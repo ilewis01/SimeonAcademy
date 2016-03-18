@@ -1,0 +1,362 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('assessment', '0020_auto_20160318_1811'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='abuseStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='addictionFamilyStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='aquaintCallNum',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='aquaintVisitMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='aquaintVisitWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='aquaintVisitYear',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='arrestCharges',
+            field=models.CharField(default=None, max_length=100, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='bothersR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='childCustody',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='childrenR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='churchAffiliation',
+            field=models.CharField(default=None, max_length=40, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='churchMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='churchWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='churchYear',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='convictionCharges',
+            field=models.CharField(default=None, max_length=100, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='dateBenkrupcy',
+            field=models.CharField(default=None, max_length=25, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='deathStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='divorceStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='exR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='explainPositiveAnswers',
+            field=models.CharField(default=None, max_length=250, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='familyHealthStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='familyHistory',
+            field=models.ForeignKey(default=None, blank=True, to='assessment.FamilyHistory', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='financialStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsAct',
+            field=models.CharField(default=None, max_length=25, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsCallNum',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsVisitMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsVisitWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsVisitYear',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='friendsWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='hasBankrupcy',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='hasLawsuit',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='inDivorce',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='interestAct',
+            field=models.CharField(default=None, max_length=25, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='interestMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='interestWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='lawsuitStress',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='medicalStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='moveStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='num_DUI_charges',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='num_DUI_convictions',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='num_arrest',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='num_convictions',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='num_suspended',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='otherStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='parentsR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='probationOffense',
+            field=models.CharField(default=None, max_length=35, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='probationOfficer',
+            field=models.CharField(default=None, max_length=35, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='probationPast',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='probationPresent',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='psychiatricHistory',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='sistersR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='spouseR',
+            field=models.CharField(default=None, max_length=7, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='suspendedDrivePresent',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='violenceFamilyStress',
+            field=models.CharField(default=None, max_length=500, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='workAct',
+            field=models.CharField(default=None, max_length=25, null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='workMonth',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='mentalhealth',
+            name='workWeek',
+            field=models.IntegerField(default=0),
+            preserve_default=True,
+        ),
+    ]
