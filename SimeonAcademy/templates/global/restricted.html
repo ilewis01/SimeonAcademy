@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>{{user.first_name}}, you are restricted from this page!!</h1>
+<h4>If you continue to attempt access to this page, your account will be deactivated and reported</h4>
+
+<a href='/clientHome'>Continue</a>
+
+{% endblock %}

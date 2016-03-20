@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Admin Home</h1>
+<h3><em>Welcome Back, {{user.first_name}}!!!</em></h3>
+
+<a href='/newClient'><h4>New Client</h4></a>
+<a href='/searchClients'><h4>New Session</h4></a>
+<a href='/am_preliminary'><h4>Anger Management Assessment</h4></a>
+<a href='/mh_preliminary'><h4>Mental Health Assessment</h4></a>
+<a href='/sap_preliminary'><h4>S.A.P.</h4></a>
+<a href='/ut_preliminary'><h4>Urine Test</h4></a>
+<a href='/discharge_preliminary'><h4>Discharge Client</h4></a>
+
+<a href='/logout'>Logout</a>
+
+{% endblock %}

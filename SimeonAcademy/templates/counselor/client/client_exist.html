@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Error: This Client Already Exist</h1>
+
+<h3>
+	Client Details: {{client.lname}}, {{client.fname}} 
+</h3>
+<h4>
+	<b>ID: </b> <span><em>{{client.clientID}}</em></span>
+</h4>
+<p>
+	<b>Intake Date: </b> 
+	<span><em>{{client.intake_date}}</em></span>
+</p>
+
+<a href="/adminHome"><button type='button'>Home Page</button></a>
+
+{% endblock %}

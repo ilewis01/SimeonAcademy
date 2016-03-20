@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Verify Client</h1>
+
+<table>
+	<tr><td><b>Intake Date: </b></td> <td>{{intake_date}}</td></tr>
+	<tr>
+		<td>
+			<b>Name: </b>
+		</td>
+		<td>
+			{{lname}}, {{fname}} {{mi}}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>Address: </b>
+		</td>
+		<td>
+			{{street_no}} {{street_name}} {{apt}}
+		</td>
+	</tr>
+	
+	<tr><td></td><td>{{city}}, {{state}} {{zip}}</td></tr>
+	
+	<tr><td><b>Gender: </b></td> <td>{{gender}}</td></tr>
+	<tr><td><b>SS Number: </b></td> <td>{{ss_num}}</td></tr>
+	<tr><td><b>DOB: </b></td> <td>{{dob}}</td></tr>
+	<tr><td><b>Phone: </b></td> <td>{{phone}}</td></tr>
+	<tr><td><b>Email: </b></td> <td>{{email}}</td></tr>
+	<tr><td><b>Reason for Referral: </b></td> <td>{{reason}}</td></tr>
+	<tr><td><b>Emergency Contact: </b></td> <td>{{ec}}</td></tr>
+	<tr><td><b>EM Phone: </b></td> <td>{{ep}}</td></tr>
+</table>
+<br><br>
+<form action='/clientCreated/' method='GET' id='cli-form' name='cli-form'>
+	<input type='hidden' name='fname' id='fname' value='{{fname}}'>
+	<input type='hidden' name='mi' id='mi' value='{{mi}}'>
+	<input type='hidden' name='lname' id='lname' value='{{lname}}'>
+	<input type='hidden' name='intake_date' id='intake_date' value='{{intake_date}}'>
+	<input type='hidden' name='street_no' id='street_no' value='{{street_no}}'>
+	<input type='hidden' name='street_name' id='street_name' value='{{street_name}}'>
+	<input type='hidden' name='city' id='city' value='{{city}}'>
+	<input type='hidden' name='state' id='state' value='{{state}}'>
+	<input type='hidden' name='zip' id='zip' value='{{zip}}'>
+	<input type='hidden' name='apt' id='apt' value='{{apt}}'>
+	<input type='hidden' name='gender' id='gender' value='{{gender}}'>
+	<input type='hidden' name='ss_num' id='ss_num' value='{{ss_num}}'>
+	<input type='hidden' name='dob' id='dob' value='{{dob}}'>
+	<input type='hidden' name='phone' id='phone' value='{{phone}}'>
+	<input type='hidden' name='email' id='email' value='{{email}}'>
+	<input type='hidden' name='reason' id='reason' value='{{reason}}'>
+	<input type='hidden' name='ec' id='ec' value='{{ec}}'>
+	<input type='hidden' name='ep' id='ep' value='{{ep}}'>
+	<input type="submit" value="Submit" />
+</form>
+
+<a href="/adminHome"><button type='button'>Cancel</button></a>
+
+{% endblock %}
