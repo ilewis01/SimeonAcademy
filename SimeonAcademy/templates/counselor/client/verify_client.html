@@ -36,7 +36,7 @@
 	<tr><td><b>EM Phone: </b></td> <td>{{ep}}</td></tr>
 </table>
 <br><br>
-<form action='/clientCreated/' method='GET' id='cli-form' name='cli-form'>
+<form action='/clientCreated/' method='post' id='cli-form' name='cli-form'> {% csrf_token %}
 	<input type='hidden' name='fname' id='fname' value='{{fname}}'>
 	<input type='hidden' name='mi' id='mi' value='{{mi}}'>
 	<input type='hidden' name='lname' id='lname' value='{{lname}}'>

@@ -59,6 +59,7 @@ urlpatterns = patterns('',
     url(r'^am_final/$', 'assessment.views.am_final'),
     url(r'^am_viewForm/$', 'assessment.views.am_viewForm'),
     url(r'^am_worst/$', 'assessment.views.am_worst'),
+    url(r'^am_location/$', 'assessment.views.am_location'),
 
     ## Urine Test Views
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),

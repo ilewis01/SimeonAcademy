@@ -2,17 +2,15 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Admin Home</h1>
+<h1>Counselor Home Page</h1>
 <h3><em>Welcome Back, {{user.first_name}}!!!</em></h3>
 
 <a href='/newClient'><h4>New Client</h4></a>
 <a href='/searchClients'><h4>New Session</h4></a>
-<a href='/am_preliminary'><h4>Anger Management Assessment</h4></a>
-<a href='/mh_preliminary'><h4>Mental Health Assessment</h4></a>
-<a href='/sap_preliminary'><h4>S.A.P.</h4></a>
-<a href='/ut_preliminary'><h4>Urine Test</h4></a>
-<a href='/discharge_preliminary'><h4>Discharge Client</h4></a>
-
+<a href='/active_clients'><h4>View All Active Clients</h4></a>
+<a href='/discharged_clients'><h4>View All Discharged Clients</h4></a>
+<a href='/search_clients'><h4>Search Clients</h4></a>
+<a href='/appointment_management'><h4>Appointment Manager</h4></a>
 <a href='/logout'>Logout</a>
 
 {% endblock %}

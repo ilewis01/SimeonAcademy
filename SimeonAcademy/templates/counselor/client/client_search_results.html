@@ -4,4 +4,26 @@
 
 <h1>Client Search Results</h1>
 
+<h3>Your {{type}} search for <span><em>{{searched}}</em><span> has returned {{matches}} {{phrase}}:</h3>
+
+<ul>
+	{% for r in results %}
+		<li>
+			<p href='#'>
+				{{r.lname}}, {{r.fname}}<br>
+				DOB: {{r.dob}}<br>
+				SS: {{r.ss_num}}<br>
+				ID: {{r.clientID}}<br>
+			</p>
+		</li>
+
+		<form action='/clientOptions/' method='post' id='cli-form'> {% csrf_token %}
+			<input type='hidden' value='{{r.id}}' id='cli-id' name='cli-id'>
+			<input type='submit' value='Continue'>
+		</form>
+	{% endfor %}
+</ul>
+
+<a href='/adminHome'><h4>Home Page</h4></a>
+
 {% endblock %}

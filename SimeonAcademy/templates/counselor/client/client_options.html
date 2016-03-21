@@ -2,6 +2,116 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Client Options</h1>
+<h1>Session Options and Forms</h1>
+<h2>Client Info</h2>
+<h3>Client ID: <em><span style='color:blue;'>{{client.clientID}}</span></em></h3>
+
+<table>
+	<tr>
+		<td>
+			<b>Name: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.lname}}, {{client.fname}} {{client.mi}}</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>DOB: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.dob}}</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>SS no: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.ss_num}}</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>Address: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<span style='color:red'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>Phone: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.phone}}</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<b>Email: </b>
+		</td>
+		<td>
+			<span style='color:red'>{{client.email}}</span>
+		</td>
+	</tr>
+</table>
+
+<div style='margin-top:40px;'></div>
+
+<form action="/am_demographic/" method='get' id='am' name='am'> 
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='Anger Management Assessment'>
+</form>
+
+<form action="/mh_preliminary/" method='get' id='mh' name='mh'> 
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='Mental Health Assessment'>
+</form>
+
+<form action="/sap_preliminary/" method='get' id='sap' name='sap'>
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='S.A.P.'>
+</form>
+
+<form action="/ut_preliminary/" method='get' id='ut' name='ut'> 
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='Urine Test'>
+</form>
+
+<form action="/discharge_preliminary/" method='get' id='dis' name='dis'> 
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='Client Discharge'>
+</form>
+
+<form action="#" method='get' id='noth' name='noth'> 
+	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+	<input type='submit' value='Appointment Manager'>
+</form>
+
+<a href='#'><button type="button">Client File</button></a><br>
+<a href='/adminHome'><button type="button">Home Page</button></a><br>
+<a href='/logout'><button type="button">Logout</button></a>
+
+
+<!-- <a href='/am_preliminary'><h4>Anger Management Assessment</h4></a>
+<a href='/mh_preliminary'><h4>Mental Health Assessment</h4></a>
+<a href='/sap_preliminary'><h4>S.A.P.</h4></a>
+<a href='/ut_preliminary'><h4>Urine Test</h4></a>
+<a href='/discharge_preliminary'><h4>Discharge Client</h4></a>
+<a href='#'><h4>Appointment Manager</h4></a>
+<a href='/adminHome'><h4>Home Page</h4></a>
+<a href='/logout'>Logout</a> -->
 
 {% endblock %}

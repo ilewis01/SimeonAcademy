@@ -8,7 +8,7 @@ reasonRef, datepicker -->
 
 <h1>New Client</h1>
 
-<form action="/confirmNewClient" method="GET" id="new-client-form">
+<form action="/confirmNewClient/" method="post" id="new-client-form"> {% csrf_token %}
 	<table>
 		<tr>
 			<td>

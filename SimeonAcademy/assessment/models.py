@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class account(models.Model):
 	user = models.OneToOneField(User)
 	is_counselor = models.NullBooleanField(default=None)
+	is_validated = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return self.user.username
@@ -69,7 +70,7 @@ class Client(models.Model):
 	phone = models.CharField(max_length=14, default=None, blank=True, null=True)
 	emer_phone = models.CharField(max_length=14, default=None, blank=True, null=True)
 	email = models.EmailField(default=None, blank=True, null=True)
-	clientID = models.CharField(max_length=10, default=None, blank=True, null=True)
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
@@ -133,7 +134,7 @@ class SapDemographics(models.Model):
 
 ##PSYCHOACTIVE HISTORY OF SAP FORM---------------------------------------------------------
 class SapPsychoactive(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	drug1 = models.CharField(max_length=25, default=None, blank=True, null=True)
 	age1 = models.IntegerField(default=0)
 	frequency1 = models.IntegerField(default=0)
@@ -218,6 +219,7 @@ class SAP(models.Model):
 	def __unicode__(self):
 		return "SAP: " + str(self.demographics.client)
 
+##ANGER MANAGEMENT DEMOGRAPHIC------------------------------------------------------------
 class AM_Demographic(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=False, null=False)
 	date_of_assessment = models.DateField(blank=True, default=None, null=True)
@@ -251,7 +253,7 @@ class AM_Demographic(models.Model):
 
 ##ANGER MANAGEMENT ALCOHOL AND DRUG HISTORY---------------------------------------------------------
 class AM_DrugHistory(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	firstDrinkAge = models.IntegerField(default=0)
 	firstDrinkType = models.CharField(default=None, max_length=50, blank=True, null=True)	
 	curUse = models.BooleanField(default=False, blank=True)
@@ -282,7 +284,7 @@ class AM_DrugHistory(models.Model):
 
 ##ANGER MANAGEMENT CHILDHOOD HISTORY----------------------------------------------------------------
 class AM_ChildhoodHistory(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	raisedBy = models.CharField(max_length=20, default=None, blank=True, null=True)
 	momAlive = models.BooleanField(default=False, blank=True)
 	dadAlive = models.BooleanField(default=False, blank=True)
@@ -310,7 +312,7 @@ class AM_ChildhoodHistory(models.Model):
 
 ##ANGER MANAGEMENT ANGER/VIOLENCE HISTORY----------------------------------------------------------------
 class AM_AngerHistory(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	recentIncidentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	recentVDate = models.DateField(blank=True, null=True, default=None)
 	recentVlocation = models.CharField(max_length=50, default=None, blank=True, null=True)
@@ -374,7 +376,7 @@ class AM_AngerHistory(models.Model):
 
 ##ANGER MANAGEMENT CONNECTIONS OF USE AND ANGER----------------------------------------------------------
 class AM_Connections(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	angerWorse = models.BooleanField(default=False, blank=True)
 	troubleWhenUsing = models.BooleanField(default=False, blank=True)
 	lessAngry = models.BooleanField(default=False, blank=True)
@@ -388,7 +390,7 @@ class AM_Connections(models.Model):
 
 ##ANGER MANAGEMENT WORST EPISODE--------------------------------------------------------------------------
 class AM_WorstEpisode(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	whoWorst = models.CharField(max_length=50, default=None, blank=True, null=True)
 	happenedWorst = models.CharField(max_length=100, default=None, blank=True, null=True)
 	wordThoughtWorst = models.CharField(max_length=100, default=None, blank=True, null=True)
@@ -409,7 +411,7 @@ class AM_WorstEpisode(models.Model):
 
 ##ANGER MANAGEMENT WITH WHOM YOU GET ANGRY----------------------------------------------------------------
 class AM_AngerTarget(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	angryPartner = models.BooleanField(blank=True, default=False)
 	angryParents = models.BooleanField(blank=True, default=False)
 	angryChildren = models.BooleanField(blank=True, default=False)
@@ -426,7 +428,7 @@ class AM_AngerTarget(models.Model):
 
 ##ANGER MANAGEMENT FAMILY OF ORIGIN-----------------------------------------------------------------------
 class AM_FamilyOrigin(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	kidMomAnger = models.CharField(max_length=100, default=None, blank=True, null=True)
 	kidDadAnger = models.CharField(max_length=100, default=None, blank=True, null=True)
 	kidSiblingAnger = models.CharField(max_length=100, default=None, blank=True, null=True)
@@ -439,7 +441,7 @@ class AM_FamilyOrigin(models.Model):
 
 ##ANGER MANAGEMENT ANY CURRENT PROBLEMS HISTORY OF--------------------------------------------------------
 class AM_CurrentProblem(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	brainInjury = models.BooleanField(blank=True, default=False)
 	stroke = models.BooleanField(blank=True, default=False)
 	epilepsy = models.BooleanField(blank=True, default=False)
@@ -457,7 +459,7 @@ class AM_CurrentProblem(models.Model):
 
 ##ANGER MANAGEMENT CONTROL--------------------------------------------------------------------------------
 class AM_Control(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	neverAttemptedControl = models.BooleanField(blank=True, default=False)
 	talkToMyself = models.BooleanField(blank=True, default=False)
 	whatSayYou = models.CharField(max_length=50, default=None, blank=True, null=True)
@@ -474,7 +476,7 @@ class AM_Control(models.Model):
 
 ##ANGER MANAGEMENT OTHER THINGS---------------------------------------------------------------------------
 class AM_Final(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	anythingelse = models.CharField(max_length=250, default=None, blank=True, null=True)
 	changeLearn1 = models.CharField(max_length=100, default=None, blank=True, null=True)
 	changeLearn2 = models.CharField(max_length=100, default=None, blank=True, null=True)
@@ -497,8 +499,22 @@ class AngerManagement(models.Model):
 	control = models.ForeignKey(AM_Control, blank=True, null=True, default=None)
 	final = models.ForeignKey(AM_Final, blank=True, null=True, default=None)
 
+	demographicComplete = models.BooleanField(blank= True, default = False)
+	drugHistoryComplete = models.BooleanField(blank= True, default = False)
+	childhoodComplete = models.BooleanField(blank= True, default = False)
+	angerHistoryComplete = models.BooleanField(blank= True, default = False)
+	connectionsComplete = models.BooleanField(blank= True, default = False)
+	worstComplete = models.BooleanField(blank= True, default = False)
+	angerTargetComplete = models.BooleanField(blank= True, default = False)
+	familyOriginComplete = models.BooleanField(blank= True, default = False)
+	currentProblemsComplete = models.BooleanField(blank= True, default = False)
+	controlComplete = models.BooleanField(blank= True, default = False)
+	finalComplete = models.BooleanField(blank= True, default = False)
+
+	AMComplete = models.BooleanField(blank=True, default=False)
+
 	def __unicode__(self):
-		return self.demographic.client
+		return str(self.demographic.client.fname) + ' ' + str(self.demographic.client.lname)
 
 class MHDemographic(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
@@ -524,7 +540,7 @@ class MHDemographic(models.Model):
 
 ##MENTAL HEALTH FAMILY----------------------------------------------------------------------------------
 class MHFamily(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	spouseAge = models.IntegerField(default=0)
 	spouseOccupation = models.CharField(max_length=35, default=None, blank=True, null=True)
 	spouseEmployer = models.CharField(max_length=35, default=None, blank=True, null=True)
@@ -551,7 +567,7 @@ class MHFamily(models.Model):
 
 ##MENTAL HEALTH EDUCATION-------------------------------------------------------------------------------
 class MHEducation(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	GradesKto6 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	BehaviorProblemsKto6 = models.BooleanField(default=False, blank=True)
 	AcademicProblemsKto6 = models.BooleanField(default=False, blank=True)
@@ -581,7 +597,7 @@ class MHEducation(models.Model):
 
 ##MENTAL HEALTH RELATIONSHIPS---------------------------------------------------------------------------
 class MHRelationship(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	spouseR = models.CharField(max_length=7, default=None, blank=True, null=True)
 	bothersR = models.CharField(max_length=7, default=None, blank=True, null=True)
 	childrenR = models.CharField(max_length=7, default=None, blank=True, null=True)
@@ -602,7 +618,7 @@ class MHRelationship(models.Model):
 
 ##MENTAL HEALTH ACTIVITIES------------------------------------------------------------------------------
 class MHActivity(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	interestAct = models.CharField(max_length=25, default=None, blank=True, null=True)
 	interestWeek = models.IntegerField(default=0)
 	interestMonth = models.IntegerField(default=0)
@@ -622,7 +638,7 @@ class MHActivity(models.Model):
 
 ##MENTAL HEALTH ENVIRONMENTAL STRESSORS-----------------------------------------------------------------
 class MHStressor(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	deathStress = models.CharField(max_length=500, default=None, blank=True, null=True)
 	divorceStress = models.CharField(max_length=500, default=None, blank=True, null=True)
 	moveStress = models.CharField(max_length=500, default=None, blank=True, null=True)
@@ -641,7 +657,7 @@ class MHStressor(models.Model):
 
 ##MENTAL HEALTH FAMILY HISTORY--------------------------------------------------------------------------
 class FamilyHistory(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	depression = models.CharField(max_length=35, default=None, blank=True, null=True)
 	hyperactivity = models.CharField(max_length=35, default=None, blank=True, null=True)
 	bedWetting = models.CharField(max_length=35, default=None, blank=True, null=True)
@@ -674,7 +690,7 @@ class FamilyHistory(models.Model):
 
 ##MENTAL HEALTH LEGAL HISTORY---------------------------------------------------------------------------
 class MHLegalHistory(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	num_arrest = models.IntegerField(default=0)
 	arrestCharges = models.CharField(max_length=100, default=None, blank=True, null=True)
 	num_convictions = models.IntegerField(default=0)
@@ -700,7 +716,7 @@ class MHLegalHistory(models.Model):
 
 ##MENTAL HEALTH DRUG AND ALCOHOL USE--------------------------------------------------------------------
 class UseTable(models.Model):
-	client_id = models.CharField(max_length=10, default=None, blank=True, null=True)
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	howMuch1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOften1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howLong1 = models.CharField(max_length=15, default=None, blank=True, null=True)
@@ -823,6 +839,8 @@ class MentalHealth(models.Model):
 
 	def __unicode__(self):
 		return "Mental Health Form: " + str(self.demographics.client)
+
+
 
 
 

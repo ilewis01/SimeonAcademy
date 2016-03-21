@@ -24,7 +24,9 @@ SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
-getStateID, getReasonRefID, clientExist
+getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
+getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
+amDemographicExist, findClientAM, clientAmExist, continueToAmSection
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -130,6 +132,7 @@ def newClient(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -157,24 +160,28 @@ def confirmNewClient(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			fname = request.GET['fname']
-			mi = request.GET['mi']
-			lname = request.GET['lname']
-			street_no = request.GET['street-no']
-			street_name = request.GET['street-name']
-			apt = request.GET['apt']
-			city = request.GET['city']
-			state = State.objects.get(id=(request.GET['state']))
-			zip_code = request.GET['zip']
-			ss_num = request.GET['ss_num']
-			dob = request.GET['dob']
-			intake_date = request.GET['datepicker']
-			em_contact = request.GET['ec']
-			reason = RefReason.objects.get(id=(request.GET['reasonRef']))
-			phone = request.GET['phone']
-			em_phone = request.GET['ep']
-			email = request.GET['email']
-			gender = request.GET['gender']
+			content.update(csrf(request))
+			fname = request.POST.get('fname', '')
+			lname = request.POST.get('lname', '')
+			mi = request.POST.get('mi', '')
+			street_no = request.POST.get('street-no', '')
+			street_name = request.POST.get('street-name', '')
+			apt = request.POST.get('apt', '')
+			city = request.POST.get('city', '')
+			state = request.POST.get('state', '')
+			zip_code = request.POST.get('zip', '')
+			ss_num = request.POST.get('ss_num', '')
+			dob = request.POST.get('dob', '')
+			intake_date = request.POST.get('datepicker', '')
+			em_contact = request.POST.get('ec', '')
+			reason = request.POST.get('reasonRef', '')
+			phone = request.POST.get('phone', '')
+			em_phone = request.POST.get('ep', '')
+			email = request.POST.get('email', '')
+			gender = request.POST.get('gender', '')
+
+			state = State.objects.get(id=state)
+			reason = RefReason.objects.get(id=reason)
 
 			content['fname'] = fname
 			content['lname'] = lname
@@ -206,30 +213,32 @@ def clientCreated(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			fname = request.GET['fname']
-			mi = request.GET['mi']
-			lname = request.GET['lname']
-			street_no = request.GET['street_no']
-			street_name = request.GET['street_name']
-			apt = request.GET['apt']
-			city = request.GET['city']
-			state = request.GET['state']
-			zip_code = request.GET['zip']
-			ss_num = request.GET['ss_num']
-			dob = request.GET['dob']
-			intake_date = request.GET['intake_date']
-			em_contact = request.GET['ec']
-			reason = request.GET['reason']
-			phone = request.GET['phone']
-			em_phone = request.GET['ep']
-			email = request.GET['email']
-			gender = request.GET['gender']
+			content.update(csrf(request))
+			fname = request.POST.get('fname', '')
+			lname = request.POST.get('lname', '')
+			mi = request.POST.get('mi', '')
+			street_no = request.POST.get('street_no', '')
+			street_name = request.POST.get('street_name', '')
+			apt = request.POST.get('apt', '')
+			city = request.POST.get('city', '')
+			state = request.POST.get('state', '')
+			zip_code = int(request.POST.get('zip', ''))
+			ss_num = request.POST.get('ss_num', '')
+			dob = request.POST.get('dob', '')
+			intake_date = request.POST.get('intake_date', '')
+			em_contact = request.POST.get('ec', '')
+			reason = request.POST.get('reason', '')
+			phone = request.POST.get('phone', '')
+			em_phone = request.POST.get('ep', '')
+			email = request.POST.get('email', '')
+			gender = request.POST.get('gender', '')
 
 			dob = convert_datepicker(dob)
 			dob = dob['date']
@@ -254,6 +263,12 @@ def clientCreated(request):
 			commit = clientExist(client)
 			content['client'] = client
 
+			print "Intake Date: " + str(client.intake_date)
+			print "DOB: " + str(client.dob)
+			print "Reason: " + str(client.reason_ref)
+			print "Exist?: " + str(commit)
+			print "State: " + str(client.state)
+
 			if commit == False:
 				client.save()
 				content['title'] = "Simeon Academy | New Client"
@@ -270,10 +285,11 @@ def searchClients(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
+			return render_to_response('global/restricted.html')
 
 		else:
 			content['title'] = "Simeon Academy | Client Search"
@@ -287,13 +303,52 @@ def clientSearchResults(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			search_type = request.POST.get('search-radio', '')
+			s_results = None
+			phrase = None
+			searched = None
+
+			if search_type == "ssNumSearch":
+				getThis = request.POST.get('ss_num', '')
+				search_type = "Social Security Number"
+				s_results = getClientBySS(getThis)
+				searched = getThis
+			elif search_type == "nameSearch":
+				getFirst = request.POST.get('fname', '')
+				getLast = request.POST.get('lname', '')
+				search_type = "Name"
+				s_results = getClientByName(getFirst, getLast)
+				searched = str(getFirst) + " " + str(getLast)
+			elif search_type == "dobSearch":
+				getThis = request.POST.get('dob', '')
+				search_type = "Birthdate"
+				s_results = getClientByDOB(getThis)
+				searched = getThis
+			elif search_type == "clientIDSearch":
+				getThis = request.POST.get('client_ID', '')
+				search_type = "Client ID"
+				s_results = getClientByID(getThis)
+				searched = getThis
+
+			matches = len(s_results)
+			if matches == 1:
+				phrase = 'result'
+			else:
+				phrase = 'results'
+
 			content['title'] = "Simeon Academy | Client Search"
+			content['matches'] = matches
+			content['results'] = s_results
+			content['phrase'] = phrase
+			content['type'] = search_type
+			content['searched'] = searched
 			return render_to_response('counselor/client/client_search_results.html', content)
 
 @login_required(login_url='/index')
@@ -304,13 +359,17 @@ def clientOptions(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			clID = request.POST.get('cli-id', '')
+			client = Client.objects.get(id=clID)
 			content['title'] = "Simeon Academy | Client Options"
+			content['client'] = client
 			return render_to_response('counselor/client/client_options.html', content)
 
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
@@ -373,6 +432,7 @@ def am_childhood(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -390,6 +450,7 @@ def am_connections(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -417,6 +478,49 @@ def am_control(request):
 			return render_to_response('counselor/forms/AngerManagement/control.html', content)
 
 @login_required(login_url='/index')
+def am_location(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			action = request.POST.get('am-choice', '')
+			am = request.POST.get('am_id')
+			am = AngerManagement.objects.get(id=am)
+			client = am.demographic.client
+			content['client'] = am.demographic.client
+
+			if str(action) == 'finish-old':
+				##go to the next section to be completed in the form
+				content['am'] = am
+				goToLocation = continueToAmSection(am)
+				content['title'] = "Simeon Academy | Counselor Home Page"
+				return render_to_response(goToLocation, content)
+			elif str(action) == 'start-new':
+				##delete the current form and start at beginning of the am form
+				am.delete()
+				marital = MaritalStatus.objects.all().order_by('status')
+				living = LivingSituation.objects.all().order_by('situation')
+				education = EducationLevel.objects.all().order_by('level')
+				content['education'] = education
+				content['marital'] = marital
+				content['living'] = living
+				content['title'] = "Simeon Academy | Anger Management Assessment"
+				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			elif str(action) == 'cancel':
+				## return to the client options page
+				content['title'] = "Simeon Academy | Client Options"
+				return render_to_response('counselor/client/client_options.html', content)
+
+@login_required(login_url='/index')
 def am_problems(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -441,15 +545,33 @@ def am_demographic(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
-			return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			client = Client.objects.get(id=(request.GET['client_ID']))
+			proceed = findClientAM(client)
+			am = proceed['am']
 
+			if proceed['incomplete'] == True:
+				content['am'] = am
+				content['client'] = client
+				content['title'] = "Simeon Academy | Anger Management Assessment"
+				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
+			else:
+				marital = MaritalStatus.objects.all().order_by('status')
+				living = LivingSituation.objects.all().order_by('situation')
+				education = EducationLevel.objects.all().order_by('level')
+				content['title'] = "Simeon Academy | Anger Management Assessment"
+				content['client'] = client
+				content['education'] = education
+				content['marital'] = marital
+				content['living'] = living
+				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			
 @login_required(login_url='/index')
 def am_drugHistory(request):
 	user = request.user
@@ -458,13 +580,88 @@ def am_drugHistory(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			date = datetime.now()
+			date = date.date()
+			marital = request.POST.get('marital', '')
+			living = request.POST.get('living', '')
+			res_month = request.POST.get('res-mo', '')
+			res_year = request.POST.get('res-yr', '')
+			res_type = request.POST.get('rentRAD', '')
+			dep_children = request.POST.get('dep_children', '')
+			dep_other = request.POST.get('dep_other', '')
+			education = request.POST.get('edu', '')
+			graduate = request.POST.get('dip', '')
+			occupation = request.POST.get('occ', '')
+			employer = request.POST.get('employer', '')
+			employer_address = request.POST.get('em_add', '')
+			employer_phone = request.POST.get('em_phone', '')
+			mosJob = request.POST.get('mosJob', '')
+			yrsJob = request.POST.get('yrsJob', '')
+			heal = request.POST.get('heal', '')
+			med = request.POST.get('med', '')
+			health_explain = request.POST.get('explain', '')
+			client_id = request.POST.get('client_id', '')
+			client = Client.objects.get(id=client_id)
+
+			reasonDo = 'Rememebr to change this shit'
+
+			marital = getMaritalID(marital)
+			living = getLivingID(living)
+			education = getEducationID(education)
+
+			marital = MaritalStatus.objects.get(id=marital)
+			living = LivingSituation.objects.get(id=living)
+			education = EducationLevel.objects.get(id=education)
+
+			if res_type == "Own":
+				res_type = True
+			else:
+				res_type = False
+
+			if graduate == 'Dropout':
+				graduate = True
+			else:
+				graduate = False
+
+			if heal == 'Healthy':
+				heal = False
+			else:
+				heal = True
+
+			if med == 'On meds':
+				med = True
+			else:
+				med = False
+
+			demographic = AM_Demographic(client=client, date_of_assessment=date, maritalStatus=marital,\
+				livingSituation=living, own=res_type, months_res=res_month, years_res=res_year,\
+				num_children=dep_children, other_dependants=dep_other, education=education, \
+				drop_out=graduate, resasonDO=reasonDo, employee=employer, job_title=occupation, \
+				emp_address=employer_address, employed_months=mosJob, employed_years=yrsJob, \
+				employer_phone=employer_phone, health_problem=heal, medication=med, health_exp=health_explain)
+
+			moveForward = amDemographicExist(demographic)
+
+			if moveForward['exist'] == False:
+				demographic.save()
+			else:
+				demographic = moveForward['am_demo']
+
+			angerManagement = AngerManagement(demographic=demographic, demographicComplete=True, AMComplete=False)
+			checkAM = clientAmExist(client)
+
+			if checkAM == False:
+				angerManagement.save()
+
 			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['AM'] = angerManagement.id
 			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 @login_required(login_url='/index')

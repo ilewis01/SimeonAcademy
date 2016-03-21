@@ -3,7 +3,277 @@
 {% load staticfiles %}
 
 <h1>Anger Management Demographics</h1>
+<h3 style='color:blue;'><em>{{client.lname}}, {{client.fname}}</em></h3>
 
-<a href='/adminHome'>Home Page</a>
+<form action='/am_drugHistory/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+	<table>
+		<tr>
+			<td>
+				<label for='marital'>Marital Status: </label>
+			</td>
+
+			<td>
+				<select id='marital' name='marital'>
+					<option>Select</option>
+
+					{% for m in marital %}
+						<option value='{{m.status}}'>{{m.status}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='living'>Living Situation: </label>
+			</td>
+
+			<td>
+				<select id='living' name='living'>
+					<option>Select</option>
+
+					{% for l in living %}
+						<option value='{{l.situation}}'>{{l.situation}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style="margin-bottom:25px;">
+					<label for=''>Time at Residence: </label>
+				</div>
+			</td>
+
+			<td>
+				<div><input type='number' style="width:40px;" name='res-mo' id='res-mos'></div>
+				<div><input type='number' style="width:40px;" name='res-yr' name='res-yr'></div>
+			</td>
+
+			<td>
+				<p>mos</p>
+				<p>yrs</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>Rent </td>
+						<td><input type='radio' name='rentRAD' id='rentRAD' value='Rent' checked='true'></td>
+					</tr>
+				</table>
+			</td>
+
+			<td>
+				<table>
+					<tr>
+						<td>Own </td>
+						<td><input type='radio' name='rentRAD' value='Own' id='rentRAD'></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				<h3>Dependents</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Children</label>
+			</td>
+			<td>
+				<input type='number' style='width:40px' id='dep_children' name='dep_children'>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Other Dependents</label>
+			</td>
+			<td>
+				<input type='number' style='width:40px' id='dep_other' name='dep_other'>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				<h3>Education</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Highest Level</label>
+			</td>
+			<td>
+				<select name='edu' id='edu'>
+					<option value=''>Select</option>
+
+					{% for e in education %}
+						<option value='{{e}}'>{{e.level}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>HS Graduate </td>
+						<td><input type='radio' name='dip' id='dip' value='Graduate' checked='true'></td>
+					</tr>
+				</table>
+			</td>
+
+			<td>
+				<table>
+					<tr>
+						<td>HS Dropout  </td>
+						<td><input type='radio' name='dip' value='Dropout' id='dip'></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				<h3>Employment</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Occupation</label>
+			</td>
+			<td>
+				<input type='text' id='occ' name='occ'>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Employer</label>
+			</td>
+			<td>
+				<input type='text' id='employer' name='employer'>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Address</label>
+			</td>
+			<td>
+				<input type='text' id='em_add' name='em_add'>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for=''>Phone</label>
+			</td>
+			<td>
+				<input type='tel' id='em_phone' name='em_phone'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for=''>Time at job:</label>
+			</td>
+		</tr>
+
+		<tr>
+			<table>
+				<tr>
+					<td>
+						<input type='number' style='width:40px' id='mosJob' name='mosJob'>
+					</td>
+					<td>
+						<label for=''>mos</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type='number' style='width:40px' id='yrsJob' name='yrsJob'>
+					</td>
+					<td>
+						<label for=''>yrs</label>
+					</td>
+				</tr>
+			</table>
+		</tr>
+	</table>
+
+	<h3>Health</h3>
+	<label for=''>Do you currently have any health issues?</label>
+
+	<table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>No </td>
+						<td><input type='radio' name='heal' id='heal' value='Healthy' checked='true'></td>
+					</tr>
+				</table>
+			</td>
+
+			<td>
+				<table>
+					<tr>
+						<td>Yes  </td>
+						<td><input type='radio' name='heal' value='Not Healthy' id='heal'></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<label for=''>Are you taking medication?</label>
+	<table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>No </td>
+						<td><input type='radio' name='med' id='med' value='On meds' checked='true'></td>
+					</tr>
+				</table>
+			</td>
+
+			<td>
+				<table>
+					<tr>
+						<td>Yes  </td>
+						<td><input type='radio' name='med' value='Not on meds' id='med'></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				<label for=''>Please explain</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea cols='60' rows='15' id='explain' name='explain'></textarea>
+			</td>
+		</tr>
+	</table>
+	<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+	<input type='submit' value='Continue'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
 
 {% endblock %}
