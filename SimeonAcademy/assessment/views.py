@@ -831,7 +831,7 @@ def mh_familyBackground(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = Client.objects.get(id=(request.POST.get('client_id', '')))
+			client = request.POST.get('client_id', '')
 			dob = request.POST.get('dob', '')
 			bp = request.POST.get('bp', '')
 			raised = request.POST.get('raised', '')
@@ -847,6 +847,12 @@ def mh_familyBackground(request):
 			debt = request.POST.get('debt', '')
 			hc = request.POST.get('hc', '')
 			other = request.POST.get('other', '')
+
+			client = Client.objects.get(id=client)
+
+			demographic = MHDemographic(client=client, birthplace=bp, raised=raised, no_marriages=no_marriages,\
+				occupation=occ, employer=employer, employedMo=ep_mos, employedYrs=ep_yrs, pastJobs=pe, \
+				residence=residence, income=income, debt=debt, credit=credit, healthCare=hc, otherIncome=other)
 
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/familyBackground.html', content)

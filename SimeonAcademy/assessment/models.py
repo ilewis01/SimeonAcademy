@@ -531,9 +531,9 @@ class MHDemographic(models.Model):
 	income = models.CharField(max_length=15, default=None, blank=True, null=True)
 	debt = models.CharField(max_length=15, default=None, blank=True, null=True)
 	credit = models.CharField(max_length=15, default=None, blank=True, null=True)
-	residence = models.CharField(max_length=15, default=None, blank=True, null=True)
 	healthCare = models.CharField(max_length=15, default=None, blank=True, null=True)
 	otherIncome = models.CharField(max_length=15, default=None, blank=True, null=True)
+	##remember to check form to make sure that all fields are accounted for
 
 	def __unicode__(self):
 		return "Mental Health/Demographic: " + str(self.client)
@@ -836,6 +836,18 @@ class MentalHealth(models.Model):
 	familyHistory = models.ForeignKey(FamilyHistory, default=None, blank=True, null=True)
 	legalHistory = models.ForeignKey(MHLegalHistory, default=None, blank=True, null=True)
 	useTable = models.ForeignKey(UseTable, default=None, blank=True, null=True)
+
+	demographicsComplete = models.BooleanField(default=False, blank=True)
+	familyComplete = models.BooleanField(default=False, blank=True)
+	educationComplete = models.BooleanField(default=False, blank=True)
+	relationshipsComplete = models.BooleanField(default=False, blank=True)
+	activitiesComplete = models.BooleanField(default=False, blank=True)
+	stressorsComplete = models.BooleanField(default=False, blank=True)
+	familyHistoryComplete = models.BooleanField(default=False, blank=True)
+	legalHistoryComplete = models.BooleanField(default=False, blank=True)
+	useTableComplete = models.BooleanField(default=False, blank=True)
+
+	MHComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return "Mental Health Form: " + str(self.demographics.client)
