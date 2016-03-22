@@ -398,6 +398,7 @@ def am_angerHistory(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -415,6 +416,7 @@ def am_angerTarget(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -464,10 +466,12 @@ def am_connections(request):
 def am_control(request):
 	user = request.user
 	if not user.is_authenticated():
+		content.update(csrf(request))
 		render_to_response('global/index.html')
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -528,6 +532,7 @@ def am_problems(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -672,6 +677,7 @@ def am_familyOrigin(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -689,6 +695,7 @@ def am_final(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -706,6 +713,7 @@ def am_viewForm(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -723,6 +731,7 @@ def am_worst(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -741,6 +750,7 @@ def mh_preliminary(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -758,6 +768,7 @@ def mh_activity(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -775,12 +786,15 @@ def mh_demographic(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(request.GET['client_ID']))
+			content['client'] = client
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
 
@@ -792,6 +806,7 @@ def mh_education(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -809,12 +824,30 @@ def mh_familyBackground(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(request.POST.get('client_id', '')))
+			dob = request.POST.get('dob', '')
+			bp = request.POST.get('bp', '')
+			raised = request.POST.get('raised', '')
+			occ = request.POST.get('occ', '')
+			employer = request.POST.get('employer', '')
+			ep_yrs = request.POST.get('ep_yrs', '')
+			ep_mos = request.POST.get('ep_mos', '')
+			pe = request.POST.get('pe', '')
+			no_marriages = request.POST.get('no_marriages', '')
+			residence = request.POST.get('residence', '')
+			income = request.POST.get('income', '')
+			credit = request.POST.get('credit', '')
+			debt = request.POST.get('debt', '')
+			hc = request.POST.get('hc', '')
+			other = request.POST.get('other', '')
+
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/familyBackground.html', content)
 
@@ -826,6 +859,7 @@ def mh_familyHistory(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -843,6 +877,7 @@ def mh_legal(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -860,6 +895,7 @@ def mh_relationships(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -877,6 +913,7 @@ def mh_stress(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -894,6 +931,7 @@ def mh_useTable(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -911,6 +949,7 @@ def mh_viewForm(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -929,6 +968,7 @@ def sap_preliminary(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -946,6 +986,7 @@ def sap_demographic(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -963,6 +1004,7 @@ def sap_psychoactive(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -980,6 +1022,7 @@ def sap_viewForm(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -998,6 +1041,7 @@ def ut_preliminary(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -1015,6 +1059,7 @@ def ut_testResults(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -1032,6 +1077,7 @@ def ut_viewForm(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -1050,6 +1096,7 @@ def discharge_preliminary(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -1067,6 +1114,7 @@ def discharge_client(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -1084,6 +1132,7 @@ def discharge_viewForm(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'

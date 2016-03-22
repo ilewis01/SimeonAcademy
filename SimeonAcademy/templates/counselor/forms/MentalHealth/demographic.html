@@ -4,6 +4,178 @@
 
 <h1>Mental Health Demographics</h1>
 
-<a href='/adminHome'>Home Page</a>
+<h3>{{client.fname}} {{client.lname}}</h3>
+<h4>Client ID: <span style="color:blue;">{{client.clientID}}</span></h4>
+
+<form action='/mh_familyBackground/' method='post' id=''> {% csrf_token %}
+	<input type="hidden" name-'client_id' id='client_id' value='{{client.id}}'>
+
+	<table>
+		<tr>
+			<td>
+				<label for='dob'>DOB (mm/dd/yyyy): </label>
+			</td>
+			<td>
+				<input type='dob' id='dob' name=''>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='bp'>Birth Place: </label>
+			</td>
+			<td>
+				<input type='text' id='bp' name='bp'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='raised'>Raised: </label>
+			</td>
+			<td>
+				<input type='text' id='raised' name='raised'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='occ'>Occupation: </label>
+			</td>
+			<td>
+				<input type='text' id='occ' name='occ'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='employer'>Employer: </label>
+			</td>
+			<td>
+				<input type='text' id='employer' name='employer'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-top:10px;'>
+					<label for='ep_yrs'>Time at job: </label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type='number' style='width:40px' value='0' id='ep_yrs' name='ep_yrs'>
+				<label for='ep_yrs'>yrs</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type='number' style='width:40px' value='0' id='ep_mos' name='ep_mos'>
+				<label for='ep_mos'>mos</label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='pe'>Past Employment: </label>
+			</td>
+			<td>
+				<input type='text' id='pe' name='pe'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='no_marriages'>No. Marriages</label>
+			</td>
+			<td>
+				<input type='number' value='0' style='width:40px;' id='no_marriages' name='no_marriages'>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-top:10px;'>
+					<label for='residence'>Residence: </label>
+				</div>
+			</td>
+			<td>
+				<div style='margin-top:10px;'>
+					<select name='residence' id='residence' value='0'>
+						<option value=''>Select</option>
+					</select>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='income'>Income: </label>
+			</td>
+			<td>
+				<select name='income' id='income' value='0'>
+					<option value=''>Select</option>
+				</selec>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='credit'>Credit: </label>
+			</td>
+			<td>
+				<select name='credit' id='credit' value='0'>
+					<option value=''>Select</option>
+				</selec>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='debt'>Debt: </label>
+			</td>
+			<td>
+				<select name='debt' id='debt' value='0'>
+					<option value=''>Select</option>
+				</selec>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='hc'>Health Care: </label>
+			</td>
+			<td>
+				<select name='hc' id='hc' value='0'>
+					<option value=''>Select</option>
+				</selec>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for='other'>Other Income: </label>
+			</td>
+			<td>
+				<select name='other' id='other' value='0'>
+					<option value=''>Select</option>
+				</selec>
+			</td>
+		</tr>
+
+
+
+		<tr>
+			<td>
+				<div style='margin-top:20px;'>
+					<input type='submit' value='submit'>
+				</div>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
 
 {% endblock %}

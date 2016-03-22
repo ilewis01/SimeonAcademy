@@ -75,22 +75,22 @@
 	<input type='submit' value='Anger Management Assessment'>
 </form>
 
-<form action="/mh_preliminary/" method='get' id='mh' name='mh'> 
+<form action="/mh_demographic/" method='get' id='mh' name='mh'> 
 	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
 	<input type='submit' value='Mental Health Assessment'>
 </form>
 
-<form action="/sap_preliminary/" method='get' id='sap' name='sap'>
+<form action="/sap_demographic/" method='get' id='sap' name='sap'>
 	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
 	<input type='submit' value='S.A.P.'>
 </form>
 
-<form action="/ut_preliminary/" method='get' id='ut' name='ut'> 
+<form action="/ut_testResults/" method='get' id='ut' name='ut'> 
 	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
 	<input type='submit' value='Urine Test'>
 </form>
 
-<form action="/discharge_preliminary/" method='get' id='dis' name='dis'> 
+<form action="/discharge_client/" method='get' id='dis' name='dis'> 
 	<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
 	<input type='submit' value='Client Discharge'>
 </form>
