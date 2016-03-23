@@ -852,6 +852,48 @@ class MentalHealth(models.Model):
 	def __unicode__(self):
 		return "Mental Health Form: " + str(self.demographics.client)
 
+## SESSION TYPE----------------------------------------------------------------------------------------
+class SType(models.Model):
+	session_type = models.CharField(max_length=25, default=None, blank=True, null=True)
+	duration = models.IntegerField(default=0)
+	fee = models.IntegerField(default=0)
+	notes = models.CharField(max_length=50, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.session_type
+
+## APPIONTMENTS----------------------------------------------------------------------------------------
+class A_Time(models.Model):
+	time = models.CharField(max_length=12, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.time
+
+class Appointment(models.Model):
+	date = models.DateField(blank=True, null=True, default=None)
+	time = models.ForeignKey(A_Time, default=None, blank=True, null=True)
+	client = models.ForeignKey(Client, blank=True, null=True, default=None)
+	sessionType = models.ForeignKey(SType, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.date) + " " + str(self.time) + " " + str(self.time)
+
+## SESSIONS--------------------------------------------------------------------------------------------
+class Session(models.Model):
+	appointment = models.ForeignKey(Appointment, default=None, blank=True, null=True)
+	start = models.DateTimeField(default=None, blank=True, null=True)
+	end = models.DateTimeField(default=None, blank=True, null=True)
+
+	#The type of visit being billed for...
+	s_type = models.ManyToManyField(SType, default=None, blank=True, null=True)
+	bill = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.appointment.client) + ' ' + str(self.appointment.date) + ' ' + str(self.bill)
+
+
+
+
 
 
 

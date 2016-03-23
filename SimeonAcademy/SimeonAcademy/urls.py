@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^clientHome/$', 'assessment.views.clientHome'),
     url(r'^client_appointment/$', 'assessment.views.client_appointment'),
     url(r'^client_documents/$', 'assessment.views.client_documents'),
+    url(r'^all_active_clients/$', 'assessment.views.all_active_clients'),
+    url(r'^all_discharged_clients/$', 'assessment.views.all_discharged_clients'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),
@@ -38,6 +40,7 @@ urlpatterns = patterns('',
     url(r'^mh_stress/$', 'assessment.views.mh_stress'),
     url(r'^mh_useTable/$', 'assessment.views.mh_useTable'),
     url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
+    url(r'^mh_location/$', 'assessment.views.mh_location'),
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),
@@ -65,6 +68,8 @@ urlpatterns = patterns('',
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),
     url(r'^ut_testResults/$', 'assessment.views.ut_testResults'),
     url(r'^ut_viewForm/$', 'assessment.views.ut_viewForm'),
+    url(r'^ut_form_saved/$', 'assessment.views.ut_form_saved'),
+    url(r'^ut_form_saved2/$', 'assessment.views.ut_form_saved2'),
 
     ## Discharge Views
     url(r'^discharge_preliminary/$', 'assessment.views.discharge_preliminary'),

@@ -2,8 +2,41 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Urine Test</h1>
+<h1>Urine Test Results</h1>
+<span style='color:red;'><b>{{matches}} test(s) {{phrase2}} found for {{ut.testDate}}</b></span><br>
+<em>Are you sure that you would like to enter new test results?</em><br>
 
-<a href='/adminHome'>Home Page</a>
+<div style='margin-bottom:30px;'></div>
+<form action='/ut_form_saved2/' method='post' id=''> {% csrf_token %}
+	<input type='hidden' id='ut_id' name='ut_id' value='{{ut.id}}'>
+	<table>
+		<tr>
+			<td>
+				<input type='radio' name='ut_op' id='ut_op' value='delete' checked='true'>
+			</td>
+			<td>
+				<label for=''>Delete previous results and save new results</label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<input type='radio' name='ut_op' id='ut_op' value='keep'>
+			</td>
+			<td>
+				<label for=''>Keep previous results and save new results</label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-bottom:30px;'></div>
+			</td>
+		</tr>
+	</table>
+	<input type='submit' value='Continue'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
 
 {% endblock %}

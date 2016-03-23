@@ -9,6 +9,7 @@
 
 <form action='/mh_familyBackground/' method='post' id=''> {% csrf_token %}
 	<input type="hidden" name='client_id' id='client_id' value='{{client.id}}'>
+	<input type="hidden" name='mh_id' id='mh_id' value='{{mh.id}}'>
 
 	<table>
 		<tr>

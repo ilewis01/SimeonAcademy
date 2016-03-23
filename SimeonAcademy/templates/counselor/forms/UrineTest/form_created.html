@@ -1,0 +1,8 @@
+<h1>Urine Test Form Created</h1>
+
+<form action='/clientOptions/' method='post' id='ut-options'> {% csrf_token %}
+	<input type='hidden' id='cli-id' name='cli-id' value='{{ut.client.id}}'>
+	<input type='submit' value='Continue Session'>
+</form>
+
+<a href='/adminHome'><button type='button'>End Session</button></a>

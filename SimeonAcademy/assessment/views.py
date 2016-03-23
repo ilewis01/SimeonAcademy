@@ -26,7 +26,10 @@ MHRelationship, MHActivity, MHStressor, MHLegalHistory
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
 getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
-amDemographicExist, findClientAM, clientAmExist, continueToAmSection
+amDemographicExist, findClientAM, clientAmExist, continueToAmSection, \
+mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
+continueToMhSection, getActiveClients, getDischargedClients, utExist, \
+getUtsByDate, deleteOldUTS
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -101,6 +104,46 @@ def client_documents(request):
 		content['user'] = user
 		content['title'] = "Simeon Academy | My Documents"
 		return render_to_response('client/view_documents.html', content)
+
+@login_required(login_url='/index')
+def all_active_clients(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			clients = getActiveClients()
+			content["clients"] = clients
+			content['title'] = "Simeon Academy | All Active Clients"
+			return render_to_response('counselor/client/active.html', content)
+
+@login_required(login_url='/index')
+def all_discharged_clients(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			clients = getDischargedClients()
+			content["clients"] = clients
+			content['title'] = "Simeon Academy | All Active Clients"
+			return render_to_response('counselor/client/discharged.html', content)
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -761,6 +804,43 @@ def mh_preliminary(request):
 			return render_to_response('counselor/forms/MentalHealth/getClient.html', content)
 
 @login_required(login_url='/index')
+def mh_location(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			action = request.POST.get('mh-choice', '')
+			mh = request.POST.get('mh_id')
+			mh = MentalHealth.objects.get(id=mh)
+			client = mh.demographics.client
+			content['client'] = mh.demographics.client
+
+			if str(action) == 'finish-old':
+				##go to the next section to be completed in the form
+				content['mh'] = mh
+				goToLocation = continueToMhSection(mh)
+				content['title'] = "Simeon Academy | Counselor Home Page"
+				return render_to_response(goToLocation, content)
+			elif str(action) == 'start-new':
+				##delete the current form and start at beginning of the am form
+				mh.delete()
+				content['title'] = "Simeon Academy | Anger Management Assessment"
+				return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
+			elif str(action) == 'cancel':
+				## return to the client options page
+				content['title'] = "Simeon Academy | Client Options"
+				return render_to_response('counselor/client/client_options.html', content)
+
+@login_required(login_url='/index')
 def mh_activity(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -795,6 +875,15 @@ def mh_demographic(request):
 		else:
 			client = Client.objects.get(id=(request.GET['client_ID']))
 			content['client'] = client
+			proceed = findClientMH(client)
+
+			if proceed['incomplete'] == True:
+				content['mh'] = proceed['mh']
+				return render_to_response('counselor/forms/MentalHealth/getClient.html', content)
+			else:
+				##remember to incluse all valid content for this form
+				return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
+
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
 
@@ -854,6 +943,21 @@ def mh_familyBackground(request):
 				occupation=occ, employer=employer, employedMo=ep_mos, employedYrs=ep_yrs, pastJobs=pe, \
 				residence=residence, income=income, debt=debt, credit=credit, healthCare=hc, otherIncome=other)
 
+			moveForward = mhDemographicExist(demographic)
+
+			if moveForward['exist'] == False:
+				demographic.save()
+			else:
+				demographic = moveForward['mh_demo']
+
+			mentalHealth = MentalHealth(demographics=demographic, demographicsComplete=True, MHComplete=False)
+
+			checkMH = clientMhExist(client)
+
+			if checkMH == False:
+				mentalHealth.save()
+
+			content['mh_id'] = mentalHealth.id
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/familyBackground.html', content)
 
@@ -1072,6 +1176,10 @@ def ut_testResults(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			drugs = Drug.objects.all()
+			client = Client.objects.get(id=(request.GET['client_ID']))
+			content['client'] = client
+			content['drugs'] = drugs
 			content['title'] = "Simeon Academy | Urine Test Analysis"
 			return render_to_response('counselor/forms/UrineTest/testResults.html', content)
 
@@ -1090,8 +1198,126 @@ def ut_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Urine Test Analysis"
-			return render_to_response('counselor/forms/UrineTest/viewForm.html', content)
+			drugs = Drug.objects.all()
+			client_id = request.POST.get('client_id', '')
+			client = Client.objects.get(id=client_id)
+			date = request.POST.get('datepicker', '')
+			date = convert_datepicker(date)
+			date = date['date']
+			ut = UrineResults(client=client, testDate=date)
+			results = []
+
+			for d in drugs:
+				result = request.POST.get(d.drug, '')
+				if str(result) == "Positive":
+					results.append(d.drug)
+
+			amount = len(results)
+			phrase = None
+			phrase2 = None
+
+			if amount == 1:
+				phrase = 'match'
+				phrase2 = 'was'
+			else:
+				phrase = 'matches'
+				phrase2 = 'were'
+
+			if amount > 0:
+				for i in range(amount):
+					if i == 0:
+						ut.drug1=results[i]
+					elif i == 1:
+						ut.drug2=results[i]
+					elif i == 2:
+						ut.drug3=results[i]
+					elif i == 3:
+						ut.drug4=results[i]
+					elif i == 4:
+						ut.drug5=results[i]
+					elif i == 5:
+						ut.drug6=results[i]
+					elif i == 6:
+						ut.drug7=results[i]
+					elif i == 7:
+						ut.drug8=results[i]
+					elif i == 8:
+						ut.drug9=results[i]
+					elif i == 9:
+						ut.drug10=results[i]
+					elif i == 10:
+						ut.drug11=results[i]
+					elif i == 11:
+						ut.drug12=results[i]
+
+			if utExist(ut) == False:
+				ut.save()
+				content['ut'] = ut
+				content['matches'] = amount
+				content['results'] = results
+				content['phrase'] = phrase
+				content['phrase2'] = phrase2
+				content['title'] = "Simeon Academy | Urine Test Results"
+				return render_to_response('counselor/forms/UrineTest/viewForm.html', content)
+			else:
+				ut.save()
+				uts = getUtsByDate(ut)
+				formMatches = len(uts)
+				content['matches'] = formMatches
+				content['ut'] = ut
+				content['uts'] = uts
+				content['title'] = "ERROR"
+				return render_to_response('counselor/forms/UrineTest/getClient.html', content)
+
+@login_required(login_url='/index')
+def ut_form_saved(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			ut_id = request.POST.get('ut_id', '')
+			ut = UrineResults.objects.get(id=ut_id)
+			content['ut'] = ut
+			content['title'] = "Simeon Academy | Urine Test Results"
+			return render_to_response('counselor/forms/UrineTest/form_created.html', content)
+
+@login_required(login_url='/index')
+def ut_form_saved2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			choice = request.POST.get('ut_op', '')
+			ut_id = request.POST.get('ut_id', '')
+			ut = UrineResults.objects.get(id=ut_id)
+			content['ut'] = ut
+			content['title'] = "Simeon Academy | Urine Test Results"
+
+			if str(choice) == 'keep':				
+				return render_to_response('counselor/forms/UrineTest/form_created.html', content)
+			elif str(choice) == 'delete':
+				keepThis = ut
+				deleteOldUTS(ut.testDate)
+				ut.save()
+				return render_to_response('counselor/forms/UrineTest/form_created.html', content)
 
 ## DISCHARGE VIEWS------------------------------------------------------------
 @login_required(login_url='/index')
@@ -1147,6 +1373,7 @@ def discharge_viewForm(request):
 		else:
 			content['title'] = "Simeon Academy | Discharge"
 			return render_to_response('counselor/forms/Discharge/viewForm.html', content)
+
 
 
 

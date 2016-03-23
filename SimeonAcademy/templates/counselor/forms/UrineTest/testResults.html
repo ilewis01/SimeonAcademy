@@ -4,9 +4,67 @@
 
 <h1>Urine Test Results</h1>
 
+<h3>Client: <em>{{client.fname}} {{client.lname}}</em></h3>
+<h4>Client ID: <span style='color:blue;'>{{client.clientID}}</span></h4>
+<em style='color:green;'>Please check the drugs in which the client tested positive</em>
+
 <form action='/ut_viewForm/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
+	<input type="hidden" name='client_id' id='client_id' value='{{client.id}}'>
+	<table>
+		<tr>
+			<td>
+				<label for=''><b>Test Date: </b></label>
+			</td>
+			<td>
+				<input type='text' name='datepicker' id='datepicker'>
+			</td>
+			<td><div style='margin-bottom:80px;'></div></td>
+		</tr>
+	</table>
+
+	<table>
+		{% for d in drugs %}
+			<tr>
+				<td>
+					<label for='{{d.drug}}'><b>{{d.drug}}:</b></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td><div style='margin-left:10px;'></div></td>
+							<td>
+								<input type='radio' name='{{d.drug}}' id='{{d.drug}}' value='Positive'>
+							</td>
+							<td>
+								<label for='{{d.drug}}'><em>Positive</em></label>
+							</td>
+
+							<td><div style='margin-left:10px;'></div></td>
+							<td>
+								<input type='radio' name='{{d.drug}}' id='{{d.drug}}' checked='true' value='Negative'>
+							</td>
+							<td>
+								<label for='{{d.drug}}'><em>Negative</em></label>
+							</td>
+						</tr>
+
+						<tr><td><div style='margin-bottom:15px;'></div></td></tr>
+					</table>
+				</td>
+			</tr>
+			
+
+		{% endfor %}
+	</table>
+
 	<input type='submit' value='submit'>
+</form>
+
+<form action='/clientOptions/' method='post' id='go-back'> {% csrf_token %}
+	<input type="hidden" name='cli-id' id='cli-id' value='{{client.id}}'>
+	<input type='submit' value='Back to client options'>
 </form>
 
 <a href='/adminHome'><button type='button'>Home Page</button></a>

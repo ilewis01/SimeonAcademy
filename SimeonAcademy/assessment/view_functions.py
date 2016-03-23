@@ -174,12 +174,35 @@ def amDemographicExist(demo):
 			break
 	return results
 
+def mhDemographicExist(demo):
+	demographics = MHDemographic.objects.all()
+	results = {}
+	results['exist'] = False
+	results['mh_demo'] = None
+
+	for d in demographics:
+		if str(d.client.id) == str(demo.client.id) and str(d.birthplace) == str(demo.birthplace):
+			results['exist'] = True
+			results['mh_demo'] = d
+			break
+	return results
+
 def clientAmExist(client):
 	ams = AngerManagement.objects.all()
 	exist = False
 
 	for a in ams:
 		if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
+			exist = True
+			break
+	return exist
+
+def clientMhExist(client):
+	mhs = MentalHealth.objects.all()
+	exist = False
+
+	for m in mhs:
+		if str(m.demographics.client.fname) == str(client.fname) and str(m.demographics.client.lname) == str(client.lname) and str(m.demographics.client.id) == str(client.id) and str(m.demographics.client.clientID) == str(client.clientID):
 			exist = True
 			break
 	return exist
@@ -193,6 +216,16 @@ def getClientAmList(client):
 			if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
 				results.append(a)
 	return results
+
+def getClientMhList(client):
+	results = []
+	mhs = MentalHealth.objects.all()
+
+	if clientAmExist(client) == True:
+		for m in mhs:
+			if str(m.demographics.client.fname) == str(client.fname) and str(m.demographics.client.lname) == str(client.lname) and str(m.demographics.client.id) == str(client.id) and str(m.demographics.client.clientID) == str(client.clientID):
+				results.append(m)
+	return results
 	
 def findClientAM(client):
 	result = {}
@@ -204,6 +237,19 @@ def findClientAM(client):
 		if a.AMComplete == False:
 			result['incomplete'] = True
 			result['am'] = a
+			break
+	return result
+
+def findClientMH(client):
+	result = {}
+	result['incomplete'] = False
+	result['mh'] = None
+	mh_list = getClientMhList(client)
+
+	for m in mh_list:
+		if m.MHComplete == False:
+			result['incomplete'] = True
+			result['mh'] = m
 			break
 	return result
 
@@ -230,6 +276,78 @@ def continueToAmSection(am):
 		location = 'counselor/forms/AngerManagement/final.html'
 
 	return location
+
+def continueToMhSection(mh):
+	location = None
+
+	if mh.demographicsComplete == False:
+		location = 'counselor/forms/MentalHealth/demographic.html'
+	elif mh.familyComplete == False:
+		location = 'counselor/forms/MentalHealth/familyBackground.html'
+	elif mh.educationComplete == False:
+		location = 'counselor/forms/MentalHealth/education.html'
+	elif mh.relationshipsComplete == False:
+		location = 'counselor/forms/MentalHealth/relationships.html'
+	elif mh.activitiesComplete == False:
+		location = 'counselor/forms/MentalHealth/activity.html'
+	elif mh.stressorsComplete == False:
+		location = 'counselor/forms/MentalHealth/stressors.html'
+	elif mh.familyHistoryComplete == False:
+		location = 'counselor/forms/MentalHealth/familyHistory.html'
+	elif mh.legalHistoryComplete == False:
+		location = 'counselor/forms/MentalHealth/legal.html'
+	elif mh.useTableComplete == False:
+		location = 'counselor/forms/MentalHealth/useTable.html'
+
+	return location
+
+def getActiveClients():
+	clients = Client.objects.all()
+	results = []
+
+	for c in clients:
+		if c.isDischarged == False:
+			results.append(c)
+	return results
+
+def getDischargedClients():
+	clients = Client.objects.all()
+	result = []
+
+	for c in clients:
+		if c.isDischarged == True:
+			result.append(c)
+	return result
+
+def utExist(ut):
+	uts = UrineResults.objects.all()
+	exist = False
+
+	for u in uts:
+		if str(u.client.clientID) == str(ut.client.clientID) and str(u.client.fname) == str(ut.client.fname) and str(u.testDate) == str(ut.testDate):
+			exist = True
+			break
+	return exist
+
+def getUtsByDate(ut):
+	uts = UrineResults.objects.all()
+	results = []
+
+	for u in uts:
+		if u.client == ut.client and u.testDate == ut.testDate:
+			results.append(u)
+	return results
+
+def deleteOldUTS(date):
+	uts = UrineResults.objects.all()
+	deleted = []
+	num_test = len(uts)
+
+	for u in uts:
+		if str(u.testDate) == str(date):
+			deleted.append(u)
+			u.delete()
+	return deleted
 
 
 
