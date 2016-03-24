@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Sources of Information</h1>
+
+<h2 style='color:green;'>Please provide source of information other than client</h2>
+
+<form action='/sap_viewForm/' method='post' id=''> {% csrf_token %}
+	<input type="hidden" name-'' id='' value=''>
+
+	<table>
+		<tr><td><em><b><span style='color:blue;'>Source 1</span>:</b></em></td></tr>
+		<tr>
+			<td>
+				<label for='name1'><b>Name: </b></label>
+			</td>
+			<td>
+				<input type='text' name='name1' id='name1' value=''>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for='relationship1'><b>Relationship: </b></label>
+			</td>
+			<td>
+				<input type='text' name='relationship1' id='relationship1' value=''>
+			</td>
+		</tr>
+
+		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
+
+		<tr><td><em><b><span style='color:blue;'>Source 2</span>:</b></em></td></tr>
+		<tr>
+			<td>
+				<label for='name2'><b>Name: </b></label>
+			</td>
+			<td>
+				<input type='text' name='name2' id='name2' value=''>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for='relationship1'><b>Relationship: </b></label>
+			</td>
+			<td>
+				<input type='text' name='relationship2' id='relationship2' value=''>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
+		<tr>
+			<td>
+				<label for='relationship1'><b><span style='color:red;'>End Time</span>: </b></label>
+			</td>
+			<td>
+				<select name='end-time' id='end-time' value=''>
+					<option value=''>Select</option>
+					{% for t in times %}
+						<option value='{{t}}'>{{t}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
+	</table>
+	<input type='submit' value='submit'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
+
+{% endblock %}

@@ -187,6 +187,19 @@ def mhDemographicExist(demo):
 			break
 	return results
 
+def SAPDemographicExist(demo):
+	demographics = SapDemographics.objects.all()
+	results = {}
+	results['exist'] = False
+	results['sap_demo'] = None
+
+	for d in demographics:
+		if str(d.client.id) == str(demo.client.id) and str(d.date1) == str(demo.date1) and str(d.client.clientID) == str(demo.client.clientID):
+			results['exist'] = True
+			results['sap_demo'] = d
+			break
+	return results
+
 def clientAmExist(client):
 	ams = AngerManagement.objects.all()
 	exist = False
@@ -203,6 +216,16 @@ def clientMhExist(client):
 
 	for m in mhs:
 		if str(m.demographics.client.fname) == str(client.fname) and str(m.demographics.client.lname) == str(client.lname) and str(m.demographics.client.id) == str(client.id) and str(m.demographics.client.clientID) == str(client.clientID):
+			exist = True
+			break
+	return exist
+
+def clientSAPExist(client):
+	saps = SAP.objects.all()
+	exist = False
+
+	for s in saps:
+		if str(s.demographics.client.fname) == str(client.fname) and str(s.demographics.client.lname) == str(client.lname) and str(s.demographics.client.id) == str(client.id) and str(s.demographics.client.clientID) == str(client.clientID):
 			exist = True
 			break
 	return exist
@@ -225,6 +248,16 @@ def getClientMhList(client):
 		for m in mhs:
 			if str(m.demographics.client.fname) == str(client.fname) and str(m.demographics.client.lname) == str(client.lname) and str(m.demographics.client.id) == str(client.id) and str(m.demographics.client.clientID) == str(client.clientID):
 				results.append(m)
+	return results
+
+def getClientSAPList(client):
+	results = []
+	saps = SAP.objects.all()
+
+	if clientSAPExist(client) == True:
+		for s in saps:
+			if str(s.demographics.client.fname) == str(client.fname) and str(s.demographics.client.lname) == str(client.lname) and str(s.demographics.client.id) == str(client.id) and str(s.demographics.client.clientID) == str(client.clientID):
+				results.append(s)
 	return results
 	
 def findClientAM(client):
@@ -250,6 +283,19 @@ def findClientMH(client):
 		if m.MHComplete == False:
 			result['incomplete'] = True
 			result['mh'] = m
+			break
+	return result
+
+def findClientSAP(client):
+	result = {}
+	result['incomplete'] = False
+	result['sap'] = None
+	sap_list = getClientSAPList(client)
+
+	for s in sap_list:
+		if s.SapComplete == False:
+			result['incomplete'] = True
+			result['sap'] = s
 			break
 	return result
 
@@ -301,6 +347,22 @@ def continueToMhSection(mh):
 
 	return location
 
+def continueToSAPSection(sap):
+	location = None
+
+	if sap.demoComplet == False:
+		location = 'counselor/forms/SAP/demographic.html'
+	elif sap.psychoactiveComplet == False:
+		location = 'counselor/forms/SAP/psychoactive.html'
+	elif sap.specialComplete == False:
+		location = 'counselor/forms/SAP/psychoactive2.html'
+	elif sap.preFinalComplete == False:
+		location = 'counselor/forms/SAP/pre_final.html'
+	elif sap.finalComplete == False:
+		location = 'counselor/forms/SAP/final.html'
+
+	return location
+
 def getActiveClients():
 	clients = Client.objects.all()
 	results = []
@@ -348,6 +410,47 @@ def deleteOldUTS(date):
 			deleted.append(u)
 			u.delete()
 	return deleted
+
+def getTimes():
+	results = []
+	real = []
+	final = []
+	time = 7
+	count = 0
+
+	for i in range(56):
+		if time == 13:
+			time = 1
+
+		results.append(time)
+		count = count + 1
+
+		if count == 4:
+			time = time + 1
+			count = 0
+
+	count = 0
+	for r in results:
+		if count == 0:
+			real.append(str(r) + ':00')
+		elif count == 1:
+			real.append(str(r) + ':15')
+		elif count == 2:
+			real.append(str(r) + ':30')
+		else:
+			real.append(str(r) + ':45')
+
+		count = count + 1			
+		if count == 4:
+			count = 0
+
+	for i in range(len(real)):
+		if i < 20:
+			final.append(str(real[i]) + ' am')
+		else:
+			final.append(str(real[i]) + ' pm')
+
+	return final
 
 
 

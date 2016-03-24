@@ -2,13 +2,310 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>SAP Psychoactive</h1>
+<h1 style='text-align:center;'>Psychoactive Substance Use History</h1>
 
-<form action='/sap_viewForm/' method='post' id=''> {% csrf_token %}
+<form action='/sap_psychoactive2/' method='post' id=''> {% csrf_token %}
 	<input type="hidden" name-'' id='' value=''>
-	<input type='submit' value='submit'>
+
+	<table style='background-color:#e6e6e6; width:1000px; height:300px; border:1px solid black; margin-bottom:40px; margin:auto;'>
+		<tr>
+			<th style='border:3px solid black; width:200px;'><b>Drug</b></th>
+			<th style='border:3px solid black; width:80px;'><b>Age at first use</b></th>
+			<th style='border:3px solid black; width:100px;'><b>Frequency</b></th>
+			<th style='border:3px solid black; width:350px;'><b>Quantity</b></th>
+			<th style='border:3px solid black; '><b>Last (3) uses</b></th>
+			<th style='border:3px solid black; '><b>How used</b></th>
+		</tr>
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Alcohol</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Amphetamine</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Caffine</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Cannabis</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Cocaine</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Hallucinogen</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Inhalant</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Nicotine</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Opioid</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>PCP</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Sedative Hypnotic</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+
+		<tr>
+			<td style='border:1px solid black'>
+				<div  style='width:150px; padding-left:10px;'>
+					<b><em>Other</em></b>
+				</div>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='number' id='' name='' value='0' style='width:80px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:100px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:350px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+			<td style='border:1px solid black'>
+				<input type='text' id='' name='' value='' style='width:200px'>
+			</td>
+		</tr>
+	</table>
+	<div style='margin-top:30px; margin-left:33px;'>
+		<input type='submit' value='submit'>
+	</div>
 </form>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+<form action='/clientOptions/' method='post' id='sap-back'> {% csrf_token %}
+	<input type='hidden' id='cli-id' name='cli-id' value='{{client.id}}'>
+	<div style='margin-top:5px; margin-left:33px;'>
+		<input type='submit' value='Return to client options'>
+	</div>
+</form>
+
+<div style='margin-top:5px; margin-left:33px;'>
+	<a href='/adminHome'><button type='button'>Home Page</button></a>
+</div>
 
 {% endblock %}

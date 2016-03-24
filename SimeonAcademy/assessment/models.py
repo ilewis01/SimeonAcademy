@@ -130,7 +130,7 @@ class SapDemographics(models.Model):
 	relationship2 = models.CharField(max_length=25, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "SAP/Demographics: " + str(self.client.client_id)
+		return "SAP/Demographics: " + str(self.client.clientID)
 
 ##PSYCHOACTIVE HISTORY OF SAP FORM---------------------------------------------------------
 class SapPsychoactive(models.Model):
@@ -215,6 +215,15 @@ class SapPsychoactive(models.Model):
 class SAP(models.Model):
 	demographics = models.ForeignKey(SapDemographics, default=None, blank=True, null=True)
 	psychoactive = models.ForeignKey(SapPsychoactive, default=None, blank=True, null=True)
+
+	demoComplet = models.BooleanField(blank=True, default=False)
+	psychoactiveComplet = models.BooleanField(blank=True, default=False)
+	psychoactive2Complet = models.BooleanField(blank=True, default=False)
+	specialComplete = models.BooleanField(blank=True, default=False)
+	preFinalComplete = models.BooleanField(blank=True, default=False)
+	finalComplete = models.BooleanField(blank=True, default=False)
+
+	SapComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
 		return "SAP: " + str(self.demographics.client)

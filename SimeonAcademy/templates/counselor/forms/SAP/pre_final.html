@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>SAP Cont.</h1>
+
+<form action='/sap_final/' method='post' id=''> {% csrf_token %}
+	<input type="hidden" name-'' id='' value=''>
+
+	<table>
+		<tr><td><label for='psychological'><b>Psychological:</b></label></td></tr>
+		<tr>
+			<td>
+				<textarea rows='5' cols='55' name='psychological' id='psychological'></textarea>
+			</td>
+		</tr>
+		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
+
+		<tr><td><label for='gambling'><b>Gambling:</b></label></td></tr>
+		<tr>
+			<td>
+				<textarea rows='5' cols='55' name='gambling' id='gambling'></textarea>
+			</td>
+		</tr>
+		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
+
+		<tr><td><label for='abilities'><b>Abilities, Strengths, Needs and Preferences:</b></label></td></tr>
+		<tr>
+			<td>
+				<textarea rows='5' cols='55' name='abilities' id='abilities'></textarea>
+			</td>
+		</tr>
+		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
+
+		<tr><td><label for='other'><b>Other:</b></label></td></tr>
+		<tr>
+			<td>
+				<textarea rows='5' cols='55' name='other' id='other'></textarea>
+			</td>
+		</tr>
+		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
+	</table>
+	<input type='submit' value='submit'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
+
+{% endblock %}

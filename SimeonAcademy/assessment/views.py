@@ -29,7 +29,8 @@ getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
 amDemographicExist, findClientAM, clientAmExist, continueToAmSection, \
 mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
 continueToMhSection, getActiveClients, getDischargedClients, utExist, \
-getUtsByDate, deleteOldUTS
+getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
+getClientSAPList, continueToSAPSection, SAPDemographicExist
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1089,6 +1090,49 @@ def sap_preliminary(request):
 			return render_to_response('counselor/forms/SAP/getClient.html', content)
 
 @login_required(login_url='/index')
+def sap_location(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			action = request.POST.get('sap-choice', '')
+			sap = request.POST.get('sap_id')
+			sap = SAP.objects.get(id=sap)
+			client = sap.demographics.client
+			content['client'] = sap.demographics.client
+
+			if str(action) == 'finish-old':
+				##go to the next section to be completed in the form
+				content['sap'] = sap
+				goToLocation = continueToSAPSection(sap)
+				content['title'] = "Simeon Academy | SAP"
+				return render_to_response(goToLocation, content)
+			elif str(action) == 'start-new':
+				##delete the current form and start at beginning of the am form
+				times = getTimes()
+				content['times'] = times
+				if sap.demographics != None:
+					sap.demographics.delete()
+				if sap.psychoactive != None:
+					sap.psychoactive.delete()
+				sap.delete()
+				content['title'] = "Simeon Academy | SAP"
+				return render_to_response('counselor/forms/SAP/demographic.html', content)
+			elif str(action) == 'cancel':
+				## return to the client options page
+				content['title'] = "Simeon Academy | Client Options"
+				return render_to_response('counselor/client/client_options.html', content)
+
+@login_required(login_url='/index')
 def sap_demographic(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -1103,8 +1147,20 @@ def sap_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = request.GET['client_ID']
+			client = Client.objects.get(id=client)
+			times = getTimes()
+			proceed = findClientSAP(client)
+
+			content['client'] = client
+			content['times'] = times
 			content['title'] = "Simeon Academy | Urine Test Analysis"
-			return render_to_response('counselor/forms/SAP/demographic.html', content)
+
+			if proceed['incomplete'] == True:
+				content['sap'] = proceed['sap']
+				return render_to_response('counselor/forms/SAP/getClient.html', content)
+			else:
+				return render_to_response('counselor/forms/SAP/demographic.html', content)
 
 @login_required(login_url='/index')
 def sap_psychoactive(request):
@@ -1121,8 +1177,110 @@ def sap_psychoactive(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client_id = request.POST.get('client_id', '')
+			date = request.POST.get('datepicker', '')
+			start_time = request.POST.get('start-time', '')
+			problem = request.POST.get('problem', '')
+			health = request.POST.get('health', '')
+			family = request.POST.get('family', '')
+
+			client = Client.objects.get(id=client_id)
+			date = convert_datepicker(date)
+			date = date['date']
+
+			demographic = SapDemographics(client=client, date1=date, startTime1=start_time,\
+				problem=problem, health=health, family=family)
+
+			moveForward = SAPDemographicExist(demographic)
+
+			if moveForward['exist'] == False:
+				demographic.save()
+			else:
+				demographic = moveForward['sap_demo']
+
+			sap = SAP(demographics=demographic, demoComplet=True, SapComplete=False)
+
+			checkSAP = clientSAPExist(client)
+
+			if checkSAP == False:
+				sap.save()
+
 			content['title'] = "Simeon Academy | Urine Test Analysis"
 			return render_to_response('counselor/forms/SAP/psychoactive.html', content)
+
+@login_required(login_url='/index')
+def sap_psychoactive2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Urine Test Analysis"
+			return render_to_response('counselor/forms/SAP/psychoactive2.html', content)
+
+@login_required(login_url='/index')
+def sap_special(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Urine Test Analysis"
+			return render_to_response('counselor/forms/SAP/special.html', content)
+
+@login_required(login_url='/index')
+def sap_preFinal(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Urine Test Analysis"
+			return render_to_response('counselor/forms/SAP/pre_final.html', content)
+
+@login_required(login_url='/index')
+def sap_final(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			times = getTimes()
+			content['times'] = times
+			content['title'] = "Simeon Academy | Urine Test Analysis"
+			return render_to_response('counselor/forms/SAP/final.html', content)
 
 @login_required(login_url='/index')
 def sap_viewForm(request):
@@ -1353,6 +1511,10 @@ def discharge_client(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(request.GET['client_ID']))
+			term = TermReason.objects.all()
+			content['client'] = client
+			content['term'] = term
 			content['title'] = "Simeon Academy | Discharge"
 			return render_to_response('counselor/forms/Discharge/clientDischarge.html', content)
 

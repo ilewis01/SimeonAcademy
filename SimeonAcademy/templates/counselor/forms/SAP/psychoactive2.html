@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Psychoactive Substance Use History Cont.</h1>
+
+<form action='/sap_special/' method='post' id=''> {% csrf_token %}
+	<input type="hidden" name-'' id='' value=''>
+	<table>
+		<tr>
+			<td><label for=''><b><u>Psychoactive Substance Use:</u></b></label></td>
+		</tr>
+
+		<tr>
+			<td>
+				<em>
+					<p>
+						Include other relevant substance use factors such as the loss of control,<br>
+						tolerance, treatment history, patterns of use and problems related to use.<br>
+						Include data to differentiate between use, abuse and history.
+					</p>
+				</em>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name='' id='' rows='20' cols='80'></textarea>
+			</td>
+		</tr>
+	</table>
+	<input type='submit' value='submit'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
+
+{% endblock %}

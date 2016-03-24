@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<h1>Special Populations</h1>
+
+<form action='/sap_preFinal/' method='post' id=''> {% csrf_token %}
+	<input type="hidden" name-'' id='' value=''>
+
+	<span style='font-size:24px; color:green;'><b>Client is member of the following special population group:</b></span><br>
+	<em>Check all that apply</em>
+
+	<table style='margin-top:20px;'>
+		<tr>
+			<td>
+				<div style='margin-bottom:2px;'>
+					<input type='checkbox' id='' name='' value=''>
+				</div>
+			</td>
+			<td>
+				<label for=''><b>Child/Adolescent</b></label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-bottom:2px;'>
+					<input type='checkbox' id='' name='' value=''>
+				</div>
+			</td>
+			<td>
+				<label for=''><b>Seniors</b></label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-bottom:2px;'>
+					<input type='checkbox' id='' name='' value=''>
+				</div>
+			</td>
+			<td>
+				<label for=''><b>Dual Diagnosis</b></label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-bottom:2px;'>
+					<input type='checkbox' id='' name='' value=''>
+				</div>
+			</td>
+			<td>
+				<label for=''><b>Other co-existing disabilities/disorders</b></label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div style='margin-bottom:2px;'>
+					<input type='checkbox' id='' name='' value=''>
+				</div>
+			</td>
+			<td>
+				<label for=''><b>None of the above </b><em>(Continue to next section)</em></label>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr><td><div style='margin-top:20px;'></div></td></tr>
+
+		<tr>
+			<td>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<textarea cols='80' rows='20'></textarea>
+			</td>
+		</tr>
+	</table>
+
+	<input type='submit' value='submit'>
+</form>
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
+
+{% endblock %}

@@ -4,6 +4,46 @@
 
 <h1>S.A.P</h1>
 
-<a href='/adminHome'>Home Page</a>
+<span style='color:red;'><b>This client has an incomplete SAP Profile</b></span><br>
+<em>A new form cannot be created until the previous form has been resolved</em><br>
+
+<h4>Please choose from the following options:</h4>
+<form action='/sap_location/' method='post' id='chooseSAPform'> {% csrf_token %}
+	<input type='hidden' id='sap_id' name='sap_id' value="{{sap.id}}">
+	<input type='hidden' id='cli-id' name='cli-id' value='{{client.id}}'>
+	<table>
+		<tr>
+			<td>
+				<input type='radio' id='c1' name='sap-choice' value='finish-old' checked='true'>
+			</td>
+			<td>
+				<label for='c1'>Continue completing current SAP form on file</label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<input type='radio' id='c2' name='sap-choice' value='start-new'>
+			</td>
+			<td>
+				<label for='c2'>Start a new form <em style='color:green;'>*All previous incomplete SAP forms for this client will be deleted</em></label>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<input type='radio' id='c3' name='sap-choice' value='cancel'>
+			</td>
+			<td>
+				<label for='c3'>Back to client options page</label>
+			</td>
+		</tr>
+	</table>
+	<div style='margin-bottom:20px;'></div>
+	<input type='submit' value='submit'>
+</form>
+
+
+<a href='/adminHome'><button type='button'>Home Page</button></a>
 
 {% endblock %}
