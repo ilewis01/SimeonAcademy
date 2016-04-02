@@ -2,15 +2,134 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Counselor Home Page</h1>
-<h3><em>Welcome Back, {{user.first_name}}!!!</em></h3>
+<body class="gradient-white">
+	<div class="container">
+        <div class="row">                   
+            <div class="col-md-12">
+            	<div id='center-page'>
+            		<em>
+            			<h3>Welcome back, {{user.first_name}}!</h3>
+            		</em>
+            	</div>
+            </div>
 
-<a href='/newClient'><h4>New Client</h4></a>
-<a href='/searchClients'><h4>New Session</h4></a>
-<a href='/all_active_clients'><h4>View All Active Clients</h4></a>
-<a href='/all_discharged_clients'><h4>View All Discharged Clients</h4></a>
-<a href='/search_clients'><h4>Search Clients</h4></a>
-<a href='/appointment_management'><h4>Appointment Manager</h4></a>
-<a href='/logout'>Logout</a>
+            <div class="col-md-3 col-sm-3" style='background-color:red;'></div>
+            <div class="col-md-3 col-sm-3" style='background-color:green;'></div>
+            <div class="col-md-3 col-sm-3" style='background-color:blue;'></div>
+            <div class="col-md-3 col-sm-3" style='background-color:orange;'></div>
+
+            <div class='button-align-center'>
+	            <div id='home-page-margin'>
+	            	<div class="col-md-3 col-sm-3" id='align-rounded'>
+		            	<div class='center-rounded'>
+		            		<div class="round-button">
+		            			<div class="round-button-circle">
+		            				<div id='icon-placement' style="margin-left:7px;">
+		            					<i class="fa fa-folder-open-o fa-3x"></i>
+		            				</div>
+		            				<a href="/searchClients" class="round-button"></a>
+		            			</div>
+		            		</div>
+		            	</div>
+		            </div>
+
+		            <div class="col-md-3 col-sm-3" id='align-rounded'>
+		            	<div class='center-rounded' >
+		            		<div class="round-button">
+		            			<div class="round-button-circle">
+		            				<div id='icon-placement'>
+		            					<i class="fa fa-user fa-3x"></i>
+		            				</div>
+		            				<a href="/newClient" class="round-button"></a>
+		            			</div>
+		            		</div>
+		            	</div>
+		            </div>
+
+		            <div class="col-md-3 col-sm-3" id='align-rounded'>
+		            	<div class='center-rounded' >
+		            		<div class="round-button">
+		            			<div class="round-button-circle">
+		            				<div id='icon-placement'>
+		            					<i class="fa fa-search fa-3x"></i>
+		            				</div>
+		            				<a href="http://example.com" class="round-button"></a>
+		            			</div>
+		            		</div>
+		            	</div>
+		            </div>
+
+		            <div class="col-md-3 col-sm-3" id='align-rounded'>
+		            	<div class='center-rounded'>
+		            		<div class="round-button">
+		            			<div class="round-button-circle">
+		            				<div id='icon-placement'>
+		            					<i class="fa fa-calendar fa-3x"></i>
+		            				</div>
+		            				<a href="http://example.com" class="round-button"></a>
+		            			</div>
+		            		</div>
+		            	</div>
+		            </div>
+		        </div>
+	        </div>
+
+	        <div class='button-align-center'>
+	        	<div class="col-md-3 col-sm-3">
+		        	<div class="">
+			        	<div id='button-label-placement'>
+			        		<a href="/searchClients" class='round-text'>
+			        			New Session
+			        		</a>
+			        	</div>
+			        </div>
+		        </div>
+
+		        <div class="col-md-3 col-sm-3">
+		        	<div class="">
+			        	<div id='button-label-placement'>
+			        		<a href="/newClient" class='round-text'>
+			        			New Client
+			        		</a>
+			        	</div>
+			        </div>
+		        </div>
+
+		        <div class="col-md-3 col-sm-3">
+		        	<div class="">
+			        	<div id='button-label-placement'>
+			        		<a href="/search_clients" class='round-text'>
+			        			Search Clients
+			        		</a>
+			        	</div>
+			        </div>
+		        </div>
+
+		        <div class="col-md-3 col-sm-3">
+		        	<div class="">
+			        	<div id='button-label-placement'>
+			        		<a href="/newClient" class='round-text'>
+			        			Appointments
+			        		</a>
+			        	</div>
+			        </div>
+		        </div>
+		    </div>
+        </div>
+    </div>
+</body>
+
+<!-- <body>
+	<h1>Counselor Home Page</h1>
+	<h3><em>Welcome Back, {{user.first_name}}!!!</em></h3>
+
+	<a href='/newClient'><h4>New Client</h4></a>
+	<a href='/searchClients'><h4>New Session</h4></a>
+	<a href='/all_active_clients'><h4>View All Active Clients</h4></a>
+	<a href='/all_discharged_clients'><h4>View All Discharged Clients</h4></a>
+	<a href='/search_clients'><h4>Search Clients</h4></a>
+	<a href='/appointment_management'><h4>Appointment Manager</h4></a>
+	<a href='/logout'>Logout</a>
+</body> -->
 
 {% endblock %}
