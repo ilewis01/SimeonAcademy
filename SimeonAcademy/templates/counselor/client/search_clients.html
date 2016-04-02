@@ -2,7 +2,169 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Client Session</h1>
+<body class="gradient-white" style='text-align:center'>
+<!-- 	<div id='header-img'>
+        <img src="{% static 'images/header.png' %}">
+    </div> -->
+
+    <div class='header-images'>
+    	<div class="container">
+        	<div class="row">                   
+            	<div class="col-md-12">
+            		<div id='header-text'>
+            			CLIENT SEARCH
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+    	<div class="container">
+        	<div class="row">                   
+            	<div class="col-md-12">
+            		<div class='main-windows-left'>
+            			<h3>Select Search Criteria</h3>
+            		</div>
+            	</div>
+
+            	<div class="col-md-12">
+            		<div class='main-windows'>
+            			<form action="/clientSearchResults/" method="post" id='client-search' name='client-search'> {% csrf_token %}
+            				<table>
+            					<tr>
+            						<td>
+            							<input type='radio' id='search-radio' name='search-radio' checked='true'>
+            						</td>
+            						<td>
+            							<div id='radio-select' id=''>
+            								<label for=''>Name:</label>
+            							</div>
+            						</td>
+            					</tr>            					
+            				</table>
+
+            				<table class='name-table'>
+            					<tr>
+            						<td><div id='form-radio-margin'></div></td>
+            						<td>
+            							<div>
+            								<input type='text' name='' id='' value='Fname'>
+            							</div>
+            						</td>
+
+            						<td>
+            							<div>
+            								<input type='text' name='' id='' value='Lname'>
+            							</div>
+            						</td>
+            					</tr>
+
+            					<tr><td><div id='space2'></div></td></tr>
+            				</table>
+
+            				<table>
+            					<tr>
+            						<td>
+            							<input type='radio' id='search-radio' name='search-radio'>
+            						</td>
+            						<td>
+            							<div id='radio-select'>
+            								<label for=''>Date of Birth:</label>
+            							</div>
+            						</td>
+            					</tr>            					
+            				</table>
+
+            				<table class='name-table'>
+            					<tr>
+            						<td><div id='form-radio-margin'></div></td>
+            						<td>
+            							<div>
+            								<input type='text' name='' id='' value='mm/dd/yyyy' disabled='true' style='opacity: 0.5;'>
+            							</div>
+            						</td>
+            					</tr>
+
+            					<tr><td><div id='space2'></div></td></tr>
+            				</table>
+
+            				<table>
+            					<tr>
+            						<td>
+            							<input type='radio' id='search-radio' name='search-radio'>
+            						</td>
+            						<td>
+            							<div id='radio-select'>
+            								<label for=''>Serial Number:</label>
+            							</div>
+            						</td>
+            					</tr>            					
+            				</table>
+
+            				<table class='name-table'>
+            					<tr>
+            						<td><div id='form-radio-margin'></div></td>
+            						<td>
+            							<div>
+            								<input type='text' name='' id='' value='xxx-xx-xxxx' disabled='true' style='opacity: 0.5;'>
+            							</div>
+            						</td>
+            					</tr>
+
+            					<tr><td><div id='space2'></div></td></tr>
+            				</table>
+
+							<table>
+            					<tr>
+            						<td>
+            							<input type='radio' id='search-radio' name='search-radio'>
+            						</td>
+            						<td>
+            							<div id='radio-select'>
+            								<label for=''>Client ID:</label>
+            							</div>
+            						</td>
+            					</tr>            					
+            				</table>
+
+            				<table class='name-table'>
+            					<tr>
+            						<td><div id='form-radio-margin'></div></td>
+            						<td>
+            							<div>
+            								<input type='text' name='' id='' value='None' disabled='true' style='opacity: 0.5;'>
+            							</div>
+            						</td>
+            					</tr>
+
+            					<tr><td><div id='space'></div></td></tr>
+            				</table>   
+
+            				<table>
+            					<tr>
+            						<td>
+            							<button type='button'>Search</butto>
+            						</td>
+            					</tr>
+            				</table>       				
+            			</form>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container">
+        <div class="row">                   
+            <div class="col-md-12">
+            	
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
 
 <form action="/clientSearchResults/" method="post" id='client-search' name='client-search'> {% csrf_token %}
 	<table>
@@ -86,5 +248,3 @@
 </form>
 
 <a href='/adminHome'><button type=/button>Home Page</button></a>
-
-{% endblock %}
