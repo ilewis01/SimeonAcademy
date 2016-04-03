@@ -55,6 +55,10 @@ function updateID() {
 	client_ID.disabled = false;
 }
 
+function submit_session() {
+	document.getElementById('client-search').submit();
+}
+
 
 
 

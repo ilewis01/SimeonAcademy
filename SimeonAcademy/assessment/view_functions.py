@@ -91,12 +91,22 @@ def clientExist(client):
 
 	return result
 
+def filterSS(ss_num):
+	result = ''
+
+	for s in ss_num:
+		if s=='0' or s=='1' or s=='2' or s=='3' or s=='4' or s=='5' or s=='6' or s=='7' or s=='8' or s=='9':
+			result += s
+	return result
+
 def getClientBySS(ss_num):
 	results = []
 	clients = Client.objects.all()
+	ss_num = filterSS(ss_num)
 
 	for c in clients:
-		if str(ss_num) == str(c.ss_num):
+		sNum = filterSS(c.ss_num)
+		if str(ss_num) == str(sNum):
 			results.append(c)
 
 	return results
@@ -104,9 +114,11 @@ def getClientBySS(ss_num):
 def getClientByID(clientID):
 	results = []
 	clients = Client.objects.all()
+	clientID = clientID.lower()
 
 	for c in clients:
-		if str(clientID) == str(c.clientID):
+		compare = str(c.clientID).lower()
+		if str(clientID) == str(compare):
 			results.append(c)
 
 	return results
@@ -125,8 +137,13 @@ def getClientByName(fname, lname):
 	results = []
 	clients = Client.objects.all()
 
+	fname = fname.lower()
+	lname = lname.lower()
+
 	for c in clients:
-		if str(fname) == str(c.fname) and str(lname) == str(c.lname):
+		compF = str(c.fname).lower()
+		compL = str(c.lname).lower()
+		if str(fname) == str(compF) and str(lname) == str(compL):
 			results.append(c)
 
 	return results

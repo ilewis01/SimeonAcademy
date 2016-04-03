@@ -1,0 +1,192 @@
+body {
+	color:#393939;
+}
+
+.gradient-white {
+	background: url('../images/grey1.jpg');
+}
+
+.round-button {
+	width:25%;
+}
+.round-button-circle {
+	width: 100px;
+	height:100px;
+	padding-bottom: 100%;
+    border-radius: 50%;
+    border:10px solid #666666;
+	/*border:10px solid #cfdcec;*/
+    overflow:hidden;
+    
+    /*background: #4679BD;*/ 
+    background: #adad85;
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle:hover {
+	/*background: #fee047;*/
+	background: #6b6b47;
+	/*background:#30588e;*/
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:1.2em;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+#center-page {
+	text-align: center;
+}
+
+#home-page-margin {
+	text-align: center;
+	margin-top: 36%;
+}
+
+#icon-placement {
+	margin-top: 23%;
+	color:white;
+}
+
+#align-rounded {
+	width: 200px;
+	margin: auto;
+}
+
+.button-align-center {
+	width:800px;
+	margin:auto;
+	color:#393939;
+	text-align: center;
+}
+
+#button-label-placement {
+	margin-top: 10px;
+	font-style: bold;
+	font-size: 18px;
+}
+
+.center-rounded {
+	width:100px;
+	margin:auto;
+}
+
+.round-text {
+	color:#393939;
+}
+
+.round-text:hover {
+	color:#adad85;
+	text-decoration:none;
+}
+
+#header-img {
+	margin-right: 100%;
+}
+
+#header-img img {
+	height: 40px;
+}
+
+.header-images {
+	background: url('../images/header.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	/*font-family: arial;*/
+}
+
+#header-text{
+	color: white;
+	margin-top: 7px;
+	text-align: left;
+	font-style: oblique;
+	font-style: bold;
+	font-size: 20px;
+	text-shadow: .05em .05em #3e3e3e;
+}
+
+.main-windows-left {
+	margin-top: 30px;
+	text-align: left;
+}
+
+#radio-select {
+	margin-left: 10px;
+	margin-top: 7px;
+}
+
+#form-radio-margin {
+	margin-right: 12px;
+}
+
+.name-table td{
+	padding-right: 10px;
+}
+
+#logout_page {
+	background: url('../images/grey1.jpg');
+	text-align: center;
+}
+
+#logout-text {
+	text-align: center;
+}
+
+#log-logo {
+	height: 33px;
+}
+
+#logout_a {
+	text-decoration: none;
+	color:#393939;
+	font-size: 15px;
+}
+
+#logout_a:hover {
+	color:blue;
+}
+
+button {
+	background: #e6e6e6;
+}
+
+button:hover {
+	background: #aaaaa9;
+}
+
+.but_a {
+	color:#393939;
+}
+
+.but_a:hover {
+	color: #393939;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

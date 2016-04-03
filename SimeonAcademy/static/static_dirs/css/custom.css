@@ -164,6 +164,58 @@ button:hover {
 	background: #aaaaa9;
 }
 
+.but_a {
+	color:#393939;
+}
+
+.but_a:hover {
+	color: #393939;
+}
+
+#error-div {
+	height:15px;
+	color: red;
+	font-style: bold;
+	font-size: 15px;
+}
+
+#faded-text {
+	color:#999999;
+	font-style: oblique;;
+}
+
+#submit-space {
+	margin-left: 5px;
+}
+
+#search-name-res {
+	font-style: oblique;
+	color: blue;
+}
+
+#li-name {
+	font-size: 18px;
+	font-style: bold;
+	color:#666633;
+}
+
+#li-label {
+	font-style: bold;
+	/*color:#3e3e3e;*/
+}
+
+#li-ans {
+	font-style: oblique;
+}
+
+.li-a:hover {
+	text-decoration: none;
+	color:#6b6b47;
+}
+
+.li-a {
+	color:#adad85;
+}
 
 
 

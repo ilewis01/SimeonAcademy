@@ -354,30 +354,30 @@ def clientSearchResults(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			search_type = request.POST.get('search-radio', '')
+			search_type = request.POST.get('s-type', '')
 			s_results = None
 			phrase = None
 			searched = None
 
-			if search_type == "ssNumSearch":
+			if search_type == "ss_num":
 				getThis = request.POST.get('ss_num', '')
-				search_type = "Social Security Number"
+				search_type = "social security number"
 				s_results = getClientBySS(getThis)
 				searched = getThis
-			elif search_type == "nameSearch":
+			elif search_type == "name":
 				getFirst = request.POST.get('fname', '')
 				getLast = request.POST.get('lname', '')
-				search_type = "Name"
+				search_type = "name"
 				s_results = getClientByName(getFirst, getLast)
 				searched = str(getFirst) + " " + str(getLast)
-			elif search_type == "dobSearch":
+			elif search_type == "dob":
 				getThis = request.POST.get('dob', '')
-				search_type = "Birthdate"
+				search_type = "birthdate"
 				s_results = getClientByDOB(getThis)
 				searched = getThis
-			elif search_type == "clientIDSearch":
+			elif search_type == "id":
 				getThis = request.POST.get('client_ID', '')
-				search_type = "Client ID"
+				search_type = "client ID"
 				s_results = getClientByID(getThis)
 				searched = getThis
 
@@ -601,7 +601,8 @@ def am_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = Client.objects.get(id=(request.GET['client_ID']))
+			client_id = request.POST.get('client_ID', '')
+			client = Client.objects.get(id=client_id)
 			proceed = findClientAM(client)
 			am = proceed['am']
 
@@ -874,7 +875,8 @@ def mh_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = Client.objects.get(id=(request.GET['client_ID']))
+			client_id = request.POST.get('client_ID', '')
+			client = Client.objects.get(id=client_id)
 			content['client'] = client
 			proceed = findClientMH(client)
 
@@ -1147,7 +1149,7 @@ def sap_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = request.GET['client_ID']
+			client = request.POST.get('client_ID', '')
 			client = Client.objects.get(id=client)
 			times = getTimes()
 			proceed = findClientSAP(client)
@@ -1335,7 +1337,8 @@ def ut_testResults(request):
 
 		else:
 			drugs = Drug.objects.all()
-			client = Client.objects.get(id=(request.GET['client_ID']))
+			client = request.POST.get('client_ID', '')
+			client = Client.objects.get(id=client)
 			content['client'] = client
 			content['drugs'] = drugs
 			content['title'] = "Simeon Academy | Urine Test Analysis"
@@ -1511,7 +1514,8 @@ def discharge_client(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = Client.objects.get(id=(request.GET['client_ID']))
+			client = request.POST.get('client_ID', '')
+			client = Client.objects.get(id=client)
 			term = TermReason.objects.all()
 			content['client'] = client
 			content['term'] = term
@@ -1535,6 +1539,27 @@ def discharge_viewForm(request):
 		else:
 			content['title'] = "Simeon Academy | Discharge"
 			return render_to_response('counselor/forms/Discharge/viewForm.html', content)
+
+## ADDICTION SEVERITY INDEX-----------------------------------------------------------
+@login_required(login_url='/index')
+def asi_demographic(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			client = request.POST.get('client_ID', '')
+			content['client'] = client
+			content['title'] = "Addiction Severity Index | Simeon Academy"
+			return render_to_response('counselor/forms/ASI/asi_demographic.html', content)
 
 
 

@@ -2,10 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" style='text-align:center'>
-<!-- 	<div id='header-img'>
-        <img src="{% static 'images/header.png' %}">
-    </div> -->
+<body onLoad="set_radio_buttons()" class="gradient-white">
 
     <div class='header-images'>
     	<div class="container">
@@ -24,21 +21,22 @@
         	<div class="row">                   
             	<div class="col-md-12">
             		<div class='main-windows-left'>
-            			<h3>Select Search Criteria</h3>
+            			<h3>Select Client Search Criteria</h3>
             		</div>
             	</div>
 
             	<div class="col-md-12">
             		<div class='main-windows'>
             			<form action="/clientSearchResults/" method="post" id='client-search' name='client-search'> {% csrf_token %}
+            				<input type='hidden' name='s-type' id='s-type' value=''>
             				<table>
             					<tr>
             						<td>
-            							<input type='radio' id='search-radio' name='search-radio' checked='true'>
+            							<input type='radio' id='name_radio' name='search-radio' checked='true' value='name' onCLick="javascript: updateName();">
             						</td>
             						<td>
             							<div id='radio-select' id=''>
-            								<label for=''>Name:</label>
+            								<label for='name'>Name <span id='faded-text'>(first last)</span></label>
             							</div>
             						</td>
             					</tr>            					
@@ -49,13 +47,19 @@
             						<td><div id='form-radio-margin'></div></td>
             						<td>
             							<div>
-            								<input type='text' name='' id='' value='Fname'>
+            								<input type='text' name='fname' id='fname' value=''>
             							</div>
             						</td>
 
             						<td>
             							<div>
-            								<input type='text' name='' id='' value='Lname'>
+            								<input type='text' name='lname' id='lname' value=''>
+            							</div>
+            						</td>
+
+            						<td>
+            							<div id='error-div'>
+            								<p id='error1' name='error1'></p>
             							</div>
             						</td>
             					</tr>
@@ -66,11 +70,11 @@
             				<table>
             					<tr>
             						<td>
-            							<input type='radio' id='search-radio' name='search-radio'>
+            							<input type='radio' id='dob_radio' name='search-radio' value='dob' onClick="javascript: updateDOB();">
             						</td>
             						<td>
             							<div id='radio-select'>
-            								<label for=''>Date of Birth:</label>
+            								<label for='dob'>Date of Birth <span id='faded-text'>(mm/dd/yyyy)</span></label>
             							</div>
             						</td>
             					</tr>            					
@@ -81,7 +85,12 @@
             						<td><div id='form-radio-margin'></div></td>
             						<td>
             							<div>
-            								<input type='text' name='' id='' value='mm/dd/yyyy' disabled='true' style='opacity: 0.5;'>
+            								<input type='text' name='dob' id='dob' value=''>
+            							</div>
+            						</td>
+            						<td>
+            							<div id='error-div'>
+            								<p id='error2' name='error2'></p>
             							</div>
             						</td>
             					</tr>
@@ -92,11 +101,11 @@
             				<table>
             					<tr>
             						<td>
-            							<input type='radio' id='search-radio' name='search-radio'>
+            							<input type='radio' id='ss_radio' name='search-radio' value='ss_num' onClick="javascript: updateSS();">
             						</td>
             						<td>
             							<div id='radio-select'>
-            								<label for=''>Serial Number:</label>
+            								<label for='ss_num'>Serial Number <span id='faded-text'>(xxx-xx-xxxx)</span></label>
             							</div>
             						</td>
             					</tr>            					
@@ -107,7 +116,12 @@
             						<td><div id='form-radio-margin'></div></td>
             						<td>
             							<div>
-            								<input type='text' name='' id='' value='xxx-xx-xxxx' disabled='true' style='opacity: 0.5;'>
+            								<input type='text' name='ss_num' id='ss_num' value=''>
+            							</div>
+            						</td>
+            						<td>
+            							<div id='error-div'>
+            								<p id='error3' name='error3'></p>
             							</div>
             						</td>
             					</tr>
@@ -118,11 +132,11 @@
 							<table>
             					<tr>
             						<td>
-            							<input type='radio' id='search-radio' name='search-radio'>
+            							<input type='radio' id='id_radio' name='search-radio' value='ID' onClick="javascript: updateID();">
             						</td>
             						<td>
             							<div id='radio-select'>
-            								<label for=''>Client ID:</label>
+            								<label for='client_ID'>Client ID</label>
             							</div>
             						</td>
             					</tr>            					
@@ -133,7 +147,12 @@
             						<td><div id='form-radio-margin'></div></td>
             						<td>
             							<div>
-            								<input type='text' name='' id='' value='None' disabled='true' style='opacity: 0.5;'>
+            								<input type='text' name='client_ID' id='client_ID' value=''>
+            							</div>
+            						</td>
+            						<td>
+            							<div id='error-div'>
+            								<p id='error4' name='error4'></p>
             							</div>
             						</td>
             					</tr>
@@ -144,8 +163,17 @@
             				<table>
             					<tr>
             						<td>
-            							<button type='button'>Search</butto>
+            							<a href="javascript: submit_session()" class='but_a'>
+            								<button type='button'>Search</button>
+            							</a>
             						</td>
+                                                <td>
+                                                      <div id='submit-space'>
+                                                            <a href="/adminHome" class='but_a'>
+                                                                  <button type='button'>Cancel</button>
+                                                            </a>
+                                                      </div>
+                                                </td>
             					</tr>
             				</table>       				
             			</form>
@@ -166,85 +194,3 @@
 </body>
 {% endblock %}
 
-<form action="/clientSearchResults/" method="post" id='client-search' name='client-search'> {% csrf_token %}
-	<table>
-		<tr>
-			<td>
-				<input type='radio' id='search-radio' name='search-radio' checked='true' value='ssNumSearch' onClick="javascript: updateSS()">
-			</td>
-			<td>
-				<label for='ss_num'>SS Number</label>
-			</td>			
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<input type='text' value='' id='ss_num' name='ss_num'>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<input type='radio' id='search-radio' name='search-radio' value='nameSearch' onCLick="javaScript: updateName()">
-			</td>
-			<td>
-				<label for='fname'>Name</label>
-			</td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<input type='text' value='' id='fname' name='fname' value="First Name">
-			</td>
-			<td>
-				<input type='text' value='' id='lname' name='lname' value="Last Name">
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<input type='radio' id='search-radio' name='search-radio' value='dobSearch' onClick="javaScript: updateDOB()">
-			</td>
-			<td>
-				<label for='dob'>DOB</label>
-			</td>			
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<input type='text' value='' id='dob' name='dob'>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<input type='radio' id='search-radio' name='search-radio' value='clientIDSearch' onClick="javaScript: updateID()">
-			</td>
-			<td>
-				<label for='client_ID'>Client ID</label>
-			</td>			
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<input type='text' value='' id='client_ID' name='client_ID'>
-			</td>
-		</tr>
-	</table>
-
-	<table>
-		<tr>
-			<td>
-				<div style='margin-top:30px;'>
-					<input type='submit' value='submit'>
-				</div>
-			</td>
-		</tr>
-	</table>
-</form>
-
-<a href='/adminHome'><button type=/button>Home Page</button></a>

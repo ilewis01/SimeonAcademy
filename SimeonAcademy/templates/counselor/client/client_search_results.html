@@ -2,28 +2,59 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Client Search Results</h1>
+<body class="gradient-white">
+	<div class='header-images'>
+		<div class="container">
+	        <div class="row">                   
+	            <div class="col-md-12">
+					<div id='header-text'>
+            			CLIENT SEARCH RESULTS
+            		</div>
 
-<h3>Your {{type}} search for <span><em>{{searched}}</em><span> has returned {{matches}} {{phrase}}:</h3>
+					<h3>Your {{type}} search for <span id='search-name-res'>{{searched}}</span> has returned <span style='color:red;'>{{matches}}</span> {{phrase}}:</h3>
 
-<ul>
-	{% for r in results %}
-		<li>
-			<p href='#'>
-				{{r.lname}}, {{r.fname}}<br>
-				DOB: {{r.dob}}<br>
-				SS: {{r.ss_num}}<br>
-				ID: {{r.clientID}}<br>
-			</p>
-		</li>
+					<h4><em>Select a client to begin a new session</em></h4>
 
-		<form action='/clientOptions/' method='post' id='cli-form'> {% csrf_token %}
-			<input type='hidden' value='{{r.id}}' id='cli-id' name='cli-id'>
-			<input type='submit' value='Continue'>
-		</form>
-	{% endfor %}
-</ul>
+					<ul style='width:250px;'>
+						{% for r in results %}
+						<li style='text-align:left;'>
+							<form action="/clientOptions/" method='post' id="{{r.id}}"> {% csrf_token %}
+								<input type='hidden' name="cli-id" id="cli-id" value="{{r.id}}"> 
+								<a href='javascript: toClientOptions({{r.id}})'>
+									<div class='li-a'>
+										<span id='li-name'>{{r.fname}} {{r.lname}}</span> <br>
+										<span id='li-label'>ID: </span><span id='li-ans'>{{r.clientID}}</span> <br>
+										<span id='li-label'>DOB: </span><span id='li-ans'>{{r.dob}}</span> <br>
+										<span id='li-label'>SS: </span><span id='li-ans'>{{r.ss_num}}</span> <br>
+									</div>
+								</a>
+							</form>
+						</li>
+						{% endfor %}
+					</ul>
 
-<a href='/adminHome'><h4>Home Page</h4></a>
+					<div style="margin-top:20px;">
+						<table>
+							<tr>
+								<td>
+									<a href="/searchClients" class='but_a'>
+				                        <button type='button'>New Search</button>
+				                    </a>
+				                </td>
 
+				                <td>
+				                    <div id='submit-space'>
+					                    <a href="/adminHome" class='but_a'>
+					                        <button type='button'>Cancel</button>
+					                    </a>
+					                </div>
+					            </td>
+				            </tr>
+			            </table>
+			        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 {% endblock %}

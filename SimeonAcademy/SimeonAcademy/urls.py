@@ -80,5 +80,8 @@ urlpatterns = patterns('',
     url(r'^discharge_preliminary/$', 'assessment.views.discharge_preliminary'),
     url(r'^discharge_client/$', 'assessment.views.discharge_client'),
     url(r'^discharge_viewForm/$', 'assessment.views.discharge_viewForm'),
+
+    ##Addiction Severity Views
+    url(r'^asi_demographic/$', 'assessment.views.asi_demographic'),
     
 )

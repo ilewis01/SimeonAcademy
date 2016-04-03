@@ -863,7 +863,7 @@ class MentalHealth(models.Model):
 
 ## SESSION TYPE----------------------------------------------------------------------------------------
 class SType(models.Model):
-	session_type = models.CharField(max_length=25, default=None, blank=True, null=True)
+	session_type = models.CharField(max_length=50, default=None, blank=True, null=True)
 	duration = models.IntegerField(default=0)
 	fee = models.IntegerField(default=0)
 	notes = models.CharField(max_length=50, default=None, blank=True, null=True)
