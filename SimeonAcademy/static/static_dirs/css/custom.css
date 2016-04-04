@@ -105,6 +105,14 @@ body {
 	/*font-family: arial;*/
 }
 
+.header-images2 {
+	background: url('../images/header.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	margin-right: 200px;
+	/*font-family: arial;*/
+}
+
 #header-text{
 	color: white;
 	margin-top: 7px;
@@ -217,6 +225,106 @@ button:hover {
 	color:#adad85;
 }
 
+#type-selector {
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+.session-name-field {
+	font-weight: bold;
+	font-size: 20px;
+	color:#4d1a00;
+}
+
+#option-ans {
+	font-size:15px;
+}
+
+#option-label {
+	font-weight: bold;
+	color: black;
+}
+
+#session-h3 {
+	color:#6b6b47;
+}
+
+.session-side {
+	margin-left: 50px;
+	margin-top: 40px;
+	color:white;
+}
+
+.session-side h3 {
+	color:#fee047;
+	text-shadow:1px 1px black;
+}
+
+.session-side h5 {
+	color:#ffa64d;
+}
+.session-side h6 {
+	color:#ffa64d;
+	font-weight: bold;
+}
+
+.sidebar-label1 {
+	font-weight: bold;
+	color:#999999;
+	text-shadow:1px 1px black;
+}
+
+.sidebar-ans {
+	color:white;
+	font-weight: bold;
+	text-shadow:1px 1px black;
+}
+
+.sidebar-name {
+	color:#adad85;
+	font-weight: bold;
+	font-size: 20px;
+	overflow:hidden;
+	text-shadow:1px 1px black;
+}
+
+.sidebar-id {
+	font-style: italic;
+	color:#ffa64d;
+}
+
+.sidebar-duration {
+	font-weight: bold;
+	color:red;
+	text-shadow:1px 1px black;
+}
+
+.sidebar-session-info {
+	color:#adad85;
+	font-weight: bold;
+	text-shadow:1px 1px black;
+}
+
+.sidebar-session-info2 {
+	color:#ffa64d;
+	font-weight: bold;
+	text-shadow:1px 1px black;
+}
+
+#sidebar-space-lower {
+	margin-bottom: 15px;
+}
+
+#sidebar-space-lower2 {
+	margin-bottom: 20px;
+}
+
+#sidebar-fill {
+	font-weight: bold;
+	color:white;
+	text-shadow:1px 1px black;
+	font-style: italic;
+}
 
 
 

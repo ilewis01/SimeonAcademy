@@ -21,7 +21,8 @@ FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
-MHRelationship, MHActivity, MHStressor, MHLegalHistory
+MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, SType, \
+Invoice
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -336,6 +337,8 @@ def searchClients(request):
 			return render_to_response('global/restricted.html')
 
 		else:
+			types = SType.objects.all()
+			content['session_types'] = types
 			content['title'] = "Simeon Academy | Client Search"
 			return render_to_response('counselor/client/search_clients.html', content)
 
@@ -355,6 +358,8 @@ def clientSearchResults(request):
 
 		else:
 			search_type = request.POST.get('s-type', '')
+			session_type = request.POST.get('stype', '')
+
 			s_results = None
 			phrase = None
 			searched = None
@@ -392,6 +397,7 @@ def clientSearchResults(request):
 			content['results'] = s_results
 			content['phrase'] = phrase
 			content['type'] = search_type
+			content['session'] = session_type
 			content['searched'] = searched
 			return render_to_response('counselor/client/client_search_results.html', content)
 
@@ -411,9 +417,19 @@ def clientOptions(request):
 
 		else:
 			clID = request.POST.get('cli-id', '')
+			session_type = request.POST.get('session-type', '')
+			session_type = SType.objects.get(id=session_type)
 			client = Client.objects.get(id=clID)
+			start = datetime.now()
+
+			session = ClientSession(client=client, start=start, s_type=session_type)
+			session.save()
+
 			content['title'] = "Simeon Academy | Client Options"
 			content['client'] = client
+			content['session_type'] = session_type
+			content['start'] = start
+			content['session_id'] = session.id
 			return render_to_response('counselor/client/client_options.html', content)
 
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
@@ -603,6 +619,8 @@ def am_demographic(request):
 		else:
 			client_id = request.POST.get('client_ID', '')
 			client = Client.objects.get(id=client_id)
+			session = request.POST.get('session_id', '')
+			session = ClientSession.objects.get(id=session)
 			proceed = findClientAM(client)
 			am = proceed['am']
 
@@ -620,6 +638,7 @@ def am_demographic(request):
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
+				content['session'] = session
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			
 @login_required(login_url='/index')

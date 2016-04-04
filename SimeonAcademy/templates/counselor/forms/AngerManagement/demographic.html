@@ -2,278 +2,181 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Anger Management Demographics</h1>
-<h3 style='color:blue;'><em>{{client.lname}}, {{client.fname}}</em></h3>
+<body class="gradient-white">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/am_drugHistory/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
-	<table>
-		<tr>
-			<td>
-				<label for='marital'>Marital Status: </label>
-			</td>
+    <div id="wrapper" class='shift-rr'>
 
-			<td>
-				<select id='marital' name='marital'>
-					<option>Select</option>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        	<table class='session-side'>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Client Profile</h3>
+                    	</div>
+        			</td>
+        		</tr>
 
-					{% for m in marital %}
-						<option value='{{m.status}}'>{{m.status}}</option>
-					{% endfor %}
-				</select>
-			</td>
-		</tr>
+        		<!-- <tr>
+        			<td>
+        				<div>
+                        	<h5>{{session.start}}</h5>
+                    	</div>
+        			</td>
+        		</tr> -->
 
-		<tr>
-			<td>
-				<label for='living'>Living Situation: </label>
-			</td>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.middleInit}} {{client.lname}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-			<td>
-				<select id='living' name='living'>
-					<option>Select</option>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span class="sidebar-id">{{client.clientID}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-					{% for l in living %}
-						<option value='{{l.situation}}'>{{l.situation}}</option>
-					{% endfor %}
-				</select>
-			</td>
-		</tr>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-		<tr>
-			<td>
-				<div style="margin-bottom:25px;">
-					<label for=''>Time at Residence: </label>
-				</div>
-			</td>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-			<td>
-				<div><input type='number' style="width:40px;" name='res-mo' id='res-mos'></div>
-				<div><input type='number' style="width:40px;" name='res-yr' name='res-yr'></div>
-			</td>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-			<td>
-				<p>mos</p>
-				<p>yrs</p>
-			</td>
-		</tr>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-		<tr>
-			<td>
-				<table>
-					<tr>
-						<td>Rent </td>
-						<td><input type='radio' name='rentRAD' id='rentRAD' value='Rent' checked='true'></td>
-					</tr>
-				</table>
-			</td>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.phone}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-			<td>
-				<table>
-					<tr>
-						<td>Own </td>
-						<td><input type='radio' name='rentRAD' value='Own' id='rentRAD'></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span id='sidebar-fill'>{{client.email}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-	<table>
-		<tr>
-			<td>
-				<h3>Dependents</h3>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Children</label>
-			</td>
-			<td>
-				<input type='number' style='width:40px' id='dep_children' name='dep_children'>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Other Dependents</label>
-			</td>
-			<td>
-				<input type='number' style='width:40px' id='dep_other' name='dep_other'>
-			</td>
-		</tr>
-	</table>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Session Info</h3>
+                    	</div>
+        			</td>
+        		</tr>
 
-	<table>
-		<tr>
-			<td>
-				<h3>Education</h3>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Highest Level</label>
-			</td>
-			<td>
-				<select name='edu' id='edu'>
-					<option value=''>Select</option>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-					{% for e in education %}
-						<option value='{{e}}'>{{e.level}}</option>
-					{% endfor %}
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table>
-					<tr>
-						<td>HS Graduate </td>
-						<td><input type='radio' name='dip' id='dip' value='Graduate' checked='true'></td>
-					</tr>
-				</table>
-			</td>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
+                    	</div>
+        			</td>
+        		</tr>
 
-			<td>
-				<table>
-					<tr>
-						<td>HS Dropout  </td>
-						<td><input type='radio' name='dip' value='Dropout' id='dip'></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
+                    	</div>
+        			</td>
+        		</tr>
+        	</table>
+            <!-- <ul class="sidebar-nav">
+                <li class="sidebar-Header">
+                    <div style='margin-bottom:40px; padding-top:8%;'>
+                        <h3>Session Info</h3>
+                    </div>
+                </li>
+                <li>
+                    <h4 style='color:white;'>{{client.fname}} {{client.middleInit}} {{client.lname}}</h4>
+                </li>
+                <li>
+                    <form action='/asi_demographic/' method='post' name='asi' id='asi'> {% csrf_token %} 
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>                 
+                        <a href="javascript: new_asi();">Addiction Severity Index</a>
+                    </form>
+                </li>
+                <li>
+                    <form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
+                        <a href="javascript: new_mh();">Mental Health Assessment</a>
+                    </form>
+                </li>
+                <li>
+                    <form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <a href="javascript: new_sap();">S.A.P Form</a>
+                    </form>
+                </li>
+                <li>
+                    <form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <a href="javascript: new_ut();">Urine Test Results</a>
+                    </form>
+                </li>
+                <li>
+                    <form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <a href="javascript: discharge();">Client Discharge</a>
+                    </form>
+                </li>
+                <li>
+                    <a href="#">Client Files</a>
+                </li>
+                <li>
+                    <a href="#">Appointment Manager</a>
+                </li>
+                <li>
+                    <a href="#">Delete Current Session</a>
+                </li>
+                <li>
+                    <a href="#">Close Session</a>
+                </li>
+            </ul> -->
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-	<table>
-		<tr>
-			<td>
-				<h3>Employment</h3>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Occupation</label>
-			</td>
-			<td>
-				<input type='text' id='occ' name='occ'>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Employer</label>
-			</td>
-			<td>
-				<input type='text' id='employer' name='employer'>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Address</label>
-			</td>
-			<td>
-				<input type='text' id='em_add' name='em_add'>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for=''>Phone</label>
-			</td>
-			<td>
-				<input type='tel' id='em_phone' name='em_phone'>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for=''>Time at job:</label>
-			</td>
-		</tr>
-
-		<tr>
-			<table>
-				<tr>
-					<td>
-						<input type='number' style='width:40px' id='mosJob' name='mosJob'>
-					</td>
-					<td>
-						<label for=''>mos</label>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type='number' style='width:40px' id='yrsJob' name='yrsJob'>
-					</td>
-					<td>
-						<label for=''>yrs</label>
-					</td>
-				</tr>
-			</table>
-		</tr>
-	</table>
-
-	<h3>Health</h3>
-	<label for=''>Do you currently have any health issues?</label>
-
-	<table>
-		<tr>
-			<td>
-				<table>
-					<tr>
-						<td>No </td>
-						<td><input type='radio' name='heal' id='heal' value='Healthy' checked='true'></td>
-					</tr>
-				</table>
-			</td>
-
-			<td>
-				<table>
-					<tr>
-						<td>Yes  </td>
-						<td><input type='radio' name='heal' value='Not Healthy' id='heal'></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-
-	<label for=''>Are you taking medication?</label>
-	<table>
-		<tr>
-			<td>
-				<table>
-					<tr>
-						<td>No </td>
-						<td><input type='radio' name='med' id='med' value='On meds' checked='true'></td>
-					</tr>
-				</table>
-			</td>
-
-			<td>
-				<table>
-					<tr>
-						<td>Yes  </td>
-						<td><input type='radio' name='med' value='Not on meds' id='med'></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-
-	<table>
-		<tr>
-			<td>
-				<label for=''>Please explain</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<textarea cols='60' rows='15' id='explain' name='explain'></textarea>
-			</td>
-		</tr>
-	</table>
-	<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
-	<input type='submit' value='Continue'>
-</form>
-
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+</body>
 
 {% endblock %}

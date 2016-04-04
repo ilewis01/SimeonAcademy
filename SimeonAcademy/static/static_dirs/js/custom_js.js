@@ -248,6 +248,7 @@ function submit_session() {
 	var dob_radio = document.getElementById('dob_radio');
 	var id_radio = document.getElementById('id_radio');
 	var ss_radio = document.getElementById('ss_radio');
+	var stype = document.getElementById('stype');
 	var proceed = false;
 
 	if (name_radio.checked === true) 
@@ -306,6 +307,13 @@ function submit_session() {
 		}
 		else {proceed = true;}
 	}
+
+	if (stype.value === 'choose') {
+		document.getElementById('error5').innerHTML = '*YOU MUST CHOOSE A SESSION TYPE TO PROCEDE';
+		proceed = false;
+	}
+	else {proceed = true;}
+
 
 	if (proceed === true) {
 		document.getElementById('client-search').submit();

@@ -17,7 +17,8 @@ FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
-MHRelationship, MHActivity, MHStressor, MHLegalHistory
+MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, \
+Invoice, SType
 
 def convert_datepicker(the_date):
 	month = ''

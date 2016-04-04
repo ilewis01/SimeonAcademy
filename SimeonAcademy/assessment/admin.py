@@ -7,7 +7,7 @@ AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, SType, \
-A_Time, Appointment, Session
+A_Time, Appointment, ClientSession, Invoice
 
 admin.site.register(account)
 admin.site.register(State)
@@ -52,5 +52,6 @@ admin.site.register(MentalHealth)
 admin.site.register(SType)
 admin.site.register(A_Time)
 admin.site.register(Appointment)
-admin.site.register(Session)
+admin.site.register(ClientSession)
+admin.site.register(Invoice)
 

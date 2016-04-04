@@ -888,6 +888,32 @@ class Appointment(models.Model):
 		return str(self.date) + " " + str(self.time) + " " + str(self.time)
 
 ## SESSIONS--------------------------------------------------------------------------------------------
+class Invoice(models.Model):
+	billed_to = models.CharField(max_length=50, default=None, blank=True, null=True)
+	date = models.DateTimeField(default=None, blank=True, null=True)
+	service1 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	service2 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	service3 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	service4 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	service5 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	service6 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	amount = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.billed_to) + ' ' + str(self.date) + ' $' + str(self.amount)
+
+class ClientSession(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	s_type = models.ForeignKey(SType, default=None, blank=True, null=True)
+	invoice = models.ForeignKey(Invoice, default=None, blank=True, null=True)
+	start = models.DateTimeField(default=None, blank=True, null=True)
+	end = models.DateTimeField(default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.client) + ' ' + str(self.start)
+
+
+## This is a phony session but cannot be deleted due to the many to many field
 class Session(models.Model):
 	appointment = models.ForeignKey(Appointment, default=None, blank=True, null=True)
 	start = models.DateTimeField(default=None, blank=True, null=True)

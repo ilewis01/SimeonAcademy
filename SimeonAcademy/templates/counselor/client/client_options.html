@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body>
+<body class="gradient-white">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -16,39 +16,45 @@
                     </div>
                 </li>
                 <li>
-                	<form action='/am_demographic/' method='post' name='am' id='am'> {% csrf_token %}
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                    	<a href="javascript: new_am();">Anger Management</a>
+                    <form action='/am_demographic/' method='post' name='am' id='am'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <a href="javascript: new_am();">Anger Management</a>
                     </form>
                 </li>
                 <li>
-                	<form action='/asi_demographic/' method='post' name='asi' id='asi'> {% csrf_token %} 
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>              	
-                    	<a href="javascript: new_asi();">Addiction Severity Index</a>
-                	</form>
-                </li>
-                <li>
-                	<form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
-                    	<a href="javascript: new_mh();">Mental Health Assessment</a>
+                    <form action='/asi_demographic/' method='post' name='asi' id='asi'> {% csrf_token %} 
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>                
+                        <a href="javascript: new_asi();">Addiction Severity Index</a>
                     </form>
                 </li>
                 <li>
-                	<form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                    	<a href="javascript: new_sap();">S.A.P Form</a>
+                    <form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <a href="javascript: new_mh();">Mental Health Assessment</a>
                     </form>
                 </li>
                 <li>
-                	<form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                    	<a href="javascript: new_ut();">Urine Test Results</a>
+                    <form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <a href="javascript: new_sap();">S.A.P Form</a>
                     </form>
                 </li>
                 <li>
-                	<form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
-                		<input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                    	<a href="javascript: discharge();">Client Discharge</a>
+                    <form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <a href="javascript: new_ut();">Urine Test Results</a>
+                    </form>
+                </li>
+                <li>
+                    <form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
+                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <a href="javascript: discharge();">Client Discharge</a>
                     </form>
                 </li>
                 <li>
@@ -58,11 +64,116 @@
                     <a href="#">Appointment Manager</a>
                 </li>
                 <li>
-                    <a href="#">End Session</a>
+                    <a href="#">Delete Current Session</a>
+                </li>
+                <li>
+                    <a href="#">Close Session</a>
                 </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12" style='text-align:'>
+                        <div>
+                          
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h2>Client Session</h2>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <h3 id='session-h3'>Session Type: {{session_type.session_type}}</h3>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <h5><span id='option-label'>Start Time: </span>{{start}}</h5>
+                                        <span id='option-label'>Duration: </span><b><span style='color:red;'>{{session_type.duration}} minutes</span></b>
+                                    </td>
+                                </tr>
+
+                                <tr><td><div style='margin-bottom:20px;'></div></td></tr>
+
+                                <tr>
+                                    <td>
+                                        <h4 id='session-h3'>Client Info:</h4>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class='session-name-field'>{{client.fname}} {{client.middleInit}} {{client.lname}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <em><span style='color:blue;'>{{client.clientID}}</span></em>
+                                    </td>
+                                </tr>
+
+                                <tr><td><div style='margin-bottom:5px;'></div></td></tr>
+
+                                <tr>
+                                    <td>
+                                        <span id='option-label'>DOB: </span><span id='option-ans'>{{client.dob}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span id='option-label'>SS: </span><span id='option-ans'>{{client.ss_num}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr><td><div style='margin-bottom:20px;'></div></td></tr>
+
+                                <tr>
+                                    <td>
+                                        <h4 id='session-h3'>Contact Info</h4>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span id='option-ans'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span id='option-ans'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr><td><div style='margin-bottom:10px;'></div></td></tr>
+
+                                <tr>
+                                    <td>
+                                        <span id='option-ans'>{{client.phone}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span id='option-ans'>{{client.email}}</span>
+                                    </td>
+                                </tr>
+                            </table>
+<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
+                       <!--  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+    </div>
 </body>
 
 {% endblock %}
