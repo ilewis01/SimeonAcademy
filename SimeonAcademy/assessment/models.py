@@ -258,7 +258,8 @@ class AM_Demographic(models.Model):
 	health_exp = models.CharField(max_length=250, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Demographics: " + str(self.client)
+		return "Anger Management"
+		# return "Anger Management/Demographics: " + str(self.client)
 
 ##ANGER MANAGEMENT ALCOHOL AND DRUG HISTORY---------------------------------------------------------
 class AM_DrugHistory(models.Model):
@@ -522,8 +523,8 @@ class AngerManagement(models.Model):
 
 	AMComplete = models.BooleanField(blank=True, default=False)
 
-	def __unicode__(self):
-		return str(self.demographic.client.fname) + ' ' + str(self.demographic.client.lname)
+	# def __unicode__(self):
+	# 	return str(self.demographic.client.fname) + ' ' + str(self.demographic.client.lname)
 
 class MHDemographic(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)

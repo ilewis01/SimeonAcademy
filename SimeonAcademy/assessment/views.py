@@ -617,10 +617,12 @@ def am_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client_id = request.POST.get('client_ID', '')
-			client = Client.objects.get(id=client_id)
-			session = request.POST.get('session_id', '')
-			session = ClientSession.objects.get(id=session)
+			client_id = request.POST.get('client_id', '')
+			session_id = request.POST.get('session_id', '')
+
+			client = Client.objects.get(id=client_id)			
+			session = ClientSession.objects.get(id=session_id)
+
 			proceed = findClientAM(client)
 			am = proceed['am']
 
@@ -679,11 +681,11 @@ def am_drugHistory(request):
 			client_id = request.POST.get('client_id', '')
 			client = Client.objects.get(id=client_id)
 
-			reasonDo = 'Rememebr to change this shit'
+			reasonDo = 'Rememeber to change this shit'
 
-			marital = getMaritalID(marital)
-			living = getLivingID(living)
-			education = getEducationID(education)
+			# marital = getMaritalID(marital)
+			# living = getLivingID(living)
+			# education = getEducationID(education)
 
 			marital = MaritalStatus.objects.get(id=marital)
 			living = LivingSituation.objects.get(id=living)
@@ -719,7 +721,8 @@ def am_drugHistory(request):
 			moveForward = amDemographicExist(demographic)
 
 			if moveForward['exist'] == False:
-				demographic.save()
+				# demographic.save()
+				nothing = None
 			else:
 				demographic = moveForward['am_demo']
 

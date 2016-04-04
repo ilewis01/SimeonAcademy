@@ -348,6 +348,99 @@ function discharge() {
 	document.getElementById('discharge').submit();
 }
 
+function hideToggle() {
+	var btn = document.getElementById('my_toggle_btn1');
+
+	if (btn.innerHTML === "Show Details") {
+		btn.innerHTML = "Hide Details";
+	}
+	else if (btn.innerHTML === "Hide Details") {
+		btn.innerHTML = "Show Details";
+	}
+}
+
+function am_demo_setup() {
+	var explain = document.getElementById('explain');
+	var explain_label = document.getElementById('explain-label')
+	var med_label = document.getElementById('med-label');
+	var no_label = document.getElementById('no-label');
+	var yes_label = document.getElementById('yes-label');
+	var no_med = document.getElementById('no_med');
+	var med = document.getElementById('med');
+
+	explain.disabled = true;
+	no_med.disabled = true;
+	med.disabled = true;
+
+	explain.style.opacity = '0.3';
+	explain_label.style.opacity = '0.3';
+	med_label.style.opacity = '0.3';
+	no_label.style.opacity = '0.3';
+	yes_label.style.opacity = '0.3';
+}
+
+function health_options_on() {
+	var explain = document.getElementById('explain');
+	var explain_label = document.getElementById('explain-label')
+	var med_label = document.getElementById('med-label');
+	var no_label = document.getElementById('no-label');
+	var yes_label = document.getElementById('yes-label');
+	var no_med = document.getElementById('no_med');
+	var med = document.getElementById('med');
+
+	explain.disabled = false;
+	no_med.disabled = false;
+	med.disabled = false;
+
+	explain.style.opacity = '1.0';
+	explain_label.style.opacity = '1.0';
+	med_label.style.opacity = '1.0';
+	no_label.style.opacity = '1.0';
+	yes_label.style.opacity = '1.0';
+}
+
+function health_options_off() {
+	var explain = document.getElementById('explain');
+	var explain_label = document.getElementById('explain-label')
+	var med_label = document.getElementById('med-label');
+	var no_label = document.getElementById('no-label');
+	var yes_label = document.getElementById('yes-label');
+	var no_med = document.getElementById('no_med');
+	var med = document.getElementById('med');
+
+	explain.disabled = true;
+	no_med.disabled = true;
+	med.disabled = true;
+
+	explain.style.opacity = '0.3';
+	explain_label.style.opacity = '0.3';
+	med_label.style.opacity = '0.3';
+	no_label.style.opacity = '0.3';
+	yes_label.style.opacity = '0.3';
+}
+
+function continue_am() {
+	var marital = document.getElementById('marital');
+	var living = document.getElementById('living');
+	var res_mos = document.getElementById('res-mos');
+	var res_yrs = document.getElementById('res-yrs');
+	var children = document.getElementById('dep_children');
+	var others = document.getElementById('dep_other');
+	var edu = document.getElementById('edu');
+	var occ = document.getElementById('occ');
+	var employer = document.getElementById('employer');
+	var emp_add = document.getElementById('em_add');
+	var em_phone = document.getElementById('em_phone');
+	var mosJob = document.getElementById('yrsJob');
+	var yrsJob = document.getElementById('yrsJob');
+	var healthy = document.getElementById('healthy');
+	var proceed = true;
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
 
 
 

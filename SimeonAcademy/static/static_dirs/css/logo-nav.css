@@ -15,6 +15,7 @@ body {
 .navbar {
 	background: url('../images/nav_background.jpg');
 	border-bottom: 4px solid #adad85;
+   /* border-bottom: 4px solid black;*/
 }
 
 .navbar-fixed-top .navbar-brand {

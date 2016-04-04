@@ -251,7 +251,7 @@ button:hover {
 
 .session-side {
 	margin-left: 50px;
-	margin-top: 40px;
+	margin-top: 20px;
 	color:white;
 }
 
@@ -324,6 +324,64 @@ button:hover {
 	color:white;
 	text-shadow:1px 1px black;
 	font-style: italic;
+}
+
+.toggle-div-page {
+	/*margin-top: 20px;*/
+}
+
+#error-div-main {
+	height:15px;
+}
+
+.toggle-div-page a {
+	color:#3e3e3e;
+}
+
+#no_pad1 {
+	width:50%;
+}
+
+#select-align {
+	margin-bottom: 7px;
+	margin-left: 7px;
+}
+
+.px20-below {
+	margin-bottom: 20px;
+}
+
+#radio-align {
+	margin-bottom: 8px;
+	margin-right: 4px;
+}
+
+#num-align-text {
+	margin-top: 5px;
+	margin-left: 4px;
+}
+
+.form-line {
+	border-bottom: 4px solid #adad85;
+	margin-top: 20px;
+	width:250px;
+}
+
+#textbox-align1 {
+	margin-bottom: 4px;
+	margin-left: 5px;
+}
+
+.form-blocking {
+	background-color: #cccccc;
+	padding-left: 40px;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	border: 4px solid black;
+}
+
+#am-h2 {
+	color: #adad85;
 }
 
 

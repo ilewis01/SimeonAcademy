@@ -17,7 +17,7 @@
                 </li>
                 <li>
                     <form action='/am_demographic/' method='post' name='am' id='am'> {% csrf_token %}
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
+                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
                         <a href="javascript: new_am();">Anger Management</a>
                     </form>

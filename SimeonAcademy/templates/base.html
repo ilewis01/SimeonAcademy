@@ -25,15 +25,15 @@
 
     <!-- Date Picker Script -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<script>
-		$(function() {
-			$( "#datepicker" ).datepicker();
-			// $( "#datepicker" ).datepicker({minDate: 0});
-		});
-		</script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+            // $( "#datepicker" ).datepicker({minDate: 0});
+        });
+        </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,8 +87,8 @@
     </nav>
 
     <div id="content-doc">
-    	{% block body %}
-    	{% endblock %}
+        {% block body %}
+        {% endblock %}
     </div>
 
     <!-- jQuery -->
@@ -99,6 +99,14 @@
 
     <!-- Custom JS -->
     <script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
 </body>
 

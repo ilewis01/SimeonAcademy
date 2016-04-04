@@ -221,11 +221,16 @@ def SAPDemographicExist(demo):
 def clientAmExist(client):
 	ams = AngerManagement.objects.all()
 	exist = False
+	filter_clients = True
 
-	for a in ams:
-		if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
-			exist = True
-			break
+	if len(ams) == 0:
+		filter_clients = False
+
+	if filter_clients == True:
+		for a in ams:
+			if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
+				exist = True
+				break
 	return exist
 
 def clientMhExist(client):

@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white">
+<body class="gradient-white" onLoad="javascript: am_demo_setup()">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -29,7 +29,7 @@
         		<tr>
         			<td>
         				<div>
-                        	<span class='sidebar-name'>{{client.fname}} {{client.middleInit}} {{client.lname}}</span>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
                     	</div>
         			</td>
         		</tr>
@@ -121,61 +121,362 @@
                     	</div>
         			</td>
         		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
+                    	</div>
+        			</td>
+        		</tr>
         	</table>
-            <!-- <ul class="sidebar-nav">
-                <li class="sidebar-Header">
-                    <div style='margin-bottom:40px; padding-top:8%;'>
-                        <h3>Session Info</h3>
-                    </div>
-                </li>
-                <li>
-                    <h4 style='color:white;'>{{client.fname}} {{client.middleInit}} {{client.lname}}</h4>
-                </li>
-                <li>
-                    <form action='/asi_demographic/' method='post' name='asi' id='asi'> {% csrf_token %} 
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>                 
-                        <a href="javascript: new_asi();">Addiction Severity Index</a>
-                    </form>
-                </li>
-                <li>
-                    <form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
-                        <a href="javascript: new_mh();">Mental Health Assessment</a>
-                    </form>
-                </li>
-                <li>
-                    <form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                        <a href="javascript: new_sap();">S.A.P Form</a>
-                    </form>
-                </li>
-                <li>
-                    <form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                        <a href="javascript: new_ut();">Urine Test Results</a>
-                    </form>
-                </li>
-                <li>
-                    <form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
-                        <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
-                        <a href="javascript: discharge();">Client Discharge</a>
-                    </form>
-                </li>
-                <li>
-                    <a href="#">Client Files</a>
-                </li>
-                <li>
-                    <a href="#">Appointment Manager</a>
-                </li>
-                <li>
-                    <a href="#">Delete Current Session</a>
-                </li>
-                <li>
-                    <a href="#">Close Session</a>
-                </li>
-            </ul> -->
         </div>
         <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- <div class="container-fluid"> -->
+                <!-- <div class="row">
+                    <div class="col-lg-12" style='text-align:'> -->
+                        <div>
+                        	<h3 id='am-h2'>Anger Management Demographics</h3>
+
+                        	<div class="container">
+            					<div class="row">                   
+                  					<div class="col-md-5 col-sm-5">
+                  						<div>
+                  							<form action='/am_drugHistory/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+                  								<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+                  								<input type='hidden' name='session_id' id='session_id' value='{{session_id}}'>
+                  								
+                  								<h3>Household</h3>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='marital'>Marital Status: </label>
+                  										</td>
+
+                  										<td>
+                  											<div id='select-align'>
+	                  											<select id='marital' name='marital'>
+	                  												<option>Select</option>
+	                  												{% for m in marital %}
+	                  													<option value='{{m.id}}'>{{m.status}}</option>
+	                  												{% endfor %}
+	                  											</select>
+	                  										</div>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='living'>Living Situation: </label>
+                  										</td>
+
+                  										<td>
+                  											<div id='select-align'>
+	                  											<select id='living' name='living'>
+	                  												<option>Select</option>
+	                  												{% for l in living %}
+	                  													<option value='{{l.id}}'>{{l.situation}}</option>
+	                  												{% endfor %}
+	                  											</select>
+	                  										</div>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<div class='px20-below'></div>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='rentRAD' id='rentRAD' value='rent' checked='true'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='rentRAD'>Rent</label>
+                  										</td>
+
+                  										<td><div style='margin-right:20px;'></div></td>
+
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='rentRAD' id='ownRAD' value='own'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='ownRAD'>Own</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for=''>Time at Residence: </label>
+                  										</td>
+                  									</tr>
+                  								</table>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<div>
+                  												<input type='number' style="width:40px;" name='res-mo' id='res-mos' value='0'>
+                  												months
+                  											</div>
+                  										</td>
+
+                  										<td>
+	                  										<div id='submit-space'>
+	                  											<input type='number' style="width:40px;" name='res-yrs' id='res-yrs' value='0'>
+	                  											years
+	                  										</div>
+	                  									</td>
+                  									</tr>
+                  								</table>
+
+                  								<table><tr><td><div class='form-line'></div></td></tr></table>
+                  								<h3>Dependents</h3>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<input type='number' style='width:40px' id='dep_children' name='dep_children' value='0'>
+                  										</td>
+                  										<td>
+                  											<div id='num-align-text'>
+                  											    <label for='dep_children'>Children</label>
+                  											</div>
+                  										</td>
+                  									</tr>
+
+                  									<tr>
+                  										<td>
+                  											<input type='number' style='width:40px' id='dep_other' name='dep_other' value='0'>
+                  										</td>
+                  										<td>
+                  											<div id='num-align-text'>
+                  											    <label for='dep_other'>Other Dependents</label>
+                  											</div>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table><tr><td><div class='form-line'></div></td></tr></table>
+                  								<h3>Education</h3>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for=''>Highest Level</label>
+                  										</td>
+                  										<td>
+                  											<div id='select-align'>
+	                  											<select name='edu' id='edu'>
+	                  												<option value=''>Select</option>
+	                  												{% for e in education %}
+	                  												<option value='{{e.id}}'>{{e.level}}</option>
+	                  												{% endfor %}
+	                  											</select>
+	                  										</div>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate' checked='true'></td>
+                  										</td>
+                  										<td>
+                  											<div id='num-align-text'>
+                  											    <label for='hs_grad'>HS Graduate</label>
+                  										    </div>
+                  										</td>
+
+                  										<td><div style='margin-right:20px;'></div></td>
+
+                  										<td>
+                  											<td><input type='radio' name='dip' id='hs_drop' value='dropout'></td>
+                  										</td>
+                  										<td>
+                  											<div id='num-align-text'>
+                  											    <label for='hs_drop'>HS Dropout</label>
+                  										    </div>
+                  										</td>
+                  									</tr>
+                  								</table>
+                  							
+                  						</div>
+                  					</div>
+
+                  					<div class="col-md-5 col-sm-5" >
+                  						<div>
+                  							<h3>Employment</h3>
+                  							<table>
+                  								<tr>
+                  									<td>
+                  										<label for='occ'>Occupation:</label>
+                  									</td>
+                  									<td>
+                  										<div id='textbox-align1'>
+                  										    <input type='text' id='occ' name='occ'>
+                  									    </div>
+                  									</td>
+                  								</tr>
+
+                  						        <tr>
+                  									<td>
+                  										<label for='employer'>Employer:</label>
+                  									</td>
+                  									<td>
+                  										<div id='textbox-align1'>
+                  										    <input type='text' id='employer' name='employer'>
+                  									    </div>
+                  									</td>
+                  								</tr>
+
+                  								<tr>
+                  									<td>
+                  										<label for='emp_add'>Address:</label>
+                  									</td>
+                  									<td>
+                  										<div id='textbox-align1'>
+                  										    <input type='text' id='em_add' name='em_add'>
+                  									    </div>
+                  									</td>
+                  								</tr>
+
+                  								<tr>
+                  									<td>
+                  										<label for='em_phone'>Phone:</label>
+                  									</td>
+                  									<td>
+                  										<div id='textbox-align1'>
+                  										    <input type='tel' id='em_phone' name='em_phone'>
+                  									    </div>
+                  									</td>
+                  								</tr>
+                  								<tr><td><label for='yrsJob'>Time at Job:</label></td></tr>
+                  							</table>
+                  							<table>
+                  									<tr>
+                  										<td>
+                  											<div>
+                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob' value='0'>
+                  												months
+                  											</div>
+                  										</td>
+
+                  										<td>
+	                  										<div id='submit-space'>
+	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob' value='0'>
+	                  											years
+	                  										</div>
+	                  									</td>
+                  									</tr>
+                  								</table>
+
+                  								<table><tr><td><div class='form-line'></div></td></tr></table>
+                  								<h3>Health</h3>
+                  								<label for=''>Do you currently have any health issues?</label>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='healRad' id='healthy' value='healthy' checked='true' onClick='javascript: health_options_off()'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='healthy'>No</label>
+                  										</td>
+
+                  										<td><div style='margin-right:20px;'></div></td>
+
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='healRad' id='not_healthy' value='not_healthy' onClick='javascript: health_options_on();'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='not_healthy'>Yes</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<label for='' id='med-label'>Are you currently taking medication for this issue?</label>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='medRad' id='no_med' value='no_medication' checked='true'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='no_med' id='no-label'>No</label>
+                  										</td>
+
+                  										<td><div style='margin-right:20px;'></div></td>
+
+                  										<td>
+                  											<div id='radio-align'>
+                  												<input type='radio' name='medRad' id='med' value='medication'>
+                  											</div>    
+                  										</td>
+                  										<td>
+                  											<label for='med' id='yes-label'>Yes</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<label for='' id='explain-label'>Please explain below</label>
+                  								<textarea cols='60' rows='5' id='explain' name='explain'></textarea>
+                  							</form>
+                  						</div>
+                  					</div>
+
+                  					<div class="col-md-2 col-sm-2">
+                  					</div>
+                  				</div>
+                  			</div>
+                          
+                            
+<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
+
+                        <table class='toggle-div-page'>
+                        	<tr>
+                        		<td id="error-div-main">
+                        			<p class='error-messages'></p>
+                        		</td>
+                        	</tr>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="javascript: " id="continue">
+				                        	<button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+				                        </a>
+				                    </div>
+			                    </td>
+			                </tr>
+	                    </table>
+
+                        </div> <!-- end of section -->
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+    </div>        
 
 </body>
 
