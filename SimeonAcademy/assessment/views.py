@@ -166,7 +166,7 @@ def adminHome(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Administrative Home Page"
+			content['title'] = "Simeon Academy"
 			return render_to_response('counselor/home.html', content)
 
 @login_required(login_url='/index')
@@ -188,7 +188,7 @@ def newClient(request):
 			refs = RefReason.objects.all().order_by('reason')
 			content['states'] = states
 			content['refs'] = refs
-			content['title'] = "Simeon Academy | New Client"
+			content['title'] = "New Client | Simeon Academy"
 			return render_to_response('counselor/client/new_client.html', content)
 
 @login_required(login_url='/index')
@@ -247,7 +247,7 @@ def confirmNewClient(request):
 			content['email'] = email
 			content['gender'] = gender
 
-			content['title'] = "Simeon Academy | New Client"
+			content['title'] = "New Client | Simeon Academy"
 			return render_to_response('counselor/client/verify_client.html', content)
 
 @login_required(login_url='/index')
@@ -316,7 +316,7 @@ def clientCreated(request):
 
 			if commit == False:
 				client.save()
-				content['title'] = "Simeon Academy | New Client"
+				content['title'] = "New Client | Simeon Academy"
 				return render_to_response('counselor/client/client_created.html', content)
 			else:
 				content['title'] = 'ERROR: CLIENT EXIST'
@@ -339,7 +339,7 @@ def searchClients(request):
 		else:
 			types = SType.objects.all()
 			content['session_types'] = types
-			content['title'] = "Simeon Academy | Client Search"
+			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/search_clients.html', content)
 
 @login_required(login_url='/index')
@@ -392,7 +392,7 @@ def clientSearchResults(request):
 			else:
 				phrase = 'results'
 
-			content['title'] = "Simeon Academy | Client Search"
+			content['title'] = "Client Search | Simeon Academy"
 			content['matches'] = matches
 			content['results'] = s_results
 			content['phrase'] = phrase
@@ -425,7 +425,7 @@ def clientOptions(request):
 			session = ClientSession(client=client, start=start, s_type=session_type)
 			session.save()
 
-			content['title'] = "Simeon Academy | Client Options"
+			content['title'] = "Client Options | Simeon Academy"
 			content['client'] = client
 			content['session_type'] = session_type
 			content['start'] = start
@@ -447,7 +447,7 @@ def am_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
 @login_required(login_url='/index')
@@ -465,7 +465,7 @@ def am_angerHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
 
 @login_required(login_url='/index')
@@ -483,7 +483,7 @@ def am_angerTarget(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/AngerTarget.html', content)
 
 @login_required(login_url='/index')
@@ -501,7 +501,7 @@ def am_childhood(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 
 @login_required(login_url='/index')
@@ -519,7 +519,7 @@ def am_connections(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/connections.html', content)
 
 @login_required(login_url='/index')
@@ -538,7 +538,7 @@ def am_control(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/control.html', content)
 
 @login_required(login_url='/index')
@@ -566,7 +566,7 @@ def am_location(request):
 				##go to the next section to be completed in the form
 				content['am'] = am
 				goToLocation = continueToAmSection(am)
-				content['title'] = "Simeon Academy | Counselor Home Page"
+				content['title'] = "Counselor Home Page | Simeon Academy"
 				return render_to_response(goToLocation, content)
 			elif str(action) == 'start-new':
 				##delete the current form and start at beginning of the am form
@@ -577,11 +577,11 @@ def am_location(request):
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
-				content['title'] = "Simeon Academy | Anger Management Assessment"
+				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			elif str(action) == 'cancel':
 				## return to the client options page
-				content['title'] = "Simeon Academy | Client Options"
+				content['title'] = "Client Options | Simeon Academy"
 				return render_to_response('counselor/client/client_options.html', content)
 
 @login_required(login_url='/index')
@@ -599,7 +599,7 @@ def am_problems(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content)
 
 @login_required(login_url='/index')
@@ -629,13 +629,13 @@ def am_demographic(request):
 			if proceed['incomplete'] == True:
 				content['am'] = am
 				content['client'] = client
-				content['title'] = "Simeon Academy | Anger Management Assessment"
+				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 			else:
 				marital = MaritalStatus.objects.all().order_by('status')
 				living = LivingSituation.objects.all().order_by('situation')
 				education = EducationLevel.objects.all().order_by('level')
-				content['title'] = "Simeon Academy | Anger Management Assessment"
+				content['title'] = "Anger Management Assessment | Simeon Academy"
 				content['client'] = client
 				content['education'] = education
 				content['marital'] = marital
@@ -663,77 +663,75 @@ def am_drugHistory(request):
 			marital = request.POST.get('marital', '')
 			living = request.POST.get('living', '')
 			res_month = request.POST.get('res-mo', '')
-			res_year = request.POST.get('res-yr', '')
-			res_type = request.POST.get('rentRAD', '')
+			res_year = request.POST.get('res-yrs', '')
+			rent_own  = request.POST.get('rentRAD', '')
 			dep_children = request.POST.get('dep_children', '')
 			dep_other = request.POST.get('dep_other', '')
 			education = request.POST.get('edu', '')
-			graduate = request.POST.get('dip', '')
+			dropout = request.POST.get('dip', '')
 			occupation = request.POST.get('occ', '')
 			employer = request.POST.get('employer', '')
 			employer_address = request.POST.get('em_add', '')
 			employer_phone = request.POST.get('em_phone', '')
 			mosJob = request.POST.get('mosJob', '')
 			yrsJob = request.POST.get('yrsJob', '')
-			heal = request.POST.get('heal', '')
-			med = request.POST.get('med', '')
+			healthy = request.POST.get('healRad', '')
+			medicine = request.POST.get('medRad', '')
 			health_explain = request.POST.get('explain', '')
-			client_id = request.POST.get('client_id', '')
-			client = Client.objects.get(id=client_id)
+			session_id = request.POST.get('session_id', '')
 
-			reasonDo = 'Rememeber to change this shit'
+			session = ClientSession.objects.get(id=session_id)
 
-			# marital = getMaritalID(marital)
-			# living = getLivingID(living)
-			# education = getEducationID(education)
+			reasonDo = "This is the reason for dropout"
 
 			marital = MaritalStatus.objects.get(id=marital)
 			living = LivingSituation.objects.get(id=living)
 			education = EducationLevel.objects.get(id=education)
 
-			if res_type == "Own":
-				res_type = True
+			if rent_own == "rent":
+				rent_own = False
 			else:
-				res_type = False
+				rent_own = True
 
-			if graduate == 'Dropout':
-				graduate = True
+			if dropout == 'dropout':
+				dropout = True
 			else:
-				graduate = False
+				dropout = False
 
-			if heal == 'Healthy':
-				heal = False
+			if healthy == 'not_healthy':
+				healthy = True
 			else:
-				heal = True
+				healthy = False
 
-			if med == 'On meds':
-				med = True
+			if medicine == 'medication':
+				medicine = True
 			else:
-				med = False
+				medicine = False
 
-			demographic = AM_Demographic(client=client, date_of_assessment=date, maritalStatus=marital,\
-				livingSituation=living, own=res_type, months_res=res_month, years_res=res_year,\
+			demographic = AM_Demographic(client=session.client, date_of_assessment=date, maritalStatus=marital,\
+				livingSituation=living, own=rent_own, months_res=res_month, years_res=res_year,\
 				num_children=dep_children, other_dependants=dep_other, education=education, \
-				drop_out=graduate, resasonDO=reasonDo, employee=employer, job_title=occupation, \
+				drop_out=dropout, resasonDO=reasonDo, employee=employer, job_title=occupation, \
 				emp_address=employer_address, employed_months=mosJob, employed_years=yrsJob, \
-				employer_phone=employer_phone, health_problem=heal, medication=med, health_exp=health_explain)
+				employer_phone=employer_phone, health_problem=healthy, medication=medicine, health_exp=health_explain)
 
 			moveForward = amDemographicExist(demographic)
 
 			if moveForward['exist'] == False:
-				# demographic.save()
-				nothing = None
+				demographic.save()
 			else:
 				demographic = moveForward['am_demo']
 
 			angerManagement = AngerManagement(demographic=demographic, demographicComplete=True, AMComplete=False)
-			checkAM = clientAmExist(client)
+			checkAM = clientAmExist(session.client)
 
 			if checkAM == False:
 				angerManagement.save()
 
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			content['AM'] = angerManagement.id
+			content['session'] = session
+			content['client'] = session.client
 			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 @login_required(login_url='/index')
@@ -751,7 +749,7 @@ def am_familyOrigin(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/familyOrigin.html', content)
 
 @login_required(login_url='/index')
@@ -769,7 +767,7 @@ def am_final(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/final.html', content)
 
 @login_required(login_url='/index')
@@ -787,7 +785,7 @@ def am_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
 
 @login_required(login_url='/index')
@@ -805,7 +803,7 @@ def am_worst(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Anger Management Assessment"
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/worstEpisodes.html', content)
 
 ## MENTAL HEALTH VIEWS--------------------------------------------------------

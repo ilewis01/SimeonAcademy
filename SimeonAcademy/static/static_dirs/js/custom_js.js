@@ -441,6 +441,345 @@ function continue_am() {
 	}
 }
 
+function am_drug_history_setup() {
+	var quit_label = document.getElementById('quit-label');
+	var reason_quit_label = document.getElementById('reason-quit-label');
+	var moLabel1 = document.getElementById('moLabel1');
+	var yrLabel1 = document.getElementById('yrLabel1');
+	var quitMos = document.getElementById('quitMos');
+	var quitYrs = document.getElementById('quitYrs');	
+	var reason_quit = document.getElementById('reason_quit');
+
+	var what_use_label = document.getElementById('what_use_label');
+	var how_often_label = document.getElementById('how_often_label');
+	var how_much_use_label = document.getElementById('how_much_use_label');
+	var what_you_use = document.getElementById('what-you-use');	
+	var how_often_you_use = document.getElementById('how-often-you-use');	
+	var how_much_you_use = document.getElementById('how-much-you-use');
+
+	var dui_amount_label = document.getElementById('dui_amount_label');
+	var bal_label = document.getElementById('bal_label');
+	var dui_amount = document.getElementById('dui_amount');
+	var bal = document.getElementById('BAL');
+
+	var when_treated_label = document.getElementById('when_treated_label');
+	var where_treated_label = document.getElementById('where_treated_label');
+	var completed_treatment_label = document.getElementById('completed_treatment_label');
+	var when_treated = document.getElementById('when_treated');
+	var where_treated = document.getElementById('where_treated');
+	var did_complete = document.getElementById('did_complete');
+	var did_complete_label = document.getElementById('did_complete_label');
+	var not_completed = document.getElementById('not_completed');
+	var not_completed_label = document.getElementById('not_completed_label');
+
+	var no_complete_explain_label = document.getElementById('no_complete_explain_label');
+	var still_abstinent_label = document.getElementById('still_abstinent_label');
+	var is_abstinent_label = document.getElementById('is_abstinent_label');
+	var not_abstinent_label = document.getElementById('not_abstinent_label');
+	var trigger_label = document.getElementById('trigger_label');
+
+	quit_label.style.opacity = '0.3';
+	reason_quit_label.style.opacity = '0.3';
+	moLabel1.style.opacity = '0.3';
+	yrLabel1.style.opacity = '0.3';
+	what_use_label.style.opacity = '0.3';
+	how_often_label.style.opacity = '0.3';
+	how_much_use_label.style.opacity = '0.3';
+	dui_amount_label.style.opacity = '0.3';
+	bal_label.style.opacity = '0.3';
+	when_treated_label.style.opacity = '0.3';
+	where_treated_label.style.opacity = '0.3';
+	completed_treatment_label.style.opacity = '0.3';
+	did_complete_label.style.opacity = '0.3';
+	not_completed_label.style.opacity = '0.3';
+	no_complete_explain_label.style.opacity = '0.3';
+	still_abstinent_label.style.opacity = '0.3';
+	is_abstinent_label.style.opacity = '0.3';
+	not_abstinent_label.style.opacity = '0.3';
+	trigger_label.style.opacity = '0.3';
+
+	quitMos.disabled = true;
+	quitYrs.disabled = true;
+	reason_quit.disabled = true;
+	what_you_use.disabled = true;
+	how_often_you_use.disabled = true;
+	how_much_you_use.disabled = true;
+	dui_amount.disabled = true;
+	bal.disabled = true;
+
+	var no_treatment = document.getElementById('no_treatment');
+	var had_treatment = document.getElementById('had_treatment');
+	var when_treated = document.getElementById('when_treated');
+	var where_treated = document.getElementById('where_treated');
+	// var did_complete = document.getElementById('did_complete');
+	// var not_completed = document.getElementById('not_completed');
+	var no_treat_explain = document.getElementById('no_treat_explain');
+	var is_abstinent = document.getElementById('is_abstinent');
+	var not_abstinent = document.getElementById('not_abstinent');
+	var relapse_explain = document.getElementById('relapse_explain');
+
+	// no_treatment.disabled = true;
+	// had_treatment.disabled = true;
+	when_treated.disabled = true;
+	where_treated.disabled = true;
+	did_complete.disabled = true;
+	not_completed.disabled = true;
+	no_treat_explain.disabled = true;
+	is_abstinent.disabled = true;
+	not_abstinent.disabled = true;
+	relapse_explain.disabled = true;
+}
+
+function dh_never_used() {
+	var quit_label = document.getElementById('quit-label');
+	var reason_quit_label = document.getElementById('reason-quit-label');
+	var moLabel1 = document.getElementById('moLabel1');
+	var yrLabel1 = document.getElementById('yrLabel1');
+	var quitMos = document.getElementById('quitMos');
+	var quitYrs = document.getElementById('quitYrs');	
+	var reason_quit = document.getElementById('reason_quit');
+	
+	quit_label.style.opacity = '0.3';
+	reason_quit_label.style.opacity = '0.3';
+	moLabel1.style.opacity = '0.3';
+	yrLabel1.style.opacity = '0.3';
+
+	quitYrs.disabled = true;
+	quitMos.disabled = true;
+	reason_quit.disabled = true;
+
+	quitYrs.value = '0';
+	quitMos.value = '0';
+	reason_quit.value = '';
+}
+
+function dh_has_used() {
+	var quit_label = document.getElementById('quit-label');
+	var reason_quit_label = document.getElementById('reason-quit-label');
+	var moLabel1 = document.getElementById('moLabel1');
+	var yrLabel1 = document.getElementById('yrLabel1');
+	var quitMos = document.getElementById('quitMos');
+	var quitYrs = document.getElementById('quitYrs');	
+	var reason_quit = document.getElementById('reason_quit');
+	
+	quit_label.style.opacity = '1.0';
+	reason_quit_label.style.opacity = '1.0';
+	moLabel1.style.opacity = '1.0';
+	yrLabel1.style.opacity = '1.0';
+
+	quitYrs.disabled = false;
+	quitMos.disabled = false;
+	reason_quit.disabled = false;
+}
+
+function dh_drinks() {
+	var what_use_label = document.getElementById('what_use_label');
+	var how_often_label = document.getElementById('how_often_label');
+	var how_much_use_label = document.getElementById('how_much_use_label');
+	var what_you_use = document.getElementById('what-you-use');	
+	var how_often_you_use = document.getElementById('how-often-you-use');	
+	var how_much_you_use = document.getElementById('how-much-you-use');
+
+	what_use_label.style.opacity = '1.0';
+	how_often_label.style.opacity = '1.0';
+	how_much_use_label.style.opacity = '1.0';
+
+	what_you_use.disabled = false;
+	how_often_you_use.disabled = false;
+	how_much_you_use.disabled = false;
+}
+
+function dh_no_drink() {
+	var what_use_label = document.getElementById('what_use_label');
+	var how_often_label = document.getElementById('how_often_label');
+	var how_much_use_label = document.getElementById('how_much_use_label');
+	var what_you_use = document.getElementById('what-you-use');	
+	var how_often_you_use = document.getElementById('how-often-you-use');	
+	var how_much_you_use = document.getElementById('how-much-you-use');
+
+	what_use_label.style.opacity = '0.3';
+	how_often_label.style.opacity = '0.3';
+	how_much_use_label.style.opacity = '0.3';
+
+	what_you_use.disabled = true;
+	how_often_you_use.disabled = true;
+	how_much_you_use.disabled = true;
+
+	what_you_use.value = '';
+	how_often_you_use.value = '';
+	how_much_you_use.value = '';
+}
+
+function dh_no_dui() {
+	var dui_amount_label = document.getElementById('dui_amount_label');
+	var bal_label = document.getElementById('bal_label');
+	var dui_amount = document.getElementById('dui_amount');
+	var bal = document.getElementById('BAL');
+
+	dui_amount_label.style.opacity = '0.3';
+	bal_label.style.opacity = '0.3';
+
+	dui_amount.disabled = true;
+	dui_amount.value = '0';
+	bal.disabled = true;
+	bal.value = '';
+}
+
+function dh_has_dui() {
+	var dui_amount_label = document.getElementById('dui_amount_label');
+	var bal_label = document.getElementById('bal_label');
+	var dui_amount = document.getElementById('dui_amount');
+	var bal = document.getElementById('BAL');
+
+	dui_amount_label.style.opacity = '1.0';
+	bal_label.style.opacity = '1.0';
+
+	dui_amount.disabled = false;
+	bal.disabled = false;
+}
+
+function dh_had_treatment() {
+	var when_treated_label = document.getElementById('when_treated_label');
+	var where_treated_label = document.getElementById('where_treated_label');
+	var completed_treatment_label = document.getElementById('completed_treatment_label'); 
+	var when_treated = document.getElementById('when_treated');
+	var where_treated = document.getElementById('where_treated');
+	var did_complete = document.getElementById('did_complete');
+	var not_completed = document.getElementById('not_completed');
+	var did_complete_label = document.getElementById('did_complete_label');
+	var not_completed_label = document.getElementById('not_completed_label');
+
+	when_treated_label.style.opacity = '1.0';
+	where_treated_label.style.opacity = '1.0';
+	completed_treatment_label.style.opacity = '1.0';
+	did_complete_label.style.opacity = '1.0';
+	not_completed_label.style.opacity = '1.0';
+
+	when_treated.disabled = false;
+	where_treated.disabled = false;
+	did_complete.disabled = false;
+	not_completed.disabled = false;
+}
+
+function dh_no_treatment() {
+	var when_treated_label = document.getElementById('when_treated_label');
+	var where_treated_label = document.getElementById('where_treated_label');
+	var completed_treatment_label = document.getElementById('completed_treatment_label'); 
+	var when_treated = document.getElementById('when_treated');
+	var where_treated = document.getElementById('where_treated');
+	var did_complete = document.getElementById('did_complete');
+	var not_completed = document.getElementById('not_completed');
+	var did_complete_label = document.getElementById('did_complete_label');
+	var not_completed_label = document.getElementById('not_completed_label');
+
+	when_treated_label.style.opacity = '0.3';
+	where_treated_label.style.opacity = '0.3';
+	completed_treatment_label.style.opacity = '0.3';
+	did_complete_label.style.opacity = '0.3';
+	not_completed_label.style.opacity = '0.3';
+
+	when_treated.disabled = true;
+	where_treated.disabled = true;
+	did_complete.disabled = true;
+	not_completed.disabled = true;
+
+	when_treated.value = '';
+	where_treated.value = '';
+	did_complete.checked = true;
+
+	var no_complete_explain_label = document.getElementById('no_complete_explain_label');
+	var still_abstinent_label = document.getElementById('still_abstinent_label');
+	var no_treat_explain = document.getElementById('no_treat_explain');
+	var is_abstinent = document.getElementById('is_abstinent');
+	var not_abstinent = document.getElementById('not_abstinent');
+	var is_abstinent_label = document.getElementById('is_abstinent_label');
+	var not_abstinent_label = document.getElementById('not_abstinent_label')
+
+	no_complete_explain_label.style.opacity = '0.3';
+	still_abstinent_label.style.opacity = '0.3';
+	is_abstinent_label.style.opacity = '0.3';
+	not_abstinent_label.style.opacity = '0.3';
+
+	no_treat_explain.disabled = true;
+	is_abstinent.disabled = true;
+	not_abstinent.disabled = true;
+
+	no_treat_explain.value = '';
+	is_abstinent.checked = true;
+
+	var trigger_label = document.getElementById('trigger_label');
+	var relapse_explain = document.getElementById('relapse_explain');
+
+	trigger_label.style.opacity = '0.3';
+	relapse_explain.disabled = true;
+	relapse_explain.value = '';
+}
+
+function dh_not_completed_sub() {
+	var no_complete_explain_label = document.getElementById('no_complete_explain_label');
+	var still_abstinent_label = document.getElementById('still_abstinent_label');
+	var no_treat_explain = document.getElementById('no_treat_explain');
+	var is_abstinent = document.getElementById('is_abstinent');
+	var not_abstinent = document.getElementById('not_abstinent');
+	var is_abstinent_label = document.getElementById('is_abstinent_label');
+	var not_abstinent_label = document.getElementById('not_abstinent_label')
+
+	no_complete_explain_label.style.opacity = '1.0';
+	still_abstinent_label.style.opacity = '1.0';
+	is_abstinent_label.style.opacity = '1.0';
+	not_abstinent_label.style.opacity = '1.0';
+
+	no_treat_explain.disabled = false;
+	is_abstinent.disabled = false;
+	not_abstinent.disabled = false;
+}
+
+function dh_did_completed_sub() {
+	var no_complete_explain_label = document.getElementById('no_complete_explain_label');
+	var still_abstinent_label = document.getElementById('still_abstinent_label');
+	var no_treat_explain = document.getElementById('no_treat_explain');
+	var is_abstinent = document.getElementById('is_abstinent');
+	var not_abstinent = document.getElementById('not_abstinent');
+	var is_abstinent_label = document.getElementById('is_abstinent_label');
+	var not_abstinent_label = document.getElementById('not_abstinent_label')
+
+	no_complete_explain_label.style.opacity = '0.3';
+	still_abstinent_label.style.opacity = '0.3';
+	is_abstinent_label.style.opacity = '0.3';
+	not_abstinent_label.style.opacity = '0.3';
+
+	no_treat_explain.disabled = true;
+	is_abstinent.disabled = true;
+	not_abstinent.disabled = true;
+
+	no_treat_explain.value = '';
+	is_abstinent.checked = true;
+
+	var trigger_label = document.getElementById('trigger_label');
+	var relapse_explain = document.getElementById('relapse_explain');
+
+	trigger_label.style.opacity = '0.3';
+	relapse_explain.disabled = true;
+	relapse_explain.value = '';
+}
+
+function dh_is_abstinent() {
+	var trigger_label = document.getElementById('trigger_label');
+	var relapse_explain = document.getElementById('relapse_explain');
+
+	trigger_label.style.opacity = '0.3';
+	relapse_explain.disabled = true;
+	relapse_explain.value = '';
+}
+
+function dh_not_abstinent() {
+	var trigger_label = document.getElementById('trigger_label');
+	var relapse_explain = document.getElementById('relapse_explain');
+
+	trigger_label.style.opacity = '1.0';
+	relapse_explain.disabled = false;
+}
+
 
 
 

@@ -2,21 +2,680 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Drug History</h1>
-<form action='/am_childhood/' method='post' id='drug-history-form'> {% csrf_token %}
-	<input type='hidden' value='{{AM.id}}' id='AM_id' name='AM_id'>
+<body class="gradient-white" onLoad="javascript: am_drug_history_setup()">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-	<table>
-		<tr>
-			<td>
-				
-			</td>
-		</tr>
-	</table>
+    <div id="wrapper" class='shift-rr'>
 
-	<input type='submit' value='submit'>
-</form>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        	<table class='session-side'>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Client Profile</h3>
+                    	</div>
+        			</td>
+        		</tr>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+        		<!-- <tr>
+        			<td>
+        				<div>
+                        	<h5>{{session.start}}</h5>
+                    	</div>
+        			</td>
+        		</tr> -->
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span class="sidebar-id">{{client.clientID}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.phone}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span id='sidebar-fill'>{{client.email}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Session Info</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
+                    	</div>
+        			</td>
+        		</tr>
+        	</table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- <div class="container-fluid"> -->
+                <!-- <div class="row">
+                    <div class="col-lg-12" style='text-align:'> -->
+                        <div>
+                        	<h3 id='am-h2'>Anger Management: Drug History</h3>
+
+                        	<div class="container">
+            					<div class="row">                   
+                  					<div class="col-md-5 col-sm-5">
+                  						<div>
+                  							<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
+                  								<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+                  								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='first_drink'>At what age did you have your first drink of alcohol and/or drugs? </label>
+                  											<input class='small-number' type='number' value='0' name='first_drink' id='first_drink'>
+                  										</td>
+                  									</tr>
+                  								</table>
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='first_use_type'>What did you use? </label>
+                  										</td>
+                  										<td>
+                  											<div class='left-space-5'>
+                  												<input type='text' id='first_use_type' name='first_use_type'>
+                  											</div>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='ever_used'>Have you ever drank or used drugs?</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='never_used' name='ever_used' value='no' checked='true' onClick='javascript: dh_never_used();'>
+                  											<div>
+                  										</td>
+                  										<td>
+                  											<label for='never_used'>No</label>
+                  										</td>
+
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='has_used' name='ever_used' value='yes' onClick="javascript: dh_has_used();">
+                  										    </div>
+                  										</td>
+                  										<td>
+                  											<label for='has_used'>Yes</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<div class='sub-table-indent-40px'>
+	                  								<table>
+	                  									<tr>
+	                  										<td>
+	                  											<label for='quitYrs' id='quit-label'>How long ago did you quit?</label>
+	                  										</td>
+	                  									</tr>
+	                  									<tr>
+	                  										<td>
+	                  											<table>
+	                  												<tr>
+	                  													<td>
+				                  											<div>
+				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value='0'>
+				                  												<label id='moLabel1'>months</label>
+				                  											</div>
+				                  										</td>
+				                  										<td>
+				                  											<div style='margin-left: 8px;'>
+				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value='0'>
+				                  												<label id='yrLabel1'>years</label>
+				                  											</div>
+				                  										</td>
+				                  									</tr>
+	                  											</table>
+	                  										</td>
+	                  									</tr>
+	                  									<table>
+	                  										<tr>
+	                  											<div style='margin-top:5px;'>
+		                  											<td>
+		                  												<label for='reason_quit' id='reason-quit-label'>Why did you quit?</label>
+		                  											</td>
+		                  											<td>
+		                  												<div class='left-space-5'>
+		                  												    <input type='text' id='reason_quit' name='reason_quit'>
+		                  											    </div>
+		                  											</td>
+	                  											</div>
+	                  										</tr>
+	                  									</table>
+	                  								</table>
+                  								</div>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='use_drugs'>Do you currently drink alcohol or use drugs?</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='no_current_use' name='use_drugs' value='no' checked='true' onClick='javascript: dh_no_drink()'>
+                  											<div>
+                  										</td>
+                  										<td>
+                  											<label for='no_current_use'>No</label>
+                  										</td>
+
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='current_use' name='use_drugs' value='yes' onClick='javascript: dh_drinks()'>
+                  										    </div>
+                  										</td>
+                  										<td>
+                  											<label for='current_use'>Yes</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<div class='sub-table-indent-40px'>
+	                  								<table>
+	                  									<tr>
+	                  										<td>
+	                  											<label for='what-you-use' id='what_use_label'>What do you use?</label>
+	                  										</td>
+	                  										<td>
+	                  											<div class='left-space-5'>
+	                  											    <input type='text' id='what-you-use' name='what-you-use'>
+	                  											</div>
+	                  										</td>
+	                  									</tr>
+	                  									<tr>
+	                  										<td>
+	                  											<label for='how-often-you-use' id='how_often_label'>How often?</label>
+	                  										</td>
+	                  										<td>
+	                  											<div class='left-space-5'>
+	                  											    <input type='text' id='how-often-you-use' name='how-often-you-use'>
+	                  											</div>
+	                  										</td>
+	                  									</tr>
+	                  									<tr>
+	                  										<td>
+	                  											<label for='how-much-you-use' id='how_much_use_label'>How much?</label>
+	                  										</td>
+	                  										<td>
+	                  											<div class='left-space-5'>
+	                  											    <input type='text' id='how-much-you-use' name='how-much-you-use'>
+	                  											</div>
+	                  										</td>
+	                  									</tr>
+	                  								</table>
+                  								</div>
+                  								
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='has_dui'>Have you ever received a DUI?</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='no_dui' name='has_dui' value='no' checked='true' onClick='javascript: dh_no_dui();'>
+                  											<div>
+                  										</td>
+                  										<td>
+                  											<label for='no_dui'>No</label>
+                  										</td>
+
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='dui' name='has_dui' value='yes' onClick='javascript: dh_has_dui();'>
+                  										    </div>
+                  										</td>
+                  										<td>
+                  											<label for='dui'>Yes</label>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<div class='sub-table-indent-40px'>
+	                  								<table>
+	                  									<tr>
+	                  										<td>
+	                  											<table>
+	                  												<tr>
+	                  													<td>
+	                  														<label for='dui_amount' id='dui_amount_label'>How many?</label>
+	                  													</td>
+	                  													<td>
+	                  														<div class='left-space-5'>
+	                  															<input type='number' value='0' id='dui_amount' name='dui_amount' class='small-number'>
+	                  														</div>
+	                  													</td>
+	                  												</tr>
+	                  											</table>
+	                  										</td>
+	                  									</tr>
+	                  									<tr>
+	                  										<td>
+	                  											<label for='BAL' id='bal_label'>What was your blood alcohol level?</label>
+	                  										</td>
+	                  										<td>
+	                  											<div class='left-space-5'>
+	                  											    <input type='text' id='BAL' name='BAL' style='width:100px;'>
+	                  											</div>
+	                  										</td>
+	                  									</tr>
+	                  								</table>
+                  								</div>
+                  							</div>
+
+                  							<table>
+	                  								<tr>
+                  										<td>
+                  											<label for='need_help'>Do you need help for alcohol or drug dependency problems?</label>
+                  										</td>
+                  									</tr>
+                  									<tr>
+                  										<td>
+                  											<table>
+                  												<tr>
+                  													<td>
+                  														<div class='single-line-radio1'>
+                  														    <input type='radio' name='need_help' id='give_me_help' value='give_me_help'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='give_me_help'>Yes</label>
+                  													</td>
+                  													
+                  													<td>
+                  														<div class='single-line-radio'>
+                  														    <input type='radio' name='need_help' id='no_help' value='no_help' checked='true'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='no_help'>No</label>
+                  													</td>
+                  												</tr>
+                  											</table>
+                  										</td>
+                  									</tr>
+	                  							</table> 
+                  					</div>
+
+
+
+                  					<!-- RIGHT SIDE -->
+                  					<div class="col-md-5 col-sm-5">
+                  						<div>
+                  							<table>
+                  								<tr>
+                  									<td>
+                  										<label for='treatment'>Have you ever received treatment for drug/alcohol abuse?</label>
+                  									</td>
+                  								</tr>
+                  								<tr>
+                  									<td>
+                  										<table>
+                  											<tr>
+                  												<td>
+                  													<div class='single-line-radio1'>
+                  													    <input type='radio' name='treatment' id='had_treatment' value='had_treatment' checked='true' onClick='javascript: dh_had_treatment();'>
+                  												    </div>
+                  												</td>
+                  												<td>
+                  													<label for='had_treatment' id='had_treatment_label'>Yes</label>
+                  												</td>
+                  												
+                  												<td>
+                  													<div class='single-line-radio'>
+                  													    <input type='radio' name='treatment' id='no_treatment' value='no_treatment' checked='true' onClick='javascript: dh_no_treatment();'>
+                  													</div>
+                  												</td>
+                  												<td>
+                  													<label for='no_treatment' id='no_treatment_label'>No</label>
+                  												</td>
+                  											</tr>
+                  										</table>
+                  									</td>
+                  								</tr>
+                  							</table>
+
+                  							<div class='sub-table-indent-40px'>
+	                  								<table>
+	                  									<tr>
+	                  										<td>
+	                  											<table>
+	                  												<tr>
+	                  													<td>
+	                  														<label for='when_treated' id='when_treated_label'>When?</label>
+	                  													</td>
+	                  													<td>
+	                  														<div class='left-space-5'>
+	                  															<input type='text' id='when_treated' name='when_treated'>
+	                  														</div>
+	                  													</td>
+	                  												</tr>
+	                  												<tr>
+	                  													<td>
+	                  														<label for='where_treated' id='where_treated_label'>Where?</label>
+	                  													</td>
+	                  													<td>
+	                  														<div class='left-space-5'>
+	                  															<input type='text' id='where_treated' name='where_treated'>
+	                  														</div>
+	                  													</td>
+	                  												</tr>
+	                  											</table>
+	                  										</td>
+	                  									</tr>
+	                  								</table>
+	                  								<table>
+	                  									<tr>
+                  										<td>
+                  											<label for='completed_treatment' id='completed_treatment_label'>Did you complete treatment?</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='did_complete' name='completed_treatment' value='yes' checked='true' onClick='javascript: dh_did_completed_sub();'>
+                  										    </div>
+                  										</td>
+                  										<td>
+                  											<label for='did_complete' id='did_complete_label'>Yes</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='not_completed' name='completed_treatment' value='no' onClick='javascript: dh_not_completed_sub();'>
+                  											<div>
+                  										</td>
+                  										<td>
+                  											<label for='not_completed' id='not_completed_label'>No</label>
+                  										</td>
+                  									</tr>
+	                  								</table>
+                  								</div>
+
+                  								<table>
+                  									<tr>
+                  										<td>
+                  											<label for='no_treat_explain' id='no_complete_explain_label'>Explain why treatment was not completed below</label>
+                  										</td>
+                  									</tr>
+                  									<tr>
+                  										<td>
+                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'></textarea>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+	                  									<tr>
+                  										<td>
+                  											<label for='still_abstinent' id='still_abstinent_label'>Are you still abstinent?</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='yes' checked='true' onClick='javascript: dh_is_abstinent();'>
+                  										    </div>
+                  										</td>
+                  										<td>
+                  											<label for='is_abstinent' id='is_abstinent_label'>Yes</label>
+                  										</td>
+                  										<td>
+                  											<div class='single-line-radio'>
+                  											    <input type='radio' id='not_abstinent' name='still_abstinent' value='no' onClick='javascript: dh_not_abstinent();'>
+                  											<div>
+                  										</td>
+                  										<td>
+                  											<label for='not_abstinent' id='not_abstinent_label'>No</label>
+                  										</td>
+                  									</tr>
+	                  							</table>
+
+												<table>
+                  									<tr>
+                  										<td>
+                  											<label for='relapse_explain' id='trigger_label'>What triggered your relapse?</label>
+                  										</td>
+                  									</tr>
+                  									<tr>
+                  										<td>
+                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'></textarea>
+                  										</td>
+                  									</tr>
+                  								</table>
+
+                  								<table>
+	                  								<tr>
+                  										<td>
+                  											<label for='drinking_last'>Were you drinking and/or using drugs during your most </label>
+                  										</td>
+                  									</tr>
+                  									<tr>
+                  										<td>
+                  											<table>
+                  												<tr>
+                  													<td>
+                  														<label for='drinking_last'>recent abusive episode?</label>
+                  													</td>
+                  													<td>
+                  														<div class='single-line-radio'>
+                  														    <input type='radio' name='drinking_last' id='was_drinking' value='was_drinking'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='was_drinking'>Yes</label>
+                  													</td>
+                  													
+                  													<td>
+                  														<div class='single-line-radio'>
+                  														    <input type='radio' name='drinking_last' id='not_drinking' value='not_drinking' checked='true'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='not_drinking'>No</label>
+                  													</td>
+                  												</tr>
+                  											</table>
+                  										</td>
+                  									</tr>
+	                  							</table>  
+
+	                  							<table>
+	                  								<tr>
+                  										<td>
+                  											<label for='relationship_alc'>Is the use of alcohol and or drugs a problem in your</label>
+                  										</td>
+                  									</tr>
+                  									<tr>
+                  										<td>
+                  											<table>
+                  												<tr>
+                  													<td>
+                  														<label for='relationship_alc'>relationship?</label>
+                  													</td>
+                  													<td>
+                  														<div class='single-line-radio'>
+                  														    <input type='radio' name='relationship_alc' id='is_problem' value='is_problem'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='is_problem'>Yes</label>
+                  													</td>
+                  													
+                  													<td>
+                  														<div class='single-line-radio'>
+                  														    <input type='radio' name='relationship_alc' id='no_problem' value='no_problem' checked='true'>
+                  														</div>
+                  													</td>
+                  													<td>
+                  														<label for='no_problem'>No</label>
+                  													</td>
+                  												</tr>
+                  											</table>
+                  										</td>
+                  									</tr>
+	                  							</table>                  							
+                  						</div>
+                  					</div>
+
+
+
+                  					<div class="col-md-2 col-sm-2">
+                  					</div>
+                  				</div>
+                  			</div>
+                          
+                            
+<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
+
+                        <table class='toggle-div-page'>
+                        	<tr>
+                        		<td id="error-div-main">
+                        			<p class='error-messages'></p>
+                        		</td>
+                        	</tr>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="javascript: " id="back">
+				                        	<button type='button' onClick='javascript: back_am_demographic();' id='continue'>Back</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="javascript: " id="continue">
+				                        	<button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+				                        </a>
+				                    </div>
+			                    </td>
+			                </tr>
+	                    </table>
+
+                        </div> <!-- end of section -->
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+    </div>        
+
+</body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<> {% csrf_token %}
+	
+
+</form>

@@ -384,6 +384,32 @@ button:hover {
 	color: #adad85;
 }
 
+.small-number {
+	width:40px;
+}
+
+.left-space-5 {
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+.single-line-radio {
+	margin-bottom: 8px;
+	margin-right: 4px; 
+	margin-left: 12px;
+}
+.single-line-radio1 {
+	margin-bottom: 8px;
+	margin-right: 4px; 
+}
+
+.sub-table-indent-40px {
+	margin-left: 40px;
+}
+.hori-block {
+	float: left;
+}
+
 
 
 

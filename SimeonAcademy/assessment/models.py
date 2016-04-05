@@ -258,7 +258,7 @@ class AM_Demographic(models.Model):
 	health_exp = models.CharField(max_length=250, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management"
+		return "Anger Management: " + str(self.client) + " Date: " + str(self.date_of_assessment)
 		# return "Anger Management/Demographics: " + str(self.client)
 
 ##ANGER MANAGEMENT ALCOHOL AND DRUG HISTORY---------------------------------------------------------
