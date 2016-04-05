@@ -31,7 +31,7 @@ amDemographicExist, findClientAM, clientAmExist, continueToAmSection, \
 mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
 continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
-getClientSAPList, continueToSAPSection, SAPDemographicExist
+getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -501,6 +501,99 @@ def am_childhood(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			first_drink = request.POST.get('first_drink', '')
+			first_use_type = request.POST.get('first_use_type', '')
+			ever_used_drugs = request.POST.get('ever_used', '')
+			quitMos = request.POST.get('quitMos', '')
+			quitYrs = request.POST.get('quitYrs', '')
+			reason_quit = request.POST.get('reason_quit', '')
+			currently_use_drugs = request.POST.get('use_drugs', '')
+			what_you_use = request.POST.get('what-you-use', '')
+			how_often_you_use = request.POST.get('how-often-you-use', '')
+			how_much_you_use = request.POST.get('how-much-you-use', '')
+			has_dui = request.POST.get('has_dui', '')
+			dui_amount = request.POST.get('dui_amount', '')
+			BAL = request.POST.get('BAL', '')
+			need_help = request.POST.get('need_help', '')
+			had_treatment = request.POST.get('treatment', '')
+			when_treated = request.POST.get('when_treated', '')
+			where_treated = request.POST.get('where_treated', '')
+			completed_treatment = request.POST.get('completed_treatment', '')
+			no_treat_explain = request.POST.get('no_treat_explain', '')
+			still_abstinent = request.POST.get('still_abstinent', '')
+			relapse_explain = request.POST.get('relapse_explain', '')
+			drinking_last = request.POST.get('drinking_last', '')
+			relationship_alc = request.POST.get('relationship_alc', '')
+
+			session_id = request.POST.get('session_id', '')
+			am_id = request.POST.get('am_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			am = AngerManagement.objects.get(id=am_id)
+			drug_history = AM_DrugHistory(client_id=session.client.clientID)
+
+			if currently_use_drugs == 'yes':
+				currently_use_drugs = True
+			else:
+				currently_use_drugs = False
+			if ever_used_drugs == 'yes':
+				ever_used_drugs = True
+			else:
+				ever_used_drugs = False
+			if has_dui == 'yes':
+				has_dui = True
+			else:
+				has_dui = False
+			if had_treatment == 'yes':
+				had_treatment = True
+			else:
+				had_treatment = False
+			if completed_treatment == 'yes':
+				completed_treatment = True
+			else:
+				completed_treatment = False
+			if still_abstinent == 'yes':
+				still_abstinent = True
+			else:
+				still_abstinent = False
+			if drinking_last == 'yes':
+				drinking_last = True
+			else:
+				drinking_last = False
+			if need_help == 'yes':
+				need_help = True
+			else:
+				need_help = False
+
+			drug_history.firstDrinkAge = first_drink
+			drug_history.firstDrinkType = first_use_type
+			drug_history.curUse = currently_use_drugs
+			drug_history.useType = what_you_use
+			drug_history.amtPerWeek = how_often_you_use
+			drug_history.useAmt = how_much_you_use
+			drug_history.everDrank = ever_used_drugs
+			drug_history.monthsQuit = quitMos
+			drug_history.yearsQuit = quitYrs
+			drug_history.reasonQuit = reason_quit
+			drug_history.DUI = has_dui
+			drug_history.numDUI = dui_amount
+			drug_history.BALevel = BAL
+			drug_history.drugTreatment = had_treatment
+			drug_history.treatmentPlace = where_treated
+			drug_history.dateTreated = when_treated
+			drug_history.finishedTreatment = completed_treatment
+			drug_history.reasonNotFinishedTreatment = no_treat_explain
+			drug_history.isClean = still_abstinent
+			drug_history.relapseTrigger = relapse_explain
+			drug_history.drinkLastEpisode = drinking_last
+			drug_history.drinkRelationshipProblem = relationship_alc
+			drug_history.needHelpDrugs = need_help
+
+			drug_history.save()
+			am.drugHistory = drug_history
+			am.drugHistoryComplete = True
+			am.save()
+
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 
@@ -679,6 +772,7 @@ def am_drugHistory(request):
 			medicine = request.POST.get('medRad', '')
 			health_explain = request.POST.get('explain', '')
 			session_id = request.POST.get('session_id', '')
+			am_id = request.POST.get('am_id', '')
 
 			session = ClientSession.objects.get(id=session_id)
 
@@ -727,9 +821,11 @@ def am_drugHistory(request):
 
 			if checkAM == False:
 				angerManagement.save()
+			else:
+				angerManagement = getAM_byDemographic(demographic)['am']
 
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-			content['AM'] = angerManagement.id
+			content['AM'] = angerManagement
 			content['session'] = session
 			content['client'] = session.client
 			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)

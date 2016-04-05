@@ -192,6 +192,20 @@ def amDemographicExist(demo):
 			break
 	return results
 
+def getAM_byDemographic(demo):
+	result = {}
+	result['am'] = None
+	result['exist'] = False
+	ams = AngerManagement.objects.all()
+
+	for a in ams:
+		if str(a.demographic.client.clientID) == str(demo.client.clientID) and str(a.demographic.date_of_assessment) == str(demo.date_of_assessment):
+			result = a
+			result['exist'] = True
+			result['am'] = a
+			break
+	return result
+
 def mhDemographicExist(demo):
 	demographics = MHDemographic.objects.all()
 	results = {}

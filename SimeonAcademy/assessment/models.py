@@ -268,19 +268,18 @@ class AM_DrugHistory(models.Model):
 	firstDrinkType = models.CharField(default=None, max_length=50, blank=True, null=True)	
 	curUse = models.BooleanField(default=False, blank=True)
 	useType = models.CharField(max_length=50, default=None, blank=True, null=True)
-	amtPerWeek = models.IntegerField(default=0)
-	useAmt = models.IntegerField(default=0)
+	amtPerWeek =  models.CharField(max_length=50, default=None, blank=True, null=True)
+	useAmt = models.CharField(max_length=50, default=None, blank=True, null=True)
 	everDrank = models.BooleanField(default=False, blank=True)
-	timeQuit = models.IntegerField(default=0)
 	monthsQuit = models.IntegerField(default=0)
 	yearsQuit = models.IntegerField(default=0)
 	reasonQuit = models.CharField(max_length=100, default=None, blank=True, null=True)
 	DUI = models.BooleanField(blank=True, default=False)
 	numDUI = models.IntegerField(default=0)
-	BALevel = models.FloatField(default=0.0)
+	BALevel = models.CharField(max_length=20, default=None, blank=True, null=True)
 	drugTreatment = models.BooleanField(default=False, blank=True)
 	treatmentPlace = models.CharField(max_length=50, default=None, blank=True, null=True)
-	dateTreated = models.DateField(default=None, blank=True, null=True)
+	dateTreated = models.CharField(max_length=10, default=None, blank=True, null=True)
 	finishedTreatment = models.BooleanField(default=False, blank=True)
 	reasonNotFinishedTreatment = models.CharField(max_length=100, blank=True, null=True, default=None)
 	isClean = models.BooleanField(default=False, blank=True)
@@ -523,8 +522,8 @@ class AngerManagement(models.Model):
 
 	AMComplete = models.BooleanField(blank=True, default=False)
 
-	# def __unicode__(self):
-	# 	return str(self.demographic.client.fname) + ' ' + str(self.demographic.client.lname)
+	def __unicode__(self):
+		return "Anger Management Full: " + str(self.demographic.client.fname) + ' ' + str(self.demographic.client.lname)
 
 class MHDemographic(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
