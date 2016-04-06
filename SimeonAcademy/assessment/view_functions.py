@@ -193,17 +193,13 @@ def amDemographicExist(demo):
 	return results
 
 def getAM_byDemographic(demo):
-	result = {}
-	result['am'] = None
-	result['exist'] = False
+	result = None
 	ams = AngerManagement.objects.all()
 
 	for a in ams:
 		if str(a.demographic.client.clientID) == str(demo.client.clientID) and str(a.demographic.date_of_assessment) == str(demo.date_of_assessment):
 			result = a
-			result['exist'] = True
-			result['am'] = a
-			break
+
 	return result
 
 def mhDemographicExist(demo):
@@ -342,7 +338,7 @@ def continueToAmSection(am):
 	if am.drugHistoryComplete == False:
 		location = 'counselor/forms/AngerManagement/drugHistory.html'
 	elif am.childhoodComplete == False:
-		location = 'counselor/forms/AngerManagement/childhoodHistroy.html'
+		location = 'counselor/forms/AngerManagement/childhoodHistory.html'
 	elif am.connectionsComplete == False:
 		location = 'counselor/forms/AngerManagement/connections.html'
 	elif am.worstComplete == False:
@@ -488,6 +484,63 @@ def getTimes():
 			final.append(str(real[i]) + ' pm')
 
 	return final
+
+def getAmDHData(back, am):
+	data = {}
+
+	if back == True:
+		data['firstDrinkAge'] = '0'
+		data['firstDrinkType'] = ''
+		data['curUse'] = False
+		data['useType'] = ''
+		data['amtPerWeek'] = ''
+		data['useAmt'] = ''
+		data['everDrank'] = False
+		data['monthsQuit'] = '0'
+		data['yearsQuit'] = '0'
+		data['reasonQuit'] = ''
+		data['DUI'] = False
+		data['numDUI'] = '0'
+		data['BALevel'] = ''
+		data['drugTreatment'] = False
+		data['treatmentPlace'] = ''
+		data['dateTreated'] = ''
+		data['finishedTreatment'] = True
+		data['reasonNotFinishedTreatment'] = ''
+		data['isClean'] = True
+		data['relapseTrigger'] = ''
+		data['drinkLastEpisode'] = False
+		data['drinkRelationshipProblem'] = False
+		data['needHelpDrugs'] = False
+
+	else:
+		data['firstDrinkAge'] = am.firstDrinkAge
+		data['firstDrinkType'] = am.firstDrinkType
+		data['curUse'] = am.curUse
+		data['useType'] = am.useType
+		data['amtPerWeek'] = am.amtPerWeek
+		data['useAmt'] = am.useAmt
+		data['everDrank'] = am.everDrank
+		data['monthsQuit'] = am.monthsQuit
+		data['yearsQuit'] = am.yearsQuit
+		data['reasonQuit'] = am.reasonQuit
+		data['DUI'] = am.DUI
+		data['numDUI'] = am.numDUI
+		data['BALevel'] = am.BALevel
+		data['drugTreatment'] = am.drugTreatment
+		data['treatmentPlace'] = am.treatmentPlace
+		data['dateTreated'] = am.dateTreated
+		data['finishedTreatment'] = am.finishedTreatment
+		data['reasonNotFinishedTreatment'] = am.reasonNotFinishedTreatment
+		data['isClean'] = am.isClean
+		data['relapseTrigger'] = am.relapseTrigger
+		data['drinkLastEpisode'] = am.drinkLastEpisode
+		data['drinkRelationshipProblem'] = am.drinkRelationshipProblem
+		data['needHelpDrugs'] = am.needHelpDrugs
+
+	return data
+
+
 
 
 

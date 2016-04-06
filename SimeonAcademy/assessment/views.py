@@ -31,7 +31,8 @@ amDemographicExist, findClientAM, clientAmExist, continueToAmSection, \
 mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
 continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
-getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic
+getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
+getAmDHData
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -822,7 +823,9 @@ def am_drugHistory(request):
 			if checkAM == False:
 				angerManagement.save()
 			else:
-				angerManagement = getAM_byDemographic(demographic)['am']
+				test_am = getAM_byDemographic(demographic)
+				if test_am != None:
+					angerManagement = test_am
 
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			content['AM'] = angerManagement

@@ -530,6 +530,88 @@ function am_drug_history_setup() {
 	relapse_explain.disabled = true;
 }
 
+function dh_drinks() {
+	var what_use_label = document.getElementById('what_use_label');
+	var how_often_label = document.getElementById('how_often_label');
+	var how_much_use_label = document.getElementById('how_much_use_label');
+	var what_you_use = document.getElementById('what-you-use');	
+	var how_often_you_use = document.getElementById('how-often-you-use');	
+	var how_much_you_use = document.getElementById('how-much-you-use');	
+	var have_you_ever_label = document.getElementById('have_you_ever_label');
+	var never_used = document.getElementById('never_used');
+	var has_used = document.getElementById('has_used');
+	var never_used_label = document.getElementById('never_used_label');
+	var has_used_label = document.getElementById('has_used_label');
+
+
+	what_use_label.style.opacity = '1.0';
+	how_often_label.style.opacity = '1.0';
+	how_much_use_label.style.opacity = '1.0';
+	have_you_ever_label.style.opacity = '0.3';
+	never_used_label.style.opacity = '0.3';
+	has_used_label.style.opacity = '0.3';
+
+	what_you_use.disabled = false;
+	how_often_you_use.disabled = false;
+	how_much_you_use.disabled = false;
+	never_used.disabled = true;
+	has_used.disabled = true;
+
+	never_used.checked = true;
+
+	var quit_label = document.getElementById('quit-label');
+	var reason_quit_label = document.getElementById('reason-quit-label');
+	var moLabel1 = document.getElementById('moLabel1');
+	var yrLabel1 = document.getElementById('yrLabel1');
+	var quitMos = document.getElementById('quitMos');
+	var quitYrs = document.getElementById('quitYrs');	
+	var reason_quit = document.getElementById('reason_quit');
+	
+	quit_label.style.opacity = '0.3';
+	reason_quit_label.style.opacity = '0.3';
+	moLabel1.style.opacity = '0.3';
+	yrLabel1.style.opacity = '0.3';
+
+	quitYrs.disabled = true;
+	quitMos.disabled = true;
+	reason_quit.disabled = true;
+
+	quitYrs.value = '0';
+	quitMos.value = '0';
+	reason_quit.value = '';
+}
+
+function dh_no_drink() {
+	var what_use_label = document.getElementById('what_use_label');
+	var how_often_label = document.getElementById('how_often_label');
+	var how_much_use_label = document.getElementById('how_much_use_label');
+	var what_you_use = document.getElementById('what-you-use');	
+	var how_often_you_use = document.getElementById('how-often-you-use');	
+	var how_much_you_use = document.getElementById('how-much-you-use');
+	var have_you_ever_label = document.getElementById('have_you_ever_label');
+	var never_used = document.getElementById('never_used');
+	var has_used = document.getElementById('has_used');
+	var never_used_label = document.getElementById('never_used_label');
+	var has_used_label = document.getElementById('has_used_label');
+
+	what_use_label.style.opacity = '0.3';
+	how_often_label.style.opacity = '0.3';
+	how_much_use_label.style.opacity = '0.3';
+	have_you_ever_label.style.opacity = '1.0';
+	never_used_label.style.opacity = '1.0';
+	has_used_label.style.opacity = '1.0';
+
+	what_you_use.disabled = true;
+	how_often_you_use.disabled = true;
+	how_much_you_use.disabled = true;
+	never_used.disabled = false;
+	has_used.disabled = false;
+
+	what_you_use.value = '';
+	how_often_you_use.value = '';
+	how_much_you_use.value = '';
+}
+
 function dh_never_used() {
 	var quit_label = document.getElementById('quit-label');
 	var reason_quit_label = document.getElementById('reason-quit-label');
@@ -570,44 +652,6 @@ function dh_has_used() {
 	quitYrs.disabled = false;
 	quitMos.disabled = false;
 	reason_quit.disabled = false;
-}
-
-function dh_drinks() {
-	var what_use_label = document.getElementById('what_use_label');
-	var how_often_label = document.getElementById('how_often_label');
-	var how_much_use_label = document.getElementById('how_much_use_label');
-	var what_you_use = document.getElementById('what-you-use');	
-	var how_often_you_use = document.getElementById('how-often-you-use');	
-	var how_much_you_use = document.getElementById('how-much-you-use');
-
-	what_use_label.style.opacity = '1.0';
-	how_often_label.style.opacity = '1.0';
-	how_much_use_label.style.opacity = '1.0';
-
-	what_you_use.disabled = false;
-	how_often_you_use.disabled = false;
-	how_much_you_use.disabled = false;
-}
-
-function dh_no_drink() {
-	var what_use_label = document.getElementById('what_use_label');
-	var how_often_label = document.getElementById('how_often_label');
-	var how_much_use_label = document.getElementById('how_much_use_label');
-	var what_you_use = document.getElementById('what-you-use');	
-	var how_often_you_use = document.getElementById('how-often-you-use');	
-	var how_much_you_use = document.getElementById('how-much-you-use');
-
-	what_use_label.style.opacity = '0.3';
-	how_often_label.style.opacity = '0.3';
-	how_much_use_label.style.opacity = '0.3';
-
-	what_you_use.disabled = true;
-	how_often_you_use.disabled = true;
-	how_much_you_use.disabled = true;
-
-	what_you_use.value = '';
-	how_often_you_use.value = '';
-	how_much_you_use.value = '';
 }
 
 function dh_no_dui() {
