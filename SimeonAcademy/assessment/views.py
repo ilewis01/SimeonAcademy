@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader, Context
 from datetime import datetime
 from datetime import date
+import json
 import json as simplejson
 from xhtml2pdf import pisa
 from django.core import serializers
@@ -32,7 +33,7 @@ mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
 continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
-getAmDHData
+getAmDHData, amDhExist, getAMDemoFields
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -309,12 +310,6 @@ def clientCreated(request):
 			commit = clientExist(client)
 			content['client'] = client
 
-			print "Intake Date: " + str(client.intake_date)
-			print "DOB: " + str(client.dob)
-			print "Reason: " + str(client.reason_ref)
-			print "Exist?: " + str(commit)
-			print "State: " + str(client.state)
-
 			if commit == False:
 				client.save()
 				content['title'] = "New Client | Simeon Academy"
@@ -431,6 +426,7 @@ def clientOptions(request):
 			content['session_type'] = session_type
 			content['start'] = start
 			content['session_id'] = session.id
+			content['back'] = False
 			return render_to_response('counselor/client/client_options.html', content)
 
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
@@ -502,101 +498,114 @@ def am_childhood(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			first_drink = request.POST.get('first_drink', '')
-			first_use_type = request.POST.get('first_use_type', '')
-			ever_used_drugs = request.POST.get('ever_used', '')
-			quitMos = request.POST.get('quitMos', '')
-			quitYrs = request.POST.get('quitYrs', '')
-			reason_quit = request.POST.get('reason_quit', '')
-			currently_use_drugs = request.POST.get('use_drugs', '')
-			what_you_use = request.POST.get('what-you-use', '')
-			how_often_you_use = request.POST.get('how-often-you-use', '')
-			how_much_you_use = request.POST.get('how-much-you-use', '')
-			has_dui = request.POST.get('has_dui', '')
-			dui_amount = request.POST.get('dui_amount', '')
-			BAL = request.POST.get('BAL', '')
-			need_help = request.POST.get('need_help', '')
-			had_treatment = request.POST.get('treatment', '')
-			when_treated = request.POST.get('when_treated', '')
-			where_treated = request.POST.get('where_treated', '')
-			completed_treatment = request.POST.get('completed_treatment', '')
-			no_treat_explain = request.POST.get('no_treat_explain', '')
-			still_abstinent = request.POST.get('still_abstinent', '')
-			relapse_explain = request.POST.get('relapse_explain', '')
-			drinking_last = request.POST.get('drinking_last', '')
-			relationship_alc = request.POST.get('relationship_alc', '')
-
-			session_id = request.POST.get('session_id', '')
+			back = request.POST.get('back', '')
 			am_id = request.POST.get('am_id', '')
-
+			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
+			am = None
+			print "AM ID: " + str(am_id)
 			am = AngerManagement.objects.get(id=am_id)
-			drug_history = AM_DrugHistory(client_id=session.client.clientID)
 
-			if currently_use_drugs == 'yes':
-				currently_use_drugs = True
-			else:
-				currently_use_drugs = False
-			if ever_used_drugs == 'yes':
-				ever_used_drugs = True
-			else:
-				ever_used_drugs = False
-			if has_dui == 'yes':
-				has_dui = True
-			else:
-				has_dui = False
-			if had_treatment == 'yes':
-				had_treatment = True
-			else:
-				had_treatment = False
-			if completed_treatment == 'yes':
-				completed_treatment = True
-			else:
-				completed_treatment = False
-			if still_abstinent == 'yes':
-				still_abstinent = True
-			else:
-				still_abstinent = False
-			if drinking_last == 'yes':
-				drinking_last = True
-			else:
-				drinking_last = False
-			if need_help == 'yes':
-				need_help = True
-			else:
-				need_help = False
+			if str(back) == 'false':
+				childhood = AM_ChildhoodHistory(client_id=session.client.clientID)
+				childhood.save()
+				# am.childhood = childhood
 
-			drug_history.firstDrinkAge = first_drink
-			drug_history.firstDrinkType = first_use_type
-			drug_history.curUse = currently_use_drugs
-			drug_history.useType = what_you_use
-			drug_history.amtPerWeek = how_often_you_use
-			drug_history.useAmt = how_much_you_use
-			drug_history.everDrank = ever_used_drugs
-			drug_history.monthsQuit = quitMos
-			drug_history.yearsQuit = quitYrs
-			drug_history.reasonQuit = reason_quit
-			drug_history.DUI = has_dui
-			drug_history.numDUI = dui_amount
-			drug_history.BALevel = BAL
-			drug_history.drugTreatment = had_treatment
-			drug_history.treatmentPlace = where_treated
-			drug_history.dateTreated = when_treated
-			drug_history.finishedTreatment = completed_treatment
-			drug_history.reasonNotFinishedTreatment = no_treat_explain
-			drug_history.isClean = still_abstinent
-			drug_history.relapseTrigger = relapse_explain
-			drug_history.drinkLastEpisode = drinking_last
-			drug_history.drinkRelationshipProblem = relationship_alc
-			drug_history.needHelpDrugs = need_help
+				first_drink = request.POST.get('first_drink', '')
+				first_use_type = request.POST.get('first_use_type', '')
+				ever_used_drugs = request.POST.get('ever_used', '')
+				quitMos = request.POST.get('quitMos', '')
+				quitYrs = request.POST.get('quitYrs', '')
+				reason_quit = request.POST.get('reason_quit', '')
+				currently_use_drugs = request.POST.get('use_drugs', '')
+				what_you_use = request.POST.get('what-you-use', '')
+				how_often_you_use = request.POST.get('how-often-you-use', '')
+				how_much_you_use = request.POST.get('how-much-you-use', '')
+				has_dui = request.POST.get('has_dui', '')
+				dui_amount = request.POST.get('dui_amount', '')
+				BAL = request.POST.get('BAL', '')
+				need_help = request.POST.get('need_help', '')
+				had_treatment = request.POST.get('treatment', '')
+				when_treated = request.POST.get('when_treated', '')
+				where_treated = request.POST.get('where_treated', '')
+				completed_treatment = request.POST.get('completed_treatment', '')
+				no_treat_explain = request.POST.get('no_treat_explain', '')
+				still_abstinent = request.POST.get('still_abstinent', '')
+				relapse_explain = request.POST.get('relapse_explain', '')
+				drinking_last = request.POST.get('drinking_last', '')
+				relationship_alc = request.POST.get('relationship_alc', '')				
 
-			drug_history.save()
-			am.drugHistory = drug_history
-			am.drugHistoryComplete = True
-			am.save()
+				# drug_history = am.drugHistory
 
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
+				if currently_use_drugs == 'yes':
+					currently_use_drugs = True
+				else:
+					currently_use_drugs = False
+				if ever_used_drugs == 'yes':
+					ever_used_drugs = True
+				else:
+					ever_used_drugs = False
+				if has_dui == 'yes':
+					has_dui = True
+				else:
+					has_dui = False
+				if had_treatment == 'yes':
+					had_treatment = True
+				else:
+					had_treatment = False
+				if completed_treatment == 'yes':
+					completed_treatment = True
+				else:
+					completed_treatment = False
+				if still_abstinent == 'yes':
+					still_abstinent = True
+				else:
+					still_abstinent = False
+				if drinking_last == 'yes':
+					drinking_last = True
+				else:
+					drinking_last = False
+				if need_help == 'yes':
+					need_help = True
+				else:
+					need_help = False
+
+				# drug_history.firstDrinkAge = first_drink
+				# drug_history.firstDrinkType = first_use_type
+				# drug_history.curUse = currently_use_drugs
+				# drug_history.useType = what_you_use
+				# drug_history.amtPerWeek = how_often_you_use
+				# drug_history.useAmt = how_much_you_use
+				# drug_history.everDrank = ever_used_drugs
+				# drug_history.monthsQuit = quitMos
+				# drug_history.yearsQuit = quitYrs
+				# drug_history.reasonQuit = reason_quit
+				# drug_history.DUI = has_dui
+				# drug_history.numDUI = dui_amount
+				# drug_history.BALevel = BAL
+				# drug_history.drugTreatment = had_treatment
+				# drug_history.treatmentPlace = where_treated
+				# drug_history.dateTreated = when_treated
+				# drug_history.finishedTreatment = completed_treatment
+				# drug_history.reasonNotFinishedTreatment = no_treat_explain
+				# drug_history.isClean = still_abstinent
+				# drug_history.relapseTrigger = relapse_explain
+				# drug_history.drinkLastEpisode = drinking_last
+				# drug_history.drinkRelationshipProblem = relationship_alc
+				# drug_history.needHelpDrugs = need_help
+
+				# drug_history.save()
+				# am.drugHistoryComplete = True
+				# am.save()
+
+				content['session'] = session
+				content['AM'] = am
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
+			else:
+				no = None
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 
 @login_required(login_url='/index')
 def am_connections(request):
@@ -653,8 +662,10 @@ def am_location(request):
 			action = request.POST.get('am-choice', '')
 			am = request.POST.get('am_id')
 			am = AngerManagement.objects.get(id=am)
-			client = am.demographic.client
-			content['client'] = am.demographic.client
+			session_id = request.POST.get('session_id', '')
+			session = ClientSession.objects.get(id=session_id)
+			client = session.client
+			content['client'] = session.client
 
 			if str(action) == 'finish-old':
 				##go to the next section to be completed in the form
@@ -663,14 +674,27 @@ def am_location(request):
 				content['title'] = "Counselor Home Page | Simeon Academy"
 				return render_to_response(goToLocation, content)
 			elif str(action) == 'start-new':
+				print "In the start new form section"
 				##delete the current form and start at beginning of the am form
 				am.delete()
+				new_start_time = datetime.now()
+				new_am = AngerManagement(client=client, start_time=new_start_time)
+				new_am.save()
+
+				fields = getAMDemoFields(False, am)
+				json_data = json.dumps(fields)
+
 				marital = MaritalStatus.objects.all().order_by('status')
 				living = LivingSituation.objects.all().order_by('situation')
 				education = EducationLevel.objects.all().order_by('level')
+				content['AM'] = new_am
+				content['json_data'] = json_data
+				content['fields'] = fields
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
+				content['session'] = session
+				content['client'] = client
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			elif str(action) == 'cancel':
@@ -713,29 +737,99 @@ def am_demographic(request):
 		else:
 			client_id = request.POST.get('client_id', '')
 			session_id = request.POST.get('session_id', '')
+			back = request.POST.get('back')
+			content['back'] = back
 
 			client = Client.objects.get(id=client_id)			
 			session = ClientSession.objects.get(id=session_id)
 
 			proceed = findClientAM(client)
-			am = proceed['am']
 
-			if proceed['incomplete'] == True:
+			if proceed['incomplete'] == True and back == 'false':
+				am = proceed['am']
 				content['am'] = am
+				content['session'] = session
 				content['client'] = client
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
-			else:
+
+			if back == 'true':
+				am_id = request.POST.get('am_id', '')
+				am = AngerManagement.objects.get(id=am_id)
+
 				marital = MaritalStatus.objects.all().order_by('status')
 				living = LivingSituation.objects.all().order_by('situation')
 				education = EducationLevel.objects.all().order_by('level')
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				content['client'] = client
+
+				#JSON OBJECTS
+				fields = getAMDemoFields(back, am)
+				json_data = json.dumps(fields)
+
+				#CONTEXT
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
 				content['session'] = session
+				content['client'] = client
+				content['AM'] = am
+				content['json_data'] = json_data
+				content['fields'] = fields
+				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			else:
+				date = datetime.now()
+				am = AngerManagement(client=client, AMComplete=False, start_time=date)
+				date = date.date()
+				demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
+				demo.save()
+				am.demographic = demo
+				am.save()
+
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				content['session'] = session
+				content['AM'] = am
+				return render_to_response('counselor/timed_instruction.html', content)
+
+@login_required(login_url='/index')
+def proceed_to_am(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session_id = request.POST.get('session_id', '')
+			am_id = request.POST.get('am_id', '')
+			back = False
+
+			am = AngerManagement.objects.get(id=am_id)
+			session = ClientSession.objects.get(id=session_id)
+
+			marital = MaritalStatus.objects.all().order_by('status')
+			living = LivingSituation.objects.all().order_by('situation')
+			education = EducationLevel.objects.all().order_by('level')
+
+			fields = getAMDemoFields(back, am)
+			json_data = json.dumps(fields)
+
+			content['education'] = education
+			content['marital'] = marital
+			content['living'] = living
+			content['json_data'] = json_data
+			content['fields'] = fields
+			content['client'] = session.client
+			content['AM'] = am
+			content['session'] = session
+			content['back'] = back
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/demographic.html', content)				
 			
 @login_required(login_url='/index')
 def am_drugHistory(request):
@@ -752,86 +846,124 @@ def am_drugHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			date = datetime.now()
-			date = date.date()
-			marital = request.POST.get('marital', '')
-			living = request.POST.get('living', '')
-			res_month = request.POST.get('res-mo', '')
-			res_year = request.POST.get('res-yrs', '')
-			rent_own  = request.POST.get('rentRAD', '')
-			dep_children = request.POST.get('dep_children', '')
-			dep_other = request.POST.get('dep_other', '')
-			education = request.POST.get('edu', '')
-			dropout = request.POST.get('dip', '')
-			occupation = request.POST.get('occ', '')
-			employer = request.POST.get('employer', '')
-			employer_address = request.POST.get('em_add', '')
-			employer_phone = request.POST.get('em_phone', '')
-			mosJob = request.POST.get('mosJob', '')
-			yrsJob = request.POST.get('yrsJob', '')
-			healthy = request.POST.get('healRad', '')
-			medicine = request.POST.get('medRad', '')
-			health_explain = request.POST.get('explain', '')
-			session_id = request.POST.get('session_id', '')
+			back = request.POST.get('back', '')
 			am_id = request.POST.get('am_id', '')
-
+			am = AngerManagement.objects.get(id=am_id)
+			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
+			content['back'] = back
+			content['back_url'] = '/am_demographic/'
 
-			reasonDo = "This is the reason for dropout"
+			if back == 'false':
+				demo = am.demographic
+				dateTime = datetime.now()
+				date = dateTime.date()				
 
-			marital = MaritalStatus.objects.get(id=marital)
-			living = LivingSituation.objects.get(id=living)
-			education = EducationLevel.objects.get(id=education)
+				marital = request.POST.get('marital', '')
+				living = request.POST.get('living', '')
+				res_month = request.POST.get('res-mo', '')
+				res_year = request.POST.get('res-yrs', '')
+				rent_own  = request.POST.get('rentRAD', '')
+				dep_children = request.POST.get('dep_children', '')
+				dep_other = request.POST.get('dep_other', '')
+				education = request.POST.get('edu', '')
+				dropout = request.POST.get('dip', '')
+				occupation = request.POST.get('occ', '')
+				employer = request.POST.get('employer', '')
+				employer_address = request.POST.get('em_add', '')
+				employer_phone = request.POST.get('em_phone', '')
+				mosJob = request.POST.get('mosJob', '')
+				yrsJob = request.POST.get('yrsJob', '')
+				healthy = request.POST.get('healRad', '')
+				medicine = request.POST.get('medRad', '')
+				health_explain = request.POST.get('explain', '')
 
-			if rent_own == "rent":
-				rent_own = False
+				reasonDo = "This is the reason for dropout"
+
+				marital = MaritalStatus.objects.get(id=marital)
+				living = LivingSituation.objects.get(id=living)
+				education = EducationLevel.objects.get(id=education)
+
+				if rent_own == "rent":
+					rent_own = False
+				else:
+					rent_own = True
+
+				if dropout == 'dropout':
+					dropout = True
+				else:
+					dropout = False
+
+				if healthy == 'not_healthy':
+					healthy = True
+				else:
+					healthy = False
+
+				if medicine == 'medication':
+					medicine = True
+				else:
+					medicine = False
+
+				demo.maritalStatus = marital
+				demo.livingSituation = living
+				demo.own = rent_own
+				demo.months_res = res_month
+				demo.years_res = res_year
+				demo.num_children = dep_children
+				demo.other_dependants = dep_other
+				demo.education = education
+				demo.drop_out = dropout
+				demo.resasonDO = reasonDo
+				demo.employee = employer
+				demo.job_title = occupation
+				demo.emp_address = employer_address
+				demo.employed_months = mosJob
+				demo.employed_years = yrsJob
+				demo.employer_phone = employer_phone
+				demo.health_problem = healthy
+				demo.medication = medicine
+				demo.health_exp = health_explain
+
+				demo.save()
+				am.demographic = demo
+				am.demographicComplete = True
+				am.save()
+
+				# moveForward = amDemographicExist(demo)
+
+				# if moveForward['exist'] == False:
+				# 	demo.save()
+				# 	am.demographic = demo
+				# 	am.save()
+				# else:
+				# 	demo = moveForward['am_demo']
+
+				if am.drugHistory == None:					
+					new_dh = AM_DrugHistory(client_id=session.client.clientID, date_of_assessment=date)
+					new_dh.save()
+					am.drugHistory = new_dh
+					am.save()
+
+				fields = getAmDHData(back, am)
+				json_data = json.dumps(fields)
+
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				content['fields'] = fields
+				content['json_data'] = json_data
+				content['AM'] = am
+				content['session'] = session
+				content['client'] = session.client
+				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 			else:
-				rent_own = True
-
-			if dropout == 'dropout':
-				dropout = True
-			else:
-				dropout = False
-
-			if healthy == 'not_healthy':
-				healthy = True
-			else:
-				healthy = False
-
-			if medicine == 'medication':
-				medicine = True
-			else:
-				medicine = False
-
-			demographic = AM_Demographic(client=session.client, date_of_assessment=date, maritalStatus=marital,\
-				livingSituation=living, own=rent_own, months_res=res_month, years_res=res_year,\
-				num_children=dep_children, other_dependants=dep_other, education=education, \
-				drop_out=dropout, resasonDO=reasonDo, employee=employer, job_title=occupation, \
-				emp_address=employer_address, employed_months=mosJob, employed_years=yrsJob, \
-				employer_phone=employer_phone, health_problem=healthy, medication=medicine, health_exp=health_explain)
-
-			moveForward = amDemographicExist(demographic)
-
-			if moveForward['exist'] == False:
-				demographic.save()
-			else:
-				demographic = moveForward['am_demo']
-
-			angerManagement = AngerManagement(demographic=demographic, demographicComplete=True, AMComplete=False)
-			checkAM = clientAmExist(session.client)
-
-			if checkAM == False:
-				angerManagement.save()
-			else:
-				test_am = getAM_byDemographic(demographic)
-				if test_am != None:
-					angerManagement = test_am
-
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			content['AM'] = angerManagement
-			content['session'] = session
-			content['client'] = session.client
-			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
+				fields = getAmDHData(back, am)
+				json_data = json.dumps(fields)
+				content['AM'] = am
+				content['session'] = session
+				content['client'] = session.client
+				content['fields'] = fields
+				content['json_data'] = json_data
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 @login_required(login_url='/index')
 def am_familyOrigin(request):

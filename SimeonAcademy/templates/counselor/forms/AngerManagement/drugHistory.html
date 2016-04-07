@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: am_drug_history_setup()">
+<body class="gradient-white" onLoad="javascript: am_drug_history_initialize({{json_data}}, {{back}})">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -140,6 +140,8 @@
                     <div class="col-lg-12" style='text-align:'> -->
                         <div>
                         	<h3 id='am-h2'>Anger Management: Drug History</h3>
+                        	AM ID: {{AM.id}} <br>
+                        	Back: {{back}}
 
                         	<div class="container">
             					<div class="row">                   
@@ -148,11 +150,13 @@
                   							<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
                   								<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
                   								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  								<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                  								<input type='hidden' name='back' id='back' value='false'>
                   								<table>
                   									<tr>
                   										<td>
                   											<label for='first_drink'>At what age did you have your first drink of alcohol and/or drugs? </label>
-                  											<input class='small-number' type='number' value='0' name='first_drink' id='first_drink'>
+                  											<input class='small-number' type='number' value='{{fields.firstDrinkAge}}' name='first_drink' id='first_drink'>
                   										</td>
                   									</tr>
                   								</table>
@@ -163,7 +167,7 @@
                   										</td>
                   										<td>
                   											<div class='left-space-5'>
-                  												<input type='text' id='first_use_type' name='first_use_type'>
+                  												<input type='text' id='first_use_type' name='first_use_type' value='{{fields.firstDrinkType}}'>
                   											</div>
                   										</td>
                   									</tr>
@@ -176,7 +180,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_current_use' name='use_drugs' value='no' checked='true' onClick='javascript: dh_no_drink()'>
+                  											    <input type='radio' id='no_current_use' name='use_drugs' value='no' onClick='javascript: dh_no_drink()'>
                   											<div>
                   										</td>
                   										<td>
@@ -202,7 +206,7 @@
 	                  										</td>
 	                  										<td>
 	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='what-you-use' name='what-you-use'>
+	                  											    <input type='text' id='what-you-use' name='what-you-use' value='{{fields.useType}}'>
 	                  											</div>
 	                  										</td>
 	                  									</tr>
@@ -212,7 +216,7 @@
 	                  										</td>
 	                  										<td>
 	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='how-often-you-use' name='how-often-you-use'>
+	                  											    <input type='text' id='how-often-you-use' name='how-often-you-use' value='{{fields.amtPerWeek}}'>
 	                  											</div>
 	                  										</td>
 	                  									</tr>
@@ -222,7 +226,7 @@
 	                  										</td>
 	                  										<td>
 	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='how-much-you-use' name='how-much-you-use'>
+	                  											    <input type='text' id='how-much-you-use' name='how-much-you-use' value='{{fields.useAmt}}'>
 	                  											</div>
 	                  										</td>
 	                  									</tr>
@@ -236,7 +240,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='never_used' name='ever_used' value='no' checked='true' onClick='javascript: dh_never_used();'>
+                  											    <input type='radio' id='never_used' name='ever_used' value='no' onClick='javascript: dh_never_used();'>
                   											<div>
                   										</td>
                   										<td>
@@ -267,13 +271,13 @@
 	                  												<tr>
 	                  													<td>
 				                  											<div>
-				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value='0'>
+				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value='{{fields.monthsQuit}}'>
 				                  												<label id='moLabel1'>months</label>
 				                  											</div>
 				                  										</td>
 				                  										<td>
 				                  											<div style='margin-left: 8px;'>
-				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value='0'>
+				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value='{{fields.yearsQuit}}'>
 				                  												<label id='yrLabel1'>years</label>
 				                  											</div>
 				                  										</td>
@@ -289,7 +293,7 @@
 		                  											</td>
 		                  											<td>
 		                  												<div class='left-space-5'>
-		                  												    <input type='text' id='reason_quit' name='reason_quit'>
+		                  												    <input type='text' id='reason_quit' name='reason_quit' value='{{fields.reasonQuit}}'>
 		                  											    </div>
 		                  											</td>
 	                  											</div>
@@ -305,7 +309,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_dui' name='has_dui' value='no' checked='true' onClick='javascript: dh_no_dui();'>
+                  											    <input type='radio' id='no_dui' name='has_dui' value='no' onClick='javascript: dh_no_dui();'>
                   											<div>
                   										</td>
                   										<td>
@@ -334,7 +338,7 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='number' value='0' id='dui_amount' name='dui_amount' class='small-number'>
+	                  															<input type='number' value='{{fields.numDUI}}' id='dui_amount' name='dui_amount' class='small-number'>
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -347,7 +351,7 @@
 	                  										</td>
 	                  										<td>
 	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='BAL' name='BAL' style='width:100px;'>
+	                  											    <input type='text' id='BAL' name='BAL' style='width:100px;' value='{{fields.BALevel}}'>
 	                  											</div>
 	                  										</td>
 	                  									</tr>
@@ -376,7 +380,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='need_help' id='no_help' value='no_help' checked='true'>
+                  														    <input type='radio' name='need_help' id='no_help' value='no_help'>
                   														</div>
                   													</td>
                   													<td>
@@ -406,7 +410,7 @@
                   											<tr>
                   												<td>
                   													<div class='single-line-radio1'>
-                  													    <input type='radio' name='treatment' id='had_treatment' value='had_treatment' checked='true' onClick='javascript: dh_had_treatment();'>
+                  													    <input type='radio' name='treatment' id='had_treatment' value='had_treatment' onClick='javascript: dh_had_treatment();'>
                   												    </div>
                   												</td>
                   												<td>
@@ -415,7 +419,7 @@
                   												
                   												<td>
                   													<div class='single-line-radio'>
-                  													    <input type='radio' name='treatment' id='no_treatment' value='no_treatment' checked='true' onClick='javascript: dh_no_treatment();'>
+                  													    <input type='radio' name='treatment' id='no_treatment' value='no_treatment' onClick='javascript: dh_no_treatment();'>
                   													</div>
                   												</td>
                   												<td>
@@ -438,7 +442,7 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='text' id='when_treated' name='when_treated'>
+	                  															<input type='text' id='when_treated' name='when_treated' value="{{fields.dateTreated}}">
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -448,7 +452,7 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='text' id='where_treated' name='where_treated'>
+	                  															<input type='text' id='where_treated' name='where_treated' value='{{fields.treatmentPlace}}'>
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -463,7 +467,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='did_complete' name='completed_treatment' value='yes' checked='true' onClick='javascript: dh_did_completed_sub();'>
+                  											    <input type='radio' id='did_complete' name='completed_treatment' value='yes' onClick='javascript: dh_did_completed_sub();'>
                   										    </div>
                   										</td>
                   										<td>
@@ -489,7 +493,7 @@
                   									</tr>
                   									<tr>
                   										<td>
-                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'></textarea>
+                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'>{{fields.reasonNotFinishedTreatment}}</textarea>
                   										</td>
                   									</tr>
                   								</table>
@@ -501,7 +505,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='yes' checked='true' onClick='javascript: dh_is_abstinent();'>
+                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='yes' onClick='javascript: dh_is_abstinent();'>
                   										    </div>
                   										</td>
                   										<td>
@@ -526,7 +530,7 @@
                   									</tr>
                   									<tr>
                   										<td>
-                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'></textarea>
+                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'>{{fields.relapseTrigger}}</textarea>
                   										</td>
                   									</tr>
                   								</table>
@@ -555,7 +559,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='drinking_last' id='not_drinking' value='not_drinking' checked='true'>
+                  														    <input type='radio' name='drinking_last' id='not_drinking' value='not_drinking'>
                   														</div>
                   													</td>
                   													<td>
@@ -591,7 +595,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='relationship_alc' id='no_problem' value='no_problem' checked='true'>
+                  														    <input type='radio' name='relationship_alc' id='no_problem' value='no_problem'>
                   														</div>
                   													</td>
                   													<td>
@@ -615,10 +619,15 @@
                             
 <!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
 
+
+
+
                         <table class='toggle-div-page'>
                         	<tr>
-                        		<td id="error-div-main">
-                        			<p class='error-messages'></p>
+                        		<td>
+                        			<div id="error-div-main">
+                        				<p class='error-messages'></p>
+                        			</div>
                         		</td>
                         	</tr>
                         	<tr>
@@ -632,8 +641,8 @@
 
 			                    <td>
 			                    	<div id="submit-space">
-				                        <a href="javascript: " id="back">
-				                        	<button type='button' onClick='javascript: back_am_demographic();' id='continue'>Back</button>
+				                        <a href='javascript: back({{back_url}});'>
+				                        	<button type='button' id='back_btn' name='back_btn'>Back</button>
 				                        </a>
 				                    </div>
 			                    </td>

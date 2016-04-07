@@ -181,15 +181,20 @@ def getEducationID(education):
 
 def amDemographicExist(demo):
 	demographics = AM_Demographic.objects.all()
+	secondTest = True
 	results = {}
 	results['exist'] = False
 	results['am_demo'] = None
 
-	for d in demographics:
-		if str(d.client.id) == str(demo.client.id) and str(d.date_of_assessment) == str(demo.date_of_assessment):
-			results['exist'] = True
-			results['am_demo'] = d
-			break
+	if len(demographics) == 0:
+		secondTest = False
+
+	if secondTest == True:
+		for d in demographics:
+			if str(d.client_id) == str(demo.client_id) and str(d.date_of_assessment) == str(demo.date_of_assessment):
+				results['exist'] = True
+				results['am_demo'] = d
+				break
 	return results
 
 def getAM_byDemographic(demo):
@@ -235,12 +240,15 @@ def clientAmExist(client):
 
 	if len(ams) == 0:
 		filter_clients = False
+		print "no am's exist..."
 
 	if filter_clients == True:
 		for a in ams:
-			if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
-				exist = True
-				break
+			if a.demographic != None:
+				if str(a.demographic.client_id) == str(client.clientID) and str(a.client.id) == str(client.id):
+					exist = True
+					print "There was a match"
+					break
 	return exist
 
 def clientMhExist(client):
@@ -269,7 +277,7 @@ def getClientAmList(client):
 
 	if clientAmExist(client) == True:
 		for a in ams:
-			if str(a.demographic.client.fname) == str(client.fname) and str(a.demographic.client.lname) == str(client.lname) and str(a.demographic.client.id) == str(client.id) and str(a.demographic.client.clientID) == str(client.clientID):
+			if str(a.demographic.client_id) == str(client.clientID) and str(a.client.id) == str(client.id):
 				results.append(a)
 	return results
 
@@ -485,10 +493,141 @@ def getTimes():
 
 	return final
 
+def assign_married_index():
+	the_list = MaritalStatus.objects.all().order_by('status')
+	results = []
+	count = 1
+
+	for t in the_list:
+		data = {}
+		data['index'] = count
+		data['status'] = t.id
+		results.append(data)
+		count = count + 1
+	return results
+
+def married_index(married_value):
+	indices = assign_married_index()
+	result = None
+
+	for i in indices:
+		if str(i['status']) == str(married_value):
+			result = i['index']
+			break
+	return result
+
+def assign_living_index():
+	the_list = LivingSituation.objects.all().order_by('situation')
+	results = []
+	count = 1
+
+	for t in the_list:
+		data = {}
+		data['index'] = count
+		data['status'] = t.id
+		results.append(data)
+		count = count + 1
+	return results
+
+def living_index(living_value):
+	indices = assign_living_index()
+	result = None
+
+	for i in indices:
+		if str(i['status']) == str(living_value):
+			result = i['index']
+			break
+	return result
+
+def assign_education_index():
+	the_list = EducationLevel.objects.all().order_by('level')
+	results = []
+	count = 1
+
+	for t in the_list:
+		data = {}
+		data['index'] = count
+		data['status'] = t.id
+		results.append(data)
+		count = count + 1
+	return results
+
+def education_index(education_value):
+	indices = assign_education_index()
+	result = None
+
+	for i in indices:
+		if str(i['status']) == str(education_value):
+			result = i['index']
+			break
+	return result
+
+def getAMDemoFields(back, am):
+	data = {}
+
+	if back == False:
+		data['maritalStatus'] = 0
+		data['livingSituation'] = 0
+		data['own'] = False
+		data['months_res'] = '0'
+		data['years_res'] = '0'
+		data['num_children'] = '0'
+		data['other_dependants'] = '0'
+		data['education'] = 0
+		data['drop_out'] = False
+		data['resasonDO'] = ''
+		data['employee'] = ''
+		data['job_title'] = ''
+		data['emp_address'] = ''
+		data['employed_months'] = '0'
+		data['employed_years'] = '0'
+		data['employer_phone'] = ''
+		data['health_problem'] = False
+		data['medication'] = False
+		data['health_exp'] = ''
+	else:
+		ms = am.demographic.maritalStatus
+		ls = am.demographic.livingSituation
+		ed = am.demographic.education
+
+		if ms == None:
+			data['maritalStatus'] = ''
+		else:
+			data['maritalStatus'] = str(married_index(str(am.demographic.maritalStatus.id)))
+
+		if ls == None:
+			data['livingSituation'] = ''
+		else:
+			data['livingSituation'] = str(living_index(str(am.demographic.livingSituation.id)))
+
+		if ed == None:
+			data['education'] = ''
+		else:
+			data['education'] = str(education_index(str(am.demographic.education.id)))
+		
+		data['own'] = am.demographic.own
+		data['months_res'] = am.demographic.months_res
+		data['years_res'] = am.demographic.years_res
+		data['num_children'] = am.demographic.num_children
+		data['other_dependants'] = am.demographic.other_dependants		
+		data['drop_out'] = am.demographic.drop_out
+		data['resasonDO'] = am.demographic.resasonDO
+		data['employee'] = am.demographic.employee
+		data['job_title'] = am.demographic.job_title
+		data['emp_address'] = am.demographic.emp_address
+		data['employed_months'] = am.demographic.employed_months
+		data['employed_years'] = am.demographic.employed_years
+		data['employer_phone'] = am.demographic.employer_phone
+		data['health_problem'] = am.demographic.health_problem
+		data['medication'] = am.demographic.medication
+		data['health_exp'] = am.demographic.health_exp
+
+	return data
+
 def getAmDHData(back, am):
 	data = {}
 
-	if back == True:
+	if back == False:
 		data['firstDrinkAge'] = '0'
 		data['firstDrinkType'] = ''
 		data['curUse'] = False
@@ -514,31 +653,46 @@ def getAmDHData(back, am):
 		data['needHelpDrugs'] = False
 
 	else:
-		data['firstDrinkAge'] = am.firstDrinkAge
-		data['firstDrinkType'] = am.firstDrinkType
-		data['curUse'] = am.curUse
-		data['useType'] = am.useType
-		data['amtPerWeek'] = am.amtPerWeek
-		data['useAmt'] = am.useAmt
-		data['everDrank'] = am.everDrank
-		data['monthsQuit'] = am.monthsQuit
-		data['yearsQuit'] = am.yearsQuit
-		data['reasonQuit'] = am.reasonQuit
-		data['DUI'] = am.DUI
-		data['numDUI'] = am.numDUI
-		data['BALevel'] = am.BALevel
-		data['drugTreatment'] = am.drugTreatment
-		data['treatmentPlace'] = am.treatmentPlace
-		data['dateTreated'] = am.dateTreated
-		data['finishedTreatment'] = am.finishedTreatment
-		data['reasonNotFinishedTreatment'] = am.reasonNotFinishedTreatment
-		data['isClean'] = am.isClean
-		data['relapseTrigger'] = am.relapseTrigger
-		data['drinkLastEpisode'] = am.drinkLastEpisode
-		data['drinkRelationshipProblem'] = am.drinkRelationshipProblem
-		data['needHelpDrugs'] = am.needHelpDrugs
+		data['firstDrinkAge'] = am.drugHistory.firstDrinkAge
+		data['firstDrinkType'] = am.drugHistory.firstDrinkType
+		data['curUse'] = am.drugHistory.curUse
+		data['useType'] = am.drugHistory.useType
+		data['amtPerWeek'] = am.drugHistory.amtPerWeek
+		data['useAmt'] = am.drugHistory.useAmt
+		data['everDrank'] = am.drugHistory.everDrank
+		data['monthsQuit'] = am.drugHistory.monthsQuit
+		data['yearsQuit'] = am.drugHistory.yearsQuit
+		data['reasonQuit'] = am.drugHistory.reasonQuit
+		data['DUI'] = am.drugHistory.DUI
+		data['numDUI'] = am.drugHistory.numDUI
+		data['BALevel'] = am.drugHistory.BALevel
+		data['drugTreatment'] = am.drugHistory.drugTreatment
+		data['treatmentPlace'] = am.drugHistory.treatmentPlace
+		data['dateTreated'] = am.drugHistory.dateTreated
+		data['finishedTreatment'] = am.drugHistory.finishedTreatment
+		data['reasonNotFinishedTreatment'] = am.drugHistory.reasonNotFinishedTreatment
+		data['isClean'] = am.drugHistory.isClean
+		data['relapseTrigger'] = am.drugHistory.relapseTrigger
+		data['drinkLastEpisode'] = am.drugHistory.drinkLastEpisode
+		data['drinkRelationshipProblem'] = am.drugHistory.drinkRelationshipProblem
+		data['needHelpDrugs'] = am.drugHistory.needHelpDrugs
 
 	return data
+
+def amDhExist(drug_history):
+	exist = False
+	dhs = AM_DrugHistory.objects.all()
+	testList = True
+
+	if len(dhs) == 0:
+		testList = False
+
+	if testList == True:
+		for d in dhs:
+			if str(drug_history.id) == str(d.id):
+				exist = True
+				break
+	return exist
 
 
 

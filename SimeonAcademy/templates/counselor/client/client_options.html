@@ -19,13 +19,15 @@
                     <form action='/am_demographic/' method='post' name='am' id='am'> {% csrf_token %}
                         <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <input type='hidden' id='back' name='back' value='{{back}}'>
                         <a href="javascript: new_am();">Anger Management</a>
                     </form>
                 </li>
                 <li>
                     <form action='/asi_demographic/' method='post' name='asi' id='asi'> {% csrf_token %} 
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>                
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'> 
+                        <input type='hidden' id='back' name='back' value='{{back}}'>              
                         <a href="javascript: new_asi();">Addiction Severity Index</a>
                     </form>
                 </li>
@@ -33,6 +35,7 @@
                     <form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'> 
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <input type='hidden' id='back' name='back' value='{{back}}'>
                         <a href="javascript: new_mh();">Mental Health Assessment</a>
                     </form>
                 </li>
@@ -40,6 +43,7 @@
                     <form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <input type='hidden' id='back' name='back' value='{{back}}'>
                         <a href="javascript: new_sap();">S.A.P Form</a>
                     </form>
                 </li>
@@ -47,6 +51,7 @@
                     <form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <input type='hidden' id='back' name='back' value='{{back}}'>
                         <a href="javascript: new_ut();">Urine Test Results</a>
                     </form>
                 </li>
@@ -54,6 +59,7 @@
                     <form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
+                        <input type='hidden' id='back' name='back' value='{{back}}'>
                         <a href="javascript: discharge();">Client Discharge</a>
                     </form>
                 </li>

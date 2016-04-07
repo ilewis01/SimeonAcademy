@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: am_demo_setup()">
+<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -148,6 +148,8 @@
                   							<form action='/am_drugHistory/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
                   								<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
                   								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  								<input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                  								<input type='hidden' name='back' id='back' value='false'>
 
                   								<h3>Household</h3>
                   								<table>
@@ -158,10 +160,10 @@
 
                   										<td>
                   											<div id='select-align'>
-	                  											<select id='marital' name='marital'>
+	                  											<select id='marital' name='marital' value=''>
 	                  												<option>Select</option>
 	                  												{% for m in marital %}
-	                  													<option value='{{m.id}}'>{{m.status}}</option>
+	                  													<option value='{{m.id}}' id='{{m.id}}'>{{m.status}}</option>
 	                  												{% endfor %}
 	                  											</select>
 	                  										</div>
@@ -193,22 +195,22 @@
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='rentRAD' id='rentRAD' value='rent' checked='true'>
+                  												<input type='radio' name='rentRAD' id='rent_radio' value='rent' id='rent'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='rentRAD'>Rent</label>
+                  											<label for='rent' id='rent_label'>Rent</label>
                   										</td>
 
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='rentRAD' id='ownRAD' value='own'>
+                  												<input type='radio' name='rentRAD' id='own_radio' value='own' id='own'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='ownRAD'>Own</label>
+                  											<label for='own' id='own_label'>Own</label>
                   										</td>
                   									</tr>
                   								</table>
@@ -224,14 +226,14 @@
                   									<tr>
                   										<td>
                   											<div>
-                  												<input type='number' style="width:40px;" name='res-mo' id='res-mos' value='0'>
+                  												<input type='number' style="width:40px;" name='res-mo' id='res-mos' value='{{fields.months_res}}'>
                   												months
                   											</div>
                   										</td>
 
                   										<td>
 	                  										<div id='submit-space'>
-	                  											<input type='number' style="width:40px;" name='res-yrs' id='res-yrs' value='0'>
+	                  											<input type='number' style="width:40px;" name='res-yrs' id='res-yrs' value='{{fields.years_res}}'>
 	                  											years
 	                  										</div>
 	                  									</td>
@@ -243,7 +245,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<input type='number' style='width:40px' id='dep_children' name='dep_children' value='0'>
+                  											<input type='number' style='width:40px' id='dep_children' name='dep_children' value='{{fields.num_children}}'>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -254,7 +256,7 @@
 
                   									<tr>
                   										<td>
-                  											<input type='number' style='width:40px' id='dep_other' name='dep_other' value='0'>
+                  											<input type='number' style='width:40px' id='dep_other' name='dep_other' value='{{fields.other_dependants}}'>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -287,7 +289,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate' checked='true'></td>
+                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate'></td>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -321,7 +323,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='occ' name='occ'>
+                  										    <input type='text' id='occ' name='occ' value='{{fields.job_title}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -332,7 +334,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='employer' name='employer'>
+                  										    <input type='text' id='employer' name='employer' value='{{fields.employee}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -343,7 +345,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='em_add' name='em_add'>
+                  										    <input type='text' id='em_add' name='em_add' value='{{fields.emp_address}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -354,7 +356,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='tel' id='em_phone' name='em_phone'>
+                  										    <input type='tel' id='em_phone' name='em_phone' value='{{fields.employer_phone}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -364,14 +366,14 @@
                   									<tr>
                   										<td>
                   											<div>
-                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob' value='0'>
+                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob' value='{{fields.employed_months}}'>
                   												months
                   											</div>
                   										</td>
 
                   										<td>
 	                  										<div id='submit-space'>
-	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob' value='0'>
+	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob' value='{{fields.employed_years}}'>
 	                  											years
 	                  										</div>
 	                  									</td>
@@ -386,7 +388,7 @@
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='healRad' id='healthy' value='healthy' checked='true' onClick='javascript: health_options_off()'>
+                  												<input type='radio' name='healRad' id='healthy' value='healthy' onClick='javascript: health_options_off()'>
                   											</div>    
                   										</td>
                   										<td>
@@ -406,33 +408,33 @@
                   									</tr>
                   								</table>
 
-                  								<label for='' id='med-label'>Are you currently taking medication for this issue?</label>
+                  								<label for='' id='med_taking_label'>Are you currently taking medication for this issue?</label>
                   								<table>
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='no_med' value='no_medication' checked='true'>
+                  												<input type='radio' name='medRad' id='no_med' value='no_medication'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='no_med' id='no-label'>No</label>
+                  											<label for='no_med' id='no_med_label'>No</label>
                   										</td>
 
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='med' value='medication'>
+                  												<input type='radio' name='medRad' id='on_meds' value='medication'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='med' id='yes-label'>Yes</label>
+                  											<label for='on_meds' id='yes_med_label'>Yes</label>
                   										</td>
                   									</tr>
                   								</table>
 
                   								<label for='' id='explain-label'>Please explain below</label>
-                  								<textarea cols='60' rows='5' id='explain' name='explain'></textarea>
+                  								<textarea cols='60' rows='4' id='explain' name='explain'>{{fields.health_exp}}</textarea>
                   							</form>
                   						</div>
                   					</div>
@@ -444,6 +446,16 @@
                           
                             
 <!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
+
+                        <table>
+                          <tr>
+                            <td>
+                              <div id="error-div-main">
+                                <p class='error-messages' id='error_message_main'></p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
 
                         <table class='toggle-div-page'>
                         	<tr>

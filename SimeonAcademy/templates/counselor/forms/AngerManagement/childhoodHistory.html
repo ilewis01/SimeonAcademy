@@ -4,8 +4,13 @@
 
 <h1>Childhood History</h1>
 
-<form action='/am_angerHistory/' method='post' id='drug-history-form'> {% csrf_token %}
-	<input type='hidden' value='{{AM.id}}' id='AM_id' name='AM_id'>
+Session ID: {{session.id}} <br>
+Anger Management ID: {{AM.id}} <br>
+Back: {{back}}
+
+<form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
+	<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	<input type='hidden' value='false' id='back_top' name='back_top'>
 
 	<table>
 		<tr>
@@ -18,6 +23,43 @@
 	<input type='submit' value='submit'>
 </form>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+<form action='/am_drugHistory/' method='post' id='back_page' name='back_page'> {% csrf_token %}
+	<input type='hidden' value='true' id='back' name='back'>
+	<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	<input type='hidden' value='{{session.id}}' id='session_id' name='session_id'>
+</form>
+
+						<table class='toggle-div-page'>
+                        	<tr>
+                        		<td id="error-div-main">
+                        			<p class='error-messages'></p>
+                        		</td>
+                        	</tr>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href='#'>
+				                        	<button type='button' onClick='javascript: back_demo();' id='back_btn' name='back_btn'>Back</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="#">
+				                        	<button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+				                        </a>
+				                    </div>
+			                    </td>
+			                </tr>
+	                    </table>
 
 {% endblock %}

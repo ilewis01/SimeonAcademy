@@ -331,7 +331,11 @@ button:hover {
 }
 
 #error-div-main {
-	height:15px;
+	margin-left:15px;
+	margin-bottom: 19px;
+	height:1px;
+	color: red;
+	font-weight: bold;
 }
 
 .toggle-div-page a {
@@ -409,6 +413,27 @@ button:hover {
 .hori-block {
 	float: left;
 }
+
+.form_exist_page {
+	margin-top: 30px;
+}
+
+#imcomplete_header {
+	color: red;
+	font-size: 24px;
+	text-shadow: 0.05em 0.05em black;
+}
+
+#incomplete_form_div {
+	margin-right: 10px;
+	margin-bottom: 7px;
+	/*color: #adad85;*/
+}
+
+#incomplete_form_options {
+	color: #676765;
+}
+
 
 
 
