@@ -152,6 +152,23 @@
                   								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   								<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                   								<input type='hidden' name='back' id='back' value='false'>
+                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
+
+                                  <!-- REAL DATA ENTRIES -->
+                                  <input type='hidden' name='m_first_drink' id='m_first_drink' value=''>
+                                  <input type='hidden' name='m_first_use_type' id='m_first_use_type' value=''>
+                                  <input type='hidden' name='m_quitMos' id='m_quitMos' value=''>
+                                  <input type='hidden' name='m_quitYrs' id='m_quitYrs' value=''>
+                                  <input type='hidden' name='m_reason_quit' id='m_reason_quit' value=''>
+                                  <input type='hidden' name='m-what-you-use' id='m-what-you-use' value=''>
+                                  <input type='hidden' name='m-how-often-you-use' id='m-how-often-you-use' value=''>
+                                  <input type='hidden' name='m-how-much-you-use' id='m-how-much-you-use' value=''>
+                                  <input type='hidden' name='m_dui_amount' id='m_dui_amount' value=''>
+                                  <input type='hidden' name='m_BAL' id='m_BAL' value=''>
+                                  <input type='hidden' name='m_when_treated' id='m_when_treated' value=''>
+                                  <input type='hidden' name='m_where_treated' id='m_where_treated' value=''>
+                                  <input type='hidden' name='m_no_treat_explain' id='m_no_treat_explain' value=''>
+                                  <input type='hidden' name='m_relapse_explain' id='m_relapse_explain' value=''>
                   								<table>
                   									<tr>
                   										<td>
@@ -522,7 +539,7 @@
                   									</tr>
 	                  							</table>
 
-												<table>
+												          <table>
                   									<tr>
                   										<td>
                   											<label for='relapse_explain' id='trigger_label'>What triggered your relapse?</label>
@@ -626,31 +643,49 @@
                         	<tr>
                         		<td>
                         			<div id="error-div-main">
-                        				<p class='error-messages'></p>
+                        				<p class='error-messages' id='error_msg_field'></p>
                         			</div>
                         		</td>
                         	</tr>
                         	<tr>
+                        </table>
+                        <table>
                         		<td>
                         			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle">
+				                        <a href="#menu-toggle" id="menu-toggle" class='but_a'>
 				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
 				                        </a>
 				                    </div>
 			                    </td>
 
+                          <td>
+                            <div id="submit-space">
+                                <a href="javascript: exit_am2('exit_only');" id="continue" class='but_a'>
+                                  <button type='button' id='continue'>Exit</button>
+                                </a>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div id="submit-space">
+                                <a href="javascript: exit_am2('exit_save');" id="continue" class='but_a'>
+                                  <button type='button' id='save_and_exit' name='save_and_exit'>Save and Exit</button>
+                                </a>
+                            </div>
+                          </td>
+
 			                    <td>
 			                    	<div id="submit-space">
-				                        <a href='javascript: back({{back_url}});'>
-				                        	<button type='button' id='back_btn' name='back_btn'>Back</button>
+				                        <a href='javascript: back({{back_url}});' class='but_a'>
+				                        	<button type='button' id='exit_no_save' name='exit_no_save'>Back</button>
 				                        </a>
 				                    </div>
 			                    </td>
 
 			                    <td>
 			                    	<div id="submit-space">
-				                        <a href="javascript: " id="continue">
-				                        	<button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+				                        <a href="javascript: continue_am_dh()" id="continue" class='but_a'>
+				                        	<button type='button' id='continue'>Continue</button>
 				                        </a>
 				                    </div>
 			                    </td>

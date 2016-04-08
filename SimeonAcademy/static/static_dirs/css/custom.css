@@ -333,7 +333,7 @@ button:hover {
 #error-div-main {
 	margin-left:15px;
 	margin-bottom: 19px;
-	height:1px;
+	height:15px;
 	color: red;
 	font-weight: bold;
 }

@@ -284,7 +284,7 @@ class AM_DrugHistory(models.Model):
 	dateTreated = models.CharField(max_length=10, default=None, blank=True, null=True)
 	finishedTreatment = models.BooleanField(default=False, blank=True)
 	reasonNotFinishedTreatment = models.CharField(max_length=100, blank=True, null=True, default=None)
-	isClean = models.BooleanField(default=False, blank=True)
+	isClean = models.BooleanField(default=True, blank=True)
 	relapseTrigger = models.CharField(max_length=250, default=None, blank=True, null=True)
 	drinkLastEpisode = models.BooleanField(default=False, blank=True)
 	drinkRelationshipProblem = models.BooleanField(default=False, blank=True)

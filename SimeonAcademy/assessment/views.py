@@ -426,7 +426,7 @@ def clientOptions(request):
 			content['session_type'] = session_type
 			content['start'] = start
 			content['session_id'] = session.id
-			content['back'] = False
+			content['back'] = 'false'
 			return render_to_response('counselor/client/client_options.html', content)
 
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
@@ -511,27 +511,27 @@ def am_childhood(request):
 				childhood.save()
 				# am.childhood = childhood
 
-				first_drink = request.POST.get('first_drink', '')
-				first_use_type = request.POST.get('first_use_type', '')
+				first_drink = request.POST.get('m_first_drink', '')
+				first_use_type = request.POST.get('m_first_use_type', '')
 				ever_used_drugs = request.POST.get('ever_used', '')
-				quitMos = request.POST.get('quitMos', '')
-				quitYrs = request.POST.get('quitYrs', '')
-				reason_quit = request.POST.get('reason_quit', '')
+				quitMos = request.POST.get('m_quitMos', '')
+				quitYrs = request.POST.get('m_quitYrs', '')
+				reason_quit = request.POST.get('m_reason_quit', '')
 				currently_use_drugs = request.POST.get('use_drugs', '')
-				what_you_use = request.POST.get('what-you-use', '')
-				how_often_you_use = request.POST.get('how-often-you-use', '')
-				how_much_you_use = request.POST.get('how-much-you-use', '')
+				what_you_use = request.POST.get('m-what-you-use', '')
+				how_often_you_use = request.POST.get('m-how-often-you-use', '')
+				how_much_you_use = request.POST.get('m-how-much-you-use', '')
 				has_dui = request.POST.get('has_dui', '')
-				dui_amount = request.POST.get('dui_amount', '')
-				BAL = request.POST.get('BAL', '')
+				dui_amount = request.POST.get('m_dui_amount', '')
+				BAL = request.POST.get('m_BAL', '')
 				need_help = request.POST.get('need_help', '')
 				had_treatment = request.POST.get('treatment', '')
-				when_treated = request.POST.get('when_treated', '')
-				where_treated = request.POST.get('where_treated', '')
+				when_treated = request.POST.get('m_when_treated', '')
+				where_treated = request.POST.get('m_where_treated', '')
 				completed_treatment = request.POST.get('completed_treatment', '')
-				no_treat_explain = request.POST.get('no_treat_explain', '')
+				no_treat_explain = request.POST.get('m_no_treat_explain', '')
 				still_abstinent = request.POST.get('still_abstinent', '')
-				relapse_explain = request.POST.get('relapse_explain', '')
+				relapse_explain = request.POST.get('m_relapse_explain', '')
 				drinking_last = request.POST.get('drinking_last', '')
 				relationship_alc = request.POST.get('relationship_alc', '')				
 
@@ -785,51 +785,27 @@ def am_demographic(request):
 				am.demographic = demo
 				am.save()
 
+				marital = MaritalStatus.objects.all().order_by('status')
+				living = LivingSituation.objects.all().order_by('situation')
+				education = EducationLevel.objects.all().order_by('level')
+
+				print "AM: " + str(am)
+				print "Back: " + str(back)
+				print "Demographic ID: " + str(am.demographic.id)
+
+				fields = getAMDemoFields(back, am)
+				json_data = json.dumps(fields)
+
 				content['title'] = "Anger Management Assessment | Simeon Academy"
+				content['client'] = client
+				content['education'] = education
+				content['marital'] = marital
+				content['living'] = living
 				content['session'] = session
 				content['AM'] = am
-				return render_to_response('counselor/timed_instruction.html', content)
-
-@login_required(login_url='/index')
-def proceed_to_am(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			session_id = request.POST.get('session_id', '')
-			am_id = request.POST.get('am_id', '')
-			back = False
-
-			am = AngerManagement.objects.get(id=am_id)
-			session = ClientSession.objects.get(id=session_id)
-
-			marital = MaritalStatus.objects.all().order_by('status')
-			living = LivingSituation.objects.all().order_by('situation')
-			education = EducationLevel.objects.all().order_by('level')
-
-			fields = getAMDemoFields(back, am)
-			json_data = json.dumps(fields)
-
-			content['education'] = education
-			content['marital'] = marital
-			content['living'] = living
-			content['json_data'] = json_data
-			content['fields'] = fields
-			content['client'] = session.client
-			content['AM'] = am
-			content['session'] = session
-			content['back'] = back
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/demographic.html', content)				
+				content['json_data'] = json_data
+				content['fields'] = fields
+				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			
 @login_required(login_url='/index')
 def am_drugHistory(request):
