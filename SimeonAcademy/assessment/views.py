@@ -502,14 +502,22 @@ def am_childhood(request):
 			am_id = request.POST.get('am_id', '')
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
-			am = None
-			print "AM ID: " + str(am_id)
 			am = AngerManagement.objects.get(id=am_id)
+			date = datetime.now()
+			date = date.date()
+
+			content['back'] = back
 
 			if str(back) == 'false':
-				childhood = AM_ChildhoodHistory(client_id=session.client.clientID)
-				childhood.save()
-				# am.childhood = childhood
+				if am.childhood == None:
+					childhood = AM_ChildhoodHistory(client_id=session.client.clientID, date_of_assessment=date)
+					childhood.save()
+					am.childhood = childhood
+					am.save()
+				else:
+					childhood = am.childhood
+					childhood.date_of_assessment = date
+					am.save()
 
 				first_drink = request.POST.get('m_first_drink', '')
 				first_use_type = request.POST.get('m_first_use_type', '')
@@ -533,42 +541,54 @@ def am_childhood(request):
 				still_abstinent = request.POST.get('still_abstinent', '')
 				relapse_explain = request.POST.get('m_relapse_explain', '')
 				drinking_last = request.POST.get('drinking_last', '')
-				relationship_alc = request.POST.get('relationship_alc', '')				
+				relationship_alc = request.POST.get('relationship_alc', '')	
 
-				# drug_history = am.drugHistory
+				print first_drink
+				print first_use_type
+				print ever_used_drugs
+				print quitMos
+				print quitYrs
+				print reason_quit
+				print currently_use_drugs
+				print what_you_use
+				print how_often_you_use
+				print how_much_you_use
 
-				if currently_use_drugs == 'yes':
-					currently_use_drugs = True
-				else:
-					currently_use_drugs = False
-				if ever_used_drugs == 'yes':
-					ever_used_drugs = True
-				else:
-					ever_used_drugs = False
-				if has_dui == 'yes':
-					has_dui = True
-				else:
-					has_dui = False
-				if had_treatment == 'yes':
-					had_treatment = True
-				else:
-					had_treatment = False
-				if completed_treatment == 'yes':
-					completed_treatment = True
-				else:
-					completed_treatment = False
-				if still_abstinent == 'yes':
-					still_abstinent = True
-				else:
-					still_abstinent = False
-				if drinking_last == 'yes':
-					drinking_last = True
-				else:
-					drinking_last = False
-				if need_help == 'yes':
-					need_help = True
-				else:
-					need_help = False
+				# dh_id = am.drugHistory.id
+				# drug_history = AM_DrugHistory.objects.get(id=dh_id)
+
+				# if currently_use_drugs == 'yes':
+				# 	currently_use_drugs = True
+				# else:
+				# 	currently_use_drugs = False
+				# if ever_used_drugs == 'yes':
+				# 	ever_used_drugs = True
+				# else:
+				# 	ever_used_drugs = False
+				# if has_dui == 'yes':
+				# 	has_dui = True
+				# else:
+				# 	has_dui = False
+				# if had_treatment == 'yes':
+				# 	had_treatment = True
+				# else:
+				# 	had_treatment = False
+				# if completed_treatment == 'yes':
+				# 	completed_treatment = True
+				# else:
+				# 	completed_treatment = False
+				# if still_abstinent == 'yes':
+				# 	still_abstinent = True
+				# else:
+				# 	still_abstinent = False
+				# if drinking_last == 'yes':
+				# 	drinking_last = True
+				# else:
+				# 	drinking_last = False
+				# if need_help == 'yes':
+				# 	need_help = True
+				# else:
+				# 	need_help = False
 
 				# drug_history.firstDrinkAge = first_drink
 				# drug_history.firstDrinkType = first_use_type
@@ -594,15 +614,19 @@ def am_childhood(request):
 				# drug_history.drinkRelationshipProblem = relationship_alc
 				# drug_history.needHelpDrugs = need_help
 
+				# print "DH ID: " + str(drug_history.id)
+
 				# drug_history.save()
+				# # am.drugHistory = drug_history
 				# am.drugHistoryComplete = True
 				# am.save()
 
+				content['back_url'] = '/am_drugHistory/'
 				content['session'] = session
 				content['AM'] = am
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
-			else:
+			else: #IF BACK == TRUE...
 				no = None
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)

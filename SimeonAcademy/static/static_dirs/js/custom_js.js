@@ -1034,156 +1034,155 @@ function evaluate_field(field, hidden, error_msg) {
 }
 
 function continue_am_dh() {
-	var proceed = true;
-	var continue_test = true;
-	var check_next = true;
+	// var proceed = true;
+	// var continue_test = true;
+	// var check_next = true;
 	
-	var first_drink = document.getElementById('first_drink');	
-	var first_use_type = document.getElementById('first_use_type');
+	// var first_drink = document.getElementById('first_drink');	
+	// var first_use_type = document.getElementById('first_use_type');
 
-	var m_first_drink = document.getElementById('m_first_drink');
-	var m_first_use_type = document.getElementById('m_first_use_type');
+	// var m_first_drink = document.getElementById('m_first_drink');
+	// var m_first_use_type = document.getElementById('m_first_use_type');
 
-	if (evaluate_field(first_drink, m_first_drink, "(age of first drink)") === false) {
-		continue_test = false;
-		proceed = false;
-	}
-	if (continue_test === true) {
-		if (evaluate_field(first_use_type, m_first_use_type, "(what client used | first drink)") === false) {
-			continue_test = false;
-			proceed = false;
-		}
-	}
+	// if (evaluate_field(first_drink, m_first_drink, "(age of first drink)") === false) {
+	// 	continue_test = false;
+	// 	proceed = false;
+	// }
+	// if (continue_test === true) {
+	// 	if (evaluate_field(first_use_type, m_first_use_type, "(what client used | first drink)") === false) {
+	// 		continue_test = false;
+	// 		proceed = false;
+	// 	}
+	// }
 
-	if (continue_test === true) {
-		var sub_cont = true;
-		var what_you_use = document.getElementById('what-you-use');
-		var how_often_you_use = document.getElementById('how-often-you-use');
-		var how_much_you_use = document.getElementById('how-much-you-use');
-		var quitMos = document.getElementById('quitMos');
-		var quitYrs = document.getElementById('quitYrs');
-		var reason_quit = document.getElementById('reason_quit');
+	// if (continue_test === true) {
+	// 	var sub_cont = true;
+	// 	var what_you_use = document.getElementById('what-you-use');
+	// 	var how_often_you_use = document.getElementById('how-often-you-use');
+	// 	var how_much_you_use = document.getElementById('how-much-you-use');
+	// 	var quitMos = document.getElementById('quitMos');
+	// 	var quitYrs = document.getElementById('quitYrs');
+	// 	var reason_quit = document.getElementById('reason_quit');
 
-		var m_what_you_use = document.getElementById('m-what-you-use');
-		var m_how_often_you_use = document.getElementById('m-how-often-you-use');
-		var m_how_much_you_use = document.getElementById('m-how-much-you-use');
-		var m_quitMos = document.getElementById('m_quitMos');
-		var m_quitYrs = document.getElementById('m_quitYrs');
-		var m_reason_quit = document.getElementById('m_reason_quit');
+	// 	var m_what_you_use = document.getElementById('m-what-you-use');
+	// 	var m_how_often_you_use = document.getElementById('m-how-often-you-use');
+	// 	var m_how_much_you_use = document.getElementById('m-how-much-you-use');
+	// 	var m_quitMos = document.getElementById('m_quitMos');
+	// 	var m_quitYrs = document.getElementById('m_quitYrs');
+	// 	var m_reason_quit = document.getElementById('m_reason_quit');
 
-		var does_drink = document.getElementById('current_use');
-		var ever_drank = document.getElementById('has_used');
+	// 	var does_drink = document.getElementById('current_use');
+	// 	var ever_drank = document.getElementById('has_used');
+
+	// 	proceed = evaluate_checked_true(does_drink, what_you_use, m_what_you_use, "(what client currently uses)");
+	// 	sub_cont = proceed;
+
+	// 	if (sub_cont === true) {
+	// 		proceed = evaluate_checked_true(does_drink, how_often_you_use, m_how_often_you_use, "(how often client uses)");
+	// 		sub_cont = proceed;
+	// 	}
+
+	// 	if (sub_cont === true) {
+	// 		proceed = evaluate_checked_true(does_drink, how_much_you_use, m_how_much_you_use, "(how much client uses)");
+	// 		sub_cont = proceed;
+	// 	}
+
+	// 	if (sub_cont === true) {
+	// 		m_quitMos.value = '0';
+	// 		m_quitYrs.value = '0';
+	// 		m_reason_quit.value = '';
+	// 	}
+
+	// 	if (sub_cont === true) {
+	// 		sub_2_cont = true;
+
+	// 		if (does_drink.checked === false) {
+	// 			proceed = evaluate_checked_true(ever_drank, quitMos, m_quitMos, "(months client has been abstinent)");
+	// 			sub_2_cont = proceed;
+	// 		}
+
+	// 		if (sub_2_cont === true) {
+	// 			proceed = evaluate_checked_true(ever_drank, quitYrs, m_quitYrs, "(years client has been abstinent)");
+	// 			sub_2_cont = proceed;
+	// 		}
+
+	// 		if (sub_2_cont === true) {
+	// 			proceed = evaluate_checked_true(ever_drank, reason_quit, m_reason_quit, "(reason client stopped using)");
+	// 			sub_2_cont = proceed;
+	// 		}
+
+	// 		if (sub_2_cont === true) {
+	// 			m_what_you_use.value = '';
+	// 			m_how_much_you_use.value = '';
+	// 			m_how_often_you_use.value = '';
+	// 		}
+	// 		continue_test = sub_2_cont;
+	// 	}
+
+	// 	if (continue_test === true) {
+	// 		var sub3 = true;
+	// 		var has_dui = document.getElementById('dui');
+	// 		var dui_amount = document.getElementById('dui_amount');
+	// 		var BAL = document.getElementById('BAL');
+	// 		var m_dui_amount = document.getElementById('m_dui_amount');
+	// 		var m_BAL = document.getElementById('m_BAL');
+
+	// 		proceed = evaluate_checked_true(has_dui, dui_amount, m_dui_amount, "(number of DUI's)");
+	// 		sub3 = proceed;
+
+	// 		if (sub3 === true) {
+	// 			proceed = evaluate_checked_true(has_dui, BAL, m_BAL, "(blood alcohol level)");
+	// 		}
+	// 		else {
+	// 			m_dui_amount.value = '0';
+	// 			m_BAL.value = '';
+	// 		}
+	// 		continue_test = proceed;
+	// 	}
+
+	// 	if (continue_test === true) {
+	// 		var sub4 = true;
+	// 		var had_treatment = document.getElementById('had_treatment');
+	// 		var completed_treatment = document.getElementById('did_complete');
+	// 		var not_abstinent = document.getElementById('not_abstinent');
+
+	// 		var when_treated = document.getElementById('when_treated');
+	// 		var where_treated = document.getElementById('where_treated');
+	// 		var no_treat_explain = document.getElementById('no_treat_explain');
+	// 		var relapse_explain = document.getElementById('relapse_explain');
+
+	// 		var m_when_treated = document.getElementById('m_when_treated');
+	// 		var m_where_treated = document.getElementById('m_where_treated');
+	// 		var m_no_treat_explain = document.getElementById('m_no_treat_explain');
+	// 		var m_relapse_explain = document.getElementById('m_relapse_explain');
+
+	// 		proceed = evaluate_checked_true(had_treatment, when_treated, m_when_treated, "(when did client receive treatment)");
+	// 		sub4 = proceed;
+
+	// 		if (sub4 === true) {
+	// 			proceed = evaluate_checked_true(had_treatment, where_treated, m_where_treated, "(where did the client receive treatment)");
+	// 			sub4 = proceed;
+	// 		}
+
+	// 		if (sub4 === true) {
+	// 			if (completed_treatment.checked === true) {
+	// 				m_no_treat_explain.innerHTML = '';
+	// 				m_relapse_explain.innerHTML = '';
+	// 			}
+	// 			else {
+	// 				if (not_abstinent.checked === true) {
+	// 					proceed = evaluate_field(relapse_explain, m_relapse_explain, "(why did client relapse)");
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 
-		proceed = evaluate_checked_true(does_drink, what_you_use, m_what_you_use, "(what client currently uses)");
-		sub_cont = proceed;
-
-		if (sub_cont === true) {
-			proceed = evaluate_checked_true(does_drink, how_often_you_use, m_how_often_you_use, "(how often client uses)");
-			sub_cont = proceed;
-		}
-
-		if (sub_cont === true) {
-			proceed = evaluate_checked_true(does_drink, how_much_you_use, m_how_much_you_use, "(how much client uses)");
-			sub_cont = proceed;
-		}
-
-		if (sub_cont === true) {
-			m_quitMos.value = '0';
-			m_quitYrs.value = '0';
-			m_reason_quit.value = '';
-		}
-
-		if (sub_cont === true) {
-			sub_2_cont = true;
-
-			if (does_drink.checked === false) {
-				proceed = evaluate_checked_true(ever_drank, quitMos, m_quitMos, "(months client has been abstinent)");
-				sub_2_cont = proceed;
-			}
-
-			if (sub_2_cont === true) {
-				proceed = evaluate_checked_true(ever_drank, quitYrs, m_quitYrs, "(years client has been abstinent)");
-				sub_2_cont = proceed;
-			}
-
-			if (sub_2_cont === true) {
-				proceed = evaluate_checked_true(ever_drank, reason_quit, m_reason_quit, "(reason client stopped using)");
-				sub_2_cont = proceed;
-			}
-
-			if (sub_2_cont === true) {
-				m_what_you_use.value = '';
-				m_how_much_you_use.value = '';
-				m_how_often_you_use.value = '';
-			}
-			continue_test = sub_2_cont;
-		}
-
-		if (continue_test === true) {
-			var sub3 = true;
-			var has_dui = document.getElementById('dui');
-			var dui_amount = document.getElementById('dui_amount');
-			var BAL = document.getElementById('BAL');
-			var m_dui_amount = document.getElementById('m_dui_amount');
-			var m_BAL = document.getElementById('m_BAL');
-
-			proceed = evaluate_checked_true(has_dui, dui_amount, m_dui_amount, "(number of DUI's)");
-			sub3 = proceed;
-
-			if (sub3 === true) {
-				proceed = evaluate_checked_true(has_dui, BAL, m_BAL, "(blood alcohol level)");
-			}
-			else {
-				m_dui_amount.value = '0';
-				m_BAL.value = '';
-			}
-			continue_test = proceed;
-		}
-
-		if (continue_test === true) {
-			var sub4 = true;
-			var had_treatment = document.getElementById('had_treatment');
-			var completed_treatment = document.getElementById('did_complete');
-			var not_abstinent = document.getElementById('not_abstinent');
-
-			var when_treated = document.getElementById('when_treated');
-			var where_treated = document.getElementById('where_treated');
-			var no_treat_explain = document.getElementById('no_treat_explain');
-			var relapse_explain = document.getElementById('relapse_explain');
-
-			var m_when_treated = document.getElementById('m_when_treated');
-			var m_where_treated = document.getElementById('m_where_treated');
-			var m_no_treat_explain = document.getElementById('m_no_treat_explain');
-			var m_relapse_explain = document.getElementById('m_relapse_explain');
-
-			proceed = evaluate_checked_true(had_treatment, when_treated, m_when_treated, "(when did client receive treatment)");
-			sub4 = proceed;
-
-			if (sub4 === true) {
-				proceed = evaluate_checked_true(had_treatment, where_treated, m_where_treated, "(where did the client receive treatment)");
-				sub4 = proceed;
-			}
-
-			if (sub4 === true) {
-				if (completed_treatment.checked === true) {
-					m_no_treat_explain.innerHTML = '';
-					m_relapse_explain.innerHTML = '';
-				}
-				else {
-					if (not_abstinent.checked === true) {
-						proceed = evaluate_field(relapse_explain, m_relapse_explain, "(why did client relapse)");
-					}
-				}
-			}
-		}
-	}
-
-
-	if (proceed === true) {
-		// document.getElementById('am_demo').submit();
-		document.getElementById('error_msg_field').innerHTML = 'Success!!!';
-	}
+	// if (proceed === true) {
+	// 	document.getElementById('am_demo').submit();
+	// }
+	document.getElementById('am_demo').submit();
 }
 
 
