@@ -586,16 +586,6 @@ def am_childhood(request):
 				drinking_last = request.POST.get('drinking_last', '')
 				relationship_alc = request.POST.get('relationship_alc', '')	
 
-				print first_drink
-				print first_use_type
-				print ever_used_drugs
-				print quitMos
-				print quitYrs
-				print reason_quit
-				print currently_use_drugs
-				print what_you_use
-				print how_often_you_use
-				print how_much_you_use
 
 				# dh_id = am.drugHistory.id
 				# drug_history = AM_DrugHistory.objects.get(id=dh_id)
@@ -745,8 +735,16 @@ def am_location(request):
 				content['back'] = back
 				goToLocation = continueToAmSection(am)
 
+				if goToLocation == 'counselor/forms/AngerManagement/demographic.html':
+					marital = MaritalStatus.objects.all().order_by('status')
+					living = LivingSituation.objects.all().order_by('situation')
+					education = EducationLevel.objects.all().order_by('level')
+					content['education'] = education
+					content['marital'] = marital
+					content['living'] = living
+
 				fields = getAMFields(am, goToLocation, back)
-				json_data = json.dumps(fields)
+				json_data = json.dumps(fields)	
 
 				content['json_data'] = json_data
 				content['fields'] = fields
@@ -832,8 +830,7 @@ def am_demographic(request):
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 
 			if proceed['isNew'] == False and back == 'true':
-				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING	
-				print "Moving to pre-existing choices..."										
+				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
 			else:
