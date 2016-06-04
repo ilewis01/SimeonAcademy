@@ -932,6 +932,7 @@ class ClientSession(models.Model):
 	invoice = models.ForeignKey(Invoice, default=None, blank=True, null=True)
 	start = models.DateTimeField(default=None, blank=True, null=True)
 	end = models.DateTimeField(default=None, blank=True, null=True)
+	isComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return str(self.client) + ' ' + str(self.start)

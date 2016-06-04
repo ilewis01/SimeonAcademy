@@ -33,7 +33,8 @@ mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
 continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
-getAmDHData, amDhExist, getAMDemoFields
+getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
+startSession
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -417,11 +418,15 @@ def clientOptions(request):
 			session_type = SType.objects.get(id=session_type)
 			client = Client.objects.get(id=clID)
 			start = datetime.now()
+			phone = convert_phone(client.phone)
 
-			session = ClientSession(client=client, start=start, s_type=session_type)
-			session.save()
+			session = startSession(client, session_type)
+
+			# session = ClientSession(client=client, start=start, s_type=session_type)
+			# session.save()
 
 			content['title'] = "Client Options | Simeon Academy"
+			content['phone'] = phone
 			content['client'] = client
 			content['session_type'] = session_type
 			content['start'] = start
@@ -430,6 +435,44 @@ def clientOptions(request):
 			return render_to_response('counselor/client/client_options.html', content)
 
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
+@login_required(login_url='/index')
+def exit_am(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client_id = request.POST.get('client_id', '')
+			session_id = request.POST.get('session_id', '')
+			exit_type = request.POST.get('exit_type', '')
+			am_id = request.POST.get('am_id', '')
+
+			am = AngerManagement.objects.get(id=am_id)
+			client = Client.objects.get(id=client_id)
+			session = ClientSession.objects.get(session_id)
+
+			content['client'] = client
+			content['AM'] = am
+			content['session'] = session
+
+			if str(exit_type) == 'exit_only':
+				deleteAM(am)
+			elif str(exit_type) == 'exit_save':
+				none = None
+
+			types = SType.objects.all()
+			content['session_types'] = types
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/confirm_exit.html', content)
+
 @login_required(login_url='/index')
 def am_preliminary(request):
 	user = request.user
@@ -690,6 +733,8 @@ def am_location(request):
 			session = ClientSession.objects.get(id=session_id)
 			client = session.client
 			content['client'] = session.client
+			phone = convert_phone(client.phone)
+			content['phone'] = phone
 
 			if str(action) == 'finish-old':
 				##go to the next section to be completed in the form
@@ -746,41 +791,45 @@ def am_problems(request):
 
 @login_required(login_url='/index')
 def am_demographic(request):
+	#IF USER IS NOT AUTHENTICATED RETURN TO LOGIN PAGE
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
 
 	else:
+		#USER HAS BEEN AUTHENTICATED
 		content = {}
 		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
+			#RESTRICTED ACCESS FOR NON COUNSELOR USERS
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			#AUTHENTICATED AS A COUNSELOR
 			client_id = request.POST.get('client_id', '')
 			session_id = request.POST.get('session_id', '')
-			back = request.POST.get('back')
-			content['back'] = back
-
 			client = Client.objects.get(id=client_id)			
 			session = ClientSession.objects.get(id=session_id)
 
-			proceed = findClientAM(client)
+			phone = convert_phone(client.phone)
+			proceed = startAM(client)
+			back = proceed['back']			
+			am = proceed['am']
 
-			if proceed['incomplete'] == True and back == 'false':
-				am = proceed['am']
-				content['am'] = am
-				content['session'] = session
-				content['client'] = client
+			content['am'] = am
+			content['back'] = back
+			content['session'] = session
+			content['client'] = client
+			content['phone'] = phone
+
+			if proceed['isNew'] == "false":
+				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE								
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
-			if back == 'true':
-				am_id = request.POST.get('am_id', '')
-				am = AngerManagement.objects.get(id=am_id)
-
+			else:
 				marital = MaritalStatus.objects.all().order_by('status')
 				living = LivingSituation.objects.all().order_by('situation')
 				education = EducationLevel.objects.all().order_by('level')
@@ -800,36 +849,144 @@ def am_demographic(request):
 				content['fields'] = fields
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
-			else:
-				date = datetime.now()
-				am = AngerManagement(client=client, AMComplete=False, start_time=date)
-				date = date.date()
-				demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
-				demo.save()
-				am.demographic = demo
-				am.save()
 
-				marital = MaritalStatus.objects.all().order_by('status')
-				living = LivingSituation.objects.all().order_by('situation')
-				education = EducationLevel.objects.all().order_by('level')
 
-				print "AM: " + str(am)
-				print "Back: " + str(back)
-				print "Demographic ID: " + str(am.demographic.id)
+			# if back == True:
+			# 	# am_id = request.POST.get('am_id', '')
+			# 	# am = AngerManagement.objects.get(id=am_id)
 
-				fields = getAMDemoFields(back, am)
-				json_data = json.dumps(fields)
+			# 	marital = MaritalStatus.objects.all().order_by('status')
+			# 	living = LivingSituation.objects.all().order_by('situation')
+			# 	education = EducationLevel.objects.all().order_by('level')
 
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				content['client'] = client
-				content['education'] = education
-				content['marital'] = marital
-				content['living'] = living
-				content['session'] = session
-				content['AM'] = am
-				content['json_data'] = json_data
-				content['fields'] = fields
-				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			# 	#JSON OBJECTS
+			# 	fields = getAMDemoFields(back, am)
+			# 	json_data = json.dumps(fields)
+
+			# 	#CONTEXT
+			# 	content['education'] = education
+			# 	content['marital'] = marital
+			# 	content['living'] = living
+			# 	content['session'] = session
+			# 	content['client'] = client
+			# 	content['AM'] = am
+			# 	content['json_data'] = json_data
+			# 	content['fields'] = fields
+			# 	content['title'] = "Anger Management Assessment | Simeon Academy"
+			# 	return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			# else:
+			# 	# date = datetime.now()
+			# 	# am = AngerManagement(client=client, AMComplete=False, start_time=date)
+			# 	# date = date.date()
+			# 	# demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
+			# 	# am.save()
+
+			# 	marital = MaritalStatus.objects.all().order_by('status')
+			# 	living = LivingSituation.objects.all().order_by('situation')
+			# 	education = EducationLevel.objects.all().order_by('level')
+
+			# 	fields = getAMDemoFields(back, am)
+			# 	json_data = json.dumps(fields)
+
+			# 	content['title'] = "Anger Management Assessment | Simeon Academy"
+			# 	content['client'] = client
+			# 	content['education'] = education
+			# 	content['marital'] = marital
+			# 	content['living'] = living
+			# 	content['session'] = session
+			# 	content['AM'] = am
+			# 	content['json_data'] = json_data
+			# 	content['fields'] = fields
+			# 	return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+
+# @login_required(login_url='/index')
+# def am_demographic(request):
+# 	#IF USER IS NOT AUTHENTICATED RETURN TO LOGIN PAGE
+# 	user = request.user
+# 	if not user.is_authenticated():
+# 		render_to_response('global/index.html')
+
+# 	else:
+# 		#USER HAS BEEN AUTHENTICATED
+# 		content = {}
+# 		content.update(csrf(request))
+# 		content['user'] = user
+# 		if user.account.is_counselor == False:
+# 			#RESTRICTED ACCESS FOR NON COUNSELOR USERS
+# 			content['title'] = 'Restricted Access'
+# 			return render_to_response('global/restricted.html', content)
+
+# 		else:
+# 			#AUTHENTICATED AS A COUNSELOR
+# 			client_id = request.POST.get('client_id', '')
+# 			session_id = request.POST.get('session_id', '')
+# 			back = request.POST.get('back')
+# 			content['back'] = back
+
+# 			client = Client.objects.get(id=client_id)			
+# 			session = ClientSession.objects.get(id=session_id)
+# 			phone = convert_phone(client.phone)
+# 			content['phone'] = phone
+
+# 			proceed = findClientAM(client)
+
+# 			if proceed['incomplete'] == True and back == 'false':
+# 				am = proceed['am']
+# 				content['am'] = am
+# 				content['session'] = session
+# 				content['client'] = client
+# 				content['title'] = "Anger Management Assessment | Simeon Academy"
+# 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
+
+# 			if back == 'true':
+# 				am_id = request.POST.get('am_id', '')
+# 				am = AngerManagement.objects.get(id=am_id)
+
+# 				marital = MaritalStatus.objects.all().order_by('status')
+# 				living = LivingSituation.objects.all().order_by('situation')
+# 				education = EducationLevel.objects.all().order_by('level')
+
+# 				#JSON OBJECTS
+# 				fields = getAMDemoFields(back, am)
+# 				json_data = json.dumps(fields)
+
+# 				#CONTEXT
+# 				content['education'] = education
+# 				content['marital'] = marital
+# 				content['living'] = living
+# 				content['session'] = session
+# 				content['client'] = client
+# 				content['AM'] = am
+# 				content['json_data'] = json_data
+# 				content['fields'] = fields
+# 				content['title'] = "Anger Management Assessment | Simeon Academy"
+# 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+# 			else:
+# 				date = datetime.now()
+# 				am = AngerManagement(client=client, AMComplete=False, start_time=date)
+# 				date = date.date()
+# 				demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
+# 				demo.save()
+# 				am.demographic = demo
+# 				am.save()
+
+# 				marital = MaritalStatus.objects.all().order_by('status')
+# 				living = LivingSituation.objects.all().order_by('situation')
+# 				education = EducationLevel.objects.all().order_by('level')
+
+# 				fields = getAMDemoFields(back, am)
+# 				json_data = json.dumps(fields)
+
+# 				content['title'] = "Anger Management Assessment | Simeon Academy"
+# 				content['client'] = client
+# 				content['education'] = education
+# 				content['marital'] = marital
+# 				content['living'] = living
+# 				content['session'] = session
+# 				content['AM'] = am
+# 				content['json_data'] = json_data
+# 				content['fields'] = fields
+# 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			
 @login_required(login_url='/index')
 def am_drugHistory(request):

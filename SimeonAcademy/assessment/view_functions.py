@@ -20,6 +20,24 @@ SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, \
 Invoice, SType
 
+def convert_phone(phone):
+	result = '('
+	result += phone[0]
+	result += phone[1]
+	result += phone[2]
+	result += ') '
+
+	result += phone[3]
+	result += phone[4]
+	result += phone[5]
+	result += '-'
+
+	result += phone[6]
+	result += phone[7]
+	result += phone[8]
+	result += phone[9]
+	return result
+
 def convert_datepicker(the_date):
 	month = ''
 	day = ''
@@ -148,6 +166,30 @@ def getClientByName(fname, lname):
 			results.append(c)
 
 	return results
+
+def startSession(client, session_type):
+	sessionList = ClientSession.objects.all()
+	check_sessions = True
+	createNewSession = True
+	session = None
+
+	if len(sessionList) == 0:
+		check_sessions = False
+
+	if check_sessions == True:
+		for s in sessionList:
+			if (str(s.client.clientID) == str(client.clientID)) and (s.isComplete == False):
+				session = s
+				createNewSession = False
+				break
+
+	if createNewSession == True:
+		startTime = datetime.now()
+		session = ClientSession(client=client, start=startTime, s_type=session_type)
+		session.save()
+
+	return session
+
 
 def getMaritalID(marital):
 	m_id = None
@@ -340,10 +382,131 @@ def findClientSAP(client):
 			break
 	return result
 
+def deleteAM(am):
+	am.demographic.delete()
+	am.drugHistory.delete()
+	am.childhood.delete()
+	am.angerHistory.delete()
+	am.connections.delete()
+	am.worstEpisode.delete()
+	am.angerTarget.delete()
+	am.familyOrigin.delete()
+	am.currentProblems.delete()
+	am.control.delete()
+	am.final.delete()
+	am.delete()
+
+	return am
+
+def newAM(client):
+	date = datetime.now()
+	am = AngerManagement(client=client, AMComplete=False, start_time=date)
+	date = date.date()
+
+	demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
+	drugHistory = AM_DrugHistory(client_id=client.clientID)
+	childhoodHistory = AM_ChildhoodHistory(client_id=client.clientID)
+	angerHistory = AM_AngerHistory(client_id=client.clientID)
+	connections = AM_Connections(client_id=client.clientID)
+	worstEpisodes = AM_WorstEpisode(client_id=client.clientID)
+	amTarget = AM_AngerTarget(client_id=client.clientID)
+	familyOrigin = AM_FamilyOrigin(client_id=client.clientID)
+	currentProblems = AM_CurrentProblem(client_id=client.clientID)
+	amControl = AM_Control(client_id=client.clientID)
+	amFinal = AM_Final(client_id=client.clientID)
+
+	demo.save()
+	drugHistory.save()
+	childhoodHistory.save()
+	angerHistory.save()
+	connections.save()
+	worstEpisodes.save()
+	amTarget.save()
+	familyOrigin.save()
+	currentProblems.save()
+	amControl.save()
+	amFinal.save()
+
+	am.demographic = demo
+	am.drugHistory = drugHistory
+	am.childhood = childhoodHistory
+	am.angerHistory = angerHistory
+	am.connections = connections
+	am.worstEpisode = worstEpisodes
+	am.angerTarget = amTarget
+	am.familyOrigin = familyOrigin
+	am.currentProblems = currentProblems
+	am.control = amControl
+	am.final = amFinal
+
+	am.save()
+
+	return am
+
+def getDuplicateAM(client):
+	amList = AngerManagement.objects.all()
+	results = []
+
+	for a in amList:
+		if str(a.client.clientID) == str(client.clientID) and a.AMComplete == False:
+			results.append(a)
+
+	return results
+
+def cleanAmDatabase(client):
+	cleaning = getDuplicateAM(client)
+	deleted = []
+
+	if len(cleaning) > 0:
+		for clean in cleaning:
+			deleted.append(clean)
+			deleteAM(clean)
+
+	return deleted
+
+def hasAM(client):
+	amList = AngerManagement.objects.all()
+	exist = False
+
+	for a in amList:
+		if (str(client.clientID) == str(a.client.clientID)) and (str(client.fname) == str(a.client.fname)) and (str(client.dob) == str(a.client.dob)):
+			exist = True
+			break
+
+	return exist
+
+def startAM(client):
+	results = {}
+	back = "false"
+	create_new = True
+	am = None
+
+	if hasAM(client) == True:
+		amList = AngerManagement.objects.all()
+
+		for a in amList:
+			if (a.AMComplete == False) and (str(a.client.clientID) == str(client.clientID)):
+				create_new = False
+				back = "true"
+				am = a
+				break
+
+	if create_new == True:
+		am = newAM(client)
+
+	results['back'] = back
+	results['am'] = am
+	results['isNew'] = create_new
+
+	return results
+
+
 def continueToAmSection(am):
 	location = None
 
-	if am.drugHistoryComplete == False:
+	if am.demographicComplete == False:
+		location = 'counselor/forms/AngerManagement/demographic.html'
+	elif am.drugHistoryComplete == False:
 		location = 'counselor/forms/AngerManagement/drugHistory.html'
 	elif am.childhoodComplete == False:
 		location = 'counselor/forms/AngerManagement/childhoodHistory.html'
