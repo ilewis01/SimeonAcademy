@@ -737,10 +737,11 @@ def am_location(request):
 			content['phone'] = phone
 			content['client'] = client
 			content['session'] = session
+			content['AM'] = am
 
 			if str(action) == 'finish-old':
 				##go to the next section to be completed in the form
-				content['am'] = am
+				content['back'] = 'false'
 				goToLocation = continueToAmSection(am)
 				content['title'] = "Counselor Home Page | Simeon Academy"
 				return render_to_response(goToLocation, content)

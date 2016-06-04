@@ -434,6 +434,33 @@ button:hover {
 	color: #676765;
 }
 
+.info-icon {
+	margin-left: 5px;
+	margin-top: 17px;
+	color: #33ccff;
+	/*text-shadow: .05em .05em black;*/
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.4em
+}
+
+#employment-tip:hover span{
+	color:black;
+	display: block;
+	position: absolute;
+	text-shadow: 0px 0px;
+	font-size: 14px;
+	width: 283px;
+	height:23px;
+	background: white;
+	border: 1px solid gray;
+	padding-left: 5px;
+}
+
+#employment-tip span {
+	display: none;
+	color: black;
+}
+
 
 
 
