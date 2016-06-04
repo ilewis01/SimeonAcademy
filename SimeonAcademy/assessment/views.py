@@ -34,7 +34,7 @@ continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
-startSession
+startSession, refreshAM
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -735,6 +735,8 @@ def am_location(request):
 			content['client'] = session.client
 			phone = convert_phone(client.phone)
 			content['phone'] = phone
+			content['client'] = client
+			content['session'] = session
 
 			if str(action) == 'finish-old':
 				##go to the next section to be completed in the form
@@ -743,14 +745,12 @@ def am_location(request):
 				content['title'] = "Counselor Home Page | Simeon Academy"
 				return render_to_response(goToLocation, content)
 			elif str(action) == 'start-new':
-				print "In the start new form section"
 				##delete the current form and start at beginning of the am form
-				am.delete()
-				new_start_time = datetime.now()
-				new_am = AngerManagement(client=client, start_time=new_start_time)
-				new_am.save()
+				new_am = refreshAM(am)
+				back = 'false'
+				content['back'] = back
 
-				fields = getAMDemoFields(False, am)
+				fields = getAMDemoFields('false', am)
 				json_data = json.dumps(fields)
 
 				marital = MaritalStatus.objects.all().order_by('status')
@@ -761,9 +761,7 @@ def am_location(request):
 				content['fields'] = fields
 				content['education'] = education
 				content['marital'] = marital
-				content['living'] = living
-				content['session'] = session
-				content['client'] = client
+				content['living'] = living				
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			elif str(action) == 'cancel':
@@ -823,10 +821,11 @@ def am_demographic(request):
 			content['session'] = session
 			content['client'] = client
 			content['phone'] = phone
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 
-			if proceed['isNew'] == "false":
-				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE								
-				content['title'] = "Anger Management Assessment | Simeon Academy"
+			if proceed['isNew'] == False and back == 'true':
+				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING	
+				print "Moving to pre-existing choices..."										
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
 			else:
@@ -834,7 +833,7 @@ def am_demographic(request):
 				living = LivingSituation.objects.all().order_by('situation')
 				education = EducationLevel.objects.all().order_by('level')
 
-				#JSON OBJECTS
+				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
 				fields = getAMDemoFields(back, am)
 				json_data = json.dumps(fields)
 
@@ -842,62 +841,12 @@ def am_demographic(request):
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
-				content['session'] = session
-				content['client'] = client
 				content['AM'] = am
 				content['json_data'] = json_data
 				content['fields'] = fields
-				content['title'] = "Anger Management Assessment | Simeon Academy"
+
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 
-
-			# if back == True:
-			# 	# am_id = request.POST.get('am_id', '')
-			# 	# am = AngerManagement.objects.get(id=am_id)
-
-			# 	marital = MaritalStatus.objects.all().order_by('status')
-			# 	living = LivingSituation.objects.all().order_by('situation')
-			# 	education = EducationLevel.objects.all().order_by('level')
-
-			# 	#JSON OBJECTS
-			# 	fields = getAMDemoFields(back, am)
-			# 	json_data = json.dumps(fields)
-
-			# 	#CONTEXT
-			# 	content['education'] = education
-			# 	content['marital'] = marital
-			# 	content['living'] = living
-			# 	content['session'] = session
-			# 	content['client'] = client
-			# 	content['AM'] = am
-			# 	content['json_data'] = json_data
-			# 	content['fields'] = fields
-			# 	content['title'] = "Anger Management Assessment | Simeon Academy"
-			# 	return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
-			# else:
-			# 	# date = datetime.now()
-			# 	# am = AngerManagement(client=client, AMComplete=False, start_time=date)
-			# 	# date = date.date()
-			# 	# demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
-			# 	# am.save()
-
-			# 	marital = MaritalStatus.objects.all().order_by('status')
-			# 	living = LivingSituation.objects.all().order_by('situation')
-			# 	education = EducationLevel.objects.all().order_by('level')
-
-			# 	fields = getAMDemoFields(back, am)
-			# 	json_data = json.dumps(fields)
-
-			# 	content['title'] = "Anger Management Assessment | Simeon Academy"
-			# 	content['client'] = client
-			# 	content['education'] = education
-			# 	content['marital'] = marital
-			# 	content['living'] = living
-			# 	content['session'] = session
-			# 	content['AM'] = am
-			# 	content['json_data'] = json_data
-			# 	content['fields'] = fields
-			# 	return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 
 # @login_required(login_url='/index')
 # def am_demographic(request):

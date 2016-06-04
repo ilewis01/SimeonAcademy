@@ -443,6 +443,100 @@ def newAM(client):
 
 	return am
 
+def refreshAM(am):
+	if am.demographicComplete == True:
+		date = datetime.now()
+		date = date.date()
+		am.demographic.delete()
+		demo = AM_Demographic(client_id=am.client.clientID, date_of_assessment=date)
+		demo.save()
+		am.demographic = demo
+		am.demographicComplete = False
+		am.save()
+
+	if am.drugHistoryComplete == True:
+		am.drugHistory.delete()
+		drugHistory = AM_DrugHistory(client_id=am.client.clientID)
+		drugHistory.save()
+		am.drugHistory = drugHistory
+		am.drugHistoryComplete = False
+		am.save()
+
+	if am.childhoodComplete == True:
+		am.childhood.delete()
+		childhood = AM_ChildhoodHistory(client_id=am.client.clientID)
+		childhood.save()
+		am.childhood = childhood
+		am.childhoodComplete = False
+		am.save()
+
+	if am.angerHistoryComplete == True:
+		am.angerHistory.delete()
+		angerHistory = AM_AngerHistory(client_id=am.client.clientID)
+		angerHistory.save()
+		am.angerHistory = angerHistory
+		am.angerHistoryComplete = False
+		am.save()
+
+	if am.connectionsComplete == True:
+		am.connections.delete()
+		connections = AM_Connections(client_id=am.client.clientID)
+		connections.save()
+		am.connections = connections
+		am.connectionsComplete = False
+		am.save()
+
+	if am.worstComplete == True:
+		am.worstEpisode.delete()
+		worstEpisode = AM_WorstEpisode(client_id=am.client.clientID)
+		worstEpisode.save()
+		am.worstEpisode = worstEpisode
+		am.worstComplete = False
+		am.save()
+
+	if am.angerTargetComplete == True:
+		am.angerTarget.delete()
+		angerTarget = AM_AngerTarget(client_id=am.client.clientID)
+		angerTarget.save()
+		am.angerTarget = angerTarget
+		am.angerTargetComplete = False
+		am.save()
+
+	if am.familyOriginComplete == True:
+		am.familyOrigin.delete()
+		familyOrigin = AM_FamilyOrigin(client_id=am.client.clientID)
+		familyOrigin.save()
+		am.familyOrigin = familyOrigin
+		am.familyOriginComplete = False
+		am.save()
+
+	if am.currentProblemsComplete == True:
+		am.currentProblems.delete()
+		currentProblems = AM_CurrentProblem(client_id=am.client.clientID)
+		currentProblems.save()
+		am.currentProblems = currentProblems
+		am.currentProblemsComplete = False
+		am.save()
+
+	if am.controlComplete == True:
+		am.control.delete()
+		control = AM_Control(client_id=am.client.clientID)
+		control.save()
+		am.control = control
+		am.controlComplete = False
+		am.save()
+
+	if am.finalComplete == True:
+		am.final.delete()
+		final = AM_Final(client_id=am.client.clientID)
+		final.save()
+		am.final = final
+		am.finalComplete = False
+		am.save()
+
+	return am
+
+
 def getDuplicateAM(client):
 	amList = AngerManagement.objects.all()
 	results = []
