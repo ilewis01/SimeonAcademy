@@ -34,7 +34,7 @@ continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
-startSession, refreshAM
+startSession, refreshAM, getAMFields
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -741,8 +741,15 @@ def am_location(request):
 
 			if str(action) == 'finish-old':
 				##go to the next section to be completed in the form
-				content['back'] = 'false'
+				back = 'false'
+				content['back'] = back
 				goToLocation = continueToAmSection(am)
+
+				fields = getAMFields(am, goToLocation, back)
+				json_data = json.dumps(fields)
+
+				content['json_data'] = json_data
+				content['fields'] = fields
 				content['title'] = "Counselor Home Page | Simeon Academy"
 				return render_to_response(goToLocation, content)
 			elif str(action) == 'start-new':
@@ -1045,11 +1052,11 @@ def am_drugHistory(request):
 				# else:
 				# 	demo = moveForward['am_demo']
 
-				if am.drugHistory == None:					
-					new_dh = AM_DrugHistory(client_id=session.client.clientID, date_of_assessment=date)
-					new_dh.save()
-					am.drugHistory = new_dh
-					am.save()
+				# if am.drugHistory == None:					
+				# 	new_dh = AM_DrugHistory(client_id=session.client.clientID, date_of_assessment=date)
+				# 	new_dh.save()
+				# 	am.drugHistory = new_dh
+				# 	am.save()
 
 				fields = getAmDHData(back, am)
 				json_data = json.dumps(fields)

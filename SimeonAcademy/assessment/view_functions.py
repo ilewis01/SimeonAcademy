@@ -282,14 +282,12 @@ def clientAmExist(client):
 
 	if len(ams) == 0:
 		filter_clients = False
-		print "no am's exist..."
 
 	if filter_clients == True:
 		for a in ams:
 			if a.demographic != None:
 				if str(a.demographic.client_id) == str(client.clientID) and str(a.client.id) == str(client.id):
 					exist = True
-					print "There was a match"
 					break
 	return exist
 
@@ -535,6 +533,34 @@ def refreshAM(am):
 		am.save()
 
 	return am
+
+def getAMFields(am, location, back):
+	fields = None
+
+	if location == 'counselor/forms/AngerManagement/demographic.html':
+		fields = getAMDemoFields(back, am)
+	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
+		fields = fields = getAmDHData(back, am)
+	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/connections.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/control.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/currentProblems.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/familyOrigin.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/worstEpisodes.html':
+		fields = None
+	elif location == 'counselor/forms/AngerManagement/final.html':
+		fields = None
+
+	return fields
 
 
 def getDuplicateAM(client):
