@@ -27,6 +27,43 @@ function set_radio_buttons() {
 	client_ID.style.opacity = '0.5';
 }
 
+function processCheckbox(checkbox_element) {
+	if (checkbox_element.checked === true) {
+		checkbox_element.value = 'on';
+	}
+	else {
+		checkbox_element.value = 'off';
+	}
+}
+
+function processCheckboxPython(checkbox_element) {
+	if (checkbox_element.checked === true) {
+		checkbox_element.value = 'True';
+	}
+	else {
+		checkbox_element.value = 'False';
+	}
+}
+
+function processRadioYes(radioButton, postElement) {
+	if (radioButton.checked === true) {
+		postElement.value = 'True';
+	}
+	else {
+		postElement.value = 'Fause';
+	}
+}
+
+function copyElementToInput(element_name) {
+	copiedElementName = 'm_';
+	copiedElementName += element_name;
+
+	var element_orig = document.getElementById(element_name);
+	var element_copy = document.getElementById(copiedElementName);
+
+	element_copy.value = element_orig.value;
+}
+
 function updateSS() {
 	var ss_num = document.getElementById('ss_num');
 	var fname = document.getElementById('fname');
@@ -373,6 +410,9 @@ function clearNullTextArea(element) {
 	return element.innerHTML;
 }
 
+
+
+// AM CONNECTIONS FUNCTIONS
 function connectionCheck() {
 	var explain = document.getElementById('connectionExplain');
 	var label = document.getElementById('explain_label');
@@ -395,7 +435,33 @@ function initalize_am_connections() {
 }
 
 function continue_to_worst() {
-	document.getElementById('am_demo').submit();
+	var proceed = true;
+	var angerWorse = document.getElementById('angerWorse');
+	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
+	var lessAngry = document.getElementById('lessAngry');
+	var othersTellMe = document.getElementById('othersTellMe');
+	var noConnection = document.getElementById('noConnection');
+	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
+	var connectionExplain = document.getElementById('connectionExplain');
+
+	processCheckbox(angerWorse);
+	processCheckbox(troubleWhenUsing);
+	processCheckbox(lessAngry);
+	processCheckbox(othersTellMe);
+	processCheckbox(noConnection);
+	processCheckbox(otherConnectionsUsing);
+
+	copyElementToInput('angerWorse');
+	copyElementToInput('troubleWhenUsing');
+	copyElementToInput('lessAngry');
+	copyElementToInput('othersTellMe');
+	copyElementToInput('noConnection');
+	copyElementToInput('otherConnectionsUsing');
+	copyElementToInput('connectionExplain');
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
 }
 
 // AM WORST EPISODES FUNCTIONS
@@ -435,7 +501,59 @@ function initalize_am_worst() {
 }
 
 function continue_to_target() {
-	document.getElementById('am_demo').submit();
+	var proceed = true;
+	var whoWorst = document.getElementById('whoWorst');
+	var happenedWorst = document.getElementById('happenedWorst');
+	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
+	var howStartWorst = document.getElementById('howStartWorst');
+	var howEndWorst = document.getElementById('howEndWorst');
+	var hadDrugs = document.getElementById('hadDrugs');
+	var iUsedWorst = document.getElementById('iUsedWorst');
+	var physicalWorst = document.getElementById('physicalWorst');
+	var verbalWorst = document.getElementById('verbalWorst');
+	var threatsWorst = document.getElementById('threatsWorst');
+	var propertyWorst = document.getElementById('propertyWorst');
+	var otherWorst = document.getElementById('otherWorst');
+	var otherWorstDescription = document.getElementById('otherWorstDescription');
+
+	var useWorst = document.getElementById('m_useWorst');
+	var descriptOUT = document.getElementById('m_otherWorstDescription');
+
+	processCheckbox(physicalWorst);
+	processCheckbox(verbalWorst);
+	processCheckbox(threatsWorst);
+	processCheckbox(propertyWorst);
+	processCheckbox(otherWorst);
+
+	if (hadDrugs.checked === true) {
+		useWorst.value = "True";
+	}
+	else {
+		useWorst.value = "False";
+	}
+
+	if (otherWorst.checked === true) {
+		copyElementToInput('otherWorstDescription');
+	}
+	else {
+		descriptOUT.value = 'NA';
+	}
+
+	copyElementToInput('whoWorst');
+	copyElementToInput('happenedWorst');
+	copyElementToInput('wordThoughtWorst');
+	copyElementToInput('howStartWorst');
+	copyElementToInput('howEndWorst');
+	copyElementToInput('iUsedWorst');
+	copyElementToInput('physicalWorst');
+	copyElementToInput('verbalWorst');
+	copyElementToInput('threatsWorst');
+	copyElementToInput('propertyWorst');
+	copyElementToInput('otherWorst');
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
 }
 
 
@@ -458,14 +576,204 @@ function initalize_am_target() {
 }
 
 function continue_to_am_family() {
-	document.getElementById('am_demo').submit();
+	var proceed = true;
+	var angryPartner = document.getElementById('angryPartner');
+	var angryParents = document.getElementById('angryParents');
+	var angryChildren = document.getElementById('angryChildren');
+	var angryRelatives = document.getElementById('angryRelatives');
+	var angryEmployer = document.getElementById('angryEmployer');
+	var angryFriends = document.getElementById('angryFriends');
+	var angryOther = document.getElementById('angryOther');
+	var otherWhom = document.getElementById('otherWhom');
+	var angryAbout = document.getElementById('angryAbout');
+	var seldomUpset = document.getElementById('seldomUpset');
+
+	processCheckbox(angryPartner);
+	processCheckbox(angryParents);
+	processCheckbox(angryChildren);
+	processCheckbox(angryRelatives);
+	processCheckbox(angryEmployer);
+	processCheckbox(angryFriends);
+	processCheckbox(angryOther);
+	processCheckbox(seldomUpset);
+
+	if (angryOther.checked === false) {
+		document.getElementById('m_otherWhom').value = 'NA';
+	}
+	else {
+		copyElementToInput('otherWhom');
+	}
+
+	//ERROR CHECKING...
+
+	copyElementToInput('angryPartner');
+	copyElementToInput('angryParents');
+	copyElementToInput('angryChildren');
+	copyElementToInput('angryRelatives');
+	copyElementToInput('angryEmployer');
+	copyElementToInput('angryFriends');
+	copyElementToInput('angryOther');	
+	copyElementToInput('angryAbout');
+	copyElementToInput('seldomUpset');
+
+	
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
 }
 
 
 // AM FAMILY OF ORIGIN FUNCTIONS
+function continue_to_am_problems() {
+	var proceed = true;
+	var kidMomAnger = document.getElementById('kidMomAnger');
+	var kidDadAnger = document.getElementById('kidDadAnger');
+	var kidSiblingAnger = document.getElementById('kidSiblingAnger');
+	var kidOtherAnger = document.getElementById('kidOtherAnger');
+	var learnFamilyAnger = document.getElementById('learnFamilyAnger');
+	var hasSuicide = document.getElementById('hasSuicide');
+	var hasLovingMother = document.getElementById('hasLovingMother');
+	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
+
+	//PROCESS CHECKBOXES
+	processCheckbox(hasLovingMother);
+	processCheckbox(hasLovingSiblings);
+
+	//PROCESS RADIO BUTTONS
+	if (hasSuicide.checked === true) {
+		document.getElementById('m_suicideHistory').value = 'True';
+	}
+	else {
+		document.getElementById('m_suicideHistory').value = 'False';
+	}
+
+	//COPY OUTPUT FIELDS
+	copyElementToInput('kidMomAnger');
+	copyElementToInput('kidDadAnger');
+	copyElementToInput('kidSiblingAnger');
+	copyElementToInput('kidOtherAnger');
+	copyElementToInput('learnFamilyAnger');
+	copyElementToInput('hasLovingMother');
+	copyElementToInput('hasLovingSiblings');
+	
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
+//AM CURRENT PROBLEMS FUNCTIONS
+function am_problems_check() {
+	var label = document.getElementById('other_label');
+	var box = document.getElementById('describeIssue');
+
+	if (document.getElementById('otherSeriousIllness').checked === true) {
+		label.style.opacity = '1.0';
+		box.style.opacity = '1.0';
+		box.disabled = false;
+	}
+	else {
+		label.style.opacity = '0';
+		box.style.opacity = '0';
+		box.disabled = true;
+	}
+}
+
+function am_problems_radio() {
+	var label = document.getElementById('taking_meds_label');
+	var box = document.getElementById('whichMeds');
+
+	if (document.getElementById('onMeds').checked === true) {
+		label.style.opacity = '1.0';
+		box.style.opacity = '1.0';
+		box.disabled = false;
+	}
+
+	if (document.getElementById('noMeds').checked === true) {
+		label.style.opacity = '0.5';
+		box.style.opacity = '0.5';
+		box.disabled = true;
+	}
+}
+
+function initalize_am_problems() {
+	am_problems_check();
+	am_problems_radio();
+}
+
 function continue_to_am_control() {
+	var proceed = true;
+	var brainInjury = document.getElementById('brainInjury');
+	var stroke = document.getElementById('stroke');
+	var epilepsy = document.getElementById('epilepsy');
+	var attentionDD = document.getElementById('attentionDD');
+	var pms = document.getElementById('pms');
+	var depression = document.getElementById('depression');
+	var ptsd = document.getElementById('ptsd');
+	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
+	var onMeds = document.getElementById('onMeds');
+	var whichMeds = document.getElementById('whichMeds');
+	var describeIssue = document.getElementById('describeIssue');
+
+	//PROCESS RADIO BUTTONS
+	if (onMeds.checked === true) {
+		document.getElementById('m_currentlyOnMeds').value = 'True';
+		copyElementToInput('whichMeds')
+	}
+	else {
+		document.getElementById('m_currentlyOnMeds').value = 'False';
+		document.getElementById('m_whichMeds').value = 'NA';
+	}
+
+	//PROCESS DYNAMIC FIELDS
+	if (otherSeriousIllness.checked === false) {
+		document.getElementById('m_describeIssue').value = 'NA';
+	}
+	else {
+		copyElementToInput('describeIssue');
+	}
+
+	//PROCESS CHECKBOXES
+	processCheckboxPython(brainInjury);
+	processCheckboxPython(stroke);
+	processCheckboxPython(epilepsy);
+	processCheckboxPython(attentionDD);
+	processCheckboxPython(pms);
+	processCheckboxPython(depression);
+	processCheckboxPython(ptsd);
+	processCheckboxPython(otherSeriousIllness);
+
+	//ERROR CHECKING...
+
+	//PROCESS HIDDEN POST INPUTS
+	copyElementToInput('brainInjury');
+	copyElementToInput('stroke');
+	copyElementToInput('epilepsy');
+	copyElementToInput('attentionDD');
+	copyElementToInput('pms');
+	copyElementToInput('depression');
+	copyElementToInput('ptsd');
+	copyElementToInput('otherSeriousIllness');
+
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
+
+// AM CHILDHOOD FUNCTIONS
+function continue_am_history1() {
 	document.getElementById('am_demo').submit();
 }
+
+
+
+// AM ANGER/VIOLENCE HISTORY FUNCTIONS
+function continue_to_am_connections() {
+	document.getElementById('am_demo').submit();
+}
+
+
 
 
 // AM DEMOGRAPHIC FUNCTIONS

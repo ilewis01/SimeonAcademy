@@ -151,13 +151,12 @@
 	                            <input type='hidden' value='' name='m_howEndWorst' id='m_howEndWorst'>
 	                            <input type='hidden' value='' name='m_useWorst' id='m_useWorst'>
 	                            <input type='hidden' value='' name='m_iUsedWorst' id='m_iUsedWorst'>
-	                            <input type='hidden' value='' name='m_theyUsedWorst' id='m_theyUsedWorst'>
 	                            <input type='hidden' value='' name='m_physicalWorst' id='m_physicalWorst'>
 	                            <input type='hidden' value='' name='m_verbalWorst' id='m_verbalWorst'>
 	                            <input type='hidden' value='' name='m_threatsWorst' id='m_threatsWorst'>
 	                            <input type='hidden' value='' name='m_propertyWorst' id='m_propertyWorst'>
 	                            <input type='hidden' value='' name='m_otherWorst' id='m_otherWorst'>
-	                            <input type='hidden' value='' name='m_wotherWorstDescription' id='m_wotherWorstDescription'>
+	                            <input type='hidden' value='' name='m_otherWorstDescription' id='m_otherWorstDescription'>
 
 	                            <table>
 	                            	<tr>
@@ -280,11 +279,11 @@
 										</td>
 
 										<td>
-											<select name='iUsedWorst' id='iUsedWorst' value=''>
-												<option value=''>Select</option>
-												<option value='me'>Me</option>
-												<option value='other'>The Other Party</option>
-												<option value='all'>Everyone Involved</option>
+											<select name='iUsedWorst' id='iUsedWorst'>
+												<option value='not selected'>Select</option>
+												<option value='client used only'>Client Used</option>
+												<option value='other party used only'>The Other Party Used</option>
+												<option value='all parties involved used'>Everyone Involved</option>
 											</select>
 										</td>
 									</tr>

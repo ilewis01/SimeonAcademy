@@ -20,6 +20,13 @@ SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, \
 Invoice, SType
 
+def onTrue_offFalse(data):
+	if data == 'on':
+		data = True
+	else:
+		data = False
+	return data
+
 def convert_phone(phone):
 	result = '('
 	result += phone[0]

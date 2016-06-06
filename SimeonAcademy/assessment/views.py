@@ -34,7 +34,7 @@ continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
-startSession, refreshAM, getAMFields
+startSession, refreshAM, getAMFields, onTrue_offFalse
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -505,6 +505,17 @@ def am_angerHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
 
@@ -523,6 +534,60 @@ def am_angerTarget(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			whoWorst = request.POST.get('m_whoWorst', '')
+			happenedWorst = request.POST.get('m_happenedWorst', '')
+			wordThoughtWorst = request.POST.get('m_wordThoughtWorst', '')
+			howStartWorst = request.POST.get('m_howStartWorst', '')
+			howEndWorst = request.POST.get('m_howEndWorst', '')
+			useWorst = request.POST.get('m_useWorst', '')
+			iUsedWorst = request.POST.get('m_iUsedWorst', '')
+			theyUsedWorst = request.POST.get('m_theyUsedWorst', '')
+			physicalWorst = request.POST.get('m_physicalWorst', '')
+			verbalWorst = request.POST.get('m_verbalWorst', '')
+			threatsWorst = request.POST.get('m_threatsWorst', '')
+			propertyWorst = request.POST.get('m_propertyWorst', '')
+			otherWorst = request.POST.get('m_otherWorst', '')
+			otherWorstDescription = request.POST.get('m_otherWorstDescription', '')
+
+			#PROCESS THE CHECKBOXES
+			physicalWorst = onTrue_offFalse(physicalWorst)
+			verbalWorst = onTrue_offFalse(verbalWorst)
+			threatsWorst = onTrue_offFalse(threatsWorst)
+			propertyWorst = onTrue_offFalse(propertyWorst)
+			otherWorst = onTrue_offFalse(otherWorst)
+
+			date = datetime.now()
+			date = date.date()
+
+			am.worstEpisode.date_of_assessment = date
+			am.worstEpisode.whoWorst = whoWorst
+			am.worstEpisode.happenedWorst = happenedWorst
+			am.worstEpisode.wordThoughtWorst = wordThoughtWorst
+			am.worstEpisode.howStartWorst = howStartWorst
+			am.worstEpisode.howEndWorst = howEndWorst
+			am.worstEpisode.useWorst = useWorst
+			am.worstEpisode.iUsedWorst = iUsedWorst
+			am.worstEpisode.physicalWorst = physicalWorst
+			am.worstEpisode.verbalWorst = verbalWorst
+			am.worstEpisode.threatsWorst = threatsWorst
+			am.worstEpisode.propertyWorst = propertyWorst
+			am.worstEpisode.otherWorst = otherWorst
+			am.worstEpisode.otherWorstDescription = otherWorstDescription
+			am.worstEpisode.save()
+			am.worstComplete = True
+			am.save()
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/AngerTarget.html', content)
 
@@ -682,6 +747,17 @@ def am_connections(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/connections.html', content)
 
@@ -701,6 +777,49 @@ def am_control(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			date = datetime.now()
+			date = date.date()
+
+			brainInjury = request.POST.get('brainInjury', '')
+			stroke = request.POST.get('stroke', '')
+			epilepsy = request.POST.get('epilepsy', '')
+			attentionDD = request.POST.get('attentionDD', '')
+			pms = request.POST.get('pms', '')
+			depression = request.POST.get('depression', '')
+			ptsd = request.POST.get('ptsd', '')
+			otherSeriousIllness = request.POST.get('otherSeriousIllness', '')
+			currentlyOnMeds = request.POST.get('currentlyOnMeds', '')
+			whichMeds = request.POST.get('whichMeds', '')
+			describeIssue = request.POST.get('describeIssue', '')
+
+			#UPDATE CURRENT PROBLEMS DATABASE
+			am.currentProblems.date_of_assessment = date
+			am.currentProblems.brainInjury = brainInjury
+			am.currentProblems.stroke = stroke
+			am.currentProblems.epilepsy = epilepsy
+			am.currentProblems.attentionDD = attentionDD
+			am.currentProblems.pms = pms
+			am.currentProblems.depression = depression
+			am.currentProblems.ptsd = ptsd
+			am.currentProblems.otherSeriousIllness = otherSeriousIllness
+			am.currentProblems.currentlyOnMeds = currentlyOnMeds
+			am.currentProblems.whichMeds = whichMeds
+			am.currentProblems.describeIssue = describeIssue
+			am.currentProblems.save()
+			am.currentProblemsComplete = True
+			am.save()
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/control.html', content)
 
@@ -793,6 +912,47 @@ def am_problems(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			date = datetime.now()
+			date = date.date()
+
+			kidMomAnger = request.POST.get('m_kidMomAnger', '')
+			kidDadAnger = request.POST.get('m_kidDadAnger', '')
+			kidSiblingAnger = request.POST.get('m_kidSiblingAnger', '')
+			kidOtherAnger = request.POST.get('m_kidOtherAnger', '')
+			learnFamilyAnger = request.POST.get('m_learnFamilyAnger', '')
+			suicideHistory = request.POST.get('m_suicideHistory', '')
+			hasLovingMother = request.POST.get('m_hasLovingMother', '')
+			hasLovingSiblings = request.POST.get('m_hasLovingSiblings', '')
+
+			#PROCESS CHECKBOXES
+			hasLovingMother = onTrue_offFalse(hasLovingMother)
+			hasLovingSiblings = onTrue_offFalse(hasLovingSiblings)
+
+			#UPDATE FAMILY OF ORGIN DATA
+			am.familyOrigin.date_of_assessment = date
+			am.familyOrigin.kidMomAnger = kidMomAnger
+			am.familyOrigin.kidDadAnger = kidDadAnger
+			am.familyOrigin.kidSiblingAnger = kidSiblingAnger
+			am.familyOrigin.kidOtherAnger = kidOtherAnger
+			am.familyOrigin.learnFamilyAnger = learnFamilyAnger
+			am.familyOrigin.suicideHistory = suicideHistory
+			am.familyOrigin.hasLovingMother = hasLovingMother
+			am.familyOrigin.hasLovingSiblings = hasLovingSiblings
+			am.familyOrigin.save()
+			am.familyOriginComplete = True
+			am.save()
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content)
 
@@ -1094,6 +1254,55 @@ def am_familyOrigin(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			date = datetime.now()
+			date = date.date()
+
+			angryPartner = request.POST.get('m_angryPartner', '')
+			angryParents = request.POST.get('m_angryParents', '')
+			angryChildren = request.POST.get('m_angryChildren', '')
+			angryRelatives = request.POST.get('m_angryRelatives', '')
+			angryEmployer = request.POST.get('m_angryEmployer', '')
+			angryFriends = request.POST.get('m_angryFriends', '')
+			angryOther = request.POST.get('m_angryOther', '')
+			otherWhom = request.POST.get('m_otherWhom', '')
+			angryAbout = request.POST.get('m_angryAbout', '')
+			seldomUpset = request.POST.get('m_seldomUpset', '')
+
+			angryPartner = onTrue_offFalse(angryPartner)
+			angryParents = onTrue_offFalse(angryParents)
+			angryChildren = onTrue_offFalse(angryChildren)
+			angryRelatives = onTrue_offFalse(angryRelatives)
+			angryEmployer = onTrue_offFalse(angryEmployer)
+			angryFriends = onTrue_offFalse(angryFriends)
+			angryOther = onTrue_offFalse(angryOther)
+			seldomUpset = onTrue_offFalse(seldomUpset)
+
+			am.angerTarget.date_of_assessment = date
+			am.angerTarget.angryPartner = angryPartner
+			am.angerTarget.angryParents = angryParents
+			am.angerTarget.angryChildren = angryChildren
+			am.angerTarget.angryRelatives = angryRelatives
+			am.angerTarget.angryEmployer = angryEmployer
+			am.angerTarget.angryFriends = angryFriends
+			am.angerTarget.angryOther = angryOther
+			am.angerTarget.otherWhom = otherWhom
+			am.angerTarget.angryAbout = angryAbout
+			am.angerTarget.seldomUpset = seldomUpset
+			am.angerTarget.save()
+			am.angerTargetComplete = True
+			am.save()
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/familyOrigin.html', content)
 
@@ -1112,6 +1321,17 @@ def am_final(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/final.html', content)
 
@@ -1148,6 +1368,47 @@ def am_worst(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			angerWorse = request.POST.get('m_angerWorse', '')
+			troubleWhenUsing = request.POST.get('m_troubleWhenUsing', '')
+			lessAngry = request.POST.get('m_lessAngry', '')
+			othersTellMe = request.POST.get('m_othersTellMe', '')
+			noConnection = request.POST.get('m_noConnection', '')
+			otherConnectionsUsing = request.POST.get('m_otherConnectionsUsing', '')
+			connectionExplain = request.POST.get('m_connectionExplain', '')
+
+			angerWorse = onTrue_offFalse(angerWorse)
+			troubleWhenUsing = onTrue_offFalse(troubleWhenUsing)
+			lessAngry = onTrue_offFalse(lessAngry)
+			othersTellMe = onTrue_offFalse(othersTellMe)
+			noConnection = onTrue_offFalse(noConnection)
+			otherConnectionsUsing = onTrue_offFalse(otherConnectionsUsing)
+
+			date = datetime.now()
+			date = date.date()
+
+			am.connections.date_of_assessment = date
+			am.connections.angerWorse = angerWorse
+			am.connections.troubleWhenUsing = troubleWhenUsing
+			am.connections.lessAngry = lessAngry
+			am.connections.othersTellMe = othersTellMe
+			am.connections.noConnection = noConnection
+			am.connections.otherConnectionsUsing = otherConnectionsUsing
+			am.connections.connectionExplain = connectionExplain
+			am.connectionsComplete = True
+			am.connections.save()
+			am.save()
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/worstEpisodes.html', content)
 

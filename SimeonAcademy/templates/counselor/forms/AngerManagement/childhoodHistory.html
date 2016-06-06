@@ -137,7 +137,7 @@
 	            <div class="container">
 	            	<div class="row">                   
 	                  	<div class="col-md-5 col-sm-5">
-	                  		<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
+	                  		<form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
 	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
 	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
 	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
@@ -759,7 +759,7 @@
                           <td>
                             <div id="submit-space">
                                 <a href="javascript: " id="continue">
-                                  <button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+                                  <button type='button' onClick='javascript: continue_am_history1();' id='continue'>Continue</button>
                                 </a>
                             </div>
                           </td>
