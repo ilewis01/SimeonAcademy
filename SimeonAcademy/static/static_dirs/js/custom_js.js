@@ -373,6 +373,27 @@ function clearNullTextArea(element) {
 	return element.innerHTML;
 }
 
+function connectionCheck() {
+	var explain = document.getElementById('connectionExplain');
+	var label = document.getElementById('explain_label');
+
+	if (document.getElementById('otherConnectionsUsing').checked === true) {
+		explain.disabled = false;
+		explain.style.opacity = "1.0";
+		label.style.opacity = "1.0";
+	}
+
+	else {
+		explain.disabled = true;
+		explain.style.opacity = "0.5";
+		label.style.opacity = "0.5";
+	}
+}
+
+function initalize_am_connections() {
+	connectionCheck();
+}
+
 function initialize_am_demo(json_data, back) {
 	var rent_radio = document.getElementById('rent_radio');
 	var own_radio = document.getElementById('own_radio');
