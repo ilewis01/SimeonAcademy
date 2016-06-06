@@ -2,13 +2,800 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Childhood History</h1>
+<body class="gradient-white" onLoad="javascript: am_drug_history_initialize({{json_data}}, {{back}})">
+    <!-- _________________________SIDE BAR_________________________ -->
+
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        	<table class='session-side'>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Client Profile</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span class="sidebar-id">{{client.clientID}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{phone}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span id='sidebar-fill'>{{client.email}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Session Info</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
+                    	</div>
+        			</td>
+        		</tr>
+        	</table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <h3 id='am-h2'>Anger Management: Childhood History</h3>
+                <!-- AM ID: {{AM.id}} <br>
+                Back: {{back}} <br>
+                Drug History ID: {{AM.drugHistory.id}} <br>
+                Session ID: {{session.id}} -->
+
+	            <div class="container">
+	            	<div class="row">                   
+	                  	<div class="col-md-5 col-sm-5">
+	                  		<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
+	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+	                  			<input type='hidden' name='back' id='back' value='false'>
+	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+
+	                            <!-- REAL DATA ENTRIES -->
+	                            <input type='hidden' value='' name='m_raisedBy' id='m_raisedBy'>
+	                            <input type='hidden' value='' name='m_momAlive' id='m_momAlive'>
+	                            <input type='hidden' value='' name='m_dadAlive' id='m_dadAlive'>
+	                            <input type='hidden' value='' name='m_childTrama' id='m_childTrama'>
+	                            <input type='hidden' value='' name='m_howLeftHome' id='m_howLeftHome'>
+	                            <input type='hidden' value='' name='m_num_siblings' id='m_num_siblings'>
+	                            <input type='hidden' value='' name='m_siblingsRelationship' id='m_siblingsRelationship'>
+	                            <input type='hidden' value='' name='m_dadClose' id='m_dadClose'>
+	                            <input type='hidden' value='' name='m_dadCloseExplain' id='m_dadCloseExplain'>
+	                            <input type='hidden' value='' name='m_momClose' id='m_momClose'>
+	                            <input type='hidden' value='' name='m_momCloseExplain' id='m_momCloseExplain'>
+	                            <input type='hidden' value='' name='m_wasAbused' id='m_wasAbused'>
+	                            <input type='hidden' value='' name='m_abusedBy' id='m_abusedBy'>
+	                            <input type='hidden' value='' name='m_abuseImpact' id='m_abuseImpact'>
+	                            <input type='hidden' value='' name='m_childAnger' id='m_childAnger'>
+	                            <input type='hidden' value='' name='m_childAngerExplain' id='m_childAngerExplain'>
+	                            <input type='hidden' value='' name='m_otherChild' id='m_otherChild'>
+	                            <input type='hidden' value='' name='m_otherChildExplain' id='m_otherChildExplain'>
+	                            <input type='hidden' value='' name='m_parentViolence' id='m_parentViolence'>
+	                            <input type='hidden' value='' name='m_parentViolenceExplain' id='m_parentViolenceExplain'>
+	                            <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
+
+	                            <!-- ____________________________LEFT SIDE_______________________________ -->
+	                            <table>
+	                            	<tr>
+		                            	<td>
+		                            		<div id='seperate-textfield-bottom'>
+			                            		<div id='textfield-label-correction'>
+			                            			<label for=''>By whom were you raised?</label>
+			                            		</div>
+			                            	</div>
+		                            	</td>
+		                            	<td>
+		                            		<select name='' id='' value=''>
+		                            			<option value=''>Select</option>
+		                            			<option value='parents'>Parents</option>
+		                            			<option value='grandparents'>Grandparents</option>
+		                            			<option value='relatives'>Relatives</option>
+		                            			<option value='foster'>Foster Care</option>
+		                            		</select>
+		                            	</td>
+	                            	</tr>
+	                            </table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Mother living?</label>
+								        </td>
+								   
+								        <td>
+								        	<div id='move-radio-right'>
+									            <table>
+									                <tr>
+									                    <td>
+									                        <div class='single-line-radio1'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for='YES'>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for='NO'>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Father living?</label>
+								        </td>
+								   
+								        <td>
+								        	<div id='move-radio-right'>
+									            <table>
+									                <tr>
+									                    <td>
+									                        <div class='single-line-radio1'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for='YES'>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for='NO'>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Have you experienced childhood trama?</label>
+								        </td>
+								   
+								        <td>
+								        	<div id='move-radio-right'>
+									            <table>
+									                <tr>
+									                    <td>
+									                        <div class='single-line-radio1'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain:</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain how you came to leave home:</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+										<td>
+											<div id='label_level_number'>
+												<label for=''>Number of siblings: </label>
+											</div>
+										</td>
+										<td>
+											<div id='submit-space'>
+												<input type='number' style="width:40px;" name='' id='' value=''>
+											</div>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Is your relationship with your siblings close or distant?<br>Explain:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>How would you describe your relationship with your</label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>father?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Close</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Distant</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain what made it close or distant:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Were you or any of your siblings physically, psychologically,</label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>or sexually abused as children?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table>
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>By whom?</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table> 
+	                    </div>
+
+	                    <div class="col-md-5 col-sm-5">
+	                    <!-- ____________________________RIGHT SIDE_______________________________ -->
+
+	                    		
+								<table>
+									<tr>
+										<td>
+										    <label for=''>What was the impact emotionally and psychologically on the <br>abused?</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table> 
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>How would you describe your relationship with your</label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>mother?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Close</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Distant</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain what made it close or distant:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Did you have any problems with anger or violent behavior as a </label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>child or teenager?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Were there any other events or circumstances regarding your<br> childhood that may help us understand your particular</label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>counseling needs?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+								        <td>
+								            <label for='need_help'>Did you ever see your father or mother physically or</label>
+								        </td>
+								    </tr>
+								   
+								    <tr>
+								        <td>
+								        	<div>
+									            <table>
+									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for=''>psychologically abuse each other?</label>
+									                		</div>
+									                	</td>
+									                    <td>
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>Yes</label>
+									                    </td>
+									                                                                    
+									                    <td>
+									                        <div class='single-line-radio'>
+									                            <input type='radio' name='' id='' value=''>
+									                        </div>
+									                    </td>
+									                    <td>
+									                        <label for=''>No</label>
+									                    </td>
+									                </tr>
+									            </table>
+									        </div>
+								        </td>
+								    </tr>
+								</table> 
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>Explain:</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+
+								<table>
+									<tr>
+										<td>
+										    <label for=''>What impact did seeing/hearing one of the your parents abuse the <br>other have on you emotionally, psychologically, or physically?</label>
+
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<textarea cols='57' rows='3' name='' id=''></textarea>
+										</td>
+									</tr>
+								</table>
+	                    	</form>
+	                    </div> <!-- END LEFT SIDE -->
+	                </div> <!-- END FIRST ROW -->
+
+	                <div class="row">
+	                	<table>
+                          <tr>
+                            <td>
+                              <div id="error-div-main">
+                                <p class='error-messages' id='error_message_main'></p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table class='toggle-div-page'>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+                          <td>
+                            <div id="submit-space">
+                                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+                                  <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                                  <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
+                                  <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                                </form>
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: exit_am("exit_only");' id='continue'>Delete and Exit</button>
+                                </a>
+                            </div>
+                          </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="javascript: " id="continue">
+				                        	<button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Save and Exit</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+                          <td>
+                            <div id="submit-space">
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
+                                </a>
+                            </div>
+                          </td>
+			                </tr>
+	                    </table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+                  							                       
+                            
+<!-- _____________________________________________BUTTONS_______________________________________________ -->
+
+
+
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+<!-- <h1>Childhood History</h1>
 
 Session ID: {{session.id}} <br>
 Anger Management ID: {{AM.id}} <br>
-Back: {{back}}
+Back: {{back}} <br>
+First Drink Age: {{first_drink_age}} -->
 
-<form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
+
+
+<!-- <form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
 	<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
 	<input type='hidden' value='{{session.id}}' id='session_id' name='session_id'>
 	<input type='hidden' value='{{back}}' id='back' name='back'>
@@ -59,6 +846,4 @@ Back: {{back}}
 				</div>
 			</td>
 		</tr>
-	</table>
-
-{% endblock %}
+	</table> -->

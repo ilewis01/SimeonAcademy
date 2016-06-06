@@ -359,6 +359,20 @@ function hideToggle() {
 	}
 }
 
+function clearNullTextField(element) {
+	if (element.value === null) {
+		element.value = '';
+	}
+	return element.value;
+}
+
+function clearNullTextArea(element) {
+	if (element.innerHTML === null) {
+		element.innerHTML = '';
+	}
+	return element.innerHTML;
+}
+
 function initialize_am_demo(json_data, back) {
 	var rent_radio = document.getElementById('rent_radio');
 	var own_radio = document.getElementById('own_radio');
@@ -646,18 +660,33 @@ function am_drug_history_initialize(json_data, back) {
 		document.getElementById('no_treat_explain').innerHTML = '';
 		document.getElementById('relapse_explain').innerHTML = '';
 	}
-	// else {
-	// 	document.getElementById('first_use_type').value = json_data.;
-	// 	document.getElementById('what-you-use').value = json_data.;
-	// 	document.getElementById('how-often-you-use').value = json_data.;
-	// 	document.getElementById('how-much-you-use').value = json_data.;
-	// 	document.getElementById('reason_quit').value = json_data.;
-	// 	document.getElementById('BAL').value = json_data.;
-	// 	document.getElementById('when_treated').value = json_data.;
-	// 	document.getElementById('where_treated').value = json_data.;
-	// 	document.getElementById('no_treat_explain').innerHTML = json_data.;
-	// 	document.getElementById('relapse_explain').innerHTML = json_data.;
-	// }
+	else {
+		document.getElementById('first_drink').value = json_data.firstDrinkAge;
+		document.getElementById('first_use_type').value = json_data.firstDrinkType;
+		document.getElementById('what-you-use').value = json_data.useType;
+		document.getElementById('how-often-you-use').value = json_data.amtPerWeek;
+		document.getElementById('how-much-you-use').value = json_data.useAmt;
+		document.getElementById('quitMos').value = json_data.monthsQuit;
+		document.getElementById('quitYrs').value = json_data.yearsQuit;
+		document.getElementById('reason_quit').value = json_data.reasonQuit;
+		document.getElementById('dui_amount').value = json_data.numDUI;
+		document.getElementById('BAL').value = json_data.BALevel;
+		document.getElementById('when_treated').value = json_data.dateTreated;
+		document.getElementById('where_treated').value = json_data.treatmentPlace;
+		document.getElementById('no_treat_explain').innerHTML = json_data.reasonNotFinishedTreatment;
+		document.getElementById('relapse_explain').innerHTML = json_data.relapseTrigger;
+	}
+
+	document.getElementById('first_use_type').value = clearNullTextField(document.getElementById('first_use_type'));
+	document.getElementById('what-you-use').value = clearNullTextField(document.getElementById('what-you-use'));
+	document.getElementById('how-often-you-use').value = clearNullTextField(document.getElementById('how-often-you-use'));
+	document.getElementById('how-much-you-use').value = clearNullTextField(document.getElementById('how-much-you-use'));
+	document.getElementById('reason_quit').value = clearNullTextField(document.getElementById('reason_quit'));
+	document.getElementById('BAL').value = clearNullTextField(document.getElementById('BAL'));
+	document.getElementById('when_treated').value = clearNullTextField(document.getElementById('when_treated'));
+	document.getElementById('where_treated').value = clearNullTextField(document.getElementById('where_treated'));
+	document.getElementById('no_treat_explain').innerHTML = clearNullTextArea(document.getElementById('no_treat_explain'));
+	document.getElementById('relapse_explain').innerHTML = clearNullTextArea(document.getElementById('relapse_explain'));
 }
 
 function dh_drinks() {
@@ -1034,6 +1063,9 @@ function evaluate_field(field, hidden, error_msg) {
 }
 
 function continue_am_dh() {
+	var first_drink_age = document.getElementById('first_drink');
+	var m_first_drink_age = document.getElementById('m_first_drink');
+	m_first_drink_age.value = first_drink_age.value;
 	// var proceed = true;
 	// var continue_test = true;
 	// var check_next = true;

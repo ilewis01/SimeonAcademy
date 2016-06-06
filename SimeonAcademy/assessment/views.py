@@ -546,10 +546,12 @@ def am_childhood(request):
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
 			am = AngerManagement.objects.get(id=am_id)
-			date = datetime.now()
-			date = date.date()
 
 			content['back'] = back
+			content['AM'] = am
+			content['session'] = session
+			content['client'] = am.client
+			content['phone'] = convert_phone(am.client.phone)
 
 			if str(back) == 'false':
 				if am.childhood == None:
@@ -562,7 +564,7 @@ def am_childhood(request):
 					childhood.date_of_assessment = date
 					am.save()
 
-				first_drink = request.POST.get('m_first_drink', '')
+				first_drink_age = request.POST.get('m_first_drink', '')
 				first_use_type = request.POST.get('m_first_use_type', '')
 				ever_used_drugs = request.POST.get('ever_used', '')
 				quitMos = request.POST.get('m_quitMos', '')
@@ -586,9 +588,10 @@ def am_childhood(request):
 				drinking_last = request.POST.get('drinking_last', '')
 				relationship_alc = request.POST.get('relationship_alc', '')	
 
+				content['first_drink_age'] = first_drink_age
 
-				# dh_id = am.drugHistory.id
-				# drug_history = AM_DrugHistory.objects.get(id=dh_id)
+
+				# drug_history = am.drugHistory
 
 				# if currently_use_drugs == 'yes':
 				# 	currently_use_drugs = True

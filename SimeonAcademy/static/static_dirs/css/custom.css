@@ -461,6 +461,23 @@ button:hover {
 	color: black;
 }
 
+#textfield-label-correction {
+	margin-right: 7px;
+	margin-top: 8px;
+}
+
+#move-radio-right {
+	margin-left: 10px;
+}
+
+#seperate-textfield-bottom {
+	margin-bottom: 3px;
+}
+
+#label_level_number {
+	margin-top: 9px;
+}
+
 
 
 

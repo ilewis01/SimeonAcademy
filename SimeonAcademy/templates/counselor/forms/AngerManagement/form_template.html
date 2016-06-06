@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad="javascript: am_drug_history_initialize({{json_data}}, {{back}})">
+    <!-- _________________________SIDE BAR_________________________ -->
+
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        	<table class='session-side'>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Client Profile</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span class="sidebar-id">{{client.clientID}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{phone}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span id='sidebar-fill'>{{client.email}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Session Info</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
+                    	</div>
+        			</td>
+        		</tr>
+        	</table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <h3 id='am-h2'>Anger Management: Childhood History</h3>
+                AM ID: {{AM.id}} <br>
+                Back: {{back}} <br>
+                Drug History ID: {{AM.drugHistory.id}} <br>
+                Session ID: {{session.id}}
+
+	            <div class="container">
+	            	<div class="row">                   
+	                  	<div class="col-md-5 col-sm-5">
+	                  		<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
+	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+	                  			<input type='hidden' name='back' id='back' value='false'>
+	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+
+	                            <!-- REAL DATA ENTRIES -->
+	                            <input type='hidden' value='' name='m_raisedBy' id='m_raisedBy'>
+	                            <input type='hidden' value='' name='m_momAlive' id='m_momAlive'>
+	                            <input type='hidden' value='' name='m_dadAlive' id='m_dadAlive'>
+	                            <input type='hidden' value='' name='m_childTrama' id='m_childTrama'>
+	                            <input type='hidden' value='' name='m_howLeftHome' id='m_howLeftHome'>
+	                            <input type='hidden' value='' name='m_num_siblings' id='m_num_siblings'>
+	                            <input type='hidden' value='' name='m_siblingsRelationship' id='m_siblingsRelationship'>
+	                            <input type='hidden' value='' name='m_dadClose' id='m_dadClose'>
+	                            <input type='hidden' value='' name='m_dadCloseExplain' id='m_dadCloseExplain'>
+	                            <input type='hidden' value='' name='m_momClose' id='m_momClose'>
+	                            <input type='hidden' value='' name='m_momCloseExplain' id='m_momCloseExplain'>
+	                            <input type='hidden' value='' name='m_wasAbused' id='m_wasAbused'>
+	                            <input type='hidden' value='' name='m_abusedBy' id='m_abusedBy'>
+	                            <input type='hidden' value='' name='m_abuseImpact' id='m_abuseImpact'>
+	                            <input type='hidden' value='' name='m_childAnger' id='m_childAnger'>
+	                            <input type='hidden' value='' name='m_childAngerExplain' id='m_childAngerExplain'>
+	                            <input type='hidden' value='' name='m_otherChild' id='m_otherChild'>
+	                            <input type='hidden' value='' name='m_otherChildExplain' id='m_otherChildExplain'>
+	                            <input type='hidden' value='' name='m_parentViolence' id='m_parentViolence'>
+	                            <input type='hidden' value='' name='m_parentViolenceExplain' id='m_parentViolenceExplain'>
+	                            <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
+
+	                            <!-- ____________________________LEFT SIDE_______________________________ -->
+	              
+	                    </div>
+
+	                    <div class="col-md-5 col-sm-5">
+	                    		<!-- ____________________________RIGHT SIDE_______________________________ -->
+
+	                    	</form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+                  								
+                  								
+
+                  								
+
+                  								
+
+                  								
+
+                  								
+                  								
+                  						
+                  					
+                          
+                            
+<!-- _____________________________________________BUTTONS_______________________________________________ -->
+
+
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+

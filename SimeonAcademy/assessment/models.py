@@ -517,6 +517,7 @@ class AM_Final(models.Model):
 ##ANGER MANAGEMENT FULL IMPLEMENTATION OF ASSESSMENT FILE-------------------------------------------------------------
 class AngerManagement(models.Model):
 	client = models.ForeignKey(Client, blank=True, null=True, default=None)
+
 	demographic = models.ForeignKey(AM_Demographic, blank=True, null=True, default=None)
 	drugHistory = models.ForeignKey(AM_DrugHistory, blank=True, null=True, default=None)
 	childhood = models.ForeignKey(AM_ChildhoodHistory, blank=True, null=True, default=None)
