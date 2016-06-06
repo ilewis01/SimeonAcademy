@@ -2,22 +2,377 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Anger Target</h1>
+<body class="gradient-white" onLoad="javascript: initalize_am_target();">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/am_familyOrigin/' method='post' id='drug-history-form'> {% csrf_token %}
-	<input type='hidden' value='{{AM.id}}' id='AM_id' name='AM_id'>
+    <div id="wrapper" class='shift-rr'>
 
-	<table>
-		<tr>
-			<td>
-				
-			</td>
-		</tr>
-	</table>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+        	<table class='session-side'>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Client Profile</h3>
+                    	</div>
+        			</td>
+        		</tr>
 
-	<input type='submit' value='submit'>
-</form>
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
+                    	</div>
+        			</td>
+        		</tr>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span class="sidebar-id">{{client.clientID}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower'>
+                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span id='sidebar-fill'>{{phone}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<span id='sidebar-fill'>{{client.email}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div id='sidebar-space-lower2'>
+                        	<h3>Session Info</h3>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
+                    	</div>
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td>
+        				<div>
+                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
+                    	</div>
+        			</td>
+        		</tr>
+        	</table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+            	<div class="form_headings">
+                	<h3 id='am-h2'>Anger Management: With Whom Do You Get Angry?</h3>
+                </div>
+
+	            <div class="container">
+	            	<div class="row">                   
+	                  	<div class="col-md-5 col-sm-5">
+	                  		<form action='/am_familyOrigin/' method='post' id='am_demo'> {% csrf_token %}
+	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+	                  			<input type='hidden' name='back' id='back' value='false'>
+	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+
+	                            <!-- REAL DATA ENTRIES -->
+	                            <input type='hidden' value='' name='m_angryPartner' id='m_angryPartner'>
+	                            <input type='hidden' value='' name='m_angryParents' id='m_angryParents'>
+	                            <input type='hidden' value='' name='m_angryChildren' id='m_angryChildren'>
+	                            <input type='hidden' value='' name='m_angryRelatives' id='m_angryRelatives'>
+	                            <input type='hidden' value='' name='m_angryEmployer' id='m_angryEmployer'>
+	                            <input type='hidden' value='' name='m_angryFriends' id='m_angryFriends'>
+	                            <input type='hidden' value='' name='m_angryOther' id='m_angryOther'>
+                                <input type='hidden' value='' name='m_otherWhom' id='m_otherWhom'>
+                                <input type='hidden' value='' name='m_angryAbout' id='m_angryAbout'>
+                                <input type='hidden' value='' name='m_seldomUpset' id='m_seldomUpset'>
+	                          
+
+	                            <h4>Check all that apply:</h4>
+
+                                <!-- ___________________CHECKBOXES_________________ -->
+	                            <table>
+                                    <tr>
+                                        <!-- LEFT SIDE -->
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryPartner' id='angryPartner'>
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Partner</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryRelatives' id='angryRelatives'>
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Relatives</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryOther' id='angryOther' onClick="javascript: amTargetOther();">
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Other (Explain)</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <!-- MIDDLE -->
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryParents' id='angryParents'>
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Parents (Step-parents)</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryEmployer' id='angryEmployer'>
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Employer (Co-workers)</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr><td><div class="table3Height"></div></td></tr>
+                                            </table>
+                                        </td>
+
+                                        <!-- RIGHT SIDE -->
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryChildren' id='angryChildren'>
+                                                    </td>
+
+                                                    <td class="table3Width">
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Your Children (Step-children)</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <input type='checkbox' name='angryFriends' id='angryFriends'>
+                                                    </td>
+
+                                                    <td>
+                                                        <div id='checkbox_label_fix' class="table3Col">
+                                                            <label>Friends</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr><td><div class="table3Height"></div></td></tr>
+                                            </table> 
+                                        </td>
+                                    </tr>
+                                </table>  <!-- END CHECKBOXES -->
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div id='right_17px'>
+                                                <input type='text' id='otherWhom' name='otherWhom'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div style='margin-top:30px;'>
+                                                <label>What do you get angry about?</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <textarea rows='4' cols='60' name='angryAbout' id='angryAbout'></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table style="margin-top:10px;">
+                                    <tr>
+                                        <td>
+                                            <input type='checkbox' id='' name=''>
+                                        </td>
+
+                                        <td>
+                                            <div id='checkbox_label_fix'>
+                                                <label style='color:blue;'>Client indicates that he/she seldom becomes angry.</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+	                        </form>	              
+	                    </div>
+	                </div>
+
+	                <div class="row">
+				<!-- _____________________________________________BUTTONS_______________________________________________ -->
+
+						<table>
+                          <tr>
+                            <td>
+                              <div id="error-div-main">
+                                <p class='error-messages' id='error_message_main'></p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table class='toggle-div-page'>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+                          <td>
+                            <div id="submit-space">
+                                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+                                  <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                                  <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
+                                  <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                                </form>
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: exit_am("exit_only");' id='continue'>Delete and Exit</button>
+                                </a>
+                            </div>
+                          </td>
+
+			                    <td>
+			                    	<div id="submit-space">
+				                        <a href="javascript: " id="continue">
+				                        	<button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Save and Exit</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+                          <td>
+                            <div id="submit-space">
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: continue_to_am_family();' id='continue'>Continue</button>
+                                </a>
+                            </div>
+                          </td>
+			                </tr>
+	                    </table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 
 {% endblock %}
+
+
+
+
+
+
+

@@ -458,6 +458,8 @@ class AM_FamilyOrigin(models.Model):
 	kidOtherAnger = models.CharField(max_length=100, default=None, blank=True, null=True)
 	learnFamilyAnger = models.CharField(max_length=100, default=None, blank=True, null=True)
 	suicideHistory = models.BooleanField(blank=True, default=False)
+	hasLovingMother = models.BooleanField(blank=True, default=False)
+	hasLovingSiblings = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
 		return "Anger Management/Family Origin: " + str(self.client_id)

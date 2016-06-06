@@ -394,6 +394,75 @@ function initalize_am_connections() {
 	connectionCheck();
 }
 
+function continue_to_worst() {
+	document.getElementById('am_demo').submit();
+}
+
+// AM WORST EPISODES FUNCTIONS
+function worstCheck() {
+	var description = document.getElementById('otherWorstDescription');
+
+	if (document.getElementById('otherWorst').checked === true) {
+		description.style.opacity = "1.0";
+		description.disabled = false;
+	}
+	else {
+		description.style.opacity = '0';
+		description.disabled = true;
+	}
+}
+
+function activateWorstRadio() {
+	var selectBox = document.getElementById('iUsedWorst');
+	var label = document.getElementById('iUsedLabel');
+
+	if (document.getElementById('hadDrugs').checked === true) {
+		label.style.opacity = '1.0';
+		selectBox.style.opacity = '1.0';
+		selectBox.disabled = false;
+	}
+
+	if (document.getElementById('noDrugs').checked === true) {
+		label.style.opacity = '0.5';
+		selectBox.style.opacity = '0.5';
+		selectBox.disabled = true;
+	}
+}
+
+function initalize_am_worst() {
+	worstCheck();
+	activateWorstRadio();
+}
+
+function continue_to_target() {
+	document.getElementById('am_demo').submit();
+}
+
+
+// AM TARGET FUNCTIONS
+function amTargetOther() {
+	otherWhom = document.getElementById('otherWhom');
+
+	if(document.getElementById('angryOther').checked === true) {
+		otherWhom.disabled = false;
+		otherWhom.style.opacity = '1.0';
+	}
+	else {
+		otherWhom.disabled = true;
+		otherWhom.style.opacity = '0';
+	}
+}
+
+function initalize_am_target() {
+	amTargetOther();
+}
+
+function continue_to_am_family() {
+	document.getElementById('am_demo').submit();
+}
+
+
+// AM DEMOGRAPHIC FUNCTIONS
 function initialize_am_demo(json_data, back) {
 	var rent_radio = document.getElementById('rent_radio');
 	var own_radio = document.getElementById('own_radio');

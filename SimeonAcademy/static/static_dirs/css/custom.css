@@ -487,6 +487,47 @@ button:hover {
 	margin-left: 17px; 
 }
 
+#select_indent {
+	margin-top: 6px;
+	margin-right: 7px;
+	margin-left: 30px;
+}
+
+#ital_label {
+	font-style: italic;
+}
+
+#select_indent_check {
+	margin-right: 7px;
+	margin-left: 30px;
+	margin-bottom: 8px;
+}
+
+.worstVerticalSpace {
+	margin-bottom: 20px;
+}
+
+.worstVerticalSpace10 {
+	margin-bottom: 13px;
+}
+
+.form_headings {
+	margin-bottom: 30px;
+}
+
+.form_headings_low {
+	margin-bottom: 45px;
+}
+
+.table3Col{
+	width: 250px;
+}
+
+.table3Height{
+	height:30px;
+}
+
+
 
 
 
