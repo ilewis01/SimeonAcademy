@@ -462,6 +462,12 @@ function continue_to_am_family() {
 }
 
 
+// AM FAMILY OF ORIGIN FUNCTIONS
+function continue_to_am_control() {
+	document.getElementById('am_demo').submit();
+}
+
+
 // AM DEMOGRAPHIC FUNCTIONS
 function initialize_am_demo(json_data, back) {
 	var rent_radio = document.getElementById('rent_radio');

@@ -527,6 +527,11 @@ button:hover {
 	height:30px;
 }
 
+#header_question {
+	font-style: italic;
+	font-size: 15px;
+}
+
 
 
 

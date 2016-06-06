@@ -130,13 +130,17 @@
             <div>
             	<div class="form_headings_low">
                 	<h3 id='am-h2'>Anger Management: Family of Origin</h3>
+
+                	<div style='margin-top:30px;'>
+                		<span id='header_question'>Please describe what the following individuals do/did with their anger, especially when you were growing up:</span>
+                	</div>
                 </div>
 
 	            <div class="container">
 	            	<div class="row">                   
 	                  	<div class="col-md-5 col-sm-5">
 	                  		<!-- _______________________LEFT SIDE_____________________ -->
-	                  		<form action='/am_angerTarget/' method='post' id='am_demo'> {% csrf_token %}
+	                  		<form action='/am_problems/' method='post' id='am_demo'> {% csrf_token %}
 	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
 	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
 	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
@@ -152,17 +156,18 @@
 	                            <input type='hidden' value='' name='m_suicideHistory' id='m_suicideHistory'>
 	                            <input type='hidden' value='' name='m_hasLovingMother' id='m_hasLovingMother'>
 	                            <input type='hidden' value='' name='m_hasLovingSiblings' id='m_hasLovingSiblings'>
-	                            
+	                           
 
 	                            <table>
 	                            	<tr>
 	                            		<td>
-	                            			<label>1. When and with whom were involved?</label>
+	                            			<label>1. Your father (step-father):</label>
 	                            		</td>
 	                            	</tr>
+
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='60' rows='4' name='whoWorst' id='whoWorst'></textarea>
+	                            			<textarea cols='60' rows='4' name='kidDadAnger' id='kidDadAnger'></textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -172,12 +177,27 @@
 	                            <table>
 	                            	<tr>
 	                            		<td>
-	                            			<label>2. What Happened?</label>
+	                            			<label>2. Your Mother (step-mother):</label>
 	                            		</td>
 	                            	</tr>
+
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='60' rows='4' name='happenedWorst' id='happenedWorst'></textarea>
+	                            			<textarea cols='60' rows='4' name='kidMomAnger' id='kidMomAnger'></textarea>
+	                            		</td>
+	                            	</tr>
+	                            </table>
+
+	                            <table>
+	                            	<tr>
+	                            		<td>
+	                            			<input type='checkbox' name='hasLovingMother' id='hasLovingMother'>
+	                            		</td>
+
+	                            		<td>
+	                            			<div id='checkbox_label_fix'>
+	                            				<label>Client indicates that his/her mother is a very loving person.</label>
+	                            			</div>
 	                            		</td>
 	                            	</tr>
 
@@ -187,30 +207,40 @@
 	                            <table>
 	                            	<tr>
 	                            		<td>
-	                            			<label>3. Main types of angry words and thoughts during this episode:</label>
-	                            		</td>
-	                            	</tr>
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='60' rows='4' name='wordThoughtWorst' id='wordThoughtWorst'></textarea>
+	                            			<label>3. Your Siblings:</label>
 	                            		</td>
 	                            	</tr>
 
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
+	                            	<tr>
+	                            		<td>
+	                            			<textarea cols='60' rows='4' name='kidSiblingAnger' id='kidSiblingAnger'></textarea>
+	                            		</td>
+	                            	</tr>
 	                            </table>
 
 	                            <table>
 	                            	<tr>
 	                            		<td>
-	                            			<label>4. How did this angry episode start?</label>
+	                            			<input type='checkbox' name='hasLovingSiblings' id='hasLovingSiblings'>
 	                            		</td>
-	                            	</tr>
-	                            	<tr>
+
 	                            		<td>
-	                            			<textarea cols='60' rows='4' name='howStartWorst' id='howStartWorst'></textarea>
+	                            			<div id='checkbox_label_fix'>
+	                            				<label>Client indicates that he and his siblings have always had</label>
+	                            			</div>
 	                            		</td>
 	                            	</tr>
+
+	                            	<tr>
+	                            		<td></td>
+	                            		<td>
+	                            			<div style='margin-left:5px;'><label>a good relationship.</label></div>
+	                            		</td>
+	                            	</tr>
+
+	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
 	                            </table>
+	                            	
 	                    </div>
 
 	                    <div class="col-md-5 col-sm-5">
@@ -219,32 +249,39 @@
 	                    		<table>
 	                            	<tr>
 	                            		<td>
-	                            			<label>5. How did it this angry episode end?</label>
+	                            			<label>4. Other Significant Persons (grandparents, etc.):</label>
 	                            		</td>
 	                            	</tr>
+
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='60' rows='4' name='howEndWorst' id='howEndWorst'></textarea>
+	                            			<textarea cols='60' rows='4' name='kidOtherAnger' id='kidOtherAnger'></textarea>
 	                            		</td>
 	                            	</tr>
 
 	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            	<tr><td><div class="worstVerticalSpace10"></div></td></tr>
 	                            </table>
-
+	                    		
 	                            <table>
 									<tr>
 								        <td>
-								            <label for='need_help'>6. Any alcohol or drugs by anyone involved?</label>
+								            <label for='suicideHistory'>5. Is ther any family history of bad tempers, assults,</label>
 								        </td>
+								    </tr>
 								   
+								    <tr>
 								        <td>
-								        	<div id='move-radio-right'>
+								        	<div>
 									            <table>
 									                <tr>
+									                	<td>
+									                		<div style='margin-right:10px;'>
+									                			<label for='suicideHistory'>homicides, or suicides?</label>
+									                		</div>
+									                	</td>
 									                    <td>
-									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='useWorst' id='hadDrugs' value='hadDrugs' onClick="javascript: activateWorstRadio();">
+									                        <div class='single-line-radio1' style='margin-left:10px;'>
+									                            <input type='radio' name='suicideHistory' id='hasSuicide' value='hasSuicide'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -253,13 +290,15 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='useWorst' id='noDrugs' value='noDrugs' checked onClick="javascript: activateWorstRadio();">
+									                            <input type='radio' name='suicideHistory' id='noSuicide' value='noSuicide' checked>
 									                        </div>
 									                    </td>
 									                    <td>
 									                        <label for=''>No</label>
 									                    </td>
 									                </tr>
+
+									                <tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
 									            </table>
 									        </div>
 								        </td>
@@ -267,133 +306,20 @@
 								</table> 
 
 								<table>
-									<tr>
-										<td>
-											<div id='select_indent'>
-												<label for='iUsedWorst' name='iUsedLabel' id='iUsedLabel'>Who was using?</label>
-											</div>
-										</td>
+	                            	<tr>
+	                            		<td>
+	                            			<label>6. In general, what did you learn about anger from <br>your family?</label>
+	                            		</td>
+	                            	</tr>
 
-										<td>
-											<select name='iUsedWorst' id='iUsedWorst' value=''>
-												<option value=''>Select</option>
-												<option value='me'>Me</option>
-												<option value='other'>The Other Party</option>
-												<option value='all'>Everyone Involved</option>
-											</select>
-										</td>
-									</tr>
+	                            	<tr>
+	                            		<td>
+	                            			<textarea cols='60' rows='4' name='learnFamilyAnger' id='learnFamilyAnger'></textarea>
+	                            		</td>
+	                            	</tr>
 
-									<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-									<tr><td><div class="worstVerticalSpace10"></div></td></tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-											<label>7. What actions did you demostrate during the angry episode?</label> <br>
-											<span id='ital_label'>Check all that apply:</span>
-										</td>
-									</tr>
-
-									<tr>
-										<table>
-											<tr>
-												<td>
-													<div id='select_indent_check'>
-														<input type='checkbox' name='physicalWorst' id='physicalWorst'>
-													</div>
-												</td>
-
-												<td>
-													<div>
-														<label>Physical</label>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</tr>
-
-									<tr>
-										<table>
-											<tr>
-												<td>
-													<div id='select_indent_check'>
-														<input type='checkbox' name='verbalWorst' id='verbalWorst'>
-													</div>
-												</td>
-
-												<td>
-													<div>
-														<label>Verbal</label>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</tr>
-
-									<tr>
-										<table>
-											<tr>
-												<td>
-													<div id='select_indent_check'>
-														<input type='checkbox' name='threatsWorst' id='threatsWorst'>
-													</div>
-												</td>
-
-												<td>
-													<div>
-														<label>Threats</label>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</tr>
-
-									<tr>
-										<table>
-											<tr>
-												<td>
-													<div id='select_indent_check'>
-														<input type='checkbox' name='propertyWorst' id='propertyWorst'>
-													</div>
-												</td>
-
-												<td>
-													<div>
-														<label>Property Destruction</label>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</tr>
-
-									<tr>
-										<table>
-											<tr>
-												<td>
-													<div id='select_indent_check'>
-														<input type='checkbox' name='otherWorst' id='otherWorst' onClick="javascript: worstCheck();">
-													</div>
-												</td>
-
-												<td>
-													<div>
-														<label>Other (Explain)</label>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</tr>
-
-									<tr>
-										<td>
-											<div id='select_indent'>
-												<textarea cols='55' rows='4' name='otherWorstDescription' id='otherWorstDescription'></textarea>
-											</div>
-										</td>
-									</tr>
-								</table>
+	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
+	                            </table>
 
 	                        </form>	              
 	                    </div>
@@ -447,7 +373,7 @@
                           <td>
                             <div id="submit-space">
                                 <a href="javascript: " id="continue">
-                                  <button type='button' onClick='javascript: continue_to_target();' id='continue'>Continue</button>
+                                  <button type='button' onClick='javascript: continue_to_am_control();' id='continue'>Continue</button>
                                 </a>
                             </div>
                           </td>
