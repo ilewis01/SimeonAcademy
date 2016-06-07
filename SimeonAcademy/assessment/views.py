@@ -547,7 +547,7 @@ def am_angerTarget(request):
 			howStartWorst = request.POST.get('m_howStartWorst', '')
 			howEndWorst = request.POST.get('m_howEndWorst', '')
 			useWorst = request.POST.get('m_useWorst', '')
-			iUsedWorst = request.POST.get('m_iUsedWorst', '')
+			whoDidItFight = request.POST.get('m_whoDidItFight', '')
 			theyUsedWorst = request.POST.get('m_theyUsedWorst', '')
 			physicalWorst = request.POST.get('m_physicalWorst', '')
 			verbalWorst = request.POST.get('m_verbalWorst', '')
@@ -573,7 +573,7 @@ def am_angerTarget(request):
 			am.worstEpisode.howStartWorst = howStartWorst
 			am.worstEpisode.howEndWorst = howEndWorst
 			am.worstEpisode.useWorst = useWorst
-			am.worstEpisode.iUsedWorst = iUsedWorst
+			am.worstEpisode.whoDidItFight = whoDidItFight
 			am.worstEpisode.physicalWorst = physicalWorst
 			am.worstEpisode.verbalWorst = verbalWorst
 			am.worstEpisode.threatsWorst = threatsWorst
@@ -737,6 +737,11 @@ def am_connections(request):
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/connections.html', False)
+			json_data = json.dumps(fields)
+
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
@@ -1391,6 +1396,11 @@ def am_worst(request):
 			am.connections.save()
 			am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/worstEpisodes.html', False)
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
+			content['fields'] = fields
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session

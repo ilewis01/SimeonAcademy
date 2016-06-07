@@ -417,6 +417,7 @@ class AM_WorstEpisode(models.Model):
 	howEndWorst = models.CharField(max_length=100, default=None, blank=True, null=True)
 	useWorst = models.BooleanField(default=False, blank=True)
 	iUsedWorst = models.BooleanField(default=False, blank=True)
+	whoDidItFight = models.CharField(max_length=50, default=None, blank=True, null=True)
 	theyUsedWorst = models.BooleanField(default=False, blank=True)
 	physicalWorst = models.BooleanField(default=False, blank=True)
 	verbalWorst = models.BooleanField(default=False, blank=True)

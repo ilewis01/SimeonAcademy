@@ -446,11 +446,31 @@ function connectionCheck() {
 		explain.disabled = true;
 		explain.style.opacity = "0.5";
 		label.style.opacity = "0.5";
+		explain.innerHTML = '';
 	}
 }
 
-function initalize_am_connections() {
+function initalize_am_connections(json_data) {
+	var angerWorse = document.getElementById('angerWorse');
+	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
+	var lessAngry = document.getElementById('lessAngry');
+	var othersTellMe = document.getElementById('othersTellMe');
+	var noConnection = document.getElementById('noConnection');
+	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
+	var connectionExplain = document.getElementById('connectionExplain');
+
+	angerWorse.checked = json_data.angerWorse;
+	troubleWhenUsing.checked = json_data.troubleWhenUsing;
+	lessAngry.checked = json_data.lessAngry;
+	othersTellMe.checked = json_data.othersTellMe;
+	noConnection.checked = json_data.noConnection;
+	otherConnectionsUsing.checked = json_data.otherConnectionsUsing;
+
 	connectionCheck();
+
+	if (otherConnectionsUsing.checked === true) {
+		connectionExplain.innerHTML = json_data.connectionExplain;
+	}
 }
 
 function continue_to_worst() {
@@ -498,8 +518,8 @@ function worstCheck() {
 }
 
 function activateWorstRadio() {
-	var selectBox = document.getElementById('iUsedWorst');
-	var label = document.getElementById('iUsedLabel');
+	var selectBox = document.getElementById('whoDidItFight');
+	var label = document.getElementById('whoDidItFight_label');
 
 	if (document.getElementById('hadDrugs').checked === true) {
 		label.style.opacity = '1.0';
@@ -514,9 +534,62 @@ function activateWorstRadio() {
 	}
 }
 
-function initalize_am_worst() {
+function initalize_am_worst(json_data) {
+	var whoWorst = document.getElementById('whoWorst');
+	var happenedWorst = document.getElementById('happenedWorst');
+	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
+	var howStartWorst = document.getElementById('howStartWorst');
+	var howEndWorst = document.getElementById('howEndWorst');
+	var whoDidItFight = document.getElementById('whoDidItFight');
+	var theyUsedWorst = document.getElementById('theyUsedWorst');
+	var physicalWorst = document.getElementById('physicalWorst');
+	var verbalWorst = document.getElementById('verbalWorst');
+	var threatsWorst = document.getElementById('threatsWorst');
+	var propertyWorst = document.getElementById('propertyWorst');
+	var otherWorst = document.getElementById('otherWorst');
+	var otherWorstDescription = document.getElementById('otherWorstDescription');
+
+	var hadDrugs = document.getElementById('hadDrugs');
+	var noDrugs = document.getElementById('noDrugs');
+
+	if (json_data.useWorst === true) {
+		hadDrugs.checked = true;
+	}
+	else {
+		noDrugs.checked = true;
+	}
+
+	if (String(json_data.whoDidItFight) === 'not selected') {
+		whoDidItFight.selectedIndex = 0;
+	}
+	else if (String(json_data.whoDidItFight) === 'client used only') {
+		whoDidItFight.selectedIndex = 1;
+	}
+	else if (String(json_data.whoDidItFight) === 'other party used only') {
+		whoDidItFight.selectedIndex = 2;
+	}
+	else {
+		whoDidItFight.selectedIndex = 3;
+	}
+
+	whoWorst.innerHTML = json_data.whoWorst;
+	happenedWorst.innerHTML = json_data.happenedWorst;
+	wordThoughtWorst.innerHTML = json_data.wordThoughtWorst;
+	howStartWorst.innerHTML = json_data.howStartWorst;
+	howEndWorst.innerHTML = json_data.howEndWorst;
+
+	physicalWorst.checked = json_data.physicalWorst;
+	verbalWorst.checked = json_data.verbalWorst;
+	threatsWorst.checked = json_data.threatsWorst;
+	propertyWorst.checked = json_data.propertyWorst;
+	otherWorst.checked = json_data.otherWorst;
+
 	worstCheck();
 	activateWorstRadio();
+
+	if (otherWorst.checked === true) {
+		otherWorstDescription.innerHTML = json_data.otherWorstDescription;
+	}
 }
 
 function continue_to_target() {
@@ -527,7 +600,7 @@ function continue_to_target() {
 	var howStartWorst = document.getElementById('howStartWorst');
 	var howEndWorst = document.getElementById('howEndWorst');
 	var hadDrugs = document.getElementById('hadDrugs');
-	var iUsedWorst = document.getElementById('iUsedWorst');
+	var whoDidItFight = document.getElementById('whoDidItFight');
 	var physicalWorst = document.getElementById('physicalWorst');
 	var verbalWorst = document.getElementById('verbalWorst');
 	var threatsWorst = document.getElementById('threatsWorst');
@@ -558,12 +631,14 @@ function continue_to_target() {
 		descriptOUT.value = 'NA';
 	}
 
+	whoDidItFight.value = whoDidItFight.options[whoDidItFight.selectedIndex].value;
+
 	copyElementToInput('whoWorst');
 	copyElementToInput('happenedWorst');
 	copyElementToInput('wordThoughtWorst');
 	copyElementToInput('howStartWorst');
 	copyElementToInput('howEndWorst');
-	copyElementToInput('iUsedWorst');
+	copyElementToInput('whoDidItFight');
 	copyElementToInput('physicalWorst');
 	copyElementToInput('verbalWorst');
 	copyElementToInput('threatsWorst');

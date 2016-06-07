@@ -543,7 +543,6 @@ def refreshAM(am):
 
 def grabAmDhFields(am):
 	result = {}
-
 	result['firstDrinkAge'] = am.drugHistory.firstDrinkAge
 	result['firstDrinkType'] = am.drugHistory.firstDrinkType
 	result['curUse'] = am.drugHistory.curUse
@@ -567,11 +566,105 @@ def grabAmDhFields(am):
 	result['drinkLastEpisode'] = am.drugHistory.drinkLastEpisode
 	result['drinkRelationshipProblem'] = am.drugHistory.drinkRelationshipProblem
 	result['needHelpDrugs'] = am.drugHistory.needHelpDrugs
-
 	return result
 
+def grabAmConnections(am):
+	fields = {}
+	fields['angerWorse'] = am.connections.angerWorse
+	fields['troubleWhenUsing'] = am.connections.troubleWhenUsing
+	fields['lessAngry'] = am.connections.lessAngry
+	fields['othersTellMe'] = am.connections.othersTellMe
+	fields['noConnection'] = am.connections.noConnection
+	fields['otherConnectionsUsing'] = am.connections.otherConnectionsUsing
+	fields['connectionExplain'] = am.connections.connectionExplain
+	return fields
 
+def grabAmControl(am):
+	fields = {}
+	fields['neverAttemptedControl'] = am.control.neverAttemptedControl
+	fields['talkToMyself'] = am.control.talkToMyself
+	fields['whatSayYou'] = am.control.whatSayYou
+	fields['leaveScene'] = am.control.leaveScene
+	fields['howLongLeaveScene'] = am.control.howLongLeaveScene
+	fields['whatDoLeave'] = am.control.whatDoLeave
+	fields['relax'] = am.control.relax
+	fields['selfHelpGroup'] = am.control.selfHelpGroup
+	fields['otherControlAnger'] = am.control.otherControlAnger
+	fields['doWhatOtherControl'] = am.control.doWhatOtherControl
+	return fields
 
+def grabAmCurrentProblems(am):
+	fields = {}
+	fields['brainInjury'] = am.currentProblems.brainInjury
+	fields['stroke'] = am.currentProblems.stroke
+	fields['epilepsy'] = am.currentProblems.epilepsy
+	fields['attentionDD'] = am.currentProblems.attentionDD
+	fields['pms'] = am.currentProblems.pms
+	fields['depression'] = am.currentProblems.depression
+	fields['ptsd'] = am.currentProblems.ptsd
+	fields['otherSeriousIllness'] = am.currentProblems.otherSeriousIllness
+	fields['currentlyOnMeds'] = am.currentProblems.currentlyOnMeds
+	fields['whichMeds'] = am.currentProblems.whichMeds
+	fields['describeIssue'] = am.currentProblems.describeIssue
+	return fields
+
+def grabAmFamilyOrigin(am):
+	fields = {}
+	fields['kidMomAnger'] = am.familyOrigin.kidMomAnger
+	fields['kidDadAnger'] = am.familyOrigin.kidDadAnger
+	fields['kidSiblingAnger'] = am.familyOrigin.kidSiblingAnger
+	fields['kidOtherAnger'] = am.familyOrigin.kidOtherAnger
+	fields['learnFamilyAnger'] = am.familyOrigin.learnFamilyAnger
+	fields['suicideHistory'] = am.familyOrigin.suicideHistory
+	fields['hasLovingMother'] = am.familyOrigin.hasLovingMother
+	fields['hasLovingSiblings'] = am.familyOrigin.hasLovingSiblings
+	return fields
+
+def grabAmWorstEpisodes(am):
+	fields = {}
+	fields['whoWorst'] = am.worstEpisode.whoWorst
+	fields['happenedWorst'] = am.worstEpisode.happenedWorst
+	fields['wordThoughtWorst'] = am.worstEpisode.wordThoughtWorst
+	fields['howStartWorst'] = am.worstEpisode.howStartWorst
+	fields['howEndWorst'] = am.worstEpisode.howEndWorst
+	fields['useWorst'] = am.worstEpisode.useWorst
+	fields['whoDidItFight'] = am.worstEpisode.whoDidItFight
+	fields['theyUsedWorst'] = am.worstEpisode.theyUsedWorst
+	fields['physicalWorst'] = am.worstEpisode.physicalWorst
+	fields['verbalWorst'] = am.worstEpisode.verbalWorst
+	fields['threatsWorst'] = am.worstEpisode.threatsWorst
+	fields['propertyWorst'] = am.worstEpisode.propertyWorst
+	fields['otherWorst'] = am.worstEpisode.otherWorst
+	fields['otherWorstDescription'] = am.worstEpisode.otherWorstDescription
+	return fields
+
+def grabAmTarget(am):
+	fields = {}
+	fields['angryPartner'] = am.angerTarget.angryPartner
+	fields['angryParents'] = am.angerTarget.angryParents
+	fields['angryChildren'] = am.angerTarget.angryChildren
+	fields['angryRelatives'] = am.angerTarget.angryRelatives
+	fields['angryEmployer'] = am.angerTarget.angryEmployer
+	fields['angryFriends'] = am.angerTarget.angryFriends
+	fields['angryOther'] = am.angerTarget.angryOther
+	fields['otherWhom'] = am.angerTarget.otherWhom
+	fields['angryAbout'] = am.angerTarget.angryAbout
+	fields['seldomUpset'] = am.angerTarget.seldomUpset
+	return fields
+
+def grabAmChildhood(am):
+	fields = {}
+
+	fields['raisedBy'] = am.childhood.raisedBy
+
+	return fields
+
+def grabAmAngerHistory1(am):
+	fields = {}
+
+	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
+
+	return fields
 
 def getAMFields(am, location, back):
 	fields = None
@@ -581,21 +674,21 @@ def getAMFields(am, location, back):
 	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
 		fields = grabAmDhFields(am)
 	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
-		fields = None
+		fields = grabAmChildhood(am)
 	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
-		fields = None
+		fields = grabAmAngerHistory1(am)
 	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
-		fields = None
+		fields = grabAmTarget(am)
 	elif location == 'counselor/forms/AngerManagement/connections.html':
-		fields = None
+		fields = grabAmConnections(am)
 	elif location == 'counselor/forms/AngerManagement/control.html':
-		fields = None
+		fields = grabAmControl(am)
 	elif location == 'counselor/forms/AngerManagement/currentProblems.html':
-		fields = None
+		fields = grabAmCurrentProblems(am)
 	elif location == 'counselor/forms/AngerManagement/familyOrigin.html':
-		fields = None
+		fields = grabAmFamilyOrigin(am)
 	elif location == 'counselor/forms/AngerManagement/worstEpisodes.html':
-		fields = None
+		fields = grabAmWorstEpisodes(am)
 	elif location == 'counselor/forms/AngerManagement/final.html':
 		fields = None
 

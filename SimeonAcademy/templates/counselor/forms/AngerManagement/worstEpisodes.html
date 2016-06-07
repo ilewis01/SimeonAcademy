@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initalize_am_worst();">
+<body class="gradient-white" onLoad="javascript: initalize_am_worst({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -150,7 +150,7 @@
 	                            <input type='hidden' value='' name='m_howStartWorst' id='m_howStartWorst'>
 	                            <input type='hidden' value='' name='m_howEndWorst' id='m_howEndWorst'>
 	                            <input type='hidden' value='' name='m_useWorst' id='m_useWorst'>
-	                            <input type='hidden' value='' name='m_iUsedWorst' id='m_iUsedWorst'>
+	                            <input type='hidden' value='' name='m_whoDidItFight' id='m_whoDidItFight'>
 	                            <input type='hidden' value='' name='m_physicalWorst' id='m_physicalWorst'>
 	                            <input type='hidden' value='' name='m_verbalWorst' id='m_verbalWorst'>
 	                            <input type='hidden' value='' name='m_threatsWorst' id='m_threatsWorst'>
@@ -274,12 +274,12 @@
 									<tr>
 										<td>
 											<div id='select_indent'>
-												<label for='iUsedWorst' name='iUsedLabel' id='iUsedLabel'>Who was using?</label>
+												<label for='whoDidItFight' name='whoDidItFight_label' id='whoDidItFight_label'>Who was using?</label>
 											</div>
 										</td>
 
 										<td>
-											<select name='iUsedWorst' id='iUsedWorst'>
+											<select name='whoDidItFight' id='whoDidItFight'>
 												<option value='not selected'>Select</option>
 												<option value='client used only'>Client Used</option>
 												<option value='other party used only'>The Other Party Used</option>
