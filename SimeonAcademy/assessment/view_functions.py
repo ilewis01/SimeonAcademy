@@ -541,13 +541,45 @@ def refreshAM(am):
 
 	return am
 
+def grabAmDhFields(am):
+	result = {}
+
+	result['firstDrinkAge'] = am.drugHistory.firstDrinkAge
+	result['firstDrinkType'] = am.drugHistory.firstDrinkType
+	result['curUse'] = am.drugHistory.curUse
+	result['useType'] = am.drugHistory.useType
+	result['amtPerWeek'] = am.drugHistory.amtPerWeek
+	result['useAmt'] = am.drugHistory.useAmt
+	result['everDrank'] = am.drugHistory.everDrank
+	result['monthsQuit'] = am.drugHistory.monthsQuit
+	result['yearsQuit'] = am.drugHistory.yearsQuit
+	result['reasonQuit'] = am.drugHistory.reasonQuit
+	result['DUI'] = am.drugHistory.DUI
+	result['numDUI'] = am.drugHistory.numDUI
+	result['BALevel'] = am.drugHistory.BALevel
+	result['drugTreatment'] = am.drugHistory.drugTreatment
+	result['treatmentPlace'] = am.drugHistory.treatmentPlace
+	result['dateTreated'] = am.drugHistory.dateTreated
+	result['finishedTreatment'] = am.drugHistory.finishedTreatment
+	result['reasonNotFinishedTreatment'] = am.drugHistory.reasonNotFinishedTreatment
+	result['isClean'] = am.drugHistory.isClean
+	result['relapseTrigger'] = am.drugHistory.relapseTrigger
+	result['drinkLastEpisode'] = am.drugHistory.drinkLastEpisode
+	result['drinkRelationshipProblem'] = am.drugHistory.drinkRelationshipProblem
+	result['needHelpDrugs'] = am.drugHistory.needHelpDrugs
+
+	return result
+
+
+
+
 def getAMFields(am, location, back):
 	fields = None
 
 	if location == 'counselor/forms/AngerManagement/demographic.html':
 		fields = getAMDemoFields(back, am)
 	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
-		fields = fields = getAmDHData(back, am)
+		fields = grabAmDhFields(am)
 	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
 		fields = None
 	elif location == 'counselor/forms/AngerManagement/angerHistory.html':

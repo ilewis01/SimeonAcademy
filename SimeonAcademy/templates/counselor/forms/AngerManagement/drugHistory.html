@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: am_drug_history_initialize({{json_data}}, {{back}})">
+<body class="gradient-white" onLoad="javascript: initialize_am_drug_history({{json_data}})">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -170,6 +170,18 @@
                                   <input type='hidden' name='m_where_treated' id='m_where_treated' value=''>
                                   <input type='hidden' name='m_no_treat_explain' id='m_no_treat_explain' value=''>
                                   <input type='hidden' name='m_relapse_explain' id='m_relapse_explain' value=''>
+
+                                  <!-- RADIO BUTTONS -->
+                                  <input type='hidden' name='m_curr_use' id='m_curr_use' value=''>
+                                  <input type='hidden' name='m_everDrank' id='m_everDrank' value=''>
+                                  <input type='hidden' name='m_DUI' id='m_DUI' value=''>
+                                  <input type='hidden' name='m_needHelpDrugs' id='m_needHelpDrugs' value=''>
+                                  <input type='hidden' name='m_drugTreatment' id='m_drugTreatment' value=''>
+                                  <input type='hidden' name='m_finishedTreatment' id='m_finishedTreatment' value=''>
+                                  <input type='hidden' name='m_isClean' id='m_isClean' value=''>
+                                  <input type='hidden' name='m_drinkLastEpisode' id='m_drinkLastEpisode' value=''>
+                                  <input type='hidden' name='m_drinkRelationshipProblem' id='m_drinkRelationshipProblem' value=''>
+
                   								<table>
                   									<tr>
                   										<td>

@@ -618,119 +618,102 @@ def am_childhood(request):
 			content['client'] = am.client
 			content['phone'] = convert_phone(am.client.phone)
 
-			if str(back) == 'false':
-				if am.childhood == None:
-					childhood = AM_ChildhoodHistory(client_id=session.client.clientID, date_of_assessment=date)
-					childhood.save()
-					am.childhood = childhood
-					am.save()
-				else:
-					childhood = am.childhood
-					childhood.date_of_assessment = date
-					am.save()
+			# if str(back) == 'false':
+			# 	if am.childhood == None:
+			# 		childhood = AM_ChildhoodHistory(client_id=session.client.clientID, date_of_assessment=date)
+			# 		childhood.save()
+			# 		am.childhood = childhood
+			# 		am.save()
+			# 	else:
+			# 		childhood = am.childhood
+			# 		childhood.date_of_assessment = date
+			# 		am.save()
 
-				first_drink_age = request.POST.get('m_first_drink', '')
-				first_use_type = request.POST.get('m_first_use_type', '')
-				ever_used_drugs = request.POST.get('ever_used', '')
-				quitMos = request.POST.get('m_quitMos', '')
-				quitYrs = request.POST.get('m_quitYrs', '')
-				reason_quit = request.POST.get('m_reason_quit', '')
-				currently_use_drugs = request.POST.get('use_drugs', '')
-				what_you_use = request.POST.get('m-what-you-use', '')
-				how_often_you_use = request.POST.get('m-how-often-you-use', '')
-				how_much_you_use = request.POST.get('m-how-much-you-use', '')
-				has_dui = request.POST.get('has_dui', '')
-				dui_amount = request.POST.get('m_dui_amount', '')
-				BAL = request.POST.get('m_BAL', '')
-				need_help = request.POST.get('need_help', '')
-				had_treatment = request.POST.get('treatment', '')
-				when_treated = request.POST.get('m_when_treated', '')
-				where_treated = request.POST.get('m_where_treated', '')
-				completed_treatment = request.POST.get('completed_treatment', '')
-				no_treat_explain = request.POST.get('m_no_treat_explain', '')
-				still_abstinent = request.POST.get('still_abstinent', '')
-				relapse_explain = request.POST.get('m_relapse_explain', '')
-				drinking_last = request.POST.get('drinking_last', '')
-				relationship_alc = request.POST.get('relationship_alc', '')	
+			firstDrinkAge = request.POST.get('m_first_drink', '')
+			firstDrinkType = request.POST.get('m_first_use_type', '')
+			curUse = request.POST.get('m_curr_use', '')
+			useType = request.POST.get('m-what-you-use', '')
+			amtPerWeek = request.POST.get('m-how-often-you-use', '')
+			useAmt = request.POST.get('m-how-much-you-use', '')
+			everDrank = request.POST.get('m_everDrank', '')
+			monthsQuit = request.POST.get('m_quitMos', '')
+			yearsQuit = request.POST.get('m_quitYrs', '')
+			reasonQuit = request.POST.get('m_reason_quit', '')
+			DUI = request.POST.get('m_DUI', '')
+			numDUI = request.POST.get('m_dui_amount', '')
+			BALevel = request.POST.get('m_BAL', '')
+			drugTreatment = request.POST.get('m_drugTreatment', '')
+			treatmentPlace = request.POST.get('m_where_treated', '')
+			dateTreated = request.POST.get('m_when_treated', '')
+			finishedTreatment = request.POST.get('m_finishedTreatment', '')
+			reasonNotFinishedTreatment = request.POST.get('m_no_treat_explain', '')
+			isClean = request.POST.get('m_isClean', '')
+			relapseTrigger = request.POST.get('m_relapse_explain', '')
+			drinkLastEpisode = request.POST.get('m_drinkLastEpisode', '')
+			drinkRelationshipProblem = request.POST.get('m_drinkRelationshipProblem', '')
+			needHelpDrugs = request.POST.get('m_needHelpDrugs', '')
 
-				content['first_drink_age'] = first_drink_age
+			# print 'firstDrinkAge: ' + str(firstDrinkAge)
+			# print 'firstDrinkType: ' + str(firstDrinkType)
+			# print 'curUse: ' + str(curUse)
+			# print 'useType: ' + str(useType)
+			# print 'amtPerWeek: ' + str(amtPerWeek)
+			# print 'useAmt: ' + str(useAmt)
+			# print 'everDrank: ' + str(everDrank)
+			# print 'monthsQuit: ' + str(monthsQuit)
+			# print 'yearsQuit: ' + str(yearsQuit)
+			# print 'reasonQuit: ' + str(reasonQuit)
+			# print 'DUI: ' + str(DUI)
+			# print 'numDUI: ' + str(numDUI)
+			# print 'BALevel: ' + str(BALevel)
+			# print 'drugTreatment: ' + str(drugTreatment)
+			# print 'treatmentPlace: ' + str(treatmentPlace)
+			# print 'dateTreated: ' + str(dateTreated)
+			# print 'finishedTreatment: ' + str(finishedTreatment)
+			# print 'reasonNotFinishedTreatment: ' + str(reasonNotFinishedTreatment)
+			# print 'isClean: ' + str(isClean)
+			# print 'relapseTrigger: ' + str(relapseTrigger)
+			# print 'drinkLastEpisode: ' + str(drinkLastEpisode)
+			# print 'drinkRelationshipProblem: ' + str(drinkRelationshipProblem)
+			# print 'needHelpDrugs: ' + str(needHelpDrugs)
+
+			date = datetime.now()
+			date = date.date()
+
+			#UPDATE DRUG HISTORY FORM
+			am.drugHistory.date_of_assessment = date
+			am.drugHistory.firstDrinkAge = firstDrinkAge
+			am.drugHistory.firstDrinkType = firstDrinkType
+			am.drugHistory.curUse = curUse
+			am.drugHistory.useType = useType
+			am.drugHistory.amtPerWeek = amtPerWeek
+			am.drugHistory.useAmt = useAmt
+			am.drugHistory.everDrank = everDrank
+			am.drugHistory.monthsQuit = monthsQuit
+			am.drugHistory.yearsQuit = yearsQuit
+			am.drugHistory.reasonQuit = reasonQuit
+			am.drugHistory.DUI = DUI
+			am.drugHistory.numDUI = numDUI
+			am.drugHistory.BALevel = BALevel
+			am.drugHistory.drugTreatment = drugTreatment
+			am.drugHistory.finishedTreatment = finishedTreatment
+			am.drugHistory.reasonNotFinishedTreatment = reasonNotFinishedTreatment
+			am.drugHistory.isClean = isClean
+			am.drugHistory.relapseTrigger = relapseTrigger
+			am.drugHistory.drinkLastEpisode = drinkLastEpisode
+			am.drugHistory.drinkRelationshipProblem = drinkRelationshipProblem
+			am.drugHistory.needHelpDrugs = needHelpDrugs
+
+			am.drugHistory.save()
+			# am.drugHistoryComplete = True
+			# am.save()
 
 
-				# drug_history = am.drugHistory
-
-				# if currently_use_drugs == 'yes':
-				# 	currently_use_drugs = True
-				# else:
-				# 	currently_use_drugs = False
-				# if ever_used_drugs == 'yes':
-				# 	ever_used_drugs = True
-				# else:
-				# 	ever_used_drugs = False
-				# if has_dui == 'yes':
-				# 	has_dui = True
-				# else:
-				# 	has_dui = False
-				# if had_treatment == 'yes':
-				# 	had_treatment = True
-				# else:
-				# 	had_treatment = False
-				# if completed_treatment == 'yes':
-				# 	completed_treatment = True
-				# else:
-				# 	completed_treatment = False
-				# if still_abstinent == 'yes':
-				# 	still_abstinent = True
-				# else:
-				# 	still_abstinent = False
-				# if drinking_last == 'yes':
-				# 	drinking_last = True
-				# else:
-				# 	drinking_last = False
-				# if need_help == 'yes':
-				# 	need_help = True
-				# else:
-				# 	need_help = False
-
-				# drug_history.firstDrinkAge = first_drink
-				# drug_history.firstDrinkType = first_use_type
-				# drug_history.curUse = currently_use_drugs
-				# drug_history.useType = what_you_use
-				# drug_history.amtPerWeek = how_often_you_use
-				# drug_history.useAmt = how_much_you_use
-				# drug_history.everDrank = ever_used_drugs
-				# drug_history.monthsQuit = quitMos
-				# drug_history.yearsQuit = quitYrs
-				# drug_history.reasonQuit = reason_quit
-				# drug_history.DUI = has_dui
-				# drug_history.numDUI = dui_amount
-				# drug_history.BALevel = BAL
-				# drug_history.drugTreatment = had_treatment
-				# drug_history.treatmentPlace = where_treated
-				# drug_history.dateTreated = when_treated
-				# drug_history.finishedTreatment = completed_treatment
-				# drug_history.reasonNotFinishedTreatment = no_treat_explain
-				# drug_history.isClean = still_abstinent
-				# drug_history.relapseTrigger = relapse_explain
-				# drug_history.drinkLastEpisode = drinking_last
-				# drug_history.drinkRelationshipProblem = relationship_alc
-				# drug_history.needHelpDrugs = need_help
-
-				# print "DH ID: " + str(drug_history.id)
-
-				# drug_history.save()
-				# # am.drugHistory = drug_history
-				# am.drugHistoryComplete = True
-				# am.save()
-
-				content['back_url'] = '/am_drugHistory/'
-				content['session'] = session
-				content['AM'] = am
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
-			else: #IF BACK == TRUE...
-				no = None
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
+			content['back_url'] = '/am_drugHistory/'
+			content['session'] = session
+			content['AM'] = am
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 
 @login_required(login_url='/index')
 def am_connections(request):
@@ -1218,7 +1201,10 @@ def am_drugHistory(request):
 				# 	am.drugHistory = new_dh
 				# 	am.save()
 
-				fields = getAmDHData(back, am)
+				# fields = getAmDHData(back, am)
+				# json_data = json.dumps(fields)
+
+				fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html', False)
 				json_data = json.dumps(fields)
 
 				content['title'] = "Anger Management Assessment | Simeon Academy"
