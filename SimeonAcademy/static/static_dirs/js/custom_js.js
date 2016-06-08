@@ -2037,6 +2037,123 @@ function continue_am_dh() {
 	}
 }
 
+//CONTROL FUNCTIONS
+function talkMyself() {
+	var whatSayYou_label = document.getElementById('whatSayYou_label');
+	var whatSayYou = document.getElementById('whatSayYou');
+
+	if (document.getElementById('talkToMyself').checked === true) {
+		whatSayYou_label.style.opacity = '1.0';
+		whatSayYou.disabled = false;
+		whatSayYou.style.opacity = '1.0';
+	}
+	else {
+		whatSayYou_label.style.opacity = '0.3';
+		whatSayYou.style.opacity = '0.3';
+		whatSayYou.disabled = true;
+	}
+}
+
+function leaveSceneCheckbox() {
+	var leaveScene = document.getElementById('leaveScene');
+	var howLongLeaveScene = document.getElementById('howLongLeaveScene');
+	var whatDoLeave = document.getElementById('whatDoLeave');
+	var howLongLeaveScene_label = document.getElementById('howLongLeaveScene_label');
+	var whatDoLeave_label = document.getElementById('whatDoLeave_label');
+
+	if (leaveScene.checked === true) {
+		howLongLeaveScene.disabled = false;
+		whatDoLeave.disabled = false;
+		howLongLeaveScene_label.style.opacity = '1.0';
+		whatDoLeave_label.style.opacity = '1.0';
+		whatDoLeave.style.opacity = '1.0';
+		howLongLeaveScene.style.opacity = '1.0';
+	}
+	else {
+		whatDoLeave.style.opacity = '0.3';
+		howLongLeaveScene.style.opacity = '0.3';
+		howLongLeaveScene.disabled = true;
+		whatDoLeave.disabled = true;
+		howLongLeaveScene_label.style.opacity = '0.3';
+		whatDoLeave_label.style.opacity = '0.3';
+	}
+}
+
+function howRelaxCheckbox() {
+	var relax = document.getElementById('relax');
+	var howRelax_label = document.getElementById('howRelax_label');
+	var howRelax = document.getElementById('howRelax');
+
+	if (relax.checked === true) {
+		howRelax_label.style.opacity = '1.0';
+		howRelax.disabled = false;
+		howRelax.style.opacity = '1.0';
+	}
+	else {
+		howRelax_label.style.opacity = '0.3';
+		howRelax.style.opacity = '0.3';
+		howRelax.disabled = true;
+	}
+}
+
+function otherControlCheckbox() {
+	var otherControlAnger = document.getElementById('otherControlAnger');
+	var doWhatOtherControl_label = document.getElementById('doWhatOtherControl_label');
+	var doWhatOtherControl = document.getElementById('doWhatOtherControl');
+
+	if (otherControlAnger.checked === true) {
+		doWhatOtherControl_label.style.opacity = '1.0';
+		doWhatOtherControl.disabled = false;
+		doWhatOtherControl.style.opacity = '1.0';
+	}
+	else {
+		doWhatOtherControl_label.style.opacity = '0.3';
+		doWhatOtherControl.style.opacity = '0.3';
+		doWhatOtherControl.disabled = true;
+	}
+}
+
+function initalize_am_control(json_data) {
+	talkMyself();
+	leaveSceneCheckbox();
+	howRelaxCheckbox();
+	otherControlCheckbox();
+}
+
+function continue_to_am_final() {
+	var proceed = true;
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
+function continue_to_amViewForm() {
+	var proceed = true;
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

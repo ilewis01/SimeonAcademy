@@ -809,6 +809,10 @@ def am_control(request):
 			am.currentProblemsComplete = True
 			am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html', False)
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session

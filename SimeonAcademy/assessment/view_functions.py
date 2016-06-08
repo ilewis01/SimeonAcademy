@@ -588,6 +588,7 @@ def grabAmControl(am):
 	fields['howLongLeaveScene'] = am.control.howLongLeaveScene
 	fields['whatDoLeave'] = am.control.whatDoLeave
 	fields['relax'] = am.control.relax
+	fields['howRelax'] = am.control.howRelax
 	fields['selfHelpGroup'] = am.control.selfHelpGroup
 	fields['otherControlAnger'] = am.control.otherControlAnger
 	fields['doWhatOtherControl'] = am.control.doWhatOtherControl

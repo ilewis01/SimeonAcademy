@@ -293,6 +293,12 @@ button:hover {
 	color:#ffa64d;
 }
 
+.sidebar-id2 {
+	font-style: italic;
+	color:gray;
+	/*text-shadow: 1px 1px black;*/
+}
+
 .sidebar-duration {
 	font-weight: bold;
 	color:red;
@@ -444,7 +450,7 @@ button:hover {
 }
 
 #employment-tip:hover span{
-	color:black;
+	color:gray;
 	display: block;
 	position: absolute;
 	text-shadow: 0px 0px;
@@ -452,7 +458,7 @@ button:hover {
 	width: 283px;
 	height:23px;
 	background: white;
-	border: 1px solid gray;
+	border: 1px solid #D5DADB;
 	padding-left: 5px;
 }
 
@@ -530,6 +536,23 @@ button:hover {
 #header_question {
 	font-style: italic;
 	font-size: 15px;
+}
+
+.right-indent-form {
+	padding-left: 30px;
+}
+
+.indentForm2 {
+	padding-left: 8px;
+}
+
+#inline-text-field {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.fix-right-col-margin {
+	margin-top: 57px;
 }
 
 
