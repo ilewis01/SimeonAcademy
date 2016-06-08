@@ -555,6 +555,54 @@ button:hover {
 	margin-top: 57px;
 }
 
+.viewFormStyle {
+	text-align: center;
+	font-family: Times;
+}
+
+.align-form-center {
+	width: 100%;
+	margin: auto;
+}
+
+#header-margin-top {
+	margin-top: 40px;
+}
+
+#viewVerticalSpace {
+	margin-top: 20px;
+}
+
+#viewHeaderBox {
+	font-size: 20px;
+	font-weight: bold;
+	border: 3px solid black;
+}
+
+#viewLabel {
+	margin-right: 6px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#viewAns {
+	font-size: 18px;
+}
+
+#viewAnsIndent {
+	font-size: 18px;
+	text-align: left;
+}
+
+#viewMatchMargin {
+	margin-left: 40px;
+}
+
+.viewSectionWrapper {
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
 
 
 

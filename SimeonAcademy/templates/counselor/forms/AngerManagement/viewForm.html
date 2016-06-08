@@ -2,10 +2,68 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>View Anger Management Form</h1>
+<body class="" onLoad="javascript: ;">
+	<div class='viewFormStyle'>
+		<div class="container">
+			<div class="row"> 
+				<div class="col-md-12 col-sm-12">
+					<h2><b>Anger Management Intake Form</b></h2>
+					<h4>Date of Assessment: <b>{{date_of_form}}</b></h4>
 
-<a href='/adminHome'><button type='button'>Continue Session</button></a> 
-<a href='/adminHome'><button type='button'>End Session</button></a>
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+					<div id='header-margin-top'>
+						<table class='align-form-center'>
+							<tr><td id='viewHeaderBox'>DEMOGRAPHICS</td></tr>
+						</table>
+
+						<div class='viewSectionWrapper'>
+							<table>
+								<tr>
+									<td>
+										<span id='viewLabel'>Name: </span>
+									</td>
+									<td>
+										<div id='viewAns'>{{AM.client.lname}}, {{AM.client.fname}}     {{AM.client.middleInit}}</div>
+									</td>
+
+									<td>
+										<div style='margin-left:200px;;'>
+											<span id='viewLabel'>DOB: </span>
+										</div>
+									</td>
+									<td>
+										<div id='viewAns'>{{AM.client.dob}}</div>
+									</td>
+								</tr>
+							</table>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Home Address: </span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.client.street_no}} {{AM.client.street_name}} {{AM.client.apartment_no}}
+										</td>
+									</tr>
+
+									<tr>
+										<td></td>
+										<td>
+											<div id='viewAnsIndent'>
+												{{AM.client.city}}, {{AM.client.state}} {{AM.client.zip_code}}
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}

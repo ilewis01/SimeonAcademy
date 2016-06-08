@@ -1358,6 +1358,21 @@ def am_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			date_of_form = am.start_time
+			date_of_form = date_of_form.date()
+
+			content['AM'] = am
+			content['date_of_form'] = date_of_form
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
 

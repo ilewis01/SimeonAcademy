@@ -72,6 +72,7 @@ class Client(models.Model):
 	email = models.EmailField(default=None, blank=True, null=True)
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)
+	probationOfficer = models.CharField(max_length=60, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)
