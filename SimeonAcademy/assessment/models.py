@@ -256,6 +256,7 @@ class AM_Demographic(models.Model):
 	
 	health_problem = models.BooleanField(default=False, blank=True)
 	medication = models.BooleanField(default=False, blank=True)
+	whatMedicine = models.CharField(max_length=100, default=None, blank=True, null=True)
 	health_exp = models.CharField(max_length=250, default=None, blank=True, null=True)
 
 	def __unicode__(self):

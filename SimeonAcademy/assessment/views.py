@@ -1368,13 +1368,218 @@ def am_viewForm(request):
 			date_of_form = am.start_time
 			date_of_form = date_of_form.date()
 
-			content['AM'] = am
+			unchecked = "/static/images/unchecked_checkbox.png"
+			checked = "/static/images/checked_checkbox.png"
+
+			images = {}
+			spouse = None
+
+			if am.demographic.maritalStatus.status == 'Married':
+				spouse = '1'
+			else:
+				spouse = '0'
+
+			#PROCESS MARITAL STATUS CHECKBOXES
+			if am.demographic.maritalStatus.status == 'Divorced':
+				images['divorced'] 	= checked
+				images['single'] 	= unchecked
+				images['separated'] = unchecked
+				images['married'] 	= unchecked
+			elif am.demographic.maritalStatus.status == 'Single':
+				images['divorced'] 	= unchecked
+				images['single'] 	= checked
+				images['separated'] = unchecked
+				images['married'] 	= unchecked
+			elif am.demographic.maritalStatus.status == 'Married':
+				images['divorced'] 	= unchecked
+				images['single'] 	= unchecked
+				images['separated'] = unchecked
+				images['married'] 	= checked
+			elif am.demographic.maritalStatus.status == 'Separated':
+				images['divorced'] 	= unchecked
+				images['single'] 	= unchecked
+				images['separated'] = checked
+				images['married'] 	= unchecked
+
+			#PROCESS LIVING SITUATION CHECKBOXES
+			if am.demographic.livingSituation.situation == 'Live with friend':
+				images['friend'] 	= checked
+				images['family'] 	= unchecked
+				images['alone'] 	= unchecked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live with family':
+				images['friend'] 	= unchecked
+				images['family'] 	= checked
+				images['alone'] 	= unchecked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live alone':
+				images['friend'] 	= unchecked
+				images['family'] 	= unchecked
+				images['alone'] 	= checked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live with partner':
+				images['friend'] 	= unchecked
+				images['family'] 	= unchecked
+				images['alone'] 	= unchecked
+				images['partner'] 	= checked
+
+			#PROCESS HEALTH CHECKBOX IMAGES
+			if am.demographic.health_problem == True:
+				images['goodHealth'] = checked
+				images['badHealth'] = unchecked
+			else:
+				images['goodHealth'] = unchecked
+				images['badHealth'] = checked
+
+			if am.demographic.medication == True:
+				images['onMeds'] = checked
+				images['noMeds'] = unchecked
+			else:
+				images['onMeds'] = unchecked
+				images['noMeds'] = checked
+
+			#PROCESS EMPLOYER PHONE NUMBER
+			emp_phone = convert_phone(am.demographic.employer_phone)
+
+			#PROCESS RENT/OWN CHECKBOXES
+			if am.demographic.own == True:
+				images['own'] = checked
+				images['rent'] = unchecked
+				
+			else:
+				images['own'] = unchecked
+				images['rent'] = checked				
+
+			content['emp_phone'] = emp_phone
+			content['spouse'] = spouse
+			content['images'] = images
+			content['phone'] = convert_phone(am.client.phone)
 			content['date_of_form'] = date_of_form
+			content['AM'] = am			
+			content['client'] = am.client
+			content['session'] = session			
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
+
+@login_required(login_url='/index')
+def printAM(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			date_of_form = am.start_time
+			date_of_form = date_of_form.date()
+
+			unchecked = "/static/images/unchecked_checkbox.png"
+			checked = "/static/images/checked_checkbox.png"
+
+			images = {}
+			spouse = None
+
+			if am.demographic.maritalStatus.status == 'Married':
+				spouse = '1'
+			else:
+				spouse = '0'
+
+			#PROCESS MARITAL STATUS CHECKBOXES
+			if am.demographic.maritalStatus.status == 'Divorced':
+				images['divorced'] 	= checked
+				images['single'] 	= unchecked
+				images['separated'] = unchecked
+				images['married'] 	= unchecked
+			elif am.demographic.maritalStatus.status == 'Single':
+				images['divorced'] 	= unchecked
+				images['single'] 	= checked
+				images['separated'] = unchecked
+				images['married'] 	= unchecked
+			elif am.demographic.maritalStatus.status == 'Married':
+				images['divorced'] 	= unchecked
+				images['single'] 	= unchecked
+				images['separated'] = unchecked
+				images['married'] 	= checked
+			elif am.demographic.maritalStatus.status == 'Separated':
+				images['divorced'] 	= unchecked
+				images['single'] 	= unchecked
+				images['separated'] = checked
+				images['married'] 	= unchecked
+
+			#PROCESS LIVING SITUATION CHECKBOXES
+			if am.demographic.livingSituation.situation == 'Live with friend':
+				images['friend'] 	= checked
+				images['family'] 	= unchecked
+				images['alone'] 	= unchecked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live with family':
+				images['friend'] 	= unchecked
+				images['family'] 	= checked
+				images['alone'] 	= unchecked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live alone':
+				images['friend'] 	= unchecked
+				images['family'] 	= unchecked
+				images['alone'] 	= checked
+				images['partner'] 	= unchecked
+			elif am.demographic.livingSituation.situation == 'Live with partner':
+				images['friend'] 	= unchecked
+				images['family'] 	= unchecked
+				images['alone'] 	= unchecked
+				images['partner'] 	= checked
+
+			#PROCESS HEALTH CHECKBOX IMAGES
+			if am.demographic.health_problem == True:
+				images['goodHealth'] = checked
+				images['badHealth'] = unchecked
+			else:
+				images['goodHealth'] = unchecked
+				images['badHealth'] = checked
+
+			if am.demographic.medication == True:
+				images['onMeds'] = checked
+				images['noMeds'] = unchecked
+			else:
+				images['onMeds'] = unchecked
+				images['noMeds'] = checked
+
+			#PROCESS EMPLOYER PHONE NUMBER
+			emp_phone = convert_phone(am.demographic.employer_phone)
+
+			#PROCESS RENT/OWN CHECKBOXES
+			if am.demographic.own == True:
+				images['own'] = checked
+				images['rent'] = unchecked
+				
+			else:
+				images['own'] = unchecked
+				images['rent'] = checked				
+
+			content['emp_phone'] = emp_phone
+			content['spouse'] = spouse
+			content['images'] = images
+			content['phone'] = convert_phone(am.client.phone)
+			content['date_of_form'] = date_of_form
+
+			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
 			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
+			return render_to_response('counselor/forms/AngerManagement/printAM.html', content)
 
 @login_required(login_url='/index')
 def am_worst(request):

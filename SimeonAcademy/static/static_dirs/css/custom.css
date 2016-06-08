@@ -561,15 +561,19 @@ button:hover {
 }
 
 .align-form-center {
-	width: 100%;
+	width: 85%;
 	margin: auto;
 }
 
 #header-margin-top {
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 #viewVerticalSpace {
+	margin-top: 40px;
+}
+
+#viewVerticalSpaceVeryLow {
 	margin-top: 20px;
 }
 
@@ -586,11 +590,13 @@ button:hover {
 }
 
 #viewAns {
-	font-size: 18px;
+	color: #434545;
+	font-size: 19px;
+	/*font-style: oblique;*/
 }
 
 #viewAnsIndent {
-	font-size: 18px;
+	font-size: 19px;
 	text-align: left;
 }
 
@@ -599,8 +605,36 @@ button:hover {
 }
 
 .viewSectionWrapper {
-	margin-left: 20px;
+	margin-left: 10%;
 	margin-top: 30px;
+}
+
+.viewCheckbox {
+	font-size: 30px;
+}
+
+#checkbox_img_size {
+	width:20px;
+}
+
+#img_div {
+	margin-bottom: 2px;
+	margin-right: 4px;
+	margin-left: 10px;
+}
+
+#img_divLong {
+	margin-bottom: 2px;
+	margin-right: 4px;
+	margin-left: 40px;
+}
+
+#section_separation {
+	margin-top: 50px;
+}
+
+#shortSpaceView {
+	margin-top: 7px;
 }
 
 
