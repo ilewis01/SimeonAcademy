@@ -404,6 +404,12 @@ function discharge() {
 	document.getElementById('discharge').submit();
 }
 
+function goBackPage(back_url) {
+	var form = document.getElementById('am_demo');
+	form.action = back_url;
+	form.submit();
+}
+
 function hideToggle() {
 	var btn = document.getElementById('my_toggle_btn1');
 
@@ -559,7 +565,7 @@ function initalize_am_worst(json_data) {
 		noDrugs.checked = true;
 	}
 
-	if (String(json_data.whoDidItFight) === 'not selected') {
+	if (String(json_data.whoDidItFight) === 'not selected' || json_data.whoDidItFight === null) {
 		whoDidItFight.selectedIndex = 0;
 	}
 	else if (String(json_data.whoDidItFight) === 'client used only') {
@@ -665,8 +671,34 @@ function amTargetOther() {
 	}
 }
 
-function initalize_am_target() {
+function initalize_am_target(json_data) {
+	var angryPartner = document.getElementById('angryPartner');
+	var angryParents = document.getElementById('angryParents');
+	var angryChildren = document.getElementById('angryChildren');
+	var angryRelatives = document.getElementById('angryRelatives');
+	var angryEmployer = document.getElementById('angryEmployer');
+	var angryFriends = document.getElementById('angryFriends');
+	var angryOther = document.getElementById('angryOther');
+	var otherWhom = document.getElementById('otherWhom');
+	var angryAbout = document.getElementById('angryAbout');
+	var seldomUpset = document.getElementById('seldomUpset');
+
+	angryPartner.checked = json_data.angryPartner;
+	angryParents.checked = json_data.angryParents;
+	angryChildren.checked = json_data.angryChildren;
+	angryRelatives.checked = json_data.angryRelatives;
+	angryEmployer.checked = json_data.angryEmployer;
+	angryFriends.checked = json_data.angryFriends;
+	angryOther.checked = json_data.angryOther;
+	seldomUpset.checked = json_data.seldomUpset;
+
 	amTargetOther();
+
+	if (angryOther.checked === true) {
+		otherWhom.value = json_data.otherWhom;
+	}
+
+	angryAbout.innerHTML = json_data.angryAbout;
 }
 
 function continue_to_am_family() {
@@ -718,6 +750,49 @@ function continue_to_am_family() {
 
 
 // AM FAMILY OF ORIGIN FUNCTIONS
+function initalize_family_origin(json_data) {
+	kidMomAnger = document.getElementById('kidMomAnger');
+	kidDadAnger = document.getElementById('kidDadAnger');
+	kidSiblingAnger = document.getElementById('kidSiblingAnger');
+	kidOtherAnger = document.getElementById('kidOtherAnger');
+	learnFamilyAnger = document.getElementById('learnFamilyAnger');
+	hasSuicide = document.getElementById('hasSuicide');
+	noSuicide = document.getElementById('noSuicide');
+	hasLovingMother = document.getElementById('hasLovingMother');
+	hasLovingSiblings = document.getElementById('hasLovingSiblings');
+
+	if (json_data.suicideHistory === true) {
+		hasSuicide.checked = true;
+	}
+	else {
+		noSuicide.checked = true;
+	}
+
+
+	if (json_data.kidMomAnger !== null) {
+		kidMomAnger.value = json_data.kidMomAnger
+	}
+
+	if (json_data.kidDadAnger !== null) {
+		kidDadAnger.value = json_data.kidDadAnger
+	}
+
+	if (json_data.kidSiblingAnger !== null) {
+		kidSiblingAnger.value = json_data.kidSiblingAnger
+	}
+
+	if (json_data.kidOtherAnger !== null) {
+		kidOtherAnger.value = json_data.kidOtherAnger
+	}
+
+	if (json_data.learnFamilyAnger !== null) {
+		learnFamilyAnger.value = json_data.learnFamilyAnger
+	}
+
+	hasLovingMother.checked = json_data.hasLovingMother
+	hasLovingSiblings.checked = json_data.hasLovingSiblings
+}
+
 function continue_to_am_problems() {
 	var proceed = true;
 	var kidMomAnger = document.getElementById('kidMomAnger');
@@ -789,9 +864,47 @@ function am_problems_radio() {
 	}
 }
 
-function initalize_am_problems() {
+function initalize_am_problems(json_data) {
+	var brainInjury = document.getElementById('brainInjury');
+	var stroke = document.getElementById('stroke');
+	var epilepsy = document.getElementById('epilepsy');
+	var attentionDD = document.getElementById('attentionDD');
+	var pms = document.getElementById('pms');
+	var depression = document.getElementById('depression');
+	var ptsd = document.getElementById('ptsd');
+	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
+	var whichMeds = document.getElementById('whichMeds');
+	var describeIssue = document.getElementById('describeIssue');
+
+	var onMeds = document.getElementById('onMeds');
+	var noMeds = document.getElementById('noMeds');
+
+	if (json_data.currentlyOnMeds === true) {
+		onMeds.checked = true;
+	}
+	else {
+		noMeds.checked = true;
+	}
+
+	brainInjury.checked = json_data.brainInjury;
+	stroke.checked = json_data.stroke;
+	epilepsy.checked = json_data.epilepsy;
+	attentionDD.checked = json_data.attentionDD;
+	pms.checked = json_data.pms;
+	depression.checked = json_data.depression;
+	ptsd.checked = json_data.ptsd;
+	otherSeriousIllness.checked = json_data.otherSeriousIllness;
+
 	am_problems_check();
 	am_problems_radio();
+
+	if (json_data.otherSeriousIllness === true) {
+		describeIssue.innerHTML = json_data.describeIssue;
+	}
+
+	if (json_data.currentlyOnMeds === true) {
+		whichMeds.innerHTML = json_data.whichMeds;
+	}
 }
 
 function continue_to_am_control() {
@@ -1061,7 +1174,7 @@ function defineRadio(yesElement, NoElement, m_value) {
 }
 
 function treatNullTextFields(element, json_value) {
-	if (element.value === null) {
+	if (json_value === null) {
 		element.value = '';
 	}
 	else {
@@ -1070,7 +1183,7 @@ function treatNullTextFields(element, json_value) {
 }
 
 function treatNullAreaFields(element, json_value) {
-	if (element.value === null) {
+	if (json_value === null) {
 		element.innerHTML = '';
 	}
 	else {
@@ -1176,6 +1289,7 @@ function toggleEverDrankRadio() {
 }
 
 function initializeTreatmentRadio() {
+	var had_treatment = document.getElementById('had_treatment');
 	var no_treatment = document.getElementById('no_treatment');
 
 	var when_treated_label = document.getElementById('when_treated_label');
@@ -1186,8 +1300,8 @@ function initializeTreatmentRadio() {
 
 	var when_treated = document.getElementById('when_treated');
 	var where_treated = document.getElementById('where_treated');
-	var had_treatment = document.getElementById('did_complete');
-	var no_treatment = document.getElementById('not_completed');
+	var did_complete = document.getElementById('did_complete');
+	var not_completed = document.getElementById('not_completed');
 
 	if (no_treatment.checked === true) {
 		when_treated_label.style.opacity = '0.5';
@@ -1198,8 +1312,8 @@ function initializeTreatmentRadio() {
 
 		when_treated.disabled = true;
 		where_treated.disabled = true;
-		had_treatment.disabled = true;
-		no_treatment.disabled = true;
+		did_complete.disabled = true;
+		not_completed.disabled = true;
 	}
 
 	else {
@@ -1211,8 +1325,8 @@ function initializeTreatmentRadio() {
 
 		when_treated.disabled = false;
 		where_treated.disabled = false;
-		had_treatment.disabled = false;
-		no_treatment.disabled = false;
+		did_complete.disabled = false;
+		not_completed.disabled = false;
 	}
 }
 
@@ -1253,87 +1367,6 @@ function initializeSoberRadio() {
 		trigger_label.style.opacity = '1.0';
 		relapse_explain.disabled = false;
 	}
-}
-
-function initialize_am_drug_history(json_data) {
-	//TEXT FIELDS	
-	var first_use_type = document.getElementById('first_use_type');	
-	var what_you_use = document.getElementById('what-you-use');
-	var how_often_you_use = document.getElementById('how-often-you-use');
-	var how_much_you_use = document.getElementById('how-much-you-use');
-	var reason_quit = document.getElementById('reason_quit');
-	var BAL = document.getElementById('BAL');
-	var when_treated = document.getElementById('when_treated');
-	var where_treated = document.getElementById('where_treated');
-
-	//TEXTAREA FIELDS
-	var no_treat_explain = document.getElementById('no_treat_explain');
-	var relapse_explain = document.getElementById('relapse_explain');
-	
-	//NUMBER FIELDS
-	var first_drink = document.getElementById('first_drink');
-	var quitMos = document.getElementById('quitMos');
-	var quitYrs = document.getElementById('quitYrs');
-	var dui_amount = document.getElementById('dui_amount');
-
-	//RADIO ELEMENTS
-	var current_use = document.getElementById('current_use');
-	var no_current_use = document.getElementById('no_current_use');
-	var has_used = document.getElementById('has_used');
-	var never_used = document.getElementById('never_used');
-	var dui = document.getElementById('dui'); //has DUI
-	var no_dui = document.getElementById('no_dui');
-	var give_me_help = document.getElementById('give_me_help');
-	var no_help = document.getElementById('no_help');
-	var had_treatment = document.getElementById('had_treatment');
-	var no_treatment = document.getElementById('no_treatment');
-	var did_complete = document.getElementById('did_complete');
-	var not_completed = document.getElementById('not_completed');
-	var is_abstinent = document.getElementById('is_abstinent');
-	var not_abstinent = document.getElementById('not_abstinent');
-	var was_drinking = document.getElementById('was_drinking');
-	var not_drinking = document.getElementById('not_drinking');
-	var is_problem = document.getElementById('is_problem');
-	var no_problem = document.getElementById('no_problem');
-
-	//DEFINE THE RADIO FIELDS
-	defineRadio(current_use, no_current_use, json_data.curUse);
-	defineRadio(has_used, never_used, json_data.everDrank);
-	defineRadio(dui, no_dui, json_data.DUI);
-	defineRadio(give_me_help, no_help, json_data.needHelpDrugs);
-	defineRadio(had_treatment, no_treatment, json_data.drugTreatment);
-	defineRadio(did_complete, not_completed, json_data.finishedTreatment);
-	defineRadio(is_abstinent, not_abstinent, json_data.isClean);
-	defineRadio(was_drinking, not_drinking, json_data.drinkLastEpisode);
-	defineRadio(is_problem, no_problem, json_data.drinkRelationshipProblem);
-
-	//CHECK FOR NULL VALUES IN TEXT AREAS
-	treatNullAreaFields(no_treat_explain, json_data.reasonNotFinishedTreatment);
-	treatNullAreaFields(relapse_explain, json_data.relapseTrigger);
-
-	//CHECK FOR NULL VALUES IN TEXT FIELDS
-	treatNullTextFields(first_use_type, json_data.firstDrinkType);
-	treatNullTextFields(what_you_use, json_data.useType);
-	treatNullTextFields(how_often_you_use, json_data.amtPerWeek);
-	treatNullTextFields(how_much_you_use, json_data.useAmt);
-	treatNullTextFields(reason_quit, json_data.reasonQuit);
-	treatNullTextFields(BAL, json_data.BALevel);
-	treatNullTextFields(when_treated, json_data.dateTreated);
-	treatNullTextFields(where_treated, json_data.treatmentPlace);
-
-	//PROCESS NUMBER FIELDS
-	treatNumberFields(first_drink, json_data.firstDrinkAge);
-	treatNumberFields(quitMos, json_data.monthsQuit);
-	treatNumberFields(quitYrs, json_data.yearsQuit);
-	treatNumberFields(dui_amount, json_data.numDUI);
-
-	//INITIALIZE AND DISABLE/ENABLE FIELDS
-	toggleUseAlcoholRadio();
-	toggleEverDrankRadio();
-	initializeDUIRadio();
-	initializeTreatmentRadio();
-	initializeRadioSub1();
-	initializeSoberRadio();
 }
 
 function am_drug_history_initialize(json_data, back) {
@@ -1843,6 +1876,96 @@ function evaluate_field(field, hidden, error_msg) {
 	}
 
 	return proceed;
+}
+
+function initialize_am_drug_history(json_data) {
+	//TEXT FIELDS	
+	var first_use_type = document.getElementById('first_use_type');	
+	var what_you_use = document.getElementById('what-you-use');
+	var how_often_you_use = document.getElementById('how-often-you-use');
+	var how_much_you_use = document.getElementById('how-much-you-use');
+	var reason_quit = document.getElementById('reason_quit');
+	var BAL = document.getElementById('BAL');
+	var when_treated = document.getElementById('when_treated');
+	var where_treated = document.getElementById('where_treated');
+
+	//TEXTAREA FIELDS
+	var no_treat_explain = document.getElementById('no_treat_explain');
+	var relapse_explain = document.getElementById('relapse_explain');
+	
+	//NUMBER FIELDS
+	var first_drink = document.getElementById('first_drink');
+	var quitMos = document.getElementById('quitMos');
+	var quitYrs = document.getElementById('quitYrs');
+	var dui_amount = document.getElementById('dui_amount');
+
+	//RADIO ELEMENTS
+	var current_use = document.getElementById('current_use');
+	var no_current_use = document.getElementById('no_current_use');
+	var has_used = document.getElementById('has_used');
+	var never_used = document.getElementById('never_used');
+	var dui = document.getElementById('dui'); //has DUI
+	var no_dui = document.getElementById('no_dui');
+	var give_me_help = document.getElementById('give_me_help');
+	var no_help = document.getElementById('no_help');
+	var had_treatment = document.getElementById('had_treatment');
+	var no_treatment = document.getElementById('no_treatment');
+	var did_complete = document.getElementById('did_complete');
+	var not_completed = document.getElementById('not_completed');
+	var is_abstinent = document.getElementById('is_abstinent');
+	var not_abstinent = document.getElementById('not_abstinent');
+	var was_drinking = document.getElementById('was_drinking');
+	var not_drinking = document.getElementById('not_drinking');
+	var is_problem = document.getElementById('is_problem');
+	var no_problem = document.getElementById('no_problem');
+
+	//DEFINE THE RADIO FIELDS
+	defineRadio(current_use, no_current_use, json_data.curUse);
+	defineRadio(has_used, never_used, json_data.everDrank);
+	defineRadio(dui, no_dui, json_data.DUI);
+	defineRadio(give_me_help, no_help, json_data.needHelpDrugs);
+	defineRadio(had_treatment, no_treatment, json_data.drugTreatment);
+	defineRadio(did_complete, not_completed, json_data.finishedTreatment);
+	defineRadio(is_abstinent, not_abstinent, json_data.isClean);
+	defineRadio(was_drinking, not_drinking, json_data.drinkLastEpisode);
+	defineRadio(is_problem, no_problem, json_data.drinkRelationshipProblem);
+
+	//CHECK FOR NULL VALUES IN TEXT AREAS
+	treatNullAreaFields(no_treat_explain, json_data.reasonNotFinishedTreatment);
+	treatNullAreaFields(relapse_explain, json_data.relapseTrigger);
+
+	//CHECK FOR NULL VALUES IN TEXT FIELDS
+	treatNullTextFields(first_use_type, json_data.firstDrinkType);
+	treatNullTextFields(what_you_use, json_data.useType);
+	treatNullTextFields(how_often_you_use, json_data.amtPerWeek);
+	treatNullTextFields(how_much_you_use, json_data.useAmt);
+	treatNullTextFields(reason_quit, json_data.reasonQuit);
+	treatNullTextFields(BAL, json_data.BALevel);
+	treatNullTextFields(when_treated, json_data.dateTreated);
+	treatNullTextFields(where_treated, json_data.treatmentPlace);
+
+	//PROCESS NUMBER FIELDS
+	treatNumberFields(first_drink, json_data.firstDrinkAge);
+	treatNumberFields(quitMos, json_data.monthsQuit);
+	treatNumberFields(quitYrs, json_data.yearsQuit);
+	treatNumberFields(dui_amount, json_data.numDUI);
+
+	//INITIALIZE AND DISABLE/ENABLE FIELDS
+	toggleUseAlcoholRadio();
+	toggleEverDrankRadio();
+	initializeDUIRadio();
+	initializeTreatmentRadio();
+	initializeRadioSub1();
+	initializeSoberRadio();
+
+	// clearNullTextField(first_use_type);
+	// clearNullTextField(what_you_use);
+	// clearNullTextField(how_often_you_use);
+	// clearNullTextField(how_much_you_use);
+	// clearNullTextField(reason_quit);
+	// clearNullTextField(BAL);
+	// clearNullTextField(when_treated);
+	// clearNullTextField(where_treated);
 }
 
 function continue_am_dh() {

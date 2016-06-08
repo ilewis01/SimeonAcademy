@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initalize_am_worst();">
+<body class="gradient-white" onLoad="javascript: initalize_family_origin({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -369,6 +369,14 @@
 				                        </a>
 				                    </div>
 			                    </td>
+
+			            <td>
+                            <div id="submit-space">
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: goBackPage("/am_angerTarget/");' id='continue'>Back</button>
+                                </a>
+                            </div>
+                        </td>
 
                           <td>
                             <div id="submit-space">

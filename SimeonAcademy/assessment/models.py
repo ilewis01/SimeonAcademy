@@ -497,6 +497,7 @@ class AM_Control(models.Model):
 	howLongLeaveScene = models.IntegerField(default=0)
 	whatDoLeave = models.CharField(max_length=100, default=None, blank=True, null=True)
 	relax = models.BooleanField(blank=True, default=False)
+	howRelax = models.CharField(max_length=200, default=None, blank=True, null=True)
 	selfHelpGroup = models.BooleanField(blank=True, default=False)
 	otherControlAnger = models.BooleanField(blank=True, default=False)
 	doWhatOtherControl = models.CharField(max_length=50, default=None, blank=True, null=True)

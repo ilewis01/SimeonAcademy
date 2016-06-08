@@ -584,6 +584,11 @@ def am_angerTarget(request):
 			am.worstComplete = True
 			am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/AngerTarget.html', False)
+			json_data = json.dumps(fields)
+
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
@@ -705,8 +710,8 @@ def am_childhood(request):
 			am.drugHistory.needHelpDrugs = needHelpDrugs
 
 			am.drugHistory.save()
-			# am.drugHistoryComplete = True
-			# am.save()
+			am.drugHistoryComplete = True
+			am.save()
 
 
 			content['back_url'] = '/am_drugHistory/'
@@ -937,6 +942,10 @@ def am_problems(request):
 			am.familyOriginComplete = True
 			am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/currentProblems.html', False)
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
@@ -1290,6 +1299,10 @@ def am_familyOrigin(request):
 			am.angerTargetComplete = True
 			am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html', False)
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session

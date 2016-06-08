@@ -409,7 +409,7 @@ def newAM(client):
 	date = date.date()
 
 	demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
-	drugHistory = AM_DrugHistory(client_id=client.clientID)
+	drugHistory = AM_DrugHistory(client_id=client.clientID, finishedTreatment=True)
 	childhoodHistory = AM_ChildhoodHistory(client_id=client.clientID)
 	angerHistory = AM_AngerHistory(client_id=client.clientID)
 	connections = AM_Connections(client_id=client.clientID)
@@ -461,7 +461,7 @@ def refreshAM(am):
 
 	if am.drugHistoryComplete == True:
 		am.drugHistory.delete()
-		drugHistory = AM_DrugHistory(client_id=am.client.clientID)
+		drugHistory = AM_DrugHistory(client_id=am.client.clientID, finishedTreatment=True)
 		drugHistory.save()
 		am.drugHistory = drugHistory
 		am.drugHistoryComplete = False
