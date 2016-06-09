@@ -2136,6 +2136,114 @@ function continue_to_amViewForm() {
 	}
 }
 
+//ANGER HISTORY FUNCTIONS
+function turnOnAH1() {
+	var otherRecentV = document.getElementById('otherRecentV');
+	var explain_Label = document.getElementById('explain_Label');
+	var otherExplainRecentV = document.getElementById('otherExplainRecentV');
+
+	if (otherRecentV.checked === true) {
+		otherExplainRecentV.disabled = false;
+		otherExplainRecentV.style.opacity = '1.0';
+		explain_Label.style.opacity = '1.0';
+	}
+	else {
+		otherExplainRecentV.style.opacity = '0.3';
+		explain_Label.style.opacity = '0.3';
+		otherExplainRecentV.disabled = true;
+	}
+}
+
+function AHcompletedRadioActivate() {
+	var notCompleted = document.getElementById('notCompleted');
+	var reasonNotCompleteRecentV_label = document.getElementById('reasonNotCompleteRecentV_label');
+	var reasonNotCompleteRecentV = document.getElementById('reasonNotCompleteRecentV');
+
+	if (notCompleted.checked === true) {
+		reasonNotCompleteRecentV.disabled = false;
+		reasonNotCompleteRecentV.style.opacity = '1.0';
+		reasonNotCompleteRecentV_label.style.opacity = '1.0';
+	}
+
+	else {
+		reasonNotCompleteRecentV.value = '';
+		reasonNotCompleteRecentV.style.opacity = '0.3';
+		reasonNotCompleteRecentV_label.style.opacity = '0.3';		
+		reasonNotCompleteRecentV.disabled = true;
+	}
+}
+
+function psychoClick() {
+	var wasTreated = document.getElementById('wasTreated');
+
+	var psychoWhyRecentV_label = document.getElementById('psychoWhyRecentV_label');
+	var longAgoTreatment_label = document.getElementById('longAgoTreatment_label');
+	var longAgoTreatRecentVmos_label = document.getElementById('longAgoTreatRecentVmos_label');
+	var longAgoTreatRecentVyrs_label = document.getElementById('longAgoTreatRecentVyrs_label');
+	var didCompleteTreatRecentV_label = document.getElementById('didCompleteTreatRecentV_label');
+	var notCompleted_label = document.getElementById('notCompleted_label2');
+	var Completed_label = document.getElementById('Completed_label');
+
+	var didComplete = document.getElementById('didComplete');
+	var notCompleted = document.getElementById('notCompleted');
+
+	var psychoWhyRecentV = document.getElementById('psychoWhyRecentV');
+	var longAgoTreatRecentVmos = document.getElementById('longAgoTreatRecentVmos');
+	var longAgoTreatRecentVyrs = document.getElementById('longAgoTreatRecentVyrs');
+
+
+	if (wasTreated.checked === true) {
+		psychoWhyRecentV.disabled = false;
+		longAgoTreatRecentVmos.disabled = false;
+		longAgoTreatRecentVyrs.disabled = false;
+
+		didComplete.disabled = false;
+		notCompleted.disabled = false;
+
+		psychoWhyRecentV_label.style.opacity = '1.0';
+		longAgoTreatment_label.style.opacity = '1.0';
+		longAgoTreatRecentVmos_label.style.opacity = '1.0';
+		longAgoTreatRecentVyrs_label.style.opacity = '1.0';
+		didCompleteTreatRecentV_label.style.opacity = '1.0';
+		notCompleted_label.style.opacity = '1.0';
+		Completed_label.style.opacity = '1.0';
+
+		psychoWhyRecentV.style.opacity = '1.0';	
+		longAgoTreatRecentVmos.style.opacity = '1.0';	
+		longAgoTreatRecentVyrs.style.opacity = '1.0';	
+	}
+
+	else {
+		psychoWhyRecentV.value = '';
+		longAgoTreatRecentVmos.value = '0';
+		longAgoTreatRecentVyrs.value = '0';
+
+		didComplete.checked = true;
+		psychoWhyRecentV.disabled = true;
+		longAgoTreatRecentVmos.disabled = true;
+		longAgoTreatRecentVyrs.disabled = true;
+		AHcompletedRadioActivate();
+		psychoWhyRecentV_label.style.opacity = '0.3';
+		longAgoTreatment_label.style.opacity = '0.3';
+		longAgoTreatRecentVmos_label.style.opacity = '0.3';
+		longAgoTreatRecentVyrs_label.style.opacity = '0.3';
+		didCompleteTreatRecentV_label.style.opacity = '0.3';
+		notCompleted_label.style.opacity = '0.3';
+		Completed_label.style.opacity = '0.3';
+
+		didComplete.disabled = true;
+		notCompleted.disabled = true;
+	}
+
+	
+}
+
+function initialize_am_angerHistory() {
+	// AHcompletedRadioActivate();
+	turnOnAH1();
+	psychoClick();
+}
+
 
 
 

@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: am_anger_history_initialize();">
+<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory();">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -128,7 +128,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <h3 id='am-h2'>Anger Management: Anger/Violence History</h3>
+                <h3 id='am-h2'>Anger Management: Most Recent Anger Episode</h3>
 
                 <div class="container">
                     <div class="row">                   
@@ -164,11 +164,371 @@
                                 <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
 
                                 <!-- ____________________________LEFT SIDE_______________________________ -->
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                1. Please describe in detail your most recent anger incident:
+                                            </label>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <textarea rows='3' cols='63' name='recentIncidentV' id='recentIncidentV'></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                2. When did the anger episode occur?
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <div id='adjust-right-textField'>
+                                                <input type='text' name='recentVDate' id='recentVDate' style='width:140px;'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                3. Where did the anger episode occur?
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <div id='adjust-right-textField'>
+                                                <input type='text' name='recentVlocation' id='recentVlocation' style='width:136px;'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                4. With whom?
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <div id='adjust-right-textField'>
+                                                <input type='text' name='withWhomRecentV' id='withWhomRecentV' style='width:295px;'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                5. What happened?
+                                            </label>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <textarea rows='2' cols='63' name='happenedRecentV' id='happenedRecentV'></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                6. What actions did you demostrate during the episode?
+                                            </label><br>
+                                            <span><em>Check all that apply</em></span>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type='checkbox' name='physicalRecentV' id='physicalRecentV'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch'>
+                                                <label>Physical</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <input type='checkbox' name='verbalRecentV' id='verbalRecentV'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch'>
+                                                <label>Verbal</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <input type='checkbox' name='threatsRecentV' id='threatsRecentV'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch'>
+                                                <label>Threats</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <input type='checkbox' name='propertyRecentV' id='propertyRecentV'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch'>
+                                                <label>Property Destruction</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type='checkbox' name='otherRecentV' id='otherRecentV' onClick='javascript: turnOnAH1();'>
+                                        </td>
+
+                                        <td>
+                                            <div id='AH_labelCheckMatch'>
+                                                <label>Other</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div style='margin-top:6px;'>
+                                                <label id='explain_Label'>(Explain):</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div style='margin-left:3px; margin-top:1px;'>
+                                                <input type='text' name='otherExplainRecentV' id='otherExplainRecentV' style='width:200px'>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
                   
                         </div>
 
                         <div class="col-md-5 col-sm-5">
                                 <!-- ____________________________RIGHT SIDE_______________________________ -->
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                7. Main types of angry words and thoughts during the episode:
+                                            </label>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <textarea rows='3' cols='66' name='typeWordsRecentV' id='typeWordsRecentV'></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>8. Explain how you felt physically while angry:</label>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div style='margin-left:15px;'>
+                                                <input type='checkbox' name='wasTense' id='wasTense'>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch2'>
+                                                <label>Tense</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <input type='checkbox' name='hadRush' id='hadRush'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch2'>
+                                                <label>Rush</label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <input type='checkbox' name='feltStrong' id='feltStrong'>
+                                        </td>
+                                        <td>
+                                            <div id='AH_labelCheckMatch2'>
+                                                <label>Strong</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                9. Have you ever been treated for psychological or
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>emotional problems?</label>
+                                        </td>
+
+                                        <td>
+                                            <div id='psychoRadio'>
+                                                <input type='radio' name='psychoRecentV' id='wasTreated' onClick='javascript: psychoClick()'>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <label>Yes</label>
+                                        </td>
+
+                                        <td>
+                                            <div id='psychoRadio'>
+                                                <input type='radio' name='psychoRecentV' id='notTreated' checked onClick='javascript: psychoClick()'>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <label>No</label>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <ul>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <li>
+                                                    <label for='psychoWhyRecentV' id='psychoWhyRecentV_label'>
+                                                        For what were you being treated?
+                                                    </label>
+                                                </li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <textarea name='psychoWhyRecentV' id='psychoWhyRecentV' rows='2' cols='59'></textarea>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
+                                    </table>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <li>
+                                                    <label id='longAgoTreatment_label'>
+                                                        How long ago did you receive counseling or treatment?
+                                                    </label>
+                                                </li>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' style='width:40px;'>
+                                            </td>
+                                            <td>
+                                                <div id='numberLabel'>
+                                                    <label for='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos_label'>
+                                                        months
+                                                    </label>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' style='width:40px;'>
+                                            </td>
+                                            <td>
+                                                <div id='numberLabel'>
+                                                    <label for='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs_label'>
+                                                        years
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
+                                    </table>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <li>
+                                                    <label for='didCompleteTreatRecentV' id='didCompleteTreatRecentV_label'>
+                                                        Did you complete the program?
+                                                    </label>
+                                                </li>
+                                            </td>
+
+                                            <td>
+                                                <div id='psychoRadio'>
+                                                    <input type='radio' name='didCompleteTreatRecentV' id='didComplete' checked onClick='javascript: AHcompletedRadioActivate()'>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <label for='didComplete' id='Completed_label'>Yes</label>
+                                            </td>
+
+                                            <td>
+                                                <div id='psychoRadio'>
+                                                    <input type='radio' name='didCompleteTreatRecentV' id='notCompleted' onClick='javascript: AHcompletedRadioActivate()'>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <label for='notCompleted' id='notCompleted_label2'>No</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label for='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV_label'>Why not?</label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <textarea rows='2' cols='59' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'></textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ul>
 
                             </form>
                         </div>
