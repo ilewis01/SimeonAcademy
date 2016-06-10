@@ -968,11 +968,23 @@ function continue_to_am_control() {
 	}
 }
 
+function twoElementRadioSetup(yesRadio, label, field) {
+	if (yesRadio.checked === true) {
+		label.disabled = false;
+		label.style.opacity = '1.0';
+		field.style.opacity = '1.0';
+	}
 
-// AM CHILDHOOD FUNCTIONS
-function continue_am_history1() {
-	document.getElementById('am_demo').submit();
+	else {
+		label.style.opacity = '0.3';
+		field.style.opacity = '0.3';
+		field.value = '';
+		field.disabled;
+	}
 }
+
+
+
 
 
 
@@ -1861,6 +1873,7 @@ function evaluate_field(field, hidden, error_msg) {
 	return proceed;
 }
 
+//DRUG HISTORY FUNCTIONS
 function initialize_am_drug_history(json_data) {
 	//TEXT FIELDS	
 	var first_use_type = document.getElementById('first_use_type');	
@@ -2029,6 +2042,192 @@ function continue_am_dh() {
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
 	}
+}
+
+
+// AM CHILDHOOD FUNCTIONS
+function childTraumaRadio() {
+	var hadTramua = document.getElementById('hadTramua');
+	var traumaExplain_label = document.getElementById('traumaExplain_label');
+	var traumaExplain = document.getElementById('traumaExplain');
+
+	twoElementRadioSetup(hadTramua, traumaExplain_label, traumaExplain);
+}
+
+function childAbusedRadio() {
+	var childAbused = document.getElementById('childAbused');
+	var abusedBy_label = document.getElementById('abusedBy_label');
+	var abusedBy = document.getElementById('abusedBy');
+
+	twoElementRadioSetup(childAbused, abusedBy_label, abusedBy);
+}
+
+function hadChildAngerRadio() {
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var childAngerExplain_label = document.getElementById('childAngerExplain_label');
+	var childAngerExplain = document.getElementById('childAngerExplain');
+
+	twoElementRadioSetup(hadAngerChild, childAngerExplain_label, childAngerExplain);
+}
+
+function otherEventsHelpRadio() {
+	var haveOtherEvents = document.getElementById('haveOtherEvents');
+	var otherChildExplain_label = document.getElementById('otherChildExplain_label');
+	var otherChildExplain = document.getElementById('otherChildExplain');
+
+	twoElementRadioSetup(haveOtherEvents, otherChildExplain_label, otherChildExplain);
+}
+
+function parentsFoughtRadio() {
+	var sawViolence = document.getElementById('sawViolence');
+	var parentViolenceExplain_label = document.getElementById('parentViolenceExplain_label');
+	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
+
+	twoElementRadioSetup(sawViolence, parentViolenceExplain_label, parentViolenceExplain);
+}
+
+function initialize_am_childhood(json_data) {
+	//text fields
+	var raisedBy = document.getElementById('raisedBy');
+	var traumaExplain = document.getElementById('traumaExplain');
+	var howLeftHome = document.getElementById('howLeftHome');
+	var dadCloseExplain = document.getElementById('dadCloseExplain');
+	var momCloseExplain = document.getElementById('momCloseExplain');
+	var abusedBy = document.getElementById('abusedBy');
+	var abuseImpact = document.getElementById('abuseImpact');
+	var childAngerExplain = document.getElementById('childAngerExplain');
+	var otherChildExplain = document.getElementById('otherChildExplain');
+	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
+	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
+	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
+	var num_siblings = document.getElementById('num_siblings');
+
+	//boolean fields
+	var momAlive = document.getElementById('momAlive');
+	var dadAlive = document.getElementById('dadAlive');
+	var childTrama = document.getElementById('childTrama');
+	var siblingsClose = document.getElementById('siblingsClose');
+	var dadClose = document.getElementById('dadClose');
+	var momClose = document.getElementById('momClose');
+	var wasAbused = document.getElementById('wasAbused');
+	var childAnger = document.getElementById('childAnger');
+	var otherChild = document.getElementById('otherChild');
+	var parentViolence = document.getElementById('parentViolence');
+
+	raisedBy.selectedIndex = json_data.raisedBy;
+	num_siblings.value = json_data.num_siblings;
+
+	traumaExplain.value = insertProcessedText(json_data.traumaExplain)
+	howLeftHome.value = insertProcessedText(json_data.howLeftHome)
+	dadCloseExplain.value = insertProcessedText(json_data.dadCloseExplain)
+	momCloseExplain.value = insertProcessedText(json_data.momCloseExplain)
+	abusedBy.value = insertProcessedText(json_data.abusedBy)
+	abuseImpact.value = insertProcessedText(json_data.abuseImpact)
+	childAngerExplain.value = insertProcessedText(json_data.childAngerExplain)
+	otherChildExplain.value = insertProcessedText(json_data.otherChildExplain)
+	parentViolenceExplain.value = insertProcessedText(json_data.parentViolenceExplain)
+	parentViolenceImpact.value = insertProcessedText(json_data.parentViolenceImpact)
+	siblingsRelationshipExplain.value = insertProcessedText(json_data.siblingsRelationshipExplain)
+
+	//sub radio button declarations
+	var motherLiving = document.getElementById('motherLiving');
+	var motherNotLiving = document.getElementById('motherNotLiving');
+	var fatherLiving = document.getElementById('fatherLiving');
+	var fatherNotLiving = document.getElementById('fatherNotLiving');
+	var hadTramua = document.getElementById('hadTramua');
+	var noTrauma = document.getElementById('noTrauma');
+	var sibsClose = document.getElementById('sibsClose');
+	var sibsNotClose = document.getElementById('sibsNotClose');
+	var dadIsClose = document.getElementById('dadIsClose');
+	var dadNotClose = document.getElementById('dadNotClose');
+	var childAbused = document.getElementById('childAbused');
+	var childNotAbused = document.getElementById('childNotAbused');
+	var meMomClose = document.getElementById('meMomClose');
+	var meMomNotClose = document.getElementById('meMomNotClose');
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var noAngerChild = document.getElementById('noAngerChild');
+	var haveOtherEvents = document.getElementById('haveOtherEvents');
+	var noOtherEvents = document.getElementById('noOtherEvents');
+	var sawViolence = document.getElementById('sawViolence');
+	var didntSeeViolence = document.getElementById('didntSeeViolence');
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var noAngerChild = document.getElementById('noAngerChild');
+
+	//process radio buttons
+	if (String(json_data.momAlive) === 'true') {
+		motherLiving.checked = true;
+	}
+	else {
+		motherNotLiving.checked = true;
+	}
+
+	if (String(json_data.dadAlive) === 'true') {
+		fatherLiving.checked = true;
+	}
+	else {
+		fatherNotLiving.checked = true;
+	}
+
+	if (String(json_data.childTrama) === 'true') {
+		hadTramua.checked = true;
+	}
+	else {
+		noTrauma.checked = true;
+	}
+
+	if (String(json_data.siblingsClose) === 'true') {
+		sibsClose.checked = true;
+	}
+	else {
+		sibsNotClose.checked = true;
+	}
+	if (String(json_data.dadClose) === 'true') {
+		dadIsClose.checked = true;
+	}
+	else {
+		dadNotClose.checked = true;
+	}
+
+	if (String(json_data.momClose) === 'true') {
+		meMomClose.checked = true;
+	}
+	else {
+		meMomNotClose.checked = true;
+	}
+
+	if (String(json_data.wasAbused) === 'true') {
+		childAbused.checked = true;
+	}
+	else {
+		childNotAbused.checked = true;
+	}
+
+	if (String(json_data.childAnger) === 'true') {
+		haveOtherEvents.checked = true;
+	}
+	else {
+		noOtherEvents.checked = true;
+	}
+
+	if (String(json_data.otherChild) === 'true') {
+		sawViolence.checked = true;
+	}
+	else {
+		didntSeeViolence.checked = true;
+	}
+
+	if (String(json_data.childAnger) === 'true') {
+		hadAngerChild.checked = true;
+	}
+	else {
+		noAngerChild.checked = true;
+	}
+
+	childTraumaRadio();
+	childAbusedRadio();
+	hadChildAngerRadio();
+	otherEventsHelpRadio();
+	parentsFoughtRadio();
 }
 
 //CONTROL FUNCTIONS

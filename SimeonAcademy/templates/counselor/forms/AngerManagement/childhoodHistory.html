@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: am_drug_history_initialize({{json_data}}, {{back}});">
+<body class="gradient-white" onLoad="javascript: initialize_am_childhood({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -367,7 +367,7 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='childTrama' id='hadTramua' value='hadTramua'>
+									                            <input type='radio' name='childTrama' id='hadTramua' value='hadTramua' onClick='javascript: childTraumaRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -376,7 +376,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childTrama' id='noTrauma' value='noTrauma' checked>
+									                            <input type='radio' name='childTrama' id='noTrauma' value='noTrauma' checked onClick='javascript: childTraumaRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -392,7 +392,7 @@
 								<table>
 									<tr>
 										<td>
-										    <label for='noTrauma' id='noTrauma_label'>Explain:</label>
+										    <label for='traumaExplain' id='traumaExplain_label'>Explain:</label>
 										</td>
 									</tr>
 									<tr>
@@ -451,7 +451,7 @@
 
 										<td>
 											<div id='single-line-radio2' style='margin-left:15px;'>
-												<input type='radio' name='siblingsClose' id='sibsNotClose'>
+												<input type='radio' name='siblingsClose' id='sibsNotClose' value='sibsNotClose'>
 											</div>
 										</td>
 										<td>
@@ -546,7 +546,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='wasAbused' id='childAbused' value='childAbused'>
+									                            <input type='radio' name='wasAbused' id='childAbused' value='childAbused' onClick='javascript: childAbusedRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -555,7 +555,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='wasAbused' id='childNotAbused' value='childNotAbused' checked>
+									                            <input type='radio' name='wasAbused' id='childNotAbused' value='childNotAbused' checked onClick='javascript: childAbusedRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -675,7 +675,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='childAnger' id='hadAngerChild' value='hadAngerChild'>
+									                            <input type='radio' name='childAnger' id='hadAngerChild' value='hadAngerChild' onClick='javascript: hadChildAngerRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -684,7 +684,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childAnger' id='noAngerChild' value='noAngerChild' checked>
+									                            <input type='radio' name='childAnger' id='noAngerChild' value='noAngerChild' checked onClick='javascript: hadChildAngerRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -730,7 +730,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='haveOtherEvents'>
+									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='haveOtherEvents' onClick='javascript: otherEventsHelpRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -739,7 +739,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='otherChild' id='noOtherEvents' value='noOtherEvents' checked>
+									                            <input type='radio' name='otherChild' id='noOtherEvents' value='noOtherEvents' checked onClick='javascript: otherEventsHelpRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -785,7 +785,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='parentViolence' id='sawViolence' value='sawViolence'>
+									                            <input type='radio' name='parentViolence' id='sawViolence' value='sawViolence' onClick='javascript: parentsFoughtRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -794,7 +794,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='didntSeeViolence'>
+									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='didntSeeViolence' checked onClick='javascript: parentsFoughtRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>

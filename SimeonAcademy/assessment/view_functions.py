@@ -837,10 +837,90 @@ def grabAmTarget(am):
 	fields['seldomUpset'] = am.angerTarget.seldomUpset
 	return fields
 
+def getAMDemoFields(am):
+	data = {}
+
+	if am.demographic.maritalStatus == None:
+		data['maritalStatus'] = 0
+	else:
+		data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus.status)
+
+	if am.demographic.livingSituation == None:
+		data['livingSituation'] = 0
+	else:
+		data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation.situation)
+
+	if am.demographic.education == None:
+		data['education'] = 0
+	else:
+		data['education'] = convertEducationToIndex(am.demographic.education.level)
+
+	data['own'] = convertToJavascriptBool(am.demographic.own)
+	data['months_res'] = am.demographic.months_res
+	data['years_res'] = am.demographic.years_res
+	data['num_children'] = am.demographic.num_children
+	data['other_dependants'] = am.demographic.other_dependants
+	data['drop_out'] = convertToJavascriptBool(am.demographic.drop_out)
+	data['resasonDO'] = convertNullTextFields(am.demographic.resasonDO)
+	data['employee'] = convertNullTextFields(am.demographic.employee)
+	data['job_title'] = convertNullTextFields(am.demographic.job_title)
+	data['emp_address'] = convertNullTextFields(am.demographic.emp_address)
+	data['employed_months'] = am.demographic.employed_months
+	data['employed_years'] = am.demographic.employed_years
+	data['employer_phone'] = convertNullTextFields(am.demographic.employer_phone)
+	data['health_problem'] = convertToJavascriptBool(am.demographic.health_problem)
+	data['medication'] = convertToJavascriptBool(am.demographic.medication)
+	data['whatMedicine'] = convertNullTextFields(am.demographic.whatMedicine)
+	data['health_exp'] = convertNullTextFields(am.demographic.health_exp)
+
+	return data
+
 def grabAmChildhood(am):
 	fields = {}
 
-	fields['raisedBy'] = am.childhood.raisedBy
+	#CONVERT DROP MENU ITEM
+	select = convertNullTextFields(am.childhood.raisedBy)
+
+	if select == 'Parents':
+		select = 1
+	elif select == 'Grandparents':
+		select = 2
+	elif select == 'Relatives':
+		select = 3
+	elif select == 'Foster Care':
+		select = 4
+	else:
+		select = 0
+
+	fields['raisedBy'] = select
+
+	#TEXT FIELDS
+	fields['traumaExplain'] = convertNullTextFields(am.childhood.traumaExplain)
+	fields['howLeftHome'] = convertNullTextFields(am.childhood.howLeftHome)
+	fields['siblingsRelationshipExplain'] = convertNullTextFields(am.childhood.siblingsRelationshipExplain)
+	fields['dadCloseExplain'] = convertNullTextFields(am.childhood.dadCloseExplain)
+	fields['momCloseExplain'] = convertNullTextFields(am.childhood.momCloseExplain)
+	fields['abusedBy'] = convertNullTextFields(am.childhood.abusedBy)
+	fields['abuseImpact'] = convertNullTextFields(am.childhood.abuseImpact)
+	fields['childAngerExplain'] = convertNullTextFields(am.childhood.childAngerExplain)
+	fields['otherChildExplain'] = convertNullTextFields(am.childhood.otherChildExplain)
+	fields['parentViolenceExplain'] = convertNullTextFields(am.childhood.parentViolenceExplain)
+	fields['parentViolenceImpact'] = convertNullTextFields(am.childhood.parentViolenceImpact)
+
+	#INTEGER FIELDS...NOTHING NEEDS TO BE DONE BECAUSE DEFAULT VALUES ARE SET AT ZERO
+	fields['num_siblings'] = am.childhood.num_siblings
+
+	#BOOLEAN FIELDS
+	fields['momAlive'] = convertToJavascriptBool(am.childhood.momAlive)
+	fields['dadAlive'] = convertToJavascriptBool(am.childhood.dadAlive)
+	fields['childTrama'] = convertToJavascriptBool(am.childhood.childTrama)
+	fields['siblingsClose'] = convertToJavascriptBool(am.childhood.siblingsClose)
+	fields['dadClose'] = convertToJavascriptBool(am.childhood.dadClose)
+	fields['momClose'] = convertToJavascriptBool(am.childhood.momClose)
+	fields['wasAbused'] = convertToJavascriptBool(am.childhood.wasAbused)
+	fields['childAnger'] = convertToJavascriptBool(am.childhood.childAnger)
+	fields['otherChild'] = convertToJavascriptBool(am.childhood.otherChild)
+	fields['parentViolence'] = convertToJavascriptBool(am.childhood.parentViolence)
 
 	return fields
 
@@ -1253,44 +1333,6 @@ def convertEducationToIndex(education):
 		education = 0
 	return education
 
-
-def getAMDemoFields(am):
-	data = {}
-
-	if am.demographic.maritalStatus == None:
-		data['maritalStatus'] = 0
-	else:
-		data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus.status)
-
-	if am.demographic.livingSituation == None:
-		data['livingSituation'] = 0
-	else:
-		data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation.situation)
-
-	if am.demographic.education == None:
-		data['education'] = 0
-	else:
-		data['education'] = convertEducationToIndex(am.demographic.education.level)
-
-	data['own'] = convertToJavascriptBool(am.demographic.own)
-	data['months_res'] = am.demographic.months_res
-	data['years_res'] = am.demographic.years_res
-	data['num_children'] = am.demographic.num_children
-	data['other_dependants'] = am.demographic.other_dependants
-	data['drop_out'] = convertToJavascriptBool(am.demographic.drop_out)
-	data['resasonDO'] = convertNullTextFields(am.demographic.resasonDO)
-	data['employee'] = convertNullTextFields(am.demographic.employee)
-	data['job_title'] = convertNullTextFields(am.demographic.job_title)
-	data['emp_address'] = convertNullTextFields(am.demographic.emp_address)
-	data['employed_months'] = am.demographic.employed_months
-	data['employed_years'] = am.demographic.employed_years
-	data['employer_phone'] = convertNullTextFields(am.demographic.employer_phone)
-	data['health_problem'] = convertToJavascriptBool(am.demographic.health_problem)
-	data['medication'] = convertToJavascriptBool(am.demographic.medication)
-	data['whatMedicine'] = convertNullTextFields(am.demographic.whatMedicine)
-	data['health_exp'] = convertNullTextFields(am.demographic.health_exp)
-
-	return data
 
 def getAmDHData(back, am):
 	data = {}
