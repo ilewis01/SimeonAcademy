@@ -3,11 +3,11 @@ from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
 FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
-AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
+AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, SType, \
-A_Time, Appointment, ClientSession, Invoice
+A_Time, Appointment, ClientSession, Invoice, AM_AngerHistory3
 
 admin.site.register(account)
 admin.site.register(State)
@@ -29,6 +29,8 @@ admin.site.register(AM_Demographic)
 admin.site.register(AM_DrugHistory)
 admin.site.register(AM_ChildhoodHistory)
 admin.site.register(AM_AngerHistory)
+admin.site.register(AM_AngerHistory2)
+admin.site.register(AM_AngerHistory3)
 admin.site.register(AM_Connections)
 admin.site.register(AM_WorstEpisode)
 admin.site.register(AM_AngerTarget)

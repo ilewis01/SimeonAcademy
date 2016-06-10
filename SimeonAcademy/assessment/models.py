@@ -293,7 +293,7 @@ class AM_DrugHistory(models.Model):
 	needHelpDrugs = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Anger Management/Drug History: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT CHILDHOOD HISTORY----------------------------------------------------------------
 class AM_ChildhoodHistory(models.Model):
@@ -323,7 +323,7 @@ class AM_ChildhoodHistory(models.Model):
 	parentViolenceImpact = models.CharField(max_length=250, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Childhood History: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT ANGER/VIOLENCE HISTORY----------------------------------------------------------------
 class AM_AngerHistory(models.Model):
@@ -351,19 +351,26 @@ class AM_AngerHistory(models.Model):
 	longAgoTreatRecentVyrs = models.IntegerField(default=0)
 	didCompleteTreatRecentV = models.BooleanField(default=False, blank=True)
 	reasonNotCompleteRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.client_id)
+
+##ANGER MANAGEMENT ANGER/VIOLENCE HISTORY PART 2----------------------------------------------------------------
+class AM_AngerHistory2(models.Model):
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+
 	depress30RecentV = models.BooleanField(default=False, blank=True)
 	depress30ExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	anxietyRecentV = models.BooleanField(default=False, blank=True)
 	anxietyExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	hallucinationRecentV = models.BooleanField(default=False, blank=True)
-	hallucinationRecentVmos = models.IntegerField(default=0)
-	hallucinationRecentVyrs = models.IntegerField(default=0)
+	hallucinationLastV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	understandingRecentV = models.BooleanField(default=False, blank=True)
 	understandingExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	troubleControlRecentV = models.BooleanField(default=False, blank=True)
-	troubleControlRecentVmos = models.IntegerField(default=0)
-	troubleControlRecentVyrs = models.IntegerField(default=0)
-	troubleControlExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
+	lastTimeTroubleControl = models.CharField(max_length=100, default=None, blank=True, null=True)
+	controlTrigger = models.CharField(max_length=100, default=None, blank=True, null=True)
 	suicide30RecentV = models.BooleanField(default=False, blank=True)
 	suicide30ExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	suicideTodayRecentV = models.BooleanField(default=False, blank=True)
@@ -371,6 +378,15 @@ class AM_AngerHistory(models.Model):
 	suicideTodayExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
 	hasAttemptedSuicide = models.BooleanField(default=False, blank=True)
 	hasAttemptedExplainRecentV = models.CharField(max_length=100, default=None, blank=True, null=True)
+	
+	def __unicode__(self):
+		return str(self.client_id)
+
+##ANGER MANAGEMENT ANGER/VIOLENCE HISTORY PART 3----------------------------------------------------------------
+class AM_AngerHistory3(models.Model):
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+
 	homicidal = models.BooleanField(default=False, blank=True)
 	homicidalExplain = models.CharField(max_length=100, default=None, blank=True, null=True)
 	medRecentV = models.BooleanField(default=False, blank=True)
@@ -391,7 +407,7 @@ class AM_AngerHistory(models.Model):
 	onlyAsAdult = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Anger Management/Anger History: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT CONNECTIONS OF USE AND ANGER----------------------------------------------------------
 class AM_Connections(models.Model):
@@ -407,7 +423,7 @@ class AM_Connections(models.Model):
 	connectionExplain = models.CharField(max_length=250, blank=True, null=True, default=None)
 
 	def __unicode__(self):
-		return "Anger Management/Connections: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT WORST EPISODE--------------------------------------------------------------------------
 class AM_WorstEpisode(models.Model):
@@ -431,7 +447,7 @@ class AM_WorstEpisode(models.Model):
 	otherWorstDescription = models.CharField(max_length=100, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Worst Episode: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT WITH WHOM YOU GET ANGRY----------------------------------------------------------------
 class AM_AngerTarget(models.Model):
@@ -450,7 +466,7 @@ class AM_AngerTarget(models.Model):
 	seldomUpset = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return "Anger Management/Anger Target: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT FAMILY OF ORIGIN-----------------------------------------------------------------------
 class AM_FamilyOrigin(models.Model):
@@ -467,7 +483,7 @@ class AM_FamilyOrigin(models.Model):
 	hasLovingSiblings = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return "Anger Management/Family Origin: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT ANY CURRENT PROBLEMS HISTORY OF--------------------------------------------------------
 class AM_CurrentProblem(models.Model):
@@ -487,7 +503,7 @@ class AM_CurrentProblem(models.Model):
 	describeIssue = models.CharField(max_length=100, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Current Problems: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT CONTROL--------------------------------------------------------------------------------
 class AM_Control(models.Model):
@@ -507,7 +523,7 @@ class AM_Control(models.Model):
 	doWhatOtherControl = models.CharField(max_length=50, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Control: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT OTHER THINGS---------------------------------------------------------------------------
 class AM_Final(models.Model):
@@ -520,7 +536,7 @@ class AM_Final(models.Model):
 	changeLearn3 = models.CharField(max_length=100, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Anger Management/Final: " + str(self.client_id)
+		return str(self.client_id)
 
 ##ANGER MANAGEMENT FULL IMPLEMENTATION OF ASSESSMENT FILE-------------------------------------------------------------
 class AngerManagement(models.Model):
@@ -530,6 +546,8 @@ class AngerManagement(models.Model):
 	drugHistory = models.ForeignKey(AM_DrugHistory, blank=True, null=True, default=None)
 	childhood = models.ForeignKey(AM_ChildhoodHistory, blank=True, null=True, default=None)
 	angerHistory = models.ForeignKey(AM_AngerHistory, blank=True, null=True, default=None)
+	angerHistory2 = models.ForeignKey(AM_AngerHistory2, blank=True, null=True, default=None)
+	angerHistory3 = models.ForeignKey(AM_AngerHistory3, blank=True, null=True, default=None)
 	connections = models.ForeignKey(AM_Connections, blank=True, null=True, default=None)
 	worstEpisode = models.ForeignKey(AM_WorstEpisode, blank=True, null=True, default=None)
 	angerTarget = models.ForeignKey(AM_AngerTarget, blank=True, null=True, default=None)
@@ -545,6 +563,8 @@ class AngerManagement(models.Model):
 	drugHistoryComplete = models.BooleanField(blank= True, default = False)
 	childhoodComplete = models.BooleanField(blank= True, default = False)
 	angerHistoryComplete = models.BooleanField(blank= True, default = False)
+	angerHistoryComplete2 = models.BooleanField(blank= True, default = False)
+	angerHistoryComplete3 = models.BooleanField(blank= True, default = False)
 	connectionsComplete = models.BooleanField(blank= True, default = False)
 	worstComplete = models.BooleanField(blank= True, default = False)
 	angerTargetComplete = models.BooleanField(blank= True, default = False)
@@ -556,7 +576,7 @@ class AngerManagement(models.Model):
 	AMComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return "Anger Management: " + str(self.client.fname) + ' ' + str(self.client.lname) + " " + str(self.start_time)
+		return str(self.client.fname) + ' ' + str(self.client.lname) + " " + str(self.start_time)
 
 class MHDemographic(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)

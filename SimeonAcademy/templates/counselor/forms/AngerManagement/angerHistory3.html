@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initalize_am_connections({{json_data}});">
+<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory();">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -226,141 +226,60 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-            	<div class="form_headings">
-                	<h3 id='am-h2'>Anger Management: Anger and Alcohol/Drugs Connections</h3>
+                <div class="form_headings">
+                    <h3 id='am-h2'>Anger Management: Most Recent Anger Episode III</h3>
                 </div>
 
-	            <div class="container">
-	            	<div class="row">                   
-	                  	<div class="col-md-5 col-sm-5">
-	                  		<form action='/am_worst/' method='post' id='am_demo'> {% csrf_token %}
-	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-	                  			<input type='hidden' name='back' id='back' value='false'>
-	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+                <div class="container">
+                    <div class="row">                   
+                        <div class="col-md-5 col-sm-5">
+                            <form action='/am_connections/' method='post' id='am_demo'> {% csrf_token %}
+                                <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+                                <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                                <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                                <input type='hidden' name='back' id='back' value='false'>
+                                <input type='hidden' name='exit_type' id='exit_type' value=''>
 
-	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_angerWorse' id='m_angerWorse'>
-	                            <input type='hidden' value='' name='m_troubleWhenUsing' id='m_troubleWhenUsing'>
-	                            <input type='hidden' value='' name='m_lessAngry' id='m_lessAngry'>
-	                            <input type='hidden' value='' name='m_othersTellMe' id='m_othersTellMe'>
-	                            <input type='hidden' value='' name='m_noConnection' id='m_noConnection'>
-	                            <input type='hidden' value='' name='m_otherConnectionsUsing' id='m_otherConnectionsUsing'>
-	                            <input type='hidden' value='' name='m_connectionExplain' id='m_connectionExplain'>
-	                          
+                                <!-- REAL DATA ENTRIES -->
+                                <input type='hidden' value='' name='m_recentIncidentV'              id='m_recentIncidentV'>
+                                <input type='hidden' value='' name='m_recentVDate'                  id='m_recentVDate'>
+                                <input type='hidden' value='' name='m_recentVlocation'              id='m_recentVlocation'>
+                                <input type='hidden' value='' name='m_withWhomRecentV'              id='m_withWhomRecentV'>
+                                <input type='hidden' value='' name='m_happenedRecentV'              id='m_happenedRecentV'>
+                                <input type='hidden' value='' name='m_physicalRecentV'              id='m_physicalRecentV'>
+                                <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
+                                <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
+                                <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
+                                <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
+                                <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
+                                <input type='hidden' value='' name='m_typeWordsRecentV'             id='m_typeWordsRecentV'>
+                                <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
+                                <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
+                                <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
+                                <input type='hidden' value='' name='m_psychoRecentV'                id='m_psychoRecentV'>
+                                <input type='hidden' value='' name='m_psychoWhyRecentV'             id='m_psychoWhyRecentV'>
+                                <input type='hidden' value='' name='m_longAgoTreatRecentVmos'       id='m_longAgoTreatRecentVmos'>
+                                <input type='hidden' value='' name='m_longAgoTreatRecentVyrs'       id='m_longAgoTreatRecentVyrs'>
+                                <input type='hidden' value='' name='m_didCompleteTreatRecentV'      id='m_didCompleteTreatRecentV'>
+                                <input type='hidden' value='' name='m_reasonNotCompleteRecentV'     id='m_reasonNotCompleteRecentV'>
 
-	                            <h4>Check all that apply:</h4>
+                                <!-- ____________________________LEFT SIDE_______________________________ -->
+                                
+                  
+                        </div>
 
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='angerWorse' id='angerWorse'>	
-	                            		</td>
+                        <div class="col-md-5 col-sm-5">
+                                <!-- ____________________________RIGHT SIDE_______________________________ -->
+                                
 
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>Anger/aggression gets worse when using.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
+                            </form>
+                        </div>
+                    </div>
 
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='troubleWhenUsing' id='troubleWhenUsing'>	
-	                            		</td>
+                    <div class="row">
+                <!-- _____________________________________________BUTTONS_______________________________________________ -->
 
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>I only get in trouble with my anger/aggression when using.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='lessAngry' id='lessAngry'>	
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>I'm less angry/aggressive when I drink or use drugs.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='othersTellMe' id='othersTellMe'>	
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>Others tell me there is a connection but I have trouble believing it.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='noConnection' id='noConnection'>	
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>There seems to be no connection at all.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='otherConnectionsUsing' id='otherConnectionsUsing' onClick="javascript: connectionCheck();">	
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>Other alcohol/drug connections with anger/aggression.</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<div id='right_17px'>
-	                            			    <label for='connectionExplain' id='explain_label'>Explain:</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<div id='right_17px'>
-	                            				<textarea cols='60' rows='5' name='connectionExplain' id='connectionExplain'></textarea>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-	                        </form>	              
-	                    </div>
-	                </div>
-
-	                <div class="row">
-				<!-- _____________________________________________BUTTONS_______________________________________________ -->
-
-						<table>
+                        <table>
                           <tr>
                             <td>
                               <div id="error-div-main">
@@ -371,14 +290,14 @@
                         </table>
 
                         <table class='toggle-div-page'>
-                        	<tr>
-                        		<td>
-                        			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle">
-				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
+                            <tr>
+                                <td>
+                                    <div style='margin-left:12px;'>
+                                        <a href="#menu-toggle" id="menu-toggle">
+                                            <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+                                        </a>
+                                    </div>
+                                </td>
 
                           <td>
                             <div id="submit-space">
@@ -394,30 +313,35 @@
                             </div>
                           </td>
 
-			                    <td>
-			                    	<div id="submit-space">
-				                        <a href="javascript: " id="continue">
-				                        	<button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Save and Exit</button>
-				                        </a>
-				                    </div>
-			                    </td>
+                                <td>
+                                    <div id="submit-space">
+                                        <a href="javascript: " id="continue">
+                                            <button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Save and Exit</button>
+                                        </a>
+                                    </div>
+                                </td>
 
                           <td>
                             <div id="submit-space">
                                 <a href="javascript: " id="continue">
-                                  <button type='button' onClick='javascript: continue_to_worst();' id='continue'>Continue</button>
+                                  <button type='button' onClick='javascript: proceed_to_connections();' id='continue'>Continue</button>
                                 </a>
                             </div>
                           </td>
-			                </tr>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</body>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 
 {% endblock %}
+
+
+
+                  								
+
 
 
 

@@ -56,6 +56,8 @@ urlpatterns = patterns('',
     ## Anger Management Views
     url(r'^am_preliminary/$', 'assessment.views.am_preliminary'),
     url(r'^am_angerHistory/$', 'assessment.views.am_angerHistory'),
+    url(r'^am_angerHistory2/$', 'assessment.views.am_angerHistory2'),
+    url(r'^am_angerHistory3/$', 'assessment.views.am_angerHistory3'),
     url(r'^am_angerTarget/$', 'assessment.views.am_angerTarget'),
     url(r'^am_childhood/$', 'assessment.views.am_childhood'),
     url(r'^am_connections/$', 'assessment.views.am_connections'),
@@ -69,6 +71,8 @@ urlpatterns = patterns('',
     url(r'^am_worst/$', 'assessment.views.am_worst'),
     url(r'^am_location/$', 'assessment.views.am_location'),
     url(r'^printAM/$', 'assessment.views.printAM'),
+    url(r'^exit_am/$', 'assessment.views.exit_am'),
+    url(r'^am_deleted/$', 'assessment.views.am_deleted'),
 
     ## Urine Test Views
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),

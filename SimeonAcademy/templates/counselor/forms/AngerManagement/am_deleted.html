@@ -9,14 +9,14 @@
             <div class="row">                   
                   <div class="col-md-12">
                         <div id='header-text'>
-                              {{header_phrase}}
+                              The Anger Management Form Has Sucessfully Been Deleted
                         </div>
                   </div>
             </div>
         </div>
     </div>
 
-    <div style='padding-top:5%;'>
+    <!-- <div style='padding-top:5%;'>
     	<div id='form-deletion-main-phrase'>
     		{{sub1_phrase}}
     	</div>
@@ -34,7 +34,7 @@
 
     	<label>Status:</label>
     	<span>{{status}}</span> <br>
-    </div>
+    </div> -->
 
 	<form action='/am_deleted/' method='POST' id='exit_return_form'> {% csrf_token %}
 		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
@@ -44,11 +44,11 @@
 	<div style='padding-top:5%'>
 		<div class='toggle-div-page'>
 		    <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: AmDeleted();' id='continue'>Delete</button>
+                <button type='button' onClick='javascript: AmDeleted();' id='continue'>End Session</button>
             </a>
 
             <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Cancel</button>
+                <button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Return to Session</button>
             </a>
         </div>
 	</div>

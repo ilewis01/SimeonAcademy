@@ -9,127 +9,217 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-        	<table class='session-side'>
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<h3>Client Profile</h3>
-                    	</div>
-        			</td>
-        		</tr>
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='font-size:20px;'>
+                  <h4>Details:</h4>
+                </div>
+              </td>
+            </tr>
 
-        		<!-- <tr>
-        			<td>
-        				<div>
-                        	<h5>{{session.start}}</h5>
-                    	</div>
-        			</td>
-        		</tr> -->
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{am.client.fname}} {{am.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<span class="sidebar-id">{{client.clientID}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{am.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
-                    	</div>
-        			</td>
-        		</tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower'>
-                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
-                    	</div>
-        			</td>
-        		</tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower'>
-                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Demographic
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span id='sidebar-fill'>{{phone}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<span id='sidebar-fill'>{{client.email}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Drug History
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<h3>Session Info</h3>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Childhood History
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History I
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
-                    	</div>
-        			</td>
-        		</tr>
-        	</table>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History III
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.connect}}'>
+                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Abuse Connections
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.worst}}'>
+                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Worst Episode
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.target}}'>
+                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger Target
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.family}}'>
+                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Family of Origin
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.current}}'>
+                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Current Problems
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.control}}'>
+                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger Control
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.final}}'>
+                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Additional Info
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
         <!-- /#sidebar-wrapper -->
 

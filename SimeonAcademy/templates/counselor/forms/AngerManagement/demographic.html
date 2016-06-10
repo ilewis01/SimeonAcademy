@@ -9,127 +9,217 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-        	<table class='session-side'>
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<h3>Client Profile</h3>                         
-                    	</div>
-        			</td>
-        		</tr>
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='font-size:20px;'>
+                  <h4>Details:</h4>
+                </div>
+              </td>
+            </tr>
 
-        		<!-- <tr>
-        			<td>
-        				<div>
-                        	<h5>{{session.start}}</h5>
-                    	</div>
-        			</td>
-        		</tr> -->
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-name'>{{client.fname}} {{client.lname}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{am.client.fname}} {{am.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<span class="sidebar-id">{{client.clientID}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{am.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-label1'>DOB: </span> <span class='sidebar-ans'>{{client.dob}}</span>
-                    	</div>
-        			</td>
-        		</tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower'>
-                        	<span class='sidebar-label1'>SS: </span> <span class='sidebar-ans'>{{client.ss_num}}</span>
-                    	</div>
-        			</td>
-        		</tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span id='sidebar-fill'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower'>
-                        	<span id='sidebar-fill'>{{client.city}}, {{client.state}} {{client.zip_code}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Demographic
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span id='sidebar-fill'>{{phone}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<span id='sidebar-fill'>{{client.email}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Drug History
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div id='sidebar-space-lower2'>
-                        	<h3>Session Info</h3>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-session-info'>{{session.s_type}}</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Childhood History
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-session-info2'>{{session.start}}</h6>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-label1'>Duration: </span><span class='sidebar-duration'>{{session.s_type.duration}} minutes</span>
-                    	</div>
-        			</td>
-        		</tr>
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History I
+                  </a>
+                </div>
+              </td>
+            </tr>
 
-        		<tr>
-        			<td>
-        				<div>
-                        	<span class='sidebar-duration'>${{session.s_type.fee}}.00</span>
-                    	</div>
-        			</td>
-        		</tr>
-        	</table>
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger History III
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.connect}}'>
+                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Abuse Connections
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.worst}}'>
+                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Worst Episode
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.target}}'>
+                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger Target
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.family}}'>
+                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Family of Origin
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.current}}'>
+                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Current Problems
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.control}}'>
+                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Anger Control
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.final}}'>
+                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideDemographic();" name='demographicBtn' id='demographicBtn'>
+                    Additional Info
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
         <!-- /#sidebar-wrapper -->
 
@@ -190,9 +280,15 @@
                   									</tr>
                   								</table>
 
-                  								<div class='px20-below'></div>
-                  								<table>
-                  									<tr>
+                  								<!-- <div class='px20-below'></div> -->
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <div style='margin-right: 10px;'>
+                                          <label for='' >Do you rent or own?</label>
+                                        </div>
+                                      </td>
+                                   
                   										<td>
                   											<div id='radio-align'>
                   												<input type='radio' name='rentRAD' id='rent_radio' value='rent' id='rent'>
@@ -271,7 +367,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<label for=''>Highest Level</label>
+                  											<label for=''>Highest Level:</label>
                   										</td>
                   										<td>
                   											<div id='select-align'>
@@ -289,7 +385,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate'></td>
+                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate' onClick='javascript: dropOutRadio();'></td>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -300,7 +396,7 @@
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
-                  											<td><input type='radio' name='dip' id='hs_drop' value='dropout'></td>
+                  											<td><input type='radio' name='dip' id='hs_drop' value='dropout' onClick='javascript: dropOutRadio();'></td>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -309,10 +405,26 @@
                   										</td>
                   									</tr>
                   								</table>
+
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <label for='resasonDO' id='resasonDO_label'>Reason for dropout:</label>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <textarea rows='3' cols='55' name='resasonDO' id='resasonDO'></textarea>
+                                      </td>
+                                    </tr>
+                                  </table>
                   							
                   						</div>
                   					</div>
 
+                            <!-- ____________________________________RIGHT SIDE___________________________________
+ -->
                   					<div class="col-md-5 col-sm-5" >
                   						<div>
                                 <table>
@@ -352,7 +464,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='occ' name='occ' value='{{fields.job_title}}'>
+                  										    <input type='text' id='occ' name='occ'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -363,7 +475,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='employer' name='employer' value='{{fields.employee}}'>
+                  										    <input type='text' id='employer' name='employer'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -374,7 +486,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='em_add' name='em_add' value='{{fields.emp_address}}'>
+                  										    <input type='text' id='em_add' name='em_add'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -385,7 +497,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='tel' id='em_phone' name='em_phone' value='{{fields.employer_phone}}'>
+                  										    <input type='tel' id='em_phone' name='em_phone'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -395,14 +507,14 @@
                   									<tr>
                   										<td>
                   											<div>
-                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob' value='{{fields.employed_months}}'>
+                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob'>
                   												months
                   											</div>
                   										</td>
 
                   										<td>
 	                  										<div id='submit-space'>
-	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob' value='{{fields.employed_years}}'>
+	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob'>
 	                  											years
 	                  										</div>
 	                  									</td>
@@ -417,7 +529,7 @@
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='healRad' id='healthy' value='healthy' onClick='javascript: health_options_off()'>
+                  												<input type='radio' name='healRad' id='healthy' value='healthy' onClick="javascript: healthRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -428,7 +540,7 @@
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='healRad' id='not_healthy' value='not_healthy' onClick='javascript: health_options_on();'>
+                  												<input type='radio' name='healRad' id='not_healthy' value='not_healthy' onClick="javascript: healthRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -437,12 +549,27 @@
                   									</tr>
                   								</table>
 
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <label for='health_exp' id='health_exp_label'>Please explain:</label>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <textarea cols='55' rows='2' id='health_exp' name='health_exp'></textarea>
+                                      </td>
+                                    </tr>
+                                    <tr><td><div style='margin-bottom:10px;'></div></td></tr>
+                                  </table>
+
                   								<label for='' id='med_taking_label'>Are you currently taking medication for this issue?</label>
                   								<table>
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='no_med' value='no_medication'>
+                  												<input type='radio' name='medRad' id='no_med' value='no_medication' onClick="javascript: medsRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -453,7 +580,7 @@
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='on_meds' value='medication'>
+                  												<input type='radio' name='medRad' id='on_meds' value='medication' onClick="javascript: medsRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -462,8 +589,8 @@
                   									</tr>
                   								</table>
 
-                  								<label for='' id='explain-label'>Please explain below</label>
-                  								<textarea cols='60' rows='4' id='explain' name='explain'>{{fields.health_exp}}</textarea>
+                  								<label for='' id='explain_label_health'>What are you taking?</label>
+                  								<textarea cols='55' rows='2' id='whatMedicine' name='whatMedicine'></textarea>
                   							</form>
                   						</div>
                   					</div>
@@ -499,10 +626,9 @@
                           <td>
                             <div id="submit-space">
                                 <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
-                                  <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                                   <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
                                   <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                                  <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
                                 </form>
                                 <a href="javascript: " id="continue">
                                   <button type='button' onClick='javascript: exit_am("exit_only");' id='continue'>Delete and Exit</button>

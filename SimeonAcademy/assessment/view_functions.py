@@ -14,11 +14,11 @@ from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
 FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
-AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
+AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, \
-Invoice, SType
+Invoice, SType, AM_AngerHistory3
 
 def onTrue_offFalse(data):
 	if data == 'on':
@@ -171,6 +171,12 @@ def getClientByName(fname, lname):
 		compL = str(c.lname).lower()
 		if str(fname) == str(compF) and str(lname) == str(compL):
 			results.append(c)
+		elif str(lname) == None or str(lname) == '':
+			if str(fname) == str(compF):
+				results.append(c)
+		elif str(fname) == None or str(fname) == '':
+			if str(lname) == str(compL):
+				results.append(c)
 
 	return results
 
@@ -392,6 +398,8 @@ def deleteAM(am):
 	am.drugHistory.delete()
 	am.childhood.delete()
 	am.angerHistory.delete()
+	am.angerHistory2.delete()
+	am.angerHistory3.delete()
 	am.connections.delete()
 	am.worstEpisode.delete()
 	am.angerTarget.delete()
@@ -412,6 +420,8 @@ def newAM(client):
 	drugHistory = AM_DrugHistory(client_id=client.clientID, finishedTreatment=True)
 	childhoodHistory = AM_ChildhoodHistory(client_id=client.clientID)
 	angerHistory = AM_AngerHistory(client_id=client.clientID)
+	angerHistory2 = AM_AngerHistory2(client_id=client.clientID)
+	angerHistory3 = AM_AngerHistory3(client_id=client.clientID)
 	connections = AM_Connections(client_id=client.clientID)
 	worstEpisodes = AM_WorstEpisode(client_id=client.clientID)
 	amTarget = AM_AngerTarget(client_id=client.clientID)
@@ -424,6 +434,8 @@ def newAM(client):
 	drugHistory.save()
 	childhoodHistory.save()
 	angerHistory.save()
+	angerHistory2.save()
+	angerHistory3.save()
 	connections.save()
 	worstEpisodes.save()
 	amTarget.save()
@@ -436,6 +448,8 @@ def newAM(client):
 	am.drugHistory = drugHistory
 	am.childhood = childhoodHistory
 	am.angerHistory = angerHistory
+	am.angerHistory2 = angerHistory2
+	am.angerHistory3 = angerHistory3
 	am.connections = connections
 	am.worstEpisode = worstEpisodes
 	am.angerTarget = amTarget
@@ -447,6 +461,160 @@ def newAM(client):
 	am.save()
 
 	return am
+
+def amSidebarImages(am, page):
+	images = {}
+	check = "/static/images/green_check.png"
+	x = "/static/images/red_x.png"
+	progress = "/static/images/yellow_progress.png"
+
+	if am.demographicComplete == True and page != 'demo':
+		images['demo_img'] = check
+	elif page == 'demo':
+		images['demo_img'] = progress
+	else:
+		images['demo_img'] = x
+
+	if am.drugHistoryComplete == True and page != 'dh':
+		images['dh_img'] = check
+	elif page == 'dh':
+		images['dh_img'] = progress
+	else:
+		images['dh_img'] = x
+
+	if am.childhoodComplete == True and page != 'child':
+		images['child_img'] = check
+	elif page == 'child':
+		images['child_img'] = progress
+	else:
+		images['child_img'] = x
+
+	if am.angerHistoryComplete == True and page != 'ah1':
+		images['ah1_img'] = check
+	elif page == 'ah1':
+		images['ah1_img'] = progress
+	else:
+		images['ah1_img'] = x
+
+	if am.angerHistoryComplete2 == True and page != 'ah2':
+		images['ah2_img'] = check
+	elif page == 'ah2':
+		images['ah2_img'] = progress
+	else:
+		images['ah2_img'] = x
+
+	if am.angerHistoryComplete3 == True and page != 'ah3':
+		images['ah3_img'] = check
+	elif page == 'ah3':
+		images['ah3_img'] = progress
+	else:
+		images['ah3_img'] = x
+
+	if am.connectionsComplete == True and page != 'connect':
+		images['connect_img'] = check
+	elif page == 'connect':
+		images['connect_img'] = progress
+	else:
+		images['connect_img'] = x
+
+	if am.worstComplete == True and page != 'worst':
+		images['worst_img'] = check
+	elif page == 'worst':
+		images['worst_img'] = progress
+	else:
+		images['worst_img'] = x
+
+	if am.angerTargetComplete == True and page != 'target':
+		images['target_img'] = check
+	elif page == 'target':
+		images['target_img'] = progress
+	else:
+		images['target_img'] = x
+
+	if am.familyOriginComplete == True and page != 'family':
+		images['family_img'] = check
+	elif page == 'family':
+		images['family_img'] = progress
+	else:
+		images['family_img'] = x
+
+	if am.currentProblemsComplete == True and page != 'current':
+		images['current_img'] = check
+	elif page == 'current':
+		images['current_img'] = progress
+	else:
+		images['current_img'] = x
+
+	if am.controlComplete == True and page != 'control':
+		images['control_img'] = check
+	elif page == 'control':
+		images['control_img'] = progress
+	else:
+		images['control_img'] = x
+
+	if am.finalComplete == True and page != 'final':
+		images['final_img'] = check
+	elif page == 'final':
+		images['final_img'] = progress
+	else:
+		images['final_img'] = x
+
+	return images
+
+def grabAmCompletedSections(am):
+	results = {}
+
+	results['demographicComplete'] 		= am.demographicComplete
+	results['drugHistoryComplete'] 		= am.drugHistoryComplete
+	results['childhoodComplete'] 		= am.childhoodComplete
+	results['angerHistoryComplete'] 	= am.angerHistoryComplete
+	results['angerHistoryComplete2'] 	= am.angerHistoryComplete2
+	results['angerHistoryComplete3'] 	= am.angerHistoryComplete3
+	results['connectionsComplete'] 		= am.connectionsComplete
+	results['worstComplete'] 			= am.worstComplete
+	results['angerTargetComplete'] 		= am.angerTargetComplete
+	results['familyOriginComplete'] 	= am.familyOriginComplete
+	results['currentProblemsComplete'] 	= am.currentProblemsComplete
+	results['controlComplete'] 			= am.controlComplete
+	results['finalComplete'] 			= am.finalComplete
+
+	return results
+
+def processCompletedClass(isComplete, isCompleteKeyWord, m_page, green, yellow, normal):
+	result = None
+
+	if isComplete == True and str(isCompleteKeyWord) != str(m_page):
+		result = green
+	elif str(isCompleteKeyWord) == str(m_page):
+		result = yellow
+	else:
+		result = normal
+
+	return result
+
+
+def grabAmClassesCSS(am, m_page):
+	classes = {}
+	am = grabAmCompletedSections(am)
+	normal = 'sideBarMargin'
+	green = 'sideBarMarginChecked'
+	current = 'sideLinkSelected'
+
+	classes['demo'] = processCompletedClass(am['demographicComplete'], 'demo', m_page, green, current, normal)
+	classes['dh'] = processCompletedClass(am['drugHistoryComplete'], 'dh', m_page, green, current, normal)
+	classes['child'] = processCompletedClass(am['childhoodComplete'], 'child', m_page, green, current, normal)
+	classes['ah1'] = processCompletedClass(am['angerHistoryComplete'], 'ah1', m_page, green, current, normal)
+	classes['ah2'] = processCompletedClass(am['angerHistoryComplete2'], 'ah2', m_page, green, current, normal)
+	classes['ah3'] = processCompletedClass(am['angerHistoryComplete3'], 'ah3', m_page, green, current, normal)
+	classes['connect'] = processCompletedClass(am['connectionsComplete'], 'connect', m_page, green, current, normal)
+	classes['worst'] = processCompletedClass(am['worstComplete'], 'worst', m_page, green, current, normal)
+	classes['target'] = processCompletedClass(am['angerTargetComplete'], 'target', m_page, green, current, normal)
+	classes['family'] = processCompletedClass(am['familyOriginComplete'], 'family', m_page, green, current, normal)
+	classes['current'] = processCompletedClass(am['currentProblemsComplete'], 'current', m_page, green, current, normal)
+	classes['control'] = processCompletedClass(am['controlComplete'], 'control', m_page, green, current, normal)
+	classes['final'] = processCompletedClass(am['finalComplete'], 'final', m_page, green, current, normal)
+
+	return classes
 
 def refreshAM(am):
 	if am.demographicComplete == True:
@@ -481,6 +649,22 @@ def refreshAM(am):
 		angerHistory.save()
 		am.angerHistory = angerHistory
 		am.angerHistoryComplete = False
+		am.save()
+
+	if am.angerHistoryComplete2 == True:
+		am.angerHistory2.delete()
+		angerHistory2 = AM_AngerHistory2(client_id=am.client.clientID)
+		angerHistory2.save()
+		am.angerHistory2 = angerHistory2
+		am.angerHistoryComplete2 = False
+		am.save()
+
+	if am.angerHistoryComplete3 == True:
+		am.angerHistory3.delete()
+		angerHistory3 = AM_AngerHistory3(client_id=am.client.clientID)
+		angerHistory3.save()
+		am.angerHistory3 = angerHistory3
+		am.angerHistoryComplete3 = False
 		am.save()
 
 	if am.connectionsComplete == True:
@@ -667,11 +851,11 @@ def grabAmAngerHistory1(am):
 
 	return fields
 
-def getAMFields(am, location, back):
+def getAMFields(am, location):
 	fields = None
 
 	if location == 'counselor/forms/AngerManagement/demographic.html':
-		fields = getAMDemoFields(back, am)
+		fields = getAMDemoFields(am)
 	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
 		fields = grabAmDhFields(am)
 	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
@@ -978,65 +1162,95 @@ def education_index(education_value):
 			break
 	return result
 
-def getAMDemoFields(back, am):
+def convertToJavascriptBool(data):
+	if data == True:
+		data = 'true'
+	elif data == False:
+		data = 'false'
+	return data
+
+def convertNullTextFields(field):
+	if field == None or field == '':
+		field = 'NA'
+	return field
+
+def convertMaritalToIndex(marital):
+	if marital == 'Divorced':
+		marital = 1
+	elif marital == 'Married':
+		marital = 2
+	elif marital == 'Separated':
+		marital = 3
+	elif marital == 'Single':
+		marital = 4
+	else:
+		marital = 0
+	return marital
+
+def convertLivingToIndex(living):
+	if living == 'Live alone':
+		living = 1
+	elif living == 'Live with family':
+		living = 2
+	elif living == 'Live with friend':
+		living = 3
+	elif living == 'Live with partner':
+		living = 4
+	else:
+		living = 0
+	return living
+
+def convertEducationToIndex(education):
+	if education == 'College Degree':
+		education = 1
+	elif education == 'Dropout':
+		education = 2
+	elif education == 'GED':
+		education = 3
+	elif education == 'HS Diploma':
+		education = 4
+	elif education == 'Some College':
+		education = 5
+	else:
+		education = 0
+	return education
+
+
+def getAMDemoFields(am):
 	data = {}
 
-	if back == False:
+	if am.demographic.maritalStatus == None:
 		data['maritalStatus'] = 0
-		data['livingSituation'] = 0
-		data['own'] = False
-		data['months_res'] = '0'
-		data['years_res'] = '0'
-		data['num_children'] = '0'
-		data['other_dependants'] = '0'
-		data['education'] = 0
-		data['drop_out'] = False
-		data['resasonDO'] = ''
-		data['employee'] = ''
-		data['job_title'] = ''
-		data['emp_address'] = ''
-		data['employed_months'] = '0'
-		data['employed_years'] = '0'
-		data['employer_phone'] = ''
-		data['health_problem'] = False
-		data['medication'] = False
-		data['health_exp'] = ''
 	else:
-		ms = am.demographic.maritalStatus
-		ls = am.demographic.livingSituation
-		ed = am.demographic.education
+		data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus.status)
 
-		if ms == None:
-			data['maritalStatus'] = ''
-		else:
-			data['maritalStatus'] = str(married_index(str(am.demographic.maritalStatus.id)))
+	if am.demographic.livingSituation == None:
+		data['livingSituation'] = 0
+	else:
+		data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation.situation)
 
-		if ls == None:
-			data['livingSituation'] = ''
-		else:
-			data['livingSituation'] = str(living_index(str(am.demographic.livingSituation.id)))
+	if am.demographic.education == None:
+		data['education'] = 0
+	else:
+		data['education'] = convertEducationToIndex(am.demographic.education.level)
 
-		if ed == None:
-			data['education'] = ''
-		else:
-			data['education'] = str(education_index(str(am.demographic.education.id)))
-		
-		data['own'] = am.demographic.own
-		data['months_res'] = am.demographic.months_res
-		data['years_res'] = am.demographic.years_res
-		data['num_children'] = am.demographic.num_children
-		data['other_dependants'] = am.demographic.other_dependants		
-		data['drop_out'] = am.demographic.drop_out
-		data['resasonDO'] = am.demographic.resasonDO
-		data['employee'] = am.demographic.employee
-		data['job_title'] = am.demographic.job_title
-		data['emp_address'] = am.demographic.emp_address
-		data['employed_months'] = am.demographic.employed_months
-		data['employed_years'] = am.demographic.employed_years
-		data['employer_phone'] = am.demographic.employer_phone
-		data['health_problem'] = am.demographic.health_problem
-		data['medication'] = am.demographic.medication
-		data['health_exp'] = am.demographic.health_exp
+	data['own'] = convertToJavascriptBool(am.demographic.own)
+	data['months_res'] = am.demographic.months_res
+	data['years_res'] = am.demographic.years_res
+	data['num_children'] = am.demographic.num_children
+	data['other_dependants'] = am.demographic.other_dependants
+	data['drop_out'] = convertToJavascriptBool(am.demographic.drop_out)
+	data['resasonDO'] = convertNullTextFields(am.demographic.resasonDO)
+	data['employee'] = convertNullTextFields(am.demographic.employee)
+	data['job_title'] = convertNullTextFields(am.demographic.job_title)
+	data['emp_address'] = convertNullTextFields(am.demographic.emp_address)
+	data['employed_months'] = am.demographic.employed_months
+	data['employed_years'] = am.demographic.employed_years
+	data['employer_phone'] = convertNullTextFields(am.demographic.employer_phone)
+	data['health_problem'] = convertToJavascriptBool(am.demographic.health_problem)
+	data['medication'] = convertToJavascriptBool(am.demographic.medication)
+	data['whatMedicine'] = convertNullTextFields(am.demographic.whatMedicine)
+	data['health_exp'] = convertNullTextFields(am.demographic.health_exp)
 
 	return data
 

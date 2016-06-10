@@ -19,11 +19,11 @@ from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
 FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
-AM_AngerHistory, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
+AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, SType, \
-Invoice
+Invoice, AM_AngerHistory3
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -34,7 +34,8 @@ continueToMhSection, getActiveClients, getDischargedClients, utExist, \
 getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
-startSession, refreshAM, getAMFields, onTrue_offFalse
+startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
+grabAmCompletedSections, grabAmClassesCSS
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -450,28 +451,63 @@ def exit_am(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			client_id = request.POST.get('client_id', '')
-			session_id = request.POST.get('session_id', '')
-			exit_type = request.POST.get('exit_type', '')
-			am_id = request.POST.get('am_id', '')
+			am = request.POST.get('am_id', '')
+			session = request.POST.get('session_id', '')
+			exit_type = request.POST.get('exit_type_sub', '')
 
-			am = AngerManagement.objects.get(id=am_id)
-			client = Client.objects.get(id=client_id)
-			session = ClientSession.objects.get(session_id)
+			header_phrase = None
+			sub1_phrase = None
+			status = None
 
-			content['client'] = client
-			content['AM'] = am
-			content['session'] = session
-
-			if str(exit_type) == 'exit_only':
-				deleteAM(am)
-			elif str(exit_type) == 'exit_save':
+			if exit_type == 'exit_only':
+				header_phrase = 'Delete Anger Management Form'
+				sub1_phrase = 'Are you sure you want to delete the following form?'
+			elif exit_type == 'exit_save':
 				none = None
 
-			types = SType.objects.all()
-			content['session_types'] = types
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+
+			if am.AMComplete == True:
+				status = 'Complete'
+			else:
+				status = 'Incomplete'
+
+			content['AM'] = am
+			content['session'] = session
+			content['status'] = status
+			content['header_phrase'] = header_phrase
+			content['sub1_phrase'] = sub1_phrase
 			content['title'] = "Client Search | Simeon Academy"
-			return render_to_response('counselor/client/confirm_exit.html', content)
+			return render_to_response('counselor/forms/AngerManagement/confirm_exit.html', content)
+
+@login_required(login_url='/index')
+def am_deleted(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = request.POST.get('session_id', '')
+			am = request.POST.get('am_id', '')
+
+			session = ClientSession.objects.get(id=session)
+			am = AngerManagement.objects.get(id=am)
+			client = am.client
+
+			deleteAM(am)
+
+			content['client'] = client
+			content['session'] = session
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/am_deleted.html', content)
 
 @login_required(login_url='/index')
 def am_preliminary(request):
@@ -511,6 +547,11 @@ def am_angerHistory(request):
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+			image = amSidebarImages(am, 'ah1')
+			classes = grabAmClassesCSS(am, 'ah1')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['AM'] = am
 			content['client'] = am.client
@@ -518,6 +559,74 @@ def am_angerHistory(request):
 			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
+
+@login_required(login_url='/index')
+def am_angerHistory2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+			image = amSidebarImages(am, 'ah2')
+			classes = grabAmClassesCSS(am, 'ah2')
+
+			content['class'] = classes
+			content['image'] = image
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
+
+@login_required(login_url='/index')
+def am_angerHistory3(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			am = request.POST.get('am_id')
+			session = request.POST.get('session_id')
+			back = request.POST.get('back')
+
+			am = AngerManagement.objects.get(id=am)
+			session = ClientSession.objects.get(id=session)
+			image = amSidebarImages(am, 'ah3')
+			classes = grabAmClassesCSS(am, 'ah3')
+
+			content['class'] = classes
+			content['image'] = image
+
+			content['AM'] = am
+			content['client'] = am.client
+			content['session'] = session
+			content['phone'] = convert_phone(am.client.phone)
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/angerHistory3.html', content)
 
 @login_required(login_url='/index')
 def am_angerTarget(request):
@@ -584,9 +693,13 @@ def am_angerTarget(request):
 			am.worstComplete = True
 			am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/AngerTarget.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/AngerTarget.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'target')
+			classes = grabAmClassesCSS(am, 'target')
 
+			content['class'] = classes
+			content['image'] = image
 			content['fields'] = fields
 			content['json_data'] = json_data
 			content['AM'] = am
@@ -623,17 +736,6 @@ def am_childhood(request):
 			content['client'] = am.client
 			content['phone'] = convert_phone(am.client.phone)
 
-			# if str(back) == 'false':
-			# 	if am.childhood == None:
-			# 		childhood = AM_ChildhoodHistory(client_id=session.client.clientID, date_of_assessment=date)
-			# 		childhood.save()
-			# 		am.childhood = childhood
-			# 		am.save()
-			# 	else:
-			# 		childhood = am.childhood
-			# 		childhood.date_of_assessment = date
-			# 		am.save()
-
 			firstDrinkAge = request.POST.get('m_first_drink', '')
 			firstDrinkType = request.POST.get('m_first_use_type', '')
 			curUse = request.POST.get('m_curr_use', '')
@@ -657,30 +759,6 @@ def am_childhood(request):
 			drinkLastEpisode = request.POST.get('m_drinkLastEpisode', '')
 			drinkRelationshipProblem = request.POST.get('m_drinkRelationshipProblem', '')
 			needHelpDrugs = request.POST.get('m_needHelpDrugs', '')
-
-			# print 'firstDrinkAge: ' + str(firstDrinkAge)
-			# print 'firstDrinkType: ' + str(firstDrinkType)
-			# print 'curUse: ' + str(curUse)
-			# print 'useType: ' + str(useType)
-			# print 'amtPerWeek: ' + str(amtPerWeek)
-			# print 'useAmt: ' + str(useAmt)
-			# print 'everDrank: ' + str(everDrank)
-			# print 'monthsQuit: ' + str(monthsQuit)
-			# print 'yearsQuit: ' + str(yearsQuit)
-			# print 'reasonQuit: ' + str(reasonQuit)
-			# print 'DUI: ' + str(DUI)
-			# print 'numDUI: ' + str(numDUI)
-			# print 'BALevel: ' + str(BALevel)
-			# print 'drugTreatment: ' + str(drugTreatment)
-			# print 'treatmentPlace: ' + str(treatmentPlace)
-			# print 'dateTreated: ' + str(dateTreated)
-			# print 'finishedTreatment: ' + str(finishedTreatment)
-			# print 'reasonNotFinishedTreatment: ' + str(reasonNotFinishedTreatment)
-			# print 'isClean: ' + str(isClean)
-			# print 'relapseTrigger: ' + str(relapseTrigger)
-			# print 'drinkLastEpisode: ' + str(drinkLastEpisode)
-			# print 'drinkRelationshipProblem: ' + str(drinkRelationshipProblem)
-			# print 'needHelpDrugs: ' + str(needHelpDrugs)
 
 			date = datetime.now()
 			date = date.date()
@@ -712,8 +790,11 @@ def am_childhood(request):
 			am.drugHistory.save()
 			am.drugHistoryComplete = True
 			am.save()
+			image = amSidebarImages(am, 'child')
+			classes = grabAmClassesCSS(am, 'child')
 
-
+			content['class'] = classes
+			content['image'] = image
 			content['back_url'] = '/am_drugHistory/'
 			content['session'] = session
 			content['AM'] = am
@@ -742,8 +823,13 @@ def am_connections(request):
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/connections.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/connections.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'connect')
+			classes = grabAmClassesCSS(am, 'connect')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['fields'] = fields
 			content['json_data'] = json_data
@@ -809,8 +895,13 @@ def am_control(request):
 			am.currentProblemsComplete = True
 			am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'control')
+			classes = grabAmClassesCSS(am, 'control')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['json_data'] = json_data
 			content['AM'] = am
@@ -946,8 +1037,13 @@ def am_problems(request):
 			am.familyOriginComplete = True
 			am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/currentProblems.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/currentProblems.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'current')
+			classes = grabAmClassesCSS(am, 'current')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['json_data'] = json_data
 			content['AM'] = am
@@ -993,6 +1089,8 @@ def am_demographic(request):
 			content['phone'] = phone
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 
+			back = 'false' #This will keep it from going to the options page for now
+
 			if proceed['isNew'] == False and back == 'true':
 				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
@@ -1003,10 +1101,14 @@ def am_demographic(request):
 				education = EducationLevel.objects.all().order_by('level')
 
 				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
-				fields = getAMDemoFields(back, am)
+				fields = getAMDemoFields(am)
 				json_data = json.dumps(fields)
+				image = amSidebarImages(am, 'demo')
+				classes = grabAmClassesCSS(am, 'demo')
 
 				#CONTEXT
+				content['class'] = classes
+				content['image'] = image
 				content['education'] = education
 				content['marital'] = marital
 				content['living'] = living
@@ -1222,8 +1324,13 @@ def am_drugHistory(request):
 				# fields = getAmDHData(back, am)
 				# json_data = json.dumps(fields)
 
-				fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html', False)
+				fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
 				json_data = json.dumps(fields)
+				image = amSidebarImages(am, 'dh')
+				classes = grabAmClassesCSS(am, 'dh')
+
+				content['class'] = classes
+				content['image'] = image
 
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				content['fields'] = fields
@@ -1303,8 +1410,13 @@ def am_familyOrigin(request):
 			am.angerTargetComplete = True
 			am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'family')
+			classes = grabAmClassesCSS(am, 'family')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['json_data'] = json_data
 			content['AM'] = am
@@ -1335,6 +1447,11 @@ def am_final(request):
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+			image = amSidebarImages(am, 'final')
+			classes = grabAmClassesCSS(am, 'final')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['AM'] = am
 			content['client'] = am.client
@@ -1633,8 +1750,13 @@ def am_worst(request):
 			am.connections.save()
 			am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/worstEpisodes.html', False)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/worstEpisodes.html')
 			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'worst')
+			classes = grabAmClassesCSS(am, 'worst')
+
+			content['class'] = classes
+			content['image'] = image
 
 			content['json_data'] = json_data
 			content['fields'] = fields
