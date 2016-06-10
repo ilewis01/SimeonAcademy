@@ -912,6 +912,7 @@ def hasAM(client):
 
 	return exist
 
+
 def startAM(client):
 	results = {}
 	back = "false"
@@ -937,6 +938,37 @@ def startAM(client):
 
 	return results
 
+def grabAmSideBarString(location):
+	m_page = None
+
+	if location == 'counselor/forms/AngerManagement/demographic.html':
+		m_page = 'demo'
+	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
+		m_page = 'dh'
+	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
+		m_page = 'child'
+	elif location == 'counselor/forms/AngerManagement/connections.html':
+		m_page = 'connect'
+	elif location == 'counselor/forms/AngerManagement/worstEpisodes.html':
+		m_page = 'worst'
+	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
+		m_page = 'target'
+	elif location == 'counselor/forms/AngerManagement/familyOrigin.html':
+		m_page = 'family'
+	elif location == 'counselor/forms/AngerManagement/currentProblems.html':
+		m_page = 'current'
+	elif location == 'counselor/forms/AngerManagement/control.html':
+		m_page = 'control'
+	elif location == 'counselor/forms/AngerManagement/final.html':
+		m_page = 'final'
+	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+		m_page = 'ah1'
+	elif location == 'counselor/forms/AngerManagement/angerHistory2.html':
+		m_page = 'ah2'
+	elif location == 'counselor/forms/AngerManagement/angerHistory3.html':
+		m_page = 'ah3'
+
+	return m_page
 
 def continueToAmSection(am):
 	location = None
@@ -961,6 +993,12 @@ def continueToAmSection(am):
 		location = 'counselor/forms/AngerManagement/control.html'
 	elif am.finalComplete == False:
 		location = 'counselor/forms/AngerManagement/final.html'
+	elif am.finalComplete == False:
+		location = 'counselor/forms/AngerManagement/angerHistory.html'
+	elif am.finalComplete == False:
+		location = 'counselor/forms/AngerManagement/angerHistory2.html'
+	elif am.finalComplete == False:
+		location = 'counselor/forms/AngerManagement/angerHistory3.html'
 
 	return location
 

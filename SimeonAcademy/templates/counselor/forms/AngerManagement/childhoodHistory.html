@@ -29,7 +29,7 @@
         		<tr>
         			<td>
         				<div>
-                        	<span class='sidebar-name'>{{am.client.fname}} {{am.client.lname}}</span>
+                        	<span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
                     	</div>
         			</td>
         		</tr>
@@ -37,7 +37,7 @@
         		<tr>
         			<td>
         				<div id='sidebar-space-lower2'>
-                        	<span class="sidebar-id">{{am.client.clientID}}</span>
+                        	<span class="sidebar-id">{{AM.client.clientID}}</span>
                     	</div>
         			</td>
         		</tr>
@@ -271,17 +271,17 @@
 		                            	<td>
 		                            		<div id='seperate-textfield-bottom'>
 			                            		<div id='textfield-label-correction'>
-			                            			<label for=''>By whom were you raised?</label>
+			                            			<label for='raisedBy'><span id='numbered'>1. </span>By whom were you raised?</label>
 			                            		</div>
 			                            	</div>
 		                            	</td>
 		                            	<td>
-		                            		<select name='' id='' value=''>
-		                            			<option value=''>Select</option>
-		                            			<option value='parents'>Parents</option>
-		                            			<option value='grandparents'>Grandparents</option>
-		                            			<option value='relatives'>Relatives</option>
-		                            			<option value='foster'>Foster Care</option>
+		                            		<select name='raisedBy' id='raisedBy' value=''>
+		                            			<option value='Not Selected'>Select</option>
+		                            			<option value='Parents'>Parents</option>
+		                            			<option value='Grandparents'>Grandparents</option>
+		                            			<option value='Relatives'>Relatives</option>
+		                            			<option value='Foster Care'>Foster Care</option>
 		                            		</select>
 		                            	</td>
 	                            	</tr>
@@ -290,7 +290,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Mother living?</label>
+								            <label for='momAlive'><span id='numbered'>2. </span>Mother living?</label>
 								        </td>
 								   
 								        <td>
@@ -299,20 +299,20 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='momAlive' id='motherLiving' value='motherLiving' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for='YES'>Yes</label>
+									                        <label for='motherLiving'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='momAlive' id='motherNotLiving' value='motherNotLiving'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for='NO'>No</label>
+									                        <label for='motherNotLiving'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -324,7 +324,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Father living?</label>
+								            <label for=''><span id='numbered'>3. </span>Father living?</label>
 								        </td>
 								   
 								        <td>
@@ -333,20 +333,20 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='dadAlive' id='fatherLiving' value='fatherLiving' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for='YES'>Yes</label>
+									                        <label for='fatherLiving'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='dadAlive' id='fatherNotLiving' value='fatherNotLiving'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for='NO'>No</label>
+									                        <label for='fatherNotLiving'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -358,7 +358,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Have you experienced childhood trama?</label>
+								            <label for='childTrama'><span id='numbered'>4. </span>Have you experienced childhood trama?</label>
 								        </td>
 								   
 								        <td>
@@ -367,20 +367,20 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='childTrama' id='hadTramua' value='hadTramua'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Yes</label>
+									                        <label for='hadTramua'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='childTrama' id='noTrauma' value='noTrauma' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>No</label>
+									                        <label for='noTrauma'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -392,12 +392,12 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain:</label>
+										    <label for='noTrauma' id='noTrauma_label'>Explain:</label>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='traumaCase' id='traumaCase'></textarea>
+											<textarea cols='57' rows='3' name='traumaExplain' id='traumaExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -405,12 +405,12 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain how you came to leave home:</label>
+										    <label for='howLeftHome'><span id='numbered'>5. </span>Explain how you came to leave home:</label>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='howLeftHome' id='howLeftHome'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -419,12 +419,12 @@
 									<tr>
 										<td>
 											<div id='label_level_number'>
-												<label for=''>Number of siblings: </label>
+												<label for='num_siblings'><span id='numbered'>6. </span>Number of siblings: </label>
 											</div>
 										</td>
 										<td>
 											<div id='submit-space'>
-												<input type='number' style="width:40px;" name='' id='' value=''>
+												<input type='number' style="width:40px;" name='num_siblings' id='num_siblings' value='0'>
 											</div>
 										</td>
 									</tr>
@@ -433,13 +433,41 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Is your relationship with your siblings close or distant?<br>Explain:</label>
+										    <label for=''><span id='numbered'>7. </span>Is your relationship with your siblings close or distant?</label>
 
+										</td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td>
+											<div id='single-line-radio2'>
+												<input type='radio' name='siblingsClose' id='sibsClose' value='sibsClose' checked>
+											</div>
+										</td>
+										<td>
+											<label for='sibsClose'>Yes</label>
+										</td>
+
+										<td>
+											<div id='single-line-radio2' style='margin-left:15px;'>
+												<input type='radio' name='siblingsClose' id='sibsNotClose'>
+											</div>
+										</td>
+										<td>
+											<label for='sibsNotClose'>No</label>
+										</td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td>
+											<label for='siblingsRelationshipExplain' id='siblingsRelationshipExplain_label'>Explain:</label>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -447,7 +475,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>How would you describe your relationship with your</label>
+								            <label for='dadClose'><span id='numbered'>8. </span>How would you describe your relationship with your</label>
 								        </td>
 								    </tr>
 								   
@@ -458,25 +486,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>father?</label>
+									                			<label for='dadClose'>father?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='dadClose' id='dadIsClose' value='dadIsClose' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Close</label>
+									                        <label for='dadIsClose'>Close</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='dadClose' id='dadNotClose' value='dadNotClose'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Distant</label>
+									                        <label for='dadNotClose'>Distant</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -488,13 +516,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain what made it close or distant:</label>
+										    <label for='dadCloseExplain' id='dadCloseExplain_label'>Explain what made it close or distant:</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='dadCloseExplain' id='dadCloseExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -502,7 +530,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Were you or any of your siblings physically, psychologically,</label>
+								            <label for='wasAbused'><span id='numbered'>9. </span>Were you or any of your siblings physically, psychologically,</label>
 								        </td>
 								    </tr>
 								   
@@ -513,25 +541,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>or sexually abused as children?</label>
+									                			<label for='wasAbused'>or sexually abused as children?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='wasAbused' id='childAbused' value='childAbused'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Yes</label>
+									                        <label for='childAbused'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='wasAbused' id='childNotAbused' value='childNotAbused' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>No</label>
+									                        <label for='childNotAbused'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -543,13 +571,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>By whom?</label>
+										    <label for='abusedBy' id='abusedBy_label'>By whom?</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='abusedBy' id='abusedBy'></textarea>
 										</td>
 									</tr>
 								</table> 
@@ -562,13 +590,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>What was the impact emotionally and psychologically on the <br>abused?</label>
+										    <label for='abuseImpact'><span id='numbered'>10. </span>What was the impact emotionally and psychologically <br>on the abused?</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='abuseImpact' id='abuseImpact'></textarea>
 										</td>
 									</tr>
 								</table> 
@@ -576,7 +604,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>How would you describe your relationship with your</label>
+								            <label for='momClose'><span id='numbered'>11. </span>How would you describe your relationship with your</label>
 								        </td>
 								    </tr>
 								   
@@ -587,25 +615,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>mother?</label>
+									                			<label for='momClose'>mother?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='momClose' id='meMomClose' value='meMomClose' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Close</label>
+									                        <label for='meMomClose'>Close</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='momClose' id='meMomNotClose' value='meMomNotClose'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Distant</label>
+									                        <label for='meMomNotClose'>Distant</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -617,13 +645,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain what made it close or distant:</label>
+										    <label for='momCloseExplain'>Explain what made it close or distant:</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='momCloseExplain' id='momCloseExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -631,7 +659,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Did you have any problems with anger or violent behavior as a </label>
+								            <label for='childAnger'><span id='numbered'>12. </span>Did you have any problems with anger or violent</label>
 								        </td>
 								    </tr>
 								   
@@ -642,25 +670,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>child or teenager?</label>
+									                			<label for='childAnger'>behavior as a child or teenager?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='childAnger' id='hadAngerChild' value='hadAngerChild'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Yes</label>
+									                        <label for='hadAngerChild'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='childAnger' id='noAngerChild' value='noAngerChild' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>No</label>
+									                        <label for='noAngerChild'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -672,13 +700,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain:</label>
+										    <label for='childAngerExplain' id='childAngerExplain_label'>Explain:</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='childAngerExplain' id='childAngerExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -686,7 +714,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Were there any other events or circumstances regarding your<br> childhood that may help us understand your particular</label>
+								            <label for='otherChild'><span id='numbered'>13. </span>Were there any other events or circumstances <br>regarding your childhood that may help us understand</label>
 								        </td>
 								    </tr>
 								   
@@ -697,25 +725,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>counseling needs?</label>
+									                			<label for='otherChild'>your particular counseling needs?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='haveOtherEvents'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Yes</label>
+									                        <label for='haveOtherEvents'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='otherChild' id='noOtherEvents' value='noOtherEvents' checked>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>No</label>
+									                        <label for='noOtherEvents'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -727,13 +755,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain:</label>
+										    <label for='otherChildExplain' id='otherChildExplain_label'>Explain:</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='otherChildExplain' id='otherChildExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -741,7 +769,7 @@
 								<table>
 									<tr>
 								        <td>
-								            <label for='need_help'>Did you ever see your father or mother physically or</label>
+								            <label for='parentViolence'>Did you ever see your father or mother physically or</label>
 								        </td>
 								    </tr>
 								   
@@ -752,25 +780,25 @@
 									                <tr>
 									                	<td>
 									                		<div style='margin-right:10px;'>
-									                			<label for=''>psychologically abuse each other?</label>
+									                			<label for='parentViolence'>psychologically abuse each other?</label>
 									                		</div>
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='parentViolence' id='sawViolence' value='sawViolence'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>Yes</label>
+									                        <label for='sawViolence'>Yes</label>
 									                    </td>
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='' id='' value=''>
+									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='didntSeeViolence'>
 									                        </div>
 									                    </td>
 									                    <td>
-									                        <label for=''>No</label>
+									                        <label for='didntSeeViolence'>No</label>
 									                    </td>
 									                </tr>
 									            </table>
@@ -782,13 +810,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>Explain:</label>
+										    <label for='parentViolenceExplain' id='parentViolenceExplain_label'>Explain:</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='parentViolenceExplain' id='parentViolenceExplain'></textarea>
 										</td>
 									</tr>
 								</table>
@@ -796,13 +824,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for=''>What impact did seeing/hearing one of the your parents abuse the <br>other have on you emotionally, psychologically, or physically?</label>
+										    <label for='parentViolenceImpact' id='parentViolenceImpact_label'>What impact did seeing/hearing one of the your parents <br>abuse the other have on you emotionally, psychologically, <br>or physically?</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='' id=''></textarea>
+											<textarea cols='57' rows='3' name='parentViolenceImpact' id='parentViolenceImpact'></textarea>
 										</td>
 									</tr>
 								</table>

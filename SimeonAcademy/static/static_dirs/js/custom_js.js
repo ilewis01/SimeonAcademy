@@ -1126,76 +1126,9 @@ function initialize_am_demo(json_data, back) {
 
 
 function continue_am() {
-	var marital = document.getElementById('marital');
-	var living = document.getElementById('living');
-	var res_mos = document.getElementById('res-mos');
-	var res_yrs = document.getElementById('res-yrs');
-	var children = document.getElementById('dep_children');
-	var others = document.getElementById('dep_other');
-	var edu = document.getElementById('edu');
-	var occ = document.getElementById('occ');
-	var employer = document.getElementById('employer');
-	var emp_add = document.getElementById('em_add');
-	var em_phone = document.getElementById('em_phone');
-	var mosJob = document.getElementById('mosJob');
-	var yrsJob = document.getElementById('yrsJob');
-	var healthy = document.getElementById('healthy');
-	var explain = document.getElementById('explain');
-	var error_msg = document.getElementById('error_message_main');
+	var back = document.getElementById('back');
+	back.value = 'false';
 	var proceed = true;
-
-	if (marital.selectedIndex === 0) {
-		error_msg.innerHTML = 'You must choose a marital status';
-		proceed = false;
-	}
-	else if (living.selectedIndex === 0) {
-		error_msg.innerHTML = 'You must choose a living situation';
-		proceed = false;
-	}
-	else if (edu.selectedIndex === 0) {
-		error_msg.innerHTML = 'You must choose a level of education';
-		proceed = false;
-	}
-	else if (res_mos.value ==='' || res_mos.value === null || res_mos.value === ' ') {
-		error_msg.innerHTML = 'Months at residence field cannot be blank (Enter 0 if there are zero months at residence)';
-		proceed = false;
-	}
-	else if (res_yrs.value ==='' || res_yrs.value === null || res_yrs.value === ' ') {
-		error_msg.innerHTML = 'Years at residence field cannot be blank (Enter 0 if there are zero years at residence)';
-		proceed = false;
-	}
-	else if (children.value ==='' || children.value === null || children.value === ' ') {
-		error_msg.innerHTML = '"Children" field cannot be blank (Enter 0 if there are zero months at residence)';
-		proceed = false;
-	}
-	else if (others.value ==='' || others.value === null || others.value === ' ') {
-		error_msg.innerHTML = '"Other dependents" field cannot be blank (Enter 0 if there are zero years at residence)';
-		proceed = false;
-	}
-	else if (mosJob.value ==='' || mosJob.value === null || mosJob.value === ' ') {
-		error_msg.innerHTML = 'Months at employer field cannot be blank (Enter 0 if there are zero months at residence)';
-		proceed = false;
-	}
-	else if (yrsJob.value ==='' || yrsJob.value === null || yrsJob.value === ' ') {
-		error_msg.innerHTML = 'Months at employer field cannot be blank (Enter 0 if there are zero years at residence)';
-		proceed = false;
-	}
-
-	if (healthy.checked == false) {
-		if (explain.value === '' || explain.value === ' ' || explain.value === null) {
-			error_msg.innerHTML = 'You have indicated that this client currently has health issues. The explaination cannot be left blank';
-			proceed = false;
-		}
-		else {proceed === true;}
-	}
-
-	if (proceed === true) {
-		document.getElementById('am_demo').submit();
-	}
-}
-
-function continue_am_dh() {
-	proceed = true;
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
@@ -1677,11 +1610,13 @@ function dh_has_used() {
 function dh_no_dui() {
 	var dui_amount_label = document.getElementById('dui_amount_label');
 	var bal_label = document.getElementById('bal_label');
+	var bal_label2 = document.getElementById('bal_label2');
 	var dui_amount = document.getElementById('dui_amount');
 	var bal = document.getElementById('BAL');
 
 	dui_amount_label.style.opacity = '0.3';
 	bal_label.style.opacity = '0.3';
+	bal_label2.style.opacity = '0.3';
 
 	dui_amount.disabled = true;
 	dui_amount.value = '0';
@@ -1692,11 +1627,13 @@ function dh_no_dui() {
 function dh_has_dui() {
 	var dui_amount_label = document.getElementById('dui_amount_label');
 	var bal_label = document.getElementById('bal_label');
+	var bal_label2 = document.getElementById('bal_label2');
 	var dui_amount = document.getElementById('dui_amount');
 	var bal = document.getElementById('BAL');
 
 	dui_amount_label.style.opacity = '1.0';
 	bal_label.style.opacity = '1.0';
+	bal_label2.style.opacity = '1.0';
 
 	dui_amount.disabled = false;
 	bal.disabled = false;
@@ -2004,14 +1941,25 @@ function initialize_am_drug_history(json_data) {
 	initializeRadioSub1();
 	initializeSoberRadio();
 
-	// clearNullTextField(first_use_type);
-	// clearNullTextField(what_you_use);
-	// clearNullTextField(how_often_you_use);
-	// clearNullTextField(how_much_you_use);
-	// clearNullTextField(reason_quit);
-	// clearNullTextField(BAL);
-	// clearNullTextField(when_treated);
-	// clearNullTextField(where_treated);
+	//FIXES
+	var bal_label2 = document.getElementById('bal_label2');
+
+	if (no_dui.checked === true) {
+		bal_label2.style.opacity = '0.3';
+	} 
+	else {
+		bal_label2.style.opacity = '1.0';
+	}
+}
+
+function continue_am_dh() {
+	var proceed = true;
+	var back = document.getElementById('back');
+	back.value = 'false';
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
 }
 
 function continue_am_dh() {
