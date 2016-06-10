@@ -239,7 +239,7 @@
 	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
 	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
 	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-	                  			<input type='hidden' name='back' id='back' value='false'>
+	                  			<input type='hidden' name='m_back' id='m_back' value=''>
 	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
 	                            <!-- REAL DATA ENTRIES -->
@@ -249,7 +249,8 @@
 	                            <input type='hidden' value='' name='m_childTrama' id='m_childTrama'>
 	                            <input type='hidden' value='' name='m_howLeftHome' id='m_howLeftHome'>
 	                            <input type='hidden' value='' name='m_num_siblings' id='m_num_siblings'>
-	                            <input type='hidden' value='' name='m_siblingsRelationship' id='m_siblingsRelationship'>
+	                            <input type='hidden' value='' name='m_siblingsRelationshipExplain' id='m_siblingsRelationshipExplain'>
+	                            <input type='hidden' value='' name='m_siblingsClose' id='m_siblingsClose'>
 	                            <input type='hidden' value='' name='m_dadClose' id='m_dadClose'>
 	                            <input type='hidden' value='' name='m_dadCloseExplain' id='m_dadCloseExplain'>
 	                            <input type='hidden' value='' name='m_momClose' id='m_momClose'>
@@ -264,6 +265,7 @@
 	                            <input type='hidden' value='' name='m_parentViolence' id='m_parentViolence'>
 	                            <input type='hidden' value='' name='m_parentViolenceExplain' id='m_parentViolenceExplain'>
 	                            <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
+	                            <input type='hidden' value='' name='m_traumaExplain' id='m_traumaExplain'>
 
 	                            <!-- ____________________________LEFT SIDE_______________________________ -->
 	                            <table>
@@ -906,70 +908,3 @@
 
 
 
-
-
-
-
-
-
-<!-- <h1>Childhood History</h1>
-
-Session ID: {{session.id}} <br>
-Anger Management ID: {{AM.id}} <br>
-Back: {{back}} <br>
-First Drink Age: {{first_drink_age}} -->
-
-
-
-<!-- <form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
-	<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	<input type='hidden' value='{{session.id}}' id='session_id' name='session_id'>
-	<input type='hidden' value='{{back}}' id='back' name='back'>
-
-	<table>
-		<tr>
-			<td>
-				
-			</td>
-		</tr>
-	</table>
-
-	<input type='submit' value='submit'>
-</form>
-
-
-	<table class='toggle-div-page'>
-        <tr>
-            <td id="error-div-main">
-                <p class='error-messages'></p>
-            </td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <td>
-                <div style='margin-left:12px;'>
-				    <a href="#menu-toggle" id="menu-toggle" class='but_a'>
-				        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				    </a>
-				</div>
-			</td>
-
-			<td>
-			    <div id="submit-space">
-				    <a href='javascript: back({{back_url}});' class='but_a'>
-				        <button type='button' id='back_btn' name='back_btn'>Back</button>
-				    </a>
-				</div>
-			</td>
-
-			<td>
-			    <div id="submit-space">
-				    <a href="#" class='but_a'>
-				        <button type='button' onClick='javascript: continue_am();' id='continue'>Continue</button>
-				    </a>
-				</div>
-			</td>
-		</tr>
-	</table> -->

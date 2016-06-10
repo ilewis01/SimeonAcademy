@@ -35,7 +35,7 @@ getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
-grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString
+grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -543,22 +543,108 @@ def am_angerHistory(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('m_back')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-			image = amSidebarImages(am, 'ah1')
-			classes = grabAmClassesCSS(am, 'ah1')
-
-			content['class'] = classes
-			content['image'] = image
-
 			content['AM'] = am
-			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
+
+			if str(back) == 'false':
+				raisedBy = request.POST.get('m_raisedBy', '')
+				momAlive = request.POST.get('m_momAlive', '')
+				dadAlive = request.POST.get('m_dadAlive', '')
+				childTrama = request.POST.get('m_childTrama', '')
+				traumaExplain = request.POST.get('m_traumaExplain', '')
+				howLeftHome = request.POST.get('m_howLeftHome', '')
+				num_siblings = request.POST.get('m_num_siblings', '')
+				siblingsClose = request.POST.get('m_siblingsClose', '')
+				siblingsRelationshipExplain = request.POST.get('m_siblingsRelationshipExplain', '')
+				dadClose = request.POST.get('m_dadClose', '')
+				dadCloseExplain = request.POST.get('m_dadCloseExplain', '')
+				momClose = request.POST.get('m_momClose', '')
+				momCloseExplain = request.POST.get('m_momCloseExplain', '')
+				wasAbused = request.POST.get('m_wasAbused', '')
+				abusedBy = request.POST.get('m_abusedBy', '')
+				abuseImpact = request.POST.get('m_abuseImpact', '')
+				childAnger = request.POST.get('m_childAnger', '')
+				childAngerExplain = request.POST.get('m_childAngerExplain', '')
+				otherChild = request.POST.get('m_otherChild', '')
+				otherChildExplain = request.POST.get('m_otherChildExplain', '')
+				parentViolence = request.POST.get('m_parentViolence', '')
+				parentViolenceExplain = request.POST.get('m_parentViolenceExplain', '')
+				parentViolenceImpact = request.POST.get('m_parentViolenceImpact', '')				
+
+				momAlive = convertToPythonBool(momAlive)
+				dadAlive = convertToPythonBool(dadAlive)
+				childTrama = convertToPythonBool(childTrama)
+				siblingsClose = convertToPythonBool(siblingsClose)
+				dadClose = convertToPythonBool(dadClose)
+				momClose = convertToPythonBool(momClose)
+				wasAbused = convertToPythonBool(wasAbused)
+				childAnger = convertToPythonBool(childAnger)
+				otherChild = convertToPythonBool(otherChild)
+				parentViolence = convertToPythonBool(parentViolence)
+
+				childhood = am.childhood
+				date = datetime.now()
+				date = date.date()
+
+				print "Was abused after conversion: " + str(wasAbused)
+
+				childhood.date_of_assessment = date
+				childhood.raisedBy = raisedBy
+				childhood.momAlive = momAlive
+				childhood.dadAlive = dadAlive
+				childhood.childTrama = childTrama
+				childhood.traumaExplain = traumaExplain
+				childhood.howLeftHome = howLeftHome
+				childhood.num_siblings = num_siblings
+				childhood.siblingsClose = siblingsClose
+				childhood.siblingsRelationshipExplain = siblingsRelationshipExplain
+				childhood.dadClose = dadClose
+				childhood.dadCloseExplain = dadCloseExplain
+				childhood.momClose = momClose
+				childhood.momCloseExplain = momCloseExplain
+				childhood.wasAbused = wasAbused
+				childhood.abusedBy = abusedBy
+				childhood.abuseImpact = abuseImpact
+				childhood.childAnger = childAnger
+				childhood.childAngerExplain = childAngerExplain
+				childhood.otherChild = otherChild
+				childhood.otherChildExplain = otherChildExplain
+				childhood.parentViolence = parentViolence
+				childhood.parentViolenceExplain = parentViolenceExplain
+				childhood.parentViolenceImpact = parentViolenceImpact
+
+				print "Was abused after models: " + str(childhood.wasAbused)
+
+				childhood.save()
+				am.childhood = childhood
+				print "Was abused after save: " + str(childhood.wasAbused)
+				am.childhoodComplete = True
+				am.save()
+				print "Am was abused: " + str(am.childhood.wasAbused)
+
+				fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
+				json_data = json.dumps(fields)
+				image = amSidebarImages(am, 'ah1')
+				classes = grabAmClassesCSS(am, 'ah1')
+
+				content['json_data'] = json_data
+				content['class'] = classes
+				content['image'] = image
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
+			else:
+				image = amSidebarImages(am, 'ah1')
+				classes = grabAmClassesCSS(am, 'ah1')
+
+				content['class'] = classes
+				content['image'] = image
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
+
 
 @login_required(login_url='/index')
 def am_angerHistory2(request):
@@ -1113,8 +1199,9 @@ def am_demographic(request):
 			content['client'] = client
 			content['phone'] = phone
 			content['title'] = "Anger Management Assessment | Simeon Academy"
+			fake = True #This is to ensure we dont go to location page for now
 
-			if proceed['isNew'] == False and proceed['back'] == 'true':
+			if proceed['isNew'] == False and proceed['back'] == 'true' and fake == False:
 				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
@@ -1156,13 +1243,14 @@ def am_drugHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
+			back = request.POST.get('back_btn', '')
 			am_id = request.POST.get('am_id', '')
 			am = AngerManagement.objects.get(id=am_id)
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
 			content['back'] = back
 			content['back_url'] = '/am_demographic/'
+			print "Back: " + str(back)
 
 			if back == 'false':
 				demo = am.demographic
@@ -1220,6 +1308,21 @@ def am_drugHistory(request):
 					medication = True
 				else:
 					medication = False
+
+				if resasonDO == None or resasonDO == '':
+					resasonDO = 'NA'
+				if health_exp == None or health_exp == '':
+					health_exp = 'NA'
+				if whatMedicine == None or whatMedicine == '':
+					whatMedicine = 'NA'
+
+				print 'own: ' + str(own)
+				print 'drop_out: ' + str(drop_out)
+				print 'health_problem: ' + str(health_problem)
+				print 'medication: ' + str(medication)
+				print 'resasonDO: ' + str(resasonDO)
+				print 'health_exp: ' + str(health_exp)
+				print 'whatMedicine: ' + str(whatMedicine)
 
 				demo.date_of_assessment = date
 				demo.maritalStatus 		= maritalStatus

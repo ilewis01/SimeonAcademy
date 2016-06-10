@@ -1287,6 +1287,13 @@ def convertToJavascriptBool(data):
 		data = 'false'
 	return data
 
+def convertToPythonBool(data):
+	if data == 'True':
+		data = True
+	elif data == 'False':
+		data = False
+	return data
+
 def convertNullTextFields(field):
 	if field == None or field == '':
 		field = 'NA'
