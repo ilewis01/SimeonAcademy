@@ -36,7 +36,7 @@ getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
-resolveBlankRadio, convertRadioToBoolean, truePythonBool
+resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -587,11 +587,15 @@ def am_angerHistory(request):
 				otherChild = convertToPythonBool(otherChild)
 				parentViolence = convertToPythonBool(parentViolence)
 
+				traumaExplain = blankMustDie(traumaExplain)
+				abusedBy = blankMustDie(abusedBy)
+				childAngerExplain = blankMustDie(childAngerExplain)
+				otherChildExplain = blankMustDie(otherChildExplain)
+				parentViolenceExplain = blankMustDie(parentViolenceExplain)
+
 				childhood = am.childhood
 				date = datetime.now()
 				date = date.date()
-
-				print "Was abused after conversion: " + str(wasAbused)
 
 				childhood.date_of_assessment = date
 				childhood.raisedBy = raisedBy
@@ -618,14 +622,10 @@ def am_angerHistory(request):
 				childhood.parentViolenceExplain = parentViolenceExplain
 				childhood.parentViolenceImpact = parentViolenceImpact
 
-				print "Was abused after models: " + str(childhood.wasAbused)
-
 				childhood.save()
 				am.childhood = childhood
-				print "Was abused after save: " + str(childhood.wasAbused)
 				am.childhoodComplete = True
 				am.save()
-				print "Am was abused: " + str(am.childhood.wasAbused)
 
 				fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
 				json_data = json.dumps(fields)
@@ -871,30 +871,6 @@ def am_childhood(request):
 				dateTreated = request.POST.get('m_dateTreated', '')
 				reasonNotFinishedTreatment = request.POST.get('m_reasonNotFinishedTreatment', '')
 				relapseTrigger = request.POST.get('m_relapseTrigger', '')
-
-				# print 'Current Use: ' + str(curUse)
-				# print 'Ever drank: ' + str(everDrank)
-				# print 'DUI: ' + str(DUI)
-				# print 'Had drug treatment: ' + str(drugTreatment)
-				# print 'Finished treatment: ' + str(finishedTreatment)
-				# print 'Is still clean: ' + str(isClean)
-				# print 'Drinking last angry episode: ' + str(drinkLastEpisode)
-				# print 'Relationship problem: ' + str(drinkRelationshipProblem)
-				# print 'Need help: ' + str(needHelpDrugs)
-				# print "firstDrinkAge: " + str(firstDrinkAge)
-				# print "firstDrinkType: " + str(firstDrinkType)
-				# print "useType: " + str(useType)
-				# print "amtPerWeek: " + str(amtPerWeek)
-				# print "useAmt: " + str(useAmt)
-				# print "monthsQuit: " + str(monthsQuit)
-				# print "yearsQuit: " + str(yearsQuit)
-				# print "reasonQuit: " + str(reasonQuit)
-				# print "numDUI: " + str(numDUI)
-				# print "BALevel: " + str(BALevel)
-				# print "treatmentPlace: " + str(treatmentPlace)
-				# print "dateTreated: " + str(dateTreated)
-				# print "reasonNotFinishedTreatment: " + str(reasonNotFinishedTreatment)
-				# print "relapseTrigger: " + str(relapseTrigger)
 
 				if curUse == True:
 					everDrank = True

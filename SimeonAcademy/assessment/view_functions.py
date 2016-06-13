@@ -742,6 +742,14 @@ def refreshAM(am):
 
 	return am
 
+def blankMustDie(element):
+	result = None
+	if element == None or element == '':
+		result = 'N/A'
+	else:
+		result = element
+	return result
+
 def grabAmDhFields(am):
 	result = {}
 	result['firstDrinkAge'] = am.drugHistory.firstDrinkAge
@@ -943,6 +951,17 @@ def grabAmChildhood(am):
 	fields['otherChildExplain'] = convertNullTextFields(am.childhood.otherChildExplain)
 	fields['parentViolenceExplain'] = convertNullTextFields(am.childhood.parentViolenceExplain)
 	fields['parentViolenceImpact'] = convertNullTextFields(am.childhood.parentViolenceImpact)
+
+	if fields['traumaExplain'] == 'N/A':
+		fields['traumaExplain'] = None
+	if fields['abusedBy'] == 'N/A':
+		fields['abusedBy'] = None
+	if fields['childAngerExplain'] == 'N/A':
+		fields['childAngerExplain'] = None
+	if fields['otherChildExplain'] == 'N/A':
+		fields['otherChildExplain'] = None
+	if fields['parentViolenceExplain'] == 'N/A':
+		fields['parentViolenceExplain'] = None
 
 	#INTEGER FIELDS...NOTHING NEEDS TO BE DONE BECAUSE DEFAULT VALUES ARE SET AT ZERO
 	fields['num_siblings'] = am.childhood.num_siblings

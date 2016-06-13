@@ -27,6 +27,22 @@ function set_radio_buttons() {
 	client_ID.style.opacity = '0.5';
 }
 
+function isBlankField(element) {
+	var isBlank = false;
+	if (element.value === '') {
+		if (element.value === null) {
+			isBlank = true;
+		}
+	}
+	return isBlank;
+}
+
+function handleBlankElement(element) {
+	if (isBlank(element) === true) {
+		element.value = 'N/A';
+	}
+}
+
 
 function processCheckbox(checkbox_element) {
 	if (checkbox_element.checked === true) {
@@ -124,6 +140,110 @@ function processNumberZero(element) {
 	if ((element.disabled === true) || (Number.isInteger(element.value) === false)) {
 		element.value = '0';
 	}
+}
+
+function sideDemo() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_demographic/';
+	form.submit();
+}
+
+function sideDH() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_drugHistory/';
+	form.submit();
+}
+
+function sideChild() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_childhood/';
+	form.submit();
+}
+
+function sideAh1() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_angerHistory/';
+	form.submit();
+}
+
+function sideAh2() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_angerHistory2/';
+	form.submit();
+}
+
+function sideAh3() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_angerHistory3/';
+	form.submit();
+}
+
+function sideConnect() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_connections/';
+	form.submit();
+}
+
+function sideWorst() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_worst/';
+	form.submit();
+}
+
+function sideTarget() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_angerTarget/';
+	form.submit();
+}
+
+function sideFamily() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_familyOrigin/';
+	form.submit();
+}
+
+function sideCurrent() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_problems/';
+	form.submit();
+}
+
+function sideControl() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_control/';
+	form.submit();
+}
+
+function sideFinal() {
+	back = document.getElementById('back_btn');
+	back.value = 'true';
+	form = document.getElementById('am_demo');
+	form.action = '/am_final/';
+	form.submit();
 }
 
 function updateSS() {
