@@ -241,41 +241,28 @@
                   								<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
                   								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   								<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                  								<input type='hidden' name='back' id='back' value='false'>
+                  								<input type='hidden' name='back_btn' id='back_btn' value=''>
                                   <input type='hidden' name='exit_type' id='exit_type' value=''>
 
-                                  <!-- REAL DATA ENTRIES -->
-                                  <input type='hidden' name='m_first_drink' id='m_first_drink' value=''>
-                                  <input type='hidden' name='m_first_use_type' id='m_first_use_type' value=''>
-                                  <input type='hidden' name='m_quitMos' id='m_quitMos' value=''>
-                                  <input type='hidden' name='m_quitYrs' id='m_quitYrs' value=''>
-                                  <input type='hidden' name='m_reason_quit' id='m_reason_quit' value=''>
-                                  <input type='hidden' name='m-what-you-use' id='m-what-you-use' value=''>
-                                  <input type='hidden' name='m-how-often-you-use' id='m-how-often-you-use' value=''>
-                                  <input type='hidden' name='m-how-much-you-use' id='m-how-much-you-use' value=''>
-                                  <input type='hidden' name='m_dui_amount' id='m_dui_amount' value=''>
-                                  <input type='hidden' name='m_BAL' id='m_BAL' value=''>
-                                  <input type='hidden' name='m_when_treated' id='m_when_treated' value=''>
-                                  <input type='hidden' name='m_where_treated' id='m_where_treated' value=''>
-                                  <input type='hidden' name='m_no_treat_explain' id='m_no_treat_explain' value=''>
-                                  <input type='hidden' name='m_relapse_explain' id='m_relapse_explain' value=''>
-
-                                  <!-- RADIO BUTTONS -->
-                                  <input type='hidden' name='m_curr_use' id='m_curr_use' value=''>
-                                  <input type='hidden' name='m_everDrank' id='m_everDrank' value=''>
-                                  <input type='hidden' name='m_DUI' id='m_DUI' value=''>
-                                  <input type='hidden' name='m_needHelpDrugs' id='m_needHelpDrugs' value=''>
-                                  <input type='hidden' name='m_drugTreatment' id='m_drugTreatment' value=''>
-                                  <input type='hidden' name='m_finishedTreatment' id='m_finishedTreatment' value=''>
-                                  <input type='hidden' name='m_isClean' id='m_isClean' value=''>
-                                  <input type='hidden' name='m_drinkLastEpisode' id='m_drinkLastEpisode' value=''>
-                                  <input type='hidden' name='m_drinkRelationshipProblem' id='m_drinkRelationshipProblem' value=''>
+                                  <!-- DYNAMIC DATA ENTRIES -->
+                                  <input type='hidden' name='m_useType' id='m_useType' value=''>
+                                  <input type='hidden' name='m_amtPerWeek' id='m_amtPerWeek' value=''>
+                                  <input type='hidden' name='m_useAmt' id='m_useAmt' value=''>
+                                  <input type='hidden' name='m_monthsQuit' id='m_monthsQuit' value=''>
+                                  <input type='hidden' name='m_yearsQuit' id='m_yearsQuit' value=''>
+                                  <input type='hidden' name='m_reasonQuit' id='m_reasonQuit' value=''>
+                                  <input type='hidden' name='m_numDUI' id='m_numDUI' value=''>
+                                  <input type='hidden' name='m_BALevel' id='m_BALevel' value=''>
+                                  <input type='hidden' name='m_treatmentPlace' id='m_treatmentPlace' value=''>
+                                  <input type='hidden' name='m_dateTreated' id='m_dateTreated' value=''>
+                                  <input type='hidden' name='m_reasonNotFinishedTreatment' id='m_reasonNotFinishedTreatment' value=''>
+                                  <input type='hidden' name='m_relapseTrigger' id='m_relapseTrigger' value=''>
 
                   								<table>
                   									<tr>
                   										<td>
                   											<label for='first_drink'>At what age did you have your first drink of alcohol and/or drugs? </label>
-                  											<input class='small-number' type='number' value='{{fields.firstDrinkAge}}' name='first_drink' id='first_drink'>
+                  											<input class='small-number' type='number' name='first_drink' id='first_drink' value='{{fields.firstDrinkAge}}'>
                   										</td>
                   									</tr>
                   								</table>
@@ -299,7 +286,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_current_use' name='use_drugs' value='no' onClick='javascript: dh_no_drink()'>
+                  											    <input type='radio' id='no_current_use' name='use_drugs' value='False' onClick='javascript: topLevelDH()'>
                   											<div>
                   										</td>
                   										<td>
@@ -308,7 +295,7 @@
 
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='current_use' name='use_drugs' value='yes' onClick='javascript: dh_drinks()'>
+                  											    <input type='radio' id='current_use' name='use_drugs' value='True' onClick='javascript: topLevelDH()'>
                   										    </div>
                   										</td>
                   										<td>
@@ -359,7 +346,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='never_used' name='ever_used' value='no' onClick='javascript: dh_never_used();'>
+                  											    <input type='radio' id='never_used' name='ever_used' value='False' onClick='javascript: dhRadio2();'>
                   											<div>
                   										</td>
                   										<td>
@@ -368,7 +355,7 @@
 
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='has_used' name='ever_used' value='yes' onClick="javascript: dh_has_used();">
+                  											    <input type='radio' id='has_used' name='ever_used' value='True' onClick="javascript: dhRadio2();">
                   										    </div>
                   										</td>
                   										<td>
@@ -390,13 +377,13 @@
 	                  												<tr>
 	                  													<td>
 				                  											<div>
-				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value='{{fields.monthsQuit}}'>
+				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value=''>
 				                  												<label id='moLabel1'>months</label>
 				                  											</div>
 				                  										</td>
 				                  										<td>
 				                  											<div style='margin-left: 8px;'>
-				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value='{{fields.yearsQuit}}'>
+				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value=''>
 				                  												<label id='yrLabel1'>years</label>
 				                  											</div>
 				                  										</td>
@@ -412,7 +399,7 @@
 		                  											</td>
 		                  											<td>
 		                  												<div class='left-space-5'>
-		                  												    <input type='text' id='reason_quit' name='reason_quit' value='{{fields.reasonQuit}}'>
+		                  												    <input type='text' id='reason_quit' name='reason_quit' value=''>
 		                  											    </div>
 		                  											</td>
 	                  											</div>
@@ -424,24 +411,24 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<label for='has_dui'>Have you ever received a DUI?</label>
+                  											<label for='has_dui' id='got_dui_label'>Have you ever received a DUI?</label>
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_dui' name='has_dui' value='no' onClick='javascript: dh_no_dui();'>
+                  											    <input type='radio' id='no_dui' name='has_dui' value='False' onClick='javascript: dhRadio3();'>
                   											<div>
                   										</td>
                   										<td>
-                  											<label for='no_dui'>No</label>
+                  											<label for='no_dui' id='no_dui_label'>No</label>
                   										</td>
 
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='dui' name='has_dui' value='yes' onClick='javascript: dh_has_dui();'>
+                  											    <input type='radio' id='dui' name='has_dui' value='True' onClick='javascript: dhRadio3();'>
                   										    </div>
                   										</td>
                   										<td>
-                  											<label for='dui'>Yes</label>
+                  											<label for='dui' id='hasADui_label'>Yes</label>
                   										</td>
                   									</tr>
                   								</table>
@@ -457,7 +444,7 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='number' value='{{fields.numDUI}}' id='dui_amount' name='dui_amount' class='small-number'>
+	                  															<input type='number' id='dui_amount' name='dui_amount' class='small-number'>
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -470,7 +457,7 @@
 	                  										</td>
 	                  										<td>
 	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='BAL' name='BAL' style='width:40px;' value='{{fields.BALevel}}'>
+	                  											    <input type='text' id='BAL' name='BAL' style='width:40px;'>
 	                  											</div>
 	                  										</td>
                                         <td>
@@ -493,7 +480,7 @@
                   												<tr>
                   													<td>
                   														<div class='single-line-radio1'>
-                  														    <input type='radio' name='need_help' id='give_me_help' value='give_me_help'>
+                  														    <input type='radio' name='need_help' id='give_me_help' value='True'>
                   														</div>
                   													</td>
                   													<td>
@@ -502,7 +489,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='need_help' id='no_help' value='no_help'>
+                  														    <input type='radio' name='need_help' id='no_help' value='False'>
                   														</div>
                   													</td>
                   													<td>
@@ -532,7 +519,7 @@
                   											<tr>
                   												<td>
                   													<div class='single-line-radio1'>
-                  													    <input type='radio' name='treatment' id='had_treatment' value='had_treatment' onClick='javascript: dh_had_treatment();'>
+                  													    <input type='radio' name='treatment' id='had_treatment' value='True' onClick='javascript: dhLeftRadio1();'>
                   												    </div>
                   												</td>
                   												<td>
@@ -541,7 +528,7 @@
                   												
                   												<td>
                   													<div class='single-line-radio'>
-                  													    <input type='radio' name='treatment' id='no_treatment' value='no_treatment' onClick='javascript: dh_no_treatment();'>
+                  													    <input type='radio' name='treatment' id='no_treatment' value='False' onClick='javascript: dhLeftRadio1();'>
                   													</div>
                   												</td>
                   												<td>
@@ -564,7 +551,8 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='text' id='when_treated' name='when_treated' value="{{fields.dateTreated}}">
+	                  															<!-- <textarea rows='1' cols='25' name='when_treated' id='when_treated'></textarea> -->
+                                                  <input type='text' name='when_treated' id='when_treated'>
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -574,7 +562,8 @@
 	                  													</td>
 	                  													<td>
 	                  														<div class='left-space-5'>
-	                  															<input type='text' id='where_treated' name='where_treated' value='{{fields.treatmentPlace}}'>
+                                                  <input type='text' name='where_treated' id='where_treated'>
+	                  															<!-- <textarea rows='1' cols='25' name='where_treated' id='where_treated'></textarea> -->
 	                  														</div>
 	                  													</td>
 	                  												</tr>
@@ -589,7 +578,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='did_complete' name='completed_treatment' value='yes' onClick='javascript: dh_did_completed_sub();'>
+                  											    <input type='radio' id='did_complete' name='completed_treatment' value='True' onClick='javascript: dhLeftRadio2();'>
                   										    </div>
                   										</td>
                   										<td>
@@ -597,7 +586,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='not_completed' name='completed_treatment' value='no' onClick='javascript: dh_not_completed_sub();'>
+                  											    <input type='radio' id='not_completed' name='completed_treatment' value='False' onClick='javascript: dhLeftRadio2();'>
                   											<div>
                   										</td>
                   										<td>
@@ -615,7 +604,7 @@
                   									</tr>
                   									<tr>
                   										<td>
-                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'>{{fields.reasonNotFinishedTreatment}}</textarea>
+                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'></textarea>
                   										</td>
                   									</tr>
                   								</table>
@@ -627,7 +616,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='yes' onClick='javascript: dh_is_abstinent();'>
+                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='True' onClick='javascript: dhLeftRadio3();'>
                   										    </div>
                   										</td>
                   										<td>
@@ -635,7 +624,7 @@
                   										</td>
                   										<td>
                   											<div class='single-line-radio'>
-                  											    <input type='radio' id='not_abstinent' name='still_abstinent' value='no' onClick='javascript: dh_not_abstinent();'>
+                  											    <input type='radio' id='not_abstinent' name='still_abstinent' value='False' onClick='javascript: dhLeftRadio3();'>
                   											<div>
                   										</td>
                   										<td>
@@ -652,7 +641,7 @@
                   									</tr>
                   									<tr>
                   										<td>
-                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'>{{fields.relapseTrigger}}</textarea>
+                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'></textarea>
                   										</td>
                   									</tr>
                   								</table>
@@ -672,7 +661,7 @@
                   													</td>
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='drinking_last' id='was_drinking' value='was_drinking'>
+                  														    <input type='radio' name='drinking_last' id='was_drinking' value='True'>
                   														</div>
                   													</td>
                   													<td>
@@ -681,7 +670,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='drinking_last' id='not_drinking' value='not_drinking'>
+                  														    <input type='radio' name='drinking_last' id='not_drinking' value='False'>
                   														</div>
                   													</td>
                   													<td>
@@ -708,7 +697,7 @@
                   													</td>
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='relationship_alc' id='is_problem' value='is_problem'>
+                  														    <input type='radio' name='relationship_alc' id='is_problem' value='True'>
                   														</div>
                   													</td>
                   													<td>
@@ -717,7 +706,7 @@
                   													
                   													<td>
                   														<div class='single-line-radio'>
-                  														    <input type='radio' name='relationship_alc' id='no_problem' value='no_problem'>
+                  														    <input type='radio' name='relationship_alc' id='no_problem' value='False'>
                   														</div>
                   													</td>
                   													<td>
@@ -730,7 +719,7 @@
 	                  							</table>                  							
                   						</div>
                   					</div>
-
+                          </form>
 
 
                   					<div class="col-md-2 col-sm-2">

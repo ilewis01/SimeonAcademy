@@ -35,7 +35,8 @@ getUtsByDate, deleteOldUTS, getTimes, clientSAPExist, findClientSAP,\
 getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic, \
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
-grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool
+grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
+resolveBlankRadio, convertRadioToBoolean, truePythonBool
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -810,42 +811,93 @@ def am_childhood(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
+			back = request.POST.get('back_btn', '')
 			am_id = request.POST.get('am_id', '')
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
 			am = AngerManagement.objects.get(id=am_id)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
+			json_data = json.dumps(fields)
 
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['back'] = back
 			content['AM'] = am
 			content['session'] = session
 			content['client'] = am.client
 			content['phone'] = convert_phone(am.client.phone)
 
-			if back == 'false':
-				firstDrinkAge = request.POST.get('m_first_drink', '')
-				firstDrinkType = request.POST.get('m_first_use_type', '')
-				curUse = request.POST.get('m_curr_use', '')
-				useType = request.POST.get('m-what-you-use', '')
-				amtPerWeek = request.POST.get('m-how-often-you-use', '')
-				useAmt = request.POST.get('m-how-much-you-use', '')
-				everDrank = request.POST.get('m_everDrank', '')
-				monthsQuit = request.POST.get('m_quitMos', '')
-				yearsQuit = request.POST.get('m_quitYrs', '')
-				reasonQuit = request.POST.get('m_reason_quit', '')
-				DUI = request.POST.get('m_DUI', '')
-				numDUI = request.POST.get('m_dui_amount', '')
-				BALevel = request.POST.get('m_BAL', '')
-				drugTreatment = request.POST.get('m_drugTreatment', '')
-				treatmentPlace = request.POST.get('m_where_treated', '')
-				dateTreated = request.POST.get('m_when_treated', '')
-				finishedTreatment = request.POST.get('m_finishedTreatment', '')
-				reasonNotFinishedTreatment = request.POST.get('m_no_treat_explain', '')
-				isClean = request.POST.get('m_isClean', '')
-				relapseTrigger = request.POST.get('m_relapse_explain', '')
-				drinkLastEpisode = request.POST.get('m_drinkLastEpisode', '')
-				drinkRelationshipProblem = request.POST.get('m_drinkRelationshipProblem', '')
-				needHelpDrugs = request.POST.get('m_needHelpDrugs', '')
+			if back == 'false':	
+				#UPDATE THE NEW DRUG HISTORY FORM	
+
+				#PROCESS THE BOOLEAN FIELDS
+				curUse = request.POST.get('use_drugs', '')
+				everDrank = request.POST.get('ever_used', '')
+				DUI = request.POST.get('has_dui', '')
+				drugTreatment = request.POST.get('treatment', '')
+				finishedTreatment = request.POST.get('completed_treatment', '')
+				isClean = request.POST.get('still_abstinent', '')
+				drinkLastEpisode = request.POST.get('drinking_last', '')
+				drinkRelationshipProblem = request.POST.get('relationship_alc', '')
+				needHelpDrugs = request.POST.get('need_help', '')
+
+				everDrank = resolveBlankRadio(everDrank, 'False')
+				DUI = resolveBlankRadio(DUI, 'False')
+				finishedTreatment = resolveBlankRadio(finishedTreatment, 'True')
+				isClean = resolveBlankRadio(isClean, 'True')
+
+				curUse = truePythonBool(curUse)
+				everDrank = truePythonBool(everDrank)
+				DUI = truePythonBool(DUI)
+				drugTreatment = truePythonBool(drugTreatment)
+				finishedTreatment = truePythonBool(finishedTreatment)
+				isClean = truePythonBool(isClean)
+				drinkLastEpisode = truePythonBool(drinkLastEpisode)
+				drinkRelationshipProblem = truePythonBool(drinkRelationshipProblem)
+				needHelpDrugs = truePythonBool(needHelpDrugs)
+
+				#PROCESS THE TEXT AND INTEGER FIELDS
+				firstDrinkAge = request.POST.get('first_drink', '')
+				firstDrinkType = request.POST.get('first_use_type', '')
+				useType = request.POST.get('m_useType', '')
+				amtPerWeek = request.POST.get('m_amtPerWeek', '')
+				useAmt = request.POST.get('m_useAmt', '')
+				monthsQuit = request.POST.get('m_monthsQuit', '')
+				yearsQuit = request.POST.get('m_yearsQuit', '')
+				reasonQuit = request.POST.get('m_reasonQuit', '')
+				numDUI = request.POST.get('m_numDUI', '')
+				BALevel = request.POST.get('m_BALevel', '')
+				treatmentPlace = request.POST.get('m_treatmentPlace', '')
+				dateTreated = request.POST.get('m_dateTreated', '')
+				reasonNotFinishedTreatment = request.POST.get('m_reasonNotFinishedTreatment', '')
+				relapseTrigger = request.POST.get('m_relapseTrigger', '')
+
+				# print 'Current Use: ' + str(curUse)
+				# print 'Ever drank: ' + str(everDrank)
+				# print 'DUI: ' + str(DUI)
+				# print 'Had drug treatment: ' + str(drugTreatment)
+				# print 'Finished treatment: ' + str(finishedTreatment)
+				# print 'Is still clean: ' + str(isClean)
+				# print 'Drinking last angry episode: ' + str(drinkLastEpisode)
+				# print 'Relationship problem: ' + str(drinkRelationshipProblem)
+				# print 'Need help: ' + str(needHelpDrugs)
+				# print "firstDrinkAge: " + str(firstDrinkAge)
+				# print "firstDrinkType: " + str(firstDrinkType)
+				# print "useType: " + str(useType)
+				# print "amtPerWeek: " + str(amtPerWeek)
+				# print "useAmt: " + str(useAmt)
+				# print "monthsQuit: " + str(monthsQuit)
+				# print "yearsQuit: " + str(yearsQuit)
+				# print "reasonQuit: " + str(reasonQuit)
+				# print "numDUI: " + str(numDUI)
+				# print "BALevel: " + str(BALevel)
+				# print "treatmentPlace: " + str(treatmentPlace)
+				# print "dateTreated: " + str(dateTreated)
+				# print "reasonNotFinishedTreatment: " + str(reasonNotFinishedTreatment)
+				# print "relapseTrigger: " + str(relapseTrigger)
+
+				if curUse == True:
+					everDrank = True
 
 				date = datetime.now()
 				date = date.date()
@@ -874,6 +926,8 @@ def am_childhood(request):
 				demo.drinkLastEpisode = drinkLastEpisode
 				demo.drinkRelationshipProblem = drinkRelationshipProblem
 				demo.needHelpDrugs = needHelpDrugs
+				demo.treatmentPlace = treatmentPlace
+				demo.dateTreated = dateTreated
 
 				demo.save()
 				am.drugHistoryComplete = True
@@ -881,29 +935,19 @@ def am_childhood(request):
 
 				image = amSidebarImages(am, 'child')
 				classes = grabAmClassesCSS(am, 'child')
-				fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
-				json_data = json.dumps(fields)
 
 				content['image'] = image
 				content['class'] = classes
-				content['json_data'] = json_data
 				content['back_url'] = '/am_drugHistory/'
-				content['session'] = session
-				content['AM'] = am
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 			else:
-				fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
-				json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'child')
 				classes = grabAmClassesCSS(am, 'child')
 
 				content['image'] = image
 				content['class'] = classes
-				content['json_data'] = json_data
 				content['back_url'] = '/am_drugHistory/'
-				content['session'] = session
-				content['AM'] = am
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
 
@@ -1248,9 +1292,16 @@ def am_drugHistory(request):
 			am = AngerManagement.objects.get(id=am_id)
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
+			
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
+			json_data = json.dumps(fields)
+
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['back'] = back
 			content['back_url'] = '/am_demographic/'
-			print "Back: " + str(back)
+			content['AM'] = am
+			content['session'] = session
 
 			if back == 'false':
 				demo = am.demographic
@@ -1316,14 +1367,6 @@ def am_drugHistory(request):
 				if whatMedicine == None or whatMedicine == '':
 					whatMedicine = 'NA'
 
-				print 'own: ' + str(own)
-				print 'drop_out: ' + str(drop_out)
-				print 'health_problem: ' + str(health_problem)
-				print 'medication: ' + str(medication)
-				print 'resasonDO: ' + str(resasonDO)
-				print 'health_exp: ' + str(health_exp)
-				print 'whatMedicine: ' + str(whatMedicine)
-
 				demo.date_of_assessment = date
 				demo.maritalStatus 		= maritalStatus
 				demo.livingSituation 	= livingSituation
@@ -1351,29 +1394,31 @@ def am_drugHistory(request):
 				am.demographicComplete = True
 				am.save()
 
-				fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
-				json_data = json.dumps(fields)
+				# fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
+				# json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'dh')
 				classes = grabAmClassesCSS(am, 'dh')
 
+				# content['fields'] = fields
 				content['class'] = classes
 				content['image'] = image
 				content['title'] = "Anger Management Assessment | Simeon Academy"
-				content['json_data'] = json_data
-				content['AM'] = am
-				content['session'] = session
+				# content['json_data'] = json_data
+				# content['AM'] = am
+				# content['session'] = session
 				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 			else:
-				fields = getAmDHData(back, am)
-				json_data = json.dumps(fields)
+				# fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
+				# json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'dh')
 				classes = grabAmClassesCSS(am, 'dh')
 
+				# content['fields'] = fields
 				content['class'] = classes
 				content['image'] = image
-				content['AM'] = am
-				content['session'] = session
-				content['json_data'] = json_data
+				# content['AM'] = am
+				# content['session'] = session
+				# content['json_data'] = json_data
 				content['title'] = "Anger Management Assessment | Simeon Academy"
 				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 

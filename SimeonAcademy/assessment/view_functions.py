@@ -27,6 +27,14 @@ def onTrue_offFalse(data):
 		data = False
 	return data
 
+def convertRadioToBoolean(data):
+	result = True
+
+	if data == 'no':
+		result = False
+
+	return result
+
 def convert_phone(phone):
 	result = '('
 	result += phone[0]
@@ -43,6 +51,15 @@ def convert_phone(phone):
 	result += phone[7]
 	result += phone[8]
 	result += phone[9]
+	return result
+
+def resolveBlankRadio(radio, defaultValue):
+	result = None
+
+	if radio == None or radio == '':
+		result = defaultValue
+	else:
+		result = radio
 	return result
 
 def convert_datepicker(the_date):
@@ -750,7 +767,27 @@ def grabAmDhFields(am):
 	result['drinkLastEpisode'] = am.drugHistory.drinkLastEpisode
 	result['drinkRelationshipProblem'] = am.drugHistory.drinkRelationshipProblem
 	result['needHelpDrugs'] = am.drugHistory.needHelpDrugs
+
+	if result['curUse'] == True:
+		result['everDrank'] = False
+
 	return result
+
+def truePythonBool(value):
+	result = False
+
+	if value == 'True':
+		result = True
+
+	return result
+
+def processAmDhFields(fields):
+	results = {}
+
+	if fields['curUse'] == True:
+		results['']
+
+	return results
 
 def grabAmConnections(am):
 	fields = {}
