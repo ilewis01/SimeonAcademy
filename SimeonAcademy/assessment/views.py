@@ -548,8 +548,14 @@ def am_angerHistory(request):
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
+			content['fields'] = fields
 			content['AM'] = am
 			content['session'] = session
+			content['back'] = back
 
 			if str(back) == 'false':
 				momAlive = request.POST.get('momAlive', '')
@@ -632,13 +638,10 @@ def am_angerHistory(request):
 				am.childhood = childhood
 				am.childhoodComplete = True
 				am.save()
-
-				fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
-				json_data = json.dumps(fields)
+				
 				image = amSidebarImages(am, 'ah1')
 				classes = grabAmClassesCSS(am, 'ah1')
 
-				content['json_data'] = json_data
 				content['class'] = classes
 				content['image'] = image
 				content['title'] = "Anger Management Assessment | Simeon Academy"
