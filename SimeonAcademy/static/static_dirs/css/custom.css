@@ -1,4 +1,4 @@
-body {
+side_option_headbody {
 	color:#393939;
 }
 
@@ -758,6 +758,54 @@ button:hover {
 	margin-bottom: 7px;
 	margin-right: 5px; 
 }
+
+.side_option_head {
+	margin-top: 15px;
+	font-weight: bold;	
+	font-size: 17px;
+	color: #ffa64d;
+}
+
+.FA_side_bar_btn a {
+	color: #adad85;
+}
+
+.FA_side_bar_btn a:hover {
+	color: #ffa64d;
+}
+
+.FA_side_bar_btn td {
+	width: 40px;
+}
+
+#save_icon_btn {
+	font-size: 35px;
+	margin-top: 3px;
+}
+
+#trash_icon_btn {
+	font-size: 40px;
+}
+
+#side_icon_text {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.icon_table td {
+	
+	width: 40px;
+	text-align: center;
+}
+
+#save_icon_text {
+	font-weight: bold;
+	margin-top: 4px;}
+
+#trash_icon_text {
+	font-weight: bold;
+}
+
 
 
 
