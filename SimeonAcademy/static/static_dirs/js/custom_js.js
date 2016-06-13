@@ -43,6 +43,11 @@ function handleBlankElement(element) {
 	}
 }
 
+function handleBlankTextArea(element) {
+	if (isBlank(element) === true) {
+		element.innerHTML = 'N/A';
+	}
+}
 
 function processCheckbox(checkbox_element) {
 	if (checkbox_element.checked === true) {
@@ -2022,46 +2027,6 @@ function am_drug_history_initialize(json_data, back) {
 
 	dhRadio3();
 	dhRadio2();
-
-	// if (String(back) === 'false') {
-	// 	document.getElementById('first_use_type').value = '';
-	// 	document.getElementById('what-you-use').value = '';
-	// 	document.getElementById('how-often-you-use').value = '';
-	// 	document.getElementById('how-much-you-use').value = '';
-	// 	document.getElementById('reason_quit').value = '';
-	// 	document.getElementById('BAL').value = '';
-	// 	document.getElementById('when_treated').value = '';
-	// 	document.getElementById('where_treated').value = '';
-	// 	document.getElementById('no_treat_explain').innerHTML = '';
-	// 	document.getElementById('relapse_explain').innerHTML = '';
-	// }
-	// else {
-	// 	document.getElementById('first_drink').value = json_data.firstDrinkAge;
-	// 	document.getElementById('first_use_type').value = json_data.firstDrinkType;
-	// 	document.getElementById('what-you-use').value = json_data.useType;
-	// 	document.getElementById('how-often-you-use').value = json_data.amtPerWeek;
-	// 	document.getElementById('how-much-you-use').value = json_data.useAmt;
-	// 	document.getElementById('quitMos').value = json_data.monthsQuit;
-	// 	document.getElementById('quitYrs').value = json_data.yearsQuit;
-	// 	document.getElementById('reason_quit').value = json_data.reasonQuit;
-	// 	document.getElementById('dui_amount').value = json_data.numDUI;
-	// 	document.getElementById('BAL').value = json_data.BALevel;
-	// 	document.getElementById('when_treated').value = json_data.dateTreated;
-	// 	document.getElementById('where_treated').value = json_data.treatmentPlace;
-	// 	document.getElementById('no_treat_explain').innerHTML = json_data.reasonNotFinishedTreatment;
-	// 	document.getElementById('relapse_explain').innerHTML = json_data.relapseTrigger;
-	// }
-
-	// document.getElementById('first_use_type').value = clearNullTextField(document.getElementById('first_use_type'));
-	// document.getElementById('what-you-use').value = clearNullTextField(document.getElementById('what-you-use'));
-	// document.getElementById('how-often-you-use').value = clearNullTextField(document.getElementById('how-often-you-use'));
-	// document.getElementById('how-much-you-use').value = clearNullTextField(document.getElementById('how-much-you-use'));
-	// document.getElementById('reason_quit').value = clearNullTextField(document.getElementById('reason_quit'));
-	// document.getElementById('BAL').value = clearNullTextField(document.getElementById('BAL'));
-	// document.getElementById('when_treated').value = clearNullTextField(document.getElementById('when_treated'));
-	// document.getElementById('where_treated').value = clearNullTextField(document.getElementById('where_treated'));
-	// document.getElementById('no_treat_explain').innerHTML = clearNullTextArea(document.getElementById('no_treat_explain'));
-	// document.getElementById('relapse_explain').innerHTML = clearNullTextArea(document.getElementById('relapse_explain'));
 }
 
 
@@ -2618,8 +2583,11 @@ function childAbusedRadio() {
 	var childAbused = document.getElementById('childAbused');
 	var abusedBy_label = document.getElementById('abusedBy_label');
 	var abusedBy = document.getElementById('abusedBy');
+	var abuseImpact_label = document.getElementById('abuseImpact_label');
+	var abuseImpact = document.getElementById('abuseImpact');
 
 	twoElementRadioSetup(childAbused, abusedBy_label, abusedBy);
+	twoElementRadioSetup(childAbused, abuseImpact_label, abuseImpact);
 }
 
 function hadChildAngerRadio() {
@@ -2642,8 +2610,11 @@ function parentsFoughtRadio() {
 	var sawViolence = document.getElementById('sawViolence');
 	var parentViolenceExplain_label = document.getElementById('parentViolenceExplain_label');
 	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
+	var parentViolenceImpact_label = document.getElementById('parentViolenceImpact_label');
+	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
 
 	twoElementRadioSetup(sawViolence, parentViolenceExplain_label, parentViolenceExplain);
+	twoElementRadioSetup(sawViolence, parentViolenceImpact_label, parentViolenceImpact);
 }
 
 function initialize_am_childhood(json_data) {
@@ -2660,7 +2631,6 @@ function initialize_am_childhood(json_data) {
 	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
 	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
 	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
-	var num_siblings = document.getElementById('num_siblings');
 
 	//boolean fields
 	var momAlive = document.getElementById('momAlive');
@@ -2673,21 +2643,6 @@ function initialize_am_childhood(json_data) {
 	var childAnger = document.getElementById('childAnger');
 	var otherChild = document.getElementById('otherChild');
 	var parentViolence = document.getElementById('parentViolence');
-
-	raisedBy.selectedIndex = json_data.raisedBy;
-	num_siblings.value = json_data.num_siblings;
-
-	traumaExplain.value = insertProcessedText(json_data.traumaExplain)
-	howLeftHome.value = insertProcessedText(json_data.howLeftHome)
-	dadCloseExplain.value = insertProcessedText(json_data.dadCloseExplain)
-	momCloseExplain.value = insertProcessedText(json_data.momCloseExplain)
-	abusedBy.value = insertProcessedText(json_data.abusedBy)
-	abuseImpact.value = insertProcessedText(json_data.abuseImpact)
-	childAngerExplain.value = insertProcessedText(json_data.childAngerExplain)
-	otherChildExplain.value = insertProcessedText(json_data.otherChildExplain)
-	parentViolenceExplain.value = insertProcessedText(json_data.parentViolenceExplain)
-	parentViolenceImpact.value = insertProcessedText(json_data.parentViolenceImpact)
-	siblingsRelationshipExplain.value = insertProcessedText(json_data.siblingsRelationshipExplain)
 
 	//sub radio button declarations
 	var motherLiving = document.getElementById('motherLiving');
@@ -2713,75 +2668,22 @@ function initialize_am_childhood(json_data) {
 	var hadAngerChild = document.getElementById('hadAngerChild');
 	var noAngerChild = document.getElementById('noAngerChild');
 
-	//process radio buttons
-	if (String(json_data.momAlive) === 'true') {
-		motherLiving.checked = true;
-	}
-	else {
-		motherNotLiving.checked = true;
-	}
+	//PROCESS THE DROPDOWN MENU
+	raisedBy.selectedIndex = json_data.raisedBy;
 
-	if (String(json_data.dadAlive) === 'true') {
-		fatherLiving.checked = true;
-	}
-	else {
-		fatherNotLiving.checked = true;
-	}
+	//PROCESS RADIO BUTTONS
+	setRadioElement(json_data.momAlive, motherLiving, motherNotLiving);
+	setRadioElement(json_data.dadAlive, fatherLiving, fatherNotLiving);
+	setRadioElement(json_data.childTrama, hadTramua, noTrauma);
+	setRadioElement(json_data.siblingsClose, sibsClose, sibsNotClose);
+	setRadioElement(json_data.dadClose, dadIsClose, dadNotClose);
+	setRadioElement(json_data.momClose, meMomClose, meMomNotClose);
+	setRadioElement(json_data.wasAbused, childAbused, childNotAbused);
+	setRadioElement(json_data.childAnger, hadAngerChild, noAngerChild);
+	setRadioElement(json_data.otherChild, haveOtherEvents, noOtherEvents);
+	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);	
 
-	if (String(json_data.childTrama) === 'true') {
-		hadTramua.checked = true;
-	}
-	else {
-		noTrauma.checked = true;
-	}
-
-	if (String(json_data.siblingsClose) === 'true') {
-		sibsClose.checked = true;
-	}
-	else {
-		sibsNotClose.checked = true;
-	}
-	if (String(json_data.dadClose) === 'true') {
-		dadIsClose.checked = true;
-	}
-	else {
-		dadNotClose.checked = true;
-	}
-
-	if (String(json_data.momClose) === 'true') {
-		meMomClose.checked = true;
-	}
-	else {
-		meMomNotClose.checked = true;
-	}
-
-	if (String(json_data.wasAbused) === 'true') {
-		childAbused.checked = true;
-	}
-	else {
-		childNotAbused.checked = true;
-	}
-
-	if (String(json_data.childAnger) === 'true') {
-		haveOtherEvents.checked = true;
-	}
-	else {
-		noOtherEvents.checked = true;
-	}
-
-	if (String(json_data.otherChild) === 'true') {
-		sawViolence.checked = true;
-	}
-	else {
-		didntSeeViolence.checked = true;
-	}
-
-	if (String(json_data.childAnger) === 'true') {
-		hadAngerChild.checked = true;
-	}
-	else {
-		noAngerChild.checked = true;
-	}
+	back = document.getElementById('back_btn');
 
 	childTraumaRadio();
 	childAbusedRadio();
@@ -2793,87 +2695,43 @@ function initialize_am_childhood(json_data) {
 function continue_am_history1() {
 	var proceed = true;
 
-	//text fields
-	var raisedBy = document.getElementById('raisedBy');
+	//DYNAMIC TRIGGERS
+	var hadTramua = document.getElementById('hadTramua');
+	var childAbused = document.getElementById('childAbused');
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var haveOtherEvents = document.getElementById('haveOtherEvents');
+	var sawViolence = document.getElementById('sawViolence');
+
+	//DYNAMIC FIELDS
 	var traumaExplain = document.getElementById('traumaExplain');
-	var howLeftHome = document.getElementById('howLeftHome');
-	var dadCloseExplain = document.getElementById('dadCloseExplain');
-	var momCloseExplain = document.getElementById('momCloseExplain');
 	var abusedBy = document.getElementById('abusedBy');
 	var abuseImpact = document.getElementById('abuseImpact');
-	var childAngerExplain = document.getElementById('childAngerExplain');
 	var otherChildExplain = document.getElementById('otherChildExplain');
+	var childAngerExplain = document.getElementById('childAngerExplain');
 	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
 	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
-	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
-	var num_siblings = document.getElementById('num_siblings');
 
-	//boolean fields
-	var momAlive = document.getElementById('momAlive');
-	var dadAlive = document.getElementById('dadAlive');
-	var childTrama = document.getElementById('childTrama');
-	var siblingsClose = document.getElementById('siblingsClose');
-	var dadClose = document.getElementById('dadClose');
-	var momClose = document.getElementById('momClose');
-	var wasAbused = document.getElementById('wasAbused');
-	var childAnger = document.getElementById('childAnger');
-	var otherChild = document.getElementById('otherChild');
-	var parentViolence = document.getElementById('parentViolence');
+	//POST FIELDS
+	var m_traumaExplain = document.getElementById('m_traumaExplain');
+	var m_howLeftHome = document.getElementById('m_howLeftHome');
+	var m_abusedBy = document.getElementById('m_abusedBy');
+	var m_abuseImpact = document.getElementById('m_abuseImpact');
+	var m_childAngerExplain = document.getElementById('m_childAngerExplain');
+	var m_otherChildExplain = document.getElementById('m_otherChildExplain');
+	var m_parentViolenceExplain = document.getElementById('m_parentViolenceExplain');
+	var m_parentViolenceImpact = document.getElementById('m_parentViolenceImpact');
 
-	//sub radio button declarations
-	var motherLiving = document.getElementById('motherLiving');
-	var motherNotLiving = document.getElementById('motherNotLiving');
-	var fatherLiving = document.getElementById('fatherLiving');
-	var fatherNotLiving = document.getElementById('fatherNotLiving');
-	var hadTramua = document.getElementById('hadTramua');
-	var noTrauma = document.getElementById('noTrauma');
-	var sibsClose = document.getElementById('sibsClose');
-	var sibsNotClose = document.getElementById('sibsNotClose');
-	var dadIsClose = document.getElementById('dadIsClose');
-	var dadNotClose = document.getElementById('dadNotClose');
-	var childAbused = document.getElementById('childAbused');
-	var childNotAbused = document.getElementById('childNotAbused');
-	var meMomClose = document.getElementById('meMomClose');
-	var meMomNotClose = document.getElementById('meMomNotClose');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
-	var haveOtherEvents = document.getElementById('haveOtherEvents');
-	var noOtherEvents = document.getElementById('noOtherEvents');
-	var sawViolence = document.getElementById('sawViolence');
-	var didntSeeViolence = document.getElementById('didntSeeViolence');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
 
-	//process the disabled fields
-	processDisabledTextFields(traumaExplain, document.getElementById('m_traumaExplain'));
-	processDisabledTextFields(abusedBy, document.getElementById('m_abusedBy'));
-	processDisabledTextFields(childAngerExplain, document.getElementById('m_childAngerExplain'));
-	processDisabledTextFields(otherChildExplain, document.getElementById('m_otherChildExplain'));
-	processDisabledTextFields(parentViolenceExplain, document.getElementById('m_parentViolenceExplain'));
+	// //PROCESS DYNAMIC FIELDS
+	postDynamicFields(hadTramua, traumaExplain, m_traumaExplain);
+	postDynamicFields(childAbused, abusedBy, m_abusedBy);
+	postDynamicFields(childAbused, abuseImpact, m_abuseImpact);
+	postDynamicFields(hadAngerChild, childAngerExplain, m_childAngerExplain);
+	postDynamicFields(haveOtherEvents, otherChildExplain, m_otherChildExplain);
+	postDynamicFields(sawViolence, parentViolenceExplain, m_parentViolenceExplain);
+	postDynamicFields(sawViolence, parentViolenceImpact, m_parentViolenceImpact);
 
-	//copy the normal text fields
-	copyElementToInput('howLeftHome');
-	copyElementToInput('siblingsRelationshipExplain');
-	copyElementToInput('dadCloseExplain');
-	copyElementToInput('momCloseExplain');
-	copyElementToInput('abuseImpact');
-	copyElementToInput('parentViolenceImpact');
-	copyElementToInput('raisedBy');
-	copyElementToInput('num_siblings');
-
-	//process the radio buttons
-	processRadioYes(motherLiving, document.getElementById('m_momAlive'));
-	processRadioYes(fatherLiving, document.getElementById('m_dadAlive'));
-	processRadioYes(hadTramua, document.getElementById('m_childTrama'));
-	processRadioYes(sibsClose, document.getElementById('m_siblingsClose'));
-	processRadioYes(dadIsClose, document.getElementById('m_dadClose'));
-	processRadioYes(meMomClose, document.getElementById('m_momClose'));
-	processRadioYes(childAbused, document.getElementById('m_wasAbused'));
-	processRadioYes(hadAngerChild, document.getElementById('m_childAnger'));
-	processRadioYes(haveOtherEvents, document.getElementById('m_otherChild'));
-	processRadioYes(sawViolence, document.getElementById('m_parentViolence'));
-
-	document.getElementById('m_back').value = 'false';
+	document.getElementById('back_btn').value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();

@@ -227,6 +227,7 @@
         <div id="page-content-wrapper">
             <div>
                 <h3 id='am-h2'>Anger Management: Childhood History</h3>
+                <h1>Back: {{back}}</h1>
                 <!-- AM ID: {{AM.id}} <br>
                 Back: {{back}} <br>
                 Drug History ID: {{AM.drugHistory.id}} <br>
@@ -243,29 +244,15 @@
 	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
 	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_raisedBy' id='m_raisedBy'>
-	                            <input type='hidden' value='' name='m_momAlive' id='m_momAlive'>
-	                            <input type='hidden' value='' name='m_dadAlive' id='m_dadAlive'>
-	                            <input type='hidden' value='' name='m_childTrama' id='m_childTrama'>
+                                <input type='hidden' value='' name='m_traumaExplain' id='m_traumaExplain'>
 	                            <input type='hidden' value='' name='m_howLeftHome' id='m_howLeftHome'>
-	                            <input type='hidden' value='' name='m_num_siblings' id='m_num_siblings'>
-	                            <input type='hidden' value='' name='m_siblingsRelationshipExplain' id='m_siblingsRelationshipExplain'>
-	                            <input type='hidden' value='' name='m_siblingsClose' id='m_siblingsClose'>
-	                            <input type='hidden' value='' name='m_dadClose' id='m_dadClose'>
-	                            <input type='hidden' value='' name='m_dadCloseExplain' id='m_dadCloseExplain'>
-	                            <input type='hidden' value='' name='m_momClose' id='m_momClose'>
-	                            <input type='hidden' value='' name='m_momCloseExplain' id='m_momCloseExplain'>
-	                            <input type='hidden' value='' name='m_wasAbused' id='m_wasAbused'>
 	                            <input type='hidden' value='' name='m_abusedBy' id='m_abusedBy'>
 	                            <input type='hidden' value='' name='m_abuseImpact' id='m_abuseImpact'>
-	                            <input type='hidden' value='' name='m_childAnger' id='m_childAnger'>
-	                            <input type='hidden' value='' name='m_childAngerExplain' id='m_childAngerExplain'>
-	                            <input type='hidden' value='' name='m_otherChild' id='m_otherChild'>
+                                <input type='hidden' value='' name='m_childAngerExplain' id='m_childAngerExplain'>
 	                            <input type='hidden' value='' name='m_otherChildExplain' id='m_otherChildExplain'>
-	                            <input type='hidden' value='' name='m_parentViolence' id='m_parentViolence'>
 	                            <input type='hidden' value='' name='m_parentViolenceExplain' id='m_parentViolenceExplain'>
 	                            <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
-	                            <input type='hidden' value='' name='m_traumaExplain' id='m_traumaExplain'>
+	                            
 
 	                            <!-- ____________________________LEFT SIDE_______________________________ -->
 	                            <table>
@@ -301,7 +288,7 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='momAlive' id='motherLiving' value='motherLiving' checked>
+									                            <input type='radio' name='momAlive' id='motherLiving' value='True' checked>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -310,7 +297,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='momAlive' id='motherNotLiving' value='motherNotLiving'>
+									                            <input type='radio' name='momAlive' id='motherNotLiving' value='False'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -335,7 +322,7 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='dadAlive' id='fatherLiving' value='fatherLiving' checked>
+									                            <input type='radio' name='dadAlive' id='fatherLiving' value='True' checked>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -344,7 +331,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='dadAlive' id='fatherNotLiving' value='fatherNotLiving'>
+									                            <input type='radio' name='dadAlive' id='fatherNotLiving' value='False'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -369,7 +356,7 @@
 									                <tr>
 									                    <td>
 									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='childTrama' id='hadTramua' value='hadTramua' onClick='javascript: childTraumaRadio();'>
+									                            <input type='radio' name='childTrama' id='hadTramua' value='True' onClick='javascript: childTraumaRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -378,7 +365,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childTrama' id='noTrauma' value='noTrauma' checked onClick='javascript: childTraumaRadio();'>
+									                            <input type='radio' name='childTrama' id='noTrauma' value='False' checked onClick='javascript: childTraumaRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -412,7 +399,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='howLeftHome' id='howLeftHome'></textarea>
+											<textarea cols='57' rows='3' name='howLeftHome' id='howLeftHome'>{{fields.howLeftHome}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -426,7 +413,7 @@
 										</td>
 										<td>
 											<div id='submit-space'>
-												<input type='number' style="width:40px;" name='num_siblings' id='num_siblings' value='0'>
+												<input type='number' style="width:40px;" name='num_siblings' id='num_siblings' value='{{fields.num_siblings}}'>
 											</div>
 										</td>
 									</tr>
@@ -444,7 +431,7 @@
 									<tr>
 										<td>
 											<div id='single-line-radio2'>
-												<input type='radio' name='siblingsClose' id='sibsClose' value='sibsClose' checked>
+												<input type='radio' name='siblingsClose' id='sibsClose' value='True' checked>
 											</div>
 										</td>
 										<td>
@@ -453,7 +440,7 @@
 
 										<td>
 											<div id='single-line-radio2' style='margin-left:15px;'>
-												<input type='radio' name='siblingsClose' id='sibsNotClose' value='sibsNotClose'>
+												<input type='radio' name='siblingsClose' id='sibsNotClose' value='False'>
 											</div>
 										</td>
 										<td>
@@ -469,7 +456,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain'></textarea>
+											<textarea cols='57' rows='3' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain'>{{fields.siblingsRelationshipExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -493,7 +480,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='dadClose' id='dadIsClose' value='dadIsClose' checked>
+									                            <input type='radio' name='dadClose' id='dadIsClose' value='True' checked>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -502,7 +489,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='dadClose' id='dadNotClose' value='dadNotClose'>
+									                            <input type='radio' name='dadClose' id='dadNotClose' value='False'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -524,7 +511,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='dadCloseExplain' id='dadCloseExplain'></textarea>
+											<textarea cols='57' rows='3' name='dadCloseExplain' id='dadCloseExplain'>{{fields.dadCloseExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -548,7 +535,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='wasAbused' id='childAbused' value='childAbused' onClick='javascript: childAbusedRadio();'>
+									                            <input type='radio' name='wasAbused' id='childAbused' value='True' onClick='javascript: childAbusedRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -557,7 +544,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='wasAbused' id='childNotAbused' value='childNotAbused' checked onClick='javascript: childAbusedRadio();'>
+									                            <input type='radio' name='wasAbused' id='childNotAbused' value='False' checked onClick='javascript: childAbusedRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -579,7 +566,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='abusedBy' id='abusedBy'></textarea>
+											<textarea cols='57' rows='3' name='abusedBy' id='abusedBy'>{{fields.abusedBy}}</textarea>
 										</td>
 									</tr>
 								</table> 
@@ -592,13 +579,13 @@
 								<table>
 									<tr>
 										<td>
-										    <label for='abuseImpact'><span id='numbered'>10. </span>What was the impact emotionally and psychologically <br>on the abused?</label>
+										    <label for='abuseImpact' id='abuseImpact_label'><span id='numbered'>10. </span>What was the impact emotionally and psychologically <br>on the abused?</label>
 
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='abuseImpact' id='abuseImpact'></textarea>
+											<textarea cols='57' rows='3' name='abuseImpact' id='abuseImpact'>{{fields.abuseImpact}}</textarea>
 										</td>
 									</tr>
 								</table> 
@@ -622,7 +609,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='momClose' id='meMomClose' value='meMomClose' checked>
+									                            <input type='radio' name='momClose' id='meMomClose' value='True' checked>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -631,7 +618,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='momClose' id='meMomNotClose' value='meMomNotClose'>
+									                            <input type='radio' name='momClose' id='meMomNotClose' value='False'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -653,7 +640,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='momCloseExplain' id='momCloseExplain'></textarea>
+											<textarea cols='57' rows='3' name='momCloseExplain' id='momCloseExplain'>{{fields.momCloseExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -677,7 +664,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='childAnger' id='hadAngerChild' value='hadAngerChild' onClick='javascript: hadChildAngerRadio();'>
+									                            <input type='radio' name='childAnger' id='hadAngerChild' value='True' onClick='javascript: hadChildAngerRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -686,7 +673,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childAnger' id='noAngerChild' value='noAngerChild' checked onClick='javascript: hadChildAngerRadio();'>
+									                            <input type='radio' name='childAnger' id='noAngerChild' value='False' checked onClick='javascript: hadChildAngerRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -708,7 +695,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='childAngerExplain' id='childAngerExplain'></textarea>
+											<textarea cols='57' rows='3' name='childAngerExplain' id='childAngerExplain'>{{fields.childAngerExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -732,7 +719,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='haveOtherEvents' onClick='javascript: otherEventsHelpRadio();'>
+									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='True' onClick='javascript: otherEventsHelpRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -741,7 +728,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='otherChild' id='noOtherEvents' value='noOtherEvents' checked onClick='javascript: otherEventsHelpRadio();'>
+									                            <input type='radio' name='otherChild' id='noOtherEvents' value='False' checked onClick='javascript: otherEventsHelpRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -763,7 +750,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='otherChildExplain' id='otherChildExplain'></textarea>
+											<textarea cols='57' rows='3' name='otherChildExplain' id='otherChildExplain'>{{fields.otherChildExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -787,7 +774,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='parentViolence' id='sawViolence' value='sawViolence' onClick='javascript: parentsFoughtRadio();'>
+									                            <input type='radio' name='parentViolence' id='sawViolence' value='True' onClick='javascript: parentsFoughtRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -796,7 +783,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='didntSeeViolence' checked onClick='javascript: parentsFoughtRadio();'>
+									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='False' checked onClick='javascript: parentsFoughtRadio();'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -818,7 +805,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='parentViolenceExplain' id='parentViolenceExplain'></textarea>
+											<textarea cols='57' rows='3' name='parentViolenceExplain' id='parentViolenceExplain'>{{fields.parentViolenceExplain}}</textarea>
 										</td>
 									</tr>
 								</table>
@@ -832,7 +819,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea cols='57' rows='3' name='parentViolenceImpact' id='parentViolenceImpact'></textarea>
+											<textarea cols='57' rows='3' name='parentViolenceImpact' id='parentViolenceImpact'>{{fields.parentViolenceImpact}}</textarea>
 										</td>
 									</tr>
 								</table>
