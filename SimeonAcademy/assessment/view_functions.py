@@ -974,6 +974,40 @@ def grabAmAngerHistory1(am):
 	fields = {}
 
 	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
+	fields['recentVDate'] = am.angerHistory.recentVDate
+	fields['recentVlocation'] = am.angerHistory.recentVlocation
+	fields['withWhomRecentV'] = am.angerHistory.withWhomRecentV
+	fields['happenedRecentV'] = am.angerHistory.happenedRecentV
+	fields['physicalRecentV'] = am.angerHistory.physicalRecentV
+	fields['verbalRecentV'] = am.angerHistory.verbalRecentV
+	fields['threatsRecentV'] = am.angerHistory.threatsRecentV
+	fields['propertyRecentV'] = am.angerHistory.propertyRecentV
+	fields['otherRecentV'] = am.angerHistory.otherRecentV
+	fields['otherExplainRecentV'] = am.angerHistory.otherExplainRecentV
+	fields['typeWordsRecentV'] = am.angerHistory.typeWordsRecentV
+	fields['wasTense'] = am.angerHistory.wasTense
+	fields['hadRush'] = am.angerHistory.hadRush
+	fields['feltStrong'] = am.angerHistory.feltStrong
+	fields['psychoRecentV'] = am.angerHistory.psychoRecentV
+	fields['psychoWhyRecentV'] = am.angerHistory.psychoWhyRecentV
+	fields['longAgoTreatRecentVmos'] = am.angerHistory.longAgoTreatRecentVmos
+	fields['longAgoTreatRecentVyrs'] = am.angerHistory.longAgoTreatRecentVyrs
+	fields['didCompleteTreatRecentV'] = am.angerHistory.didCompleteTreatRecentV
+	fields['reasonNotCompleteRecentV'] = am.angerHistory.reasonNotCompleteRecentV
+
+	return fields
+
+def grabAmAngerHistory2(am):
+	fields = {}
+
+	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
+
+	return fields
+
+def grabAmAngerHistory3(am):
+	fields = {}
+
+	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
 
 	return fields
 
@@ -988,6 +1022,10 @@ def getAMFields(am, location):
 		fields = grabAmChildhood(am)
 	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
 		fields = grabAmAngerHistory1(am)
+	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+		fields = grabAmAngerHistory2(am)
+	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+		fields = grabAmAngerHistory3(am)
 	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
 		fields = grabAmTarget(am)
 	elif location == 'counselor/forms/AngerManagement/connections.html':

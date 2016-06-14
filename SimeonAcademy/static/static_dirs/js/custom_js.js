@@ -49,6 +49,15 @@ function handleBlankTextArea(element) {
 	}
 }
 
+function postCheckboxValue(box, target) {
+	if (box.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
+	}
+}
+
 function processCheckbox(checkbox_element) {
 	if (checkbox_element.checked === true) {
 		checkbox_element.value = 'on';
@@ -2837,6 +2846,15 @@ function continue_to_amViewForm() {
 	}
 }
 
+function initializeAllCheckBoxes(trigger, box) {
+	if (String(trigger) === 'true') {
+		box.checked = true;
+	}
+	else {
+		box.checked = false;
+	}
+}
+
 //ANGER HISTORY FUNCTIONS
 function turnOnAH1() {
 	var otherRecentV = document.getElementById('otherRecentV');
@@ -2849,6 +2867,7 @@ function turnOnAH1() {
 		explain_Label.style.opacity = '1.0';
 	}
 	else {
+		otherExplainRecentV.value = '';
 		otherExplainRecentV.style.opacity = '0.3';
 		explain_Label.style.opacity = '0.3';
 		otherExplainRecentV.disabled = true;
@@ -2912,6 +2931,8 @@ function psychoClick() {
 		psychoWhyRecentV.style.opacity = '1.0';	
 		longAgoTreatRecentVmos.style.opacity = '1.0';	
 		longAgoTreatRecentVyrs.style.opacity = '1.0';	
+
+		AHcompletedRadioActivate();
 	}
 
 	else {
@@ -2919,27 +2940,59 @@ function psychoClick() {
 		longAgoTreatRecentVmos.value = '0';
 		longAgoTreatRecentVyrs.value = '0';
 
-		didComplete.checked = true;
+		didComplete.checked = true;		
+		
+		opacityLow(psychoWhyRecentV_label);
+		opacityLow(longAgoTreatment_label);
+		opacityLow(longAgoTreatRecentVmos_label);
+		opacityLow(longAgoTreatRecentVyrs_label);
+		opacityLow(didCompleteTreatRecentV_label);
+		opacityLow(notCompleted_label);
+		opacityLow(Completed_label);
+
+		opacityLow(psychoWhyRecentV);
+		opacityLow(longAgoTreatRecentVmos);
+		opacityLow(longAgoTreatRecentVyrs);
+
+		AHcompletedRadioActivate();
+
 		psychoWhyRecentV.disabled = true;
 		longAgoTreatRecentVmos.disabled = true;
 		longAgoTreatRecentVyrs.disabled = true;
-		AHcompletedRadioActivate();
-		psychoWhyRecentV_label.style.opacity = '0.3';
-		longAgoTreatment_label.style.opacity = '0.3';
-		longAgoTreatRecentVmos_label.style.opacity = '0.3';
-		longAgoTreatRecentVyrs_label.style.opacity = '0.3';
-		didCompleteTreatRecentV_label.style.opacity = '0.3';
-		notCompleted_label.style.opacity = '0.3';
-		Completed_label.style.opacity = '0.3';
-
 		didComplete.disabled = true;
 		notCompleted.disabled = true;
-	}
-
-	
+	}	
 }
 
-function initialize_am_angerHistory() {
+function initialize_am_angerHistory(json_data) {
+	//CHECKE BOXES
+	var physicalRecentV = document.getElementById('physicalRecentV');
+	var verbalRecentV = document.getElementById('verbalRecentV');
+	var threatsRecentV = document.getElementById('threatsRecentV');
+	var propertyRecentV = document.getElementById('propertyRecentV');
+	var otherRecentV = document.getElementById('otherRecentV');
+	var wasTense = document.getElementById('wasTense');
+	var hadRush = document.getElementById('hadRush');
+	var feltStrong = document.getElementById('feltStrong');
+
+	//RADIO BUTTONS
+	var wasTreated = document.getElementById('wasTreated');
+	var notTreated = document.getElementById('notTreated');
+	var didComplete = document.getElementById('didComplete');
+	var notCompleted = document.getElementById('notCompleted');
+
+	setRadioElement(json_data.psychoRecentV, wasTreated, notTreated);
+	setRadioElement(json_data.didCompleteTreatRecentV, didComplete, notCompleted);
+
+	initializeAllCheckBoxes(json_data.physicalRecentV, physicalRecentV);
+	initializeAllCheckBoxes(json_data.verbalRecentV, verbalRecentV);
+	initializeAllCheckBoxes(json_data.threatsRecentV, threatsRecentV);
+	initializeAllCheckBoxes(json_data.propertyRecentV, propertyRecentV);
+	initializeAllCheckBoxes(json_data.otherRecentV, otherRecentV);
+	initializeAllCheckBoxes(json_data.wasTense, wasTense);
+	initializeAllCheckBoxes(json_data.hadRush, hadRush);
+	initializeAllCheckBoxes(json_data.feltStrong, feltStrong);
+
 	// AHcompletedRadioActivate();
 	turnOnAH1();
 	psychoClick();
@@ -2947,6 +3000,92 @@ function initialize_am_angerHistory() {
 
 function continue_to_am_AH2() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
+	//DYNAMIC POSTING FIELDS
+	var m_physicalRecentV = document.getElementById('m_physicalRecentV');
+	var m_verbalRecentV = document.getElementById('m_verbalRecentV');
+	var m_threatsRecentV = document.getElementById('m_threatsRecentV');
+	var m_propertyRecentV = document.getElementById('m_propertyRecentV');
+	var m_otherRecentV = document.getElementById('m_otherRecentV');
+	var m_otherExplainRecentV = document.getElementById('m_otherExplainRecentV');
+	var m_wasTense = document.getElementById('m_wasTense');
+	var m_hadRush = document.getElementById('m_hadRush');
+	var m_feltStrong = document.getElementById('m_feltStrong');
+	var m_psychoRecentV = document.getElementById('m_psychoRecentV');
+	var m_psychoWhyRecentV = document.getElementById('m_psychoWhyRecentV');
+	var m_longAgoTreatRecentVmos = document.getElementById('m_longAgoTreatRecentVmos');
+	var m_longAgoTreatRecentVyrs = document.getElementById('m_longAgoTreatRecentVyrs');
+	var m_didCompleteTreatRecentV = document.getElementById('m_didCompleteTreatRecentV');
+	var m_reasonNotCompleteRecentV = document.getElementById('m_reasonNotCompleteRecentV');
+
+	//CHECKBOXES
+	var physicalRecentV = document.getElementById('physicalRecentV');
+	var verbalRecentV = document.getElementById('verbalRecentV');
+	var threatsRecentV = document.getElementById('threatsRecentV');
+	var propertyRecentV = document.getElementById('propertyRecentV');
+	var otherRecentV = document.getElementById('otherRecentV');
+	var wasTense = document.getElementById('wasTense');
+	var hadRush = document.getElementById('hadRush');
+	var feltStrong = document.getElementById('feltStrong');
+
+	//TEXT FIELDS
+	var otherExplainRecentV = document.getElementById('otherExplainRecentV');
+	var psychoWhyRecentV = document.getElementById('psychoWhyRecentV');
+	var longAgoTreatRecentVmos = document.getElementById('longAgoTreatRecentVmos');
+	var longAgoTreatRecentVyrs = document.getElementById('longAgoTreatRecentVyrs');
+	var reasonNotCompleteRecentV = document.getElementById('reasonNotCompleteRecentV');
+
+	//DYNAMIC RADIOS
+	var didComplete = document.getElementById('didComplete');
+
+	//TRIGGERS
+	var wasTreated = document.getElementById('wasTreated');
+
+	//GET CHECKBOX VALUES AND SEND TO POST FIELDS
+	postCheckboxValue(physicalRecentV, m_physicalRecentV);
+	postCheckboxValue(verbalRecentV, m_verbalRecentV);
+	postCheckboxValue(threatsRecentV, m_threatsRecentV);
+	postCheckboxValue(propertyRecentV, m_propertyRecentV);
+	postCheckboxValue(otherRecentV, m_otherRecentV);
+	postCheckboxValue(wasTense, m_wasTense);
+	postCheckboxValue(hadRush, m_hadRush);
+	postCheckboxValue(feltStrong, m_feltStrong);
+
+	//PROCESS DYNAMIC RADIO FIELDS
+	if (otherRecentV.checked === true) {
+		m_otherExplainRecentV.value = otherExplainRecentV.value;
+	}
+	else {
+		m_otherExplainRecentV.value = 'N/A';
+	}
+
+
+	if (wasTreated.checked === true) {
+		m_psychoRecentV.value = 'True';
+		m_psychoWhyRecentV.value = psychoWhyRecentV.value;
+		m_longAgoTreatRecentVmos.value = longAgoTreatRecentVmos.value;
+		m_longAgoTreatRecentVyrs.value = longAgoTreatRecentVyrs.value;
+
+		if (didComplete.checked === true) {
+			m_didCompleteTreatRecentV.value = 'True';
+			m_reasonNotCompleteRecentV.value = 'N/A';
+		}
+		else {
+			m_didCompleteTreatRecentV.value = 'False';
+			m_reasonNotCompleteRecentV.value = reasonNotCompleteRecentV.value;
+		}
+	}
+	else {
+		m_psychoRecentV.value = 'False';
+		m_didCompleteTreatRecentV.value = 'False';
+		m_reasonNotCompleteRecentV.value = 'N/A';
+		m_psychoWhyRecentV.value = 'N/A';
+		m_longAgoTreatRecentVmos.value = '0';
+		m_longAgoTreatRecentVyrs.value = '0';
+	}
+
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();

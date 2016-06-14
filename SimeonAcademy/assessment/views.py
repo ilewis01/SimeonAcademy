@@ -673,22 +673,104 @@ def am_angerHistory2(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-			image = amSidebarImages(am, 'ah2')
-			classes = grabAmClassesCSS(am, 'ah2')
 
-			content['class'] = classes
-			content['image'] = image
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory2.html')
+			json_data = json.dumps(fields)
 
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['AM'] = am
-			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
+
+			if back == 'false':
+				#UPDATE AH1
+
+				#DYNAMIC FIELDS
+				physicalRecentV = request.POST.get('m_physicalRecentV', '')
+				verbalRecentV = request.POST.get('m_verbalRecentV', '')
+				threatsRecentV = request.POST.get('m_threatsRecentV', '')
+				propertyRecentV = request.POST.get('m_propertyRecentV', '')
+				otherRecentV = request.POST.get('m_otherRecentV', '')
+				otherExplainRecentV = request.POST.get('m_otherExplainRecentV', '')
+				wasTense = request.POST.get('m_wasTense', '')
+				hadRush = request.POST.get('m_hadRush', '')
+				feltStrong = request.POST.get('m_feltStrong', '')
+				psychoRecentV = request.POST.get('m_psychoRecentV', '')
+				psychoWhyRecentV = request.POST.get('m_psychoWhyRecentV', '')
+				longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos', '')
+				longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs', '')
+				didCompleteTreatRecentV = request.POST.get('m_didCompleteTreatRecentV', '')
+				reasonNotCompleteRecentV = request.POST.get('m_reasonNotCompleteRecentV', '')
+
+				#NORMAL FIELDS
+				recentIncidentV = request.POST.get('recentIncidentV', '')
+				recentVDate = request.POST.get('recentVDate', '')
+				recentVlocation = request.POST.get('recentVlocation', '')
+				withWhomRecentV = request.POST.get('withWhomRecentV', '')
+				happenedRecentV = request.POST.get('happenedRecentV', '')
+				typeWordsRecentV = request.POST.get('typeWordsRecentV', '')
+
+				physicalRecentV = truePythonBool(physicalRecentV)
+				verbalRecentV = truePythonBool(verbalRecentV)
+				threatsRecentV = truePythonBool(threatsRecentV)
+				propertyRecentV = truePythonBool(propertyRecentV)
+				otherRecentV = truePythonBool(otherRecentV)
+				wasTense = truePythonBool(wasTense)
+				hadRush = truePythonBool(hadRush)
+				feltStrong = truePythonBool(feltStrong)
+				psychoRecentV = truePythonBool(psychoRecentV)
+				didCompleteTreatRecentV = truePythonBool(didCompleteTreatRecentV)
+
+				date = datetime.now()
+				date = date.date()
+
+				ah1 = am.angerHistory
+
+				ah1.date_of_assessment = date
+				ah1.recentIncidentV = recentIncidentV				
+				ah1.recentVDate = recentVDate
+				ah1.recentVlocation = recentVlocation
+				ah1.withWhomRecentV = withWhomRecentV
+				ah1.happenedRecentV = happenedRecentV
+				ah1.physicalRecentV = physicalRecentV
+				ah1.verbalRecentV = verbalRecentV
+				ah1.threatsRecentV = threatsRecentV
+				ah1.propertyRecentV = propertyRecentV
+				ah1.otherRecentV = otherRecentV
+				ah1.otherExplainRecentV = otherExplainRecentV
+				ah1.typeWordsRecentV = typeWordsRecentV
+				ah1.wasTense = wasTense
+				ah1.hadRush = hadRush
+				ah1.feltStrong = feltStrong
+				ah1.psychoRecentV = psychoRecentV
+				ah1.psychoWhyRecentV = psychoWhyRecentV
+				ah1.longAgoTreatRecentVmos = longAgoTreatRecentVmos
+				ah1.longAgoTreatRecentVyrs = longAgoTreatRecentVyrs
+				ah1.didCompleteTreatRecentV = didCompleteTreatRecentV
+				ah1.reasonNotCompleteRecentV = reasonNotCompleteRecentV
+
+				ah1.save()
+				am.angerHistoryComplete = True
+				am.save()
+
+				image = amSidebarImages(am, 'ah2')
+				classes = grabAmClassesCSS(am, 'ah2')
+
+				content['class'] = classes
+				content['image'] = image
+				return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
+			else:
+				image = amSidebarImages(am, 'ah2')
+				classes = grabAmClassesCSS(am, 'ah2')
+
+				content['class'] = classes
+				content['image'] = image
+				return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
 
 @login_required(login_url='/index')
 def am_angerHistory3(request):

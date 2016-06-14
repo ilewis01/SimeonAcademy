@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory();">
+<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -240,18 +240,12 @@
                                 <input type='hidden' name='exit_type' id='exit_type' value=''>
 
                                 <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_recentIncidentV'              id='m_recentIncidentV'>
-                                <input type='hidden' value='' name='m_recentVDate'                  id='m_recentVDate'>
-                                <input type='hidden' value='' name='m_recentVlocation'              id='m_recentVlocation'>
-                                <input type='hidden' value='' name='m_withWhomRecentV'              id='m_withWhomRecentV'>
-                                <input type='hidden' value='' name='m_happenedRecentV'              id='m_happenedRecentV'>
                                 <input type='hidden' value='' name='m_physicalRecentV'              id='m_physicalRecentV'>
                                 <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
                                 <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
                                 <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
                                 <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
                                 <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
-                                <input type='hidden' value='' name='m_typeWordsRecentV'             id='m_typeWordsRecentV'>
                                 <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
                                 <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
                                 <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
@@ -274,7 +268,7 @@
 
                                     <tr>
                                         <td>
-                                            <textarea rows='3' cols='63' name='recentIncidentV' id='recentIncidentV'></textarea>
+                                            <textarea rows='3' cols='63' name='recentIncidentV' id='recentIncidentV'>{{fields.recentIncidentV}}</textarea>
                                         </td>
                                     </tr>
                                     <tr><td><div id='AH_space'></div></td></tr>
@@ -290,7 +284,7 @@
 
                                         <td>
                                             <div id='adjust-right-textField'>
-                                                <input type='text' name='recentVDate' id='recentVDate' style='width:140px;'>
+                                                <input type='text' name='recentVDate' id='recentVDate' style='width:140px;' value='{{fields.recentVDate}}'>
                                             </div>
                                         </td>
                                     </tr>
@@ -307,7 +301,7 @@
 
                                         <td>
                                             <div id='adjust-right-textField'>
-                                                <input type='text' name='recentVlocation' id='recentVlocation' style='width:136px;'>
+                                                <input type='text' name='recentVlocation' id='recentVlocation' style='width:136px;' value='{{fields.recentVlocation}}'>
                                             </div>
                                         </td>
                                     </tr>
@@ -324,7 +318,7 @@
 
                                         <td>
                                             <div id='adjust-right-textField'>
-                                                <input type='text' name='withWhomRecentV' id='withWhomRecentV' style='width:295px;'>
+                                                <input type='text' name='withWhomRecentV' id='withWhomRecentV' style='width:295px;' value='{{fields.withWhomRecentV}}'>
                                             </div>
                                         </td>
                                     </tr>
@@ -342,7 +336,7 @@
 
                                     <tr>
                                         <td>
-                                            <textarea rows='2' cols='63' name='happenedRecentV' id='happenedRecentV'></textarea>
+                                            <textarea rows='2' cols='63' name='happenedRecentV' id='happenedRecentV'>{{fields.happenedRecentV}}</textarea>
                                         </td>
                                     </tr>
                                     <tr><td><div id='AH_space'></div></td></tr>
@@ -420,7 +414,7 @@
 
                                         <td>
                                             <div style='margin-left:3px; margin-top:1px;'>
-                                                <input type='text' name='otherExplainRecentV' id='otherExplainRecentV' style='width:200px'>
+                                                <input type='text' name='otherExplainRecentV' id='otherExplainRecentV' style='width:200px' value='{{fields.otherExplainRecentV}}'>
                                             </div>
                                         </td>
                                     </tr>
@@ -441,7 +435,7 @@
 
                                     <tr>
                                         <td>
-                                            <textarea rows='3' cols='66' name='typeWordsRecentV' id='typeWordsRecentV'></textarea>
+                                            <textarea rows='3' cols='66' name='typeWordsRecentV' id='typeWordsRecentV'>{{fields.typeWordsRecentV}}</textarea>
                                         </td>
                                     </tr>
                                     <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
@@ -507,7 +501,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='psychoRecentV' id='wasTreated' onClick='javascript: psychoClick()'>
+                                                <input type='radio' name='psychoRecentV' id='wasTreated' value='True' onClick='javascript: psychoClick()'>
                                             </div>
                                         </td>
                                         <td>
@@ -516,7 +510,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='psychoRecentV' id='notTreated' checked onClick='javascript: psychoClick()'>
+                                                <input type='radio' name='psychoRecentV' id='notTreated' value='False' checked onClick='javascript: psychoClick()'>
                                             </div>
                                         </td>
                                         <td>
@@ -539,7 +533,7 @@
                                         <tr>
                                             <td>
                                                 <div>
-                                                    <textarea name='psychoWhyRecentV' id='psychoWhyRecentV' rows='2' cols='59'></textarea>
+                                                    <textarea name='psychoWhyRecentV' id='psychoWhyRecentV' rows='2' cols='59'>{{fields.psychoWhyRecentV}}</textarea>
                                                 </div>
                                             </td>
                                         </tr>
@@ -560,7 +554,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' style='width:40px;'>
+                                                <input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' style='width:40px;' value='{{fields.longAgoTreatRecentVmos}}'>
                                             </td>
                                             <td>
                                                 <div id='numberLabel'>
@@ -571,7 +565,7 @@
                                             </td>
 
                                             <td>
-                                                <input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' style='width:40px;'>
+                                                <input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' style='width:40px;' value='{{fields.longAgoTreatRecentVyrs}}'>
                                             </td>
                                             <td>
                                                 <div id='numberLabel'>
@@ -596,7 +590,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='didCompleteTreatRecentV' id='didComplete' checked onClick='javascript: AHcompletedRadioActivate()'>
+                                                    <input type='radio' name='didCompleteTreatRecentV' id='didComplete' value='True' checked onClick='javascript: AHcompletedRadioActivate()'>
                                                 </div>
                                             </td>
                                             <td>
@@ -605,7 +599,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='didCompleteTreatRecentV' id='notCompleted' onClick='javascript: AHcompletedRadioActivate()'>
+                                                    <input type='radio' name='didCompleteTreatRecentV' id='notCompleted' value='False' onClick='javascript: AHcompletedRadioActivate()'>
                                                 </div>
                                             </td>
                                             <td>
@@ -623,7 +617,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='59' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'></textarea>
+                                                <textarea rows='2' cols='59' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'>{{fields.reasonNotCompleteRecentV}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
