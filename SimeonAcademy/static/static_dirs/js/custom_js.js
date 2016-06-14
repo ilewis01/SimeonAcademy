@@ -3217,7 +3217,20 @@ function activateAH2SubSuicide() { //lowest level radio button
 }
 
 function planRadioAH2() { //mid-sub level radio for: (do you have a plan?)
-	var doesHavePlan = document.getElementById('doesHavePlan');
+	// var doesHavePlan = document.getElementById('doesHavePlan');
+	// var suicideTodayExplainRecentV_label = document.getElementById('suicideTodayExplainRecentV_label');
+	// var suicideTodayExplainRecentV = document.getElementById('suicideTodayExplainRecentV');
+
+	// if (doesHavePlan.checked === true) {
+	// 	suicideTodayExplainRecentV.disabled = false;
+	// 	opacityHigh(suicideTodayExplainRecentV_label);
+	// 	opacityHigh(suicideTodayExplainRecentV);
+	// }
+	// else {
+	// 	opacityLow(suicideTodayExplainRecentV_label);
+	// 	opacityLow(suicideTodayExplainRecentV);
+	// 	suicideTodayExplainRecentV.disabled = true;
+	// }
 
 	//labels
 	var suicideTodayExplainRecentV_label = document.getElementById('suicideTodayExplainRecentV_label');
@@ -3232,37 +3245,37 @@ function planRadioAH2() { //mid-sub level radio for: (do you have a plan?)
 
 	if (doesHavePlan.checked === true) {
 		suicideTodayExplainRecentV_label.style.opacity = '1.0';
-		haveAttempted_label.style.opacity = '1.0';
-		haveNotAttempted_label.style.opacity = '1.0';
-		hasAttemptedSuicide_label.style.opacity = '1.0';
+		// haveAttempted_label.style.opacity = '1.0';
+		// haveNotAttempted_label.style.opacity = '1.0';
+		// hasAttemptedSuicide_label.style.opacity = '1.0';
 
 		suicideTodayExplainRecentV.disabled = false;
-		haveAttempted.disabled = false;
-		haveNotAttempted.disabled = false;
+		// haveAttempted.disabled = false;
+		// haveNotAttempted.disabled = false;
 
 		suicideTodayExplainRecentV.style.opacity = '1.0';
-		haveAttempted.style.opacity = '1.0';
-		haveNotAttempted.style.opacity = '1.0';
+		// haveAttempted.style.opacity = '1.0';
+		// haveNotAttempted.style.opacity = '1.0';
 	}
 
 	else {
-		haveNotAttempted.checked = true;
-		activateAH2SubSuicide()
+		// haveNotAttempted.checked = true;
+		// activateAH2SubSuicide()
 
 		suicideTodayExplainRecentV_label.style.opacity = '0.3';
-		haveAttempted_label.style.opacity = '0.3';
-		haveNotAttempted_label.style.opacity = '0.3';
-		hasAttemptedSuicide_label.style.opacity = '0.3';
+		// haveAttempted_label.style.opacity = '0.3';
+		// haveNotAttempted_label.style.opacity = '0.3';
+		// hasAttemptedSuicide_label.style.opacity = '0.3';
 
 		suicideTodayExplainRecentV.style.opacity = '0.3';
-		haveAttempted.style.opacity = '0.3';
-		haveNotAttempted.style.opacity = '0.3';
+		// haveAttempted.style.opacity = '0.3';
+		// haveNotAttempted.style.opacity = '0.3';
 
 		suicideTodayExplainRecentV.value = '';
 
 		suicideTodayExplainRecentV.disabled = true;
-		haveAttempted.disabled = true;
-		haveNotAttempted.disabled = true;
+		// haveAttempted.disabled = true;
+		// haveNotAttempted.disabled = true;
 	}
 
 }
@@ -3320,10 +3333,19 @@ function suicide30recent() { //top level radio button
 	var isSuicidalToday = document.getElementById('isSuicidalToday');
 	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
 
+	var hasAttemptedSuicide_label = document.getElementById('hasAttemptedSuicide_label');
+	var haveAttempted_label = document.getElementById('haveAttempted_label');
+	var haveNotAttempted_label = document.getElementById('haveNotAttempted_label');
+	var haveAttempted = document.getElementById('haveAttempted');
+	var haveNotAttempted = document.getElementById('haveNotAttempted');
+
+
 	if (suicideThoughts.checked === true) {
 		suicide30ExplainRecentV.disabled = false;
 		isSuicidalToday.disabled = false;
 		isNotSuicidalToday.disabled = false;
+		haveAttempted.disabled = false;
+		haveNotAttempted.disabled = false;
 
 		suicide30ExplainRecentV_label.style.opacity = '1.0';
 		suicideTodayRecentV_label.style.opacity = '1.0';
@@ -3333,11 +3355,28 @@ function suicide30recent() { //top level radio button
 		suicide30ExplainRecentV.style.opacity = '1.0';
 		isSuicidalToday.style.opacity = '1.0';
 		isNotSuicidalToday.style.opacity = '1.0';
+
+		opacityHigh(hasAttemptedSuicide_label);
+		opacityHigh(haveAttempted_label);
+		opacityHigh(haveNotAttempted_label);
+		opacityHigh(haveAttempted);
+		opacityHigh(haveNotAttempted);
 	}
 
 	else {
 		isNotSuicidalToday.checked = true;
+		haveNotAttempted.checked = true;
 		midLevelSubAH2();
+		activateAH2SubSuicide();
+
+		opacityLow(hasAttemptedSuicide_label);
+		opacityLow(haveAttempted_label);
+		opacityLow(haveNotAttempted_label);
+		opacityLow(haveAttempted);
+		opacityLow(haveNotAttempted);
+
+		haveAttempted.disabled = true;
+		haveNotAttempted.disabled = true;
 
 		suicide30ExplainRecentV_label.style.opacity = '0.3';
 		suicideTodayRecentV_label.style.opacity = '0.3';
@@ -3356,7 +3395,35 @@ function suicide30recent() { //top level radio button
 	}
 }
 
-function initialize_am_angerHistory2() {
+function initialize_am_angerHistory2(json_data) {
+	//RADIO BUTTONS
+	var hasExperience = document.getElementById('hasExperience');
+	var noExperience = document.getElementById('noExperience');
+	var hasTension = document.getElementById('hasTension');
+	var noTension = document.getElementById('noTension');
+	var hasHallu = document.getElementById('hasHallu');
+	var noHallu = document.getElementById('noHallu');
+	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
+	var noTroubleAH2 = document.getElementById('noTroubleAH2');	
+	var canControl = document.getElementById('canControl');
+	var canNotControl = document.getElementById('canNotControl');
+	var suicideThoughts = document.getElementById('suicideThoughts');
+	var noSuicideThoughts = document.getElementById('noSuicideThoughts');
+	var isSuicidalToday = document.getElementById('isSuicidalToday');
+	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
+	var doesHavePlan = document.getElementById('doesHavePlan');
+	var doesNotHavePlan = document.getElementById('doesNotHavePlan');
+	var haveAttempted = document.getElementById('haveAttempted');
+	var haveNotAttempted = document.getElementById('haveNotAttempted');
+
+	setRadioElement(json_data.depress30RecentV, hasExperience, noExperience);
+	setRadioElement(json_data.anxietyRecentV, hasTension, noTension);
+	setRadioElement(json_data.hallucinationRecentV, hasHallu, noHallu);
+	setRadioElement(json_data.understandingRecentV, hasTroubleAH2, noTroubleAH2);
+	setRadioElement(json_data.troubleControlRecentV, canControl, canNotControl);
+
+
+
 	explainDep();
 	tensionRadio();
 	halluRadio();

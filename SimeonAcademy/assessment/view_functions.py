@@ -999,15 +999,30 @@ def grabAmAngerHistory1(am):
 
 def grabAmAngerHistory2(am):
 	fields = {}
-
-	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
-
+	fields['depress30RecentV'] = am.angerHistory2.depress30RecentV
+	fields['depress30ExplainRecentV'] = am.angerHistory2.depress30ExplainRecentV
+	fields['anxietyRecentV'] = am.angerHistory2.anxietyRecentV
+	fields['anxietyExplainRecentV'] = am.angerHistory2.anxietyExplainRecentV
+	fields['hallucinationRecentV'] = am.angerHistory2.hallucinationRecentV
+	fields['hallucinationLastV'] = am.angerHistory2.hallucinationLastV
+	fields['understandingRecentV'] = am.angerHistory2.understandingRecentV
+	fields['understandingExplainRecentV'] = am.angerHistory2.understandingExplainRecentV
+	fields['troubleControlRecentV'] = am.angerHistory2.troubleControlRecentV
+	fields['lastTimeTroubleControl'] = am.angerHistory2.lastTimeTroubleControl
+	fields['controlTrigger'] = am.angerHistory2.controlTrigger
+	fields['suicide30RecentV'] = am.angerHistory2.suicide30RecentV
+	fields['suicide30ExplainRecentV'] = am.angerHistory2.suicide30ExplainRecentV
+	fields['suicideTodayRecentV'] = am.angerHistory2.suicideTodayRecentV
+	fields['suicideTodayPlanRecentV'] = am.angerHistory2.suicideTodayPlanRecentV
+	fields['suicideTodayExplainRecentV'] = am.angerHistory2.suicideTodayExplainRecentV
+	fields['hasAttemptedSuicide'] = am.angerHistory2.hasAttemptedSuicide
+	fields['hasAttemptedExplainRecentV'] = am.angerHistory2.hasAttemptedExplainRecentV
 	return fields
 
 def grabAmAngerHistory3(am):
 	fields = {}
 
-	fields['recentIncidentV'] = am.angerHistory.recentIncidentV
+	fields['recentIncidentV'] = am.angerHistory3.recentIncidentV
 
 	return fields
 
@@ -1022,9 +1037,9 @@ def getAMFields(am, location):
 		fields = grabAmChildhood(am)
 	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
 		fields = grabAmAngerHistory1(am)
-	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+	elif location == 'counselor/forms/AngerManagement/angerHistory2.html':
 		fields = grabAmAngerHistory2(am)
-	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+	elif location == 'counselor/forms/AngerManagement/angerHistory3.html':
 		fields = grabAmAngerHistory3(am)
 	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
 		fields = grabAmTarget(am)

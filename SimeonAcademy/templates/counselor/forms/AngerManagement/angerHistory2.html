@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory2();">
+<body class="gradient-white" onLoad="javascript: initialize_am_angerHistory2({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -241,27 +241,25 @@
                                 <input type='hidden' name='exit_type' id='exit_type' value=''>
 
                                 <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_recentIncidentV'              id='m_recentIncidentV'>
-                                <input type='hidden' value='' name='m_recentVDate'                  id='m_recentVDate'>
-                                <input type='hidden' value='' name='m_recentVlocation'              id='m_recentVlocation'>
-                                <input type='hidden' value='' name='m_withWhomRecentV'              id='m_withWhomRecentV'>
-                                <input type='hidden' value='' name='m_happenedRecentV'              id='m_happenedRecentV'>
-                                <input type='hidden' value='' name='m_physicalRecentV'              id='m_physicalRecentV'>
-                                <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
-                                <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
-                                <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
-                                <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
-                                <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
-                                <input type='hidden' value='' name='m_typeWordsRecentV'             id='m_typeWordsRecentV'>
-                                <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
-                                <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
-                                <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
-                                <input type='hidden' value='' name='m_psychoRecentV'                id='m_psychoRecentV'>
-                                <input type='hidden' value='' name='m_psychoWhyRecentV'             id='m_psychoWhyRecentV'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVmos'       id='m_longAgoTreatRecentVmos'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVyrs'       id='m_longAgoTreatRecentVyrs'>
-                                <input type='hidden' value='' name='m_didCompleteTreatRecentV'      id='m_didCompleteTreatRecentV'>
-                                <input type='hidden' value='' name='m_reasonNotCompleteRecentV'     id='m_reasonNotCompleteRecentV'>
+                                <input type='hidden' value='' name='m_depress30RecentV' id='m_depress30RecentV'>
+                                <input type='hidden' value='' name='m_depress30ExplainRecentV' id='m_depress30ExplainRecentV'>
+                                <input type='hidden' value='' name='m_anxietyRecentV' id='m_anxietyRecentV'>
+                                <input type='hidden' value='' name='m_anxietyExplainRecentV' id='m_anxietyExplainRecentV'>
+                                <input type='hidden' value='' name='m_hallucinationRecentV' id='m_hallucinationRecentV'>
+                                <input type='hidden' value='' name='m_hallucinationLastV' id='m_hallucinationLastV'>
+                                <input type='hidden' value='' name='m_understandingRecentV' id='m_understandingRecentV'>
+                                <input type='hidden' value='' name='m_understandingExplainRecentV' id='m_understandingExplainRecentV'>
+                                <input type='hidden' value='' name='m_troubleControlRecentV' id='m_troubleControlRecentV'>
+                                <input type='hidden' value='' name='m_lastTimeTroubleControl' id='m_lastTimeTroubleControl'>
+                                <input type='hidden' value='' name='m_controlTrigger' id='m_controlTrigger'>
+                                <input type='hidden' value='' name='m_suicide30RecentV' id='m_suicide30RecentV'>
+                                <input type='hidden' value='' name='m_suicide30ExplainRecentV' id='m_suicide30ExplainRecentV'>
+                                <input type='hidden' value='' name='m_suicideTodayRecentV' id='m_suicideTodayRecentV'>
+                                <input type='hidden' value='' name='m_suicideTodayPlanRecentV' id='m_suicideTodayPlanRecentV'>
+                                <input type='hidden' value='' name='m_suicideTodayExplainRecentV' id='m_suicideTodayExplainRecentV'>
+                                <input type='hidden' value='' name='m_hasAttemptedSuicide' id='m_hasAttemptedSuicide'>
+                                <input type='hidden' value='' name='m_hasAttemptedExplainRecentV' id='m_hasAttemptedExplainRecentV'>
+                                
 
                                 <!-- ____________________________LEFT SIDE_______________________________ -->
                                 <table>
@@ -289,7 +287,7 @@
                                         </td>
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='depress30RecentV' id='hasExperience' onClick='javascript: explainDep();'>
+                                                <input type='radio' name='depress30RecentV' id='hasExperience' onClick='javascript: explainDep();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -298,7 +296,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='depress30RecentV' id='noExperience' onClick='javascript: explainDep();' checked>
+                                                <input type='radio' name='depress30RecentV' id='noExperience' onClick='javascript: explainDep();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -319,7 +317,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='depress30ExplainRecentV' id='depress30ExplainRecentV'></textarea>
+                                                <textarea rows='2' cols='60' name='depress30ExplainRecentV' id='depress30ExplainRecentV'>{{fields.depress30ExplainRecentV}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
@@ -351,7 +349,7 @@
                                         </td>
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='anxietyRecentV' id='hasTension' onClick='javascript: tensionRadio();'>
+                                                <input type='radio' name='anxietyRecentV' id='hasTension' onClick='javascript: tensionRadio();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -360,7 +358,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='anxietyRecentV' id='noTension' onClick='javascript: tensionRadio();' checked>
+                                                <input type='radio' name='anxietyRecentV' id='noTension' onClick='javascript: tensionRadio();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -381,7 +379,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='anxietyExplainRecentV' id='anxietyExplainRecentV'></textarea>
+                                                <textarea rows='2' cols='60' name='anxietyExplainRecentV' id='anxietyExplainRecentV'>{{fields.anxietyExplainRecentV}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
@@ -407,7 +405,7 @@
                                         </td>
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='hallucinationRecentV' id='hasHallu' onClick='javascript: halluRadio();'>
+                                                <input type='radio' name='hallucinationRecentV' id='hasHallu' onClick='javascript: halluRadio();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -416,7 +414,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='hallucinationRecentV' id='noHallu' onClick='javascript: halluRadio();' checked>
+                                                <input type='radio' name='hallucinationRecentV' id='noHallu' onClick='javascript: halluRadio();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -437,7 +435,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='hallucinationLastV' id='hallucinationLastV'></textarea>
+                                                <textarea rows='2' cols='60' name='hallucinationLastV' id='hallucinationLastV'>{{fields.hallucinationLastV}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
@@ -464,7 +462,7 @@
                                         <td>
                                             <div id='psychoRadio'>
                                                 <input type='radio' name='understandingRecentV' id='hasTroubleAH2' onClick='javascript:
-                                                troubleRadioAH2();'>
+                                                troubleRadioAH2();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -473,7 +471,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='understandingRecentV' id='noTroubleAH2' onClick='javascript: troubleRadioAH2();' checked>
+                                                <input type='radio' name='understandingRecentV' id='noTroubleAH2' onClick='javascript: troubleRadioAH2();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -494,7 +492,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='understandingExplainRecentV' id='understandingExplainRecentV'></textarea>
+                                                <textarea rows='2' cols='60' name='understandingExplainRecentV' id='understandingExplainRecentV'>{{fields.understandingExplainRecentV}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
@@ -524,7 +522,7 @@
                                         <td>
                                             <div id='psychoRadio'>
                                                 <input type='radio' name='troubleControlRecentV' id='canControl' onClick='javascript:
-                                                troubleControlAH2();'>
+                                                troubleControlAH2();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -533,7 +531,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='troubleControlRecentV' id='canNotControl' onClick='javascript: troubleControlAH2();' checked>
+                                                <input type='radio' name='troubleControlRecentV' id='canNotControl' onClick='javascript: troubleControlAH2();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -554,7 +552,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='lastTimeTroubleControl' id='lastTimeTroubleControl'></textarea>
+                                                <textarea rows='2' cols='60' name='lastTimeTroubleControl' id='lastTimeTroubleControl'>{{fields.lastTimeTroubleControl}}</textarea>
                                             </td>
                                         </tr>
                                         <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
@@ -571,7 +569,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='controlTrigger' id='controlTrigger'></textarea>
+                                                <textarea rows='2' cols='60' name='controlTrigger' id='controlTrigger'>{{fields.controlTrigger}}</textarea>
                                             </td>
                                         </tr>
                                     </table>
@@ -598,7 +596,7 @@
                                         <td>
                                             <div id='psychoRadio'>
                                                 <input type='radio' name='suicide30RecentV' id='suicideThoughts' onClick='javascript:
-                                                suicide30recent();'>
+                                                suicide30recent();' value='True'>
                                             </div>
                                         </td>
                                         <td>
@@ -607,7 +605,7 @@
 
                                         <td>
                                             <div id='psychoRadio'>
-                                                <input type='radio' name='suicide30RecentV' id='noSuicideThoughts' onClick='javascript: suicide30recent();' checked>
+                                                <input type='radio' name='suicide30RecentV' id='noSuicideThoughts' onClick='javascript: suicide30recent();' checked value='False'>
                                             </div>
                                         </td>
                                         <td>
@@ -628,7 +626,7 @@
 
                                         <tr>
                                             <td>
-                                                <textarea rows='2' cols='60' name='suicide30ExplainRecentV' id='suicide30ExplainRecentV'></textarea>
+                                                <textarea rows='2' cols='60' name='suicide30ExplainRecentV' id='suicide30ExplainRecentV'>{{fields.suicide30ExplainRecentV}}</textarea>
                                             </td>
                                         </tr>
                                         <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
@@ -646,7 +644,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='suicideTodayRecentV' id='isSuicidalToday' onClick='javascript: midLevelSubAH2();'>
+                                                    <input type='radio' name='suicideTodayRecentV' id='isSuicidalToday' onClick='javascript: midLevelSubAH2();' value='True'>
                                                 </div>
                                             </td>
                                             <td>
@@ -655,7 +653,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='suicideTodayRecentV' id='isNotSuicidalToday' onClick='javascript: midLevelSubAH2();' checked>
+                                                    <input type='radio' name='suicideTodayRecentV' id='isNotSuicidalToday' onClick='javascript: midLevelSubAH2();' checked value='False'>
                                                 </div>
                                             </td>
                                             <td>
@@ -677,7 +675,7 @@
 
                                                 <td>
                                                     <div id='psychoRadio'>
-                                                        <input type='radio' name='suicideTodayPlanRecentV' id='doesHavePlan' onClick='javascript: planRadioAH2();'>
+                                                        <input type='radio' name='suicideTodayPlanRecentV' id='doesHavePlan' onClick='javascript: planRadioAH2();' value='True'>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -686,7 +684,7 @@
 
                                                 <td>
                                                     <div id='psychoRadio'>
-                                                        <input type='radio' name='suicideTodayPlanRecentV' id='doesNotHavePlan' onClick='javascript: planRadioAH2();' checked>
+                                                        <input type='radio' name='suicideTodayPlanRecentV' id='doesNotHavePlan' onClick='javascript: planRadioAH2();' checked value='False'>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -708,7 +706,7 @@
 
                                             <tr>
                                                 <td>
-                                                    <textarea rows='2' cols='53' name='suicideTodayExplainRecentV' id='suicideTodayExplainRecentV'></textarea>
+                                                    <textarea rows='2' cols='53' name='suicideTodayExplainRecentV' id='suicideTodayExplainRecentV'>{{fields.suicideTodayExplainRecentV}}</textarea>
                                                 </td>
                                             </tr>
                                         </table>
@@ -728,7 +726,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='hasAttemptedSuicide' id='haveAttempted' onClick='javascript: activateAH2SubSuicide()'>
+                                                    <input type='radio' name='hasAttemptedSuicide' id='haveAttempted' onClick='javascript: activateAH2SubSuicide()' value='True'>
                                                 </div>
                                             </td>
 
@@ -738,7 +736,7 @@
 
                                             <td>
                                                 <div id='psychoRadio'>
-                                                    <input type='radio' name='hasAttemptedSuicide' id='haveNotAttempted' onClick='javascript: activateAH2SubSuicide()' checked>
+                                                    <input type='radio' name='hasAttemptedSuicide' id='haveNotAttempted' onClick='javascript: activateAH2SubSuicide()' checked value='False'>
                                                 </div>
                                             </td>
 
@@ -762,7 +760,7 @@
 
                                             <tr>
                                                 <td>
-                                                    <textarea rows='2' cols='53' name='hasAttemptedExplainRecentV' id='hasAttemptedExplainRecentV'></textarea>
+                                                    <textarea rows='2' cols='53' name='hasAttemptedExplainRecentV' id='hasAttemptedExplainRecentV'>{{fields.hasAttemptedExplainRecentV}}</textarea>
                                                 </td>
                                             </tr>
                                         </table>
