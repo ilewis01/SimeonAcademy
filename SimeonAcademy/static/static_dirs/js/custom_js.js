@@ -27,6 +27,15 @@ function set_radio_buttons() {
 	client_ID.style.opacity = '0.5';
 }
 
+function processDynamicTextPostValue(trigger, element, m_element) {
+	if (trigger.checked === true) {
+		m_element.value = element.value;
+	}
+	else {
+		m_element.value = 'N/A';
+	}
+}
+
 function isBlankField(element) {
 	var isBlank = false;
 	if (element.value === '') {
@@ -125,6 +134,15 @@ function postDynamicFields(trigger, field, m_target) {
 	}
 	else {
 		m_target.value = 'N/A';
+	}
+}
+
+function postDynamicRadioButtons(radio, target) {
+	if (radio.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
 	}
 }
 
@@ -3216,22 +3234,7 @@ function activateAH2SubSuicide() { //lowest level radio button
 	}
 }
 
-function planRadioAH2() { //mid-sub level radio for: (do you have a plan?)
-	// var doesHavePlan = document.getElementById('doesHavePlan');
-	// var suicideTodayExplainRecentV_label = document.getElementById('suicideTodayExplainRecentV_label');
-	// var suicideTodayExplainRecentV = document.getElementById('suicideTodayExplainRecentV');
-
-	// if (doesHavePlan.checked === true) {
-	// 	suicideTodayExplainRecentV.disabled = false;
-	// 	opacityHigh(suicideTodayExplainRecentV_label);
-	// 	opacityHigh(suicideTodayExplainRecentV);
-	// }
-	// else {
-	// 	opacityLow(suicideTodayExplainRecentV_label);
-	// 	opacityLow(suicideTodayExplainRecentV);
-	// 	suicideTodayExplainRecentV.disabled = true;
-	// }
-
+function planRadioAH2() { 
 	//labels
 	var suicideTodayExplainRecentV_label = document.getElementById('suicideTodayExplainRecentV_label');
 	var haveAttempted_label = document.getElementById('haveAttempted_label');
@@ -3245,37 +3248,15 @@ function planRadioAH2() { //mid-sub level radio for: (do you have a plan?)
 
 	if (doesHavePlan.checked === true) {
 		suicideTodayExplainRecentV_label.style.opacity = '1.0';
-		// haveAttempted_label.style.opacity = '1.0';
-		// haveNotAttempted_label.style.opacity = '1.0';
-		// hasAttemptedSuicide_label.style.opacity = '1.0';
-
 		suicideTodayExplainRecentV.disabled = false;
-		// haveAttempted.disabled = false;
-		// haveNotAttempted.disabled = false;
-
 		suicideTodayExplainRecentV.style.opacity = '1.0';
-		// haveAttempted.style.opacity = '1.0';
-		// haveNotAttempted.style.opacity = '1.0';
 	}
 
 	else {
-		// haveNotAttempted.checked = true;
-		// activateAH2SubSuicide()
-
 		suicideTodayExplainRecentV_label.style.opacity = '0.3';
-		// haveAttempted_label.style.opacity = '0.3';
-		// haveNotAttempted_label.style.opacity = '0.3';
-		// hasAttemptedSuicide_label.style.opacity = '0.3';
-
 		suicideTodayExplainRecentV.style.opacity = '0.3';
-		// haveAttempted.style.opacity = '0.3';
-		// haveNotAttempted.style.opacity = '0.3';
-
 		suicideTodayExplainRecentV.value = '';
-
 		suicideTodayExplainRecentV.disabled = true;
-		// haveAttempted.disabled = true;
-		// haveNotAttempted.disabled = true;
 	}
 
 }
@@ -3393,6 +3374,8 @@ function suicide30recent() { //top level radio button
 		isSuicidalToday.disabled = true;
 		isNotSuicidalToday.disabled = true;
 	}
+
+	activateAH2SubSuicide();
 }
 
 function initialize_am_angerHistory2(json_data) {
@@ -3421,7 +3404,10 @@ function initialize_am_angerHistory2(json_data) {
 	setRadioElement(json_data.hallucinationRecentV, hasHallu, noHallu);
 	setRadioElement(json_data.understandingRecentV, hasTroubleAH2, noTroubleAH2);
 	setRadioElement(json_data.troubleControlRecentV, canControl, canNotControl);
-
+	setRadioElement(json_data.suicide30RecentV, suicideThoughts, noSuicideThoughts);
+	setRadioElement(json_data.suicideTodayRecentV, isSuicidalToday, isNotSuicidalToday);
+	setRadioElement(json_data.suicideTodayPlanRecentV, doesHavePlan, doesNotHavePlan);
+	setRadioElement(json_data.hasAttemptedSuicide, haveAttempted, haveNotAttempted);
 
 
 	explainDep();
@@ -3432,8 +3418,117 @@ function initialize_am_angerHistory2(json_data) {
 	suicide30recent();
 }
 
+function proceed_to_section3() {
+	var proceed = true;
+	var back = document.getElementById('back_btn');
+
+	//M_ELEMENTS
+	var m_depress30RecentV = document.getElementById('m_depress30RecentV');
+	var m_depress30ExplainRecentV = document.getElementById('m_depress30ExplainRecentV');
+	var m_anxietyRecentV = document.getElementById('m_anxietyRecentV');
+	var m_anxietyExplainRecentV = document.getElementById('m_anxietyExplainRecentV');
+	var m_hallucinationRecentV = document.getElementById('m_hallucinationRecentV');
+	var m_hallucinationLastV = document.getElementById('m_hallucinationLastV');
+	var m_understandingRecentV = document.getElementById('m_understandingRecentV');
+	var m_understandingExplainRecentV = document.getElementById('m_understandingExplainRecentV');
+	var m_troubleControlRecentV = document.getElementById('m_troubleControlRecentV');
+	var m_lastTimeTroubleControl = document.getElementById('m_lastTimeTroubleControl');
+	var m_controlTrigger = document.getElementById('m_controlTrigger');
+	var m_suicide30ExplainRecentV = document.getElementById('m_suicide30ExplainRecentV');
+	var m_suicideTodayRecentV = document.getElementById('m_suicideTodayRecentV');
+	var m_suicideTodayPlanRecentV = document.getElementById('m_suicideTodayPlanRecentV');
+	var m_suicideTodayExplainRecentV = document.getElementById('m_suicideTodayExplainRecentV');
+	var m_hasAttemptedSuicide = document.getElementById('m_hasAttemptedSuicide');
+	var m_hasAttemptedExplainRecentV = document.getElementById('m_hasAttemptedExplainRecentV');
+
+	//TRIGGERS
+	var hasExperience = document.getElementById('hasExperience');
+	var hasTension = document.getElementById('hasTension');
+	var hasHallu = document.getElementById('hasHallu');
+	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
+	var canControl = document.getElementById('canControl');
+	var suicideThoughts = document.getElementById('suicideThoughts');
+
+	//SUB TRIGGERS
+	var isSuicidalToday = document.getElementById('isSuicidalToday');
+	var doesHavePlan = document.getElementById('doesHavePlan');
+	var haveAttempted = document.getElementById('haveAttempted');
+
+	//NORMAL DYNAMIC TEXT FIELDS
+	var depress30ExplainRecentV = document.getElementById('depress30ExplainRecentV');
+	var anxietyExplainRecentV = document.getElementById('anxietyExplainRecentV');
+	var hallucinationLastV = document.getElementById('hallucinationLastV');
+	var understandingExplainRecentV = document.getElementById('understandingExplainRecentV');
+	var lastTimeTroubleControl = document.getElementById('lastTimeTroubleControl');
+	var controlTrigger = document.getElementById('controlTrigger');
+	var suicide30ExplainRecentV = document.getElementById('suicide30ExplainRecentV');
+
+	processDynamicTextPostValue(hasExperience, depress30ExplainRecentV, m_depress30ExplainRecentV);
+	processDynamicTextPostValue(hasTension, anxietyExplainRecentV, m_anxietyExplainRecentV);
+	processDynamicTextPostValue(hasHallu, hallucinationLastV, m_hallucinationLastV);
+	processDynamicTextPostValue(hasTroubleAH2, understandingExplainRecentV, m_understandingExplainRecentV);
+	processDynamicTextPostValue(canControl, lastTimeTroubleControl, m_lastTimeTroubleControl);
+	processDynamicTextPostValue(canControl, controlTrigger, m_controlTrigger);
+	processDynamicTextPostValue(suicideThoughts, suicide30ExplainRecentV, m_suicide30ExplainRecentV);
+
+	postDynamicRadioButtons(hasExperience, m_depress30RecentV);
+	postDynamicRadioButtons(hasTension, m_anxietyRecentV);
+	postDynamicRadioButtons(hasHallu, m_hallucinationRecentV);
+	postDynamicRadioButtons(hasTroubleAH2, m_understandingRecentV);
+	postDynamicRadioButtons(canControl, m_troubleControlRecentV);
+	postDynamicRadioButtons(suicideThoughts, m_suicide30RecentV);
+
+	if (suicideThoughts.checked === true) {
+		postDynamicRadioButtons(isSuicidalToday, m_suicideTodayRecentV);
+		postDynamicRadioButtons(haveAttempted, m_hasAttemptedSuicide);
+		m_suicide30ExplainRecentV.value = suicide30ExplainRecentV.value;
+
+		if (isSuicidalToday.checked === true) {
+			postDynamicRadioButtons(doesHavePlan, m_suicideTodayPlanRecentV);
+			m_suicideTodayExplainRecentV.value = suicideTodayExplainRecentV.value;
+		}
+		else {
+			m_suicideTodayPlanRecentV.value = 'False';
+			m_suicideTodayExplainRecentV.value = 'N/A';
+		}
+
+		if (doesHavePlan.checked === true) {
+			m_suicideTodayExplainRecentV.value = suicideTodayExplainRecentV.value;
+		}
+		else {
+			m_suicideTodayExplainRecentV.value = 'N/A';
+		}
+
+		if (haveAttempted.checked === true) {
+			m_hasAttemptedExplainRecentV.value = hasAttemptedExplainRecentV.value;
+		}
+		else {
+			m_hasAttemptedExplainRecentV.value = 'N/A';
+		}
+	}
+
+	else {
+		m_suicide30ExplainRecentV.value = 'N/A';
+		m_suicideTodayExplainRecentV.value = 'N/A';
+		m_hasAttemptedExplainRecentV.value = 'N/A';
+
+		m_suicideTodayRecentV.value = 'False';
+		m_suicideTodayPlanRecentV.value = 'False';
+		m_hasAttemptedSuicide.value = 'False';
+	}
+
+	back.value = 'false';
+
+	if (proceed === true) {
+		document.getElementById('am_demo').submit();
+	}
+}
+
 function proceed_to_connections() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
@@ -3441,13 +3536,7 @@ function proceed_to_connections() {
 }
 
 //AM ANGER HISTORY SECTION III FUNCTIONS
-function proceed_to_section3() {
-	var proceed = true;
 
-	if (proceed === true) {
-		document.getElementById('am_demo').submit();
-	}
-}
 
 //DELETE THE ANGER MANAGEMENT FORM
 function AmDeleted() {

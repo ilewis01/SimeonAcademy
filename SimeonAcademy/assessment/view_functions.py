@@ -1022,7 +1022,7 @@ def grabAmAngerHistory2(am):
 def grabAmAngerHistory3(am):
 	fields = {}
 
-	fields['recentIncidentV'] = am.angerHistory3.recentIncidentV
+	fields['homicidal'] = am.angerHistory3.homicidal
 
 	return fields
 

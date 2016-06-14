@@ -789,20 +789,87 @@ def am_angerHistory3(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory3.html')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['AM'] = am
+			content['fields'] = fields
+			content['json_data'] = json_data
+
+			print "Back: " + str(back)
+
+			if back == 'false':
+				depress30RecentV = request.POST.get('m_depress30RecentV', '')
+				depress30ExplainRecentV = request.POST.get('m_depress30ExplainRecentV', '')
+				anxietyRecentV = request.POST.get('m_anxietyRecentV', '')
+				anxietyExplainRecentV = request.POST.get('m_anxietyExplainRecentV', '')
+				hallucinationRecentV = request.POST.get('m_hallucinationRecentV', '')
+				hallucinationLastV = request.POST.get('m_hallucinationLastV', '')
+				understandingRecentV = request.POST.get('m_understandingRecentV', '')
+				understandingExplainRecentV = request.POST.get('m_understandingExplainRecentV', '')
+				troubleControlRecentV = request.POST.get('m_troubleControlRecentV', '')
+				lastTimeTroubleControl = request.POST.get('m_lastTimeTroubleControl', '')
+				controlTrigger = request.POST.get('m_controlTrigger', '')
+				suicide30RecentV = request.POST.get('m_suicide30RecentV', '')
+				suicide30ExplainRecentV = request.POST.get('m_suicide30ExplainRecentV', '')
+				suicideTodayRecentV = request.POST.get('m_suicideTodayRecentV', '')
+				suicideTodayPlanRecentV = request.POST.get('m_suicideTodayPlanRecentV', '')
+				suicideTodayExplainRecentV = request.POST.get('m_suicideTodayExplainRecentV', '')
+				hasAttemptedSuicide = request.POST.get('m_hasAttemptedSuicide', '')
+				hasAttemptedExplainRecentV = request.POST.get('m_hasAttemptedExplainRecentV', '')
+
+				#CONVERT THE BOOLEAN FIELDS
+				depress30RecentV = truePythonBool(depress30RecentV)
+				anxietyRecentV = truePythonBool(anxietyRecentV)
+				hallucinationRecentV = truePythonBool(hallucinationRecentV)
+				understandingRecentV = truePythonBool(understandingRecentV)
+				troubleControlRecentV = truePythonBool(troubleControlRecentV)
+				suicide30RecentV = truePythonBool(suicide30RecentV)
+				suicideTodayRecentV = truePythonBool(suicideTodayRecentV)
+				suicideTodayPlanRecentV = truePythonBool(suicideTodayPlanRecentV)
+				hasAttemptedSuicide = truePythonBool(hasAttemptedSuicide)
+
+				#UPDATE ANGER HISTORY 2...
+				date = datetime.now()
+				date = date.date()
+
+				ah2 = am.angerHistory2
+				ah2.date_of_assessment = date
+
+				ah2.depress30RecentV = depress30RecentV
+				ah2.depress30ExplainRecentV = depress30ExplainRecentV
+				ah2.anxietyRecentV = anxietyRecentV
+				ah2.anxietyExplainRecentV = anxietyExplainRecentV
+				ah2.hallucinationRecentV = hallucinationRecentV
+				ah2.hallucinationLastV = hallucinationLastV
+				ah2.understandingRecentV = understandingRecentV
+				ah2.understandingExplainRecentV = understandingExplainRecentV
+				ah2.troubleControlRecentV = troubleControlRecentV
+				ah2.lastTimeTroubleControl = lastTimeTroubleControl
+				ah2.controlTrigger = controlTrigger
+				ah2.suicide30RecentV = suicide30RecentV
+				ah2.suicide30ExplainRecentV = suicide30ExplainRecentV
+				ah2.suicideTodayRecentV = suicideTodayRecentV
+				ah2.suicideTodayPlanRecentV = suicideTodayPlanRecentV
+				ah2.suicideTodayExplainRecentV = suicideTodayExplainRecentV
+				ah2.hasAttemptedSuicide = hasAttemptedSuicide
+				ah2.hasAttemptedExplainRecentV = hasAttemptedExplainRecentV
+
+				ah2.save()
+				am.angerHistoryComplete2 = True
+				am.save()
+
 			image = amSidebarImages(am, 'ah3')
 			classes = grabAmClassesCSS(am, 'ah3')
 
 			content['class'] = classes
 			content['image'] = image
-
-			content['AM'] = am
-			content['client'] = am.client
-			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/angerHistory3.html', content)
 
