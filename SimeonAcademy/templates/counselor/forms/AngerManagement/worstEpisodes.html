@@ -242,11 +242,6 @@
 	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
 	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_whoWorst' id='m_whoWorst'>
-	                            <input type='hidden' value='' name='m_happenedWorst' id='m_happenedWorst'>
-	                            <input type='hidden' value='' name='m_wordThoughtWorst' id='m_wordThoughtWorst'>
-	                            <input type='hidden' value='' name='m_howStartWorst' id='m_howStartWorst'>
-	                            <input type='hidden' value='' name='m_howEndWorst' id='m_howEndWorst'>
 	                            <input type='hidden' value='' name='m_useWorst' id='m_useWorst'>
 	                            <input type='hidden' value='' name='m_whoDidItFight' id='m_whoDidItFight'>
 	                            <input type='hidden' value='' name='m_physicalWorst' id='m_physicalWorst'>
@@ -264,7 +259,7 @@
 	                            	</tr>
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='whoWorst' id='whoWorst'></textarea>
+	                            			<textarea cols='55' rows='3' name='whoWorst' id='whoWorst'>{{fields.whoWorst}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -279,7 +274,7 @@
 	                            	</tr>
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='happenedWorst' id='happenedWorst'></textarea>
+	                            			<textarea cols='55' rows='3' name='happenedWorst' id='happenedWorst'>{{fields.happenedWorst}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -294,7 +289,7 @@
 	                            	</tr>
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='wordThoughtWorst' id='wordThoughtWorst'></textarea>
+	                            			<textarea cols='55' rows='3' name='wordThoughtWorst' id='wordThoughtWorst'>{{fields.wordThoughtWorst}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -309,7 +304,7 @@
 	                            	</tr>
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='howStartWorst' id='howStartWorst'></textarea>
+	                            			<textarea cols='55' rows='3' name='howStartWorst' id='howStartWorst'>{{fields.howStartWorst}}</textarea>
 	                            		</td>
 	                            	</tr>
 	                            </table>
@@ -326,7 +321,7 @@
 	                            	</tr>
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='howEndWorst' id='howEndWorst'></textarea>
+	                            			<textarea cols='55' rows='3' name='howEndWorst' id='howEndWorst'>{{fields.howEndWorst}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -379,9 +374,9 @@
 										<td>
 											<select name='whoDidItFight' id='whoDidItFight'>
 												<option value='not selected'>Select</option>
-												<option value='client used only'>Client Used</option>
-												<option value='other party used only'>The Other Party Used</option>
-												<option value='all parties involved used'>Everyone Involved</option>
+												<option value='Client Used'>Client Used</option>
+												<option value='The Other Party Used'>The Other Party Used</option>
+												<option value='Everyone Involved'>Everyone Involved</option>
 											</select>
 										</td>
 									</tr>
@@ -491,7 +486,7 @@
 									<tr>
 										<td>
 											<div id='select_indent'>
-												<textarea cols='55' rows='4' name='otherWorstDescription' id='otherWorstDescription'></textarea>
+												<textarea cols='55' rows='4' name='otherWorstDescription' id='otherWorstDescription'>{{fields.otherWorstDescription}}</textarea>
 											</div>
 										</td>
 									</tr>

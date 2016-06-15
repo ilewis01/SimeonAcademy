@@ -890,53 +890,70 @@ def am_angerTarget(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			whoWorst = request.POST.get('m_whoWorst', '')
-			happenedWorst = request.POST.get('m_happenedWorst', '')
-			wordThoughtWorst = request.POST.get('m_wordThoughtWorst', '')
-			howStartWorst = request.POST.get('m_howStartWorst', '')
-			howEndWorst = request.POST.get('m_howEndWorst', '')
-			useWorst = request.POST.get('m_useWorst', '')
-			whoDidItFight = request.POST.get('m_whoDidItFight', '')
-			theyUsedWorst = request.POST.get('m_theyUsedWorst', '')
-			physicalWorst = request.POST.get('m_physicalWorst', '')
-			verbalWorst = request.POST.get('m_verbalWorst', '')
-			threatsWorst = request.POST.get('m_threatsWorst', '')
-			propertyWorst = request.POST.get('m_propertyWorst', '')
-			otherWorst = request.POST.get('m_otherWorst', '')
-			otherWorstDescription = request.POST.get('m_otherWorstDescription', '')
+			if back == 'false':
+				useWorst = request.POST.get('m_useWorst', '')
+				whoDidItFight = request.POST.get('m_whoDidItFight', '')
+				physicalWorst = request.POST.get('m_physicalWorst', '')
+				verbalWorst = request.POST.get('m_verbalWorst', '')
+				threatsWorst = request.POST.get('m_threatsWorst', '')
+				propertyWorst = request.POST.get('m_propertyWorst', '')
+				otherWorst = request.POST.get('m_otherWorst', '')
+				otherWorstDescription = request.POST.get('m_otherWorstDescription', '')
 
-			#PROCESS THE CHECKBOXES
-			physicalWorst = onTrue_offFalse(physicalWorst)
-			verbalWorst = onTrue_offFalse(verbalWorst)
-			threatsWorst = onTrue_offFalse(threatsWorst)
-			propertyWorst = onTrue_offFalse(propertyWorst)
-			otherWorst = onTrue_offFalse(otherWorst)
+				#GET NORMAL TEXT FIELDS
+				whoWorst = request.POST.get('whoWorst', '')
+				happenedWorst = request.POST.get('happenedWorst', '')
+				wordThoughtWorst = request.POST.get('wordThoughtWorst', '')
+				howStartWorst = request.POST.get('howStartWorst', '')
+				howEndWorst = request.POST.get('howEndWorst', '')
 
-			date = datetime.now()
-			date = date.date()
+				#PROCESS THE CHECKBOXES AND RADIO BUTTONS
+				useWorst = truePythonBool(useWorst)
+				physicalWorst = truePythonBool(physicalWorst)
+				verbalWorst = truePythonBool(verbalWorst)
+				threatsWorst = truePythonBool(threatsWorst)
+				propertyWorst = truePythonBool(propertyWorst)
+				otherWorst = truePythonBool(otherWorst)				
 
-			am.worstEpisode.date_of_assessment = date
-			am.worstEpisode.whoWorst = whoWorst
-			am.worstEpisode.happenedWorst = happenedWorst
-			am.worstEpisode.wordThoughtWorst = wordThoughtWorst
-			am.worstEpisode.howStartWorst = howStartWorst
-			am.worstEpisode.howEndWorst = howEndWorst
-			am.worstEpisode.useWorst = useWorst
-			am.worstEpisode.whoDidItFight = whoDidItFight
-			am.worstEpisode.physicalWorst = physicalWorst
-			am.worstEpisode.verbalWorst = verbalWorst
-			am.worstEpisode.threatsWorst = threatsWorst
-			am.worstEpisode.propertyWorst = propertyWorst
-			am.worstEpisode.otherWorst = otherWorst
-			am.worstEpisode.otherWorstDescription = otherWorstDescription
-			am.worstEpisode.save()
-			am.worstComplete = True
-			am.save()
+				date = datetime.now()
+				date = date.date()
+
+				am.worstEpisode.date_of_assessment = date
+				am.worstEpisode.whoWorst = whoWorst
+				am.worstEpisode.happenedWorst = happenedWorst
+				am.worstEpisode.wordThoughtWorst = wordThoughtWorst
+				am.worstEpisode.howStartWorst = howStartWorst
+				am.worstEpisode.howEndWorst = howEndWorst
+				am.worstEpisode.useWorst = useWorst
+				am.worstEpisode.whoDidItFight = whoDidItFight
+				am.worstEpisode.physicalWorst = physicalWorst
+				am.worstEpisode.verbalWorst = verbalWorst
+				am.worstEpisode.threatsWorst = threatsWorst
+				am.worstEpisode.propertyWorst = propertyWorst
+				am.worstEpisode.otherWorst = otherWorst
+				am.worstEpisode.otherWorstDescription = otherWorstDescription
+
+				# print "whoWorst: " + str(whoWorst)
+				# print "happenedWorst: " + str(happenedWorst)
+				# print "wordThoughtWorst: " + str(wordThoughtWorst)
+				# print "howStartWorst: " + str(howStartWorst)
+				# print "howEndWorst: " + str(howEndWorst)
+				# print "whoDidItFight: " + str(whoDidItFight)
+				# print "physicalWorst: " + str(physicalWorst)
+				# print "verbalWorst: " + str(verbalWorst)
+				# print "threatsWorst: " + str(threatsWorst)
+				# print "propertyWorst: " + str(propertyWorst)
+				# print "otherWorst: " + str(otherWorst)
+				# print "otherWorstDescription: " + str(otherWorstDescription)
+
+				am.worstEpisode.save()
+				am.worstComplete = True
+				am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/AngerTarget.html')
 			json_data = json.dumps(fields)

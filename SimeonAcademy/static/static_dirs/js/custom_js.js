@@ -712,6 +712,7 @@ function worstCheck() {
 		description.disabled = false;
 	}
 	else {
+		description.value = '';
 		description.style.opacity = '0';
 		description.disabled = true;
 	}
@@ -728,6 +729,7 @@ function activateWorstRadio() {
 	}
 
 	if (document.getElementById('noDrugs').checked === true) {
+		selectBox.selectedIndex = 0;
 		label.style.opacity = '0.5';
 		selectBox.style.opacity = '0.5';
 		selectBox.disabled = true;
@@ -752,98 +754,63 @@ function initalize_am_worst(json_data) {
 	var hadDrugs = document.getElementById('hadDrugs');
 	var noDrugs = document.getElementById('noDrugs');
 
-	if (json_data.useWorst === true) {
-		hadDrugs.checked = true;
-	}
-	else {
-		noDrugs.checked = true;
-	}
+	setRadioElement(json_data.useWorst, hadDrugs, noDrugs);
+	whoDidItFight.selectedIndex = json_data.whoDidItFight;
 
-	if (String(json_data.whoDidItFight) === 'not selected' || json_data.whoDidItFight === null) {
-		whoDidItFight.selectedIndex = 0;
-	}
-	else if (String(json_data.whoDidItFight) === 'client used only') {
-		whoDidItFight.selectedIndex = 1;
-	}
-	else if (String(json_data.whoDidItFight) === 'other party used only') {
-		whoDidItFight.selectedIndex = 2;
-	}
-	else {
-		whoDidItFight.selectedIndex = 3;
-	}
-
-	whoWorst.innerHTML = json_data.whoWorst;
-	happenedWorst.innerHTML = json_data.happenedWorst;
-	wordThoughtWorst.innerHTML = json_data.wordThoughtWorst;
-	howStartWorst.innerHTML = json_data.howStartWorst;
-	howEndWorst.innerHTML = json_data.howEndWorst;
-
-	physicalWorst.checked = json_data.physicalWorst;
-	verbalWorst.checked = json_data.verbalWorst;
-	threatsWorst.checked = json_data.threatsWorst;
-	propertyWorst.checked = json_data.propertyWorst;
-	otherWorst.checked = json_data.otherWorst;
+	initializeAllCheckBoxes(json_data.physicalWorst, physicalWorst);
+	initializeAllCheckBoxes(json_data.verbalWorst, verbalWorst);
+	initializeAllCheckBoxes(json_data.threatsWorst, threatsWorst);
+	initializeAllCheckBoxes(json_data.propertyWorst, propertyWorst);
+	initializeAllCheckBoxes(json_data.otherWorst, otherWorst);
 
 	worstCheck();
 	activateWorstRadio();
-
-	if (otherWorst.checked === true) {
-		otherWorstDescription.innerHTML = json_data.otherWorstDescription;
-	}
 }
 
 function continue_to_target() {
 	var proceed = true;
-	var whoWorst = document.getElementById('whoWorst');
-	var happenedWorst = document.getElementById('happenedWorst');
-	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
-	var howStartWorst = document.getElementById('howStartWorst');
-	var howEndWorst = document.getElementById('howEndWorst');
+	var back = document.getElementById('back_btn');
+
+	//M_VALUE ELEMENTS
+	var m_useWorst = document.getElementById('m_useWorst');
+	var m_whoDidItFight = document.getElementById('m_whoDidItFight');
+	var m_physicalWorst = document.getElementById('m_physicalWorst');
+	var m_verbalWorst = document.getElementById('m_verbalWorst');
+	var m_threatsWorst = document.getElementById('m_threatsWorst');
+	var m_propertyWorst = document.getElementById('m_propertyWorst');
+	var m_otherWorst = document.getElementById('m_otherWorst');
+	var m_otherWorstDescription = document.getElementById('m_otherWorstDescription');
+
+	//TRIGGERS
 	var hadDrugs = document.getElementById('hadDrugs');
-	var whoDidItFight = document.getElementById('whoDidItFight');
+
+	// CHECKBOXES
 	var physicalWorst = document.getElementById('physicalWorst');
 	var verbalWorst = document.getElementById('verbalWorst');
 	var threatsWorst = document.getElementById('threatsWorst');
 	var propertyWorst = document.getElementById('propertyWorst');
 	var otherWorst = document.getElementById('otherWorst');
-	var otherWorstDescription = document.getElementById('otherWorstDescription');
 
-	var useWorst = document.getElementById('m_useWorst');
-	var descriptOUT = document.getElementById('m_otherWorstDescription');
+	// DYNAMIC TEXT FIELDS
+	var whoDidItFight = document.getElementById('whoDidItFight');
 
-	processCheckbox(physicalWorst);
-	processCheckbox(verbalWorst);
-	processCheckbox(threatsWorst);
-	processCheckbox(propertyWorst);
-	processCheckbox(otherWorst);
+	postDynamicRadioButtons(hadDrugs, m_useWorst);
+	processDynamicTextPostValue(hadDrugs, whoDidItFight, m_whoDidItFight);
 
-	if (hadDrugs.checked === true) {
-		useWorst.value = "True";
-	}
-	else {
-		useWorst.value = "False";
-	}
+	postCheckboxValue(physicalWorst, m_physicalWorst);
+	postCheckboxValue(verbalWorst, m_verbalWorst);
+	postCheckboxValue(threatsWorst, m_threatsWorst);
+	postCheckboxValue(propertyWorst, m_propertyWorst);
+	postCheckboxValue(otherWorst, m_otherWorst);
 
 	if (otherWorst.checked === true) {
-		copyElementToInput('otherWorstDescription');
+		m_otherWorstDescription.value = document.getElementById('otherWorstDescription').value;
 	}
 	else {
-		descriptOUT.value = 'NA';
+		m_otherWorstDescription.value = 'N/A';
 	}
 
-	whoDidItFight.value = whoDidItFight.options[whoDidItFight.selectedIndex].value;
-
-	copyElementToInput('whoWorst');
-	copyElementToInput('happenedWorst');
-	copyElementToInput('wordThoughtWorst');
-	copyElementToInput('howStartWorst');
-	copyElementToInput('howEndWorst');
-	copyElementToInput('whoDidItFight');
-	copyElementToInput('physicalWorst');
-	copyElementToInput('verbalWorst');
-	copyElementToInput('threatsWorst');
-	copyElementToInput('propertyWorst');
-	copyElementToInput('otherWorst');
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();

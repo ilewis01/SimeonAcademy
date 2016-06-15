@@ -799,6 +799,7 @@ def processAmDhFields(fields):
 
 def grabAmConnections(am):
 	fields = {}
+
 	fields['angerWorse'] = am.connections.angerWorse
 	fields['troubleWhenUsing'] = am.connections.troubleWhenUsing
 	fields['lessAngry'] = am.connections.lessAngry
@@ -852,13 +853,31 @@ def grabAmFamilyOrigin(am):
 
 def grabAmWorstEpisodes(am):
 	fields = {}
+
+	selectBtn = am.worstEpisode.whoDidItFight
+	index = None
+
+	if selectBtn == None:
+		index = 0
+	else:
+		if str(selectBtn) == 'Client Used':
+			index = 1
+		elif str(selectBtn) == 'The Other Party Used':
+			index = 2
+		elif str(selectBtn) == 'Everyone Involved':
+			index = 3
+		else:
+			index = 0
+
+	print 'The index:' + str(index)
+
 	fields['whoWorst'] = am.worstEpisode.whoWorst
 	fields['happenedWorst'] = am.worstEpisode.happenedWorst
 	fields['wordThoughtWorst'] = am.worstEpisode.wordThoughtWorst
 	fields['howStartWorst'] = am.worstEpisode.howStartWorst
 	fields['howEndWorst'] = am.worstEpisode.howEndWorst
 	fields['useWorst'] = am.worstEpisode.useWorst
-	fields['whoDidItFight'] = am.worstEpisode.whoDidItFight
+	fields['whoDidItFight'] = index
 	fields['theyUsedWorst'] = am.worstEpisode.theyUsedWorst
 	fields['physicalWorst'] = am.worstEpisode.physicalWorst
 	fields['verbalWorst'] = am.worstEpisode.verbalWorst
