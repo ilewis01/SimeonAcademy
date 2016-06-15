@@ -1965,40 +1965,42 @@ def am_worst(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			angerWorse = request.POST.get('m_angerWorse', '')
-			troubleWhenUsing = request.POST.get('m_troubleWhenUsing', '')
-			lessAngry = request.POST.get('m_lessAngry', '')
-			othersTellMe = request.POST.get('m_othersTellMe', '')
-			noConnection = request.POST.get('m_noConnection', '')
-			otherConnectionsUsing = request.POST.get('m_otherConnectionsUsing', '')
-			connectionExplain = request.POST.get('m_connectionExplain', '')
+			if back == 'false':
+				angerWorse = request.POST.get('m_angerWorse', '')
+				troubleWhenUsing = request.POST.get('m_troubleWhenUsing', '')
+				lessAngry = request.POST.get('m_lessAngry', '')
+				othersTellMe = request.POST.get('m_othersTellMe', '')
+				noConnection = request.POST.get('m_noConnection', '')
+				otherConnectionsUsing = request.POST.get('m_otherConnectionsUsing', '')
+				connectionExplain = request.POST.get('m_connectionExplain', '')
 
-			angerWorse = onTrue_offFalse(angerWorse)
-			troubleWhenUsing = onTrue_offFalse(troubleWhenUsing)
-			lessAngry = onTrue_offFalse(lessAngry)
-			othersTellMe = onTrue_offFalse(othersTellMe)
-			noConnection = onTrue_offFalse(noConnection)
-			otherConnectionsUsing = onTrue_offFalse(otherConnectionsUsing)
+				angerWorse = truePythonBool(angerWorse)
+				troubleWhenUsing = truePythonBool(troubleWhenUsing)
+				lessAngry = truePythonBool(lessAngry)
+				othersTellMe = truePythonBool(othersTellMe)
+				noConnection = truePythonBool(noConnection)
+				otherConnectionsUsing = truePythonBool(otherConnectionsUsing)
 
-			date = datetime.now()
-			date = date.date()
+				date = datetime.now()
+				date = date.date()
 
-			am.connections.date_of_assessment = date
-			am.connections.angerWorse = angerWorse
-			am.connections.troubleWhenUsing = troubleWhenUsing
-			am.connections.lessAngry = lessAngry
-			am.connections.othersTellMe = othersTellMe
-			am.connections.noConnection = noConnection
-			am.connections.otherConnectionsUsing = otherConnectionsUsing
-			am.connections.connectionExplain = connectionExplain
-			am.connectionsComplete = True
-			am.connections.save()
-			am.save()
+				am.connections.date_of_assessment = date
+				am.connections.angerWorse = angerWorse
+				am.connections.troubleWhenUsing = troubleWhenUsing
+				am.connections.lessAngry = lessAngry
+				am.connections.othersTellMe = othersTellMe
+				am.connections.noConnection = noConnection
+				am.connections.otherConnectionsUsing = otherConnectionsUsing
+				am.connections.connectionExplain = connectionExplain
+
+				am.connectionsComplete = True
+				am.connections.save()
+				am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/worstEpisodes.html')
 			json_data = json.dumps(fields)

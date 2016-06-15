@@ -647,7 +647,7 @@ function connectionCheck() {
 		explain.disabled = true;
 		explain.style.opacity = "0.5";
 		label.style.opacity = "0.5";
-		explain.innerHTML = '';
+		explain.value = '';
 	}
 }
 
@@ -660,22 +660,20 @@ function initalize_am_connections(json_data) {
 	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
 	var connectionExplain = document.getElementById('connectionExplain');
 
-	angerWorse.checked = json_data.angerWorse;
-	troubleWhenUsing.checked = json_data.troubleWhenUsing;
-	lessAngry.checked = json_data.lessAngry;
-	othersTellMe.checked = json_data.othersTellMe;
-	noConnection.checked = json_data.noConnection;
-	otherConnectionsUsing.checked = json_data.otherConnectionsUsing;
+	initializeAllCheckBoxes(json_data.angerWorse, angerWorse);
+	initializeAllCheckBoxes(json_data.troubleWhenUsing, troubleWhenUsing);
+	initializeAllCheckBoxes(json_data.lessAngry, lessAngry);
+	initializeAllCheckBoxes(json_data.othersTellMe, othersTellMe);
+	initializeAllCheckBoxes(json_data.noConnection, noConnection);
+	initializeAllCheckBoxes(json_data.otherConnectionsUsing, otherConnectionsUsing);
 
 	connectionCheck();
-
-	if (otherConnectionsUsing.checked === true) {
-		connectionExplain.innerHTML = json_data.connectionExplain;
-	}
 }
 
 function continue_to_worst() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
 	var angerWorse = document.getElementById('angerWorse');
 	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
 	var lessAngry = document.getElementById('lessAngry');
@@ -684,20 +682,21 @@ function continue_to_worst() {
 	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
 	var connectionExplain = document.getElementById('connectionExplain');
 
-	processCheckbox(angerWorse);
-	processCheckbox(troubleWhenUsing);
-	processCheckbox(lessAngry);
-	processCheckbox(othersTellMe);
-	processCheckbox(noConnection);
-	processCheckbox(otherConnectionsUsing);
+	postCheckboxValue(angerWorse, m_angerWorse);
+	postCheckboxValue(troubleWhenUsing, m_troubleWhenUsing);
+	postCheckboxValue(lessAngry, m_lessAngry);
+	postCheckboxValue(othersTellMe, m_othersTellMe);
+	postCheckboxValue(noConnection, m_noConnection);
+	postCheckboxValue(otherConnectionsUsing, m_otherConnectionsUsing);
 
-	copyElementToInput('angerWorse');
-	copyElementToInput('troubleWhenUsing');
-	copyElementToInput('lessAngry');
-	copyElementToInput('othersTellMe');
-	copyElementToInput('noConnection');
-	copyElementToInput('otherConnectionsUsing');
-	copyElementToInput('connectionExplain');
+	if (otherConnectionsUsing.checked === true) {
+		m_connectionExplain.value = connectionExplain.value;
+	}
+	else {
+		m_connectionExplain.value = 'N/A';
+	}
+
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
@@ -3633,7 +3632,7 @@ function initialize_am_angerHistory3(json_data) {
 		document.getElementById('ten').checked = true;
 	}
 
-	
+
 
 	if (String(json_data.howOften) === 'This time only') {
 		document.getElementById('thisTimeOnly').checked = true;
