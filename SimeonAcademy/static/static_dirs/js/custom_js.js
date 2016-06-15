@@ -3524,9 +3524,175 @@ function proceed_to_section3() {
 	}
 }
 
+
+
+//AM ANGER HISTORY SECTION III FUNCTIONS
+function homicidalRadio() {
+	var isHomicidal = document.getElementById('isHomicidal');
+	var homicidalExplain_label = document.getElementById('homicidalExplain_label');
+	var homicidalExplain = document.getElementById('homicidalExplain');
+
+	twoElementRadioSetup(isHomicidal, homicidalExplain_label, homicidalExplain);
+}
+
+function ah3number2() {
+	var hasMedRecent = document.getElementById('hasMedRecent');
+
+	//LABELS
+	var medRecentVExplain_label = document.getElementById('medRecentVExplain_label');
+	var medSuccessRecentV_label = document.getElementById('medSuccessRecentV_label');
+	var treatmentSuccess_label = document.getElementById('treatmentSuccess_label');
+	var noTreatmentSuccess_label = document.getElementById('noTreatmentSuccess_label');
+	var medSuccessExplainRecentV_label = document.getElementById('medSuccessExplainRecentV_label');
+
+	//FIELDS
+	var medRecentVExplain = document.getElementById('medRecentVExplain');
+	var medSuccessExplainRecentV = document.getElementById('medSuccessExplainRecentV');
+	var treatmentSuccess = document.getElementById('treatmentSuccess');
+	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
+
+	if (hasMedRecent.checked === true) {
+		medRecentVExplain.disabled = false;
+		medSuccessExplainRecentV.disabled = false;
+		treatmentSuccess.disabled = false;
+		noTreatmentSuccess.disabled = false;
+
+		opacityHigh(medRecentVExplain);
+		opacityHigh(medSuccessExplainRecentV);
+
+		opacityHigh(medRecentVExplain_label);
+		opacityHigh(medSuccessRecentV_label);
+		opacityHigh(treatmentSuccess_label);
+		opacityHigh(noTreatmentSuccess_label);
+		opacityHigh(medSuccessExplainRecentV_label);
+	}
+
+	else {
+		medRecentVExplain.value = '';
+		medSuccessExplainRecentV.value = '';
+
+		opacityLow(medRecentVExplain_label);
+		opacityLow(medSuccessRecentV_label);
+		opacityLow(treatmentSuccess_label);
+		opacityLow(noTreatmentSuccess_label);
+		opacityLow(medSuccessExplainRecentV_label);
+
+		opacityLow(medRecentVExplain);
+		opacityLow(medSuccessExplainRecentV);
+
+		treatmentSuccess.disabled = true;
+		noTreatmentSuccess.disabled = true;
+		medRecentVExplain.disabled = true;
+		medSuccessExplainRecentV.disabled = true;
+	}
+}
+
+function initialize_am_angerHistory3(json_data) {
+	//RADIO BUTTONS
+	var isHomicidal = document.getElementById('isHomicidal');
+	var notHomicidal = document.getElementById('notHomicidal');
+	var hasMedRecent = document.getElementById('hasMedRecent');
+	var noMedRecent = document.getElementById('noMedRecent');
+	var treatmentSuccess = document.getElementById('treatmentSuccess');
+	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
+
+	var intensityRecentV = document.getElementById('intensityRecentV');
+
+	setRadioElement(json_data.homicidal, isHomicidal, notHomicidal);
+	setRadioElement(json_data.medRecentV, hasMedRecent, noMedRecent);
+	setRadioElement(json_data.medSuccessRecentV, treatmentSuccess, noTreatmentSuccess);
+
+	if (String(json_data.intensityRecentV) === '1') {
+		document.getElementById('one').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '2') {
+		document.getElementById('two').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '3') {
+		document.getElementById('three').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '4') {
+		document.getElementById('four').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '5') {
+		document.getElementById('five').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '6') {
+		document.getElementById('six').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '7') {
+		document.getElementById('seven').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '8') {
+		document.getElementById('eight').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '9') {
+		document.getElementById('nine').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '10') {
+		document.getElementById('ten').checked = true;
+	}
+
+	
+
+	if (String(json_data.howOften) === 'This time only') {
+		document.getElementById('thisTimeOnly').checked = true;
+	}
+	if (String(json_data.howOften) === 'Since childhood') {
+		document.getElementById('sinceChildhood').checked = true;
+	}
+	if (String(json_data.howOften) === 'This month only') {
+		document.getElementById('ThisMonthOnly').checked = true;
+	}
+	if (String(json_data.howOften) === 'Adolescent') {
+		document.getElementById('adolescent').checked = true;
+	}
+	if (String(json_data.howOften) === 'Last six months') {
+		document.getElementById('lastSixMonth').checked = true;
+	}
+	if (String(json_data.howOften) === 'Only as an adult') {
+		document.getElementById('onlyAdult').checked = true;
+	}
+
+	homicidalRadio();
+	ah3number2();
+}
+
 function proceed_to_connections() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+
+	//M_VALUE ELEMENTS
+	var m_homicidal = document.getElementById('m_homicidal');
+	var m_homicidalExplain = document.getElementById('m_homicidalExplain');
+	var m_medRecentV = document.getElementById('m_medRecentV');
+	var m_medRecentVExplain = document.getElementById('m_medRecentVExplain');
+	var m_medSuccessRecentV = document.getElementById('m_medSuccessRecentV');
+	var m_medSuccessExplainRecentV = document.getElementById('m_medSuccessExplainRecentV');
+
+	//TRIGGERS
+	var isHomicidal = document.getElementById('isHomicidal');
+	var hasMedRecent = document.getElementById('hasMedRecent');
+
+	//DYNAMIC TEXT FIELDS
+	var homicidalExplain = document.getElementById('homicidalExplain');
+	var medRecentVExplain = document.getElementById('medRecentVExplain');
+	var medSuccessExplainRecentV = document.getElementById('medSuccessExplainRecentV');
+
+	//PROCESS RADIO BUTTONS AND ASSOCIATED TEXT FIELDS
+	postDynamicRadioButtons(isHomicidal, m_homicidal);
+	postDynamicRadioButtons(hasMedRecent, m_medRecentV);
+
+	processDynamicTextPostValue(isHomicidal, homicidalExplain, m_homicidalExplain);
+	processDynamicTextPostValue(hasMedRecent, medRecentVExplain, m_medRecentVExplain);
+	processDynamicTextPostValue(hasMedRecent, medSuccessExplainRecentV, m_medSuccessExplainRecentV);
+
+	if (hasMedRecent.checked === true) {
+		postDynamicRadioButtons(document.getElementById('treatmentSuccess'), m_medSuccessRecentV);
+	}
+	else {
+		m_medSuccessRecentV.value = 'False';
+	}
 
 	back.value = 'false';
 
@@ -3534,8 +3700,6 @@ function proceed_to_connections() {
 		document.getElementById('am_demo').submit();
 	}
 }
-
-//AM ANGER HISTORY SECTION III FUNCTIONS
 
 
 //DELETE THE ANGER MANAGEMENT FORM

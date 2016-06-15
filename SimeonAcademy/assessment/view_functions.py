@@ -1023,6 +1023,14 @@ def grabAmAngerHistory3(am):
 	fields = {}
 
 	fields['homicidal'] = am.angerHistory3.homicidal
+	fields['homicidalExplain'] = am.angerHistory3.homicidalExplain
+	fields['medRecentV'] = am.angerHistory3.medRecentV
+	fields['medRecentVExplain'] = am.angerHistory3.medRecentVExplain
+	fields['medSuccessRecentV'] = am.angerHistory3.medSuccessRecentV
+	fields['medSuccessExplainRecentV'] = am.angerHistory3.medSuccessExplainRecentV
+	fields['durationRecentV'] = am.angerHistory3.durationRecentV
+	fields['intensityRecentV'] = am.angerHistory3.intensityRecentV
+	fields['howOften'] = am.angerHistory3.howOften
 
 	return fields
 

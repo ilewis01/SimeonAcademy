@@ -1102,25 +1102,69 @@ def am_connections(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/connections.html')
 			json_data = json.dumps(fields)
+
+			content['AM'] = am
+			content['session'] = session
+			content['back'] = back
+			content['fields'] = fields
+			content['json_data'] = json_data
+
+			if back == 'false':
+				homicidal = request.POST.get('m_homicidal', '')
+				homicidalExplain = request.POST.get('m_homicidalExplain', '')
+				medRecentV = request.POST.get('m_medRecentV', '')
+				medRecentVExplain = request.POST.get('m_medRecentVExplain', '')
+				medSuccessRecentV = request.POST.get('m_medSuccessRecentV', '')
+				medSuccessExplainRecentV = request.POST.get('m_medSuccessExplainRecentV', '')
+				durationRecentV = request.POST.get('durationRecentV', '')
+				intensityRecentV = request.POST.get('intensityRecentV')
+				howOften = request.POST.get('howOften')
+
+				homicidal = truePythonBool(homicidal)
+				medRecentV = truePythonBool(medRecentV)
+				medSuccessRecentV = truePythonBool(medSuccessRecentV)
+
+				print "homicidal: " + str(homicidal)
+				print "homicidalExplain: " + str(homicidalExplain)
+				print "medRecentV: " + str(medRecentV)
+				print "medRecentVExplain: " + str(medRecentVExplain)
+				print "medSuccessRecentV: " + str(medSuccessRecentV)
+				print "medSuccessExplainRecentV: " + str(medSuccessExplainRecentV)
+				print "durationRecentV: " + str(durationRecentV)
+				print "intensityRecentV: " + str(intensityRecentV)
+				print "howOften: " + str(howOften)
+
+				date = datetime.now()
+				date = date.date()
+
+				ah3 = am.angerHistory3
+				ah3.date_of_assessment = date
+
+				ah3.homicidal = homicidal
+				ah3.homicidalExplain = homicidalExplain
+				ah3.medRecentV = medRecentV
+				ah3.medRecentVExplain = medRecentVExplain
+				ah3.medSuccessRecentV = medSuccessRecentV
+				ah3.medSuccessExplainRecentV = medSuccessExplainRecentV
+				ah3.durationRecentV = durationRecentV
+				ah3.intensityRecentV = intensityRecentV
+				ah3.howOften = howOften
+
+				ah3.save()
+				am.angerHistoryComplete3 = True
+				am.save()
+
 			image = amSidebarImages(am, 'connect')
 			classes = grabAmClassesCSS(am, 'connect')
 
 			content['class'] = classes
 			content['image'] = image
-
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['AM'] = am
-			content['client'] = am.client
-			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/connections.html', content)
 

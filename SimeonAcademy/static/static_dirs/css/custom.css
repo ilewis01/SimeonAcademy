@@ -664,6 +664,12 @@ button:hover {
 	margin-right: 4px;
 }
 
+#psychoRadio2 {
+	margin-bottom: 7px;
+	margin-left: 16px;
+	margin-right: 4px;
+}
+
 #numberLabel {
 	margin-top: 5px;
 	margin-left: 3px;
@@ -804,6 +810,23 @@ button:hover {
 
 #trash_icon_text {
 	font-weight: bold;
+}
+
+#number_radio {
+	margin-bottom: 7px;
+	margin-right: 5px;
+}
+
+#number_radio2 {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 15px;
+}
+
+#otherRadioFix {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 17px;
 }
 
 
