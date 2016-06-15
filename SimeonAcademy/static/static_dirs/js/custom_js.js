@@ -827,8 +827,9 @@ function amTargetOther() {
 		otherWhom.style.opacity = '1.0';
 	}
 	else {
-		otherWhom.disabled = true;
+		otherWhom.value = '';
 		otherWhom.style.opacity = '0';
+		otherWhom.disabled = true;
 	}
 }
 
@@ -844,26 +845,23 @@ function initalize_am_target(json_data) {
 	var angryAbout = document.getElementById('angryAbout');
 	var seldomUpset = document.getElementById('seldomUpset');
 
-	angryPartner.checked = json_data.angryPartner;
-	angryParents.checked = json_data.angryParents;
-	angryChildren.checked = json_data.angryChildren;
-	angryRelatives.checked = json_data.angryRelatives;
-	angryEmployer.checked = json_data.angryEmployer;
-	angryFriends.checked = json_data.angryFriends;
-	angryOther.checked = json_data.angryOther;
-	seldomUpset.checked = json_data.seldomUpset;
+	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
+	initializeAllCheckBoxes(json_data.angryParents, angryParents);
+	initializeAllCheckBoxes(json_data.angryChildren, angryChildren);
+	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
+	initializeAllCheckBoxes(json_data.angryRelatives, angryRelatives);
+	initializeAllCheckBoxes(json_data.angryEmployer, angryEmployer);
+	initializeAllCheckBoxes(json_data.angryFriends, angryFriends);
+	initializeAllCheckBoxes(json_data.angryOther, angryOther);
+	initializeAllCheckBoxes(json_data.seldomUpset, seldomUpset);
 
 	amTargetOther();
-
-	if (angryOther.checked === true) {
-		otherWhom.value = json_data.otherWhom;
-	}
-
-	angryAbout.innerHTML = json_data.angryAbout;
 }
 
 function continue_to_am_family() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
 	var angryPartner = document.getElementById('angryPartner');
 	var angryParents = document.getElementById('angryParents');
 	var angryChildren = document.getElementById('angryChildren');
@@ -875,35 +873,28 @@ function continue_to_am_family() {
 	var angryAbout = document.getElementById('angryAbout');
 	var seldomUpset = document.getElementById('seldomUpset');
 
-	processCheckbox(angryPartner);
-	processCheckbox(angryParents);
-	processCheckbox(angryChildren);
-	processCheckbox(angryRelatives);
-	processCheckbox(angryEmployer);
-	processCheckbox(angryFriends);
-	processCheckbox(angryOther);
-	processCheckbox(seldomUpset);
+	postCheckboxValue(angryPartner, document.getElementById('m_angryPartner'));
+	postCheckboxValue(angryParents, document.getElementById('m_angryParents'));
+	postCheckboxValue(angryChildren, document.getElementById('m_angryChildren'));
+	postCheckboxValue(angryRelatives, document.getElementById('m_angryRelatives'));
+	postCheckboxValue(angryEmployer, document.getElementById('m_angryEmployer'));
+	postCheckboxValue(angryFriends, document.getElementById('m_angryFriends'));
+	postCheckboxValue(angryOther, document.getElementById('m_angryOther'));
+	postCheckboxValue(seldomUpset, document.getElementById('m_seldomUpset'));
 
 	if (angryOther.checked === false) {
-		document.getElementById('m_otherWhom').value = 'NA';
+		document.getElementById('m_otherWhom').value = 'N/A';
 	}
 	else {
-		copyElementToInput('otherWhom');
+		document.getElementById('m_otherWhom').value = otherWhom.value;
 	}
 
-	//ERROR CHECKING...
+	if (angryAbout.value === '') {
+		angryAbout.value = 'N/A';
+	}
 
-	copyElementToInput('angryPartner');
-	copyElementToInput('angryParents');
-	copyElementToInput('angryChildren');
-	copyElementToInput('angryRelatives');
-	copyElementToInput('angryEmployer');
-	copyElementToInput('angryFriends');
-	copyElementToInput('angryOther');	
-	copyElementToInput('angryAbout');
-	copyElementToInput('seldomUpset');
+	back.value = 'false';
 
-	
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
 	}

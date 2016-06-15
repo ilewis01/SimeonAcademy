@@ -938,19 +938,6 @@ def am_angerTarget(request):
 				am.worstEpisode.otherWorst = otherWorst
 				am.worstEpisode.otherWorstDescription = otherWorstDescription
 
-				# print "whoWorst: " + str(whoWorst)
-				# print "happenedWorst: " + str(happenedWorst)
-				# print "wordThoughtWorst: " + str(wordThoughtWorst)
-				# print "howStartWorst: " + str(howStartWorst)
-				# print "howEndWorst: " + str(howEndWorst)
-				# print "whoDidItFight: " + str(whoDidItFight)
-				# print "physicalWorst: " + str(physicalWorst)
-				# print "verbalWorst: " + str(verbalWorst)
-				# print "threatsWorst: " + str(threatsWorst)
-				# print "propertyWorst: " + str(propertyWorst)
-				# print "otherWorst: " + str(otherWorst)
-				# print "otherWorstDescription: " + str(otherWorstDescription)
-
 				am.worstEpisode.save()
 				am.worstComplete = True
 				am.save()
@@ -1634,48 +1621,52 @@ def am_familyOrigin(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			date = datetime.now()
-			date = date.date()
+			if back == 'false':
+				angryPartner = request.POST.get('m_angryPartner', '')
+				angryParents = request.POST.get('m_angryParents', '')
+				angryChildren = request.POST.get('m_angryChildren', '')
+				angryRelatives = request.POST.get('m_angryRelatives', '')
+				angryEmployer = request.POST.get('m_angryEmployer', '')
+				angryFriends = request.POST.get('m_angryFriends', '')
+				angryOther = request.POST.get('m_angryOther', '')
+				otherWhom = request.POST.get('m_otherWhom', '')
+				angryAbout = request.POST.get('angryAbout', '')
+				seldomUpset = request.POST.get('m_seldomUpset', '')
 
-			angryPartner = request.POST.get('m_angryPartner', '')
-			angryParents = request.POST.get('m_angryParents', '')
-			angryChildren = request.POST.get('m_angryChildren', '')
-			angryRelatives = request.POST.get('m_angryRelatives', '')
-			angryEmployer = request.POST.get('m_angryEmployer', '')
-			angryFriends = request.POST.get('m_angryFriends', '')
-			angryOther = request.POST.get('m_angryOther', '')
-			otherWhom = request.POST.get('m_otherWhom', '')
-			angryAbout = request.POST.get('m_angryAbout', '')
-			seldomUpset = request.POST.get('m_seldomUpset', '')
+				angryPartner = truePythonBool(angryPartner)
+				angryParents = truePythonBool(angryParents)
+				angryChildren = truePythonBool(angryChildren)
+				angryRelatives = truePythonBool(angryRelatives)
+				angryEmployer = truePythonBool(angryEmployer)
+				angryFriends = truePythonBool(angryFriends)
+				angryOther = truePythonBool(angryOther)
+				seldomUpset = truePythonBool(seldomUpset)
 
-			angryPartner = onTrue_offFalse(angryPartner)
-			angryParents = onTrue_offFalse(angryParents)
-			angryChildren = onTrue_offFalse(angryChildren)
-			angryRelatives = onTrue_offFalse(angryRelatives)
-			angryEmployer = onTrue_offFalse(angryEmployer)
-			angryFriends = onTrue_offFalse(angryFriends)
-			angryOther = onTrue_offFalse(angryOther)
-			seldomUpset = onTrue_offFalse(seldomUpset)
+				date = datetime.now()
+				date = date.date()
 
-			am.angerTarget.date_of_assessment = date
-			am.angerTarget.angryPartner = angryPartner
-			am.angerTarget.angryParents = angryParents
-			am.angerTarget.angryChildren = angryChildren
-			am.angerTarget.angryRelatives = angryRelatives
-			am.angerTarget.angryEmployer = angryEmployer
-			am.angerTarget.angryFriends = angryFriends
-			am.angerTarget.angryOther = angryOther
-			am.angerTarget.otherWhom = otherWhom
-			am.angerTarget.angryAbout = angryAbout
-			am.angerTarget.seldomUpset = seldomUpset
-			am.angerTarget.save()
-			am.angerTargetComplete = True
-			am.save()
+				target = am.angerTarget
+
+				target.date_of_assessment = date
+				target.angryPartner = angryPartner
+				target.angryParents = angryParents
+				target.angryChildren = angryChildren
+				target.angryRelatives = angryRelatives
+				target.angryEmployer = angryEmployer
+				target.angryFriends = angryFriends
+				target.angryOther = angryOther
+				target.otherWhom = otherWhom
+				target.angryAbout = angryAbout
+				target.seldomUpset = seldomUpset
+
+				target.save()
+				am.angerTargetComplete = True
+				am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
 			json_data = json.dumps(fields)
@@ -1684,12 +1675,9 @@ def am_familyOrigin(request):
 
 			content['class'] = classes
 			content['image'] = image
-
 			content['json_data'] = json_data
 			content['AM'] = am
-			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/familyOrigin.html', content)
 

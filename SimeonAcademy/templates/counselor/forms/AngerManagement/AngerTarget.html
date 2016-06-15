@@ -249,7 +249,6 @@
 	                            <input type='hidden' value='' name='m_angryFriends' id='m_angryFriends'>
 	                            <input type='hidden' value='' name='m_angryOther' id='m_angryOther'>
                                 <input type='hidden' value='' name='m_otherWhom' id='m_otherWhom'>
-                                <input type='hidden' value='' name='m_angryAbout' id='m_angryAbout'>
                                 <input type='hidden' value='' name='m_seldomUpset' id='m_seldomUpset'>
 	                          
 
@@ -367,7 +366,7 @@
                                     <tr>
                                         <td>
                                             <div id='right_17px'>
-                                                <input type='text' id='otherWhom' name='otherWhom'>
+                                                <input type='text' id='otherWhom' name='otherWhom' value='{{fields.otherWhom}}'>
                                             </div>
                                         </td>
                                     </tr>
@@ -384,7 +383,7 @@
 
                                     <tr>
                                         <td>
-                                            <textarea rows='4' cols='60' name='angryAbout' id='angryAbout'></textarea>
+                                            <textarea rows='4' cols='60' name='angryAbout' id='angryAbout'>{{fields.angryAbout}}</textarea>
                                         </td>
                                     </tr>
                                 </table>
