@@ -246,12 +246,7 @@
 	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
 	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_kidMomAnger' id='m_kidMomAnger'>
-	                            <input type='hidden' value='' name='m_kidDadAnger' id='m_kidDadAnger'>
-	                            <input type='hidden' value='' name='m_kidSiblingAnger' id='m_kidSiblingAnger'>
-	                            <input type='hidden' value='' name='m_kidOtherAnger' id='m_kidOtherAnger'>
-	                            <input type='hidden' value='' name='m_learnFamilyAnger' id='m_learnFamilyAnger'>
-	                            <input type='hidden' value='' name='m_suicideHistory' id='m_suicideHistory'>
+                                <input type='hidden' value='' name='m_suicideHistory' id='m_suicideHistory'>
 	                            <input type='hidden' value='' name='m_hasLovingMother' id='m_hasLovingMother'>
 	                            <input type='hidden' value='' name='m_hasLovingSiblings' id='m_hasLovingSiblings'>
 	                           
@@ -265,7 +260,7 @@
 
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidDadAnger' id='kidDadAnger'></textarea>
+	                            			<textarea cols='55' rows='3' name='kidDadAnger' id='kidDadAnger'>{{fields.kidDadAnger}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -281,7 +276,7 @@
 
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidMomAnger' id='kidMomAnger'></textarea>
+	                            			<textarea cols='55' rows='3' name='kidMomAnger' id='kidMomAnger'>{{fields.kidMomAnger}}</textarea>
 	                            		</td>
 	                            	</tr>
 	                            </table>
@@ -318,7 +313,7 @@
 
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidSiblingAnger' id='kidSiblingAnger'></textarea>
+	                            			<textarea cols='55' rows='3' name='kidSiblingAnger' id='kidSiblingAnger'>{{fields.kidSiblingAnger}}</textarea>
 	                            		</td>
 	                            	</tr>
 	                            </table>
@@ -360,7 +355,7 @@
 
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidOtherAnger' id='kidOtherAnger'></textarea>
+	                            			<textarea cols='55' rows='3' name='kidOtherAnger' id='kidOtherAnger'>{{fields.kidOtherAnger}}</textarea>
 	                            		</td>
 	                            	</tr>
 
@@ -386,7 +381,7 @@
 									                	</td>
 									                    <td>
 									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='suicideHistory' id='hasSuicide' value='hasSuicide'>
+									                            <input type='radio' name='suicideHistory' id='hasSuicide' value='True'>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -395,7 +390,7 @@
 									                                                                    
 									                    <td>
 									                        <div class='single-line-radio'>
-									                            <input type='radio' name='suicideHistory' id='noSuicide' value='noSuicide' checked>
+									                            <input type='radio' name='suicideHistory' id='noSuicide' value='False' checked>
 									                        </div>
 									                    </td>
 									                    <td>
@@ -419,7 +414,7 @@
 
 	                            	<tr>
 	                            		<td>
-	                            			<textarea cols='55' rows='3' name='learnFamilyAnger' id='learnFamilyAnger'></textarea>
+	                            			<textarea cols='55' rows='3' name='learnFamilyAnger' id='learnFamilyAnger'>{{fields.learnFamilyAnger}}</textarea>
 	                            		</td>
 	                            	</tr>
 

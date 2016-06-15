@@ -1223,9 +1223,10 @@ def am_control(request):
 			am.currentProblems.currentlyOnMeds = currentlyOnMeds
 			am.currentProblems.whichMeds = whichMeds
 			am.currentProblems.describeIssue = describeIssue
-			am.currentProblems.save()
-			am.currentProblemsComplete = True
-			am.save()
+			
+			# am.currentProblems.save()
+			# am.currentProblemsComplete = True
+			# am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
@@ -1340,43 +1341,47 @@ def am_problems(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-
-			date = datetime.now()
-			date = date.date()
-
-			kidMomAnger = request.POST.get('m_kidMomAnger', '')
-			kidDadAnger = request.POST.get('m_kidDadAnger', '')
-			kidSiblingAnger = request.POST.get('m_kidSiblingAnger', '')
-			kidOtherAnger = request.POST.get('m_kidOtherAnger', '')
-			learnFamilyAnger = request.POST.get('m_learnFamilyAnger', '')
-			suicideHistory = request.POST.get('m_suicideHistory', '')
-			hasLovingMother = request.POST.get('m_hasLovingMother', '')
-			hasLovingSiblings = request.POST.get('m_hasLovingSiblings', '')
-
-			#PROCESS CHECKBOXES
-			hasLovingMother = onTrue_offFalse(hasLovingMother)
-			hasLovingSiblings = onTrue_offFalse(hasLovingSiblings)
-
-			#UPDATE FAMILY OF ORGIN DATA
-			am.familyOrigin.date_of_assessment = date
-			am.familyOrigin.kidMomAnger = kidMomAnger
-			am.familyOrigin.kidDadAnger = kidDadAnger
-			am.familyOrigin.kidSiblingAnger = kidSiblingAnger
-			am.familyOrigin.kidOtherAnger = kidOtherAnger
-			am.familyOrigin.learnFamilyAnger = learnFamilyAnger
-			am.familyOrigin.suicideHistory = suicideHistory
-			am.familyOrigin.hasLovingMother = hasLovingMother
-			am.familyOrigin.hasLovingSiblings = hasLovingSiblings
-			am.familyOrigin.save()
-			am.familyOriginComplete = True
-			am.save()
-
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/currentProblems.html')
 			json_data = json.dumps(fields)
+
+			if back == 'false':
+				date = datetime.now()
+				date = date.date()
+
+				kidMomAnger = request.POST.get('kidMomAnger', '')
+				kidDadAnger = request.POST.get('kidDadAnger', '')
+				kidSiblingAnger = request.POST.get('kidSiblingAnger', '')
+				kidOtherAnger = request.POST.get('kidOtherAnger', '')
+				learnFamilyAnger = request.POST.get('learnFamilyAnger', '')
+				suicideHistory = request.POST.get('m_suicideHistory', '')
+				hasLovingMother = request.POST.get('m_hasLovingMother', '')
+				hasLovingSiblings = request.POST.get('m_hasLovingSiblings', '')
+
+				suicideHistory = truePythonBool(suicideHistory)
+				hasLovingMother = truePythonBool(hasLovingMother)
+				hasLovingSiblings = truePythonBool(hasLovingSiblings)
+
+				#UPDATE FAMILY OF ORGIN DATA
+				family = am.familyOrigin
+
+				family.date_of_assessment = date
+				family.kidMomAnger = kidMomAnger
+				family.kidDadAnger = kidDadAnger
+				family.kidSiblingAnger = kidSiblingAnger
+				family.kidOtherAnger = kidOtherAnger
+				family.learnFamilyAnger = learnFamilyAnger
+				family.suicideHistory = suicideHistory
+				family.hasLovingMother = hasLovingMother
+				family.hasLovingSiblings = hasLovingSiblings
+
+				am.familyOrigin.save()
+				am.familyOriginComplete = True
+				am.save()
+			
 			image = amSidebarImages(am, 'current')
 			classes = grabAmClassesCSS(am, 'current')
 
@@ -1384,9 +1389,7 @@ def am_problems(request):
 			content['image'] = image
 			content['json_data'] = json_data
 			content['AM'] = am
-			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content)
 
@@ -1625,6 +1628,13 @@ def am_familyOrigin(request):
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
+			json_data = json.dumps(fields)
+
+			content['json_data'] = json_data
+			content['fields'] = fields
+			content['AM'] = am
+			content['session'] = session		
 
 			if back == 'false':
 				angryPartner = request.POST.get('m_angryPartner', '')
@@ -1668,16 +1678,11 @@ def am_familyOrigin(request):
 				am.angerTargetComplete = True
 				am.save()
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
-			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'family')
 			classes = grabAmClassesCSS(am, 'family')
 
 			content['class'] = classes
 			content['image'] = image
-			content['json_data'] = json_data
-			content['AM'] = am
-			content['session'] = session
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/familyOrigin.html', content)
 
