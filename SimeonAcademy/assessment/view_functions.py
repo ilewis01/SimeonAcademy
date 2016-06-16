@@ -1053,6 +1053,17 @@ def grabAmAngerHistory3(am):
 
 	return fields
 
+def grabAmFinal(am):
+	fields = {}
+
+	fields['anythingelse'] = am.final.anythingelse
+	fields['changeLearn1'] = am.final.changeLearn1
+	fields['changeLearn2'] = am.final.changeLearn2
+	fields['changeLearn3'] = am.final.changeLearn3
+	fields['whoLivesWithClient'] = am.demographic.whoLivesWithClient
+
+	return fields
+
 def getAMFields(am, location):
 	fields = None
 
@@ -1081,7 +1092,7 @@ def getAMFields(am, location):
 	elif location == 'counselor/forms/AngerManagement/worstEpisodes.html':
 		fields = grabAmWorstEpisodes(am)
 	elif location == 'counselor/forms/AngerManagement/final.html':
-		fields = None
+		fields = grabAmFinal(am)
 
 	return fields
 

@@ -239,6 +239,7 @@ class AM_Demographic(models.Model):
 	own = models.BooleanField(default=False, blank=True)
 	months_res = models.IntegerField(default=0)
 	years_res = models.IntegerField(default=0)
+	whoLivesWithClient = models.CharField(max_length=500, default=None, blank=True, null=True)
 	
 	num_children = models.IntegerField(default=0)
 	other_dependants = models.IntegerField(default=0)

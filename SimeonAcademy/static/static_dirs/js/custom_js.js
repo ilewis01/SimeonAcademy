@@ -2811,6 +2811,8 @@ function continue_to_am_final() {
 
 function continue_to_amViewForm() {
 	var proceed = true;
+	
+	document.getElementById('back_btn').value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();

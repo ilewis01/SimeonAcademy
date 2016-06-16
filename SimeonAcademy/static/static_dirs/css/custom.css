@@ -829,6 +829,18 @@ button:hover {
 	margin-left: 17px;
 }
 
+#numbered_textarea {
+	margin-left: 20px;
+	margin-right: 7px;
+	font-weight: bold;
+	color: #74797A;
+}
+
+#h4_header_tag {
+	color: #74797A;
+	font-weight: bold;
+}
+
 
 
 

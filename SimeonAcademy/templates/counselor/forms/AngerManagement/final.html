@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initalize_am_connections({{json_data}});">
+<body class="gradient-white">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -10,13 +10,20 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <table class='session-side'>
-                <tr>
+
+                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+                    <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                    <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                </form>
+                
+                <!-- <tr>
                     <td>
                         <div style='font-size:20px;'>
                             <h4>Details:</h4>
                         </div>
                     </td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <td>
@@ -298,7 +305,7 @@
 
 	            <div class="container">
 	            	<div class="row">                   
-	                  	<div class="col-md-12 col-sm-12">
+	                  	<div class="col-md-5 col-sm-5">
 	                  		<form action='/am_viewForm/' method='post' id='am_demo'> {% csrf_token %}
 	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
 	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
@@ -306,69 +313,109 @@
 	                  			<input type='hidden' name='back_btn' id='back_btn' value=''>
 	                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
-	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_anythingelse' id='m_anythingelse'>
-	                            <input type='hidden' value='' name='m_changeLearn1' id='m_changeLearn1'>
-	                            <input type='hidden' value='' name='m_changeLearn2' id='m_changeLearn2'>
-	                            <input type='hidden' value='' name='m_changeLearn3' id='m_changeLearn3'>
+                                <!-- ______________________________LEFT SIDE_________________________________ -->
+                                <div id='h4_header_tag'>
+                                    <h4>Additional Information</h4>
+                                </div>
 
-	                            <ul>
-	                            	<li>
-	                            		<h5><em>Is there anything else that you can tell me that might help me understand <br>your anger and how it affects you and others?</em></h5>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for='whoLivesWithClient'>
+                                                1. Who lives with client at residence (include names, ages, and relationships to client)
+                                            </label>
+                                        </td>
+                                    </tr>
 
-	                            		<textarea name='anythingelse' id='anythingelse' rows='5' cols='70'></textarea>
-	                            	</li>
+                                    <tr>
+                                        <td>
+                                            <textarea rows='4' cols='66' name='whoLivesWithClient' id='whoLivesWithClient'>{{fields.whoLivesWithClient}}</textarea>
+                                        </td>
+                                    </tr>
 
-	                            	<br><br>
+                                    <tr><td><div style='margin-bottom:20px;'></div></td></tr>
+                                </table>
 
-	                            	<li>
-	                            		<h5><em>Would you like to change or learn anything as a result of counseling?</em></h5>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for='anythingelse'>
+                                                2. Is there anything else that you can tell me that might help me understand your anger and how it affects you and others?
+                                            </label>
+                                        </td>
+                                    </tr>
 
-	                            		<table>
-	                            			<tr>
-	                            				<td>
-	                            					<label for='changeLearn1'><span class="sidebar-id2">Recommendation 1:</span></label>
-	                            				</td>
-	                            			</tr>
+                                    <tr>
+                                        <td>
+                                            <textarea rows='8' cols='66' name='anythingelse' id='anythingelse'>{{fields.anythingelse}}</textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                            
+                        </div>
 
-	                            			<tr>
-	                            				<td>
-	                            					<textarea name='changeLearn1' id='changeLearn1' rows='3' cols='70'></textarea>
-	                            				</td>
-	                            			</tr>
-	                            		</table><br>
+                        <div class="col-md-5 col-sm-5">
+                                <!-- ______________________________RIGHT SIDE_________________________________ -->
+                                <div id='h4_header_tag'>
+                                    <h4>Recommendations</h4>
+                                </div>
 
-	                            		<table>
-	                            			<tr>
-	                            				<td>
-	                            					<label for='changeLearn2'><span class="sidebar-id2">Recommendation 2:</span></label>
-	                            				</td>
-	                            			</tr>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                What would you like to change or learn as a result of counseling?
+                                            </label>
+                                        </td>
+                                    </tr>
 
-	                            			<tr>
-	                            				<td>
-	                            					<textarea name='changeLearn2' id='changeLearn2' rows='3' cols='70'></textarea>
-	                            				</td>
-	                            			</tr>
-	                            		</table><br>
+                                    <tr><td><div style='margin-bottom:20px;'></div></td></tr>
+                                </table>
 
-	                            		<table>
-	                            			<tr>
-	                            				<td>
-	                            					<label for='changeLearn3'><span class="sidebar-id2">Recommendation 3:</span></label>
-	                            				</td>
-	                            			</tr>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span id='numbered_textarea'>
+                                                1.
+                                            </span>
+                                        </td>
 
-	                            			<tr>
-	                            				<td>
-	                            					<textarea name='changeLearn3' id='changeLearn3' rows='3' cols='70'></textarea>
-	                            				</td>
-	                            			</tr>
-	                            		</table>
-	                            	</li>
-	                            </ul>   
-	                        </form>	              
-	                    </div>
+                                        <td>
+                                            <textarea rows='4' cols='62' name='changeLearn1' id='changeLearn1'>{{fields.changeLearn1}}</textarea>
+                                        </td>
+                                    </tr>
+
+                                    <tr><td><div style='margin-bottom:25px;'></div></td></tr>
+
+                                    <tr>
+                                        <td>
+                                            <span id='numbered_textarea'>
+                                                2.
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <textarea rows='4' cols='62' name='changeLearn2' id='changeLearn2'>{{fields.changeLearn2}}</textarea>
+                                        </td>
+                                    </tr>
+
+                                    <tr><td><div style='margin-bottom:25px;'></div></td></tr>
+
+                                    <tr>
+                                        <td>
+                                            <span id='numbered_textarea'>
+                                                3.
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <textarea rows='4' cols='62' name='changeLearn3' id='changeLearn3'>{{fields.changeLearn3}}</textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
 	                </div>
 
 	                <div class="row">
@@ -394,19 +441,7 @@
 				                    </div>
 			                    </td>
 
-                          <td>
-                            <div id="submit-space">
-                                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
-                                  <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                                  <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
-                                  <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-                                </form>
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick='javascript: exit_am("exit_only");' id='continue'>Delete and Exit</button>
-                                </a>
-                            </div>
-                          </td>
+            
 
                           <td>
                             <div id="submit-space">

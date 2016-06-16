@@ -1718,10 +1718,6 @@ def am_final(request):
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/final.html')
-			json_data = json.dumps(fields)
-			image = amSidebarImages(am, 'final')
-			classes = grabAmClassesCSS(am, 'final')
 
 			if back == 'false':
 				date = datetime.now()
@@ -1764,6 +1760,11 @@ def am_final(request):
 				am.controlComplete = True
 				am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/final.html')
+			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'final')
+			classes = grabAmClassesCSS(am, 'final')
+
 			content['class'] 		= classes
 			content['image'] 		= image
 			content['fields'] 		= fields
@@ -1790,103 +1791,40 @@ def am_viewForm(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			date_of_form = am.start_time
-			date_of_form = date_of_form.date()
+			print "Back: " + str(back)
 
-			unchecked = "/static/images/unchecked_checkbox.png"
-			checked = "/static/images/checked_checkbox.png"
+			if back == 'false':
+				anythingelse = request.POST.get('anythingelse', '')
+				changeLearn1 = request.POST.get('changeLearn1', '')
+				changeLearn2 = request.POST.get('changeLearn2', '')
+				changeLearn3 = request.POST.get('changeLearn3', '')
+				whoLivesWithClient = request.POST.get('whoLivesWithClient', '')
 
-			images = {}
-			spouse = None
+				date = datetime.now()
+				date = date.date()
 
-			if am.demographic.maritalStatus.status == 'Married':
-				spouse = '1'
-			else:
-				spouse = '0'
+				final = am.final
+				demo = am.demographic
 
-			#PROCESS MARITAL STATUS CHECKBOXES
-			if am.demographic.maritalStatus.status == 'Divorced':
-				images['divorced'] 	= checked
-				images['single'] 	= unchecked
-				images['separated'] = unchecked
-				images['married'] 	= unchecked
-			elif am.demographic.maritalStatus.status == 'Single':
-				images['divorced'] 	= unchecked
-				images['single'] 	= checked
-				images['separated'] = unchecked
-				images['married'] 	= unchecked
-			elif am.demographic.maritalStatus.status == 'Married':
-				images['divorced'] 	= unchecked
-				images['single'] 	= unchecked
-				images['separated'] = unchecked
-				images['married'] 	= checked
-			elif am.demographic.maritalStatus.status == 'Separated':
-				images['divorced'] 	= unchecked
-				images['single'] 	= unchecked
-				images['separated'] = checked
-				images['married'] 	= unchecked
+				demo.whoLivesWithClient = whoLivesWithClient
+				demo.save()
 
-			#PROCESS LIVING SITUATION CHECKBOXES
-			if am.demographic.livingSituation.situation == 'Live with friend':
-				images['friend'] 	= checked
-				images['family'] 	= unchecked
-				images['alone'] 	= unchecked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live with family':
-				images['friend'] 	= unchecked
-				images['family'] 	= checked
-				images['alone'] 	= unchecked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live alone':
-				images['friend'] 	= unchecked
-				images['family'] 	= unchecked
-				images['alone'] 	= checked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live with partner':
-				images['friend'] 	= unchecked
-				images['family'] 	= unchecked
-				images['alone'] 	= unchecked
-				images['partner'] 	= checked
+				final.date_of_assessment = date
+				final.anythingelse = anythingelse
+				final.changeLearn1 = changeLearn1
+				final.changeLearn2 = changeLearn2
+				final.changeLearn3 = changeLearn3
+				final.save()
 
-			#PROCESS HEALTH CHECKBOX IMAGES
-			if am.demographic.health_problem == True:
-				images['goodHealth'] = checked
-				images['badHealth'] = unchecked
-			else:
-				images['goodHealth'] = unchecked
-				images['badHealth'] = checked
+				am.finalComplete = True
+				am.save()
 
-			if am.demographic.medication == True:
-				images['onMeds'] = checked
-				images['noMeds'] = unchecked
-			else:
-				images['onMeds'] = unchecked
-				images['noMeds'] = checked
-
-			#PROCESS EMPLOYER PHONE NUMBER
-			emp_phone = convert_phone(am.demographic.employer_phone)
-
-			#PROCESS RENT/OWN CHECKBOXES
-			if am.demographic.own == True:
-				images['own'] = checked
-				images['rent'] = unchecked
-				
-			else:
-				images['own'] = unchecked
-				images['rent'] = checked				
-
-			content['emp_phone'] = emp_phone
-			content['spouse'] = spouse
-			content['images'] = images
-			content['phone'] = convert_phone(am.client.phone)
-			content['date_of_form'] = date_of_form
 			content['AM'] = am			
-			content['client'] = am.client
 			content['session'] = session			
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
