@@ -10,13 +10,18 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
         	<table class='session-side'>
-        		<tr>
+                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+                    <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                    <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                </form>
+        		<!-- <tr>
         			<td>
         				<div style='font-size:20px;'>
         					<h4>Details:</h4>
         				</div>
         			</td>
-        		</tr>
+        		</tr> -->
 
         		<tr>
         			<td>
@@ -365,7 +370,7 @@
 	                            					<tr>
 	                            						<td>
 	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='whatSayYou' id='whatSayYou'></textarea>
+	                            								<textarea cols='53' rows='2' name='whatSayYou' id='whatSayYou'>{{fields.whatSayYou}}</textarea>
 	                            							</div>
 	                            						</td>
 	                            					</tr>
@@ -398,7 +403,7 @@
 
 	                            						<td>
 	                            							<div id='inline-text-field'>
-	                            								<input type='text' name='howLongLeaveScene' id='howLongLeaveScene'>
+	                            								<input type='text' name='howLongLeaveScene' id='howLongLeaveScene' value='{{fields.howLongLeaveScene}}'>
 	                            							</div>
 	                            						</td>
 	                            					</tr>
@@ -419,7 +424,7 @@
 	                            			<td></td>
 	                            			<td>
 	                            				<div class='indentForm2'>
-	                            					<textarea name='whatDoLeave' id='whatDoLeave' rows='2' cols='53'></textarea>
+	                            					<textarea name='whatDoLeave' id='whatDoLeave' rows='2' cols='53'>{{fields.whatDoLeave}}</textarea>
 	                            				</div>
 	                            			</td>
 	                            		</tr>
@@ -469,7 +474,7 @@
 	                            					<tr>
 	                            						<td>
 	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='howRelax' id='howRelax'></textarea>
+	                            								<textarea cols='53' rows='2' name='howRelax' id='howRelax'>{{fields.howRelax}}</textarea>
 	                            							</div>
 	                            						</td>
 	                            					</tr>
@@ -504,7 +509,7 @@
 	                            					<tr>
 	                            						<td>
 	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='doWhatOtherControl' id='doWhatOtherControl'></textarea>
+	                            								<textarea cols='53' rows='2' name='doWhatOtherControl' id='doWhatOtherControl'>{{fields.doWhatOtherControl}}</textarea>
 	                            							</div>
 	                            						</td>
 	                            					</tr>
@@ -536,28 +541,6 @@
                         			<div style='margin-left:12px;'>
 				                        <a href="#menu-toggle" id="menu-toggle">
 				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
-
-                          <td>
-                            <div id="submit-space">
-                                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
-                                  <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                                  <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                                  <input type='hidden' name='exit_type' id='exit_type' value=''>
-                                  <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-                                </form>
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick='javascript: exit_am("exit_only");' id='continue'>Delete and Exit</button>
-                                </a>
-                            </div>
-                          </td>
-
-			                    <td>
-			                    	<div id="submit-space">
-				                        <a href="javascript: " id="continue">
-				                        	<button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Save and Exit</button>
 				                        </a>
 				                    </div>
 			                    </td>

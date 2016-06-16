@@ -2668,6 +2668,7 @@ function talkMyself() {
 	else {
 		whatSayYou_label.style.opacity = '0.3';
 		whatSayYou.style.opacity = '0.3';
+		whatSayYou.value = '';
 		whatSayYou.disabled = true;
 	}
 }
@@ -2690,6 +2691,8 @@ function leaveSceneCheckbox() {
 	else {
 		whatDoLeave.style.opacity = '0.3';
 		howLongLeaveScene.style.opacity = '0.3';
+		howLongLeaveScene.value = '';
+		whatDoLeave.value = '';
 		howLongLeaveScene.disabled = true;
 		whatDoLeave.disabled = true;
 		howLongLeaveScene_label.style.opacity = '0.3';
@@ -2710,6 +2713,7 @@ function howRelaxCheckbox() {
 	else {
 		howRelax_label.style.opacity = '0.3';
 		howRelax.style.opacity = '0.3';
+		howRelax.value = '';
 		howRelax.disabled = true;
 	}
 }
@@ -2727,11 +2731,26 @@ function otherControlCheckbox() {
 	else {
 		doWhatOtherControl_label.style.opacity = '0.3';
 		doWhatOtherControl.style.opacity = '0.3';
+		doWhatOtherControl.value = '';
 		doWhatOtherControl.disabled = true;
 	}
 }
 
 function initalize_am_control(json_data) {
+	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
+	var talkToMyself = document.getElementById('talkToMyself');
+	var leaveScene = document.getElementById('leaveScene');
+	var selfHelpGroup = document.getElementById('selfHelpGroup');
+	var relax = document.getElementById('relax');
+	var otherControlAnger = document.getElementById('otherControlAnger');
+
+	initializeAllCheckBoxes(json_data.neverAttemptedControl, neverAttemptedControl);
+	initializeAllCheckBoxes(json_data.talkToMyself, talkToMyself);
+	initializeAllCheckBoxes(json_data.leaveScene, leaveScene);
+	initializeAllCheckBoxes(json_data.selfHelpGroup, selfHelpGroup);
+	initializeAllCheckBoxes(json_data.relax, relax);
+	initializeAllCheckBoxes(json_data.otherControlAnger, otherControlAnger);
+
 	talkMyself();
 	leaveSceneCheckbox();
 	howRelaxCheckbox();
@@ -2740,6 +2759,50 @@ function initalize_am_control(json_data) {
 
 function continue_to_am_final() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
+	//M_VALUES
+	var m_neverAttemptedControl = document.getElementById('m_neverAttemptedControl');
+	var m_talkToMyself = document.getElementById('m_talkToMyself');
+	var m_whatSayYou = document.getElementById('m_whatSayYou');
+	var m_leaveScene = document.getElementById('m_leaveScene');
+	var m_howLongLeaveScene = document.getElementById('m_howLongLeaveScene');
+	var m_whatDoLeave = document.getElementById('m_whatDoLeave');
+	var m_relax = document.getElementById('m_relax');
+	var m_howRelax = document.getElementById('m_howRelax');
+	var m_selfHelpGroup = document.getElementById('m_selfHelpGroup');
+	var m_otherControlAnger = document.getElementById('m_otherControlAnger');
+	var m_doWhatOtherControl = document.getElementById('m_doWhatOtherControl');
+
+	//CHECKBOXES
+	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
+	var talkToMyself = document.getElementById('talkToMyself');
+	var leaveScene = document.getElementById('leaveScene');
+	var selfHelpGroup = document.getElementById('selfHelpGroup');
+	var relax = document.getElementById('relax');
+	var otherControlAnger = document.getElementById('otherControlAnger');
+
+	//DYNAMIC FIELDS
+	var whatSayYou = document.getElementById('whatSayYou');
+	var howLongLeaveScene = document.getElementById('howLongLeaveScene');
+	var whatDoLeave = document.getElementById('whatDoLeave');
+	var howRelax = document.getElementById('howRelax');
+	var doWhatOtherControl = document.getElementById('doWhatOtherControl');
+
+	postCheckboxValue(neverAttemptedControl, m_neverAttemptedControl);
+	postCheckboxValue(talkToMyself, m_talkToMyself);
+	postCheckboxValue(leaveScene, m_leaveScene);
+	postCheckboxValue(selfHelpGroup, m_selfHelpGroup);
+	postCheckboxValue(relax, m_relax);
+	postCheckboxValue(otherControlAnger, m_otherControlAnger);
+
+	processDynamicTextPostValue(talkToMyself, whatSayYou, m_whatSayYou);
+	processDynamicTextPostValue(leaveScene, howLongLeaveScene, m_howLongLeaveScene);
+	processDynamicTextPostValue(leaveScene, whatDoLeave, m_whatDoLeave);
+	processDynamicTextPostValue(relax, howRelax, m_howRelax);
+	processDynamicTextPostValue(otherControlAnger, doWhatOtherControl, m_doWhatOtherControl);
+
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();

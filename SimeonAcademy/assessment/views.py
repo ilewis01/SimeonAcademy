@@ -1236,9 +1236,9 @@ def am_control(request):
 				current.whichMeds = whichMeds
 				current.describeIssue = describeIssue
 
-				am.currentProblems.save()
-				am.currentProblemsComplete = True
-				am.save()
+				# am.currentProblems.save()
+				# am.currentProblemsComplete = True
+				# am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
@@ -1714,21 +1714,63 @@ def am_final(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/final.html')
+			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'final')
 			classes = grabAmClassesCSS(am, 'final')
 
-			content['class'] = classes
-			content['image'] = image
+			if back == 'false':
+				date = datetime.now()
+				date = date.date()
 
-			content['AM'] = am
-			content['client'] = am.client
-			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
-			content['title'] = "Anger Management Assessment | Simeon Academy"
+				neverAttemptedControl 	= request.POST.get('m_neverAttemptedControl', '')
+				talkToMyself 			= request.POST.get('m_talkToMyself', '')
+				whatSayYou 				= request.POST.get('m_whatSayYou', '')
+				leaveScene 				= request.POST.get('m_leaveScene', '')
+				howLongLeaveScene 		= request.POST.get('m_howLongLeaveScene', '')
+				whatDoLeave 			= request.POST.get('m_whatDoLeave', '')
+				relax 					= request.POST.get('m_relax', '')
+				howRelax 				= request.POST.get('m_howRelax', '')
+				selfHelpGroup 			= request.POST.get('m_selfHelpGroup', '')
+				otherControlAnger 		= request.POST.get('m_otherControlAnger', '')
+				doWhatOtherControl 		= request.POST.get('m_doWhatOtherControl', '')
+
+				neverAttemptedControl 	= truePythonBool(neverAttemptedControl)
+				talkToMyself 			= truePythonBool(talkToMyself)
+				leaveScene 				= truePythonBool(leaveScene)
+				relax 					= truePythonBool(relax)
+				selfHelpGroup 			= truePythonBool(selfHelpGroup)
+				otherControlAnger 		= truePythonBool(otherControlAnger)
+
+				control = am.control
+				control.neverAttemptedControl = neverAttemptedControl
+				control.talkToMyself = talkToMyself
+				control.whatSayYou = whatSayYou
+				control.leaveScene = leaveScene
+				control.howLongLeaveScene = howLongLeaveScene
+				control.whatDoLeave = whatDoLeave
+				control.relax = relax
+				control.howRelax = howRelax
+				control.selfHelpGroup = selfHelpGroup
+				control.otherControlAnger = otherControlAnger
+				control.doWhatOtherControl = doWhatOtherControl
+				control.date_of_assessment = date
+
+				control.save()
+				am.controlComplete = True
+				am.save()
+
+			content['class'] 		= classes
+			content['image'] 		= image
+			content['fields'] 		= fields
+			content['json_data'] 	= json_data
+			content['AM'] 			= am
+			content['session'] 		= session
+			content['title'] 		= "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/final.html', content)
 
 @login_required(login_url='/index')

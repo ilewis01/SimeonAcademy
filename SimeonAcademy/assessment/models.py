@@ -507,7 +507,7 @@ class AM_Control(models.Model):
 	talkToMyself = models.BooleanField(blank=True, default=False)
 	whatSayYou = models.CharField(max_length=50, default=None, blank=True, null=True)
 	leaveScene = models.BooleanField(blank=True, default=False)
-	howLongLeaveScene = models.IntegerField(default=0)
+	howLongLeaveScene = models.CharField(max_length=50, default=None, blank=True, null=True)
 	whatDoLeave = models.CharField(max_length=100, default=None, blank=True, null=True)
 	relax = models.BooleanField(blank=True, default=False)
 	howRelax = models.CharField(max_length=200, default=None, blank=True, null=True)
