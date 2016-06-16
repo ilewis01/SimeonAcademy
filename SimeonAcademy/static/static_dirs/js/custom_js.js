@@ -27,6 +27,24 @@ function set_radio_buttons() {
 	client_ID.style.opacity = '0.5';
 }
 
+function nullTextMustDie(element) {
+	if (String(element.value) === '' || String(element.value) === 'NA' || String(element.value) === 'None' || String(element.value) === 'N/A') {
+		element.value = '';
+	}
+}
+
+function nullTextMustDie2(element) {
+	if (String(element.value) === '' || String(element.value) === 'None') {
+		element.value = '';
+	}
+}
+
+function nullTextMustDie3(element) {
+	if (String(element.value) === '' || String(element.value) === 'NA') {
+		element.value = '';
+	}
+}
+
 function processDynamicTextPostValue(trigger, element, m_element) {
 	if (trigger.checked === true) {
 		m_element.value = element.value;
@@ -737,6 +755,8 @@ function activateWorstRadio() {
 }
 
 function initalize_am_worst(json_data) {
+	var back = document.getElementById('back_btn');
+
 	var whoWorst = document.getElementById('whoWorst');
 	var happenedWorst = document.getElementById('happenedWorst');
 	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
@@ -765,6 +785,21 @@ function initalize_am_worst(json_data) {
 
 	worstCheck();
 	activateWorstRadio();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('whoWorst'));
+		nullTextMustDie(document.getElementById('happenedWorst'));
+		nullTextMustDie(document.getElementById('wordThoughtWorst'));
+		nullTextMustDie(document.getElementById('howStartWorst'));
+		nullTextMustDie(document.getElementById('howEndWorst'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('whoWorst'));
+		nullTextMustDie2(document.getElementById('happenedWorst'));
+		nullTextMustDie2(document.getElementById('wordThoughtWorst'));
+		nullTextMustDie2(document.getElementById('howStartWorst'));
+		nullTextMustDie2(document.getElementById('howEndWorst'));
+	}
 }
 
 function continue_to_target() {
@@ -834,6 +869,8 @@ function amTargetOther() {
 }
 
 function initalize_am_target(json_data) {
+	var back = document.getElementById('back_btn');
+
 	var angryPartner = document.getElementById('angryPartner');
 	var angryParents = document.getElementById('angryParents');
 	var angryChildren = document.getElementById('angryChildren');
@@ -856,6 +893,13 @@ function initalize_am_target(json_data) {
 	initializeAllCheckBoxes(json_data.seldomUpset, seldomUpset);
 
 	amTargetOther();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('angryAbout'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('angryAbout'));
+	}
 }
 
 function continue_to_am_family() {
@@ -903,6 +947,8 @@ function continue_to_am_family() {
 
 // AM FAMILY OF ORIGIN FUNCTIONS
 function initalize_family_origin(json_data) {
+	var back = document.getElementById('back_btn');
+
 	var hasLovingMother = document.getElementById('hasLovingMother');
 	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
 	var hasSuicide = document.getElementById('hasSuicide');
@@ -911,6 +957,21 @@ function initalize_family_origin(json_data) {
 	initializeAllCheckBoxes(json_data.hasLovingMother, hasLovingMother);
 	initializeAllCheckBoxes(json_data.hasLovingSiblings, hasLovingSiblings);
 	setRadioElement(json_data.suicideHistory, hasSuicide, noSuicide);
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('kidDadAnger'));
+		nullTextMustDie(document.getElementById('kidMomAnger'));
+		nullTextMustDie(document.getElementById('kidSiblingAnger'));
+		nullTextMustDie(document.getElementById('kidOtherAnger'));
+		nullTextMustDie(document.getElementById('learnFamilyAnger'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('kidDadAnger'));
+		nullTextMustDie2(document.getElementById('kidMomAnger'));
+		nullTextMustDie2(document.getElementById('kidSiblingAnger'));
+		nullTextMustDie2(document.getElementById('kidOtherAnger'));
+		nullTextMustDie2(document.getElementById('learnFamilyAnger'));
+	}
 }
 
 function continue_to_am_problems() {
@@ -1242,6 +1303,8 @@ function medsRadioBtn() {
 }
 
 function initialize_am_demo(json_data, back) {
+	var back = document.getElementById('back_btn');
+
 	//DROP DOWN MENUS
 	var maritalStatus = document.getElementById('maritalStatus');
 	var livingSituation = document.getElementById('livingSituation');
@@ -1270,6 +1333,13 @@ function initialize_am_demo(json_data, back) {
 
 	dropOutRadio();
 	healthRadioBtn();
+
+	if (back.value === 'false') {
+		nullTextMustDie(document.getElementById('job_title'));
+		nullTextMustDie(document.getElementById('employer'));
+		nullTextMustDie(document.getElementById('emp_address'));
+		nullTextMustDie(document.getElementById('employer_phone'));
+	}
 }
 
 
@@ -2344,6 +2414,8 @@ function radioRightNoLower() {
 }
 
 function initialize_am_drug_history(json_data) {
+	var back = document.getElementById('back_btn');
+
 	//INITIALIZE RADIO BUTTONS
 	var current_use = document.getElementById('current_use');
 	var no_current_use = document.getElementById('no_current_use');
@@ -2413,11 +2485,13 @@ function initialize_am_drug_history(json_data) {
 		opacityLow(document.getElementById('trigger_label'));
 		document.getElementById('relapse_explain').disabled = true;
 	}
-	// if (document.getElementById('not_abstinent').checked === true) {
-	// 	document.getElementById('relapse_explain').disabled = false;
-	// 	opacityHigh(document.getElementById('relapse_explain'));
-	// 	opacityHigh(document.getElementById('trigger_label'));		
-	// }
+	
+	if (String(back.value) == 'false') {
+		nullTextMustDie(document.getElementById('first_use_type'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('first_use_type'));
+	}
 }
 
 function continue_am_dh() {
@@ -2533,6 +2607,8 @@ function parentsFoughtRadio() {
 }
 
 function initialize_am_childhood(json_data) {
+	var back = document.getElementById('back_btn');
+
 	//text fields
 	var raisedBy = document.getElementById('raisedBy');
 	var traumaExplain = document.getElementById('traumaExplain');
@@ -2596,15 +2672,26 @@ function initialize_am_childhood(json_data) {
 	setRadioElement(json_data.wasAbused, childAbused, childNotAbused);
 	setRadioElement(json_data.childAnger, hadAngerChild, noAngerChild);
 	setRadioElement(json_data.otherChild, haveOtherEvents, noOtherEvents);
-	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);	
-
-	back = document.getElementById('back_btn');
+	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);
 
 	childTraumaRadio();
 	childAbusedRadio();
 	hadChildAngerRadio();
 	otherEventsHelpRadio();
 	parentsFoughtRadio();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('howLeftHome'));
+		nullTextMustDie(document.getElementById('siblingsRelationshipExplain'));
+		nullTextMustDie(document.getElementById('dadCloseExplain'));
+		nullTextMustDie(document.getElementById('momCloseExplain'));
+	}
+	else {
+		nullTextMustDie3(document.getElementById('howLeftHome'));
+		nullTextMustDie3(document.getElementById('siblingsRelationshipExplain'));
+		nullTextMustDie3(document.getElementById('dadCloseExplain'));
+		nullTextMustDie3(document.getElementById('momCloseExplain'));
+	}
 }
 
 function continue_am_history1() {
@@ -2807,6 +2894,26 @@ function continue_to_am_final() {
 	}
 }
 
+function initalize_am_final() {
+	var back = document.getElementById('back_btn');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('whoLivesWithClient'));
+		nullTextMustDie(document.getElementById('anythingelse'));
+		nullTextMustDie(document.getElementById('changeLearn1'));
+		nullTextMustDie(document.getElementById('changeLearn2'));
+		nullTextMustDie(document.getElementById('changeLearn3'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('whoLivesWithClient'));
+		nullTextMustDie2(document.getElementById('anythingelse'));
+		nullTextMustDie2(document.getElementById('changeLearn1'));
+		nullTextMustDie2(document.getElementById('changeLearn2'));
+		nullTextMustDie2(document.getElementById('changeLearn3'));
+	}
+}
+
 function continue_to_amViewForm() {
 	var proceed = true;
 	
@@ -2936,6 +3043,8 @@ function psychoClick() {
 }
 
 function initialize_am_angerHistory(json_data) {
+	back = document.getElementById('back_btn');
+
 	//CHECKE BOXES
 	var physicalRecentV = document.getElementById('physicalRecentV');
 	var verbalRecentV = document.getElementById('verbalRecentV');
@@ -2967,6 +3076,23 @@ function initialize_am_angerHistory(json_data) {
 	// AHcompletedRadioActivate();
 	turnOnAH1();
 	psychoClick();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('recentIncidentV'));
+		nullTextMustDie(document.getElementById('happenedRecentV'));
+		nullTextMustDie(document.getElementById('typeWordsRecentV'));
+		nullTextMustDie(document.getElementById('recentVDate'));
+		nullTextMustDie(document.getElementById('recentVlocation'));
+		nullTextMustDie(document.getElementById('withWhomRecentV'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('recentIncidentV'));
+		nullTextMustDie2(document.getElementById('happenedRecentV'));
+		nullTextMustDie2(document.getElementById('typeWordsRecentV'));
+		nullTextMustDie2(document.getElementById('recentVDate'));
+		nullTextMustDie2(document.getElementById('recentVlocation'));
+		nullTextMustDie2(document.getElementById('withWhomRecentV'));
+	}
 }
 
 function continue_to_am_AH2() {
@@ -3332,6 +3458,8 @@ function suicide30recent() { //top level radio button
 }
 
 function initialize_am_angerHistory2(json_data) {
+	var back = document.getElementById('back_btn');
+
 	//RADIO BUTTONS
 	var hasExperience = document.getElementById('hasExperience');
 	var noExperience = document.getElementById('noExperience');
@@ -3541,6 +3669,8 @@ function ah3number2() {
 }
 
 function initialize_am_angerHistory3(json_data) {
+	var back = document.getElementById('back_btn');
+
 	//RADIO BUTTONS
 	var isHomicidal = document.getElementById('isHomicidal');
 	var notHomicidal = document.getElementById('notHomicidal');
@@ -3609,6 +3739,13 @@ function initialize_am_angerHistory3(json_data) {
 
 	homicidalRadio();
 	ah3number2();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('durationRecentV'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('durationRecentV'));
+	}
 }
 
 function proceed_to_connections() {

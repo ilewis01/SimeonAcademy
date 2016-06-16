@@ -912,6 +912,7 @@ def grabAmTarget(am):
 
 def getAMDemoFields(am):
 	data = {}
+	phone = None
 
 	if am.demographic.maritalStatus == None:
 		data['maritalStatus'] = 0
@@ -928,7 +929,10 @@ def getAMDemoFields(am):
 	else:
 		data['education'] = convertEducationToIndex(am.demographic.education.level)
 
-	phone = convert_phone(am.demographic.employer_phone)
+	if am.demographic.employer_phone == None:
+		phone = am.demographic.employer_phone
+	else:
+		phone = convert_phone(am.demographic.employer_phone)
 
 	data['own'] = convertToJavascriptBool(am.demographic.own)
 	data['months_res'] = am.demographic.months_res

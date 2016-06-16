@@ -686,6 +686,7 @@ def am_angerHistory2(request):
 			content['AM'] = am
 			content['session'] = session
 			content['title'] = "Anger Management Assessment | Simeon Academy"
+			content['back'] = back
 
 			if back == 'false':
 				#UPDATE AH1
@@ -801,6 +802,7 @@ def am_angerHistory3(request):
 			content['AM'] = am
 			content['fields'] = fields
 			content['json_data'] = json_data
+			content['back'] = back
 
 			print "Back: " + str(back)
 
@@ -954,7 +956,7 @@ def am_angerTarget(request):
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
+			content['back'] = back
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/AngerTarget.html', content)
 
@@ -1466,6 +1468,7 @@ def am_demographic(request):
 				content['AM'] = am
 				content['json_data'] = json_data
 				content['fields'] = fields
+				content['back'] = back
 
 				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			
@@ -1602,7 +1605,8 @@ def am_familyOrigin(request):
 			content['json_data'] = json_data
 			content['fields'] = fields
 			content['AM'] = am
-			content['session'] = session		
+			content['session'] = session
+			content['back'] = back		
 
 			if back == 'false':
 				angryPartner = request.POST.get('m_angryPartner', '')
@@ -1722,6 +1726,7 @@ def am_final(request):
 			image = amSidebarImages(am, 'final')
 			classes = grabAmClassesCSS(am, 'final')
 
+			content['back'] = back
 			content['class'] 		= classes
 			content['image'] 		= image
 			content['fields'] 		= fields
@@ -1973,7 +1978,7 @@ def am_worst(request):
 			content['AM'] = am
 			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
+			content['back'] = back
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/worstEpisodes.html', content)
 
