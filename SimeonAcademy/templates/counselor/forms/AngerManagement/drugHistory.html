@@ -219,6 +219,72 @@
                 </div>
               </td>
             </tr>
+
+            <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("exit_save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("exit_only");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
           </table>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -748,30 +814,6 @@
                         			<div style='margin-left:12px;'>
 				                        <a href="#menu-toggle" id="menu-toggle" class='but_a'>
 				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
-
-                          <td>
-                            <div id="submit-space">
-                                <a href="javascript: exit_am2('exit_only');" id="continue" class='but_a'>
-                                  <button type='button' id='continue'>Exit</button>
-                                </a>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div id="submit-space">
-                                <a href="javascript: exit_am2('exit_save');" id="continue" class='but_a'>
-                                  <button type='button' id='save_and_exit' name='save_and_exit'>Save and Exit</button>
-                                </a>
-                            </div>
-                          </td>
-
-			                    <td>
-			                    	<div id="submit-space">
-				                        <a href='javascript: back({{back_url}});' class='but_a'>
-				                        	<button type='button' id='exit_no_save' name='exit_no_save'>Back</button>
 				                        </a>
 				                    </div>
 			                    </td>

@@ -1190,43 +1190,55 @@ def am_control(request):
 		else:
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
-			back = request.POST.get('back')
+			back = request.POST.get('back_btn')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			date = datetime.now()
-			date = date.date()
+			if back == 'false':
+				date = datetime.now()
+				date = date.date()
 
-			brainInjury = request.POST.get('brainInjury', '')
-			stroke = request.POST.get('stroke', '')
-			epilepsy = request.POST.get('epilepsy', '')
-			attentionDD = request.POST.get('attentionDD', '')
-			pms = request.POST.get('pms', '')
-			depression = request.POST.get('depression', '')
-			ptsd = request.POST.get('ptsd', '')
-			otherSeriousIllness = request.POST.get('otherSeriousIllness', '')
-			currentlyOnMeds = request.POST.get('currentlyOnMeds', '')
-			whichMeds = request.POST.get('whichMeds', '')
-			describeIssue = request.POST.get('describeIssue', '')
+				brainInjury = request.POST.get('m_brainInjury', '')
+				stroke = request.POST.get('m_stroke', '')
+				epilepsy = request.POST.get('m_epilepsy', '')
+				attentionDD = request.POST.get('m_attentionDD', '')
+				pms = request.POST.get('m_pms', '')
+				depression = request.POST.get('m_depression', '')
+				ptsd = request.POST.get('m_ptsd', '')
+				otherSeriousIllness = request.POST.get('m_otherSeriousIllness', '')
+				currentlyOnMeds = request.POST.get('m_currentlyOnMeds', '')
+				whichMeds = request.POST.get('m_whichMeds', '')
+				describeIssue = request.POST.get('m_describeIssue', '')	
 
-			#UPDATE CURRENT PROBLEMS DATABASE
-			am.currentProblems.date_of_assessment = date
-			am.currentProblems.brainInjury = brainInjury
-			am.currentProblems.stroke = stroke
-			am.currentProblems.epilepsy = epilepsy
-			am.currentProblems.attentionDD = attentionDD
-			am.currentProblems.pms = pms
-			am.currentProblems.depression = depression
-			am.currentProblems.ptsd = ptsd
-			am.currentProblems.otherSeriousIllness = otherSeriousIllness
-			am.currentProblems.currentlyOnMeds = currentlyOnMeds
-			am.currentProblems.whichMeds = whichMeds
-			am.currentProblems.describeIssue = describeIssue
-			
-			# am.currentProblems.save()
-			# am.currentProblemsComplete = True
-			# am.save()
+				brainInjury = truePythonBool(brainInjury)
+				stroke = truePythonBool(stroke)
+				epilepsy = truePythonBool(epilepsy)
+				attentionDD = truePythonBool(attentionDD)
+				depression = truePythonBool(depression)
+				pms = truePythonBool(pms)
+				ptsd = truePythonBool(ptsd)
+				otherSeriousIllness = truePythonBool(otherSeriousIllness)
+				currentlyOnMeds = truePythonBool(currentlyOnMeds)		
+
+				#UPDATE CURRENT PROBLEMS DATABASE
+				current = am.currentProblems
+				current.date_of_assessment = date
+				current.brainInjury = brainInjury
+				current.stroke = stroke
+				current.epilepsy = epilepsy
+				current.attentionDD = attentionDD
+				current.pms = pms
+				current.depression = depression
+				current.ptsd = ptsd
+				current.otherSeriousIllness = otherSeriousIllness
+				current.currentlyOnMeds = currentlyOnMeds
+				current.whichMeds = whichMeds
+				current.describeIssue = describeIssue
+
+				am.currentProblems.save()
+				am.currentProblemsComplete = True
+				am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
@@ -1235,12 +1247,10 @@ def am_control(request):
 
 			content['class'] = classes
 			content['image'] = image
-
 			content['json_data'] = json_data
+			content['fields'] = fields
 			content['AM'] = am
-			content['client'] = am.client
 			content['session'] = session
-			content['phone'] = convert_phone(am.client.phone)
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/control.html', content)
 
@@ -1388,6 +1398,7 @@ def am_problems(request):
 			content['class'] = classes
 			content['image'] = image
 			content['json_data'] = json_data
+			content['fields'] = fields
 			content['AM'] = am
 			content['session'] = session
 			content['title'] = "Anger Management Assessment | Simeon Academy"

@@ -951,6 +951,7 @@ function am_problems_check() {
 	else {
 		label.style.opacity = '0';
 		box.style.opacity = '0';
+		box.value = '';
 		box.disabled = true;
 	}
 }
@@ -968,6 +969,7 @@ function am_problems_radio() {
 	if (document.getElementById('noMeds').checked === true) {
 		label.style.opacity = '0.5';
 		box.style.opacity = '0.5';
+		box.value = '';
 		box.disabled = true;
 	}
 }
@@ -981,42 +983,43 @@ function initalize_am_problems(json_data) {
 	var depression = document.getElementById('depression');
 	var ptsd = document.getElementById('ptsd');
 	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
-	var whichMeds = document.getElementById('whichMeds');
-	var describeIssue = document.getElementById('describeIssue');
 
 	var onMeds = document.getElementById('onMeds');
 	var noMeds = document.getElementById('noMeds');
 
-	if (json_data.currentlyOnMeds === true) {
-		onMeds.checked = true;
-	}
-	else {
-		noMeds.checked = true;
-	}
+	initializeAllCheckBoxes(json_data.brainInjury, brainInjury);
+	initializeAllCheckBoxes(json_data.stroke, stroke);
+	initializeAllCheckBoxes(json_data.epilepsy, epilepsy);
+	initializeAllCheckBoxes(json_data.attentionDD, attentionDD);
+	initializeAllCheckBoxes(json_data.pms, pms);
+	initializeAllCheckBoxes(json_data.depression, depression);
+	initializeAllCheckBoxes(json_data.ptsd, ptsd);
+	initializeAllCheckBoxes(json_data.otherSeriousIllness, otherSeriousIllness);
 
-	brainInjury.checked = json_data.brainInjury;
-	stroke.checked = json_data.stroke;
-	epilepsy.checked = json_data.epilepsy;
-	attentionDD.checked = json_data.attentionDD;
-	pms.checked = json_data.pms;
-	depression.checked = json_data.depression;
-	ptsd.checked = json_data.ptsd;
-	otherSeriousIllness.checked = json_data.otherSeriousIllness;
+	setRadioElement(json_data.currentlyOnMeds, onMeds, noMeds);
 
 	am_problems_check();
 	am_problems_radio();
-
-	if (json_data.otherSeriousIllness === true) {
-		describeIssue.innerHTML = json_data.describeIssue;
-	}
-
-	if (json_data.currentlyOnMeds === true) {
-		whichMeds.innerHTML = json_data.whichMeds;
-	}
 }
 
 function continue_to_am_control() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+
+	//M_VALUES
+	var m_brainInjury = document.getElementById('m_brainInjury');
+	var m_stroke = document.getElementById('m_stroke');
+	var m_epilepsy = document.getElementById('m_epilepsy');
+	var m_attentionDD = document.getElementById('m_attentionDD');
+	var m_pms = document.getElementById('m_pms');
+	var m_depression = document.getElementById('m_depression');
+	var m_ptsd = document.getElementById('m_ptsd');
+	var m_otherSeriousIllness = document.getElementById('m_otherSeriousIllness');
+	var m_describeIssue = document.getElementById('m_describeIssue');
+	var m_currentlyOnMeds = document.getElementById('m_currentlyOnMeds');
+	var m_whichMeds = document.getElementById('m_whichMeds');
+
+	//ALL ELEMENTS
 	var brainInjury = document.getElementById('brainInjury');
 	var stroke = document.getElementById('stroke');
 	var epilepsy = document.getElementById('epilepsy');
@@ -1029,46 +1032,20 @@ function continue_to_am_control() {
 	var whichMeds = document.getElementById('whichMeds');
 	var describeIssue = document.getElementById('describeIssue');
 
-	//PROCESS RADIO BUTTONS
-	if (onMeds.checked === true) {
-		document.getElementById('m_currentlyOnMeds').value = 'True';
-		copyElementToInput('whichMeds')
-	}
-	else {
-		document.getElementById('m_currentlyOnMeds').value = 'False';
-		document.getElementById('m_whichMeds').value = 'NA';
-	}
+	postCheckboxValue(brainInjury, m_brainInjury);
+	postCheckboxValue(depression, m_depression);
+	postCheckboxValue(stroke, m_stroke);
+	postCheckboxValue(epilepsy, m_epilepsy);
+	postCheckboxValue(attentionDD, m_attentionDD);
+	postCheckboxValue(pms, m_pms);
+	postCheckboxValue(ptsd, m_ptsd);
+	postCheckboxValue(otherSeriousIllness, m_otherSeriousIllness);
 
-	//PROCESS DYNAMIC FIELDS
-	if (otherSeriousIllness.checked === false) {
-		document.getElementById('m_describeIssue').value = 'NA';
-	}
-	else {
-		copyElementToInput('describeIssue');
-	}
+	postDynamicRadioButtons(onMeds, m_currentlyOnMeds);
+	processDynamicTextPostValue(otherSeriousIllness, describeIssue, m_describeIssue);
+	processDynamicTextPostValue(onMeds, whichMeds, m_whichMeds);
 
-	//PROCESS CHECKBOXES
-	processCheckboxPython(brainInjury);
-	processCheckboxPython(stroke);
-	processCheckboxPython(epilepsy);
-	processCheckboxPython(attentionDD);
-	processCheckboxPython(pms);
-	processCheckboxPython(depression);
-	processCheckboxPython(ptsd);
-	processCheckboxPython(otherSeriousIllness);
-
-	//ERROR CHECKING...
-
-	//PROCESS HIDDEN POST INPUTS
-	copyElementToInput('brainInjury');
-	copyElementToInput('stroke');
-	copyElementToInput('epilepsy');
-	copyElementToInput('attentionDD');
-	copyElementToInput('pms');
-	copyElementToInput('depression');
-	copyElementToInput('ptsd');
-	copyElementToInput('otherSeriousIllness');
-
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
