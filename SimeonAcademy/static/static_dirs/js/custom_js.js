@@ -1181,36 +1181,55 @@ function dropOutRadio() {
 	var resasonDO = document.getElementById('resasonDO');
 	var resasonDO_label = document.getElementById('resasonDO_label');
 
-	if (hs_drop.checked === true) {
-		resasonDO.disabled = false;
-		resasonDO.style.opacity = '1.0';
-		resasonDO_label.style.opacity = '1.0';
-	}
-
-	else {
-		resasonDO.style.opacity = '0.3';
-		resasonDO_label.style.opacity = '0.3';
-		resasonDO.value = '';
-		resasonDO.disabled = true;
-	}
+	twoElementRadioSetup(hs_drop, resasonDO_label, resasonDO);
 }
 
 function healthRadioBtn() {
-	var not_healthy = document.getElementById('not_healthy');
-	var health_exp = document.getElementById('health_exp');
-	var health_exp_label = document.getElementById('health_exp_label');
+	//TRIGGER
+	var healthy = document.getElementById('healthy');
 
-	if (not_healthy.checked === true) {
+	//LABELS
+	var health_exp_label = document.getElementById('health_exp_label');
+	var med_taking_label = document.getElementById('med_taking_label');
+	var no_med_label = document.getElementById('no_med_label');
+	var yes_med_label = document.getElementById('yes_med_label');
+	var explain_label_health = document.getElementById('explain_label_health');
+
+	//ELEMENTS
+	var health_exp = document.getElementById('health_exp');
+	var no_med = document.getElementById('no_med');
+	var on_meds = document.getElementById('on_meds');
+
+	if (healthy.checked == true) {
 		health_exp.disabled = false;
-		health_exp.style.opacity = '1.0';
-		health_exp_label.style.opacity = '1.0';
+		no_med.disabled = false;
+		on_meds.disabled = false;
+
+		opacityHigh(health_exp);
+		opacityHigh(no_med);
+		opacityHigh(on_meds);
+
+		opacityHigh(health_exp_label);
+		opacityHigh(med_taking_label);
+		opacityHigh(no_med_label);
+		opacityHigh(yes_med_label);
+		opacityHigh(explain_label_health);
 	}
 
 	else {
-		health_exp.style.opacity = '0.3';
-		health_exp_label.style.opacity = '0.3';
+		no_med.checked = true;
+		medsRadioBtn();
+
+		opacityLow(health_exp_label);
+		opacityLow(med_taking_label);
+		opacityLow(no_med_label);
+		opacityLow(yes_med_label);
+		opacityLow(explain_label_health);
+
 		health_exp.value = '';
 		health_exp.disabled = true;
+		no_med.disabled = true;
+		on_meds.disabled = true;
 	}
 }
 
@@ -1219,101 +1238,80 @@ function medsRadioBtn() {
 	var explain_label_health = document.getElementById('explain_label_health');
 	var whatMedicine = document.getElementById('whatMedicine');
 
-	if (on_meds.checked === true) {
-		whatMedicine.disabled = false;
-		whatMedicine.style.opacity = '1.0';
-		explain_label_health.style.opacity = '1.0';
-	}
-
-	else {
-		whatMedicine.style.opacity = '0.3';
-		explain_label_health.style.opacity = '0.3';
-		whatMedicine.value = '';
-		whatMedicine.disabled = true;
-	}
+	twoElementRadioSetup(on_meds, explain_label_health, whatMedicine);
 }
 
 function initialize_am_demo(json_data, back) {
-	var marital = document.getElementById('marital');
-	var living = document.getElementById('living');
-	var rent_radio = document.getElementById('rent_radio');
-	var own_radio = document.getElementById('own_radio');
-	var res_mos = document.getElementById('res-mos');
-	var res_yrs = document.getElementById('res-yrs');
-	var children = document.getElementById('dep_children');
-	var others = document.getElementById('dep_other');
-	var edu = document.getElementById('edu');
+	//DROP DOWN MENUS
+	var maritalStatus = document.getElementById('maritalStatus');
+	var livingSituation = document.getElementById('livingSituation');
+	var education = document.getElementById('education');
+
+	//RADIO BUTTONS
+	var doesRent = document.getElementById('doesRent');
+	var doesOwn = document.getElementById('doesOwn');
 	var hs_grad = document.getElementById('hs_grad');
 	var hs_drop = document.getElementById('hs_drop');
-	var resasonDO = document.getElementById('resasonDO');
-	var occ = document.getElementById('occ');
-	var employer = document.getElementById('employer');
-	var emp_add = document.getElementById('em_add');
-	var em_phone = document.getElementById('em_phone');
-	var mosJob = document.getElementById('mosJob');
-	var yrsJob = document.getElementById('yrsJob');
 	var healthy = document.getElementById('healthy');
 	var not_healthy = document.getElementById('not_healthy');
-	var no_med = document.getElementById('no_med');
 	var on_meds = document.getElementById('on_meds');
-	var health_exp = document.getElementById('health_exp');
-	var whatMedicine = document.getElementById('whatMedicine');
+	var no_med = document.getElementById('no_med');
 
-	marital.selectedIndex = json_data.maritalStatus
-	living.selectedIndex = json_data.livingSituation
-	edu.selectedIndex = json_data.education
+	//PROCESS DROP DOWN MENUS
+	maritalStatus.selectedIndex = json_data.maritalStatus;
+	livingSituation.selectedIndex = json_data.livingSituation;
+	education.selectedIndex = json_data.education;
 
-	res_mos.value = json_data.months_res
-	res_yrs.value = json_data.years_res
-	children.value = json_data.num_children
-	mosJob.value = json_data.employed_months
-	yrsJob.value = json_data.employed_years
-
-	resasonDO.value = insertProcessedText(json_data.resasonDO);
-	occ.value = insertProcessedText(json_data.job_title);
-	employer.value = insertProcessedText(json_data.employee);
-	emp_add.value = insertProcessedText(json_data.emp_address);
-	em_phone.value = insertProcessedText(json_data.employer_phone);
-	health_exp.value = insertProcessedText(json_data.health_exp);
-	whatMedicine.value = insertProcessedText(json_data.whatMedicine);	
-
-	if (String(json_data.own) === 'true') {
-		own_radio.checked = true;
-	}
-	else {
-		rent_radio.checked = true;
-	}
-
-	if (String(json_data.drop_out) === 'true') {
-		hs_drop.checked = true;
-	}
-	else {
-		hs_grad.checked = true;
-	}
-
-	if (String(json_data.health_problem) === 'true') {
-		not_healthy.checked = true;
-	}
-	else {
-		healthy.checked = true;
-	}
-
-	if (String(json_data.medication) === 'true') {
-		on_meds.checked = true;
-	}
-	else {
-		no_med.checked = true;
-	}
+	//PROCESS RADIO BUTTONS
+	setRadioElement(json_data.own, doesOwn, doesRent);
+	setRadioElement(json_data.drop_out, hs_drop, hs_grad);
+	setRadioElement(json_data.health_problem, healthy, not_healthy);
+	setRadioElement(json_data.medication, on_meds, no_med);
 
 	dropOutRadio();
 	healthRadioBtn();
-	medsRadioBtn();
 }
 
 
 function continue_am() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+
+	//M_VALUES
+	var m_own = document.getElementById('m_own');
+	var m_drop_out = document.getElementById('m_drop_out');
+	var m_health_problem = document.getElementById('m_health_problem');
+	var m_medication = document.getElementById('m_medication');
+	var m_resasonDO = document.getElementById('m_resasonDO');
+	var m_health_exp = document.getElementById('m_health_exp');
+	var m_whatMedicine = document.getElementById('m_whatMedicine');
+
+	//TRIGGERS AND RADIOS
+	var doesOwn = document.getElementById('doesOwn');
+	var hs_drop = document.getElementById('hs_drop');
+	var not_healthy = document.getElementById('healthy');
+	var on_meds = document.getElementById('on_meds');
+
+	//DYNAMIC FIELDS
+	var resasonDO = document.getElementById('resasonDO');
+	var health_exp = document.getElementById('health_exp');
+	var whatMedicine = document.getElementById('whatMedicine');
+
+	postDynamicRadioButtons(doesOwn, m_own);
+	postDynamicRadioButtons(hs_drop, m_drop_out);
+	postDynamicRadioButtons(not_healthy, m_health_problem);
+
+	processDynamicTextPostValue(hs_drop, resasonDO, m_resasonDO);
+	processDynamicTextPostValue(not_healthy, health_exp, m_health_exp);
+
+	if (not_healthy.checked == true) {
+		postDynamicRadioButtons(on_meds, m_medication);
+		processDynamicTextPostValue(on_meds, whatMedicine, m_whatMedicine);
+	}
+	else {
+		m_medication.value = 'False';
+		m_whatMedicine.value = 'N/A';
+	}
 
 	back.value = 'false';	
 

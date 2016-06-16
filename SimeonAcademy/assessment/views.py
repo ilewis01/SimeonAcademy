@@ -36,7 +36,7 @@ getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
-resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie
+resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1425,19 +1425,20 @@ def am_demographic(request):
 			#AUTHENTICATED AS A COUNSELOR
 			client_id = request.POST.get('client_id', '')
 			session_id = request.POST.get('session_id', '')
+			back = request.POST.get('back_btn', '')
 			client = Client.objects.get(id=client_id)			
 			session = ClientSession.objects.get(id=session_id)
 
-			phone = convert_phone(client.phone)
-			proceed = startAM(client)
-			back = request.POST.get('back', '')			
+			if back == '' or back == None:
+				back = 'false'
+
+			proceed = startAM(client)		
 			am = proceed['am']
 
 			content['am'] = am
 			content['back'] = back
 			content['session'] = session
 			content['client'] = client
-			content['phone'] = phone
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			fake = True #This is to ensure we dont go to location page for now
 
@@ -1488,135 +1489,91 @@ def am_drugHistory(request):
 			am = AngerManagement.objects.get(id=am_id)
 			session_id = request.POST.get('session_id', '')
 			session = ClientSession.objects.get(id=session_id)
-			
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
-			json_data = json.dumps(fields)
-
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['back'] = back
-			content['back_url'] = '/am_demographic/'
-			content['AM'] = am
-			content['session'] = session
 
 			if back == 'false':
 				demo = am.demographic
 				dateTime = datetime.now()
 				date = dateTime.date()	
 
-				maritalStatus = request.POST.get('marital', '')
-				livingSituation = request.POST.get('living', '')	
-				months_res = request.POST.get('res-mo', '')	
-				years_res = request.POST.get('res-yrs', '')	
-				num_children = request.POST.get('dep_children', '')	
-				other_dependants = request.POST.get('dep_other', '')	
-				education = request.POST.get('edu', '')	
-				resasonDO = request.POST.get('resasonDO', '')	
-				employee = request.POST.get('employer', '')	
-				job_title = request.POST.get('occ', '')	
-				emp_address = request.POST.get('em_add', '')	
-				employed_months = request.POST.get('mosJob', '')	
-				employed_years = request.POST.get('yrsJob', '')	
-				employer_phone = request.POST.get('em_phone', '')	
-				whatMedicine = request.POST.get('whatMedicine', '')	
-				health_exp = request.POST.get('health_exp', '')		
+				#NORMAL FIELDS
+				maritalStatus = request.POST.get('maritalStatus', '')
+				livingSituation = request.POST.get('livingSituation', '')
+				education = request.POST.get('education', '')
 
+				months_res = request.POST.get('months_res', '')
+				years_res = request.POST.get('years_res', '')
+				num_children = request.POST.get('num_children', '')
+				other_dependants = request.POST.get('other_dependants', '')
+				job_title = request.POST.get('job_title', '')
+				employee = request.POST.get('employee', '')
+				emp_address = request.POST.get('emp_address', '')
+				employer_phone = request.POST.get('employer_phone', '')
+				employed_months = request.POST.get('employed_months', '')
+				employed_years = request.POST.get('employed_years', '')
+
+				#DYNAMIC FIELDS
+				own = request.POST.get('m_own', '')
+				drop_out = request.POST.get('m_drop_out', '')
+				health_problem = request.POST.get('m_health_problem', '')
+				medication = request.POST.get('m_medication', '')
+				resasonDO = request.POST.get('m_resasonDO', '')
+				health_exp = request.POST.get('m_health_exp', '')
+				whatMedicine = request.POST.get('m_whatMedicine', '')
+
+				#SET DROP DOWN MENU VALUES
 				maritalStatus = MaritalStatus.objects.get(id=maritalStatus)
 				livingSituation = LivingSituation.objects.get(id=livingSituation)
 				education = EducationLevel.objects.get(id=education)
 
+				employer_phone = phone_to_integer(employer_phone)
+
 				#PROCESS THE RADIO BUTTONS
-				rent_own = request.POST.get('rentRAD', '')
-				healRad = request.POST.get('healRad', '')
-				medRad = request.POST.get('medRad', '')
-				dip = request.POST.get('dip')
+				own = truePythonBool(own)
+				drop_out = truePythonBool(drop_out)
+				health_problem = truePythonBool(health_problem)
+				medication = truePythonBool(medication)
 
-				own = None
-				drop_out = None
-				health_problem = None
-				medication = None
-
-				if rent_own == "rent":
-					own = False
-				else:
-					own = True
-
-				if dip == 'dropout':
-					drop_out = True
-				else:
-					drop_out = False
-
-				if healRad == 'not_healthy':
-					health_problem = True
-				else:
-					health_problem = False
-
-				if medRad == 'medication':
-					medication = True
-				else:
-					medication = False
-
-				if resasonDO == None or resasonDO == '':
-					resasonDO = 'NA'
-				if health_exp == None or health_exp == '':
-					health_exp = 'NA'
-				if whatMedicine == None or whatMedicine == '':
-					whatMedicine = 'NA'
-
-				demo.date_of_assessment = date
-				demo.maritalStatus 		= maritalStatus
-				demo.livingSituation 	= livingSituation
-				demo.own 				= own
-				demo.months_res 		= months_res
-				demo.years_res 			= years_res
-				demo.num_children 		= num_children
-				demo.other_dependants 	= other_dependants
-				demo.education 			= education
-				demo.drop_out 			= drop_out
-				demo.resasonDO 			= resasonDO
-				demo.employee 			= employee
-				demo.job_title 			= job_title
-				demo.emp_address 		= emp_address
-				demo.employed_months 	= employed_months
-				demo.employed_years 	= employed_years
-				demo.employer_phone 	= employer_phone
-				demo.health_problem 	= health_problem
-				demo.medication 		= medication
-				demo.whatMedicine 		= whatMedicine
-				demo.health_exp 		= health_exp
+				demo.date_of_assessment 	= date
+				demo.maritalStatus 			= maritalStatus
+				demo.livingSituation 		= livingSituation
+				demo.own 					= own
+				demo.months_res 			= months_res
+				demo.years_res 				= years_res
+				demo.num_children 			= num_children
+				demo.other_dependants 		= other_dependants
+				demo.education 				= education
+				demo.drop_out 				= drop_out
+				demo.resasonDO 				= resasonDO
+				demo.employee 				= employee
+				demo.job_title 				= job_title
+				demo.emp_address 			= emp_address
+				demo.employed_months 		= employed_months
+				demo.employed_years 		= employed_years
+				demo.employer_phone 		= employer_phone
+				demo.health_problem 		= health_problem
+				demo.medication 			= medication
+				demo.whatMedicine 			= whatMedicine
+				demo.health_exp 			= health_exp
 
 				demo.save()
-				am.demographic = demo
 				am.demographicComplete = True
 				am.save()
 
-				# fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
-				# json_data = json.dumps(fields)
-				image = amSidebarImages(am, 'dh')
-				classes = grabAmClassesCSS(am, 'dh')
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
+			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'dh')
+			classes = grabAmClassesCSS(am, 'dh')
 
-				# content['fields'] = fields
-				content['class'] = classes
-				content['image'] = image
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				# content['json_data'] = json_data
-				# content['AM'] = am
-				# content['session'] = session
-				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
-			else:
-				# fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
-				# json_data = json.dumps(fields)
-				image = amSidebarImages(am, 'dh')
-				classes = grabAmClassesCSS(am, 'dh')
+			content['back'] = back
+			content['AM'] = am
+			content['session'] = session
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['class'] = classes
+			content['image'] = image
+			content['title'] = "Anger Management Assessment | Simeon Academy"
 
-				# content['fields'] = fields
-				content['class'] = classes
-				content['image'] = image
-				# content['AM'] = am
-				# content['session'] = session
-				# content['json_data'] = json_data
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
+			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 @login_required(login_url='/index')
 def am_familyOrigin(request):

@@ -307,19 +307,28 @@
                   								<input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
                   								<input type='hidden' name='back_btn' id='back_btn' value=''>
 
+                                  <input type='hidden' name='m_own' id='m_own'>
+                                  <input type='hidden' name='m_drop_out' id='m_drop_out'>
+                                  <input type='hidden' name='m_health_problem' id='m_health_problem'>
+                                  <input type='hidden' name='m_medication' id='m_medication'>
+
+                                  <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
+                                  <input type='hidden' name='m_health_exp' id='m_health_exp'>
+                                  <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
+
                   								<h3>Household</h3>
                   								<table>
                   									<tr>
                   										<td>
-                  											<label for='marital'>Marital Status: </label>
+                  											<label for='maritalStatus'>Marital Status: </label>
                   										</td>
 
                   										<td>
                   											<div id='select-align'>
-	                  											<select id='marital' name='marital' value=''>
+	                  											<select id='maritalStatus' name='maritalStatus' value=''>
 	                  												<option>Select</option>
 	                  												{% for m in marital %}
-	                  													<option value='{{m.id}}' id='{{m.id}}'>{{m.status}}</option>
+	                  													<option value='{{m.id}}' id='{{m.status}}'>{{m.status}}</option>
 	                  												{% endfor %}
 	                  											</select>
 	                  										</div>
@@ -335,10 +344,10 @@
 
                   										<td>
                   											<div id='select-align'>
-	                  											<select id='living' name='living'>
+	                  											<select id='livingSituation' name='livingSituation'>
 	                  												<option>Select</option>
 	                  												{% for l in living %}
-	                  													<option value='{{l.id}}'>{{l.situation}}</option>
+	                  													<option value='{{l.id}}' id='{{l.situation}}'>{{l.situation}}</option>
 	                  												{% endfor %}
 	                  											</select>
 	                  										</div>
@@ -351,28 +360,28 @@
                                     <tr>
                                       <td>
                                         <div style='margin-right: 10px;'>
-                                          <label for='' >Do you rent or own?</label>
+                                          <label for='own' >Do you rent or own?</label>
                                         </div>
                                       </td>
                                    
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='rentRAD' id='rent_radio' value='rent' id='rent'>
+                  												<input type='radio' name='own' id='doesRent' value='False'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='rent' id='rent_label'>Rent</label>
+                  											<label for='doesRent' id='doesRent_label'>Rent</label>
                   										</td>
 
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='rentRAD' id='own_radio' value='own' id='own'>
+                  												<input type='radio' name='own' id='doesOwn' value='True'>
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='own' id='own_label'>Own</label>
+                  											<label for='doesOwn' id='doesOwn_label'>Own</label>
                   										</td>
                   									</tr>
                   								</table>
@@ -388,14 +397,14 @@
                   									<tr>
                   										<td>
                   											<div>
-                  												<input type='number' style="width:40px;" name='res-mo' id='res-mos' value='{{fields.months_res}}'>
+                  												<input type='number' style="width:40px;" name='months_res' id='months_res' value='{{fields.months_res}}'>
                   												months
                   											</div>
                   										</td>
 
                   										<td>
 	                  										<div id='submit-space'>
-	                  											<input type='number' style="width:40px;" name='res-yrs' id='res-yrs' value='{{fields.years_res}}'>
+	                  											<input type='number' style="width:40px;" name='years_res' id='years_res' value='{{fields.years_res}}'>
 	                  											years
 	                  										</div>
 	                  									</td>
@@ -407,7 +416,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<input type='number' style='width:40px' id='dep_children' name='dep_children' value='{{fields.num_children}}'>
+                  											<input type='number' style='width:40px' id='num_children' name='num_children' value='{{fields.num_children}}'>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -418,7 +427,7 @@
 
                   									<tr>
                   										<td>
-                  											<input type='number' style='width:40px' id='dep_other' name='dep_other' value='{{fields.other_dependants}}'>
+                  											<input type='number' style='width:40px' id='other_dependants' name='other_dependants' value='{{fields.other_dependants}}'>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -437,10 +446,10 @@
                   										</td>
                   										<td>
                   											<div id='select-align'>
-	                  											<select name='edu' id='edu'>
+	                  											<select name='education' id='education'>
 	                  												<option value=''>Select</option>
 	                  												{% for e in education %}
-	                  												<option value='{{e.id}}'>{{e.level}}</option>
+	                  												<option value='{{e.id}}' id='{{e.id}}'>{{e.level}}</option>
 	                  												{% endfor %}
 	                  											</select>
 	                  										</div>
@@ -451,7 +460,7 @@
                   								<table>
                   									<tr>
                   										<td>
-                  											<td><input type='radio' name='dip' id='hs_grad' value='graduate' onClick='javascript: dropOutRadio();'></td>
+                  											<td><input type='radio' name='drop_out' id='hs_grad' value='False' onClick='javascript: dropOutRadio();'></td>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -462,7 +471,7 @@
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
-                  											<td><input type='radio' name='dip' id='hs_drop' value='dropout' onClick='javascript: dropOutRadio();'></td>
+                  											<td><input type='radio' name='drop_out' id='hs_drop' value='True' onClick='javascript: dropOutRadio();'></td>
                   										</td>
                   										<td>
                   											<div id='num-align-text'>
@@ -481,7 +490,7 @@
 
                                     <tr>
                                       <td>
-                                        <textarea rows='3' cols='55' name='resasonDO' id='resasonDO'></textarea>
+                                        <textarea rows='3' cols='55' name='resasonDO' id='resasonDO'>{{fields.resasonDO}}</textarea>
                                       </td>
                                     </tr>
                                   </table>
@@ -530,7 +539,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='occ' name='occ'>
+                  										    <input type='text' id='job_title' name='job_title' value='{{fields.job_title}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -541,7 +550,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='employer' name='employer'>
+                  										    <input type='text' id='employer' name='employee' value='{{fields.employee}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -552,7 +561,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='text' id='em_add' name='em_add'>
+                  										    <input type='text' id='emp_address' name='emp_address' value='{{fields.emp_address}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -563,7 +572,7 @@
                   									</td>
                   									<td>
                   										<div id='textbox-align1'>
-                  										    <input type='tel' id='em_phone' name='em_phone'>
+                  										    <input type='tel' id='employer_phone' name='employer_phone' value='{{fields.employer_phone}}'>
                   									    </div>
                   									</td>
                   								</tr>
@@ -573,14 +582,14 @@
                   									<tr>
                   										<td>
                   											<div>
-                  												<input type='number' style="width:40px;" name='mosJob' id='mosJob'>
+                  												<input type='number' style="width:40px;" name='employed_months' id='employed_months' value='{{fields.employed_months}}'>
                   												months
                   											</div>
                   										</td>
 
                   										<td>
 	                  										<div id='submit-space'>
-	                  											<input type='number' style="width:40px;" name='yrsJob' id='yrsJob'>
+	                  											<input type='number' style="width:40px;" name='employed_years' id='employed_years' value='{{fields.employed_years}}'>
 	                  											years
 	                  										</div>
 	                  									</td>
@@ -589,28 +598,28 @@
 
                   								<table><tr><td><div class='form-line'></div></td></tr></table>
                   								<h3>Health</h3>
-                  								<label for=''>Do you currently have any health issues?</label>
+                  								<label for='health_problem'>Do you currently have any health issues?</label>
 
                   								<table>
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='healRad' id='healthy' value='healthy' onClick="javascript: healthRadioBtn();">
+                  												<input type='radio' name='health_problem' id='not_healthy' value='False' onClick="javascript: healthRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='healthy'>No</label>
+                  											<label for='not_healthy'>No</label>
                   										</td>
 
                   										<td><div style='margin-right:20px;'></div></td>
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='healRad' id='not_healthy' value='not_healthy' onClick="javascript: healthRadioBtn();">
+                  												<input type='radio' name='health_problem' id='healthy' value='True' onClick="javascript: healthRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
-                  											<label for='not_healthy'>Yes</label>
+                  											<label for='healthy'>Yes</label>
                   										</td>
                   									</tr>
                   								</table>
@@ -624,18 +633,18 @@
 
                                     <tr>
                                       <td>
-                                        <textarea cols='55' rows='2' id='health_exp' name='health_exp'></textarea>
+                                        <textarea cols='55' rows='2' id='health_exp' name='health_exp'>{{fields.health_exp}}</textarea>
                                       </td>
                                     </tr>
                                     <tr><td><div style='margin-bottom:10px;'></div></td></tr>
                                   </table>
 
-                  								<label for='' id='med_taking_label'>Are you currently taking medication for this issue?</label>
+                  								<label for='medication' id='med_taking_label'>Are you currently taking medication for this issue?</label>
                   								<table>
                   									<tr>
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='no_med' value='no_medication' onClick="javascript: medsRadioBtn();">
+                  												<input type='radio' name='medication' id='no_med' value='False' onClick="javascript: medsRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -646,7 +655,7 @@
 
                   										<td>
                   											<div id='radio-align'>
-                  												<input type='radio' name='medRad' id='on_meds' value='medication' onClick="javascript: medsRadioBtn();">
+                  												<input type='radio' name='medication' id='on_meds' value='True' onClick="javascript: medsRadioBtn();">
                   											</div>    
                   										</td>
                   										<td>
@@ -656,7 +665,7 @@
                   								</table>
 
                   								<label for='' id='explain_label_health'>What are you taking?</label>
-                  								<textarea cols='55' rows='2' id='whatMedicine' name='whatMedicine'></textarea>
+                  								<textarea cols='55' rows='2' id='whatMedicine' name='whatMedicine'>{{fields.whatMedicine}}</textarea>
                   							</form>
                   						</div>
                   					</div>

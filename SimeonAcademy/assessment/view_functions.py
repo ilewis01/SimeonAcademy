@@ -53,6 +53,15 @@ def convert_phone(phone):
 	result += phone[9]
 	return result
 
+def phone_to_integer(phone):
+	result = ''
+
+	for p in phone:
+		if p=='0' or p=='1' or p=='2' or p=='3' or p=='4' or p=='5' or p=='6' or p=='7' or p=='8' or p=='9':
+			result += p
+
+	return result
+
 def resolveBlankRadio(radio, defaultValue):
 	result = None
 
@@ -919,6 +928,8 @@ def getAMDemoFields(am):
 	else:
 		data['education'] = convertEducationToIndex(am.demographic.education.level)
 
+	phone = convert_phone(am.demographic.employer_phone)
+
 	data['own'] = convertToJavascriptBool(am.demographic.own)
 	data['months_res'] = am.demographic.months_res
 	data['years_res'] = am.demographic.years_res
@@ -931,7 +942,7 @@ def getAMDemoFields(am):
 	data['emp_address'] = convertNullTextFields(am.demographic.emp_address)
 	data['employed_months'] = am.demographic.employed_months
 	data['employed_years'] = am.demographic.employed_years
-	data['employer_phone'] = convertNullTextFields(am.demographic.employer_phone)
+	data['employer_phone'] = phone
 	data['health_problem'] = convertToJavascriptBool(am.demographic.health_problem)
 	data['medication'] = convertToJavascriptBool(am.demographic.medication)
 	data['whatMedicine'] = convertNullTextFields(am.demographic.whatMedicine)
