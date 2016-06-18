@@ -39,16 +39,17 @@
 	<form action='/am_deleted/' method='POST' id='exit_return_form'> {% csrf_token %}
 		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
 		<input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+        <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
 	</form> 
 
 	<div style='padding-top:5%'>
 		<div class='toggle-div-page'>
 		    <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: AmDeleted();' id='continue'>Delete</button>
+                <button type='button' onClick='javascript: exit_am2("{{trigger_btn}}");' id='exit_session'>{{trigger_btn}}</button>
             </a>
 
             <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Cancel</button>
+                <button type='button' onClick='javascript: exit_am2("exit_save");' id='continue'>Cancel</button>
             </a>
         </div>
 	</div>

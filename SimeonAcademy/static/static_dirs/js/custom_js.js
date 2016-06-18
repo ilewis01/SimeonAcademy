@@ -691,6 +691,8 @@ function initalize_am_connections(json_data) {
 function continue_to_worst() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	var angerWorse = document.getElementById('angerWorse');
 	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
@@ -714,10 +716,11 @@ function continue_to_worst() {
 		m_connectionExplain.value = 'N/A';
 	}
 
-	back.value = 'false';
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -805,6 +808,8 @@ function initalize_am_worst(json_data) {
 function continue_to_target() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var next_section = document.getElementById('next_section');
+	var form = document.getElementById('am_demo');
 
 	//M_VALUE ELEMENTS
 	var m_useWorst = document.getElementById('m_useWorst');
@@ -845,10 +850,11 @@ function continue_to_target() {
 		m_otherWorstDescription.value = 'N/A';
 	}
 
-	back.value = 'false';
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -905,6 +911,9 @@ function initalize_am_target(json_data) {
 function continue_to_am_family() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var goToNext = document.getElementById('goToNext');
+	var next_section = document.getElementById('next_section');
 
 	var angryPartner = document.getElementById('angryPartner');
 	var angryParents = document.getElementById('angryParents');
@@ -937,10 +946,11 @@ function continue_to_am_family() {
 		angryAbout.value = 'N/A';
 	}
 
-	back.value = 'false';
-
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		goToNext.value = 'true';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -977,6 +987,9 @@ function initalize_family_origin(json_data) {
 function continue_to_am_problems() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var goToNext = document.getElementById('goToNext');
+	var next_section = document.getElementById('next_section');
 
 	var m_hasLovingMother = document.getElementById('m_hasLovingMother');
 	var m_hasLovingSiblings = document.getElementById('m_hasLovingSiblings');
@@ -990,12 +1003,13 @@ function continue_to_am_problems() {
 
 	postCheckboxValue(hasLovingMother, m_hasLovingMother);
 	postCheckboxValue(hasLovingSiblings, m_hasLovingSiblings);
-	postDynamicRadioButtons(hasSuicide, m_suicideHistory);
-
-	back.value = 'false';
+	postDynamicRadioButtons(hasSuicide, m_suicideHistory);	
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		goToNext.value = 'true';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -1066,6 +1080,9 @@ function initalize_am_problems(json_data) {
 function continue_to_am_control() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var goToNext = document.getElementById('goToNext');
+	var next_section = document.getElementById('next_section');
+	var form = document.getElementById('am_demo');
 
 	//M_VALUES
 	var m_brainInjury = document.getElementById('m_brainInjury');
@@ -1106,10 +1123,11 @@ function continue_to_am_control() {
 	processDynamicTextPostValue(otherSeriousIllness, describeIssue, m_describeIssue);
 	processDynamicTextPostValue(onMeds, whichMeds, m_whichMeds);
 
-	back.value = 'false';
-
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		goToNext.value = 'true';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -2023,16 +2041,21 @@ function go_to_am_instruction() {
 	document.getElementById('to_am_form').submit();
 }
 
+
 function exit_am(e_type) {
+	var form = document.getElementById('am_demo');
 	var exit_type_sub = document.getElementById('exit_type_sub');
+
 	exit_type_sub.value = String(e_type);
-	document.getElementById('exit_form').submit();
+	form.action = '/exit_am/';
+	form.submit();
 }
 
 function exit_am2(e_type) {
-	var form = document.getElementById('am_demo');
-	document.getElementById('exit_type').value = e_type;
-	form.action = '/exit_am/';
+	var form = document.getElementById('exit_return_form');
+	var exit_type_sub = document.getElementById('exit_type_sub');
+
+	exit_type_sub.value = String(e_type);
 	form.submit();
 }
 
@@ -2496,6 +2519,9 @@ function initialize_am_drug_history(json_data) {
 
 function continue_am_dh() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	//HIDDEN FIELDS
 	var m_useType = document.getElementById('m_useType');
@@ -2548,13 +2574,11 @@ function continue_am_dh() {
 	//PROCESS DYNAMIC NUMBER FIELDS
 	processDisabledNumberFields(quitMos, m_monthsQuit);
 	processDisabledNumberFields(quitYrs, m_yearsQuit);
-
-
-
-	document.getElementById('back_btn').value = 'false';
 	
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -2696,6 +2720,9 @@ function initialize_am_childhood(json_data) {
 
 function continue_am_history1() {
 	var proceed = true;
+	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	//DYNAMIC TRIGGERS
 	var hadTramua = document.getElementById('hadTramua');
@@ -2733,10 +2760,12 @@ function continue_am_history1() {
 	postDynamicFields(sawViolence, parentViolenceExplain, m_parentViolenceExplain);
 	postDynamicFields(sawViolence, parentViolenceImpact, m_parentViolenceImpact);
 
-	document.getElementById('back_btn').value = 'false';
+	
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -2845,6 +2874,9 @@ function initalize_am_control(json_data) {
 function continue_to_am_final() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var next_section = document.getElementById('next_section');
+	var form = document.getElementById('am_demo');
+	var goToNext = document.getElementById('goToNext');
 
 	//M_VALUES
 	var m_neverAttemptedControl = document.getElementById('m_neverAttemptedControl');
@@ -2887,10 +2919,11 @@ function continue_to_am_final() {
 	processDynamicTextPostValue(relax, howRelax, m_howRelax);
 	processDynamicTextPostValue(otherControlAnger, doWhatOtherControl, m_doWhatOtherControl);
 
-	back.value = 'false';
-
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		goToNext.value = 'true';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -2916,8 +2949,14 @@ function initalize_am_final() {
 
 function continue_to_amViewForm() {
 	var proceed = true;
-	
-	document.getElementById('back_btn').value = 'false';
+	var form = document.getElementById('am_demo');
+	var goToNext = document.getElementById('goToNext');
+	var back = document.getElementById('back_btn');
+	var next_section = document.getElementById('next_section');
+
+	form.action = next_section.value;
+	goToNext.value = 'true';
+	back.value = 'false';
 
 	if (proceed === true) {
 		document.getElementById('am_demo').submit();
@@ -3098,6 +3137,8 @@ function initialize_am_angerHistory(json_data) {
 function continue_to_am_AH2() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	//DYNAMIC POSTING FIELDS
 	var m_physicalRecentV = document.getElementById('m_physicalRecentV');
@@ -3182,10 +3223,12 @@ function continue_to_am_AH2() {
 		m_longAgoTreatRecentVyrs.value = '0';
 	}
 
-	back.value = 'false';
+	
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -3502,6 +3545,8 @@ function initialize_am_angerHistory2(json_data) {
 function proceed_to_section3() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	//M_ELEMENTS
 	var m_depress30RecentV = document.getElementById('m_depress30RecentV');
@@ -3598,10 +3643,11 @@ function proceed_to_section3() {
 		m_hasAttemptedSuicide.value = 'False';
 	}
 
-	back.value = 'false';
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 
@@ -3751,6 +3797,8 @@ function initialize_am_angerHistory3(json_data) {
 function proceed_to_connections() {
 	var proceed = true;
 	var back = document.getElementById('back_btn');
+	var form = document.getElementById('am_demo');
+	var next_section = document.getElementById('next_section');
 
 	//M_VALUE ELEMENTS
 	var m_homicidal = document.getElementById('m_homicidal');
@@ -3783,11 +3831,12 @@ function proceed_to_connections() {
 	else {
 		m_medSuccessRecentV.value = 'False';
 	}
-
-	back.value = 'false';
+	
 
 	if (proceed === true) {
-		document.getElementById('am_demo').submit();
+		back.value = 'false';
+		form.action = next_section.value;
+		form.submit();
 	}
 }
 

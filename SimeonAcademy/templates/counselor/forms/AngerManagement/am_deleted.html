@@ -9,7 +9,7 @@
             <div class="row">                   
                   <div class="col-md-12">
                         <div id='header-text'>
-                              The Anger Management Form Has Sucessfully Been Deleted
+                              The Anger Management Form Has Sucessfully Been {{exit_sub_phrase}}
                         </div>
                   </div>
             </div>
@@ -39,6 +39,7 @@
 	<form action='/am_deleted/' method='POST' id='exit_return_form'> {% csrf_token %}
 		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
 		<input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+        <input type='hidden' name='exit_type' id='exit_type' value='{{exit_type}}'>
 	</form> 
 
 	<div style='padding-top:5%'>

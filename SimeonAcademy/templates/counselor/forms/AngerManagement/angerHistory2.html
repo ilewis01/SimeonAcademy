@@ -241,7 +241,7 @@
                   <!-- BUTTON 1 -->
                   <td>
                     <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("exit_save");'>
+                      <a href='javascript: exit_am("Save");'>
                         <table>
                           <tr>
                             <td>
@@ -268,7 +268,7 @@
                   <!-- BUTTON 2 -->
                   <td>
                     <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("exit_only");'>
+                      <a href='javascript: exit_am("Delete");'>
                         <table>
                           <tr>
                             <td>
@@ -311,7 +311,9 @@
                                 <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                                 <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                                 <input type='hidden' name='back_btn' id='back_btn' value='{{back}}'>
-                                <input type='hidden' name='exit_type' id='exit_type' value=''>
+                                <input type='hidden' name='goToNext' id='goToNext' value='true'>
+                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+                                <input type='hidden' name='save_section' id='save_section' value='/am_angerHistory2/'>
 
                                 <!-- REAL DATA ENTRIES -->
                                 <input type='hidden' value='' name='m_depress30RecentV' id='m_depress30RecentV'>

@@ -36,7 +36,8 @@ getClientSAPList, continueToSAPSection, SAPDemographicExist, getAM_byDemographic
 getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM, \
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
-resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer
+resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
+grabProperNextSection, saveCompletedAmSection
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -452,22 +453,24 @@ def exit_am(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			am = request.POST.get('am_id', '')
-			session = request.POST.get('session_id', '')
+			am_id = request.POST.get('am_id', '')
+			session_id = request.POST.get('session_id', '')
 			exit_type = request.POST.get('exit_type_sub', '')
+
+			am = AngerManagement.objects.get(id=am_id)
+			session  = ClientSession.objects.get(id=session_id)
 
 			header_phrase = None
 			sub1_phrase = None
 			status = None
+			trigger_btn = None
 
-			if exit_type == 'exit_only':
+			if exit_type == 'Delete':
 				header_phrase = 'Delete Anger Management Form'
 				sub1_phrase = 'Are you sure you want to delete the following form?'
-			elif exit_type == 'exit_save':
-				none = None
-
-			am = AngerManagement.objects.get(id=am)
-			session = ClientSession.objects.get(id=session)
+			elif exit_type == 'Save':
+				header_phrase = "Save Current Anger Management Form"
+				sub1_phrase = 'Are you sure you want to save the following form?'
 
 			if am.AMComplete == True:
 				status = 'Complete'
@@ -475,7 +478,9 @@ def exit_am(request):
 				status = 'Incomplete'
 
 			content['AM'] = am
+			content['exit_type'] = exit_type
 			content['session'] = session
+			content['trigger_btn'] = exit_type
 			content['status'] = status
 			content['header_phrase'] = header_phrase
 			content['sub1_phrase'] = sub1_phrase
@@ -498,18 +503,34 @@ def am_deleted(request):
 		else:
 			session = request.POST.get('session_id', '')
 			am = request.POST.get('am_id', '')
+			exit_type = request.POST.get('exit_type_sub')
 
 			session = ClientSession.objects.get(id=session)
 			am = AngerManagement.objects.get(id=am)
 			client = am.client
 
-			deleteAM(am)
-
 			content['client'] = client
 			content['session'] = session
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/am_deleted.html', content)
 
+			exit_sub_phrase = None
+
+			if str(exit_type) == 'Delete':
+				deleteAM(am)
+				exit_sub_phrase = 'Deleted'
+
+				content['exit_sub_phrase'] = exit_sub_phrase
+				content['title'] = "Session Options | Simeon Academy"
+				return render_to_response('counselor/client/client_options.html', content)
+				
+			elif str(exit_type) == 'Save':
+				#First save current AM then return to client options page
+				exit_sub_phrase = 'Saved'
+				
+				content['exit_sub_phrase'] = exit_sub_phrase
+				content['title'] = "Session Options | Simeon Academy"
+				return render_to_response('counselor/client/client_options.html', content)		
+
+			
 @login_required(login_url='/index')
 def am_preliminary(request):
 	user = request.user
@@ -545,17 +566,11 @@ def am_angerHistory(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
-			session = ClientSession.objects.get(id=session)
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
-			json_data = json.dumps(fields)
-
-			content['json_data'] = json_data
-			content['fields'] = fields
-			content['AM'] = am
-			content['session'] = session
-			content['back'] = back
+			session = ClientSession.objects.get(id=session)			
 
 			if str(back) == 'false':
 				momAlive = request.POST.get('momAlive', '')
@@ -638,22 +653,23 @@ def am_angerHistory(request):
 				am.childhood = childhood
 				am.childhoodComplete = True
 				am.save()
-				
-				image = amSidebarImages(am, 'ah1')
-				classes = grabAmClassesCSS(am, 'ah1')
+			
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
+			json_data = json.dumps(fields)
+			next_section = grabProperNextSection(am)
+			image = amSidebarImages(am, 'ah1')
+			classes = grabAmClassesCSS(am, 'ah1')
 
-				content['class'] = classes
-				content['image'] = image
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
-			else:
-				image = amSidebarImages(am, 'ah1')
-				classes = grabAmClassesCSS(am, 'ah1')
-
-				content['class'] = classes
-				content['image'] = image
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
+			content['next_section'] = next_section
+			content['json_data'] = json_data
+			content['fields'] = fields
+			content['AM'] = am
+			content['session'] = session
+			content['back'] = back
+			content['class'] = classes
+			content['image'] = image
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/angerHistory.html', content)
 
 
 @login_required(login_url='/index')
@@ -674,23 +690,13 @@ def am_angerHistory2(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			next_section = request.POST.get('next_section', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory2.html')
-			json_data = json.dumps(fields)
-
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['AM'] = am
-			content['session'] = session
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-			content['back'] = back
-
 			if back == 'false':
-				#UPDATE AH1
-
 				#DYNAMIC FIELDS
 				physicalRecentV = request.POST.get('m_physicalRecentV', '')
 				verbalRecentV = request.POST.get('m_verbalRecentV', '')
@@ -759,19 +765,22 @@ def am_angerHistory2(request):
 				am.angerHistoryComplete = True
 				am.save()
 
-				image = amSidebarImages(am, 'ah2')
-				classes = grabAmClassesCSS(am, 'ah2')
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory2.html')
+			json_data = json.dumps(fields)
+			next_section = grabProperNextSection(am)
+			image = amSidebarImages(am, 'ah2')
+			classes = grabAmClassesCSS(am, 'ah2')
 
-				content['class'] = classes
-				content['image'] = image
-				return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
-			else:
-				image = amSidebarImages(am, 'ah2')
-				classes = grabAmClassesCSS(am, 'ah2')
-
-				content['class'] = classes
-				content['image'] = image
-				return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
+			content['next_section'] = next_section
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['AM'] = am
+			content['session'] = session
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			content['back'] = back
+			content['class'] = classes
+			content['image'] = image
+			return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content)
 
 @login_required(login_url='/index')
 def am_angerHistory3(request):
@@ -791,20 +800,11 @@ def am_angerHistory3(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
-
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory3.html')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['AM'] = am
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['back'] = back
-
-			print "Back: " + str(back)
 
 			if back == 'false':
 				depress30RecentV = request.POST.get('m_depress30RecentV', '')
@@ -867,9 +867,18 @@ def am_angerHistory3(request):
 				am.angerHistoryComplete2 = True
 				am.save()
 
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory3.html')
+			json_data = json.dumps(fields)			
 			image = amSidebarImages(am, 'ah3')
 			classes = grabAmClassesCSS(am, 'ah3')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
+			content['session'] = session
+			content['AM'] = am
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['back'] = back
 			content['class'] = classes
 			content['image'] = image
 			content['title'] = "Anger Management Assessment | Simeon Academy"
@@ -893,6 +902,8 @@ def am_angerTarget(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
@@ -948,7 +959,11 @@ def am_angerTarget(request):
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'target')
 			classes = grabAmClassesCSS(am, 'target')
+			next_section = grabProperNextSection(am)
 
+			print "Next section: " + str(next_section)
+
+			content['next_section'] = next_section
 			content['class'] = classes
 			content['image'] = image
 			content['fields'] = fields
@@ -978,18 +993,11 @@ def am_childhood(request):
 			back = request.POST.get('back_btn', '')
 			am_id = request.POST.get('am_id', '')
 			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
+
 			session = ClientSession.objects.get(id=session_id)
 			am = AngerManagement.objects.get(id=am_id)
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
-			json_data = json.dumps(fields)
-
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['back'] = back
-			content['AM'] = am
-			content['session'] = session
-			content['client'] = am.client
-			content['phone'] = convert_phone(am.client.phone)
 
 			if back == 'false':	
 				#UPDATE THE NEW DRUG HISTORY FORM	
@@ -1073,23 +1081,23 @@ def am_childhood(request):
 				am.drugHistoryComplete = True
 				am.save()
 
-				image = amSidebarImages(am, 'child')
-				classes = grabAmClassesCSS(am, 'child')
+			image = amSidebarImages(am, 'child')
+			classes = grabAmClassesCSS(am, 'child')
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
+			json_data = json.dumps(fields)
+			next_section = grabProperNextSection(am)
 
-				content['image'] = image
-				content['class'] = classes
-				content['back_url'] = '/am_drugHistory/'
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
-			else:
-				image = amSidebarImages(am, 'child')
-				classes = grabAmClassesCSS(am, 'child')
-
-				content['image'] = image
-				content['class'] = classes
-				content['back_url'] = '/am_drugHistory/'
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
+			content['next_section'] = next_section
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['back'] = back
+			content['AM'] = am
+			content['session'] = session
+			content['image'] = image
+			content['class'] = classes
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/childhoodHistory.html', content)
+			
 
 @login_required(login_url='/index')
 def am_connections(request):
@@ -1109,17 +1117,13 @@ def am_connections(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/connections.html')
 			json_data = json.dumps(fields)
-
-			content['AM'] = am
-			content['session'] = session
-			content['back'] = back
-			content['fields'] = fields
-			content['json_data'] = json_data
 
 			if back == 'false':
 				homicidal = request.POST.get('m_homicidal', '')
@@ -1135,16 +1139,6 @@ def am_connections(request):
 				homicidal = truePythonBool(homicidal)
 				medRecentV = truePythonBool(medRecentV)
 				medSuccessRecentV = truePythonBool(medSuccessRecentV)
-
-				print "homicidal: " + str(homicidal)
-				print "homicidalExplain: " + str(homicidalExplain)
-				print "medRecentV: " + str(medRecentV)
-				print "medRecentVExplain: " + str(medRecentVExplain)
-				print "medSuccessRecentV: " + str(medSuccessRecentV)
-				print "medSuccessExplainRecentV: " + str(medSuccessExplainRecentV)
-				print "durationRecentV: " + str(durationRecentV)
-				print "intensityRecentV: " + str(intensityRecentV)
-				print "howOften: " + str(howOften)
 
 				date = datetime.now()
 				date = date.date()
@@ -1168,7 +1162,16 @@ def am_connections(request):
 
 			image = amSidebarImages(am, 'connect')
 			classes = grabAmClassesCSS(am, 'connect')
+			next_section = grabProperNextSection(am)
 
+			print "Next section: " + str(next_section)
+
+			content['next_section'] = next_section
+			content['AM'] = am
+			content['session'] = session
+			content['back'] = back
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['class'] = classes
 			content['image'] = image
 			content['title'] = "Anger Management Assessment | Simeon Academy"
@@ -1193,6 +1196,8 @@ def am_control(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			next_section = request.POST.get('next_section', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
@@ -1238,15 +1243,17 @@ def am_control(request):
 				current.whichMeds = whichMeds
 				current.describeIssue = describeIssue
 
-				# am.currentProblems.save()
-				# am.currentProblemsComplete = True
-				# am.save()
+				am.currentProblems.save()
+				am.currentProblemsComplete = True
+				am.save()
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'control')
 			classes = grabAmClassesCSS(am, 'control')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
 			content['class'] = classes
 			content['image'] = image
 			content['json_data'] = json_data
@@ -1354,6 +1361,8 @@ def am_problems(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
@@ -1396,7 +1405,11 @@ def am_problems(request):
 			
 			image = amSidebarImages(am, 'current')
 			classes = grabAmClassesCSS(am, 'current')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
+			content['save_section'] = save_section
+			content['goToNext'] = goToNext
 			content['class'] = classes
 			content['image'] = image
 			content['json_data'] = json_data
@@ -1428,23 +1441,28 @@ def am_demographic(request):
 			client_id = request.POST.get('client_id', '')
 			session_id = request.POST.get('session_id', '')
 			back = request.POST.get('back_btn', '')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
+
 			client = Client.objects.get(id=client_id)			
 			session = ClientSession.objects.get(id=session_id)
 
 			if back == '' or back == None:
-				back = 'false'
+				back = 'false'			
 
 			proceed = startAM(client)		
 			am = proceed['am']
+
+			if back == 'false':
+				saveCompletedAmSection(request, save_section, am)
 
 			content['am'] = am
 			content['back'] = back
 			content['session'] = session
 			content['client'] = client
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-			fake = True #This is to ensure we dont go to location page for now
 
-			if proceed['isNew'] == False and proceed['back'] == 'true' and fake == False:
+			if proceed['isNew'] == False and proceed['back'] == 'true' and str(goToNext) == 'false':
 				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
 
@@ -1458,8 +1476,10 @@ def am_demographic(request):
 				json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'demo')
 				classes = grabAmClassesCSS(am, 'demo')
+				next_section = grabProperNextSection(am)
 
 				#CONTEXT
+				content['next_section'] = next_section
 				content['class'] = classes
 				content['image'] = image
 				content['education'] = education
@@ -1488,10 +1508,13 @@ def am_drugHistory(request):
 
 		else:
 			back = request.POST.get('back_btn', '')
-			am_id = request.POST.get('am_id', '')
-			am = AngerManagement.objects.get(id=am_id)
+			am_id = request.POST.get('am_id', '')			
 			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
+
 			session = ClientSession.objects.get(id=session_id)
+			am = AngerManagement.objects.get(id=am_id)
 
 			if back == 'false':
 				demo = am.demographic
@@ -1566,7 +1589,9 @@ def am_drugHistory(request):
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'dh')
 			classes = grabAmClassesCSS(am, 'dh')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
 			content['back'] = back
 			content['AM'] = am
 			content['session'] = session
@@ -1596,12 +1621,16 @@ def am_familyOrigin(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
 			json_data = json.dumps(fields)
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
 			content['json_data'] = json_data
 			content['fields'] = fields
 			content['AM'] = am
@@ -1652,7 +1681,9 @@ def am_familyOrigin(request):
 
 			image = amSidebarImages(am, 'family')
 			classes = grabAmClassesCSS(am, 'family')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
 			content['class'] = classes
 			content['image'] = image
 			content['title'] = "Anger Management Assessment | Simeon Academy"
@@ -1676,6 +1707,7 @@ def am_final(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
@@ -1725,8 +1757,10 @@ def am_final(request):
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'final')
 			classes = grabAmClassesCSS(am, 'final')
+			next_section = grabProperNextSection(am)
 
-			content['back'] = back
+			content['next_section'] = next_section
+			content['back'] 		= back
 			content['class'] 		= classes
 			content['image'] 		= image
 			content['fields'] 		= fields
@@ -1929,6 +1963,8 @@ def am_worst(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
@@ -1969,10 +2005,11 @@ def am_worst(request):
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'worst')
 			classes = grabAmClassesCSS(am, 'worst')
+			next_section = grabProperNextSection(am)
 
+			content['next_section'] = next_section
 			content['class'] = classes
 			content['image'] = image
-
 			content['json_data'] = json_data
 			content['fields'] = fields
 			content['AM'] = am
