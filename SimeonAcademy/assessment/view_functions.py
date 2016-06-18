@@ -419,7 +419,68 @@ def findClientSAP(client):
 			break
 	return result
 
-def grabProperNextSection(am):
+def forceNextSection(am):
+	result = None
+	print "INSIDE FUNCTION COMPLETE: " + str()
+
+	demographicComplete = am.demographicComplete
+	drugHistoryComplete = am.drugHistoryComplete
+	childhoodComplete = am.childhoodComplete
+	angerHistoryComplete = am.angerHistoryComplete
+	angerHistoryComplete2 = am.angerHistoryComplete2
+	angerHistoryComplete3 = am.angerHistoryComplete3
+	connectionsComplete = am.connectionsComplete
+	worstComplete = am.worstComplete
+	angerTargetComplete = am.angerTargetComplete
+	familyOriginComplete = am.familyOriginComplete
+	currentProblemsComplete = am.currentProblemsComplete
+	controlComplete = am.controlComplete
+	finalComplete = am.finalComplete
+
+	if demographicComplete == False:
+		result = '/am_demographic/'
+			
+	elif drugHistoryComplete == False:
+		result = '/am_drugHistory/'
+			
+	elif childhoodComplete == False:
+		result = '/am_childhood/'
+			
+	elif angerHistoryComplete == False:
+		result = '/am_angerHistory/'
+			
+	elif angerHistoryComplete2 == False:
+		result = '/am_angerHistory2/'
+			
+	elif angerHistoryComplete3 == False:
+		result = '/am_angerHistory3/'
+			
+	elif connectionsComplete == False:
+		result = '/am_connections/'
+			
+	elif worstComplete == False:
+		result = '/am_worst/'
+			
+	elif angerTargetComplete == False:
+		result = '/am_angerTarget/'
+			
+	elif familyOriginComplete == False:
+		result = '/am_familyOrigin/'
+
+	elif currentProblemsComplete == False:
+		result = '/am_problems/'
+			
+	elif controlComplete == False:
+		result = '/am_control/'
+			
+	elif finalComplete == False:
+		result = '/am_final/'			
+	else:
+		result = '/am_viewForm/'
+
+	return result
+
+def grabProperNextSection(am, current):
 	result = None
 
 	demographicComplete = am.demographicComplete
@@ -438,30 +499,146 @@ def grabProperNextSection(am):
 
 	if demographicComplete == False:
 		result = '/am_demographic/'
+
+		if str(current) == str(result):
+			am.demographicComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.demographicComplete = False
+			am.save()
+			
 	elif drugHistoryComplete == False:
 		result = '/am_drugHistory/'
+
+		if str(current) == str(result):
+			am.drugHistoryComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.drugHistoryComplete = False
+			am.save()
+			
 	elif childhoodComplete == False:
 		result = '/am_childhood/'
+
+		if str(current) == str(result):
+			am.childhoodComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.childhoodComplete = False
+			am.save()
+			
 	elif angerHistoryComplete == False:
 		result = '/am_angerHistory/'
+
+		if str(current) == str(result):
+			am.angerHistoryComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.angerHistoryComplete = False
+			am.save()
+			
 	elif angerHistoryComplete2 == False:
 		result = '/am_angerHistory2/'
+
+		if str(current) == str(result):
+			am.angerHistoryComplete2 = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.angerHistoryComplete2 = False
+			am.save()
+			
 	elif angerHistoryComplete3 == False:
 		result = '/am_angerHistory3/'
+
+		if str(current) == str(result):
+			am.angerHistoryComplete3 = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.angerHistoryComplete3 = False
+			am.save()
+			
 	elif connectionsComplete == False:
 		result = '/am_connections/'
+
+		if str(current) == str(result):
+			am.connectionsComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.connectionsComplete = False
+			am.save()
+			
 	elif worstComplete == False:
 		result = '/am_worst/'
+
+		if str(current) == str(result):
+			am.worstComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.worstComplete = False
+			am.save()
+			
 	elif angerTargetComplete == False:
 		result = '/am_angerTarget/'
+
+		if str(current) == str(result):
+			am.angerTargetComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.angerTargetComplete = False
+			am.save()
+			
 	elif familyOriginComplete == False:
 		result = '/am_familyOrigin/'
+
+		if str(current) == str(result):
+			am.familyOriginComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.familyOriginComplete = False
+			am.save()
+			
 	elif currentProblemsComplete == False:
 		result = '/am_problems/'
+
+		if str(current) == str(result):
+			am.currentProblemsComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.currentProblemsComplete = False
+			am.save()
+			
 	elif controlComplete == False:
 		result = '/am_control/'
+
+		if str(current) == str(result):
+			am.controlComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.controlComplete = False
+			am.save()
+			
 	elif finalComplete == False:
 		result = '/am_final/'
+
+		if str(current) == str(result):
+			am.finalComplete = True
+			am.save()
+			result = forceNextSection(am)
+
+			am.finalComplete = False
+			am.save()			
 	else:
 		result = '/am_viewForm/'
 

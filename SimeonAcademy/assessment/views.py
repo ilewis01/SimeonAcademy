@@ -573,90 +573,11 @@ def am_angerHistory(request):
 			session = ClientSession.objects.get(id=session)			
 
 			if str(back) == 'false':
-				momAlive = request.POST.get('momAlive', '')
-				dadAlive = request.POST.get('dadAlive', '')
-				childTrama = request.POST.get('childTrama', '')
-				siblingsClose = request.POST.get('siblingsClose', '')
-				dadClose = request.POST.get('dadClose', '')
-				momClose = request.POST.get('momClose', '')
-				wasAbused = request.POST.get('wasAbused', '')
-				childAnger = request.POST.get('childAnger', '')
-				otherChild = request.POST.get('otherChild', '')
-				parentViolence = request.POST.get('parentViolence', '')
-
-				#BOOLEAN FIELDS
-				momAlive = truePythonBool(momAlive)
-				dadAlive = truePythonBool(dadAlive)
-				childTrama = truePythonBool(childTrama)
-				siblingsClose = truePythonBool(siblingsClose)
-				dadClose = truePythonBool(dadClose)
-				momClose = truePythonBool(momClose)
-				wasAbused = truePythonBool(wasAbused)
-				childAnger = truePythonBool(childAnger)
-				otherChild = truePythonBool(otherChild)
-				parentViolence = truePythonBool(parentViolence)
-
-				#DYNAMIC FIELDS
-				traumaExplain = request.POST.get('m_traumaExplain', '')
-				howLeftHome = request.POST.get('m_howLeftHome', '')
-				abusedBy = request.POST.get('m_abusedBy', '')
-				abuseImpact = request.POST.get('m_abuseImpact', '')
-				childAngerExplain = request.POST.get('m_childAngerExplain', '')
-				otherChildExplain = request.POST.get('m_otherChildExplain', '')
-				parentViolenceExplain = request.POST.get('m_parentViolenceExplain', '')
-				parentViolenceImpact = request.POST.get('m_parentViolenceImpact', '')
-
-				#NORMAL FIELDS
-				raisedBy = request.POST.get('raisedBy', '')
-				howLeftHome = request.POST.get('howLeftHome', '')
-				num_siblings = request.POST.get('num_siblings', '')
-				siblingsRelationshipExplain = request.POST.get('siblingsRelationshipExplain', '')
-				dadCloseExplain = request.POST.get('dadCloseExplain', '')
-				momCloseExplain = request.POST.get('momCloseExplain', '')
-
-				raisedBy = blankMustDie(raisedBy)
-				howLeftHome = blankMustDie(howLeftHome)
-				siblingsRelationshipExplain = blankMustDie(siblingsRelationshipExplain)
-				dadCloseExplain = blankMustDie(dadCloseExplain)
-				momCloseExplain = blankMustDie(momCloseExplain)
-
-				childhood = am.childhood
-				date = datetime.now()
-				date = date.date()
-
-				childhood.date_of_assessment = date
-				childhood.raisedBy = raisedBy
-				childhood.momAlive = momAlive
-				childhood.dadAlive = dadAlive
-				childhood.childTrama = childTrama
-				childhood.traumaExplain = traumaExplain
-				childhood.howLeftHome = howLeftHome
-				childhood.num_siblings = num_siblings
-				childhood.siblingsClose = siblingsClose
-				childhood.siblingsRelationshipExplain = siblingsRelationshipExplain
-				childhood.dadClose = dadClose
-				childhood.dadCloseExplain = dadCloseExplain
-				childhood.momClose = momClose
-				childhood.momCloseExplain = momCloseExplain
-				childhood.wasAbused = wasAbused
-				childhood.abusedBy = abusedBy
-				childhood.abuseImpact = abuseImpact
-				childhood.childAnger = childAnger
-				childhood.childAngerExplain = childAngerExplain
-				childhood.otherChild = otherChild
-				childhood.otherChildExplain = otherChildExplain
-				childhood.parentViolence = parentViolence
-				childhood.parentViolenceExplain = parentViolenceExplain
-				childhood.parentViolenceImpact = parentViolenceImpact
-
-				childhood.save()
-				am.childhood = childhood
-				am.childhoodComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 			
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory.html')
 			json_data = json.dumps(fields)
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_angerHistory/')
 			image = amSidebarImages(am, 'ah1')
 			classes = grabAmClassesCSS(am, 'ah1')
 
@@ -697,77 +618,11 @@ def am_angerHistory2(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				#DYNAMIC FIELDS
-				physicalRecentV = request.POST.get('m_physicalRecentV', '')
-				verbalRecentV = request.POST.get('m_verbalRecentV', '')
-				threatsRecentV = request.POST.get('m_threatsRecentV', '')
-				propertyRecentV = request.POST.get('m_propertyRecentV', '')
-				otherRecentV = request.POST.get('m_otherRecentV', '')
-				otherExplainRecentV = request.POST.get('m_otherExplainRecentV', '')
-				wasTense = request.POST.get('m_wasTense', '')
-				hadRush = request.POST.get('m_hadRush', '')
-				feltStrong = request.POST.get('m_feltStrong', '')
-				psychoRecentV = request.POST.get('m_psychoRecentV', '')
-				psychoWhyRecentV = request.POST.get('m_psychoWhyRecentV', '')
-				longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos', '')
-				longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs', '')
-				didCompleteTreatRecentV = request.POST.get('m_didCompleteTreatRecentV', '')
-				reasonNotCompleteRecentV = request.POST.get('m_reasonNotCompleteRecentV', '')
-
-				#NORMAL FIELDS
-				recentIncidentV = request.POST.get('recentIncidentV', '')
-				recentVDate = request.POST.get('recentVDate', '')
-				recentVlocation = request.POST.get('recentVlocation', '')
-				withWhomRecentV = request.POST.get('withWhomRecentV', '')
-				happenedRecentV = request.POST.get('happenedRecentV', '')
-				typeWordsRecentV = request.POST.get('typeWordsRecentV', '')
-
-				physicalRecentV = truePythonBool(physicalRecentV)
-				verbalRecentV = truePythonBool(verbalRecentV)
-				threatsRecentV = truePythonBool(threatsRecentV)
-				propertyRecentV = truePythonBool(propertyRecentV)
-				otherRecentV = truePythonBool(otherRecentV)
-				wasTense = truePythonBool(wasTense)
-				hadRush = truePythonBool(hadRush)
-				feltStrong = truePythonBool(feltStrong)
-				psychoRecentV = truePythonBool(psychoRecentV)
-				didCompleteTreatRecentV = truePythonBool(didCompleteTreatRecentV)
-
-				date = datetime.now()
-				date = date.date()
-
-				ah1 = am.angerHistory
-
-				ah1.date_of_assessment = date
-				ah1.recentIncidentV = recentIncidentV				
-				ah1.recentVDate = recentVDate
-				ah1.recentVlocation = recentVlocation
-				ah1.withWhomRecentV = withWhomRecentV
-				ah1.happenedRecentV = happenedRecentV
-				ah1.physicalRecentV = physicalRecentV
-				ah1.verbalRecentV = verbalRecentV
-				ah1.threatsRecentV = threatsRecentV
-				ah1.propertyRecentV = propertyRecentV
-				ah1.otherRecentV = otherRecentV
-				ah1.otherExplainRecentV = otherExplainRecentV
-				ah1.typeWordsRecentV = typeWordsRecentV
-				ah1.wasTense = wasTense
-				ah1.hadRush = hadRush
-				ah1.feltStrong = feltStrong
-				ah1.psychoRecentV = psychoRecentV
-				ah1.psychoWhyRecentV = psychoWhyRecentV
-				ah1.longAgoTreatRecentVmos = longAgoTreatRecentVmos
-				ah1.longAgoTreatRecentVyrs = longAgoTreatRecentVyrs
-				ah1.didCompleteTreatRecentV = didCompleteTreatRecentV
-				ah1.reasonNotCompleteRecentV = reasonNotCompleteRecentV
-
-				ah1.save()
-				am.angerHistoryComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory2.html')
 			json_data = json.dumps(fields)
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_angerHistory2/')
 			image = amSidebarImages(am, 'ah2')
 			classes = grabAmClassesCSS(am, 'ah2')
 
@@ -807,71 +662,13 @@ def am_angerHistory3(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				depress30RecentV = request.POST.get('m_depress30RecentV', '')
-				depress30ExplainRecentV = request.POST.get('m_depress30ExplainRecentV', '')
-				anxietyRecentV = request.POST.get('m_anxietyRecentV', '')
-				anxietyExplainRecentV = request.POST.get('m_anxietyExplainRecentV', '')
-				hallucinationRecentV = request.POST.get('m_hallucinationRecentV', '')
-				hallucinationLastV = request.POST.get('m_hallucinationLastV', '')
-				understandingRecentV = request.POST.get('m_understandingRecentV', '')
-				understandingExplainRecentV = request.POST.get('m_understandingExplainRecentV', '')
-				troubleControlRecentV = request.POST.get('m_troubleControlRecentV', '')
-				lastTimeTroubleControl = request.POST.get('m_lastTimeTroubleControl', '')
-				controlTrigger = request.POST.get('m_controlTrigger', '')
-				suicide30RecentV = request.POST.get('m_suicide30RecentV', '')
-				suicide30ExplainRecentV = request.POST.get('m_suicide30ExplainRecentV', '')
-				suicideTodayRecentV = request.POST.get('m_suicideTodayRecentV', '')
-				suicideTodayPlanRecentV = request.POST.get('m_suicideTodayPlanRecentV', '')
-				suicideTodayExplainRecentV = request.POST.get('m_suicideTodayExplainRecentV', '')
-				hasAttemptedSuicide = request.POST.get('m_hasAttemptedSuicide', '')
-				hasAttemptedExplainRecentV = request.POST.get('m_hasAttemptedExplainRecentV', '')
-
-				#CONVERT THE BOOLEAN FIELDS
-				depress30RecentV = truePythonBool(depress30RecentV)
-				anxietyRecentV = truePythonBool(anxietyRecentV)
-				hallucinationRecentV = truePythonBool(hallucinationRecentV)
-				understandingRecentV = truePythonBool(understandingRecentV)
-				troubleControlRecentV = truePythonBool(troubleControlRecentV)
-				suicide30RecentV = truePythonBool(suicide30RecentV)
-				suicideTodayRecentV = truePythonBool(suicideTodayRecentV)
-				suicideTodayPlanRecentV = truePythonBool(suicideTodayPlanRecentV)
-				hasAttemptedSuicide = truePythonBool(hasAttemptedSuicide)
-
-				#UPDATE ANGER HISTORY 2...
-				date = datetime.now()
-				date = date.date()
-
-				ah2 = am.angerHistory2
-				ah2.date_of_assessment = date
-
-				ah2.depress30RecentV = depress30RecentV
-				ah2.depress30ExplainRecentV = depress30ExplainRecentV
-				ah2.anxietyRecentV = anxietyRecentV
-				ah2.anxietyExplainRecentV = anxietyExplainRecentV
-				ah2.hallucinationRecentV = hallucinationRecentV
-				ah2.hallucinationLastV = hallucinationLastV
-				ah2.understandingRecentV = understandingRecentV
-				ah2.understandingExplainRecentV = understandingExplainRecentV
-				ah2.troubleControlRecentV = troubleControlRecentV
-				ah2.lastTimeTroubleControl = lastTimeTroubleControl
-				ah2.controlTrigger = controlTrigger
-				ah2.suicide30RecentV = suicide30RecentV
-				ah2.suicide30ExplainRecentV = suicide30ExplainRecentV
-				ah2.suicideTodayRecentV = suicideTodayRecentV
-				ah2.suicideTodayPlanRecentV = suicideTodayPlanRecentV
-				ah2.suicideTodayExplainRecentV = suicideTodayExplainRecentV
-				ah2.hasAttemptedSuicide = hasAttemptedSuicide
-				ah2.hasAttemptedExplainRecentV = hasAttemptedExplainRecentV
-
-				ah2.save()
-				am.angerHistoryComplete2 = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/angerHistory3.html')
 			json_data = json.dumps(fields)			
 			image = amSidebarImages(am, 'ah3')
 			classes = grabAmClassesCSS(am, 'ah3')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_angerHistory3/')
 
 			content['next_section'] = next_section
 			content['session'] = session
@@ -909,57 +706,13 @@ def am_angerTarget(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				useWorst = request.POST.get('m_useWorst', '')
-				whoDidItFight = request.POST.get('m_whoDidItFight', '')
-				physicalWorst = request.POST.get('m_physicalWorst', '')
-				verbalWorst = request.POST.get('m_verbalWorst', '')
-				threatsWorst = request.POST.get('m_threatsWorst', '')
-				propertyWorst = request.POST.get('m_propertyWorst', '')
-				otherWorst = request.POST.get('m_otherWorst', '')
-				otherWorstDescription = request.POST.get('m_otherWorstDescription', '')
-
-				#GET NORMAL TEXT FIELDS
-				whoWorst = request.POST.get('whoWorst', '')
-				happenedWorst = request.POST.get('happenedWorst', '')
-				wordThoughtWorst = request.POST.get('wordThoughtWorst', '')
-				howStartWorst = request.POST.get('howStartWorst', '')
-				howEndWorst = request.POST.get('howEndWorst', '')
-
-				#PROCESS THE CHECKBOXES AND RADIO BUTTONS
-				useWorst = truePythonBool(useWorst)
-				physicalWorst = truePythonBool(physicalWorst)
-				verbalWorst = truePythonBool(verbalWorst)
-				threatsWorst = truePythonBool(threatsWorst)
-				propertyWorst = truePythonBool(propertyWorst)
-				otherWorst = truePythonBool(otherWorst)				
-
-				date = datetime.now()
-				date = date.date()
-
-				am.worstEpisode.date_of_assessment = date
-				am.worstEpisode.whoWorst = whoWorst
-				am.worstEpisode.happenedWorst = happenedWorst
-				am.worstEpisode.wordThoughtWorst = wordThoughtWorst
-				am.worstEpisode.howStartWorst = howStartWorst
-				am.worstEpisode.howEndWorst = howEndWorst
-				am.worstEpisode.useWorst = useWorst
-				am.worstEpisode.whoDidItFight = whoDidItFight
-				am.worstEpisode.physicalWorst = physicalWorst
-				am.worstEpisode.verbalWorst = verbalWorst
-				am.worstEpisode.threatsWorst = threatsWorst
-				am.worstEpisode.propertyWorst = propertyWorst
-				am.worstEpisode.otherWorst = otherWorst
-				am.worstEpisode.otherWorstDescription = otherWorstDescription
-
-				am.worstEpisode.save()
-				am.worstComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/AngerTarget.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'target')
 			classes = grabAmClassesCSS(am, 'target')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_angerTarget/')
 
 			print "Next section: " + str(next_section)
 
@@ -1000,92 +753,13 @@ def am_childhood(request):
 			am = AngerManagement.objects.get(id=am_id)
 
 			if back == 'false':	
-				#UPDATE THE NEW DRUG HISTORY FORM	
-
-				#PROCESS THE BOOLEAN FIELDS
-				curUse = request.POST.get('use_drugs', '')
-				everDrank = request.POST.get('ever_used', '')
-				DUI = request.POST.get('has_dui', '')
-				drugTreatment = request.POST.get('treatment', '')
-				finishedTreatment = request.POST.get('completed_treatment', '')
-				isClean = request.POST.get('still_abstinent', '')
-				drinkLastEpisode = request.POST.get('drinking_last', '')
-				drinkRelationshipProblem = request.POST.get('relationship_alc', '')
-				needHelpDrugs = request.POST.get('need_help', '')
-
-				everDrank = resolveBlankRadio(everDrank, 'False')
-				DUI = resolveBlankRadio(DUI, 'False')
-				finishedTreatment = resolveBlankRadio(finishedTreatment, 'True')
-				isClean = resolveBlankRadio(isClean, 'True')
-
-				curUse = truePythonBool(curUse)
-				everDrank = truePythonBool(everDrank)
-				DUI = truePythonBool(DUI)
-				drugTreatment = truePythonBool(drugTreatment)
-				finishedTreatment = truePythonBool(finishedTreatment)
-				isClean = truePythonBool(isClean)
-				drinkLastEpisode = truePythonBool(drinkLastEpisode)
-				drinkRelationshipProblem = truePythonBool(drinkRelationshipProblem)
-				needHelpDrugs = truePythonBool(needHelpDrugs)
-
-				#PROCESS THE TEXT AND INTEGER FIELDS
-				firstDrinkAge = request.POST.get('first_drink', '')
-				firstDrinkType = request.POST.get('first_use_type', '')
-				useType = request.POST.get('m_useType', '')
-				amtPerWeek = request.POST.get('m_amtPerWeek', '')
-				useAmt = request.POST.get('m_useAmt', '')
-				monthsQuit = request.POST.get('m_monthsQuit', '')
-				yearsQuit = request.POST.get('m_yearsQuit', '')
-				reasonQuit = request.POST.get('m_reasonQuit', '')
-				numDUI = request.POST.get('m_numDUI', '')
-				BALevel = request.POST.get('m_BALevel', '')
-				treatmentPlace = request.POST.get('m_treatmentPlace', '')
-				dateTreated = request.POST.get('m_dateTreated', '')
-				reasonNotFinishedTreatment = request.POST.get('m_reasonNotFinishedTreatment', '')
-				relapseTrigger = request.POST.get('m_relapseTrigger', '')
-
-				if curUse == True:
-					everDrank = True
-
-				date = datetime.now()
-				date = date.date()
-
-				#UPDATE DRUG HISTORY FORM
-				demo = am.drugHistory
-				demo.date_of_assessment = date
-				demo.firstDrinkAge = firstDrinkAge
-				demo.firstDrinkType = firstDrinkType
-				demo.curUse = curUse
-				demo.useType = useType
-				demo.amtPerWeek = amtPerWeek
-				demo.useAmt = useAmt
-				demo.everDrank = everDrank
-				demo.monthsQuit = monthsQuit
-				demo.yearsQuit = yearsQuit
-				demo.reasonQuit = reasonQuit
-				demo.DUI = DUI
-				demo.numDUI = numDUI
-				demo.BALevel = BALevel
-				demo.drugTreatment = drugTreatment
-				demo.finishedTreatment = finishedTreatment
-				demo.reasonNotFinishedTreatment = reasonNotFinishedTreatment
-				demo.isClean = isClean
-				demo.relapseTrigger = relapseTrigger
-				demo.drinkLastEpisode = drinkLastEpisode
-				demo.drinkRelationshipProblem = drinkRelationshipProblem
-				demo.needHelpDrugs = needHelpDrugs
-				demo.treatmentPlace = treatmentPlace
-				demo.dateTreated = dateTreated
-
-				demo.save()
-				am.drugHistoryComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)	
 
 			image = amSidebarImages(am, 'child')
 			classes = grabAmClassesCSS(am, 'child')
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/childhoodHistory.html')
 			json_data = json.dumps(fields)
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_childhood/')
 
 			content['next_section'] = next_section
 			content['fields'] = fields
@@ -1126,43 +800,11 @@ def am_connections(request):
 			json_data = json.dumps(fields)
 
 			if back == 'false':
-				homicidal = request.POST.get('m_homicidal', '')
-				homicidalExplain = request.POST.get('m_homicidalExplain', '')
-				medRecentV = request.POST.get('m_medRecentV', '')
-				medRecentVExplain = request.POST.get('m_medRecentVExplain', '')
-				medSuccessRecentV = request.POST.get('m_medSuccessRecentV', '')
-				medSuccessExplainRecentV = request.POST.get('m_medSuccessExplainRecentV', '')
-				durationRecentV = request.POST.get('durationRecentV', '')
-				intensityRecentV = request.POST.get('intensityRecentV')
-				howOften = request.POST.get('howOften')
-
-				homicidal = truePythonBool(homicidal)
-				medRecentV = truePythonBool(medRecentV)
-				medSuccessRecentV = truePythonBool(medSuccessRecentV)
-
-				date = datetime.now()
-				date = date.date()
-
-				ah3 = am.angerHistory3
-				ah3.date_of_assessment = date
-
-				ah3.homicidal = homicidal
-				ah3.homicidalExplain = homicidalExplain
-				ah3.medRecentV = medRecentV
-				ah3.medRecentVExplain = medRecentVExplain
-				ah3.medSuccessRecentV = medSuccessRecentV
-				ah3.medSuccessExplainRecentV = medSuccessExplainRecentV
-				ah3.durationRecentV = durationRecentV
-				ah3.intensityRecentV = intensityRecentV
-				ah3.howOften = howOften
-
-				ah3.save()
-				am.angerHistoryComplete3 = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			image = amSidebarImages(am, 'connect')
 			classes = grabAmClassesCSS(am, 'connect')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_connections/')
 
 			print "Next section: " + str(next_section)
 
@@ -1203,55 +845,13 @@ def am_control(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				date = datetime.now()
-				date = date.date()
-
-				brainInjury = request.POST.get('m_brainInjury', '')
-				stroke = request.POST.get('m_stroke', '')
-				epilepsy = request.POST.get('m_epilepsy', '')
-				attentionDD = request.POST.get('m_attentionDD', '')
-				pms = request.POST.get('m_pms', '')
-				depression = request.POST.get('m_depression', '')
-				ptsd = request.POST.get('m_ptsd', '')
-				otherSeriousIllness = request.POST.get('m_otherSeriousIllness', '')
-				currentlyOnMeds = request.POST.get('m_currentlyOnMeds', '')
-				whichMeds = request.POST.get('m_whichMeds', '')
-				describeIssue = request.POST.get('m_describeIssue', '')	
-
-				brainInjury = truePythonBool(brainInjury)
-				stroke = truePythonBool(stroke)
-				epilepsy = truePythonBool(epilepsy)
-				attentionDD = truePythonBool(attentionDD)
-				depression = truePythonBool(depression)
-				pms = truePythonBool(pms)
-				ptsd = truePythonBool(ptsd)
-				otherSeriousIllness = truePythonBool(otherSeriousIllness)
-				currentlyOnMeds = truePythonBool(currentlyOnMeds)		
-
-				#UPDATE CURRENT PROBLEMS DATABASE
-				current = am.currentProblems
-				current.date_of_assessment = date
-				current.brainInjury = brainInjury
-				current.stroke = stroke
-				current.epilepsy = epilepsy
-				current.attentionDD = attentionDD
-				current.pms = pms
-				current.depression = depression
-				current.ptsd = ptsd
-				current.otherSeriousIllness = otherSeriousIllness
-				current.currentlyOnMeds = currentlyOnMeds
-				current.whichMeds = whichMeds
-				current.describeIssue = describeIssue
-
-				am.currentProblems.save()
-				am.currentProblemsComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/control.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'control')
 			classes = grabAmClassesCSS(am, 'control')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_control/')
 
 			content['next_section'] = next_section
 			content['class'] = classes
@@ -1370,42 +970,11 @@ def am_problems(request):
 			json_data = json.dumps(fields)
 
 			if back == 'false':
-				date = datetime.now()
-				date = date.date()
-
-				kidMomAnger = request.POST.get('kidMomAnger', '')
-				kidDadAnger = request.POST.get('kidDadAnger', '')
-				kidSiblingAnger = request.POST.get('kidSiblingAnger', '')
-				kidOtherAnger = request.POST.get('kidOtherAnger', '')
-				learnFamilyAnger = request.POST.get('learnFamilyAnger', '')
-				suicideHistory = request.POST.get('m_suicideHistory', '')
-				hasLovingMother = request.POST.get('m_hasLovingMother', '')
-				hasLovingSiblings = request.POST.get('m_hasLovingSiblings', '')
-
-				suicideHistory = truePythonBool(suicideHistory)
-				hasLovingMother = truePythonBool(hasLovingMother)
-				hasLovingSiblings = truePythonBool(hasLovingSiblings)
-
-				#UPDATE FAMILY OF ORGIN DATA
-				family = am.familyOrigin
-
-				family.date_of_assessment = date
-				family.kidMomAnger = kidMomAnger
-				family.kidDadAnger = kidDadAnger
-				family.kidSiblingAnger = kidSiblingAnger
-				family.kidOtherAnger = kidOtherAnger
-				family.learnFamilyAnger = learnFamilyAnger
-				family.suicideHistory = suicideHistory
-				family.hasLovingMother = hasLovingMother
-				family.hasLovingSiblings = hasLovingSiblings
-
-				am.familyOrigin.save()
-				am.familyOriginComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 			
 			image = amSidebarImages(am, 'current')
 			classes = grabAmClassesCSS(am, 'current')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_problems/')
 
 			content['next_section'] = next_section
 			content['save_section'] = save_section
@@ -1476,7 +1045,7 @@ def am_demographic(request):
 				json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'demo')
 				classes = grabAmClassesCSS(am, 'demo')
-				next_section = grabProperNextSection(am)
+				next_section = grabProperNextSection(am, '/am_demographic/')
 
 				#CONTEXT
 				content['next_section'] = next_section
@@ -1517,79 +1086,13 @@ def am_drugHistory(request):
 			am = AngerManagement.objects.get(id=am_id)
 
 			if back == 'false':
-				demo = am.demographic
-				dateTime = datetime.now()
-				date = dateTime.date()	
-
-				#NORMAL FIELDS
-				maritalStatus = request.POST.get('maritalStatus', '')
-				livingSituation = request.POST.get('livingSituation', '')
-				education = request.POST.get('education', '')
-
-				months_res = request.POST.get('months_res', '')
-				years_res = request.POST.get('years_res', '')
-				num_children = request.POST.get('num_children', '')
-				other_dependants = request.POST.get('other_dependants', '')
-				job_title = request.POST.get('job_title', '')
-				employee = request.POST.get('employee', '')
-				emp_address = request.POST.get('emp_address', '')
-				employer_phone = request.POST.get('employer_phone', '')
-				employed_months = request.POST.get('employed_months', '')
-				employed_years = request.POST.get('employed_years', '')
-
-				#DYNAMIC FIELDS
-				own = request.POST.get('m_own', '')
-				drop_out = request.POST.get('m_drop_out', '')
-				health_problem = request.POST.get('m_health_problem', '')
-				medication = request.POST.get('m_medication', '')
-				resasonDO = request.POST.get('m_resasonDO', '')
-				health_exp = request.POST.get('m_health_exp', '')
-				whatMedicine = request.POST.get('m_whatMedicine', '')
-
-				#SET DROP DOWN MENU VALUES
-				maritalStatus = MaritalStatus.objects.get(id=maritalStatus)
-				livingSituation = LivingSituation.objects.get(id=livingSituation)
-				education = EducationLevel.objects.get(id=education)
-
-				employer_phone = phone_to_integer(employer_phone)
-
-				#PROCESS THE RADIO BUTTONS
-				own = truePythonBool(own)
-				drop_out = truePythonBool(drop_out)
-				health_problem = truePythonBool(health_problem)
-				medication = truePythonBool(medication)
-
-				demo.date_of_assessment 	= date
-				demo.maritalStatus 			= maritalStatus
-				demo.livingSituation 		= livingSituation
-				demo.own 					= own
-				demo.months_res 			= months_res
-				demo.years_res 				= years_res
-				demo.num_children 			= num_children
-				demo.other_dependants 		= other_dependants
-				demo.education 				= education
-				demo.drop_out 				= drop_out
-				demo.resasonDO 				= resasonDO
-				demo.employee 				= employee
-				demo.job_title 				= job_title
-				demo.emp_address 			= emp_address
-				demo.employed_months 		= employed_months
-				demo.employed_years 		= employed_years
-				demo.employer_phone 		= employer_phone
-				demo.health_problem 		= health_problem
-				demo.medication 			= medication
-				demo.whatMedicine 			= whatMedicine
-				demo.health_exp 			= health_exp
-
-				demo.save()
-				am.demographicComplete = True
-				am.save()
-
+				saveCompletedAmSection(request, save_section, am)
+				
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'dh')
 			classes = grabAmClassesCSS(am, 'dh')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_drugHistory/')
 
 			content['next_section'] = next_section
 			content['back'] = back
@@ -1625,64 +1128,22 @@ def am_familyOrigin(request):
 			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
-			session = ClientSession.objects.get(id=session)
+			session = ClientSession.objects.get(id=session)		
+
+			if back == 'false':
+				saveCompletedAmSection(request, save_section, am)
+
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/familyOrigin.html')
 			json_data = json.dumps(fields)
-			next_section = grabProperNextSection(am)
+			image = amSidebarImages(am, 'family')
+			classes = grabAmClassesCSS(am, 'family')
+			next_section = grabProperNextSection(am, '/am_familyOrigin/')
 
-			content['next_section'] = next_section
 			content['json_data'] = json_data
 			content['fields'] = fields
 			content['AM'] = am
 			content['session'] = session
-			content['back'] = back		
-
-			if back == 'false':
-				angryPartner = request.POST.get('m_angryPartner', '')
-				angryParents = request.POST.get('m_angryParents', '')
-				angryChildren = request.POST.get('m_angryChildren', '')
-				angryRelatives = request.POST.get('m_angryRelatives', '')
-				angryEmployer = request.POST.get('m_angryEmployer', '')
-				angryFriends = request.POST.get('m_angryFriends', '')
-				angryOther = request.POST.get('m_angryOther', '')
-				otherWhom = request.POST.get('m_otherWhom', '')
-				angryAbout = request.POST.get('angryAbout', '')
-				seldomUpset = request.POST.get('m_seldomUpset', '')
-
-				angryPartner = truePythonBool(angryPartner)
-				angryParents = truePythonBool(angryParents)
-				angryChildren = truePythonBool(angryChildren)
-				angryRelatives = truePythonBool(angryRelatives)
-				angryEmployer = truePythonBool(angryEmployer)
-				angryFriends = truePythonBool(angryFriends)
-				angryOther = truePythonBool(angryOther)
-				seldomUpset = truePythonBool(seldomUpset)
-
-				date = datetime.now()
-				date = date.date()
-
-				target = am.angerTarget
-
-				target.date_of_assessment = date
-				target.angryPartner = angryPartner
-				target.angryParents = angryParents
-				target.angryChildren = angryChildren
-				target.angryRelatives = angryRelatives
-				target.angryEmployer = angryEmployer
-				target.angryFriends = angryFriends
-				target.angryOther = angryOther
-				target.otherWhom = otherWhom
-				target.angryAbout = angryAbout
-				target.seldomUpset = seldomUpset
-
-				target.save()
-				am.angerTargetComplete = True
-				am.save()
-
-			image = amSidebarImages(am, 'family')
-			classes = grabAmClassesCSS(am, 'family')
-			next_section = grabProperNextSection(am)
-
+			content['back'] = back
 			content['next_section'] = next_section
 			content['class'] = classes
 			content['image'] = image
@@ -1713,51 +1174,13 @@ def am_final(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				date = datetime.now()
-				date = date.date()
-
-				neverAttemptedControl 	= request.POST.get('m_neverAttemptedControl', '')
-				talkToMyself 			= request.POST.get('m_talkToMyself', '')
-				whatSayYou 				= request.POST.get('m_whatSayYou', '')
-				leaveScene 				= request.POST.get('m_leaveScene', '')
-				howLongLeaveScene 		= request.POST.get('m_howLongLeaveScene', '')
-				whatDoLeave 			= request.POST.get('m_whatDoLeave', '')
-				relax 					= request.POST.get('m_relax', '')
-				howRelax 				= request.POST.get('m_howRelax', '')
-				selfHelpGroup 			= request.POST.get('m_selfHelpGroup', '')
-				otherControlAnger 		= request.POST.get('m_otherControlAnger', '')
-				doWhatOtherControl 		= request.POST.get('m_doWhatOtherControl', '')
-
-				neverAttemptedControl 	= truePythonBool(neverAttemptedControl)
-				talkToMyself 			= truePythonBool(talkToMyself)
-				leaveScene 				= truePythonBool(leaveScene)
-				relax 					= truePythonBool(relax)
-				selfHelpGroup 			= truePythonBool(selfHelpGroup)
-				otherControlAnger 		= truePythonBool(otherControlAnger)
-
-				control = am.control
-				control.neverAttemptedControl = neverAttemptedControl
-				control.talkToMyself = talkToMyself
-				control.whatSayYou = whatSayYou
-				control.leaveScene = leaveScene
-				control.howLongLeaveScene = howLongLeaveScene
-				control.whatDoLeave = whatDoLeave
-				control.relax = relax
-				control.howRelax = howRelax
-				control.selfHelpGroup = selfHelpGroup
-				control.otherControlAnger = otherControlAnger
-				control.doWhatOtherControl = doWhatOtherControl
-				control.date_of_assessment = date
-
-				control.save()
-				am.controlComplete = True
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/final.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'final')
 			classes = grabAmClassesCSS(am, 'final')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_final/')
 
 			content['next_section'] = next_section
 			content['back'] 		= back
@@ -1970,42 +1393,13 @@ def am_worst(request):
 			session = ClientSession.objects.get(id=session)
 
 			if back == 'false':
-				angerWorse = request.POST.get('m_angerWorse', '')
-				troubleWhenUsing = request.POST.get('m_troubleWhenUsing', '')
-				lessAngry = request.POST.get('m_lessAngry', '')
-				othersTellMe = request.POST.get('m_othersTellMe', '')
-				noConnection = request.POST.get('m_noConnection', '')
-				otherConnectionsUsing = request.POST.get('m_otherConnectionsUsing', '')
-				connectionExplain = request.POST.get('m_connectionExplain', '')
-
-				angerWorse = truePythonBool(angerWorse)
-				troubleWhenUsing = truePythonBool(troubleWhenUsing)
-				lessAngry = truePythonBool(lessAngry)
-				othersTellMe = truePythonBool(othersTellMe)
-				noConnection = truePythonBool(noConnection)
-				otherConnectionsUsing = truePythonBool(otherConnectionsUsing)
-
-				date = datetime.now()
-				date = date.date()
-
-				am.connections.date_of_assessment = date
-				am.connections.angerWorse = angerWorse
-				am.connections.troubleWhenUsing = troubleWhenUsing
-				am.connections.lessAngry = lessAngry
-				am.connections.othersTellMe = othersTellMe
-				am.connections.noConnection = noConnection
-				am.connections.otherConnectionsUsing = otherConnectionsUsing
-				am.connections.connectionExplain = connectionExplain
-
-				am.connectionsComplete = True
-				am.connections.save()
-				am.save()
+				saveCompletedAmSection(request, save_section, am)
 
 			fields = getAMFields(am, 'counselor/forms/AngerManagement/worstEpisodes.html')
 			json_data = json.dumps(fields)
 			image = amSidebarImages(am, 'worst')
 			classes = grabAmClassesCSS(am, 'worst')
-			next_section = grabProperNextSection(am)
+			next_section = grabProperNextSection(am, '/am_worst/')
 
 			content['next_section'] = next_section
 			content['class'] = classes
