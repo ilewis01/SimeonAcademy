@@ -16,40 +16,23 @@
         </div>
     </div>
 
-    <!-- <div style='padding-top:5%;'>
-    	<div id='form-deletion-main-phrase'>
-    		{{sub1_phrase}}
-    	</div>
-    </div>
 
-    <div style='padding-top:5%'>
-    	<span>{{AM.client.fname}}, &nbsp{{AM.client.lname}}</span><br>
-    	<span>{{AM.client.clientID}}</span><br>
-
-    	<label>Type:</label>
-    	<span>{{session.s_type.session_type}}</span> <br>
-
-    	<label>Created on:</label>
-    	<span>{{AM.start_time}}</span> <br>
-
-    	<label>Status:</label>
-    	<span>{{status}}</span> <br>
-    </div> -->
-
-	<form action='/am_deleted/' method='POST' id='exit_return_form'> {% csrf_token %}
+	<form action='' method='post' id='exit_return_form'> {% csrf_token %}
+        <input type='hidden' name='cli-id' id='cli-id' value='{{session.client.id}}'>
 		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-		<input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
         <input type='hidden' name='exit_type' id='exit_type' value='{{exit_type}}'>
+        <input type='hidden' name='new_session' id='new_session' value='false'>
+        <input type='hidden' name='goToNext' id='goToNext' value='{{goToNext}}'>
 	</form> 
 
 	<div style='padding-top:5%'>
 		<div class='toggle-div-page'>
 		    <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: AmDeleted();' id='continue'>End Session</button>
+                <button type='button' onClick='javascript: exit_return_form();' id='exitSession'>End Session</button>
             </a>
 
             <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: exit_am("exit_save");' id='continue'>Return to Session</button>
+                <button type='button' onClick='javascript: continue_AM_session();' id='continueAMSession'>Return to Session</button>
             </a>
         </div>
 	</div>

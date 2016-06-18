@@ -416,24 +416,39 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+
 			clID = request.POST.get('cli-id', '')
-			session_type = request.POST.get('session-type', '')
-			session_type = SType.objects.get(id=session_type)
+			new_session = request.POST.get('new_session', '')
+			goToNext = request.POST.get('goToNext', '')					
 			client = Client.objects.get(id=clID)
 			start = datetime.now()
 			phone = convert_phone(client.phone)
 
-			session = startSession(client, session_type)
+			session = None
+			session_type = None
+
+			if new_session == 'false':
+				session_id = request.POST.get('session_id', '')
+				session = ClientSession.objects.get(id=session_id)
+				session_type = session.s_type.session_type
+
+			else:
+				session_type = request.POST.get('session-type', '')
+				session_type = SType.objects.get(id=session_type)
+				session = startSession(client, session_type)
+
 
 			# session = ClientSession(client=client, start=start, s_type=session_type)
 			# session.save()
 
 			content['title'] = "Client Options | Simeon Academy"
+			content['goToNext'] = goToNext
 			content['phone'] = phone
 			content['client'] = client
 			content['session_type'] = session_type
 			content['start'] = start
 			content['session_id'] = session.id
+			content['session'] = session
 			content['back'] = 'false'
 			return render_to_response('counselor/client/client_options.html', content)
 
@@ -458,7 +473,7 @@ def exit_am(request):
 			exit_type = request.POST.get('exit_type_sub', '')
 
 			am = AngerManagement.objects.get(id=am_id)
-			session  = ClientSession.objects.get(id=session_id)
+			session = ClientSession.objects.get(id=session_id)
 
 			header_phrase = None
 			sub1_phrase = None
@@ -472,10 +487,11 @@ def exit_am(request):
 				header_phrase = "Save Current Anger Management Form"
 				sub1_phrase = 'Are you sure you want to save the following form?'
 
-			if am.AMComplete == True:
-				status = 'Complete'
-			else:
-				status = 'Incomplete'
+			if am != None:
+				if am.AMComplete == True:
+					status = 'Complete'
+				else:
+					status = 'Incomplete'
 
 			content['AM'] = am
 			content['exit_type'] = exit_type
@@ -495,6 +511,7 @@ def am_deleted(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -507,28 +524,39 @@ def am_deleted(request):
 
 			session = ClientSession.objects.get(id=session)
 			am = AngerManagement.objects.get(id=am)
-			client = am.client
+			client = session.client
 
-			content['client'] = client
-			content['session'] = session
-
-			exit_sub_phrase = None
-
-			if str(exit_type) == 'Delete':
-				deleteAM(am)
-				exit_sub_phrase = 'Deleted'
-
+			if am == None:
 				content['exit_sub_phrase'] = exit_sub_phrase
-				content['title'] = "Session Options | Simeon Academy"
-				return render_to_response('counselor/client/client_options.html', content)
-				
-			elif str(exit_type) == 'Save':
-				#First save current AM then return to client options page
-				exit_sub_phrase = 'Saved'
-				
-				content['exit_sub_phrase'] = exit_sub_phrase
-				content['title'] = "Session Options | Simeon Academy"
-				return render_to_response('counselor/client/client_options.html', content)		
+				content['title'] = "Session Options | Error"
+				return render_to_response('counselor/forms/AngerManagement/am_doesNotExist.html', content)
+			
+			else:
+				content['client'] = client
+				content['session'] = session
+				content['client_id'] = client.id
+				content['session_id'] = session.id
+				content['back'] = 'false'
+				content['save_section'] = '/am_demographic/'
+				content['goToNext'] = 'false'
+
+				exit_sub_phrase = None
+
+				if str(exit_type) == 'Delete':
+					# deleteAM(am)
+					exit_sub_phrase = 'Deleted'
+
+					content['exit_sub_phrase'] = exit_sub_phrase
+					content['title'] = "Session Options | Simeon Academy"
+					return render_to_response('counselor/forms/AngerManagement/am_deleted.html', content)
+					
+				elif str(exit_type) == 'Save':
+					#First save current AM then return to client options page
+					exit_sub_phrase = 'Saved'
+					
+					content['exit_sub_phrase'] = exit_sub_phrase
+					content['title'] = "Session Options | Simeon Academy"
+					return render_to_response('counselor/client/am_deleted.html', content)		
 
 			
 @login_required(login_url='/index')
@@ -539,6 +567,26 @@ def am_preliminary(request):
 
 	else:
 		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+			return render_to_response('counselor/forms/AngerManagement/am_doesNotExist.html', content)
+
+
+@login_required(login_url='/index')
+def am_previouslyDeleted(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -901,19 +949,18 @@ def am_location(request):
 					marital = MaritalStatus.objects.all().order_by('status')
 					living = LivingSituation.objects.all().order_by('situation')
 					education = EducationLevel.objects.all().order_by('level')
-					m_page = grabAmSideBarString(goToLocation)
-					image = amSidebarImages(am, m_page)
-					classes = grabAmClassesCSS(am, m_page)
-
-					content['class'] = classes
-					content['image'] = image
 					content['education'] = education
 					content['marital'] = marital
 					content['living'] = living
 
+				m_page = grabAmSideBarString(goToLocation)
+				image = amSidebarImages(am, m_page)
+				classes = grabAmClassesCSS(am, m_page)
 				fields = getAMFields(am, goToLocation)
 				json_data = json.dumps(fields)	
 
+				content['class'] = classes
+				content['image'] = image
 				content['json_data'] = json_data
 				content['fields'] = fields
 				content['title'] = "Counselor Home Page | Simeon Academy"
@@ -1031,6 +1078,10 @@ def am_demographic(request):
 			content['client'] = client
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 
+			print "isNew: " + str(proceed['isNew'])
+			print "back: " + str(back)
+			print "goToNext: " + str(goToNext)
+
 			if proceed['isNew'] == False and proceed['back'] == 'true' and str(goToNext) == 'false':
 				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
 				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
@@ -1041,8 +1092,10 @@ def am_demographic(request):
 				education = EducationLevel.objects.all().order_by('level')
 
 				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
-				fields = getAMDemoFields(am)
-				json_data = json.dumps(fields)
+				fields = None
+				json_data = None
+				# fields = getAMDemoFields(am)
+				# json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'demo')
 				classes = grabAmClassesCSS(am, 'demo')
 				next_section = grabProperNextSection(am, '/am_demographic/')

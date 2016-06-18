@@ -3846,6 +3846,12 @@ function AmDeleted() {
 	document.getElementById('exit_return_form').submit();
 }
 
+function continue_AM_session() {
+	form = document.getElementById('exit_return_form');
+	form.action = '/clientOptions/';
+	form.submit();
+}
+
 
 
 
