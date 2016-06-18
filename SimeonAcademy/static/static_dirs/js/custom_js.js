@@ -1133,7 +1133,7 @@ function continue_to_am_control() {
 
 function twoElementRadioSetup(yesRadio, label, field) {
 	if (yesRadio.checked === true) {
-		label.disabled = false;
+		field.disabled = false;
 		label.style.opacity = '1.0';
 		field.style.opacity = '1.0';
 	}
@@ -1142,7 +1142,7 @@ function twoElementRadioSetup(yesRadio, label, field) {
 		label.style.opacity = '0.3';
 		field.style.opacity = '0.3';
 		field.value = '';
-		field.disabled;
+		field.disabled = true;
 	}
 }
 

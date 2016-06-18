@@ -10,12 +10,6 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
         	<table class='session-side'>
-
-                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
-                    <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                    <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
-                </form>
                 
         		<!-- <tr>
         			<td>
