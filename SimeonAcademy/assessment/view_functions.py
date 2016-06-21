@@ -1379,6 +1379,67 @@ def newAM(client):
 
 	return am
 
+def grabSapImages(sap, page):
+	images = {}
+	check = "/static/images/green_check.png"
+	x = "/static/images/red_x.png"
+	progress = "/static/images/yellow_progress.png"
+
+	if sap.demoComplete == True and page != 'demo':
+		images['demo_image'] = check
+	elif page == 'viewForm':
+		images['demo_image'] = check
+	elif page == 'demo':
+		images['demo_img'] = progress
+	else:
+		images['demo_img'] = x
+
+	if sap.socialComplete == True and page != 'social':
+		images['social_image'] = check
+	elif page == 'viewForm':
+		images['social_image'] = check
+	elif page == 'social':
+		images['social_image'] = progress
+	else:
+		images['social_image'] = x
+
+	if sap.psycho1Complete == True and page != 'psycho1':
+		images['psycho1_image'] = check
+	elif page == 'viewForm':
+		images['psycho1_image'] = check
+	elif page == 'psycho1':
+		images['psycho1_image'] = progress
+	else:
+		images['psycho1_image'] = x
+
+	if sap.psycho2Complete == True and page != 'psycho2':
+		images['psycho2_image'] = check
+	elif page == 'viewForm':
+		images['psycho2_image'] = check
+	elif page == 'psycho2':
+		images['psycho2_image'] = progress
+	else:
+		images['psycho2_image'] = x
+
+	if sap.specialComplete == True and page != 'special':
+		images['special_image'] = check
+	elif page == 'viewForm':
+		images['special_image'] = check
+	elif page == 'special':
+		images['special_image'] = progress
+	else:
+		images['special_image'] = x
+
+	if sap.otherComplete == True and page != 'other':
+		images['other_image'] = check
+	elif page == 'viewForm':
+		images['other_image'] = check
+	elif page == 'other':
+		images['other_image'] = progress
+	else:
+		images['other_image'] = x
+
+
 def amSidebarImages(am, page):
 	images = {}
 	check = "/static/images/green_check.png"
@@ -1387,12 +1448,16 @@ def amSidebarImages(am, page):
 
 	if am.demographicComplete == True and page != 'demo':
 		images['demo_img'] = check
+	elif page == 'viewForm':
+		images['demo_img'] = check
 	elif page == 'demo':
 		images['demo_img'] = progress
 	else:
 		images['demo_img'] = x
 
 	if am.drugHistoryComplete == True and page != 'dh':
+		images['dh_img'] = check
+	elif page == 'viewForm':
 		images['dh_img'] = check
 	elif page == 'dh':
 		images['dh_img'] = progress
@@ -1401,12 +1466,16 @@ def amSidebarImages(am, page):
 
 	if am.childhoodComplete == True and page != 'child':
 		images['child_img'] = check
+	elif page == 'viewForm':
+		images['child_img'] = check
 	elif page == 'child':
 		images['child_img'] = progress
 	else:
 		images['child_img'] = x
 
 	if am.angerHistoryComplete == True and page != 'ah1':
+		images['ah1_img'] = check
+	elif page == 'viewForm':
 		images['ah1_img'] = check
 	elif page == 'ah1':
 		images['ah1_img'] = progress
@@ -1415,12 +1484,16 @@ def amSidebarImages(am, page):
 
 	if am.angerHistoryComplete2 == True and page != 'ah2':
 		images['ah2_img'] = check
+	elif page == 'viewForm':
+		images['ah2_img'] = check
 	elif page == 'ah2':
 		images['ah2_img'] = progress
 	else:
 		images['ah2_img'] = x
 
 	if am.angerHistoryComplete3 == True and page != 'ah3':
+		images['ah3_img'] = check
+	elif page == 'viewForm':
 		images['ah3_img'] = check
 	elif page == 'ah3':
 		images['ah3_img'] = progress
@@ -1429,12 +1502,16 @@ def amSidebarImages(am, page):
 
 	if am.connectionsComplete == True and page != 'connect':
 		images['connect_img'] = check
+	elif page == 'viewForm':
+		images['connect_img'] = check
 	elif page == 'connect':
 		images['connect_img'] = progress
 	else:
 		images['connect_img'] = x
 
 	if am.worstComplete == True and page != 'worst':
+		images['worst_img'] = check
+	elif page == 'viewForm':
 		images['worst_img'] = check
 	elif page == 'worst':
 		images['worst_img'] = progress
@@ -1443,12 +1520,16 @@ def amSidebarImages(am, page):
 
 	if am.angerTargetComplete == True and page != 'target':
 		images['target_img'] = check
+	elif page == 'viewForm':
+		images['target_img'] = check
 	elif page == 'target':
 		images['target_img'] = progress
 	else:
 		images['target_img'] = x
 
 	if am.familyOriginComplete == True and page != 'family':
+		images['family_img'] = check
+	elif page == 'viewForm':
 		images['family_img'] = check
 	elif page == 'family':
 		images['family_img'] = progress
@@ -1457,12 +1538,16 @@ def amSidebarImages(am, page):
 
 	if am.currentProblemsComplete == True and page != 'current':
 		images['current_img'] = check
+	elif page == 'viewForm':
+		images['current_img'] = check
 	elif page == 'current':
 		images['current_img'] = progress
 	else:
 		images['current_img'] = x
 
 	if am.controlComplete == True and page != 'control':
+		images['control_img'] = check
+	elif page == 'viewForm':
 		images['control_img'] = check
 	elif page == 'control':
 		images['control_img'] = progress
@@ -1471,10 +1556,13 @@ def amSidebarImages(am, page):
 
 	if am.finalComplete == True and page != 'final':
 		images['final_img'] = check
+	elif page == 'viewForm':
+		images['final_img'] = check
 	elif page == 'final':
 		images['final_img'] = progress
 	else:
 		images['final_img'] = x
+
 
 	return images
 

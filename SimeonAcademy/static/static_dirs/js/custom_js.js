@@ -3853,6 +3853,140 @@ function continue_AM_session() {
 }
 
 
+//SAP FUNCTIONS
+
+function sap_continue_demographic() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_social() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_psycho1() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_psycho2() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_special() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_other() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function disable_sap_special() {
+	//TRIGGER
+	var isNone = document.getElementById('isNone');
+
+	//LABELS
+	var other_label = document.getElementById('other_label');
+	var dual_label = document.getElementById('dual_label');
+	var senior_label = document.getElementById('senior_label');
+	var child_label = document.getElementById('child_label');
+	var text_label = document.getElementById('text_label');
+
+	//FIELDS
+	var isChild = document.getElementById('isChild');
+	var isSenior = document.getElementById('isSenior');
+	var isDual = document.getElementById('isDual');
+	var isOther = document.getElementById('isOther');
+	var problem = document.getElementById('problem');
+
+	if (isNone.checked === true) {
+		opacityLow(other_label);
+		opacityLow(dual_label);
+		opacityLow(senior_label);
+		opacityLow(child_label);
+		opacityLow(text_label);
+
+		opacityLow(isChild);
+		opacityLow(isSenior);
+		opacityLow(isDual);
+		opacityLow(isOther);
+		opacityLow(problem);
+
+		isChild.disabled = true;
+		isSenior.disabled = true;
+		isDual.disabled = true;
+		isOther.disabled = true;
+		problem.disabled = true;
+	}
+
+	else {
+		isChild.disabled = false;
+		isSenior.disabled = false;
+		isDual.disabled = false;
+		isOther.disabled = false;
+		problem.disabled = false;
+
+		opacityHigh(other_label);
+		opacityHigh(dual_label);
+		opacityHigh(senior_label);
+		opacityHigh(child_label);
+		opacityHigh(text_label);
+
+		opacityHigh(isChild);
+		opacityHigh(isSenior);
+		opacityHigh(isDual);
+		opacityHigh(isOther);
+		opacityHigh(problem);
+	}
+}
+
+function initialize_sap_special() {
+	disable_sap_special();
+}
+
+
+
+
 
 
 

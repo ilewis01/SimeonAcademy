@@ -841,6 +841,169 @@ button:hover {
 	font-weight: bold;
 }
 
+#h4_header_tag2 {
+	color: #74797A;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#viewFormLabel {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.sap_label {
+	font-weight: bold;
+	font-size: 16px;
+	text-decoration: underline;
+}
+
+#sap_sub_label {
+	font-style: italic;
+	font-size: 13px;
+}
+
+#Above_5 {
+	margin-top: 5px;
+}
+
+#form_question_text2 {
+	margin-right: 5px;
+	margin-bottom: 83px;
+}
+
+.light_bulb {
+	width: 15px;
+}
+
+.light_bulb_large {
+	width: 25px;
+}
+
+#justify_div {
+	width: 612px;
+	text-align: justify;
+}
+
+.FA_INFO {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 80px;
+}
+
+.FA_INFO2 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	/*margin-top: 3px;*/
+	margin-bottom: 2px;
+}
+
+.FA_INFO3 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 100px;
+}
+
+.FA_INFO4 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 20px;
+}
+
+.FA_INFO5 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 160px;
+}
+
+.FA_INFO6 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 60px;
+}
+
+.FA_INFO7 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 40px;
+}
+
+.psychoactive_table {
+	/*width: 100%;*/
+	text-align: center;
+}
+
+.psychoactive_table th {
+	text-align: center;
+	background-color: #d6d6d6;
+	font-size: 15px;
+	height: 50px;
+	border: 2px solid black;
+}
+
+#align_checkbox_label {
+	margin-bottom: 8px;
+	margin-right: 3px;
+}
+
+#give_label_right_space {
+	margin-right: 21px;
+}
+
+#give_label_right_space_high {
+	margin-right: 160px;
+}
+
+#give_label_right_space_low {
+	margin-right: 30px;
+}
+
+.psychoactive_table td {
+	/*background-color: #EDEDED;*/
+	background-color: white;
+	border: 1px solid black; 
+}
+
+#psy_label {
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 5px;
+	width: 160px;
+	font-weight: bold;
+	font-style: italic;
+	height: 25px;
+}
+
+#psy_number {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+#psy_frequency {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+#psy_quantity {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.psyAct_header {
+	margin-bottom: 40px;
+	margin-left: 25px;
+}
+
+#text_label {
+	margin-bottom: 15px;
+}
 
 
 

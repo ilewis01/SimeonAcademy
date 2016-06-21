@@ -2,72 +2,425 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Sources of Information</h1>
+<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<h2 style='color:green;'>Please provide source of information other than client</h2>
+    <div id="wrapper" class='shift-rr'>
 
-<form action='/sap_viewForm/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
 
-	<table>
-		<tr><td><em><b><span style='color:blue;'>Source 1</span>:</b></em></td></tr>
-		<tr>
-			<td>
-				<label for='name1'><b>Name: </b></label>
-			</td>
-			<td>
-				<input type='text' name='name1' id='name1' value=''>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for='relationship1'><b>Relationship: </b></label>
-			</td>
-			<td>
-				<input type='text' name='relationship1' id='relationship1' value=''>
-			</td>
-		</tr>
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{sap.client.fname}} {{sap.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
 
-		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{sap.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
 
-		<tr><td><em><b><span style='color:blue;'>Source 2</span>:</b></em></td></tr>
-		<tr>
-			<td>
-				<label for='name2'><b>Name: </b></label>
-			</td>
-			<td>
-				<input type='text' name='name2' id='name2' value=''>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for='relationship1'><b>Relationship: </b></label>
-			</td>
-			<td>
-				<input type='text' name='relationship2' id='relationship2' value=''>
-			</td>
-		</tr>
-	</table>
-	<table>
-		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
-		<tr>
-			<td>
-				<label for='relationship1'><b><span style='color:red;'>End Time</span>: </b></label>
-			</td>
-			<td>
-				<select name='end-time' id='end-time' value=''>
-					<option value=''>Select</option>
-					{% for t in times %}
-						<option value='{{t}}'>{{t}}</option>
-					{% endfor %}
-				</select>
-			</td>
-		</tr>
-		<tr><td><div style='margin-bottom:20px;'></div></td></tr>
-	</table>
-	<input type='submit' value='submit'>
-</form>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideClinical();" name='clinicalBtn' id='clinicalBtn'>
+                    Clinical Assessment
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSocial();" name='socialBtn' id='socialBtn'>
+                    Social Interaction
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho1();" name='psychoBtn' id='psychoBtn'>
+                    Psychoactive Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho2();" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSpecial();" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideOther();" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSource();" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Delete");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <h3 id='am-h2'>S.A.P: Other Factors</h3>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-12 col-sm-12">
+                  			<div>
+                  				<form action='/sap_sources/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+				                
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Psychological:
+				            		    </span>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<div class='FA_INFO6'>
+				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				            				</div>
+				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='justify_div'>
+				            				<span id='sap_sub_label'>
+				            				    Include mental status, cognative functioning, activities of daily living, communication skills/abilities, present emotional state, risk taking behaviors, violence, suicide attempts/thoughts, hallucinations and other psychiatric history (to include history of eating disorder behaviors). Special populations section completed as appropiate.
+				            			    </span>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='Above_5'>
+				            				<textarea rows='4' cols='103' name='psychological' id='psychological'>{{fields.psychological}}</textarea>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Gambling:
+				            		    </span>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<div class='FA_INFO7'>
+				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				            				</div>
+				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='justify_div'>
+				            				<span id='sap_sub_label'>
+				            				    Include the age at which gambling began and describe the preoccupation with gambling, loss of control, tolerance, treatment history, gambling patterns (including patterns impacted by substance use/abuse) and problems related to gambling.
+				            			    </span>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='Above_5'>
+				            				<textarea rows='4' cols='103' name='gambling' id='gambling'>{{fields.gambling}}</textarea>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Abilities, Strengths, Needs and Preferences:
+				            		    </span>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<div class='FA_INFO4'>
+				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				            				</div>
+				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='justify_div'>
+				            				<span id='sap_sub_label'>
+				            				    Describe client and clinician perceptions of abilities, strengths, needs and preferences. Include unique factors affecting the course of treatment and client expectation of treatment outcomes.
+				            			    </span>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='Above_5'>
+				            				<textarea rows='4' cols='103' name='abilities' id='abilities'>{{fields.abilities}}</textarea>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Other:
+				            		    </span>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<div class='FA_INFO2'>
+				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				            				</div>
+				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='justify_div'>
+				            				<span id='sap_sub_label'>
+				            				    Include financial status, leisure skills/activities and recovery environment.
+				            			    </span>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='Above_5'>
+				            				<textarea rows='4' cols='103' name='other' id='other'>{{fields.other}}</textarea>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+                    </form>
+                    </div>
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: sap_continue_other();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}

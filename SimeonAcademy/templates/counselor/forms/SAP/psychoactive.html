@@ -2,7 +2,771 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1 style='text-align:center;'>Psychoactive Substance Use History</h1>
+<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+    <!-- _________________________SIDE BAR_________________________ -->
+
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{sap.client.fname}} {{sap.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{sap.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideClinical();" name='clinicalBtn' id='clinicalBtn'>
+                    Clinical Assessment
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSocial();" name='socialBtn' id='socialBtn'>
+                    Social Interaction
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho1();" name='psychoBtn' id='psychoBtn'>
+                    Psychoactive Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho2();" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSpecial();" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideOther();" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSource();" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Delete");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <div class='psyAct_header'>
+                	<h3 id='am-h2'>S.A.P: Psychoactive Substance Use History</h3>
+                	<h5><em>Please complete all fields in the form below</em></h5>
+                </div>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-12 col-sm-12">
+                  			<div>
+                  				<form action='/sap_psychoactive2/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+
+
+				                    <table class='psychoactive_table'>
+				                    	<tr>
+				                    		<th>
+				                    			Drug
+				                    		</th>
+
+				                    		<th>
+				                    			Age at <br>First Use
+				                    		</th>
+
+				                    		<th>
+				                    			Frequency <br>(last 12 months)
+				                    		</th>
+
+				                    		<th>
+				                    			Quantity <br>(specify time frame)
+				                    		</th>
+
+				                    		<th>
+				                    			Last (3) uses
+				                    		</th>
+
+				                    		<th>
+				                    			How Used
+				                    		</th>
+				                    	</tr>
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Alcohol
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='alcoholAge' id='alcoholAge' value='{{fields.alcoholAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='alcoholFrequency' id='alcoholFrequency' value='{{fields.alcoholFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='alcoholQuantity' id='alcoholQuantity' value='{{fields.alcoholQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='alcoholLast' id='alcoholLast' value='{{fields.alcoholLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='alcoholHow' id='alcoholHow' value='{{fields.alcoholHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Amphetamine
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='amphAge' id='amphAge' value='{{fields.amphAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='amphFrequency' id='amphFrequency' value='{{fields.amphFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='amphQuantity' id='amphQuantity' value='{{fields.amphQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='amphLast' id='amphLast' value='{{fields.amphLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='amphHow' id='amphHow' value='{{fields.amphHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Caffine
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='caffineAge' id='caffineAge' value='{{fields.caffineAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='caffineFrequency' id='caffineFrequency' value='{{fields.caffineFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='caffineQuantity' id='caffineQuantity' value='{{fields.caffineQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='caffineLast' id='caffineLast' value='{{fields.caffineLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='caffineHow' id='caffineHow' value='{{fields.caffineHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Cannabis
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='weedAge' id='weedAge' value='{{fields.weedAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='weedFrequency' id='weedFrequency' value='{{fields.weedFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='weedQuantity' id='weedQuantity' value='{{fields.weedQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='weedLast' id='weedLast' value='{{fields.weedLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='weedHow' id='weedHow' value='{{fields.weedHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Cocaine
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='cokeAge' id='cokeAge' value='{{fields.cokeAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='cokeFrequency' id='cokeFrequency' value='{{fields.cokeFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='cokeQuantity' id='cokeQuantity' value='{{fields.cokeQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='cokeLast' id='cokeLast' value='{{fields.cokeLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='cokeHow' id='cokeHow' value='{{fields.cokeHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Hallucinogen
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='hallAge' id='hallAge' value='{{fields.hallAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='hallFrequency' id='hallFrequency' value='{{fields.hallFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='hallQuantity' id='hallQuantity' value='{{fields.hallQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='hallLast' id='hallLast' value='{{fields.hallLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='hallHow' id='hallHow' value='{{fields.hallHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Inhalant
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='inhaleAge' id='inhaleAge' value='{{fields.inhaleAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='inhaleFrequency' id='inhaleFrequency' value='{{fields.inhaleFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='inhaleQuantity' id='inhaleQuantity' value='{{fields.inhaleQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='inhaleLast' id='inhaleLast' value='{{fields.inhaleLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='hallHow' id='hallHow' value='{{fields.hallHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Nicotine
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='smokeAge' id='smokeAge' value='{{fields.smokeAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='smokeFrequency' id='smokeFrequency' value='{{fields.smokeFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='smokeQuantity' id='smokeQuantity' value='{{fields.smokeQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='smokeLast' id='smokeLast' value='{{fields.smokeLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='smokeHow' id='smokeHow' value='{{fields.smokeHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Opioid
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='opAge' id='opAge' value='{{fields.opAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='opFrequency' id='opFrequency' value='{{fields.opFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='opQuantity' id='opQuantity' value='{{fields.opQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='opLast' id='opLast' value='{{fields.opLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='opHow' id='opHow' value='{{fields.opHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				PCP
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='pcpAge' id='pcpAge' value='{{fields.pcpAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='pcpFrequency' id='pcpFrequency' value='{{fields.pcpFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='pcpQuantity' id='pcpQuantity' value='{{fields.pcpQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='pcpLast' id='pcpLast' value='{{fields.pcpLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='pcpHow' id='pcpHow' value='{{fields.pcpHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Sedative Hypnotic
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='sedAge' id='sedAge' value='{{fields.sedAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='sedFrequency' id='sedFrequency' value='{{fields.sedFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='sedQuantity' id='sedQuantity' value='{{fields.sedQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='sedLast' id='sedLast' value='{{fields.sedLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='sedHow' id='sedHow' value='{{fields.sedHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+
+
+				                    	<tr>
+				                    		<td>
+				                    			<div id='psy_label'>
+				                    				Other
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_number'>
+				                    				<input type='number' style='width:90px;' name='otherAge' id='otherAge' value='{{fields.otherAge}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_frequency'>
+				                    				<input type='text' style='width:200px;' name='otherFrequency' id='otherFrequency' value='{{fields.otherFrequency}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_quantity'>
+				                    				<input type='text' style='width:350px;' name='otherQuantity' id='otherQuantity' value='{{fields.otherQuantity}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_last'>
+				                    				<input type='text' style='width:150px;' name='otherLast' id='otherLast' value='{{fields.otherLast}}'>
+				                    			</div>
+				                    		</td>
+
+				                    		<td>
+				                    			<div id='psy_how'>
+				                    				<input type='text' style='width:150px;' name='otherHow' id='otherHow' value='{{fields.otherHow}}'>
+				                    			</div>
+				                    		</td>
+				                    	</tr>
+				                    </table>
+				                </form>
+				            </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: sap_continue_psycho1();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h1 style='text-align:center;'>Psychoactive Substance Use History</h1>
 
 <form action='/sap_psychoactive2/' method='post' id=''> {% csrf_token %}
 	<input type="hidden" name-'' id='' value=''>
@@ -306,6 +1070,4 @@
 
 <div style='margin-top:5px; margin-left:33px;'>
 	<a href='/adminHome'><button type='button'>Home Page</button></a>
-</div>
-
-{% endblock %}
+</div> -->

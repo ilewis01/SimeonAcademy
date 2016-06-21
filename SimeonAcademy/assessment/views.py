@@ -37,7 +37,7 @@ getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
-grabProperNextSection, saveCompletedAmSection
+grabProperNextSection, saveCompletedAmSection, grabSapImages
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -543,7 +543,7 @@ def am_deleted(request):
 				exit_sub_phrase = None
 
 				if str(exit_type) == 'Delete':
-					# deleteAM(am)
+					deleteAM(am)
 					exit_sub_phrase = 'Deleted'
 
 					content['exit_sub_phrase'] = exit_sub_phrase
@@ -1092,10 +1092,10 @@ def am_demographic(request):
 				education = EducationLevel.objects.all().order_by('level')
 
 				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
-				fields = None
-				json_data = None
-				# fields = getAMDemoFields(am)
-				# json_data = json.dumps(fields)
+				# fields = None
+				# json_data = None
+				fields = getAMDemoFields(am)
+				json_data = json.dumps(fields)
 				image = amSidebarImages(am, 'demo')
 				classes = grabAmClassesCSS(am, 'demo')
 				next_section = grabProperNextSection(am, '/am_demographic/')
@@ -1264,38 +1264,86 @@ def am_viewForm(request):
 			am = request.POST.get('am_id')
 			session = request.POST.get('session_id')
 			back = request.POST.get('back_btn')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			am = AngerManagement.objects.get(id=am)
 			session = ClientSession.objects.get(id=session)
 
-			print "Back: " + str(back)
+			if am.demographic.own == False:
+				content['own'] = 'Rent'
+			else:
+				content['own'] = 'Own'
+
+			if str(am.demographic.employer_phone) == 'NA':
+				content['employer_phone'] = 'NA'
+			else:
+				content['employer_phone'] = convert_phone(am.demographic.employer_phone)
+
+			if str(am.demographic.health_problem) == 'True':
+				content['health'] = 'Yes'
+			else:
+				content['health'] = 'No'
+
+			if str(am.demographic.medication) == 'True':
+				content['medical'] = 'Yes'
+			else:
+				content['medical'] = 'No'
+
+			if am.drugHistory.curUse == True:
+				content['curUse'] = 'Yes'
+			else:
+				content['curUse'] = 'No'
+
+			if am.drugHistory.everDrank == True:
+				content['everDrank'] = 'Yes'
+			else:
+				content['everDrank'] = 'No'
+
+			if am.drugHistory.DUI == True:
+				content['DUI'] = 'Yes'
+			else:
+				content['DUI'] = 'No'
+
+			if am.drugHistory.drugTreatment == True:
+				content['drugTreatment'] = 'Yes'
+			else:
+				content['drugTreatment'] = 'No'
+
+			if am.drugHistory.finishedTreatment == True:
+				content['finishedTreatment'] = 'Yes'
+			else:
+				content['finishedTreatment'] = 'No'
+
+			if am.drugHistory.isClean == True:
+				content['isClean'] = 'Yes'
+			else:
+				content['isClean'] = 'No'
+
+			if am.drugHistory.drinkLastEpisode == True:
+				content['drinkLastEpisode'] = 'Yes'
+			else:
+				content['drinkLastEpisode'] = 'No'
+
+			if am.drugHistory.needHelpDrugs == True:
+				content['needHelpDrugs'] = 'Yes'
+			else:
+				content['needHelpDrugs'] = 'No'
+
+			if am.drugHistory.drinkRelationshipProblem == True:
+				content['drinkRelationshipProblem'] = 'Yes'
+			else:
+				content['drinkRelationshipProblem'] = 'No'
+
 
 			if back == 'false':
-				anythingelse = request.POST.get('anythingelse', '')
-				changeLearn1 = request.POST.get('changeLearn1', '')
-				changeLearn2 = request.POST.get('changeLearn2', '')
-				changeLearn3 = request.POST.get('changeLearn3', '')
-				whoLivesWithClient = request.POST.get('whoLivesWithClient', '')
+				saveCompletedAmSection(request, save_section, am)
 
-				date = datetime.now()
-				date = date.date()
+			image = amSidebarImages(am, 'viewForm')
+			classes = grabAmClassesCSS(am, 'viewForm')
 
-				final = am.final
-				demo = am.demographic
-
-				demo.whoLivesWithClient = whoLivesWithClient
-				demo.save()
-
-				final.date_of_assessment = date
-				final.anythingelse = anythingelse
-				final.changeLearn1 = changeLearn1
-				final.changeLearn2 = changeLearn2
-				final.changeLearn3 = changeLearn3
-				final.save()
-
-				am.finalComplete = True
-				am.save()
-
+			content['class'] 		= classes
+			content['image'] 		= image
 			content['AM'] = am			
 			content['session'] = session			
 			content['title'] = "Anger Management Assessment | Simeon Academy"
@@ -1836,7 +1884,7 @@ def sap_demographic(request):
 
 			content['client'] = client
 			content['times'] = times
-			content['title'] = "Simeon Academy | Urine Test Analysis"
+			content['title'] = "Simeon Academy | Substance Abuse Professional Form"
 
 			if proceed['incomplete'] == True:
 				content['sap'] = proceed['sap']
@@ -1859,35 +1907,7 @@ def sap_psychoactive(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client_id = request.POST.get('client_id', '')
-			date = request.POST.get('datepicker', '')
-			start_time = request.POST.get('start-time', '')
-			problem = request.POST.get('problem', '')
-			health = request.POST.get('health', '')
-			family = request.POST.get('family', '')
-
-			client = Client.objects.get(id=client_id)
-			date = convert_datepicker(date)
-			date = date['date']
-
-			demographic = SapDemographics(client=client, date1=date, startTime1=start_time,\
-				problem=problem, health=health, family=family)
-
-			moveForward = SAPDemographicExist(demographic)
-
-			if moveForward['exist'] == False:
-				demographic.save()
-			else:
-				demographic = moveForward['sap_demo']
-
-			sap = SAP(demographics=demographic, demoComplet=True, SapComplete=False)
-
-			checkSAP = clientSAPExist(client)
-
-			if checkSAP == False:
-				sap.save()
-
-			content['title'] = "Simeon Academy | Urine Test Analysis"
+			content['title'] = "Simeon Academy | SAP"
 			return render_to_response('counselor/forms/SAP/psychoactive.html', content)
 
 @login_required(login_url='/index')
@@ -1927,7 +1947,7 @@ def sap_special(request):
 			return render_to_response('counselor/forms/SAP/special.html', content)
 
 @login_required(login_url='/index')
-def sap_preFinal(request):
+def sap_social(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -1945,7 +1965,7 @@ def sap_preFinal(request):
 			return render_to_response('counselor/forms/SAP/pre_final.html', content)
 
 @login_required(login_url='/index')
-def sap_final(request):
+def sap_other(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -1963,6 +1983,26 @@ def sap_final(request):
 			content['times'] = times
 			content['title'] = "Simeon Academy | Urine Test Analysis"
 			return render_to_response('counselor/forms/SAP/final.html', content)
+
+@login_required(login_url='/index')
+def sap_sources(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			times = getTimes()
+			content['times'] = times
+			content['title'] = "Simeon Academy | Urine Test Analysis"
+			return render_to_response('counselor/forms/SAP/sap_sources.html', content)
 
 @login_required(login_url='/index')
 def sap_viewForm(request):

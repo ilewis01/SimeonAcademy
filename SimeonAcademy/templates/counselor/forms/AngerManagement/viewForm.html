@@ -2,511 +2,1072 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="" onLoad="javascript: ;">
-	<div class='viewFormStyle'>
-		<div class="container">
-			<div class="row"> 
-				<div class="col-md-12 col-sm-12">
-					<h2><b>Anger Management Intake Form</b></h2>
-					<h4>Date of Assessment: <b>{{date_of_form}}</b></h4>
-
-					<div id='header-margin-top'>
-						<!-- ___________________________________DEMOGRAPHIC SECTION___________________________________ -->
-						<table class='align-form-center'>
-							<tr><td id='viewHeaderBox'>DEMOGRAPHICS</td></tr>
-						</table>
-
-						<div class='viewSectionWrapper'>
-							<table>
-								<tr>
-									<td>
-										<span id='viewLabel'>Name: </span>
-									</td>
-									<td>
-										<div id='viewAns'>{{AM.client.lname}}, {{AM.client.fname}} &nbsp{{AM.client.middleInit}}</div>
-									</td>
-
-									<td>
-										<div style='margin-left:200px;;'>
-											<span id='viewLabel'>DOB: </span>
-										</div>
-									</td>
-									<td>
-										<div id='viewAns'>{{AM.client.dob}}</div>
-									</td>
-								</tr>
-							</table>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Home Address: </span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.client.street_no}} {{AM.client.street_name}} <em>&nbsp&nbsp{{AM.client.apartment_no}}</em></div>
-										</td>
-									</tr>
-
-									<tr>
-										<td></td>
-										<td>
-											<div id='viewAnsIndent'>
-												{{AM.client.city}}, {{AM.client.state}} {{AM.client.zip_code}}
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Probation Officer/Court of Referral: </span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.client.probationOfficer}}</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Marital Status: </span>
-										</td>
-
-										<td>
-											<div id='img_div'>
-												<img src="{{images.married}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Married</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.single}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Single</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.divorced}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Divorced</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.separated}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Seperated</span>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Living Situation: </span>
-										</td>
-
-										<td>
-											<div id='img_div'>
-												<img src="{{images.partner}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Live with partner</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.alone}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Live alone</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.family}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Live w/family</span>
-										</td>
-
-										<td>
-											<div id='img_divLong'>
-												<img src="{{images.friend}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Friend</span>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>How long at current residence? </span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.months_res}} month(s)</div>
-										</td>
-
-										<td>
-											<div id='viewAns' style='margin-left:10px;'>{{AM.demographic.years_res}} year(s)</div>
-										</td>
-
-										<td>
-											<div style='margin-left:40px;'>
-												<span id='viewLabel'>Rent</span>
-											</div>
-										</td>
-										<td>
-											<img src="{{images.rent}}" id='checkbox_img_size'>
-										</td>
-
-										<td>
-											<div style='margin-left:20px;'>
-												<span id='viewLabel'>Own</span>
-											</div>
-										</td>
-										<td>
-											<img src="{{images.own}}" id='checkbox_img_size'>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpace'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Dependents: </span>
-										</td>
-
-										<td style='padding-left:50px;'>
-											<span id='viewLabel'>How many children?</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.num_children}}</div>
-										</td>
-
-										<td style='padding-left:35px;'>
-											<span id='viewLabel'>Spouse:</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{spouse}}</div>
-										</td>
-
-										<td style='padding-left:35px;'> 
-											<span id='viewLabel'>Other Dependants:</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.other_dependants}}</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div> <!-- END DEMOGRAPHIC SECTION -->
-
-
-						<!-- ___________________________________EDUCATION SECTION___________________________________ -->
-						<div id='section_separation'>
-							<table class='align-form-center'>
-								<tr><td id='viewHeaderBox'>EDUCATION</td></tr>
-							</table>
-						</div>
-
-
-						<div class='viewSectionWrapper'>
-							<table>
-								<tr>
-									<td>
-										<span id='viewLabel'>Highest grade completed:</span>
-									</td>
-
-									<td>
-										<div id='img_div'>
-											<img src="{{images.partner}}" id='checkbox_img_size'>
-										</div>
-									</td>
-
-									<td>
-										<span id='viewLabel'>GED</span>
-									</td>
-
-									<td>
-										<div id='img_divLong'>
-											<img src="{{images.alone}}" id='checkbox_img_size'>
-										</div>
-									</td>
-
-									<td>
-										<span id='viewLabel'>HS</span>
-									</td>
-
-									<td>
-										<div id='img_divLong'>
-											<img src="{{images.family}}" id='checkbox_img_size'>
-										</div>
-									</td>
-
-									<td>
-										<span id='viewLabel'>College/Degree Received</span>
-									</td>
-								</tr>
-							</table>
-
-							<div id='viewVerticalSpaceVeryLow'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>If drop out, why?</span>
-										</td>
-
-										<td>
-											<div id='viewAns'><em>{{AM.demographic.resasonDO}}</em></div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-
-
-
-						<!-- ___________________________________EMPLOYMENT SECTION___________________________________ -->
-						<div id='section_separation'>
-							<table class='align-form-center'>
-								<tr><td id='viewHeaderBox'>EMPLOYMENT</td></tr>
-							</table>
-						</div>
-
-
-						<div class='viewSectionWrapper'>
-							<table>
-								<tr>
-									<td>
-										<span id='viewLabel'>Current Employee:</span>
-									</td>
-
-									<td>
-										<div id='viewAns'>{{AM.demographic.employee}}</div>
-									</td>
-
-									<td>
-											<span id='viewLabel' style='margin-left:100px;'>Phone:</span>
-									</td>
-
-									<td>
-										<div id='viewAns'>{{emp_phone}}</div>
-									</td>
-								</tr>
-							</table>
-
-							<div id='viewVerticalSpaceVeryLow'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Address:</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.emp_address}}</div>
-										</td>	
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpaceVeryLow'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Current job title:</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.job_title}}</div>
-										</td>
-
-										<td>
-											<span id='viewLabel' style='margin-left:117px;'>Length of employment:</span>
-										</td>
-
-										<td>
-											<div id='viewAns'>{{AM.demographic.employed_months}} month(s)</div>
-										</td>
-
-										<td>
-											<div id='viewAns' style='margin-left:10px;'>{{AM.demographic.employed_years}} year(s)</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-
-						<!-- ___________________________________HEALTH SECTION___________________________________ -->
-						<div id='section_separation'>
-							<table class='align-form-center'>
-								<tr><td id='viewHeaderBox'>MEDICAL/HEALTH</td></tr>
-							</table>
-						</div>
-
-						<div class='viewSectionWrapper'>
-							<table>
-								<tr>
-									<td>
-										<span id='viewLabel'>Do you have any ongoing health problems?</span>
-									</td>
-
-									<td>
-										<div <div id='img_div'>
-											<img src="{{images.goodHealth}}" id='checkbox_img_size'>
-										</div>
-									</td>
-
-									<td>
-										<span id='viewLabel'>Yes</span>
-									</td>
-
-									<td>
-										<div <div id='img_div'>
-											<img src="{{images.badHealth}}" id='checkbox_img_size'>
-										</div>
-									</td>
-
-									<td>
-										<span id='viewLabel'>No</span>
-									</td>
-								</tr>
-							</table>
-
-							<div id='shortSpaceView'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>If yes, please explain: </span>
-										</td>
-
-										<td>
-											<div id='viewAns'><em>{{AM.demographic.health_exp}}</em></div>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='viewVerticalSpaceVeryLow'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>Are you currently taking any medications? </span>
-										</td>
-
-										<td>
-											<div id='img_div'>
-												<img src="{{images.onMeds}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>Yes</span>
-										</td>
-
-										<td>
-											<div id='img_div'>
-												<img src="{{images.noMeds}}" id='checkbox_img_size'>
-											</div>
-										</td>
-
-										<td>
-											<span id='viewLabel'>No</span>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<div id='shortSpaceView'>
-								<table>
-									<tr>
-										<td>
-											<span id='viewLabel'>If yes, what are you taking? </span>
-										</td>
-
-										<td>
-											<div id='viewAns'><em>{{AM.demographic.whatMedicine}}</em></div>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-
-		
-						<!-- ___________________________________BOTTOM SECTION___________________________________ -->
-						<div id='section_separation'>
-							<table class='align-form-center'>
-								<tr><td id='viewHeaderBox'>PSYCHIATRIC STATUS</td></tr>
-							</table>
-						</div>
-
-						<div class='viewSectionWrapper'>
-							<table>
-								<tr>
-									<td>
-										<form action='/printAM/' method='post' id='am_demo'> {% csrf_token %}
-											<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	                  			            <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-	                  			            <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-	                  			            <input type='hidden' name='back' id='back' value='false'>
-	                                        <input type='hidden' name='exit_type' id='exit_type' value=''>
-
-	                                        <input type='submit' value='Print Form'>
-										</form>
-									</td>
-								</tr>
-							</table>
-						</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+<body class="gradient-white" onLoad="javascript: initalize_am_final();">
+    <!-- _________________________SIDE BAR_________________________ -->
+
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <table class='session-side'>
+
+                <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+                    <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                    <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                </form>
+                
+                <!-- <tr>
+                    <td>
+                        <div style='font-size:20px;'>
+                            <h4>Details:</h4>
+                        </div>
+                    </td>
+                </tr> -->
+
+                <tr>
+                    <td>
+                        <div style='color:#fee047'>
+                            <h4>{{session.s_type}}</h4>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div>
+                            <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div id='sidebar-space-lower2'>
+                            <span class="sidebar-id">{{AM.client.clientID}}</span>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <!-- <div style='margin-bottom: 80px;'></div> -->
+                <tr>
+                    <td>
+                        <div id='sidebar-space-lower'>
+                            <h4>Completed:</h4>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.demo}}'>
+                            <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideDemo();" name='demographicBtn' id='demographicBtn'>
+                                Demographic
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.dh}}'>
+                            <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideDH();" name='demographicBtn' id='demographicBtn'>
+                                Drug History
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.child}}'>
+                            <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideChild();" name='demographicBtn' id='demographicBtn'>
+                                Childhood History
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.ah1}}'>
+                            <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideAh1();" name='demographicBtn' id='demographicBtn'>
+                                Anger History I
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.ah2}}'>
+                            <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideAh2();" name='demographicBtn' id='demographicBtn'>
+                                Anger History II
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.ah3}}'>
+                            <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideAh3();" name='demographicBtn' id='demographicBtn'>
+                                Anger History III
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.connect}}'>
+                            <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideConnect();" name='demographicBtn' id='demographicBtn'>
+                                Abuse Connections
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.worst}}'>
+                            <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideWorst();" name='demographicBtn' id='demographicBtn'>
+                                Worst Episode
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.target}}'>
+                            <img src="{{image.target_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideTarget();" name='demographicBtn' id='demographicBtn'>
+                                Anger Target
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.family}}'>
+                            <img src="{{image.family_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideFamily();" name='demographicBtn' id='demographicBtn'>
+                                Family of Origin
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.current}}'>
+                            <img src="{{image.current_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideCurrent();" name='demographicBtn' id='demographicBtn'>
+                                Current Problems
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.control}}'>
+                            <img src="{{image.control_img}}" id='bullet-img'> &nbsp
+                            <a href="javascript: sideControl();" name='demographicBtn' id='demographicBtn'>
+                                Anger Control
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+                <tr>
+                    <td>
+                        <div class='{{class.final}}'>
+                            <img src="{{image.final_img}}" id='bullet-img'> &nbsp
+                            <a href="#" name='demographicBtn' id='demographicBtn'>
+                                Additional Info
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Delete");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
+            </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+            	<div class="form_headings">
+                	<h3 id='am-h2'>Anger Management: Verify Information</h3>
+                </div>
+
+	            <div class="container">
+	            	<div class="row">                   
+	                  	<div class="col-md-5 col-sm-5">
+	                  		<form action='/am_viewForm/' method='post' id='am_demo'> {% csrf_token %}
+	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+	                  			<input type='hidden' name='back_btn' id='back_btn' value='{{back}}'>
+                                <input type='hidden' name='goToNext' id='goToNext' value=''>                               
+                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+                                <input type='hidden' name='save_section' id='save_section' value='/am_final/'>
+                                <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+
+                                <!-- ______________________________LEFT SIDE_________________________________ -->
+                                <div id='h4_header_tag2'>
+                                    <h4>DEMOGRAPHIC INFORMATION</h4>
+                                </div>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Name:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.client.fname}} &nbsp {{AM.client.middleInit}} &nbsp {{AM.client.lname}}
+                                		</td>
+                                	</tr>
+                                </table>
+                                
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				DOB:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.client.dob}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Address:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.client.street_no}} {{AM.client.street_name}} {{AM.client.apartment_no}}
+                                		</td>
+                                	</tr>
+
+                                	<tr>
+                                		<td></td>
+
+                                		<td>
+                                			{{AM.client.city}}, {{AM.client.state}} {{AM.client.zip_code}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Probation officer/Court of referral:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.client.probationOfficer}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Marital Status:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.maritalStatus}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Living Situation:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.livingSituation}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				How long in current residence?
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.months_res}} months &nbsp {{AM.demographic.years_res}} years
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Rent/Own:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{own}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Who lives with client at current residence:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.whoLivesWithClient}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Dependents:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			Children: {{AM.demographic.num_children}}  &nbsp &nbsp Other: {{AM.demographic.other_dependants}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+
+                                <div style='margin-top:40px;'>
+                                	<div id='h4_header_tag2'>
+                                        <h4>MEDICAL/HEALTH</h4>
+                                    </div>
+                                </div>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Do you have any ongoing health problems?
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{health}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Please Explain:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.health_exp}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				Are you currently taking any medication?
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{medical}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+                                <table>
+                                	<tr>
+                                		<td>
+                                			<label id='viewFormLabel'>
+                                				What are you taking:
+                                			</label>
+                                		</td>
+
+                                		<td>
+                                			{{AM.demographic.whatMedicine}}
+                                		</td>
+                                	</tr>
+                                </table>
+
+
+                                <div style='margin-top:40px;'>
+	                                <div id='h4_header_tag2'>
+	                                    <h4>CHILDHOOD HISTORY</h4>
+	                                </div>
+	                            </div>
+                            
+                        </div>
+
+                        <div class="col-md-5 col-sm-5">
+                                <!-- ______________________________RIGHT SIDE_________________________________ -->
+                                <div style='margin-left:20px;'>
+	                                <div id='h4_header_tag2'>
+	                                    <h4>EDUCATION</h4>
+	                                </div>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Highest Grade Completed:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.education}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Reason for drop out:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.resasonDO}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <div style='margin-top:40px;'>
+	                                	<div id='h4_header_tag2'>
+	                                        <h4>EMPLOYMENT</h4>
+	                                    </div>
+	                                </div>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Current Employee:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.employee}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Phone:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{employer_phone}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Address:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.emp_address}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Current Job Title:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.job_title}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				Length of Employment:
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.demographic.employed_months}} months &nbsp {{AM.demographic.employed_years}} years
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <div style='margin-top:40px;'>
+	                                	<div id='h4_header_tag2'>
+	                                        <h4>ALCOHOL AND DRUG HISTORY</h4>
+	                                    </div>
+	                                </div>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				1. At what age did you have your first drink of alcohol and/or
+	                                			</label>
+	                                		</td>
+	                                	</tr>
+
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				drugs?
+	                                			</label>
+	                                			{{AM.drugHistory.firstDrinkAge}} yrs old
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				2. What did you use?
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{AM.drugHistory.firstDrinkType}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				3. Do you currently drink alcohol and/or use drugs?
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{curUse}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <ul>
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				What do you use?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.useType}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				How often do you use?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.amtPerWeek}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				How much do you use?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.useAmt}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                            </ul>
+
+		                            <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				4. Have you ever drank alcohol and/or used drugs
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{everDrank}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                               <ul>
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				How long ago did you quit?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.monthsQuit}} months &nbsp {{AM.drugHistory.yearsQuit}} years
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				For what reasons did you quit?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+		                                	</tr>
+
+		                                	<tr>
+		                                		<td>
+		                                			{{AM.drugHistory.reasonQuit}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                            </ul>
+
+		                            <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				5. Have you ever drank received a DUI?
+	                                			</label>
+	                                		</td>
+
+	                                		<td>
+	                                			{{DUI}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <ul>
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				How many?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.numDUI}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				What was your blood alcohol level on your last one?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.reasonQuit}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                            </ul>
+
+		                            <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				6. Have you ever received treatment for alcohol or drug
+	                                			</label>
+	                                		</td>
+	                                	</tr>
+
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				abuse/dependence?
+	                                			</label>
+	                                			{{drugTreatment}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <ul>
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				When were you treated?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.dateTreated}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				Where were treated?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{AM.drugHistory.treatmentPlace}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				Did you sucessfully complete treatment?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{finishedTreatment}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				Why was treatment not completed?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+		                                	</tr>
+
+		                                	<tr>
+		                                		<td>
+		                                			{{AM.drugHistory.reasonNotFinishedTreatment}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <table>
+		                                	<tr>
+		                                		<td>
+		                                			<li>
+			                                			<label id='viewFormLabel'>
+			                                				Are you still abstinent?
+			                                			</label>
+			                                		</li>
+		                                		</td>
+
+		                                		<td>
+		                                			{{isClean}}
+		                                		</td>
+		                                	</tr>
+		                                </table>
+
+		                                <ul>
+			                                <table>
+			                                	<tr>
+			                                		<td>
+			                                			<li>
+				                                			<label id='viewFormLabel'>
+				                                				What triggered your relapse?
+				                                			</label>
+				                                		</li>
+			                                		</td>
+			                                	</tr>
+
+			                                	<tr>
+			                                		<td>
+			                                			{{AM.drugHistory.relapseTrigger}}
+			                                		</td>
+			                                	</tr>
+			                                </table>
+			                            </ul>
+		                            </ul>
+
+		                            <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				7. Were you drinking and/or using drugs during your most
+	                                			</label>
+	                                		</td>
+	                                	</tr>
+
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				recent abusive episode?
+	                                			</label>
+	                                			{{drinkLastEpisode}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				8. Is the use of alcohol and/or drugs a problem in your
+	                                			</label>
+	                                		</td>
+	                                	</tr>
+
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				relationship?
+	                                			</label>
+	                                			{{drinkRelationshipProblem}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                                <table>
+	                                	<tr>
+	                                		<td>
+	                                			<label id='viewFormLabel'>
+	                                				9. Do you need help for drug abuse/ dependency problems?
+	                                			</label>
+	                                			{{needHelpDrugs}}
+	                                		</td>
+	                                	</tr>
+	                                </table>
+
+	                            </div> <!-- STAY INSIDE THIS DIV FOR RIGHT SIDE -->
+                            </form>
+                        </div>
+	                </div>
+
+	                <div class="row">
+				<!-- _____________________________________________BUTTONS_______________________________________________ -->
+
+						<table>
+                          <tr>
+                            <td>
+                              <div id="error-div-main">
+                                <p class='error-messages' id='error_message_main'></p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table class='toggle-div-page'>
+                        	<tr>
+                        		<td>
+                        			<div style='margin-left:12px;'>
+				                        <a href="#menu-toggle" id="menu-toggle">
+				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                        </a>
+				                    </div>
+			                    </td>
+
+            
+
+                          <td>
+                            <div id="submit-space">
+                                <a href="javascript: " id="continue">
+                                  <button type='button' onClick='javascript: continue_to_amViewForm();' id='continue'>Finish</button>
+                                </a>
+                            </div>
+                          </td>
+			                </tr>
+	                    </table>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 
 {% endblock %}

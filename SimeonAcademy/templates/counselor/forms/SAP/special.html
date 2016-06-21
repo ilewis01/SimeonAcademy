@@ -2,88 +2,399 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Special Populations</h1>
+<body class="gradient-white" onLoad="javascript: initialize_sap_special();">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/sap_preFinal/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
+    <div id="wrapper" class='shift-rr'>
 
-	<span style='font-size:24px; color:green;'><b>Client is member of the following special population group:</b></span><br>
-	<em>Check all that apply</em>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
 
-	<table style='margin-top:20px;'>
-		<tr>
-			<td>
-				<div style='margin-bottom:2px;'>
-					<input type='checkbox' id='' name='' value=''>
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{sap.client.fname}} {{sap.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{sap.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideClinical();" name='clinicalBtn' id='clinicalBtn'>
+                    Clinical Assessment
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSocial();" name='socialBtn' id='socialBtn'>
+                    Social Interaction
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho1();" name='psychoBtn' id='psychoBtn'>
+                    Psychoactive Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho2();" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSpecial();" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideOther();" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSource();" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Delete");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <h3 id='am-h2'>S.A.P: Special Populations</h3>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-12 col-sm-12">
+                  			<div>
+                  				<form action='/sap_other/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+				                </form>
+				            </div>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Client is a member of the following special population group:
+				            		    </span>
+				            		</td>
+				            	</tr>
+
+				            	<tr>
+				            		<td>
+				            			<em>(Check all that apply)</em>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='align_checkbox_label'>
+				            				<input type='checkbox' name='isChild' id='isChild'>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='give_label_right_space_high'>
+				            				<label id='child_label'>
+				            				    Child/Adolescent
+				            			    </label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<table>
+				            				<tr>
+				            					<td>
+				            						<div id='align_checkbox_label'>
+				            							<input type='checkbox' name='isSenior' id='isSenior'>
+				            						</div>
+				            					</td>
+
+				            					<td>
+				            						<label id='senior_label'>
+				            							Senior
+				            						</label>
+				            					</td>
+
+				            					<td><div style='margin-left:135px;'></div></td>
+
+
+				            					<td>
+				            						<div id='align_checkbox_label'>
+				            							<input type='checkbox' name='isDual' id='isDual'>
+				            						</div>
+				            					</td>
+
+				            					<td>
+				            						<label id='dual_label'>
+				            							Dual Diagnosis
+				            						</label>
+				            					</td>
+				            				</tr>
+				            			</table>
+				            		</td>
+				            	</tr>
+				            </table>
+
+                            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='align_checkbox_label'>
+				            				<input type='checkbox' name='isOther' id='isOther'>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='give_label_right_space'>
+				            				<label id='other_label'>
+				            				    Other coexisting disabilities/disorders
+				            			    </label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='align_checkbox_label'>
+				            				<input type='checkbox' name='isNone' id='isNone' onClick='javascript: disable_sap_special();'>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<label>
+				            				None of the above <span>(Continue to next section)</span>
+				            			</label>
+				            		</td>
+				            	</tr>
+				            </table>
+                            
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Special Populations:
+				            		    </span>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<div class='FA_INFO5'>
+				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				            				</div>
+				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<div id='justify_div'>
+				            				<span id='sap_sub_label'>
+				            				    <div id='text_label'>
+				            				    	Assessment for children/adolescents must include motor development and functioning; speech, hearing and language functioning; immunization status; evaluation of developmental age factors, learning ability and intellectual functioning. Assessment for seniors must include motor, speech, hearing, language and cognitive functioning. Assessment for persons with coexisting psychiatric disabilities and other coexisting disabilities/disorders must include (if appropiate or applicable) history of previous mental health services, previous medical history, pharmacotherapy, hospitalization, use of community programs, differential diagnosis, mental status, all prescription and non-prescription medications at time of admission and at least the previous six months, past and current medication efficacy, medication allergies and/or adverse medication reactions, and adjustment to disability/disorder.
+				            				    </div>
+				            			    </span>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='Above_5'>
+				            				<textarea rows='20' cols='103' name='special' id='special'>{{fields.special}}</textarea>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: sap_continue_special();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
 				</div>
-			</td>
-			<td>
-				<label for=''><b>Child/Adolescent</b></label>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<div style='margin-bottom:2px;'>
-					<input type='checkbox' id='' name='' value=''>
-				</div>
-			</td>
-			<td>
-				<label for=''><b>Seniors</b></label>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<div style='margin-bottom:2px;'>
-					<input type='checkbox' id='' name='' value=''>
-				</div>
-			</td>
-			<td>
-				<label for=''><b>Dual Diagnosis</b></label>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<div style='margin-bottom:2px;'>
-					<input type='checkbox' id='' name='' value=''>
-				</div>
-			</td>
-			<td>
-				<label for=''><b>Other co-existing disabilities/disorders</b></label>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<div style='margin-bottom:2px;'>
-					<input type='checkbox' id='' name='' value=''>
-				</div>
-			</td>
-			<td>
-				<label for=''><b>None of the above </b><em>(Continue to next section)</em></label>
-			</td>
-		</tr>
-	</table>
-	<table>
-		<tr><td><div style='margin-top:20px;'></div></td></tr>
-
-		<tr>
-			<td>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<textarea cols='80' rows='20'></textarea>
-			</td>
-		</tr>
-	</table>
-
-	<input type='submit' value='submit'>
-</form>
-
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}
