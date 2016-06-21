@@ -37,7 +37,8 @@ getAmDHData, amDhExist, getAMDemoFields, convert_phone, newAM, deleteAM, startAM
 startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
-grabProperNextSection, saveCompletedAmSection, grabSapImages
+grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
+sapExist
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1816,6 +1817,18 @@ def sap_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			client = session.client
+
+			action = getSAP(client)
+			print "SAP Exist? " + str(action['newSap'])
+			print "SAP ID: " + str(action['sap'].id)
+
+			content['session'] = session
+			# content['newSap'] = action.newSap
+			# content['sap'] = action.sap
 			content['title'] = "Simeon Academy | S.A.P Instructions"
 			return render_to_response('counselor/forms/SAP/instructions.html', content)
 

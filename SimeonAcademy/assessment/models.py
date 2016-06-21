@@ -109,8 +109,7 @@ class UrineResults(models.Model):
 
 ##DEMOGRAPHIC SECTION OF THE SAP FORM------------------------------------------------------
 class SapDemographics(models.Model):
-	client = models.ForeignKey(Client, default=None, blank=True, null=True)
-	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 
 	date1 = models.DateField(default=None, blank=True, null=True)
 	date2 = models.DateField(default=None, blank=True, null=True)
@@ -119,6 +118,7 @@ class SapDemographics(models.Model):
 	startTime1 = models.CharField(max_length=8, default=None, blank=True, null=True)
 	startTime2 = models.CharField(max_length=8, default=None, blank=True, null=True)
 	startTime3 = models.CharField(max_length=8, default=None, blank=True, null=True)
+
 	problem = models.CharField(max_length=500, default=None, blank=True, null=True)
 	health = models.CharField(max_length=500, default=None, blank=True, null=True)
 	family = models.CharField(max_length=500, default=None, blank=True, null=True)
@@ -141,11 +141,11 @@ class SapDemographics(models.Model):
 	isNone = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return str(self.client.clientID)
+		return str(self.clientID)
 
 ##PSYCHOACTIVE HISTORY OF SAP FORM---------------------------------------------------------
 class SapPsychoactive(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	
 	alcoholAge = models.IntegerField(default=0)
 	alcoholFrequency = models.CharField(max_length=25, default=None, blank=True, null=True)
@@ -220,10 +220,13 @@ class SapPsychoactive(models.Model):
 	otherHow = models.CharField(max_length=25, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "SAP/Psychoavtive Table: " + str(self.client_id)
+		return str(self.clientID)
 
 ##COMPLETE IMPLEMENTATION OF THE SAP FORM-----------------------------------------------
 class SAP(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+
 	demographics = models.ForeignKey(SapDemographics, default=None, blank=True, null=True)
 	psychoactive = models.ForeignKey(SapPsychoactive, default=None, blank=True, null=True)
 
@@ -238,7 +241,7 @@ class SAP(models.Model):
 	SapComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return "SAP: " + str(self.demographics.client)
+		return "SAP: " + str(self.client.clientID)
 
 ##ANGER MANAGEMENT DEMOGRAPHIC------------------------------------------------------------
 class AM_Demographic(models.Model):

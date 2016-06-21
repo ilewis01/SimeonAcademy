@@ -2483,6 +2483,65 @@ def amDhExist(drug_history):
 
 
 #SAP FUNCTIONS_________________________________________________________________________________
+
+def sapExist(client):
+	exist = False
+	filter_form = True
+	saps = SAP.objects.all()
+
+	if len(saps) == 0:
+		filter_form = False
+
+	if filter_form == True:
+		for s in saps:
+			if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.SapComplete == False):
+				exist = True
+				break
+	return exist
+
+def grabIncompleteSap(client):
+	result = None
+	saps = SAP.objects.all()
+
+	for s in saps:
+		if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.SapComplete == False):
+			result = s
+			break
+	return result
+
+def newSap(the_client):
+	date = datetime.now()
+	date = date.date()
+	sap = None
+
+	demo = SapDemographics(clientID=the_client.clientID)
+	psycho = SapPsychoactive(clientID=the_client.clientID)
+
+	demo.save()
+	psycho.save()
+
+	sap = SAP(client=the_client, date_of_assessment=date)
+	sap.demographics = demo
+	sap.psychoactive = psycho
+	sap.save()
+
+	return sap
+
+def getSAP(client):
+	results = {}
+	saps = SAP.objects.all()
+	filter_list = sapExist(client)
+
+	if len(saps) == 0 or filter_list == False:
+		results['newSap'] = True
+		results['sap'] = newSap(client)
+
+	else:
+		results['newSap'] = False
+		results['sap'] = grabIncompleteSap(client)
+
+	return results
+
 def grabSapImages(sap, page):
 	images = {}
 	check = "/static/images/green_check.png"
@@ -2542,6 +2601,34 @@ def grabSapImages(sap, page):
 		images['other_image'] = progress
 	else:
 		images['other_image'] = x
+
+def grabSapDemoFields(sap):
+	fields = {}
+
+	fields['problem'] = problem
+	fields['health'] = health
+	fields['family'] = family
+	fields['psychoactive'] = psychoactive
+	fields['special'] = special
+	fields['psychological'] = psychological
+	fields['gambling'] = gambling
+	fields['abilities'] = abilities
+	fields['other'] = other
+	fields['source1'] = source1
+	fields['relationship1'] = relationship1
+	fields['source2'] = source2
+	fields['relationship2'] = relationship2
+
+	fields['isChild'] = isChild
+	fields['isSenior'] = isSenior
+	fields['isDual'] = isDual
+	fields['isOther'] = isOther
+	fields['isNone'] = isNone
+
+	return fields
+
+
+
 
 
 
