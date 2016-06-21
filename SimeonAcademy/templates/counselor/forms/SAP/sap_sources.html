@@ -1,1 +1,336 @@
-<h1>Sources</h1>
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+    <!-- _________________________SIDE BAR_________________________ -->
+
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{sap.client.fname}} {{sap.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{sap.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Completed:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.demo}}'>
+                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideClinical();" name='clinicalBtn' id='clinicalBtn'>
+                    Clinical Assessment
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.dh}}'>
+                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSocial();" name='socialBtn' id='socialBtn'>
+                    Social Interaction
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.child}}'>
+                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho1();" name='psychoBtn' id='psychoBtn'>
+                    Psychoactive Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah1}}'>
+                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sidePsycho2();" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah2}}'>
+                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSpecial();" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideOther();" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.ah3}}'>
+                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideSource();" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='side_option_head'>
+                  <h4>Exit Options:</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>  
+              <td>
+                <table class='icon_table'>      
+                  <!-- BUTTON 1 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Save");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='save_icon_btn' style='margin-left:30px;'>
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='save_icon_text' style='margin-left:30px;'>
+                                Save
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td><div style='margin-right:15px;'></div></td>
+
+                  <!-- BUTTON 2 -->
+                  <td>
+                    <div class='FA_side_bar_btn'>
+                      <a href='javascript: exit_am("Delete");'>
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='trash_icon_btn'>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div id='trash_icon_text'>
+                                Delete
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </a>
+                    </div>
+                  </td>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <h3 id='am-h2'>S.A.P: Sources of Information</h3>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-12 col-sm-12">
+                  			<div>
+                  				<form action='/sap_viewForm/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+				                
+
+				            <table>
+				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
+				            	<tr>
+				            		<td>
+				            			<span class='sap_label'>
+				            			    Sources of information other than client:
+				            		    </span>
+				            		</td>
+				            	</tr>
+
+                      <tr><td><div style='margin-bottom: 30px;'></div></td></tr>
+				            </table>
+
+				            <table>
+                      <tr>
+                        <td>
+                          <div>
+                            <label id='sap_label_text_align'>
+                              Name:
+                            </label>
+                          </div>
+                        </td>
+
+                        <td>
+                          <input type='text' name='source1' id='source1' style='width:200px;' value='{{fields.source1}}'>
+                        </td>
+
+                        <td><div style='margin-right: 25px;'></div></td>
+
+                        <td>
+                          <div>
+                            <label id='sap_label_text_align'>
+                              Relationship:
+                            </label>
+                          </div>
+                        </td>
+
+                        <td>
+                          <input type='text' name='relationship1' id='relationship1' style='width:200px;' value='{{fields.relationship1}}'>
+                        </td>
+                      </tr>
+
+                      <tr><td><div style='margin-bottom: 5px;'></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td>
+                          <div>
+                            <label id='sap_label_text_align'>
+                              Name:
+                            </label>
+                          </div>
+                        </td>
+
+                        <td>
+                          <input type='text' name='source2' id='source2' style='width:200px;' value='{{fields.source2}}'>
+                        </td>
+
+                        <td><div style='margin-right: 25px;'></div></td>
+
+                        <td>
+                          <div>
+                            <label id='sap_label_text_align'>
+                              Relationship:
+                            </label>
+                          </div>
+                        </td>
+
+                        <td>
+                          <input type='text' name='relationship2' id='relationship2' style='width:200px;' value='{{fields.relationship2}}'>
+                        </td>
+                      </tr>
+                    </table>
+
+                    </form>
+                    </div>
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: sap_continue_sources();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock %}

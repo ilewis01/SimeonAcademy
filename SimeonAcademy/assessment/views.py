@@ -1816,8 +1816,8 @@ def sap_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | S.A.P Form"
-			return render_to_response('counselor/forms/SAP/getClient.html', content)
+			content['title'] = "Simeon Academy | S.A.P Instructions"
+			return render_to_response('counselor/forms/SAP/instructions.html', content)
 
 @login_required(login_url='/index')
 def sap_location(request):
@@ -1877,20 +1877,8 @@ def sap_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = request.POST.get('client_ID', '')
-			client = Client.objects.get(id=client)
-			times = getTimes()
-			proceed = findClientSAP(client)
-
-			content['client'] = client
-			content['times'] = times
-			content['title'] = "Simeon Academy | Substance Abuse Professional Form"
-
-			if proceed['incomplete'] == True:
-				content['sap'] = proceed['sap']
-				return render_to_response('counselor/forms/SAP/getClient.html', content)
-			else:
-				return render_to_response('counselor/forms/SAP/demographic.html', content)
+			content['title'] = "Simeon Academy | Substance Abuse Professional Form"		
+			return render_to_response('counselor/forms/SAP/demographic.html', content)
 
 @login_required(login_url='/index')
 def sap_psychoactive(request):

@@ -3855,6 +3855,23 @@ function continue_AM_session() {
 
 //SAP FUNCTIONS
 
+function continue_to_sap_form(next_page) {
+	var proceed = true;
+	var form = document.getElementById('sap_instructions');
+
+	if (proceed === true) {
+		if (String(next_page) === 'options') {
+			form.action = '/clientOptions/';
+		}
+
+		else {
+			form.action = '/sap_demographic/';
+		}
+
+		form.submit();
+	}
+}
+
 function sap_continue_demographic() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
@@ -3911,6 +3928,17 @@ function sap_continue_special() {
 }
 
 function sap_continue_other() {
+	var proceed = true;
+	var form = document.getElementById('sap_form');
+	var back = document.getElementById('back');
+
+	if (proceed === true) {
+		back.value = 'false';
+		form.submit();
+	}
+}
+
+function sap_continue_sources() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');

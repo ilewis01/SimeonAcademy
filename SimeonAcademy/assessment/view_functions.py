@@ -1379,65 +1379,6 @@ def newAM(client):
 
 	return am
 
-def grabSapImages(sap, page):
-	images = {}
-	check = "/static/images/green_check.png"
-	x = "/static/images/red_x.png"
-	progress = "/static/images/yellow_progress.png"
-
-	if sap.demoComplete == True and page != 'demo':
-		images['demo_image'] = check
-	elif page == 'viewForm':
-		images['demo_image'] = check
-	elif page == 'demo':
-		images['demo_img'] = progress
-	else:
-		images['demo_img'] = x
-
-	if sap.socialComplete == True and page != 'social':
-		images['social_image'] = check
-	elif page == 'viewForm':
-		images['social_image'] = check
-	elif page == 'social':
-		images['social_image'] = progress
-	else:
-		images['social_image'] = x
-
-	if sap.psycho1Complete == True and page != 'psycho1':
-		images['psycho1_image'] = check
-	elif page == 'viewForm':
-		images['psycho1_image'] = check
-	elif page == 'psycho1':
-		images['psycho1_image'] = progress
-	else:
-		images['psycho1_image'] = x
-
-	if sap.psycho2Complete == True and page != 'psycho2':
-		images['psycho2_image'] = check
-	elif page == 'viewForm':
-		images['psycho2_image'] = check
-	elif page == 'psycho2':
-		images['psycho2_image'] = progress
-	else:
-		images['psycho2_image'] = x
-
-	if sap.specialComplete == True and page != 'special':
-		images['special_image'] = check
-	elif page == 'viewForm':
-		images['special_image'] = check
-	elif page == 'special':
-		images['special_image'] = progress
-	else:
-		images['special_image'] = x
-
-	if sap.otherComplete == True and page != 'other':
-		images['other_image'] = check
-	elif page == 'viewForm':
-		images['other_image'] = check
-	elif page == 'other':
-		images['other_image'] = progress
-	else:
-		images['other_image'] = x
 
 
 def amSidebarImages(am, page):
@@ -2539,6 +2480,68 @@ def amDhExist(drug_history):
 				exist = True
 				break
 	return exist
+
+
+#SAP FUNCTIONS_________________________________________________________________________________
+def grabSapImages(sap, page):
+	images = {}
+	check = "/static/images/green_check.png"
+	x = "/static/images/red_x.png"
+	progress = "/static/images/yellow_progress.png"
+
+	if sap.demoComplete == True and page != 'demo':
+		images['demo_image'] = check
+	elif page == 'viewForm':
+		images['demo_image'] = check
+	elif page == 'demo':
+		images['demo_img'] = progress
+	else:
+		images['demo_img'] = x
+
+	if sap.socialComplete == True and page != 'social':
+		images['social_image'] = check
+	elif page == 'viewForm':
+		images['social_image'] = check
+	elif page == 'social':
+		images['social_image'] = progress
+	else:
+		images['social_image'] = x
+
+	if sap.psycho1Complete == True and page != 'psycho1':
+		images['psycho1_image'] = check
+	elif page == 'viewForm':
+		images['psycho1_image'] = check
+	elif page == 'psycho1':
+		images['psycho1_image'] = progress
+	else:
+		images['psycho1_image'] = x
+
+	if sap.psycho2Complete == True and page != 'psycho2':
+		images['psycho2_image'] = check
+	elif page == 'viewForm':
+		images['psycho2_image'] = check
+	elif page == 'psycho2':
+		images['psycho2_image'] = progress
+	else:
+		images['psycho2_image'] = x
+
+	if sap.specialComplete == True and page != 'special':
+		images['special_image'] = check
+	elif page == 'viewForm':
+		images['special_image'] = check
+	elif page == 'special':
+		images['special_image'] = progress
+	else:
+		images['special_image'] = x
+
+	if sap.otherComplete == True and page != 'other':
+		images['other_image'] = check
+	elif page == 'viewForm':
+		images['other_image'] = check
+	elif page == 'other':
+		images['other_image'] = progress
+	else:
+		images['other_image'] = x
 
 
 

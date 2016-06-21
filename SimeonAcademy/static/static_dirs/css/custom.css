@@ -1005,6 +1005,16 @@ button:hover {
 	margin-bottom: 15px;
 }
 
+#sap_label_text_align {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.instruction_class {
+	width: 100%;
+	text-align: center;
+}
+
 
 
 

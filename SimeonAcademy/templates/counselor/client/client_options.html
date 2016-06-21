@@ -41,7 +41,7 @@
                     </form>
                 </li>
                 <li>
-                    <form action='/sap_demographic/' method='post' name='sap' id='sap'> {% csrf_token %}
+                    <form action='/sap_preliminary/' method='post' name='sap' id='sap'> {% csrf_token %}
                         <input type="hidden" id='client_ID' name='client_ID' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
                         <input type='hidden' id='back' name='back' value='false'>

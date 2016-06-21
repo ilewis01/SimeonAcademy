@@ -110,9 +110,12 @@ class UrineResults(models.Model):
 ##DEMOGRAPHIC SECTION OF THE SAP FORM------------------------------------------------------
 class SapDemographics(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+
 	date1 = models.DateField(default=None, blank=True, null=True)
 	date2 = models.DateField(default=None, blank=True, null=True)
 	date3 = models.DateField(default=None, blank=True, null=True)
+
 	startTime1 = models.CharField(max_length=8, default=None, blank=True, null=True)
 	startTime2 = models.CharField(max_length=8, default=None, blank=True, null=True)
 	startTime3 = models.CharField(max_length=8, default=None, blank=True, null=True)
