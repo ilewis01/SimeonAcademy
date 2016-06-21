@@ -4012,6 +4012,50 @@ function initialize_sap_special() {
 	disable_sap_special();
 }
 
+function sideBarOption(page) {
+	if (String(page) === 'sapClinic') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_demographic/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapSocial') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_social/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapPsycho1') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_psychoactive/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapPsycho2') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_psychoactive2/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapSpecial') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_special/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapOther') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_other/';
+		form.submit();
+	}
+
+	else if (String(page) === 'sapSource') {
+		var form = document.getElementById('sap_form');
+		form.action = '/sap_sources/';
+		form.submit();
+	}
+}
+
 
 
 

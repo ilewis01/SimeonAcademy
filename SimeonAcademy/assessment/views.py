@@ -38,7 +38,7 @@ startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
-sapExist
+saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1818,19 +1818,24 @@ def sap_preliminary(request):
 
 		else:
 			session_id = request.POST.get('session_id', '')
+			goToNext = request.POST.get('goToNext', '')
 
 			session = ClientSession.objects.get(id=session_id)
 			client = session.client
 
 			action = getSAP(client)
-			print "SAP Exist? " + str(action['newSap'])
-			print "SAP ID: " + str(action['sap'].id)
+			sap = action['sap']
 
 			content['session'] = session
-			# content['newSap'] = action.newSap
-			# content['sap'] = action.sap
-			content['title'] = "Simeon Academy | S.A.P Instructions"
-			return render_to_response('counselor/forms/SAP/instructions.html', content)
+			content['sap'] = sap
+
+			if action['newSap'] == False and str(goToNext) == 'false':
+				content['title'] = 'Simeon Academy | SAP'
+				return render_to_response('counselor/forms/SAP/getClient.html', content)
+
+			else:
+				content['title'] = "Simeon Academy | S.A.P Instructions"
+				return render_to_response('counselor/forms/SAP/instructions.html', content)
 
 @login_required(login_url='/index')
 def sap_location(request):
@@ -1890,6 +1895,20 @@ def sap_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			sap_id = request.POST.get('sap_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			sap = SAP.objects.get(id=sap_id)
+			fields = grabSapDemoFields(sap)
+			image = grabSapImages(sap, '/sap_demographic/')
+			classes = grabSapClassesCSS(sap, 'clinic')
+
+			content['session'] = session
+			content['sap'] = sap
+			content['fields'] = fields
+			content['image'] = image
+			content['class'] = classes
 			content['title'] = "Simeon Academy | Substance Abuse Professional Form"		
 			return render_to_response('counselor/forms/SAP/demographic.html', content)
 
@@ -1908,6 +1927,26 @@ def sap_psychoactive(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			back = request.POST.get('back', '')
+			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			sap_id = request.POST.get('sap_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			sap = SAP.objects.get(id=sap_id)
+
+			if str(back) == 'false':
+				saveSapDemoSection(request, save_section, sap)
+
+			fields = grabSapPsychoFields(sap)
+			image = grabSapImages(sap, '/sap_psychoactive/')
+			classes = grabSapClassesCSS(sap, 'psycho1')
+
+			content['session'] = session
+			content['sap'] = sap
+			content['fields'] = fields
+			content['image'] = image
+			content['class'] = classes
 			content['title'] = "Simeon Academy | SAP"
 			return render_to_response('counselor/forms/SAP/psychoactive.html', content)
 
@@ -1926,7 +1965,27 @@ def sap_psychoactive2(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Urine Test Analysis"
+			back = request.POST.get('back', '')
+			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			sap_id = request.POST.get('sap_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			sap = SAP.objects.get(id=sap_id)
+
+			if str(back) == 'false':
+				saveSapDemoSection(request, save_section, sap)
+
+			fields = grabSapDemoFields(sap)
+			image = grabSapImages(sap, '/sap_psychoactive2/')
+			classes = grabSapClassesCSS(sap, 'psycho2')
+
+			content['session'] = session
+			content['sap'] = sap
+			content['fields'] = fields
+			content['image'] = image
+			content['class'] = classes
+			content['title'] = "Simeon Academy | SAP"
 			return render_to_response('counselor/forms/SAP/psychoactive2.html', content)
 
 @login_required(login_url='/index')
@@ -1962,7 +2021,27 @@ def sap_social(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Urine Test Analysis"
+			back = request.POST.get('back', '')
+			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			sap_id = request.POST.get('sap_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			sap = SAP.objects.get(id=sap_id)
+
+			if str(back) == 'false':
+				saveSapDemoSection(request, save_section, sap)
+
+			fields = grabSapDemoFields(sap)
+			image = grabSapImages(sap, '/sap_social/')
+			classes = grabSapClassesCSS(sap, 'social')
+
+			content['fields'] = fields
+			content['image'] = image
+			content['class'] = classes
+			content['session'] = session
+			content['sap'] = sap
+			content['title'] = "Simeon Academy | SAP"
 			return render_to_response('counselor/forms/SAP/pre_final.html', content)
 
 @login_required(login_url='/index')

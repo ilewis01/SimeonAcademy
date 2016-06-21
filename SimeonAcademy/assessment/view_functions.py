@@ -2542,90 +2542,395 @@ def getSAP(client):
 
 	return results
 
+def grabSapCompletedSections(sap):
+	results = {}
+
+	results['clinicalComplete'] 	= sap.clinicalComplete
+	results['socialComplete'] 		= sap.socialComplete
+	results['psychoComplete'] 		= sap.psychoComplete
+	results['psycho2Complete'] 		= sap.psycho2Complete
+	results['specialComplete'] 		= sap.specialComplete
+	results['otherComplete'] 		= sap.otherComplete
+	results['sourcesComplete'] 		= sap.sourcesComplete
+
+	return results
+
+def grabSapClassesCSS(sap, m_page):
+	classes = {}
+	sap = grabSapCompletedSections(sap)
+	normal = 'sideBarMargin'
+	green = 'sideBarMarginChecked'
+	current = 'sideLinkSelected'
+
+	classes['clinic'] = processCompletedClass(sap['clinicalComplete'], 'clinic', m_page, green, current, normal)
+	classes['social'] = processCompletedClass(sap['socialComplete'], 'social', m_page, green, current, normal)
+	classes['psycho1'] = processCompletedClass(sap['psychoComplete'], 'psycho1', m_page, green, current, normal)
+	classes['psycho2'] = processCompletedClass(sap['psycho2Complete'], 'psycho2', m_page, green, current, normal)
+	classes['special'] = processCompletedClass(sap['specialComplete'], 'special', m_page, green, current, normal)
+	classes['other'] = processCompletedClass(sap['otherComplete'], 'other', m_page, green, current, normal)
+	classes['source'] = processCompletedClass(sap['sourcesComplete'], 'source', m_page, green, current, normal)
+
+	return classes
+
 def grabSapImages(sap, page):
 	images = {}
 	check = "/static/images/green_check.png"
 	x = "/static/images/red_x.png"
 	progress = "/static/images/yellow_progress.png"
 
-	if sap.demoComplete == True and page != 'demo':
+	if sap.clinicalComplete == True and page != '/sap_demographic/':
 		images['demo_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['demo_image'] = check
-	elif page == 'demo':
-		images['demo_img'] = progress
+	elif page == '/sap_demographic/':
+		images['demo_image'] = progress
 	else:
-		images['demo_img'] = x
+		images['demo_image'] = x
 
-	if sap.socialComplete == True and page != 'social':
+	if sap.socialComplete == True and page != '/sap_social/':
 		images['social_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['social_image'] = check
-	elif page == 'social':
+	elif page == '/sap_social/':
 		images['social_image'] = progress
 	else:
 		images['social_image'] = x
 
-	if sap.psycho1Complete == True and page != 'psycho1':
+	if sap.psychoComplete == True and page != '/sap_psychoactive/':
 		images['psycho1_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['psycho1_image'] = check
-	elif page == 'psycho1':
+	elif page == '/sap_psychoactive/':
 		images['psycho1_image'] = progress
 	else:
 		images['psycho1_image'] = x
 
-	if sap.psycho2Complete == True and page != 'psycho2':
+	if sap.psycho2Complete == True and page != '/sap_psychoactive2/':
 		images['psycho2_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['psycho2_image'] = check
-	elif page == 'psycho2':
+	elif page == '/sap_psychoactive2/':
 		images['psycho2_image'] = progress
 	else:
 		images['psycho2_image'] = x
 
-	if sap.specialComplete == True and page != 'special':
+	if sap.specialComplete == True and page != '/sap_special/':
 		images['special_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['special_image'] = check
-	elif page == 'special':
+	elif page == '/sap_special/':
 		images['special_image'] = progress
 	else:
 		images['special_image'] = x
 
-	if sap.otherComplete == True and page != 'other':
+	if sap.otherComplete == True and page != '/sap_other/':
 		images['other_image'] = check
-	elif page == 'viewForm':
+	elif page == '/sap_viewForm/':
 		images['other_image'] = check
-	elif page == 'other':
+	elif page == '/sap_other/':
 		images['other_image'] = progress
 	else:
 		images['other_image'] = x
 
+	if sap.sourcesComplete == True and page != '/sap_sources/':
+		images['source_image'] = check
+	elif page == '/sap_viewForm/':
+		images['source_image'] = check
+	elif page == '/sap_sources/':
+		images['source_image'] = progress
+	else:
+		images['source_image'] = x
+
+	return images
+
 def grabSapDemoFields(sap):
 	fields = {}
 
-	fields['problem'] = problem
-	fields['health'] = health
-	fields['family'] = family
-	fields['psychoactive'] = psychoactive
-	fields['special'] = special
-	fields['psychological'] = psychological
-	fields['gambling'] = gambling
-	fields['abilities'] = abilities
-	fields['other'] = other
-	fields['source1'] = source1
-	fields['relationship1'] = relationship1
-	fields['source2'] = source2
-	fields['relationship2'] = relationship2
+	fields['problem'] = sap.demographics.problem
+	fields['health'] = sap.demographics.health
+	fields['family'] = sap.demographics.family
+	fields['psychoactive'] = sap.demographics.psychoactive
+	fields['special'] = sap.demographics.special
+	fields['psychological'] = sap.demographics.psychological
+	fields['gambling'] = sap.demographics.gambling
+	fields['abilities'] = sap.demographics.abilities
+	fields['other'] = sap.demographics.other
+	fields['source1'] = sap.demographics.source1
+	fields['relationship1'] = sap.demographics.relationship1
+	fields['source2'] = sap.demographics.source2
+	fields['relationship2'] = sap.demographics.relationship2
 
-	fields['isChild'] = isChild
-	fields['isSenior'] = isSenior
-	fields['isDual'] = isDual
-	fields['isOther'] = isOther
-	fields['isNone'] = isNone
+	fields['isChild'] = sap.demographics.isChild
+	fields['isSenior'] = sap.demographics.isSenior
+	fields['isDual'] = sap.demographics.isDual
+	fields['isOther'] = sap.demographics.isOther
+	fields['isNone'] = sap.demographics.isNone
 
 	return fields
+
+def grabSapPsychoFields(sap):
+	fields = {}
+
+	fields['alcoholAge'] = sap.psychoactive.alcoholAge
+	fields['alcoholFrequency'] = sap.psychoactive.alcoholFrequency
+	fields['alcoholQuantity'] = sap.psychoactive.alcoholQuantity
+	fields['alcoholLast'] = sap.psychoactive.alcoholLast
+	fields['alcoholHow'] = sap.psychoactive.alcoholHow
+
+	fields['amphAge'] = sap.psychoactive.amphAge
+	fields['amphFrequency'] = sap.psychoactive.amphFrequency
+	fields['amphQuantity'] = sap.psychoactive.amphQuantity
+	fields['amphLast'] = sap.psychoactive.amphLast
+	fields['amphHow'] = sap.psychoactive.amphHow
+
+	fields['caffineAge'] = sap.psychoactive.caffineAge
+	fields['caffineFrequency'] = sap.psychoactive.caffineFrequency
+	fields['caffineQuantity'] = sap.psychoactive.caffineQuantity
+	fields['caffineLast'] = sap.psychoactive.caffineLast
+	fields['caffineHow'] = sap.psychoactive.caffineHow
+
+	fields['weedAge'] = sap.psychoactive.weedAge
+	fields['weedFrequency'] = sap.psychoactive.weedFrequency
+	fields['weedQuantity'] = sap.psychoactive.weedQuantity
+	fields['weedLast'] = sap.psychoactive.weedLast
+	fields['weedHow'] = sap.psychoactive.weedHow
+
+	fields['cokeAge'] = sap.psychoactive.cokeAge
+	fields['cokeFrequency'] = sap.psychoactive.cokeFrequency
+	fields['cokeQuantity'] = sap.psychoactive.cokeQuantity
+	fields['cokeLast'] = sap.psychoactive.cokeLast
+	fields['cokeHow'] = sap.psychoactive.cokeHow
+
+	fields['hallAge'] = sap.psychoactive.hallAge
+	fields['hallFrequency'] = sap.psychoactive.hallFrequency
+	fields['hallQuantity'] = sap.psychoactive.hallQuantity
+	fields['hallLast'] = sap.psychoactive.hallLast
+	fields['hallHow'] = sap.psychoactive.hallHow
+
+	fields['inhaleAge'] = sap.psychoactive.inhaleAge
+	fields['inhaleFrequency'] = sap.psychoactive.inhaleFrequency
+	fields['inhaleQuantity'] = sap.psychoactive.inhaleQuantity
+	fields['inhaleLast'] = sap.psychoactive.inhaleLast
+	fields['inhaleHow'] = sap.psychoactive.inhaleHow
+
+	fields['smokeAge'] = sap.psychoactive.smokeAge
+	fields['smokeFrequency'] = sap.psychoactive.smokeFrequency
+	fields['smokeQuantity'] = sap.psychoactive.smokeQuantity
+	fields['smokeLast'] = sap.psychoactive.smokeLast
+	fields['smokeHow'] = sap.psychoactive.smokeHow
+
+	fields['opAge'] = sap.psychoactive.opAge
+	fields['opFrequency'] = sap.psychoactive.opFrequency
+	fields['opQuantity'] = sap.psychoactive.opQuantity
+	fields['opLast'] = sap.psychoactive.opLast
+	fields['opHow'] = sap.psychoactive.opHow
+
+	fields['pcpAge'] = sap.psychoactive.pcpAge
+	fields['pcpFrequency'] = sap.psychoactive.pcpFrequency
+	fields['pcpQuantity'] = sap.psychoactive.pcpQuantity
+	fields['pcpLast'] = sap.psychoactive.pcpLast
+	fields['pcpHow'] = sap.psychoactive.pcpHow
+
+	fields['sedAge'] = sap.psychoactive.sedAge
+	fields['sedFrequency'] = sap.psychoactive.sedFrequency
+	fields['sedQuantity'] = sap.psychoactive.sedQuantity
+	fields['sedLast'] = sap.psychoactive.sedLast
+	fields['sedHow'] = sap.psychoactive.sedHow
+
+	fields['otherAge'] = sap.psychoactive.otherAge
+	fields['otherFrequency'] = sap.psychoactive.otherFrequency
+	fields['otherQuantity'] = sap.psychoactive.otherQuantity
+	fields['otherLast'] = sap.psychoactive.otherLast
+	fields['otherHow'] = sap.psychoactive.otherHow
+
+	return fields
+
+def saveSapPhycho1(request, sap):
+	alcoholAge = request.POST.get('alcoholAge', '')
+	alcoholFrequency = request.POST.get('alcoholFrequency', '')
+	alcoholQuantity = request.POST.get('alcoholQuantity', '')
+	alcoholLast = request.POST.get('alcoholLast', '')
+	alcoholHow = request.POST.get('alcoholHow', '')
+
+	amphAge = request.POST.get('amphAge', '')
+	amphFrequency = request.POST.get('amphFrequency', '')
+	amphQuantity = request.POST.get('amphQuantity', '')
+	amphLast = request.POST.get('amphLast', '')
+	amphHow = request.POST.get('amphHow', '')
+
+	caffineAge = request.POST.get('caffineAge', '')
+	caffineFrequency = request.POST.get('caffineFrequency', '')
+	caffineQuantity = request.POST.get('caffineQuantity', '')
+	caffineLast = request.POST.get('caffineLast', '')
+	caffineHow = request.POST.get('caffineHow', '')
+
+	weedAge = request.POST.get('weedAge', '')
+	weedFrequency = request.POST.get('weedFrequency', '')
+	weedQuantity = request.POST.get('weedQuantity', '')
+	weedLast = request.POST.get('weedLast', '')
+	weedHow = request.POST.get('weedHow', '')
+
+	cokeAge = request.POST.get('cokeAge', '')
+	cokeFrequency = request.POST.get('cokeFrequency', '')
+	cokeQuantity = request.POST.get('cokeQuantity', '')
+	cokeLast = request.POST.get('cokeLast', '')
+	cokeHow = request.POST.get('cokeHow', '')
+
+	hallAge = request.POST.get('hallAge', '')
+	hallFrequency = request.POST.get('hallFrequency', '')
+	hallQuantity = request.POST.get('hallQuantity', '')
+	hallLast = request.POST.get('hallLast', '')
+	hallHow = request.POST.get('hallHow', '')
+
+	inhaleAge = request.POST.get('inhaleAge', '')
+	inhaleFrequency = request.POST.get('inhaleFrequency', '')
+	inhaleQuantity = request.POST.get('inhaleQuantity', '')
+	inhaleLast = request.POST.get('inhaleLast', '')
+	inhaleHow = request.POST.get('inhaleHow', '')
+
+	smokeAge = request.POST.get('smokeAge', '')
+	smokeFrequency = request.POST.get('smokeFrequency', '')
+	smokeQuantity = request.POST.get('smokeQuantity', '')
+	smokeLast = request.POST.get('smokeLast', '')
+	smokeHow = request.POST.get('smokeHow', '')
+
+	opAge = request.POST.get('opAge', '')
+	opFrequency = request.POST.get('opFrequency', '')
+	opQuantity = request.POST.get('opQuantity', '')
+	opLast = request.POST.get('opLast', '')
+	opHow = request.POST.get('opHow', '')
+
+	pcpAge = request.POST.get('pcpAge', '')
+	pcpFrequency = request.POST.get('pcpFrequency', '')
+	pcpQuantity = request.POST.get('pcpQuantity', '')
+	pcpLast = request.POST.get('pcpLast', '')
+	pcpHow = request.POST.get('pcpHow', '')
+
+	sedAge = request.POST.get('sedAge', '')
+	sedFrequency = request.POST.get('sedFrequency', '')
+	sedQuantity = request.POST.get('sedQuantity', '')
+	sedLast = request.POST.get('sedLast', '')
+	sedHow = request.POST.get('sedHow', '')
+
+	otherAge = request.POST.get('otherAge', '')
+	otherFrequency = request.POST.get('otherFrequency', '')
+	otherQuantity = request.POST.get('otherQuantity', '')
+	otherLast = request.POST.get('otherLast', '')
+	otherHow = request.POST.get('otherHow', '')
+
+	psycho = sap.psychoactive
+
+	psycho.alcoholAge = alcoholAge
+	psycho.alcoholFrequency = alcoholFrequency
+	psycho.alcoholQuantity = alcoholQuantity
+	psycho.alcoholLast = alcoholLast
+	psycho.alcoholHow = alcoholHow
+
+	psycho.amphAge = amphAge
+	psycho.amphFrequency = amphFrequency
+	psycho.amphQuantity = amphQuantity
+	psycho.amphLast = amphLast
+	psycho.amphHow = amphHow
+
+	psycho.caffineAge = caffineAge
+	psycho.caffineFrequency = caffineFrequency
+	psycho.caffineQuantity = caffineQuantity
+	psycho.caffineLast = caffineLast
+	psycho.caffineHow = caffineHow
+
+	psycho.weedAge = weedAge
+	psycho.weedFrequency = weedFrequency
+	psycho.weedQuantity = weedQuantity
+	psycho.weedLast = weedLast
+	psycho.weedHow = weedHow
+
+	psycho.cokeAge = cokeAge
+	psycho.cokeFrequency = cokeFrequency
+	psycho.cokeQuantity = cokeQuantity
+	psycho.cokeLast = cokeLast
+	psycho.cokeHow = cokeHow
+
+	psycho.hallAge = hallAge
+	psycho.hallFrequency = hallFrequency
+	psycho.hallQuantity = hallQuantity
+	psycho.hallLast = hallLast
+	psycho.hallHow = hallHow
+
+	psycho.inhaleAge = inhaleAge
+	psycho.inhaleFrequency = inhaleFrequency
+	psycho.inhaleQuantity = inhaleQuantity
+	psycho.inhaleLast = inhaleLast
+	psycho.inhaleHow = inhaleHow
+
+	psycho.smokeAge = smokeAge
+	psycho.smokeFrequency = smokeFrequency
+	psycho.smokeQuantity = smokeQuantity
+	psycho.smokeLast = smokeLast
+	psycho.smokeHow = smokeHow
+
+	psycho.opAge = opAge
+	psycho.opFrequency = opFrequency
+	psycho.opQuantity = opQuantity
+	psycho.opLast = opLast
+	psycho.opHow = opHow
+
+	psycho.pcpAge = pcpAge
+	psycho.pcpFrequency = pcpFrequency
+	psycho.pcpQuantity = pcpQuantity
+	psycho.pcpLast = pcpLast
+	psycho.pcpHow = pcpHow
+
+	psycho.sedAge = sedAge
+	psycho.sedFrequency = sedFrequency
+	psycho.sedQuantity = sedQuantity
+	psycho.sedLast = sedLast
+	psycho.sedHow = sedHow
+
+	psycho.otherAge = otherAge
+	psycho.otherFrequency = otherFrequency
+	psycho.otherQuantity = otherQuantity
+	psycho.otherLast = otherLast
+	psycho.otherHow = otherHow
+
+	psycho.save()
+	sap.psychoComplete = True
+	sap.save()
+
+def saveSapDemoSection(request, section, sap):
+	demo = sap.demographics
+
+	if str(section) == '/sap_demographic/':
+		problem = request.POST.get('problem', '')
+		health = request.POST.get('health', '')
+
+		demo.problem = problem
+		demo.health = health
+		demo.save()
+		sap.clinicalComplete = True
+		sap.save()
+
+	elif str(section) == '/sap_social/':
+		family = request.POST.get('family')
+
+		demo.family = family
+		demo.save()
+		sap.socialComplete = True
+		sap.save()
+
+	elif str(section) == '/sap_psychoactive/':
+		saveSapPhycho1(request, sap)
+
+	elif str(section) == '/sap_psychoactive2/':
+		psychoactive = request.POST.get('psychoactive')
+
+		demo.psychoactive = psychoactive
+		demo.save()
+		sap.psycho2Complete = True
+		sap.save()
+
+	elif str(section) == '/sap_special/':
+		no = None
+
 
 
 
