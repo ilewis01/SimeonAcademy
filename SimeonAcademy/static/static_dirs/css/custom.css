@@ -6,6 +6,10 @@ side_option_headbody {
 	background: url('../images/grey1.jpg');
 }
 
+.round-button2 {
+	width:5%;
+}
+
 .round-button {
 	width:25%;
 }
@@ -1015,7 +1019,118 @@ button:hover {
 	text-align: center;
 }
 
+.exit_icon {
+	width:20px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
 
+.exit_btn_text {
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.exit_a_tag {
+	color: #3399cc;
+}
+
+.exit_a_tag:hover {
+	text-decoration: none;
+	color: #ffa64d;
+}
+
+.exitBtn_class {
+	width: 100%;
+	height: 150px;
+	margin-top: 50px;
+}
+
+.round_exit_center {
+	width: 100%;
+	text-align: center;
+}
+
+.round_exit_center th {
+	border: 1px solid black;
+}
+
+.round_exit_center td {
+	/*border: 1px solid black;*/
+}
+
+.round_exit_center a {
+	color: #666666;
+}
+
+.round_exit_center a:hover {
+	color: #adad89;
+	/*text-shadow: 1px 1px black;*/
+	text-decoration: none;
+}
+
+.exitBtn_headerText {
+	margin-top: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.roundIconClass {
+	margin-top: 18px;
+	margin-left: 11px;
+	/*margin-right: 5px;*/
+}
+
+.roundIconClass1 {
+	margin-left: 4px;
+	margin-top: 10px;
+}
+
+.roundIconClass2 {
+	margin-top: 15px;
+	margin-left: 2px;
+}
+
+.roundIconClass3 {
+	margin-top: 13px;
+	margin-right: 3px;
+}
+
+.image_icon {
+	width:65%;
+}
+
+.image_icon2 {
+	width:70%;
+}
+
+.image_icon3 {
+	width:40%;
+}
+
+.exit_page_main {
+	text-align: center;
+}
+
+.exit_table_class {
+	width:100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#sub_exit_text {
+	font-style: italic;
+	font-size: 15px;
+}
+
+#sideBarMainHeader {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	color:#ffa64d;
+	text-shadow: 1px 1px black;
+	margin-bottom: 15px;
+}
 
 
 

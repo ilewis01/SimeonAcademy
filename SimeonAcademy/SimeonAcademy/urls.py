@@ -90,5 +90,8 @@ urlpatterns = patterns('',
 
     ##Addiction Severity Views
     url(r'^asi_demographic/$', 'assessment.views.asi_demographic'),
+
+    ##Global Views
+    url(r'^generic_exit/$', 'assessment.views.generic_exit'),
     
 )

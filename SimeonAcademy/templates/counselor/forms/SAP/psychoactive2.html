@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+<body class="gradient-white" onLoad="javascript: initialize_sap_psycho2();">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -88,7 +88,7 @@
               <td>
                 <div class='{{class.psycho2}}'>
                   <img src="{{image.psycho2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapPsycho2');" name='psycho2Btn' id='psycho2Btn'>
+                  <a href="#" name='psycho2Btn' id='psycho2Btn'>
                     Psychoactive Use II
                   </a>
                 </div>
@@ -212,14 +212,15 @@
             		<div class="row">                   
                   		<div class="col-md-12 col-sm-12">
                   			<div>
-                  				<form action='/sap_special/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  				<form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_psychoactive2/'>
 				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                            <input type='hidden' name='new_form' id='new_form' value='false'>
 				                
 
 				            <table>

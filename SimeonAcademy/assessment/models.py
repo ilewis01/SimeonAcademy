@@ -238,6 +238,14 @@ class SAP(models.Model):
 	otherComplete = models.BooleanField(blank=True, default=False)
 	sourcesComplete = models.BooleanField(blank=True, default=False)
 
+	clinicPriority = models.BooleanField(blank=True, default=False)
+	socialPriority = models.BooleanField(blank=True, default=False)
+	psycho1Priority = models.BooleanField(blank=True, default=False)
+	psycho2Priority = models.BooleanField(blank=True, default=False)
+	spacialPriority = models.BooleanField(blank=True, default=False)
+	otherPriority = models.BooleanField(blank=True, default=False)
+	sourcesPriority = models.BooleanField(blank=True, default=False)
+
 	SapComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):

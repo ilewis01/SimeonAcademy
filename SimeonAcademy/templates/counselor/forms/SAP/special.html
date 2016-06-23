@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_sap_special();">
+<body class="gradient-white" onLoad="javascript: initialize_sap_special({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -49,7 +49,7 @@
               <td>
                 <div class='{{class.clinic}}'>
                   <img src="{{image.demo_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption({{'sapClinic'}});" name='clinicalBtn' id='clinicalBtn'>
+                  <a href="javascript: sideBarOption('sapClinic');" name='clinicalBtn' id='clinicalBtn'>
                     Clinical Assessment
                   </a>
                 </div>
@@ -101,7 +101,7 @@
               <td>
                 <div class='{{class.special}}'>
                   <img src="{{image.special_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapSpecial');" name='specialBtn' id='specialBtn'>
+                  <a href="#" name='specialBtn' id='specialBtn'>
                     Special Populations
                   </a>
                 </div>
@@ -217,10 +217,18 @@
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/sap_social/'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_special/'>
 				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
-				                </form>
+                            <input type='hidden' name='new_form' id='new_form' value='false'>
+
+                            <input type='hidden' name='m_isChild' id='m_isChild' value=''>
+                            <input type='hidden' name='m_isSenior' id='m_isSenior' value=''>
+                            <input type='hidden' name='m_isDual' id='m_isDual' value=''>
+                            <input type='hidden' name='m_isOther' id='m_isOther' value=''>
+                            <input type='hidden' name='m_isNone' id='m_isNone' value=''>
+                            <input type='hidden' name='m_special' id='m_special' value=''>
+				                
 				            </div>
 
 				            <table>
@@ -363,6 +371,7 @@
 				            		</td>
 				            	</tr>
 				            </table>
+                    </form>
 				        </div>
 				    </div>
 				</div> <!-- END PAGE CONTAINER -->

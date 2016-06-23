@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+<body class="gradient-white" onLoad="javascript: initialize_sap_clinic()">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -10,6 +10,14 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
           <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
             <tr>
               <td>
                 <div style='color:#fee047'>
@@ -40,7 +48,7 @@
             <tr>
               <td>
                 <div id='sidebar-space-lower'>
-                          <h4>Completed:</h4>
+                          <h4>Progress:</h4>
                       </div>
               </td>
             </tr>
@@ -136,67 +144,12 @@
 
             <tr>
               <td>
-                <div class='side_option_head'>
-                  <h4>Exit Options:</h4>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
                 </div>
-              </td>
-            </tr>
-
-            <tr>  
-              <td>
-                <table class='icon_table'>      
-                  <!-- BUTTON 1 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Save");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='save_icon_btn' style='margin-left:30px;'>
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='save_icon_text' style='margin-left:30px;'>
-                                Save
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-
-                  <td><div style='margin-right:15px;'></div></td>
-
-                  <!-- BUTTON 2 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Delete");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='trash_icon_btn'>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='trash_icon_text'>
-                                Delete
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-                </table>
               </td>
             </tr>
           </table>
@@ -217,9 +170,11 @@
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'>
-				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            <input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
 				            <table>
 				            	<tr><td><div style='margin-top:25px;'></div></td></tr>

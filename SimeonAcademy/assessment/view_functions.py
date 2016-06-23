@@ -2555,6 +2555,117 @@ def grabSapCompletedSections(sap):
 
 	return results
 
+def forceSapLocation(sap):
+	completed = grabSapCompletedSections(sap)
+	index = 0
+	look = 1
+	skip = None
+	match = None
+	result = None
+	forced = []
+
+	forced.append(completed['clinicalComplete'])
+	forced.append(completed['socialComplete'])
+	forced.append(completed['psychoComplete'])
+	forced.append(completed['psycho2Complete'])
+	forced.append(completed['specialComplete'])
+	forced.append(completed['otherComplete'])
+	forced.append(completed['sourcesComplete'])
+	forced.append(False)
+
+	for i in range(8):
+		if forced[i] == False:
+			skip = i
+			break
+
+	if skip < 7:
+		skip = skip + 1
+
+	if skip != 7:
+		for f in range(skip, 7):
+			if forced[skip] == False:
+				match = f
+				break
+	else:
+		match = 7
+			
+	
+	if match == 0:
+		result = '/sap_demographic/'
+	elif match == 1:
+		result = '/sap_social/'
+	elif match == 2:
+		result = '/sap_psychoactive/'
+	elif match == 3:
+		result = '/sap_psychoactive2/'
+	elif match == 4:
+		result = '/sap_special/'
+	elif match == 5:
+		result = '/sap_other/'
+	elif match == 6:
+		result = '/sap_sources/'
+	elif match == 7:
+		result = '/sap_viewForm/'
+
+	return result
+
+def locateNextSection(sap, current_page):
+	clinic = '/sap_demographic/'
+	social = '/sap_social/'
+	psycho = '/sap_psychoactive/'
+	psycho2 = '/sap_psychoactive2/'
+	special = '/sap_special/'
+	other = '/sap_other/'
+	source = '/sap_sources/'
+	view = '/sap_viewForm/'
+
+
+	completed = grabSapCompletedSections(sap)
+	result = None
+
+	if completed['clinicalComplete'] == False:
+		if str(current_page) == str(clinic):
+			result = forceSapLocation(sap)	
+		else:
+			result = clinic
+	elif completed['socialComplete'] == False:
+		if str(current_page) == str(social):
+			result = forceSapLocation(sap)
+		else:
+			result = social
+	elif completed['psychoComplete'] == False:
+		if str(current_page) == str(psycho):
+			result = forceSapLocation(sap)	
+		else:
+			result = psycho
+	elif completed['psycho2Complete'] == False:
+		if str(current_page) == str(psycho2):
+			result = forceSapLocation(sap)
+		else:
+			result = psycho2
+	elif completed['specialComplete'] == False:
+		if str(current_page) == str(special):
+			result = forceSapLocation(sap)	
+		else:
+			result = special
+	elif completed['otherComplete'] == False:
+		if str(current_page) == str(other):
+			result = forceSapLocation(sap)
+		else:
+			result = other
+	elif completed['sourcesComplete'] == False:
+		if str(current_page) == str(source):
+			result = forceSapLocation(sap)	
+		else:
+			result = source
+	
+	if result == None:
+		result = view
+
+	return result
+
+
+
 def grabSapClassesCSS(sap, m_page):
 	classes = {}
 	sap = grabSapCompletedSections(sap)
@@ -2929,7 +3040,167 @@ def saveSapDemoSection(request, section, sap):
 		sap.save()
 
 	elif str(section) == '/sap_special/':
-		no = None
+		isChild = request.POST.get('m_isChild', '')
+		isSenior = request.POST.get('m_isSenior', '')
+		isDual = request.POST.get('m_isDual', '')
+		isOther = request.POST.get('m_isOther', '')
+		isNone = request.POST.get('m_isNone', '')
+		special = request.POST.get('m_special', '')
+
+		isChild = truePythonBool(isChild)
+		isSenior = truePythonBool(isSenior)
+		isDual = truePythonBool(isDual)
+		isOther = truePythonBool(isOther)
+		isNone = truePythonBool(isNone)
+
+		demo.special = special
+		demo.isChild = isChild
+		demo.isSenior = isSenior
+		demo.isDual = isDual
+		demo.isOther = isOther
+		demo.isNone = isNone
+
+		demo.save()
+		sap.specialComplete = True
+		sap.save()
+
+	elif str(section) == '/sap_other/':
+		psychological = request.POST.get('psychological', '')
+		gambling = request.POST.get('gambling', '')
+		abilities = request.POST.get('abilities', '')
+		other = request.POST.get('other', '')
+
+		demo.psychological = psychological
+		demo.gambling = gambling
+		demo.abilities = abilities
+		demo.other = other
+
+		demo.save()
+		sap.otherComplete = True
+		sap.save()
+
+	elif str(section) == '/sap_sources/':
+		source1 = request.POST.get('source1', '')
+		source2 = request.POST.get('source2', '')
+		relationship1 = request.POST.get('relationship1', '')
+		relationship2 = request.POST.get('relationship2', '')
+
+		demo.source1 = source1
+		demo.source2 = source2
+		demo.relationship1 = relationship1
+		demo.relationship2 = relationship2
+
+		demo.save()
+		sap.sourcesComplete = True
+		sap.save()
+
+def deleteSap(sap):
+	sap.demographics.delete()
+	sap.psychoactive.delete()
+	sap.delete()
+
+def refreshSap(sap):
+	demo = sap.demographics
+	psy = sap.psychoactive
+
+	demo.startTime1 = ''
+	demo.startTime2 = ''
+	demo.startTime3 = ''
+
+	demo.problem = ''
+	demo.health = ''
+	demo.family = ''
+	demo.psychoactive = ''
+	demo.special = ''
+	demo.psychological = ''
+	demo.gambling = ''
+	demo.abilities = ''
+	demo.other = ''
+	demo.source1 = ''
+	demo.relationship1 = ''
+	demo.source2 = ''
+	demo.relationship2 = ''
+
+	demo.demographics.isChild = False
+	demo.demographics.isSenior = False
+	demo.isDual = False
+	demo.isOther = False
+	demo.isNone = False
+
+	psy.alcoholAge = 0
+	psy.alcoholFrequency = ''
+	psy.alcoholQuantity = ''
+	psy.alcoholLast = ''
+	psy.alcoholHow = ''
+
+	psy.amphAge = 0
+	psy.amphFrequency = ''
+	psy.amphQuantity = ''
+	psy.amphLast = ''
+	psy.amphHow = ''
+
+	psy.caffineAge = 0
+	psy.caffineFrequency = ''
+	psy.caffineQuantity = ''
+	psy.caffineLast = ''
+	psy.caffineHow = ''
+
+	psy.weedAge = 0
+	psy.weedFrequency = ''
+	psy.weedQuantity = ''
+	psy.weedLast = ''
+	psy.weedHow = ''
+
+	psy.cokeAge = 0
+	psy.cokeFrequency = ''
+	psy.cokeQuantity = ''
+	psy.cokeLast = ''
+	psy.cokeHow = ''
+
+	psy.hallAge = 0
+	psy.hallFrequency = ''
+	psy.hallQuantity = ''
+	psy.hallLast = ''
+	psy.hallHow = ''
+
+	psy.inhaleAge = 0
+	psy.inhaleFrequency = ''
+	psy.inhaleQuantity = ''
+	psy.inhaleLast = ''
+	psy.inhaleHow = ''
+
+	psy.smokeAge = 0
+	psy.smokeFrequency = ''
+	psy.smokeQuantity = ''
+	psy.smokeLast = ''
+	psy.smokeHow = ''
+
+	psy.opAge = 0
+	psy.opFrequency = ''
+	psy.opQuantity = ''
+	psy.opLast = ''
+	psy.opHow = ''
+
+	psy.pcpAge = 0
+	psy.pcpFrequency = ''
+	psy.pcpQuantity = ''
+	psy.pcpLast = ''
+	psy.pcpHow = ''
+
+	psy.sedAge = 0
+	psy.sedFrequency = ''
+	psy.sedQuantity = ''
+	psy.sedLast = ''
+	psy.sedHow = ''
+
+	psy.otherAge = 0
+	psy.otherFrequency = ''
+	psy.otherQuantity = ''
+	psy.otherLast = ''
+	psy.otherHow = ''
+
+
+
 
 
 

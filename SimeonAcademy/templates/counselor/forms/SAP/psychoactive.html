@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am_demo({{json_data}}, {{back}});">
+<body class="gradient-white" onLoad="javascript: initialize_sap_psycho1();">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -220,9 +220,10 @@
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/sap_psychoactive/'>
 				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                            <input type='hidden' name='new_form' id='new_form' value='false'>
 
 
 				                    <table class='psychoactive_table'>
@@ -519,7 +520,7 @@
 
 				                    		<td>
 				                    			<div id='psy_how'>
-				                    				<input type='text' style='width:150px;' name='hallHow' id='hallHow' value='{{fields.hallHow}}'>
+				                    				<input type='text' style='width:150px;' name='inhaleHow' id='inhaleHow' value='{{fields.inhaleHow}}'>
 				                    			</div>
 				                    		</td>
 				                    	</tr>

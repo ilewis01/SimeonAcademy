@@ -130,6 +130,12 @@ function processRadioByValue(radioValue, yesRadio, m_element) {
 	}
 }
 
+function postTextNA(field) {
+	if (field.value === '' || field.value === null) {
+		field.value = 'N/A';
+	}
+}
+
 
 function copyElementToInput(element_name) {
 	copiedElementName = 'm_';
@@ -3872,13 +3878,224 @@ function continue_to_sap_form(next_page) {
 	}
 }
 
+function initialize_sap_clinic() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('problem'));
+		nullTextMustDie(document.getElementById('health'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('problem'));
+		nullTextMustDie2(document.getElementById('health'));
+	}
+}
+
+function initialize_sap_social() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('family'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('family'));
+	}
+}
+
+function initialize_sap_psycho1() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('alcoholFrequency'));
+		nullTextMustDie(document.getElementById('alcoholQuantity'));
+		nullTextMustDie(document.getElementById('alcoholLast'));
+		nullTextMustDie(document.getElementById('alcoholHow'));
+
+		nullTextMustDie(document.getElementById('amphFrequency'));
+		nullTextMustDie(document.getElementById('amphQuantity'));
+		nullTextMustDie(document.getElementById('amphLast'));
+		nullTextMustDie(document.getElementById('amphHow'));
+
+		nullTextMustDie(document.getElementById('caffineFrequency'));
+		nullTextMustDie(document.getElementById('caffineQuantity'));
+		nullTextMustDie(document.getElementById('caffineLast'));
+		nullTextMustDie(document.getElementById('caffineHow'));
+
+		nullTextMustDie(document.getElementById('weedFrequency'));
+		nullTextMustDie(document.getElementById('weedQuantity'));
+		nullTextMustDie(document.getElementById('weedLast'));
+		nullTextMustDie(document.getElementById('weedHow'));
+
+		nullTextMustDie(document.getElementById('cokeFrequency'));
+		nullTextMustDie(document.getElementById('cokeQuantity'));
+		nullTextMustDie(document.getElementById('cokeLast'));
+		nullTextMustDie(document.getElementById('cokeHow'));
+
+		nullTextMustDie(document.getElementById('hallFrequency'));
+		nullTextMustDie(document.getElementById('hallQuantity'));
+		nullTextMustDie(document.getElementById('hallLast'));
+		nullTextMustDie(document.getElementById('hallHow'));
+
+		nullTextMustDie(document.getElementById('inhaleFrequency'));
+		nullTextMustDie(document.getElementById('inhaleQuantity'));
+		nullTextMustDie(document.getElementById('inhaleLast'));
+		nullTextMustDie(document.getElementById('inhaleHow'));
+
+		nullTextMustDie(document.getElementById('smokeFrequency'));
+		nullTextMustDie(document.getElementById('smokeQuantity'));
+		nullTextMustDie(document.getElementById('smokeLast'));
+		nullTextMustDie(document.getElementById('smokeHow'));
+
+		nullTextMustDie(document.getElementById('opFrequency'));
+		nullTextMustDie(document.getElementById('opQuantity'));
+		nullTextMustDie(document.getElementById('opLast'));
+		nullTextMustDie(document.getElementById('opHow'));
+
+		nullTextMustDie(document.getElementById('pcpFrequency'));
+		nullTextMustDie(document.getElementById('pcpQuantity'));
+		nullTextMustDie(document.getElementById('pcpLast'));
+		nullTextMustDie(document.getElementById('pcpHow'));
+
+		nullTextMustDie(document.getElementById('sedFrequency'));
+		nullTextMustDie(document.getElementById('sedQuantity'));
+		nullTextMustDie(document.getElementById('sedLast'));
+		nullTextMustDie(document.getElementById('sedHow'));
+
+		nullTextMustDie(document.getElementById('otherFrequency'));
+		nullTextMustDie(document.getElementById('otherQuantity'));
+		nullTextMustDie(document.getElementById('otherLast'));
+		nullTextMustDie(document.getElementById('otherHow'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('alcoholFrequency'));
+		nullTextMustDie2(document.getElementById('alcoholQuantity'));
+		nullTextMustDie2(document.getElementById('alcoholLast'));
+		nullTextMustDie2(document.getElementById('alcoholHow'));
+
+		nullTextMustDie2(document.getElementById('amphFrequency'));
+		nullTextMustDie2(document.getElementById('amphQuantity'));
+		nullTextMustDie2(document.getElementById('amphLast'));
+		nullTextMustDie2(document.getElementById('amphHow'));
+
+		nullTextMustDie2(document.getElementById('caffineFrequency'));
+		nullTextMustDie2(document.getElementById('caffineQuantity'));
+		nullTextMustDie2(document.getElementById('caffineLast'));
+		nullTextMustDie2(document.getElementById('caffineHow'));
+
+		nullTextMustDie2(document.getElementById('weedFrequency'));
+		nullTextMustDie2(document.getElementById('weedQuantity'));
+		nullTextMustDie2(document.getElementById('weedLast'));
+		nullTextMustDie2(document.getElementById('weedHow'));
+
+		nullTextMustDie2(document.getElementById('cokeFrequency'));
+		nullTextMustDie2(document.getElementById('cokeQuantity'));
+		nullTextMustDie2(document.getElementById('cokeLast'));
+		nullTextMustDie2(document.getElementById('cokeHow'));
+
+		nullTextMustDie2(document.getElementById('hallFrequency'));
+		nullTextMustDie2(document.getElementById('hallQuantity'));
+		nullTextMustDie2(document.getElementById('hallLast'));
+		nullTextMustDie2(document.getElementById('hallHow'));
+
+		nullTextMustDie2(document.getElementById('inhaleFrequency'));
+		nullTextMustDie2(document.getElementById('inhaleQuantity'));
+		nullTextMustDie2(document.getElementById('inhaleLast'));
+		nullTextMustDie2(document.getElementById('inhaleHow'));
+
+		nullTextMustDie2(document.getElementById('smokeFrequency'));
+		nullTextMustDie2(document.getElementById('smokeQuantity'));
+		nullTextMustDie2(document.getElementById('smokeLast'));
+		nullTextMustDie2(document.getElementById('smokeHow'));
+
+		nullTextMustDie2(document.getElementById('opFrequency'));
+		nullTextMustDie2(document.getElementById('opQuantity'));
+		nullTextMustDie2(document.getElementById('opLast'));
+		nullTextMustDie2(document.getElementById('opHow'));
+
+		nullTextMustDie2(document.getElementById('pcpFrequency'));
+		nullTextMustDie2(document.getElementById('pcpQuantity'));
+		nullTextMustDie2(document.getElementById('pcpLast'));
+		nullTextMustDie2(document.getElementById('pcpHow'));
+
+		nullTextMustDie2(document.getElementById('sedFrequency'));
+		nullTextMustDie2(document.getElementById('sedQuantity'));
+		nullTextMustDie2(document.getElementById('sedLast'));
+		nullTextMustDie2(document.getElementById('sedHow'));
+
+		nullTextMustDie2(document.getElementById('otherFrequency'));
+		nullTextMustDie2(document.getElementById('otherQuantity'));
+		nullTextMustDie2(document.getElementById('otherLast'));
+		nullTextMustDie2(document.getElementById('otherHow'));
+	}
+}
+
+function initialize_sap_psycho2() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('psychoactive'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('psychoactive'));
+	}
+}
+
+function initialize_sap_other() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('psychological'));
+		nullTextMustDie(document.getElementById('gambling'));
+		nullTextMustDie(document.getElementById('abilities'));
+		nullTextMustDie(document.getElementById('other'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('psychological'));
+		nullTextMustDie2(document.getElementById('gambling'));
+		nullTextMustDie2(document.getElementById('abilities'));
+		nullTextMustDie2(document.getElementById('other'));
+	}
+}
+
+function initialize_sap_sources() {
+	var back = document.getElementById('back');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('source1'));
+		nullTextMustDie(document.getElementById('source2'));
+		nullTextMustDie(document.getElementById('relationship1'));
+		nullTextMustDie(document.getElementById('relationship2'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('source1'));
+		nullTextMustDie2(document.getElementById('source2'));
+		nullTextMustDie2(document.getElementById('relationship1'));
+		nullTextMustDie2(document.getElementById('relationship2'));
+	}
+}
+
 function sap_continue_demographic() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	//TEXT FIELDS
+	var problem = document.getElementById('problem');
+	var health = document.getElementById('health');
+
+	postTextNA(problem);
+	postTextNA(health);
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3887,9 +4104,14 @@ function sap_continue_social() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	var family = document.getElementById('family');
+	postTextNA(family);
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3898,9 +4120,71 @@ function sap_continue_psycho1() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	postTextNA(document.getElementById('alcoholFrequency'));
+	postTextNA(document.getElementById('alcoholQuantity'));
+	postTextNA(document.getElementById('alcoholLast'));
+	postTextNA(document.getElementById('alcoholHow'));
+
+	postTextNA(document.getElementById('amphFrequency'));
+	postTextNA(document.getElementById('amphQuantity'));
+	postTextNA(document.getElementById('amphLast'));
+	postTextNA(document.getElementById('amphHow'));
+
+	postTextNA(document.getElementById('caffineFrequency'));
+	postTextNA(document.getElementById('caffineQuantity'));
+	postTextNA(document.getElementById('caffineLast'));
+	postTextNA(document.getElementById('caffineHow'));
+
+	postTextNA(document.getElementById('weedFrequency'));
+	postTextNA(document.getElementById('weedQuantity'));
+	postTextNA(document.getElementById('weedLast'));
+	postTextNA(document.getElementById('weedHow'));
+
+	postTextNA(document.getElementById('cokeFrequency'));
+	postTextNA(document.getElementById('cokeQuantity'));
+	postTextNA(document.getElementById('cokeLast'));
+	postTextNA(document.getElementById('cokeHow'));
+
+	postTextNA(document.getElementById('hallFrequency'));
+	postTextNA(document.getElementById('hallQuantity'));
+	postTextNA(document.getElementById('hallLast'));
+	postTextNA(document.getElementById('hallHow'));
+
+	postTextNA(document.getElementById('inhaleFrequency'));
+	postTextNA(document.getElementById('inhaleQuantity'));
+	postTextNA(document.getElementById('inhaleLast'));
+	postTextNA(document.getElementById('inhaleHow'));
+
+	postTextNA(document.getElementById('smokeFrequency'));
+	postTextNA(document.getElementById('smokeQuantity'));
+	postTextNA(document.getElementById('smokeLast'));
+	postTextNA(document.getElementById('smokeHow'));
+
+	postTextNA(document.getElementById('opFrequency'));
+	postTextNA(document.getElementById('opQuantity'));
+	postTextNA(document.getElementById('opLast'));
+	postTextNA(document.getElementById('opHow'));
+
+	postTextNA(document.getElementById('pcpFrequency'));
+	postTextNA(document.getElementById('pcpQuantity'));
+	postTextNA(document.getElementById('pcpLast'));
+	postTextNA(document.getElementById('pcpHow'));
+
+	postTextNA(document.getElementById('sedFrequency'));
+	postTextNA(document.getElementById('sedQuantity'));
+	postTextNA(document.getElementById('sedLast'));
+	postTextNA(document.getElementById('sedHow'));
+
+	postTextNA(document.getElementById('otherFrequency'));
+	postTextNA(document.getElementById('otherQuantity'));
+	postTextNA(document.getElementById('otherLast'));
+	postTextNA(document.getElementById('otherHow'));
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3909,9 +4193,15 @@ function sap_continue_psycho2() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	//TEXT PROCESSING
+	var psychoactive = document.getElementById('psychoactive');
+	postTextNA(psychoactive);
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3920,9 +4210,45 @@ function sap_continue_special() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	//M_VALUE ELEMENTS
+	var m_isChild = document.getElementById('m_isChild');
+	var m_isSenior = document.getElementById('m_isSenior');
+	var m_isDual = document.getElementById('m_isDual');
+	var m_isOther = document.getElementById('m_isOther');
+	var m_isNone = document.getElementById('m_isNone');
+	var m_special = document.getElementById('m_special');
+
+	//CHECKBOXES
+	var isChild = document.getElementById('isChild');
+	var isSenior = document.getElementById('isSenior');
+	var isDual = document.getElementById('isDual');
+	var isOther = document.getElementById('isOther');
+	var isNone = document.getElementById('isNone');
+
+	var special = document.getElementById('special');
+
+	if (special.value === '' || special.value === null) {
+		m_special.value = 'N/A';
+	}
+
+	postCheckboxValue(isChild, m_isChild);
+	postCheckboxValue(isSenior, m_isSenior);
+	postCheckboxValue(isDual, m_isDual);
+	postCheckboxValue(isOther, m_isOther);
+	postCheckboxValue(isNone, m_isNone);
+
+	if (String(special.value) === '' || String(special.value) === null) {
+		m_special.value = 'N/A';
+	}
+	else {
+		m_special.value = special.value;
+	}
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3931,9 +4257,22 @@ function sap_continue_other() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	//TEXT
+	var psychological = document.getElementById('psychological');
+	var gambling = document.getElementById('gambling');
+	var abilities = document.getElementById('abilities');
+	var other = document.getElementById('other');
+
+	postTextNA(psychological);
+	postTextNA(gambling);
+	postTextNA(abilities);
+	postTextNA(other);
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3942,9 +4281,22 @@ function sap_continue_sources() {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
 	var back = document.getElementById('back');
+	var next_location = document.getElementById('next_location');
+
+	//NULL TEXT
+	var source1 = document.getElementById('source1');
+	var source2 = document.getElementById('source2');
+	var relationship1 = document.getElementById('relationship1');
+	var relationship2 = document.getElementById('relationship2');
+
+	postTextNA(source1);
+	postTextNA(source2);
+	postTextNA(relationship1);
+	postTextNA(relationship2);
 
 	if (proceed === true) {
 		back.value = 'false';
+		form.action = next_location.value;
 		form.submit();
 	}
 }
@@ -3965,7 +4317,7 @@ function disable_sap_special() {
 	var isSenior = document.getElementById('isSenior');
 	var isDual = document.getElementById('isDual');
 	var isOther = document.getElementById('isOther');
-	var problem = document.getElementById('problem');
+	var special = document.getElementById('special');
 
 	if (isNone.checked === true) {
 		opacityLow(other_label);
@@ -3978,13 +4330,20 @@ function disable_sap_special() {
 		opacityLow(isSenior);
 		opacityLow(isDual);
 		opacityLow(isOther);
-		opacityLow(problem);
+		opacityLow(special);
+
+		special.value = '';
+
+		isChild.checked = false;
+		isSenior.checked = false;
+		isDual.checked = false;
+		isOther.checked = false;
 
 		isChild.disabled = true;
 		isSenior.disabled = true;
 		isDual.disabled = true;
 		isOther.disabled = true;
-		problem.disabled = true;
+		special.disabled = true;
 	}
 
 	else {
@@ -3992,7 +4351,7 @@ function disable_sap_special() {
 		isSenior.disabled = false;
 		isDual.disabled = false;
 		isOther.disabled = false;
-		problem.disabled = false;
+		special.disabled = false;
 
 		opacityHigh(other_label);
 		opacityHigh(dual_label);
@@ -4004,15 +4363,37 @@ function disable_sap_special() {
 		opacityHigh(isSenior);
 		opacityHigh(isDual);
 		opacityHigh(isOther);
-		opacityHigh(problem);
+		opacityHigh(special);
 	}
 }
 
-function initialize_sap_special() {
+function initialize_sap_special(json_data) {
+	var isChild = document.getElementById('isChild');
+	var isSenior = document.getElementById('isSenior');
+	var isDual = document.getElementById('isDual');
+	var isOther = document.getElementById('isOther');
+	var isNone = document.getElementById('isNone');
+	var back = document.getElementById('back');
+
+	initializeAllCheckBoxes(json_data.isChild, isChild);
+	initializeAllCheckBoxes(json_data.isSenior, isSenior);
+	initializeAllCheckBoxes(json_data.isDual, isDual);
+	initializeAllCheckBoxes(json_data.isOther, isOther);
+	initializeAllCheckBoxes(json_data.isNone, isNone);
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('special'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('special'));
+	}
+
 	disable_sap_special();
 }
 
 function sideBarOption(page) {
+	document.getElementById('back').value = 'true';
+
 	if (String(page) === 'sapClinic') {
 		var form = document.getElementById('sap_form');
 		form.action = '/sap_demographic/';
@@ -4054,6 +4435,31 @@ function sideBarOption(page) {
 		form.action = '/sap_sources/';
 		form.submit();
 	}
+}
+
+function getFormElement(form_type) {
+	var result = '';
+
+	if (String(form_type) === 'am') {
+		result = document.getElementById('am_demo');
+	}
+	else if (String(form_type) === 'sap') {
+		result = document.getElementById('sap_form');
+	}
+
+	return result;
+}
+
+
+function generic_exit(form_type, section) {
+	var all_purpose = document.getElementById('all_purpose');
+	var exit_type = document.getElementById('exit_type');
+	var form = getFormElement(form_type);
+
+	form.action = '/generic_exit/';
+	exit_type.value = String(form_type);
+	all_purpose.value = String(section);
+	form.submit();
 }
 
 
