@@ -16,6 +16,24 @@
         </div>
     </div>
 
+    <form action='' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
+    	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+    	<input type='hidden' name='form_id' id='form_id' value='{{form.id}}'>
+    	<input type='hidden' name='form_type' id='form_type' value='{{form_type}}'>
+    	<input type='hidden' name='last_section' id='last_section' value='{{last_section}}'>
+    	<input type='hidden' name='cli-id' id='cli-id' value='{{session.client.id}}'>
+    	<input type='hidden' name='goToNext' id='goToNext' value=''>
+    	<input type='hidden' name='new_session' id='new_session' value='false'>
+    	<input type='hidden' name='back' id='back' value=''>
+
+    	<!-- goToNext but be 'true' if going back to form -->
+
+    	<input type='hidden' name='am_id' id='am_id' value='{{form.id}}'>
+    	<input type='hidden' name='sap_id' id='sap_id' value='{{form.id}}'>
+    	<input type='hidden' name='mh_id' id='mh_id' value='{{form.id}}'>
+    	<input type='hidden' name='ut_id' id='ut_id' value='{{form.id}}'>
+    </form>
+
     <div>
       <div class="container">
             <div class="row">
@@ -64,7 +82,7 @@
 		           			<!-- _________BUTTONS GO ON THIS ROW___________ -->
 		           			<tr>
 		           				<td>
-		           					<a href="">
+		           					<a href="javascript: genericReturnToForm();">
 		           						<div>
 		           							<div class='center-rounded'>
 		           								<div class='round-button'>

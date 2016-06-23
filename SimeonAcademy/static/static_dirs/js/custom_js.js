@@ -4462,6 +4462,22 @@ function generic_exit(form_type, section) {
 	form.submit();
 }
 
+function genericReturnToForm() {
+	var form = document.getElementById('exit_form');
+	var section = document.getElementById('last_section');
+	var back = document.getElementById('back');
+	var goToNext = document.getElementById('goToNext');
+
+	//ACTUAL SESSION FORM DATA
+	var form_id = document.getElementById('form_id').value;
+	var form_type = String(document.getElementById('form_type').value);
+
+	back.value = 'true';
+	goToNext.value = 'true';
+	form.action = section.value;
+	form.submit();
+}
+
 
 
 

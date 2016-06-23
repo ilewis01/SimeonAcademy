@@ -2662,6 +2662,21 @@ def locateNextSection(sap, current_page):
 	if result == None:
 		result = view
 
+	if sap.clinicPriority == True:
+		result = clinic
+	elif sap.socialPriority == True:
+		result = social
+	elif sap.psycho1Priority == True:
+		result = psycho
+	elif sap.psycho2Priority == True:
+		result = psycho2
+	elif sap.spacialPriority == True:
+		result = special
+	elif sap.otherPriority == True:
+		result = other
+	elif sap.sourcesPriority == True:
+		result = source
+
 	return result
 
 
@@ -3092,6 +3107,244 @@ def saveSapDemoSection(request, section, sap):
 
 		demo.save()
 		sap.sourcesComplete = True
+		sap.save()
+
+def saveIncompleteSapPsycho1(request, sap):
+	alcoholAge = request.POST.get('alcoholAge', '')
+	alcoholFrequency = request.POST.get('alcoholFrequency', '')
+	alcoholQuantity = request.POST.get('alcoholQuantity', '')
+	alcoholLast = request.POST.get('alcoholLast', '')
+	alcoholHow = request.POST.get('alcoholHow', '')
+
+	amphAge = request.POST.get('amphAge', '')
+	amphFrequency = request.POST.get('amphFrequency', '')
+	amphQuantity = request.POST.get('amphQuantity', '')
+	amphLast = request.POST.get('amphLast', '')
+	amphHow = request.POST.get('amphHow', '')
+
+	caffineAge = request.POST.get('caffineAge', '')
+	caffineFrequency = request.POST.get('caffineFrequency', '')
+	caffineQuantity = request.POST.get('caffineQuantity', '')
+	caffineLast = request.POST.get('caffineLast', '')
+	caffineHow = request.POST.get('caffineHow', '')
+
+	weedAge = request.POST.get('weedAge', '')
+	weedFrequency = request.POST.get('weedFrequency', '')
+	weedQuantity = request.POST.get('weedQuantity', '')
+	weedLast = request.POST.get('weedLast', '')
+	weedHow = request.POST.get('weedHow', '')
+
+	cokeAge = request.POST.get('cokeAge', '')
+	cokeFrequency = request.POST.get('cokeFrequency', '')
+	cokeQuantity = request.POST.get('cokeQuantity', '')
+	cokeLast = request.POST.get('cokeLast', '')
+	cokeHow = request.POST.get('cokeHow', '')
+
+	hallAge = request.POST.get('hallAge', '')
+	hallFrequency = request.POST.get('hallFrequency', '')
+	hallQuantity = request.POST.get('hallQuantity', '')
+	hallLast = request.POST.get('hallLast', '')
+	hallHow = request.POST.get('hallHow', '')
+
+	inhaleAge = request.POST.get('inhaleAge', '')
+	inhaleFrequency = request.POST.get('inhaleFrequency', '')
+	inhaleQuantity = request.POST.get('inhaleQuantity', '')
+	inhaleLast = request.POST.get('inhaleLast', '')
+	inhaleHow = request.POST.get('inhaleHow', '')
+
+	smokeAge = request.POST.get('smokeAge', '')
+	smokeFrequency = request.POST.get('smokeFrequency', '')
+	smokeQuantity = request.POST.get('smokeQuantity', '')
+	smokeLast = request.POST.get('smokeLast', '')
+	smokeHow = request.POST.get('smokeHow', '')
+
+	opAge = request.POST.get('opAge', '')
+	opFrequency = request.POST.get('opFrequency', '')
+	opQuantity = request.POST.get('opQuantity', '')
+	opLast = request.POST.get('opLast', '')
+	opHow = request.POST.get('opHow', '')
+
+	pcpAge = request.POST.get('pcpAge', '')
+	pcpFrequency = request.POST.get('pcpFrequency', '')
+	pcpQuantity = request.POST.get('pcpQuantity', '')
+	pcpLast = request.POST.get('pcpLast', '')
+	pcpHow = request.POST.get('pcpHow', '')
+
+	sedAge = request.POST.get('sedAge', '')
+	sedFrequency = request.POST.get('sedFrequency', '')
+	sedQuantity = request.POST.get('sedQuantity', '')
+	sedLast = request.POST.get('sedLast', '')
+	sedHow = request.POST.get('sedHow', '')
+
+	otherAge = request.POST.get('otherAge', '')
+	otherFrequency = request.POST.get('otherFrequency', '')
+	otherQuantity = request.POST.get('otherQuantity', '')
+	otherLast = request.POST.get('otherLast', '')
+	otherHow = request.POST.get('otherHow', '')
+
+	psycho = sap.psychoactive
+
+	psycho.alcoholAge = alcoholAge
+	psycho.alcoholFrequency = alcoholFrequency
+	psycho.alcoholQuantity = alcoholQuantity
+	psycho.alcoholLast = alcoholLast
+	psycho.alcoholHow = alcoholHow
+
+	psycho.amphAge = amphAge
+	psycho.amphFrequency = amphFrequency
+	psycho.amphQuantity = amphQuantity
+	psycho.amphLast = amphLast
+	psycho.amphHow = amphHow
+
+	psycho.caffineAge = caffineAge
+	psycho.caffineFrequency = caffineFrequency
+	psycho.caffineQuantity = caffineQuantity
+	psycho.caffineLast = caffineLast
+	psycho.caffineHow = caffineHow
+
+	psycho.weedAge = weedAge
+	psycho.weedFrequency = weedFrequency
+	psycho.weedQuantity = weedQuantity
+	psycho.weedLast = weedLast
+	psycho.weedHow = weedHow
+
+	psycho.cokeAge = cokeAge
+	psycho.cokeFrequency = cokeFrequency
+	psycho.cokeQuantity = cokeQuantity
+	psycho.cokeLast = cokeLast
+	psycho.cokeHow = cokeHow
+
+	psycho.hallAge = hallAge
+	psycho.hallFrequency = hallFrequency
+	psycho.hallQuantity = hallQuantity
+	psycho.hallLast = hallLast
+	psycho.hallHow = hallHow
+
+	psycho.inhaleAge = inhaleAge
+	psycho.inhaleFrequency = inhaleFrequency
+	psycho.inhaleQuantity = inhaleQuantity
+	psycho.inhaleLast = inhaleLast
+	psycho.inhaleHow = inhaleHow
+
+	psycho.smokeAge = smokeAge
+	psycho.smokeFrequency = smokeFrequency
+	psycho.smokeQuantity = smokeQuantity
+	psycho.smokeLast = smokeLast
+	psycho.smokeHow = smokeHow
+
+	psycho.opAge = opAge
+	psycho.opFrequency = opFrequency
+	psycho.opQuantity = opQuantity
+	psycho.opLast = opLast
+	psycho.opHow = opHow
+
+	psycho.pcpAge = pcpAge
+	psycho.pcpFrequency = pcpFrequency
+	psycho.pcpQuantity = pcpQuantity
+	psycho.pcpLast = pcpLast
+	psycho.pcpHow = pcpHow
+
+	psycho.sedAge = sedAge
+	psycho.sedFrequency = sedFrequency
+	psycho.sedQuantity = sedQuantity
+	psycho.sedLast = sedLast
+	psycho.sedHow = sedHow
+
+	psycho.otherAge = otherAge
+	psycho.otherFrequency = otherFrequency
+	psycho.otherQuantity = otherQuantity
+	psycho.otherLast = otherLast
+	psycho.otherHow = otherHow
+
+	psycho.save()
+	sap.psychoComplete = False
+	sap.save()
+
+def saveIncompleteSapForm(request, section, sap):
+	demo = sap.demographics
+
+	if str(section) == '/sap_demographic/':
+		problem = request.POST.get('problem', '')
+		health = request.POST.get('health', '')
+
+		demo.problem = problem
+		demo.health = health
+		demo.save()
+		sap.clinicalComplete = False
+		sap.save()
+
+	elif str(section) == '/sap_social/':
+		family = request.POST.get('family')
+
+		demo.family = family
+		demo.save()
+		sap.socialComplete = False
+		sap.save()
+
+	elif str(section) == '/sap_psychoactive/':
+		saveIncompleteSapPsycho1(request, sap)
+
+	elif str(section) == '/sap_psychoactive2/':
+		psychoactive = request.POST.get('psychoactive')
+
+		demo.psychoactive = psychoactive
+		demo.save()
+		sap.psycho2Complete = False
+		sap.save()
+
+	elif str(section) == '/sap_special/':
+		isChild = request.POST.get('m_isChild', '')
+		isSenior = request.POST.get('m_isSenior', '')
+		isDual = request.POST.get('m_isDual', '')
+		isOther = request.POST.get('m_isOther', '')
+		isNone = request.POST.get('m_isNone', '')
+		special = request.POST.get('m_special', '')
+
+		isChild = truePythonBool(isChild)
+		isSenior = truePythonBool(isSenior)
+		isDual = truePythonBool(isDual)
+		isOther = truePythonBool(isOther)
+		isNone = truePythonBool(isNone)
+
+		demo.special = special
+		demo.isChild = isChild
+		demo.isSenior = isSenior
+		demo.isDual = isDual
+		demo.isOther = isOther
+		demo.isNone = isNone
+
+		demo.save()
+		sap.specialComplete = False
+		sap.save()
+
+	elif str(section) == '/sap_other/':
+		psychological = request.POST.get('psychological', '')
+		gambling = request.POST.get('gambling', '')
+		abilities = request.POST.get('abilities', '')
+		other = request.POST.get('other', '')
+
+		demo.psychological = psychological
+		demo.gambling = gambling
+		demo.abilities = abilities
+		demo.other = other
+
+		demo.save()
+		sap.otherComplete = False
+		sap.save()
+
+	elif str(section) == '/sap_sources/':
+		source1 = request.POST.get('source1', '')
+		source2 = request.POST.get('source2', '')
+		relationship1 = request.POST.get('relationship1', '')
+		relationship2 = request.POST.get('relationship2', '')
+
+		demo.source1 = source1
+		demo.source2 = source2
+		demo.relationship1 = relationship1
+		demo.relationship2 = relationship2
+
+		demo.save()
+		sap.sourcesComplete = False
 		sap.save()
 
 def deleteSap(sap):

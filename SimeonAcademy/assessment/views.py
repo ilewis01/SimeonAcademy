@@ -38,7 +38,8 @@ startSession, refreshAM, getAMFields, onTrue_offFalse, amSidebarImages, \
 grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonBool, \
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
-saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection
+saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
+saveIncompleteSapForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -420,7 +421,8 @@ def clientOptions(request):
 
 			clID = request.POST.get('cli-id', '')
 			new_session = request.POST.get('new_session', '')
-			goToNext = request.POST.get('goToNext', '')					
+			goToNext = request.POST.get('goToNext', '')
+
 			client = Client.objects.get(id=clID)
 			start = datetime.now()
 			phone = convert_phone(client.phone)
@@ -2489,7 +2491,7 @@ def generic_exit(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			last_section = request.POST.get('all_purpose', '')
+			last_section = request.POST.get('save_section', '')
 			form_type = request.POST.get('exit_type')
 			session_id = request.POST.get('session_id', '')
 
@@ -2518,11 +2520,16 @@ def generic_exit(request):
 				form = UrineResults.objects.get(id=ut_id)
 				type_header = 'Urine Test Analysis'
 
+			print str(form_type) + ' ID: ' + str(form.id)
+
 			##Still need to do the other forms
+
+			saveIncompleteSapForm(request, last_section, form)
 
 			content['form'] = form
 			content['type_header'] = type_header
 			content['session'] = session
+			content['form_type'] = form_type
 			content['last_section'] = last_section
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('global/exit.html', content)
