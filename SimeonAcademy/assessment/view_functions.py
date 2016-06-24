@@ -2544,7 +2544,8 @@ def amDhExist(drug_history):
 	return exist
 
 
-#SAP FUNCTIONS_________________________________________________________________________________
+#SAP FUNCTIONS___________________________________________________________________________________________________________________
+#################################################################################################################################
 
 def sapExist(client):
 	exist = False
@@ -2604,6 +2605,84 @@ def getSAP(client):
 
 	return results
 
+
+def getSapProgress(sap):
+	result = {}
+	completed = 0
+	sap_list = getCompletedSapOrdered(sap)
+	result['total'] = len(sap_list)
+
+	for s in sap_list:
+		if s == True:
+			completed = completed + 1
+
+	result['completed'] = completed
+	return result
+
+def prioritySapSection(section, sap):
+	if str(section) == '/sap_demographic/':
+		sap.clinicPriority 	= True
+		sap.socialPriority 	= False
+		sap.psycho1Priority = False
+		sap.psycho2Priority = False
+		sap.spacialPriority = False
+		sap.otherPriority 	= False
+		sap.sourcesPriority = False
+
+	elif str(section) == '/sap_social/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= True
+		sap.psycho1Priority = False
+		sap.psycho2Priority = False
+		sap.spacialPriority = False
+		sap.otherPriority 	= False
+		sap.sourcesPriority = False
+
+	elif str(section) == '/sap_psychoactive/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= False
+		sap.psycho1Priority = True
+		sap.psycho2Priority = False
+		sap.spacialPriority = False
+		sap.otherPriority 	= False
+		sap.sourcesPriority = False
+
+	elif str(section) == '/sap_psychoactive2/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= False
+		sap.psycho1Priority = False
+		sap.psycho2Priority = True
+		sap.spacialPriority = False
+		sap.otherPriority 	= False
+		sap.sourcesPriority = False
+	
+	elif str(section) == '/sap_special/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= False
+		sap.psycho1Priority = False
+		sap.psycho2Priority = False
+		sap.spacialPriority = True
+		sap.otherPriority 	= False
+		sap.sourcesPriority = False
+
+	elif str(section) == '/sap_other/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= False
+		sap.psycho1Priority = False
+		sap.psycho2Priority = False
+		sap.spacialPriority = False
+		sap.otherPriority 	= True
+		sap.sourcesPriority = False
+
+	elif str(section) == '/sap_sources/':
+		sap.clinicPriority 	= False
+		sap.socialPriority 	= False
+		sap.psycho1Priority = False
+		sap.psycho2Priority = False
+		sap.spacialPriority = False
+		sap.otherPriority 	= False
+		sap.sourcesPriority = True
+
 def grabSapCompletedSections(sap):
 	results = {}
 
@@ -2617,130 +2696,110 @@ def grabSapCompletedSections(sap):
 
 	return results
 
-def forceSapLocation(sap):
-	completed = grabSapCompletedSections(sap)
-	index = 0
-	look = 1
-	skip = None
-	match = None
+def getCompletedSapOrdered(sap):
+	s_list = []
+	sections = grabSapCompletedSections(sap)
+
+	s_list.append(sections['clinicalComplete'])
+	s_list.append(sections['socialComplete'])
+	s_list.append(sections['psychoComplete'])
+	s_list.append(sections['psycho2Complete'])
+	s_list.append(sections['specialComplete'])
+	s_list.append(sections['otherComplete'])
+	s_list.append(sections['sourcesComplete'])
+
+	return s_list
+
+def isDuplicateSapURL(current, next):
+	duplicate = False
+
+	if str(current) == str(next):
+		duplicate = True
+
+	return duplicate
+
+def matchSapLocationIndex(index):
 	result = None
-	forced = []
 
-	forced.append(completed['clinicalComplete'])
-	forced.append(completed['socialComplete'])
-	forced.append(completed['psychoComplete'])
-	forced.append(completed['psycho2Complete'])
-	forced.append(completed['specialComplete'])
-	forced.append(completed['otherComplete'])
-	forced.append(completed['sourcesComplete'])
-	forced.append(False)
-
-	for i in range(8):
-		if forced[i] == False:
-			skip = i
-			break
-
-	if skip < 7:
-		skip = skip + 1
-
-	if skip != 7:
-		for f in range(skip, 7):
-			if forced[skip] == False:
-				match = f
-				break
-	else:
-		match = 7
-			
-	
-	if match == 0:
+	if str(index) == '0':
 		result = '/sap_demographic/'
-	elif match == 1:
+	elif str(index) == '1':
 		result = '/sap_social/'
-	elif match == 2:
+	elif str(index) == '2':
 		result = '/sap_psychoactive/'
-	elif match == 3:
+	elif str(index) == '3':
 		result = '/sap_psychoactive2/'
-	elif match == 4:
+	elif str(index) == '4':
 		result = '/sap_special/'
-	elif match == 5:
+	elif str(index) == '5':
 		result = '/sap_other/'
-	elif match == 6:
+	elif str(index) == '6':
 		result = '/sap_sources/'
-	elif match == 7:
+	else:
 		result = '/sap_viewForm/'
 
 	return result
 
-def locateNextSection(sap, current_page):
-	clinic = '/sap_demographic/'
-	social = '/sap_social/'
-	psycho = '/sap_psychoactive/'
-	psycho2 = '/sap_psychoactive2/'
-	special = '/sap_special/'
-	other = '/sap_other/'
-	source = '/sap_sources/'
-	view = '/sap_viewForm/'
-
-
-	completed = grabSapCompletedSections(sap)
+def forceSapLocation(sap):
 	result = None
+	match = None
+	c_list = getCompletedSapOrdered(sap)
 
-	if completed['clinicalComplete'] == False:
-		if str(current_page) == str(clinic):
-			result = forceSapLocation(sap)	
-		else:
-			result = clinic
-	elif completed['socialComplete'] == False:
-		if str(current_page) == str(social):
-			result = forceSapLocation(sap)
-		else:
-			result = social
-	elif completed['psychoComplete'] == False:
-		if str(current_page) == str(psycho):
-			result = forceSapLocation(sap)	
-		else:
-			result = psycho
-	elif completed['psycho2Complete'] == False:
-		if str(current_page) == str(psycho2):
-			result = forceSapLocation(sap)
-		else:
-			result = psycho2
-	elif completed['specialComplete'] == False:
-		if str(current_page) == str(special):
-			result = forceSapLocation(sap)	
-		else:
-			result = special
-	elif completed['otherComplete'] == False:
-		if str(current_page) == str(other):
-			result = forceSapLocation(sap)
-		else:
-			result = other
-	elif completed['sourcesComplete'] == False:
-		if str(current_page) == str(source):
-			result = forceSapLocation(sap)	
-		else:
-			result = source
-	
-	if result == None:
-		result = view
+	for i in range(len(c_list)):
+		if c_list[i] == False:
+			match = i
+			break
 
-	if sap.clinicPriority == True:
-		result = clinic
-	elif sap.socialPriority == True:
-		result = social
-	elif sap.psycho1Priority == True:
-		result = psycho
-	elif sap.psycho2Priority == True:
-		result = psycho2
-	elif sap.spacialPriority == True:
-		result = special
-	elif sap.otherPriority == True:
-		result = other
-	elif sap.sourcesPriority == True:
-		result = source
-
+	for j in range(len(c_list)):
+		if c_list[j] == False and j != match:
+			result = matchSapLocationIndex(j)
+			break
+		else:
+			result = '/sap_viewForm/'
 	return result
 
+def locateNextSection(sap, current_page):
+	result = None
+	hasPriority = False
+	c_list = getCompletedSapOrdered(sap)
+
+	if sap.clinicPriority == True:
+		hasPriority = True
+		result = '/sap_demographic/'
+	elif sap.socialPriority == True:
+		hasPriority = True
+		result = '/sap_social/'
+	elif sap.psycho1Priority == True:
+		hasPriority = True
+		result = '/sap_psychoactive/'
+	elif sap.psycho2Priority == True:
+		hasPriority = True
+		result = '/sap_psychoactive2/'
+	elif sap.spacialPriority == True:
+		hasPriority = True
+		result = '/sap_special/'
+	elif sap.otherPriority == True:
+		hasPriority = True
+		result = '/sap_other/'
+	elif sap.sourcesPriority == True:
+		hasPriority = True
+		result = '/sap_sources/'
+
+	if hasPriority == False:
+		##First grab the next URL in list. If the next URL is a duplicate, force the next URL in list
+		next = ''
+
+		for i in range(len(c_list)):
+			if c_list[i] == False:
+				next = matchSapLocationIndex(i)
+				break
+
+		if isDuplicateSapURL(current_page, next) == True:
+			result = forceSapLocation(sap)
+		else:
+			result = next
+
+	return result
 
 
 def grabSapClassesCSS(sap, m_page):

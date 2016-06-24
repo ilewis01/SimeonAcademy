@@ -12,6 +12,14 @@
           <table class='session-side'>
             <tr>
               <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
                 <div style='color:#fee047'>
                   <h4>{{session.s_type}}</h4>
                 </div>
@@ -40,16 +48,26 @@
             <tr>
               <td>
                 <div id='sidebar-space-lower'>
-                          <h4>Completed:</h4>
+                          <h4>Progress:</h4>
                       </div>
               </td>
             </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+              <td>
+                <div id='sideProgress'>
+                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+                </div>
+              </td>
+            </tr> -->
 
             <tr>
               <td>
                 <div class='{{class.clinic}}'>
                   <img src="{{image.demo_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption({{'sapClinic'}});" name='clinicalBtn' id='clinicalBtn'>
+                  <a href="javascript: sideBarOption('sapClinic');" name='clinicalBtn' id='clinicalBtn'>
                     Clinical Assessment
                   </a>
                 </div>
@@ -136,67 +154,12 @@
 
             <tr>
               <td>
-                <div class='side_option_head'>
-                  <h4>Exit Options:</h4>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
                 </div>
-              </td>
-            </tr>
-
-            <tr>  
-              <td>
-                <table class='icon_table'>      
-                  <!-- BUTTON 1 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Save");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='save_icon_btn' style='margin-left:30px;'>
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='save_icon_text' style='margin-left:30px;'>
-                                Save
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-
-                  <td><div style='margin-right:15px;'></div></td>
-
-                  <!-- BUTTON 2 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Delete");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='trash_icon_btn'>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='trash_icon_text'>
-                                Delete
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-                </table>
               </td>
             </tr>
           </table>
@@ -219,7 +182,8 @@
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
 				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/sap_psychoactive2/'>
-				                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+				                    <input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            <input type='hidden' name='exit_type' id='exit_type' value=''>
                             <input type='hidden' name='new_form' id='new_form' value='false'>
 				                
 

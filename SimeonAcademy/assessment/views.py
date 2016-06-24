@@ -40,7 +40,7 @@ resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
-openForm
+openForm, prioritySapSection, getSapProgress
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -479,6 +479,65 @@ def comfirmSessionEnd(request):
 			return render_to_response('global/comfirmSessionEnd.html', content)
 
 @login_required(login_url='/index')
+def generic_exit(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			last_section = request.POST.get('save_section', '')
+			form_type = request.POST.get('exit_type')
+			session_id = request.POST.get('session_id', '')
+
+			form = None
+			type_header = None
+
+			session = ClientSession.objects.get(id=session_id)
+
+			if str(form_type) == 'am':
+				am_id = request.POST.get('am_id', '')
+				form = AngerManagement.objects.get(id=am_id)
+				type_header = 'Anger Management'
+
+			elif str(form_type) == 'sap':
+				sap_id = request.POST.get('sap_id', '')
+				form = SAP.objects.get(id=sap_id)
+				prioritySapSection(last_section, form)
+				type_header = "S.A.P"
+
+			elif str(form_type) == 'mh':
+				mh_id = request.POST.get('mh_id', '')
+				form = MentalHealth.objects.get(id=mh_id)
+				type_header = 'Mental Health'
+
+			elif str(form_type) == 'ut':
+				ut_id = request.POST.get(id=ut_id)
+				form = UrineResults.objects.get(id=ut_id)
+				type_header = 'Urine Test Analysis'
+
+			print str(form_type) + ' ID: ' + str(form.id)
+
+			##Still need to do the other forms
+
+			saveIncompleteSapForm(request, last_section, form)
+
+			content['form'] = form
+			content['type_header'] = type_header
+			content['session'] = session
+			content['form_type'] = form_type
+			content['last_section'] = last_section
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('global/exit.html', content)
+
+@login_required(login_url='/index')
 def genericDelete(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -493,10 +552,6 @@ def genericDelete(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			# form = grabOpenForm()
-
-			# content['form'] = form['form']
-			# content['type'] = form['type']
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericDelete.html', content)
 
@@ -520,8 +575,6 @@ def genericFormDeleted(request):
 
 			form = grabGenericForm(form_type, form_id)
 			deleteGenericForm(form_type, form)
-
-			print str(form_type) + " with ID: " + str(form_id) + "has been deleted."
 
 			content['form_type'] = form_type
 			content['form_id'] = form_id
@@ -1981,7 +2034,9 @@ def sap_demographic(request):
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
 
-			print "Back: " + str(back)
+			progress = getSapProgress(sap)
+			sap.clinicPriority = False
+			sap.save()
 
 			if str(new_form) == 'false' and str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
@@ -1991,6 +2046,7 @@ def sap_demographic(request):
 			classes = grabSapClassesCSS(sap, 'clinic')
 			next_location = locateNextSection(sap, '/sap_demographic/')
 
+			content['progress'] = progress
 			content['next_location'] = next_location
 			content['session'] = session
 			content['sap'] = sap
@@ -2023,6 +2079,10 @@ def sap_psychoactive(request):
 
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
+
+			progress = getSapProgress(sap)
+			sap.psycho1Priority = False
+			sap.save()
 
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
@@ -2065,6 +2125,10 @@ def sap_psychoactive2(request):
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
 
+			progress = getSapProgress(sap)
+			sap.psycho2Priority = False
+			sap.save()
+
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
 
@@ -2105,6 +2169,10 @@ def sap_special(request):
 
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
+
+			progress = getSapProgress(sap)
+			sap.spacialPriority = False
+			sap.save()
 
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
@@ -2150,6 +2218,10 @@ def sap_social(request):
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
 
+			progress = getSapProgress(sap)
+			sap.socialPriority = False
+			sap.save()
+
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
 
@@ -2191,6 +2263,10 @@ def sap_other(request):
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
 
+			progress = getSapProgress(sap)
+			sap.otherPriority = False
+			sap.save()
+
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
 
@@ -2231,6 +2307,10 @@ def sap_sources(request):
 
 			session = ClientSession.objects.get(id=session_id)
 			sap = SAP.objects.get(id=sap_id)
+
+			progress = getSapProgress(sap)
+			sap.sourcesPriority = False
+			sap.save()
 
 			if str(back) == 'false':
 				saveSapDemoSection(request, save_section, sap)
@@ -2551,63 +2631,7 @@ def asi_demographic(request):
 			return render_to_response('counselor/forms/ASI/asi_demographic.html', content)
 
 
-@login_required(login_url='/index')
-def generic_exit(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
 
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			last_section = request.POST.get('save_section', '')
-			form_type = request.POST.get('exit_type')
-			session_id = request.POST.get('session_id', '')
-
-			form = None
-			type_header = None
-
-			session = ClientSession.objects.get(id=session_id)
-
-			if str(form_type) == 'am':
-				am_id = request.POST.get('am_id', '')
-				form = AngerManagement.objects.get(id=am_id)
-				type_header = 'Anger Management'
-
-			elif str(form_type) == 'sap':
-				sap_id = request.POST.get('sap_id', '')
-				form = SAP.objects.get(id=sap_id)
-				type_header = "S.A.P"
-
-			elif str(form_type) == 'mh':
-				mh_id = request.POST.get('mh_id', '')
-				form = MentalHealth.objects.get(id=mh_id)
-				type_header = 'Mental Health'
-
-			elif str(form_type) == 'ut':
-				ut_id = request.POST.get(id=ut_id)
-				form = UrineResults.objects.get(id=ut_id)
-				type_header = 'Urine Test Analysis'
-
-			print str(form_type) + ' ID: ' + str(form.id)
-
-			##Still need to do the other forms
-
-			saveIncompleteSapForm(request, last_section, form)
-
-			content['form'] = form
-			content['type_header'] = type_header
-			content['session'] = session
-			content['form_type'] = form_type
-			content['last_section'] = last_section
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('global/exit.html', content)
 
 
 
