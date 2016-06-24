@@ -910,6 +910,7 @@ class UseTable(models.Model):
 		return "Mental Health/Use Table: " + str(self.client_id)
 
 class MentalHealth(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
 	demographics = models.ForeignKey(MHDemographic, default=None, blank=True, null=True)
 	family = models.ForeignKey(MHFamily, default=None, blank=True, null=True)
 	education = models.ForeignKey(MHEducation, default=None, blank=True, null=True)

@@ -62,6 +62,68 @@ def phone_to_integer(phone):
 
 	return result
 
+##_____________________________SEARCH CLIENT FORMS_____________________________________________________
+
+def grabClientAMForms(client):
+	ams = AngerManagement.objects.all()
+	search = True
+	results = []
+
+	if len(ams) == 0:
+		search = False
+
+	if search == True:
+		for a in ams:
+			if (str(client.id) == str(a.client.id)) and (str(client.clientID) == str(a.client.clientID)):
+				results.append(a)
+	return results
+
+def grabClientSAPForms(client):
+	saps = SAP.objects.all()
+	search = True
+	results = []
+
+	if len(saps) == 0:
+		search = False
+
+	if search == True:
+		for s in saps:
+			if (str(client.id) == str(s.client.id)) and (str(client.clientID) == str(s.client.clientID)):
+				results.append(s)
+	return results
+
+def grabClientMHForms(client):
+	mhs = MentalHealth.objects.all()
+	search = True
+	results = []
+
+	print "Number of MH's: " + str(len(mhs))
+
+	if len(mhs) == 0:
+		search = False
+
+	if search == True:
+		for m in mhs:
+			if (str(client.id) == str(m.client.id)) and (str(client.clientID) == str(m.client.clientID)):
+				results.append(m)
+	return results
+
+def grabClientUtForms(client):
+	uts = UrineResults.objects.all()
+	search = True
+	results = []
+
+	if len(uts) == 0:
+		search = False
+
+	if search == True:
+		for u in uts:
+			if (str(client.id) == str(u.client.id)) and (str(client.clientID) == str(u.client.clientID)):
+				results.append(u)
+	return results
+
+########################################################################################################
+
 def resolveBlankRadio(radio, defaultValue):
 	result = None
 
@@ -3452,6 +3514,142 @@ def refreshSap(sap):
 	psy.otherLast = ''
 	psy.otherHow = ''
 
+##______________________OPEN FORMS_____________________________________________________
+def formIsOpen(form):
+	opened = False
+	if form.isOpen == True:
+		opened = True
+	return opened
+
+def openForm(form_type, form, client):
+	ams = grabClientAMForms(client)
+	saps = grabClientSAPForms(client)
+	mhs = grabClientMHForms(client)
+	uts = grabClientUtForms(client)
+
+	if str(form_type) == 'am':
+		if ams != None:
+			for a in ams:
+				if str(form.id) == str(a.id):
+					a.isOpen = True
+					a.save()
+				else:
+					a.isOpen = False
+					a.save()
+			for s in saps:
+				s.isOpen = False
+				s.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+
+	elif str(form_type) == 'sap':
+		if saps != None:
+			for s in saps:
+				if str(form.id) == str(s.id):
+					s.isOpen = True
+					s.save()
+				else:
+					s.isOpen = False
+					s.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+
+	elif str(form_type) == 'mh':
+		if mhs != None:
+			for m in mhs:
+				if str(form.id) == str(m.id):
+					m.isOpen = True
+					m.save()
+				else:
+					m.isOpen = False
+					m.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for s in  saps:
+				s.isOpen = False
+				s.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+
+	elif str(form_type) == 'ut':
+		if uts != None:
+			for u in uts:
+				if str(form.id) == str(u.id):
+					u.isOpen = True
+					u.save()
+				else:
+					u.isOpen = False
+					u.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for s in saps:
+				s.isOpen = False
+				s.save()
+
+def hasOpened(form_list):
+	exist = False
+
+	for f in form_list:
+		if f.isOpen == True:
+			exist = True
+			break
+	return exist
+
+def getOpenedForm(form_list):
+	form = None
+
+	for f in form_list:
+		if f.isOpen == True:
+			form = f
+			break
+	return form
+
+def grabClientOpenForm(client, form_type):
+	result = None
+
+	if str(form_type) == 'am':
+		ams = grabClientAMForms(client)
+
+		if hasOpened(ams) == True:
+			result = getOpenedForm(ams)
+
+	elif str(form_type) == 'sap':
+		saps = grabClientSAPForms(client)
+
+		if hasOpened(saps) == True:
+			result = getOpenedForm(saps)
+
+	elif str(form_type) == 'mh':
+		mhs = grabClientMHForms(client)
+
+		if hasOpened(mhs) == True:
+			result = getOpenedForm(mhs)
+
+	elif str(form_type) == 'ut':
+		uts = grabClientUtForms(client)
+
+		if hasOpened(uts) == True:
+			result = getOpenedForm(uts)
+
+	return result
+
 
 def grabOpenForm():
 	result = {}
@@ -3500,6 +3698,10 @@ def grabOpenForm():
 
 	return result
 
+############################################################################################
+
+#___________________________________GENERIC DELETE FORMS____________________________________
+
 def grabGenericForm(form_type, form_id):
 	form = None
 
@@ -3521,6 +3723,8 @@ def deleteGenericForm(form_type, form):
 		deleteSap(form)
 
 	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
+
+############################################################################################
 
 
 

@@ -39,7 +39,8 @@ grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonB
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
-saveIncompleteSapForm, grabOpenForm, grabGenericForm, deleteGenericForm
+saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
+openForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1899,8 +1900,7 @@ def sap_preliminary(request):
 
 			action = getSAP(client)
 			sap = action['sap']
-			sap.isOpen = True
-			sap.save()
+			openForm('sap', sap, session.client)
 
 			content['session'] = session
 			content['sap'] = sap
