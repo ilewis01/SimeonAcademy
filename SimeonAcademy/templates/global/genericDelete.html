@@ -41,7 +41,8 @@
 					<td>
 						<a href="javascript: complete_generic_delete()">
 							<form action='/genericFormDeleted/' method='post' name='exit_g' id='exit_g'> {% csrf_token %}
-								<input type='hidden' name='fakeData' id='fakeData' value='fake'>
+								<input type='hidden' name='form_type' id='form_type' value='{{type}}'>
+								<input type='hidden' name='form_id' id='form_id' value='{{form.id}}'>
 							</form>
 							<button type='button' class='popupBtn'>Delete</button>
 						</a>

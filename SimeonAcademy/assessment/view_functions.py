@@ -3500,6 +3500,29 @@ def grabOpenForm():
 
 	return result
 
+def grabGenericForm(form_type, form_id):
+	form = None
+
+	if str(form_type) == 'am':
+		form = AngerManagement.objects.get(id=form_id)
+	elif str(form_type) == 'sap':
+		form = SAP.objects.get(id=form_id)
+	elif str(form_type) == 'mh':
+		form = MentalHealth.objects.get(id=form_id)
+	elif str(form_type) == 'ut':
+		form = UrineResults.objects.get(id=form_id)
+
+	return form
+
+def deleteGenericForm(form_type, form):
+	if str(form_type) == 'am':
+		deleteAM(form)
+	elif str(form_type) == 'sap':
+		deleteSap(form)
+
+	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
+
+
 
 
 

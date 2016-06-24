@@ -39,7 +39,7 @@ grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonB
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
-saveIncompleteSapForm, grabOpenForm
+saveIncompleteSapForm, grabOpenForm, grabGenericForm, deleteGenericForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -494,7 +494,8 @@ def genericDelete(request):
 		else:
 			form = grabOpenForm()
 
-			content['form'] = form
+			content['form'] = form['form']
+			content['type'] = form['type']
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericDelete.html', content)
 
@@ -513,6 +514,16 @@ def genericFormDeleted(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			form_type = request.POST.get('form_type', '')
+			form_id = request.POST.get('form_id', '')
+
+			form = grabGenericForm(form_type, form_id)
+			deleteGenericForm(form_type, form)
+
+			print str(form_type) + " with ID: " + str(form_id) + "has been deleted."
+
+			content['form_type'] = form_type
+			content['form_id'] = form_id
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericFormDeleted.html', content)
 
