@@ -4538,7 +4538,10 @@ function goToGenericURL() {
 	}
 
 	else if (c2.checked === true) {
-		//Refresh form
+		var w = 460, h = 240;
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var refresh = window.open('/genericRefreshForm/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 	}
 
 	else {
@@ -4546,6 +4549,10 @@ function goToGenericURL() {
 	}
 
 	form.submit();
+}
+
+function refreshForm() {
+	
 }
 
 

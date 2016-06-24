@@ -555,6 +555,24 @@ def genericDelete(request):
 			return render_to_response('global/genericDelete.html', content)
 
 @login_required(login_url='/index')
+def genericRefreshForm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('global/genericRefreshForm.html', content)
+
+@login_required(login_url='/index')
 def genericFormDeleted(request):
 	user = request.user
 	if not user.is_authenticated():
