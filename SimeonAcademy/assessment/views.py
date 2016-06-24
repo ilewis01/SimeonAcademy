@@ -39,7 +39,7 @@ grabAmCompletedSections, grabAmClassesCSS, grabAmSideBarString, convertToPythonB
 resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to_integer, \
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
-saveIncompleteSapForm
+saveIncompleteSapForm, grabOpenForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -492,10 +492,9 @@ def genericDelete(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			sap_id = request.POST.get('sap_id', '')
-			sap = SAP.objects.get(id=sap_id)
+			form = grabOpenForm()
 
-			content['sap'] = sap
+			content['form'] = form
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericDelete.html', content)
 
@@ -1889,6 +1888,8 @@ def sap_preliminary(request):
 
 			action = getSAP(client)
 			sap = action['sap']
+			sap.isOpen = True
+			sap.save()
 
 			content['session'] = session
 			content['sap'] = sap

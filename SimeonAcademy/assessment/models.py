@@ -104,6 +104,9 @@ class UrineResults(models.Model):
 	drug11 = models.CharField(max_length=20, default=None, blank=True, null=True)
 	drug12 = models.CharField(max_length=20, default=None, blank=True, null=True)
 
+	isOpen = models.BooleanField(default=False, blank=True)
+	isComplete = models.BooleanField(default=False, blank=True)
+
 	def __unicode__(self):
 		return "Urine Results: " + str(self.client)
 
@@ -590,6 +593,7 @@ class AngerManagement(models.Model):
 	controlComplete = models.BooleanField(blank= True, default = False)
 	finalComplete = models.BooleanField(blank= True, default = False)
 
+	isOpen = models.BooleanField(blank=True, default=False)
 	AMComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
@@ -926,6 +930,7 @@ class MentalHealth(models.Model):
 	legalHistoryComplete = models.BooleanField(default=False, blank=True)
 	useTableComplete = models.BooleanField(default=False, blank=True)
 
+	isOpen = models.BooleanField(default=False, blank=True)
 	MHComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):

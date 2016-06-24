@@ -3453,6 +3453,54 @@ def refreshSap(sap):
 	psy.otherHow = ''
 
 
+def grabOpenForm():
+	result = {}
+	result['type'] = None
+	result['form'] = None
+	match = False
+
+	am = AngerManagement.objects.all()
+
+	for a in am:
+		if a.isOpen == True:
+			result['type'] = 'am'
+			result['form'] = a
+			match = True
+			break
+
+	if match == False:
+		sap = SAP.objects.all()
+
+		for s in sap:
+			if s.isOpen == True:
+				result['type'] = 'sap'
+				result['form'] = s
+				match = True
+				break
+
+	if match == False:
+		mh = MentalHealth.objects.all()
+
+		for m in mh:
+			if m.isOpen == True:
+				result['type'] = 'mh'
+				result['form'] = m
+				match = True
+				break
+
+	if match == False:
+		ut = UrineResults.objects.all()
+
+		for u in ut:
+			if u.isOpen == True:
+				result['type'] = 'ut'
+				result['form'] = u
+				match = True
+				break
+
+	return result
+
+
 
 
 
