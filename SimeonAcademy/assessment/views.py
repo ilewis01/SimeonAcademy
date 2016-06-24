@@ -493,10 +493,10 @@ def genericDelete(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			form = grabOpenForm()
+			# form = grabOpenForm()
 
-			content['form'] = form['form']
-			content['type'] = form['type']
+			# content['form'] = form['form']
+			# content['type'] = form['type']
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericDelete.html', content)
 
@@ -515,8 +515,8 @@ def genericFormDeleted(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			form_type = request.POST.get('form_type', '')
-			form_id = request.POST.get('form_id', '')
+			form_type = request.POST.get('parent_form_type', '')
+			form_id = request.POST.get('parent_form_id', '')
 
 			form = grabGenericForm(form_type, form_id)
 			deleteGenericForm(form_type, form)

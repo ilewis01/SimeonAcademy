@@ -4505,6 +4505,14 @@ function complete_generic_delete() {
 	form.submit();
 }
 
+function initialize_generic_popup() {
+	var form_id = window.opener.document.getElementById('form_id');
+	var form_type = window.opener.document.getElementById('form_type');
+
+	document.getElementById('parent_form_id').value = form_id.value;
+	document.getElementById('parent_form_type').value = form_type.value;
+}
+
 function genericReturntoSession() {
 	var form = window.opener.document.getElementById('exit_form');
 	form.action = '/clientOptions/';
