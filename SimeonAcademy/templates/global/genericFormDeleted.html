@@ -1,0 +1,53 @@
+{% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='popup_class2'>
+	<div class="container">
+		<div class="row"> 
+			<div class="col-md-12 col-sm-12">
+				<div>
+					<img src="{% static 'images/simeon_logo2.png' %}" alt="popupLogo" id='popupLogo'>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div style='text-align:center;'>
+				<div id='genericHeader'>
+					The {{form_type}} Form Has Been Sucessfully Deleted
+				</div>
+
+				<div id='genericSubText'>
+					Would you like to continue this session?
+				</div>
+			</div>
+
+			<table id='confirm_delete_pop_table'>
+				<tr>
+					<td>
+						<a href="javascript: genericReturntoSession();">
+							<div>
+								<button type='button' class='longBtn'>Return to Session</button>
+							</div>
+						</a>
+					</td>
+
+					<td>
+						<a href="javascript: genericEndSession();">
+							<div>
+								<button type='button' class='longBtn'>End Session</button>
+							</div>
+						</a>
+					</td>
+				</tr>
+			</table>			
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>

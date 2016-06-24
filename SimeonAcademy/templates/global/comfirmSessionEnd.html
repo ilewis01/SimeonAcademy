@@ -1,0 +1,10 @@
+<h1>Confirm Session End Page</h1>
+
+<h3>Session ID: {{session.id}}</h3>
+<h3>Client ID: {{session.client.id}}</h3>
+
+<form action='/adminHome/' method='post'>{% csrf_token %}
+	<input type='hidden' name='clID' id='clID' value='{{session.client.id}}'>
+
+	<input type='submit' value='Back to home page'>
+</form>

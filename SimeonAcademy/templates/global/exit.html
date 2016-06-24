@@ -22,6 +22,7 @@
     	<input type='hidden' name='form_type' id='form_type' value='{{form_type}}'>
     	<input type='hidden' name='last_section' id='last_section' value='{{last_section}}'>
     	<input type='hidden' name='cli-id' id='cli-id' value='{{session.client.id}}'>
+    	<input type='hidden' name='clID' id='clID' value='{{session.client.id}}'>
     	<input type='hidden' name='goToNext' id='goToNext' value=''>
     	<input type='hidden' name='new_session' id='new_session' value='false'>
     	<input type='hidden' name='back' id='back' value=''>
@@ -102,7 +103,7 @@
 		           				</td>
 
 		           				<td>
-		           					<a href="">
+		           					<a href="#" onClick='javascript: generic_delete_form();'>
 		           						<div>
 		           							<div class='center-rounded'>
 		           								<div class='round-button'>
@@ -122,7 +123,7 @@
 		           				</td>
 
 		           				<td>
-		           					<a href="">
+		           					<a href="javascript: generic_exit_home()">
 		           						<div>
 		           							<div class='center-rounded'>
 		           								<div class='round-button'>
@@ -142,7 +143,7 @@
 		           				</td>
 
 		           				<td>
-		           					<a href="">
+		           					<a href="javascript: generic_to_session();">
 		           						<div>
 		           							<div class='center-rounded'>
 		           								<div class='round-button'>

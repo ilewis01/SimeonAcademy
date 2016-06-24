@@ -93,5 +93,8 @@ urlpatterns = patterns('',
 
     ##Global Views
     url(r'^generic_exit/$', 'assessment.views.generic_exit'),
+    url(r'^comfirmSessionEnd/$', 'assessment.views.comfirmSessionEnd'),
+    url(r'^genericDelete/$', 'assessment.views.genericDelete'),
+    url(r'^genericFormDeleted/$', 'assessment.views.genericFormDeleted'),
     
 )

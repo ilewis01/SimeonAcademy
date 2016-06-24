@@ -246,6 +246,7 @@ class SAP(models.Model):
 	otherPriority = models.BooleanField(blank=True, default=False)
 	sourcesPriority = models.BooleanField(blank=True, default=False)
 
+	isOpen = models.BooleanField(blank=True, default=False)
 	SapComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):

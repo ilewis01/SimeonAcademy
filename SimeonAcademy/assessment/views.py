@@ -455,6 +455,68 @@ def clientOptions(request):
 			content['back'] = 'false'
 			return render_to_response('counselor/client/client_options.html', content)
 
+@login_required(login_url='/index')
+def comfirmSessionEnd(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session_id = request.POST.get('session_id', '')
+			session = ClientSession.objects.get(id=session_id)
+
+			content['session'] = session
+			content['title'] = "Simeon Academy | Confirm Billing Details"
+			return render_to_response('global/comfirmSessionEnd.html', content)
+
+@login_required(login_url='/index')
+def genericDelete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			sap_id = request.POST.get('sap_id', '')
+			sap = SAP.objects.get(id=sap_id)
+
+			content['sap'] = sap
+			content['title'] = "Simeon Academy"
+			return render_to_response('global/genericDelete.html', content)
+
+@login_required(login_url='/index')
+def genericFormDeleted(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('global/genericFormDeleted.html', content)
+
 ## ANGER MANAGEMENT VIEWS-----------------------------------------------------
 @login_required(login_url='/index')
 def exit_am(request):
@@ -1830,6 +1892,7 @@ def sap_preliminary(request):
 
 			content['session'] = session
 			content['sap'] = sap
+			content['goToNext'] = goToNext
 
 			if action['newSap'] == False and str(goToNext) == 'false':
 				content['title'] = 'Simeon Academy | SAP'

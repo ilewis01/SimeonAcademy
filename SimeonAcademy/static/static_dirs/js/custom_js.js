@@ -4478,6 +4478,48 @@ function genericReturnToForm() {
 	form.submit();
 }
 
+function generic_to_session() {
+	var form = document.getElementById('exit_form');
+	var goToNext = document.getElementById('goToNext');
+
+	goToNext.value = 'false';
+	form.action = '/clientOptions/';
+	form.submit();
+}
+
+function generic_exit_home() {
+	var form = document.getElementById('exit_form');
+	form.action = '/comfirmSessionEnd/';
+	form.submit();
+}
+
+function generic_delete_form() {
+	var w = 450, h = 210;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var delWin = window.open('/genericDelete/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+}
+
+function complete_generic_delete() {
+	var form = document.getElementById('exit_g');
+	form.submit();
+}
+
+function genericReturntoSession() {
+	var form = window.opener.document.getElementById('exit_form');
+	form.action = '/clientOptions/';
+	form.submit();
+	window.close();
+}
+
+function genericEndSession() {
+	var form = window.opener.document.getElementById('exit_form');
+	form.action = '/comfirmSessionEnd/';
+	form.submit();
+	window.close();
+}
+
+
 
 
 

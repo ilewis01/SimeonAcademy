@@ -1132,6 +1132,80 @@ button:hover {
 	margin-bottom: 15px;
 }
 
+.popup_class {
+	background-color: #efefef;
+	font-family: Arial;
+	font-size: 16px;
+}
+
+.popup_class2 {
+	background-color: #efefef;
+	font-family: Arial;
+}
+
+.popupTable {
+	width: 100%;
+}
+
+.popupTable tr {
+	margin: auto;
+}
+
+.popupBtn {
+	width:100px;
+	height:30px;
+	font-size: 13px;
+	margin-top: 15%;
+}
+
+#popupLogo {
+	width:40%;
+	margin-bottom: 4%;
+	margin-top: 5px;
+	/*margin-left: 30%;*/
+}
+
+#popupText {
+	font-style: italic;
+	text-align: center;
+}
+
+#warning_icon {
+	width:40px;
+	margin-left: 60%;
+}
+
+#popupBtnTable {
+	width: 210px;
+	margin: auto;
+}
+
+.longBtn {
+	height: 30px;
+	font-size: 13px;
+	width: 130px;
+}
+
+#confirm_delete_pop_table {
+	width: 270px;
+	margin: auto;
+}
+
+#genericHeader {
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top:3px;
+}
+
+#genericSubText {
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+
+
+
 
 
 
