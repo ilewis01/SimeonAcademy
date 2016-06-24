@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body onLoad="set_radio_buttons()" class="gradient-white">
+
+    <div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              Resolve Existing Form
+                        </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+      <div class="container">
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class='form_exist_page'>
+						<span id='imcomplete_header'><b>This client currently has an existing incomplete {{type_header}} form on file</b></span><br>
+						<h5>Date Created:: {{form.date_of_assessment}}</h5>
+						<div style='margin-bottom:50px;'>
+							<em style='color:blue;'>A new form cannot be created until the previous form has been resolved</em><br>
+						</div>
+
+						<h4>Please choose from the following options:</h4>
+						<form action='' method='post' id='resolve_form'> {% csrf_token %}
+							<input type='hidden' id='cli-id' name='cli-id' value='{{session.client.id}}'>
+							<input type='hidden' id='new_session' name='new_session' value='false'>
+							<input type='hidden' id='goToNext' name='goToNext' value='true'>
+
+							<input type='hidden' id='session_id' name='session_id' value='{{session.id}}'>
+							<input type='hidden' id='new_form' name='new_form' value="false">
+							<input type='hidden' id='save_section' name='save_section' value="{{save_section}}">
+							<input type='hidden' id='back' name='back' value="true">
+
+							<input type='hidden' id='am_id' name='am_id' value="{{form.id}}">
+							<input type='hidden' id='sap_id' name='sap_id' value="{{form.id}}">
+							<input type='hidden' id='mh_id' name='mh_id' value="{{form.id}}">
+							<input type='hidden' id='ut_id' name='ut_id' value="{{form.id}}">
+							<table>
+								<tr>
+									<td>
+										<div id='incomplete_form_div'>
+											<input type='radio' id='c1' name='form_choice' value='finish_old' checked='true'>
+										</div>
+									</td>
+									<td>
+										<label for='c1' id='incomplete_form_options'>Continue completing current anger management form on file</label>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div id='incomplete_form_div'>
+											<input type='radio' id='c2' name='form_choice' value='start_new'>
+										</div>
+									</td>
+									<td>
+										<label for='c2' id='incomplete_form_options'>Start a new form <em style='color:green;'>*All previous incomplete {{type_header}} forms for this client will be deleted</em></label>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div id='incomplete_form_div'>
+											<input type='radio' id='c3' name='form_choice' value='back_to_session'>
+										</div>
+									</td>
+									<td>
+										<label for='c3' id='incomplete_form_options'>Back to client options page</label>
+									</td>
+								</tr>
+							</table>
+							<div style='margin-bottom:20px;'></div>
+							<!-- <input type='submit' value='submit'> -->
+						</form> 
+
+						<table>
+							<tr>
+								<td>
+									<a href="javascript: goToGenericURL()" class='but_a'>
+										<button type='button'>Continue</button>
+									</a>
+								</td>
+							</tr>
+						</table>                            
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="container">
+        <div class="row">                   
+            <div class="col-md-12">
+                  
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+

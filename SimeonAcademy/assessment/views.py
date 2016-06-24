@@ -40,7 +40,7 @@ resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
-openForm, prioritySapSection, getSapProgress
+openForm, prioritySapSection, getSapProgress, universalLocation
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -419,7 +419,6 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-
 			clID = request.POST.get('cli-id', '')
 			new_session = request.POST.get('new_session', '')
 			goToNext = request.POST.get('goToNext', '')
@@ -581,7 +580,9 @@ def genericFormDeleted(request):
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericFormDeleted.html', content)
 
-## ANGER MANAGEMENT VIEWS-----------------------------------------------------
+
+
+## ANGER MANAGEMENT VIEWS---------------------------------------------------------------------------------------------------
 @login_required(login_url='/index')
 def exit_am(request):
 	user = request.user
@@ -1930,6 +1931,7 @@ def mh_viewForm(request):
 			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content)
 
 ## SAP VIEWS------------------------------------------------------------------
+
 @login_required(login_url='/index')
 def sap_preliminary(request):
 	user = request.user
@@ -1945,8 +1947,8 @@ def sap_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			goToNext = None
 			session_id = request.POST.get('session_id', '')
-			goToNext = request.POST.get('goToNext', '')
 
 			session = ClientSession.objects.get(id=session_id)
 			client = session.client
@@ -1957,11 +1959,21 @@ def sap_preliminary(request):
 
 			content['session'] = session
 			content['sap'] = sap
-			content['goToNext'] = goToNext
+			
+			if action['newSap'] == False:
+				goToNext = 'false'
+			else:
+				goToNext = 'true'
 
 			if action['newSap'] == False and str(goToNext) == 'false':
+				save_section = universalLocation('sap', sap.id)
+
+				content['save_section'] = save_section
+				content['type_header'] = 'S.A.P'
+				content['form'] = sap
+				content['date_of_assessment'] = sap.date_of_assessment
 				content['title'] = 'Simeon Academy | SAP'
-				return render_to_response('counselor/forms/SAP/getClient.html', content)
+				return render_to_response('global/resolve_form.html', content)
 
 			else:
 				content['title'] = "Simeon Academy | S.A.P Instructions"

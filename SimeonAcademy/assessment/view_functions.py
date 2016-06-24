@@ -2758,6 +2758,7 @@ def forceSapLocation(sap):
 			result = '/sap_viewForm/'
 	return result
 
+
 def locateNextSection(sap, current_page):
 	result = None
 	hasPriority = False
@@ -3780,6 +3781,24 @@ def deleteGenericForm(form_type, form):
 		deleteAM(form)
 	elif str(form_type) == 'sap':
 		deleteSap(form)
+
+def universalLocation(form_type, form_id):
+	location = None
+
+	if str(form_type) == 'am':
+		am = AngerManagement.objects.get(id=form_id)
+		#am location function here
+	elif str(form_type) == 'sap':
+		sap = SAP.objects.get(id=form_id)
+		location = locateNextSection(sap, None)
+	elif str(form_type) == 'mh':
+		mh = MentalHealth.objects.get(id=form_id)
+	elif str(form_type) == 'ut':
+		ut = UrineResults.objects.get(id=form_id)
+
+	return location
+
+
 
 	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
 

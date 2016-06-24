@@ -4527,6 +4527,27 @@ function genericEndSession() {
 	window.close();
 }
 
+function goToGenericURL() {
+	var form = document.getElementById('resolve_form');
+	var location = document.getElementById('save_section');
+	var c1 = document.getElementById('c1');
+	var c2 = document.getElementById('c2');
+
+	if (c1.checked === true) {
+		form.action = location.value;
+	}
+
+	else if (c2.checked === true) {
+		//Refresh form
+	}
+
+	else {
+		form.action = '/clientOptions/';
+	}
+
+	form.submit();
+}
+
 
 
 
