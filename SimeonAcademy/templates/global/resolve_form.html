@@ -21,17 +21,24 @@
             <div class="row">
             	<div class="col-md-12">
                     <div class='form_exist_page'>
-						<span id='imcomplete_header'><b>This client currently has an existing incomplete {{type_header}} form on file</b></span><br>
-						<h5>Date Created:: {{form.date_of_assessment}}</h5>
+						<span id='imcomplete_header'><b>This client currently has an existing incomplete {{type_header}} profile on file</b></span><br>
 						<div style='margin-bottom:50px;'>
-							<em style='color:blue;'>A new form cannot be created until the previous form has been resolved</em><br>
+							<em style='color:blue;'>A new profile cannot be created until the previous one has been resolved</em><br>
 						</div>
+						<h5>Client: {{session.client.fname}} {{session.client.lname}}</h5>
+						<h5>ID: {{session.client.clientID}}</h5>
+						<h5>Date Created: {{form.date_of_assessment}}</h5>
+						<div style='margin-bottom:50px;'></div>
+						
 
 						<h4>Please choose from the following options:</h4>
 						<form action='' method='post' id='resolve_form'> {% csrf_token %}
 							<input type='hidden' id='cli-id' name='cli-id' value='{{session.client.id}}'>
 							<input type='hidden' id='new_session' name='new_session' value='false'>
 							<input type='hidden' id='goToNext' name='goToNext' value='true'>
+
+							<input type='hidden' id='form_type' name='form_type' value='{{form_type}}'>
+							<input type='hidden' id='form_id' name='form_id' value='{{form.id}}'>
 
 							<input type='hidden' id='session_id' name='session_id' value='{{session.id}}'>
 							<input type='hidden' id='new_form' name='new_form' value="false">
@@ -61,7 +68,7 @@
 										</div>
 									</td>
 									<td>
-										<label for='c2' id='incomplete_form_options'>Start a new form <em style='color:green;'>*All previous incomplete {{type_header}} forms for this client will be deleted</em></label>
+										<label for='c2' id='incomplete_form_options'>Start a new form <em style='color:green;'>*The current incomplete {{type_header}} profile for this client will be erased</em></label>
 									</td>
 								</tr>
 

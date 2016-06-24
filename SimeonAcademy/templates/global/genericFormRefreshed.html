@@ -1,0 +1,49 @@
+{% load staticfiles %}
+
+<head>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='refreshBody' onLoad='initialize_refresh_popup()'>
+	<div class="container">
+		<div class="row"> 
+			<div class="col-md-12 col-sm-12">
+				<div class='refreshWrapper'>
+
+					<form action='' method='post' id='refresh_form'> {% csrf_token %}
+						<input type='hidden' name='child_form_type' id='child_form_type' value=''>
+						<input type='hidden' name='child_form_id' id='child_form_id' value=''>
+
+						<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+						<input type='hidden' name='save_section' id='save_section' value='{{save_section}}'>
+						<input type='hidden' name='new_form' id='new_form' value='false'>
+						<input type='hidden' name='back' id='back' value='true'>
+
+						<input type='hidden' name='am_id' id='am_id' value='{{form.id}}'>
+						<input type='hidden' name='sap_id' id='sap_id' value='{{form.id}}'>
+						<input type='hidden' name='mh_id' id='mh_id' value='{{form.id}}'>
+						<input type='hidden' name='ut_id' id='ut_id' value='{{form.id}}'>
+					</form>
+
+					<div>
+						<img src="{% static 'images/simeon_logo2.png' %}" alt="lgPopLogo" id='lgPopLogo'>
+					</div>
+
+					<div style='text-align:center; font-style:italic; margin-bottom:30px;'>
+						<h4>The {{type_header}} profile for {{session.client.fname}} {{session.client.lname}} has been reset.</h4>
+					</div>
+
+					
+					<div style='width:60px; margin:auto;'>
+						<a href="javascript: restart_form();">
+							<button class='refreshBtn'>Continue</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+
+</body>

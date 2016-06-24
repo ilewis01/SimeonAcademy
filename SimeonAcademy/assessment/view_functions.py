@@ -3496,8 +3496,8 @@ def refreshSap(sap):
 	demo.source2 = ''
 	demo.relationship2 = ''
 
-	demo.demographics.isChild = False
-	demo.demographics.isSenior = False
+	demo.isChild = False
+	demo.isSenior = False
 	demo.isDual = False
 	demo.isOther = False
 	demo.isNone = False
@@ -3573,6 +3573,30 @@ def refreshSap(sap):
 	psy.otherQuantity = ''
 	psy.otherLast = ''
 	psy.otherHow = ''
+
+	sap.clinicalComplete = False
+	sap.socialComplete = False
+	sap.psychoComplete = False
+	sap.psycho2Complete = False
+	sap.specialComplete = False
+	sap.otherComplete = False
+	sap.sourcesComplete = False
+
+	sap.clinicPriority = True
+	sap.socialPriority = False
+	sap.psycho1Priority = False
+	sap.psycho2Priority = False
+	sap.spacialPriority = False
+	sap.otherPriority = False
+	sap.sourcesPriority = False
+
+	demo.save()
+	psy.save()
+
+	sap.isOpen = True
+	sap.SapComplete = False
+
+	sap.save()
 
 ##______________________OPEN FORMS_____________________________________________________
 def formIsOpen(form):
@@ -3797,6 +3821,17 @@ def universalLocation(form_type, form_id):
 		ut = UrineResults.objects.get(id=form_id)
 
 	return location
+
+def universalRefresh(form_type, form):
+	if str(form_type) == 'am':
+		refreshAM(form)
+	elif str(form_type) == 'sap':
+		refreshSap(form)
+	elif str(form_type) == 'mh':
+		no = None
+	elif str(form_type) == 'ut':
+		no = None
+
 
 
 

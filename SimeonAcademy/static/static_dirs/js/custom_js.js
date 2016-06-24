@@ -4535,24 +4535,48 @@ function goToGenericURL() {
 
 	if (c1.checked === true) {
 		form.action = location.value;
+		form.submit();
 	}
 
 	else if (c2.checked === true) {
-		var w = 460, h = 240;
+		var w = 460, h = 250;
 		var lefts = Number((screen.width/2) - (w/2));
 		var tops = Number((screen.height/2) - (h/2));
 		var refresh = window.open('/genericRefreshForm/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+		form.submit();
 	}
 
 	else {
 		form.action = '/clientOptions/';
+		form.submit();
 	}
+}
 
-	form.submit();
+function initialize_refresh_popup() {
+	var form_id = window.opener.document.getElementById('form_id');
+	var form_type = window.opener.document.getElementById('form_type');
+	var session_id = window.opener.document.getElementById('session_id');
+
+	document.getElementById('child_form_id').value = form_id.value;
+	document.getElementById('child_form_type').value = form_type.value;
+	document.getElementById('child_session_id').value = session_id.value;
 }
 
 function refreshForm() {
-	
+	var form = document.getElementById('refresh_form');
+	form.submit();
+}
+
+function restart_form() {
+	var form = window.opener.document.getElementById('resolve_form');
+	var save_section = document.getElementById('save_section');
+
+	window.opener.document.getElementById('back').value = 'true';
+	window.opener.document.getElementById('new_form').value = 'false';
+
+	form.action = save_section.value;
+	form.submit();
+	window.close();
 }
 
 

@@ -40,7 +40,7 @@ resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
-openForm, prioritySapSection, getSapProgress, universalLocation
+openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -571,6 +571,54 @@ def genericRefreshForm(request):
 		else:
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericRefreshForm.html', content)
+
+@login_required(login_url='/index')
+def genericFormRefreshed(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			form_id = request.POST.get('child_form_id', '')
+			form_type = request.POST.get('child_form_type', '')
+			session_id = request.POST.get('child_session_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+
+			type_header = None
+			form = None
+
+			if str(form_type) == 'am':
+				type_header = 'Anger Management'
+				form = AngerManagement.objects.get(id=form_id)
+			elif str(form_type) == 'sap':
+				type_header = 'S.A.P'
+				form = SAP.objects.get(id=form_id)
+			elif str(form_type) == 'mh':
+				type_header = 'Mental Health'
+				form = MentalHealth.objects.get(id=form_id)
+			elif str(form_type) == 'ut':
+				type_header = 'Urine Test'
+				form = UrineResults.objects.get(id=form_id)
+
+			universalRefresh(form_type, form)
+			location = universalLocation(form_type, form.id)
+
+			content['save_section'] = location
+			content['form_type'] = form_type
+			content['form'] = form
+			content['type_header'] = type_header
+			content['session'] = session
+			content['title'] = "Simeon Academy"
+			return render_to_response('global/genericFormRefreshed.html', content)
 
 @login_required(login_url='/index')
 def genericFormDeleted(request):
@@ -1989,6 +2037,7 @@ def sap_preliminary(request):
 				content['save_section'] = save_section
 				content['type_header'] = 'S.A.P'
 				content['form'] = sap
+				content['form_type'] = 'sap'
 				content['date_of_assessment'] = sap.date_of_assessment
 				content['title'] = 'Simeon Academy | SAP'
 				return render_to_response('global/resolve_form.html', content)
