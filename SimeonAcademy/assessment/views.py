@@ -419,11 +419,11 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			clID = request.POST.get('cli-id', '')
+			client_id = request.POST.get('client_id', '')
 			new_session = request.POST.get('new_session', '')
 			goToNext = request.POST.get('goToNext', '')
 
-			client = Client.objects.get(id=clID)
+			client = Client.objects.get(id=client_id)
 			start = datetime.now()
 			phone = convert_phone(client.phone)
 
@@ -436,7 +436,7 @@ def clientOptions(request):
 				session_type = session.s_type.session_type
 
 			else:
-				session_type = request.POST.get('session-type', '')
+				session_type = request.POST.get('session_type', '')
 				session_type = SType.objects.get(id=session_type)
 				session = startSession(client, session_type)
 
@@ -521,8 +521,6 @@ def generic_exit(request):
 				ut_id = request.POST.get(id=ut_id)
 				form = UrineResults.objects.get(id=ut_id)
 				type_header = 'Urine Test Analysis'
-
-			print str(form_type) + ' ID: ' + str(form.id)
 
 			##Still need to do the other forms
 
@@ -770,8 +768,160 @@ def am_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			goToNext = None
+			session_id = request.POST.get('session_id', '')
+			session = ClientSession.objects.get(id=session_id)
+
+			action = startAM(session.client)		
+			am = action['am']
+			openForm('am', am, session.client)
+
+			content['session'] = session
+			content['am'] = am
+
+			if action['isNew'] == False:
+				goToNext = 'false'
+			else:
+				goToNext = 'true'
+
+			if action['isNew'] == False and str(goToNext) == 'false':
+				save_section = universalLocation('am', am.id)
+
+				content['save_section'] = save_section
+				content['type_header'] = 'Anger Management'
+				content['form'] = am
+				content['form_type'] = 'am'
+				content['date_of_assessment'] = am.start_time
+				content['title'] = 'Simeon Academy | Anger Management'
+				return render_to_response('global/resolve_form.html', content)
+
+			else:
+				content['title'] = "Anger Management Assessment | Simeon Academy"
+				return render_to_response('counselor/forms/AngerManagement/instructions.html', content)
+
+@login_required(login_url='/index')
+def am_demographic(request):
+	#IF USER IS NOT AUTHENTICATED RETURN TO LOGIN PAGE
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		#USER HAS BEEN AUTHENTICATED
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			#RESTRICTED ACCESS FOR NON COUNSELOR USERS
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			#AUTHENTICATED AS A COUNSELOR
+			client_id = request.POST.get('client_id', '')
+			session_id = request.POST.get('session_id', '')
+			back = request.POST.get('back_btn', '')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
+
+			client = Client.objects.get(id=client_id)			
+			session = ClientSession.objects.get(id=session_id)
+
+			if back == '' or back == None:
+				back = 'false'			
+
+			proceed = startAM(client)		
+			am = proceed['am']
+
+			if back == 'false':
+				saveCompletedAmSection(request, save_section, am)
+
+			content['am'] = am
+			content['back'] = back
+			content['session'] = session
+			content['client'] = client
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-			return render_to_response('counselor/forms/AngerManagement/am_doesNotExist.html', content)
+
+			print "isNew: " + str(proceed['isNew'])
+			print "back: " + str(back)
+			print "goToNext: " + str(goToNext)
+
+			if proceed['isNew'] == False and proceed['back'] == 'true' and str(goToNext) == 'false':
+				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
+				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
+
+			else:
+				marital = MaritalStatus.objects.all().order_by('status')
+				living = LivingSituation.objects.all().order_by('situation')
+				education = EducationLevel.objects.all().order_by('level')
+
+				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
+				# fields = None
+				# json_data = None
+				fields = getAMDemoFields(am)
+				json_data = json.dumps(fields)
+				image = amSidebarImages(am, 'demo')
+				classes = grabAmClassesCSS(am, 'demo')
+				next_section = grabProperNextSection(am, '/am_demographic/')
+
+				#CONTEXT
+				content['next_section'] = next_section
+				content['class'] = classes
+				content['image'] = image
+				content['education'] = education
+				content['marital'] = marital
+				content['living'] = living
+				content['AM'] = am
+				content['json_data'] = json_data
+				content['fields'] = fields
+				content['back'] = back
+
+				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			
+@login_required(login_url='/index')
+def am_drugHistory(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			back = request.POST.get('back_btn', '')
+			am_id = request.POST.get('am_id', '')			
+			session_id = request.POST.get('session_id', '')
+			save_section = request.POST.get('save_section', '')
+			goToNext = request.POST.get('goToNext', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			am = AngerManagement.objects.get(id=am_id)
+
+			if back == 'false':
+				saveCompletedAmSection(request, save_section, am)
+				
+			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
+			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'dh')
+			classes = grabAmClassesCSS(am, 'dh')
+			next_section = grabProperNextSection(am, '/am_drugHistory/')
+
+			content['next_section'] = next_section
+			content['back'] = back
+			content['AM'] = am
+			content['session'] = session
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['class'] = classes
+			content['image'] = image
+			content['title'] = "Anger Management Assessment | Simeon Academy"
+
+			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 
 @login_required(login_url='/index')
@@ -1230,130 +1380,6 @@ def am_problems(request):
 			content['session'] = session
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content)
-
-@login_required(login_url='/index')
-def am_demographic(request):
-	#IF USER IS NOT AUTHENTICATED RETURN TO LOGIN PAGE
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		#USER HAS BEEN AUTHENTICATED
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			#RESTRICTED ACCESS FOR NON COUNSELOR USERS
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			#AUTHENTICATED AS A COUNSELOR
-			client_id = request.POST.get('client_id', '')
-			session_id = request.POST.get('session_id', '')
-			back = request.POST.get('back_btn', '')
-			save_section = request.POST.get('save_section', '')
-			goToNext = request.POST.get('goToNext', '')
-
-			client = Client.objects.get(id=client_id)			
-			session = ClientSession.objects.get(id=session_id)
-
-			if back == '' or back == None:
-				back = 'false'			
-
-			proceed = startAM(client)		
-			am = proceed['am']
-
-			if back == 'false':
-				saveCompletedAmSection(request, save_section, am)
-
-			content['am'] = am
-			content['back'] = back
-			content['session'] = session
-			content['client'] = client
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-
-			print "isNew: " + str(proceed['isNew'])
-			print "back: " + str(back)
-			print "goToNext: " + str(goToNext)
-
-			if proceed['isNew'] == False and proceed['back'] == 'true' and str(goToNext) == 'false':
-				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
-				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
-
-			else:
-				marital = MaritalStatus.objects.all().order_by('status')
-				living = LivingSituation.objects.all().order_by('situation')
-				education = EducationLevel.objects.all().order_by('level')
-
-				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
-				# fields = None
-				# json_data = None
-				fields = getAMDemoFields(am)
-				json_data = json.dumps(fields)
-				image = amSidebarImages(am, 'demo')
-				classes = grabAmClassesCSS(am, 'demo')
-				next_section = grabProperNextSection(am, '/am_demographic/')
-
-				#CONTEXT
-				content['next_section'] = next_section
-				content['class'] = classes
-				content['image'] = image
-				content['education'] = education
-				content['marital'] = marital
-				content['living'] = living
-				content['AM'] = am
-				content['json_data'] = json_data
-				content['fields'] = fields
-				content['back'] = back
-
-				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
-			
-@login_required(login_url='/index')
-def am_drugHistory(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			back = request.POST.get('back_btn', '')
-			am_id = request.POST.get('am_id', '')			
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			goToNext = request.POST.get('goToNext', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			am = AngerManagement.objects.get(id=am_id)
-
-			if back == 'false':
-				saveCompletedAmSection(request, save_section, am)
-				
-			fields = getAMFields(am, 'counselor/forms/AngerManagement/drugHistory.html')
-			json_data = json.dumps(fields)
-			image = amSidebarImages(am, 'dh')
-			classes = grabAmClassesCSS(am, 'dh')
-			next_section = grabProperNextSection(am, '/am_drugHistory/')
-
-			content['next_section'] = next_section
-			content['back'] = back
-			content['AM'] = am
-			content['session'] = session
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['class'] = classes
-			content['image'] = image
-			content['title'] = "Anger Management Assessment | Simeon Academy"
-
-			return render_to_response('counselor/forms/AngerManagement/drugHistory.html', content)
 
 @login_required(login_url='/index')
 def am_familyOrigin(request):

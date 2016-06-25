@@ -561,6 +561,7 @@ class AM_Final(models.Model):
 ##ANGER MANAGEMENT FULL IMPLEMENTATION OF ASSESSMENT FILE-------------------------------------------------------------
 class AngerManagement(models.Model):
 	client = models.ForeignKey(Client, blank=True, null=True, default=None)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
 
 	demographic = models.ForeignKey(AM_Demographic, blank=True, null=True, default=None)
 	drugHistory = models.ForeignKey(AM_DrugHistory, blank=True, null=True, default=None)
@@ -592,6 +593,20 @@ class AngerManagement(models.Model):
 	currentProblemsComplete = models.BooleanField(blank= True, default = False)
 	controlComplete = models.BooleanField(blank= True, default = False)
 	finalComplete = models.BooleanField(blank= True, default = False)
+
+	demoPriority = models.BooleanField(blank= True, default = False)
+	dhPriority = models.BooleanField(blank= True, default = False)
+	childPriority = models.BooleanField(blank= True, default = False)
+	ah1Priority = models.BooleanField(blank= True, default = False)
+	ah2Priority = models.BooleanField(blank= True, default = False)
+	ah3Priority = models.BooleanField(blank= True, default = False)
+	connectPriority = models.BooleanField(blank= True, default = False)
+	worstPriority = models.BooleanField(blank= True, default = False)
+	targetPriority = models.BooleanField(blank= True, default = False)
+	familyPriority = models.BooleanField(blank= True, default = False)
+	currentPriority = models.BooleanField(blank= True, default = False)
+	controlPriority = models.BooleanField(blank= True, default = False)
+	finalPriority = models.BooleanField(blank= True, default = False)
 
 	isOpen = models.BooleanField(blank=True, default=False)
 	AMComplete = models.BooleanField(blank=True, default=False)

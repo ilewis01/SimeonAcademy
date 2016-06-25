@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" style='text-align:center'>
+
+	<div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              ANGER MANAGEMENT INSTRUCTIONS
+                        </div>
+
+                        <table class='instruction_class'>
+                            <tr>
+                                <td>
+                                    <h3>The Anger Management instructions will go into this table</h3>
+                                </td>
+                            </tr>
+                        </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+	<form action='' method='post' id='sap_instructions'> {% csrf_token %}
+        <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+        <input type='hidden' name='am_id' id='am_id' value='{{sap.id}}'>
+        <input type='hidden' name='new_session' id='new_session' value='false'>
+        <input type='hidden' name='new_form' id='new_form' value='true'>
+        <input type='hidden' name='goToNext' id='goToNext' value='false'>
+        <input type='hidden' name='back' id='back' value='false'>
+	</form> 
+
+	<div style='padding-top:5%'>
+		<div class='toggle-div-page'>
+		    <a href="javascript: " id="continue">
+                <button type='button' onClick='javascript: continue_to_sap_form("options");' id='exitSession'>Cancel</button>
+            </a>
+
+            <a href="javascript: " id="continue">
+                <button type='button' onClick='javascript: continue_to_sap_form("demo");' id='continueAMSession'>Continue</button>
+            </a>
+        </div>
+	</div>
+
+</body>
+
+{% endblock %}

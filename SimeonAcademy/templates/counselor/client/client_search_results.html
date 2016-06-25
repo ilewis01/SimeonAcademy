@@ -19,8 +19,8 @@
 						{% for r in results %}
 						<li style='text-align:left;'>
 							<form action="/clientOptions/" method='post' id="{{r.id}}"> {% csrf_token %}
-								<input type='hidden' name="cli-id" id="cli-id" value="{{r.id}}"> 
-								<input type='hidden' name="session-type" id="session-type" value="{{session}}">
+								<input type='hidden' name="client_id" id="client_id" value="{{r.id}}"> 
+								<input type='hidden' name="session_type" id="session_type" value="{{session}}">
 								<a href='javascript: toClientOptions({{r.id}})'>
 									<div class='li-a'>
 										<span id='li-name'>{{r.fname}} {{r.lname}}</span> <br>
