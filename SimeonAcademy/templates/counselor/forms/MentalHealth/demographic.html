@@ -2,181 +2,933 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Mental Health Demographics</h1>
+<body class="gradient-white" onLoad="javascript: initialize_mh_demo()">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<h3>{{client.fname}} {{client.lname}}</h3>
-<h4>Client ID: <span style="color:blue;">{{client.clientID}}</span></h4>
+    <div id="wrapper" class='shift-rr'>
 
-<form action='/mh_familyBackground/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name='client_id' id='client_id' value='{{client.id}}'>
-	<input type="hidden" name='mh_id' id='mh_id' value='{{mh.id}}'>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
 
-	<table>
-		<tr>
-			<td>
-				<label for='dob'>DOB (mm/dd/yyyy): </label>
-			</td>
-			<td>
-				<input type='dob' id='dob' name=''>
-			</td>
-		</tr>
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>{{session.s_type}}</h4>
+                </div>
+              </td>
+            </tr>
 
-		<tr>
-			<td>
-				<label for='bp'>Birth Place: </label>
-			</td>
-			<td>
-				<input type='text' id='bp' name='bp'>
-			</td>
-		</tr>
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
 
-		<tr>
-			<td>
-				<label for='raised'>Raised: </label>
-			</td>
-			<td>
-				<input type='text' id='raised' name='raised'>
-			</td>
-		</tr>
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{mh.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
 
-		<tr>
-			<td>
-				<label for='occ'>Occupation: </label>
-			</td>
-			<td>
-				<input type='text' id='occ' name='occ'>
-			</td>
-		</tr>
 
-		<tr>
-			<td>
-				<label for='employer'>Employer: </label>
-			</td>
-			<td>
-				<input type='text' id='employer' name='employer'>
-			</td>
-		</tr>
 
-		<tr>
-			<td>
-				<div style='margin-top:10px;'>
-					<label for='ep_yrs'>Time at job: </label>
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Progress:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+            	<td>
+            		<div id='sideProgress'>
+            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+            		</div>
+            	</td>
+            </tr> -->
+
+            <tr>
+              <td>
+                <div class='{{class.history}}'>
+                  <img src="{{image.history_image}}" id='bullet-img'> &nbsp
+                  <a href="History" name='historyBtn' id='historyBtn'>
+                    Comprehensive History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.history}}'>
+                  <img src="{{image.history_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhHistory');" name='historyBtn' id='historyBtn'>
+                    History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.psycho1}}'>
+                  <img src="{{image.psycho1_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapPsycho1');" name='psychoBtn' id='psychoBtn'>
+                    Psychoactive Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.psycho2}}'>
+                  <img src="{{image.psycho2_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapPsycho2');" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.special}}'>
+                  <img src="{{image.special_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSpecial');" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.other}}'>
+                  <img src="{{image.other_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapOther');" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.source}}'>
+                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <div style='margin-bottom:10px;'>
+                	<h3 id='am-h2'>Mental Health: Comprehensive History</h3>
+                </div>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-6 col-sm-6">
+                  			<div>
+                  				<form action='/sap_social/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='mh_sub_header' style='margin-bottom:10px;'>Demographics:</div>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            		<td>
+				            			<div id='mh_text_label' style='margin-right:10px;'>
+				            				<label>1. Birthplace:</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='text' name='birthplace' id='birthplace' value='{{fields.birthplace}}'>
+				            		</td>
+				            	</tr>
+
+				            	<tr>
+				            		<td>
+				            			<div id='mh_text_label'>
+				            				<label>2. Raised By:</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='text' name='raised' id='raised' value='{{fields.raised}}'>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div style='margin-top:8px;'>
+				            				<label for='maritalStatus'>3. Marital Status:</label>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td style='padding-left:15px;'>
+				            			<input type='radio' name='maritalStatus' id='married' value='married' checked onClick='javascript: mhSpouse();'>
+				            		</td>
+
+				            		<td>
+				            			<div id='mh_check_label'>
+				            				<label for=''>Married</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='radio' name='maritalStatus' id='single' value='single' onClick='javascript:   mhSpouse();'>
+				            		</td>
+
+				            		<td>
+				            			<div id='mh_check_label'>
+				            				<label for=''>Single</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='radio' name='maritalStatus' id='divorced' value='divorced' onClick='javascript: mhSpouse();'>
+				            		</td>
+
+				            		<td>
+				            			<div id='mh_check_label'>
+				            				<label for=''>Divorced</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='radio' name='maritalStatus' id='widowed' value='widowed' onClick='javascript: mhSpouse();'>
+				            		</td>
+
+				            		<td>
+				            			<div id='mh_check_label'>
+				            				<label for=''>Widowed</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='radio' name='maritalStatus' id='seperated' value='seperated' onClick='javascript: mhSpouse();'>
+				            		</td>
+
+				            		<td>
+				            			<div id='mh_check_label'>
+				            				<label for=''>Seperated</label>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='mh_text_label' style='padding-left:15px; margin-right:5px;'>
+				            				<label for='numMarriages' id='numMarriages_label'>No. Marriages:</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='number' name='numMarriages' id='numMarriages' style='width:40px;' value='{{fields.numMarriages}}'>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<tr>
+				            			<td>
+				            				<div id='mh_text_label'>
+				            				    <label>4. Occupation:</label>
+				            			    </div>
+				            			</td>
+
+				            			<td>
+				            				<div>
+				            					<input type='text' name='occupation' id='occupation' value='{{fields.occupation}}'>
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</tr>
+
+				            	<tr>
+				            		<tr>
+				            			<td>
+				            				<div id='mh_text_label' style='margin-right:10px;'>
+				            				    <label>5. Current Employment:</label>
+				            			    </div>
+				            			</td>
+
+				            			<td>
+				            				<div>
+				            					<input type='text' name='employer' id='employer' value='{{fields.employer}}'>
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='mh_num_label'>
+				            				<label>6. How Long:</label>
+				            			</div>
+				            		</td>
+
+				            		<td>
+				            			<input type='number' name='employedMo' id='employedMo' style='width:40px;' value='{{fields.employedMo}}'> <em>months</em>
+				            		</td>
+
+				            		<td>
+				            			<input type='number' name='employedYrs' id='employedYrs' style='width:40px; margin-left:15px;' value='{{fields.employedYrs}}'> <em>years</em>
+				            		</td>
+				            	</tr>
+
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<label>
+				            				    7. Past Jobs or Line of Work (Last 5 Years):
+				            			    </label>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            		<td>
+				            			<textarea rows='3' cols='70' name='pastJobs' id='pastJobs'>{{fields.pastJobs}}</textarea>
+				            		</td>
+				            	</tr>
+
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            	<tr><td><div id='mh_space'></div></td></tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div>
+				            				<label>
+				            				    8. Recent Moves (Last 5 Years):
+				            			    </label>
+				            			</div>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            		<td>
+				            			<textarea rows='3' cols='70' name='recentMove' id='recentMove'>{{fields.recentMove}}</textarea>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<div id='mh_sub_header'>Spouse/Significant Other:</div>
+				            		</td>
+				            	</tr>
+				            </table>
+
+				            <table>
+				            	<ul>
+				            	    <tr>
+				            		    <td>
+				            			    <div id='mh_num_label'>
+				            				    <li>
+				            				    	<label for='spouseAge' id='spouseAge_label'>Age:</label>
+				            				    </li>
+				            			    </div>
+				            		    </td>
+
+				            		    <td>
+				            			    <input type='number' style='width:40px;' name='spouseAge' id='spouseAge' value='{{fields.spouseAge}}'> &nbsp<em id='syears_label'>years old</em>
+				            		    </td>
+				            	    </tr>
+				            	</table>
+				            	<table>
+				            	    <tr>
+				            	    	<td>
+				            	    		<div id='mh_text_label'>
+				            	    			<li>
+				            	    				<label for='spouseOccupation' id='spouseOccupation_label'>Occupation:</label>
+				            	    			</li>
+				            	    		</div>
+				            	    	</td>
+
+				            	    	<td>
+				            	    		<input type='text' name='spouseOccupation' id='spouseOccupation' value='{{fields.spouseOccupation}}'>
+				            	    	</td>
+				            	    </tr>
+
+				            	    <tr>
+				            	    	<td>
+				            	    		<div id='mh_text_label'>
+				            	    			<li>
+				            	    				<label for='spouseEmployer' id='spouseEmployer_label' style='margin-right:10px;'>Current Employment:</label>
+				            	    			</li>
+				            	    		</div>
+				            	    	</td>
+
+				            	    	<td>
+				            	    		<input type='text' name='spouseEmployer' id='spouseEmployer' value='{{fields.spouseEmployer}}'>
+				            	    	</td>
+				            	    </tr>
+				            	</table>
+				            	<table>
+				            	    <tr>
+				            	    	<td>
+				            	    		<div id='mh_num_label'>
+				            	    			<li>
+				            	    				<label for='spouseWorkMos' id='spouseWorkMos_label'>How Long?</label>
+				            	    			</li>
+				            	    		</div>
+				            	    	</td>
+
+				            	    	<td>
+				            	    		<input type='number' name='spouseWorkMos' id='spouseWorkMos' style='width:40px;' value='{{fields.spouseWorkMos}}'>&nbsp<em id='smonths'>months</em>
+				            	    	</td>
+
+				            	    	<td>
+				            	    		<input type='number' name='spouseWorkYrs' id='spouseWorkYrs' style='width:40px; margin-left:15px;' value='{{fields.spouseWorkYrs}}'>&nbsp<em id='syears'>years</em>
+				            	    	</td>
+				            	    </tr>
+				                </ul>
+				            </table>
+				            
+				            </div>
+				        </div><!--  END OF LEFT SIDE -->
+
+				        <div class="col-md-6 col-sm-6">
+				        	<div style='margin-top:0px;'>
+				        		<table>
+				        			<tr>
+				            		    <td>
+				            			    <div id='mh_sub_header' style='margin-bottom:10px;'>Family:</div>
+				            		    </td>
+				            	</tr>
+				        		</table>
+
+				        		<table>
+				        		    <tr>
+				        			    <td>
+				        				    <div>
+				        					    <label>1. Do You Have Children?</label>
+				        				    </div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveChildren' id='yesChild' value='True'>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>Yes</label>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveChildren' id='noChild' value='False' checked>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>No</label>
+				        			    	</div>
+				        			    </td>
+				        		    </tr>
+
+				        		    <ul>
+				        		    	<table>
+				        		    		<tr>
+				        		    			<td>
+				        		    				<li  class='indent_subMH'>
+				        		    					<div id='mh_num_label'>
+				        		    						<label for='numChildren' id='numChildren_label'>How Many?</label>
+				        		    					</div>
+				        		    				</li>
+				        		    			</td>
+
+				        		    			<td>
+				        		    				<input type='number' name='numChildren' id='numChildren' style='width:40px;' value='{{fields.numChildren}}'>
+				        		    			</td>
+				        		    		</tr>
+				        		    	</table>
+				        		    </ul>
+				        	    </table>
+
+				        	    <table>
+				        		    <tr>
+				        			    <td>
+				        				    <div>
+				        					    <label>2. Do You Have Sisters?</label>
+				        				    </div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveSisters' id='yesSister' value='True'>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>Yes</label>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveSisters' id='noSister' value='False' checked>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>No</label>
+				        			    	</div>
+				        			    </td>
+				        		    </tr>
+
+				        		    <ul>
+				        		    	<table>
+				        		    		<tr>
+				        		    			<td>
+				        		    				<li  class='indent_subMH'>
+				        		    					<div id='mh_num_label'>
+				        		    						<label for='numSisters' id='numSisters_label'>How Many?</label>
+				        		    					</div>
+				        		    				</li>
+				        		    			</td>
+
+				        		    			<td>
+				        		    				<input type='number' name='numSisters' id='numSisters' style='width:40px;' value='{{fields.numSisters}}'>
+				        		    			</td>
+				        		    		</tr>
+				        		    	</table>
+				        		    </ul>
+				        	    </table>
+
+				        	    <table>
+				        		    <tr>
+				        			    <td>
+				        				    <div>
+				        					    <label>3. Do You Have Brothers?</label>
+				        				    </div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveBrothers' id='yesBrother' value='True'>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>Yes</label>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id='inlineRadio1'>
+				        			    		<input type='radio' name='haveBrothers' id='noBrother' value='False' checked>
+				        			    	</div>
+				        			    </td>
+
+				        			    <td>
+				        			    	<div id=''>
+				        			    		<label>No</label>
+				        			    	</div>
+				        			    </td>
+				        		    </tr>
+
+				        		    <ul>
+				        		    	<table>
+				        		    		<tr>
+				        		    			<td>
+				        		    				<li  class='indent_subMH'>
+				        		    					<div id='mh_num_label'>
+				        		    						<label for='numBrothers' id='numBrothers_label'>How Many?</label>
+				        		    					</div>
+				        		    				</li>
+				        		    			</td>
+
+				        		    			<td>
+				        		    				<input type='number' name='numBrothers' id='numBrothers' style='width:40px;' value='{{fields.numBrothers}}'>
+				        		    			</td>
+				        		    		</tr>
+				        		    	</table>
+				        		    </ul>
+				        	    </table>
+
+				        	    <table>
+				        	    	<tr>
+				        	    		<td>
+				        	    			<div id='mh_sub_header'>
+				        	    				Mother:
+				        	    			</div>
+				        	    		</td>
+				        	    	</tr>
+				        	    </table>
+
+				        	    <ul>
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_text_label' style='margin-right:5px;'>
+				        	    						<label>Occupation:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='text' name='motherOccupation' id='motherOccupation' value='{{fields.motherOccupation}}'>
+				        	    			</td>
+				        	    		</tr>
+
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_text_label' style='margin-right:5px;'>
+				        	    						<label>City:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='text' name='motherCity' id='motherCity' value='{{fields.motherCity}}'>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_select_label'>
+				        	    						<label>State:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<select>
+				        	    					<option name='motherState' value='None Selected'>Select</option>
+
+				        	    					{% for s in states %}
+				        	    					    <option value='{{s.state}}'>{{s.state}}</option>
+				        	    					{% endfor %}
+				        	    				</select>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_num_label'>
+				        	    						<label>Is Your Mother Living?</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mhRadioFix'>
+				        	    					<input type='radio' name='motherLiving' id='momIsLiving' value='True' onClick='javascript: motherShift();' checked>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='inlineRadioLabel'>
+				        	    					<label>Yes</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mhRadioFix'>
+				        	    					<input type='radio' name='motherLiving' id='momNotLiving' onClick='javascript: motherShift();' value='False'>
+				        	    					</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='inlineRadioLabel'>
+				        	    					<label>No</label>
+				        	    				</div>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<div id='mh_num_label'>
+				        	    					<label for='motherAge' id='motherAge_label'>Age:</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='number' name='motherAge' id='motherAge' value='{{fields.motherAge}}' style='width:40px;'>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mh_num_label' style='margin-left:40px;'>
+				        	    					<label for='motherAgeDeath' id='motherAgeDeath_label'>Age at Death:</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='number' name='motherAgeDeath' id='motherAgeDeath' value='{{fields.motherAgeDeath}}' style='width:40px;'>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+				        	    </ul>
+
+
+				        	    <table>
+				        	    	<tr>
+				        	    		<td>
+				        	    			<div id='mh_sub_header'>
+				        	    				Father:
+				        	    			</div>
+				        	    		</td>
+				        	    	</tr>
+				        	    </table>
+
+				        	    <ul>
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_text_label' style='margin-right:5px;'>
+				        	    						<label>Occupation:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='text' name='fatherOccupation' id='fatherOccupation' value='{{fields.fatherOccupation}}'>
+				        	    			</td>
+				        	    		</tr>
+
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_text_label' style='margin-right:5px;'>
+				        	    						<label>City:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='text' name='fatherCity' id='fatherCity' value='{{fields.fatherCity}}'>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_select_label'>
+				        	    						<label>State:</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<select>
+				        	    					<option name='fatherState' value='None Selected'>Select</option>
+
+				        	    					{% for s in states %}
+				        	    					    <option value='{{s.state}}'>{{s.state}}</option>
+				        	    					{% endfor %}
+				        	    				</select>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<li>
+				        	    					<div id='mh_num_label'>
+				        	    						<label>Is Your Mother Living?</label>
+				        	    					</div>
+				        	    				</li>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mhRadioFix'>
+				        	    					<input type='radio' name='fatherLiving' id='dadIsLiving' value='True' onClick='javascript: fatherShift();' checked>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='inlineRadioLabel'>
+				        	    					<label>Yes</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mhRadioFix'>
+				        	    					<input type='radio' name='fatherLiving' id='dadNotLiving' onClick='javascript: fatherShift();' value='False'>
+				        	    					</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='inlineRadioLabel'>
+				        	    					<label>No</label>
+				        	    				</div>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+
+				        	    	<table>
+				        	    		<tr>
+				        	    			<td>
+				        	    				<div id='mh_num_label'>
+				        	    					<label for='fatherAge' id='fatherAge_label'>Age:</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='number' name='fatherAge' id='fatherAge' value='{{fields.fatherAge}}' style='width:40px;'>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<div id='mh_num_label' style='margin-left:40px;'>
+				        	    					<label for='fatherAgeDeath' id='fatherAgeDeath_label'>Age at Death:</label>
+				        	    				</div>
+				        	    			</td>
+
+				        	    			<td>
+				        	    				<input type='number' name='fatherAgeDeath' id='fatherAgeDeath' value='{{fields.fatherAgeDeath}}' style='width:40px;'>
+				        	    			</td>
+				        	    		</tr>
+				        	    	</table>
+				        	    </ul>
+				        	</div>
+				        </div>
+				    </form>
+
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: sap_continue_demographic();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type='number' style='width:40px' value='0' id='ep_yrs' name='ep_yrs'>
-				<label for='ep_yrs'>yrs</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type='number' style='width:40px' value='0' id='ep_mos' name='ep_mos'>
-				<label for='ep_mos'>mos</label>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='pe'>Past Employment: </label>
-			</td>
-			<td>
-				<input type='text' id='pe' name='pe'>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='no_marriages'>No. Marriages</label>
-			</td>
-			<td>
-				<input type='number' value='0' style='width:40px;' id='no_marriages' name='no_marriages'>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<div style='margin-top:10px;'>
-					<label for='residence'>Residence: </label>
-				</div>
-			</td>
-			<td>
-				<div style='margin-top:10px;'>
-					<select name='residence' id='residence' value='0'>
-						<option value=''>Select</option>
-					</select>
-				</div>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='income'>Income: </label>
-			</td>
-			<td>
-				<select name='income' id='income' value='0'>
-					<option value=''>Select</option>
-				</selec>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='credit'>Credit: </label>
-			</td>
-			<td>
-				<select name='credit' id='credit' value='0'>
-					<option value=''>Select</option>
-				</selec>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='debt'>Debt: </label>
-			</td>
-			<td>
-				<select name='debt' id='debt' value='0'>
-					<option value=''>Select</option>
-				</selec>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='hc'>Health Care: </label>
-			</td>
-			<td>
-				<select name='hc' id='hc' value='0'>
-					<option value=''>Select</option>
-				</selec>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-				<label for='other'>Other Income: </label>
-			</td>
-			<td>
-				<select name='other' id='other' value='0'>
-					<option value=''>Select</option>
-				</selec>
-			</td>
-		</tr>
-
-
-
-		<tr>
-			<td>
-				<div style='margin-top:20px;'>
-					<input type='submit' value='submit'>
-				</div>
-			</td>
-		</tr>
-	</table>
-</form>
-
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+

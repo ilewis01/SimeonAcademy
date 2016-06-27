@@ -1366,6 +1366,12 @@ function initialize_am_demo(json_data, back) {
 	}
 }
 
+function start_am_form() {
+	var form = document.getElementById('am_instructions');
+	form.action = '/am_demographic/';
+	form.submit();
+}
+
 
 function continue_am() {
 	var proceed = true;
@@ -4390,6 +4396,177 @@ function initialize_sap_special(json_data) {
 
 	disable_sap_special();
 }
+
+//======================================================================================================================
+//++++++++++++++++++++++++++++++++++++++++++ MH FUNCTIONS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function mhSpouse() {
+	//TRIGGERS
+	var divorced = document.getElementById('divorced');
+	var married = document.getElementById('married');
+	var widowed = document.getElementById('widowed');
+	var seperated = document.getElementById('seperated');
+
+	//LABELS
+	var spouseAge_label = document.getElementById('spouseAge_label');
+	var spouseOccupation_label = document.getElementById('spouseOccupation_label');
+	var spouseEmployer_label = document.getElementById('spouseEmployer_label');
+	var spouseWorkMos_label = document.getElementById('spouseWorkMos_label');
+	var numMarriages_label = document.getElementById('numMarriages_label')
+	var syears_label = document.getElementById('syears_label');
+	var smonths = document.getElementById('smonths');
+	var syears = document.getElementById('syears');
+
+	//FIELDS
+	var spouseAge = document.getElementById('spouseAge');
+	var spouseOccupation = document.getElementById('spouseOccupation');
+	var spouseEmployer = document.getElementById('spouseEmployer');
+	var spouseWorkMos = document.getElementById('spouseWorkMos');
+	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
+	var numMarriages = document.getElementById('numMarriages');
+
+	if (divorced.checked == true || married.checked == true || widowed.checked == true || seperated.checked == true) {
+		spouseAge.disabled = false;
+		spouseOccupation.disabled = false;
+		spouseEmployer.disabled = false;
+		spouseWorkMos.disabled = false;
+		spouseWorkYrs.disabled = false;
+		numMarriages.disabled = false;
+
+		opacityHigh(spouseAge_label);
+		opacityHigh(spouseOccupation_label);
+		opacityHigh(spouseEmployer_label);
+		opacityHigh(spouseWorkMos_label);
+		opacityHigh(syears_label);
+		opacityHigh(smonths);
+		opacityHigh(syears);
+		opacityHigh(numMarriages_label);
+
+		opacityHigh(spouseAge);
+		opacityHigh(spouseOccupation);
+		opacityHigh(spouseEmployer);
+		opacityHigh(spouseWorkMos);
+		opacityHigh(spouseWorkYrs);
+		opacityHigh(numMarriages);
+	}
+
+	else {
+		opacityLow(spouseAge_label);
+		opacityLow(spouseOccupation_label);
+		opacityLow(spouseEmployer_label);
+		opacityLow(spouseWorkMos_label);
+		opacityLow(syears_label);
+		opacityLow(smonths);
+		opacityLow(syears);
+		opacityLow(numMarriages_label);
+
+		opacityLow(spouseAge);
+		opacityLow(spouseOccupation);
+		opacityLow(spouseEmployer);
+		opacityLow(spouseWorkMos);
+		opacityLow(spouseWorkYrs);
+		opacityLow(numMarriages);
+
+		spouseAge.value = '0';
+		spouseOccupation.value = '';
+		spouseEmployer.value = '';
+		spouseWorkMos.value = '0';
+		spouseWorkYrs.value = '0';
+		numMarriages.value = '';
+
+		spouseAge.disabled = true;
+		spouseOccupation.disabled = true;
+		spouseEmployer.disabled = true;
+		spouseWorkMos.disabled = true;
+		spouseWorkYrs.disabled = true;
+		numMarriages.disabled = true;
+	}
+}
+
+function motherShift() {
+	//TRIGGER
+	var momIsLiving = document.getElementById('momIsLiving');
+
+	//LABELS
+	var motherAge_label = document.getElementById('motherAge_label');
+	var motherAgeDeath_label = document.getElementById('motherAgeDeath_label'); 
+
+	//FIELDS
+	var motherAge = document.getElementById('motherAge');
+	var motherAgeDeath = document.getElementById('motherAgeDeath');
+
+	if (momIsLiving.checked === true) {
+		motherAge.disabled = false;
+		opacityHigh(motherAge);
+		opacityHigh(motherAge_label);
+
+		motherAgeDeath.value = '0';
+		opacityLow(motherAgeDeath);
+		opacityLow(motherAgeDeath_label);
+		motherAgeDeath.disabled = true;
+	}
+
+	else {
+		motherAgeDeath.disabled = false;
+		opacityHigh(motherAgeDeath);
+		opacityHigh(motherAgeDeath_label);
+
+		motherAge.value = '0';
+		opacityLow(motherAge);
+		opacityLow(motherAge_label);
+		motherAge.disabled = true;
+	}
+}
+
+function fatherShift() {
+	//TRIGGER
+	var dadIsLiving = document.getElementById('dadIsLiving');
+
+	//LABELS
+	var fatherAge_label = document.getElementById('fatherAge_label');
+	var fatherAgeDeath_label = document.getElementById('fatherAgeDeath_label'); 
+
+	//FIELDS
+	var fatherAge = document.getElementById('fatherAge');
+	var fatherAgeDeath = document.getElementById('fatherAgeDeath');
+
+	if (dadIsLiving.checked === true) {
+		fatherAge.disabled = false;
+		opacityHigh(fatherAge);
+		opacityHigh(fatherAge_label);
+
+		fatherAgeDeath.value = '0';
+		opacityLow(fatherAgeDeath);
+		opacityLow(fatherAgeDeath_label);
+		fatherAgeDeath.disabled = true;
+	}
+
+	else {
+		fatherAgeDeath.disabled = false;
+		opacityHigh(fatherAgeDeath);
+		opacityHigh(fatherAgeDeath_label);
+
+		fatherAge.value = '0';
+		opacityLow(fatherAge);
+		opacityLow(fatherAge_label);
+		fatherAge.disabled = true;
+	}
+}
+
+function initialize_mh_demo() {
+	mhSpouse();
+	motherShift();
+	fatherShift();
+}
+
+function continue_to_mh_form() {
+	var form = document.getElementById('mh_instructions');
+	form.action = '/mh_demographic/';
+	form.submit();
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//======================================================================================================================
 
 function sideBarOption(page) {
 	document.getElementById('back').value = 'true';

@@ -1,0 +1,3439 @@
+{% extends "printBase.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="" onLoad="javascript: ;">
+	<div class='viewFormStyle'>
+		<div class="container">
+			<div class="row"> 
+				<div class="col-md-12 col-sm-12">
+					<h2><b>Anger Management Intake Form</b></h2>
+					<h4>Date of Assessment: <b>{{date_of_form}}</b></h4>
+
+					<div id='header-margin-top'>
+						<!-- ___________________________________DEMOGRAPHIC SECTION___________________________________ -->
+						<table class='align-form-center'>
+							<tr><td id='viewHeaderBox'>DEMOGRAPHICS</td></tr>
+						</table>
+
+						<div class='viewSectionWrapper'>
+							<table>
+								<tr>
+									<td>
+										<span id='viewLabel'>Name: </span>
+									</td>
+									<td>
+										<div id='viewAns'>{{AM.client.lname}}, {{AM.client.fname}} &nbsp{{AM.client.middleInit}}</div>
+									</td>
+
+									<td>
+										<div style='margin-left:200px;;'>
+											<span id='viewLabel'>DOB: </span>
+										</div>
+									</td>
+									<td>
+										<div id='viewAns'>{{AM.client.dob}}</div>
+									</td>
+								</tr>
+							</table>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Home Address: </span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.client.street_no}} {{AM.client.street_name}} <em>&nbsp;&nbsp;{{AM.client.apartment_no}}</em></div>
+										</td>
+									</tr>
+
+									<tr>
+										<td></td>
+										<td>
+											<div id='viewAnsIndent'>
+												{{AM.client.city}}, {{AM.client.state}} {{AM.client.zip_code}}
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Probation Officer/Court of Referral: </span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.client.probationOfficer}}</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Marital Status: </span>
+										</td>
+
+										<td>
+											<div id='img_div'>
+												<img src="{{images.married}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Married</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.single}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Single</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.divorced}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Divorced</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.separated}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Seperated</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Living Situation: </span>
+										</td>
+
+										<td>
+											<div id='img_div'>
+												<img src="{{images.partner}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Live with partner</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.alone}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Live alone</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.family}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Live w/family</span>
+										</td>
+
+										<td>
+											<div id='img_divLong'>
+												<img src="{{images.friend}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Friend</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>How long at current residence? </span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.months_res}} month(s)</div>
+										</td>
+
+										<td>
+											<div id='viewAns' style='margin-left:10px;'>{{AM.demographic.years_res}} year(s)</div>
+										</td>
+
+										<td>
+											<div style='margin-left:40px;'>
+												<span id='viewLabel'>Rent</span>
+											</div>
+										</td>
+										<td>
+											<img src="{{images.rent}}" id='checkbox_img_size'>
+										</td>
+
+										<td>
+											<div style='margin-left:20px;'>
+												<span id='viewLabel'>Own</span>
+											</div>
+										</td>
+										<td>
+											<img src="{{images.own}}" id='checkbox_img_size'>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpace'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Dependents: </span>
+										</td>
+
+										<td style='padding-left:50px;'>
+											<span id='viewLabel'>How many children?</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.num_children}}</div>
+										</td>
+
+										<td style='padding-left:35px;'>
+											<span id='viewLabel'>Spouse:</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{spouse}}</div>
+										</td>
+
+										<td style='padding-left:35px;'> 
+											<span id='viewLabel'>Other Dependants:</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.other_dependants}}</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div> <!-- END DEMOGRAPHIC SECTION -->
+
+
+						<!-- ___________________________________EDUCATION SECTION___________________________________ -->
+						<div id='section_separation'>
+							<table class='align-form-center'>
+								<tr><td id='viewHeaderBox'>EDUCATION</td></tr>
+							</table>
+						</div>
+
+
+						<div class='viewSectionWrapper'>
+							<table>
+								<tr>
+									<td>
+										<span id='viewLabel'>Highest grade completed:</span>
+									</td>
+
+									<td>
+										<div id='img_div'>
+											<img src="{{images.partner}}" id='checkbox_img_size'>
+										</div>
+									</td>
+
+									<td>
+										<span id='viewLabel'>GED</span>
+									</td>
+
+									<td>
+										<div id='img_divLong'>
+											<img src="{{images.alone}}" id='checkbox_img_size'>
+										</div>
+									</td>
+
+									<td>
+										<span id='viewLabel'>HS</span>
+									</td>
+
+									<td>
+										<div id='img_divLong'>
+											<img src="{{images.family}}" id='checkbox_img_size'>
+										</div>
+									</td>
+
+									<td>
+										<span id='viewLabel'>College/Degree Received</span>
+									</td>
+								</tr>
+							</table>
+
+							<div id='viewVerticalSpaceVeryLow'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>If drop out, why?</span>
+										</td>
+
+										<td>
+											<div id='viewAns'><em>{{AM.demographic.resasonDO}}</em></div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+
+
+						<!-- ___________________________________EMPLOYMENT SECTION___________________________________ -->
+						<div id='section_separation'>
+							<table class='align-form-center'>
+								<tr><td id='viewHeaderBox'>EMPLOYMENT</td></tr>
+							</table>
+						</div>
+
+
+						<div class='viewSectionWrapper'>
+							<table>
+								<tr>
+									<td>
+										<span id='viewLabel'>Current Employee:</span>
+									</td>
+
+									<td>
+										<div id='viewAns'>{{AM.demographic.employee}}</div>
+									</td>
+
+									<td>
+											<span id='viewLabel' style='margin-left:100px;'>Phone:</span>
+									</td>
+
+									<td>
+										<div id='viewAns'>{{emp_phone}}</div>
+									</td>
+								</tr>
+							</table>
+
+							<div id='viewVerticalSpaceVeryLow'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Address:</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.emp_address}}</div>
+										</td>	
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpaceVeryLow'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Current job title:</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.job_title}}</div>
+										</td>
+
+										<td>
+											<span id='viewLabel' style='margin-left:117px;'>Length of employment:</span>
+										</td>
+
+										<td>
+											<div id='viewAns'>{{AM.demographic.employed_months}} month(s)</div>
+										</td>
+
+										<td>
+											<div id='viewAns' style='margin-left:10px;'>{{AM.demographic.employed_years}} year(s)</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<!-- ___________________________________HEALTH SECTION___________________________________ -->
+						<div id='section_separation'>
+							<table class='align-form-center'>
+								<tr><td id='viewHeaderBox'>MEDICAL/HEALTH</td></tr>
+							</table>
+						</div>
+
+						<div class='viewSectionWrapper'>
+							<table>
+								<tr>
+									<td>
+										<span id='viewLabel'>Do you have any ongoing health problems?</span>
+									</td>
+
+									<td>
+										<div id='img_div'>
+											<img src="{{images.goodHealth}}" id='checkbox_img_size'>
+										</div>
+									</td>
+
+									<td>
+										<span id='viewLabel'>Yes</span>
+									</td>
+
+									<td>
+										<div id='img_div'>
+											<img src="{{images.badHealth}}" id='checkbox_img_size'>
+										</div>
+									</td>
+
+									<td>
+										<span id='viewLabel'>No</span>
+									</td>
+								</tr>
+							</table>
+
+							<div id='shortSpaceView'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>If yes, please explain: </span>
+										</td>
+
+										<td>
+											<div id='viewAns'><em>{{AM.demographic.health_exp}}</em></div>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='viewVerticalSpaceVeryLow'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>Are you currently taking any medications? </span>
+										</td>
+
+										<td>
+											<div id='img_div'>
+												<img src="{{images.onMeds}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>Yes</span>
+										</td>
+
+										<td>
+											<div id='img_div'>
+												<img src="{{images.noMeds}}" id='checkbox_img_size'>
+											</div>
+										</td>
+
+										<td>
+											<span id='viewLabel'>No</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<div id='shortSpaceView'>
+								<table>
+									<tr>
+										<td>
+											<span id='viewLabel'>If yes, what are you taking? </span>
+										</td>
+
+										<td>
+											<div id='viewAns'><em>{{AM.demographic.whatMedicine}}</em></div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+		
+						<!-- ___________________________________PSYCHIATRIC SECTION___________________________________ -->
+						<div id='section_separation'>
+							<table class='align-form-center'>
+								<tr><td id='viewHeaderBox'>PSYCHIATRIC STATUS</td></tr>
+							</table>
+						</div>
+    
+			            <!-- Isaias code starts here -->
+			            
+			            <div class='viewSectionWrapper'>
+			            
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>Have you ever been treated for psychological or emotional problems? </span>
+			                  </td>
+
+			                  <td>
+			                    <div id='img_div'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Yes</span>
+			                  </td>
+
+			                  <td>
+			                    <div id='img_div'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>No</span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, for what were you being treated? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{what_treated}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How long ago did you receive counseling or treatment? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{when}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Did you complete the program? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If no, why not? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{why}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced serious depression, sadness, hopelessness, loss of interest, difficulty with daily functions, in the past 30 days or in your life time: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced serious anxiety, tension, up-tightness, stress, unreasonably worried, inability to relax? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain when was the last time and how often does this occur: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{when}} {{how_often}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced hallucinations-saw things or heard voices that were not there? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>When was the last time you experienced hallucinations? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{when}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced trouble understanding, concentrating, or remembering? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced trouble controlling violent behavior, including episodes of rage or violence? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>When was the last time this occured? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{when}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What usually triggers this behavior? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{trigger}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you experienced thoughts of suicide in the past 30 days or in your life time? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Do you feel suicidal today? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel' style='margin-left:100px;'>If yes, do you have a plan? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, describe your plan: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{plan}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you ever attempted suicide? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you felt like hurting others or commiting homicide? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, whom did you want to hurt and what were the reasons: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{whom}} {{why}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you ever been prescribed medication(s) for any psychological or emotional problems? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, for what was the medication prescribed? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{why}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Was the treatment successful? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END PSYCHIATRIC SECTION -->
+			    
+			            <!-- ___________________________________ALCOHOL AND DRUG HISTORY_________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>ALCOHOL AND DRUG HISTORY</td></tr>
+			              </table>
+			            </div>
+			    
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id="viewLabel">At what age did you have your first drink of alcohol and/or drugs?</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id="viewAns">{{age}}</div>
+			                  <td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What did you use?</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id="viewAns">{{what_drugs}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Do you currently drink alcohol and/or use drugs?</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id="img_div">
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id="viewLabel">Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>  
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, what do you use: </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{current_drugs}}</em></div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel' style='margin-left:250px;'>How often do you use </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{frequency}}</em></div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel' style='margin-left:250px;'>and how much? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{amount}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If you do not currently drink alcohol or use drugs, have you ever drank alcohol and/or used drugs? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>                
+			                </table> 
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How long ago did you quit? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'><em>{{when_quit}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>For what reasons did you quit? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{why}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you ever received a DUI? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How many? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{how_many}}</em></div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel' style='margin-left:150px;'>What was your Blood Alcohol Level on your last one?</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{level}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Have you ever received treatment for alcohol or drug abuse/dependence? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, when and where were you in treatment? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{when}} {{where}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Did you successfully complete treatment? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If not, why not? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{why}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Are you still abstinent? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If no, what triggered your relapse? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{trigger}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Were you drinking and/or using drugs during your most recent abusive episode? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Is the use of alcohol and/or drugs a problem in your relationship? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Do you need help for alcohol or drug abuse/dependency problems? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END ALCOHOL AND DRUG HISTORY SECTION -->
+			    
+			            <!-- ___________________________________CHILDHOOD HISTORY________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>CHILDHOOD HISTORY</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>By whom were you raised? </span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id="img_div">
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id="viewLabel">Parents</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='img_divLong'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Grandparents</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='img_divLong'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Relatives</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='img_divLong'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Foster Care</span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Are your parents/gaurdian living or deceased: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Living (M/F)</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Deceased (M/F)</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Did you experience any traumatic events during your childhood? (i.e., deaths, abuse, etc.) </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain how you came to leave home: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{how}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Number of siblings: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{siblings_num}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Is your relationship with your siblings close or distant? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{close}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How would you describe your relationship with your father? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Close</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Distant</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain what made it close or distant: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{explanation}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Were you or any of your siblings physically, psychologically, or sexually abused as children? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			       
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>By whom? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{whom}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What was the impact emotionally and psychologically on the abused? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{impact}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How would you describe your relationship with your mother? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Close</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Distant</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain what made it close or distant: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Did you have any problems with anger or violent behavior as a child or teenager? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, please explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Were there any other events or circumstances regarding your childhood that may help us understand your particular counseling needs? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Did you ever see your father or mother physically or psychologically abuse each other? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What impact did seeing/hearing one of your parents abuse the other have on you emotionally, psychologically, or physically? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{impact}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END CHILDHOOD HISTORY SECTION -->
+			            
+			            <!-- ___________________________________ANGER/VIOLENCE HISTORY___________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>ANGER/VIOLENCE HISTORY<br>MOST RECENT ANGER EPIDSODE</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>Please describe in detail your most recent anger incident: </span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='viewAns'>{{description}}</div>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>When did the anger episode occur? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{when}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Where did the anger episode occur? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{where}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>With whom? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{whom}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What happened? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{what_happened}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What actions did you demonstrate during the angry epidsode? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Physical</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Verbal Threats</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Property destruction</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{other}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Main types of angry words and thoughts during the angry episode: </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{wordsthoughts}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain how did you feel physically while you were angry? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Tense</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Rush</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Strong</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No Other</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{other}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How did the angry episode end? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{how}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Were there any use of alcohol and/or drugs by anyone involved? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, by whom? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{whom}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Was this incident typical? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Duration: </span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>When you become angry, how long do you remain angry? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{duration}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Intensity: </span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>On a scale of 1 to 10, with one representing no anger and 10 representing explosive anger, rate the intensity of your anger during the angry episode. </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{intensity}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Frequency: </span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How often have you had trouble with your anger: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>This time only</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>This month only</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Last six months</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_divLong' style='margin-left:430px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Since childhood</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong' style='margin-left:30px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Adolescent</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong' style='margin-left:82px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Only as an adult (Every single day)</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END ANGER/VIOLENCE HISTORY SECTION -->
+			            
+			            <!-- __________________________________CONNECTION SECTION________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>CONNECTION BETWEEN YOUR USE OF ALCOHOL/DRUGS AND<br>ANGER/AGGRESSION</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <div id='img_div'>
+			                      <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+			                  
+			                  <td>
+			                    <span id='viewLabel'>Anger/aggression gets worse when using.</span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>I only get in trouble with my anger/aggression while using.</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>I'm less angry/aggresive when I drink or use drugs.</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Others tell me there is a connection but I have trouble believing it.</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>There seems to be no connection at all.</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other alcohol/drug connections with anger/aggression (Explain)</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{explanation}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END CONNECTION SECTION -->
+			            
+			            <!-- __________________________________WORST ANGER EPISODE SECTION_______________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>EXPLAIN YOUR WORST ANGER EPISODE</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>When and with whom were involved?</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='viewAns'>{{when}} {{whom}}</div>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What happened?</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{what}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Main types of angry words and thoughts during this episode:</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{types}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How did this angry episode start?</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{how}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>How did it end?</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{how}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Any alcohol or drugs by anyone involved? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, who was using? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{whom}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What actions did you demonstrate during the angry epidsode? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Physical</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Verbal Threats</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Property destruction</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{other}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Explain: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{explanation}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END WORST ANGER EPISODE SECTION -->
+			            
+			            <!-- __________________________________WITH WHOM DO YOU GET ANGRY________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>WITH WHOM DO YOU GET ANGRY</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <div id='img_divLong'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Partner</span>
+			                  </td>
+
+			                  <td>
+			                    <div id='img_divLong' style='margin-left:100px;'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Parents/Step-Parents</span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='img_divLong' style='margin-left:100px;'>
+			                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>Your children (step-children)</span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_divLong'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Relatives</span>
+			                    </td>
+
+			                    <td>
+			                      <div id='img_divLong' style='margin-left:90px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Employer/Co-workers</span>
+			                    </td>
+			                    
+			                     <td>
+			                      <div id='img_divLong' style='margin-left:90px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Friends</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_divLong' style='margin-left:200px;'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other (whom)</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{whom}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What about? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{about}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			               
+			            </div><!-- END WITH WHOM DO YOU GET ANGRY -->
+			            
+			            <!-- __________________________________FAMILY OF ORIGIN__________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>FAMILY OF ORIGIN</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>Describe what the following people do/did with their anger, especially when you were growing up: </span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Your father/stepfather: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{describe}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Your mother/stepmother: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{describe}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Your brothers/sisters: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{describe}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Other significant persons (grandparents, etc.): </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{describe}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Is there any history of bad temper, assaults, homicides or suicides? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{history}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>In general, what did you learn about anger from your family? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{what}} </div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END FAMILY OF ORIGIN SECTION -->
+			            
+			            <!-- __________________________________CURRENT PROBLEMS SECTION__________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>ANY CURRENT PROBLEMS WITH OR HISTORY OF: </td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>NA Describe: </span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='viewAns'>{{describe}}</div>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Problem: </span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Brain injury</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Stroke</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Epilepsy/Seizures</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Attention Deficit Disorder</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Premenstrual Syndrome</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Depression</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>PTSD</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other serious illness</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Are you currently taking any medications: </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Yes</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>No</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>If yes, what are you taking? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'><em>{{what}}</em></div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END CURRENT PROBLEMS SECTION -->
+			            
+			            <!-- __________________________________LEGAL HISTORY SECTION__________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>LEGAL HISTORY RELATING TO ANGER/AGGRESSION</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>Current legal problems related to anger/aggression: </span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='viewAns'>{{current}}</div>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Past legal problems related to anger/aggression: </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{past}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END LEGAL HISTORY SECTION -->
+			            
+			            <!-- __________________________________ATTEMPT CONTROL SECTION__________________________________ -->
+			            <div id='section_separation'>
+			              <table class='align-form-center'>
+			                <tr><td id='viewHeaderBox'>HOW HAVE YOU ATTEMPTEDTO CONTROL YOUR ANGER?</td></tr>
+			              </table>
+			            </div>
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <div id='img_div'>
+			                      <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+			                    </div>
+			                  </td>
+
+			                  <td>
+			                    <span id='viewLabel'>I never have.</span>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Talk to myself. What do you say to yourself to control your anger? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{what}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Leave the scene. How long? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{how_long}}</div>
+			                    </td>
+			                    
+			                    <td>
+			                      <span id='viewLabel' style='margin-left:100px;'>What do you do?</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{what}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Try to relax. How? </span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{how}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Go to a self help group such as A.A.</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <div id='img_div'>
+			                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+			                      </div>
+			                    </td>
+
+			                    <td>
+			                      <span id='viewLabel'>Other? What?</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{what}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Is there anything else you can tell me that might help me understand your anger and how it affects you and others? </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{anything_else}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Recommendation</span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='shortSpaceView'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>What would you like to change or learn as a result of counseling? </span>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>1.</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{1}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>2.</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{2}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			              
+			              <div id='viewVerticalSpaceVeryLow'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>3.</span>
+			                    </td>
+			                    
+			                    <td>
+			                      <div id='viewAns'>{{3}}</div>
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div><!-- END ATTEMPT CONTROL SECTION -->
+			            
+			            <div class='viewSectionWrapper'>
+			              <table>
+			                <tr>
+			                  <td>
+			                    <span id='viewLabel'>Clinician Signature: </span>
+			                  </td>
+			                  
+			                  <td>
+			                    <div id='viewAns'>{{sig}}</div>
+			                  </td>
+			                </tr>
+			              </table>
+			              
+			              <div id='viewVerticalSpace'>
+			                <table>
+			                  <tr>
+			                    <td>
+			                      <span id='viewLabel'>Date: </span>
+			                    </td>
+
+			                    <td>
+			                      <div id='viewAns'>{{date}}</div>
+			                    </td>
+			                  </tr>
+			                </table>  
+			              </div>
+			            </div>
+			          <!-- Isaias code ends here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock %}

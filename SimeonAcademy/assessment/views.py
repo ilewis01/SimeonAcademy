@@ -114,7 +114,7 @@ def client_documents(request):
 		content = {}
 		content['user'] = user
 		content['title'] = "Simeon Academy | My Documents"
-		return render_to_response('client/view_documents.html', content)
+		return render_to_response('global/printAM.html', content)
 
 @login_required(login_url='/index')
 def all_active_clients(request):
@@ -777,12 +777,14 @@ def am_preliminary(request):
 			openForm('am', am, session.client)
 
 			content['session'] = session
-			content['am'] = am
+			content['AM'] = am
 
 			if action['isNew'] == False:
 				goToNext = 'false'
 			else:
 				goToNext = 'true'
+
+			goToNext = 'true' #ERASE THIS WHEN YOU FINISH
 
 			if action['isNew'] == False and str(goToNext) == 'false':
 				save_section = universalLocation('am', am.id)
@@ -790,6 +792,7 @@ def am_preliminary(request):
 				content['save_section'] = save_section
 				content['type_header'] = 'Anger Management'
 				content['form'] = am
+				content['AM'] = am
 				content['form_type'] = 'am'
 				content['date_of_assessment'] = am.start_time
 				content['title'] = 'Simeon Academy | Anger Management'
@@ -818,65 +821,43 @@ def am_demographic(request):
 
 		else:
 			#AUTHENTICATED AS A COUNSELOR
-			client_id = request.POST.get('client_id', '')
 			session_id = request.POST.get('session_id', '')
+			am_id = request.POST.get('am_id')
 			back = request.POST.get('back_btn', '')
 			save_section = request.POST.get('save_section', '')
 			goToNext = request.POST.get('goToNext', '')
-
-			client = Client.objects.get(id=client_id)			
-			session = ClientSession.objects.get(id=session_id)
-
-			if back == '' or back == None:
-				back = 'false'			
-
-			proceed = startAM(client)		
-			am = proceed['am']
+			
+			session = ClientSession.objects.get(id=session_id)	
+			am = AngerManagement.objects.get(id=am_id)	
 
 			if back == 'false':
 				saveCompletedAmSection(request, save_section, am)
 
-			content['am'] = am
+			marital = MaritalStatus.objects.all().order_by('status')
+			living = LivingSituation.objects.all().order_by('situation')
+			education = EducationLevel.objects.all().order_by('level')
+
+			#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
+			fields = getAMDemoFields(am)
+			json_data = json.dumps(fields)
+			image = amSidebarImages(am, 'demo')
+			classes = grabAmClassesCSS(am, 'demo')
+			next_section = grabProperNextSection(am, '/am_demographic/')
+
 			content['back'] = back
 			content['session'] = session
-			content['client'] = client
+			content['next_section'] = next_section
+			content['class'] = classes
+			content['image'] = image
+			content['education'] = education
+			content['marital'] = marital
+			content['living'] = living
+			content['AM'] = am
+			content['json_data'] = json_data
+			content['fields'] = fields
+			content['back'] = back
 			content['title'] = "Anger Management Assessment | Simeon Academy"
-
-			print "isNew: " + str(proceed['isNew'])
-			print "back: " + str(back)
-			print "goToNext: " + str(goToNext)
-
-			if proceed['isNew'] == False and proceed['back'] == 'true' and str(goToNext) == 'false':
-				#CLIENT CURRENTLY HAS EXISTING INCOMPLETE AM FILE USER MUST CHOOSE WHAT TO DO WITH PRE-EXISTING											
-				return render_to_response('counselor/forms/AngerManagement/getClient.html', content)
-
-			else:
-				marital = MaritalStatus.objects.all().order_by('status')
-				living = LivingSituation.objects.all().order_by('situation')
-				education = EducationLevel.objects.all().order_by('level')
-
-				#JSON OBJECTS WILL DYNAMICALLY FILL IN THE HTML FORM FIELDS IN REAL TIME FROM THE SERVER
-				# fields = None
-				# json_data = None
-				fields = getAMDemoFields(am)
-				json_data = json.dumps(fields)
-				image = amSidebarImages(am, 'demo')
-				classes = grabAmClassesCSS(am, 'demo')
-				next_section = grabProperNextSection(am, '/am_demographic/')
-
-				#CONTEXT
-				content['next_section'] = next_section
-				content['class'] = classes
-				content['image'] = image
-				content['education'] = education
-				content['marital'] = marital
-				content['living'] = living
-				content['AM'] = am
-				content['json_data'] = json_data
-				content['fields'] = fields
-				content['back'] = back
-
-				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
 			
 @login_required(login_url='/index')
 def am_drugHistory(request):
@@ -1271,70 +1252,70 @@ def am_location(request):
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
-		else:
-			action = request.POST.get('am-choice', '')
-			am = request.POST.get('am_id')
-			am = AngerManagement.objects.get(id=am)
-			session_id = request.POST.get('session_id', '')
-			session = ClientSession.objects.get(id=session_id)
-			client = session.client
-			content['client'] = session.client
-			phone = convert_phone(client.phone)
-			content['phone'] = phone
-			content['client'] = client
-			content['session'] = session
-			content['AM'] = am
+		# else:
+			# action = request.POST.get('am-choice', '')
+			# am = request.POST.get('am_id')
+			# am = AngerManagement.objects.get(id=am)
+			# session_id = request.POST.get('session_id', '')
+			# session = ClientSession.objects.get(id=session_id)
+			# client = session.client
+			# content['client'] = session.client
+			# phone = convert_phone(client.phone)
+			# content['phone'] = phone
+			# content['client'] = client
+			# content['session'] = session
+			# content['AM'] = am
 
-			if str(action) == 'finish-old':
-				##go to the next section to be completed in the form
-				back = 'false'
-				content['back'] = back
-				goToLocation = continueToAmSection(am)
+			# if str(action) == 'finish-old':
+			# 	##go to the next section to be completed in the form
+			# 	back = 'false'
+			# 	content['back'] = back
+			# 	goToLocation = continueToAmSection(am)
 
-				if goToLocation == 'counselor/forms/AngerManagement/demographic.html':
-					marital = MaritalStatus.objects.all().order_by('status')
-					living = LivingSituation.objects.all().order_by('situation')
-					education = EducationLevel.objects.all().order_by('level')
-					content['education'] = education
-					content['marital'] = marital
-					content['living'] = living
+			# 	if goToLocation == 'counselor/forms/AngerManagement/demographic.html':
+			# 		marital = MaritalStatus.objects.all().order_by('status')
+			# 		living = LivingSituation.objects.all().order_by('situation')
+			# 		education = EducationLevel.objects.all().order_by('level')
+			# 		content['education'] = education
+			# 		content['marital'] = marital
+			# 		content['living'] = living
 
-				m_page = grabAmSideBarString(goToLocation)
-				image = amSidebarImages(am, m_page)
-				classes = grabAmClassesCSS(am, m_page)
-				fields = getAMFields(am, goToLocation)
-				json_data = json.dumps(fields)	
+			# 	m_page = grabAmSideBarString(goToLocation)
+			# 	image = amSidebarImages(am, m_page)
+			# 	classes = grabAmClassesCSS(am, m_page)
+			# 	fields = getAMFields(am, goToLocation)
+			# 	json_data = json.dumps(fields)	
 
-				content['class'] = classes
-				content['image'] = image
-				content['json_data'] = json_data
-				content['fields'] = fields
-				content['title'] = "Counselor Home Page | Simeon Academy"
-				return render_to_response(goToLocation, content)
-			elif str(action) == 'start-new':
-				##delete the current form and start at beginning of the am form
-				new_am = refreshAM(am)
-				back = 'false'
-				content['back'] = back
+			# 	content['class'] = classes
+			# 	content['image'] = image
+			# 	content['json_data'] = json_data
+			# 	content['fields'] = fields
+			# 	content['title'] = "Counselor Home Page | Simeon Academy"
+			# 	return render_to_response(goToLocation, content)
+			# elif str(action) == 'start-new':
+			# 	##delete the current form and start at beginning of the am form
+			# 	new_am = refreshAM(am)
+			# 	back = 'false'
+			# 	content['back'] = back
 
-				fields = getAMDemoFields('false', am)
-				json_data = json.dumps(fields)
+			# 	fields = getAMDemoFields('false', am)
+			# 	json_data = json.dumps(fields)
 
-				marital = MaritalStatus.objects.all().order_by('status')
-				living = LivingSituation.objects.all().order_by('situation')
-				education = EducationLevel.objects.all().order_by('level')
-				content['AM'] = new_am
-				content['json_data'] = json_data
-				content['fields'] = fields
-				content['education'] = education
-				content['marital'] = marital
-				content['living'] = living				
-				content['title'] = "Anger Management Assessment | Simeon Academy"
-				return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
-			elif str(action) == 'cancel':
-				## return to the client options page
-				content['title'] = "Client Options | Simeon Academy"
-				return render_to_response('counselor/client/client_options.html', content)
+			# 	marital = MaritalStatus.objects.all().order_by('status')
+			# 	living = LivingSituation.objects.all().order_by('situation')
+			# 	education = EducationLevel.objects.all().order_by('level')
+			# 	content['AM'] = new_am
+			# 	content['json_data'] = json_data
+			# 	content['fields'] = fields
+			# 	content['education'] = education
+			# 	content['marital'] = marital
+			# 	content['living'] = living				
+			# 	content['title'] = "Anger Management Assessment | Simeon Academy"
+			# 	return render_to_response('counselor/forms/AngerManagement/demographic.html', content)
+			# elif str(action) == 'cancel':
+			# 	## return to the client options page
+			# 	content['title'] = "Client Options | Simeon Academy"
+			# 	return render_to_response('counselor/client/client_options.html', content)
 
 @login_required(login_url='/index')
 def am_problems(request):
@@ -1736,7 +1717,7 @@ def am_worst(request):
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/worstEpisodes.html', content)
 
-## MENTAL HEALTH VIEWS--------------------------------------------------------
+## MENTAL HEALTH VIEWS----------------------------------------------------------------------------------------------------------------
 @login_required(login_url='/index')
 def mh_preliminary(request):
 	user = request.user
@@ -1753,7 +1734,7 @@ def mh_preliminary(request):
 
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/getClient.html', content)
+			return render_to_response('counselor/forms/MentalHealth/instructions.html', content)
 
 @login_required(login_url='/index')
 def mh_location(request):
@@ -1825,19 +1806,9 @@ def mh_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client_id = request.POST.get('client_ID', '')
-			client = Client.objects.get(id=client_id)
-			content['client'] = client
-			proceed = findClientMH(client)
+			states = State.objects.all().order_by('state')
 
-			if proceed['incomplete'] == True:
-				content['mh'] = proceed['mh']
-				return render_to_response('counselor/forms/MentalHealth/getClient.html', content)
-			else:
-				##remember to incluse all valid content for this form
-				return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
-
-			content['title'] = "Simeon Academy | Mental Health Assessment"
+			content['states'] = states
 			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
 
 @login_required(login_url='/index')

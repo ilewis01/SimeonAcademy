@@ -1279,6 +1279,65 @@ button:hover {
 
 }
 
+#mh_text_label {
+	margin-top: 5px;
+}
+
+#mh_num_label {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#mh_check_label {
+	margin-top: 7px;
+	margin-left: 5px;
+	margin-right: 20px;
+}
+
+#mh_space {
+	margin-bottom: 5px;
+}
+
+#mh_sub_header {
+	font-weight: bold;
+	font-size: 19px;
+	margin-top: 10px;
+	color: #88898A;
+}
+
+#mh_select_label {
+	margin-top: 6px;
+	margin-right: 6px;
+}
+
+#inlineRadio1 {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 20px;
+}
+
+.indent_subMH {
+	padding-left: 17px;
+}
+
+#mhSubHead2 {
+	margin-top: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #adad89;
+	/*text-shadow: 1px 1px gray;*/
+}
+
+#inlineRadioLabel {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#mhRadioFix {
+	margin-bottom: 2px;
+	margin-left: 15px;
+}
+
 
 
 

@@ -33,7 +33,7 @@
                     </form>
                 </li>
                 <li>
-                    <form action='/mh_demographic/' method='post' name='mh' id='mh'> {% csrf_token %} 
+                    <form action='/mh_preliminary/' method='post' name='mh' id='mh'> {% csrf_token %} 
                         <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'> 
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
                         <input type='hidden' id='back' name='back' value='true'>

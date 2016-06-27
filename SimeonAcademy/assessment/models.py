@@ -615,26 +615,45 @@ class AngerManagement(models.Model):
 		return str(self.client.fname) + ' ' + str(self.client.lname) + " " + str(self.start_time)
 
 class MHDemographic(models.Model):
-	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	#HISTORY I
+	clientID = models.CharField(max_length=25, default=None, blank=True, null=True)
 	birthplace = models.CharField(max_length=25, default=None, blank=True, null=True)
 	raised = models.CharField(max_length=20, default=None, blank=True, null=True)
-	no_marriages = models.IntegerField(default=0)
+	maritalStatus = models.CharField(max_length=30, default=None, blank=True, null=True)
+	numMarriages = models.IntegerField(default=0)
 	occupation = models.CharField(max_length=30, default=None, blank=True, null=True)
 	employer = models.CharField(max_length=30, default=None, blank=True, null=True)
 	employedMo = models.IntegerField(default=0)
 	employedYrs = models.IntegerField(default=0)
-	pastJobs = models.CharField(max_length=50, default=None, blank=True, null=True)
-	##FINANCIAL STATUS------------------------------------------------------------------------
-	residence = models.CharField(max_length=15, default=None, blank=True, null=True)
-	income = models.CharField(max_length=15, default=None, blank=True, null=True)
-	debt = models.CharField(max_length=15, default=None, blank=True, null=True)
-	credit = models.CharField(max_length=15, default=None, blank=True, null=True)
-	healthCare = models.CharField(max_length=15, default=None, blank=True, null=True)
-	otherIncome = models.CharField(max_length=15, default=None, blank=True, null=True)
-	##remember to check form to make sure that all fields are accounted for
+	pastJobs = models.CharField(max_length=1000, default=None, blank=True, null=True)
+	recentMove = models.CharField(max_length=100, default=None, blank=True, null=True)
+	spouseAge = models.IntegerField(default=0)
+	spouseOccupation = models.CharField(max_length=30, default=None, blank=True, null=True)
+	spouseEmployer = models.CharField(max_length=35, default=None, blank=True, null=True)
+	spouseWorkMos = models.IntegerField(default=0)
+	spouseWorkYrs = models.IntegerField(default=0)
+
+	childrenMale = models.CharField(max_length=1000, default=None, blank=True, null=True)
+	childrenFemale = models.CharField(max_length=1000, default=None, blank=True, null=True)
+	bothers = models.CharField(max_length=1000, default=None, blank=True, null=True)
+	sisters = models.CharField(max_length=1000, default=None, blank=True, null=True)
+
+	motherOccupation = models.CharField(max_length=35, default=None, blank=True, null=True)
+	motherCity = models.CharField(max_length=35, default=None, blank=True, null=True)
+	motherState = models.CharField(max_length=35, default=None, blank=True, null=True)
+	motherLiving = models.BooleanField(blank= True, default = True)
+	motherAge = models.IntegerField(default=0)
+	motherAgeDeath = models.IntegerField(default=0)
+
+	fatherOccupation = models.CharField(max_length=35, default=None, blank=True, null=True)
+	fatherCity = models.CharField(max_length=35, default=None, blank=True, null=True)
+	fatherState = models.CharField(max_length=35, default=None, blank=True, null=True)
+	fatherLiving = models.BooleanField(blank= True, default = True)
+	fatherAge = models.IntegerField(default=0)
+	fatherAgeDeath = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return "Mental Health/Demographic: " + str(self.client)
+		return str(self.clientID)
 
 ##MENTAL HEALTH FAMILY----------------------------------------------------------------------------------
 class MHFamily(models.Model):

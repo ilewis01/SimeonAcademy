@@ -481,231 +481,6 @@ def findClientSAP(client):
 			break
 	return result
 
-def forceNextSection(am):
-	result = None
-	print "INSIDE FUNCTION COMPLETE: " + str()
-
-	demographicComplete = am.demographicComplete
-	drugHistoryComplete = am.drugHistoryComplete
-	childhoodComplete = am.childhoodComplete
-	angerHistoryComplete = am.angerHistoryComplete
-	angerHistoryComplete2 = am.angerHistoryComplete2
-	angerHistoryComplete3 = am.angerHistoryComplete3
-	connectionsComplete = am.connectionsComplete
-	worstComplete = am.worstComplete
-	angerTargetComplete = am.angerTargetComplete
-	familyOriginComplete = am.familyOriginComplete
-	currentProblemsComplete = am.currentProblemsComplete
-	controlComplete = am.controlComplete
-	finalComplete = am.finalComplete
-
-	if demographicComplete == False:
-		result = '/am_demographic/'
-			
-	elif drugHistoryComplete == False:
-		result = '/am_drugHistory/'
-			
-	elif childhoodComplete == False:
-		result = '/am_childhood/'
-			
-	elif angerHistoryComplete == False:
-		result = '/am_angerHistory/'
-			
-	elif angerHistoryComplete2 == False:
-		result = '/am_angerHistory2/'
-			
-	elif angerHistoryComplete3 == False:
-		result = '/am_angerHistory3/'
-			
-	elif connectionsComplete == False:
-		result = '/am_connections/'
-			
-	elif worstComplete == False:
-		result = '/am_worst/'
-			
-	elif angerTargetComplete == False:
-		result = '/am_angerTarget/'
-			
-	elif familyOriginComplete == False:
-		result = '/am_familyOrigin/'
-
-	elif currentProblemsComplete == False:
-		result = '/am_problems/'
-			
-	elif controlComplete == False:
-		result = '/am_control/'
-			
-	elif finalComplete == False:
-		result = '/am_final/'			
-	else:
-		result = '/am_viewForm/'
-
-	return result
-
-def grabProperNextSection(am, current):
-	result = None
-
-	demographicComplete = am.demographicComplete
-	drugHistoryComplete = am.drugHistoryComplete
-	childhoodComplete = am.childhoodComplete
-	angerHistoryComplete = am.angerHistoryComplete
-	angerHistoryComplete2 = am.angerHistoryComplete2
-	angerHistoryComplete3 = am.angerHistoryComplete3
-	connectionsComplete = am.connectionsComplete
-	worstComplete = am.worstComplete
-	angerTargetComplete = am.angerTargetComplete
-	familyOriginComplete = am.familyOriginComplete
-	currentProblemsComplete = am.currentProblemsComplete
-	controlComplete = am.controlComplete
-	finalComplete = am.finalComplete
-
-	if demographicComplete == False:
-		result = '/am_demographic/'
-
-		if str(current) == str(result):
-			am.demographicComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.demographicComplete = False
-			am.save()
-			
-	elif drugHistoryComplete == False:
-		result = '/am_drugHistory/'
-
-		if str(current) == str(result):
-			am.drugHistoryComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.drugHistoryComplete = False
-			am.save()
-			
-	elif childhoodComplete == False:
-		result = '/am_childhood/'
-
-		if str(current) == str(result):
-			am.childhoodComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.childhoodComplete = False
-			am.save()
-			
-	elif angerHistoryComplete == False:
-		result = '/am_angerHistory/'
-
-		if str(current) == str(result):
-			am.angerHistoryComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.angerHistoryComplete = False
-			am.save()
-			
-	elif angerHistoryComplete2 == False:
-		result = '/am_angerHistory2/'
-
-		if str(current) == str(result):
-			am.angerHistoryComplete2 = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.angerHistoryComplete2 = False
-			am.save()
-			
-	elif angerHistoryComplete3 == False:
-		result = '/am_angerHistory3/'
-
-		if str(current) == str(result):
-			am.angerHistoryComplete3 = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.angerHistoryComplete3 = False
-			am.save()
-			
-	elif connectionsComplete == False:
-		result = '/am_connections/'
-
-		if str(current) == str(result):
-			am.connectionsComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.connectionsComplete = False
-			am.save()
-			
-	elif worstComplete == False:
-		result = '/am_worst/'
-
-		if str(current) == str(result):
-			am.worstComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.worstComplete = False
-			am.save()
-			
-	elif angerTargetComplete == False:
-		result = '/am_angerTarget/'
-
-		if str(current) == str(result):
-			am.angerTargetComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.angerTargetComplete = False
-			am.save()
-			
-	elif familyOriginComplete == False:
-		result = '/am_familyOrigin/'
-
-		if str(current) == str(result):
-			am.familyOriginComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.familyOriginComplete = False
-			am.save()
-			
-	elif currentProblemsComplete == False:
-		result = '/am_problems/'
-
-		if str(current) == str(result):
-			am.currentProblemsComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.currentProblemsComplete = False
-			am.save()
-			
-	elif controlComplete == False:
-		result = '/am_control/'
-
-		if str(current) == str(result):
-			am.controlComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.controlComplete = False
-			am.save()
-			
-	elif finalComplete == False:
-		result = '/am_final/'
-
-		if str(current) == str(result):
-			am.finalComplete = True
-			am.save()
-			result = forceNextSection(am)
-
-			am.finalComplete = False
-			am.save()			
-	else:
-		result = '/am_viewForm/'
-
-	return result
-
 def saveCompletedAmSection(request, section, am):
 	if section == '/am_childhood/':
 		momAlive = request.POST.get('momAlive', '')
@@ -1566,8 +1341,305 @@ def amSidebarImages(am, page):
 	else:
 		images['final_img'] = x
 
-
 	return images
+
+def setAmPriorityURL(section, am):
+	if str(section) == '/am_demographic/':
+		am.demoPriority = True
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_drugHistory/':
+		am.demoPriority = False
+		am.dhPriority = True
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_childhood/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = True
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_angerHistory/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = True
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_angerHistory2/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = True
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_angerHistory3/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = True
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_connections/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = True
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_worst/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = True
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_angerTarget/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = True
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_familyOrigin/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = True
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_problems/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = True
+		am.controlPriority = False
+		am.finalPriority = False
+
+	elif str(section) == '/am_control/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = True
+		am.finalPriority = False
+
+	elif str(section) == '/am_final/':
+		am.demoPriority = False
+		am.dhPriority = False
+		am.childPriority = False
+		am.ah1Priority = False
+		am.ah2Priority = False
+		am.ah3Priority = False
+		am.connectPriority = False
+		am.worstPriority = False
+		am.targetPriority = False
+		am.familyPriority = False
+		am.currentPriority = False
+		am.controlPriority = False
+		am.finalPriority = True
+
+
+def grabProperNextSection(am, current):
+	result = None
+	hasPriority = False
+	progress = sortedAmProgress(am)
+
+	if am.demoPriority == True:
+		hasPriority = True
+	elif am.dhPriority == True:
+		hasPriority = True
+	elif am.childPriority == True:
+		hasPriority = True
+	elif am.ah1Priority == True:
+		hasPriority = True
+	elif am.ah2Priority == True:
+		hasPriority = True
+	elif am.ah3Priority == True:
+		hasPriority = True
+	elif am.connectPriority == True:
+		hasPriority = True
+	elif am.worstPriority == True:
+		hasPriority = True
+	elif am.targetPriority == True:
+		hasPriority = True
+	elif am.familyPriority == True:
+		hasPriority = True
+	elif am.currentPriority == True:
+		hasPriority = True
+	elif am.controlPriority == True:
+		hasPriority = True
+	elif am.finalPriority == True:
+		hasPriority = True
+
+	if hasPriority == False:
+		next = ''
+
+		for i in range(len(progress)):
+			if progress[i] == False:
+				next = matchAmProgressIndex(i)
+				break
+
+		if str(next) == str(current):
+			result = forceNextSection(am)
+		else:
+			result = next
+
+	return result
+
+def forceNextSection(am):
+	result = None
+	match = None
+	progress = sortedAmProgress(am)
+	
+	for i in range(len(progress)):
+		if progress[i] == False:
+			match = i
+			break
+
+	for j in range(len(progress)):
+		if progress[j] == False and j != match:
+			result = matchAmProgressIndex(j)
+			break
+
+	if result == None:
+		result = '/am_viewForm/'
+
+	return result
+
+def matchAmProgressIndex(index):
+	result = None
+
+	if str(index) == '0':
+		result = '/am_demographic/'
+	elif str(index) == '1':
+		result = '/am_drugHistory/'
+	elif str(index) == '2':
+		result = '/am_childhood/'
+	elif str(index) == '3':
+		result = '/am_angerHistory/'
+	elif str(index) == '4':
+		result = '/am_angerHistory2/'
+	elif str(index) == '5':
+		result = '/am_angerHistory3/'
+	elif str(index) == '6':
+		result = '/am_connections/'
+	elif str(index) == '7':
+		result = '/am_worst/'
+	elif str(index) == '8':
+		result = '/am_angerTarget/'
+	elif str(index) == '9':
+		result = '/am_familyOrigin/'
+	elif str(index) == '10':
+		result = '/am_problems/'
+	elif str(index) == '11':
+		result = '/am_control/'
+	elif str(index) == '12':
+		result = '/am_final/'
+	else:
+		result = '/am_viewForm/'
+
+	return result
 
 def grabAmCompletedSections(am):
 	results = {}
@@ -1587,6 +1659,27 @@ def grabAmCompletedSections(am):
 	results['finalComplete'] 			= am.finalComplete
 
 	return results
+
+def sortedAmProgress(am):
+	results = []
+	progress = grabAmCompletedSections(am)
+
+	results.append(progress['demographicComplete'])
+	results.append(progress['drugHistoryComplete'])
+	results.append(progress['childhoodComplete'])
+	results.append(progress['angerHistoryComplete'])
+	results.append(progress['angerHistoryComplete2'])
+	results.append(progress['angerHistoryComplete3'])
+	results.append(progress['connectionsComplete'])
+	results.append(progress['worstComplete'])
+	results.append(progress['angerTargetComplete'])
+	results.append(progress['familyOriginComplete'])
+	results.append(progress['currentProblemsComplete'])
+	results.append(progress['controlComplete'])
+	results.append(progress['finalComplete'])
+
+	return results
+
 
 def processCompletedClass(isComplete, isCompleteKeyWord, m_page, green, yellow, normal):
 	result = None
@@ -3811,7 +3904,7 @@ def universalLocation(form_type, form_id):
 
 	if str(form_type) == 'am':
 		am = AngerManagement.objects.get(id=form_id)
-		#am location function here
+		grabProperNextSection(am, None)
 	elif str(form_type) == 'sap':
 		sap = SAP.objects.get(id=form_id)
 		location = locateNextSection(sap, None)
