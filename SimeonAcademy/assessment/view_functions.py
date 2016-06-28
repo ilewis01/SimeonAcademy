@@ -27,6 +27,24 @@ def onTrue_offFalse(data):
 		data = False
 	return data
 
+def getOrderedStateIndex(the_state):
+	index = 0
+
+	states = State.objects.all().order_by('state')
+	s_list = []
+
+	for s in states:
+		s_list.append(s.state)
+
+	for i in range(len(s_list)):
+		if str(the_state) == str(s_list[i]):
+			index = i
+			break
+
+	index = index + 1
+
+	return index
+
 def convertRadioToBoolean(data):
 	result = True
 
@@ -3686,6 +3704,7 @@ def refreshSap(sap):
 	demo.save()
 	psy.save()
 
+
 	sap.isOpen = True
 	sap.SapComplete = False
 
@@ -3694,54 +3713,106 @@ def refreshSap(sap):
 ############################################################################################################################
 #------------------------------------------------ MENTAL HEALTH ------------------------------------------------------------
 
-def newMh(client):
-	mh = None
-
-def startMH(client):
-	mh = {}
-	mh['isNew'] = True
-	continue_search = True
+def hasIncompleteMh(client):
+	exist = False
 	mhs = MentalHealth.objects.all()
 
-	if len(mhs) == 0:
-		continue_search = False
+	for m in mhs:
+		if m.client == client and m.MHComplete == False:
+			exist = True
+			break
+	return exist
+
+def findIncompleteClientMh(client):
+	mhs = MentalHealth.objects.all()
+	result = None
+
+	for m in mhs:
+		if m.client == client and m.MHComplete == False:
+			result = m
+			break
+	return result
+
+def newMh(the_client):
+	date = datetime.now()
+	date = date.date()
+
+	mh = MentalHealth(client=the_client, date_of_assessment=date)
+
+	demo = MHDemographic(clientID=the_client.clientID)	
+	education = MHEducation(clientID=the_client.clientID)
+
+	demo.save()
+	education.save()
+
+	mh.demographics = demo
+	mh.education = education
+
+	mh.demographicsComplete = False
+	mh.educationComplete = False
+
+	mh.demoPriority = False
+	mh.educationPriority = False
+
+	mh.isOpen = True
+	mh.MHComplete = False
+	mh.save()
 
 	return mh
+
+def startMH(client):
+	result = {}
+
+	mhs = MentalHealth.objects.all()
+
+	if hasIncompleteMh(client) == False:
+		result['isNew'] = True
+		result['mh'] = newMh(client)
+		print "New Created"
+
+	else:
+		result['isNew'] = False
+		result['mh'] = findIncompleteClientMh(client)
+		print "Client has pre-existing MH"
+
+	return result
 
 def getMhDemoFields(mh):
 	results = {}
 
-	results['birthplace'] = mh.birthplace
-	results['raised'] = mh.raised
-	results['maritalStatus'] = mh.maritalStatus
-	results['numMarriages'] = mh.numMarriages
-	results['occupation'] = mh.occupation
-	results['employer'] = mh.employer
-	results['employedMo'] = mh.employedMo
-	results['employedYrs'] = mh.employedYrs
-	results['pastJobs'] = mh.pastJobs
-	results['recentMove'] = mh.recentMove
-	results['spouseAge'] = mh.spouseAge
-	results['spouseOccupation'] = mh.spouseOccupation
-	results['spouseEmployer'] = mh.spouseEmployer
-	results['spouseWorkMos'] = mh.spouseWorkMos
-	results['spouseWorkYrs'] = mh.spouseWorkYrs
+	results['birthplace'] = mh.demographics.birthplace
+	results['raised'] = mh.demographics.raised
+	results['maritalStatus'] = mh.demographics.maritalStatus
+	results['numMarriages'] = mh.demographics.numMarriages
+	results['occupation'] = mh.demographics.occupation
+	results['employer'] = mh.demographics.employer
+	results['employedMo'] = mh.demographics.employedMo
+	results['employedYrs'] = mh.demographics.employedYrs
+	results['pastJobs'] = mh.demographics.pastJobs
+	results['recentMove'] = mh.demographics.recentMove
+	results['spouseAge'] = mh.demographics.spouseAge
+	results['spouseOccupation'] = mh.demographics.spouseOccupation
+	results['spouseEmployer'] = mh.demographics.spouseEmployer
+	results['spouseWorkMos'] = mh.demographics.spouseWorkMos
+	results['spouseWorkYrs'] = mh.demographics.spouseWorkYrs
 
-	results['motherOccupation'] = mh.motherOccupation
-	results['motherCity'] = mh.motherCity
-	results['motherLiving'] = mh.motherLiving
-	results['motherAge'] = mh.motherAge
-	results['motherAgeDeath'] = mh.motherAgeDeath
+	results['motherOccupation'] = mh.demographics.motherOccupation
+	results['motherCity'] = mh.demographics.motherCity
+	results['motherState'] = mh.demographics.motherState
+	results['motherLiving'] = mh.demographics.motherLiving
+	results['motherAge'] = mh.demographics.motherAge
+	results['motherAgeDeath'] = mh.demographics.motherAgeDeath
 
-	results['fatherOccupation'] = mh.fatherOccupation
-	results['fatherCity'] = mh.fatherCity
-	results['fatherLiving'] = mh.fatherLiving
-	results['fatherAge'] = mh.fatherAge
-	results['fatherAgeDeath'] = mh.fatherAgeDeath
+	results['fatherOccupation'] = mh.demographics.fatherOccupation
+	results['fatherCity'] = mh.demographics.fatherCity
+	results['fatherLiving'] = mh.demographics.fatherLiving
+	results['fatherState'] = mh.demographics.fatherState
+	results['fatherAge'] = mh.demographics.fatherAge
+	results['fatherAgeDeath'] = mh.demographics.fatherAgeDeath
 
-	results['numChildren'] = mh.numChildren
-	results['numSisters'] = mh.numSisters
-	results['numBrothers'] = mh.numBrothers
+	results['numChildren'] = mh.demographics.numChildren
+	results['numSisters'] = mh.demographics.numSisters
+	results['numBrothers'] = mh.demographics.numBrothers
 
 	return results
 

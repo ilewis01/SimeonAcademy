@@ -4483,6 +4483,30 @@ function mhSpouse() {
 	}
 }
 
+function mhChildren() {
+	var yesChild = document.getElementById('yesChild');
+	var numChildren_label = document.getElementById('numChildren_label');
+	var numChildren = document.getElementById('numChildren');
+
+	twoElementRadioSetup(yesChild, numChildren_label, numChildren);
+}
+
+function mhSister() {
+	var yesSister = document.getElementById('yesSister');
+	var numSisters_label = document.getElementById('numSisters_label');
+	var numSisters = document.getElementById('numSisters');
+
+	twoElementRadioSetup(yesSister, numSisters_label, numSisters);
+}
+
+function mhBrother() {
+	var yesBrother = document.getElementById('yesBrother');
+	var numBrothers_label = document.getElementById('numBrothers_label');
+	var numBrothers = document.getElementById('numBrothers');
+
+	twoElementRadioSetup(yesBrother, numBrothers_label, numBrothers);
+}
+
 function motherShift() {
 	//TRIGGER
 	var momIsLiving = document.getElementById('momIsLiving');
@@ -4553,10 +4577,67 @@ function fatherShift() {
 	}
 }
 
-function initialize_mh_demo() {
+function initialize_mh_demo(json_data) {
+	var married = document.getElementById('married');
+	var single = document.getElementById('single');
+	var divorced = document.getElementById('divorced');
+	var widowed = document.getElementById('widowed');
+	var seperated = document.getElementById('seperated');
+	var maritalStatus = String(json_data.maritalStatus);
+
+	var d_mom_state = document.getElementById('d_mom_state').value;
+	var d_dad_state = document.getElementById('d_dad_state').value;
+	var motherState = document.getElementById('motherState');
+	var fatherState = document.getElementById('fatherState');
+
+	motherState.selectedIndex = d_mom_state;
+	fatherState.selectedIndex = d_dad_state;
+
+	if (maritalStatus === 'Married') {
+		married.checked = true;
+	}
+	else if (maritalStatus === 'Single') {
+		single.checked = true;
+	}
+	else if (maritalStatus === 'Divorced') {
+		divorced.checked = true;
+	}
+	else if (maritalStatus === 'Widowed') {
+		widowed.checked = true;
+	}
+	else if (maritalStatus === 'Seperated') {
+		seperated.checked = true;
+	}
+
+
+	if (String(json_data.numChildren) !== '0') {
+		document.getElementById('yesChild').checked = true;
+	}
+	else {
+		document.getElementById('noChild').checked = true;
+	}
+	if (String(json_data.numSisters) !== '0') {
+		document.getElementById('yesSister').checked = true;
+	}
+	else {
+		document.getElementById('noSister').checked = true;
+	}
+	if (String(json_data.numBrothers) !== '0') {
+		document.getElementById('yesBrother').checked = true;
+	}
+	else {
+		document.getElementById('noBrother').checked = true;
+	}
+
+	setRadioElement(json_data.motherLiving, document.getElementById('momIsLiving'), document.getElementById('momNotLiving'));
+	setRadioElement(json_data.fatherLiving, document.getElementById('dadIsLiving'), document.getElementById('dadNotLiving'));
+
 	mhSpouse();
 	motherShift();
 	fatherShift();
+	mhChildren();
+	mhSister();
+	mhBrother();
 }
 
 function mh_continue_demographic() {

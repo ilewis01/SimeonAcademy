@@ -689,7 +689,7 @@ class MHEducation(models.Model):
 	honorableDischarge = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Mental Health/Education: " + str(self.client_id)
+		return str(self.clientID)
 
 ##MENTAL HEALTH FAMILY----------------------------------------------------------------------------------
 class MHFamily(models.Model):
@@ -952,6 +952,7 @@ class UseTable(models.Model):
 
 class MentalHealth(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
 
 	demographics = models.ForeignKey(MHDemographic, default=None, blank=True, null=True)
 	education = models.ForeignKey(MHEducation, default=None, blank=True, null=True)
@@ -966,7 +967,7 @@ class MentalHealth(models.Model):
 	MHComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Mental Health Form: " + str(self.demographics.client)
+		return "Mental Health Form: " + str(self.client)
 
 ## SESSION TYPE----------------------------------------------------------------------------------------
 class SType(models.Model):

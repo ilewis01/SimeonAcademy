@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_demo()">
+<body class="gradient-white" onLoad="javascript: initialize_mh_demo({{json_data}})">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -21,7 +21,7 @@
             <tr>
               <td>
                 <div style='color:#fee047'>
-                  <h4>{{session.s_type}}</h4>
+                  <h4>Mental Health Profile</h4>
                 </div>
               </td>
             </tr>
@@ -68,7 +68,7 @@
                 <div class='{{class.history}}'>
                   <img src="{{image.history_image}}" id='bullet-img'> &nbsp
                   <a href="History" name='historyBtn' id='historyBtn'>
-                    Comprehensive History
+                    History and Family
                   </a>
                 </div>
               </td>
@@ -81,7 +81,7 @@
                 <div class='{{class.history}}'>
                   <img src="{{image.history_image}}" id='bullet-img'> &nbsp
                   <a href="javascript: sideBarOption('mhHistory');" name='historyBtn' id='historyBtn'>
-                    History
+                     Education and Background
                   </a>
                 </div>
               </td>
@@ -176,12 +176,16 @@
                 <div class="container">
             		<div class="row">                   
                   		<div class="col-md-6 col-sm-6">
+                  			<h4>Mom State Index: {{mom_state}}</h4>
+                  			<h4>Dad State Index: {{dad_state}}</h4>
                   			<div>
                   				<form action='/mh_education/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
+                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
 				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
@@ -232,7 +236,7 @@
 				            <table>
 				            	<tr>
 				            		<td style='padding-left:15px;'>
-				            			<input type='radio' name='maritalStatus' id='married' value='married' checked onClick='javascript: mhSpouse();'>
+				            			<input type='radio' name='maritalStatus' id='married' value='Married' checked onClick='javascript: mhSpouse();'>
 				            		</td>
 
 				            		<td>
@@ -242,7 +246,7 @@
 				            		</td>
 
 				            		<td>
-				            			<input type='radio' name='maritalStatus' id='single' value='single' onClick='javascript:   mhSpouse();'>
+				            			<input type='radio' name='maritalStatus' id='single' value='Single' onClick='javascript:   mhSpouse();'>
 				            		</td>
 
 				            		<td>
@@ -252,7 +256,7 @@
 				            		</td>
 
 				            		<td>
-				            			<input type='radio' name='maritalStatus' id='divorced' value='divorced' onClick='javascript: mhSpouse();'>
+				            			<input type='radio' name='maritalStatus' id='divorced' value='Divorced' onClick='javascript: mhSpouse();'>
 				            		</td>
 
 				            		<td>
@@ -262,7 +266,7 @@
 				            		</td>
 
 				            		<td>
-				            			<input type='radio' name='maritalStatus' id='widowed' value='widowed' onClick='javascript: mhSpouse();'>
+				            			<input type='radio' name='maritalStatus' id='widowed' value='Widowed' onClick='javascript: mhSpouse();'>
 				            		</td>
 
 				            		<td>
@@ -272,7 +276,7 @@
 				            		</td>
 
 				            		<td>
-				            			<input type='radio' name='maritalStatus' id='seperated' value='seperated' onClick='javascript: mhSpouse();'>
+				            			<input type='radio' name='maritalStatus' id='seperated' value='Seperated' onClick='javascript: mhSpouse();'>
 				            		</td>
 
 				            		<td>
@@ -490,7 +494,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveChildren' id='yesChild' value='True'>
+				        			    		<input type='radio' name='haveChildren' id='yesChild' value='True' onClick='javascript: mhChildren();'>
 				        			    	</div>
 				        			    </td>
 
@@ -502,7 +506,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveChildren' id='noChild' value='False' checked>
+				        			    		<input type='radio' name='haveChildren' id='noChild' value='False' onClick='javascript: mhChildren();'>
 				        			    	</div>
 				        			    </td>
 
@@ -542,7 +546,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveSisters' id='yesSister' value='True'>
+				        			    		<input type='radio' name='haveSisters' id='yesSister' value='True' onClick='javascript: mhSister();'>
 				        			    	</div>
 				        			    </td>
 
@@ -554,7 +558,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveSisters' id='noSister' value='False' checked>
+				        			    		<input type='radio' name='haveSisters' id='noSister' value='False' onClick='javascript: mhSister();'>
 				        			    	</div>
 				        			    </td>
 
@@ -594,7 +598,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveBrothers' id='yesBrother' value='True'>
+				        			    		<input type='radio' name='haveBrothers' id='yesBrother' value='True' onClick='javascript: mhBrother();'>
 				        			    	</div>
 				        			    </td>
 
@@ -606,7 +610,7 @@
 
 				        			    <td>
 				        			    	<div id='inlineRadio1'>
-				        			    		<input type='radio' name='haveBrothers' id='noBrother' value='False' checked>
+				        			    		<input type='radio' name='haveBrothers' id='noBrother' value='False' onClick='javascript: mhBrother();'>
 				        			    	</div>
 				        			    </td>
 
@@ -688,8 +692,8 @@
 				        	    			</td>
 
 				        	    			<td>
-				        	    				<select>
-				        	    					<option name='motherState' value='None Selected'>Select</option>
+				        	    				<select name='motherState' id='motherState'>
+				        	    					<option value='None Selected'>Select</option>
 
 				        	    					{% for s in states %}
 				        	    					    <option value='{{s.state}}'>{{s.state}}</option>
@@ -711,7 +715,7 @@
 
 				        	    			<td>
 				        	    				<div id='mhRadioFix'>
-				        	    					<input type='radio' name='motherLiving' id='momIsLiving' value='True' onClick='javascript: motherShift();' checked>
+				        	    					<input type='radio' name='motherLiving' id='momIsLiving' value='True' onClick='javascript: motherShift();'>
 				        	    				</div>
 				        	    			</td>
 
@@ -813,8 +817,8 @@
 				        	    			</td>
 
 				        	    			<td>
-				        	    				<select>
-				        	    					<option name='fatherState' value='None Selected'>Select</option>
+				        	    				<select  name='fatherState' id='fatherState'>
+				        	    					<option value='None Selected'>Select</option>
 
 				        	    					{% for s in states %}
 				        	    					    <option value='{{s.state}}'>{{s.state}}</option>
@@ -829,7 +833,7 @@
 				        	    			<td>
 				        	    				<li>
 				        	    					<div id='mh_num_label'>
-				        	    						<label>Is Your Mother Living?</label>
+				        	    						<label>Is Your Father Living?</label>
 				        	    					</div>
 				        	    				</li>
 				        	    			</td>

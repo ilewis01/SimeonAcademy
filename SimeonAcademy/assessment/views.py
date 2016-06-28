@@ -41,7 +41,7 @@ grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields,
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
-getMhFields, saveMentalHealth
+getMhFields, saveMentalHealth, startMH, getOrderedStateIndex
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1734,8 +1734,26 @@ def mh_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/instructions.html', content)
+			client_id = request.POST.get('client_id', '')
+			session_id = request.POST.get('session_id', '')
+
+			client = Client.objects.get(id=client_id)
+			session = ClientSession.objects.get(id=session_id)
+
+			action = startMH(client)
+
+			content['mh'] = action['mh']
+			content['session'] = session
+
+			fake = False
+
+			if action['isNew'] == False and fake == True:
+				content['title'] = "Simeon Academy | Mental Health"
+				render_to_response('global/resolve_form.html', content)
+
+			else:
+				content['title'] = "Simeon Academy | Mental Health Assessment"
+				return render_to_response('counselor/forms/MentalHealth/instructions.html', content)
 
 @login_required(login_url='/index')
 def mh_demographic(request):
@@ -1752,8 +1770,25 @@ def mh_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			states = State.objects.all().order_by('state')
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
 
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+
+			states = State.objects.all().order_by('state')
+			fields = getMhFields(mh, '/mh_demographic/')
+			json_data = json.dumps(fields)
+
+			mom_state = getOrderedStateIndex(fields['motherState'])
+			dad_state = getOrderedStateIndex(fields['fatherState'])
+
+			content['mh'] = mh
+			content['session'] = session
+			content['fields'] = fields
+			content['json_data'] = json_data
+			content['mom_state'] = mom_state
+			content['dad_state'] = dad_state
 			content['states'] = states
 			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
 
