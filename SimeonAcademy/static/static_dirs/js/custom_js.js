@@ -4559,6 +4559,26 @@ function initialize_mh_demo() {
 	fatherShift();
 }
 
+function mh_continue_demographic() {
+	var yesChild = document.getElementById('yesChild');
+	var yesSister = document.getElementById('yesSister');
+	var yesBrother = document.getElementById('yesBrother');
+	var form = document.getElementById('mh_form');
+
+	if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
+		var w = 700, h = 700;
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+
+		form.submit();
+	}
+
+	else {
+		form.submit();
+	}
+}
+
 function continue_to_mh_form() {
 	var form = document.getElementById('mh_instructions');
 	form.action = '/mh_demographic/';

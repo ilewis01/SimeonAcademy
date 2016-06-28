@@ -40,7 +40,8 @@ resolveBlankRadio, convertRadioToBoolean, truePythonBool, blankMustDie, phone_to
 grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields, getSAP, \
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
-openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh
+openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
+getMhFields, saveMentalHealth
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1737,6 +1738,69 @@ def mh_preliminary(request):
 			return render_to_response('counselor/forms/MentalHealth/instructions.html', content)
 
 @login_required(login_url='/index')
+def mh_demographic(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			states = State.objects.all().order_by('state')
+
+			content['states'] = states
+			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
+
+@login_required(login_url='/index')
+def mhDemoOpPage(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			numChildren = request.POST.get('numChildren', '')
+			numSisters = request.POST.get('numSisters', '')
+			numBrothers = request.POST.get('numBrothers', '')
+
+			content['children'] = numChildren
+			content['sisters'] = numSisters
+			content['brothers'] = numBrothers
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/mhDemoOpPage.html', content)
+
+@login_required(login_url='/index')
+def mh_education(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/education.html', content)
+
+@login_required(login_url='/index')
 def mh_location(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -1790,26 +1854,6 @@ def mh_activity(request):
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/activity.html', content)
-
-@login_required(login_url='/index')
-def mh_demographic(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			states = State.objects.all().order_by('state')
-
-			content['states'] = states
-			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
 
 @login_required(login_url='/index')
 def mh_education(request):

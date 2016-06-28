@@ -617,6 +617,7 @@ class AngerManagement(models.Model):
 class MHDemographic(models.Model):
 	#HISTORY I
 	clientID = models.CharField(max_length=25, default=None, blank=True, null=True)
+
 	birthplace = models.CharField(max_length=25, default=None, blank=True, null=True)
 	raised = models.CharField(max_length=20, default=None, blank=True, null=True)
 	maritalStatus = models.CharField(max_length=30, default=None, blank=True, null=True)
@@ -652,8 +653,43 @@ class MHDemographic(models.Model):
 	fatherAge = models.IntegerField(default=0)
 	fatherAgeDeath = models.IntegerField(default=0)
 
+	numChildren = models.IntegerField(default=0)
+	numSisters = models.IntegerField(default=0)
+	numBrothers = models.IntegerField(default=0)
+
 	def __unicode__(self):
 		return str(self.clientID)
+
+##MENTAL HEALTH EDUCATION-------------------------------------------------------------------------------
+class MHEducation(models.Model):
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+
+	GradesKto6 = models.CharField(max_length=1, default=None, blank=True, null=True)
+	BehaviorProblemsKto6 = models.BooleanField(default=False, blank=True)
+	AcademicProblemsKto6 = models.BooleanField(default=False, blank=True)
+	FriendshipsKto6 = models.IntegerField(default=0)
+	Grades7to9 = models.CharField(max_length=1, default=None, blank=True, null=True)
+	BehaviorProblems7to9 = models.BooleanField(default=False, blank=True)
+	AcademicProblems7to9 = models.BooleanField(default=False, blank=True)
+	Friendships7to9 = models.IntegerField(default=0)
+	Grades10to12 = models.CharField(max_length=1, default=None, blank=True, null=True)
+	BehaviorProblems10to12 = models.BooleanField(default=False, blank=True)
+	AcademicProblems10to12 = models.BooleanField(default=False, blank=True)
+	Friendships10to12 = models.IntegerField(default=0)
+	collegeYears = models.IntegerField(default=0)
+	collegeDegree = models.BooleanField(default=False, blank=True)
+	collegeMajor = models.CharField(max_length=25, blank=True, null=True, default=None)
+	advanceDegree = models.BooleanField(blank=True, default=False)
+	tradeSchool = models.BooleanField(blank=True, default=False)
+	tradeAreaStudy = models.CharField(max_length=25, blank=True, null=True, default=None)
+	wasMillitary = models.BooleanField(default=False, blank=True)
+	millitaryBranch = models.CharField(max_length=20, default=None, blank=True, null=True)
+	millitaryYears = models.IntegerField(default=0)
+	millitaryRank = models.CharField(max_length=25, default=None, blank=True, null=True)
+	honorableDischarge = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return "Mental Health/Education: " + str(self.client_id)
 
 ##MENTAL HEALTH FAMILY----------------------------------------------------------------------------------
 class MHFamily(models.Model):
@@ -682,35 +718,6 @@ class MHFamily(models.Model):
 	def __unicode__(self):
 		return "Mental Health/Family: " + str(self.client_id)
 
-##MENTAL HEALTH EDUCATION-------------------------------------------------------------------------------
-class MHEducation(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
-	GradesKto6 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	BehaviorProblemsKto6 = models.BooleanField(default=False, blank=True)
-	AcademicProblemsKto6 = models.BooleanField(default=False, blank=True)
-	FriendshipsKto6 = models.IntegerField(default=0)
-	Grades7to9 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	BehaviorProblems7to9 = models.BooleanField(default=False, blank=True)
-	AcademicProblems7to9 = models.BooleanField(default=False, blank=True)
-	Friendships7to9 = models.IntegerField(default=0)
-	Grades10to12 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	BehaviorProblems10to12 = models.BooleanField(default=False, blank=True)
-	AcademicProblems10to12 = models.BooleanField(default=False, blank=True)
-	Friendships10to12 = models.IntegerField(default=0)
-	collegeYears = models.IntegerField(default=0)
-	collegeDegree = models.BooleanField(default=False, blank=True)
-	collegeMajor = models.CharField(max_length=25, blank=True, null=True, default=None)
-	advanceDegree = models.BooleanField(blank=True, default=False)
-	tradeSchool = models.BooleanField(blank=True, default=False)
-	tradeAreaStudy = models.CharField(max_length=25, blank=True, null=True, default=None)
-	wasMillitary = models.BooleanField(default=False, blank=True)
-	millitaryBranch = models.CharField(max_length=20, default=None, blank=True, null=True)
-	millitaryYears = models.IntegerField(default=0)
-	millitaryRank = models.CharField(max_length=25, default=None, blank=True, null=True)
-	honorableDischarge = models.BooleanField(default=False, blank=True)
-
-	def __unicode__(self):
-		return "Mental Health/Education: " + str(self.client_id)
 
 ##MENTAL HEALTH RELATIONSHIPS---------------------------------------------------------------------------
 class MHRelationship(models.Model):
@@ -945,25 +952,15 @@ class UseTable(models.Model):
 
 class MentalHealth(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+
 	demographics = models.ForeignKey(MHDemographic, default=None, blank=True, null=True)
-	family = models.ForeignKey(MHFamily, default=None, blank=True, null=True)
 	education = models.ForeignKey(MHEducation, default=None, blank=True, null=True)
-	relationships = models.ForeignKey(MHRelationship, default=None, blank=True, null=True)
-	activities = models.ForeignKey(MHActivity, default=None, blank=True, null=True)
-	stressors = models.ForeignKey(MHStressor, default=None, blank=True, null=True)
-	familyHistory = models.ForeignKey(FamilyHistory, default=None, blank=True, null=True)
-	legalHistory = models.ForeignKey(MHLegalHistory, default=None, blank=True, null=True)
-	useTable = models.ForeignKey(UseTable, default=None, blank=True, null=True)
 
 	demographicsComplete = models.BooleanField(default=False, blank=True)
-	familyComplete = models.BooleanField(default=False, blank=True)
 	educationComplete = models.BooleanField(default=False, blank=True)
-	relationshipsComplete = models.BooleanField(default=False, blank=True)
-	activitiesComplete = models.BooleanField(default=False, blank=True)
-	stressorsComplete = models.BooleanField(default=False, blank=True)
-	familyHistoryComplete = models.BooleanField(default=False, blank=True)
-	legalHistoryComplete = models.BooleanField(default=False, blank=True)
-	useTableComplete = models.BooleanField(default=False, blank=True)
+
+	demoPriority = models.BooleanField(default=False, blank=True)
+	educationPriority = models.BooleanField(default=False, blank=True)
 
 	isOpen = models.BooleanField(default=False, blank=True)
 	MHComplete = models.BooleanField(default=False, blank=True)

@@ -177,13 +177,13 @@
             		<div class="row">                   
                   		<div class="col-md-6 col-sm-6">
                   			<div>
-                  				<form action='/sap_social/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  				<form action='/mh_education/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
 				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'>	
+				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
                             		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
                             		<input type='hidden' name='exit_type' id='exit_type' value=''>
@@ -396,7 +396,7 @@
 				            <table>
 				            	<tr>
 				            		<td>
-				            			<div id='mh_sub_header'>Spouse/Significant Other:</div>
+				            			<div id='mh_sub_header'>Spouse/Partner:</div>
 				            		</td>
 				            	</tr>
 				            </table>
@@ -909,7 +909,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: sap_continue_demographic();">
+			                		<a href="javascript: mh_continue_demographic();">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>

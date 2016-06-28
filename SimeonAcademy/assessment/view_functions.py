@@ -3691,6 +3691,121 @@ def refreshSap(sap):
 
 	sap.save()
 
+############################################################################################################################
+#------------------------------------------------ MENTAL HEALTH ------------------------------------------------------------
+
+def newMh(client):
+	mh = None
+
+def startMH(client):
+	mh = {}
+	mh['isNew'] = True
+	continue_search = True
+	mhs = MentalHealth.objects.all()
+
+	if len(mhs) == 0:
+		continue_search = False
+
+	return mh
+
+def getMhDemoFields(mh):
+	results = {}
+
+	results['birthplace'] = mh.birthplace
+	results['raised'] = mh.raised
+	results['maritalStatus'] = mh.maritalStatus
+	results['numMarriages'] = mh.numMarriages
+	results['occupation'] = mh.occupation
+	results['employer'] = mh.employer
+	results['employedMo'] = mh.employedMo
+	results['employedYrs'] = mh.employedYrs
+	results['pastJobs'] = mh.pastJobs
+	results['recentMove'] = mh.recentMove
+	results['spouseAge'] = mh.spouseAge
+	results['spouseOccupation'] = mh.spouseOccupation
+	results['spouseEmployer'] = mh.spouseEmployer
+	results['spouseWorkMos'] = mh.spouseWorkMos
+	results['spouseWorkYrs'] = mh.spouseWorkYrs
+
+	results['motherOccupation'] = mh.motherOccupation
+	results['motherCity'] = mh.motherCity
+	results['motherLiving'] = mh.motherLiving
+	results['motherAge'] = mh.motherAge
+	results['motherAgeDeath'] = mh.motherAgeDeath
+
+	results['fatherOccupation'] = mh.fatherOccupation
+	results['fatherCity'] = mh.fatherCity
+	results['fatherLiving'] = mh.fatherLiving
+	results['fatherAge'] = mh.fatherAge
+	results['fatherAgeDeath'] = mh.fatherAgeDeath
+
+	results['numChildren'] = mh.numChildren
+	results['numSisters'] = mh.numSisters
+	results['numBrothers'] = mh.numBrothers
+
+	return results
+
+def getMhFields(mh, section):
+	result = {}
+
+	if str(section) == '/mh_demographic/':
+		result = getMhDemoFields(mh)
+
+	return result
+
+def saveMhDemo(request, mh):
+	momLive = request.POST.get('motherLiving', '')
+	dadLive  =request.POST.get('fatherLiving', '')
+
+	momLive = truePythonBool(momLive)
+	dadLive = truePythonBool(dadLive)
+
+	mh.demographics.birthplace = request.POST.get('birthplace', '')
+	mh.demographics.raised = request.POST.get('raised', '')
+	mh.demographics.maritalStatus = request.POST.get('maritalStatus', '')
+	mh.demographics.numMarriages = request.POST.get('numMarriages', '')
+	mh.demographics.occupation = request.POST.get('occupation', '')
+	mh.demographics.employer = request.POST.get('employer', '')
+	mh.demographics.employedMo = request.POST.get('employedMo', '')
+	mh.demographics.employedYrs = request.POST.get('employedYrs', '')
+	mh.demographics.pastJobs = request.POST.get('pastJobs', '')
+	mh.demographics.recentMove = request.POST.get('recentMove', '')
+	mh.demographics.spouseAge = request.POST.get('spouseAge', '')
+	mh.demographics.spouseOccupation = request.POST.get('spouseOccupation', '')
+	mh.demographics.spouseEmployer = request.POST.get('spouseEmployer', '')
+	mh.demographics.spouseWorkMos = request.POST.get('spouseWorkMos', '')
+	mh.demographics.spouseWorkYrs = request.POST.get('spouseWorkYrs', '')
+
+	mh.demographics.motherOccupation = request.POST.get('motherOccupation', '')
+	mh.demographics.motherCity = request.POST.get('motherCity', '')
+	mh.demographics.motherState = request.POST.get('motherState', '')
+	mh.demographics.motherLiving = momLive
+	mh.demographics.motherAge = request.POST.get('motherAge', '')
+	mh.demographics.motherAgeDeath = request.POST.get('motherAgeDeath', '')
+
+	mh.demographics.fatherOccupation = request.POST.get('fatherOccupation', '')
+	mh.demographics.fatherCity = request.POST.get('fatherCity', '')
+	mh.demographics.fatherState = request.POST.get('fatherState', '')
+	mh.demographics.fatherLiving = dadLive
+	mh.demographics.fatherAge = request.POST.get('fatherAge', '')
+	mh.demographics.fatherAgeDeath = request.POST.get('fatherAgeDeath', '')
+
+	mh.demographics.numChildren = request.POST.get('numChildren', '')
+	mh.demographics.numSisters = request.POST.get('numSisters', '')
+	mh.demographics.numBrothers = request.POST.get('numBrothers', '')
+
+	mh.demographics.save()
+	mh.demographicsComplete = True
+	mh.save()
+
+def saveMentalHealth(request, section, mh):
+	if str(section) == '/mh_demographic/':
+		saveMhDemo(request, mh)
+
+############################################################################################################################
+############################################################################################################################
+
+
 ##______________________OPEN FORMS_____________________________________________________
 def formIsOpen(form):
 	opened = False
