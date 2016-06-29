@@ -109,6 +109,14 @@ side_option_headbody {
 	/*font-family: arial;*/
 }
 
+.header-images3 {
+	background: url('../images/header.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	padding-right: 50px;
+	/*font-family: arial;*/
+}
+
 .header-images2 {
 	background: url('../images/header.png');
 	background-repeat: no-repeat;
@@ -124,6 +132,16 @@ side_option_headbody {
 	font-style: oblique;
 	font-style: bold;
 	font-size: 20px;
+	text-shadow: .05em .05em #3e3e3e;
+}
+
+#header-text2{
+	color: #adad89;
+	margin-top: 7px;
+	text-align: left;
+	font-style: oblique;
+	font-style: bold;
+	font-size: 25px;
 	text-shadow: .05em .05em #3e3e3e;
 }
 
@@ -1337,6 +1355,167 @@ button:hover {
 	margin-bottom: 2px;
 	margin-left: 15px;
 }
+
+.sub_body_mh {
+	font-family: Arial;
+	padding: 20px;
+}
+
+.mh_op_table1 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table2 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table3 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table1 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.mh_op_table2 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.mh_op_table3 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.sub_head_table {
+	width: 100%;
+	vertical-align: top;
+}
+
+.sub_head_table th {
+	width: 100%;
+	margin: auto;
+	vertical-align: top;
+}
+
+.individual_pop_mh {
+	border: 1px black solid;
+	width: 100%;
+}	
+
+.subSubSubTableMh {
+	width: 100%;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.subSubSubTableMh label {
+	font-size: 12px;
+}
+
+#pop_numField {
+	margin-top: 2px;
+}
+
+#pop_textField {
+	margin-top: 2px;
+}
+
+#pop_selectField {
+	margin-top: 3px;
+}
+
+#sub_head_text_mh_pop_demo {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	font-style: italic;
+	font-size: 15px;
+}
+
+#mh_verify_btns {
+	margin-left: 15px;
+}
+
+#opResultHead {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	color: #ad9609;
+	text-shadow: 1px 1px black;
+	/*margin-top: 20px;*/
+}
+
+#opResultSubHEad {
+	/*margin-left: 30px;*/
+	font-size: 18px;
+	font-weight: bold;
+	/*color: #ffa45a;*/
+	font-style: italic;
+	/*text-shadow: 1px 1px gray;*/
+}
+
+#opResultData {
+	margin-left: 3px;
+	font-size: 15px;
+}
+
+.gold_bullet {
+	width:8px;
+	/*margin-left: 25px;*/
+}
+
+.opResultTable {
+	width: 100%;
+	margin: auto;
+}
+
+.opResultTable th {
+	border: 1px solid black;
+	width: 30%;
+	text-align: center;
+}
+
+.opResultTable td {
+	width: 30%;
+}
+
+.table_container {
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+.sobOplogo {
+	width:30%;
+}
+
+.the_gray_gradient {
+	 /*background: url('../images/gray_gradient.png');
+	 background-repeat: none;*/
+}
+
+
 
 
 

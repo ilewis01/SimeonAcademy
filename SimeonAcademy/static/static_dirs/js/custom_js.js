@@ -4647,17 +4647,27 @@ function mh_continue_demographic() {
 	var form = document.getElementById('mh_form');
 
 	if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
-		var w = 700, h = 700;
+		var w = 750, h = 600;
 		var lefts = Number((screen.width/2) - (w/2));
 		var tops = Number((screen.height/2) - (h/2));
 		var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 
-		form.submit();
+		var numChildren = window.opener.document.getElementById('numChildren').value;
+		var numSisters = window.opener.document.getElementById('numSisters').value;
+		var numBrothers = window.opener.document.getElementById('numBrothers').value;
+
+		var fake = document.getElementById('fake1');
+		fake.value = 'This is stuff';
+		// form.submit();
 	}
 
 	else {
 		form.submit();
 	}
+}
+
+function verify_mh_op() {
+	document.getElementById('mhOpForm').submit();
 }
 
 function continue_to_mh_form() {

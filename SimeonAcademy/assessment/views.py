@@ -41,7 +41,7 @@ grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields,
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
-getMhFields, saveMentalHealth, startMH, getOrderedStateIndex
+getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1741,8 +1741,10 @@ def mh_preliminary(request):
 			session = ClientSession.objects.get(id=session_id)
 
 			action = startMH(client)
+			mh = action['mh']
+			setGlobalID(mh.id)
 
-			content['mh'] = action['mh']
+			content['mh'] = mh
 			content['session'] = session
 
 			fake = False
@@ -1807,15 +1809,219 @@ def mhDemoOpPage(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			numChildren = request.POST.get('numChildren', '')
-			numSisters = request.POST.get('numSisters', '')
-			numBrothers = request.POST.get('numBrothers', '')
+			mh_id = getGlobalID()
+			mh = MentalHealth.objects.get(id=mh_id)
+			states = State.objects.all().order_by('state')
 
-			content['children'] = numChildren
-			content['sisters'] = numSisters
-			content['brothers'] = numBrothers
+			children = (mh.demographics.numChildren)
+			sisters = (mh.demographics.numSisters)
+			brothers = (mh.demographics.numBrothers)
+
+			content['no_child'] = children
+			content['no_sister'] = sisters
+			content['no_brother'] = brothers
+
+			the_class = None
+			cols = 0
+
+			if children > 0:
+				content['childHead'] = 'Children'
+				cols = cols + 1
+
+				children_list = []
+				for c in range(children):
+					f = {}
+					age = 'c_age'
+					gender = 'c_gender'
+					male = 'male'
+					female = 'female'
+					city = 'c_city'
+					state = 'c_state'
+					f['ageID'] = age + str(c + 1)
+					f['genderName'] = gender + str(c + 1)
+					f['maleID'] = male + str(c + 1)
+					f['femaleID'] = female + str(c + 1)
+					f['cityID'] = city + str(c + 1)
+					f['stateID'] = state + str(c + 1)
+					children_list.append(f)
+				content['children']  = children_list
+
+			if sisters > 0:
+				content['sisterHead'] = 'Sisters'
+				cols = cols + 1
+
+				sister_list = []
+				for s in range(sisters):
+					f2 = {}
+					age = 's_age'
+					city = 's_city'
+					state = 's_state'
+					f2['age'] = age + str(s + 1)
+					f2['city'] = city + str(s + 1)
+					f2['state'] = state + str(s + 1)
+					sister_list.append(f2)
+				content['sisters']  = sister_list
+
+			if brothers > 0:
+				content['brotherHead'] = 'Brothers'
+				cols = cols + 1
+
+				brother_list = []
+				for b in range(brothers):
+					f3 = {}
+					age = 'b_age'
+					city = 'b_city'
+					state = 'b_state'
+					f3['age'] = age + str(b + 1)
+					f3['city'] = city + str(b + 1)
+					f3['state'] = state + str(b + 1)
+					brother_list.append(f3)
+				content['brothers']  = brother_list
+
+			if cols == 1:
+				the_class = 'mh_op_table1'
+			elif cols == 2:
+				the_class = 'mh_op_table2'
+			elif cols == 3:
+				the_class = 'mh_op_table3'
+
+			content['mh'] = mh		
+			content['col_class'] = the_class
+			content['states'] = states
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/mhDemoOpPage.html', content)
+
+@login_required(login_url='/index')
+def verify_mhOp(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			mh_id = request.POST.get('mh_id', '')
+			numChildren = int(request.POST.get('numChildren', ''))
+			numSisters = int(request.POST.get('numSisters', ''))
+			numBrothers = int(request.POST.get('numBrothers', ''))
+
+			mh = MentalHealth.objects.get(id=mh_id)
+
+			male = ''
+			female = ''
+			sister = ''
+			brother = ''
+
+			maleList = []
+			femaleList = []
+			sisterList = []
+			brotherList = []
+
+			for c in range(numChildren):
+				age = 'c_age' + str(c + 1)
+				gender = 'c_gender' + str(c + 1)
+				city = 'c_city' + str(c + 1)
+				state = 'c_state' + str(c + 1)
+
+				age = request.POST.get(age)
+				gender = request.POST.get(gender, '')
+				city = request.POST.get(city, '')
+				state = request.POST.get(state, '')
+
+				if str(gender) == 'male':
+					male2 = ''
+					male2 += age
+					male2 += '/'
+					male2 += city
+					male2 += ', '
+					male2 += state
+					maleList.append(male2)
+
+				else:
+					female2 = ''
+					female2 += age
+					female2 += '/'
+					female2 += city
+					female2 += ', '
+					female2 += state
+					femaleList.append(female2)
+
+			for s in range(numSisters):
+				age = 's_age' + str(s + 1)
+				city = 's_city' + str(s + 1)
+				state = 's_state' + str(s + 1)
+
+				age = request.POST.get(age)
+				gender = request.POST.get(gender)
+				city = request.POST.get(city)
+				state = request.POST.get(state)
+
+				sister2 = ''
+				sister2 += age
+				sister2 += '/'
+				sister2 += city
+				sister2 += ', '
+				sister2 += state
+				sisterList.append(sister2)
+
+			for b in range(numBrothers):
+				age = 'b_age' + str(b + 1)
+				city = 'b_city' + str(b + 1)
+				state = 'b_state' + str(b + 1)
+
+				age = request.POST.get(age)
+				gender = request.POST.get(gender)
+				city = request.POST.get(city)
+				state = request.POST.get(state)
+
+				brother2 = ''
+				brother2 += age
+				brother2 += '/'
+				brother2 += city
+				brother2 += ', '
+				brother2 += state
+				brotherList.append(brother2)
+
+			flag = ' ~ '
+			for m in maleList:
+				male += m
+				male += flag
+
+			for f in femaleList:
+				female += f
+				female += flag
+
+			for s in sisterList:
+				sister += s
+				sister += flag
+
+			for b in brotherList:
+				brother += b
+				brother += flag
+
+			demo = mh.demographics
+			demo.childrenMale = male
+			demo.childrenFemale = female
+			demo.bothers = brother
+			demo.sisters = sister
+			demo.save()
+
+			mh.demographicsComplete = True
+			mh.save()
+
+			content['maleList'] = maleList
+			content['femaleList'] = femaleList
+			content['sisterList'] = sisterList
+			content['brotherList'] = brotherList
+			content['mh'] = mh
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/verify_mhOp.html', content)
 
 @login_required(login_url='/index')
 def mh_education(request):

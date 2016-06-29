@@ -18,7 +18,16 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, \
-Invoice, SType, AM_AngerHistory3
+Invoice, SType, AM_AngerHistory3, Global_ID
+
+def setGlobalID(the_id):
+	gloVar = Global_ID.objects.get(id=1)
+	gloVar.global_id = the_id
+	gloVar.save()
+
+def getGlobalID():
+	gloVar = Global_ID.objects.get(id=1)
+	return gloVar.global_id
 
 def onTrue_offFalse(data):
 	if data == 'on':
@@ -3759,6 +3768,7 @@ def newMh(the_client):
 	mh.save()
 
 	return mh
+
 
 def startMH(client):
 	result = {}

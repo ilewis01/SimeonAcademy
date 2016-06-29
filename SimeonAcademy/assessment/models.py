@@ -9,6 +9,13 @@ class account(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
+class Global_ID(models.Model):
+	name = models.CharField(max_length=20, default=None, blank=True, null=True)
+	global_id = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.global_id)
+
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)
 

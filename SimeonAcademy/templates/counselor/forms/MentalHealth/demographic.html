@@ -176,8 +176,6 @@
                 <div class="container">
             		<div class="row">                   
                   		<div class="col-md-6 col-sm-6">
-                  			<h4>Mom State Index: {{mom_state}}</h4>
-                  			<h4>Dad State Index: {{dad_state}}</h4>
                   			<div>
                   				<form action='/mh_education/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
