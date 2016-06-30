@@ -698,7 +698,7 @@ class MHEducation(models.Model):
 		return str(self.clientID)
 
 ##MENTAL HEALTH FAMILY----------------------------------------------------------------------------------
-class MHFamily(models.Model):
+class MHBackground(models.Model):
 	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	spouseAge = models.IntegerField(default=0)
 	spouseOccupation = models.CharField(max_length=35, default=None, blank=True, null=True)
@@ -962,12 +962,15 @@ class MentalHealth(models.Model):
 
 	demographics = models.ForeignKey(MHDemographic, default=None, blank=True, null=True)
 	education = models.ForeignKey(MHEducation, default=None, blank=True, null=True)
+	background = models.ForeignKey(MHBackground, default=None, blank=True, null=True)
 
 	demographicsComplete = models.BooleanField(default=False, blank=True)
 	educationComplete = models.BooleanField(default=False, blank=True)
+	backgroundComplete = models.BooleanField(default=False, blank=True)
 
 	demoPriority = models.BooleanField(default=False, blank=True)
 	educationPriority = models.BooleanField(default=False, blank=True)
+	backgroundPriority = models.BooleanField(default=False, blank=True)
 
 	isOpen = models.BooleanField(default=False, blank=True)
 	MHComplete = models.BooleanField(default=False, blank=True)

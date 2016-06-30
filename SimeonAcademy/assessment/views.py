@@ -21,7 +21,7 @@ Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
 FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
-SapDemographics, SapPsychoactive, MHDemographic, MHFamily, MHEducation, \
+SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, SType, \
 Invoice, AM_AngerHistory3
 
@@ -2043,6 +2043,24 @@ def mh_education(request):
 			return render_to_response('counselor/forms/MentalHealth/education.html', content)
 
 @login_required(login_url='/index')
+def mh_background(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/background.html', content)
+
+@login_required(login_url='/index')
 def mh_location(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -2096,24 +2114,6 @@ def mh_activity(request):
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/activity.html', content)
-
-@login_required(login_url='/index')
-def mh_education(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/education.html', content)
 
 @login_required(login_url='/index')
 def mh_familyBackground(request):

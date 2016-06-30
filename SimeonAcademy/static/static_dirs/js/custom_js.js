@@ -4793,6 +4793,15 @@ function initialize_mh_education() {
 	mhMilitary();
 }
 
+function proceed_mh_education() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		form.submit();
+	}
+}
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //======================================================================================================================
