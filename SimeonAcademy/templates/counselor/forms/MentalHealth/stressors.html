@@ -2,13 +2,742 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Mental Health Stress Factors</h1>
+<body class="gradient-white" onLoad="javascript: initialize_mh_stress();">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/mh_familyHistory/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
-	<input type='submit' value='submit'>
-</form>
+    <div id="wrapper" class='shift-rr'>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>Mental Health Profile</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{mh.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Progress:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+            	<td>
+            		<div id='sideProgress'>
+            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+            		</div>
+            	</td>
+            </tr> -->
+
+            <tr>
+              <td>
+                <div class='{{class.mhHistory}}'>
+                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhHistory');" name='mhHistoryBtn' id='mhHistoryBtn'>
+                    History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhEducation}}'>
+                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhEducation');" name='mhEducationBtn' id='mhEducationBtn'>
+                     Education
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhBackground}}'>
+                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhBackground');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
+                    Finance & Background
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhStress}}'>
+                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhStress');" name='mhStressBtn' id='mhStressBtn'>
+                    Stressors
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhFamily}}'>
+                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhFamily');" name='mhFamilyBtn' id='mhFamilyBtn'>
+                    Family History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.other}}'>
+                  <img src="{{image.other_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapOther');" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.source}}'>
+                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <div style='margin-bottom:30px;'>
+                	<h3 id='am-h2'>Mental Health: Stress Factors</h3>
+
+                	 <div id='mh_sub_desciption'>
+                	    Have there been any major changes in your life or your family? Please describe.
+                    </div>
+                </div>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-6 col-sm-6">
+                  			<div>
+                  				<form action='/mh_familyHistory/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
+                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+
+				            	<table>
+				            		<tr>
+				            			<td>
+				            				<div id='sub_background_header'>
+				            					Environmental Stressors:
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<table>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					1. Death of a friend or family member:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='deathStress' id='yesDeath' value='True' onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='deathStress' id='noDeath' value='False' checked onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='deathStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='deathStressExp' id='deathStressExp'>{{fields.deathStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					2. Divorce:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='divorceStress' id='yesDivorce' value='True' onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='divorceStress' id='noDivorce' value='False' checked onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='divorceStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='divorceStressExp' id='divorceStressExp'>{{fields.divorceStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					3. Moves:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='moveStress' id='yesMove' value='True' onClick="javascript: mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='moveStress' id='noMove' value='False' checked onClick="javascript: mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='moveStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='moveStressExp' id='moveStressExp'>{{fields.moveStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					4. Significant medical problems:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='medicalStress' id='yesMedical' value='True' onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='medicalStress' id='noMedical' value='False' checked onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='medicalStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='medicalStressExp' id='medicalStressExp'>{{fields.medicalStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					5. Ill health of family member:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='familyHealthStress' id='yesFamily' value='True' onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='familyHealthStress' id='noFamily' value='False' checked onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='familyHealthStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='familyHealthStressExp' id='familyHealthStressExp'>{{fields.familyHealthStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+				            </div>
+				        </div><!--  END OF LEFT SIDE -->
+
+				        <div class="col-md-6 col-sm-6">
+				        	<div style='margin-top:28px;'>
+					        	<table>
+					            		<tr>
+					            			<td>
+					            				<label>
+					            					6. Financial problems:
+					            				</label>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='financialStress' id='yesMoney' value='True' onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<label>Yes</label>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='financialStress' id='noMoney' value='False' checked onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<label>No</label>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<div class='sub_left_margin_tr'>
+						            	<table>
+						            		<tr>
+						            			<td>
+						            				<span id='financialStressExp_lab'><em>Explain</em></span>
+						            			</td>
+						            		</tr>
+
+						            		<tr>
+						            			<td>
+						            				<textarea rows='3' cols='60' name='financialStressExp' id='financialStressExp'>{{fields.financialStressExp}}</textarea>
+						            			</td>
+						            		</tr>
+						            	</table>
+						            </div>
+						        </div>
+
+						        <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					7. Abuse in family:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='abuseStress' id='yesAbuse' value='True' onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='abuseStress' id='noAbuse' value='False' checked onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='abuseStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='abuseStressExp' id='abuseStressExp'>{{fields.abuseStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					8. Addiction in family:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='addictionFamilyStress' id='yesAddiction' value='True' onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='addictionFamilyStress' id='noAddiction' value='False' checked onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='addictionFamilyStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='addictionFamilyStressExp' id='addictionFamilyStressExp'>{{fields.addictionFamilyStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					9. Violence in family:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='violenceFamilyStress' id='yesViolence' value='True' onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='violenceFamilyStress' id='noViolence' value='False' checked onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='violenceFamilyStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='violenceFamilyStressExp' id='violenceFamilyStressExp'>{{fields.violenceFamilyStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+
+					            <table>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+					            	<tr><td><div id='mh_space'></div></td></tr>
+				            		<tr>
+				            			<td>
+				            				<label>
+				            					10. Other stressors:
+				            				</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='otherStress' id='yesOther' value='True' onClick="javascript: mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>Yes</label>
+				            			</td>
+
+				            			<td>
+				            				<div id='fix_my_radio'>
+				            					<input type='radio' name='otherStress' id='noOther' value='False' checked onClick="javascript: mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');">
+				            				</div>
+				            			</td>
+
+				            			<td>
+				            				<label>No</label>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<div class='sub_left_margin_tr'>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<span id='otherStressExp_lab'><em>Explain</em></span>
+					            			</td>
+					            		</tr>
+
+					            		<tr>
+					            			<td>
+					            				<textarea rows='3' cols='60' name='otherStressExp' id='otherStressExp'>{{fields.otherStressExp}}</textarea>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </div>
+				        			        	
+				        </div>
+				    </form>
+
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: proceed_mh_stress();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+

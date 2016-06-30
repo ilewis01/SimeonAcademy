@@ -2,13 +2,244 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Mental Health Family History</h1>
+<body class="gradient-white" onLoad="javascript: initialize_mh_stress();">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/mh_legal/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
-	<input type='submit' value='submit'>
-</form>
+    <div id="wrapper" class='shift-rr'>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>Mental Health Profile</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{mh.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Progress:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+            	<td>
+            		<div id='sideProgress'>
+            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+            		</div>
+            	</td>
+            </tr> -->
+
+            <tr>
+              <td>
+                <div class='{{class.mhHistory}}'>
+                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhHistory');" name='mhHistoryBtn' id='mhHistoryBtn'>
+                    History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhEducation}}'>
+                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhEducation');" name='mhEducationBtn' id='mhEducationBtn'>
+                     Education
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhBackground}}'>
+                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhBackground');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
+                    Finance & Background
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhStress}}'>
+                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhStress');" name='mhStressBtn' id='mhStressBtn'>
+                    Stressors
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhFamily}}'>
+                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhFamily');" name='mhFamilyBtn' id='mhFamilyBtn'>
+                    Family History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.other}}'>
+                  <img src="{{image.other_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapOther');" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.source}}'>
+                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <div style='margin-bottom:30px;'>
+                	<h3 id='am-h2'>Mental Health: Family History</h3>
+                </div>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-6 col-sm-6">
+                  			<div>
+                  				<form action='/mh_stress/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
+                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+
+				            	       
+				            </div>
+				        </div><!--  END OF LEFT SIDE -->
+
+				        <div class="col-md-6 col-sm-6">
+				        			        	
+				        </div>
+				    </form>
+
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: proceed_mh_familyHistory();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+

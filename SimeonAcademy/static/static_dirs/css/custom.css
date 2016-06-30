@@ -1579,12 +1579,6 @@ button:hover {
 	font-size: 13px;
 }
 
-#fix_my_radio {
-	margin-bottom: 7px;
-	margin-right: 3px;
-	margin-left: 15px;
-}
-
 #sub_background_header {
 	font-size: 18px;
 	font-style: italic;
@@ -1595,6 +1589,29 @@ button:hover {
 #mh_numFix {
 	margin-bottom: 5px;
 	margin-left: 3px;
+}
+
+#fix_my_radio {
+	margin-bottom: 7px;
+	margin-right: 3px;
+	margin-left: 15px;
+}
+
+#fix_my_select {
+	margin-left: 5px;
+	margin-bottom: 7px;
+}
+
+#mhRelate_width {
+	width:80px;
+}
+
+#mh_sub_desciption {
+
+}
+
+.sub_left_margin_tr {
+	margin-left: 17px;
 }
 
 

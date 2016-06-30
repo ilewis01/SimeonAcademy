@@ -4802,6 +4802,54 @@ function proceed_mh_education() {
 	}
 }
 
+function proceed_mh_background() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		form.submit();
+	}
+}
+
+function proceed_mh_stress() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		form.submit();
+	}
+}
+
+function proceed_mh_familyHistory() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		form.submit();
+	}
+}
+
+function mhStressRadio(trigger_id, label_id, element_id) {
+	var trigger = document.getElementById(trigger_id);
+	var label = document.getElementById(label_id);
+	var element = document.getElementById(element_id);
+
+	twoElementRadioSetup(trigger, label, element);
+}
+
+function initialize_mh_stress() {
+	mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');
+	mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');
+	mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');
+	mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');
+	mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');
+	mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');
+	mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');
+	mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');
+	mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');
+	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
+}
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //======================================================================================================================

@@ -2061,6 +2061,42 @@ def mh_background(request):
 			return render_to_response('counselor/forms/MentalHealth/background.html', content)
 
 @login_required(login_url='/index')
+def mh_stress(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/stressors.html', content)
+
+@login_required(login_url='/index')
+def mh_familyHistory(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content)
+
+@login_required(login_url='/index')
 def mh_location(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -2171,23 +2207,6 @@ def mh_familyBackground(request):
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/familyBackground.html', content)
 
-@login_required(login_url='/index')
-def mh_familyHistory(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content)
 
 @login_required(login_url='/index')
 def mh_legal(request):
@@ -2224,24 +2243,6 @@ def mh_relationships(request):
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/relationships.html', content)
-
-@login_required(login_url='/index')
-def mh_stress(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/stressors.html', content)
 
 @login_required(login_url='/index')
 def mh_useTable(request):
