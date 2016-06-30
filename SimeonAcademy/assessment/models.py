@@ -768,51 +768,8 @@ class MHStressor(models.Model):
 	def __unicode__(self):
 		return str(self.clientID)
 
-
-##MENTAL HEALTH RELATIONSHIPS---------------------------------------------------------------------------
-class MHRelationship(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
-	spouseR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	bothersR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	childrenR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	parentsR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	sistersR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	exR = models.CharField(max_length=7, default=None, blank=True, null=True)
-	friendsCallNum = models.IntegerField(default=0)
-	friendsVisitWeek = models.IntegerField(default=0)
-	friendsVisitMonth = models.IntegerField(default=0)
-	friendsVisitYear = models.IntegerField(default=0)
-	aquaintCallNum = models.IntegerField(default=0)
-	aquaintVisitWeek = models.IntegerField(default=0)
-	aquaintVisitMonth = models.IntegerField(default=0)
-	aquaintVisitYear = models.IntegerField(default=0)
-
-	def __unicode__(self):
-		return "Mental Health/Relationships: " + str(self.client_id)
-
-##MENTAL HEALTH ACTIVITIES------------------------------------------------------------------------------
-class MHActivity(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
-	interestAct = models.CharField(max_length=25, default=None, blank=True, null=True)
-	interestWeek = models.IntegerField(default=0)
-	interestMonth = models.IntegerField(default=0)
-	friendsAct = models.CharField(max_length=25, default=None, blank=True, null=True)
-	friendsWeek = models.IntegerField(default=0)
-	friendsMonth = models.IntegerField(default=0)
-	workAct = models.CharField(max_length=25, default=None, blank=True, null=True)
-	workWeek = models.IntegerField(default=0)
-	workMonth = models.IntegerField(default=0)
-	churchAffiliation = models.CharField(max_length=40, default=None, blank=True, null=True)
-	churchWeek = models.IntegerField(default=0)
-	churchMonth = models.IntegerField(default=0)
-	churchYear = models.IntegerField(default=0)
-
-	def __unicode__(self):
-		return "Mental Health/Activities: " + str(self.client_id)
-
-
 ##MENTAL HEALTH FAMILY HISTORY--------------------------------------------------------------------------
-class FamilyHistory(models.Model):
+class MHFamilyHistory(models.Model):
 	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	depression = models.CharField(max_length=35, default=None, blank=True, null=True)
 	hyperactivity = models.CharField(max_length=35, default=None, blank=True, null=True)
@@ -869,6 +826,50 @@ class MHLegalHistory(models.Model):
 
 	def __unicode__(self):
 		return "Mental Health/Legal History: " + str(self.client_id)
+
+
+
+##MENTAL HEALTH RELATIONSHIPS---------------------------------------------------------------------------
+class MHRelationship(models.Model):
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	spouseR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	bothersR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	childrenR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	parentsR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	sistersR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	exR = models.CharField(max_length=7, default=None, blank=True, null=True)
+	friendsCallNum = models.IntegerField(default=0)
+	friendsVisitWeek = models.IntegerField(default=0)
+	friendsVisitMonth = models.IntegerField(default=0)
+	friendsVisitYear = models.IntegerField(default=0)
+	aquaintCallNum = models.IntegerField(default=0)
+	aquaintVisitWeek = models.IntegerField(default=0)
+	aquaintVisitMonth = models.IntegerField(default=0)
+	aquaintVisitYear = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return "Mental Health/Relationships: " + str(self.client_id)
+
+##MENTAL HEALTH ACTIVITIES------------------------------------------------------------------------------
+class MHActivity(models.Model):
+	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	interestAct = models.CharField(max_length=25, default=None, blank=True, null=True)
+	interestWeek = models.IntegerField(default=0)
+	interestMonth = models.IntegerField(default=0)
+	friendsAct = models.CharField(max_length=25, default=None, blank=True, null=True)
+	friendsWeek = models.IntegerField(default=0)
+	friendsMonth = models.IntegerField(default=0)
+	workAct = models.CharField(max_length=25, default=None, blank=True, null=True)
+	workWeek = models.IntegerField(default=0)
+	workMonth = models.IntegerField(default=0)
+	churchAffiliation = models.CharField(max_length=40, default=None, blank=True, null=True)
+	churchWeek = models.IntegerField(default=0)
+	churchMonth = models.IntegerField(default=0)
+	churchYear = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return "Mental Health/Activities: " + str(self.client_id)
+
 
 ##MENTAL HEALTH DRUG AND ALCOHOL USE--------------------------------------------------------------------
 class UseTable(models.Model):
@@ -990,16 +991,22 @@ class MentalHealth(models.Model):
 	education = models.ForeignKey(MHEducation, default=None, blank=True, null=True)
 	background = models.ForeignKey(MHBackground, default=None, blank=True, null=True)
 	stressors = models.ForeignKey(MHStressor, default=None, blank=True, null=True)
+	familyHistory = models.ForeignKey(MHFamilyHistory, default=None, blank=True, null=True)
+	legalHistory = models.ForeignKey(MHLegalHistory, default=None, blank=True, null=True)
 
 	demographicsComplete = models.BooleanField(default=False, blank=True)
 	educationComplete = models.BooleanField(default=False, blank=True)
 	backgroundComplete = models.BooleanField(default=False, blank=True)
 	stressorComplete = models.BooleanField(default=False, blank=True)
+	familyComplete = models.BooleanField(default=False, blank=True)
+	legalComplete = models.BooleanField(default=False, blank=True)
 
 	demoPriority = models.BooleanField(default=False, blank=True)
 	educationPriority = models.BooleanField(default=False, blank=True)
 	backgroundPriority = models.BooleanField(default=False, blank=True)
 	stressPriority = models.BooleanField(default=False, blank=True)
+	familyPriority = models.BooleanField(default=False, blank=True)
+	legalPriority = models.BooleanField(default=False, blank=True)
 
 	isOpen = models.BooleanField(default=False, blank=True)
 	MHComplete = models.BooleanField(default=False, blank=True)

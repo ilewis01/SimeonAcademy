@@ -2,7 +2,7 @@ from django.contrib import admin
 from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
-FamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
+MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
@@ -43,7 +43,7 @@ admin.site.register(AngerManagement)
 ##MENTAL HEALTH REGISTERS
 admin.site.register(MHDemographic)
 admin.site.register(UseTable)
-admin.site.register(FamilyHistory)
+admin.site.register(MHFamilyHistory)
 admin.site.register(MHBackground)
 admin.site.register(MHEducation)
 admin.site.register(MHRelationship)
