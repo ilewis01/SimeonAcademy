@@ -29,6 +29,19 @@ def getGlobalID():
 	gloVar = Global_ID.objects.get(id=1)
 	return gloVar.global_id
 
+def decodeCharfield(text):
+	result = []
+	temp = ''
+
+	for t in text:
+		if str(t) != '~':
+			temp += t
+		else:
+			result.append(temp)
+			temp = ''
+
+	return result
+
 def onTrue_offFalse(data):
 	if data == 'on':
 		data = True

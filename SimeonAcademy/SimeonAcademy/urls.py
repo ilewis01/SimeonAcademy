@@ -30,10 +30,12 @@ urlpatterns = patterns('',
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),
-    url(r'^mh_activity/$', 'assessment.views.mh_activity'),
     url(r'^mh_demographic/$', 'assessment.views.mh_demographic'),
-    url(r'^mhDemoOpPage/$', 'assessment.views.mhDemoOpPage'),
     url(r'^mh_education/$', 'assessment.views.mh_education'),
+    url(r'^mhDemoOpPage/$', 'assessment.views.mhDemoOpPage'),
+    url(r'^verify_mhOp/$', 'assessment.views.verify_mhOp'),
+
+    url(r'^mh_activity/$', 'assessment.views.mh_activity'),
     url(r'^mh_familyBackground/$', 'assessment.views.mh_familyBackground'),
     url(r'^mh_familyHistory/$', 'assessment.views.mh_familyHistory'),
     url(r'^mh_legal/$', 'assessment.views.mh_legal'),
@@ -41,8 +43,7 @@ urlpatterns = patterns('',
     url(r'^mh_stress/$', 'assessment.views.mh_stress'),
     url(r'^mh_useTable/$', 'assessment.views.mh_useTable'),
     url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
-    url(r'^mh_location/$', 'assessment.views.mh_location'),
-    url(r'^verify_mhOp/$', 'assessment.views.verify_mhOp'),
+    url(r'^mh_location/$', 'assessment.views.mh_location'),   
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),

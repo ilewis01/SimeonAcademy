@@ -41,7 +41,8 @@ grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields,
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
-getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID
+getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID, \
+decodeCharfield
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1988,7 +1989,7 @@ def verify_mhOp(request):
 				brother2 += state
 				brotherList.append(brother2)
 
-			flag = ' ~ '
+			flag = '~'
 			for m in maleList:
 				male += m
 				male += flag

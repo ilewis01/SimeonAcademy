@@ -6,164 +6,137 @@
     <title>{{title}}</title>
 </head>
 
+<form action='/mhDemoOpPage/' method='post' id='back_edit'> {% csrf_token %}
+</form>
+
 <body class="gradient-white">
 	<div class='sub_body_mh'>
-		<div>
-			<img src="{% static 'images/simeon_logo2.png' %}" alt="gold_bullet" class='gold_bullet'>
-		</div>
+
 		<div id='header-text2'>
 			Verify Family Details
 		</div>
 
 		<div class='table_container'>
-			<table class='opResultTable'>
+			<table class='border_table'>
 				<tr>
-					<td>
-						<table>
-							<tr>
-								<th>
-									<div id='opResultHead'>
-										Children
-									</div>
-								</th>
-							</tr>
-						</table>
-					</td>
+					<th>
+						<div class='inner_box_head'>
+							Children
+						</div>
+					</th>
 
-					<td>
-						<table>
-							<tr>
-								<th>
-									<div id='opResultHead'>
-										Sisters
-									</div>
-								</th>
-							</tr>
-						</table>
-					</td>
+					<th>
+						<div class='inner_box_head'>
+							Sisters
+						</div>
+					</th>
 
-					<td>
-						<table>
-							<tr>
-								<th>
-									<div id='opResultHead'>
-										Brothers
-									</div>
-								</th>
-							</tr>
-						</table>
-					</td>
+					<th>
+						<div class='inner_box_head'>
+							Brothers
+						</div>
+					</th>
 				</tr>
 
 				<tr>
 					<td>
-						<table>
-							<tr>
-								<td>
-									<div id='opResultSubHEad'>
-										Male:
-									</div>
-								</td>
-							</tr>
-						</table>
-					</td>
-
-					<td>
-						<table>
-							{% for s in sisterList %}
-							<tr>
-								<td>
-									<div>
-										<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
-									</div>
-								</td>
-
-								<td>
-									<div>
-										{{s}}
-									</div>
-								</td>
-							</tr>
-							{% endfor %}
-						</table>
-					</td>
-
-					<td>
-						<table>
-							{% for b in brotherList %}
-							<tr>
-								<td>
-									<div>
-										<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
-									</div>
-								</td>
-
-								<td>
-									<div>
-										{{b}}
-									</div>
-								</td>
-							</tr>
-							{% endfor %}
-						</table>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<table>
-							{% for m in maleList %}
+						<div class='inner_box'>
+							<table>
 								<tr>
 									<td>
-										<div>
-											<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
+										<div id='subHeadOp'>
+											Male:
 										</div>
 									</td>
+								</tr>
+
+								{% for m in maleList %}
+								<tr>
 									<td>
-										<div id='opResultData'>
+										<div id='bullet_text2'>
+											<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
 											{{m}}
 										</div>
 									</td>
 								</tr>
-							{% endfor %}
-						</table>
-					</td>
-				</tr>
+								{% endfor %}
 
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td>
+								<tr>
 									<td>
-										<div id='opResultSubHEad'>
+										<div id='subHeadOp'>
 											Female:
 										</div>
 									</td>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
+								</tr>
 
-				<tr>
-					<td>
-						<table>
-							{% for f in femaleList %}
+								{% for f in femaleList %}
 								<tr>
 									<td>
-										<div>
+										<div id='bullet_text2'>
 											<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
-										</div>
-									</td>
-									<td>
-										<div id='opResultData'>
 											{{f}}
 										</div>
 									</td>
 								</tr>
-							{% endfor %}
-						</table>
+								{% endfor %}
+							</table>
+						</div>
+					</td>
+
+					<td>
+						<div class='inner_box'>
+							<table>
+								{% for s in sisterList %}
+								<tr>
+									<td>
+										<div id='bullet_text'>
+											<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
+											{{s}}
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</td>
+
+					<td>
+						<div class='inner_box'>
+							<table>
+								{% for b in brotherList %}
+								<tr>
+									<td>
+										<div id='bullet_text'>
+											<img src="{% static 'images/gold_bullet.png' %}" alt="gold_bullet" class='gold_bullet'>
+											{{b}}
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id='mh_sideNote'>
+			<em>*Note: Selecting Edit will reset the previous form*</em>
+		</div>
+
+		<div class='opResultButtons'>
+			<table>
+				<tr>
+					<td>
+						<a href="javascript: proceed_opWin();">
+							<button>Verify</button>
+						</a>
+					</td>
+
+					<td>
+						<a href="javascript: edit_mhOpResults();">
+							<button>Edit</button>
+						</a>
 					</td>
 				</tr>
 			</table>

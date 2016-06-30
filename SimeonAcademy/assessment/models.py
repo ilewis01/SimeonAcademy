@@ -687,12 +687,11 @@ class MHEducation(models.Model):
 	collegeDegree = models.BooleanField(default=False, blank=True)
 	collegeMajor = models.CharField(max_length=25, blank=True, null=True, default=None)
 	advanceDegree = models.BooleanField(blank=True, default=False)
-	tradeSchool = models.BooleanField(blank=True, default=False)
+	tradeSchool = models.CharField(max_length=25, blank=True, null=True, default=None)
 	tradeAreaStudy = models.CharField(max_length=25, blank=True, null=True, default=None)
-	wasMillitary = models.BooleanField(default=False, blank=True)
-	millitaryBranch = models.CharField(max_length=20, default=None, blank=True, null=True)
-	millitaryYears = models.IntegerField(default=0)
-	millitaryRank = models.CharField(max_length=25, default=None, blank=True, null=True)
+	militaryBranch = models.CharField(max_length=20, default=None, blank=True, null=True)
+	militaryYears = models.IntegerField(default=0)
+	militaryRank = models.CharField(max_length=25, default=None, blank=True, null=True)
 	honorableDischarge = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):

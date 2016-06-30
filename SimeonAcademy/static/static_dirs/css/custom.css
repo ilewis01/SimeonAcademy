@@ -1409,12 +1409,18 @@ button:hover {
 .sub_head_table {
 	width: 100%;
 	vertical-align: top;
+	color:#333333;
 }
 
 .sub_head_table th {
 	width: 100%;
 	margin: auto;
 	vertical-align: top;
+	color:#333333;
+}
+
+.tr_height_fix {
+	height:112px;
 }
 
 .individual_pop_mh {
@@ -1480,22 +1486,6 @@ button:hover {
 
 .gold_bullet {
 	width:8px;
-	/*margin-left: 25px;*/
-}
-
-.opResultTable {
-	width: 100%;
-	margin: auto;
-}
-
-.opResultTable th {
-	border: 1px solid black;
-	width: 30%;
-	text-align: center;
-}
-
-.opResultTable td {
-	width: 30%;
 }
 
 .table_container {
@@ -1504,16 +1494,111 @@ button:hover {
 	margin-top: 20px;
 	border: 1px solid black;
 	padding: 2px;
+	background-color: #d9d9d9;
 }
 
 .sobOplogo {
 	width:30%;
 }
 
-.the_gray_gradient {
-	 /*background: url('../images/gray_gradient.png');
-	 background-repeat: none;*/
+.border_table {
+	width: 100%;
+	height: 10%;
+	margin-top: 3px;
 }
+
+.border_table th {
+	width: 25%;
+	margin: auto;
+	text-align: center;
+	font-size: 18px;
+	font-style: italic;
+	color: #4f4d4d;
+	/*color: #a39000;*/
+	/*text-shadow: 1px 1px black;*/
+}
+
+.border_table td {
+	width: 25%;
+	height: 100%;
+}
+
+.inner_box {
+	width: 97%;
+	height: 98%;
+	margin: auto;
+	margin-top: 6%;
+	margin-bottom: 6%;
+	border: 1px solid black;
+	background-color: #e8e6e8;
+}
+
+.inner_box_head {
+	width: 97%;
+	height: 98%;
+	margin: auto;
+	border: 1px solid black;
+	background-color: #e8e6e8;
+}
+
+#bullet_text {
+	margin-top: 5%;
+	margin-left: 8%;
+	font-size: 13px;
+}
+
+#bullet_text2 {
+	margin-top: 1%;
+	margin-bottom: 4%;
+	margin-left: 8%;
+	font-size: 13px;
+}
+
+#subHeadOp {
+	font-weight: bold;
+	font-size: 16px;
+	font-style: italic;
+	color: #4f4d4d;
+	margin-left: 3%;
+	margin-top: 3%;
+}
+
+.opResultButtons {
+	padding-left: 5%;
+	margin-top: 3%;
+}
+
+.opResultButtons button {
+	color:#333333;
+	font-size: 12px;
+}
+
+#mh_sideNote {
+	margin-left: 5%;
+	margin-top: 3%;
+	font-size: 13px;
+}
+
+#fix_my_radio {
+	margin-bottom: 7px;
+	margin-right: 3px;
+	margin-left: 15px;
+}
+
+#sub_background_header {
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	color:#7f7f7f;
+}
+
+#mh_numFix {
+	margin-bottom: 5px;
+	margin-left: 3px;
+}
+
+
+
 
 
 

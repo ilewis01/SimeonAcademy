@@ -2,13 +2,1349 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Mental Health Education</h1>
+<body class="gradient-white" onLoad="javascript: initialize_mh_education();">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<form action='/mh_relationships/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name-'' id='' value=''>
-	<input type='submit' value='submit'>
-</form>
+    <div id="wrapper" class='shift-rr'>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>Mental Health Profile</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{mh.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Progress:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+            	<td>
+            		<div id='sideProgress'>
+            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+            		</div>
+            	</td>
+            </tr> -->
+
+            <tr>
+              <td>
+                <div class='{{class.mhBackground}}'>
+                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhBackground');" name='backgroundBtn' id='backgroundBtn'>
+                    Background
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhEducation}}'>
+                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhEducation');" name='educationBtn' id='educationBtn'>
+                     Education
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhFinancial}}'>
+                  <img src="{{image.mhFinancial_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhFinancial');" name='mhFinancialBtn' id='mhFinancialBtn'>
+                    Finance & Relationships
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.psycho2}}'>
+                  <img src="{{image.psycho2_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapPsycho2');" name='psycho2Btn' id='psycho2Btn'>
+                    Psychoactive Use II
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.special}}'>
+                  <img src="{{image.special_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSpecial');" name='specialBtn' id='specialBtn'>
+                    Special Populations
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.other}}'>
+                  <img src="{{image.other_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapOther');" name='otherBtn' id='otherBtn'>
+                    Other
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.source}}'>
+                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
+                    Sources
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div>
+                <div style='margin-bottom:30px;'>
+                	<h3 id='am-h2'>Mental Health: Education Background</h3>
+                </div>
+
+                <div class="container">
+            		<div class="row">                   
+                  		<div class="col-md-6 col-sm-6">
+                  			<div>
+                  				<form action='/mh_background/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
+                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
+				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+
+				            	<table>
+				            		<tr>
+				            			<td>
+				            				<div id='sub_background_header'>
+				            					Grades K-6
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<ul>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='GradesKto6'>Average Grades:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+					            		
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6a' value='A' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>A</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6b' value='B'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>B</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6c' value='C'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>C</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6d' value='D'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>D</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6e' value='E'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>E</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='GradesKto6' id='k6f' value='F'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='BehaviorProblemsKto6'>F</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='GradesKto6'>Behavioral Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblemsKto6' id='behaved' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='behaved'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblemsKto6' id='notBehaved' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='notBehaved'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='GradesKto6'>Academic Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblemsKto6' id='yesAcademic' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='yesAcademic'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblemsKto6' id='noAcademic' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='noAcademic'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for'FriendshipsKto6'>Good Friendships:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='FriendshipsKto6' id='friend1' value='1' checked onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend1'>1</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='FriendshipsKto6' id='friend2' value='2' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend2'>2</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='FriendshipsKto6' id='friend3' value='3' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend3'>3</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='FriendshipsKto6' id='friend4' value='4' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend4'>4</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='FriendshipsKto6' id='friendMore' value='' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friendMore' id='friendMore_label'>More</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<div>
+					            					<label id='numMore_label'>How Many?</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='mh_numFix'>
+					            					<input type='number' style='width:40px' name='numMore' id='numMore' value='0'>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </ul>
+
+
+					            <table>
+				            		<tr>
+				            			<td>
+				            				<div id='sub_background_header'>
+				            					Grades 7-9
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<ul>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='Grades7to9'>Average Grades:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+					            		
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9a' value='A' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>A</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9b' value='B'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>B</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9c' value='C'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>C</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9d' value='D'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>D</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9e' value='E'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for=''>E</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades7to9' id='g7_9f' value='F'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='Grades7to9'>F</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='BehaviorProblems7to9'>Behavioral Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblems7to9' id='behaved2' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='behaved2'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblems7to9' id='notBehaved2' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='notBehaved2'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='AcademicProblems7to9'>Academic Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblems7to9' id='yesAcademic2' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='yesAcademic2'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblems7to9' id='noAcademic2' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='noAcademic2'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for'Friendships7to9'>Good Friendships:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships7to9' id='friend1g7' value='1' checked onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend1g7'>1</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships7to9' id='friend2g7' value='2' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend2g7'>2</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships7to9' id='friend3g7' value='3' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend3g7'>3</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships7to9' id='friend4g7' value='4' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend4g7'>4</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships7to9' id='friendMoreg7' value='' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friendMoreg7' id='friendMore_labelg7'>More</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<div>
+					            					<label id='numMore_labelg7'>How Many?</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='mh_numFix'>
+					            					<input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='0'>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </ul>
+
+
+
+					            <table>
+				            		<tr>
+				            			<td>
+				            				<div id='sub_background_header'>
+				            					Grades 10-12
+				            				</div>
+				            			</td>
+				            		</tr>
+				            	</table>
+
+				            	<ul>
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='Grades10to12'>Average Grades:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+					            		
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12a' value='A' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12a'>A</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12b' value='B'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12b'>B</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12c' value='C'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12c'>C</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12d' value='D'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12d'>D</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12e' value='E'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12e'>E</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Grades10to12' id='g10_12f' value='F'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='g10_12f'>F</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='BehaviorProblems10to12'>Behavioral Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblems10to12' id='behaved3' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='behaved3'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='BehaviorProblems10to12' id='notBehaved3' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='notBehaved3'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for='AcademicProblems10to12'>Academic Problems:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblems10to12' id='yesAcademic3' value='True'>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='yesAcademic3'>Yes</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='AcademicProblems10to12' id='noAcademic3' value='False' checked>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='noAcademic3'>No</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<li>
+						            				<div>
+						            					<label for'Friendships10to12'>Good Friendships:</label>
+						            				</div>
+						            			</li>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships10to12' id='friend1g10' value='1' checked onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend1g10'>1</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships10to12' id='friend2g10' value='2' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend2g10'>2</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships10to12' id='friend3g10' value='3' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend3g10'>3</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships10to12' id='friend4g10' value='4' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friend4g10'>4</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='fix_my_radio'>
+					            					<input type='radio' name='Friendships10to12' id='friendMoreg10' value='' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');">
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div>
+					            					<label for='friendMoreg10' id='friendMore_labelg10'>More</label>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+
+					            	<table>
+					            		<tr>
+					            			<td>
+					            				<div>
+					            					<label id='numMore_labelg10'>How Many?</label>
+					            				</div>
+					            			</td>
+
+					            			<td>
+					            				<div id='mh_numFix'>
+					            					<input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='0'>
+					            				</div>
+					            			</td>
+					            		</tr>
+					            	</table>
+					            </ul>
+				            
+				            </div>
+				        </div><!--  END OF LEFT SIDE -->
+
+				        <div class="col-md-6 col-sm-6">
+				        	<table>
+				        		<tr>
+				        			<td>
+				        				<div id='sub_background_header'>
+				        		            College
+				        	            </div>
+				        			</td>
+				        		</tr>
+				        	</table>
+
+				        		<table>
+				        			<tr>
+				        				<td>
+				        					<label>Years Completed:</label>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'> 
+				        						<input type='radio' name='collegeYears' id='college1' value='1' checked>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='college1'>1</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'> 
+				        						<input type='radio' name='collegeYears' id='college2' value='2'>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='college2'>2</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'> 
+				        						<input type='radio' name='collegeYears' id='college3' value='3'>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='college3'>3</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'> 
+				        						<input type='radio' name='collegeYears' id='college4' value='4'>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='college4'>4</label>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        		</table>
+
+				        		<table>
+				        			<tr>
+				        				<td>
+				        					<div>
+				        						<label for='collegeDegree'>Did you graduate from college?</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'>
+				        						<input type='radio' name='collegeDegree' id='yesGrad' value='True' onClick='javascript: mhCollegeRadio();'>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='yesGrad'>Yes</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='fix_my_radio'>
+				        						<input type='radio' name='collegeDegree' id='noGrad' value='False' onClick='javascript: mhCollegeRadio();' checked>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div>
+				        						<label for='noGrad'>No</label>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        		</table>
+
+				        		<table>
+				        			<tr>
+				        				<td>
+				        					<div>
+				        						<label id='collegeMajor_label'>Major:</label>
+				        					</div>
+				        				</td>
+
+				        				<td>
+				        					<div id='mh_numFix'>
+				        						<input type='text' name='collegeMajor' id='collegeMajor' value='{{fields.collegeMajor}}'>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        		</table>
+
+				        	<table>
+				        		<tr>
+				        			<td>
+				        				<div>
+				        					<label id='advanceDegree_label'>Do you have an advanced degree?</label>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div id='fix_my_radio'>
+				        					<input type='radio' name='advanceDegree' id='hasAdvanced' value='True'>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div>
+				        					<label id='hasAdvanced_label'>Yes</label>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div id='fix_my_radio'>
+				        					<input type='radio' name='advanceDegree' id='noAdvanced' value='False' checked>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div>
+				        					<label id='noAdvanced_label'>No</label>
+				        				</div>
+				        			</td>
+				        		</tr>
+				        	</table>
+
+				        	<table>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr>
+				        			<td>
+				        				<div id='sub_background_header'>
+				        		            Trade/Technical School
+				        	            </div>
+				        			</td>
+				        		</tr>
+				        	</table>
+
+				        	<table>
+					        	<tr>
+					        		<td>
+					        			<div>
+					        				<label>Did you attend trade/technical school?</label>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='tradeSch' id='yesTrade' value='True' onClick='javascript: mhTrade();'>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label for='yesTrade'>Yes</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='tradeSch' id='noTrade' value='False' onClick='javascript: mhTrade();' checked>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label for='noTrade'>No</label>
+					        		</td>
+					        	</tr>
+					        </table>
+
+				        	<table>
+				        		<tr>
+				        			<td>
+				        				<div>
+				        					<label id='tradeSchool_label'>School:</label>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div id='mh_numFix'>
+				        					<input type='text' name='tradeSchool' id='tradeSchool' value='{{fields.tradeSchool}}'>
+				        				</div>
+				        			</td>
+				        		</tr>
+				        		<tr>
+				        			<td>
+				        				<div>
+				        					<label id='tradeAreaStudy_label'>Area(s) of training:</label>
+				        				</div>
+				        			</td>
+
+				        			<td>
+				        				<div id='mh_numFix'>
+				        					<input type='text' name='tradeAreaStudy' id='tradeAreaStudy' value='{{fields.tradeAreaStudy}}'>
+				        				</div>
+				        			</td>
+				        		</tr>
+				        	</table>
+
+				        	<table>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr><td><div id='mh_space'></div></td></tr>
+				        		<tr>
+				        			<td>
+				        				<div id='sub_background_header'>
+				        		            Military
+				        	            </div>
+				        			</td>
+				        		</tr>
+				        	</table>
+
+				        	<table>
+					        	<tr>
+					        		<td>
+					        			<div>
+					        				<label>Have you ever served in the Military?</label>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='military' id='isMilitary' value='True' onClick='javascript: mhMilitary();'>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label for='isMilitary'>Yes</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='military' id='notMilitary' value='False' onClick='javascript: mhMilitary();' checked>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label for='notMilitary'>No</label>
+					        		</td>
+					        	</tr>
+					        </table>
+
+					        <table>
+					        	<tr>
+					        		<td>
+					        			<label id='militaryBranch_label'>Branch:</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='mh_numFix'>
+					        				<input type='text' name='militaryBranch' id='militaryBranch' value='{{fields.militaryBranch}}'>
+					        			</div>
+					        		</td>
+					        	</tr>
+					        </table>
+
+					        <table>
+					        	<tr>
+					        		<td>
+					        			<label id='militaryRank_label'>Highest Rank:</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='mh_numFix'>
+					        				<input type='text' name='militaryRank' id='militaryRank' value='{{fields.militaryRank}}'>
+					        			</div>
+					        		</td>
+					        	</tr>
+					        </table>
+
+					         <table>
+					        	<tr>
+					        		<td>
+					        			<label id='militaryYears_label'>Years:</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='mh_numFix'>
+					        				<input type='number' style='width:40px;' name='militaryYears' id='militaryYears' value='{{fields.militaryYears}}'>
+					        			</div>
+					        		</td>
+					        	</tr>
+					        </table>
+
+					        <table>
+					        	<tr>
+					        		<td>
+					        			<label id='honorableDischarge_label'>Honorable Discharge?</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='honorableDischarge' id='isHonor' value='True'>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label id='isHonor_label'>Yes</label>
+					        		</td>
+
+					        		<td>
+					        			<div id='fix_my_radio'>
+					        				<input type='radio' name='honorableDischarge' id='notHonor' value='False' checked>
+					        			</div>
+					        		</td>
+
+					        		<td>
+					        			<label id='notHonor_label'>No</label>
+					        		</td>
+					        	</tr>
+					        </table>
+				        </div>
+				    </form>
+
+				        </div>
+				    </div>
+				</div> <!-- END PAGE CONTAINER -->
+
+				<div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: mh_continue_demographic();">
+			                			<button type='button'>Continue</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+

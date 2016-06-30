@@ -1137,18 +1137,44 @@ function continue_to_am_control() {
 	}
 }
 
-function twoElementRadioSetup(yesRadio, label, field) {
-	if (yesRadio.checked === true) {
+function twoElementRadioSetup(trigger, label, field) {
+	if (trigger.checked === true) {
 		field.disabled = false;
-		label.style.opacity = '1.0';
-		field.style.opacity = '1.0';
+		opacityHigh(label);
+		opacityHigh(field);
 	}
 
 	else {
-		label.style.opacity = '0.3';
-		field.style.opacity = '0.3';
+		opacityLow(label);
+		opacityLow(field);
 		field.value = '';
 		field.disabled = true;
+	}
+}
+
+function threeElementRadioSetup(trigger, label1, label2, label3, radio1, defaultRadio) {
+	if (trigger.checked === true) {
+		radio1.disabled = false;
+		defaultRadio.disabled = false;
+
+		opacityHigh(label1);
+		opacityHigh(label2);
+		opacityHigh(label3);
+		opacityHigh(radio1);
+		opacityHigh(defaultRadio);
+	}
+
+	else {
+		opacityLow(label1);
+		opacityLow(label2);
+		opacityLow(label3);
+		opacityLow(radio1);
+		opacityLow(defaultRadio);
+
+		defaultRadio.checked = true;
+
+		radio1.disabled = true;
+		defaultRadio.disabled = true;
 	}
 }
 
@@ -4670,11 +4696,103 @@ function verify_mh_op() {
 	document.getElementById('mhOpForm').submit();
 }
 
+function proceed_opWin() {
+	var form = window.opener.document.getElementById('mh_form');
+	form.submit();
+	window.close();
+}
+
+function edit_mhOpResults() {
+	document.getElementById('back_edit').submit();
+}
+
 function continue_to_mh_form() {
 	var form = document.getElementById('mh_instructions');
 	form.action = '/mh_demographic/';
 	form.submit();
 }
+
+function moreFriends(trigger_id, label_id, field_id) {
+	var trigger = document.getElementById(trigger_id);
+	var label = document.getElementById(label_id);
+	var field = document.getElementById(field_id);
+
+	twoElementRadioSetup(trigger, label, field)
+
+	field.value = 0;
+}
+
+function mhCollegeRadio() {
+	//TRIGGER
+	var yesGrad = document.getElementById('yesGrad');
+
+	//LABELS
+	var collegeMajor_label = document.getElementById('collegeMajor_label');
+	var advanceDegree_label = document.getElementById('advanceDegree_label');
+	var hasAdvanced_label = document.getElementById('hasAdvanced_label');
+	var noAdvanced_label = document.getElementById('noAdvanced_label');
+
+	// //ELEMENTS
+	var collegeMajor = document.getElementById('collegeMajor');
+	var hasAdvanced = document.getElementById('hasAdvanced');
+	var noAdvanced = document.getElementById('noAdvanced');
+	
+	twoElementRadioSetup(yesGrad, collegeMajor_label, collegeMajor);
+	threeElementRadioSetup(yesGrad, advanceDegree_label, hasAdvanced_label, noAdvanced_label, hasAdvanced, noAdvanced);
+}
+
+function mhTrade() {
+	//TRIGGER
+	var yesTrade = document.getElementById('yesTrade');
+
+	//LABELS
+	var tradeSchool_label = document.getElementById('tradeSchool_label');
+	var tradeAreaStudy_label = document.getElementById('tradeAreaStudy_label');
+
+	//ELEMENTS
+	var tradeSchool = document.getElementById('tradeSchool');
+	var tradeAreaStudy = document.getElementById('tradeAreaStudy');
+
+	twoElementRadioSetup(yesTrade, tradeSchool_label, tradeSchool);
+	twoElementRadioSetup(yesTrade, tradeAreaStudy_label, tradeAreaStudy);
+}
+
+function mhMilitary() {
+	//TRIGGER
+	var isMilitary = document.getElementById('isMilitary');
+
+	//LABELS
+	var militaryBranch_label = document.getElementById('militaryBranch_label');
+	var militaryYears_label = document.getElementById('militaryYears_label');
+	var militaryRank_label = document.getElementById('militaryRank_label');
+	var honorableDischarge_label = document.getElementById('honorableDischarge_label');
+	var isHonor_label = document.getElementById('isHonor_label');
+	var notHonor_label = document.getElementById('notHonor_label');
+
+	//FIELDS
+	var militaryBranch = document.getElementById('militaryBranch');
+	var militaryYears = document.getElementById('militaryYears');
+	var militaryRank = document.getElementById('militaryRank');
+	var isHonor = document.getElementById('isHonor');
+	var notHonor = document.getElementById('notHonor');
+
+	twoElementRadioSetup(isMilitary, militaryBranch_label, militaryBranch);
+	twoElementRadioSetup(isMilitary, militaryYears_label, militaryYears);
+	twoElementRadioSetup(isMilitary, militaryRank_label, militaryRank);
+	threeElementRadioSetup(isMilitary, honorableDischarge_label, isHonor_label, notHonor_label, isHonor, notHonor);
+
+	militaryYears.value = 0;
+}
+
+function initialize_mh_education() {
+	moreFriends('friendMore', 'numMore_label', 'numMore');
+	moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');
+	moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');
+	mhCollegeRadio();
+	mhTrade();
+	mhMilitary();
+}
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //======================================================================================================================
