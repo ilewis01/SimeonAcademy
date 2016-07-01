@@ -56,11 +56,11 @@
             <!-- PROGRESS -->
 <!-- 
             <tr>
-            	<td>
-            		<div id='sideProgress'>
-            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-            		</div>
-            	</td>
+              <td>
+                <div id='sideProgress'>
+                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+                </div>
+              </td>
             </tr> -->
 
             <tr>
@@ -141,10 +141,21 @@
 
             <tr>
               <td>
-                <div class='{{class.source}}'>
-                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
-                    Sources
+                <div class='{{class.mhPsych}}'>
+                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhPsych');" name='mhPsychBtn' id='mhPsychBtn'>
+                    Psychiatric History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhUse}}'>
+                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarOption('mhUse');" name='mhUseBtn' id='mhUseBtn'>
+                    Use
                   </a>
                 </div>
               </td>
@@ -177,7 +188,7 @@
             		<div class="row">                   
                   		<div class="col-md-6 col-sm-6">
                   			<div>
-                  				<form action='/mh_stress/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  				<form action='/mh_psych/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
@@ -187,15 +198,513 @@
 				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
-                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+                            <input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                            <input type='hidden' name='exit_type' id='exit_type' value=''>
 
+                      <table>
+                        <tr>
+                          <td>
+                            <div id='sub_background_header'>
+                              Arrest:
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Number of Arrest:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='mh_numFix'>
+                                <input type='number' style='width:40px;' name='num_arrest' id='num_arrest' value='{{fields.num_arrest}}'>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Charges:</label>
+                              </li>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <textarea rows='3' cols='60' name='arrestCharges' id='arrestCharges'>{{fields.arrestCharges}}</textarea>
+                            </td>
+                          </tr>
+                        </table>
+                      </ul>
+
+
+                      <table>
+                        <tr>
+                          <td>
+                            <div id='sub_background_header'>
+                              Convictions:
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Number of Convictions:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='mh_numFix'>
+                                <input type='number' style='width:40px;' name='num_convictions' id='num_convictions' value='{{fields.num_convictions}}'>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Charges:</label>
+                              </li>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <textarea rows='3' cols='60' name='convictionCharges' id='convictionCharges'>{{fields.convictionCharges}}</textarea>
+                            </td>
+                          </tr>
+                        </table>
+                      </ul>
+
+                      <table>
+                        <tr>
+                          <td>
+                            <div id='sub_background_header'>
+                              Probation:
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Present Probation:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='fix_my_radio'>
+                                <input type='radio' name='probationPresent' id='yesPresent' value='True'>
+                              </div>
+                            </td>
+
+                            <td>
+                              <label>Yes</label>
+                            </td>
+
+                            <td>
+                              <div id='fix_my_radio'>
+                                <input type='radio' name='probationPresent' id='noPresent' value='False' checked>
+                              </div>
+                            </td>
+
+                            <td>
+                              <label>No</label>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Past Probation:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='fix_my_radio'>
+                                <input type='radio' name='probationPast' id='yesPast' value='True'>
+                              </div>
+                            </td>
+
+                            <td>
+                              <label>Yes</label>
+                            </td>
+
+                            <td>
+                              <div id='fix_my_radio'>
+                                <input type='radio' name='probationPast' id='noPast' value='False' checked>
+                              </div>
+                            </td>
+
+                            <td>
+                              <label>No</label>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Probation Officer:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='mh_numFix'>
+                                <input type='text' name='probationOfficer' id='probationOfficer' value='{{fields.probationOfficer}}'>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Offenses:</label>
+                              </li>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <textarea rows='3' cols='60' name='probationOffense' id='probationOffense'>{{fields.probationOffense}}</textarea>
+                            </td>
+                          </tr>
+                        </table>
+                      </ul>
 				            	       
 				            </div>
 				        </div><!--  END OF LEFT SIDE -->
 
 				        <div class="col-md-6 col-sm-6">
-				        			        	
+                  <table>
+                    <tr>
+                      <td>
+                        <div id='sub_background_header'>
+                          Driver's License:
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Currently Suspended:</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='suspendedDrivePresent' id='isSuspended' value='True'>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Yes</label>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='suspendedDrivePresent' id='notSuspended' value='False' checked>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>No</label>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Number of Past Suspensions:</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='mh_numFix'>
+                            <input type='number' style='width:40px;' name='num_suspended' id='num_suspended' value='{{fields.num_suspended}}'>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                        <tr>
+                          <td>
+                            <div id='sub_background_header'>
+                              Driving Under the Influence:
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td>
+                              <li>
+                                <label>Number of Infractions:</label>
+                              </li>
+                            </td>
+
+                            <td>
+                              <div id='mh_numFix'>
+                                <input type='number' style='width:40px;' name='num_DUI_charges' id='num_DUI_charges' value='{{fields.num_DUI_charges}}'>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <td>
+                               <li>
+                                   <label>Number of Convictions:</label>
+                               </li>
+                          </td>
+
+                            <td>
+                              <div id='mh_numFix'>
+                                <input type='number' style='width:40px;' name='num_DUI_convictions' id='num_DUI_convictions' value='{{fields.num_DUI_convictions}}'>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </ul>
+
+                  <table>
+                    <tr>
+                      <td>
+                        <div id='sub_background_header'>
+                          Legal Proceedings:
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Are you currently party to any lawsuits?</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='hasLawsuit' id='yesSuit' value='True'>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Yes</label>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='hasLawsuit' id='noSuit' value='False' checked>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>No</label>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <ul>
+                      <table>
+                        <tr>
+                          <td>
+                            <li>
+                              <label>Is this causing stress for you?</label>
+                            </li>
+                          </td>
+
+                          <td>
+                            <div id='fix_my_radio'>
+                              <input type='radio' name='lawsuitStress' id='yesStress' value='True'>
+                            </div>
+                          </td>
+
+                          <td>
+                            <label>Yes</label>
+                          </td>
+
+                          <td>
+                            <div id='fix_my_radio'>
+                              <input type='radio' name='lawsuitStress' id='noStress' value='False' checked>
+                            </div>
+                          </td>
+
+                          <td>
+                            <label>No</label>
+                          </td>
+                        </tr>
+                      </table>
+                    </ul>
+
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Are you presently involved in divorce proceedings?</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='inDivorce' id='yesDivPro' value='True'>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Yes</label>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='inDivorce' id='noDivPro' value='False' checked>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>No</label>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Are you presently involved in a child custody dispute?</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='childCustody' id='yesChildDis' value='True'>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Yes</label>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='childCustody' id='noChildDis' value='False' checked>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>No</label>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td>
+                          <li>
+                            <label>Have you ever filed for bankruptcy?</label>
+                          </li>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='hasBankrupcy' id='yesBank' value='True'>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>Yes</label>
+                        </td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='hasBankrupcy' id='noBank' value='False' checked>
+                          </div>
+                        </td>
+
+                        <td>
+                          <label>No</label>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <ul>
+                      <table>
+                        <tr>
+                          <td>
+                            <li>
+                              <label>When? <span id='text_format_des'>(mm/dd/yyyy)</span></label>
+                            </li>
+                          </td>
+
+                          <td>
+                            <div id='mh_numFix'>
+                              <input type='text' name='dateBenkrupcy' id='dateBenkrupcy' value='{{fields.dateBenkrupcy}}'>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </ul>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td>
+                        <div id='sub_background_header'>
+                          Descriptions:
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <td>
+                        <label>
+                          Please describe any positive answers in the space provided below:
+                        </label>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <textarea rows='4' cols='70' name='explainPositiveAnswers' id='explainPositiveAnswers'>{{fields.explainPositiveAnswers}}</textarea>
+                      </td>
+                    </tr>
+                  </table>
+
 				        </div>
 				    </form>
 

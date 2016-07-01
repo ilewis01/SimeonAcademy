@@ -4837,6 +4837,34 @@ function mhStressRadio(trigger_id, label_id, element_id) {
 	twoElementRadioSetup(trigger, label, element);
 }
 
+function mhFamilyRadio(trigger_id, label1_id, label2_id, sel1_id, sel2_id) {
+	var trigger = document.getElementById(trigger_id);
+	var lab1 = document.getElementById(label1_id);
+	var lab2 = document.getElementById(label2_id);
+	var sel1 = document.getElementById(sel1_id);
+	var sel2 = document.getElementById(sel2_id);
+
+	if (trigger.checked === true) {
+		sel1.disabled = false;
+		sel2.disabled = false;
+		opacityHigh(lab1);
+		opacityHigh(lab2);
+		opacityHigh(sel1);
+		opacityHigh(sel2);
+	}
+
+	else {
+		opacityLow(sel1);
+		opacityLow(sel2);
+		opacityLow(lab1);
+		opacityLow(lab2);
+		sel1.selectedIndex = 0;
+		sel2.selectedIndex = 0;
+		sel1.disabled = true;
+		sel2.disabled = true;
+	}
+}
+
 function initialize_mh_stress() {
 	mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');
 	mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');
@@ -4848,6 +4876,35 @@ function initialize_mh_stress() {
 	mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');
 	mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');
 	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
+}
+
+function initialize_mh_family() {
+	mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');
+	mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');
+	mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');
+	mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');
+	mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');
+	mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');
+	mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');
+	mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');
+	mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');
+	mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');
+	mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');
+	mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');
+	mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');
+	mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');
+	mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');
+	mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');
+	mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');
+	mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');
+	mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');
+	mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');
+	mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');
+	mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');
+	mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');
+	mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');
+	mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');
+	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
 }
 
 

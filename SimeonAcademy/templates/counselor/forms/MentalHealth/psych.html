@@ -181,37 +181,46 @@
         <div id="page-content-wrapper">
             <div>
                 <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Mental Health: Alcohol and Drug Use</h3>
+                	<h3 id='am-h2'>Mental Health: Psychiatric History</h3>
                 </div>
 
                 <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='/mh_viewForm/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-                  					<input type='hidden' name='back' id='back' value='{{back}}'>
-				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
-				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
-				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='all_purpose' id='all_purpose' value=''>
-                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+              		<div class="row">                   
+                    		<div class="col-md-12 col-sm-12">
+                    			<div>
+                    				<form action='/mh_useTable/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                    					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                    					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+                    					<input type='hidden' name='back' id='back' value='{{back}}'>
+  				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
+  				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
+                    					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
+  				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+  				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
+  				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                              <input type='hidden' name='all_purpose' id='all_purpose' value=''>
+                              <input type='hidden' name='exit_type' id='exit_type' value=''>
 
-				            	       
-				            </div>
-				        </div><!--  END OF LEFT SIDE -->
+                              <div id='sub_background_header'>
+                                Past Psychiatric History and/or Past Mental Health Counseling
 
-				        <div class="col-md-6 col-sm-6">
-				        			        	
+                                <div class='subSubHeadText'>
+                                  Please include doctor/counselor names. diasnosis, dates of treatment/counseling, any medications with dosage.
+                                </div>
+                              </div>
+
+                              <div style='margin-top:20px;'>
+                                <textarea rows='15' cols='120' name='psychiatricHistory' id='psychiatricHistory'>{{fields.psychiatricHistory}}</textarea>
+                              </div>
+
+                              <table class='single_table_center'>
+                              </table>
+                            </form>
+                          </div>
+                        </div><!--  END OF LEFT SIDE -->
+  				        </div> <!-- END ROW -->
 				        </div>
-				    </form>
-
-				        </div>
-				    </div>
+            </div> <!-- EMPTY DIV -->
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>

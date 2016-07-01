@@ -38,12 +38,9 @@ urlpatterns = patterns('',
     url(r'^mh_stress/$', 'assessment.views.mh_stress'),
     url(r'^mh_familyHistory/$', 'assessment.views.mh_familyHistory'),
     url(r'^mh_legal/$', 'assessment.views.mh_legal'),
-
-    url(r'^mh_activity/$', 'assessment.views.mh_activity'),           
-    url(r'^mh_relationships/$', 'assessment.views.mh_relationships'),
+    url(r'^mh_psych/$', 'assessment.views.mh_psych'),
     url(r'^mh_useTable/$', 'assessment.views.mh_useTable'),
-    url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
-    url(r'^mh_location/$', 'assessment.views.mh_location'),   
+    url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),   
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),

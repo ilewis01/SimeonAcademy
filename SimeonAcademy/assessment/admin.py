@@ -1,13 +1,13 @@
 from django.contrib import admin
 from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
-Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
+Discharge, UrineResults, SAP, account, MentalHealth, MHUseTable, \
 MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
-MHRelationship, MHActivity, MHStressor, MHLegalHistory, SType, \
-A_Time, Appointment, ClientSession, Invoice, AM_AngerHistory3, Global_ID
+MHStressor, MHLegalHistory, SType, Invoice, AM_AngerHistory3, Global_ID,\
+A_Time, Appointment, ClientSession
 
 admin.site.register(account)
 admin.site.register(State)
@@ -42,12 +42,10 @@ admin.site.register(AM_Final)
 admin.site.register(AngerManagement)
 ##MENTAL HEALTH REGISTERS
 admin.site.register(MHDemographic)
-admin.site.register(UseTable)
+admin.site.register(MHUseTable)
 admin.site.register(MHFamilyHistory)
 admin.site.register(MHBackground)
 admin.site.register(MHEducation)
-admin.site.register(MHRelationship)
-admin.site.register(MHActivity)
 admin.site.register(MHStressor)
 admin.site.register(MHLegalHistory)
 admin.site.register(MentalHealth)

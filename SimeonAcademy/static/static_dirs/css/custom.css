@@ -1614,6 +1614,37 @@ button:hover {
 	margin-left: 17px;
 }
 
+#sub_paragraph_header {
+	width:100%;
+	text-align: justify;
+	font-style: italic;
+	/*font-size: 13px;*/
+}
+
+.mh_box_class {
+	border: 1px solid black;
+	width: 100%;
+	height: 100px;
+}
+
+#text_format_des {
+	/*font-style: italic;*/
+	font-weight: none;
+	color:#929292;
+}
+
+.single_table_center {
+	width: 100%;
+	margin: auto;
+}
+
+.subSubHeadText {
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin-top: 10px;
+}
+
 
 
 

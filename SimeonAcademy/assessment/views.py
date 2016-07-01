@@ -17,13 +17,12 @@ from django.core import serializers
 
 from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
-Discharge, UrineResults, SAP, account, MentalHealth, UseTable, \
+Discharge, UrineResults, SAP, account, MentalHealth, MHUseTable, \
 MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
-MHRelationship, MHActivity, MHStressor, MHLegalHistory, ClientSession, SType, \
-Invoice, AM_AngerHistory3
+MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3\
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -2115,44 +2114,7 @@ def mh_legal(request):
 			return render_to_response('counselor/forms/MentalHealth/legal.html', content)
 
 @login_required(login_url='/index')
-def mh_location(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			action = request.POST.get('mh-choice', '')
-			mh = request.POST.get('mh_id')
-			mh = MentalHealth.objects.get(id=mh)
-			client = mh.demographics.client
-			content['client'] = mh.demographics.client
-
-			if str(action) == 'finish-old':
-				##go to the next section to be completed in the form
-				content['mh'] = mh
-				goToLocation = continueToMhSection(mh)
-				content['title'] = "Simeon Academy | Counselor Home Page"
-				return render_to_response(goToLocation, content)
-			elif str(action) == 'start-new':
-				##delete the current form and start at beginning of the am form
-				mh.delete()
-				content['title'] = "Simeon Academy | Anger Management Assessment"
-				return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
-			elif str(action) == 'cancel':
-				## return to the client options page
-				content['title'] = "Simeon Academy | Client Options"
-				return render_to_response('counselor/client/client_options.html', content)
-
-@login_required(login_url='/index')
-def mh_activity(request):
+def mh_psych(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -2167,82 +2129,7 @@ def mh_activity(request):
 
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/activity.html', content)
-
-@login_required(login_url='/index')
-def mh_familyBackground(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			client = request.POST.get('client_id', '')
-			dob = request.POST.get('dob', '')
-			bp = request.POST.get('bp', '')
-			raised = request.POST.get('raised', '')
-			occ = request.POST.get('occ', '')
-			employer = request.POST.get('employer', '')
-			ep_yrs = request.POST.get('ep_yrs', '')
-			ep_mos = request.POST.get('ep_mos', '')
-			pe = request.POST.get('pe', '')
-			no_marriages = request.POST.get('no_marriages', '')
-			residence = request.POST.get('residence', '')
-			income = request.POST.get('income', '')
-			credit = request.POST.get('credit', '')
-			debt = request.POST.get('debt', '')
-			hc = request.POST.get('hc', '')
-			other = request.POST.get('other', '')
-
-			client = Client.objects.get(id=client)
-
-			demographic = MHDemographic(client=client, birthplace=bp, raised=raised, no_marriages=no_marriages,\
-				occupation=occ, employer=employer, employedMo=ep_mos, employedYrs=ep_yrs, pastJobs=pe, \
-				residence=residence, income=income, debt=debt, credit=credit, healthCare=hc, otherIncome=other)
-
-			moveForward = mhDemographicExist(demographic)
-
-			if moveForward['exist'] == False:
-				demographic.save()
-			else:
-				demographic = moveForward['mh_demo']
-
-			mentalHealth = MentalHealth(demographics=demographic, demographicsComplete=True, MHComplete=False)
-
-			checkMH = clientMhExist(client)
-
-			if checkMH == False:
-				mentalHealth.save()
-
-			content['mh_id'] = mentalHealth.id
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/familyBackground.html', content)
-
-
-@login_required(login_url='/index')
-def mh_relationships(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/relationships.html', content)
+			return render_to_response('counselor/forms/MentalHealth/psych.html', content)
 
 @login_required(login_url='/index')
 def mh_useTable(request):
@@ -2261,6 +2148,7 @@ def mh_useTable(request):
 		else:
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/useTable.html', content)
+
 
 @login_required(login_url='/index')
 def mh_viewForm(request):
