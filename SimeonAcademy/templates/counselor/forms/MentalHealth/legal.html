@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_stress();">
+<body class="gradient-white" onLoad="javascript: initialize_mh_legal();">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -311,7 +311,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='probationPresent' id='yesPresent' value='True'>
+                                <input type='radio' name='probationPresent' id='yesPresent' value='True' onClick='javascript: mhProbation();'>
                               </div>
                             </td>
 
@@ -321,7 +321,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='probationPresent' id='noPresent' value='False' checked>
+                                <input type='radio' name='probationPresent' id='noPresent' value='False' checked onClick='javascript: mhProbation();'>
                               </div>
                             </td>
 
@@ -341,7 +341,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='probationPast' id='yesPast' value='True'>
+                                <input type='radio' name='probationPast' id='yesPast' value='True' onClick='javascript: mhProbation();'>
                               </div>
                             </td>
 
@@ -351,7 +351,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='probationPast' id='noPast' value='False' checked>
+                                <input type='radio' name='probationPast' id='noPast' value='False' checked onClick='javascript: mhProbation();'>
                               </div>
                             </td>
 
@@ -365,7 +365,7 @@
                           <tr>
                             <td>
                               <li>
-                                <label>Probation Officer:</label>
+                                <label id='probLab'>Probation Officer:</label>
                               </li>
                             </td>
 
@@ -381,7 +381,7 @@
                           <tr>
                             <td>
                               <li>
-                                <label>Offenses:</label>
+                                <label id='probOffLab'>Offenses:</label>
                               </li>
                             </td>
                           </tr>
@@ -518,7 +518,7 @@
 
                         <td>
                           <div id='fix_my_radio'>
-                            <input type='radio' name='hasLawsuit' id='yesSuit' value='True'>
+                            <input type='radio' name='hasLawsuit' id='yesSuit' value='True' onClick='javascript: mhLawsuits();'>
                           </div>
                         </td>
 
@@ -528,7 +528,7 @@
 
                         <td>
                           <div id='fix_my_radio'>
-                            <input type='radio' name='hasLawsuit' id='noSuit' value='False' checked>
+                            <input type='radio' name='hasLawsuit' id='noSuit' value='False' checked onClick='javascript: mhLawsuits();'>
                           </div>
                         </td>
 
@@ -543,7 +543,7 @@
                         <tr>
                           <td>
                             <li>
-                              <label>Is this causing stress for you?</label>
+                              <label id='mhFamStressLab'>Is this causing stress for you?</label>
                             </li>
                           </td>
 
@@ -554,7 +554,7 @@
                           </td>
 
                           <td>
-                            <label>Yes</label>
+                            <label id='yesStressLab'>Yes</label>
                           </td>
 
                           <td>
@@ -564,7 +564,7 @@
                           </td>
 
                           <td>
-                            <label>No</label>
+                            <label id='noStressLab'>No</label>
                           </td>
                         </tr>
                       </table>
@@ -640,7 +640,7 @@
 
                         <td>
                           <div id='fix_my_radio'>
-                            <input type='radio' name='hasBankrupcy' id='yesBank' value='True'>
+                            <input type='radio' name='hasBankrupcy' id='yesBank' value='True' onClick='javascript: mhBank();'>
                           </div>
                         </td>
 
@@ -650,7 +650,7 @@
 
                         <td>
                           <div id='fix_my_radio'>
-                            <input type='radio' name='hasBankrupcy' id='noBank' value='False' checked>
+                            <input type='radio' name='hasBankrupcy' id='noBank' value='False' checked onClick='javascript: mhBank();'>
                           </div>
                         </td>
 
@@ -665,7 +665,7 @@
                         <tr>
                           <td>
                             <li>
-                              <label>When? <span id='text_format_des'>(mm/dd/yyyy)</span></label>
+                              <label id='bankLab'>When? <span id='text_format_des'>(mm/dd/yyyy)</span></label>
                             </li>
                           </td>
 

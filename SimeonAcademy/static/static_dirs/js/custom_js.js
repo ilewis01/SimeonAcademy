@@ -4907,6 +4907,89 @@ function initialize_mh_family() {
 	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
 }
 
+function mhProbation() {
+	//TRIGGERS
+	var yesPresent = document.getElementById('yesPresent');
+	var yesPast = document.getElementById('yesPast');
+
+	//LABELS
+	var probLab = document.getElementById('probLab');
+	var probOffLab = document.getElementById('probOffLab');
+
+	//ELEMENTS
+	var probationOfficer = document.getElementById('probationOfficer');
+	var probationOffense = document.getElementById('probationOffense');
+
+	if (yesPresent.checked === true || yesPast.checked === true) {
+		probationOfficer.disabled = false;
+		probationOffense.disabled = false;
+		opacityHigh(probLab);
+		opacityHigh(probOffLab);
+		opacityHigh(probationOfficer);
+		opacityHigh(probationOffense);
+	}
+
+	else if (yesPresent.checked === false || yesPast.checked === false) {
+		opacityLow(probLab);
+		opacityLow(probOffLab);
+		opacityLow(probationOfficer);
+		opacityLow(probationOffense);
+		probationOfficer.value = '';
+		probationOffense.value = '';
+		probationOfficer.disabled = true;
+		probationOffense.disabled = true;
+	}
+}
+
+function mhLawsuits() {
+	//TRIGGER
+	var yesSuit = document.getElementById('yesSuit');
+
+	//LABELS
+	var mhFamStressLab = document.getElementById('mhFamStressLab');
+	var yesStressLab = document.getElementById('yesStressLab');
+	var noStressLab = document.getElementById('noStressLab');
+
+	//ELEMENTS
+	var yesStress = document.getElementById('yesStress');
+	var noStress = document.getElementById('noStress');
+
+	if (yesSuit.checked === true) {
+		yesStress.disabled = false;
+		noStress.disabled = false;
+		opacityHigh(mhFamStressLab);
+		opacityHigh(yesStressLab);
+		opacityHigh(noStressLab);
+		opacityHigh(yesStress);
+		opacityHigh(noStress);
+	}
+
+	else {
+		opacityLow(mhFamStressLab);
+		opacityLow(yesStressLab);
+		opacityLow(noStressLab);
+		opacityLow(yesStress);
+		opacityLow(noStress);
+		yesStress.checked = true;
+		yesStress.disabled = true;
+		noStress.disabled = true;
+	}
+}
+
+function mhBank() {
+	var yesBank = document.getElementById('yesBank');
+	var bankLab = document.getElementById('bankLab');
+	var dateBenkrupcy = document.getElementById('dateBenkrupcy');
+
+	twoElementRadioSetup(yesBank, bankLab, dateBenkrupcy);
+}
+
+function initialize_mh_legal() {
+	mhProbation();
+	mhLawsuits();
+	mhBank();
+}
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //======================================================================================================================
