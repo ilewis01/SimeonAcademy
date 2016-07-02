@@ -5045,62 +5045,148 @@ function initialize_mh_stress(json_data) {
 	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
 }
 
-function initialize_mh_family() {
+function initialize_mh_family(json_data) {
+	//CONFIGURE THE RADIO BUTTONS
+	var yesDepress = document.getElementById('yesDepress');
+	var noDepress = document.getElementById('noDepress');
+	var yesADD = document.getElementById('yesADD');
+	var noADD = document.getElementById('noADD');
+	var yesBed = document.getElementById('yesBed');
+	var noBed = document.getElementById('noBed');
+	var yesBi = document.getElementById('yesBi');
+	var noBi = document.getElementById('noBi');
+	var yesATT = document.getElementById('yesATT');
+	var noATT = document.getElementById('noATT');
+	var yesPA = document.getElementById('yesPA');
+	var noPA = document.getElementById('noPA');
+	var yesLaw = document.getElementById('yesLaw');
+	var noLaw = document.getElementById('noLaw');
+	var yesLD = document.getElementById('yesLD');
+	var noLD = document.getElementById('noLD');
+	var yesTic = document.getElementById('yesTic');
+	var noTic = document.getElementById('noTic');
+	var yesThy = document.getElementById('yesThy');
+	var noThy = document.getElementById('noThy');
+	var yesHeart = document.getElementById('yesHeart');
+	var noHeart = document.getElementById('noHeart');
+	var yesOW = document.getElementById('yesOW');
+	var noOW = document.getElementById('noOW');
+	var yesMood = document.getElementById('yesMood');
+	var noMood = document.getElementById('noMood');
+	var yesAlc = document.getElementById('yesAlc');
+	var noAlc = document.getElementById('noAlc');
+	var yesDrug = document.getElementById('yesDrug');
+	var noDrug = document.getElementById('noDrug');
+	var yesSch = document.getElementById('yesSch');
+	var noSch = document.getElementById('noSch');
+	var YesSe = document.getElementById('YesSe');
+	var noSe = document.getElementById('noSe');
+	var yesCS = document.getElementById('yesCS');
+	var noCS = document.getElementById('noCS');
+	var yesSex = document.getElementById('yesSex');
+	var noSex = document.getElementById('noSex');
+	var yesPanick = document.getElementById('yesPanick');
+	var noPanick = document.getElementById('noPanick');
+	var yesAnx = document.getElementById('yesAnx');
+	var noAnx = document.getElementById('noAnx');
+	var yesOCD = document.getElementById('yesOCD');
+	var noOCD = document.getElementById('noOCD');
+	var yesSugar = document.getElementById('yesSugar');
+	var noSudar = document.getElementById('noSudar');
+
+	var yesCancer = document.getElementById('yesCancer');
+	var noCancer = document.getElementById('noCancer');
+
+	var yesCancer = document.getElementById('yesCancer');
+	var noCancer = document.getElementById('noCancer');
+	var yesBlood = document.getElementById('yesBlood');
+	var noBlood = document.getElementById('noBlood');
+	var yesAngry = document.getElementById('yesAngry');
+	var noAngry = document.getElementById('noAngry');
+
+	setRadioElement(json_data.isdepressed, yesDepress, noDepress);
+	setRadioElement(json_data.isadd, yesADD, noADD);
+	setRadioElement(json_data.isbedWetting, yesBed, noBed);
+	setRadioElement(json_data.isbipolar, yesBi, noBi);
+	setRadioElement(json_data.issuicideAttempt, yesATT, noATT);
+	setRadioElement(json_data.isphysicalAbuse, yesPA, noPA);
+	setRadioElement(json_data.islaw, yesLaw, noLaw);
+	setRadioElement(json_data.isld, yesLD, noLD);
+	setRadioElement(json_data.istic, yesTic, noTic);
+	setRadioElement(json_data.isthyroid, yesThy, noThy);
+	setRadioElement(json_data.isheart, yesHeart, noHeart);
+	setRadioElement(json_data.isoverweight, yesOW, noOW);
+	setRadioElement(json_data.ismood, yesMood, noMood);
+	setRadioElement(json_data.isalcohol, yesAlc, noAlc);
+	setRadioElement(json_data.isdrugs, yesDrug, noDrug);
+	setRadioElement(json_data.isschizo, yesSch, noSch);	
+	setRadioElement(json_data.isseizures, YesSe, noCS);
+	setRadioElement(json_data.iscompletedSuicide, yesCS, noCS);
+	setRadioElement(json_data.issexAbuse, yesSex, noSex);
+	setRadioElement(json_data.ispanic, yesPanick, yesPanick);
+	setRadioElement(json_data.isanxiety, yesAnx, noAnx);
+	setRadioElement(json_data.isOCD, yesSugar, noSudar);
+	setRadioElement(json_data.iscancer, yesCancer, noCancer);
+	setRadioElement(json_data.ishighBloodPressure, yesBlood, noBlood);
+	setRadioElement(json_data.isanger, yesAngry, noAngry);
+
 	//FAMILY SIDE SELECT OPTIONS
-	document.getElementById('depressSide').selectedIndex 	= json_data.
-	document.getElementById('sideADD').selectedIndex 		= json_data.
-	document.getElementById('sideBed').selectedIndex 		= json_data.
-	document.getElementById('sideBi').selectedIndex 		= json_data.
-	document.getElementById('sideATT').selectedIndex 		= json_data.
-	document.getElementById('sidePA').selectedIndex 		= json_data.
-	document.getElementById('sideLaw').selectedIndex 		= json_data.
-	document.getElementById('sideLD').selectedIndex 		= json_data.
-	document.getElementById('sideTic').selectedIndex 		= json_data.
-	document.getElementById('sideThy').selectedIndex 		= json_data.
-	document.getElementById('sideHeart').selectedIndex 		= json_data.
-	document.getElementById('sideOW').selectedIndex 		= json_data.
-	document.getElementById('sideMood').selectedIndex 		= json_data.
-	document.getElementById('sideAlc').selectedIndex 		= json_data.
-	document.getElementById('sideDrug').selectedIndex 		= json_data.
-	document.getElementById('sideSch').selectedIndex 		= json_data.
-	document.getElementById('sideSe').selectedIndex 		= json_data.
-	document.getElementById('sideCS').selectedIndex 		= json_data.
-	document.getElementById('sideSex').selectedIndex 		= json_data.
-	document.getElementById('sidePanick').selectedIndex 	= json_data.
-	document.getElementById('sideAnx').selectedIndex 		= json_data.
-	document.getElementById('sideOCD').selectedIndex 		= json_data.
-	document.getElementById('sideSugar').selectedIndex 		= json_data.
-	document.getElementById('sideCancer').selectedIndex 	= json_data.
-	document.getElementById('sideBlood').selectedIndex 		= json_data.
-	document.getElementById('sideAngry').selectedIndex 		= json_data.
+	document.getElementById('depressSide').selectedIndex 	= json_data.depressedS
+	document.getElementById('sideADD').selectedIndex 		= json_data.addS
+
+	document.getElementById('sideBed').selectedIndex		= json_data.bedWettingS
+	document.getElementById('sideBi').selectedIndex 		= json_data.bipolarS
+	document.getElementById('sideATT').selectedIndex 		= json_data.suicideAttemptS
+	document.getElementById('sidePA').selectedIndex 		= json_data.physicalAbuseS
+
+	document.getElementById('sideLaw').selectedIndex 		= json_data.lawS
+	document.getElementById('sideLD').selectedIndex 		= json_data.ldS
+	document.getElementById('sideTic').selectedIndex 		= json_data.ticS
+	document.getElementById('sideThy').selectedIndex 		= json_data.thyroidS
+	document.getElementById('sideHeart').selectedIndex 		= json_data.heartS
+	document.getElementById('sideOW').selectedIndex 		= json_data.overweightS
+	document.getElementById('sideMood').selectedIndex 		= json_data.moodS
+	document.getElementById('sideAlc').selectedIndex 		= json_data.alcoholS
+	document.getElementById('sideDrug').selectedIndex 		= json_data.drugsS
+	document.getElementById('sideSch').selectedIndex 		= json_data.schizoS
+	document.getElementById('sideSe').selectedIndex 		= json_data.seizuresS
+	document.getElementById('sideCS').selectedIndex 		= json_data.completedSuicideS
+	document.getElementById('sideSex').selectedIndex 		= json_data.sexAbuseS
+	document.getElementById('sidePanick').selectedIndex 	= json_data.panicS
+	document.getElementById('sideAnx').selectedIndex 		= json_data.anxietyS
+	document.getElementById('sideOCD').selectedIndex 		= json_data.OCDS
+	document.getElementById('sideSugar').selectedIndex 		= json_data.diabetesS
+	document.getElementById('sideCancer').selectedIndex 	= json_data.cancerS
+	document.getElementById('sideBlood').selectedIndex 		= json_data.highBloodPressureS
+	document.getElementById('sideAngry').selectedIndex 		= json_data.angerS
 
 	//FAMILY MEMBER SELECT OPTIONS
-	document.getElementById('depressMember').selectedIndex 	= json_data.
-	document.getElementById('memADD').selectedIndex 		= json_data.
-	document.getElementById('memBed').selectedIndex			= json_data.
-	document.getElementById('memBi').selectedIndex 			= json_data.
-	document.getElementById('memATT').selectedIndex 		= json_data.
-	document.getElementById('memPA').selectedIndex 			= json_data.
-	document.getElementById('memLaw').selectedIndex 		= json_data.
-	document.getElementById('memLD').selectedIndex 			= json_data.
-	document.getElementById('memTic').selectedIndex 		= json_data.
-	document.getElementById('memThy').selectedIndex 		= json_data.
-	document.getElementById('memHeart').selectedIndex 		= json_data.
-	document.getElementById('memOW').selectedIndex 			= json_data.
-	document.getElementById('memMood').selectedIndex 		= json_data.
-	document.getElementById('memAlc').selectedIndex 		= json_data.
-	document.getElementById('memDrug').selectedIndex 		= json_data.
-	document.getElementById('memSch').selectedIndex 		= json_data.
-	document.getElementById('memSe').selectedIndex 			= json_data.
-	document.getElementById('memCS').selectedIndex 			= json_data.
-	document.getElementById('memSex').selectedIndex 		= json_data.
-	document.getElementById('memPanick').selectedIndex 		= json_data.
-	document.getElementById('memAnx').selectedIndex 		= json_data.
-	document.getElementById('memOCD').selectedIndex 		= json_data.
-	document.getElementById('memSugar').selectedIndex 		= json_data.
-	document.getElementById('memCancer').selectedIndex 		= json_data.
-	document.getElementById('memBlood').selectedIndex 		= json_data.
-	document.getElementById('memAngry').selectedIndex 		= json_data.
+	document.getElementById('depressMember').selectedIndex 	= json_data.depressedM
+	document.getElementById('memADD').selectedIndex 		= json_data.addM
+	document.getElementById('memBed').selectedIndex			= json_data.bedWettingM
+	document.getElementById('memBi').selectedIndex 			= json_data.bipolarM
+	document.getElementById('memATT').selectedIndex 		= json_data.suicideAttemptM
+	document.getElementById('memPA').selectedIndex 			= json_data.physicalAbuseM
+	document.getElementById('memLaw').selectedIndex 		= json_data.lawM
+	document.getElementById('memLD').selectedIndex 			= json_data.ldM
+	document.getElementById('memTic').selectedIndex 		= json_data.ticM
+	document.getElementById('memThy').selectedIndex 		= json_data.thyroidM
+	document.getElementById('memHeart').selectedIndex 		= json_data.heartM
+	document.getElementById('memOW').selectedIndex 			= json_data.overweightM
+	document.getElementById('memMood').selectedIndex 		= json_data.moodM
+	document.getElementById('memAlc').selectedIndex 		= json_data.alcoholM
+	document.getElementById('memDrug').selectedIndex 		= json_data.drugsM
+	document.getElementById('memSch').selectedIndex 		= json_data.schizoM
+	document.getElementById('memSe').selectedIndex 			= json_data.seizuresM
+	document.getElementById('memCS').selectedIndex 			= json_data.completedSuicideM
+	document.getElementById('memSex').selectedIndex 		= json_data.sexAbuseM
+	document.getElementById('memPanick').selectedIndex 		= json_data.panicM
+	document.getElementById('memAnx').selectedIndex 		= json_data.anxietyM
+	document.getElementById('memOCD').selectedIndex 		= json_data.OCDM
+	document.getElementById('memSugar').selectedIndex 		= json_data.diabetesM
+	document.getElementById('memCancer').selectedIndex 		= json_data.cancerM
+	document.getElementById('memBlood').selectedIndex 		= json_data.highBloodPressureM
+	document.getElementById('memAngry').selectedIndex 		= json_data.angerM
 
 	mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');
 	mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');
@@ -5130,7 +5216,34 @@ function initialize_mh_family() {
 	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
 }
 
-function initialize_mh_legal() {
+function initialize_mh_legal(json_data) {
+	//RADIO VARIABLES
+	var yesPresent = document.getElementById('yesPresent');
+	var noPresent = document.getElementById('noPresent');
+	var yesPast = document.getElementById('yesPast');
+	var noPast = document.getElementById('noPast');
+	var isSuspended = document.getElementById('isSuspended');
+	var notSuspended = document.getElementById('notSuspended');
+	var yesSuit = document.getElementById('yesSuit');
+	var noSuit = document.getElementById('noSuit');
+	var yesStress = document.getElementById('yesStress');
+	var noStress = document.getElementById('noStress');
+	var yesDivPro = document.getElementById('yesDivPro');
+	var noDivPro = document.getElementById('noDivPro');
+	var yesChildDis = document.getElementById('yesChildDis');
+	var noChildDis = document.getElementById('noChildDis');
+	var yesBank = document.getElementById('yesBank');
+	var noBank = document.getElementById('noBank');
+
+	setRadioElement(json_data.probationPresent, yesPresent, noPresent);
+	setRadioElement(json_data.probationPast, yesPast, noPast);
+	setRadioElement(json_data.suspendedDrivePresent, isSuspended, notSuspended);
+	setRadioElement(json_data.hasLawsuit, yesSuit, noSuit);
+	setRadioElement(json_data.lawsuitStress, yesStress, noStress);
+	setRadioElement(json_data.inDivorce, yesDivPro, noDivPro);
+	setRadioElement(json_data.childCustody, yesChildDis, noChildDis);
+	setRadioElement(json_data.hasBankrupcy, yesBank, noBank);
+
 	mhProbation();
 	mhLawsuits();
 	mhBank();

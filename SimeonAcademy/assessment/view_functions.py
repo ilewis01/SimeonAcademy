@@ -3988,6 +3988,70 @@ def grabWeeklyIndex(selection):
 
 	return result
 
+def grabMhFamilySideIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Maternal':
+		result = 1
+	elif selection == 'Paternal':
+		result = 2
+	else:
+		result = 0
+
+	return result
+
+def grabMhFamilyMemberIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Mother':
+		result = 1
+	elif selection == 'Father':
+		result = 2
+	elif selection == 'Sister':
+		result = 3
+	elif selection == 'Brother':
+		result = 4
+	elif selection == 'Child':
+		result = 5
+	elif selection == 'Aunt':
+		result = 6
+	elif selection == 'Uncle':
+		result = 7
+	elif selection == 'Grandmother':
+		result = 8
+	elif selection == 'Grandfather':
+		result = 9
+	else:
+		result = 0
+
+	return result
+
+def decodeMhFamilyText(m_value):
+	## This function will convert the strings to a value that can be displayed by a html select element
+ 	result = {}
+	m_value = str(m_value)
+	side = ''
+	member = ''
+	flag = 0
+
+	for i in range(len(m_value)):
+		if m_value[i] == ' ':
+			flag = i
+			break
+
+	for j in range(0, flag):
+		side += m_value[j]
+
+	for k in range((flag + 1), len(m_value)):
+		member += m_value[k]
+
+	result['side'] = grabMhFamilySideIndex(side)
+	result['member'] = grabMhFamilyMemberIndex(member)
+
+	return result
+
 def getMhDemoFields(mh):
 	results = {}
 
@@ -4134,6 +4198,163 @@ def getMhStressorFields(mh):
 def getMhFamilyFields(mh):
 	result = {}
 
+	## DECODE THE STRINGS
+	depressed = decodeMhFamilyText(mh.familyHistory.depressed)
+	add = decodeMhFamilyText(mh.familyHistory.add)
+	bedWetting = decodeMhFamilyText(mh.familyHistory.bedWetting)
+	bipolar = decodeMhFamilyText(mh.familyHistory.bipolar)
+	suicideAttempt = decodeMhFamilyText(mh.familyHistory.suicideAttempt)
+	physicalAbuse = decodeMhFamilyText(mh.familyHistory.physicalAbuse)
+	law = decodeMhFamilyText(mh.familyHistory.law)
+	ld = decodeMhFamilyText(mh.familyHistory.ld)
+	tic = decodeMhFamilyText(mh.familyHistory.tic)
+	thyroid = decodeMhFamilyText(mh.familyHistory.thyroid)
+	heart = decodeMhFamilyText(mh.familyHistory.heart)
+	overweight = decodeMhFamilyText(mh.familyHistory.overweight)
+	mood = decodeMhFamilyText(mh.familyHistory.mood)
+	alcohol = decodeMhFamilyText(mh.familyHistory.alcohol)
+	drugs = decodeMhFamilyText(mh.familyHistory.drugs)
+	schizo = decodeMhFamilyText(mh.familyHistory.schizo)
+	seizures = decodeMhFamilyText(mh.familyHistory.seizures)
+	completedSuicide = decodeMhFamilyText(mh.familyHistory.completedSuicide)
+	sexAbuse = decodeMhFamilyText(mh.familyHistory.sexAbuse)
+	panic = decodeMhFamilyText(mh.familyHistory.panic)
+	anxiety = decodeMhFamilyText(mh.familyHistory.anxiety)
+	OCD = decodeMhFamilyText(mh.familyHistory.OCD)
+	diabetes = decodeMhFamilyText(mh.familyHistory.diabetes)
+	cancer = decodeMhFamilyText(mh.familyHistory.cancer)
+	highBloodPressure = decodeMhFamilyText(mh.familyHistory.highBloodPressure)
+	anger = decodeMhFamilyText(mh.familyHistory.anger)
+
+	result['depressedS'] = depressed['side']
+	result['depressedM'] = depressed['member']
+	result['isdepressed'] = mh.familyHistory.isdepressed
+
+	result['addS'] = add['side']
+	result['addM'] = add['member']
+	result['isadd'] = mh.familyHistory.isadd
+
+	result['bedWettingS'] = bedWetting['side']
+	result['bedWettingM'] = bedWetting['member']
+	result['isbedWetting'] = mh.familyHistory.isbedWetting
+
+	result['bipolarS'] = bipolar['side']
+	result['bipolarM'] = bipolar['member']
+	result['isbipolar'] = mh.familyHistory.isbipolar
+
+	result['suicideAttemptS'] = suicideAttempt['side']
+	result['suicideAttemptM'] = suicideAttempt['member']
+	result['issuicideAttempt'] = mh.familyHistory.issuicideAttempt
+
+	result['physicalAbuseS'] = physicalAbuse['side']
+	result['physicalAbuseM'] = physicalAbuse['member']
+	result['isphysicalAbuse'] = mh.familyHistory.isphysicalAbuse
+
+	result['lawS'] = law['side']
+	result['lawM'] = law['member']
+	result['islaw'] = mh.familyHistory.islaw
+
+	result['ldS'] = ld['side']
+	result['ldM'] = ld['member']
+	result['isld'] = mh.familyHistory.isld
+
+	result['ticS'] = tic['side']
+	result['ticM'] = tic['member']
+	result['istic'] = mh.familyHistory.istic
+
+	result['thyroidS'] = thyroid['side']
+	result['thyroidM'] = thyroid['member']
+	result['isthyroid'] = mh.familyHistory.isthyroid
+
+	result['heartS'] = heart['side']
+	result['heartM'] = heart['member']
+	result['isheart'] = mh.familyHistory.isheart
+
+	result['overweightS'] = overweight['side']
+	result['overweightM'] = overweight['member']
+	result['isoverweight'] = mh.familyHistory.isoverweight
+
+	result['moodS'] = mood['side']
+	result['moodM'] = mood['member']
+	result['ismood'] = mh.familyHistory.ismood
+
+	result['alcoholS'] = alcohol['side']
+	result['alcoholM'] = alcohol['member']
+	result['isalcohol'] = mh.familyHistory.isalcohol
+
+	result['drugsS'] = drugs['side']
+	result['drugsM'] = drugs['member']
+	result['isdrugs'] = mh.familyHistory.isdrugs
+
+	result['schizoS'] = schizo['side']
+	result['schizoM'] = schizo['member']
+	result['isschizo'] = mh.familyHistory.isschizo
+
+	result['seizuresS'] = seizures['side']
+	result['seizuresM'] = seizures['member']
+	result['isseizures'] = mh.familyHistory.isseizures
+
+	result['completedSuicideS'] = completedSuicide['side']
+	result['completedSuicideM'] = completedSuicide['member']
+	result['iscompletedSuicide'] = mh.familyHistory.iscompletedSuicide
+
+	result['sexAbuseS'] = sexAbuse['side']
+	result['sexAbuseM'] = sexAbuse['member']
+	result['issexAbuse'] = mh.familyHistory.issexAbuse
+
+	result['panicS'] = panic['side']
+	result['panicM'] = panic['member']
+	result['ispanic'] = mh.familyHistory.ispanic
+
+	result['anxietyS'] = anxiety['side']
+	result['anxietyM'] = anxiety['member']
+	result['isanxiety'] = mh.familyHistory.isanxiety
+
+	result['OCDS'] = OCD['side']
+	result['OCDM'] = OCD['member']
+	result['isOCD'] = mh.familyHistory.isOCD
+
+	result['diabetesS'] = diabetes['side']
+	result['diabetesM'] = diabetes['member']
+	result['isdiabetes'] = mh.familyHistory.isdiabetes
+
+	result['cancerS'] = cancer['side']
+	result['cancerM'] = cancer['member']
+	result['iscancer'] = mh.familyHistory.iscancer
+
+	result['highBloodPressureS'] = highBloodPressure['side']
+	result['highBloodPressureM'] = highBloodPressure['member']
+	result['ishighBloodPressure'] = mh.familyHistory.ishighBloodPressure
+
+	result['angerS'] = anger['side']
+	result['angerM'] = anger['member']
+	result['isanger'] = mh.familyHistory.isanger
+
+	return result
+
+def getMhLegalFields(mh):
+	result = {}
+
+	result['num_arrest'] = mh.legalHistory.num_arrest
+	result['arrestCharges'] = mh.legalHistory.arrestCharges
+	result['num_convictions'] = mh.legalHistory.num_convictions
+	result['convictionCharges'] = mh.legalHistory.convictionCharges
+	result['num_DUI_charges'] = mh.legalHistory.num_DUI_charges
+	result['num_DUI_convictions'] = mh.legalHistory.num_DUI_convictions
+	result['probationPresent'] = mh.legalHistory.probationPresent
+	result['probationPast'] = mh.legalHistory.probationPast
+	result['probationOfficer'] = mh.legalHistory.probationOfficer
+	result['probationOffense'] = mh.legalHistory.probationOffense
+	result['suspendedDrivePresent'] = mh.legalHistory.suspendedDrivePresent
+	result['num_suspended'] = mh.legalHistory.num_suspended
+	result['hasLawsuit'] = mh.legalHistory.hasLawsuit
+	result['lawsuitStress'] = mh.legalHistory.lawsuitStress
+	result['inDivorce'] = mh.legalHistory.inDivorce
+	result['childCustody'] = mh.legalHistory.childCustody
+	result['hasBankrupcy'] = mh.legalHistory.hasBankrupcy
+	result['dateBenkrupcy'] = mh.legalHistory.dateBenkrupcy
+	result['explainPositiveAnswers'] = mh.legalHistory.explainPositiveAnswers
+
 	return result
 
 def getMhFields(mh, section):
@@ -4149,8 +4370,11 @@ def getMhFields(mh, section):
 		result = getMhStressorFields(mh)
 	elif str(section) == '/mh_familyHistory/':
 		result = getMhFamilyFields(mh)
+	elif str(section) == '/mh_legal/':
+		result = getMhLegalFields(mh)
 
 	return result
+
 
 def saveMhDemo(request, mh):
 	momLive = request.POST.get('motherLiving', '')
