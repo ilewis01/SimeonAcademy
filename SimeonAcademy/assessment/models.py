@@ -687,8 +687,10 @@ class MHEducation(models.Model):
 	collegeDegree = models.BooleanField(default=False, blank=True)
 	collegeMajor = models.CharField(max_length=25, blank=True, null=True, default=None)
 	advanceDegree = models.BooleanField(blank=True, default=False)
+	tradeSch = models.BooleanField(blank=True, default=False)
 	tradeSchool = models.CharField(max_length=25, blank=True, null=True, default=None)
 	tradeAreaStudy = models.CharField(max_length=25, blank=True, null=True, default=None)
+	military = models.BooleanField(blank=True, default=False)
 	militaryBranch = models.CharField(max_length=20, default=None, blank=True, null=True)
 	militaryYears = models.IntegerField(default=0)
 	militaryRank = models.CharField(max_length=25, default=None, blank=True, null=True)
@@ -770,33 +772,59 @@ class MHStressor(models.Model):
 
 ##MENTAL HEALTH FAMILY HISTORY--------------------------------------------------------------------------
 class MHFamilyHistory(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
-	
-	depression = models.CharField(max_length=35, default=None, blank=True, null=True)
-	hyperactivity = models.CharField(max_length=35, default=None, blank=True, null=True)
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+
+	isdepressed = models.BooleanField(default=False, blank=True)
+	depressed = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isadd = models.BooleanField(default=False, blank=True)
+	add = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isbedWetting = models.BooleanField(default=False, blank=True)
 	bedWetting = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isbipolar = models.BooleanField(default=False, blank=True)
 	bipolar = models.CharField(max_length=35, default=None, blank=True, null=True)
+	issuicideAttempt = models.BooleanField(default=False, blank=True)
 	suicideAttempt = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isphysicalAbuse = models.BooleanField(default=False, blank=True)
 	physicalAbuse = models.CharField(max_length=35, default=None, blank=True, null=True)
+	islaw = models.BooleanField(default=False, blank=True)
 	law = models.CharField(max_length=35, default=None, blank=True, null=True)
-	LD = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isld = models.BooleanField(default=False, blank=True)
+	ld = models.CharField(max_length=35, default=None, blank=True, null=True)
+	istic = models.BooleanField(default=False, blank=True)
 	tic = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isthyroid = models.BooleanField(default=False, blank=True)
 	thyroid = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isheart = models.BooleanField(default=False, blank=True)
 	heart = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isoverweight = models.BooleanField(default=False, blank=True)
 	overweight = models.CharField(max_length=35, default=None, blank=True, null=True)
+	ismood = models.BooleanField(default=False, blank=True)
 	mood = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isalcohol = models.BooleanField(default=False, blank=True)
 	alcohol = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isdrugs = models.BooleanField(default=False, blank=True)
 	drugs = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isschizo = models.BooleanField(default=False, blank=True)
 	schizo = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isseizures = models.BooleanField(default=False, blank=True)
 	seizures = models.CharField(max_length=35, default=None, blank=True, null=True)
+	iscompletedSuicide = models.BooleanField(default=False, blank=True)
 	completedSuicide = models.CharField(max_length=35, default=None, blank=True, null=True)
+	issexAbuse = models.BooleanField(default=False, blank=True)
 	sexAbuse = models.CharField(max_length=35, default=None, blank=True, null=True)
+	ispanic = models.BooleanField(default=False, blank=True)
 	panic = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isanxiety = models.BooleanField(default=False, blank=True)
 	anxiety = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isOCD = models.BooleanField(default=False, blank=True)
 	OCD = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isdiabetes = models.BooleanField(default=False, blank=True)
 	diabetes = models.CharField(max_length=35, default=None, blank=True, null=True)
+	iscancer = models.BooleanField(default=False, blank=True)
 	cancer = models.CharField(max_length=35, default=None, blank=True, null=True)
+	ishighBloodPressure = models.BooleanField(default=False, blank=True)
 	highBloodPressure = models.CharField(max_length=35, default=None, blank=True, null=True)
+	isanger = models.BooleanField(default=False, blank=True)
 	anger = models.CharField(max_length=35, default=None, blank=True, null=True)
 
 	def __unicode__(self):
@@ -834,12 +862,14 @@ class MHLegalHistory(models.Model):
 
 ##MENTAL HEALTH DRUG AND ALCOHOL USE--------------------------------------------------------------------
 class MHUseTable(models.Model):
-	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+
 	howMuch1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOften1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howLong1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOld1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	lastTime1 = models.CharField(max_length=15, default=None, blank=True, null=True)
+
 	howMuch2 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOften2 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howLong2 = models.CharField(max_length=15, default=None, blank=True, null=True)
@@ -942,7 +972,7 @@ class MHUseTable(models.Model):
 	lastTime21 = models.CharField(max_length=15, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return "Mental Health/Use Table: " + str(self.client_id)
+		return str(self.clientID)
 
 class MentalHealth(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)

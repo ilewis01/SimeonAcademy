@@ -3735,6 +3735,87 @@ def refreshSap(sap):
 ############################################################################################################################
 #------------------------------------------------ MENTAL HEALTH ------------------------------------------------------------
 
+def getOrderedMhNames():
+	result = []
+
+	result.append('history')
+	result.append('education')
+	result.append('finance')
+	result.append('stressors')
+	result.append('family')
+	result.append('legal')
+	result.append('psych')
+	result.append('use')
+
+	return result
+
+def getOrderedMhURLS():
+	result = []
+
+	result.append('/mh_demographic/')
+	result.append('/mh_education/')
+	result.append('/mh_background/')
+	result.append('/mh_stress/')
+	result.append('/mh_familyHistory/')
+	result.append('/mh_legal/')
+	result.append('/mh_psych/')
+	result.append('/mh_useTable/')
+	# result.append('/mh_viewForm/')
+
+	return result
+
+def getMhOrderedCompleteValues(mh):
+	result = []
+
+	result.append(mh.demographicsComplete)
+	result.append(mh.educationComplete)
+	result.append(mh.backgroundComplete)
+	result.append(mh.stressorComplete)
+	result.append(mh.familyComplete)
+	result.append(mh.legalComplete)
+	result.append(mh.psychComplete)
+	result.append(mh.useComplete)
+
+	return result
+
+def getOrderedMhPriorityValue(mh):
+	result = []
+
+	result.append(mh.demoPriority)
+	result.append(mh.educationPriority)
+	result.append(mh.backgroundPriority)
+	result.append(mh.stressPriority)
+	result.append(mh.familyPriority)
+	result.append(mh.legalPriority)
+	result.append(mh.psychPriority)
+	result.append(mh.psychPriority)
+
+	return result
+
+def grabOrderedMh(mh):
+	mh_list = []
+
+	name = getOrderedMhNames()
+	url = getOrderedMhURLS()
+	complete = getMhOrderedCompleteValues(mh)
+	priority = getOrderedMhPriorityValue(mh)
+
+	amount = len(name)	
+
+	for i in range(amount):
+		data = {}
+		data['name'] = name[i]
+		data['url'] = url[i]
+		data['complete'] = complete[i]
+		data['priority'] = priority[i]
+		mh_list.append(data)
+
+	return mh_list
+
+def grabMhLocation(mh, section):
+	result = None
+	mh_list = grabOrderedMh(mh)
+
 def hasIncompleteMh(client):
 	exist = False
 	mhs = MentalHealth.objects.all()
@@ -3763,18 +3844,27 @@ def newMh(the_client):
 
 	demo = MHDemographic(clientID=the_client.clientID)	
 	education = MHEducation(clientID=the_client.clientID)
+	background = MHBackground(clientID=the_client.clientID)
+	stressors = MHStressor(clientID=the_client.clientID)
+	familyHistory = MHFamilyHistory(clientID=the_client.clientID)
+	legalHistory = MHLegalHistory(clientID=the_client.clientID)
+	useTable = MHUseTable(clientID=the_client.clientID)
 
 	demo.save()
 	education.save()
+	background.save()
+	stressors.save()
+	familyHistory.save()
+	legalHistory.save()
+	useTable.save()
 
 	mh.demographics = demo
 	mh.education = education
-
-	mh.demographicsComplete = False
-	mh.educationComplete = False
-
-	mh.demoPriority = False
-	mh.educationPriority = False
+	mh.background = background
+	mh.stressors = stressors
+	mh.familyHistory = familyHistory
+	mh.legalHistory = legalHistory
+	mh.useTable = useTable
 
 	mh.isOpen = True
 	mh.MHComplete = False
@@ -3786,17 +3876,115 @@ def newMh(the_client):
 def startMH(client):
 	result = {}
 
-	mhs = MentalHealth.objects.all()
-
 	if hasIncompleteMh(client) == False:
 		result['isNew'] = True
 		result['mh'] = newMh(client)
-		print "New Created"
 
 	else:
 		result['isNew'] = False
 		result['mh'] = findIncompleteClientMh(client)
-		print "Client has pre-existing MH"
+
+	return result
+
+def grabMhResidentIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Rent':
+		result = 1
+	elif selection == 'Own Home':
+		result = 2
+	elif selection == 'Subsidized Housing':
+		result = 3
+	else:
+		result = 0
+
+	return result
+
+def grabLowMedHighIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Low':
+		result = 1
+	elif selection == 'Medium':
+		result = 2
+	elif selection == 'High':
+		result = 3
+	else:
+		result = 0
+
+	return result
+
+def grabMhCreditIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Poor':
+		result = 1
+	elif selection == 'Fair':
+		result = 2
+	elif selection == 'Good':
+		result = 3
+	elif selection == 'Bankruptcy':
+		result = 4
+	else:
+		result = 0
+
+	return result
+
+def grabMhHealthIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Company Health Benefits':
+		result = 1
+	elif selection == 'Private Insurance':
+		result = 2
+	elif selection == 'Medicaid':
+		result = 3
+	elif selection == 'Medicare':
+		result = 4
+	elif selection == 'Self-Pay':
+		result = 5
+	else:
+		result = 0
+
+	return result
+
+def grabMhOtherIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Alimony':
+		result = 1
+	elif selection == 'Child Support':
+		result = 2
+	elif selection == 'Aid to Dependant Children':
+		result = 3
+	elif selection == 'SSI':
+		result = 4
+	elif selection == 'Retired':
+		result = 5
+	elif selection == 'Support from Relatives':
+		result = 6
+	else:
+		result = 0
+
+	return result
+
+def grabWeeklyIndex(selection):
+	result = None
+	selection = str(selection)
+
+	if selection == 'Weekly':
+		result = 1
+	elif selection == 'Monthly':
+		result = 2
+	elif selection == 'Yearly':
+		result = 3
+	else:
+		result = 0
 
 	return result
 
@@ -3839,11 +4027,128 @@ def getMhDemoFields(mh):
 
 	return results
 
+def getMhEducationFields(mh):
+	result = {}
+
+	result['GradesKto6'] = mh.education.GradesKto6
+	result['BehaviorProblemsKto6'] = mh.education.BehaviorProblemsKto6
+	result['AcademicProblemsKto6'] = mh.education.AcademicProblemsKto6
+	result['FriendshipsKto6'] = mh.education.FriendshipsKto6
+	result['Grades7to9'] = mh.education.Grades7to9
+	result['BehaviorProblems7to9'] = mh.education.BehaviorProblems7to9
+	result['AcademicProblems7to9'] = mh.education.AcademicProblems7to9
+	result['Friendships7to9'] = mh.education.Friendships7to9
+	result['Grades10to12'] = mh.education.Grades10to12
+	result['BehaviorProblems10to12'] = mh.education.BehaviorProblems10to12
+	result['AcademicProblems10to12'] = mh.education.AcademicProblems10to12
+	result['Friendships10to12'] = mh.education.Friendships10to12
+	result['collegeYears'] = mh.education.collegeYears
+	result['collegeDegree'] = mh.education.collegeDegree
+	result['collegeMajor'] = mh.education.collegeMajor
+	result['advanceDegree'] = mh.education.advanceDegree
+	result['tradeSch'] = mh.education.tradeSch
+	result['tradeSchool'] = mh.education.tradeSchool
+	result['tradeAreaStudy'] = mh.education.tradeAreaStudy
+	result['military'] = mh.education.military
+	result['militaryBranch'] = mh.education.militaryBranch
+	result['militaryYears'] = mh.education.militaryYears
+	result['militaryRank'] = mh.education.militaryRank
+	result['honorableDischarge'] = mh.education.honorableDischarge
+
+	return result
+
+def getMhBackgroundFields(mh):
+	results = {}
+	residence = grabMhResidentIndex(mh.background.residence)
+	income = grabLowMedHighIndex(mh.background.income)
+	debt = grabLowMedHighIndex(mh.background.debt)
+	credit = grabMhCreditIndex(mh.background.credit)
+	healthCare = grabMhHealthIndex(mh.background.healthCare)
+	otherIncome = grabMhOtherIndex(mh.background.otherIncome)
+	closeFriendVisit = grabWeeklyIndex(mh.background.closeFriendVisit)
+	acqVisit = grabWeeklyIndex(mh.background.acqVisit)
+
+	results['residence'] = residence
+	results['income'] = income
+	results['debt'] = debt
+	results['credit'] = credit
+	results['healthCare'] = healthCare
+	results['otherIncome'] = otherIncome
+
+	results['spouseRelationship'] = mh.background.spouseRelationship
+	results['brothersRelationship'] = mh.background.brothersRelationship
+	results['childrenRelationship'] = mh.background.childrenRelationship
+	results['parentsRelationship'] = mh.background.parentsRelationship
+	results['sistersRelationship'] = mh.background.sistersRelationship
+	results['exRelationship'] = mh.background.exRelationship
+
+	results['closeFriendVisit'] = closeFriendVisit
+	results['closeFriendNumber'] = mh.background.closeFriendNumber
+	results['acqVisit'] = acqVisit
+	results['acqNumber'] = mh.background.acqNumber
+
+	results['interest'] = mh.background.interest
+	results['interestWeek'] = mh.background.interestWeek
+	results['interestMonth'] = mh.background.interestMonth
+	results['friendAct'] = mh.background.friendAct
+	results['friendActWeek'] = mh.background.friendActWeek
+	results['friendActMonth'] = mh.background.friendActMonth
+	results['workAct'] = mh.background.workAct
+	results['workActWeek'] = mh.background.workActWeek
+	results['workActMonth'] = mh.background.workActMonth
+	results['churchAffiliation'] = mh.background.churchAffiliation
+	results['churchWeek'] = mh.background.churchWeek
+	results['churchMonth'] = mh.background.churchMonth
+	results['churchYear'] = mh.background.churchYear
+
+	return results
+
+def getMhStressorFields(mh):
+	result = {}
+
+	result['deathStress'] = mh.stressors.deathStress
+	result['deathStressExp'] = mh.stressors.deathStressExp
+	result['divorceStress'] = mh.stressors.divorceStress
+	result['divorceStressExp'] = mh.stressors.divorceStressExp
+	result['moveStress'] = mh.stressors.moveStress
+	result['moveStressExp'] = mh.stressors.moveStressExp
+	result['medicalStress'] = mh.stressors.medicalStress
+	result['medicalStressExp'] = mh.stressors.medicalStressExp
+	result['familyHealthStress'] = mh.stressors.familyHealthStress
+	result['familyHealthStressExp'] = mh.stressors.familyHealthStressExp
+	result['financialStress'] = mh.stressors.financialStress
+	result['financialStressExp'] = mh.stressors.financialStressExp
+	result['abuseStress'] = mh.stressors.abuseStress
+	result['abuseStressExp'] = mh.stressors.abuseStressExp
+	result['addictionFamilyStress'] = mh.stressors.addictionFamilyStress
+	result['addictionFamilyStressExp'] = mh.stressors.addictionFamilyStressExp
+	result['violenceFamilyStress'] = mh.stressors.violenceFamilyStress
+	result['violenceFamilyStressExp'] = mh.stressors.violenceFamilyStressExp
+	result['otherStress'] = mh.stressors.otherStress
+	result['otherStressExp'] = mh.stressors.otherStressExp
+
+	result['psychiatricHistory'] = mh.stressors.psychiatricHistory
+
+	return result
+
+def getMhFamilyFields(mh):
+	result = {}
+
+	return result
+
 def getMhFields(mh, section):
 	result = {}
 
 	if str(section) == '/mh_demographic/':
 		result = getMhDemoFields(mh)
+	elif str(section) == '/mh_education/':
+		result = getMhEducationFields(mh)
+	elif str(section) == '/mh_background/':
+		result = getMhBackgroundFields(mh)
+	elif str(section) == '/mh_stress/':
+		result = getMhStressorFields(mh)
+	elif str(section) == '/mh_familyHistory/':
+		result = getMhFamilyFields(mh)
 
 	return result
 

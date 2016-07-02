@@ -1645,6 +1645,68 @@ button:hover {
 	margin-top: 10px;
 }
 
+.useBorder {
+	width: 100%;
+	margin: auto;
+	background-color: #e7e6e7;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.useTable {
+	width: 100%;
+}
+
+.useTable th{
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
+	background-color: #d0d0d0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.useTable td {
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
+}
+
+.InnerTableUse {
+
+}
+
+.InnerTableUse td {
+	border: none;
+	text-align: left;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	padding-left: 5%;
+	font-style: italic;
+	font-weight: bold;
+	/*color: #909074;*/
+	/*color: #474747;*/
+	color: #6c6c66;
+}
+
+#useHeader {
+	padding: 6px;
+	font-size: 15px;
+	font-style: italic;
+	color: #595959;
+	/*color: black;*/
+	/*color: #909074;*/
+	/*text-shadow: 1px 1px gray;*/
+	/*border: 1px solid black;*/
+}
+
+.innerTextUse {
+	border: 1px solid gray;
+	width: 98%;
+	text-align: center;
+}
+
 
 
 

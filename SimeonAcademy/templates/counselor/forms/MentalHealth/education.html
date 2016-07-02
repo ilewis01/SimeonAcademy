@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_education();">
+<body class="gradient-white" onLoad="javascript: initialize_mh_education({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -450,7 +450,7 @@
 
 					            			<td>
 					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px' name='numMore' id='numMore' value='0'>
+					            					<input type='number' style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'>
 					            				</div>
 					            			</td>
 					            		</tr>
@@ -707,7 +707,7 @@
 
 					            			<td>
 					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='0'>
+					            					<input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}'>
 					            				</div>
 					            			</td>
 					            		</tr>
@@ -965,7 +965,7 @@
 
 					            			<td>
 					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='0'>
+					            					<input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}'>
 					            				</div>
 					            			</td>
 					            		</tr>

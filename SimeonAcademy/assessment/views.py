@@ -41,7 +41,7 @@ saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
 getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID, \
-decodeCharfield
+decodeCharfield, grabOrderedMh
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -2038,6 +2038,18 @@ def mh_education(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_education/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/education.html', content)
 
@@ -2056,6 +2068,18 @@ def mh_background(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_background/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/background.html', content)
 
@@ -2074,6 +2098,18 @@ def mh_stress(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_stress/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/stressors.html', content)
 
@@ -2092,6 +2128,18 @@ def mh_familyHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_familyHistory/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content)
 
@@ -2110,6 +2158,18 @@ def mh_legal(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_legal/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/legal.html', content)
 
@@ -2128,6 +2188,18 @@ def mh_psych(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_psych/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/psych.html', content)
 
@@ -2146,6 +2218,18 @@ def mh_useTable(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session_id = request.POST.get('session_id', '')
+			mh_id = request.POST.get('mh_id', '')
+
+			session = ClientSession.objects.get(id=session_id)
+			mh = MentalHealth.objects.get(id=mh_id)
+			fields = getMhFields(mh, '/mh_useTable/')
+			json_data = json.dumps(fields)
+
+			content['session'] = session
+			content['mh'] = mh
+			content['fields'] = fields
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/useTable.html', content)
 
