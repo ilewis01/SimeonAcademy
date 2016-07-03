@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_stress();">
+<body class="gradient-white" onLoad="javascript: initialize_mh_use({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -1018,7 +1018,7 @@
 
                                   <td>
                                     <div>
-                                      <input type='text' name='lastTime17' id='lastTime17' class='innerTextUse' value='{{fields.lastTime}}'>
+                                      <input type='text' name='lastTime17' id='lastTime17' class='innerTextUse' value='{{fields.lastTime17}}'>
                                     </div>
                                   </td>
                                 </tr>

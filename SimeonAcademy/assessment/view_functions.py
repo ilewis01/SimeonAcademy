@@ -63,7 +63,10 @@ def getOrderedStateIndex(the_state):
 			index = i
 			break
 
-	index = index + 1
+	if str(the_state) == None or str(the_state) == 'None Selected' or str(the_state) == '':
+		index = 0
+	else:
+		index = index + 1
 
 	return index
 
@@ -3793,28 +3796,57 @@ def getOrderedMhPriorityValue(mh):
 	return result
 
 def grabOrderedMh(mh):
-	mh_list = []
+	mh_list 	= []
+	name 		= getOrderedMhNames()
+	url 		= getOrderedMhURLS()
+	complete 	= getMhOrderedCompleteValues(mh)
+	priority 	= getOrderedMhPriorityValue(mh)
 
-	name = getOrderedMhNames()
-	url = getOrderedMhURLS()
-	complete = getMhOrderedCompleteValues(mh)
-	priority = getOrderedMhPriorityValue(mh)
-
-	amount = len(name)	
-
-	for i in range(amount):
+	for i in range(len(name)):
 		data = {}
-		data['name'] = name[i]
-		data['url'] = url[i]
-		data['complete'] = complete[i]
-		data['priority'] = priority[i]
+		data['name'] 		= name[i]
+		data['url'] 		= url[i]
+		data['complete'] 	= complete[i]
+		data['priority'] 	= priority[i]
 		mh_list.append(data)
-
 	return mh_list
 
-def grabMhLocation(mh, section):
-	result = None
+def forceNextMhPage(mh):
+	result 	= None
+	flag 	= None
 	mh_list = grabOrderedMh(mh)
+
+	for i in range(len(mh_list)):
+		if mh_list[i].data['complete'] == False:
+			flag = i
+			break
+
+	return result
+
+def nextMhPage(mh, section):
+	result 		= None
+	nextSection = None
+	proceed 	= True
+	mh_list 	= grabOrderedMh(mh)
+
+	for m in mh_list:
+		if m['priority'] == True:
+			result = m['url']
+			proceed = False
+			break
+
+	if proceed == True:
+		for i in range(len(mh_list)):
+			if mh_list[i]['complete'] == False:
+				nextSection = mh_list[i]['url']
+				break
+
+		if str(nextSection) == str(section):
+			result = forceNextMhPage(mh)
+		else:
+			result = nextSection
+
+	return result
 
 def hasIncompleteMh(client):
 	exist = False
@@ -4226,106 +4258,82 @@ def getMhFamilyFields(mh):
 	highBloodPressure = decodeMhFamilyText(mh.familyHistory.highBloodPressure)
 	anger = decodeMhFamilyText(mh.familyHistory.anger)
 
+	## SET THE VALUES FOR THE GET FUNCTION
 	result['depressedS'] = depressed['side']
 	result['depressedM'] = depressed['member']
 	result['isdepressed'] = mh.familyHistory.isdepressed
-
 	result['addS'] = add['side']
 	result['addM'] = add['member']
 	result['isadd'] = mh.familyHistory.isadd
-
 	result['bedWettingS'] = bedWetting['side']
 	result['bedWettingM'] = bedWetting['member']
 	result['isbedWetting'] = mh.familyHistory.isbedWetting
-
 	result['bipolarS'] = bipolar['side']
 	result['bipolarM'] = bipolar['member']
 	result['isbipolar'] = mh.familyHistory.isbipolar
-
 	result['suicideAttemptS'] = suicideAttempt['side']
 	result['suicideAttemptM'] = suicideAttempt['member']
 	result['issuicideAttempt'] = mh.familyHistory.issuicideAttempt
-
 	result['physicalAbuseS'] = physicalAbuse['side']
 	result['physicalAbuseM'] = physicalAbuse['member']
 	result['isphysicalAbuse'] = mh.familyHistory.isphysicalAbuse
-
 	result['lawS'] = law['side']
 	result['lawM'] = law['member']
 	result['islaw'] = mh.familyHistory.islaw
-
 	result['ldS'] = ld['side']
 	result['ldM'] = ld['member']
 	result['isld'] = mh.familyHistory.isld
-
 	result['ticS'] = tic['side']
 	result['ticM'] = tic['member']
 	result['istic'] = mh.familyHistory.istic
-
 	result['thyroidS'] = thyroid['side']
 	result['thyroidM'] = thyroid['member']
 	result['isthyroid'] = mh.familyHistory.isthyroid
-
 	result['heartS'] = heart['side']
 	result['heartM'] = heart['member']
 	result['isheart'] = mh.familyHistory.isheart
-
 	result['overweightS'] = overweight['side']
 	result['overweightM'] = overweight['member']
 	result['isoverweight'] = mh.familyHistory.isoverweight
-
 	result['moodS'] = mood['side']
 	result['moodM'] = mood['member']
 	result['ismood'] = mh.familyHistory.ismood
-
 	result['alcoholS'] = alcohol['side']
 	result['alcoholM'] = alcohol['member']
 	result['isalcohol'] = mh.familyHistory.isalcohol
-
 	result['drugsS'] = drugs['side']
 	result['drugsM'] = drugs['member']
 	result['isdrugs'] = mh.familyHistory.isdrugs
-
 	result['schizoS'] = schizo['side']
 	result['schizoM'] = schizo['member']
 	result['isschizo'] = mh.familyHistory.isschizo
-
 	result['seizuresS'] = seizures['side']
 	result['seizuresM'] = seizures['member']
 	result['isseizures'] = mh.familyHistory.isseizures
-
 	result['completedSuicideS'] = completedSuicide['side']
 	result['completedSuicideM'] = completedSuicide['member']
 	result['iscompletedSuicide'] = mh.familyHistory.iscompletedSuicide
-
 	result['sexAbuseS'] = sexAbuse['side']
 	result['sexAbuseM'] = sexAbuse['member']
 	result['issexAbuse'] = mh.familyHistory.issexAbuse
-
 	result['panicS'] = panic['side']
 	result['panicM'] = panic['member']
 	result['ispanic'] = mh.familyHistory.ispanic
-
 	result['anxietyS'] = anxiety['side']
 	result['anxietyM'] = anxiety['member']
 	result['isanxiety'] = mh.familyHistory.isanxiety
-
 	result['OCDS'] = OCD['side']
 	result['OCDM'] = OCD['member']
 	result['isOCD'] = mh.familyHistory.isOCD
-
 	result['diabetesS'] = diabetes['side']
 	result['diabetesM'] = diabetes['member']
 	result['isdiabetes'] = mh.familyHistory.isdiabetes
-
 	result['cancerS'] = cancer['side']
 	result['cancerM'] = cancer['member']
 	result['iscancer'] = mh.familyHistory.iscancer
-
 	result['highBloodPressureS'] = highBloodPressure['side']
 	result['highBloodPressureM'] = highBloodPressure['member']
 	result['ishighBloodPressure'] = mh.familyHistory.ishighBloodPressure
-
 	result['angerS'] = anger['side']
 	result['angerM'] = anger['member']
 	result['isanger'] = mh.familyHistory.isanger
@@ -4357,6 +4365,117 @@ def getMhLegalFields(mh):
 
 	return result
 
+def getMhUseFields(mh):
+	result = {}
+
+	result['howMuch1'] = mh.useTable.howMuch1
+	result['howOften1'] = mh.useTable.howOften1
+	result['howLong1'] = mh.useTable.howLong1
+	result['howOld1'] = mh.useTable.howOld1
+	result['lastTime1'] = mh.useTable.lastTime1
+	result['howMuch2'] = mh.useTable.howMuch2
+	result['howOften2'] = mh.useTable.howOften2
+	result['howLong2'] = mh.useTable.howLong2
+	result['howOld2'] = mh.useTable.howOld2
+	result['lastTime2'] = mh.useTable.lastTime2
+	result['howMuch3'] = mh.useTable.howMuch3
+	result['howOften3'] = mh.useTable.howOften3
+	result['howLong3'] = mh.useTable.howLong3
+	result['howOld3'] = mh.useTable.howOld3
+	result['lastTime3'] = mh.useTable.lastTime3
+	result['howMuch4'] = mh.useTable.howMuch4
+	result['howOften4'] = mh.useTable.howOften4
+	result['howLong4'] = mh.useTable.howLong4
+	result['howOld4'] = mh.useTable.howOld4
+	result['lastTime4'] = mh.useTable.lastTime4
+	result['howMuch5'] = mh.useTable.howMuch5
+	result['howOften5'] = mh.useTable.howOften5
+	result['howLong5'] = mh.useTable.howLong5
+	result['howOld5'] = mh.useTable.howOld5
+	result['lastTime5'] = mh.useTable.lastTime5
+	result['howMuch6'] = mh.useTable.howMuch6
+	result['howOften6'] = mh.useTable.howOften6
+	result['howLong6'] = mh.useTable.howLong6
+	result['howOld6'] = mh.useTable.howOld6
+	result['lastTime6'] = mh.useTable.lastTime6
+	result['howMuch7'] = mh.useTable.howMuch7
+	result['howOften7'] = mh.useTable.howOften7
+	result['howLong7'] = mh.useTable.howLong7
+	result['howOld7'] = mh.useTable.howOld7
+	result['lastTime7'] = mh.useTable.lastTime7
+	result['howMuch8'] = mh.useTable.howMuch8
+	result['howOften8'] = mh.useTable.howOften8
+	result['howLong8'] = mh.useTable.howLong8
+	result['howOld8'] = mh.useTable.howOld8
+	result['lastTime8'] = mh.useTable.lastTime8
+	result['howMuch9'] = mh.useTable.howMuch9
+	result['howOften9'] = mh.useTable.howOften9
+	result['howLong9'] = mh.useTable.howLong9
+	result['howOld9'] = mh.useTable.howOld9
+	result['lastTime9'] = mh.useTable.lastTime9
+	result['howMuch10'] = mh.useTable.howMuch10
+	result['howOften10'] = mh.useTable.howOften10
+	result['howLong10'] = mh.useTable.howLong10
+	result['howOld10'] = mh.useTable.howOld10
+	result['lastTime10'] = mh.useTable.lastTime10
+	result['howMuch11'] = mh.useTable.howMuch11
+	result['howOften11'] = mh.useTable.howOften11
+	result['howLong11'] = mh.useTable.howLong11
+	result['howOld11'] = mh.useTable.howOld11
+	result['lastTime11'] = mh.useTable.lastTime11
+	result['howMuch12'] = mh.useTable.howMuch12
+	result['howOften12'] = mh.useTable.howOften12
+	result['howLong12'] = mh.useTable.howLong12
+	result['howOld12'] = mh.useTable.howOld12
+	result['lastTime12'] = mh.useTable.lastTime12
+	result['howMuch13'] = mh.useTable.howMuch13
+	result['howOften13'] = mh.useTable.howOften13
+	result['howLong13'] = mh.useTable.howLong13
+	result['howOld13'] = mh.useTable.howOld13
+	result['lastTime13'] = mh.useTable.lastTime13
+	result['howMuch14'] = mh.useTable.howMuch14
+	result['howOften14'] = mh.useTable.howOften14
+	result['howLong14'] = mh.useTable.howLong14
+	result['howOld14'] = mh.useTable.howOld14
+	result['lastTime14'] = mh.useTable.lastTime14
+	result['howMuch15'] = mh.useTable.howMuch15
+	result['howOften15'] = mh.useTable.howOften15
+	result['howLong15'] = mh.useTable.howLong15
+	result['howOld15'] = mh.useTable.howOld15
+	result['lastTime15'] = mh.useTable.lastTime15
+	result['howMuch16'] = mh.useTable.howMuch16
+	result['howOften16'] = mh.useTable.howOften16
+	result['howLong16'] = mh.useTable.howLong16
+	result['howOld16'] = mh.useTable.howOld16
+	result['lastTime16'] = mh.useTable.lastTime16
+	result['howMuch17'] = mh.useTable.howMuch17
+	result['howOften17'] = mh.useTable.howOften17
+	result['howLong17'] = mh.useTable.howLong17
+	result['howOld17'] = mh.useTable.howOld17
+	result['lastTime17'] = mh.useTable.lastTime17
+	result['howMuch18'] = mh.useTable.howMuch18
+	result['howOften18'] = mh.useTable.howOften18
+	result['howLong18'] = mh.useTable.howLong18
+	result['howOld18'] = mh.useTable.howOld18
+	result['lastTime18'] = mh.useTable.lastTime18
+	result['howMuch19'] = mh.useTable.howMuch19
+	result['howOften19'] = mh.useTable.howOften19
+	result['howLong19'] = mh.useTable.howLong19
+	result['howOld19'] = mh.useTable.howOld19
+	result['lastTime19'] = mh.useTable.lastTime19
+	result['howMuch20'] = mh.useTable.howMuch20
+	result['howOften20'] = mh.useTable.howOften20
+	result['howLong20'] = mh.useTable.howLong20
+	result['howOld20'] = mh.useTable.howOld20
+	result['lastTime20'] = mh.useTable.lastTime20
+	result['howMuch21'] = mh.useTable.howMuch21
+	result['howOften21'] = mh.useTable.howOften21
+	result['howLong21'] = mh.useTable.howLong21
+	result['howOld21'] = mh.useTable.howOld21
+	result['lastTime21'] = mh.useTable.lastTime21
+
+	return result
+
 def getMhFields(mh, section):
 	result = {}
 
@@ -4372,6 +4491,8 @@ def getMhFields(mh, section):
 		result = getMhFamilyFields(mh)
 	elif str(section) == '/mh_legal/':
 		result = getMhLegalFields(mh)
+	elif str(section) == '/mh_useTable/':
+		result = getMhUseFields(mh)
 
 	return result
 
@@ -4386,44 +4507,291 @@ def saveMhDemo(request, mh):
 	mh.demographics.birthplace = request.POST.get('birthplace', '')
 	mh.demographics.raised = request.POST.get('raised', '')
 	mh.demographics.maritalStatus = request.POST.get('maritalStatus', '')
-	mh.demographics.numMarriages = request.POST.get('numMarriages', '')
+	mh.demographics.numMarriages = request.POST.get('m_numMarriages', '')
 	mh.demographics.occupation = request.POST.get('occupation', '')
 	mh.demographics.employer = request.POST.get('employer', '')
 	mh.demographics.employedMo = request.POST.get('employedMo', '')
 	mh.demographics.employedYrs = request.POST.get('employedYrs', '')
 	mh.demographics.pastJobs = request.POST.get('pastJobs', '')
 	mh.demographics.recentMove = request.POST.get('recentMove', '')
-	mh.demographics.spouseAge = request.POST.get('spouseAge', '')
-	mh.demographics.spouseOccupation = request.POST.get('spouseOccupation', '')
-	mh.demographics.spouseEmployer = request.POST.get('spouseEmployer', '')
-	mh.demographics.spouseWorkMos = request.POST.get('spouseWorkMos', '')
-	mh.demographics.spouseWorkYrs = request.POST.get('spouseWorkYrs', '')
+	mh.demographics.spouseAge = request.POST.get('m_spouseAge', '')
+	mh.demographics.spouseOccupation = request.POST.get('m_spouseOccupation', '')
+	mh.demographics.spouseEmployer = request.POST.get('m_spouseEmployer', '')
+	mh.demographics.spouseWorkMos = request.POST.get('m_spouseWorkMos', '')
+	mh.demographics.spouseWorkYrs = request.POST.get('m_spouseWorkYrs', '')
 
 	mh.demographics.motherOccupation = request.POST.get('motherOccupation', '')
 	mh.demographics.motherCity = request.POST.get('motherCity', '')
 	mh.demographics.motherState = request.POST.get('motherState', '')
 	mh.demographics.motherLiving = momLive
-	mh.demographics.motherAge = request.POST.get('motherAge', '')
-	mh.demographics.motherAgeDeath = request.POST.get('motherAgeDeath', '')
+	mh.demographics.motherAge = request.POST.get('m_motherAge', '')
+	mh.demographics.motherAgeDeath = request.POST.get('m_motherAgeDeath', '')
 
 	mh.demographics.fatherOccupation = request.POST.get('fatherOccupation', '')
 	mh.demographics.fatherCity = request.POST.get('fatherCity', '')
 	mh.demographics.fatherState = request.POST.get('fatherState', '')
 	mh.demographics.fatherLiving = dadLive
-	mh.demographics.fatherAge = request.POST.get('fatherAge', '')
-	mh.demographics.fatherAgeDeath = request.POST.get('fatherAgeDeath', '')
+	mh.demographics.fatherAge = request.POST.get('m_fatherAge', '')
+	mh.demographics.fatherAgeDeath = request.POST.get('m_fatherAgeDeath', '')
 
-	mh.demographics.numChildren = request.POST.get('numChildren', '')
-	mh.demographics.numSisters = request.POST.get('numSisters', '')
-	mh.demographics.numBrothers = request.POST.get('numBrothers', '')
+	mh.demographics.numChildren = request.POST.get('m_numChildren', '')
+	mh.demographics.numSisters = request.POST.get('m_numSisters', '')
+	mh.demographics.numBrothers = request.POST.get('m_numBrothers', '')
 
 	mh.demographics.save()
 	mh.demographicsComplete = True
 	mh.save()
 
+def saveMhEducation(request, mh):
+	result = {}
+
+	mh.education.GradesKto6 = request.POST.get('GradesKto6')
+	mh.education.Grades7to9 = request.POST.get('Grades7to9')
+	mh.education.Grades10to12 = request.POST.get('Grades10to12')
+	mh.education.BehaviorProblemsKto6 = truePythonBool(request.POST.get('BehaviorProblemsKto6'))
+	mh.education.AcademicProblemsKto6 = truePythonBool(request.POST.get('AcademicProblemsKto6'))
+	mh.education.BehaviorProblems7to9 = truePythonBool(request.POST.get('BehaviorProblems7to9'))
+	mh.education.AcademicProblems7to9 = truePythonBool(request.POST.get('AcademicProblems7to9'))
+	mh.education.BehaviorProblems10to12 = truePythonBool(request.POST.get('BehaviorProblems10to12'))
+	mh.education.AcademicProblems10to12 = truePythonBool(request.POST.get('AcademicProblems10to12'))
+	mh.education.FriendshipsKto6 = request.POST.get('m_FriendshipsKto6')
+	mh.education.Friendships7to9 = request.POST.get('m_Friendships7to9')
+	mh.education.Friendships10to12 = request.POST.get('m_Friendships10to12')
+	mh.education.collegeYears = request.POST.get('collegeYears')
+	mh.education.collegeDegree = truePythonBool(request.POST.get('collegeDegree'))
+	mh.education.collegeMajor = request.POST.get('m_collegeMajor')
+	mh.education.advanceDegree = truePythonBool(request.POST.get('m_advanceDegree'))
+	mh.education.tradeSch = truePythonBool(request.POST.get('tradeSch'))
+	mh.education.tradeSchool = request.POST.get('m_tradeSchool')
+	mh.education.tradeAreaStudy = request.POST.get('m_tradeAreaStudy')
+	mh.education.military = truePythonBool(request.POST.get('military'))	
+	mh.education.militaryBranch = request.POST.get('m_militaryBranch')
+	mh.education.militaryRank = request.POST.get('m_militaryRank')
+	mh.education.militaryYears = request.POST.get('m_militaryYears')
+	mh.education.honorableDischarge = truePythonBool(request.POST.get('m_honorableDischarge'))
+
+	mh.education.save()
+
+	return result
+
 def saveMentalHealth(request, section, mh):
 	if str(section) == '/mh_demographic/':
 		saveMhDemo(request, mh)
+	elif str(section) == '/mh_education/':
+		print "Saving Education..."
+		saveMhEducation(request, mh)
+
+def refreshMhDemo(mh):
+	mh.demographics.birthplace = None
+	mh.demographics.raised = None
+	mh.demographics.maritalStatus = None
+	mh.demographics.numMarriages = 0
+	mh.demographics.occupation = ''
+	mh.demographics.employer = ''
+	mh.demographics.employedMo = 0
+	mh.demographics.employedYrs = 0
+	mh.demographics.pastJobs = ''
+	mh.demographics.recentMove = ''
+	mh.demographics.spouseAge = 0
+	mh.demographics.spouseOccupation = ''
+	mh.demographics.spouseEmployer = ''
+	mh.demographics.spouseWorkMos = 0
+	mh.demographics.spouseWorkYrs = 0
+	mh.demographics.childrenMale = ''
+	mh.demographics.childrenFemale = ''
+	mh.demographics.bothers = ''
+	mh.demographics.sisters = ''
+	mh.demographics.motherOccupation = ''
+	mh.demographics.motherCity = ''
+	mh.demographics.motherState = ''
+	mh.demographics.motherLiving = False
+	mh.demographics.motherAge = 0
+	mh.demographics.motherAgeDeath = 0
+	mh.demographics.fatherOccupation = ''
+	mh.demographics.fatherCity = ''
+	mh.demographics.fatherState = ''
+	mh.demographics.fatherLiving = False
+	mh.demographics.fatherAge = 0
+	mh.demographics.fatherAgeDeath = 0
+	mh.demographics.numChildren = 0
+	mh.demographics.numSisters = 0
+	mh.demographics.numBrothers = 0
+	print "MH DEMO ID: " + str(mh.demographics.id)
+	mh.demographics.save()
+
+def refreshEdu(mh):
+	result = mh
+	mh.education.GradesKto6 = ''
+	mh.education.BehaviorProblemsKto6 = False
+	mh.education.AcademicProblemsKto6 = False
+	mh.education.FriendshipsKto6 = 0
+	mh.education.Grades7to9 = ''
+	mh.education.BehaviorProblems7to9 = False
+	mh.education.AcademicProblems7to9 = False
+	mh.education.Friendships7to9 = 0
+	mh.education.Grades10to12 = ''
+	mh.education.BehaviorProblems10to12 = False
+	mh.education.AcademicProblems10to12 = False
+	mh.education.Friendships10to12 = 0
+	mh.education.collegeYears = 0
+	mh.education.collegeDegree = False
+	mh.education.collegeMajor = ''
+	mh.education.advanceDegree = False
+	mh.education.tradeSch = ''
+	mh.education.tradeSchool = False
+	mh.education.tradeAreaStudy = ''
+	mh.education.military = False
+	mh.education.militaryBranch = ''
+	mh.education.militaryYears = 0
+	mh.education.militaryRank = ''
+	mh.education.honorableDischarge = ''
+	mh.education.save()
+	return result
+
+def refreshBack(mh):
+	result = mh
+	mh.background.closeFriendNumber = 0
+	mh.background.acqNumber = 0
+	mh.background.interestWeek = 0
+	mh.background.interestMonth = 0
+	mh.background.friendActWeek = 0
+	mh.background.friendActMonth = 0
+	mh.background.workActWeek = 0
+	mh.background.workActMonth = 0
+	mh.background.churchWeek = 0
+	mh.background.churchMonth = 0
+	mh.background.churchYear = 0	
+	mh.background.residence = ''
+	mh.background.income = ''
+	mh.background.debt = ''
+	mh.background.credit = ''
+	mh.background.healthCare = ''
+	mh.background.otherIncome = ''
+	mh.background.spouseRelationship = ''
+	mh.background.brothersRelationship = ''
+	mh.background.childrenRelationship = ''
+	mh.background.parentsRelationship = ''
+	mh.background.sistersRelationship = ''
+	mh.background.exRelationship = ''
+	mh.background.closeFriendVisit = ''
+	mh.background.acqVisit = ''
+	mh.background.interest = ''
+	mh.background.friendAct = ''
+	mh.background.workAct = ''
+	mh.background.churchAffiliation = ''
+	mh.background.save()
+	return result
+
+def refreshMhStress(mh):
+	result = mh
+	mh.stressors.deathStressExp = ''
+	mh.stressors.divorceStressExp = ''
+	mh.stressors.moveStressExp = ''
+	mh.stressors.medicalStressExp = ''
+	mh.stressors.familyHealthStressExp = ''
+	mh.stressors.financialStressExp = ''
+	mh.stressors.abuseStressExp = ''
+	mh.stressors.addictionFamilyStressExp = ''
+	mh.stressors.violenceFamilyStressExp = ''
+	mh.stressors.otherStressExp = ''
+	mh.stressors.psychiatricHistory = ''
+	mh.stressors.deathStress = False
+	mh.stressors.divorceStress = False
+	mh.stressors.moveStress = False
+	mh.stressors.medicalStress = False
+	mh.stressors.familyHealthStress = False
+	mh.stressors.financialStress = False
+	mh.stressors.abuseStress = False
+	mh.stressors.addictionFamilyStress = False
+	mh.stressors.violenceFamilyStress = False
+	mh.stressors.otherStress = False
+	mh.stressors.save()
+	return result
+
+def refreshMhFam(mh):
+	THEclientID = mh.client.clientID
+	newFam = MHFamilyHistory(clientID=THEclientID)
+	oldFam = mh.familyHistory
+	newFam.save()
+	mh.familyHistory = newFam
+	mh.save()	
+	oldFam.delete()
+
+def refreshMhLegal(mh):
+	result = mh
+	mh.legalHistory.num_arrest = 0
+	mh.legalHistory.num_convictions = 0
+	mh.legalHistory.num_DUI_charges = 0
+	mh.legalHistory.num_DUI_convictions = 0
+	mh.legalHistory.num_suspended = 0
+	mh.legalHistory.arrestCharges = ''
+	mh.legalHistory.convictionCharges = ''
+	mh.legalHistory.probationOfficer = ''
+	mh.legalHistory.probationOffense = ''
+	mh.legalHistory.dateBenkrupcy = ''
+	mh.legalHistory.explainPositiveAnswers = ''
+	mh.legalHistory.probationPresent = False
+	mh.legalHistory.probationPast = False
+	mh.legalHistory.suspendedDrivePresent = False
+	mh.legalHistory.hasLawsuit = False
+	mh.legalHistory.lawsuitStress = False
+	mh.legalHistory.inDivorce = False
+	mh.legalHistory.childCustody = False
+	mh.legalHistory.hasBankrupcy = False
+	mh.legalHistory.save()
+	return result
+
+def refreshMhUse(mh):	
+	THEclientID = mh.client.clientID
+	newUse = MHUseTable(clientID=THEclientID)
+	oldUse = mh.useTable
+	newUse.save()
+	mh.useTable = newUse
+	mh.save()
+	oldUse.delete()
+
+def refreshMh(mh):
+	print "MH ID: " + str(mh.id)
+	refreshMhDemo(mh)
+	refreshEdu(mh)
+	refreshBack(mh)
+	refreshMhStress(mh)
+	refreshMhFam(mh)
+	refreshMhLegal(mh)
+	# refreshMhPsy(mh)
+	refreshMhUse(mh)
+
+	mh.demographicsComplete = False
+	mh.educationComplete = False
+	mh.backgroundComplete = False
+	mh.stressorComplete = False
+	mh.familyComplete = False
+	mh.legalComplete = False
+	mh.psychComplete = False
+	mh.useComplete = False
+	mh.demoPriority = False
+	mh.educationPriority = False
+	mh.backgroundPriority = False
+	mh.stressPriority = False
+	mh.familyPriority = False
+	mh.legalPriority = False
+	mh.psychPriority = False
+	mh.usePriority = False
+	mh.MHComplete = False
+	mh.save()
+
+def deleteMh(mh):
+	result = mh
+	mh.demographics.delete()
+	mh.education.delete()
+	mh.background.delete()
+	mh.stressors.delete()
+	mh.familyHistory.delete()
+	mh.legalHistory.delete()
+	mh.useTable.delete()
+	mh.delete()
+	return result
+
 
 ############################################################################################################################
 ############################################################################################################################
@@ -4648,6 +5016,8 @@ def universalLocation(form_type, form_id):
 		location = locateNextSection(sap, None)
 	elif str(form_type) == 'mh':
 		mh = MentalHealth.objects.get(id=form_id)
+		print "This is Universal MH Location"
+		location = nextMhPage(mh, None)
 	elif str(form_type) == 'ut':
 		ut = UrineResults.objects.get(id=form_id)
 
@@ -4659,7 +5029,7 @@ def universalRefresh(form_type, form):
 	elif str(form_type) == 'sap':
 		refreshSap(form)
 	elif str(form_type) == 'mh':
-		no = None
+		refreshMh(form)
 	elif str(form_type) == 'ut':
 		no = None
 

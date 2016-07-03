@@ -181,6 +181,7 @@
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
                   					<input type='hidden' name='back' id='back' value='{{back}}'>
+                  					<input type='hidden' name='save_this' id='save_this' value=''>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
 				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
                   					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
@@ -190,6 +191,20 @@
                             		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
                             		<input type='hidden' name='exit_type' id='exit_type' value=''>
 
+                            		<input type='hidden' name='m_motherAge' id='m_motherAge' value=''>
+                            		<input type='hidden' name='m_motherAgeDeath' id='m_motherAgeDeath' value=''>
+                            		<input type='hidden' name='m_fatherAge' id='m_fatherAge' value=''>
+                            		<input type='hidden' name='m_fatherAgeDeath' id='m_fatherAgeDeath' value=''>
+                            		<input type='hidden' name='m_numChildren' id='m_numChildren' value=''>
+                            		<input type='hidden' name='m_numSisters' id='m_numSisters' value=''>
+                            		<input type='hidden' name='m_numBrothers' id='m_numBrothers' value=''>
+
+                            		<input type='hidden' name='m_numMarriages' id='m_numMarriages' value=''>
+                            		<input type='hidden' name='m_spouseOccupation' id='m_spouseOccupation' value=''>
+                            		<input type='hidden' name='m_spouseEmployer' id='m_spouseEmployer' value=''>
+                            		<input type='hidden' name='m_spouseAge' id='m_spouseAge' value=''>
+                            		<input type='hidden' name='m_spouseWorkMos' id='m_spouseWorkMos' value=''>
+                            		<input type='hidden' name='m_spouseWorkYrs' id='m_spouseWorkYrs' value=''>
 				            <table>
 				            	<tr>
 				            		<td>
@@ -692,6 +707,7 @@
 				        	    			<td>
 				        	    				<select name='motherState' id='motherState'>
 				        	    					<option value='None Selected'>Select</option>
+
 
 				        	    					{% for s in states %}
 				        	    					    <option value='{{s.state}}'>{{s.state}}</option>

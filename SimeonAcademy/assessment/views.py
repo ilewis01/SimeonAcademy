@@ -41,7 +41,7 @@ saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
 getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID, \
-decodeCharfield, grabOrderedMh
+decodeCharfield, nextMhPage
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -607,6 +607,9 @@ def genericFormRefreshed(request):
 			elif str(form_type) == 'ut':
 				type_header = 'Urine Test'
 				form = UrineResults.objects.get(id=form_id)
+
+			print "form type: " + str(form_type)
+			print 'Form ID: ' + str(form.id)
 
 			universalRefresh(form_type, form)
 			location = universalLocation(form_type, form.id)
@@ -1747,11 +1750,16 @@ def mh_preliminary(request):
 			content['mh'] = mh
 			content['session'] = session
 
-			fake = False
+			if action['isNew'] == False:
+				next_section = nextMhPage(mh, None)
 
-			if action['isNew'] == False and fake == True:
+				content['form'] = mh
+				content['form_type'] = 'mh'
+				content['type_header'] = 'Mental Health'
+				content['next_section'] = next_section
+				content['save_section'] = next_section
 				content['title'] = "Simeon Academy | Mental Health"
-				render_to_response('global/resolve_form.html', content)
+				return render_to_response('global/resolve_form.html', content)
 
 			else:
 				content['title'] = "Simeon Academy | Mental Health Assessment"
@@ -2040,11 +2048,16 @@ def mh_education(request):
 		else:
 			session_id = request.POST.get('session_id', '')
 			mh_id = request.POST.get('mh_id', '')
+			save_this = request.POST.get('save_this', '')
+			section = request.POST.get('save_section', '')
 
 			session = ClientSession.objects.get(id=session_id)
 			mh = MentalHealth.objects.get(id=mh_id)
 			fields = getMhFields(mh, '/mh_education/')
 			json_data = json.dumps(fields)
+
+			if save_this == 'true':
+				saveMentalHealth(request, section, mh)
 
 			content['session'] = session
 			content['mh'] = mh
@@ -2070,11 +2083,16 @@ def mh_background(request):
 		else:
 			session_id = request.POST.get('session_id', '')
 			mh_id = request.POST.get('mh_id', '')
+			save_this = request.POST.get('save_this', '')
+			section = request.POST.get('save_section', '')
 
 			session = ClientSession.objects.get(id=session_id)
 			mh = MentalHealth.objects.get(id=mh_id)
 			fields = getMhFields(mh, '/mh_background/')
 			json_data = json.dumps(fields)
+
+			if save_this == 'true':
+				saveMentalHealth(request, section, mh)
 
 			content['session'] = session
 			content['mh'] = mh
@@ -2193,7 +2211,7 @@ def mh_psych(request):
 
 			session = ClientSession.objects.get(id=session_id)
 			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_psych/')
+			fields = getMhFields(mh, '/mh_stress/')
 			json_data = json.dumps(fields)
 
 			content['session'] = session

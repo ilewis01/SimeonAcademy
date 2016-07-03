@@ -4513,7 +4513,7 @@ function mhSpouse() {
 		spouseEmployer.value = '';
 		spouseWorkMos.value = '0';
 		spouseWorkYrs.value = '0';
-		numMarriages.value = '';
+		numMarriages.value = '0';
 
 		spouseAge.disabled = true;
 		spouseOccupation.disabled = true;
@@ -4529,7 +4529,7 @@ function mhChildren() {
 	var numChildren_label = document.getElementById('numChildren_label');
 	var numChildren = document.getElementById('numChildren');
 
-	twoElementRadioSetup(yesChild, numChildren_label, numChildren);
+	twoElementRadioSetupNumber(yesChild, numChildren_label, numChildren);
 }
 
 function mhSister() {
@@ -4537,7 +4537,7 @@ function mhSister() {
 	var numSisters_label = document.getElementById('numSisters_label');
 	var numSisters = document.getElementById('numSisters');
 
-	twoElementRadioSetup(yesSister, numSisters_label, numSisters);
+	twoElementRadioSetupNumber(yesSister, numSisters_label, numSisters);
 }
 
 function mhBrother() {
@@ -4545,7 +4545,7 @@ function mhBrother() {
 	var numBrothers_label = document.getElementById('numBrothers_label');
 	var numBrothers = document.getElementById('numBrothers');
 
-	twoElementRadioSetup(yesBrother, numBrothers_label, numBrothers);
+	twoElementRadioSetupNumber(yesBrother, numBrothers_label, numBrothers);
 }
 
 function motherShift() {
@@ -4655,6 +4655,7 @@ function initialize_mh_demo(json_data) {
 		document.getElementById('yesChild').checked = true;
 	}
 	else {
+		document.getElementById('numChildren').value = '0';
 		document.getElementById('noChild').checked = true;
 	}
 	if (String(json_data.numSisters) !== '0') {
@@ -4681,29 +4682,69 @@ function initialize_mh_demo(json_data) {
 	mhBrother();
 }
 
-function mh_continue_demographic() {
-	var yesChild = document.getElementById('yesChild');
-	var yesSister = document.getElementById('yesSister');
-	var yesBrother = document.getElementById('yesBrother');
-	var form = document.getElementById('mh_form');
-
-	if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
-		var w = 750, h = 600;
-		var lefts = Number((screen.width/2) - (w/2));
-		var tops = Number((screen.height/2) - (h/2));
-		var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
-
-		var numChildren = window.opener.document.getElementById('numChildren').value;
-		var numSisters = window.opener.document.getElementById('numSisters').value;
-		var numBrothers = window.opener.document.getElementById('numBrothers').value;
-
-		var fake = document.getElementById('fake1');
-		fake.value = 'This is stuff';
-		// form.submit();
+function postMhFamily(trigger, element, m_element) {
+	if (trigger.checked === true) {
+		m_element.value = element.value;
 	}
-
 	else {
-		form.submit();
+		m_element.value = '0';
+	}
+}
+
+function postMhParents(trigger, elementOn, elementOff, m_elementOn, m_elementOff) {
+	if (trigger.checked === true) {
+		m_elementOn.value = elementOn.value;
+		m_elementOff.value = '0';
+	}
+	else {
+		m_elementOn.value = '0';
+		m_elementOff.value = elementOff.value;
+	}
+}
+
+function postMhNoMarriages(trigger, element, m_element) {
+	if (trigger.checked === true) {
+		m_element.value = '0';
+	}
+	else {
+		m_element.value = element.value;
+	}
+}
+
+function postMhSpouse(noTrigger, num1, num2, num3, t1, t2, m_num1, m_num2, m_num3, m_text1, m_text2) {
+	if (noTrigger.checked === true) {
+		m_num1.value = '0';
+		m_num2.value = '0';
+		m_num3.value = '0';
+
+		m_text1.value = 'N/A';
+		m_text2.value = 'N/A';
+	}
+	else {
+		m_num1.value = num1.value;
+		m_num2.value = num2.value;
+		m_num3.value = num3.value;
+
+		m_text1.value = t1.value;
+		m_text2.value = t2.value;
+	}
+}
+
+function postMhEducationFriendNumber(f1, f2, f3, f4, moreTrigger, moreElement, m_data) {
+	if (f1.checked === true) {
+		m_data.value = '1';
+	}
+	else if (f2.checked == true) {
+		m_data.value = '2';
+	}
+	else if (f3.checked == true) {
+		m_data.value = '3';
+	}
+	else if (f4.checked == true) {
+		m_data.value = '4';
+	}
+	else if (moreTrigger.checked == true) {
+		m_data.value = moreElement.value;
 	}
 }
 
@@ -4713,7 +4754,7 @@ function verify_mh_op() {
 
 function proceed_opWin() {
 	var form = window.opener.document.getElementById('mh_form');
-	form.submit();
+	// form.submit();
 	window.close();
 }
 
@@ -4835,6 +4876,10 @@ function grabFriendRadio(num, r1, r2, r3, r4, r5) {
 	}
 	else {
 		r5.checked = true;
+	}
+
+	if (num === '0') {
+		r1.checked = true;
 	}
 }
 
@@ -5249,11 +5294,167 @@ function initialize_mh_legal(json_data) {
 	mhBank();
 }
 
+function initialize_mh_use(json_data) {
+
+}
+
+function mh_continue_demographic() {
+	var proceed = true;
+	var form = document.getElementById('mh_form');
+
+	//TRIGGERS
+	var yesChild = document.getElementById('yesChild');
+	var yesSister = document.getElementById('yesSister');
+	var yesBrother = document.getElementById('yesBrother');
+	var momIsLiving = document.getElementById('momIsLiving');	
+	var dadIsLiving = document.getElementById('dadIsLiving');
+	var single = document.getElementById('single');
+
+	//M DATA
+	var m_motherAge = document.getElementById('m_motherAge');
+	var m_motherAgeDeath = document.getElementById('m_motherAgeDeath');
+	var m_fatherAge = document.getElementById('m_fatherAge');
+	var m_fatherAgeDeath = document.getElementById('m_fatherAgeDeath');
+	var m_numChildren = document.getElementById('m_numChildren');
+	var m_numSisters = document.getElementById('m_numSisters');
+	var m_numBrothers = document.getElementById('m_numBrothers');
+	var m_numMarriages = document.getElementById('m_numMarriages');
+	var m_spouseOccupation = document.getElementById('m_spouseOccupation');
+	var m_spouseEmployer = document.getElementById('m_spouseEmployer');
+	var m_spouseAge = document.getElementById('m_spouseAge');
+	var m_spouseWorkMos = document.getElementById('m_spouseWorkMos');
+	var m_spouseWorkYrs = document.getElementById('m_spouseWorkYrs');
+
+	//DYNAMIC FIELDS
+	var motherAge = document.getElementById('motherAge');
+	var motherAgeDeath = document.getElementById('motherAgeDeath');
+	var fatherAge = document.getElementById('fatherAge');
+	var fatherAgeDeath = document.getElementById('fatherAgeDeath');
+	var numChildren = document.getElementById('numChildren');
+	var numSisters = document.getElementById('numSisters');
+	var numBrothers = document.getElementById('numBrothers');
+	var numMarriages = document.getElementById('numMarriages');
+	var spouseOccupation = document.getElementById('spouseOccupation');
+	var spouseEmployer = document.getElementById('spouseEmployer');
+	var spouseAge = document.getElementById('spouseAge');
+	var spouseWorkMos = document.getElementById('spouseWorkMos');
+	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
+
+	postMhFamily(yesChild, numChildren, m_numChildren);
+	postMhFamily(yesSister, numSisters, m_numSisters);
+	postMhFamily(yesBrother, numBrothers, m_numBrothers);
+
+	postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
+	postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
+
+	postMhNoMarriages(single, numMarriages, m_numMarriages);
+	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.submit();
+
+		if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
+			var w = 750, h = 600;
+			var lefts = Number((screen.width/2) - (w/2));
+			var tops = Number((screen.height/2) - (h/2));
+			var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+		}	
+	}
+}
+
+function postUniversalRadioText(trigger, textField, m_post) {
+	if (trigger.checked === true) {
+		m_post.value = textField.value;
+	}
+	else {
+		m_post.value = 'N/A';
+	}
+}
+
+function postUniversalRadioNumber(trigger, numberField, m_post) {
+	if (trigger.checked === true) {
+		m_post.value = numberField.value;
+	}
+	else {
+		m_post.value = '0';
+	}
+}
+
+function postUniversalRadioRadio(trigger, yesRadio, m_post) {
+	if (trigger.checked === true) {
+		postDynamicRadioButtons(yesRadio, m_post);
+	}
+	else {
+		m_post.value = 'False';
+	}
+}
+
 function proceed_mh_education() {
 	var proceed = true;
 	form = document.getElementById('mh_form');
 
+	//DYNAMIC RADIO FRIEND NUMBER TRIGGERS
+	var fk1 = document.getElementById('friend1');
+	var fk2 = document.getElementById('friend2');
+	var fk3 = document.getElementById('friend3');
+	var fk4 = document.getElementById('friend4');
+	var fkm = document.getElementById('friendMore');
+	var numMore = document.getElementById('numMore');
+	var m_FriendshipsKto6 = document.getElementById('m_FriendshipsKto6');
+	var f7g1 = document.getElementById('friend1g7');
+	var f7g2 = document.getElementById('friend2g7');
+	var f7g3 = document.getElementById('friend3g7');
+	var f7g4 = document.getElementById('friend4g7');
+	var f7gm = document.getElementById('friendMoreg7');
+	var numMoreg7 = document.getElementById('numMoreg7');
+	var m_Friendships7to9 = document.getElementById('m_Friendships7to9');
+	var f10g1 = document.getElementById('friend1g10');
+	var f10g2 = document.getElementById('friend2g10');
+	var f10g3 = document.getElementById('friend3g10');
+	var f10g4 = document.getElementById('friend4g10');
+	var f10gm = document.getElementById('friendMoreg10');
+	var numMoreg10 = document.getElementById('numMoreg10');
+	var Friendships10to12 = document.getElementById('m_Friendships10to12');	
+	var yesGrad = document.getElementById('yesGrad');
+	var collegeMajor = document.getElementById('collegeMajor');	
+	var m_collegeMajor = document.getElementById('m_collegeMajor');
+	var hasAdvanced = document.getElementById('hasAdvanced');
+	var m_advanceDegree = document.getElementById('m_advanceDegree');
+
+	var yesTrade = document.getElementById('yesTrade');
+	var tradeSchool = document.getElementById('tradeSchool');
+	var tradeAreaStudy = document.getElementById('tradeAreaStudy');
+	var m_tradeSchool = document.getElementById('m_tradeSchool');
+	var m_tradeAreaStudy = document.getElementById('m_tradeAreaStudy');
+
+	var isMilitary = document.getElementById('isMilitary');
+	var militaryBranch = document.getElementById('militaryBranch');
+	var militaryRank = document.getElementById('militaryRank');
+	var militaryYears = document.getElementById('militaryYears');
+	var isHonor = document.getElementById('isHonor');
+	var m_militaryBranch = document.getElementById('m_militaryBranch');
+	var m_militaryRank = document.getElementById('m_militaryRank');
+	var m_militaryYears = document.getElementById('m_militaryYears');
+	var m_honorableDischarge = document.getElementById('m_honorableDischarge');
+
+	postMhEducationFriendNumber(fk1, fk2, fk3, fk4, fkm, numMore, m_FriendshipsKto6);
+	postMhEducationFriendNumber(f7g1, f7g2, f7g3, f7g4, f7gm, numMoreg7, m_Friendships7to9);
+	postMhEducationFriendNumber(f10g1, f10g2, f10g3, f10g4, f10gm, numMoreg10, Friendships10to12);
+
+	postUniversalRadioText(yesGrad, collegeMajor, m_collegeMajor);	
+	postUniversalRadioText(yesTrade, tradeSchool, m_tradeSchool);
+	postUniversalRadioText(yesTrade, tradeAreaStudy, m_tradeAreaStudy);
+	postUniversalRadioText(isMilitary, militaryBranch, m_militaryBranch);
+	postUniversalRadioText(isMilitary, militaryRank, m_militaryRank);
+
+	postUniversalRadioNumber(isMilitary, militaryYears, m_militaryYears);
+
+	postUniversalRadioRadio(yesGrad, hasAdvanced, m_advanceDegree);
+	postUniversalRadioRadio(isMilitary, isHonor, m_honorableDischarge);
+
 	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
 		form.submit();
 	}
 }

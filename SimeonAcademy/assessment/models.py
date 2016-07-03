@@ -869,7 +869,6 @@ class MHUseTable(models.Model):
 	howLong1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOld1 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	lastTime1 = models.CharField(max_length=15, default=None, blank=True, null=True)
-
 	howMuch2 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howOften2 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	howLong2 = models.CharField(max_length=15, default=None, blank=True, null=True)
