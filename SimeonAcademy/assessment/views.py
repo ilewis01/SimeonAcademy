@@ -2191,8 +2191,8 @@ def mh_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content)
+			content = universalContent(request, 'mh', '/mh_viewForm/')
+			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content, context_instance=RequestContext(request))
 
 ## SAP VIEWS------------------------------------------------------------------
 
