@@ -4689,16 +4689,36 @@ def saveMhFamily(request, mh):
 
 	mh.familyComplete = True
 	mh.familyHistory.save()
+	mh.save()
 
 def saveMhLegal(request, mh):
-	no = None
-	# mh.legalHistory
+	mh.legalHistory.num_arrest = request.POST.get('num_arrest')
+	mh.legalHistory.arrestCharges = request.POST.get('arrestCharges')
+	mh.legalHistory.num_convictions = request.POST.get('num_convictions')
+	mh.legalHistory.convictionCharges = request.POST.get('convictionCharges')
+	mh.legalHistory.probationPresent = truePythonBool(request.POST.get('probationPresent'))
+	mh.legalHistory.probationPast = truePythonBool(request.POST.get('probationPast'))
+	mh.legalHistory.num_DUI_charges = request.POST.get('num_DUI_charges')
+	mh.legalHistory.num_DUI_convictions = request.POST.get('num_DUI_convictions')
+	mh.legalHistory.suspendedDrivePresent = truePythonBool(request.POST.get('suspendedDrivePresent'))
+	mh.legalHistory.num_suspended = request.POST.get('num_suspended')
+	mh.legalHistory.hasLawsuit = truePythonBool(request.POST.get('hasLawsuit'))
+	mh.legalHistory.inDivorce = truePythonBool(request.POST.get('inDivorce'))
+	mh.legalHistory.childCustody = truePythonBool(request.POST.get('childCustody'))
+	mh.legalHistory.hasBankrupcy = truePythonBool(request.POST.get('hasBankrupcy'))
+	mh.legalHistory.explainPositiveAnswers = request.POST.get('explainPositiveAnswers')
+	mh.legalHistory.probationOfficer = request.POST.get('m_probationOfficer')
+	mh.legalHistory.probationOffense = request.POST.get('m_probationOffense')
+	mh.legalHistory.lawsuitStress = request.POST.get('m_lawsuitStress')
+	mh.legalHistory.dateBenkrupcy = request.POST.get('m_dateBenkrupcy')
 
-	# mh.legalComplete = True
-	# mh.save()
+	mh.legalHistory.save()
+	mh.legalComplete = True
+	mh.save()
 
 def saveMhPsych(request, mh):
 	mh.stressors.psychiatricHistory = request.POST.get('psychiatricHistory')
+	mh.stressors.save()
 	mh.psychComplete = True
 	mh.save()
 

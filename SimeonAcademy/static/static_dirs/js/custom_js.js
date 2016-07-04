@@ -5566,6 +5566,38 @@ function proceed_mh_familyHistory() {
 
 function proceed_mh_legalHistory() {
 	var proceed = true;
+
+	//TRIGGERS
+	var yesPresent = document.getElementById('yesPresent');
+	var yesPast = document.getElementById('yesPast');
+	var yesSuit = document.getElementById('yesSuit');
+	var yesBank = document.getElementById('yesBank');
+
+	//DYNAMIC FIELDS
+	var probationOfficer = document.getElementById('probationOfficer');
+	var probationOffense = document.getElementById('probationOffense');
+	var yesStress = document.getElementById('yesStress'); //ALSO A TRIGGER FOR RADIO RADIO
+	var dateBenkrupcy = document.getElementById('dateBenkrupcy');
+
+	//POST FIELDS (M_DATA)
+	var m_probationOfficer = document.getElementById('m_probationOfficer');
+	var m_probationOffense = document.getElementById('m_probationOffense');
+	var m_lawsuitStress = document.getElementById('m_lawsuitStress');
+	var m_dateBenkrupcy = document.getElementById('m_dateBenkrupcy');
+
+	if (yesPresent.checked === true || yesPast.checked === true) {
+		m_probationOfficer.value = probationOfficer.value;
+		m_probationOffense.value = probationOffense.value;
+	}
+	else if (yesPresent.checked === false && yesPast.checked == false) {
+		m_probationOfficer.value = 'N/A';
+		m_probationOffense.value = 'N/A';
+	}
+
+	postUniversalRadioRadio(yesSuit, yesStress, m_lawsuitStress);
+	postUniversalRadioNumber(yesBank, dateBenkrupcy, m_dateBenkrupcy);
+
+
 	form = document.getElementById('mh_form');
 
 	if (proceed === true) {
