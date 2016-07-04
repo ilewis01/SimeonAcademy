@@ -2119,7 +2119,7 @@ def mh_familyHistory(request):
 
 		else:
 			content = universalContent(request, 'mh', '/mh_familyHistory/')
-			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content)
+			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mh_legal(request):
@@ -2137,7 +2137,7 @@ def mh_legal(request):
 
 		else:
 			content = universalContent(request, 'mh', '/mh_legal/')
-			return render_to_response('counselor/forms/MentalHealth/legal.html', content)
+			return render_to_response('counselor/forms/MentalHealth/legal.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mh_psych(request):
@@ -2155,7 +2155,7 @@ def mh_psych(request):
 
 		else:
 			content = universalContent(request, 'mh', '/mh_psych/')
-			return render_to_response('counselor/forms/MentalHealth/psych.html', content)
+			return render_to_response('counselor/forms/MentalHealth/psych.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mh_useTable(request):
@@ -2173,7 +2173,7 @@ def mh_useTable(request):
 
 		else:
 			content = universalContent(request, 'mh', '/mh_useTable/')
-			return render_to_response('counselor/forms/MentalHealth/useTable.html', content)
+			return render_to_response('counselor/forms/MentalHealth/useTable.html', content, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/index')

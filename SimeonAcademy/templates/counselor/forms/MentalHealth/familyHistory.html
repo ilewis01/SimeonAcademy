@@ -202,7 +202,7 @@
 				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
                   					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
 				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/mh_demographic/'>	
+				                    <input type='hidden' name='save_section' id='save_section' value='/mh_familyHistory/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='all_purpose' id='all_purpose' value=''>
                             <input type='hidden' name='exit_type' id='exit_type' value=''>
@@ -244,7 +244,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r1' id='yesDepress' value='True' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');">
+                                <input type='radio' name='isdepressed' id='yesDepress' value='True' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');">
                               </div>
                             </td>
 
@@ -254,7 +254,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r1' id='noDepress' value='True' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');" checked>
+                                <input type='radio' name='isdepressed' id='noDepress' value='True' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');" checked>
                               </div>
                             </td>
 
@@ -322,7 +322,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r2' id='yesADD' value='True' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');">
+                              <input type='radio' name='isadd' id='yesADD' value='True' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');">
                             </div>
                           </td>
 
@@ -332,7 +332,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r2' id='noADD' value='True' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');" checked>
+                              <input type='radio' name='isadd' id='noADD' value='True' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');" checked>
                             </div>
                           </td>
 
@@ -400,7 +400,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r3' id='yesBed' value='True' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');">
+                              <input type='radio' name='isbedWetting' id='yesBed' value='True' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');">
                             </div>
                           </td>
 
@@ -410,7 +410,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r3' id='noBed' value='True' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');" checked>
+                              <input type='radio' name='isbedWetting' id='noBed' value='True' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');" checked>
                             </div>
                           </td>
 
@@ -477,7 +477,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r4' id='yesBi' value='True' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');">
+                              <input type='radio' name='isbipolar' id='yesBi' value='True' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');">
                             </div>
                           </td>
 
@@ -487,7 +487,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r4' id='noBi' value='True' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');" checked>
+                              <input type='radio' name='isbipolar' id='noBi' value='True' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');" checked>
                             </div>
                           </td>
 
@@ -556,7 +556,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r5' id='yesATT' value='True' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');">
+                              <input type='radio' name='issuicideAttempt' id='yesATT' value='True' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');">
                             </div>
                           </td>
 
@@ -566,7 +566,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r5' id='noATT' value='True' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');" checked>
+                              <input type='radio' name='issuicideAttempt' id='noATT' value='True' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');" checked>
                             </div>
                           </td>
 
@@ -634,7 +634,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r6' id='yesPA' value='True' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');">
+                              <input type='radio' name='isphysicalAbuse' id='yesPA' value='True' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');">
                             </div>
                           </td>
 
@@ -644,7 +644,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r6' id='noPA' value='True' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');" checked>
+                              <input type='radio' name='isphysicalAbuse' id='noPA' value='True' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');" checked>
                             </div>
                           </td>
 
@@ -712,7 +712,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r7' id='yesLaw' value='True' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');">
+                              <input type='radio' name='islaw' id='yesLaw' value='True' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');">
                             </div>
                           </td>
 
@@ -722,7 +722,7 @@
 
                           <td>
                             <div id='fix_my_radio'>
-                              <input type='radio' name='r7' id='noLaw' value='True' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');" checked>
+                              <input type='radio' name='islaw' id='noLaw' value='True' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');" checked>
                             </div>
                           </td>
 
@@ -793,7 +793,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r8' id='yesLD' value='True' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');">
+                                <input type='radio' name='isld' id='yesLD' value='True' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');">
                               </div>
                             </td>
 
@@ -803,7 +803,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r8' id='noLD' value='True' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');" checked>
+                                <input type='radio' name='isld' id='noLD' value='True' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');" checked>
                               </div>
                             </td>
 
@@ -874,7 +874,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r9' id='yesTic' value='True' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');">
+                                <input type='radio' name='istic' id='yesTic' value='True' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');">
                               </div>
                             </td>
 
@@ -884,7 +884,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r9' id='noTic' value='True' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');" checked>
+                                <input type='radio' name='istic' id='noTic' value='True' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');" checked>
                               </div>
                             </td>
 
@@ -954,7 +954,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r10' id='yesThy' value='True' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');">
+                                <input type='radio' name='isthyroid' id='yesThy' value='True' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');">
                               </div>
                             </td>
 
@@ -964,7 +964,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r10' id='noThy' value='True' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');" checked>
+                                <input type='radio' name='isthyroid' id='noThy' value='True' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');" checked>
                               </div>
                             </td>
 
@@ -1035,7 +1035,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r11' id='yesHeart' value='True' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');">
+                                <input type='radio' name='isheart' id='yesHeart' value='True' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');">
                               </div>
                             </td>
 
@@ -1045,7 +1045,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r11' id='noHeart' value='True' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');" checked>
+                                <input type='radio' name='isheart' id='noHeart' value='True' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');" checked>
                               </div>
                             </td>
 
@@ -1115,7 +1115,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r12' id='yesOW' value='True' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');">
+                                <input type='radio' name='isoverweight' id='yesOW' value='True' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');">
                               </div>
                             </td>
 
@@ -1125,7 +1125,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r12' id='noOW' value='True' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');" checked>
+                                <input type='radio' name='isoverweight' id='noOW' value='True' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');" checked>
                               </div>
                             </td>
 
@@ -1196,7 +1196,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r13' id='yesMood' value='True' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');">
+                                <input type='radio' name='ismood' id='yesMood' value='True' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');">
                               </div>
                             </td>
 
@@ -1206,7 +1206,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r13' id='noMood' value='True' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');" checked>
+                                <input type='radio' name='ismood' id='noMood' value='True' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');" checked>
                               </div>
                             </td>
 
@@ -1276,7 +1276,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r14' id='yesAlc' value='True' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');">
+                                <input type='radio' name='isalcohol' id='yesAlc' value='True' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');">
                               </div>
                             </td>
 
@@ -1286,7 +1286,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r14' id='noAlc' value='True' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');" checked>
+                                <input type='radio' name='isalcohol' id='noAlc' value='True' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');" checked>
                               </div>
                             </td>
 
@@ -1357,7 +1357,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r15' id='yesDrug' value='True' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');">
+                                <input type='radio' name='isdrugs' id='yesDrug' value='True' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');">
                               </div>
                             </td>
 
@@ -1367,7 +1367,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r15' id='noDrug' value='True' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');" checked>
+                                <input type='radio' name='isdrugs' id='noDrug' value='True' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');" checked>
                               </div>
                             </td>
 
@@ -1436,7 +1436,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r16' id='yesSch' value='True' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');">
+                                <input type='radio' name='isschizo' id='yesSch' value='True' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');">
                               </div>
                             </td>
 
@@ -1446,7 +1446,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r16' id='noSch' value='True' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');" checked>
+                                <input type='radio' name='isschizo' id='noSch' value='True' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');" checked>
                               </div>
                             </td>
 
@@ -1515,7 +1515,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r17' id='YesSe' value='True' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');">
+                                <input type='radio' name='isseizures' id='YesSe' value='True' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');">
                               </div>
                             </td>
 
@@ -1525,7 +1525,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r17' id='noSe' value='True' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');" checked>
+                                <input type='radio' name='isseizures' id='noSe' value='True' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');" checked>
                               </div>
                             </td>
 
@@ -1594,7 +1594,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r18' id='yesCS' value='True' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');">
+                                <input type='radio' name='iscompletedSuicide' id='yesCS' value='True' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');">
                               </div>
                             </td>
 
@@ -1604,7 +1604,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r18' id='noCS' value='True' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');" checked>
+                                <input type='radio' name='iscompletedSuicide' id='noCS' value='True' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');" checked>
                               </div>
                             </td>
 
@@ -1674,7 +1674,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r19' id='yesSex' value='True' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');">
+                                <input type='radio' name='issexAbuse' id='yesSex' value='True' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');">
                               </div>
                             </td>
 
@@ -1684,7 +1684,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r19' id='noSex' value='True' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');" checked>
+                                <input type='radio' name='issexAbuse' id='noSex' value='True' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');" checked>
                               </div>
                             </td>
 
@@ -1754,7 +1754,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r20' id='yesPanick' value='True' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');">
+                                <input type='radio' name='ispanic' id='yesPanick' value='True' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');">
                               </div>
                             </td>
 
@@ -1764,7 +1764,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r20' id='noPanick' value='True' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');" checked>
+                                <input type='radio' name='ispanic' id='noPanick' value='True' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');" checked>
                               </div>
                             </td>
 
@@ -1834,7 +1834,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r21' id='yesAnx' value='True' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');">
+                                <input type='radio' name='isanxiety' id='yesAnx' value='True' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');">
                               </div>
                             </td>
 
@@ -1844,7 +1844,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r21' id='noAnx' value='True' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');" checked>
+                                <input type='radio' name='isanxiety' id='noAnx' value='True' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');" checked>
                               </div>
                             </td>
 
@@ -1915,7 +1915,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r22' id='yesOCD' value='True' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');">
+                                <input type='radio' name='isOCD' id='yesOCD' value='True' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');">
                               </div>
                             </td>
 
@@ -1925,7 +1925,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r22' id='noOCD' value='True' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');" checked>
+                                <input type='radio' name='isOCD' id='noOCD' value='True' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');" checked>
                               </div>
                             </td>
 
@@ -1994,7 +1994,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r23' id='yesSugar' value='True' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');">
+                                <input type='radio' name='isdiabetes' id='yesSugar' value='True' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');">
                               </div>
                             </td>
 
@@ -2004,7 +2004,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r23' id='noSudar' value='True' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');" checked>
+                                <input type='radio' name='isdiabetes' id='noSudar' value='True' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');" checked>
                               </div>
                             </td>
 
@@ -2076,7 +2076,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r24' id='yesCancer' value='True' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');">
+                                <input type='radio' name='iscancer' id='yesCancer' value='True' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');">
                               </div>
                             </td>
 
@@ -2086,7 +2086,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r24' id='noCancer' value='True' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');" checked>
+                                <input type='radio' name='iscancer' id='noCancer' value='True' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');" checked>
                               </div>
                             </td>
 
@@ -2158,7 +2158,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r25' id='yesBlood' value='True' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');">
+                                <input type='radio' name='ishighBloodPressure' id='yesBlood' value='True' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');">
                               </div>
                             </td>
 
@@ -2168,7 +2168,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r25' id='noBlood' value='True' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');" checked>
+                                <input type='radio' name='ishighBloodPressure' id='noBlood' value='True' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');" checked>
                               </div>
                             </td>
 
@@ -2239,7 +2239,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r26' id='yesAngry' value='True' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');">
+                                <input type='radio' name='isanger' id='yesAngry' value='True' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');">
                               </div>
                             </td>
 
@@ -2249,7 +2249,7 @@
 
                             <td>
                               <div id='fix_my_radio'>
-                                <input type='radio' name='r26' id='noAngry' value='True' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');" checked>
+                                <input type='radio' name='isanger' id='noAngry' value='True' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');" checked>
                               </div>
                             </td>
 

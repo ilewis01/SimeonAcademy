@@ -4502,104 +4502,91 @@ def getMhFields(mh, section):
 def saveMhDemo(request, mh):
 	momLive = request.POST.get('motherLiving', '')
 	dadLive  =request.POST.get('fatherLiving', '')
-
 	momLive = truePythonBool(momLive)
 	dadLive = truePythonBool(dadLive)
 
-	mh.demographics.birthplace = request.POST.get('birthplace', '')
-	mh.demographics.raised = request.POST.get('raised', '')
-	mh.demographics.maritalStatus = request.POST.get('maritalStatus', '')
-	mh.demographics.numMarriages = request.POST.get('m_numMarriages', '')
-	mh.demographics.occupation = request.POST.get('occupation', '')
-	mh.demographics.employer = request.POST.get('employer', '')
-	mh.demographics.employedMo = request.POST.get('employedMo', '')
-	mh.demographics.employedYrs = request.POST.get('employedYrs', '')
-	mh.demographics.pastJobs = request.POST.get('pastJobs', '')
-	mh.demographics.recentMove = request.POST.get('recentMove', '')
-	mh.demographics.spouseAge = request.POST.get('m_spouseAge', '')
-	mh.demographics.spouseOccupation = request.POST.get('m_spouseOccupation', '')
-	mh.demographics.spouseEmployer = request.POST.get('m_spouseEmployer', '')
-	mh.demographics.spouseWorkMos = request.POST.get('m_spouseWorkMos', '')
-	mh.demographics.spouseWorkYrs = request.POST.get('m_spouseWorkYrs', '')
-
-	mh.demographics.motherOccupation = request.POST.get('motherOccupation', '')
-	mh.demographics.motherCity = request.POST.get('motherCity', '')
-	mh.demographics.motherState = request.POST.get('motherState', '')
-	mh.demographics.motherLiving = momLive
-	mh.demographics.motherAge = request.POST.get('m_motherAge', '')
-	mh.demographics.motherAgeDeath = request.POST.get('m_motherAgeDeath', '')
-
-	mh.demographics.fatherOccupation = request.POST.get('fatherOccupation', '')
-	mh.demographics.fatherCity = request.POST.get('fatherCity', '')
-	mh.demographics.fatherState = request.POST.get('fatherState', '')
-	mh.demographics.fatherLiving = dadLive
-	mh.demographics.fatherAge = request.POST.get('m_fatherAge', '')
-	mh.demographics.fatherAgeDeath = request.POST.get('m_fatherAgeDeath', '')
-
-	mh.demographics.numChildren = request.POST.get('m_numChildren', '')
-	mh.demographics.numSisters = request.POST.get('m_numSisters', '')
-	mh.demographics.numBrothers = request.POST.get('m_numBrothers', '')
+	mh.demographics.birthplace 			= request.POST.get('birthplace', '')
+	mh.demographics.raised 				= request.POST.get('raised', '')
+	mh.demographics.maritalStatus 		= request.POST.get('maritalStatus', '')
+	mh.demographics.numMarriages 		= request.POST.get('m_numMarriages', '')
+	mh.demographics.occupation 			= request.POST.get('occupation', '')
+	mh.demographics.employer 			= request.POST.get('employer', '')
+	mh.demographics.employedMo 			= request.POST.get('employedMo', '')
+	mh.demographics.employedYrs 		= request.POST.get('employedYrs', '')
+	mh.demographics.pastJobs 			= request.POST.get('pastJobs', '')
+	mh.demographics.recentMove 			= request.POST.get('recentMove', '')
+	mh.demographics.spouseAge 			= request.POST.get('m_spouseAge', '')
+	mh.demographics.spouseOccupation 	= request.POST.get('m_spouseOccupation', '')
+	mh.demographics.spouseEmployer 		= request.POST.get('m_spouseEmployer', '')
+	mh.demographics.spouseWorkMos 		= request.POST.get('m_spouseWorkMos', '')
+	mh.demographics.spouseWorkYrs 		= request.POST.get('m_spouseWorkYrs', '')
+	mh.demographics.motherOccupation 	= request.POST.get('motherOccupation', '')
+	mh.demographics.motherCity 			= request.POST.get('motherCity', '')
+	mh.demographics.motherState 		= request.POST.get('motherState', '')
+	mh.demographics.motherLiving 		= momLive
+	mh.demographics.motherAge 			= request.POST.get('m_motherAge', '')
+	mh.demographics.motherAgeDeath 		= request.POST.get('m_motherAgeDeath', '')
+	mh.demographics.fatherOccupation 	= request.POST.get('fatherOccupation', '')
+	mh.demographics.fatherCity 			= request.POST.get('fatherCity', '')
+	mh.demographics.fatherState 		= request.POST.get('fatherState', '')
+	mh.demographics.fatherLiving 		= dadLive
+	mh.demographics.fatherAge 			= request.POST.get('m_fatherAge', '')
+	mh.demographics.fatherAgeDeath 		= request.POST.get('m_fatherAgeDeath', '')
+	mh.demographics.numChildren 		= request.POST.get('m_numChildren', '')
+	mh.demographics.numSisters 			= request.POST.get('m_numSisters', '')
+	mh.demographics.numBrothers 		= request.POST.get('m_numBrothers', '')
 
 	mh.demographics.save()
 	mh.demographicsComplete = True
-	mh.save()
+	# mh.save()
 
 def saveMhEducation(request, mh):
-	result = {}
-
-	mh.education.GradesKto6 = request.POST.get('GradesKto6')
-	mh.education.Grades7to9 = request.POST.get('Grades7to9')
-	mh.education.Grades10to12 = request.POST.get('Grades10to12')
-	mh.education.BehaviorProblemsKto6 = truePythonBool(request.POST.get('BehaviorProblemsKto6'))
-	mh.education.AcademicProblemsKto6 = truePythonBool(request.POST.get('AcademicProblemsKto6'))
-	mh.education.BehaviorProblems7to9 = truePythonBool(request.POST.get('BehaviorProblems7to9'))
-	mh.education.AcademicProblems7to9 = truePythonBool(request.POST.get('AcademicProblems7to9'))
+	mh.education.GradesKto6 			= request.POST.get('GradesKto6')
+	mh.education.Grades7to9 			= request.POST.get('Grades7to9')
+	mh.education.Grades10to12 			= request.POST.get('Grades10to12')
+	mh.education.BehaviorProblemsKto6 	= truePythonBool(request.POST.get('BehaviorProblemsKto6'))
+	mh.education.AcademicProblemsKto6 	= truePythonBool(request.POST.get('AcademicProblemsKto6'))
+	mh.education.BehaviorProblems7to9 	= truePythonBool(request.POST.get('BehaviorProblems7to9'))
+	mh.education.AcademicProblems7to9 	= truePythonBool(request.POST.get('AcademicProblems7to9'))
 	mh.education.BehaviorProblems10to12 = truePythonBool(request.POST.get('BehaviorProblems10to12'))
 	mh.education.AcademicProblems10to12 = truePythonBool(request.POST.get('AcademicProblems10to12'))
-	mh.education.FriendshipsKto6 = request.POST.get('m_FriendshipsKto6')
-	mh.education.Friendships7to9 = request.POST.get('m_Friendships7to9')
-	mh.education.Friendships10to12 = request.POST.get('m_Friendships10to12')
-	mh.education.collegeYears = request.POST.get('collegeYears')
-	mh.education.collegeDegree = truePythonBool(request.POST.get('collegeDegree'))
-	mh.education.collegeMajor = request.POST.get('m_collegeMajor')
-	mh.education.advanceDegree = truePythonBool(request.POST.get('m_advanceDegree'))
-	mh.education.tradeSch = truePythonBool(request.POST.get('tradeSch'))
-	mh.education.tradeSchool = request.POST.get('m_tradeSchool')
-	mh.education.tradeAreaStudy = request.POST.get('m_tradeAreaStudy')
-	mh.education.military = truePythonBool(request.POST.get('military'))	
-	mh.education.militaryBranch = request.POST.get('m_militaryBranch')
-	mh.education.militaryRank = request.POST.get('m_militaryRank')
-	mh.education.militaryYears = request.POST.get('m_militaryYears')
-	mh.education.honorableDischarge = truePythonBool(request.POST.get('m_honorableDischarge'))
+	mh.education.FriendshipsKto6 		= request.POST.get('m_FriendshipsKto6')
+	mh.education.Friendships7to9 		= request.POST.get('m_Friendships7to9')
+	mh.education.Friendships10to12		= request.POST.get('m_Friendships10to12')
+	mh.education.collegeYears 			= request.POST.get('collegeYears')
+	mh.education.collegeDegree 			= truePythonBool(request.POST.get('collegeDegree'))
+	mh.education.collegeMajor 			= request.POST.get('m_collegeMajor')
+	mh.education.advanceDegree 			= truePythonBool(request.POST.get('m_advanceDegree'))
+	mh.education.tradeSch 				= truePythonBool(request.POST.get('tradeSch'))
+	mh.education.tradeSchool 			= request.POST.get('m_tradeSchool')
+	mh.education.tradeAreaStudy 		= request.POST.get('m_tradeAreaStudy')
+	mh.education.military 				= truePythonBool(request.POST.get('military'))	
+	mh.education.militaryBranch 		= request.POST.get('m_militaryBranch')
+	mh.education.militaryRank 			= request.POST.get('m_militaryRank')
+	mh.education.militaryYears 			= request.POST.get('m_militaryYears')
+	mh.education.honorableDischarge 	= truePythonBool(request.POST.get('m_honorableDischarge'))
 
 	mh.educationComplete = True
 	mh.education.save()
 	mh.save()
 
-	return result
-
 def saveMhBackground(request, mh):
-	result = {}
-
-	mh.background.residence 	= request.POST.get('residence')
-	mh.background.income 		= request.POST.get('income')
-	mh.background.debt 			= request.POST.get('debt')
-	mh.background.credit 		= request.POST.get('credit')
-	mh.background.healthCare 	= request.POST.get('healthCare')
-	mh.background.otherIncome 	= request.POST.get('otherIncome')
-
-	mh.background.spouseRelationship 	= request.POST.get('spouseRelationship')
-	mh.background.brothersRelationship 	= request.POST.get('brothersRelationship')
-	mh.background.childrenRelationship 	= request.POST.get('childrenRelationship')
-	mh.background.parentsRelationship 	= request.POST.get('parentsRelationship')
-	mh.background.sistersRelationship 	= request.POST.get('sistersRelationship')
-	mh.background.exRelationship 		= request.POST.get('exRelationship')
-
-	mh.background.closeFriendVisit 	= request.POST.get('closeFriendVisit')
-	mh.background.closeFriendNumber = request.POST.get('closeFriendNumber')
-	mh.background.acqVisit 			= request.POST.get('acqVisit')
-	mh.background.acqNumber 		= request.POST.get('acqNumber')
-
+	mh.background.residence 				= request.POST.get('residence')
+	mh.background.income 					= request.POST.get('income')
+	mh.background.debt 						= request.POST.get('debt')
+	mh.background.credit 					= request.POST.get('credit')
+	mh.background.healthCare 				= request.POST.get('healthCare')
+	mh.background.otherIncome 				= request.POST.get('otherIncome')
+	mh.background.spouseRelationship 		= request.POST.get('spouseRelationship')
+	mh.background.brothersRelationship 		= request.POST.get('brothersRelationship')
+	mh.background.childrenRelationship 		= request.POST.get('childrenRelationship')
+	mh.background.parentsRelationship 		= request.POST.get('parentsRelationship')
+	mh.background.sistersRelationship 		= request.POST.get('sistersRelationship')
+	mh.background.exRelationship 			= request.POST.get('exRelationship')
+	mh.background.closeFriendVisit 			= request.POST.get('closeFriendVisit')
+	mh.background.closeFriendNumber 		= request.POST.get('closeFriendNumber')
+	mh.background.acqVisit 					= request.POST.get('acqVisit')
+	mh.background.acqNumber 				= request.POST.get('acqNumber')
 	mh.background.interest 					= request.POST.get('interest')
 	mh.background.interestWeek 				= request.POST.get('interestWeek')
 	mh.background.interestMonth 			= request.POST.get('interestMonth')
@@ -4618,11 +4605,7 @@ def saveMhBackground(request, mh):
 	mh.backgroundComplete = True
 	mh.save()
 
-	return result
-
 def saveMhStress(request, mh):
-	result = {}
-
 	mh.stressors.deathStress 			= truePythonBool(request.POST.get('deathStress'));
 	mh.stressors.divorceStress 			= truePythonBool(request.POST.get('divorceStress'));
 	mh.stressors.moveStress 			= truePythonBool(request.POST.get('moveStress'));
@@ -4646,28 +4629,85 @@ def saveMhStress(request, mh):
 	mh.stressors.otherStressExp 			= request.POST.get('m_otherStressExp');
 
 	mh.stressors.save()
-
-	return result
+	mh.stressorComplete = True
+	mh.save()
 
 def saveMhFamily(request, mh):
-	result = {}
+	mh.familyHistory.isdepressed 			= truePythonBool(request.POST.get('isdepressed'))
+	mh.familyHistory.isadd 					= truePythonBool(request.POST.get('isadd'))
+	mh.familyHistory.isbedWetting 			= truePythonBool(request.POST.get('isbedWetting'))
+	mh.familyHistory.isbipolar 				= truePythonBool(request.POST.get('isbipolar'))
+	mh.familyHistory.issuicideAttempt 		= truePythonBool(request.POST.get('issuicideAttempt'))
+	mh.familyHistory.isphysicalAbuse 		= truePythonBool(request.POST.get('isphysicalAbuse'))
+	mh.familyHistory.islaw 					= truePythonBool(request.POST.get('islaw'))
+	mh.familyHistory.isld 					= truePythonBool(request.POST.get('isld'))
+	mh.familyHistory.istic 					= truePythonBool(request.POST.get('istic'))
+	mh.familyHistory.isthyroid 				= truePythonBool(request.POST.get('isthyroid'))
+	mh.familyHistory.isheart 				= truePythonBool(request.POST.get('isheart'))
+	mh.familyHistory.isoverweight 			= truePythonBool(request.POST.get('isoverweight'))
+	mh.familyHistory.ismood 				= truePythonBool(request.POST.get('ismood'))
+	mh.familyHistory.isalcohol 				= truePythonBool(request.POST.get('isalcohol'))
+	mh.familyHistory.isdrugs 				= truePythonBool(request.POST.get('isdrugs'))
+	mh.familyHistory.isschizo 				= truePythonBool(request.POST.get('isschizo'))
+	mh.familyHistory.isseizures 			= truePythonBool(request.POST.get('isseizures'))
+	mh.familyHistory.iscompletedSuicide 	= truePythonBool(request.POST.get('iscompletedSuicide'))
+	mh.familyHistory.issexAbuse 			= truePythonBool(request.POST.get('issexAbuse'))
+	mh.familyHistory.ispanic 				= truePythonBool(request.POST.get('ispanic'))
+	mh.familyHistory.isanxiety 				= truePythonBool(request.POST.get('isanxiety'))
+	mh.familyHistory.isOCD 					= truePythonBool(request.POST.get('isOCD'))
+	mh.familyHistory.isdiabetes 			= truePythonBool(request.POST.get('isdiabetes'))
+	mh.familyHistory.iscancer 				= truePythonBool(request.POST.get('iscancer'))
+	mh.familyHistory.ishighBloodPressure 	= truePythonBool(request.POST.get('ishighBloodPressure'))
+	mh.familyHistory.isanger 				= truePythonBool(request.POST.get('isanger'))
 
-	return result
+	mh.familyHistory.depressed 			= request.POST.get('depressed')
+	mh.familyHistory.add 				= request.POST.get('add')
+	mh.familyHistory.bedWetting 		= request.POST.get('bedWetting')
+	mh.familyHistory.bipolar 			= request.POST.get('bipolar')
+	mh.familyHistory.suicideAttempt 	= request.POST.get('suicideAttempt')
+	mh.familyHistory.physicalAbuse 		= request.POST.get('physicalAbuse')
+	mh.familyHistory.law 				= request.POST.get('law')
+	mh.familyHistory.ld 				= request.POST.get('ld')
+	mh.familyHistory.tic 				= request.POST.get('tic')
+	mh.familyHistory.thyroid 			= request.POST.get('thyroid')
+	mh.familyHistory.heart 				= request.POST.get('heart')
+	mh.familyHistory.overweight 		= request.POST.get('overweight')
+	mh.familyHistory.mood 				= request.POST.get('mood')
+	mh.familyHistory.alcohol 			= request.POST.get('alcohol')
+	mh.familyHistory.drugs 				= request.POST.get('drugs')
+	mh.familyHistory.schizo 			= request.POST.get('schizo')
+	mh.familyHistory.seizures 			= request.POST.get('seizures')
+	mh.familyHistory.completedSuicide 	= request.POST.get('completedSuicide')
+	mh.familyHistory.sexAbuse 			= request.POST.get('sexAbuse')
+	mh.familyHistory.panic 				= request.POST.get('panic')
+	mh.familyHistory.anxiety 			= request.POST.get('anxiety')	
+	mh.familyHistory.OCD 				= request.POST.get('OCD')
+	mh.familyHistory.diabetes 			= request.POST.get('diabetes')
+	mh.familyHistory.cancer 			= request.POST.get('cancer')
+	mh.familyHistory.highBloodPressure 	= request.POST.get('highBloodPressure')
+	mh.familyHistory.anger 				= request.POST.get('anger')
+
+	mh.familyComplete = True
+	mh.familyHistory.save()
 
 def saveMhLegal(request, mh):
-	result = {}
+	no = None
+	# mh.legalHistory
 
-	return result
+	# mh.legalComplete = True
+	# mh.save()
 
 def saveMhPsych(request, mh):
-	result = {}
-
-	return result
+	mh.stressors.psychiatricHistory = request.POST.get('psychiatricHistory')
+	mh.psychComplete = True
+	mh.save()
 
 def saveMhUse(request, mh):
-	result = {}
+	no = None
+	# mh.useTable
 
-	return result
+	# mh.useComplete = True
+	# mh.save()
 
 def saveMentalHealth(request, section, mh):
 	if str(section) == '/mh_demographic/':
