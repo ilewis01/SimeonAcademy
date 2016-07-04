@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, redirect
+from django.template import RequestContext
 from django.template.loader import get_template
 from django.conf import settings
 from django.contrib import auth
@@ -41,7 +42,7 @@ saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
 getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID, \
-decodeCharfield, nextMhPage
+decodeCharfield, nextMhPage, universalContent
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -2081,25 +2082,8 @@ def mh_background(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-			save_this = request.POST.get('save_this', '')
-			section = request.POST.get('save_section', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_background/')
-			json_data = json.dumps(fields)
-
-			if save_this == 'true':
-				saveMentalHealth(request, section, mh)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/background.html', content)
+			content = universalContent(request, 'mh', '/mh_background/')
+			return render_to_response('counselor/forms/MentalHealth/background.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mh_stress(request):
@@ -2116,20 +2100,8 @@ def mh_stress(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_stress/')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/stressors.html', content)
+			content = universalContent(request, 'mh', '/mh_stress/')
+			return render_to_response('counselor/forms/MentalHealth/stressors.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mh_familyHistory(request):
@@ -2146,19 +2118,7 @@ def mh_familyHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_familyHistory/')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
+			content = universalContent(request, 'mh', '/mh_familyHistory/')
 			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content)
 
 @login_required(login_url='/index')
@@ -2176,19 +2136,7 @@ def mh_legal(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_legal/')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
+			content = universalContent(request, 'mh', '/mh_legal/')
 			return render_to_response('counselor/forms/MentalHealth/legal.html', content)
 
 @login_required(login_url='/index')
@@ -2206,19 +2154,7 @@ def mh_psych(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_stress/')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
+			content = universalContent(request, 'mh', '/mh_psych/')
 			return render_to_response('counselor/forms/MentalHealth/psych.html', content)
 
 @login_required(login_url='/index')
@@ -2236,19 +2172,7 @@ def mh_useTable(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_useTable/')
-			json_data = json.dumps(fields)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
+			content = universalContent(request, 'mh', '/mh_useTable/')
 			return render_to_response('counselor/forms/MentalHealth/useTable.html', content)
 
 

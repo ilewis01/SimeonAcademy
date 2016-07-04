@@ -5464,6 +5464,7 @@ function proceed_mh_background() {
 	form = document.getElementById('mh_form');
 
 	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
 		form.submit();
 	}
 }
@@ -5472,7 +5473,43 @@ function proceed_mh_stress() {
 	var proceed = true;
 	form = document.getElementById('mh_form');
 
+	//TRIGGERS
+	var yesDeath 		= document.getElementById('yesDeath');
+	var yesDivorce 		= document.getElementById('yesDivorce');
+	var yesMove 		= document.getElementById('yesMove');
+	var yesMedical 		= document.getElementById('yesMedical');
+	var yesFamily 		= document.getElementById('yesFamily');
+	var yesMoney 		= document.getElementById('yesMoney');
+	var yesAbuse 		= document.getElementById('yesAbuse');
+	var yesAddiction 	= document.getElementById('yesAddiction');
+	var yesViolence 	= document.getElementById('yesViolence');
+	var yesOther 		= document.getElementById('yesOther');
+
+	//FIELDS
+	var deathStressExp 				= document.getElementById('deathStressExp');
+	var divorceStressExp 			= document.getElementById('divorceStressExp');
+	var moveStressExp 				= document.getElementById('moveStressExp');
+	var medicalStressExp 			= document.getElementById('medicalStressExp');
+	var familyHealthStressExp 		= document.getElementById('familyHealthStressExp');
+	var financialStressExp 			= document.getElementById('financialStressExp');
+	var abuseStressExp 				= document.getElementById('abuseStressExp');
+	var addictionFamilyStressExp 	= document.getElementById('addictionFamilyStressExp');
+	var violenceFamilyStressExp 	= document.getElementById('violenceFamilyStressExp');
+	var otherStressExp 				= document.getElementById('otherStressExp');
+
+	postUniversalRadioText(yesDeath, deathStressExp, m_deathStressExp);
+	postUniversalRadioText(yesDivorce, divorceStressExp, m_divorceStressExp);
+	postUniversalRadioText(yesMove, moveStressExp, m_moveStressExp);
+	postUniversalRadioText(yesMedical, medicalStressExp, m_medicalStressExp);
+	postUniversalRadioText(yesFamily, familyHealthStressExp, m_familyHealthStressExp);
+	postUniversalRadioText(yesMoney, financialStressExp, m_financialStressExp);
+	postUniversalRadioText(yesAbuse, abuseStressExp, m_abuseStressExp);
+	postUniversalRadioText(yesAddiction, addictionFamilyStressExp, m_addictionFamilyStressExp);
+	postUniversalRadioText(yesViolence, violenceFamilyStressExp, m_violenceFamilyStressExp);
+	postUniversalRadioText(yesOther, otherStressExp, m_otherStressExp);
+
 	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
 		form.submit();
 	}
 }
@@ -5482,6 +5519,37 @@ function proceed_mh_familyHistory() {
 	form = document.getElementById('mh_form');
 
 	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.submit();
+	}
+}
+
+function proceed_mh_legalHistory() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.submit();
+	}
+}
+
+function proceed_mh_psychHistory() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.submit();
+	}
+}
+
+function proceed_mh_useTable() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
 		form.submit();
 	}
 }

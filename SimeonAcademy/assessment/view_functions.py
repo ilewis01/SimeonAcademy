@@ -9,6 +9,8 @@ from django.http import HttpResponse
 from cgi import escape
 import random
 import string
+import json
+import json as simplejson
 
 from assessment.models import State, RefReason, Client, MaritalStatus, \
 LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
@@ -4570,7 +4572,100 @@ def saveMhEducation(request, mh):
 	mh.education.militaryYears = request.POST.get('m_militaryYears')
 	mh.education.honorableDischarge = truePythonBool(request.POST.get('m_honorableDischarge'))
 
+	mh.educationComplete = True
 	mh.education.save()
+	mh.save()
+
+	return result
+
+def saveMhBackground(request, mh):
+	result = {}
+
+	mh.background.residence 	= request.POST.get('residence')
+	mh.background.income 		= request.POST.get('income')
+	mh.background.debt 			= request.POST.get('debt')
+	mh.background.credit 		= request.POST.get('credit')
+	mh.background.healthCare 	= request.POST.get('healthCare')
+	mh.background.otherIncome 	= request.POST.get('otherIncome')
+
+	mh.background.spouseRelationship 	= request.POST.get('spouseRelationship')
+	mh.background.brothersRelationship 	= request.POST.get('brothersRelationship')
+	mh.background.childrenRelationship 	= request.POST.get('childrenRelationship')
+	mh.background.parentsRelationship 	= request.POST.get('parentsRelationship')
+	mh.background.sistersRelationship 	= request.POST.get('sistersRelationship')
+	mh.background.exRelationship 		= request.POST.get('exRelationship')
+
+	mh.background.closeFriendVisit 	= request.POST.get('closeFriendVisit')
+	mh.background.closeFriendNumber = request.POST.get('closeFriendNumber')
+	mh.background.acqVisit 			= request.POST.get('acqVisit')
+	mh.background.acqNumber 		= request.POST.get('acqNumber')
+
+	mh.background.interest 					= request.POST.get('interest')
+	mh.background.interestWeek 				= request.POST.get('interestWeek')
+	mh.background.interestMonth 			= request.POST.get('interestMonth')
+	mh.background.friendAct 				= request.POST.get('friendAct')
+	mh.background.friendActWeek 			= request.POST.get('friendActWeek')
+	mh.background.friendActMonth 			= request.POST.get('friendActMonth')
+	mh.background.workAct 					= request.POST.get('workAct')
+	mh.background.workActWeek 				= request.POST.get('workActWeek')
+	mh.background.workActMonth 				= request.POST.get('workActMonth')
+	mh.background.churchAffiliation 		= request.POST.get('churchAffiliation')
+	mh.background.churchWeek 				= request.POST.get('churchWeek')
+	mh.background.churchMonth 				= request.POST.get('churchMonth')
+	mh.background.churchYear 				= request.POST.get('churchYear')
+
+	mh.background.save()
+	mh.backgroundComplete = True
+	mh.save()
+
+	return result
+
+def saveMhStress(request, mh):
+	result = {}
+
+	mh.stressors.deathStress 			= truePythonBool(request.POST.get('deathStress'));
+	mh.stressors.divorceStress 			= truePythonBool(request.POST.get('divorceStress'));
+	mh.stressors.moveStress 			= truePythonBool(request.POST.get('moveStress'));
+	mh.stressors.medicalStress 			= truePythonBool(request.POST.get('medicalStress'));
+	mh.stressors.familyHealthStress 	= truePythonBool(request.POST.get('familyHealthStress'));
+	mh.stressors.financialStress 		= truePythonBool(request.POST.get('financialStress'));
+	mh.stressors.addictionFamilyStress 	= truePythonBool(request.POST.get('addictionFamilyStress'));
+	mh.stressors.violenceFamilyStress 	= truePythonBool(request.POST.get('violenceFamilyStress'));
+	mh.stressors.otherStress 			= truePythonBool(request.POST.get('otherStress'));
+	mh.stressors.abuseStress 			= truePythonBool(request.POST.get('abuseStress'));
+
+	mh.stressors.deathStressExp 			= request.POST.get('m_deathStressExp');
+	mh.stressors.divorceStressExp 			= request.POST.get('m_divorceStressExp');
+	mh.stressors.moveStressExp 				= request.POST.get('m_moveStressExp');
+	mh.stressors.medicalStressExp 			= request.POST.get('m_medicalStressExp');
+	mh.stressors.familyHealthStressExp 		= request.POST.get('m_familyHealthStressExp');
+	mh.stressors.financialStressExp 		= request.POST.get('m_financialStressExp');
+	mh.stressors.abuseStressExp 			= request.POST.get('m_abuseStressExp');
+	mh.stressors.addictionFamilyStressExp 	= request.POST.get('m_addictionFamilyStressExp');
+	mh.stressors.violenceFamilyStressExp 	= request.POST.get('m_violenceFamilyStressExp');
+	mh.stressors.otherStressExp 			= request.POST.get('m_otherStressExp');
+
+	mh.stressors.save()
+
+	return result
+
+def saveMhFamily(request, mh):
+	result = {}
+
+	return result
+
+def saveMhLegal(request, mh):
+	result = {}
+
+	return result
+
+def saveMhPsych(request, mh):
+	result = {}
+
+	return result
+
+def saveMhUse(request, mh):
+	result = {}
 
 	return result
 
@@ -4578,8 +4673,19 @@ def saveMentalHealth(request, section, mh):
 	if str(section) == '/mh_demographic/':
 		saveMhDemo(request, mh)
 	elif str(section) == '/mh_education/':
-		print "Saving Education..."
 		saveMhEducation(request, mh)
+	elif str(section) == '/mh_background/':
+		saveMhBackground(request, mh)
+	elif str(section) == '/mh_stress/':
+		saveMhStress(request, mh)
+	elif str(section) == '/mh_familyHistory/':
+		saveMhFamily(request, mh)
+	elif str(section) == '/mh_legal/':
+		saveMhLegal(request, mh)
+	elif str(section) == '/mh_psych/':
+		saveMhPsych(request, mh)
+	elif str(section) == '/mh_useTable/':
+		saveMhUse(request, mh)
 
 def refreshMhDemo(mh):
 	mh.demographics.birthplace = None
@@ -4790,6 +4896,30 @@ def deleteMh(mh):
 	mh.legalHistory.delete()
 	mh.useTable.delete()
 	mh.delete()
+	return result
+
+def processMhData(request, gField):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	mh_id = request.POST.get('mh_id', '')
+	save_this = request.POST.get('save_this', '')
+	section = request.POST.get('save_section', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	mh = MentalHealth.objects.get(id=mh_id)
+	fields = getMhFields(mh, gField)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveMentalHealth(request, section, mh)
+
+	result['session'] = session
+	result['mh'] = mh
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | Mental Health Assessment"
+
 	return result
 
 
@@ -5033,7 +5163,20 @@ def universalRefresh(form_type, form):
 	elif str(form_type) == 'ut':
 		no = None
 
+def universalContent(request, form_type, gField):
+	## TAKES DJANGO REQUEST, THE TYPE OF FORM BEING PROCESSED AND THE SECTION FOR WHICH YOU ARE REQUESTING THE FIELDS
+	## THIS FUNCTION SAVES THE FORM'S SECTION IF CONDITIONS ARE MET
+	## RETURNS ALL THE CONTENT ASSOCIATED WITH THE FORM AND SECTION (INCLUDING THE FORM AND SESSION)
+	result = None
 
+	if form_type == 'am':
+		no = None
+	elif form_type == 'sap':
+		no = None
+	elif form_type == 'mh':
+		result = processMhData(request, gField)
+
+	return result
 
 
 	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
