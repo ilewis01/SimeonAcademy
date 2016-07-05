@@ -47,6 +47,9 @@ getOrderedStateIndex, setGlobalID, getGlobalID, decodeCharfield, \
 nextMhPage, universalContent, universalSaveForm, universalSaveFinishForm, \
 universalGrabFields, universalStartForm
 
+#THE NEW GLOBAL FUNCTIONS
+# startForm, getContent, fetchUrl, fetchForm, saveForm, saveAndFinish, deleteForm, refreshForm
+
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
 	return render_to_response('global/index.html')
@@ -2518,12 +2521,12 @@ def sap_preliminary(request):
 			content['session'] = session
 			content['sap'] = sap
 			
-			if action['newSap'] == False:
+			if action['isNew'] == False:
 				goToNext = 'false'
 			else:
 				goToNext = 'true'
 
-			if action['newSap'] == False and str(goToNext) == 'false':
+			if action['isNew'] == False and str(goToNext) == 'false':
 				save_section = universalLocation('sap', sap.id)
 
 				content['save_section'] = save_section

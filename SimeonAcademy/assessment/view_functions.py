@@ -23,28 +23,6 @@ MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych
 
-def setGlobalID(the_id):
-	gloVar = Global_ID.objects.get(id=1)
-	gloVar.global_id = the_id
-	gloVar.save()
-
-def getGlobalID():
-	gloVar = Global_ID.objects.get(id=1)
-	return gloVar.global_id
-
-def decodeCharfield(text):
-	result = []
-	temp = ''
-
-	for t in text:
-		if str(t) != '~':
-			temp += t
-		else:
-			result.append(temp)
-			temp = ''
-
-	return result
-
 def onTrue_offFalse(data):
 	if data == 'on':
 		data = True
@@ -143,8 +121,6 @@ def grabClientMHForms(client):
 	search = True
 	results = []
 
-	print "Number of MH's: " + str(len(mhs))
-
 	if len(mhs) == 0:
 		search = False
 
@@ -152,6 +128,20 @@ def grabClientMHForms(client):
 		for m in mhs:
 			if (str(client.id) == str(m.client.id)) and (str(client.clientID) == str(m.client.clientID)):
 				results.append(m)
+	return results
+
+def grabClientASIForms(client):
+	asis = ASI.objects.all()
+	search = True
+	results = []
+
+	if len(asis) == 0:
+		search = False
+
+	if search == True:
+		for a in asis:
+			if (str(client.id) == str(a.client.id)) and (str(client.clientID) == str(a.client.clientID)):
+				results.append(a)
 	return results
 
 def grabClientUtForms(client):
@@ -1767,107 +1757,132 @@ def refreshAM(am):
 	if am.demographicComplete == True:
 		date = datetime.now()
 		date = date.date()
-		am.demographic.delete()
 		demo = AM_Demographic(client_id=am.client.clientID, date_of_assessment=date)
 		demo.save()
+		temp = am.demographic
 		am.demographic = demo
 		am.demographicComplete = False
+		temp.delete()
 		am.save()
 
 	if am.drugHistoryComplete == True:
 		am.drugHistory.delete()
 		drugHistory = AM_DrugHistory(client_id=am.client.clientID, finishedTreatment=True)
 		drugHistory.save()
+		temp = am.drugHistory
 		am.drugHistory = drugHistory
 		am.drugHistoryComplete = False
+		temp.delete()
 		am.save()
 
 	if am.childhoodComplete == True:
 		am.childhood.delete()
 		childhood = AM_ChildhoodHistory(client_id=am.client.clientID)
 		childhood.save()
+		temp = am.childhood
 		am.childhood = childhood
 		am.childhoodComplete = False
+		temp.delete()
 		am.save()
 
 	if am.angerHistoryComplete == True:
 		am.angerHistory.delete()
 		angerHistory = AM_AngerHistory(client_id=am.client.clientID)
 		angerHistory.save()
+		temp = am.angerHistory
 		am.angerHistory = angerHistory
 		am.angerHistoryComplete = False
+		temp.delete()
 		am.save()
 
 	if am.angerHistoryComplete2 == True:
 		am.angerHistory2.delete()
 		angerHistory2 = AM_AngerHistory2(client_id=am.client.clientID)
 		angerHistory2.save()
+		temp = am.angerHistory2
 		am.angerHistory2 = angerHistory2
 		am.angerHistoryComplete2 = False
+		temp.delete()
 		am.save()
 
 	if am.angerHistoryComplete3 == True:
 		am.angerHistory3.delete()
 		angerHistory3 = AM_AngerHistory3(client_id=am.client.clientID)
 		angerHistory3.save()
+		temp = am.angerHistory3
 		am.angerHistory3 = angerHistory3
 		am.angerHistoryComplete3 = False
+		temp.delete()
 		am.save()
 
 	if am.connectionsComplete == True:
 		am.connections.delete()
 		connections = AM_Connections(client_id=am.client.clientID)
 		connections.save()
+		temp = am.connections
 		am.connections = connections
 		am.connectionsComplete = False
+		temp.delete()
 		am.save()
 
 	if am.worstComplete == True:
 		am.worstEpisode.delete()
 		worstEpisode = AM_WorstEpisode(client_id=am.client.clientID)
 		worstEpisode.save()
+		temp = am.worstEpisode
 		am.worstEpisode = worstEpisode
 		am.worstComplete = False
+		temp.delete()
 		am.save()
 
 	if am.angerTargetComplete == True:
 		am.angerTarget.delete()
 		angerTarget = AM_AngerTarget(client_id=am.client.clientID)
 		angerTarget.save()
+		temp = am.angerTarget
 		am.angerTarget = angerTarget
 		am.angerTargetComplete = False
+		temp.delete()
 		am.save()
 
 	if am.familyOriginComplete == True:
 		am.familyOrigin.delete()
 		familyOrigin = AM_FamilyOrigin(client_id=am.client.clientID)
 		familyOrigin.save()
+		temp = am.familyOrigin
 		am.familyOrigin = familyOrigin
 		am.familyOriginComplete = False
+		temp.delete()
 		am.save()
 
 	if am.currentProblemsComplete == True:
 		am.currentProblems.delete()
 		currentProblems = AM_CurrentProblem(client_id=am.client.clientID)
 		currentProblems.save()
+		temp = am.currentProblems
 		am.currentProblems = currentProblems
 		am.currentProblemsComplete = False
+		temp.delete()
 		am.save()
 
 	if am.controlComplete == True:
 		am.control.delete()
 		control = AM_Control(client_id=am.client.clientID)
 		control.save()
+		temp = am.control
 		am.control = control
 		am.controlComplete = False
+		temp.delete()
 		am.save()
 
 	if am.finalComplete == True:
 		am.final.delete()
 		final = AM_Final(client_id=am.client.clientID)
 		final.save()
+		temp = am.final
 		am.final = final
 		am.finalComplete = False
+		temp.delete()
 		am.save()
 
 	return am
@@ -2682,9 +2697,18 @@ def amDhExist(drug_history):
 				break
 	return exist
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+################################################################# END AM ##################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-#SAP FUNCTIONS___________________________________________________________________________________________________________________
-#################################################################################################################################
+
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#----------------------------------------------------------------  S.A.P -----------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
 
 def sapExist(client):
 	exist = False
@@ -2735,7 +2759,7 @@ def getSAP(client):
 	filter_list = sapExist(client)
 
 	if len(saps) == 0 or filter_list == False:
-		results['newSap'] = True
+		results['isNew'] = True
 		results['sap'] = newSap(client)
 
 	else:
@@ -3737,6 +3761,12 @@ def refreshSap(sap):
 	sap.SapComplete = False
 
 	sap.save()
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+################################################################# END SAP #################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+
 
 ###########################################################################################################################################
 #*****************************************************************************************************************************************#
@@ -5196,7 +5226,7 @@ def processMhData(request, current_section):
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-###########################################################################################################################################
+################################################################# END MH ##################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 
@@ -5298,6 +5328,51 @@ def get_asi_parameters(asi):
 		data['complete'] = complete[l]
 		data['priority'] = priority[l]
 		result.append(data)
+	return result
+
+def forceNextAsiPage(asi):
+	result 	= None
+	flag 	= None
+	asi_list = get_asi_parameters(asi)
+
+	for i in range(len(asi_list)):
+		if asi_list[i]['complete'] == False:
+			flag = i
+			break
+
+	for j in range(len(asi_list)):
+		if asi_list[j]['complete'] == False and j != flag:
+			result = asi_list[j]['url']
+			break
+
+	return result
+
+def nextAsiPage(asi, section):
+	result 		= None
+	nextSection = None
+	proceed 	= True
+	asi_list 	= get_asi_parameters(asi)
+
+	for a in asi_list:
+		if a['priority'] == True:
+			result = a['url']
+			proceed = False
+			break
+
+	if proceed == True:
+		for i in range(len(asi_list)):
+			if asi_list[i]['complete'] == False:
+				nextSection = mh_list[i]['url']
+				break
+
+		if str(nextSection) == str(section):
+			result = forceNextAsiPage(asi)
+		else:
+			result = nextSection
+
+	if result == None:
+		result = '/asi_viewForm/'
+
 	return result
 
 def grabASIClassesCSS(asi, m_page):
@@ -5841,100 +5916,518 @@ def grabASIFields(asi, section):
 
 	return result
 
+def saveASIadmin(request, asi):
+	asi.admin.g13 = request.POST.get('g13')
+	asi.admin.g14yrs = request.POST.get('g14yrs')
+	asi.admin.g14mos = request.POST.get('g14mos')
+	asi.admin.g15 = request.POST.get('g15')
+	asi.admin.g16mth = request.POST.get('g16mth')
+	asi.admin.g16day = request.POST.get('g16day')
+	asi.admin.g16year = request.POST.get('g16year')
+	asi.admin.g17 = request.POST.get('g17')
+	asi.admin.g18 = request.POST.get('g18')
+	asi.admin.g19 = request.POST.get('g19')
+	asi.admin.g20 = request.POST.get('g20')
+
+	asi.admin.save()
+
+def saveASIgeneral(request, asi):
+	asi.general.g1 = request.POST.get('g1')
+	asi.general.g2 = request.POST.get('g2')
+	asi.general.g3 = request.POST.get('g3')
+	asi.general.g4 = request.POST.get('g4')
+	asi.general.g8 = request.POST.get('g8')
+	asi.general.g9 = request.POST.get('g9')
+	asi.general.g10 = request.POST.get('g10')
+	asi.general.g11 = request.POST.get('g11')
+	asi.general.g12 = request.POST.get('g12')
+
+	asi.general.g21 = request.POST.get('g21')
+	asi.general.g22 = request.POST.get('g22')
+	asi.general.g23 = request.POST.get('g23')
+	asi.general.g24 = request.POST.get('g24')
+	asi.general.g25 = request.POST.get('g25')
+	asi.general.g26 = request.POST.get('g26')
+
+	asi.general.medical = request.POST.get('medical')
+	asi.general.employ = request.POST.get('employ')
+	asi.general.alcohol = request.POST.get('alcohol')
+	asi.general.drug = request.POST.get('drug')
+	asi.general.legal = request.POST.get('legal')
+	asi.general.family = request.POST.get('family')
+	asi.general.psych = request.POST.get('psych')
+
+	asi.general.save()
+
+def saveASImedical(request, asi):
+	asi.medical.m1 = request.POST.get('m1')
+	asi.medical.m2yrs = request.POST.get('m2yrs')
+	asi.medical.m2mth = request.POST.get('m2mth')
+	asi.medical.m3 = request.POST.get('m3')
+	asi.medical.m4 = request.POST.get('m4')
+	asi.medical.m5 = request.POST.get('m5')
+	asi.medical.m5Exp = request.POST.get('m5Exp')
+	asi.medical.m6 = request.POST.get('m6')
+	asi.medical.m7 = request.POST.get('m7')
+	asi.medical.m8 = request.POST.get('m8')
+	asi.medical.m9 = request.POST.get('m9')
+	asi.medical.m10 = request.POST.get('m10')
+	asi.medical.m11 = request.POST.get('m11')
+	asi.medical.comments = request.POST.get('comments')
+
+	asi.medical.save()
+
+def saveASIemployment(request, asi):
+	asi.employment.e1yrs = request.POST.get('e1yrs')
+	asi.employment.e1mth = request.POST.get('e1mth')
+	asi.employment.e2 = request.POST.get('e2')
+	asi.employment.e3 = request.POST.get('e3')
+	asi.employment.e3Exp = request.POST.get('e3Exp')
+	asi.employment.e4 = request.POST.get('e4')
+	asi.employment.e5 = request.POST.get('e5')
+	asi.employment.e5Exp = request.POST.get('e5Exp')
+	asi.employment.e6yrs = request.POST.get('e6yrs')
+	asi.employment.e6mth = request.POST.get('e6mth')
+	asi.employment.e7 = request.POST.get('e7')
+	asi.employment.e7Exp = request.POST.get('e7Exp')
+	asi.employment.e8 = request.POST.get('e8')
+	asi.employment.e9 = request.POST.get('e9')
+	asi.employment.e10 = request.POST.get('e10')
+	asi.employment.e11 = request.POST.get('e11')
+	asi.employment.e12 = request.POST.get('e12')
+	asi.employment.e13 = request.POST.get('e13')
+	asi.employment.e14 = request.POST.get('e14')
+	asi.employment.e15 = request.POST.get('e15')
+	asi.employment.e16 = request.POST.get('e16')
+	asi.employment.e17 = request.POST.get('e17')
+	asi.employment.e18 = request.POST.get('e18')
+	asi.employment.e19 = request.POST.get('e19')
+	asi.employment.e20 = request.POST.get('e20')
+	asi.employment.e21 = request.POST.get('e21')
+	asi.employment.e22 = request.POST.get('e22')
+	asi.employment.e23 = request.POST.get('e23')
+	asi.employment.e24 = request.POST.get('e24')
+	asi.employment.comments = request.POST.get('comments')
+
+	asi.employment.save()
+
+def saveASIdrug1(request, asi):
+	asi.drug1.d1Day = request.POST.get('d1Day')
+	asi.drug1.d1Year = request.POST.get('d1Year')
+	asi.drug1.d1Route = request.POST.get('d1Route')
+
+	asi.drug1.d2Day = request.POST.get('d2Day')
+	asi.drug1.d2Year = request.POST.get('d2Year')
+	asi.drug1.d2Route = request.POST.get('d2Route')
+
+	asi.drug1.d3Day = request.POST.get('d3Day')
+	asi.drug1.d3Year = request.POST.get('d3Year')
+	asi.drug1.d3Route = request.POST.get('d3Route')
+
+	asi.drug1.d4Day = request.POST.get('d4Day')
+	asi.drug1.d4Year = request.POST.get('d4Year')
+	asi.drug1.d4Route = request.POST.get('d4Route')
+
+	asi.drug1.d5Day = request.POST.get('d5Day')
+	asi.drug1.d5Year = request.POST.get('d5Year')
+	asi.drug1.d5Route = request.POST.get('d5Route')
+
+	asi.drug1.d6Day = request.POST.get('d6Day')
+	asi.drug1.d6Year = request.POST.get('d6Year')
+	asi.drug1.d6Route = request.POST.get('d6Route')
+
+	asi.drug1.d7Day = request.POST.get('d7Day')
+	asi.drug1.d7Year = request.POST.get('d7Year')
+	asi.drug1.d7Route = request.POST.get('d7Route')
+
+	asi.drug1.d8Day = request.POST.get('d8Day')
+	asi.drug1.d8Year = request.POST.get('d8Year')
+	asi.drug1.d8Route = request.POST.get('d8Route')
+
+	asi.drug1.d9Day = request.POST.get('d9Day')
+	asi.drug1.d9Year = request.POST.get('d9Year')
+	asi.drug1.d9Route = request.POST.get('d9Route')
+
+	asi.drug1.d10Day = request.POST.get('d10Day')
+	asi.drug1.d10Year = request.POST.get('d10Year')
+	asi.drug1.d10Route = request.POST.get('d10Route')
+
+	asi.drug1.d11Day = request.POST.get('d11Day')
+	asi.drug1.d11Year = request.POST.get('d11Year')
+	asi.drug1.d11Route = request.POST.get('d11Route')
+
+	asi.drug1.d12Day = request.POST.get('d12Day')
+	asi.drug1.d12Year = request.POST.get('d12Year')
+	asi.drug1.d12Route = request.POST.get('d12Route')
+
+	asi.drug1.d13 = request.POST.get('d13')
+
+	asi.drug1.save()
+
+def saveASIdrug2(request, asi):
+	asi.drug2.d14 = request.POST.get('d14')
+	asi.drug2.d15 = request.POST.get('d15')
+	asi.drug2.d16 = request.POST.get('d16')
+	asi.drug2.d17 = request.POST.get('d17')
+	asi.drug2.d18 = request.POST.get('d18')
+	asi.drug2.d19 = request.POST.get('d19')
+	asi.drug2.d20 = request.POST.get('d20')
+	asi.drug2.d21 = request.POST.get('d21')
+	asi.drug2.d22 = request.POST.get('d22')
+	asi.drug2.d23 = request.POST.get('d23')
+	asi.drug2.d24 = request.POST.get('d24')
+	asi.drug2.d25 = request.POST.get('d25')
+	asi.drug2.d26 = request.POST.get('d26')
+	asi.drug2.d27 = request.POST.get('d27')
+	asi.drug2.d28 = request.POST.get('d28')
+	asi.drug2.d29 = request.POST.get('d29')
+	asi.drug2.d30 = request.POST.get('d30')
+	asi.drug2.d31 = request.POST.get('d31')
+	asi.drug2.d32 = request.POST.get('d32')
+	asi.drug2.d33 = request.POST.get('d33')
+	asi.drug2.d34 = request.POST.get('d34')
+	asi.drug2.d35 = request.POST.get('d35')
+	asi.drug2.comments = request.POST.get('comments')
+
+	asi.drug2.save()
+
+def saveASIlegal(request, asi):
+	asi.legal.l1 = request.POST.get('l1')
+	asi.legal.l2 = request.POST.get('l2')
+	asi.legal.l3 = request.POST.get('l3')
+	asi.legal.l4 = request.POST.get('l4')
+	asi.legal.l5 = request.POST.get('l5')
+	asi.legal.l6 = request.POST.get('l6')
+	asi.legal.l7 = request.POST.get('l7')
+	asi.legal.l8 = request.POST.get('l8')
+	asi.legal.l9 = request.POST.get('l9')
+	asi.legal.l10 = request.POST.get('l10')
+	asi.legal.l11 = request.POST.get('l11')
+	asi.legal.l12 = request.POST.get('l12')
+	asi.legal.l13 = request.POST.get('l13')
+	asi.legal.l14 = request.POST.get('l14')
+	asi.legal.l15 = request.POST.get('l15')
+	asi.legal.l16 = request.POST.get('l16')
+	asi.legal.l17 = request.POST.get('l17')
+	asi.legal.l18 = request.POST.get('l18')
+	asi.legal.l19 = request.POST.get('l19')
+	asi.legal.l20 = request.POST.get('l20')
+	asi.legal.l21 = request.POST.get('l21')
+	asi.legal.l22 = request.POST.get('l22')
+	asi.legal.l23 = request.POST.get('l23')
+	asi.legal.l24 = request.POST.get('l24')
+	asi.legal.l25 = request.POST.get('l25')
+	asi.legal.l26 = request.POST.get('l26')
+	asi.legal.l27 = request.POST.get('l27')
+	asi.legal.l28 = request.POST.get('l28')
+	asi.legal.l29 = request.POST.get('l29')
+	asi.legal.l30 = request.POST.get('l30')
+	asi.legal.l31 = request.POST.get('l31')
+	asi.legal.l32 = request.POST.get('l32')
+	asi.legal.comments = request.POST.get('comments')
+
+	asi.legal.save()
+
+def saveASIfamily(request, asi):
+	asi.family.h1a = request.POST.get('h1a')
+	asi.family.h1d = request.POST.get('h1d')
+	asi.family.h1p = request.POST.get('h1p')
+
+	asi.family.h2a = request.POST.get('h2a')
+	asi.family.h2d = request.POST.get('h2d')
+	asi.family.h2p = request.POST.get('h2p')
+
+	asi.family.h3a = request.POST.get('h3a')
+	asi.family.h3d = request.POST.get('h3d')
+	asi.family.h3p = request.POST.get('h3p')
+
+	asi.family.h4a = request.POST.get('h4a')
+	asi.family.h4d = request.POST.get('h4d')
+	asi.family.h4p = request.POST.get('h4p')
+
+	asi.family.h5a = request.POST.get('h5a')
+	asi.family.h5d = request.POST.get('h5d')
+	asi.family.h5p = request.POST.get('h5p')
+
+	asi.family.h6a = request.POST.get('h6a')
+	asi.family.h6d = request.POST.get('h6d')
+	asi.family.h6p = request.POST.get('h6p')
+
+	asi.family.h7a = request.POST.get('h7a')
+	asi.family.h7d = request.POST.get('h7d')
+	asi.family.h7p = request.POST.get('h7p')
+
+	asi.family.h8a = request.POST.get('h8a')
+	asi.family.h8d = request.POST.get('h8d')
+	asi.family.h8p = request.POST.get('h8p')
+
+	asi.family.h9a = request.POST.get('h9a')
+	asi.family.h9d = request.POST.get('h9d')
+	asi.family.h9p = request.POST.get('h9p')
+
+	asi.family.h10a = request.POST.get('h10a')
+	asi.family.h10d = request.POST.get('h10d')
+	asi.family.h10p = request.POST.get('h10p')
+
+	asi.family.h11a = request.POST.get('h11a')
+	asi.family.h11d = request.POST.get('h11d')
+	asi.family.h11p = request.POST.get('h11p')
+
+	asi.family.h12a = request.POST.get('h12a')
+	asi.family.h12d = request.POST.get('h12d')
+	asi.family.h12p = request.POST.get('h12p')
+
+	asi.family.save()
+
+def saveASIsocial1(request, asi):
+	asi.social1.f1 = request.POST.get('f1')
+	asi.social1.f2yrs = request.POST.get('f2yrs')
+	asi.social1.f2mth = request.POST.get('f2mth')
+	asi.social1.f3 = request.POST.get('f3')
+	asi.social1.f4 = request.POST.get('f4')
+	asi.social1.f5yrs = request.POST.get('f5yrs')
+	asi.social1.f5mth = request.POST.get('f5mth')
+	asi.social1.f6 = request.POST.get('f6')
+	asi.social1.f7 = request.POST.get('f7')
+	asi.social1.f8 = request.POST.get('f8')
+	asi.social1.f9 = request.POST.get('f9')
+	asi.social1.f10 = request.POST.get('f10')
+	asi.social1.f11 = request.POST.get('f11')
+
+	asi.social1.f30 = request.POST.get('f30')
+	asi.social1.f31 = request.POST.get('f31')
+	asi.social1.f32 = request.POST.get('f32')
+	asi.social1.f33 = request.POST.get('f33')
+	asi.social1.f34 = request.POST.get('f34')
+	asi.social1.f35 = request.POST.get('f35')
+	asi.social1.f36 = request.POST.get('f36')
+	asi.social1.f37 = request.POST.get('f37')
+	asi.social1.f38 = request.POST.get('f38')
+	asi.social1.comments = request.POST.get('comments')
+
+	asi.social1.save()
+
+def saveASIsocial2(request, asi):
+	asi.social2.f12 = request.POST.get('f12')
+	asi.social2.f13 = request.POST.get('f13')
+	asi.social2.f14 = request.POST.get('f14')
+	asi.social2.f16 = request.POST.get('f16')
+	asi.social2.f17 = request.POST.get('f17')
+
+	asi.social2.f18d = request.POST.get('f18d')
+	asi.social2.f19d = request.POST.get('f19d')
+	asi.social2.f20d = request.POST.get('f20d')
+	asi.social2.f21d = request.POST.get('f21d')
+	asi.social2.f22d = request.POST.get('f22d')
+	asi.social2.f23d = request.POST.get('f23d')
+	asi.social2.f24d = request.POST.get('f24d')
+	asi.social2.f25d = request.POST.get('f25d')
+	asi.social2.f26d = request.POST.get('f26d')
+
+	asi.social2.f18y = request.POST.get('f18y')
+	asi.social2.f19y = request.POST.get('f19y')
+	asi.social2.f20y = request.POST.get('f20y')
+	asi.social2.f21y = request.POST.get('f21y')
+	asi.social2.f22y = request.POST.get('f22y')
+	asi.social2.f23y = request.POST.get('f23y')
+	asi.social2.f24y = request.POST.get('f24y')
+	asi.social2.f25y = request.POST.get('f25y')
+	asi.social2.f26y = request.POST.get('f26y')
+
+	asi.social2.fa18 = request.POST.get('fa18')
+	asi.social2.fa19 = request.POST.get('fa19')
+	asi.social2.fa20 = request.POST.get('fa20')
+	asi.social2.fa21 = request.POST.get('fa21')
+	asi.social2.fa22 = request.POST.get('fa22')
+	asi.social2.fa23 = request.POST.get('fa23')
+	asi.social2.fa24 = request.POST.get('fa24')
+	asi.social2.fa25 = request.POST.get('fa25')
+	asi.social2.fa26 = request.POST.get('fa26')
+
+	asi.social2.f18dayBad = request.POST.get('f18dayBad')
+	asi.social2.f19dayBad = request.POST.get('f19dayBad')
+	asi.social2.f20dayBad = request.POST.get('f20dayBad')
+	asi.social2.f21dayBad = request.POST.get('f21dayBad')
+	asi.social2.f22dayBad = request.POST.get('f22dayBad')
+	asi.social2.f23dayBad = request.POST.get('f23dayBad')
+	asi.social2.f24dayBad = request.POST.get('f24dayBad')
+	asi.social2.f25dayBad = request.POST.get('f25dayBad')
+	asi.social2.f26dayBad = request.POST.get('f26dayBad')
+
+	asi.social2.f18yearBad = request.POST.get('f18yearBad')
+	asi.social2.f19yearBad = request.POST.get('f19yearBad')
+	asi.social2.f20yearBad = request.POST.get('f20yearBad')
+	asi.social2.f21yearBad = request.POST.get('f21yearBad')
+	asi.social2.f22yearBad = request.POST.get('f22yearBad')
+	asi.social2.f23yearBad = request.POST.get('f23yearBad')
+	asi.social2.f24yearBad = request.POST.get('f24yearBad')
+	asi.social2.f25yearBad = request.POST.get('f25yearBad')
+	asi.social2.f26yearBad = request.POST.get('f26yearBad')
+
+	asi.social2.comments = request.POST.get('comments')
+
+	asi.social2.save()
+
+def saveASIpsych(request, asi):
+	asi.psych.p1 = request.POST.get('p1')
+	asi.psych.p2 = request.POST.get('p2')
+	asi.psych.p3 = request.POST.get('p3')
+
+	asi.psych.p4d = request.POST.get('p4d')
+	asi.psych.p5d = request.POST.get('p5d')
+	asi.psych.p6d = request.POST.get('p6d')
+	asi.psych.p7d = request.POST.get('p7d')
+	asi.psych.p8d = request.POST.get('p8d')
+	asi.psych.p9d = request.POST.get('p9d')
+	asi.psych.p10d = request.POST.get('p10d')
+	asi.psych.p11d = request.POST.get('p11d')
+
+	asi.psych.p4y = request.POST.get('p4y')
+	asi.psych.p5y = request.POST.get('p5y')
+	asi.psych.p6y = request.POST.get('p6y')
+	asi.psych.p7y = request.POST.get('p7y')
+	asi.psych.p8y = request.POST.get('p8y')
+	asi.psych.p9y = request.POST.get('p9y')
+	asi.psych.p10y = request.POST.get('p10y')
+	asi.psych.p11y = request.POST.get('p11y')
+
+	asi.psych.p12 = request.POST.get('p12')
+	asi.psych.p13 = request.POST.get('p13')
+	asi.psych.p14 = request.POST.get('p14')
+	asi.psych.p15 = request.POST.get('p15')
+	asi.psych.p16 = request.POST.get('p16')
+	asi.psych.p17 = request.POST.get('p17')
+	asi.psych.p18 = request.POST.get('p18')
+	asi.psych.p19 = request.POST.get('p19')
+	asi.psych.p20 = request.POST.get('p20')
+	asi.psych.p21 = request.POST.get('p21')
+	asi.psych.p22 = request.POST.get('p22')
+	asi.psych.p23 = request.POST.get('p23')
+
+	asi.psych.save()
+
+def saveASI(request, section, asi):
+	section = str(section)
+
+	if section == '/asi_admin/':
+		saveASIadmin()
+	elif section == '/asi_general/':
+		saveASIgeneral()
+	elif section == '/asi_medical/':
+		saveASImedical()
+	elif section == '/asi_employment/':
+		saveASIemployment()
+	elif section == '/asi_drug1/':
+		saveASIdrug1()
+	elif section == '/asi_drug2/':
+		saveASIdrug2()
+	elif section == '/asi_legal/':
+		saveASIlegal()
+	elif section == '/asi_family/':
+		saveASIfamily()
+	elif section == '/asi_social1/':
+		saveASIsocial1()
+	elif section == '/asi_social2/':
+		saveASIsocial2()
+	elif section == '/asi_psych/':
+		saveASIpsych()
+
+def setASIcomplete(asi, section):
+	section = str(section)
+
+	if section == '/asi_admin/':
+		asi.adminComplete = True
+	elif section == '/asi_general/':
+		asi.generalComplete = True
+	elif section == '/asi_medical/':
+		asi.medicalComplete = True
+	elif section == '/asi_employment/':
+		asi.employmentComplete = True
+	elif section == '/asi_drug1/':
+		asi.drug1Complete = True
+	elif section == '/asi_drug2/':
+		asi.drug2Complete = True
+	elif section == '/asi_legal/':
+		asi.legalComplete = True
+	elif section == '/asi_family/':
+		asi.familyComplete = True
+	elif section == '/asi_social1/':
+		asi.social1Complete = True
+	elif section == '/asi_social2/':
+		asi.social2Complete = True
+	elif section == '/asi_psych/':
+		asi.psychComplete = True
+
+	asi.save()
+
+def deleteASI(asi):
+	asi.admin.delete()
+	asi.general.delete()
+	asi.medical.delete()
+	asi.employment.delete()
+	asi.drug1.delete()
+	asi.drug2.delete()
+	asi.legal.delete()
+	asi.family.delete()
+	asi.social1.delete()
+	asi.social2.delete()
+	asi.psych.delete()
+	asi.delete()
+
+def refreshASI(asi):
+	no = None
+
+def processAsiData(request, current_section):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	asi_id = request.POST.get('asi_id', '')
+	save_this = request.POST.get('save_this', '')
+	section = request.POST.get('save_section', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	asi = ASI.objects.get(id=asi_id)
+	fields = grabASIFields(asi, current_section)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveASI(request, section, asi)
+		setASIcomplete(asi, section)
+
+	next_url = nextAsiPage(asi, current_section)
+	image = grabASISideImages(asi, current_section)
+	classes = grabASIClassesCSS(asi, current_section)
+
+	result['class'] = classes
+	result['image'] = image
+	result['next_url'] = next_url
+	result['session'] = session
+	result['asi'] = asi
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | Addiction Severity Index"
+
+	return result
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+################################################################ END ASI ##################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+
+
+
 ###########################################################################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+#*****************************************************************************************************************************************#
+#---------------------------------------------------------- OPEN/CLOSE FORMS -------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
 
-
-##______________________OPEN FORMS_____________________________________________________
 def formIsOpen(form):
 	opened = False
 	if form.isOpen == True:
 		opened = True
 	return opened
-
-def openForm(form_type, form, client):
-	ams = grabClientAMForms(client)
-	saps = grabClientSAPForms(client)
-	mhs = grabClientMHForms(client)
-	uts = grabClientUtForms(client)
-
-	if str(form_type) == 'am':
-		if ams != None:
-			for a in ams:
-				if str(form.id) == str(a.id):
-					a.isOpen = True
-					a.save()
-				else:
-					a.isOpen = False
-					a.save()
-			for s in saps:
-				s.isOpen = False
-				s.save()
-			for m in  mhs:
-				m.isOpen = False
-				m.save()
-			for u in uts:
-				u.isOpen = False
-				u.save()
-
-	elif str(form_type) == 'sap':
-		if saps != None:
-			for s in saps:
-				if str(form.id) == str(s.id):
-					s.isOpen = True
-					s.save()
-				else:
-					s.isOpen = False
-					s.save()
-			for a in ams:
-				a.isOpen = False
-				a.save()
-			for m in  mhs:
-				m.isOpen = False
-				m.save()
-			for u in uts:
-				u.isOpen = False
-				u.save()
-
-	elif str(form_type) == 'mh':
-		if mhs != None:
-			for m in mhs:
-				if str(form.id) == str(m.id):
-					m.isOpen = True
-					m.save()
-				else:
-					m.isOpen = False
-					m.save()
-			for a in ams:
-				a.isOpen = False
-				a.save()
-			for s in  saps:
-				s.isOpen = False
-				s.save()
-			for u in uts:
-				u.isOpen = False
-				u.save()
-
-	elif str(form_type) == 'ut':
-		if uts != None:
-			for u in uts:
-				if str(form.id) == str(u.id):
-					u.isOpen = True
-					u.save()
-				else:
-					u.isOpen = False
-					u.save()
-			for a in ams:
-				a.isOpen = False
-				a.save()
-			for m in  mhs:
-				m.isOpen = False
-				m.save()
-			for s in saps:
-				s.isOpen = False
-				s.save()
 
 def hasOpened(form_list):
 	exist = False
@@ -5974,6 +6467,12 @@ def grabClientOpenForm(client, form_type):
 
 		if hasOpened(mhs) == True:
 			result = getOpenedForm(mhs)
+
+	elif str(form_type) == 'asi':
+		asis = grabClientAsiForms(client)
+
+		if hasOpened(asis) == True:
+			result = getOpenedForm(asis)
 
 	elif str(form_type) == 'ut':
 		uts = grabClientUtForms(client)
@@ -6020,6 +6519,16 @@ def grabOpenForm():
 				break
 
 	if match == False:
+		asi = ASI.objects.all()
+
+		for ai in asi:
+			if asi.isOpen == True:
+				result['type'] = 'asi'
+				result['form'] = ai
+				match = True
+				break
+
+	if match == False:
 		ut = UrineResults.objects.all()
 
 		for u in ut:
@@ -6029,11 +6538,159 @@ def grabOpenForm():
 				match = True
 				break
 
+
 	return result
 
-############################################################################################
+def openForm(form_type, form, client):
+	ams = grabClientAMForms(client)
+	saps = grabClientSAPForms(client)
+	mhs = grabClientMHForms(client)
+	asis = grabClientAsiForms(client)
+	uts = grabClientUtForms(client)
 
-#___________________________________GENERIC DELETE FORMS____________________________________
+	if str(form_type) == 'am':
+		if ams != None:
+			for a in ams:
+				if str(form.id) == str(a.id):
+					a.isOpen = True
+					a.save()
+				else:
+					a.isOpen = False
+					a.save()
+			for s in saps:
+				s.isOpen = False
+				s.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+			for ai in asis:
+				ai.isOpen = False
+				ai.save()
+
+	elif str(form_type) == 'sap':
+		if saps != None:
+			for s in saps:
+				if str(form.id) == str(s.id):
+					s.isOpen = True
+					s.save()
+				else:
+					s.isOpen = False
+					s.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+			for ai in asis:
+				ai.isOpen = False
+				ai.save()
+
+	elif str(form_type) == 'mh':
+		if mhs != None:
+			for m in mhs:
+				if str(form.id) == str(m.id):
+					m.isOpen = True
+					m.save()
+				else:
+					m.isOpen = False
+					m.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for s in  saps:
+				s.isOpen = False
+				s.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+			for ai in asis:
+				ai.isOpen = False
+				ai.save()
+
+	elif str(form_type) == 'asi':
+		if asis != None:
+			for ai in asis:
+				if str(form.id) == str(ai.id):
+					ai.isOpen = True
+					ai.save()
+				else:
+					ai.isOpen = False
+					ai.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for s in  saps:
+				s.isOpen = False
+				s.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+
+	elif str(form_type) == 'ut':
+		if uts != None:
+			for u in uts:
+				if str(form.id) == str(u.id):
+					u.isOpen = True
+					u.save()
+				else:
+					u.isOpen = False
+					u.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for s in saps:
+				s.isOpen = False
+				s.save()
+			for ai in asis:
+				ai.isOpen = False
+				ai.save()
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+############################################################## END OPEN/CLOSE #############################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#------------------------------------------------------- UNIVERSAL FUNCTIONS -------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#------------------------------------------------------- UNIVERSAL FUNCTIONS -------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#------------------------------------------------------- UNIVERSAL FUNCTIONS -------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#------------------------------------------------------- UNIVERSAL FUNCTIONS -------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
 
 def grabGenericForm(form_type, form_id):
 	form = None
@@ -6050,13 +6707,14 @@ def grabGenericForm(form_type, form_id):
 	return form
 
 def deleteGenericForm(form_type, form):
-	print "Form type: " + str(form_type)
 	if form_type == 'am':
 		deleteAM(form)
 	elif form_type == 'sap':
 		deleteSap(form)
 	elif form_type == 'mh':
 		deleteMh(form)
+	elif form_type == 'asi':
+		deleteASI(form)
 
 def universalLocation(form_type, form_id):
 	location = None
@@ -6069,7 +6727,6 @@ def universalLocation(form_type, form_id):
 		location = locateNextSection(sap, None)
 	elif str(form_type) == 'mh':
 		mh = MentalHealth.objects.get(id=form_id)
-		print "This is Universal MH Location"
 		location = nextMhPage(mh, None)
 	elif str(form_type) == 'ut':
 		ut = UrineResults.objects.get(id=form_id)
@@ -6083,8 +6740,8 @@ def universalRefresh(form_type, form):
 		refreshSap(form)
 	elif str(form_type) == 'mh':
 		refreshMh(form)
-	elif str(form_type) == 'ut':
-		no = None
+	elif str(form_type) == 'asi':
+		refreshASI(form)
 
 def universalSaveForm(request, form_type, section, form):
 	if form_type == 'am':
@@ -6094,7 +6751,7 @@ def universalSaveForm(request, form_type, section, form):
 	elif form_type == 'mh':
 		saveMentalHealth(request, section, form)
 	elif form_type == 'asi':
-		no = None
+		saveASI(request, section, form)
 
 def universalSaveFinishForm(request, form_type, section, form):
 	if form_type == 'am':
@@ -6105,7 +6762,8 @@ def universalSaveFinishForm(request, form_type, section, form):
 		saveMentalHealth(request, section, form)
 		finishMhSection(form, section)
 	elif form_type == 'asi':
-		no = None
+		saveASI(request, section, form)
+		setASIcomplete(section, form)
 
 def universalContent(request, form_type, gField):
 	## TAKES DJANGO REQUEST, THE TYPE OF FORM BEING PROCESSED AND THE SECTION FOR WHICH YOU ARE REQUESTING THE FIELDS
@@ -6147,18 +6805,148 @@ def universalStartForm(form_type, client):
 	elif form_type == 'mh':
 		result = startMH(client)
 	elif form_type == 'sap':
-		result = None
+		result = getSAP(client)
 	elif form_type = 'asi':
 		result = startASI(client)
 
 	return result
 
-
-
-
-	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
-
 ############################################################################################
+	              ##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
+############################################################################################
+
+def setGlobalID(the_id):
+	gloVar = Global_ID.objects.get(id=1)
+	gloVar.global_id = the_id
+	gloVar.save()
+
+def getGlobalID():
+	gloVar = Global_ID.objects.get(id=1)
+	return gloVar.global_id
+
+def decodeCharfield(text):
+	result = []
+	temp = ''
+
+	for t in text:
+		if str(t) != '~':
+			temp += t
+		else:
+			result.append(temp)
+			temp = ''
+
+	return result
+
+def startForm(form_type, client):
+	form_type = str(form_type)
+	result = None
+
+	if form_type == 'am':
+		result = startAM(client)
+		openForm(form_type, result['am'], client)
+	elif form_type == 'mh':
+		result = startMH(client)
+		openForm(form_type, result['mh'], client)
+	elif form_type == 'sap':
+		result = getSAP(client)
+		openForm(form_type, result['sap'], client)
+	elif form_type = 'asi':
+		result = startASI(client)
+		openForm(form_type, result['asi'], client)
+
+	return result
+
+def fetchUrl(form_type, current_page, form):
+	url = None
+	form_type = str(form_type)
+
+	if form_type == 'am':
+		url = grabProperNextSection(form, current_page)
+	elif form_type == 'sap':
+		url = locateNextSection(form, current_page)
+	elif form_type == 'mh':
+		url = nextMhPage(form, current_page)
+	elif form_type == 'asi':
+		url = nextAsiPage(form, current_page)
+
+	return url
+
+def fetchContent(request, form_type, current_section):
+	current_section = str(current_section)
+	content = None
+
+	if form_type == 'am':
+		content = None
+	elif form_type == 'sap':
+		content = None
+	elif form_type == 'mh':
+		content = processMhData(request, current_section)
+	elif form_type == 'asi':
+		content = processAsiData(request, current_section)
+
+	return content
+
+def saveForm(request, form_type, section, form):
+	if form_type == 'am':
+		no = None
+	elif form_type == 'sap':
+		no = None
+	elif form_type == 'mh':
+		saveMentalHealth(request, section, form)
+	elif form_type == 'asi':
+		saveASI(request, section, form)
+
+def saveAndFinish(request, form_type, section, form):
+	if form_type == 'am':
+		no = None
+	elif form_type == 'sap':
+		no = None
+	elif form_type == 'mh':
+		saveMentalHealth(request, section, form)
+		finishMhSection(form, section)
+	elif form_type == 'asi':
+		saveASI(request, section, form)
+		setASIcomplete(section, form)
+
+def fetchForm(form_type, form_id):
+	form = None
+
+	if str(form_type) == 'am':
+		form = AngerManagement.objects.get(id=form_id)
+	elif str(form_type) == 'sap':
+		form = SAP.objects.get(id=form_id)
+	elif str(form_type) == 'mh':
+		form = MentalHealth.objects.get(id=form_id)
+	elif str(form_type) == 'asi':
+		form = ASI.objects.get(id=form_id)
+	elif str(form_type) == 'ut':
+		form = UrineResults.objects.get(id=form_id)
+
+	return form
+
+def deleteForm(form_type, form):
+	form_type = str(form_type)
+
+	if form_type == 'am':
+		deleteAM(form)
+	elif form_type == 'sap':
+		deleteSap(form)
+	elif form_type == 'mh':
+		deleteMh(form)
+	elif form_type == 'asi':
+		deleteASI(form)
+
+def refreshForm(form_type, form):
+	if str(form_type) == 'am':
+		refreshAM(form)
+	elif str(form_type) == 'sap':
+		refreshSap(form)
+	elif str(form_type) == 'mh':
+		refreshMh(form)
+	elif str(form_type) == 'asi':
+		refreshASI(form)
+
+
 
 
 
