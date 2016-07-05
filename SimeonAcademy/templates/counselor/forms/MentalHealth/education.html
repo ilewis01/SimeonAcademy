@@ -56,18 +56,18 @@
             <!-- PROGRESS -->
 <!-- 
             <tr>
-            	<td>
-            		<div id='sideProgress'>
-            			<span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-            		</div>
-            	</td>
+              <td>
+                <div id='sideProgress'>
+                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+                </div>
+              </td>
             </tr> -->
 
             <tr>
               <td>
                 <div class='{{class.mhHistory}}'>
                   <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhHistory');" name='mhHistoryBtn' id='mhHistoryBtn'>
+                  <a href="javascript: sideBarMh('/mh_demographic/');" name='mhHistoryBtn' id='mhHistoryBtn'>
                     History
                   </a>
                 </div>
@@ -80,7 +80,7 @@
               <td>
                 <div class='{{class.mhEducation}}'>
                   <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhEducation');" name='mhEducationBtn' id='mhEducationBtn'>
+                  <a href="#" name='mhEducationBtn' id='mhEducationBtn'>
                      Education
                   </a>
                 </div>
@@ -93,7 +93,7 @@
               <td>
                 <div class='{{class.mhBackground}}'>
                   <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhBackground');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
+                  <a href="javascript: sideBarMh('/mh_background/');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
                     Finance & Background
                   </a>
                 </div>
@@ -106,7 +106,7 @@
               <td>
                 <div class='{{class.mhStress}}'>
                   <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhStress');" name='mhStressBtn' id='mhStressBtn'>
+                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
                     Stressors
                   </a>
                 </div>
@@ -119,7 +119,7 @@
               <td>
                 <div class='{{class.mhFamily}}'>
                   <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhFamily');" name='mhFamilyBtn' id='mhFamilyBtn'>
+                  <a href="javascript: sideBarMh('/mh_familyHistory/');" name='mhFamilyBtn' id='mhFamilyBtn'>
                     Family History
                   </a>
                 </div>
@@ -132,7 +132,7 @@
               <td>
                 <div class='{{class.mhLegal}}'>
                   <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhLegal');" name='mhLegalBtn' id='mhLegalBtn'>
+                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
                     Legal History
                   </a>
                 </div>
@@ -143,7 +143,7 @@
               <td>
                 <div class='{{class.mhPsych}}'>
                   <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhPsych');" name='mhPsychBtn' id='mhPsychBtn'>
+                  <a href="javascript: sideBarMh('/mh_psych/');" name='mhPsychBtn' id='mhPsychBtn'>
                     Psychiatric History
                   </a>
                 </div>
@@ -154,7 +154,7 @@
               <td>
                 <div class='{{class.mhUse}}'>
                   <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('mhUse');" name='mhUseBtn' id='mhUseBtn'>
+                  <a href="javascript: sideBarMh('/mh_useTable/');" name='mhUseBtn' id='mhUseBtn'>
                     Use
                   </a>
                 </div>
@@ -167,7 +167,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('mh');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -188,17 +188,17 @@
             		<div class="row">                   
                   		<div class="col-md-6 col-sm-6">
                   			<div>
-                  				<form action='/mh_background/' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  					<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-                  					<input type='hidden' name='back' id='back' value='{{back}}'>
+                  				<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  					<!-- <input type='hidden' name='back' id='back' value='{{back}}'>
 				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
 				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
-				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'> -->
+
+                            		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                            		<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/mh_education/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
                             		<input type='hidden' name='exit_type' id='exit_type' value=''>
                             		<input type='hidden' name='save_this' id='save_this' value=''>
 

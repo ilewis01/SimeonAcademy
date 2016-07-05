@@ -5352,6 +5352,7 @@ function mh_continue_demographic() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 
 		if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
@@ -5455,6 +5456,7 @@ function proceed_mh_education() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5465,6 +5467,7 @@ function proceed_mh_background() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5510,6 +5513,7 @@ function proceed_mh_stress() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5560,6 +5564,7 @@ function proceed_mh_familyHistory() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5602,6 +5607,7 @@ function proceed_mh_legalHistory() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5612,6 +5618,7 @@ function proceed_mh_psychHistory() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5622,6 +5629,7 @@ function proceed_mh_useTable() {
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -5791,6 +5799,13 @@ function sideBarOption(page) {
 	}
 }
 
+function sideBarMh(page){
+	page = String(page);
+	form = document.getElementById('mh_form');
+	form.action = page;
+	form.submit();
+}
+
 function getFormElement(form_type) {
 	var result = '';
 
@@ -5802,6 +5817,15 @@ function getFormElement(form_type) {
 	}
 
 	return result;
+}
+
+function universal_generic_exit(form_type) {
+	var exit_type = document.getElementById('exit_type');
+	var form = document.getElementById('mh_form');
+
+	form.action = '/uni_generic_exit/';
+	exit_type.value = String(form_type);
+	form.submit();
 }
 
 

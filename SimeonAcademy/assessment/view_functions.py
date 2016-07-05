@@ -3769,6 +3769,20 @@ def getOrderedMhURLS():
 
 	return result
 
+def getOrderedMhButtonNames():
+	result = []
+
+	result.append('mhHistory_image')
+	result.append('mhEducation_image')
+	result.append('mhBackground_image')
+	result.append('mhStress_image')
+	result.append('mhFamily_image')
+	result.append('mhLegal_image')
+	result.append('mhPsych_image')
+	result.append('mhUse_image')
+
+	return result
+
 def getMhOrderedCompleteValues(mh):
 	result = []
 
@@ -3803,6 +3817,7 @@ def grabOrderedMh(mh):
 	url 		= getOrderedMhURLS()
 	complete 	= getMhOrderedCompleteValues(mh)
 	priority 	= getOrderedMhPriorityValue(mh)
+	btn 		= getOrderedMhButtonNames()
 
 	for i in range(len(name)):
 		data = {}
@@ -3810,7 +3825,9 @@ def grabOrderedMh(mh):
 		data['url'] 		= url[i]
 		data['complete'] 	= complete[i]
 		data['priority'] 	= priority[i]
+		data['btn'] 		= btn[i]
 		mh_list.append(data)
+
 	return mh_list
 
 def forceNextMhPage(mh):
@@ -3819,8 +3836,13 @@ def forceNextMhPage(mh):
 	mh_list = grabOrderedMh(mh)
 
 	for i in range(len(mh_list)):
-		if mh_list[i].data['complete'] == False:
+		if mh_list[i]['complete'] == False:
 			flag = i
+			break
+
+	for j in range(len(mh_list)):
+		if mh_list[j]['complete'] == False and j != flag:
+			result = mh_list[j]['url']
 			break
 
 	return result
@@ -3847,6 +3869,9 @@ def nextMhPage(mh, section):
 			result = forceNextMhPage(mh)
 		else:
 			result = nextSection
+
+	if result == None:
+		result = '/mh_viewForm/'
 
 	return result
 
@@ -3919,6 +3944,43 @@ def startMH(client):
 		result['mh'] = findIncompleteClientMh(client)
 
 	return result
+
+def grabMhClassesCSS(mh, m_page):
+	classes = {}
+	mh = grabOrderedMh(mh)
+	normal = 'sideBarMargin'
+	green = 'sideBarMarginChecked'
+	current = 'sideLinkSelected'
+
+	classes['mhHistory'] = processCompletedClass(mh[0]['complete'], mh[0]['url'], m_page, green, current, normal)
+	classes['mhEducation'] = processCompletedClass(mh[1]['complete'], mh[1]['url'], m_page, green, current, normal)
+	classes['mhBackground'] = processCompletedClass(mh[2]['complete'], mh[2]['url'], m_page, green, current, normal)
+	classes['mhStress'] = processCompletedClass(mh[3]['complete'], mh[3]['url'], m_page, green, current, normal)
+	classes['mhFamily'] = processCompletedClass(mh[4]['complete'], mh[4]['url'], m_page, green, current, normal)
+	classes['mhLegal'] = processCompletedClass(mh[5]['complete'], mh[5]['url'], m_page, green, current, normal)	
+	classes['mhPsych'] = processCompletedClass(mh[6]['complete'], mh[6]['url'], m_page, green, current, normal)
+	classes['mhUse'] = processCompletedClass(mh[7]['complete'], mh[7]['url'], m_page, green, current, normal)
+
+	return classes
+
+def grabMhSideImages(mh, page):
+	images = {}
+	check = "/static/images/green_check.png"
+	x = "/static/images/red_x.png"
+	progress = "/static/images/yellow_progress.png"
+	mhComps = grabOrderedMh(mh)
+
+	for m in mhComps:
+		if m['complete'] == True and page != m['url']:
+			images[m['btn']] = check
+		elif page == '/mh_viewForm/':
+			images[m['btn']] = check
+		elif page == m['url']:
+			images[m['btn']] = progress
+		else:
+			images[m['btn']] = x
+
+	return images
 
 def grabMhResidentIndex(selection):
 	result = None
@@ -4606,6 +4668,7 @@ def saveMhBackground(request, mh):
 	mh.save()
 
 def saveMhStress(request, mh):
+	print 'Saving Stressors...'
 	mh.stressors.deathStress 			= truePythonBool(request.POST.get('deathStress'));
 	mh.stressors.divorceStress 			= truePythonBool(request.POST.get('divorceStress'));
 	mh.stressors.moveStress 			= truePythonBool(request.POST.get('moveStress'));
@@ -4687,8 +4750,8 @@ def saveMhFamily(request, mh):
 	mh.familyHistory.highBloodPressure 	= request.POST.get('highBloodPressure')
 	mh.familyHistory.anger 				= request.POST.get('anger')
 
-	mh.familyComplete = True
 	mh.familyHistory.save()
+	mh.familyComplete = True
 	mh.save()
 
 def saveMhLegal(request, mh):
@@ -5066,7 +5129,7 @@ def deleteMh(mh):
 	mh.delete()
 	return result
 
-def processMhData(request, gField):
+def processMhData(request, current_section):
 	result = {}
 
 	session_id = request.POST.get('session_id', '')
@@ -5076,12 +5139,27 @@ def processMhData(request, gField):
 
 	session = ClientSession.objects.get(id=session_id)
 	mh = MentalHealth.objects.get(id=mh_id)
-	fields = getMhFields(mh, gField)
+	fields = getMhFields(mh, current_section)
 	json_data = json.dumps(fields)
+
+	if current_section == '/mh_demographic/':
+		states = State.objects.all().order_by('state')
+		mom_state = getOrderedStateIndex(fields['motherState'])
+		dad_state = getOrderedStateIndex(fields['fatherState'])
+		result['states'] = states
+		result['mom_state'] = mom_state
+		result['dad_state'] = dad_state
 
 	if save_this == 'true':
 		saveMentalHealth(request, section, mh)
 
+	next_url = nextMhPage(mh, current_section)
+	image = grabMhSideImages(mh, current_section)
+	classes = grabMhClassesCSS(mh, current_section)
+
+	result['class'] = classes
+	result['image'] = image
+	result['next_url'] = next_url
 	result['session'] = session
 	result['mh'] = mh
 	result['fields'] = fields

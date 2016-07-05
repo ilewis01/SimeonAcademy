@@ -52,7 +52,6 @@ urlpatterns = patterns('',
     url(r'^sap_other/$', 'assessment.views.sap_other'),
     url(r'^sap_sources/$', 'assessment.views.sap_sources'),
     url(r'^sap_viewForm/$', 'assessment.views.sap_viewForm'),
-    url(r'^sap_location/$', 'assessment.views.sap_location'),
 
     ## Anger Management Views
     url(r'^am_preliminary/$', 'assessment.views.am_preliminary'),
@@ -93,6 +92,7 @@ urlpatterns = patterns('',
 
     ##Global Views
     url(r'^generic_exit/$', 'assessment.views.generic_exit'),
+    url(r'^uni_generic_exit/$', 'assessment.views.uni_generic_exit'),
     url(r'^comfirmSessionEnd/$', 'assessment.views.comfirmSessionEnd'),
     url(r'^genericDelete/$', 'assessment.views.genericDelete'),
     url(r'^genericFormDeleted/$', 'assessment.views.genericFormDeleted'),

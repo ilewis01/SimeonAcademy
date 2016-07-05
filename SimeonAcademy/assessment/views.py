@@ -480,6 +480,63 @@ def comfirmSessionEnd(request):
 			return render_to_response('global/comfirmSessionEnd.html', content)
 
 @login_required(login_url='/index')
+def uni_generic_exit(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			# last_section = request.POST.get('save_section', '')
+			# form_type = request.POST.get('exit_type')
+			# session_id = request.POST.get('session_id', '')
+
+			# form = None
+			# type_header = None
+
+			# session = ClientSession.objects.get(id=session_id)
+
+			# if str(form_type) == 'am':
+			# 	am_id = request.POST.get('am_id', '')
+			# 	form = AngerManagement.objects.get(id=am_id)
+			# 	type_header = 'Anger Management'
+
+			# elif str(form_type) == 'sap':
+			# 	sap_id = request.POST.get('sap_id', '')
+			# 	form = SAP.objects.get(id=sap_id)
+			# 	prioritySapSection(last_section, form)
+			# 	type_header = "S.A.P"
+
+			# elif str(form_type) == 'mh':
+			# 	mh_id = request.POST.get('mh_id', '')
+			# 	form = MentalHealth.objects.get(id=mh_id)
+			# 	type_header = 'Mental Health'
+
+			# elif str(form_type) == 'ut':
+			# 	ut_id = request.POST.get(id=ut_id)
+			# 	form = UrineResults.objects.get(id=ut_id)
+			# 	type_header = 'Urine Test Analysis'
+
+			# ##Still need to do the other forms
+
+			# saveIncompleteSapForm(request, last_section, form)
+
+			# content['form'] = form
+			# content['type_header'] = type_header
+			# content['session'] = session
+			# content['form_type'] = form_type
+			# content['last_section'] = last_section
+			# content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('global/exit.html', content)
+
+@login_required(login_url='/index')
 def generic_exit(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -651,7 +708,16 @@ def genericFormDeleted(request):
 
 
 
-## ANGER MANAGEMENT VIEWS---------------------------------------------------------------------------------------------------
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+###########################################################################################################################################
+#----------------------------------------------------------------- AM VIEWS --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
 @login_required(login_url='/index')
 def exit_am(request):
 	user = request.user
@@ -1722,7 +1788,16 @@ def am_worst(request):
 			content['title'] = "Anger Management Assessment | Simeon Academy"
 			return render_to_response('counselor/forms/AngerManagement/worstEpisodes.html', content)
 
-## MENTAL HEALTH VIEWS----------------------------------------------------------------------------------------------------------------
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+###########################################################################################################################################
+#----------------------------------------------------------------- MH VIEWS --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
 @login_required(login_url='/index')
 def mh_preliminary(request):
 	user = request.user
@@ -1781,27 +1856,153 @@ def mh_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
+			content = universalContent(request, 'mh', '/mh_demographic/')
+			return render_to_response('counselor/forms/MentalHealth/demographic.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
+@login_required(login_url='/index')
+def mh_education(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
 
-			states = State.objects.all().order_by('state')
-			fields = getMhFields(mh, '/mh_demographic/')
-			json_data = json.dumps(fields)
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
 
-			mom_state = getOrderedStateIndex(fields['motherState'])
-			dad_state = getOrderedStateIndex(fields['fatherState'])
+		else:
+			content = universalContent(request, 'mh', '/mh_education/')
+			return render_to_response('counselor/forms/MentalHealth/education.html', content, context_instance=RequestContext(request))
 
-			content['mh'] = mh
-			content['session'] = session
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['mom_state'] = mom_state
-			content['dad_state'] = dad_state
-			content['states'] = states
-			return render_to_response('counselor/forms/MentalHealth/demographic.html', content)
+@login_required(login_url='/index')
+def mh_background(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_background/')
+			return render_to_response('counselor/forms/MentalHealth/background.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_stress(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_stress/')
+			return render_to_response('counselor/forms/MentalHealth/stressors.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_familyHistory(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_familyHistory/')
+			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_legal(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_legal/')
+			return render_to_response('counselor/forms/MentalHealth/legal.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_psych(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_psych/')
+			return render_to_response('counselor/forms/MentalHealth/psych.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_useTable(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_useTable/')
+			return render_to_response('counselor/forms/MentalHealth/useTable.html', content, context_instance=RequestContext(request))
+
+
+@login_required(login_url='/index')
+def mh_viewForm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'mh', '/mh_viewForm/')
+			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def mhDemoOpPage(request):
@@ -2032,8 +2233,19 @@ def verify_mhOp(request):
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/verify_mhOp.html', content)
 
+
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+###########################################################################################################################################
+#---------------------------------------------------------------- ASI VIEWS --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
 @login_required(login_url='/index')
-def mh_education(request):
+def asi_demographic(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -2047,154 +2259,21 @@ def mh_education(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			mh_id = request.POST.get('mh_id', '')
-			save_this = request.POST.get('save_this', '')
-			section = request.POST.get('save_section', '')
+			client = request.POST.get('client_ID', '')
+			content['client'] = client
+			content['title'] = "Addiction Severity Index | Simeon Academy"
+			return render_to_response('counselor/forms/ASI/asi_demographic.html', content)
 
-			session = ClientSession.objects.get(id=session_id)
-			mh = MentalHealth.objects.get(id=mh_id)
-			fields = getMhFields(mh, '/mh_education/')
-			json_data = json.dumps(fields)
-
-			if save_this == 'true':
-				saveMentalHealth(request, section, mh)
-
-			content['session'] = session
-			content['mh'] = mh
-			content['fields'] = fields
-			content['json_data'] = json_data
-			content['title'] = "Simeon Academy | Mental Health Assessment"
-			return render_to_response('counselor/forms/MentalHealth/education.html', content)
-
-@login_required(login_url='/index')
-def mh_background(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_background/')
-			return render_to_response('counselor/forms/MentalHealth/background.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def mh_stress(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_stress/')
-			return render_to_response('counselor/forms/MentalHealth/stressors.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def mh_familyHistory(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_familyHistory/')
-			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def mh_legal(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_legal/')
-			return render_to_response('counselor/forms/MentalHealth/legal.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def mh_psych(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_psych/')
-			return render_to_response('counselor/forms/MentalHealth/psych.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def mh_useTable(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_useTable/')
-			return render_to_response('counselor/forms/MentalHealth/useTable.html', content, context_instance=RequestContext(request))
+###########################################################################################################################################
+###########################################################################################################################################
+###########################################################################################################################################
 
 
-@login_required(login_url='/index')
-def mh_viewForm(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = universalContent(request, 'mh', '/mh_viewForm/')
-			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content, context_instance=RequestContext(request))
-
-## SAP VIEWS------------------------------------------------------------------
+###########################################################################################################################################
+###########################################################################################################################################
+#---------------------------------------------------------------- SAP VIEWS --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
 
 @login_required(login_url='/index')
 def sap_preliminary(request):
@@ -2886,26 +2965,7 @@ def discharge_viewForm(request):
 			content['title'] = "Simeon Academy | Discharge"
 			return render_to_response('counselor/forms/Discharge/viewForm.html', content)
 
-## ADDICTION SEVERITY INDEX-----------------------------------------------------------
-@login_required(login_url='/index')
-def asi_demographic(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
 
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			client = request.POST.get('client_ID', '')
-			content['client'] = client
-			content['title'] = "Addiction Severity Index | Simeon Academy"
-			return render_to_response('counselor/forms/ASI/asi_demographic.html', content)
 
 
 
