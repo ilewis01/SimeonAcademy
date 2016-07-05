@@ -3738,8 +3738,11 @@ def refreshSap(sap):
 
 	sap.save()
 
-############################################################################################################################
-#------------------------------------------------ MENTAL HEALTH ------------------------------------------------------------
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#-----------------------------------------------------------  MENTAL HEALTH --------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
 
 def getOrderedMhNames():
 	result = []
@@ -5192,8 +5195,656 @@ def processMhData(request, current_section):
 	return result
 
 
-############################################################################################################################
-############################################################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+###########################################################################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#---------------------------------------------------------------- ASI VIEWS --------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+def get_asi_names():
+	result = []
+	result.append('admin')
+	result.append('general')
+	result.append('medical')
+	result.append('employment')
+	result.append('drug1')
+	result.append('drug2')
+	result.append('legal')
+	result.append('family')
+	result.append('social1')
+	result.append('social2')
+	result.append('psych')
+	return result
+
+def get_asi_urls():
+	result = []
+	result.append('/asi_admin/')
+	result.append('/asi_general/')
+	result.append('/asi_medical/')
+	result.append('/asi_employment/')
+	result.append('/asi_drug1/')
+	result.append('/asi_drug2/')
+	result.append('/asi_legal/')
+	result.append('/asi_family/')
+	result.append('/asi_social1/')
+	result.append('/asi_social2/')
+	result.append('/asi_psych/')
+	return result
+
+def get_asi_butons():
+	result = []
+	result.append('asi_admin_image')
+	result.append('asi_general_image')
+	result.append('asi_medical_image')
+	result.append('asi_employment_image')
+	result.append('asi_drug1_image')
+	result.append('asi_drug2_image')
+	result.append('asi_legal_image')
+	result.append('asi_family_image')
+	result.append('asi_social1_image')
+	result.append('asi_social2_image')
+	result.append('asi_psych_image')
+	return result
+
+def get_asi_complete(asi):
+	result = []
+	result.append(asi.adminComplete)
+	result.append(asi.generalComplete)
+	result.append(asi.medicalComplete)
+	result.append(asi.employmentComplete)
+	result.append(asi.drug1Complete)
+	result.append(asi.drug2Complete)
+	result.append(asi.legalComplete)
+	result.append(asi.familyComplete)
+	result.append(asi.social1Complete)
+	result.append(asi.social2Complete)
+	result.append(asi.psychComplete)
+	return result
+
+def get_asi_priority(asi):
+	result = []
+	result.append(asi.adminPriority)
+	result.append(asi.generalPriority)
+	result.append(asi.medicalPriority)
+	result.append(asi.employmentPriority)
+	result.append(asi.drug1Priority)
+	result.append(asi.drug2Priority)
+	result.append(asi.legalPriority)
+	result.append(asi.familyPriority)
+	result.append(asi.social1Priority)
+	result.append(asi.social2Priority)
+	result.append(asi.psychPriority)
+	return result
+
+def get_asi_parameters(asi):
+	result = []
+	name = get_asi_names()
+	url = get_asi_urls()
+	btn = get_asi_butons()
+	complete = get_asi_complete(asi)
+	priority = get_asi_priority(asi)
+
+	for l in range(len(name)):
+		data = {}
+		data['name'] = name[l]
+		data['url'] = url[l]
+		data['btn'] = btn[l]
+		data['complete'] = complete[l]
+		data['priority'] = priority[l]
+		result.append(data)
+	return result
+
+def grabASIClassesCSS(asi, m_page):
+	classes = {}
+	asi = get_asi_parameters(asi)
+	normal = 'sideBarMargin'
+	green = 'sideBarMarginChecked'
+	current = 'sideLinkSelected'
+
+	classes['asiAdmin'] = processCompletedClass(asi[0]['complete'], asi[0]['url'], m_page, green, current, normal)
+	classes['asiGeneral'] = processCompletedClass(asi[1]['complete'], asi[1]['url'], m_page, green, current, normal)
+	classes['asiMedical'] = processCompletedClass(asi[2]['complete'], asi[2]['url'], m_page, green, current, normal)
+	classes['asiEmployment'] = processCompletedClass(asi[3]['complete'], asi[3]['url'], m_page, green, current, normal)
+	classes['asiDrug1'] = processCompletedClass(asi[4]['complete'], asi[4]['url'], m_page, green, current, normal)
+	classes['asiDrug2'] = processCompletedClass(asi[5]['complete'], asi[5]['url'], m_page, green, current, normal)	
+	classes['asiLegal'] = processCompletedClass(asi[6]['complete'], asi[6]['url'], m_page, green, current, normal)
+	classes['asiFamily'] = processCompletedClass(asi[7]['complete'], asi[7]['url'], m_page, green, current, normal)
+	classes['asiSocial1'] = processCompletedClass(asi[8]['complete'], asi[8]['url'], m_page, green, current, normal)
+	classes['asiSocial2'] = processCompletedClass(asi[9]['complete'], asi[9]['url'], m_page, green, current, normal)
+	classes['asiPsych'] = processCompletedClass(asi[10]['complete'], asi[10]['url'], m_page, green, current, normal)
+
+	return classes
+
+def grabASISideImages(asi, page):
+	images = {}
+	check = "/static/images/green_check.png"
+	x = "/static/images/red_x.png"
+	progress = "/static/images/yellow_progress.png"
+	asiComps = get_asi_parameters(asi)
+
+	for a in asiComps:
+		if a['complete'] == True and page != a['url']:
+			images[a['btn']] = check
+		elif page == '/asi_viewForm/':
+			images[a['btn']] = check
+		elif page == a['url']:
+			images[a['btn']] = progress
+		else:
+			images[a['btn']] = x
+
+	return images
+
+def hasIncompleteASI(client):
+	exist = False
+	asis = AIS.objects.all()
+
+	for a in asis:
+		if a.client == client and a.AIS_Complete == False:
+			exist = True
+			break
+	return exist
+
+def findIncompleteClientASI(client):
+	asis = AIS.objects.all()
+	result = None
+
+	for a in asis:
+		if a.client == client and a.AIS_Complete == False:
+			result = a
+			break
+	return result
+
+def newASI(the_client):
+	the_date = datetime.now()
+	date = the_date.date()
+	time = the_date.time()
+
+	asi = AIS(client=the_client, date_of_assessment=date, startTime=time)
+
+	admin 		= AIS_Admin(clientID=the_client.clientID)	
+	general 	= AIS_General(clientID=the_client.clientID)
+	medical 	= AIS_Medical(clientID=the_client.clientID)
+	employment 	= AIS_Employment(clientID=the_client.clientID)
+	drug1 		= AIS_Drug1(clientID=the_client.clientID)
+	drug2 		= AIS_Drug2(clientID=the_client.clientID)
+	legal 		= AIS_Legal(clientID=the_client.clientID)
+	family 		= AIS_Family(clientID=the_client.clientID)
+	social1 	= AIS_Social1(clientID=the_client.clientID)
+	social2 	= AIS_Social2(clientID=the_client.clientID)
+	psych 		= AIS_Psych(clientID=the_client.clientID)
+
+	admin.save()
+	general.save()
+	medical.save()
+	employment.save()
+	drug1.save()
+	drug2.save()
+	legal.save()
+	family.save()
+	social1.save()
+	social2.save()
+	psych.save()
+
+	asi.admin 		= admin
+	asi.general 	= general
+	asi.medical 	= medical
+	asi.employment 	= employment
+	asi.drug1 		= drug1
+	asi.drug2 		= drug2
+	asi.legal 		= legal
+	asi.family 		= family
+	asi.social1 	= social1
+	asi.social2 	= social2
+	asi.psych 		= psych
+
+	asi.isOpen = True
+	asi.save()
+
+	return asi
+
+
+def startASI(client):
+	result = {}
+
+	if hasIncompleteASI(client) == False:
+		result['isNew'] = True
+		result['asi'] = newASI(client)
+
+	else:
+		result['isNew'] = False
+		result['asi'] = findIncompleteClientASI(client)
+
+	return result
+
+def grabAsiAdminFields(asi):
+	result = {}
+	result['g1'] = asi.admin.g1
+	result['g2'] = asi.admin.g2
+	result['g3'] = asi.admin.g3
+	result['g4'] = asi.admin.g4
+	result['g8'] = asi.admin.g8
+	result['g9'] = asi.admin.g9
+	result['g10'] = asi.admin.g10
+	result['g11'] = asi.admin.g11
+	result['g12'] = asi.admin.g12
+	return result
+
+def grabAsiGeneralFields(asi):
+	result = {}
+	result['g13'] 		= asi.general.g13
+	result['g14yrs'] 	= asi.general.g14yrs
+	result['g14mos'] 	= asi.general.g14mos
+	result['g15'] 		= asi.general.g15
+	result['g16mth'] 	= asi.general.g16mth
+	result['g16day'] 	= asi.general.g16day
+	result['g16year'] 	= asi.general.g16year
+	result['g17'] 		= asi.general.g17
+	result['g18'] 		= asi.general.g18
+	result['g19'] 		= asi.general.g19
+	result['g20'] 		= asi.general.g20
+	result['g21'] 		= asi.general.g21
+	result['g22'] 		= asi.general.g22
+	result['g23'] 		= asi.general.g23
+	result['g24'] 		= asi.general.g24
+	result['g25'] 		= asi.general.g25
+	result['g26'] 		= asi.general.g26
+	result['g27'] 		= asi.general.g27
+	result['g28'] 		= asi.general.g28
+	result['medical'] 	= asi.general.medical
+	result['employ'] 	= asi.general.employ
+	result['alcohol'] 	= asi.general.alcohol
+	result['drug'] 		= asi.general.drug
+	result['legal'] 	= asi.general.legal
+	result['family'] 	= asi.general.family
+	result['psych'] 	= asi.general.psych
+	return result
+
+def grabAsiMedicalFields(asi):
+	result = {}
+	result['m1'] = asi.medical.m1
+	result['m2yrs'] = asi.medical.m2yrs
+	result['m2mth'] = asi.medical.m2mth
+	result['m3'] = asi.medical.m3
+	result['m4'] = asi.medical.m4
+	result['m5'] = asi.medical.m5
+	result['m5Exp'] = asi.medical.m5Exp
+	result['m6'] = asi.medical.m6
+	result['m7'] = asi.medical.m7
+	result['m8'] = asi.medical.m8
+	result['m9'] = asi.medical.m9
+	result['m10'] = asi.medical.m10
+	result['m11'] = asi.medical.m11
+	result['comments'] = asi.medical.comments
+	return result
+
+def grabAsiEmploymentFields(asi):
+	result = {}
+	result['e1yrs'] = asi.employment.e1yrs
+	result['e1mth'] = asi.employment.e1mth
+	result['e2'] = asi.employment.e2
+	result['e3'] = asi.employment.e3
+	result['e3Exp'] = asi.employment.e3Exp
+	result['e4'] = asi.employment.e4
+	result['e5'] = asi.employment.e5
+	result['e5Exp'] = asi.employment.e5Exp
+	result['e6yrs'] = asi.employment.e6yrs
+	result['e6mth'] = asi.employment.e6mth
+	result['e7'] = asi.employment.e7
+	result['e7Exp'] = asi.employment.e7Exp
+	result['e8'] = asi.employment.e8
+	result['e9'] = asi.employment.e9
+	result['e10'] = asi.employment.e10
+	result['e11'] = asi.employment.e11
+	result['e12'] = asi.employment.e12
+	result['e13'] = asi.employment.e13
+	result['e14'] = asi.employment.e14
+	result['e15'] = asi.employment.e15
+	result['e16'] = asi.employment.e16
+	result['e17'] = asi.employment.e17
+	result['e18'] = asi.employment.e18
+	result['e19'] = asi.employment.e19
+	result['e20'] = asi.employment.e20
+	result['e21'] = asi.employment.e21
+	result['e22'] = asi.employment.e22
+	result['e23'] = asi.employment.e23
+	result['e24'] = asi.employment.e24
+	result['comments'] = asi.employment.comments
+	
+	return result
+
+def grabAsiDrug1Fields(asi):
+	result = {}
+	result['d1Day'] = asi.drug1.d1Day
+	result['d1Year'] = asi.drug1.d1Year
+	result['d1Route'] = asi.drug1.d1Route
+
+	result['d2Day'] = asi.drug1.d2Day
+	result['d2Year'] = asi.drug1.d2Year
+	result['d2Route'] = asi.drug1.d2Route
+
+	result['d3Day'] = asi.drug1.d3Day
+	result['d3Year'] = asi.drug1.d3Year
+	result['d3Route'] = asi.drug1.d3Route
+
+	result['d4Day'] = asi.drug1.d4Day
+	result['d4Year'] = asi.drug1.d4Year
+	result['d4Route'] = asi.drug1.d4Route
+
+	result['d5Day'] = asi.drug1.d5Day
+	result['d5Year'] = asi.drug1.d5Year
+	result['d5Route'] = asi.drug1.d5Route
+
+	result['d6Day'] = asi.drug1.d6Day
+	result['d6Year'] = asi.drug1.d6Year
+	result['d6Route'] = asi.drug1.d6Route
+
+	result['d7Day'] = asi.drug1.d7Day
+	result['d7Year'] = asi.drug1.d7Year
+	result['d7Route'] = asi.drug1.d7Route
+
+	result['d8Day'] = asi.drug1.d8Day
+	result['d8Year'] = asi.drug1.d8Year
+	result['d8Route'] = asi.drug1.d8Route
+
+	result['d9Day'] = asi.drug1.d9Day
+	result['d9Year'] = asi.drug1.d9Year
+	result['d9Route'] = asi.drug1.d9Route
+
+	result['d10Day'] = asi.drug1.d10Day
+	result['d10Year'] = asi.drug1.d10Year
+	result['d10Route'] = asi.drug1.d10Route
+
+	result['d11Day'] = asi.drug1.d11Day
+	result['d11Year'] = asi.drug1.d11Year
+	result['d11Route'] = asi.drug1.d11Route
+
+	result['d12Day'] = asi.drug1.d12Day
+	result['d12Year'] = asi.drug1.d12Year
+	result['d12Route'] = asi.drug1.d12Route
+
+	result['d13'] = asi.drug1.d13
+	return result
+
+def grabAsiDrug2Fields(asi):
+	result = {}
+	result['d14'] = asi.drug2.d14
+	result['d15'] = asi.drug2.d15
+	result['d16'] = asi.drug2.d16
+	result['d17'] = asi.drug2.d17
+	result['d18'] = asi.drug2.d18
+	result['d19'] = asi.drug2.d19
+	result['d20'] = asi.drug2.d20
+	result['d21'] = asi.drug2.d21
+	result['d22'] = asi.drug2.d22
+	result['d23'] = asi.drug2.d23
+	result['d24'] = asi.drug2.d24
+	result['d25'] = asi.drug2.d25
+	result['d26'] = asi.drug2.d26
+	result['d27'] = asi.drug2.d27
+	result['d28'] = asi.drug2.d28
+	result['d29'] = asi.drug2.d29
+	result['d30'] = asi.drug2.d30
+	result['d31'] = asi.drug2.d31
+	result['d32'] = asi.drug2.d32
+	result['d33'] = asi.drug2.d33
+	result['d34'] = asi.drug2.d34
+	result['d35'] = asi.drug2.d35
+	result['comments'] = asi.drug2.comments
+	return result
+
+def grabAsiLegalFields(asi):
+	result = {}
+	result['l1'] = asi.legal.l1
+	result['l2'] = asi.legal.l2
+	result['l3'] = asi.legal.l3
+	result['l4'] = asi.legal.l4
+	result['l5'] = asi.legal.l5
+	result['l6'] = asi.legal.l6
+	result['l7'] = asi.legal.l7
+	result['l8'] = asi.legal.l8
+	result['l9'] = asi.legal.l9
+	result['l10'] = asi.legal.l10
+	result['l11'] = asi.legal.l11
+	result['l12'] = asi.legal.l12
+	result['l13'] = asi.legal.l13
+	result['l14'] = asi.legal.l14
+	result['l15'] = asi.legal.l15
+	result['l16'] = asi.legal.l16
+	result['l17'] = asi.legal.l17
+	result['l18'] = asi.legal.l18
+	result['l19'] = asi.legal.l19
+	result['l20'] = asi.legal.l20
+	result['l21'] = asi.legal.l21
+	result['l22'] = asi.legal.l22
+	result['l23'] = asi.legal.l23
+	result['l24'] = asi.legal.l24
+	result['l25'] = asi.legal.l25
+	result['l26'] = asi.legal.l26
+	result['l27'] = asi.legal.l27
+	result['l28'] = asi.legal.l28
+	result['l29'] = asi.legal.l29
+	result['l30'] = asi.legal.l30
+	result['l31'] = asi.legal.l31
+	result['l32'] = asi.legal.l32
+	result['comments'] = asi.legal.comments
+	return result
+
+def grabAsiFamilyFields(asi):
+	result = {}
+	result['h1a'] = asi.family.h1a
+	result['h1d'] = asi.family.h1d
+	result['h1p'] = asi.family.h1p
+
+	result['h1a'] = asi.family.h2a
+	result['h1d'] = asi.family.h2d
+	result['h1p'] = asi.family.h2p
+
+	result['h1a'] = asi.family.h3a
+	result['h1d'] = asi.family.h3d
+	result['h1p'] = asi.family.h3p
+
+	result['h1a'] = asi.family.h4a
+	result['h1d'] = asi.family.h4d
+	result['h1p'] = asi.family.h4p
+
+	result['h1a'] = asi.family.h5a
+	result['h1d'] = asi.family.h5d
+	result['h1p'] = asi.family.h5p
+
+	result['h1a'] = asi.family.h6a
+	result['h1d'] = asi.family.h6d
+	result['h1p'] = asi.family.h6p
+
+	result['h1a'] = asi.family.h7a
+	result['h1d'] = asi.family.h7d
+	result['h1p'] = asi.family.h7p
+
+	result['h1a'] = asi.family.h8a
+	result['h1d'] = asi.family.h8d
+	result['h1p'] = asi.family.h8p
+
+	result['h1a'] = asi.family.h9a
+	result['h1d'] = asi.family.h9d
+	result['h1p'] = asi.family.h9p
+
+	result['h1a'] = asi.family.h10a
+	result['h1d'] = asi.family.h10d
+	result['h1p'] = asi.family.h10p
+
+	result['h1a'] = asi.family.h11a
+	result['h1d'] = asi.family.h11d
+	result['h1p'] = asi.family.h11p
+
+	result['h1a'] = asi.family.h12a
+	result['h1d'] = asi.family.h12d
+	result['h1p'] = asi.family.h12p
+	return result
+
+def grabAsiSocial1Fields(asi):
+	result = {}
+	result['f1'] = asi.social1.f1
+	result['f2yrs'] = asi.social1.f2yrs
+	result['f2mth'] = asi.social1.f2mth
+	result['f3'] = asi.social1.f3
+	result['f4'] = asi.social1.f4
+	result['f5yrs'] = asi.social1.f5yrs
+	result['f5mth'] = asi.social1.f5mth
+	result['f6'] = asi.social1.f6
+	result['f7'] = asi.social1.f7
+	result['f8'] = asi.social1.f8
+	result['f9'] = asi.social1.f9
+	result['f10'] = asi.social1.f10
+	result['f11'] = asi.social1.f11
+	result['f30'] = asi.social1.f30
+	result['f31'] = asi.social1.f31
+	result['f32'] = asi.social1.f32
+	result['f33'] = asi.social1.f33
+	result['f34'] = asi.social1.f34
+	result['f35'] = asi.social1.f35
+	result['f36'] = asi.social1.f36
+	result['f37'] = asi.social1.f37
+	result['f38'] = asi.social1.f38
+	result['comments'] = asi.social1.comments
+	return result
+
+def grabAsiSocial2Fields(asi):
+	result = {}
+	result['f12'] = asi.social2.f12
+	result['f13'] = asi.social2.f13
+	result['f14'] = asi.social2.f14
+	result['f16'] = asi.social2.f16
+	result['f17'] = asi.social2.f17
+
+	result['f18d'] = asi.social2.f18d
+	result['f18y'] = asi.social2.f18y
+	result['f19d'] = asi.social2.f19d
+	result['f19y'] = asi.social2.f19y
+	result['f20d'] = asi.social2.f20d
+	result['f20y'] = asi.social2.f20y
+	result['f21d'] = asi.social2.f21d
+	result['f21y'] = asi.social2.f21y
+	result['f22d'] = asi.social2.f22d
+	result['f22y'] = asi.social2.f22y
+	result['f23d'] = asi.social2.f23d
+	result['f23y'] = asi.social2.f23y
+	result['f24d'] = asi.social2.f24d
+	result['f24y'] = asi.social2.f24y
+	result['f25d'] = asi.social2.f25d
+	result['f25y'] = asi.social2.f25y
+	result['f26d'] = asi.social2.f26d
+	result['f26y'] = asi.social2.f26y
+	
+	result['fa18'] = asi.social2.fa18
+	result['fa19'] = asi.social2.fa19
+	result['fa20'] = asi.social2.fa20
+	result['fa21'] = asi.social2.fa21
+	result['fa22'] = asi.social2.fa22
+	result['fa23'] = asi.social2.fa23
+	result['fa24'] = asi.social2.fa24
+	result['fa25'] = asi.social2.fa25
+	result['fa26'] = asi.social2.fa26
+
+	result['f18dayBad'] = asi.social2.fdayBad18
+	result['f19dayBad'] = asi.social2.fdayBad19
+	result['f20dayBad'] = asi.social2.fdayBad20
+	result['f21dayBad'] = asi.social2.fdayBad21
+	result['f22dayBad'] = asi.social2.fdayBad22
+	result['f23dayBad'] = asi.social2.fdayBad23
+	result['f24dayBad'] = asi.social2.fdayBad24
+	result['f25dayBad'] = asi.social2.fdayBad25
+	result['f26dayBad'] = asi.social2.fdayBad26
+
+	result['f18yearBad'] = asi.social2.fyearBad18
+	result['f19yearBad'] = asi.social2.fyearBad19
+	result['f20yearBad'] = asi.social2.fyearBad20
+	result['f21yearBad'] = asi.social2.fyearBad21
+	result['f22yearBad'] = asi.social2.fyearBad22
+	result['f23yearBad'] = asi.social2.fyearBad23
+	result['f24yearBad'] = asi.social2.fyearBad24
+	result['f25yearBad'] = asi.social2.fyearBad25
+	result['f26yearBad'] = asi.social2.fyearBad26
+
+	result['comments'] = asi.social2.comments
+	return result
+
+def grabAsiPsychFields(asi):
+	result = {}
+	result['p1'] = asi.psych.p1
+	result['p2'] = asi.psych.p2
+	result['p3'] = asi.psych.p3
+
+	result['p4d'] = asi.psych.p4d
+	result['p5d'] = asi.psych.p5d
+	result['p6d'] = asi.psych.p6d
+	result['p7d'] = asi.psych.p7d
+	result['p8d'] = asi.psych.p8d
+	result['p9d'] = asi.psych.p9d
+	result['p10d'] = asi.psych.p10d
+	result['p11d'] = asi.psych.p11d
+
+	result['p4y'] = asi.psych.p4y
+	result['p5y'] = asi.psych.p5y
+	result['p6y'] = asi.psych.p6y
+	result['p7y'] = asi.psych.p7y
+	result['p8y'] = asi.psych.p8y
+	result['p9y'] = asi.psych.p9y
+	result['p10y'] = asi.psych.p10y
+	result['p11y'] = asi.psych.p11y
+
+	result['p12'] = asi.psych.p12
+	result['p13'] = asi.psych.p13
+	result['p14'] = asi.psych.p14
+	result['p15'] = asi.psych.p15
+	result['p16'] = asi.psych.p16
+	result['p17'] = asi.psych.p17
+	result['p18'] = asi.psych.p18
+	result['p19'] = asi.psych.p19
+	result['p20'] = asi.psych.p20
+	result['p21'] = asi.psych.p21
+	result['p22'] = asi.psych.p22
+	result['p23'] = asi.psych.p23
+	result['comments'] = asi.psych.comments
+	return result
+
+def grabASIFields(asi, section):
+	section = str(section)
+	result = {}
+
+	if section == '/asi_admin/':
+		result = grabAsiAdminFields(asi)
+	elif section == '/asi_general/':
+		result = grabAsiGeneralFields(asi)
+	elif section == '/asi_medical/':
+		result = grabAsiMedicalFields(asi)
+	elif section == '/asi_employment/':
+		result = grabAsiEmploymentFields(asi)
+	elif section == '/asi_drug1/':
+		result = grabAsiDrug1Fields(asi)
+	elif section == '/asi_drug2/':
+		result = grabAsiDrug2Fields(asi)
+	elif section == '/asi_legal/':
+		result = grabAsiLegalFields(asi)
+	elif section == '/asi_family/':
+		result = grabAsiFamilyFields(asi)
+	elif section == '/asi_social1/':
+		result = grabAsiSocial1Fields(asi)
+	elif section == '/asi_social2/':
+		result = grabAsiSocial2Fields(asi)
+	elif section == '/asi_psych/':
+		result = grabAsiPsychFields(asi)
+
+	return result
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+###########################################################################################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 
 ##______________________OPEN FORMS_____________________________________________________
@@ -5470,6 +6121,39 @@ def universalContent(request, form_type, gField):
 		result = processMhData(request, gField)
 
 	return result
+
+def universalGrabFields(form_type, section, form):
+	form_type = str(form_type)
+	section = str(section)
+	result = {}
+
+	if form_type == 'am':
+		result = getAMFields(form, section)
+	elif form_type == 'mh':
+		result = getMhFields(form, section)
+	elif form_type == 'asi':
+		result = grabASIFields(form, section)
+	elif form_type == 'sap':
+		result = None
+
+	return result
+
+def universalStartForm(form_type, client):
+	form_type = str(form_type)
+	result = None
+
+	if form_type == 'am':
+		result = startAM(client)
+	elif form_type == 'mh':
+		result = startMH(client)
+	elif form_type == 'sap':
+		result = None
+	elif form_type = 'asi':
+		result = startASI(client)
+
+	return result
+
+
 
 
 	##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED

@@ -1410,7 +1410,7 @@ class AIS_Psych(models.Model):
 	p21 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	p22 = models.BooleanField(default=False, blank=True)
 	p23 = models.BooleanField(default=False, blank=True)
-
+	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)

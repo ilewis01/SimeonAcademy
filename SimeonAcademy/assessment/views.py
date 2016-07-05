@@ -43,8 +43,9 @@ grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields,
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
-startMH, getOrderedStateIndex, setGlobalID, getGlobalID, decodeCharfield, \
-nextMhPage, universalContent, universalSaveForm, universalSaveFinishForm
+getOrderedStateIndex, setGlobalID, getGlobalID, decodeCharfield, \
+nextMhPage, universalContent, universalSaveForm, universalSaveFinishForm, \
+universalGrabFields, universalStartForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -1819,7 +1820,7 @@ def mh_preliminary(request):
 			client = Client.objects.get(id=client_id)
 			session = ClientSession.objects.get(id=session_id)
 
-			action = startMH(client)
+			action = universalStartForm('mh', client)
 			mh = action['mh']
 			setGlobalID(mh.id)
 
@@ -2240,9 +2241,9 @@ def verify_mhOp(request):
 
 
 ###########################################################################################################################################
-###########################################################################################################################################
+#*****************************************************************************************************************************************#
 #---------------------------------------------------------------- ASI VIEWS --------------------------------------------------------------#
-###########################################################################################################################################
+#*****************************************************************************************************************************************#
 ###########################################################################################################################################
 @login_required(login_url='/index')
 def asi_preliminary(request):
