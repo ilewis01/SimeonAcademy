@@ -88,7 +88,19 @@ urlpatterns = patterns('',
     url(r'^discharge_viewForm/$', 'assessment.views.discharge_viewForm'),
 
     ##Addiction Severity Views
-    url(r'^asi_demographic/$', 'assessment.views.asi_demographic'),
+    url(r'^asi_preliminary/$', 'assessment.views.asi_preliminary'),
+    url(r'^asi_admin/$', 'assessment.views.asi_admin'),
+    url(r'^asi_general/$', 'assessment.views.asi_general'),
+    url(r'^asi_medical/$', 'assessment.views.asi_medical'),
+    url(r'^asi_employment/$', 'assessment.views.asi_employment'),
+    url(r'^asi_drug1/$', 'assessment.views.asi_drug1'),
+    url(r'^asi_drug2/$', 'assessment.views.asi_drug2'),
+    url(r'^asi_legal/$', 'assessment.views.asi_legal'),
+    url(r'^asi_family/$', 'assessment.views.asi_family'),
+    url(r'^asi_social1/$', 'assessment.views.asi_social1'),
+    url(r'^asi_social2/$', 'assessment.views.asi_social2'),
+    url(r'^asi_psych/$', 'assessment.views.asi_psych'),
+    url(r'^asi_viewForm/$', 'assessment.views.asi_viewForm'),
 
     ##Global Views
     url(r'^generic_exit/$', 'assessment.views.generic_exit'),

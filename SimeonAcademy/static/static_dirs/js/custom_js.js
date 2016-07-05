@@ -623,6 +623,16 @@ function discharge() {
 	document.getElementById('discharge').submit();
 }
 
+function close_client_session() {
+	document.getElementById('closeSession').submit();
+}
+
+function return_to_options2() {
+	form = document.getElementById('mh_instructions');
+	form.action = '/clientOptions/';
+	form.submit();
+}
+
 function goBackPage(back_url) {
 	var form = document.getElementById('am_demo');
 	form.action = back_url;

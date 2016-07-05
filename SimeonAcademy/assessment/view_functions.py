@@ -20,7 +20,8 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
-Global_ID
+Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych
 
 def setGlobalID(the_id):
 	gloVar = Global_ID.objects.get(id=1)

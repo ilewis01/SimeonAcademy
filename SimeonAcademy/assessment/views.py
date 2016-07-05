@@ -23,7 +23,9 @@ MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
-MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3\
+MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
+AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -2243,7 +2245,7 @@ def verify_mhOp(request):
 ###########################################################################################################################################
 ###########################################################################################################################################
 @login_required(login_url='/index')
-def asi_demographic(request):
+def asi_preliminary(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -2257,10 +2259,224 @@ def asi_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = request.POST.get('client_ID', '')
-			content['client'] = client
 			content['title'] = "Addiction Severity Index | Simeon Academy"
-			return render_to_response('counselor/forms/ASI/asi_demographic.html', content)
+			return render_to_response('counselor/forms/ASI/instructions.html', content)
+
+@login_required(login_url='/index')
+def asi_admin(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/admin.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_general(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/general.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_medical(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/medical.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_employment(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/employment.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_drug1(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/drug1.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_drug2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/drug2.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_legal(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/legal.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_family(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/family.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_social1(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/social1.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_social2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/social2.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_psych(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/psych.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def asi_viewForm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = universalContent(request, 'asi', '/asi_admin/')
+			return render_to_response('counselor/forms/ASI/viewForm.html', content, context_instance=RequestContext(request))
 
 ###########################################################################################################################################
 ###########################################################################################################################################
