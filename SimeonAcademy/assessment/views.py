@@ -41,8 +41,8 @@ grabProperNextSection, saveCompletedAmSection, grabSapImages, grabSapDemoFields,
 saveSapDemoSection, grabSapClassesCSS, grabSapPsychoFields, locateNextSection, \
 saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
 openForm, prioritySapSection, getSapProgress, universalLocation, universalRefresh, \
-getMhFields, saveMentalHealth, startMH, getOrderedStateIndex, setGlobalID, getGlobalID, \
-decodeCharfield, nextMhPage, universalContent
+startMH, getOrderedStateIndex, setGlobalID, getGlobalID, decodeCharfield, \
+nextMhPage, universalContent, universalSaveForm, universalSaveFinishForm
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -494,46 +494,44 @@ def uni_generic_exit(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			# last_section = request.POST.get('save_section', '')
-			# form_type = request.POST.get('exit_type')
-			# session_id = request.POST.get('session_id', '')
+			last_section = request.POST.get('save_section', '')
+			form_type = request.POST.get('exit_type')
+			session_id = request.POST.get('session_id', '')
 
-			# form = None
-			# type_header = None
+			form = None
+			type_header = None
 
-			# session = ClientSession.objects.get(id=session_id)
+			session = ClientSession.objects.get(id=session_id)
 
-			# if str(form_type) == 'am':
-			# 	am_id = request.POST.get('am_id', '')
-			# 	form = AngerManagement.objects.get(id=am_id)
-			# 	type_header = 'Anger Management'
+			if str(form_type) == 'am':
+				am_id = request.POST.get('am_id', '')
+				form = AngerManagement.objects.get(id=am_id)
+				type_header = 'Anger Management'
 
-			# elif str(form_type) == 'sap':
-			# 	sap_id = request.POST.get('sap_id', '')
-			# 	form = SAP.objects.get(id=sap_id)
-			# 	prioritySapSection(last_section, form)
-			# 	type_header = "S.A.P"
+			elif str(form_type) == 'sap':
+				sap_id = request.POST.get('sap_id', '')
+				form = SAP.objects.get(id=sap_id)
+				prioritySapSection(last_section, form)
+				type_header = "S.A.P"
 
-			# elif str(form_type) == 'mh':
-			# 	mh_id = request.POST.get('mh_id', '')
-			# 	form = MentalHealth.objects.get(id=mh_id)
-			# 	type_header = 'Mental Health'
+			elif str(form_type) == 'mh':
+				mh_id = request.POST.get('mh_id', '')
+				form = MentalHealth.objects.get(id=mh_id)
+				type_header = 'Mental Health'
 
-			# elif str(form_type) == 'ut':
-			# 	ut_id = request.POST.get(id=ut_id)
-			# 	form = UrineResults.objects.get(id=ut_id)
-			# 	type_header = 'Urine Test Analysis'
+			elif str(form_type) == 'ut':
+				ut_id = request.POST.get(id=ut_id)
+				form = UrineResults.objects.get(id=ut_id)
+				type_header = 'Urine Test'
 
-			# ##Still need to do the other forms
+			universalSaveForm(request, form_type, last_section, form)
 
-			# saveIncompleteSapForm(request, last_section, form)
-
-			# content['form'] = form
-			# content['type_header'] = type_header
-			# content['session'] = session
-			# content['form_type'] = form_type
-			# content['last_section'] = last_section
-			# content['title'] = "Simeon Academy | Mental Health Assessment"
+			content['form'] = form
+			content['type_header'] = type_header
+			content['session'] = session
+			content['form_type'] = form_type
+			content['last_section'] = last_section
+			content['title'] = "Simeon Academy | " + str(type_header)
 			return render_to_response('global/exit.html', content)
 
 @login_required(login_url='/index')

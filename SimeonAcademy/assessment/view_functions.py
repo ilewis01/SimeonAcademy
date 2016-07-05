@@ -3754,6 +3754,20 @@ def getOrderedMhNames():
 
 	return result
 
+def getOrderedMhCompleteName():
+	result = []
+
+	result.append('demographicsComplete')
+	result.append('educationComplete')
+	result.append('backgroundComplete')
+	result.append('stressorComplete')
+	result.append('familyComplete')
+	result.append('legalComplete')
+	result.append('psychComplete')
+	result.append('useComplete')
+
+	return result
+
 def getOrderedMhURLS():
 	result = []
 
@@ -3818,6 +3832,7 @@ def grabOrderedMh(mh):
 	complete 	= getMhOrderedCompleteValues(mh)
 	priority 	= getOrderedMhPriorityValue(mh)
 	btn 		= getOrderedMhButtonNames()
+	cName 		= getOrderedMhCompleteName()
 
 	for i in range(len(name)):
 		data = {}
@@ -3826,6 +3841,7 @@ def grabOrderedMh(mh):
 		data['complete'] 	= complete[i]
 		data['priority'] 	= priority[i]
 		data['btn'] 		= btn[i]
+		data['cName'] 		= cName[i]
 		mh_list.append(data)
 
 	return mh_list
@@ -4599,8 +4615,6 @@ def saveMhDemo(request, mh):
 	mh.demographics.numBrothers 		= request.POST.get('m_numBrothers', '')
 
 	mh.demographics.save()
-	mh.demographicsComplete = True
-	# mh.save()
 
 def saveMhEducation(request, mh):
 	mh.education.GradesKto6 			= request.POST.get('GradesKto6')
@@ -4628,9 +4642,7 @@ def saveMhEducation(request, mh):
 	mh.education.militaryYears 			= request.POST.get('m_militaryYears')
 	mh.education.honorableDischarge 	= truePythonBool(request.POST.get('m_honorableDischarge'))
 
-	mh.educationComplete = True
 	mh.education.save()
-	mh.save()
 
 def saveMhBackground(request, mh):
 	mh.background.residence 				= request.POST.get('residence')
@@ -4664,8 +4676,6 @@ def saveMhBackground(request, mh):
 	mh.background.churchYear 				= request.POST.get('churchYear')
 
 	mh.background.save()
-	mh.backgroundComplete = True
-	mh.save()
 
 def saveMhStress(request, mh):
 	print 'Saving Stressors...'
@@ -4692,8 +4702,6 @@ def saveMhStress(request, mh):
 	mh.stressors.otherStressExp 			= request.POST.get('m_otherStressExp');
 
 	mh.stressors.save()
-	mh.stressorComplete = True
-	mh.save()
 
 def saveMhFamily(request, mh):
 	mh.familyHistory.isdepressed 			= truePythonBool(request.POST.get('isdepressed'))
@@ -4751,8 +4759,6 @@ def saveMhFamily(request, mh):
 	mh.familyHistory.anger 				= request.POST.get('anger')
 
 	mh.familyHistory.save()
-	mh.familyComplete = True
-	mh.save()
 
 def saveMhLegal(request, mh):
 	mh.legalHistory.num_arrest = request.POST.get('num_arrest')
@@ -4776,14 +4782,10 @@ def saveMhLegal(request, mh):
 	mh.legalHistory.dateBenkrupcy = request.POST.get('m_dateBenkrupcy')
 
 	mh.legalHistory.save()
-	mh.legalComplete = True
-	mh.save()
 
 def saveMhPsych(request, mh):
 	mh.stressors.psychiatricHistory = request.POST.get('psychiatricHistory')
 	mh.stressors.save()
-	mh.psychComplete = True
-	mh.save()
 
 def saveMhUse(request, mh):
 	mh.useTable.howMuch1 = request.POST.get('howMuch1')
@@ -4897,8 +4899,6 @@ def saveMhUse(request, mh):
 	mh.useTable.lastTime21 = request.POST.get('lastTime21')
 
 	mh.useTable.save()
-	mh.useComplete = True
-	mh.save()
 
 def saveMentalHealth(request, section, mh):
 	if str(section) == '/mh_demographic/':
@@ -4953,7 +4953,6 @@ def refreshMhDemo(mh):
 	mh.demographics.numChildren = 0
 	mh.demographics.numSisters = 0
 	mh.demographics.numBrothers = 0
-	print "MH DEMO ID: " + str(mh.demographics.id)
 	mh.demographics.save()
 
 def refreshEdu(mh):
@@ -5129,6 +5128,28 @@ def deleteMh(mh):
 	mh.delete()
 	return result
 
+def finishMhSection(mh, section):
+	section = str(section)
+
+	if section == '/mh_demographic/':
+		mh.demographicsComplete = True
+	elif section == '/mh_education/':
+		mh.educationComplete = True
+	elif section == '/mh_background/':
+		mh.backgroundComplete = True
+	elif section == '/mh_stress/':
+		mh.stressorComplete = True
+	elif section == '/mh_familyHistory/':
+		mh.familyComplete = True
+	elif section == '/mh_legal/':
+		mh.legalComplete = True
+	elif section == '/mh_psych/':
+		mh.psychComplete = True
+	elif section == '/mh_useTable/':
+		mh.useComplete = True
+
+	mh.save()
+
 def processMhData(request, current_section):
 	result = {}
 
@@ -5152,6 +5173,7 @@ def processMhData(request, current_section):
 
 	if save_this == 'true':
 		saveMentalHealth(request, section, mh)
+		finishMhSection(mh, section)
 
 	next_url = nextMhPage(mh, current_section)
 	image = grabMhSideImages(mh, current_section)
@@ -5376,10 +5398,13 @@ def grabGenericForm(form_type, form_id):
 	return form
 
 def deleteGenericForm(form_type, form):
-	if str(form_type) == 'am':
+	print "Form type: " + str(form_type)
+	if form_type == 'am':
 		deleteAM(form)
-	elif str(form_type) == 'sap':
+	elif form_type == 'sap':
 		deleteSap(form)
+	elif form_type == 'mh':
+		deleteMh(form)
 
 def universalLocation(form_type, form_id):
 	location = None
@@ -5407,6 +5432,27 @@ def universalRefresh(form_type, form):
 	elif str(form_type) == 'mh':
 		refreshMh(form)
 	elif str(form_type) == 'ut':
+		no = None
+
+def universalSaveForm(request, form_type, section, form):
+	if form_type == 'am':
+		no = None
+	elif form_type == 'sap':
+		no = None
+	elif form_type == 'mh':
+		saveMentalHealth(request, section, form)
+	elif form_type == 'asi':
+		no = None
+
+def universalSaveFinishForm(request, form_type, section, form):
+	if form_type == 'am':
+		no = None
+	elif form_type == 'sap':
+		no = None
+	elif form_type == 'mh':
+		saveMentalHealth(request, section, form)
+		finishMhSection(form, section)
+	elif form_type == 'asi':
 		no = None
 
 def universalContent(request, form_type, gField):

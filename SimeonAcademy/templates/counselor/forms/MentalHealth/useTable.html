@@ -167,7 +167,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('mh');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('mh', 'none');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -199,7 +199,7 @@
 				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/mh_useTable/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value=''>
+                            <input type='hidden' name='exit_type' id='exit_type' value='mh'>
                             <input type='hidden' name='save_this' id='save_this' value=''>
 
                             <div class='useBorder'>

@@ -5298,10 +5298,7 @@ function initialize_mh_use(json_data) {
 
 }
 
-function mh_continue_demographic() {
-	var proceed = true;
-	var form = document.getElementById('mh_form');
-
+function processDynamicMhHistory() {
 	//TRIGGERS
 	var yesChild = document.getElementById('yesChild');
 	var yesSister = document.getElementById('yesSister');
@@ -5349,6 +5346,16 @@ function mh_continue_demographic() {
 
 	postMhNoMarriages(single, numMarriages, m_numMarriages);
 	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
+}
+
+function mh_continue_demographic() {
+	var proceed = true;
+	var yesChild = document.getElementById('yesChild');
+	var yesSister = document.getElementById('yesSister');
+	var yesBrother = document.getElementById('yesBrother');
+	var form = document.getElementById('mh_form');
+
+	processDynamicMhHistory();	
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
@@ -5391,10 +5398,7 @@ function postUniversalRadioRadio(trigger, yesRadio, m_post) {
 	}
 }
 
-function proceed_mh_education() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
+function processDynamicMhEducation() {
 	//DYNAMIC RADIO FRIEND NUMBER TRIGGERS
 	var fk1 = document.getElementById('friend1');
 	var fk2 = document.getElementById('friend2');
@@ -5453,6 +5457,12 @@ function proceed_mh_education() {
 
 	postUniversalRadioRadio(yesGrad, hasAdvanced, m_advanceDegree);
 	postUniversalRadioRadio(isMilitary, isHonor, m_honorableDischarge);
+}
+
+function proceed_mh_education() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+	processDynamicMhEducation();	
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
@@ -5472,10 +5482,7 @@ function proceed_mh_background() {
 	}
 }
 
-function proceed_mh_stress() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
+function processDynamicMhStress() {
 	//TRIGGERS
 	var yesDeath 		= document.getElementById('yesDeath');
 	var yesDivorce 		= document.getElementById('yesDivorce');
@@ -5510,6 +5517,12 @@ function proceed_mh_stress() {
 	postUniversalRadioText(yesAddiction, addictionFamilyStressExp, m_addictionFamilyStressExp);
 	postUniversalRadioText(yesViolence, violenceFamilyStressExp, m_violenceFamilyStressExp);
 	postUniversalRadioText(yesOther, otherStressExp, m_otherStressExp);
+}
+
+function proceed_mh_stress() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+	processDynamicMhStress();
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
@@ -5529,10 +5542,7 @@ function combineFamilyValues(trigger, fSide, fMem, m_post) {
 	}
 }
 
-function proceed_mh_familyHistory() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
+function processDynamicMhFamily() {
 	combineFamilyValues(document.getElementById('yesDepress'), document.getElementById('depressSide'), document.getElementById('depressMember'), document.getElementById('depressed'));
 	combineFamilyValues(document.getElementById('yesADD'), document.getElementById('sideADD'), document.getElementById('memADD'), document.getElementById('add'));
 	combineFamilyValues(document.getElementById('yesBed'), document.getElementById('sideBed'), document.getElementById('memBed'), document.getElementById('bedWetting'));
@@ -5562,6 +5572,13 @@ function proceed_mh_familyHistory() {
 	combineFamilyValues(document.getElementById('yesBlood'), document.getElementById('sideBlood'), document.getElementById('memBlood'), document.getElementById('highBloodPressure'));
 	combineFamilyValues(document.getElementById('yesAngry'), document.getElementById('sideAngry'), document.getElementById('memAngry'), document.getElementById('anger'));
 
+}
+
+function proceed_mh_familyHistory() {
+	var proceed = true;
+	form = document.getElementById('mh_form');
+	processDynamicMhFamily();	
+
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
 		form.action = document.getElementById('next_url').value;
@@ -5569,9 +5586,7 @@ function proceed_mh_familyHistory() {
 	}
 }
 
-function proceed_mh_legalHistory() {
-	var proceed = true;
-
+function processDynamicMhLegal() {
 	//TRIGGERS
 	var yesPresent = document.getElementById('yesPresent');
 	var yesPast = document.getElementById('yesPast');
@@ -5601,8 +5616,11 @@ function proceed_mh_legalHistory() {
 
 	postUniversalRadioRadio(yesSuit, yesStress, m_lawsuitStress);
 	postUniversalRadioNumber(yesBank, dateBenkrupcy, m_dateBenkrupcy);
+}
 
-
+function proceed_mh_legalHistory() {
+	var proceed = true;
+	processDynamicMhLegal();
 	form = document.getElementById('mh_form');
 
 	if (proceed === true) {
@@ -5801,6 +5819,7 @@ function sideBarOption(page) {
 
 function sideBarMh(page){
 	page = String(page);
+
 	form = document.getElementById('mh_form');
 	form.action = page;
 	form.submit();
@@ -5819,9 +5838,26 @@ function getFormElement(form_type) {
 	return result;
 }
 
-function universal_generic_exit(form_type) {
+function universal_generic_exit(form_type, page) {
 	var exit_type = document.getElementById('exit_type');
 	var form = document.getElementById('mh_form');
+	page = String(page);
+
+	if (page === '/mh_demographic/') {
+		processDynamicMhHistory();
+	}
+	else if (page === '/mh_education/') {
+		processDynamicMhEducation();
+	}
+	else if (page === '/mh_stress/') {
+		processDynamicMhStress();
+	}
+	else if (page === '/mh_familyHistory/') {
+		processDynamicMhFamily();
+	}
+	else if (page === '/mh_legal/') {
+		processDynamicMhLegal();
+	}
 
 	form.action = '/uni_generic_exit/';
 	exit_type.value = String(form_type);
@@ -5880,6 +5916,8 @@ function generic_delete_form() {
 
 function complete_generic_delete() {
 	var form = document.getElementById('exit_g');
+	document.getElementById('parent_form_type').value = window.opener.document.getElementById('form_type').value;
+	document.getElementById('parent_form_id').value = window.opener.document.getElementById('form_id').value;
 	form.submit();
 }
 
