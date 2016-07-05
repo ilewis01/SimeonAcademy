@@ -5917,30 +5917,30 @@ def grabASIFields(asi, section):
 	return result
 
 def saveASIadmin(request, asi):
-	asi.admin.g13 = request.POST.get('g13')
-	asi.admin.g14yrs = request.POST.get('g14yrs')
-	asi.admin.g14mos = request.POST.get('g14mos')
-	asi.admin.g15 = request.POST.get('g15')
-	asi.admin.g16mth = request.POST.get('g16mth')
-	asi.admin.g16day = request.POST.get('g16day')
-	asi.admin.g16year = request.POST.get('g16year')
-	asi.admin.g17 = request.POST.get('g17')
-	asi.admin.g18 = request.POST.get('g18')
-	asi.admin.g19 = request.POST.get('g19')
-	asi.admin.g20 = request.POST.get('g20')
+	asi.admin.g1 = request.POST.get('g1')
+	asi.admin.g2 = request.POST.get('g2')
+	asi.admin.g3 = request.POST.get('g3')
+	asi.admin.g4 = request.POST.get('g4')
+	asi.admin.g8 = request.POST.get('g8')
+	asi.admin.g9 = request.POST.get('g9')
+	asi.admin.g10 = request.POST.get('g10')
+	asi.admin.g11 = request.POST.get('g11')
+	asi.admin.g12 = request.POST.get('g12')
 
 	asi.admin.save()
 
 def saveASIgeneral(request, asi):
-	asi.general.g1 = request.POST.get('g1')
-	asi.general.g2 = request.POST.get('g2')
-	asi.general.g3 = request.POST.get('g3')
-	asi.general.g4 = request.POST.get('g4')
-	asi.general.g8 = request.POST.get('g8')
-	asi.general.g9 = request.POST.get('g9')
-	asi.general.g10 = request.POST.get('g10')
-	asi.general.g11 = request.POST.get('g11')
-	asi.general.g12 = request.POST.get('g12')
+	asi.general.g13 = request.POST.get('g13')
+	asi.general.g14yrs = request.POST.get('g14yrs')
+	asi.general.g14mos = request.POST.get('g14mos')
+	asi.general.g15 = request.POST.get('g15')
+	asi.general.g16mth = request.POST.get('g16mth')
+	asi.general.g16day = request.POST.get('g16day')
+	asi.general.g16year = request.POST.get('g16year')
+	asi.general.g17 = request.POST.get('g17')
+	asi.general.g18 = request.POST.get('g18')
+	asi.general.g19 = request.POST.get('g19')
+	asi.general.g20 = request.POST.get('g20')
 
 	asi.general.g21 = request.POST.get('g21')
 	asi.general.g22 = request.POST.get('g22')
@@ -6374,8 +6374,410 @@ def deleteASI(asi):
 	asi.psych.delete()
 	asi.delete()
 
+def refreshASIadmin(asi):
+	asi.admin.g1 = None
+	asi.admin.g2 = None
+	asi.admin.g3 = None
+	asi.admin.g4 = None
+	asi.admin.g8 = 0
+	asi.admin.g9 = 0
+	asi.admin.g10 = 0
+	asi.admin.g11 = None
+	asi.admin.g12 = 0
+
+	asi.admin.save()
+
+def refreshASIgeneral(asi):
+	asi.general.g13 = None
+	asi.general.g14yrs = None
+	asi.general.g14mos = None
+	asi.general.g15 = False
+	asi.general.g16mth = None
+	asi.general.g16day = None
+	asi.general.g16year = None
+	asi.general.g17 = None
+	asi.general.g18 = None
+	asi.general.g19 = None
+	asi.general.g20 = None
+
+	asi.general.g21 = None
+	asi.general.g22 = None
+	asi.general.g23 = None
+	asi.general.g24 = None
+	asi.general.g25 = None
+	asi.general.g26 = None
+
+	asi.general.medical = None
+	asi.general.employ = None
+	asi.general.alcohol = None
+	asi.general.drug = None
+	asi.general.legal = None
+	asi.general.family = None
+	asi.general.psych = None
+
+	asi.general.save()
+
+def refreshASImedical(asi):
+	asi.medical.m1 = None
+	asi.medical.m2yrs = None
+	asi.medical.m2mth = None
+	asi.medical.m3 = False
+	asi.medical.m4 = False
+	asi.medical.m5 = False
+	asi.medical.m5Exp = None
+	asi.medical.m6 = None
+	asi.medical.m7 = None
+	asi.medical.m8 = None
+	asi.medical.m9 = None
+	asi.medical.m10 = False
+	asi.medical.m11 = False
+	asi.medical.comments = None
+
+	asi.medical.save()
+
+def refreshASIemployment(asi):
+	asi.employment.e1yrs = None
+	asi.employment.e1mth = None
+	asi.employment.e2 = None
+	asi.employment.e3 = False
+	asi.employment.e3Exp = None
+	asi.employment.e4 = False
+	asi.employment.e5 = False
+	asi.employment.e5Exp = None
+	asi.employment.e6yrs = None
+	asi.employment.e6mth = None
+	asi.employment.e7 = False
+	asi.employment.e7Exp = None
+	asi.employment.e8 = False
+	asi.employment.e9 = False
+	asi.employment.e10 = None
+	asi.employment.e11 = None
+	asi.employment.e12 = None
+	asi.employment.e13 = None
+	asi.employment.e14 = None
+	asi.employment.e15 = None
+	asi.employment.e16 = None
+	asi.employment.e17 = None
+	asi.employment.e18 = None
+	asi.employment.e19 = None
+	asi.employment.e20 = None
+	asi.employment.e21 = None
+	asi.employment.e22 = None
+	asi.employment.e23 = False
+	asi.employment.e24 = False
+	asi.employment.comments = None
+
+	asi.employment.save()
+
+def refreshASIdrug1(asi):
+	asi.drug1.d1Day = None
+	asi.drug1.d1Year = None
+	asi.drug1.d1Route = None
+	asi.drug1.d2Day = None
+	asi.drug1.d2Year = None
+	asi.drug1.d2Route = None
+	asi.drug1.d3Day = None
+	asi.drug1.d3Year = None
+	asi.drug1.d3Route = None
+	asi.drug1.d4Day = None
+	asi.drug1.d4Year = None
+	asi.drug1.d4Route = None
+	asi.drug1.d5Day = None
+	asi.drug1.d5Year = None
+	asi.drug1.d5Route = None
+	asi.drug1.d6Day = None
+	asi.drug1.d6Year = None
+	asi.drug1.d6Route = None
+	asi.drug1.d7Day = None
+	asi.drug1.d7Year = None
+	asi.drug1.d7Route = None
+	asi.drug1.d8Day = None
+	asi.drug1.d8Year = None
+	asi.drug1.d8Route = None
+	asi.drug1.d9Day = None
+	asi.drug1.d9Year = None
+	asi.drug1.d9Route = None
+	asi.drug1.d10Day = None
+	asi.drug1.d10Year = None
+	asi.drug1.d10Route = None
+	asi.drug1.d11Day = None
+	asi.drug1.d11Year = None
+	asi.drug1.d11Route = None
+	asi.drug1.d12Day = None
+	asi.drug1.d12Year = None
+	asi.drug1.d12Route = None
+	asi.drug1.d13 = None
+
+	asi.drug1.save()
+
+def refreshASIdrug2(asi):
+	asi.drug2.d14 = None
+	asi.drug2.d15 = None
+	asi.drug2.d16 = None
+	asi.drug2.d17 = None
+	asi.drug2.d18 = None
+	asi.drug2.d19 = None
+	asi.drug2.d20 = None
+	asi.drug2.d21 = None
+	asi.drug2.d22 = None
+	asi.drug2.d23 = None
+	asi.drug2.d24 = None
+	asi.drug2.d25 = None
+	asi.drug2.d26 = None
+	asi.drug2.d27 = None
+	asi.drug2.d28 = None
+	asi.drug2.d29 = None
+	asi.drug2.d30 = None
+	asi.drug2.d31 = None
+	asi.drug2.d32 = None
+	asi.drug2.d33 = None
+	asi.drug2.d34 = False
+	asi.drug2.d35 = False
+	asi.drug2.comments = None
+
+	asi.drug2.save()
+
+def refreshASIlegal(asi):
+	asi.legal.l1 = False
+	asi.legal.l2 = False
+	asi.legal.l3 = None
+	asi.legal.l4 = None
+	asi.legal.l5 = None
+	asi.legal.l6 = None
+	asi.legal.l7 = None
+	asi.legal.l8 = None
+	asi.legal.l9 = None
+	asi.legal.l10 = None
+	asi.legal.l11 = None
+	asi.legal.l12 = None
+	asi.legal.l13 = None
+	asi.legal.l14 = None
+	asi.legal.l15 = None
+	asi.legal.l16 = None
+	asi.legal.l17 = None
+	asi.legal.l18 = None
+	asi.legal.l19 = None
+	asi.legal.l20 = None
+	asi.legal.l21 = None
+	asi.legal.l22 = None
+	asi.legal.l23 = None
+	asi.legal.l24 = False
+	asi.legal.l25 = None
+	asi.legal.l26 = None
+	asi.legal.l27 = None
+	asi.legal.l28 = None
+	asi.legal.l29 = None
+	asi.legal.l30 = None
+	asi.legal.l31 = False
+	asi.legal.l32 = False
+	asi.legal.comments = None
+
+	asi.legal.save()
+
+def refreshASIfamily(asi):
+	asi.family.h1a = None
+	asi.family.h1d = None
+	asi.family.h1p = None
+	asi.family.h2a = None
+	asi.family.h2d = None
+	asi.family.h2p = None
+	asi.family.h3a = None
+	asi.family.h3d = None
+	asi.family.h3p = None
+	asi.family.h4a = None
+	asi.family.h4d = None
+	asi.family.h4p = None
+	asi.family.h5a = None
+	asi.family.h5d = None
+	asi.family.h5p = None
+	asi.family.h6a = None
+	asi.family.h6d = None
+	asi.family.h6p = None
+	asi.family.h7a = None
+	asi.family.h7d = None
+	asi.family.h7p = None
+	asi.family.h8a = None
+	asi.family.h8d = None
+	asi.family.h8p = None
+	asi.family.h9a = None
+	asi.family.h9d = None
+	asi.family.h9p = None
+	asi.family.h10a = None
+	asi.family.h10d = None
+	asi.family.h10p = None
+	asi.family.h11a = None
+	asi.family.h11d = None
+	asi.family.h11p = None
+	asi.family.h12a = None
+	asi.family.h12d = None
+	asi.family.h12p = None
+
+	asi.family.save()
+
+def refreshASIsocial1(asi):
+	asi.social1.f1 = None
+	asi.social1.f2yrs = None
+	asi.social1.f2mth = None
+	asi.social1.f3 = None
+	asi.social1.f4 = None
+	asi.social1.f5yrs = None
+	asi.social1.f5mth = None
+	asi.social1.f6 = None
+	asi.social1.f7 = False
+	asi.social1.f8 = False
+	asi.social1.f9 = None
+	asi.social1.f10 = None
+	asi.social1.f11 = None
+
+	asi.social1.f30 = None
+	asi.social1.f31 = None
+	asi.social1.f32 = None
+	asi.social1.f33 = None
+	asi.social1.f34 = None
+	asi.social1.f35 = None
+	asi.social1.f36 = None
+	asi.social1.f37 = False
+	asi.social1.f38 = False
+	asi.social1.comments = None
+
+	asi.social1.save()
+
+def refreshASIsocial2(asi):
+	asi.social2.f12 = None
+	asi.social2.f13 = None
+	asi.social2.f14 = None
+	asi.social2.f16 = None
+	asi.social2.f17 = None
+
+	asi.social2.f18d = None
+	asi.social2.f19d = None
+	asi.social2.f20d = None
+	asi.social2.f21d = None
+	asi.social2.f22d = None
+	asi.social2.f23d = None
+	asi.social2.f24d = None
+	asi.social2.f25d = None
+	asi.social2.f26d = None
+
+	asi.social2.f18y = None
+	asi.social2.f19y = None
+	asi.social2.f20y = None
+	asi.social2.f21y = None
+	asi.social2.f22y = None
+	asi.social2.f23y = None
+	asi.social2.f24y = None
+	asi.social2.f25y = None
+	asi.social2.f26y = None
+
+	asi.social2.fa18 = False
+	asi.social2.fa19 = False
+	asi.social2.fa20 = False
+	asi.social2.fa21 = False
+	asi.social2.fa22 = False
+	asi.social2.fa23 = False
+	asi.social2.fa24 = False
+	asi.social2.fa25 = False
+	asi.social2.fa26 = False
+
+	asi.social2.f18dayBad = None
+	asi.social2.f19dayBad = None
+	asi.social2.f20dayBad = None
+	asi.social2.f21dayBad = None
+	asi.social2.f22dayBad = None
+	asi.social2.f23dayBad = None
+	asi.social2.f24dayBad = None
+	asi.social2.f25dayBad = None
+	asi.social2.f26dayBad = None
+
+	asi.social2.f18yearBad = None
+	asi.social2.f19yearBad = None
+	asi.social2.f20yearBad = None
+	asi.social2.f21yearBad = None
+	asi.social2.f22yearBad = None
+	asi.social2.f23yearBad = None
+	asi.social2.f24yearBad = None
+	asi.social2.f25yearBad = None
+	asi.social2.f26yearBad = None
+
+	asi.social2.comments = None
+
+	asi.social2.save()
+
+def refreshASIpsych(asi):
+	asi.psych.p1 = None
+	asi.psych.p2 = None
+	asi.psych.p3 = False
+
+	asi.psych.p4d = False
+	asi.psych.p5d = False
+	asi.psych.p6d = False
+	asi.psych.p7d = False
+	asi.psych.p8d = False
+	asi.psych.p9d = False
+	asi.psych.p10d = False
+	asi.psych.p11d = False
+
+	asi.psych.p4y = False
+	asi.psych.p5y = False
+	asi.psych.p6y = False
+	asi.psych.p7y = False
+	asi.psych.p8y = False
+	asi.psych.p9y = False
+	asi.psych.p10y = False
+	asi.psych.p11y = False
+
+	asi.psych.p12 = None
+	asi.psych.p13 = None
+	asi.psych.p14 = None
+	asi.psych.p15 = False
+	asi.psych.p16 = False
+	asi.psych.p17 = False
+	asi.psych.p18 = False
+	asi.psych.p19 = False
+	asi.psych.p20 = False
+	asi.psych.p21 = None
+	asi.psych.p22 = False
+	asi.psych.p23 = False
+	asi.psych.comments = None
+
 def refreshASI(asi):
-	no = None
+	refreshASIadmin(asi)
+	refreshASIgeneral(asi)
+	refreshASImedical(asi)
+	refreshASIemployment(asi)
+	refreshASIdrug1(asi)
+	refreshASIdrug2(asi)
+	refreshASIlegal(asi)
+	refreshASIfamily(asi)
+	refreshASIsocial1(asi)
+	refreshASIsocial2(asi)
+	refreshASIpsych(asi)
+
+	asi.adminComplete = False
+	asi.generalComplete = False
+	asi.medicalComplete = False
+	asi.employmentComplete = False
+	asi.drug1Complete = False
+	asi.drug2Complete = False
+	asi.legalComplete = False
+	asi.familyComplete = False
+	asi.social1Complete = False
+	asi.social2Complete = False
+	asi.psychComplete = False
+
+	asi.adminPriority = False
+	asi.generalPriority = False
+	asi.medicalPriority = False
+	asi.employmentPriority = False
+	asi.drug1Priority = False
+	asi.drug2Priority = False
+	asi.legalPriority = False
+	asi.familyPriority = False
+	asi.social1Priority = False
+	asi.social2Priority = False
+	asi.psychPriority = False
+	asi.AIS_Complete = False
+	asi.save()
 
 def processAsiData(request, current_section):
 	result = {}
