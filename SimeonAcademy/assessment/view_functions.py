@@ -21,7 +21,7 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
 
 def onTrue_offFalse(data):
 	if data == 'on':
@@ -597,7 +597,6 @@ def saveCompletedAmSection(request, section, am):
 
 		childhood.save()
 		am.childhood = childhood
-		am.childhoodComplete = True
 		am.save()
 
 	elif section == '/am_angerHistory/':
@@ -666,7 +665,6 @@ def saveCompletedAmSection(request, section, am):
 		ah1.reasonNotCompleteRecentV = reasonNotCompleteRecentV
 
 		ah1.save()
-		am.angerHistoryComplete = True
 		am.save()
 
 	elif section == '/am_angerHistory2/':
@@ -727,7 +725,6 @@ def saveCompletedAmSection(request, section, am):
 		ah2.hasAttemptedExplainRecentV = hasAttemptedExplainRecentV
 
 		ah2.save()
-		am.angerHistoryComplete2 = True
 		am.save()
 
 	elif section == '/am_worst/':
@@ -774,7 +771,6 @@ def saveCompletedAmSection(request, section, am):
 		am.worstEpisode.otherWorstDescription = otherWorstDescription
 
 		am.worstEpisode.save()
-		am.worstComplete = True
 		am.save()
 
 	elif section == '/am_drugHistory/':
@@ -854,7 +850,6 @@ def saveCompletedAmSection(request, section, am):
 		demo.dateTreated = dateTreated
 
 		demo.save()
-		am.drugHistoryComplete = True
 		am.save()
 
 	elif section == '/am_angerHistory3/':
@@ -889,7 +884,6 @@ def saveCompletedAmSection(request, section, am):
 		ah3.howOften = howOften
 
 		ah3.save()
-		am.angerHistoryComplete3 = True
 		am.save()
 
 	elif section == '/am_problems/':
@@ -934,7 +928,6 @@ def saveCompletedAmSection(request, section, am):
 		current.describeIssue = describeIssue
 
 		am.currentProblems.save()
-		am.currentProblemsComplete = True
 		am.save()
 
 	elif section == '/am_familyOrigin/':
@@ -968,7 +961,6 @@ def saveCompletedAmSection(request, section, am):
 		family.hasLovingSiblings = hasLovingSiblings
 
 		am.familyOrigin.save()
-		am.familyOriginComplete = True
 		am.save()
 
 	elif section == '/am_demographic/':
@@ -1037,7 +1029,6 @@ def saveCompletedAmSection(request, section, am):
 		demo.health_exp 			= health_exp
 
 		demo.save()
-		am.demographicComplete = True
 		am.save()
 
 	elif section == '/am_angerTarget/':
@@ -1079,7 +1070,6 @@ def saveCompletedAmSection(request, section, am):
 		target.seldomUpset = seldomUpset
 
 		target.save()
-		am.angerTargetComplete = True
 		am.save()
 
 	elif section == '/am_control/':
@@ -1120,7 +1110,6 @@ def saveCompletedAmSection(request, section, am):
 		control.date_of_assessment = date
 
 		control.save()
-		am.controlComplete = True
 		am.save()
 
 	elif section == '/am_connections/':
@@ -1151,7 +1140,6 @@ def saveCompletedAmSection(request, section, am):
 		am.connections.otherConnectionsUsing = otherConnectionsUsing
 		am.connections.connectionExplain = connectionExplain
 
-		am.connectionsComplete = True
 		am.connections.save()
 		am.save()
 
@@ -1176,9 +1164,8 @@ def saveCompletedAmSection(request, section, am):
 		final.changeLearn1 = changeLearn1
 		final.changeLearn2 = changeLearn2
 		final.changeLearn3 = changeLearn3
-		final.save()
 
-		am.finalComplete = True
+		final.save()
 		am.save()
 
 
@@ -1378,6 +1365,21 @@ def amSidebarImages(am, page):
 		images['final_img'] = x
 
 	return images
+
+def deprioritizeAM(am):
+	am.demoPriority = True
+	am.dhPriority = False
+	am.childPriority = False
+	am.ah1Priority = False
+	am.ah2Priority = False
+	am.ah3Priority = False
+	am.connectPriority = False
+	am.worstPriority = False
+	am.targetPriority = False
+	am.familyPriority = False
+	am.currentPriority = False
+	am.controlPriority = False
+	am.finalPriority = False
 
 def setAmPriorityURL(section, am):
 	if str(section) == '/am_demographic/':
@@ -2697,6 +2699,69 @@ def amDhExist(drug_history):
 				break
 	return exist
 
+def setAmSectionComplete(am, section):
+	section = str(section)
+
+	if section == '/am_demographic/':
+		am.demographicComplete = True
+	elif section == '/am_drugHistory/':
+		am.drugHistoryComplete = True
+	elif section == '/am_childhood/':
+		am.childhoodComplete = True
+	elif section == '/am_angerHistory/':
+		am.angerHistoryComplete = True
+	elif section == '/am_angerHistory2/':
+		am.angerHistoryComplete2 = True
+	elif section == '/am_angerHistory3/':
+		am.angerHistoryComplete3 = True
+	elif section == '/am_connections/':
+		am.connectionsComplete = True
+	elif section == '/am_worst/':
+		am.worstComplete = True
+	elif section == '/am_angerTarget/':
+		am.angerTargetComplete = True
+	elif section == '/am_familyOrigin/':
+		am.familyOriginComplete = True
+	elif section == '/am_problems/':
+		am.currentProblemsComplete = True
+	elif section == '/am_control/':
+		am.controlComplete = True
+	elif section == '/am_final/':
+		am.finalComplete = True
+
+def processAMData(request, current_section):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	am_id = request.POST.get('am_id', '')
+	save_this = request.POST.get('save_this', '')
+	section = request.POST.get('save_section', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	am = AngerManagement.objects.get(id=am_id)
+	deprioritizeAM(am)
+	fields = getSapFields(sap, current_section)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveCompletedAmSection(request, section, am)
+		setAmSectionComplete(am, section)
+
+	next_url = grabProperNextSection(am, current_section)
+	image = grabAmClassesCSS(am, current_section)
+	classes = amSidebarImages(am, current_section)
+
+	result['class'] = classes
+	result['image'] = image
+	result['next_url'] = next_url
+	result['session'] = session
+	result['am'] = am
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | Anger Management"
+
+	return result
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ################################################################# END AM ##################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
@@ -2763,7 +2828,7 @@ def getSAP(client):
 		results['sap'] = newSap(client)
 
 	else:
-		results['newSap'] = False
+		results['isNew'] = False
 		results['sap'] = grabIncompleteSap(client)
 
 	return results
@@ -2781,6 +2846,15 @@ def getSapProgress(sap):
 
 	result['completed'] = completed
 	return result
+
+def deprioritizeSAP(sap):
+	sap.clinicPriority 	= False
+	sap.socialPriority 	= False
+	sap.psycho1Priority = False
+	sap.psycho2Priority = False
+	sap.spacialPriority = False
+	sap.otherPriority 	= False
+	sap.sourcesPriority = False
 
 def prioritySapSection(section, sap):
 	if str(section) == '/sap_demographic/':
@@ -3394,6 +3468,81 @@ def saveSapDemoSection(request, section, sap):
 		sap.sourcesComplete = True
 		sap.save()
 
+def saveSap(request, section, sap):
+	demo = sap.demographics
+
+	if str(section) == '/sap_demographic/':
+		problem = request.POST.get('problem', '')
+		health = request.POST.get('health', '')
+
+		demo.problem = problem
+		demo.health = health
+		demo.save()
+
+	elif str(section) == '/sap_social/':
+		family = request.POST.get('family')
+
+		demo.family = family
+		demo.save()
+
+	elif str(section) == '/sap_psychoactive/':
+		saveSapPhycho1(request, sap)
+
+	elif str(section) == '/sap_psychoactive2/':
+		psychoactive = request.POST.get('psychoactive')
+
+		demo.psychoactive = psychoactive
+		demo.save()
+
+	elif str(section) == '/sap_special/':
+		isChild = request.POST.get('m_isChild', '')
+		isSenior = request.POST.get('m_isSenior', '')
+		isDual = request.POST.get('m_isDual', '')
+		isOther = request.POST.get('m_isOther', '')
+		isNone = request.POST.get('m_isNone', '')
+		special = request.POST.get('m_special', '')
+
+		isChild = truePythonBool(isChild)
+		isSenior = truePythonBool(isSenior)
+		isDual = truePythonBool(isDual)
+		isOther = truePythonBool(isOther)
+		isNone = truePythonBool(isNone)
+
+		demo.special = special
+		demo.isChild = isChild
+		demo.isSenior = isSenior
+		demo.isDual = isDual
+		demo.isOther = isOther
+		demo.isNone = isNone
+
+		demo.save()
+
+	elif str(section) == '/sap_other/':
+		psychological = request.POST.get('psychological', '')
+		gambling = request.POST.get('gambling', '')
+		abilities = request.POST.get('abilities', '')
+		other = request.POST.get('other', '')
+
+		demo.psychological = psychological
+		demo.gambling = gambling
+		demo.abilities = abilities
+		demo.other = other
+
+		demo.save()
+
+	elif str(section) == '/sap_sources/':
+		source1 = request.POST.get('source1', '')
+		source2 = request.POST.get('source2', '')
+		relationship1 = request.POST.get('relationship1', '')
+		relationship2 = request.POST.get('relationship2', '')
+
+		demo.source1 = source1
+		demo.source2 = source2
+		demo.relationship1 = relationship1
+		demo.relationship2 = relationship2
+
+		demo.save()
+
 def saveIncompleteSapPsycho1(request, sap):
 	alcoholAge = request.POST.get('alcoholAge', '')
 	alcoholFrequency = request.POST.get('alcoholFrequency', '')
@@ -3756,11 +3905,59 @@ def refreshSap(sap):
 	demo.save()
 	psy.save()
 
-
-	sap.isOpen = True
 	sap.SapComplete = False
-
 	sap.save()
+
+def setSapSectionComplete(sap, section):
+	section = str(section)
+
+	if section == '/sap_demographic/':
+		sap.clinicalComplete = True
+	elif section == '/sap_social/':
+		sap.socialComplete = True
+	elif section == '/sap_psychoactive/':
+		sap.psychoComplete = True
+	elif section == '/sap_psychoactive2/':
+		sap.psycho2Complete = True
+	elif section == '/sap_special/':
+		sap.specialComplete = True
+	elif section == '/sap_other/':
+		sap.otherComplete = True
+	elif section == '/sap_sources/':
+		sap.sourcesComplete = True
+
+def processSapData(request, current_section):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	sap_id = request.POST.get('sap_id', '')
+	save_this = request.POST.get('save_this', '')
+	section = request.POST.get('save_section', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	sap = SAP.objects.get(id=sap_id)
+	deprioritizeSAP(sap)
+	fields = getSapFields(sap, current_section)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveSap(request, section, sap)
+		setSapSectionComplete(sap, section)
+
+	next_url = locateNextSection(sap, current_section)
+	image = grabSapImages(sap, current_section)
+	classes = grabSapClassesCSS(sap, current_section)
+
+	result['class'] = classes
+	result['image'] = image
+	result['next_url'] = next_url
+	result['session'] = session
+	result['sap'] = sap
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | S.A.P Assessment"
+
+	return result
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ################################################################# END SAP #################################################################
@@ -5162,6 +5359,116 @@ def deleteMh(mh):
 	mh.delete()
 	return result
 
+def mhDemo_priority(mh):
+	mh.demoPriority 		= True
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhEdu_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= True
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhBack_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= True
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhStress_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= True
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhFamily_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= True
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhLegal_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= True
+	mh.psychPriority 		= False
+	mh.usePriority 			= False
+
+def mhPsych_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= True
+	mh.usePriority 			= False
+
+def mhUse_priority(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= True
+
+def deprioritizeMH(mh):
+	mh.demoPriority 		= False
+	mh.educationPriority 	= False
+	mh.backgroundPriority 	= False
+	mh.stressPriority 		= False
+	mh.familyPriority 		= False
+	mh.legalPriority 		= False
+	mh.psychPriority 		= False
+	mh.usePriority 			= True
+
+def setMhPriority(mh, section):
+	section = str(section)
+
+	if section == '/mh_demographic/':
+		mhDemo_priority(mh)
+	elif section == '/mh_education/':
+		mhEdu_priority(mh)
+	elif section == '/mh_background/':
+		mhBack_priority(mh)
+	elif section == '/mh_stress/':
+		mhStress_priority(mh)
+	elif section == '/mh_familyHistory/':
+		mhFamily_priority(mh)
+	elif section == '/mh_legal/':
+		mhLegal_priority(mh)
+	elif section == '/mh_psych/':
+		mhPsych_priority(mh)
+	elif section == '/mh_useTable/':
+		mhUse_priority(mh)
+
 def finishMhSection(mh, section):
 	section = str(section)
 
@@ -5194,6 +5501,7 @@ def processMhData(request, current_section):
 
 	session = ClientSession.objects.get(id=session_id)
 	mh = MentalHealth.objects.get(id=mh_id)
+	deprioritizeMH(mh)
 	fields = getMhFields(mh, current_section)
 	json_data = json.dumps(fields)
 
@@ -5329,6 +5637,188 @@ def get_asi_parameters(asi):
 		data['priority'] = priority[l]
 		result.append(data)
 	return result
+
+def priority_asi_admin(asi):
+	asi.adminPriority 		= True
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_general(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= True
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_medical(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= True
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_employment(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= True
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_drug1(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= True
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_drug2(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= True
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_legal(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= True
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_family(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= True
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_soc1(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= True
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
+
+def priority_asi_soc2(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= True
+	asi.psychPriority 		= False
+
+def priority_asi_psych(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= True
+
+def asiPriority(asi, section):
+	section = str(section)
+
+	if section == '/asi_admin/':
+		result = priority_asi_admin(asi)
+	elif section == '/asi_general/':
+		result = priority_asi_general(asi)
+	elif section == '/asi_medical/':
+		result = priority_asi_medical(asi)
+	elif section == '/asi_employment/':
+		result = priority_asi_employment(asi)
+	elif section == '/asi_drug1/':
+		result = priority_asi_drug1(asi)
+	elif section == '/asi_drug2/':
+		result = priority_asi_drug2(asi)
+	elif section == '/asi_legal/':
+		result = priority_asi_legal(asi)
+	elif section == '/asi_family/':
+		result = priority_asi_family(asi)
+	elif section == '/asi_social1/':
+		result = priority_asi_soc1(asi)
+	elif section == '/asi_social2/':
+		result = priority_asi_soc2(asi)
+	elif section == '/asi_psych/':
+		result = priority_asi_psych(asi)
+
+def deprioritizeASI(asi):
+	asi.adminPriority 		= False
+	asi.generalPriority 	= False
+	asi.medicalPriority 	= False
+	asi.employmentPriority 	= False
+	asi.drug1Priority 		= False
+	asi.drug2Priority 		= False
+	asi.legalPriority 		= False
+	asi.familyPriority 		= False
+	asi.social1Priority 	= False
+	asi.social2Priority 	= False
+	asi.psychPriority 		= False
 
 def forceNextAsiPage(asi):
 	result 	= None
@@ -6789,6 +7279,7 @@ def processAsiData(request, current_section):
 
 	session = ClientSession.objects.get(id=session_id)
 	asi = ASI.objects.get(id=asi_id)
+	deprioritizeASI(asi)
 	fields = grabASIFields(asi, current_section)
 	json_data = json.dumps(fields)
 
@@ -6848,6 +7339,7 @@ def getOpenedForm(form_list):
 			form = f
 			break
 	return form
+
 
 def grabClientOpenForm(client, form_type):
 	result = None
@@ -6947,7 +7439,7 @@ def openForm(form_type, form, client):
 	ams = grabClientAMForms(client)
 	saps = grabClientSAPForms(client)
 	mhs = grabClientMHForms(client)
-	asis = grabClientAsiForms(client)
+	asis = grabClientASIForms(client)
 	uts = grabClientUtForms(client)
 
 	if str(form_type) == 'am':
@@ -7208,7 +7700,7 @@ def universalStartForm(form_type, client):
 		result = startMH(client)
 	elif form_type == 'sap':
 		result = getSAP(client)
-	elif form_type = 'asi':
+	elif form_type == 'asi':
 		result = startASI(client)
 
 	return result
@@ -7252,7 +7744,7 @@ def startForm(form_type, client):
 	elif form_type == 'sap':
 		result = getSAP(client)
 		openForm(form_type, result['sap'], client)
-	elif form_type = 'asi':
+	elif form_type == 'asi':
 		result = startASI(client)
 		openForm(form_type, result['asi'], client)
 
@@ -7278,9 +7770,9 @@ def fetchContent(request, form_type, current_section):
 	content = None
 
 	if form_type == 'am':
-		content = None
+		content = processAMData(request, current_section)
 	elif form_type == 'sap':
-		content = None
+		content = processSapData(request, current_section)
 	elif form_type == 'mh':
 		content = processMhData(request, current_section)
 	elif form_type == 'asi':
@@ -7290,9 +7782,9 @@ def fetchContent(request, form_type, current_section):
 
 def saveForm(request, form_type, section, form):
 	if form_type == 'am':
-		no = None
+		saveCompletedAmSection(request, section, form)
 	elif form_type == 'sap':
-		no = None
+		saveSap(request, section, form)
 	elif form_type == 'mh':
 		saveMentalHealth(request, section, form)
 	elif form_type == 'asi':
@@ -7300,9 +7792,11 @@ def saveForm(request, form_type, section, form):
 
 def saveAndFinish(request, form_type, section, form):
 	if form_type == 'am':
-		no = None
+		setAmSectionComplete(request, section, form)
+		setAmSectionComplete(form, section)
 	elif form_type == 'sap':
-		no = None
+		saveSap(request, section, form)
+		setSapSectionComplete(form, section)
 	elif form_type == 'mh':
 		saveMentalHealth(request, section, form)
 		finishMhSection(form, section)
@@ -7347,6 +7841,19 @@ def refreshForm(form_type, form):
 		refreshMh(form)
 	elif str(form_type) == 'asi':
 		refreshASI(form)
+
+def force_URL_priority(form_type, section, form):
+	form_type = str(form_type)
+
+	if form_type == 'asi':
+		asiPriority(form, section)
+	elif form_type == 'sap':
+		prioritySapSection(section, form)
+	elif form_type == 'mh':
+		setMhPriority(form, section)
+	elif form_type == 'am':
+		setAmPriorityURL(section, form)
+
 
 
 

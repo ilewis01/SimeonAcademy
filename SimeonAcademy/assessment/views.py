@@ -25,7 +25,7 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
 
 from assessment.view_functions import convert_datepicker, generateClientID,\
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -49,6 +49,7 @@ universalGrabFields, universalStartForm
 
 #THE NEW GLOBAL FUNCTIONS
 # startForm, getContent, fetchUrl, fetchForm, saveForm, saveAndFinish, deleteForm, refreshForm
+#force_URL_priority
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
@@ -849,7 +850,7 @@ def am_preliminary(request):
 
 			action = startAM(session.client)		
 			am = action['am']
-			openForm('am', am, session.client)
+			# openForm('am', am, session.client)
 
 			content['session'] = session
 			content['AM'] = am
@@ -2516,7 +2517,7 @@ def sap_preliminary(request):
 
 			action = getSAP(client)
 			sap = action['sap']
-			openForm('sap', sap, session.client)
+			# openForm('sap', sap, session.client)
 
 			content['session'] = session
 			content['sap'] = sap

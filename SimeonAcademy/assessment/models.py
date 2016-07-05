@@ -1415,7 +1415,7 @@ class AIS_Psych(models.Model):
 	def __unicode__(self):
 		return str(self.clientID)
 
-class AIS(models.Model):
+class ASI(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
 	date_of_assessment = models.DateField(blank=True, default=None, null=True)
 	startTime = models.CharField(max_length=4, default=None, blank=True, null=True)
