@@ -481,6 +481,17 @@ def comfirmSessionEnd(request):
 			content['title'] = "Simeon Academy | Confirm Billing Details"
 			return render_to_response('global/comfirmSessionEnd.html', content)
 
+###########################################################################################################################################
+################################################################ END CLIENT ###############################################################
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+###########################################################################################################################################
+#------------------------------------------------------------ GENERIC VIEWS --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
+
 @login_required(login_url='/index')
 def uni_generic_exit(request):
 	user = request.user
@@ -513,7 +524,6 @@ def uni_generic_exit(request):
 			elif str(form_type) == 'sap':
 				sap_id = request.POST.get('sap_id', '')
 				form = SAP.objects.get(id=sap_id)
-				prioritySapSection(last_section, form)
 				type_header = "S.A.P"
 
 			elif str(form_type) == 'mh':
@@ -532,6 +542,7 @@ def uni_generic_exit(request):
 				type_header = 'Urine Test'
 
 			saveForm(request, form_type, last_section, form)
+			force_URL_priority(form_type, last_section, form)
 
 			content['form'] = form
 			content['type_header'] = type_header
@@ -675,10 +686,7 @@ def genericFormRefreshed(request):
 				type_header = 'Urine Test'
 				form = UrineResults.objects.get(id=form_id)
 
-			print "form type: " + str(form_type)
-			print 'Form ID: ' + str(form.id)
-
-			universalRefresh(form_type, form)
+			refreshForm(form_type, form)
 			location = universalLocation(form_type, form.id)
 
 			content['save_section'] = location
@@ -718,7 +726,7 @@ def genericFormDeleted(request):
 
 
 ###########################################################################################################################################
-###########################################################################################################################################
+################################################################ END GENERIC ##############################################################
 ###########################################################################################################################################
 
 
@@ -750,7 +758,6 @@ def am_preliminary(request):
 				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
 
 			else:
-				print "The AM ID: " + str(content['AM'].id)
 				return render_to_response('counselor/forms/AngerManagement/instructions.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1126,7 +1133,7 @@ def printAM(request):
 
 
 ###########################################################################################################################################
-###########################################################################################################################################
+################################################################## END AM #################################################################
 ###########################################################################################################################################
 
 
@@ -1135,6 +1142,7 @@ def printAM(request):
 #----------------------------------------------------------------- MH VIEWS --------------------------------------------------------------#
 ###########################################################################################################################################
 ###########################################################################################################################################
+
 
 @login_required(login_url='/index')
 def mh_preliminary(request):
@@ -1553,7 +1561,7 @@ def verify_mhOp(request):
 
 
 ###########################################################################################################################################
-###########################################################################################################################################
+################################################################## END MH #################################################################
 ###########################################################################################################################################
 
 
@@ -1562,6 +1570,8 @@ def verify_mhOp(request):
 #---------------------------------------------------------------- ASI VIEWS --------------------------------------------------------------#
 #*****************************************************************************************************************************************#
 ###########################################################################################################################################
+
+
 @login_required(login_url='/index')
 def asi_preliminary(request):
 	user = request.user
@@ -1822,7 +1832,7 @@ def asi_viewForm(request):
 			return render_to_response('counselor/forms/ASI/viewForm.html', content, context_instance=RequestContext(request))
 
 ###########################################################################################################################################
-###########################################################################################################################################
+################################################################# END ASI #################################################################
 ###########################################################################################################################################
 
 
@@ -1847,81 +1857,13 @@ def sap_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			goToNext = None
-			session_id = request.POST.get('session_id', '')
+			content = startForm(request, 'sap')
 
-			session = ClientSession.objects.get(id=session_id)
-			client = session.client
-
-			action = getSAP(client)
-			sap = action['sap']
-			# openForm('sap', sap, session.client)
-
-			content['session'] = session
-			content['sap'] = sap
-			
-			if action['isNew'] == False:
-				goToNext = 'false'
-			else:
-				goToNext = 'true'
-
-			if action['isNew'] == False and str(goToNext) == 'false':
-				save_section = universalLocation('sap', sap.id)
-
-				content['save_section'] = save_section
-				content['type_header'] = 'S.A.P'
-				content['form'] = sap
-				content['form_type'] = 'sap'
-				content['date_of_assessment'] = sap.date_of_assessment
-				content['title'] = 'Simeon Academy | SAP'
-				return render_to_response('global/resolve_form.html', content)
+			if content['isNew'] == False:
+				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
 
 			else:
-				content['title'] = "Simeon Academy | S.A.P Instructions"
-				return render_to_response('counselor/forms/SAP/instructions.html', content)
-
-@login_required(login_url='/index')
-def sap_location(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			action = request.POST.get('sap-choice', '')
-			sap = request.POST.get('sap_id')
-			sap = SAP.objects.get(id=sap)
-			client = sap.demographics.client
-			content['client'] = sap.demographics.client
-
-			if str(action) == 'finish-old':
-				##go to the next section to be completed in the form
-				content['sap'] = sap
-				goToLocation = continueToSAPSection(sap)
-				content['title'] = "Simeon Academy | SAP"
-				return render_to_response(goToLocation, content)
-			elif str(action) == 'start-new':
-				##delete the current form and start at beginning of the am form
-				times = getTimes()
-				content['times'] = times
-				if sap.demographics != None:
-					sap.demographics.delete()
-				if sap.psychoactive != None:
-					sap.psychoactive.delete()
-				sap.delete()
-				content['title'] = "Simeon Academy | SAP"
-				return render_to_response('counselor/forms/SAP/demographic.html', content)
-			elif str(action) == 'cancel':
-				## return to the client options page
-				content['title'] = "Simeon Academy | Client Options"
-				return render_to_response('counselor/client/client_options.html', content)
+				return render_to_response('counselor/forms/SAP/instructions.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def sap_demographic(request):
@@ -1938,37 +1880,9 @@ def sap_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session_id = request.POST.get('session_id', '')
-			sap_id = request.POST.get('sap_id', '')
-			save_section = request.POST.get('save_section', '')
-			new_form = request.POST.get('new_form', '')
-			back = request.POST.get('back' '')
+			content = fetchContent(request, 'sap', '/sap_demographic/')
+			return render_to_response('counselor/forms/SAP/demographic.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.clinicPriority = False
-			sap.save()
-
-			if str(new_form) == 'false' and str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapDemoFields(sap)
-			image = grabSapImages(sap, '/sap_demographic/')
-			classes = grabSapClassesCSS(sap, 'clinic')
-			next_location = locateNextSection(sap, '/sap_demographic/')
-
-			content['progress'] = progress
-			content['next_location'] = next_location
-			content['session'] = session
-			content['sap'] = sap
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['back'] = back
-			content['title'] = "Simeon Academy | Substance Abuse Professional Form"		
-			return render_to_response('counselor/forms/SAP/demographic.html', content)
 
 @login_required(login_url='/index')
 def sap_psychoactive(request):
@@ -1985,35 +1899,9 @@ def sap_psychoactive(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_psychoactive/')
+			return render_to_response('counselor/forms/SAP/psychoactive.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.psycho1Priority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapPsychoFields(sap)
-			image = grabSapImages(sap, '/sap_psychoactive/')
-			classes = grabSapClassesCSS(sap, 'psycho1')
-			next_location = locateNextSection(sap, '/sap_psychoactive/')
-
-			content['next_location'] = next_location
-			content['session'] = session
-			content['sap'] = sap
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/psychoactive.html', content)
 
 @login_required(login_url='/index')
 def sap_psychoactive2(request):
@@ -2030,35 +1918,9 @@ def sap_psychoactive2(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_psychoactive2/')
+			return render_to_response('counselor/forms/SAP/psychoactive2.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.psycho2Priority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapDemoFields(sap)
-			image = grabSapImages(sap, '/sap_psychoactive2/')
-			classes = grabSapClassesCSS(sap, 'psycho2')
-			next_location = locateNextSection(sap, '/sap_psychoactive2/')
-
-			content['next_location'] = next_location
-			content['session'] = session
-			content['sap'] = sap
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/psychoactive2.html', content)
 
 @login_required(login_url='/index')
 def sap_special(request):
@@ -2075,38 +1937,9 @@ def sap_special(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_special/')
+			return render_to_response('counselor/forms/SAP/special.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.spacialPriority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-			content['title'] = "Simeon Academy | Urine Test Analysis"
-
-			fields = grabSapDemoFields(sap)
-			json_data = json.dumps(fields)
-			image = grabSapImages(sap, '/sap_special/')
-			classes = grabSapClassesCSS(sap, 'special')
-			next_location = locateNextSection(sap, '/sap_special/')
-
-			content['next_location'] = next_location
-			content['session'] = session
-			content['sap'] = sap
-			content['json_data'] = json_data
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/special.html', content)
 
 @login_required(login_url='/index')
 def sap_social(request):
@@ -2123,35 +1956,9 @@ def sap_social(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_social/')
+			return render_to_response('counselor/forms/SAP/pre_final.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.socialPriority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapDemoFields(sap)
-			image = grabSapImages(sap, '/sap_social/')
-			classes = grabSapClassesCSS(sap, 'social')
-			next_location = locateNextSection(sap, '/sap_social/')
-
-			content['next_location'] = next_location
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['session'] = session
-			content['sap'] = sap
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/pre_final.html', content)
 
 @login_required(login_url='/index')
 def sap_other(request):
@@ -2168,35 +1975,9 @@ def sap_other(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_other/')
+			return render_to_response('counselor/forms/SAP/final.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.otherPriority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapDemoFields(sap)
-			image = grabSapImages(sap, '/sap_other/')
-			classes = grabSapClassesCSS(sap, 'other')
-			next_location = locateNextSection(sap, '/sap_other/')
-
-			content['next_location'] = next_location
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['session'] = session
-			content['sap'] = sap
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/final.html', content)
 
 @login_required(login_url='/index')
 def sap_sources(request):
@@ -2213,35 +1994,8 @@ def sap_sources(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
-
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
-
-			progress = getSapProgress(sap)
-			sap.sourcesPriority = False
-			sap.save()
-
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
-
-			fields = grabSapDemoFields(sap)
-			image = grabSapImages(sap, '/sap_sources/')
-			classes = grabSapClassesCSS(sap, 'source')
-			next_location = locateNextSection(sap, '/sap_sources/')
-
-			content['next_location'] = next_location
-			content['fields'] = fields
-			content['image'] = image
-			content['class'] = classes
-			content['session'] = session
-			content['sap'] = sap
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/sap_sources.html', content)
+			content = fetchContent(request, 'sap', '/sap_sources/')
+			return render_to_response('counselor/forms/SAP/sap_sources.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def sap_viewForm(request):
@@ -2258,33 +2012,19 @@ def sap_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			back = request.POST.get('back', '')
-			session_id = request.POST.get('session_id', '')
-			save_section = request.POST.get('save_section', '')
-			sap_id = request.POST.get('sap_id', '')
+			content = fetchContent(request, 'sap', '/sap_viewForm/')
+			return render_to_response('counselor/forms/SAP/viewForm.html', content, context_instance=RequestContext(request))
 
-			session = ClientSession.objects.get(id=session_id)
-			sap = SAP.objects.get(id=sap_id)
+###########################################################################################################################################
+################################################################ END SAP ##################################################################
+###########################################################################################################################################
 
-			if str(back) == 'false':
-				saveSapDemoSection(request, save_section, sap)
 
-			fields = grabSapDemoFields(sap)
-			p_fields = grabSapPsychoFields(sap)
-			image = grabSapImages(sap, '//')
-			classes = grabSapClassesCSS(sap, '')
-
-			content['fields'] = fields
-			content['p_fields'] = p_fields
-			content['image'] = image
-			content['class'] = classes
-			content['session'] = session
-			content['sap'] = sap
-			content['back'] = back
-			content['title'] = "Simeon Academy | SAP"
-			return render_to_response('counselor/forms/SAP/viewForm.html', content)
-
-## URINE TEST VIEWS-----------------------------------------------------------
+###########################################################################################################################################
+###########################################################################################################################################
+#------------------------------------------------------------- URINE TEST ----------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
 @login_required(login_url='/index')
 def ut_preliminary(request):
 	user = request.user
@@ -2462,7 +2202,19 @@ def ut_form_saved2(request):
 				ut.save()
 				return render_to_response('counselor/forms/UrineTest/form_created.html', content)
 
-## DISCHARGE VIEWS------------------------------------------------------------
+
+###########################################################################################################################################
+################################################################ END UT ###################################################################
+###########################################################################################################################################
+
+
+###########################################################################################################################################
+###########################################################################################################################################
+#-------------------------------------------------------------- DISCHARGE ----------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
+
+
 @login_required(login_url='/index')
 def discharge_preliminary(request):
 	user = request.user

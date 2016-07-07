@@ -156,7 +156,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('sap', '/sap_demographic/');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -175,16 +175,14 @@
             		<div class="row">                   
                   		<div class="col-md-12 col-sm-12">
                   			<div>
-                  				<form action='/sap_social/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  				<form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
-                  					<input type='hidden' name='back' id='back' value='{{back}}'>
-				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
+				                   	<input type='hidden' name='save_this' id='save_this' value=''>
+				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
 				                    <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'>	
 				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            		<input type='hidden' name='all_purpose' id='all_purpose' value=''>
-                            		<input type='hidden' name='exit_type' id='exit_type' value=''>
+                            <input type='hidden' name='exit_type' id='exit_type' value='sap'>
 
 				            <table>
 				            	<tr><td><div style='margin-top:25px;'></div></td></tr>
@@ -292,7 +290,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: sap_continue_demographic();">
+			                		<a href="javascript: continue_sap_form('/sap_demographic/');">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>
@@ -309,111 +307,6 @@
 
 
 
-
-
-
-<!-- <h1>Clinical Assessment Outline</h1>
-
-<h2>Client Info</h2>
-<h3 style='color:green;'><em>{{client.fname}} {{client.lname}}</em></h3>
-
-<table>
-	<tr>
-		<td><b>ID: </b></td>
-		<td><span style='color:blue;'>{{client.clientID}}</span></td>
-	</tr>
-	<tr>
-		<td><b>DOB: </b></td>
-		<td><span style='color:blue;'>{{client.dob}}</span></td>
-	</tr>
-</table>
-<table>
-	<tr><td><div style='margin-bottom:10px;'></div></td></tr>
-	<tr><td><b>Address:</b></td></tr>
-	<tr><td>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</td></tr>
-	<tr><td>{{client.city}}, {{client.state}} {{client.zip_code}}</td></tr>
-	<tr><td><div style='margin-bottom:10px;'></div></td></tr>
-</table>
-
-<form action='/sap_psychoactive/' method='post' id=''> {% csrf_token %}
-	<input type="hidden" name='client_id' id='client_id' value='{{client.id}}'>
-	<table>
-		<tr>
-			<td><b>Assessment Date: </b></td>
-			<td><input type='text' value='' name='datepicker' id='datepicker'></td>
-		</tr>
-		<tr>
-			<td><b><span style='color:red;'>Start Time</span>: </b></td>
-			<td>
-				<select id='start-time' value=''>
-					<option value=''>Select</option>
-					{% for t in times %}
-						<option value='{{t}}'>{{t}}</option>
-					{% endfor %}
-				</select>
-			</td>
-		</tr>
-		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
-	</table>
-
-	<table>
-		<tr>
-			<td>
-				<label for='problem'><b>Presenting Problem:</b></label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<span><em>
-					Include reason for entry, source of refferal, legal involvement, self-identified problems and recent stressors.
-				</em></span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<textarea rows='10' cols='55' name='problem' id='problem'></textarea>
-			</td>
-		</tr>
-		
-		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
-
-		<tr><td><label for='health'><b>Health/Medical History:</b></label></td></tr>
-		<tr>
-			<td>
-				<span><em>
-					Describe general health, nutrition, medical problems (include visual and motor function),
-					prenatal exposure to alcohol or other drugs and possible effects, remarkable developmental milestone delays,
-					medications for the past year, allergies, hospitalizations, disabilities, tuberculosis screening and
-					HIV-risk behaviors. Identify need for assistive technology or resources. Provide physician's name
-					and telephone number. Complete 'Special Populations' section as appropiate.
-				</em></span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<textarea rows='10' cols='55' name='health' id='health'></textarea>
-			</td>
-		</tr>
-		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
-
-		<tr><td><label for='family'><b>Family/Social Interaction:</b></label></td></tr>
-		<tr>
-			<td>
-				<textarea rows='10' cols='55' name='family' id='family'></textarea>
-			</td>
-		</tr>
-		<tr><td><div style='margin-bottom:15px;'></div></td></tr>
-	</table>
-
-	<input type='submit' value='submit'>
-</form>
-
-<form action='/clientOptions/' method='post' id='back-options'> {% csrf_token %}
-	<input type="hidden" name='cli-id' id='cli-id' value='{{client.id}}'>
-	<input type='submit' value='Back to Client Options'>
-</form>
-
-<a href='/adminHome'><button type='button'>Home Page</button></a> -->
 
 
 

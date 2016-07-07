@@ -4056,48 +4056,75 @@ function initialize_sap_sources() {
 	}
 }
 
-function sap_continue_demographic() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
+function post_dynamic_sap_sources() {
+	//NULL TEXT
+	var source1 = document.getElementById('source1');
+	var source2 = document.getElementById('source2');
+	var relationship1 = document.getElementById('relationship1');
+	var relationship2 = document.getElementById('relationship2');
 
-	//TEXT FIELDS
-	var problem = document.getElementById('problem');
-	var health = document.getElementById('health');
+	postTextNA(source1);
+	postTextNA(source2);
+	postTextNA(relationship1);
+	postTextNA(relationship2);
+}
 
-	postTextNA(problem);
-	postTextNA(health);
+function post_dynamic_sap_other() {
+	//TEXT
+	var psychological = document.getElementById('psychological');
+	var gambling = document.getElementById('gambling');
+	var abilities = document.getElementById('abilities');
+	var other = document.getElementById('other');
 
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
+	postTextNA(psychological);
+	postTextNA(gambling);
+	postTextNA(abilities);
+	postTextNA(other);
+}
+
+function post_dynamic_sap_special() {
+	//M_VALUE ELEMENTS
+	var m_isChild = document.getElementById('m_isChild');
+	var m_isSenior = document.getElementById('m_isSenior');
+	var m_isDual = document.getElementById('m_isDual');
+	var m_isOther = document.getElementById('m_isOther');
+	var m_isNone = document.getElementById('m_isNone');
+	var m_special = document.getElementById('m_special');
+
+	//CHECKBOXES
+	var isChild = document.getElementById('isChild');
+	var isSenior = document.getElementById('isSenior');
+	var isDual = document.getElementById('isDual');
+	var isOther = document.getElementById('isOther');
+	var isNone = document.getElementById('isNone');
+
+	var special = document.getElementById('special');
+
+	if (special.value === '' || special.value === null) {
+		m_special.value = 'N/A';
+	}
+
+	postCheckboxValue(isChild, m_isChild);
+	postCheckboxValue(isSenior, m_isSenior);
+	postCheckboxValue(isDual, m_isDual);
+	postCheckboxValue(isOther, m_isOther);
+	postCheckboxValue(isNone, m_isNone);
+
+	if (String(special.value) === '' || String(special.value) === null) {
+		m_special.value = 'N/A';
+	}
+	else {
+		m_special.value = special.value;
 	}
 }
 
-function sap_continue_social() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
-
-	var family = document.getElementById('family');
-	postTextNA(family);
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
-	}
+function post_dynamic_sap_psycho2() {
+	//TEXT PROCESSING
+	var psychoactive = document.getElementById('psychoactive');
+	postTextNA(psychoactive);
 }
 
-function sap_continue_psycho1() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
-
+function post_dynamic_sap_psycho1() {
 	postTextNA(document.getElementById('alcoholFrequency'));
 	postTextNA(document.getElementById('alcoholQuantity'));
 	postTextNA(document.getElementById('alcoholLast'));
@@ -4157,122 +4184,58 @@ function sap_continue_psycho1() {
 	postTextNA(document.getElementById('otherQuantity'));
 	postTextNA(document.getElementById('otherLast'));
 	postTextNA(document.getElementById('otherHow'));
+}
 
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
+function post_dynamic_sap_social() {
+	var family = document.getElementById('family');
+	postTextNA(family);
+}
+
+function post_dynamic_sap_demo() {
+	//TEXT FIELDS
+	var problem = document.getElementById('problem');
+	var health = document.getElementById('health');
+
+	postTextNA(problem);
+	postTextNA(health);
+}
+
+function post_dynamic_sap_fields(section) {
+	section = String(section);
+
+	if (section === '/sap_demographic/') {
+		post_dynamic_sap_demo();
+	}
+	else if (section === '/sap_social/') {
+		post_dynamic_sap_social();
+	}
+	else if (section === '/sap_psychoactive/') {
+		post_dynamic_sap_psycho1();
+	}
+	else if (section === '/sap_psychoactive2/') {
+		post_dynamic_sap_psycho2();
+	}
+	else if (section === '/sap_special/') {
+		post_dynamic_sap_special();
+	}
+	else if (section === '/sap_other/') {
+		post_dynamic_sap_other();
+	}
+	else if (section === '/sap_sources/') {
+		post_dynamic_sap_sources();
 	}
 }
 
-function sap_continue_psycho2() {
+function continue_sap_form(section) {
 	var proceed = true;
 	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
+	var next_url = document.getElementById('next_url');
 
-	//TEXT PROCESSING
-	var psychoactive = document.getElementById('psychoactive');
-	postTextNA(psychoactive);
+	post_dynamic_sap_fields(section);
 
 	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
-	}
-}
-
-function sap_continue_special() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
-
-	//M_VALUE ELEMENTS
-	var m_isChild = document.getElementById('m_isChild');
-	var m_isSenior = document.getElementById('m_isSenior');
-	var m_isDual = document.getElementById('m_isDual');
-	var m_isOther = document.getElementById('m_isOther');
-	var m_isNone = document.getElementById('m_isNone');
-	var m_special = document.getElementById('m_special');
-
-	//CHECKBOXES
-	var isChild = document.getElementById('isChild');
-	var isSenior = document.getElementById('isSenior');
-	var isDual = document.getElementById('isDual');
-	var isOther = document.getElementById('isOther');
-	var isNone = document.getElementById('isNone');
-
-	var special = document.getElementById('special');
-
-	if (special.value === '' || special.value === null) {
-		m_special.value = 'N/A';
-	}
-
-	postCheckboxValue(isChild, m_isChild);
-	postCheckboxValue(isSenior, m_isSenior);
-	postCheckboxValue(isDual, m_isDual);
-	postCheckboxValue(isOther, m_isOther);
-	postCheckboxValue(isNone, m_isNone);
-
-	if (String(special.value) === '' || String(special.value) === null) {
-		m_special.value = 'N/A';
-	}
-	else {
-		m_special.value = special.value;
-	}
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
-	}
-}
-
-function sap_continue_other() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
-
-	//TEXT
-	var psychological = document.getElementById('psychological');
-	var gambling = document.getElementById('gambling');
-	var abilities = document.getElementById('abilities');
-	var other = document.getElementById('other');
-
-	postTextNA(psychological);
-	postTextNA(gambling);
-	postTextNA(abilities);
-	postTextNA(other);
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
-		form.submit();
-	}
-}
-
-function sap_continue_sources() {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var back = document.getElementById('back');
-	var next_location = document.getElementById('next_location');
-
-	//NULL TEXT
-	var source1 = document.getElementById('source1');
-	var source2 = document.getElementById('source2');
-	var relationship1 = document.getElementById('relationship1');
-	var relationship2 = document.getElementById('relationship2');
-
-	postTextNA(source1);
-	postTextNA(source2);
-	postTextNA(relationship1);
-	postTextNA(relationship2);
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_location.value;
+		document.getElementById('save_this').value = 'true';
+		form.action = next_url.value;
 		form.submit();
 	}
 }
@@ -5726,7 +5689,7 @@ function sideBarASI(page) {
 //=====================================================================================================================//
 
 function sideBarOption(page) {
-	document.getElementById('back').value = 'true';
+	document.getElementById('save_this').value = 'false';
 
 	if (String(page) === 'sapClinic') {
 		var form = document.getElementById('sap_form');
@@ -5773,7 +5736,7 @@ function sideBarOption(page) {
 
 function sideBarMh(page){
 	page = String(page);
-
+	document.getElementById('save_this').value = 'false';
 	form = document.getElementById('mh_form');
 	form.action = page;
 	form.submit();
@@ -5992,6 +5955,7 @@ function restart_form() {
 function amSideBtnSubmit(url) {
 	url = String(url);
 	var form = document.getElementById('am_demo');
+	document.getElementById('save_this').value = 'false';
 	form.action = url;
 	form.submit();
 }

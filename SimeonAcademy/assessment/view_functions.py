@@ -3112,47 +3112,98 @@ def forceSapLocation(sap):
 			result = '/sap_viewForm/'
 	return result
 
+def snatchSAPcomplete(sap):
+	result = []
+	result.append(sap.clinicalComplete)
+	result.append(sap.socialComplete)
+	result.append(sap.psychoComplete)
+	result.append(sap.psycho2Complete)
+	result.append(sap.specialComplete)
+	result.append(sap.otherComplete)
+	result.append(sap.sourcesComplete)
+	result.append(sap.SapComplete)
+	return result
 
-def locateNextSection(sap, current_page):
-	result = None
-	hasPriority = False
-	c_list = getCompletedSapOrdered(sap)
+def snatchSAPpriority(sap):
+	result = []
+	result.append(sap.clinicPriority)
+	result.append(sap.socialPriority)
+	result.append(sap.psycho1Priority)
+	result.append(sap.psycho2Priority)
+	result.append(sap.spacialPriority)
+	result.append(sap.otherPriority)
+	result.append(sap.sourcesPriority)
+	result.append(False)
+	return result
 
-	if sap.clinicPriority == True:
-		hasPriority = True
-		result = '/sap_demographic/'
-	elif sap.socialPriority == True:
-		hasPriority = True
-		result = '/sap_social/'
-	elif sap.psycho1Priority == True:
-		hasPriority = True
-		result = '/sap_psychoactive/'
-	elif sap.psycho2Priority == True:
-		hasPriority = True
-		result = '/sap_psychoactive2/'
-	elif sap.spacialPriority == True:
-		hasPriority = True
-		result = '/sap_special/'
-	elif sap.otherPriority == True:
-		hasPriority = True
-		result = '/sap_other/'
-	elif sap.sourcesPriority == True:
-		hasPriority = True
-		result = '/sap_sources/'
+def snatchSAPurls():
+	result = []
+	result.append('/sap_demographic/')
+	result.append('/sap_social/')
+	result.append('/sap_psychoactive/')
+	result.append('/sap_psychoactive2/')
+	result.append('/sap_special/')
+	result.append('/sap_other/')
+	result.append('/sap_sources/')
+	result.append('/sap_viewForm/')
+	return result
 
-	if hasPriority == False:
-		##First grab the next URL in list. If the next URL is a duplicate, force the next URL in list
-		next = ''
+def snatch_sap_parameters(sap):
+	result = []
+	complete 	= snatchSAPcomplete(sap)
+	priority 	= snatchSAPpriority(sap)
+	urls 		= snatchSAPurls()
 
-		for i in range(len(c_list)):
-			if c_list[i] == False:
-				next = matchSapLocationIndex(i)
+	for i in range(len(urls)):
+		data 				= {}
+		data['complete'] 	= complete[i]
+		data['priority'] 	= priority[i]
+		data['url'] 		= urls[i]
+		result.append(data)
+	return result
+
+def forceNextSAPpage(sap):
+	result 		= None
+	flag 		= None
+	sap_list 	= snatch_sap_parameters(sap)
+
+	for i in range(len(sap_list)):
+		if sap_list[i]['complete'] == False:
+			flag = i
+			break
+
+	for j in range(len(sap_list)):
+		if sap_list[j]['complete'] == False and j != flag:
+			result = sap_list[j]['url']
+			break
+
+	return result
+
+def nextSAPage(sap, section):
+	result = ''
+	next_section = ''
+	proceed = True
+	no_result = False
+	sap_list = snatch_sap_parameters(sap)
+
+	for s in sap_list:
+		if s['priority'] == True:
+			result = s['url']
+			proceed = False
+			break
+
+	if proceed == True:
+		print 'THERE ARE NO SAP PRIORITIES...'
+		for i in range(len(sap_list)):
+			if sap_list[i]['complete'] == False:
+				print "FOUND A FALSE VALUE AT INDEX: " + str(i)
+				next_section = sap_list[i]['url']
 				break
 
-		if isDuplicateSapURL(current_page, next) == True:
-			result = forceSapLocation(sap)
+		if str(next_section) == str(section):
+			result = forceNextSAPpage(sap)
 		else:
-			result = next
+			result = next_section
 
 	return result
 
@@ -3211,7 +3262,7 @@ def beginSAP(request):
 	result['save_this'] = 'false'
 
 	if action['isNew'] == False:
-		next_section = locateNextSection(sap, None)
+		next_section = nextSAPage(sap, None)
 		result['form'] = sap
 		result['form_type'] = 'sap'
 		result['type_header'] = 'S.A.P'
@@ -3228,13 +3279,13 @@ def grabSapClassesCSS(sap, m_page):
 	green = 'sideBarMarginChecked'
 	current = 'sideLinkSelected'
 
-	classes['clinic'] = processCompletedClass(sap['clinicalComplete'], 'clinic', m_page, green, current, normal)
-	classes['social'] = processCompletedClass(sap['socialComplete'], 'social', m_page, green, current, normal)
-	classes['psycho1'] = processCompletedClass(sap['psychoComplete'], 'psycho1', m_page, green, current, normal)
-	classes['psycho2'] = processCompletedClass(sap['psycho2Complete'], 'psycho2', m_page, green, current, normal)
-	classes['special'] = processCompletedClass(sap['specialComplete'], 'special', m_page, green, current, normal)
-	classes['other'] = processCompletedClass(sap['otherComplete'], 'other', m_page, green, current, normal)
-	classes['source'] = processCompletedClass(sap['sourcesComplete'], 'source', m_page, green, current, normal)
+	classes['clinic'] = processCompletedClass(sap['clinicalComplete'], '/sap_demographic/', m_page, green, current, normal)
+	classes['social'] = processCompletedClass(sap['socialComplete'], '/sap_social/', m_page, green, current, normal)
+	classes['psycho1'] = processCompletedClass(sap['psychoComplete'], '/sap_psychoactive/', m_page, green, current, normal)
+	classes['psycho2'] = processCompletedClass(sap['psycho2Complete'], '/sap_psychoactive2/', m_page, green, current, normal)
+	classes['special'] = processCompletedClass(sap['specialComplete'], '/sap_special/', m_page, green, current, normal)
+	classes['other'] = processCompletedClass(sap['otherComplete'], '/sap_other/', m_page, green, current, normal)
+	classes['source'] = processCompletedClass(sap['sourcesComplete'], '/sap_sources/', m_page, green, current, normal)
 
 	return classes
 
@@ -3308,6 +3359,17 @@ def grabSapImages(sap, page):
 		images['source_image'] = x
 
 	return images
+
+def getSapFields(sap, section):
+	result = None
+	section = str(section)
+
+	if section == '/sap_psychoactive/':
+		result = grabSapPsychoFields(sap)
+	else:
+		result = grabSapDemoFields(sap)
+
+	return result
 
 def grabSapDemoFields(sap):
 	fields = {}
@@ -3650,21 +3712,19 @@ def saveSapDemoSection(request, section, sap):
 		sap.save()
 
 def saveSap(request, section, sap):
-	demo = sap.demographics
-
 	if str(section) == '/sap_demographic/':
 		problem = request.POST.get('problem', '')
 		health = request.POST.get('health', '')
 
-		demo.problem = problem
-		demo.health = health
-		demo.save()
+		sap.demographics.problem = problem
+		sap.demographics.health = health
+		sap.demographics.save()
 
 	elif str(section) == '/sap_social/':
 		family = request.POST.get('family')
 
-		demo.family = family
-		demo.save()
+		sap.demographics.family = family
+		sap.demographics.save()
 
 	elif str(section) == '/sap_psychoactive/':
 		saveSapPhycho1(request, sap)
@@ -3672,8 +3732,8 @@ def saveSap(request, section, sap):
 	elif str(section) == '/sap_psychoactive2/':
 		psychoactive = request.POST.get('psychoactive')
 
-		demo.psychoactive = psychoactive
-		demo.save()
+		sap.demographics.psychoactive = psychoactive
+		sap.demographics.save()
 
 	elif str(section) == '/sap_special/':
 		isChild = request.POST.get('m_isChild', '')
@@ -3689,14 +3749,14 @@ def saveSap(request, section, sap):
 		isOther = truePythonBool(isOther)
 		isNone = truePythonBool(isNone)
 
-		demo.special = special
-		demo.isChild = isChild
-		demo.isSenior = isSenior
-		demo.isDual = isDual
-		demo.isOther = isOther
-		demo.isNone = isNone
+		sap.demographics.special = special
+		sap.demographics.isChild = isChild
+		sap.demographics.isSenior = isSenior
+		sap.demographics.isDual = isDual
+		sap.demographics.isOther = isOther
+		sap.demographics.isNone = isNone
 
-		demo.save()
+		sap.demographics.save()
 
 	elif str(section) == '/sap_other/':
 		psychological = request.POST.get('psychological', '')
@@ -3704,12 +3764,12 @@ def saveSap(request, section, sap):
 		abilities = request.POST.get('abilities', '')
 		other = request.POST.get('other', '')
 
-		demo.psychological = psychological
-		demo.gambling = gambling
-		demo.abilities = abilities
-		demo.other = other
+		sap.demographics.psychological = psychological
+		sap.demographics.gambling = gambling
+		sap.demographics.abilities = abilities
+		sap.demographics.other = other
 
-		demo.save()
+		sap.demographics.save()
 
 	elif str(section) == '/sap_sources/':
 		source1 = request.POST.get('source1', '')
@@ -3717,12 +3777,12 @@ def saveSap(request, section, sap):
 		relationship1 = request.POST.get('relationship1', '')
 		relationship2 = request.POST.get('relationship2', '')
 
-		demo.source1 = source1
-		demo.source2 = source2
-		demo.relationship1 = relationship1
-		demo.relationship2 = relationship2
+		sap.demographics.source1 = source1
+		sap.demographics.source2 = source2
+		sap.demographics.relationship1 = relationship1
+		sap.demographics.relationship2 = relationship2
 
-		demo.save()
+		sap.demographics.save()
 
 def saveIncompleteSapPsycho1(request, sap):
 	alcoholAge = request.POST.get('alcoholAge', '')
@@ -4106,6 +4166,7 @@ def setSapSectionComplete(sap, section):
 		sap.otherComplete = True
 	elif section == '/sap_sources/':
 		sap.sourcesComplete = True
+	sap.save()
 
 def processSapData(request, current_section):
 	result = {}
@@ -4125,7 +4186,7 @@ def processSapData(request, current_section):
 		saveSap(request, section, sap)
 		setSapSectionComplete(sap, section)
 
-	next_url = locateNextSection(sap, current_section)
+	next_url = nextSAPage(sap, current_section)
 	image = grabSapImages(sap, current_section)
 	classes = grabSapClassesCSS(sap, current_section)
 
@@ -7856,7 +7917,7 @@ def universalLocation(form_type, form_id):
 		nextAmPage(am, None)
 	elif str(form_type) == 'sap':
 		sap = SAP.objects.get(id=form_id)
-		location = locateNextSection(sap, None)
+		location = nextSAPage(sap, None)
 	elif str(form_type) == 'mh':
 		mh = MentalHealth.objects.get(id=form_id)
 		location = nextMhPage(mh, None)
@@ -7994,7 +8055,7 @@ def fetchUrl(form_type, current_page, form):
 	if form_type == 'am':
 		url = nextAmPage(form, current_page)
 	elif form_type == 'sap':
-		url = locateNextSection(form, current_page)
+		url = nextSAPage(form, current_page)
 	elif form_type == 'mh':
 		url = nextMhPage(form, current_page)
 	elif form_type == 'asi':

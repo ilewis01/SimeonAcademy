@@ -156,7 +156,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: generic_exit('sap', 'clinic');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('sap', '/sap_demographic/');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -178,13 +178,11 @@
                   				<form action='/sap_sources/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
-                  					<input type='hidden' name='back' id='back' value='{{back}}'>
-				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='next_location' id='next_location' value='{{next_location}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/sap_other/'>
-				                    <input type='hidden' name='all_purpose' id='all_purpose' value=''>
-                            <input type='hidden' name='exit_type' id='exit_type' value=''>
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
+                  					<input type='hidden' name='save_this' id='save_this' value=''>
+				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+				                    <input type='hidden' name='save_section' id='save_section' value='/sap_other/'>	
+				                    <input type='hidden' name='new_form' id='new_form' value='false'>
+                            		<input type='hidden' name='exit_type' id='exit_type' value='sap'>
 				                
 
 				            <table>
@@ -375,7 +373,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: sap_continue_other();">
+			                		<a href="javascript: continue_sap_form('/sap_other/');">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>
