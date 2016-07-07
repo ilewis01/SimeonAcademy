@@ -69,11 +69,7 @@ urlpatterns = patterns('',
     url(r'^am_final/$', 'assessment.views.am_final'),
     url(r'^am_viewForm/$', 'assessment.views.am_viewForm'),
     url(r'^am_worst/$', 'assessment.views.am_worst'),
-    url(r'^am_location/$', 'assessment.views.am_location'),
     url(r'^printAM/$', 'assessment.views.printAM'),
-    url(r'^exit_am/$', 'assessment.views.exit_am'),
-    url(r'^am_deleted/$', 'assessment.views.am_deleted'),
-    url(r'^am_previouslyDeleted/$', 'assessment.views.am_previouslyDeleted'),
 
     ## Urine Test Views
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),

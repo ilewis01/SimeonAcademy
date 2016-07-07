@@ -710,12 +710,7 @@ function initalize_am_connections(json_data) {
 	connectionCheck();
 }
 
-function continue_to_worst() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function post_dynamic_am_connections() {
 	var angerWorse = document.getElementById('angerWorse');
 	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
 	var lessAngry = document.getElementById('lessAngry');
@@ -737,14 +732,21 @@ function continue_to_worst() {
 	else {
 		m_connectionExplain.value = 'N/A';
 	}
-
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
+
+// function continue_to_worst() {
+// 	var proceed = true;
+// 	var form = document.getElementById('am_demo');
+// 	var next_url = document.getElementById('next_url');
+
+// 	post_dynamic_am_connections();
+
+// 	if (proceed === true) {
+// 		document.getElementById('save_this').value = 'true';
+// 		form.action = next_url.value;
+// 		form.submit();
+// 	}
+// }
 
 // AM WORST EPISODES FUNCTIONS
 function worstCheck() {
@@ -827,12 +829,7 @@ function initalize_am_worst(json_data) {
 	}
 }
 
-function continue_to_target() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var next_section = document.getElementById('next_section');
-	var form = document.getElementById('am_demo');
-
+function post_dynamic_am_worst() {
 	//M_VALUE ELEMENTS
 	var m_useWorst = document.getElementById('m_useWorst');
 	var m_whoDidItFight = document.getElementById('m_whoDidItFight');
@@ -871,15 +868,7 @@ function continue_to_target() {
 	else {
 		m_otherWorstDescription.value = 'N/A';
 	}
-
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
-
 
 // AM TARGET FUNCTIONS
 function amTargetOther() {
@@ -930,13 +919,7 @@ function initalize_am_target(json_data) {
 	}
 }
 
-function continue_to_am_family() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var goToNext = document.getElementById('goToNext');
-	var next_section = document.getElementById('next_section');
-
+function post_dynamic_am_target() {
 	var angryPartner = document.getElementById('angryPartner');
 	var angryParents = document.getElementById('angryParents');
 	var angryChildren = document.getElementById('angryChildren');
@@ -967,15 +950,7 @@ function continue_to_am_family() {
 	if (angryAbout.value === '') {
 		angryAbout.value = 'N/A';
 	}
-
-	if (proceed === true) {
-		back.value = 'false';
-		goToNext.value = 'true';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
-
 
 // AM FAMILY OF ORIGIN FUNCTIONS
 function initalize_family_origin(json_data) {
@@ -1006,13 +981,7 @@ function initalize_family_origin(json_data) {
 	}
 }
 
-function continue_to_am_problems() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var goToNext = document.getElementById('goToNext');
-	var next_section = document.getElementById('next_section');
-
+function post_dynamic_am_family() {
 	var m_hasLovingMother = document.getElementById('m_hasLovingMother');
 	var m_hasLovingSiblings = document.getElementById('m_hasLovingSiblings');
 	var m_suicideHistory = document.getElementById('m_suicideHistory');
@@ -1025,14 +994,7 @@ function continue_to_am_problems() {
 
 	postCheckboxValue(hasLovingMother, m_hasLovingMother);
 	postCheckboxValue(hasLovingSiblings, m_hasLovingSiblings);
-	postDynamicRadioButtons(hasSuicide, m_suicideHistory);	
-
-	if (proceed === true) {
-		back.value = 'false';
-		goToNext.value = 'true';
-		form.action = next_section.value;
-		form.submit();
-	}
+	postDynamicRadioButtons(hasSuicide, m_suicideHistory);
 }
 
 //AM CURRENT PROBLEMS FUNCTIONS
@@ -1099,13 +1061,7 @@ function initalize_am_problems(json_data) {
 	am_problems_radio();
 }
 
-function continue_to_am_control() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var goToNext = document.getElementById('goToNext');
-	var next_section = document.getElementById('next_section');
-	var form = document.getElementById('am_demo');
-
+function post_dynamic_am_current() {
 	//M_VALUES
 	var m_brainInjury = document.getElementById('m_brainInjury');
 	var m_stroke = document.getElementById('m_stroke');
@@ -1144,11 +1100,59 @@ function continue_to_am_control() {
 	postDynamicRadioButtons(onMeds, m_currentlyOnMeds);
 	processDynamicTextPostValue(otherSeriousIllness, describeIssue, m_describeIssue);
 	processDynamicTextPostValue(onMeds, whichMeds, m_whichMeds);
+}
+
+function universal_am_dynamic_post(section) {
+	section = String(section);
+
+	if (section === 'demo') {
+		processAMDemoData();
+	}
+	else if (section === 'dh') {
+		processAM_DH_data();
+	}
+	else if (section === 'child') {
+		process_am_child_data();
+	}
+	else if (section === 'ah1') {
+		process_am_ah1_data();
+	}
+	else if (section === 'ah2') {
+		post_am_dynamic2();
+	}
+	else if (section === 'ah3') {
+		post_dynamic_am_ah3();
+	}
+	else if (section === 'connect') {
+		post_dynamic_am_connections();
+	}
+	else if (section === 'worst') {
+		post_dynamic_am_worst();
+	}
+	else if (section === 'target') {
+		post_dynamic_am_target();
+	}
+	else if (section === 'family') {
+		post_dynamic_am_family();
+	}
+	else if (section === 'current') {
+		post_dynamic_am_current();
+	}
+	else if (section === 'control') {
+		post_dynamic_am_control();
+	}
+}
+
+function continue_am_form(section) {
+	var proceed = true;
+	var next_url = document.getElementById('next_url');
+	var form = document.getElementById('am_demo');
+
+	universal_am_dynamic_post(section);
 
 	if (proceed === true) {
-		back.value = 'false';
-		goToNext.value = 'true';
-		form.action = next_section.value;
+		document.getElementById('save_this').value = 'true';
+		form.action = next_url.value;
 		form.submit();
 	}
 }
@@ -1383,8 +1387,7 @@ function medsRadioBtn() {
 	twoElementRadioSetup(on_meds, explain_label_health, whatMedicine);
 }
 
-function initialize_am_demo(json_data, back) {
-	var back = document.getElementById('back_btn');
+function initialize_am_demo(json_data) {
 
 	//DROP DOWN MENUS
 	var maritalStatus = document.getElementById('maritalStatus');
@@ -1429,11 +1432,7 @@ function start_am_form() {
 	form.submit();
 }
 
-
-function continue_am() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-
+function processAMDemoData() {
 	//M_VALUES
 	var m_own = document.getElementById('m_own');
 	var m_drop_out = document.getElementById('m_drop_out');
@@ -1469,13 +1468,8 @@ function continue_am() {
 		m_medication.value = 'False';
 		m_whatMedicine.value = 'N/A';
 	}
-
-	back.value = 'false';	
-
-	if (proceed === true) {
-		document.getElementById('am_demo').submit();
-	}
 }
+
 
 function back(back_url) {
 	var form = document.getElementById('am_demo');
@@ -2506,8 +2500,6 @@ function radioRightNoLower() {
 }
 
 function initialize_am_drug_history(json_data) {
-	var back = document.getElementById('back_btn');
-
 	//INITIALIZE RADIO BUTTONS
 	var current_use = document.getElementById('current_use');
 	var no_current_use = document.getElementById('no_current_use');
@@ -2586,12 +2578,7 @@ function initialize_am_drug_history(json_data) {
 	}
 }
 
-function continue_am_dh() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function processAM_DH_data() {
 	//HIDDEN FIELDS
 	var m_useType = document.getElementById('m_useType');
 	var m_amtPerWeek = document.getElementById('m_amtPerWeek');
@@ -2643,12 +2630,6 @@ function continue_am_dh() {
 	//PROCESS DYNAMIC NUMBER FIELDS
 	processDisabledNumberFields(quitMos, m_monthsQuit);
 	processDisabledNumberFields(quitYrs, m_yearsQuit);
-	
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
 
 
@@ -2787,12 +2768,7 @@ function initialize_am_childhood(json_data) {
 	}
 }
 
-function continue_am_history1() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function process_am_child_data() {
 	//DYNAMIC TRIGGERS
 	var hadTramua = document.getElementById('hadTramua');
 	var childAbused = document.getElementById('childAbused');
@@ -2828,12 +2804,16 @@ function continue_am_history1() {
 	postDynamicFields(haveOtherEvents, otherChildExplain, m_otherChildExplain);
 	postDynamicFields(sawViolence, parentViolenceExplain, m_parentViolenceExplain);
 	postDynamicFields(sawViolence, parentViolenceImpact, m_parentViolenceImpact);
+}
 
-	
+function continue_am_history1() {
+	var proceed = true;
+	var form = document.getElementById('am_demo');
+	process_am_child_data();
 
 	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
+		document.getElementById('save_this').value = 'true';
+		form.action = document.getElementById('next_url').value;
 		form.submit();
 	}
 }
@@ -2940,13 +2920,7 @@ function initalize_am_control(json_data) {
 	otherControlCheckbox();
 }
 
-function continue_to_am_final() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var next_section = document.getElementById('next_section');
-	var form = document.getElementById('am_demo');
-	var goToNext = document.getElementById('goToNext');
-
+function post_dynamic_am_control() {
 	//M_VALUES
 	var m_neverAttemptedControl = document.getElementById('m_neverAttemptedControl');
 	var m_talkToMyself = document.getElementById('m_talkToMyself');
@@ -2987,13 +2961,6 @@ function continue_to_am_final() {
 	processDynamicTextPostValue(leaveScene, whatDoLeave, m_whatDoLeave);
 	processDynamicTextPostValue(relax, howRelax, m_howRelax);
 	processDynamicTextPostValue(otherControlAnger, doWhatOtherControl, m_doWhatOtherControl);
-
-	if (proceed === true) {
-		back.value = 'false';
-		goToNext.value = 'true';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
 
 function initalize_am_final() {
@@ -3013,22 +2980,6 @@ function initalize_am_final() {
 		nullTextMustDie2(document.getElementById('changeLearn1'));
 		nullTextMustDie2(document.getElementById('changeLearn2'));
 		nullTextMustDie2(document.getElementById('changeLearn3'));
-	}
-}
-
-function continue_to_amViewForm() {
-	var proceed = true;
-	var form = document.getElementById('am_demo');
-	var goToNext = document.getElementById('goToNext');
-	var back = document.getElementById('back_btn');
-	var next_section = document.getElementById('next_section');
-
-	form.action = next_section.value;
-	goToNext.value = 'true';
-	back.value = 'false';
-
-	if (proceed === true) {
-		document.getElementById('am_demo').submit();
 	}
 }
 
@@ -3203,12 +3154,7 @@ function initialize_am_angerHistory(json_data) {
 	}
 }
 
-function continue_to_am_AH2() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function process_am_ah1_data() {
 	//DYNAMIC POSTING FIELDS
 	var m_physicalRecentV = document.getElementById('m_physicalRecentV');
 	var m_verbalRecentV = document.getElementById('m_verbalRecentV');
@@ -3290,14 +3236,6 @@ function continue_to_am_AH2() {
 		m_psychoWhyRecentV.value = 'N/A';
 		m_longAgoTreatRecentVmos.value = '0';
 		m_longAgoTreatRecentVyrs.value = '0';
-	}
-
-	
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
 	}
 }
 
@@ -3611,12 +3549,7 @@ function initialize_am_angerHistory2(json_data) {
 	suicide30recent();
 }
 
-function proceed_to_section3() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function post_am_dynamic2() {
 	//M_ELEMENTS
 	var m_depress30RecentV = document.getElementById('m_depress30RecentV');
 	var m_depress30ExplainRecentV = document.getElementById('m_depress30ExplainRecentV');
@@ -3711,15 +3644,7 @@ function proceed_to_section3() {
 		m_suicideTodayPlanRecentV.value = 'False';
 		m_hasAttemptedSuicide.value = 'False';
 	}
-
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
-	}
 }
-
 
 
 //AM ANGER HISTORY SECTION III FUNCTIONS
@@ -3863,12 +3788,7 @@ function initialize_am_angerHistory3(json_data) {
 	}
 }
 
-function proceed_to_connections() {
-	var proceed = true;
-	var back = document.getElementById('back_btn');
-	var form = document.getElementById('am_demo');
-	var next_section = document.getElementById('next_section');
-
+function post_dynamic_am_ah3() {
 	//M_VALUE ELEMENTS
 	var m_homicidal = document.getElementById('m_homicidal');
 	var m_homicidalExplain = document.getElementById('m_homicidalExplain');
@@ -3899,13 +3819,6 @@ function proceed_to_connections() {
 	}
 	else {
 		m_medSuccessRecentV.value = 'False';
-	}
-	
-
-	if (proceed === true) {
-		back.value = 'false';
-		form.action = next_section.value;
-		form.submit();
 	}
 }
 
@@ -5802,6 +5715,12 @@ function continue_to_asi_form() {
 	form.submit();
 }
 
+function sideBarASI(page) {
+	var form = document.getElementById('asi_form');
+	form.action = page;
+	form.submit();
+}
+
 //=====================================================================================================================//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=====================================================================================================================//
@@ -5861,13 +5780,40 @@ function sideBarMh(page){
 }
 
 function getFormElement(form_type) {
-	var result = '';
+	var result = null;
 
 	if (String(form_type) === 'am') {
 		result = document.getElementById('am_demo');
 	}
 	else if (String(form_type) === 'sap') {
 		result = document.getElementById('sap_form');
+	}
+	else if (String(form_type) === 'mh') {
+		result = document.getElementById('mh_form');
+	}
+
+	else if (String(form_type) === 'asi') {
+		result = document.getElementById('asi_form');
+	}
+
+	return result;
+}
+
+function getGenericFormID(form_type) {
+	form_type = String(form_type)
+	var result = null;
+
+	if (form_type === 'mh') {
+		result = 'mh_form';
+	}
+	else if (form_type === 'am') {
+		result = 'am_form';
+	}
+	else if (form_type === 'sap') {
+		result = 'sap_id';
+	}
+	else if (form_type === 'asi') {
+		result = 'asi_id'
 	}
 
 	return result;
@@ -5899,15 +5845,22 @@ function universal_generic_exit(form_type, page) {
 	form.submit();
 }
 
+function asi_exit(form_type, page) {
+	var form = document.getElementById('asi_form');
+	var exit_type = document.getElementById('exit_type');
+
+	form.action = '/uni_generic_exit/';
+	exit_type.value = String(form_type);
+	form.submit();
+}
+
 
 function generic_exit(form_type, section) {
-	var all_purpose = document.getElementById('all_purpose');
 	var exit_type = document.getElementById('exit_type');
 	var form = getFormElement(form_type);
 
 	form.action = '/generic_exit/';
 	exit_type.value = String(form_type);
-	all_purpose.value = String(section);
 	form.submit();
 }
 
@@ -6028,6 +5981,13 @@ function restart_form() {
 	form.action = save_section.value;
 	form.submit();
 	window.close();
+}
+
+function amSideBtnSubmit(url) {
+	url = String(url);
+	var form = document.getElementById('am_demo');
+	form.action = url;
+	form.submit();
 }
 
 

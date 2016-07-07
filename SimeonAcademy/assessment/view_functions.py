@@ -600,6 +600,8 @@ def saveCompletedAmSection(request, section, am):
 		am.save()
 
 	elif section == '/am_angerHistory/':
+		ah1 = am.angerHistory
+
 		#DYNAMIC FIELDS
 		physicalRecentV = request.POST.get('m_physicalRecentV', '')
 		verbalRecentV = request.POST.get('m_verbalRecentV', '')
@@ -639,8 +641,6 @@ def saveCompletedAmSection(request, section, am):
 		date = datetime.now()
 		date = date.date()
 
-		ah1 = am.angerHistory
-
 		ah1.date_of_assessment = date
 		ah1.recentIncidentV = recentIncidentV				
 		ah1.recentVDate = recentVDate
@@ -663,8 +663,8 @@ def saveCompletedAmSection(request, section, am):
 		ah1.longAgoTreatRecentVyrs = longAgoTreatRecentVyrs
 		ah1.didCompleteTreatRecentV = didCompleteTreatRecentV
 		ah1.reasonNotCompleteRecentV = reasonNotCompleteRecentV
-
 		ah1.save()
+		ah1 = am.angerHistory
 		am.save()
 
 	elif section == '/am_angerHistory2/':
@@ -1367,7 +1367,7 @@ def amSidebarImages(am, page):
 	return images
 
 def deprioritizeAM(am):
-	am.demoPriority = True
+	am.demoPriority = False
 	am.dhPriority = False
 	am.childPriority = False
 	am.ah1Priority = False
@@ -1380,6 +1380,7 @@ def deprioritizeAM(am):
 	am.currentPriority = False
 	am.controlPriority = False
 	am.finalPriority = False
+	am.save()
 
 def setAmPriorityURL(section, am):
 	if str(section) == '/am_demographic/':
@@ -1577,11 +1578,8 @@ def setAmPriorityURL(section, am):
 		am.controlPriority = False
 		am.finalPriority = True
 
-
-def grabProperNextSection(am, current):
-	result = None
+def hasPriority_AM(am):
 	hasPriority = False
-	progress = sortedAmProgress(am)
 
 	if am.demoPriority == True:
 		hasPriority = True
@@ -1610,38 +1608,154 @@ def grabProperNextSection(am, current):
 	elif am.finalPriority == True:
 		hasPriority = True
 
-	if hasPriority == False:
-		next = ''
+	return hasPriority
 
-		for i in range(len(progress)):
-			if progress[i] == False:
-				next = matchAmProgressIndex(i)
-				break
+def getAmPrioritySection(am):
+	section = ''
 
-		if str(next) == str(current):
-			result = forceNextSection(am)
-		else:
-			result = next
+	if am.demoPriority == True:
+		section = '/am_demographic/'
+	elif am.dhPriority == True:
+		section = '/am_drugHistory/'
+	elif am.childPriority == True:
+		section = '/am_childhood/'
+	elif am.ah1Priority == True:
+		section = '/am_angerHistory/'
+	elif am.ah2Priority == True:
+		section = '/am_angerHistory2/'
+	elif am.ah3Priority == True:
+		section = '/am_angerHistory3/'
+	elif am.connectPriority == True:
+		section = '/am_connections/'
+	elif am.worstPriority == True:
+		section = '/am_worst/'
+	elif am.targetPriority == True:
+		section = '/am_angerTarget/'
+	elif am.familyPriority == True:
+		section = '/am_familyOrigin/'
+	elif am.currentPriority == True:
+		section = '/am_problems/'
+	elif am.controlPriority == True:
+		section = '/am_control/'
+	elif am.finalPriority == True:
+		section = '/am_final/'
+
+	return section
+
+def get_am_urls():
+	result = []
+	result.append('/am_demographic/')
+	result.append('/am_drugHistory/')
+	result.append('/am_childhood/')
+	result.append('/am_angerHistory/')
+	result.append('/am_angerHistory2/')
+	result.append('/am_angerHistory3/')
+	result.append('/am_connections/')
+	result.append('/am_worst/')
+	result.append('/am_angerTarget/')
+	result.append('/am_familyOrigin/')
+	result.append('/am_problems/')
+	result.append('/am_control/')
+	result.append('/am_final/')
+	return result
+
+def get_am_complete(am):
+	result = []
+	result.append(am.demographicComplete)
+	result.append(am.drugHistoryComplete)
+	result.append(am.childhoodComplete)
+	result.append(am.angerHistoryComplete)
+	result.append(am.angerHistoryComplete2)
+	result.append(am.angerHistoryComplete3)
+	result.append(am.connectionsComplete)
+	result.append(am.worstComplete)
+	result.append(am.angerTargetComplete)
+	result.append(am.familyOriginComplete)
+	result.append(am.currentProblemsComplete)
+	result.append(am.controlComplete)
+	result.append(am.finalComplete)
+	return result
+
+def get_am_priority(am):
+	result = []
+	result.append(am.demoPriority)
+	result.append(am.dhPriority)
+	result.append(am.childPriority)
+	result.append(am.ah1Priority)
+	result.append(am.ah2Priority)
+	result.append(am.ah3Priority)
+	result.append(am.connectPriority)
+	result.append(am.worstPriority)
+	result.append(am.targetPriority)
+	result.append(am.familyPriority)
+	result.append(am.currentPriority)
+	result.append(am.controlPriority)
+	result.append(am.finalPriority)
+	return result
+
+def get_am_parameters(am):
+	result = []
+
+	url = get_am_urls()
+	complete = get_am_complete(am)
+	priority = get_am_priority(am)
+
+	for l in range(len(url)):
+		data = {}
+		data['url'] = url[l]
+		data['complete'] = complete[l]
+		data['priority'] = priority[l]
+		result.append(data)
+	return result
+
+def forceNextAmPage(am):
+	result 	= None
+	flag 	= None
+	am_list = get_am_parameters(am)
+
+	for i in range(len(am_list)):
+		if am_list[i]['complete'] == False:
+			flag = i
+			break
+
+	for j in range(len(am_list)):
+		if am_list[j]['complete'] == False and j != flag:
+			result = am_list[j]['url']
+			break
 
 	return result
 
-def forceNextSection(am):
-	result = None
-	match = None
-	progress = sortedAmProgress(am)
-	
-	for i in range(len(progress)):
-		if progress[i] == False:
-			match = i
+def nextAmPage(am, section):
+	result = ''
+	next_section = ''
+	proceed = True
+	no_result = False
+	am_list = get_am_parameters(am)
+
+	for a in am_list:
+		if a['priority'] == True:
+			result = a['url']
+			proceed = False
 			break
 
-	for j in range(len(progress)):
-		if progress[j] == False and j != match:
-			result = matchAmProgressIndex(j)
-			break
+	if proceed == True:
+		for i in range(len(am_list)):
+			if am_list[i]['complete'] == False:
+				next_section = am_list[i]['url']
+				break
 
-	if result == None:
-		result = '/am_viewForm/'
+		if str(next_section) == str(section):
+			result = forceNextAmPage(am)
+		else:
+			result = next_section
+
+		count = 0
+		for m in am_list:
+			if m['complete'] == True:
+				count = count + 1
+
+		if count == len(am_list):
+			result = '/am_viewForm/'
 
 	return result
 
@@ -1739,19 +1853,19 @@ def grabAmClassesCSS(am, m_page):
 	green = 'sideBarMarginChecked'
 	current = 'sideLinkSelected'
 
-	classes['demo'] = processCompletedClass(am['demographicComplete'], 'demo', m_page, green, current, normal)
-	classes['dh'] = processCompletedClass(am['drugHistoryComplete'], 'dh', m_page, green, current, normal)
-	classes['child'] = processCompletedClass(am['childhoodComplete'], 'child', m_page, green, current, normal)
-	classes['ah1'] = processCompletedClass(am['angerHistoryComplete'], 'ah1', m_page, green, current, normal)
-	classes['ah2'] = processCompletedClass(am['angerHistoryComplete2'], 'ah2', m_page, green, current, normal)
-	classes['ah3'] = processCompletedClass(am['angerHistoryComplete3'], 'ah3', m_page, green, current, normal)
-	classes['connect'] = processCompletedClass(am['connectionsComplete'], 'connect', m_page, green, current, normal)
-	classes['worst'] = processCompletedClass(am['worstComplete'], 'worst', m_page, green, current, normal)
-	classes['target'] = processCompletedClass(am['angerTargetComplete'], 'target', m_page, green, current, normal)
-	classes['family'] = processCompletedClass(am['familyOriginComplete'], 'family', m_page, green, current, normal)
-	classes['current'] = processCompletedClass(am['currentProblemsComplete'], 'current', m_page, green, current, normal)
-	classes['control'] = processCompletedClass(am['controlComplete'], 'control', m_page, green, current, normal)
-	classes['final'] = processCompletedClass(am['finalComplete'], 'final', m_page, green, current, normal)
+	classes['AMdemo'] = processCompletedClass(am['demographicComplete'], '/am_demographic/', m_page, green, current, normal)
+	classes['AMdh'] = processCompletedClass(am['drugHistoryComplete'], '/am_drugHistory/', m_page, green, current, normal)
+	classes['AMchild'] = processCompletedClass(am['childhoodComplete'], '/am_childhood/', m_page, green, current, normal)
+	classes['AMah1'] = processCompletedClass(am['angerHistoryComplete'], '/am_angerHistory/', m_page, green, current, normal)
+	classes['AMah2'] = processCompletedClass(am['angerHistoryComplete2'], '/am_angerHistory2/', m_page, green, current, normal)
+	classes['AMah3'] = processCompletedClass(am['angerHistoryComplete3'], '/am_angerHistory3/', m_page, green, current, normal)
+	classes['AMconnect'] = processCompletedClass(am['connectionsComplete'], '/am_connections/', m_page, green, current, normal)
+	classes['AMworst'] = processCompletedClass(am['worstComplete'], '/am_worst/', m_page, green, current, normal)
+	classes['AMtarget'] = processCompletedClass(am['angerTargetComplete'], '/am_angerTarget/', m_page, green, current, normal)
+	classes['AMfamily'] = processCompletedClass(am['familyOriginComplete'], '/am_familyOrigin/', m_page, green, current, normal)
+	classes['AMcurrent'] = processCompletedClass(am['currentProblemsComplete'], '/am_problems/', m_page, green, current, normal)
+	classes['AMcontrol'] = processCompletedClass(am['controlComplete'], '/am_control/', m_page, green, current, normal)
+	classes['AMfinal'] = processCompletedClass(am['finalComplete'], '/am_final/', m_page, green, current, normal)
 
 	return classes
 
@@ -2216,33 +2330,34 @@ def grabAmFinal(am):
 	return fields
 
 def getAMFields(am, location):
+	location = str(location)
 	fields = None
 
-	if location == 'counselor/forms/AngerManagement/demographic.html':
+	if location == '/am_demographic/':
 		fields = getAMDemoFields(am)
-	elif location == 'counselor/forms/AngerManagement/drugHistory.html':
+	elif location == '/am_drugHistory/':
 		fields = grabAmDhFields(am)
-	elif location == 'counselor/forms/AngerManagement/childhoodHistory.html':
+	elif location == '/am_childhood/':
 		fields = grabAmChildhood(am)
-	elif location == 'counselor/forms/AngerManagement/angerHistory.html':
+	elif location == '/am_angerHistory/':
 		fields = grabAmAngerHistory1(am)
-	elif location == 'counselor/forms/AngerManagement/angerHistory2.html':
+	elif location == '/am_angerHistory2/':
 		fields = grabAmAngerHistory2(am)
-	elif location == 'counselor/forms/AngerManagement/angerHistory3.html':
+	elif location == '/am_angerHistory3/':
 		fields = grabAmAngerHistory3(am)
-	elif location == 'counselor/forms/AngerManagement/AngerTarget.html':
+	elif location == '/am_angerTarget/':
 		fields = grabAmTarget(am)
-	elif location == 'counselor/forms/AngerManagement/connections.html':
+	elif location == '/am_connections/':
 		fields = grabAmConnections(am)
-	elif location == 'counselor/forms/AngerManagement/control.html':
+	elif location == '/am_control/':
 		fields = grabAmControl(am)
-	elif location == 'counselor/forms/AngerManagement/currentProblems.html':
+	elif location == '/am_problems/':
 		fields = grabAmCurrentProblems(am)
-	elif location == 'counselor/forms/AngerManagement/familyOrigin.html':
+	elif location == '/am_familyOrigin/':
 		fields = grabAmFamilyOrigin(am)
-	elif location == 'counselor/forms/AngerManagement/worstEpisodes.html':
+	elif location == '/am_worst/':
 		fields = grabAmWorstEpisodes(am)
-	elif location == 'counselor/forms/AngerManagement/final.html':
+	elif location == '/am_final/':
 		fields = grabAmFinal(am)
 
 	return fields
@@ -2281,30 +2396,27 @@ def hasAM(client):
 	return exist
 
 
-def startAM(client):
-	results = {}
-	back = "false"
-	create_new = True
-	am = None
+# def startAM(client):
+# 	results = {}
+# 	create_new = True
+# 	am = None
 
-	if hasAM(client) == True:
-		amList = AngerManagement.objects.all()
+# 	if hasAM(client) == True:
+# 		amList = AngerManagement.objects.all()
 
-		for a in amList:
-			if (a.AMComplete == False) and (str(a.client.clientID) == str(client.clientID)):
-				create_new = False
-				back = "true"
-				am = a
-				break
+# 		for a in amList:
+# 			if (a.AMComplete == False) and (str(a.client.clientID) == str(client.clientID)):
+# 				create_new = False
+# 				am = a
+# 				break
 
-	if create_new == True:
-		am = newAM(client)
+# 	if create_new == True:
+# 		am = newAM(client)
 
-	results['back'] = back
-	results['am'] = am
-	results['isNew'] = create_new
+# 	results['am'] = am
+# 	results['isNew'] = create_new
 
-	return results
+# 	return results
 
 def grabAmSideBarString(location):
 	m_page = None
@@ -2338,77 +2450,7 @@ def grabAmSideBarString(location):
 
 	return m_page
 
-def continueToAmSection(am):
-	location = None
 
-	if am.demographicComplete == False:
-		location = 'counselor/forms/AngerManagement/demographic.html'
-	elif am.drugHistoryComplete == False:
-		location = 'counselor/forms/AngerManagement/drugHistory.html'
-	elif am.childhoodComplete == False:
-		location = 'counselor/forms/AngerManagement/childhoodHistory.html'
-	elif am.connectionsComplete == False:
-		location = 'counselor/forms/AngerManagement/connections.html'
-	elif am.worstComplete == False:
-		location = 'counselor/forms/AngerManagement/worstEpisodes.html'
-	elif am.angerTargetComplete == False:
-		location = 'counselor/forms/AngerManagement/AngerTarget.html'
-	elif am.familyOriginComplete == False:
-		location = 'counselor/forms/AngerManagement/familyOrigin.html'
-	elif am.currentProblemsComplete == False:
-		location = 'counselor/forms/AngerManagement/currentProblems.html'
-	elif am.controlComplete == False:
-		location = 'counselor/forms/AngerManagement/control.html'
-	elif am.finalComplete == False:
-		location = 'counselor/forms/AngerManagement/final.html'
-	elif am.finalComplete == False:
-		location = 'counselor/forms/AngerManagement/angerHistory.html'
-	elif am.finalComplete == False:
-		location = 'counselor/forms/AngerManagement/angerHistory2.html'
-	elif am.finalComplete == False:
-		location = 'counselor/forms/AngerManagement/angerHistory3.html'
-
-	return location
-
-def continueToMhSection(mh):
-	location = None
-
-	if mh.demographicsComplete == False:
-		location = 'counselor/forms/MentalHealth/demographic.html'
-	elif mh.familyComplete == False:
-		location = 'counselor/forms/MentalHealth/familyBackground.html'
-	elif mh.educationComplete == False:
-		location = 'counselor/forms/MentalHealth/education.html'
-	elif mh.relationshipsComplete == False:
-		location = 'counselor/forms/MentalHealth/relationships.html'
-	elif mh.activitiesComplete == False:
-		location = 'counselor/forms/MentalHealth/activity.html'
-	elif mh.stressorsComplete == False:
-		location = 'counselor/forms/MentalHealth/stressors.html'
-	elif mh.familyHistoryComplete == False:
-		location = 'counselor/forms/MentalHealth/familyHistory.html'
-	elif mh.legalHistoryComplete == False:
-		location = 'counselor/forms/MentalHealth/legal.html'
-	elif mh.useTableComplete == False:
-		location = 'counselor/forms/MentalHealth/useTable.html'
-
-	return location
-
-def continueToSAPSection(sap):
-	location = None
-
-	if sap.demoComplet == False:
-		location = 'counselor/forms/SAP/demographic.html'
-	elif sap.psychoactiveComplet == False:
-		location = 'counselor/forms/SAP/psychoactive.html'
-	elif sap.specialComplete == False:
-		location = 'counselor/forms/SAP/psychoactive2.html'
-	elif sap.preFinalComplete == False:
-		location = 'counselor/forms/SAP/pre_final.html'
-	elif sap.finalComplete == False:
-		location = 'counselor/forms/SAP/final.html'
-
-	return location
 
 def getActiveClients():
 	clients = Client.objects.all()
@@ -2701,6 +2743,7 @@ def amDhExist(drug_history):
 
 def setAmSectionComplete(am, section):
 	section = str(section)
+	print "Current section to complete: " + str(section)
 
 	if section == '/am_demographic/':
 		am.demographicComplete = True
@@ -2729,6 +2772,72 @@ def setAmSectionComplete(am, section):
 	elif section == '/am_final/':
 		am.finalComplete = True
 
+	am.save()
+
+def hasIncompleteAM(client):
+	exist = False
+	ams = AngerManagement.objects.all()
+
+	for a in ams:
+		if a.client == client and a.AMComplete == False:
+			exist = True
+			break
+	return exist
+
+def findIncompleteClientAM(client):
+	ams = AngerManagement.objects.all()
+	result = None
+
+	for a in ams:
+		if a.client == client and a.AMComplete == False:
+			result = a
+			break
+	return result
+
+def startAM(client):
+	result = {}
+
+	if hasIncompleteAM(client) == False:
+		result['isNew'] = True
+		result['am'] = newAM(client)
+
+	else:
+		result['isNew'] = False
+		result['am'] = findIncompleteClientAM(client)
+
+	return result
+
+
+def beginAM(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startAM(client)
+	am = action['am']
+	setGlobalID(am.id)
+
+	openForm('am', am, client)
+
+	result['am'] = am
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | Anger Management"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		next_section = nextAmPage(am, None)
+		result['form'] = am
+		result['form_type'] = 'am'
+		result['type_header'] = 'Anger Management'
+		result['next_section'] = next_section
+		result['save_section'] = next_section
+
+	return result
+
 def processAMData(request, current_section):
 	result = {}
 
@@ -2740,22 +2849,30 @@ def processAMData(request, current_section):
 	session = ClientSession.objects.get(id=session_id)
 	am = AngerManagement.objects.get(id=am_id)
 	deprioritizeAM(am)
-	fields = getSapFields(sap, current_section)
+	fields = getAMFields(am, current_section)
 	json_data = json.dumps(fields)
+
+	if current_section == '/am_demographic/':
+		maritalStatus = MaritalStatus.objects.all().order_by('status')
+		livingSituation = LivingSituation.objects.all().order_by('situation')
+		education = EducationLevel.objects.all().order_by('level')
+		result['marital'] = maritalStatus
+		result['living'] = livingSituation
+		result['education'] = education
 
 	if save_this == 'true':
 		saveCompletedAmSection(request, section, am)
 		setAmSectionComplete(am, section)
 
-	next_url = grabProperNextSection(am, current_section)
-	image = grabAmClassesCSS(am, current_section)
-	classes = amSidebarImages(am, current_section)
+	next_url = nextAmPage(am, current_section)
+	classes = grabAmClassesCSS(am, current_section)
+	image = amSidebarImages(am, current_section)
 
 	result['class'] = classes
 	result['image'] = image
 	result['next_url'] = next_url
 	result['session'] = session
-	result['am'] = am
+	result['AM'] = am
 	result['fields'] = fields
 	result['json_data'] = json_data
 	result['title'] = "Simeon Academy | Anger Management"
@@ -3036,6 +3153,70 @@ def locateNextSection(sap, current_page):
 			result = forceSapLocation(sap)
 		else:
 			result = next
+
+	return result
+
+def hasIncompleteSAP(client):
+	exist = False
+	sap = SAP.objects.all()
+
+	for s in sap:
+		if s.client == client and s.SapComplete == False:
+			exist = True
+			break
+	return exist
+
+def findIncompleteClientSAP(client):
+	sap = SAP.objects.all()
+	result = None
+
+	for s in sap:
+		if s.client == client and s.SapComplete == False:
+			result = s
+			break
+	return result
+
+def startSAP(client):
+	result = {}
+
+	if hasIncompleteSAP(client) == False:
+		result['isNew'] = True
+		result['sap'] = newSap(client)
+
+	else:
+		result['isNew'] = False
+		result['sap'] = findIncompleteClientSAP(client)
+
+	return result
+
+
+def beginSAP(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startSAP(client)
+	sap = action['sap']
+	setGlobalID(sap.id)
+
+	openForm('sap', sap, client)
+
+	result['sap'] = sap
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | S.A.P"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		next_section = locateNextSection(sap, None)
+		result['form'] = sap
+		result['form_type'] = 'sap'
+		result['type_header'] = 'S.A.P'
+		result['next_section'] = next_section
+		result['save_section'] = next_section
 
 	return result
 
@@ -4192,6 +4373,36 @@ def startMH(client):
 
 	return result
 
+def beginMH(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startMH(client)
+	mh = action['mh']
+	setGlobalID(mh.id)
+
+	openForm('mh', mh, client)
+
+	result['mh'] = mh
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | Mental Health Assessment"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		next_section = nextMhPage(mh, None)
+		result['form'] = mh
+		result['form_type'] = 'mh'
+		result['type_header'] = 'Mental Health'
+		result['next_section'] = next_section
+		result['save_section'] = next_section
+
+	return result
+
 def grabMhClassesCSS(mh, m_page):
 	classes = {}
 	mh = grabOrderedMh(mh)
@@ -4909,7 +5120,6 @@ def saveMhBackground(request, mh):
 	mh.background.save()
 
 def saveMhStress(request, mh):
-	print 'Saving Stressors...'
 	mh.stressors.deathStress 			= truePythonBool(request.POST.get('deathStress'));
 	mh.stressors.divorceStress 			= truePythonBool(request.POST.get('divorceStress'));
 	mh.stressors.moveStress 			= truePythonBool(request.POST.get('moveStress'));
@@ -5318,7 +5528,6 @@ def refreshMhUse(mh):
 	oldUse.delete()
 
 def refreshMh(mh):
-	print "MH ID: " + str(mh.id)
 	refreshMhDemo(mh)
 	refreshEdu(mh)
 	refreshBack(mh)
@@ -5852,7 +6061,7 @@ def nextAsiPage(asi, section):
 	if proceed == True:
 		for i in range(len(asi_list)):
 			if asi_list[i]['complete'] == False:
-				nextSection = mh_list[i]['url']
+				nextSection = asi_list[i]['url']
 				break
 
 		if str(nextSection) == str(section):
@@ -5907,7 +6116,7 @@ def grabASISideImages(asi, page):
 
 def hasIncompleteASI(client):
 	exist = False
-	asis = AIS.objects.all()
+	asis = ASI.objects.all()
 
 	for a in asis:
 		if a.client == client and a.AIS_Complete == False:
@@ -5916,7 +6125,7 @@ def hasIncompleteASI(client):
 	return exist
 
 def findIncompleteClientASI(client):
-	asis = AIS.objects.all()
+	asis = ASI.objects.all()
 	result = None
 
 	for a in asis:
@@ -5930,7 +6139,7 @@ def newASI(the_client):
 	date = the_date.date()
 	time = the_date.time()
 
-	asi = AIS(client=the_client, date_of_assessment=date, startTime=time)
+	asi = ASI(client=the_client, date_of_assessment=date, startTime=time)
 
 	admin 		= AIS_Admin(clientID=the_client.clientID)	
 	general 	= AIS_General(clientID=the_client.clientID)
@@ -5987,12 +6196,41 @@ def startASI(client):
 
 	return result
 
+def beginASI(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startASI(client)
+	asi = action['asi']
+	setGlobalID(asi.id)
+
+	openForm('asi', asi, client)
+
+	result['asi'] = asi
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | Addiction Severity Index"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		next_section = nextAsiPage(asi, None)
+		result['form'] = asi
+		result['form_type'] = 'asi'
+		result['type_header'] = 'A.S.I'
+		result['next_section'] = next_section
+		result['save_section'] = next_section
+
+	return result
+
 def grabAsiAdminFields(asi):
 	result = {}
 	result['g1'] = asi.admin.g1
 	result['g2'] = asi.admin.g2
 	result['g3'] = asi.admin.g3
-	result['g4'] = asi.admin.g4
 	result['g8'] = asi.admin.g8
 	result['g9'] = asi.admin.g9
 	result['g10'] = asi.admin.g10
@@ -6315,25 +6553,25 @@ def grabAsiSocial2Fields(asi):
 	result['fa25'] = asi.social2.fa25
 	result['fa26'] = asi.social2.fa26
 
-	result['f18dayBad'] = asi.social2.fdayBad18
-	result['f19dayBad'] = asi.social2.fdayBad19
-	result['f20dayBad'] = asi.social2.fdayBad20
-	result['f21dayBad'] = asi.social2.fdayBad21
-	result['f22dayBad'] = asi.social2.fdayBad22
-	result['f23dayBad'] = asi.social2.fdayBad23
-	result['f24dayBad'] = asi.social2.fdayBad24
-	result['f25dayBad'] = asi.social2.fdayBad25
-	result['f26dayBad'] = asi.social2.fdayBad26
+	result['f18dayBad'] = asi.social2.f18dayBad
+	result['f19dayBad'] = asi.social2.f19dayBad
+	result['f20dayBad'] = asi.social2.f20dayBad
+	result['f21dayBad'] = asi.social2.f21dayBad
+	result['f22dayBad'] = asi.social2.f22dayBad
+	result['f23dayBad'] = asi.social2.f23dayBad
+	result['f24dayBad'] = asi.social2.f24dayBad
+	result['f25dayBad'] = asi.social2.f25dayBad
+	result['f26dayBad'] = asi.social2.f26dayBad
 
-	result['f18yearBad'] = asi.social2.fyearBad18
-	result['f19yearBad'] = asi.social2.fyearBad19
-	result['f20yearBad'] = asi.social2.fyearBad20
-	result['f21yearBad'] = asi.social2.fyearBad21
-	result['f22yearBad'] = asi.social2.fyearBad22
-	result['f23yearBad'] = asi.social2.fyearBad23
-	result['f24yearBad'] = asi.social2.fyearBad24
-	result['f25yearBad'] = asi.social2.fyearBad25
-	result['f26yearBad'] = asi.social2.fyearBad26
+	result['f18yearBad'] = asi.social2.f18yearBad
+	result['f19yearBad'] = asi.social2.f19yearBad
+	result['f20yearBad'] = asi.social2.f20yearBad
+	result['f21yearBad'] = asi.social2.f21yearBad
+	result['f22yearBad'] = asi.social2.f22yearBad
+	result['f23yearBad'] = asi.social2.f23yearBad
+	result['f24yearBad'] = asi.social2.f24yearBad
+	result['f25yearBad'] = asi.social2.f25yearBad
+	result['f26yearBad'] = asi.social2.f26yearBad
 
 	result['comments'] = asi.social2.comments
 	return result
@@ -6800,27 +7038,27 @@ def saveASI(request, section, asi):
 	section = str(section)
 
 	if section == '/asi_admin/':
-		saveASIadmin()
+		saveASIadmin(request, asi)
 	elif section == '/asi_general/':
-		saveASIgeneral()
+		saveASIgeneral(request, asi)
 	elif section == '/asi_medical/':
-		saveASImedical()
+		saveASImedical(request, asi)
 	elif section == '/asi_employment/':
-		saveASIemployment()
+		saveASIemployment(request, asi)
 	elif section == '/asi_drug1/':
-		saveASIdrug1()
+		saveASIdrug1(request, asi)
 	elif section == '/asi_drug2/':
-		saveASIdrug2()
+		saveASIdrug2(request, asi)
 	elif section == '/asi_legal/':
-		saveASIlegal()
+		saveASIlegal(request, asi)
 	elif section == '/asi_family/':
-		saveASIfamily()
+		saveASIfamily(request, asi)
 	elif section == '/asi_social1/':
-		saveASIsocial1()
+		saveASIsocial1(request, asi)
 	elif section == '/asi_social2/':
-		saveASIsocial2()
+		saveASIsocial2(request, asi)
 	elif section == '/asi_psych/':
-		saveASIpsych()
+		saveASIpsych(request, asi)
 
 def setASIcomplete(asi, section):
 	section = str(section)
@@ -7283,9 +7521,9 @@ def processAsiData(request, current_section):
 	fields = grabASIFields(asi, current_section)
 	json_data = json.dumps(fields)
 
-	if save_this == 'true':
-		saveASI(request, section, asi)
-		setASIcomplete(asi, section)
+	# if save_this == 'true':
+	# 	saveASI(request, section, asi)
+	# 	setASIcomplete(asi, section)
 
 	next_url = nextAsiPage(asi, current_section)
 	image = grabASISideImages(asi, current_section)
@@ -7615,7 +7853,7 @@ def universalLocation(form_type, form_id):
 
 	if str(form_type) == 'am':
 		am = AngerManagement.objects.get(id=form_id)
-		grabProperNextSection(am, None)
+		nextAmPage(am, None)
 	elif str(form_type) == 'sap':
 		sap = SAP.objects.get(id=form_id)
 		location = locateNextSection(sap, None)
@@ -7731,22 +7969,21 @@ def decodeCharfield(text):
 
 	return result
 
-def startForm(form_type, client):
+def startForm(request, form_type):
 	form_type = str(form_type)
 	result = None
 
 	if form_type == 'am':
-		result = startAM(client)
-		openForm(form_type, result['am'], client)
+		result = beginAM(request)
+
 	elif form_type == 'mh':
-		result = startMH(client)
-		openForm(form_type, result['mh'], client)
+		result = beginMH(request)
+
 	elif form_type == 'sap':
-		result = getSAP(client)
-		openForm(form_type, result['sap'], client)
+		result = beginSAP(request)
+
 	elif form_type == 'asi':
-		result = startASI(client)
-		openForm(form_type, result['asi'], client)
+		result = beginASI(request)
 
 	return result
 
@@ -7755,7 +7992,7 @@ def fetchUrl(form_type, current_page, form):
 	form_type = str(form_type)
 
 	if form_type == 'am':
-		url = grabProperNextSection(form, current_page)
+		url = nextAmPage(form, current_page)
 	elif form_type == 'sap':
 		url = locateNextSection(form, current_page)
 	elif form_type == 'mh':

@@ -10,24 +10,18 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
           <table class='session-side'>
-            <form action='/exit_am/' method='post' name='exit_form' id='exit_form'> {% csrf_token %}
-                    <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                    <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-                    <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
-                </form>
-                
-            <!-- <tr>
+            <tr>
               <td>
-                <div style='font-size:20px;'>
-                  <h4>Details:</h4>
+                <div id='sideBarMainHeader'>
+                  Session Details:
                 </div>
               </td>
-            </tr> -->
+            </tr>
 
             <tr>
               <td>
                 <div style='color:#fee047'>
-                  <h4>{{session.s_type}}</h4>
+                  <h4>Anger Management</h4>
                 </div>
               </td>
             </tr>
@@ -54,17 +48,17 @@
             <tr>
               <td>
                 <div id='sidebar-space-lower'>
-                          <h4>Completed:</h4>
+                          <h4>Progress:</h4>
                       </div>
               </td>
             </tr>
 
             <tr>
               <td>
-                <div class='{{class.demo}}'>
+                <div class='{{class.AMdemo}}'>
                   <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideDemo();" name='demographicBtn' id='demographicBtn'>
-                    Demographic
+                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
+                    Demographics
                   </a>
                 </div>
               </td>
@@ -74,10 +68,10 @@
 
             <tr>
               <td>
-                <div class='{{class.dh}}'>
+                <div class='{{class.AMdh}}'>
                   <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="#" name='demographicBtn' id='demographicBtn'>
-                    Drug History
+                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
+                     Drug History
                   </a>
                 </div>
               </td>
@@ -87,10 +81,10 @@
 
             <tr>
               <td>
-                <div class='{{class.child}}'>
+                <div class='{{class.AMchild}}'>
                   <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideChild();" name='demographicBtn' id='demographicBtn'>
-                    Childhood History
+                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
+                    Childhood
                   </a>
                 </div>
               </td>
@@ -100,9 +94,9 @@
 
             <tr>
               <td>
-                <div class='{{class.ah1}}'>
+                <div class='{{class.AMah1}}'>
                   <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideAh1();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
                     Anger History I
                   </a>
                 </div>
@@ -113,9 +107,9 @@
 
             <tr>
               <td>
-                <div class='{{class.ah2}}'>
+                <div class='{{class.AMah2}}'>
                   <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideAh2();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
                     Anger History II
                   </a>
                 </div>
@@ -126,9 +120,9 @@
 
             <tr>
               <td>
-                <div class='{{class.ah3}}'>
+                <div class='{{class.AMah3}}'>
                   <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideAh3();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
                     Anger History III
                   </a>
                 </div>
@@ -139,9 +133,9 @@
 
             <tr>
               <td>
-                <div class='{{class.connect}}'>
+                <div class='{{class.AMconnect}}'>
                   <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideConnect();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
                     Abuse Connections
                   </a>
                 </div>
@@ -152,10 +146,10 @@
 
             <tr>
               <td>
-                <div class='{{class.worst}}'>
+                <div class='{{class.AMworst}}'>
                   <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideWorst();" name='demographicBtn' id='demographicBtn'>
-                    Worst Episode
+                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
+                    Worst Episodes
                   </a>
                 </div>
               </td>
@@ -165,9 +159,9 @@
 
             <tr>
               <td>
-                <div class='{{class.target}}'>
+                <div class='{{class.AMtarget}}'>
                   <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideTarget();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
                     Anger Target
                   </a>
                 </div>
@@ -178,10 +172,10 @@
 
             <tr>
               <td>
-                <div class='{{class.family}}'>
+                <div class='{{class.AMfamily}}'>
                   <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideFamily();" name='demographicBtn' id='demographicBtn'>
-                    Family of Origin
+                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
+                    Family
                   </a>
                 </div>
               </td>
@@ -191,9 +185,9 @@
 
             <tr>
               <td>
-                <div class='{{class.current}}'>
+                <div class='{{class.AMcurrent}}'>
                   <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideCurrent();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
                     Current Problems
                   </a>
                 </div>
@@ -204,9 +198,9 @@
 
             <tr>
               <td>
-                <div class='{{class.control}}'>
+                <div class='{{class.AMcontrol}}'>
                   <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideControl();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
                     Anger Control
                   </a>
                 </div>
@@ -217,78 +211,25 @@
 
             <tr>
               <td>
-                <div class='{{class.final}}'>
+                <div class='{{class.AMfinal}}'>
                   <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideFinal();" name='demographicBtn' id='demographicBtn'>
+                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
                     Additional Info
                   </a>
                 </div>
               </td>
             </tr>
 
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
             <tr>
               <td>
-                <div class='side_option_head'>
-                  <h4>Exit Options:</h4>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: generic_exit('am', '/am_drugHistory/');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
                 </div>
-              </td>
-            </tr>
-
-            <tr>  
-              <td>
-                <table class='icon_table'>      
-                  <!-- BUTTON 1 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Save");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='save_icon_btn' style='margin-left:30px;'>
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='save_icon_text' style='margin-left:30px;'>
-                                Save
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-
-                  <td><div style='margin-right:15px;'></div></td>
-
-                  <!-- BUTTON 2 -->
-                  <td>
-                    <div class='FA_side_bar_btn'>
-                      <a href='javascript: exit_am("Delete");'>
-                        <table>
-                          <tr>
-                            <td>
-                              <div id='trash_icon_btn'>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <div id='trash_icon_text'>
-                                Delete
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </a>
-                    </div>
-                  </td>
-                </table>
               </td>
             </tr>
           </table>
@@ -313,11 +254,11 @@
                   								<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
                   								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
                   								<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                  								<input type='hidden' name='back_btn' id='back_btn' value='{{back}}'>
-                                  <input type='hidden' name='goToNext' id='goToNext' value='true'>
-                                  <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+                  								<input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
                                   <input type='hidden' name='save_section' id='save_section' value='/am_drugHistory/'>
-                                  <input type='hidden' name='exit_type_sub' id='exit_type_sub' value=''>
+                                  <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+                                  <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                                  <input type='hidden' name='save_this' id='save_this' value=''>
 
                                   <!-- DYNAMIC DATA ENTRIES -->
                                   <input type='hidden' name='m_useType' id='m_useType' value=''>
@@ -829,7 +770,7 @@
 
 			                    <td>
 			                    	<div id="submit-space">
-				                        <a href="javascript: continue_am_dh()" id="continue" class='but_a'>
+				                        <a href="javascript: continue_am_form('dh');" id="continue" class='but_a'>
 				                        	<button type='button' id='continue'>Continue</button>
 				                        </a>
 				                    </div>
