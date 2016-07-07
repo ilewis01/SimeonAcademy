@@ -1105,40 +1105,40 @@ function post_dynamic_am_current() {
 function universal_am_dynamic_post(section) {
 	section = String(section);
 
-	if (section === 'demo') {
+	if (section === '/am_demographic/') {
 		processAMDemoData();
 	}
-	else if (section === 'dh') {
+	else if (section === '/am_drugHistory/') {
 		processAM_DH_data();
 	}
-	else if (section === 'child') {
+	else if (section === '/am_childhood/') {
 		process_am_child_data();
 	}
-	else if (section === 'ah1') {
+	else if (section === '/am_angerHistory/') {
 		process_am_ah1_data();
 	}
-	else if (section === 'ah2') {
+	else if (section === '/am_angerHistory2/') {
 		post_am_dynamic2();
 	}
-	else if (section === 'ah3') {
+	else if (section === '/am_angerHistory3/') {
 		post_dynamic_am_ah3();
 	}
-	else if (section === 'connect') {
+	else if (section === '/am_connections/') {
 		post_dynamic_am_connections();
 	}
-	else if (section === 'worst') {
+	else if (section === '/am_worst/') {
 		post_dynamic_am_worst();
 	}
-	else if (section === 'target') {
+	else if (section === '/am_angerTarget/') {
 		post_dynamic_am_target();
 	}
-	else if (section === 'family') {
+	else if (section === '/am_familyOrigin/') {
 		post_dynamic_am_family();
 	}
-	else if (section === 'current') {
+	else if (section === '/am_problems/') {
 		post_dynamic_am_current();
 	}
-	else if (section === 'control') {
+	else if (section === '/am_final/') {
 		post_dynamic_am_control();
 	}
 }
@@ -5820,9 +5820,11 @@ function getGenericFormID(form_type) {
 }
 
 function universal_generic_exit(form_type, page) {
-	var exit_type = document.getElementById('exit_type');
-	var form = document.getElementById('mh_form');
 	page = String(page);
+	form_type = String(form_type);
+
+	var exit_type = document.getElementById('exit_type');
+	var form = getFormElement(form_type);
 
 	if (page === '/mh_demographic/') {
 		processDynamicMhHistory();
@@ -5838,6 +5840,10 @@ function universal_generic_exit(form_type, page) {
 	}
 	else if (page === '/mh_legal/') {
 		processDynamicMhLegal();
+	}
+
+	if (form_type === 'am') {
+		universal_am_dynamic_post(page);
 	}
 
 	form.action = '/uni_generic_exit/';

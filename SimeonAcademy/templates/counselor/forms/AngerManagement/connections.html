@@ -226,7 +226,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: generic_exit('am', '/am_connections/');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('am', '/am_connections/');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -402,7 +402,7 @@
                             <div id="submit-space">
                                 <a href="javascript: " id="continue">
                                   <!-- <button type='button' onClick='javascript: continue_to_worst();' id='continue'>Continue</button> -->
-                                  <button type='button' onClick="javascript: continue_am_form('connect');" id='continue'>Continue</button>
+                                  <button type='button' onClick="javascript: continue_am_form('/am_connections/');" id='continue'>Continue</button>
                                 </a>
                             </div>
                           </td>
