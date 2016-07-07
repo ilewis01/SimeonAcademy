@@ -200,7 +200,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: asi_exit('asi', '/asi_admin/');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('asi', '/asi_employment/');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -223,12 +223,12 @@
                   			<div>
                   				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
                   					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  					<input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                  					<input type='hidden' name='save_this' id='save_this' value=''>
-				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/asi_admin/'>	
-				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            		<input type='hidden' name='exit_type' id='exit_type' value='asi'>
+                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
+                            <input type='hidden' name='save_this' id='save_this' value=''>
+                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                            <input type='hidden' name='save_section' id='save_section' value='/asi_employment/'>  
+                            <input type='hidden' name='new_form' id='new_form' value='false'>
+                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 				           				            
 				        </div><!--  END OF LEFT SIDE -->
 
@@ -256,7 +256,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: mh_continue_demographic();">
+			                		<a href="javascript: continue_asi_form('/asi_employment/');">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>

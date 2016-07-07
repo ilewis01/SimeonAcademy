@@ -1544,33 +1544,14 @@ def asi_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client_id = request.POST.get('client_id', '')
-			session_id = request.POST.get('session_id', '')
+			content = startForm(request, 'asi')
 
-			client = Client.objects.get(id=client_id)
-			session = ClientSession.objects.get(id=session_id)
-
-			action = startForm('asi', client)
-			asi = action['asi']
-			setGlobalID(asi.id)
-
-			content['asi'] = asi
-			content['session'] = session
-
-			if action['isNew'] == False:
-				next_section = fetchUrl('asi', None, asi)
-
-				content['form'] = asi
-				content['form_type'] = 'asi'
-				content['type_header'] = 'A.S.I'
-				content['next_section'] = next_section
-				content['save_section'] = next_section
-				content['title'] = "Simeon Academy | AngerManagement"
-				return render_to_response('global/resolve_form.html', content)
+			if content['isNew'] == False:
+				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
 
 			else:
-				content['title'] = "Simeon Academy | Addiction Severity Index"
-				return render_to_response('counselor/forms/ASI/instructions.html', content)
+				return render_to_response('counselor/forms/ASI/instructions.html', content, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/index')
 def asi_admin(request):

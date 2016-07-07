@@ -5814,15 +5814,6 @@ function universal_generic_exit(form_type, page) {
 	form.submit();
 }
 
-function asi_exit(form_type, page) {
-	var form = document.getElementById('asi_form');
-	var exit_type = document.getElementById('exit_type');
-
-	form.action = '/uni_generic_exit/';
-	exit_type.value = String(form_type);
-	form.submit();
-}
-
 
 function generic_exit(form_type, section) {
 	var exit_type = document.getElementById('exit_type');
