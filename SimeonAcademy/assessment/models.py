@@ -34,24 +34,6 @@ class TermReason(models.Model):
 	def __unicode__(self):
 		return self.reason
 
-class MaritalStatus(models.Model):
-	status = models.CharField(max_length=9, default=None, blank=True, null=True)
-
-	def __unicode__(self):
-		return self.status
-
-class LivingSituation(models.Model):
-	situation = models.CharField(max_length=20, default=None, blank=True, null=True)
-
-	def __unicode__(self):
-		return self.situation
-
-class EducationLevel(models.Model):
-	level = models.CharField(max_length=35, default=None, blank=True, null=True)
-
-	def __unicode__(self):
-		return self.level
-
 class Drug(models.Model):
 	drug = models.CharField(max_length=35, default=None, blank=True, null=True)
 
@@ -267,8 +249,8 @@ class AM_Demographic(models.Model):
 	client_id = models.CharField(max_length=30, default=None, blank=True, null=True)
 	date_of_assessment = models.DateField(blank=True, default=None, null=True)
 	
-	maritalStatus = models.ForeignKey(MaritalStatus, default=None, blank=True, null=True)
-	livingSituation = models.ForeignKey(LivingSituation, default=None, blank=True, null=True)
+	maritalStatus = models.CharField(max_length=30, default=None, blank=True, null=True)
+	livingSituation = models.CharField(max_length=30, default=None, blank=True, null=True)
 	own = models.BooleanField(default=False, blank=True)
 	months_res = models.IntegerField(default=0)
 	years_res = models.IntegerField(default=0)
@@ -277,7 +259,7 @@ class AM_Demographic(models.Model):
 	num_children = models.IntegerField(default=0)
 	other_dependants = models.IntegerField(default=0)
 	
-	education = models.ForeignKey(EducationLevel, default=None, blank=True, null=True)
+	education = models.CharField(max_length=30, default=None, blank=True, null=True)
 	drop_out = models.BooleanField(default=False, blank=True)
 	resasonDO = models.CharField(max_length=250, default=None, blank=True, null=True)
 	

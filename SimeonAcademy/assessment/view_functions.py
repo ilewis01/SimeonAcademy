@@ -12,8 +12,8 @@ import string
 import json
 import json as simplejson
 
-from assessment.models import State, RefReason, Client, MaritalStatus, \
-LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
+from assessment.models import State, RefReason, Client, \
+AngerManagement, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, MHUseTable, \
 MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
@@ -992,11 +992,6 @@ def saveCompletedAmSection(request, section, am):
 		resasonDO = request.POST.get('m_resasonDO', '')
 		health_exp = request.POST.get('m_health_exp', '')
 		whatMedicine = request.POST.get('m_whatMedicine', '')
-
-		#SET DROP DOWN MENU VALUES
-		maritalStatus = MaritalStatus.objects.get(id=maritalStatus)
-		livingSituation = LivingSituation.objects.get(id=livingSituation)
-		education = EducationLevel.objects.get(id=education)
 
 		employer_phone = phone_to_integer(employer_phone)
 
@@ -2164,20 +2159,9 @@ def getAMDemoFields(am):
 	data = {}
 	phone = None
 
-	if am.demographic.maritalStatus == None:
-		data['maritalStatus'] = 0
-	else:
-		data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus.status)
-
-	if am.demographic.livingSituation == None:
-		data['livingSituation'] = 0
-	else:
-		data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation.situation)
-
-	if am.demographic.education == None:
-		data['education'] = 0
-	else:
-		data['education'] = convertEducationToIndex(am.demographic.education.level)
+	data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus)
+	data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation)
+	data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation)
 
 	if am.demographic.employer_phone == None or am.demographic.employer_phone == '' or am.demographic.employer_phone == 'None':
 		phone = am.demographic.employer_phone
@@ -2852,14 +2836,6 @@ def processAMData(request, current_section):
 	fields = getAMFields(am, current_section)
 	json_data = json.dumps(fields)
 
-	if current_section == '/am_demographic/':
-		maritalStatus = MaritalStatus.objects.all().order_by('status')
-		livingSituation = LivingSituation.objects.all().order_by('situation')
-		education = EducationLevel.objects.all().order_by('level')
-		result['marital'] = maritalStatus
-		result['living'] = livingSituation
-		result['education'] = education
-
 	if save_this == 'true':
 		saveCompletedAmSection(request, section, am)
 		setAmSectionComplete(am, section)
@@ -2972,6 +2948,7 @@ def deprioritizeSAP(sap):
 	sap.spacialPriority = False
 	sap.otherPriority 	= False
 	sap.sourcesPriority = False
+	sap.save()
 
 def prioritySapSection(section, sap):
 	if str(section) == '/sap_demographic/':
@@ -3036,6 +3013,7 @@ def prioritySapSection(section, sap):
 		sap.spacialPriority = False
 		sap.otherPriority 	= False
 		sap.sourcesPriority = True
+	sap.save()
 
 def grabSapCompletedSections(sap):
 	results = {}
@@ -5777,11 +5755,7 @@ def processMhData(request, current_section):
 
 	if current_section == '/mh_demographic/':
 		states = State.objects.all().order_by('state')
-		mom_state = getOrderedStateIndex(fields['motherState'])
-		dad_state = getOrderedStateIndex(fields['fatherState'])
 		result['states'] = states
-		result['mom_state'] = mom_state
-		result['dad_state'] = dad_state
 
 	if save_this == 'true':
 		saveMentalHealth(request, section, mh)

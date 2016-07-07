@@ -275,12 +275,13 @@
 
                   										<td>
                   											<div id='select-align'>
-	                  											<select id='maritalStatus' name='maritalStatus' value=''>
-	                  												<option>Select</option>
-	                  												{% for m in marital %}
-	                  													<option value='{{m.id}}' id='{{m.status}}'>{{m.status}}</option>
-	                  												{% endfor %}
-	                  											</select>
+                                          <select id='maritalStatus' name='maritalStatus' value=''>
+                                            <option value='None Selected'>Select</option>
+                                            <option value='Divorced'>Divorced</option>
+                                            <option value='Married'>Married</option>
+                                            <option value='Separated'>Separated</option>
+                                            <option value='Single'>Single</option>
+                                          </select>
 	                  										</div>
                   										</td>
                   									</tr>
@@ -295,10 +296,11 @@
                   										<td>
                   											<div id='select-align'>
 	                  											<select id='livingSituation' name='livingSituation'>
-	                  												<option>Select</option>
-	                  												{% for l in living %}
-	                  													<option value='{{l.id}}' id='{{l.situation}}'>{{l.situation}}</option>
-	                  												{% endfor %}
+	                  												<option value='None Selected'>Select</option>
+	                  												<option value='Live alone'>Live alone</option>
+                                            <option value='Live with family'>Live with family</option>
+                                            <option value='Live with friend'>Live with friend</option>
+                                            <option value='Live with partner'>Live with partner</option>
 	                  											</select>
 	                  										</div>
                   										</td>
@@ -397,10 +399,12 @@
                   										<td>
                   											<div id='select-align'>
 	                  											<select name='education' id='education'>
-	                  												<option value=''>Select</option>
-	                  												{% for e in education %}
-	                  												<option value='{{e.id}}' id='{{e.id}}'>{{e.level}}</option>
-	                  												{% endfor %}
+	                  												<option value='None Selected'>Select</option>
+	                  												<option value='College Degree'>College Degree</option>
+                                            <option value='Dropout'>Dropout</option>
+                                            <option value='GED'>GED</option>
+                                            <option value='HS Diploma'>HS Diploma</option>
+                                            <option value='Some College'>Some College</option>
 	                  											</select>
 	                  										</div>
                   										</td>

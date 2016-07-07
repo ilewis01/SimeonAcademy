@@ -1,6 +1,6 @@
 from django.contrib import admin
-from assessment.models import State, RefReason, Client, MaritalStatus, \
-LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
+from assessment.models import State, RefReason, Client, \
+AngerManagement, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, MHUseTable, \
 MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
@@ -16,9 +16,6 @@ admin.site.register(State)
 admin.site.register(RefReason)
 admin.site.register(Client)
 admin.site.register(Global_ID)
-admin.site.register(MaritalStatus)
-admin.site.register(LivingSituation)
-admin.site.register(EducationLevel)
 admin.site.register(Drug)
 admin.site.register(TermReason)
 admin.site.register(Discharge)

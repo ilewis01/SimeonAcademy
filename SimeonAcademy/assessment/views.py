@@ -16,8 +16,8 @@ import json as simplejson
 from xhtml2pdf import pisa
 from django.core import serializers
 
-from assessment.models import State, RefReason, Client, MaritalStatus, \
-LivingSituation, AngerManagement, EducationLevel, Drug, TermReason, \
+from assessment.models import State, RefReason, Client, \
+AngerManagement, Drug, TermReason, \
 Discharge, UrineResults, SAP, account, MentalHealth, MHUseTable, \
 MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
@@ -687,7 +687,7 @@ def genericFormRefreshed(request):
 				form = UrineResults.objects.get(id=form_id)
 
 			refreshForm(form_type, form)
-			location = universalLocation(form_type, form.id)
+			location = fetchUrl(form_type, None ,form)
 
 			content['save_section'] = location
 			content['form_type'] = form_type
@@ -1047,49 +1047,6 @@ def printAM(request):
 			else:
 				spouse = '0'
 
-			#PROCESS MARITAL STATUS CHECKBOXES
-			if am.demographic.maritalStatus.status == 'Divorced':
-				images['divorced'] 	= checked
-				images['single'] 	= unchecked
-				images['separated'] = unchecked
-				images['married'] 	= unchecked
-			elif am.demographic.maritalStatus.status == 'Single':
-				images['divorced'] 	= unchecked
-				images['single'] 	= checked
-				images['separated'] = unchecked
-				images['married'] 	= unchecked
-			elif am.demographic.maritalStatus.status == 'Married':
-				images['divorced'] 	= unchecked
-				images['single'] 	= unchecked
-				images['separated'] = unchecked
-				images['married'] 	= checked
-			elif am.demographic.maritalStatus.status == 'Separated':
-				images['divorced'] 	= unchecked
-				images['single'] 	= unchecked
-				images['separated'] = checked
-				images['married'] 	= unchecked
-
-			#PROCESS LIVING SITUATION CHECKBOXES
-			if am.demographic.livingSituation.situation == 'Live with friend':
-				images['friend'] 	= checked
-				images['family'] 	= unchecked
-				images['alone'] 	= unchecked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live with family':
-				images['friend'] 	= unchecked
-				images['family'] 	= checked
-				images['alone'] 	= unchecked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live alone':
-				images['friend'] 	= unchecked
-				images['family'] 	= unchecked
-				images['alone'] 	= checked
-				images['partner'] 	= unchecked
-			elif am.demographic.livingSituation.situation == 'Live with partner':
-				images['friend'] 	= unchecked
-				images['family'] 	= unchecked
-				images['alone'] 	= unchecked
-				images['partner'] 	= checked
 
 			#PROCESS HEALTH CHECKBOX IMAGES
 			if am.demographic.health_problem == True:
