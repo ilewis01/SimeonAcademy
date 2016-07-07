@@ -2179,7 +2179,7 @@ def getAMDemoFields(am):
 	else:
 		data['education'] = convertEducationToIndex(am.demographic.education.level)
 
-	if am.demographic.employer_phone == None:
+	if am.demographic.employer_phone == None or am.demographic.employer_phone == '' or am.demographic.employer_phone == 'None':
 		phone = am.demographic.employer_phone
 	else:
 		phone = convert_phone(am.demographic.employer_phone)
@@ -2822,7 +2822,7 @@ def beginAM(request):
 
 	openForm('am', am, client)
 
-	result['am'] = am
+	result['AM'] = am
 	result['session'] = session
 	result['isNew'] = action['isNew']
 	result['title'] = "Simeon Academy | Anger Management"

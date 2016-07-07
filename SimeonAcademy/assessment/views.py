@@ -750,7 +750,8 @@ def am_preliminary(request):
 				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
 
 			else:
-				return render_to_response('counselor/forms/MentalHealth/instructions.html', content, context_instance=RequestContext(request))
+				print "The AM ID: " + str(content['AM'].id)
+				return render_to_response('counselor/forms/AngerManagement/instructions.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def am_demographic(request):
@@ -1173,7 +1174,7 @@ def mh_demographic(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_demographic/')
+			content = fetchContent(request, 'mh', '/mh_demographic/')
 			return render_to_response('counselor/forms/MentalHealth/demographic.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1191,7 +1192,7 @@ def mh_education(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_education/')
+			content = fetchContent(request, 'mh', '/mh_education/')
 			return render_to_response('counselor/forms/MentalHealth/education.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1209,7 +1210,7 @@ def mh_background(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_background/')
+			content = fetchContent(request, 'mh', '/mh_background/')
 			return render_to_response('counselor/forms/MentalHealth/background.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1227,7 +1228,7 @@ def mh_stress(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_stress/')
+			content = fetchContent(request, 'mh', '/mh_stress/')
 			return render_to_response('counselor/forms/MentalHealth/stressors.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1245,7 +1246,7 @@ def mh_familyHistory(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_familyHistory/')
+			content = fetchContent(request, 'mh', '/mh_familyHistory/')
 			return render_to_response('counselor/forms/MentalHealth/familyHistory.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1263,7 +1264,7 @@ def mh_legal(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_legal/')
+			content = fetchContent(request, 'mh', '/mh_legal/')
 			return render_to_response('counselor/forms/MentalHealth/legal.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1281,7 +1282,7 @@ def mh_psych(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_psych/')
+			content = fetchContent(request, 'mh', '/mh_psych/')
 			return render_to_response('counselor/forms/MentalHealth/psych.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1299,7 +1300,7 @@ def mh_useTable(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_useTable/')
+			content = fetchContent(request, 'mh', '/mh_useTable/')
 			return render_to_response('counselor/forms/MentalHealth/useTable.html', content, context_instance=RequestContext(request))
 
 
@@ -1318,7 +1319,7 @@ def mh_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'mh', '/mh_viewForm/')
+			content = fetchContent(request, 'mh', '/mh_viewForm/')
 			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

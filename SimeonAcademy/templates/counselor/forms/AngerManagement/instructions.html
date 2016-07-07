@@ -25,26 +25,28 @@
     </div>
 
 	<form action='' method='post' id='am_instructions'> {% csrf_token %}
-        <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+        <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+        <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
         <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-        <input type='hidden' name='new_session' id='new_session' value='false'>
-        <input type='hidden' name='new_form' id='new_form' value='true'>
-        <input type='hidden' name='goToNext' id='goToNext' value='false'>
-        <input type='hidden' name='back' id='back' value='false'>
+        <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+        <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+        <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+        <input type='hidden' name='save_this' id='save_this' value=''>
 	</form> 
 
-	<div style='padding-top:5%'>
-		<div class='toggle-div-page'>
-		    <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: ' id='exitSession'>Cancel</button>
-            </a>
+        <div style='padding-top:5%'>
+            <div class='toggle-div-page'>
+            	<a href="javascript: " id="continue">
+                    <button type='button' onClick='javascript: ' id='exitSession'>Cancel</button>
+                </a>
 
-            <a href="javascript: " id="continue">
-                <button type='button' onClick='javascript: start_am_form();' id='continueAMSession'>Continue</button>
-            </a>
+                <a href="javascript: " id="continue">
+                    <button type='button' onClick='javascript: start_am_form();' id='continueAMSession'>Continue</button>
+                </a>
+            </div>
         </div>
-	</div>
+
 
 </body>
 
