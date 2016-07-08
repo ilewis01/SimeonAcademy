@@ -5684,6 +5684,40 @@ function sideBarASI(page) {
 	form.submit();
 }
 
+function asi_radioBtn_select(sel_val, r1, r2) {
+	sel_val = String(sel_val);
+
+	if (sel_val === '1') {
+		r1.checked = true;
+	}
+	else {
+		r2.checked = true;
+	}
+}
+
+function init_asi_admin(json_data) {
+	document.getElementById('g8').selectedIndex = json_data.g8;
+	document.getElementById('g9').selectedIndex = json_data.g9;
+	document.getElementById('g12').selectedIndex = json_data.g12;
+	asi_radioBtn_select(json_data.g10, document.getElementById('isMale'), document.getElementById('isFemale'));
+}
+
+function continue_asi_form(section) {
+	section = String(section);
+	var form = document.getElementById('asi_form');
+	var next_url = document.getElementById('next_url');
+	var proceed = true;
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.action = next_url.value;
+		form.submit();
+	}
+}
+
+
+
+
 //=====================================================================================================================//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=====================================================================================================================//

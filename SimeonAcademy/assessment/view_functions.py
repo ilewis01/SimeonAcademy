@@ -5789,6 +5789,138 @@ def processMhData(request, current_section):
 #*****************************************************************************************************************************************#
 ###########################################################################################################################################
 
+
+def isJQnumber(din):
+	din = str(din)
+	isNumber = False
+	if din[0]=='1' or din[0]=='2' or din[0]=='3' or din[0]=='4' or din[0]=='5' or din[0]=='6' or din[0]=='7' or din[0]=='8' or din[0]=='9' or din[0]=='0':
+		isNumber = True
+	return isNumber
+
+def process_jq_year(year):
+	year = str(year)
+	result = ''
+	result += year[0]
+	result += year[1]
+	result += year[2]
+	result += year[3]
+	return result
+
+def process_jq_day(day):
+	day = str(day)
+	result = ''
+
+	if len(day) == 2:
+		result += '0'
+		result += day[0]
+	else:
+		result += day[0]
+		result += day[1]
+	return result
+
+def break_up_jq_str_date(din):
+	result = {}
+	day = ''
+	month =''
+	year = ''
+	flag1 = 0
+	flag2 = 0
+
+	for i in range(len(din)):
+		if din[i] != ' ':
+			month += din[i]
+		else:
+			flag1 = i + 1
+			break
+
+	for j in range(flag1, len(din)):
+		if din[j] != ' ':
+			day += din[j]
+		else:
+			flag2 = j + 1
+			break
+
+	for k in range(flag2, len(din)):
+		year += din[k]
+
+	result['month'] = month
+	result['day'] = day
+	result['year'] = year
+	return result
+
+def get_first3_jq(din):
+	result = ''
+	result += str(din[0])
+	result += str(din[1])
+	result += str(din[2])
+	return result
+
+def jq_month_to_int(din):
+	result = None
+	din = get_first3_jq(din)
+	din = str(din)
+
+	if din == 'Jan':
+		result = '01'
+	elif din == 'Feb':
+		result = '02'
+	elif din == 'Mar':
+		result = '03'
+	elif din == 'Apr':
+		result = '04'
+	elif din == 'May':
+		result = '05'
+	elif din == 'Jun':
+		result = '06'
+	elif din == 'Jul':
+		result = '07'
+	elif din == 'Aug':
+		result = '08'
+	elif din == 'Sep':
+		result = '09'
+	elif din == 'Oct':
+		result = '10'
+	elif din == 'Nov':
+		result = '11'
+	elif din == 'Dec':
+		result = '12'
+	return result
+
+def from_str_date(din):
+	result = ''
+	comps = break_up_jq_str_date(din)
+	month = jq_month_to_int(comps['month'])
+	day = process_jq_day(comps['day'])
+	year = process_jq_year(comps['year'])
+	result += year
+	result += '-'
+	result += month
+	result += '-'
+	result += day
+	return result
+
+def convertJQdate(din):
+	result = ''
+	result += din[6]
+	result += din[7]
+	result += din[8]
+	result += din[9]
+	result += '-'
+	result += din[0]
+	result += din[1]
+	result += '-'
+	result += din[3]
+	result += din[4]
+	return result
+
+def process_jq_date(din):
+	result = None
+	if isJQnumber(din) == True:
+		result = convertJQdate(din)
+	else:
+		result = from_str_date(din)
+	return result
+
 def get_asi_names():
 	result = []
 	result.append('admin')
@@ -6683,7 +6815,7 @@ def saveASIadmin(request, asi):
 	asi.admin.g1 = request.POST.get('g1')
 	asi.admin.g2 = request.POST.get('g2')
 	asi.admin.g3 = request.POST.get('g3')
-	asi.admin.g4 = request.POST.get('g4')
+	asi.admin.g4 = process_jq_date(request.POST.get('g4'))
 	asi.admin.g8 = request.POST.get('g8')
 	asi.admin.g9 = request.POST.get('g9')
 	asi.admin.g10 = request.POST.get('g10')
@@ -7556,9 +7688,13 @@ def processAsiData(request, current_section):
 	fields = grabASIFields(asi, current_section)
 	json_data = json.dumps(fields)
 
-	# if save_this == 'true':
-	# 	saveASI(request, section, asi)
-	# 	setASIcomplete(asi, section)
+	if current_section == '/asi_admin/':
+		ad_date = asi.admin.g4
+		result['ad_date'] = ad_date
+
+	if save_this == 'true':
+		saveASI(request, section, asi)
+		setASIcomplete(asi, section)
 
 	next_url = nextAsiPage(asi, current_section)
 	image = grabASISideImages(asi, current_section)

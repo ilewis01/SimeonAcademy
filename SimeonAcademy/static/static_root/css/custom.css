@@ -1,9 +1,13 @@
-body {
+side_option_headbody {
 	color:#393939;
 }
 
 .gradient-white {
 	background: url('../images/grey1.jpg');
+}
+
+.round-button2 {
+	width:5%;
 }
 
 .round-button {
@@ -105,6 +109,14 @@ body {
 	/*font-family: arial;*/
 }
 
+.header-images3 {
+	background: url('../images/header.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	padding-right: 50px;
+	/*font-family: arial;*/
+}
+
 .header-images2 {
 	background: url('../images/header.png');
 	background-repeat: no-repeat;
@@ -120,6 +132,16 @@ body {
 	font-style: oblique;
 	font-style: bold;
 	font-size: 20px;
+	text-shadow: .05em .05em #3e3e3e;
+}
+
+#header-text2{
+	color: #adad89;
+	margin-top: 7px;
+	text-align: left;
+	font-style: oblique;
+	font-style: bold;
+	font-size: 25px;
 	text-shadow: .05em .05em #3e3e3e;
 }
 
@@ -250,7 +272,7 @@ button:hover {
 }
 
 .session-side {
-	margin-left: 50px;
+	margin-left: 35px;
 	margin-top: 20px;
 	color:white;
 }
@@ -318,11 +340,15 @@ button:hover {
 }
 
 #sidebar-space-lower {
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
 }
 
 #sidebar-space-lower2 {
 	margin-bottom: 20px;
+}
+
+#sidebar-space-lower h4{
+	color: #fee047;
 }
 
 #sidebar-fill {
@@ -330,10 +356,6 @@ button:hover {
 	color:white;
 	text-shadow:1px 1px black;
 	font-style: italic;
-}
-
-.toggle-div-page {
-	/*margin-top: 20px;*/
 }
 
 #error-div-main {
@@ -358,7 +380,7 @@ button:hover {
 }
 
 .px20-below {
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 }
 
 #radio-align {
@@ -561,15 +583,19 @@ button:hover {
 }
 
 .align-form-center {
-	width: 100%;
+	width: 85%;
 	margin: auto;
 }
 
 #header-margin-top {
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 #viewVerticalSpace {
+	margin-top: 40px;
+}
+
+#viewVerticalSpaceVeryLow {
 	margin-top: 20px;
 }
 
@@ -586,11 +612,13 @@ button:hover {
 }
 
 #viewAns {
-	font-size: 18px;
+	color: #434545;
+	font-size: 19px;
+	/*font-style: oblique;*/
 }
 
 #viewAnsIndent {
-	font-size: 18px;
+	font-size: 19px;
 	text-align: left;
 }
 
@@ -599,7 +627,7 @@ button:hover {
 }
 
 .viewSectionWrapper {
-	margin-left: 20px;
+	margin-left: 10%;
 	margin-top: 30px;
 }
 
@@ -610,6 +638,1127 @@ button:hover {
 #checkbox_img_size {
 	width:20px;
 }
+
+#img_div {
+	margin-bottom: 2px;
+	margin-right: 4px;
+	margin-left: 10px;
+}
+
+#img_divLong {
+	margin-bottom: 2px;
+	margin-right: 4px;
+	margin-left: 40px;
+}
+
+#section_separation {
+	margin-top: 50px;
+}
+
+#shortSpaceView {
+	margin-top: 7px;
+}
+
+#adjust-right-textField {
+	margin-left: 5px;
+	margin-bottom: 6px;
+}
+
+#AH_space {
+	margin-bottom: 15px;
+}
+
+#AH_labelCheckMatch {
+	margin-top: 6px;
+	margin-right: 18px;
+	margin-left: 3px;
+}
+
+#AH_labelCheckMatch2 {
+	margin-top: 6px;
+	margin-right: 62px;
+	margin-left: 3px;
+}
+
+#psychoRadio {
+	margin-bottom: 7px;
+	margin-left: 20px;
+	margin-right: 4px;
+}
+
+#psychoRadio2 {
+	margin-bottom: 7px;
+	margin-left: 16px;
+	margin-right: 4px;
+}
+
+#numberLabel {
+	margin-top: 5px;
+	margin-left: 3px;
+	margin-right: 15px;
+}
+
+#radioLineOnly {
+	margin-bottom: 7px;
+	margin-right: 4px;
+}
+
+.sideBarMargin {
+	margin-left: 10px;
+}
+
+.sideBarMarginChecked {
+	margin-left: 10px;
+}
+
+.sideBarMargin a {
+	color: #adad85;
+	/*color: #ffa64d;*/			 /*orange color*/
+	font-size: 15px;
+}
+
+.sideBarMarginChecked a {
+	color: #5daf0d;
+	font-size: 15px;
+}
+
+.sideBarMargin a:hover {
+	color:#fee047;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.sideBarMarginChecked a:hover {
+	color:#fee047;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.sideLinkSelected {
+	font-size: 16px;
+	font-weight: bold;
+	color:#ffa64d;
+	margin-left: 10px;
+}
+
+.sideLinkSelected a {
+	font-size: 16px;
+	font-weight: bold;
+	color:#ffa64d;
+}
+
+.sideLinkSelected a:hover {
+	font-size: 16px;
+	font-weight: bold;
+	color:#ffa64d;
+	text-decoration: none;
+}
+
+#bullet-img {
+	width:15px;
+	padding-bottom: 4px;
+}
+
+.btnCorrectionSideBar {
+	padding-right: 5000px;
+}
+
+.checkGreenCircle ul{
+	list-style-image: url('/static/images/green_check.png');
+}
+
+#vertSpaceSideBar {
+	margin-bottom: 3px;
+}
+
+#form-deletion-main-phrase {
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#numbered {
+	color: #616769;
+	font-weight: bold;
+}
+
+#single-line-radio2 {
+	margin-bottom: 7px;
+	margin-right: 5px; 
+}
+
+.side_option_head {
+	margin-top: 15px;
+	font-weight: bold;	
+	font-size: 17px;
+	color: #ffa64d;
+}
+
+.FA_side_bar_btn a {
+	color: #adad85;
+}
+
+.FA_side_bar_btn a:hover {
+	color: #ffa64d;
+}
+
+.FA_side_bar_btn td {
+	width: 40px;
+}
+
+#save_icon_btn {
+	font-size: 35px;
+	margin-top: 3px;
+}
+
+#trash_icon_btn {
+	font-size: 40px;
+}
+
+#side_icon_text {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.icon_table td {
+	
+	width: 40px;
+	text-align: center;
+}
+
+#save_icon_text {
+	font-weight: bold;
+	margin-top: 4px;}
+
+#trash_icon_text {
+	font-weight: bold;
+}
+
+#number_radio {
+	margin-bottom: 7px;
+	margin-right: 5px;
+}
+
+#number_radio2 {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 15px;
+}
+
+#otherRadioFix {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 17px;
+}
+
+#numbered_textarea {
+	margin-left: 20px;
+	margin-right: 7px;
+	font-weight: bold;
+	color: #74797A;
+}
+
+#h4_header_tag {
+	color: #74797A;
+	font-weight: bold;
+}
+
+#h4_header_tag2 {
+	color: #74797A;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#viewFormLabel {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.sap_label {
+	font-weight: bold;
+	font-size: 16px;
+	text-decoration: underline;
+}
+
+#sap_sub_label {
+	font-style: italic;
+	font-size: 13px;
+}
+
+#Above_5 {
+	margin-top: 5px;
+}
+
+#form_question_text2 {
+	margin-right: 5px;
+	margin-bottom: 83px;
+}
+
+.light_bulb {
+	width: 15px;
+}
+
+.light_bulb_large {
+	width: 25px;
+}
+
+#justify_div {
+	width: 612px;
+	text-align: justify;
+}
+
+.FA_INFO {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 80px;
+}
+
+.FA_INFO2 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	/*margin-top: 3px;*/
+	margin-bottom: 2px;
+}
+
+.FA_INFO3 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 100px;
+}
+
+.FA_INFO4 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 20px;
+}
+
+.FA_INFO5 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 160px;
+}
+
+.FA_INFO6 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 60px;
+}
+
+.FA_INFO7 {
+	color: #66ccff;
+	font-size: 20px;
+	margin-right: 7px;
+	margin-bottom: 40px;
+}
+
+.psychoactive_table {
+	/*width: 100%;*/
+	text-align: center;
+}
+
+.psychoactive_table th {
+	text-align: center;
+	background-color: #d6d6d6;
+	font-size: 15px;
+	height: 50px;
+	border: 2px solid black;
+}
+
+#align_checkbox_label {
+	margin-bottom: 8px;
+	margin-right: 3px;
+}
+
+#give_label_right_space {
+	margin-right: 21px;
+}
+
+#give_label_right_space_high {
+	margin-right: 160px;
+}
+
+#give_label_right_space_low {
+	margin-right: 30px;
+}
+
+.psychoactive_table td {
+	/*background-color: #EDEDED;*/
+	background-color: white;
+	border: 1px solid black; 
+}
+
+#psy_label {
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 5px;
+	width: 160px;
+	font-weight: bold;
+	font-style: italic;
+	height: 25px;
+}
+
+#psy_number {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+#psy_frequency {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+#psy_quantity {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.psyAct_header {
+	margin-bottom: 40px;
+	margin-left: 25px;
+}
+
+#text_label {
+	margin-bottom: 15px;
+}
+
+#sap_label_text_align {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.instruction_class {
+	width: 100%;
+	text-align: center;
+}
+
+.exit_icon {
+	width:20px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
+
+.exit_btn_text {
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.exit_a_tag {
+	color: #3399cc;
+}
+
+.exit_a_tag:hover {
+	text-decoration: none;
+	color: #ffa64d;
+}
+
+.exitBtn_class {
+	width: 100%;
+	height: 150px;
+	margin-top: 50px;
+}
+
+.round_exit_center {
+	width: 100%;
+	text-align: center;
+}
+
+.round_exit_center th {
+	border: 1px solid black;
+}
+
+.round_exit_center td {
+	/*border: 1px solid black;*/
+}
+
+.round_exit_center a {
+	color: #666666;
+}
+
+.round_exit_center a:hover {
+	color: #adad89;
+	/*text-shadow: 1px 1px black;*/
+	text-decoration: none;
+}
+
+.exitBtn_headerText {
+	margin-top: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.roundIconClass {
+	margin-top: 18px;
+	margin-left: 11px;
+	/*margin-right: 5px;*/
+}
+
+.roundIconClass1 {
+	margin-left: 4px;
+	margin-top: 10px;
+}
+
+.roundIconClass2 {
+	margin-top: 15px;
+	margin-left: 2px;
+}
+
+.roundIconClass3 {
+	margin-top: 13px;
+	margin-right: 3px;
+}
+
+.image_icon {
+	width:65%;
+}
+
+.image_icon2 {
+	width:70%;
+}
+
+.image_icon3 {
+	width:40%;
+}
+
+.exit_page_main {
+	text-align: center;
+}
+
+.exit_table_class {
+	width:100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#sub_exit_text {
+	font-style: italic;
+	font-size: 15px;
+}
+
+#sideBarMainHeader {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	color:#ffa64d;
+	text-shadow: 1px 1px black;
+	margin-bottom: 15px;
+}
+
+.popup_class {
+	background-color: #efefef;
+	font-family: Arial;
+	font-size: 16px;
+}
+
+.popup_class2 {
+	background-color: #efefef;
+	font-family: Arial;
+}
+
+.popupTable {
+	width: 100%;
+}
+
+.popupTable tr {
+	margin: auto;
+}
+
+.popupBtn {
+	width:100px;
+	height:30px;
+	font-size: 13px;
+	margin-top: 15%;
+}
+
+#popupLogo {
+	width:40%;
+	margin-bottom: 4%;
+	margin-top: 5px;
+	/*margin-left: 30%;*/
+}
+
+#popupText {
+	font-style: italic;
+	text-align: center;
+}
+
+#warning_icon {
+	width:40px;
+	margin-left: 60%;
+}
+
+#warning_icon2 {
+	width:60px;
+	margin-left: 15%;
+	padding-bottom: 25px;
+}
+
+#popupBtnTable {
+	width: 210px;
+	margin: auto;
+}
+
+.longBtn {
+	height: 30px;
+	font-size: 13px;
+	width: 130px;
+}
+
+#confirm_delete_pop_table {
+	width: 270px;
+	margin: auto;
+}
+
+#genericHeader {
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top:3px;
+}
+
+#genericSubText {
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+
+#sideProgress {
+	margin-bottom: 18px;
+	margin-left: 12px;
+	font-size: 19px;
+	color: #adad89;
+	font-weight: bold;
+	font-style: italic;
+	text-shadow: 1px 1px black;
+	/*text-decoration: underline;*/
+}
+
+.refreshBody {
+	background-color: #efefef;
+	padding: 5px;
+}
+
+.refreshWrapper {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	border-radius: 5px;
+	border: 1px solid #ACADAD;
+	font-family: Arial;
+}
+
+#refreshHeader {
+	/*text-align: center;*/
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-left: 5%;
+}
+
+#refreshBodyText {
+	width: 320px;
+	margin-left: 20px;
+	font-size: 13px;
+	text-align: justify;
+}
+
+#refreshQuestion {
+	margin-left: 20px;
+	margin-top: 20px;
+	font-style: italic;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.refreshBtn {
+	width: 70px;
+	height: 25px;
+	font-size: 13px;
+	margin-top: 10px;
+}
+
+.refreshTable {
+	width: 150px;
+	margin: auto;
+}
+
+#lgPopLogo {
+	width:250px;
+	padding-left: 16px;
+	padding-bottom: 20px;
+
+}
+
+#mh_text_label {
+	margin-top: 5px;
+}
+
+#mh_num_label {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#mh_check_label {
+	margin-top: 7px;
+	margin-left: 5px;
+	margin-right: 20px;
+}
+
+#mh_space {
+	margin-bottom: 5px;
+}
+
+#mh_sub_header {
+	font-weight: bold;
+	font-size: 19px;
+	margin-top: 10px;
+	color: #88898A;
+}
+
+#mh_select_label {
+	margin-top: 6px;
+	margin-right: 6px;
+}
+
+#inlineRadio1 {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 20px;
+}
+
+.indent_subMH {
+	padding-left: 17px;
+}
+
+#mhSubHead2 {
+	margin-top: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #adad89;
+	/*text-shadow: 1px 1px gray;*/
+}
+
+#inlineRadioLabel {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#mhRadioFix {
+	margin-bottom: 2px;
+	margin-left: 15px;
+}
+
+.sub_body_mh {
+	font-family: Arial;
+	padding: 20px;
+}
+
+.mh_op_table1 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table2 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table3 {
+	width: 100%;
+	margin: auto;
+	margin-top: 30px;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.mh_op_table1 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.mh_op_table2 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.mh_op_table3 th{
+	width: 30%;
+	text-align: center;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+.sub_head_table {
+	width: 100%;
+	vertical-align: top;
+	color:#333333;
+}
+
+.sub_head_table th {
+	width: 100%;
+	margin: auto;
+	vertical-align: top;
+	color:#333333;
+}
+
+.tr_height_fix {
+	height:112px;
+}
+
+.individual_pop_mh {
+	border: 1px black solid;
+	width: 100%;
+}	
+
+.subSubSubTableMh {
+	width: 100%;
+	vertical-align: top;
+	background-color: #e8e6e8;
+}
+
+.subSubSubTableMh label {
+	font-size: 12px;
+}
+
+#pop_numField {
+	margin-top: 2px;
+}
+
+#pop_textField {
+	margin-top: 2px;
+}
+
+#pop_selectField {
+	margin-top: 3px;
+}
+
+#sub_head_text_mh_pop_demo {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	font-style: italic;
+	font-size: 15px;
+}
+
+#mh_verify_btns {
+	margin-left: 15px;
+}
+
+#opResultHead {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	color: #ad9609;
+	text-shadow: 1px 1px black;
+	/*margin-top: 20px;*/
+}
+
+#opResultSubHEad {
+	/*margin-left: 30px;*/
+	font-size: 18px;
+	font-weight: bold;
+	/*color: #ffa45a;*/
+	font-style: italic;
+	/*text-shadow: 1px 1px gray;*/
+}
+
+#opResultData {
+	margin-left: 3px;
+	font-size: 15px;
+}
+
+.gold_bullet {
+	width:8px;
+}
+
+.table_container {
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	border: 1px solid black;
+	padding: 2px;
+	background-color: #d9d9d9;
+}
+
+.sobOplogo {
+	width:30%;
+}
+
+.border_table {
+	width: 100%;
+	height: 10%;
+	margin-top: 3px;
+}
+
+.border_table th {
+	width: 25%;
+	margin: auto;
+	text-align: center;
+	font-size: 18px;
+	font-style: italic;
+	color: #4f4d4d;
+	/*color: #a39000;*/
+	/*text-shadow: 1px 1px black;*/
+}
+
+.border_table td {
+	width: 25%;
+	height: 100%;
+}
+
+.inner_box {
+	width: 97%;
+	height: 98%;
+	margin: auto;
+	margin-top: 6%;
+	margin-bottom: 6%;
+	border: 1px solid black;
+	background-color: #e8e6e8;
+}
+
+.inner_box_head {
+	width: 97%;
+	height: 98%;
+	margin: auto;
+	border: 1px solid black;
+	background-color: #e8e6e8;
+}
+
+#bullet_text {
+	margin-top: 5%;
+	margin-left: 8%;
+	font-size: 13px;
+}
+
+#bullet_text2 {
+	margin-top: 1%;
+	margin-bottom: 4%;
+	margin-left: 8%;
+	font-size: 13px;
+}
+
+#subHeadOp {
+	font-weight: bold;
+	font-size: 16px;
+	font-style: italic;
+	color: #4f4d4d;
+	margin-left: 3%;
+	margin-top: 3%;
+}
+
+.opResultButtons {
+	padding-left: 5%;
+	margin-top: 3%;
+}
+
+.opResultButtons button {
+	color:#333333;
+	font-size: 12px;
+}
+
+#mh_sideNote {
+	margin-left: 5%;
+	margin-top: 3%;
+	font-size: 13px;
+}
+
+#sub_background_header {
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	color:#7f7f7f;
+}
+
+#mh_numFix {
+	margin-bottom: 5px;
+	margin-left: 3px;
+}
+
+#fix_my_radio {
+	margin-bottom: 7px;
+	margin-right: 3px;
+	margin-left: 15px;
+}
+
+#fix_my_select {
+	margin-left: 5px;
+	margin-bottom: 7px;
+}
+
+#mhRelate_width {
+	width:80px;
+}
+
+#mh_sub_desciption {
+
+}
+
+.sub_left_margin_tr {
+	margin-left: 17px;
+}
+
+#sub_paragraph_header {
+	width:100%;
+	text-align: justify;
+	font-style: italic;
+	/*font-size: 13px;*/
+}
+
+.mh_box_class {
+	border: 1px solid black;
+	width: 100%;
+	height: 100px;
+}
+
+#text_format_des {
+	/*font-style: italic;*/
+	font-weight: none;
+	color:#929292;
+}
+
+.single_table_center {
+	width: 100%;
+	margin: auto;
+}
+
+.subSubHeadText {
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin-top: 10px;
+}
+
+.useBorder {
+	width: 100%;
+	margin: auto;
+	background-color: #e7e6e7;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.useTable {
+	width: 100%;
+}
+
+.useTable th{
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
+	background-color: #d0d0d0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.useTable td {
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
+}
+
+.InnerTableUse {
+
+}
+
+.InnerTableUse td {
+	border: none;
+	text-align: left;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	padding-left: 5%;
+	font-style: italic;
+	font-weight: bold;
+	/*color: #909074;*/
+	/*color: #474747;*/
+	color: #6c6c66;
+}
+
+#useHeader {
+	padding: 6px;
+	font-size: 15px;
+	font-style: italic;
+	color: #595959;
+	/*color: black;*/
+	/*color: #909074;*/
+	/*text-shadow: 1px 1px gray;*/
+	/*border: 1px solid black;*/
+}
+
+.innerTextUse {
+	border: 1px solid gray;
+	width: 98%;
+	text-align: center;
+}
+
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+/*############################################### ASI STYLES ####################################################*/
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+
+#asiNumber {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	font-weight: bold;
+	font-style: italic;
+	color: #adad89;
+}
+
+#fix_my_text {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+#fix_my_text input {
+	width: 60px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+/*################################################# CALENDAR ####################################################*/
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+
+.popUpDate {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.popUpDate input {
+	width: 90px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1045,6 +1045,10 @@ class AIS_General(models.Model):
 	family 	= models.CharField(max_length=1, default=None, blank=True, null=True)
 	psych 	= models.CharField(max_length=1, default=None, blank=True, null=True)
 
+	test1 	= models.CharField(max_length=40, default=None, blank=True, null=True)
+	test2 	= models.CharField(max_length=40, default=None, blank=True, null=True)
+	test3 	= models.CharField(max_length=40, default=None, blank=True, null=True)
+
 	def __unicode__(self):
 		return str(self.clientID)
 

@@ -1707,6 +1707,121 @@ button:hover {
 	text-align: center;
 }
 
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+/*############################################### ASI STYLES ####################################################*/
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+
+#asiNumber {
+	margin-bottom: 5px;
+	margin-right: 5px;
+	font-weight: bold;
+	font-style: italic;
+	color: #adad89;
+}
+
+#fix_my_text {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+#fix_my_text input {
+	width: 60px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+#ital_sub_head {
+	font-weight: bold;
+	font-size: 19px;
+	margin-top: 10px;
+	color: #88898A;
+	font-style: italic;
+}
+
+.sev_container {
+	width: 90%;
+	background-color: #e7e6e7;
+	border: 1px solid gray;
+	padding:1%;
+}
+
+.sev_table {
+	width: 100%;
+	padding: 20%;
+	border: 1px solid gray;
+}
+
+.sev_table th {
+	/*width: 100%;*/
+	padding: 2%;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+.sev_table td {
+	/*width: 100%;*/
+	padding: 1%;
+	border: 1px solid gray;
+	text-align: left;
+}
+
+#inside_table_radio {
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+#vert_sev_head {
+	margin-left: 3%;
+	font-style: italic;
+}
+
+.sev_desc_text {
+	width: 90%;
+	text-align: justify;
+	font-style: italic;
+	font-size: 13px;
+	margin-top: 8%;
+	margin-bottom: 8%;
+}
+
+.sev_desc_text span {
+	font-weight: bold;
+	color: #59B9D9;
+}
+
+#years_months {
+	font-style: italic;
+	margin-left: 5px;
+	margin-right: 20px;
+	margin-bottom: 5px;
+}
+
+#double_sel {
+	margin-left: 35px;
+}
+
+
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+/*################################################# CALENDAR ####################################################*/
+/*###############################################################################################################*/
+/*###############################################################################################################*/
+
+.popUpDate {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.popUpDate input {
+	width: 120px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+
+
 
 
 

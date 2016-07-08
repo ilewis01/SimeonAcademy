@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_demo({{json_data}})">
+<body class="gradient-white" onLoad="javascript: init_asi_admin({{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -229,14 +229,184 @@
                             <input type='hidden' name='save_section' id='save_section' value='/asi_admin/'>  
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
-				    			</form>
+                            <table>
+                              <tr>
+                                <td>
+                                  <div id='asiNumber'>
+                                    G1.
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <label>I.D. Number:</label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='text' name='g1' id='g1' value='{{fields.g1}}'>
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td><div id='asiNumber'>G2.</div></td>
+
+                                <td>
+                                  <label>Last 4 Digits of SSN:</label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='text' name='g2' id='g2' value='{{fields.g2}}'>
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td><div id='asiNumber'>G3.</div></td>
+
+                                <td>
+                                  <label>Program Number:</label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='text' name='g3' id='g3' value='{{fields.g3}}'>
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td><div id='asiNumber'>G4.</div></td>
+
+                                <td>
+                                  <label>Date of Admission:</label>
+                                </td>
+
+                                <td>
+                                  <div class='popUpDate'>
+                                    <input type="text" id="popupDatepicker" name='g4' value='{{ad_date}}'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>G5.</div></td>
+
+                                <td>
+                                  <label>Class:</label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <select name='g8' id='g8'>
+                                      <option value='0'>Select</option>
+                                      <option value='1'>Intake</option>
+                                      <option value='2'>Follow-up</option>
+                                    </select>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+				           				            
+				        </div><!--  END OF LEFT SIDE -->				    			
 				    </div>
+                <div class="col-md-6 col-sm-6">
+                  <table>
+                    <tr>
+                      <td><div id='asiNumber'>G6.</div></td>
+
+                      <td>
+                        <label>
+                          Contact Code:
+                        </label>
+                      </td>
+
+                      <td>
+                        <div id='fix_my_select'>
+                          <select name='g9' id='g9'>
+                            <option value='0'>Select</option>
+                            <option value='1'>In Person</option>
+                            <option value='2'>Phone</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <td><div id='asiNumber'>G7.</div></td>
+
+                      <td>
+                        <label>
+                          Interviewer Code Number:
+                        </label>
+                      </td>
+
+                      <td>
+                        <div id='fix_my_text'>
+                          <input type='text' name='g11' id='g11' value='{{fields.g11}}'>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <td><div id='asiNumber'>G8.</div></td>
+
+                      <td>
+                        <label>
+                          Special:
+                        </label>
+                      </td>
+
+                      <td>
+                        <div id='fix_my_select'>
+                          <select name='g12' id='g12'>
+                            <option value='0'>Select</option>
+                            <option value='1'>Patient Terminated</option>
+                            <option value='2'>Patient Refused</option>
+                            <option value='3'>Patient Unable to Respond</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <td><div id='asiNumber'>G9.</div></td>
+
+                      <td>
+                        <label>
+                          Client Gender:
+                        </label>
+                      </td>
+
+                      <td>
+                        <div id='fix_my_radio'>
+                          <input type='radio' name='g10' id='isMale' value='1'>
+                        </div>
+                      </td>
+
+                      <td><label>Male</label></td>
+
+                      <td>
+                        <div id='fix_my_radio'>
+                          <input type='radio' name='g10' id='isFemale' value='2' checked>
+                        </div>
+                      </td>
+
+                      <td><label>Female</label></td>
+                    </tr>
+                  </table>
+                </div>
+            </form>
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>
