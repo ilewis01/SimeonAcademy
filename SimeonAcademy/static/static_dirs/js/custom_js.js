@@ -5664,7 +5664,172 @@ function mhBank() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=====================================================================================================================//
 
+//#####################################################################################################################//
+//*********************************************************************************************************************//
+//------------------------------------------------------ POSTING ------------------------------------------------------//
+//*********************************************************************************************************************//
+//#####################################################################################################################//
 
+function eliminateWhiteSpace(field) {
+	var result = '';
+	var val = String(field.value);
+
+	for (var i = 0; i < val.length; i++)
+	{
+		if (val.charAt(i) !== ' ') {
+			result += val.charAt(i);
+		}
+	}
+
+	return result;
+}
+
+function fieldIsEmpty(field) {
+	var val = String(eliminateWhiteSpace(field));
+	var fieldEmpty = false;
+
+	if (val === null || val === '' || val === 'None') {
+		fieldEmpty = true;
+	}
+
+	return fieldEmpty;
+}
+
+function isValidNumber(m_val) {
+	var isValid = false;
+	val = String(m_val);
+
+	if (val==='0'| val==='1'| val==='2'| val==='3'| val==='4'| val==='5'| val==='6'| val==='7'| val==='8'| val==='9') {
+		isValid = true;
+	}
+	return isValid
+}
+
+function isValidDateEntry(date) {
+	var year = '';
+	var day = '';
+	var month = '';
+	var isValid = false;
+	var continue_search = true;
+	var d = String(date.value);
+	var len = d.length;
+
+	if (len !== 10) {
+		continue_search = false;
+	}
+
+	if (continue_search === true) {
+		if (d.charAt(2) !== '/' || d.charAt(5) !== '/') {
+			continue_search = false;
+		}
+	}
+
+	if (continue_search === true) {
+		year += d.charAt(6);
+		year += d.charAt(7);
+		year += d.charAt(8);
+		year += d.charAt(9);
+		month += d.charAt(0);
+		month += d.charAt(1);
+		day += d.charAt(3);
+		day += d.charAt(4);
+
+		if (isValidNumberEntry(year) === false || isValidNumberEntry(month) === false || isValidNumberEntry(day) === false) {
+			continue_search = false;
+		}
+	}
+
+	if (continue_search === true) {
+		isValid = true;
+	}
+
+	return isValid;
+}
+
+function isValidNumberEntry(field) {
+	var isValid = true;
+	var val = String(field.value);
+
+	for (var i = 0; i < val.length; i++) {
+		if (isValidNumber(val.charAt(i)) === false) {
+			isValid = false;
+			break;
+		}
+	}
+
+	return isValid;
+}
+
+function correctText(field) {
+	if (fieldIsEmpty(field) === true) {
+		field.value = 'N/A';
+	}
+}
+
+function correctNumber(field) {
+	if (fieldIsEmpty(field) === true || isValidNumberEntry === false) {
+		field.value = '0';
+	}
+}
+
+function correctDate(field) {
+	if (fieldIsEmpty(field) === true || isValidDateEntry(field) === false) {
+		field.value = '01/01/1900';
+	}
+}
+
+function fieldCorrection(field_type, field) {
+	field_type = String(field_type);
+
+	if (field_type === 'text') {
+		correctText(field);
+	}
+	else if (field_type === 'number') {
+		correctNumber(field);
+	}
+	else if (field_type === 'date') {
+		correctDate(field);
+	}
+}
+
+function uniDynamicFields(field_type, field, trigger, target) {
+	field_type = String(field_type);
+
+	if (field_type === 'text') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'number') {
+		postUniversalRadioNumber(trigger, field, target);
+	}
+	else if (field_type === 'select') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'checkbox') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'radio') {
+		postUniversalRadioRadio(trigger, field, target);
+	}
+	else if (field_type === 'date') {
+
+	}
+}
+
+function post(isDynamic, field_type, field, trigger, target) {
+	if (isDynamic === true) {
+		uniDynamicFields(field_type, field, trigger, target);
+	}
+	else {
+		fieldCorrection(field_type, field);
+	}
+}
+
+
+//=====================================================================================================================//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//=================================================++ END POSTING======================================================//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//=====================================================================================================================//
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//
@@ -5830,11 +5995,108 @@ function init_asi_general(json_data) {
 	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
+// post(isDynamic, field_type, field, trigger, target)
+
+function processAsiAdmin() {
+	var g1 = document.getElementById('g1');
+	var g2 = document.getElementById('g2');
+	var g3 = document.getElementById('g3');
+	var g4 = document.getElementById('popupDatepicker');
+	var g11 = document.getElementById('g11');
+
+	post(false, 'text', g1, null, null);
+	post(false, 'text', g2, null, null);
+	post(false, 'text', g3, null, null);
+	post(false, 'date', g4, null, null);
+	post(false, 'text', g11, null, null);
+
+}
+
+function processAsiGeneral() {
+	
+}
+
+function processAsiMedical() {
+	
+}
+
+function processAsiEmployment() {
+	
+}
+
+function processAsiDrug1() {
+	
+}
+
+function processAsiDrug2() {
+	
+}
+
+function processAsiLegal() {
+	
+}
+
+function processAsiFamily() {
+	
+}
+
+function processAsiSocial1() {
+	
+}
+
+function processAsiSocial2() {
+	
+}
+
+function processAsiPsych() {
+	
+}
+
+function processAsiFields(page) {
+	page = String(page);
+
+	if (page === '/asi_admin/') {
+		processAsiAdmin();
+	}
+	else if (page === '/asi_general/') {
+		processAsiGeneral();
+	}
+	else if (page === '/asi_medical/') {
+		processAsiMedical();
+	}
+	else if (page === '/asi_employment/') {
+		processAsiEmployment();
+	}
+	else if (page === '/asi_drug1/') {
+		processAsiDrug1();
+	}
+	else if (page === '/asi_drug2/') {
+		processAsiDrug2();
+	}
+	else if (page === '/asi_legal/') {
+		processAsiLegal();
+	}
+	else if (page === '/asi_family/') {
+		processAsiFamily();
+	}
+	else if (page === '/asi_social1/') {
+		processAsiSocial1();
+	}
+	else if (page === '/asi_social2/') {
+		processAsiSocial2();
+	}
+	else if (page === '/asi_psych/') {
+		processAsiPsych();
+	}
+}
+
 function continue_asi_form(section) {
 	section = String(section);
 	var form = document.getElementById('asi_form');
 	var next_url = document.getElementById('next_url');
 	var proceed = true;
+
+	processAsiFields(section);
 
 	if (proceed === true) {
 		document.getElementById('save_this').value = 'true';
@@ -5969,6 +6231,10 @@ function universal_generic_exit(form_type, page) {
 
 	if (form_type === 'am') {
 		universal_am_dynamic_post(page);
+	}
+
+	if (form_type === 'asi') {
+		processAsiFields(page);
 	}
 
 	form.action = '/uni_generic_exit/';
