@@ -5275,6 +5275,15 @@ function postUniversalRadioText(trigger, textField, m_post) {
 	}
 }
 
+function postUniversalRadioText_asi(trigger, textField, m_post) {
+	if (trigger.checked === true) {
+		m_post.value = textField.value;
+	}
+	else {
+		m_post.value = 'N';
+	}
+}
+
 function postUniversalRadioNumber(trigger, numberField, m_post) {
 	if (trigger.checked === true) {
 		m_post.value = numberField.value;
@@ -5292,6 +5301,7 @@ function postUniversalRadioRadio(trigger, yesRadio, m_post) {
 		m_post.value = 'False';
 	}
 }
+
 
 function processDynamicMhEducation() {
 	//DYNAMIC RADIO FRIEND NUMBER TRIGGERS
@@ -5839,16 +5849,16 @@ function uniDynamicFields_asi(field_type, field, trigger, target) {
 	field_type = String(field_type);
 
 	if (field_type === 'text') {
-		postUniversalRadioText(trigger, field, target);
+		postUniversalRadioText_asi(trigger, field, target);
 	}
 	else if (field_type === 'number') {
 		postUniversalRadioNumber(trigger, field, target);
 	}
 	else if (field_type === 'select') {
-		postUniversalRadioText(trigger, field, target);
+		postUniversalRadioText_asi(trigger, field, target);
 	}
 	else if (field_type === 'checkbox') {
-		postUniversalRadioText(trigger, field, target);
+		postUniversalRadioText_asi(trigger, field, target);
 	}
 	else if (field_type === 'radio') {
 		postUniversalRadioRadio(trigger, field, target);
@@ -6150,6 +6160,10 @@ function init_asi_general(json_data) {
 	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
+function m5Radio() {
+	twoElementRadioSetup(document.getElementById('m5yes'), document.getElementById('m5Exp_lab'), document.getElementById('m5Exp'));
+}
+
 function init_asi_medical(json_data) {
 	number_init(json_data.isComplete, document.getElementById('m2yrs'));
 	number_init(json_data.isComplete, document.getElementById('m2mth'));
@@ -6169,6 +6183,7 @@ function init_asi_medical(json_data) {
 	asi_radioBtn_select(json_data.m10, document.getElementById('m10yes'), document.getElementById('m10no'));
 	asi_radioBtn_select(json_data.m11, document.getElementById('m11yes'), document.getElementById('m11no'));
 
+	m5Radio();
 }
 
 function init_asi_employmentl(json_data) {
@@ -6234,7 +6249,7 @@ function processAsiGeneral() {
 }
 
 function processAsiMedical() {
-	post_asi(false, 'text', document.getElementById('m5Exp'), null, null);
+	post_asi(true, 'text', document.getElementById('m5Exp'), document.getElementById('m5yes'), document.getElementById('m_m5Exp'));
 	post_asi(false, 'text', document.getElementById('comments'), null, null);
 
 	post_asi(false, 'number', document.getElementById('m1'), null, null);

@@ -230,6 +230,8 @@
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
+                            <input type='hidden' name='m_m5Exp' id='m_m5Exp' value=''>
+
                             <table>
                               <tr>
                                 <td>
@@ -412,7 +414,7 @@
                                     <tr>
                                       <td>
                                         <div id='fix_my_radio'>
-                                          <input type='radio' name='m5' id='m5yes' value='1'>
+                                          <input type='radio' name='m5' id='m5yes' value='1' onClick='javascript: m5Radio();'>
                                         </div>
                                       </td>
 
@@ -422,7 +424,7 @@
 
                                       <td>
                                         <div id='fix_my_radio'>
-                                          <input type='radio' name='m5' id='m5no' value='0' checked>
+                                          <input type='radio' name='m5' id='m5no' value='0' onClick='javascript: m5Radio();' checked>
                                         </div>
                                       </td>
 
@@ -438,7 +440,7 @@
                             <ul>
                               <table>
                                 <tr>
-                                  <td><div id='align_sub_fields'><li><label>Explain:</label></dix></li></td>
+                                  <td><div id='align_sub_fields'><li><label id='m5Exp_lab'>Explain:</label></dix></li></td>
                                 </tr>
 
                                 <tr>

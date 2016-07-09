@@ -6924,7 +6924,7 @@ def saveASImedical(request, asi):
 	asi.medical.m3 = request.POST.get('m3')
 	asi.medical.m4 = request.POST.get('m4')
 	asi.medical.m5 = request.POST.get('m5')
-	asi.medical.m5Exp = request.POST.get('m5Exp')
+	asi.medical.m5Exp = request.POST.get('m_m5Exp')
 	asi.medical.m6 = request.POST.get('m6')
 	asi.medical.m7 = request.POST.get('m7')
 	asi.medical.m8 = request.POST.get('m8')
