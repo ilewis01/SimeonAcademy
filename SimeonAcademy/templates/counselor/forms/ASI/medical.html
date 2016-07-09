@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_demo({{json_data}})">
+<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -213,7 +213,7 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:50px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Medical Status</h3>
                 </div>
 
@@ -226,7 +226,7 @@
                             <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
                             <input type='hidden' name='save_this' id='save_this' value=''>
                             <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='/asi_medical/'>  
+                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
@@ -236,9 +236,220 @@
                                   <div id='asiNumber'>M1.</div>
                                 </td>
 
-                                <td><label>How many times in your life have you been hospitalized for medical problems? (include o.d's, d.t's, exclude detox).</label></td>
+                                <td>
+                                  <label>
+                                    How many times in your life have you been hospitalized for medical problems?
+                                  </label>
+                                </td>
                               </tr>
                             </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <div id='asi_2nd_line_indent'>
+                                    <label>Include o.d's, d.t's, exclude detox:</label>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='m1' id='m1' value='{{fields.m1}}'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <div id='asiNumber'>M2.</div>
+                                </td>
+
+                                <td>
+                                  <label>
+                                    How long ago was your last hospitalization for a physical problem?
+                                  </label>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <div id='asi_2nd_line_indent'>
+                                    <div id='fix_my_text'>
+                                      <input type='number' name='m2yrs' id='m2yrs' value='{{fields.m2yrs}}'>
+                                    </div>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div id='number_subText'>years</div>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='m2mth' id='m2mth' value='{{fields.m2mth}}'>
+                                  </div id='number_subText'>
+                                </td>
+
+                                <td id='number_subText'>
+                                  <div>months</div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>M3.</div></td>
+
+                                <td>
+                                  <label>
+                                    Do you have any chronic medical problemsnwhich continue to interfere with
+                                  </label>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td></td>
+                                <td><div id='asi_2nd_line_indent'><label>your life?</label></div></td>
+
+                                <td>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m3' id='m3yes' value='1'>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>Yes</label>
+                                      </td>
+
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m3' id='m3no' value='0' checked>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>No</label>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>M4.</div></td>
+
+                                <td>
+                                  <label>
+                                    Are you taking any prescribed medication on a regular basis for a physical
+                                  </label>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td></td>
+                                <td><div id='asi_2nd_line_indent'><label>problem?</label></div></td>
+
+                                <td>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m4' id='m4yes' value='1'>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>Yes</label>
+                                      </td>
+
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m4' id='m4no' value='0' checked>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>No</label>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>M5.</div></td>
+
+                                <td>
+                                  <label>
+                                    Do you receive a pension for a physical disability?
+                                  </label>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td></td>
+                                <td><div id='asi_2nd_line_indent'><label>(Exclude psychiatric disability):</label></div></td>
+
+                                <td>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m5' id='m5yes' value='1'>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>Yes</label>
+                                      </td>
+
+                                      <td>
+                                        <div id='fix_my_radio'>
+                                          <input type='radio' name='m5' id='m5no' value='0' checked>
+                                        </div>
+                                      </td>
+
+                                      <td>
+                                        <label>No</label>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <ul>
+                              <table>
+                                <tr>
+                                  <td><div id='align_sub_fields'><li><label>Explain:</label></dix></li></td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div id='align_sub_fields'>
+                                      <textarea rows='3' cols='60' name='m5Exp' id='m5Exp'>{{fields.m5Exp}}</textarea>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </ul>
 				           				            
 				        </div><!--  END OF LEFT SIDE -->
 
@@ -246,7 +457,206 @@
 				    			
 				    </div>
             <div class="col-md-6 col-sm-6">
-                  
+              <table>
+               <tr>
+                 <td><div id='asiNumber'>M6.</div></td>
+
+                  <td>
+                    <label>
+                      How many days have you experienced medical problems
+                    </label>
+                  </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asi_2nd_line_indent'><label>in the last month?</label></div></td>
+                <td>
+                  <div id='fix_my_text'>
+                    <input type='number' name='m6' id='m6' value='{{fields.m6}}'>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asiNumber'>M7.</div></td>
+
+                <td>
+                  <label>
+                    How troubled or bothered have you been by these medical problems in the
+                  </label>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asi_2nd_line_indent'><label>past 30 days?</label></div></td>
+
+                <td>
+                  <div id='fix_my_select'>
+                    <select name='m7' id='m7'>
+                      <option value='Select'>Select</option>
+                      <option value='0'>Not at all</option>
+                      <option value='1'>Slightly</option>
+                      <option value='2'>Moderately</option>
+                      <option value='3'>Considerably</option>
+                      <option value='4'>Extremely</option>
+                      <option value='N'>Question not applicable</option>
+                      <option value='X'>Question not answered</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asiNumber'>M8.</div></td>
+
+                <td>
+                  <label>
+                    How important to you now is treatment for these medical problems?
+                  </label>
+                </td>
+              </tr>
+          
+              <tr>
+                <td></td>
+
+                <td>
+                  <div id='fix_my_select'>
+                    <select name='m8' id='m8'>
+                      <option value='Select'>Select</option>
+                      <option value='0'>Not at all</option>
+                      <option value='1'>Slightly</option>
+                      <option value='2'>Moderately</option>
+                      <option value='3'>Considerably</option>
+                      <option value='4'>Extremely</option>
+                      <option value='N'>Question not applicable</option>
+                      <option value='X'>Question not answered</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td>
+                  <div id='ital_sub_head_small'>
+                    For question M9 please use the <b>Interviewer Rating Scale<b>.
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asiNumber'>M9.</div></td>
+
+                <td>
+                  <div>
+                    <label>How would you rate the patient's need for medical treatment?</label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td>
+                  <div id='asi_2nd_line_indent'>
+                    <div id='fix_my_select'>
+                      <select name='m9' id='m9'>
+                        <option value='Select'>Select</option>
+                        <option value='0'>0</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                        <option value='7'>7</option>
+                        <option value='8'>8</option>
+                        <option value='9'>9</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td>
+                  <div id='ital_sub_head_small'>
+                    Is the above information significantly distorted by:
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asiNumber'>M10.</div></td>
+
+                <td>
+                  <div>
+                    <label>Patient's misrepresentation?</label>
+                  </div>
+                </td>
+
+                <td>
+                  <div id='fix_my_radio'>
+                    <input type='radio' name='m10' id='m10yes' value='1'>
+                  </div>
+                </td>
+
+                <td><label>Yes</label></td>
+
+                <td>
+                  <div id='fix_my_radio'>
+                    <input type='radio' name='m10' id='m10no' value='0' checked>
+                  </div>
+                </td>
+
+                <td><label>No</label></td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td><div id='asiNumber'>M11.</div></td>
+
+                <td>
+                  <div>
+                    <label>Patient's inability to understand?</label>
+                  </div>
+                </td>
+
+                <td>
+                  <div id='fix_my_radio'>
+                    <input type='radio' name='m11' id='m11yes' value='1'>
+                  </div>
+                </td>
+
+                <td><label>Yes</label></td>
+
+                <td>
+                  <div id='fix_my_radio'>
+                    <input type='radio' name='m11' id='m11no' value='0' checked>
+                  </div>
+                </td>
+
+                <td><label>No</label></td>
+              </tr>
+            </table>
+          
+
             </div>
             </form>
 				</div> <!-- END PAGE CONTAINER -->

@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_mh_demo({{json_data}})">
+<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -226,7 +226,7 @@
                             <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
                             <input type='hidden' name='save_this' id='save_this' value=''>
                             <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='/asi_legal/'>  
+                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 				           				            

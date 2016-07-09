@@ -1802,6 +1802,40 @@ button:hover {
 	margin-left: 35px;
 }
 
+#asi_2nd_line_indent {
+	margin-left: 30px;
+}
+
+#number_subText {
+	font-style: italic;
+	padding-left: 5px;
+	margin-right: 20px;
+}
+
+#align_sub_fields {
+	margin-left: 25px;
+}
+
+#small_heading_text {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-style: italic;
+	font-size: 16px;
+}
+
+#ital_sub_head_small {
+	font-weight: bold;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #88898A;
+	font-style: italic;
+}
+
+.question_wrapper {
+	margin-top: 30px;
+}
+
 
 /*###############################################################################################################*/
 /*###############################################################################################################*/
