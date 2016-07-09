@@ -5766,6 +5766,12 @@ function correctText(field) {
 	}
 }
 
+function correctText_asi(field) {
+	if (fieldIsEmpty(field) === true) {
+		field.value = 'N';
+	}
+}
+
 function correctNumber(field) {
 	if (fieldIsEmpty(field) === true || isValidNumberEntry === false) {
 		field.value = '0';
@@ -5783,6 +5789,20 @@ function fieldCorrection(field_type, field) {
 
 	if (field_type === 'text') {
 		correctText(field);
+	}
+	else if (field_type === 'number') {
+		correctNumber(field);
+	}
+	else if (field_type === 'date') {
+		correctDate(field);
+	}
+}
+
+function fieldCorrection_asi(field_type, field) {
+	field_type = String(field_type);
+
+	if (field_type === 'text') {
+		correctText_asi(field);
 	}
 	else if (field_type === 'number') {
 		correctNumber(field);
@@ -5815,12 +5835,44 @@ function uniDynamicFields(field_type, field, trigger, target) {
 	}
 }
 
+function uniDynamicFields_asi(field_type, field, trigger, target) {
+	field_type = String(field_type);
+
+	if (field_type === 'text') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'number') {
+		postUniversalRadioNumber(trigger, field, target);
+	}
+	else if (field_type === 'select') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'checkbox') {
+		postUniversalRadioText(trigger, field, target);
+	}
+	else if (field_type === 'radio') {
+		postUniversalRadioRadio(trigger, field, target);
+	}
+	else if (field_type === 'date') {
+
+	}
+}
+
 function post(isDynamic, field_type, field, trigger, target) {
 	if (isDynamic === true) {
 		uniDynamicFields(field_type, field, trigger, target);
 	}
 	else {
 		fieldCorrection(field_type, field);
+	}
+}
+
+function post_asi(isDynamic, field_type, field, trigger, target) {
+	if (isDynamic === true) {
+		uniDynamicFields_asi(field_type, field, trigger, target);
+	}
+	else {
+		fieldCorrection_asi(field_type, field);
 	}
 }
 
@@ -5834,11 +5886,31 @@ function blank_init(isComplete, field) {
 	}
 }
 
+function blank_init_asi(isComplete, field) {
+	isComplete = String(isComplete);
+
+	if (isComplete === 'false') {
+		if (fieldIsEmpty(field) === true || field.value === 'X' || field.value === 'N' ) {
+			field.value = '';
+		}
+	}
+}
+
 function number_init(isComplete, field) {
 	isComplete = String(isComplete);
 
 	if (isComplete === 'false') {
 		if (fieldIsEmpty(field) === true || field.value === 'N/A' || field.value === 'NA') {
+			field.value = 0;
+		}
+	}
+}
+
+function number_init_asi(isComplete, field) {
+	isComplete = String(isComplete);
+
+	if (isComplete === 'false') {
+		if (fieldIsEmpty(field) === true || field.value === 'X' || field.value === 'N') {
 			field.value = 0;
 		}
 	}
@@ -5957,11 +6029,11 @@ function initialize_asi(section, json_data) {
 }
 
 function init_asi_admin(json_data) {
-	blank_init(json_data.isComplete, document.getElementById('g1'));
-	blank_init(json_data.isComplete, document.getElementById('g2'));
-	blank_init(json_data.isComplete, document.getElementById('g3'));
-	blank_init(json_data.isComplete, document.getElementById('popupDatepicker'));
-	blank_init(json_data.isComplete, document.getElementById('g11'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g1'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g2'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g3'));
+	blank_init_asi(json_data.isComplete, document.getElementById('popupDatepicker'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g11'));
 
 	document.getElementById('g8').selectedIndex = json_data.g8;
 	document.getElementById('g9').selectedIndex = json_data.g9;
@@ -5970,18 +6042,18 @@ function init_asi_admin(json_data) {
 }
 
 function init_asi_general(json_data) {
-	blank_init(json_data.isComplete, document.getElementById('g13'));
-	blank_init(json_data.isComplete, document.getElementById('g21'));
-	blank_init(json_data.isComplete, document.getElementById('g22'));
-	blank_init(json_data.isComplete, document.getElementById('g23'));
-	blank_init(json_data.isComplete, document.getElementById('g24'));
-	blank_init(json_data.isComplete, document.getElementById('g25'));
-	blank_init(json_data.isComplete, document.getElementById('g26'));
-	blank_init(json_data.isComplete, document.getElementById('g27'));
-	blank_init(json_data.isComplete, document.getElementById('g28'));
-	blank_init(json_data.isComplete, document.getElementById('test1'));
-	blank_init(json_data.isComplete, document.getElementById('test2'));
-	blank_init(json_data.isComplete, document.getElementById('test3'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g13'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g21'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g22'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g23'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g24'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g25'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g26'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g27'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g28'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test1'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test2'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test3'));
 
 	number_init(json_data.isComplete, document.getElementById('g14yrs'));
 	number_init(json_data.isComplete, document.getElementById('g14mos'));
@@ -6079,7 +6151,24 @@ function init_asi_general(json_data) {
 }
 
 function init_asi_medical(json_data) {
+	number_init(json_data.isComplete, document.getElementById('m2yrs'));
+	number_init(json_data.isComplete, document.getElementById('m2mth'));
+	number_init(json_data.isComplete, document.getElementById('m1'));
+	number_init(json_data.isComplete, document.getElementById('m6'));
+
+	blank_init_asi(json_data.isComplete, document.getElementById('m5Exp'));
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	document.getElementById('m7').selectedIndex = Number(json_data.m7);
+	document.getElementById('m8').selectedIndex = Number(json_data.m8);
+	document.getElementById('m9').selectedIndex = Number(json_data.m9);
 	
+	asi_radioBtn_select(json_data.m3, document.getElementById('m3yes'), document.getElementById('m3no'));
+	asi_radioBtn_select(json_data.m4, document.getElementById('m4yes'), document.getElementById('m4no'));
+	asi_radioBtn_select(json_data.m5, document.getElementById('m5yes'), document.getElementById('m5no'));
+	asi_radioBtn_select(json_data.m10, document.getElementById('m10yes'), document.getElementById('m10no'));
+	asi_radioBtn_select(json_data.m11, document.getElementById('m11yes'), document.getElementById('m11no'));
+
 }
 
 function init_asi_employmentl(json_data) {
@@ -6114,60 +6203,44 @@ function init_asi_psych(json_data) {
 	
 }
 
-// ________________________________END ASI INITIALIZATIONS_______________________________
+// ________________________________POST ASI DATA_______________________________
 // post(isDynamic, field_type, field, trigger, target)
 
 function processAsiAdmin() {
-	var g1 = document.getElementById('g1');
-	var g2 = document.getElementById('g2');
-	var g3 = document.getElementById('g3');
-	var g4 = document.getElementById('popupDatepicker');
-	var g11 = document.getElementById('g11');
-
-	post(false, 'text', g1, null, null);
-	post(false, 'text', g2, null, null);
-	post(false, 'text', g3, null, null);
-	post(false, 'date', g4, null, null);
-	post(false, 'text', g11, null, null);
-
+	post_asi(false, 'text', document.getElementById('g1'), null, null);
+	post_asi(false, 'text', document.getElementById('g2'), null, null);
+	post_asi(false, 'text', document.getElementById('g3'), null, null);
+	post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
+	post_asi(false, 'text', document.getElementById('g11'), null, null);
 }
 
 function processAsiGeneral() {
-	var g13 = document.getElementById('g13');
-	var g14yrs = document.getElementById('g14yrs');
-	var g14mos = document.getElementById('g14mos');
-	var g20 = document.getElementById('g20');
-	var g21 = document.getElementById('g21');
-	var g22 = document.getElementById('g22');
-	var g23 = document.getElementById('g23');
-	var g24 = document.getElementById('g24');
-	var g25 = document.getElementById('g25');
-	var g26 = document.getElementById('g26');
-	var g27 = document.getElementById('g27');
-	var g28 = document.getElementById('g28');
-	var test1 = document.getElementById('test1');
-	var test2 = document.getElementById('test2');
-	var test3 = document.getElementById('test3');
+	post_asi(false, 'number', document.getElementById('g14yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('g14mos'), null, null);
+	post_asi(false, 'number', document.getElementById('g20'), null, null);
 
-	post(false, 'text', g13, null, null);
-	post(false, 'number', g14yrs, null, null);
-	post(false, 'number', g14mos, null, null);
-	post(false, 'number', g20, null, null);
-	post(false, 'text', g21, null, null);
-	post(false, 'text', g22, null, null);
-	post(false, 'text', g23, null, null);
-	post(false, 'text', g24, null, null);
-	post(false, 'text', g25, null, null);
-	post(false, 'text', g26, null, null);
-	post(false, 'text', g27, null, null);
-	post(false, 'text', g28, null, null);
-	post(false, 'text', test1, null, null);
-	post(false, 'text', test2, null, null);
-	post(false, 'text', test3, null, null);
+	post_asi(false, 'text', document.getElementById('g13'), null, null);	
+	post_asi(false, 'text', document.getElementById('g21'), null, null);
+	post_asi(false, 'text', document.getElementById('g22'), null, null);
+	post_asi(false, 'text', document.getElementById('g23'), null, null);
+	post_asi(false, 'text', document.getElementById('g24'), null, null);
+	post_asi(false, 'text', document.getElementById('g25'), null, null);
+	post_asi(false, 'text', document.getElementById('g26'), null, null);
+	post_asi(false, 'text', document.getElementById('g27'), null, null);
+	post_asi(false, 'text', document.getElementById('g28'), null, null);
+	post_asi(false, 'text', document.getElementById('test1'), null, null);
+	post_asi(false, 'text', document.getElementById('test2'), null, null);
+	post_asi(false, 'text', document.getElementById('test3'), null, null);
 }
 
 function processAsiMedical() {
-	
+	post_asi(false, 'text', document.getElementById('m5Exp'), null, null);
+	post_asi(false, 'text', document.getElementById('comments'), null, null);
+
+	post_asi(false, 'number', document.getElementById('m1'), null, null);
+	post_asi(false, 'number', document.getElementById('m2yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('m2mth'), null, null);
+	post_asi(false, 'number', document.getElementById('m6'), null, null);
 }
 
 function processAsiEmployment() {

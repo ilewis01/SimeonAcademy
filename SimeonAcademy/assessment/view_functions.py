@@ -6392,6 +6392,31 @@ def beginASI(request):
 
 	return result
 
+def getInterviewerIndex(m_val):
+	index = 0
+	m_val = str(m_val)
+
+	if m_val == 'Select':
+		index = 0
+	else:
+		index = int(m_val) + 1
+
+	return index
+
+
+def getPatientIndex(m_val):
+	index = 0
+	m_val = str(m_val)
+
+	if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4':
+		index = int(m_val) + 1
+	elif m_val=='X':
+		index = 6
+	elif m_val == 'N':
+		index = 7
+
+	return index
+
 def grabAsiAdminFields(asi):
 	result = {}
 	result['g1'] = asi.admin.g1
@@ -6441,6 +6466,17 @@ def grabAsiGeneralFields(asi):
 
 def grabAsiMedicalFields(asi):
 	result = {}
+	m7 = None
+	m8 = None
+	m9 = None
+
+	if asi.medical.m7 != None:
+		m7 = getPatientIndex(asi.medical.m7)
+	if asi.medical.m8 != None:
+		m8 = getPatientIndex(asi.medical.m8)
+	if asi.medical.m9 != None:
+		m9 = getInterviewerIndex(asi.medical.m9)
+
 	result['m1'] = asi.medical.m1
 	result['m2yrs'] = asi.medical.m2yrs
 	result['m2mth'] = asi.medical.m2mth
@@ -6449,9 +6485,9 @@ def grabAsiMedicalFields(asi):
 	result['m5'] = asi.medical.m5
 	result['m5Exp'] = asi.medical.m5Exp
 	result['m6'] = asi.medical.m6
-	result['m7'] = asi.medical.m7
-	result['m8'] = asi.medical.m8
-	result['m9'] = asi.medical.m9
+	result['m7'] = m7
+	result['m8'] = m8
+	result['m9'] = m9
 	result['m10'] = asi.medical.m10
 	result['m11'] = asi.medical.m11
 	result['comments'] = asi.medical.comments
@@ -6824,6 +6860,12 @@ def grabASIFields(asi, section):
 
 	return result
 
+def processASIbool(val):
+	result = False
+	if str(val) == '1':
+		result = True
+	return result
+
 def saveASIadmin(request, asi):
 	asi.admin.g1 = request.POST.get('g1')
 	asi.admin.g2 = request.POST.get('g2')
@@ -6856,6 +6898,8 @@ def saveASIgeneral(request, asi):
 	asi.general.g24 = request.POST.get('g24')
 	asi.general.g25 = request.POST.get('g25')
 	asi.general.g26 = request.POST.get('g26')
+	asi.general.g27 = request.POST.get('g27')
+	asi.general.g28 = request.POST.get('g28')
 
 	asi.general.medical = request.POST.get('medical')
 	asi.general.employ = request.POST.get('employ')
