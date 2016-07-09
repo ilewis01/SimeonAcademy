@@ -5824,6 +5824,26 @@ function post(isDynamic, field_type, field, trigger, target) {
 	}
 }
 
+function blank_init(isComplete, field) {
+	isComplete = String(isComplete);
+
+	if (isComplete === 'false') {
+		if (fieldIsEmpty(field) === true || field.value === 'N/A' || field.value === 'NA') {
+			field.value = '';
+		}
+	}
+}
+
+function number_init(isComplete, field) {
+	isComplete = String(isComplete);
+
+	if (isComplete === 'false') {
+		if (fieldIsEmpty(field) === true || field.value === 'N/A' || field.value === 'NA') {
+			field.value = 0;
+		}
+	}
+}
+
 
 //=====================================================================================================================//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -5896,7 +5916,53 @@ function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
 	}
 }
 
+// ___________________________________ASI INITIALIZATIONS___________________________________
+
+function initialize_asi(section, json_data) {
+	section = String(section);
+
+	if (section === '/asi_admin/') {
+		init_asi_admin(json_data);
+	}
+	else if (section === '/asi_general/') {
+		init_asi_general(json_data);
+	}
+	else if (section === '/asi_medical/') {
+		init_asi_medical(json_data);
+	}
+	else if (section === '/asi_employment/') {
+		init_asi_employmentl(json_data);
+	}
+	else if (section === '/asi_drug1/') {
+		init_asi_drug1(json_data);
+	}
+	else if (section === '/asi_drug2/') {
+		init_asi_drug2(json_data);
+	}
+	else if (section === '/asi_legal/') {
+		init_asi_legal(json_data);
+	}
+	else if (section === '/asi_family/') {
+		init_asi_family(json_data);
+	}
+	else if (section === '/asi_social1/') {
+		init_asi_soc1(json_data);
+	}
+	else if (section === '/asi_social2/') {
+		init_asi_soc2(json_data);
+	}
+	else if (section === '/asi_psych/') {
+		init_asi_psych(json_data);
+	}
+}
+
 function init_asi_admin(json_data) {
+	blank_init(json_data.isComplete, document.getElementById('g1'));
+	blank_init(json_data.isComplete, document.getElementById('g2'));
+	blank_init(json_data.isComplete, document.getElementById('g3'));
+	blank_init(json_data.isComplete, document.getElementById('popupDatepicker'));
+	blank_init(json_data.isComplete, document.getElementById('g11'));
+
 	document.getElementById('g8').selectedIndex = json_data.g8;
 	document.getElementById('g9').selectedIndex = json_data.g9;
 	document.getElementById('g12').selectedIndex = json_data.g12;
@@ -5904,6 +5970,23 @@ function init_asi_admin(json_data) {
 }
 
 function init_asi_general(json_data) {
+	blank_init(json_data.isComplete, document.getElementById('g13'));
+	blank_init(json_data.isComplete, document.getElementById('g21'));
+	blank_init(json_data.isComplete, document.getElementById('g22'));
+	blank_init(json_data.isComplete, document.getElementById('g23'));
+	blank_init(json_data.isComplete, document.getElementById('g24'));
+	blank_init(json_data.isComplete, document.getElementById('g25'));
+	blank_init(json_data.isComplete, document.getElementById('g26'));
+	blank_init(json_data.isComplete, document.getElementById('g27'));
+	blank_init(json_data.isComplete, document.getElementById('g28'));
+	blank_init(json_data.isComplete, document.getElementById('test1'));
+	blank_init(json_data.isComplete, document.getElementById('test2'));
+	blank_init(json_data.isComplete, document.getElementById('test3'));
+
+	number_init(json_data.isComplete, document.getElementById('g14yrs'));
+	number_init(json_data.isComplete, document.getElementById('g14mos'));
+	number_init(json_data.isComplete, document.getElementById('g20'));
+
 	//SEVERITY RADIO ENTRIES
 	var m0 = document.getElementById('m0');
 	var m1 = document.getElementById('m1');
@@ -5995,6 +6078,43 @@ function init_asi_general(json_data) {
 	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
+function init_asi_medical(json_data) {
+	
+}
+
+function init_asi_employmentl(json_data) {
+	
+}
+
+function init_asi_drug1(json_data) {
+
+}
+
+function init_asi_drug2(json_data) {
+	
+}
+
+function init_asi_legal(json_data) {
+	
+}
+
+function init_asi_family(json_data) {
+	
+}
+
+function init_asi_soc1(json_data) {
+	
+}
+
+function init_asi_soc2(json_data) {
+	
+}
+
+function init_asi_psych(json_data) {
+	
+}
+
+// ________________________________END ASI INITIALIZATIONS_______________________________
 // post(isDynamic, field_type, field, trigger, target)
 
 function processAsiAdmin() {
@@ -6013,7 +6133,37 @@ function processAsiAdmin() {
 }
 
 function processAsiGeneral() {
-	
+	var g13 = document.getElementById('g13');
+	var g14yrs = document.getElementById('g14yrs');
+	var g14mos = document.getElementById('g14mos');
+	var g20 = document.getElementById('g20');
+	var g21 = document.getElementById('g21');
+	var g22 = document.getElementById('g22');
+	var g23 = document.getElementById('g23');
+	var g24 = document.getElementById('g24');
+	var g25 = document.getElementById('g25');
+	var g26 = document.getElementById('g26');
+	var g27 = document.getElementById('g27');
+	var g28 = document.getElementById('g28');
+	var test1 = document.getElementById('test1');
+	var test2 = document.getElementById('test2');
+	var test3 = document.getElementById('test3');
+
+	post(false, 'text', g13, null, null);
+	post(false, 'number', g14yrs, null, null);
+	post(false, 'number', g14mos, null, null);
+	post(false, 'number', g20, null, null);
+	post(false, 'text', g21, null, null);
+	post(false, 'text', g22, null, null);
+	post(false, 'text', g23, null, null);
+	post(false, 'text', g24, null, null);
+	post(false, 'text', g25, null, null);
+	post(false, 'text', g26, null, null);
+	post(false, 'text', g27, null, null);
+	post(false, 'text', g28, null, null);
+	post(false, 'text', test1, null, null);
+	post(false, 'text', test2, null, null);
+	post(false, 'text', test3, null, null);
 }
 
 function processAsiMedical() {

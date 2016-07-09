@@ -6402,6 +6402,7 @@ def grabAsiAdminFields(asi):
 	result['g10'] = asi.admin.g10
 	result['g11'] = asi.admin.g11
 	result['g12'] = asi.admin.g12
+	result['isComplete'] = asi.adminComplete
 	return result
 
 def grabAsiGeneralFields(asi):
@@ -6435,6 +6436,7 @@ def grabAsiGeneralFields(asi):
 	result['test1'] 	= asi.general.test1
 	result['test2'] 	= asi.general.test2
 	result['test3'] 	= asi.general.test3
+	result['isComplete'] = asi.generalComplete
 	return result
 
 def grabAsiMedicalFields(asi):
@@ -6453,6 +6455,7 @@ def grabAsiMedicalFields(asi):
 	result['m10'] = asi.medical.m10
 	result['m11'] = asi.medical.m11
 	result['comments'] = asi.medical.comments
+	result['isComplete'] = asi.medicalComplete
 	return result
 
 def grabAsiEmploymentFields(asi):
@@ -6487,6 +6490,7 @@ def grabAsiEmploymentFields(asi):
 	result['e23'] = asi.employment.e23
 	result['e24'] = asi.employment.e24
 	result['comments'] = asi.employment.comments
+	result['isComplete'] = asi.employmentComplete
 	
 	return result
 
@@ -6541,6 +6545,7 @@ def grabAsiDrug1Fields(asi):
 	result['d12Route'] = asi.drug1.d12Route
 
 	result['d13'] = asi.drug1.d13
+	result['isComplete'] = asi.drug1Complete
 	return result
 
 def grabAsiDrug2Fields(asi):
@@ -6568,6 +6573,7 @@ def grabAsiDrug2Fields(asi):
 	result['d34'] = asi.drug2.d34
 	result['d35'] = asi.drug2.d35
 	result['comments'] = asi.drug2.comments
+	result['isComplete'] = asi.drug2Complete
 	return result
 
 def grabAsiLegalFields(asi):
@@ -6605,6 +6611,7 @@ def grabAsiLegalFields(asi):
 	result['l31'] = asi.legal.l31
 	result['l32'] = asi.legal.l32
 	result['comments'] = asi.legal.comments
+	result['isComplete'] = asi.legalComplete
 	return result
 
 def grabAsiFamilyFields(asi):
@@ -6656,6 +6663,7 @@ def grabAsiFamilyFields(asi):
 	result['h1a'] = asi.family.h12a
 	result['h1d'] = asi.family.h12d
 	result['h1p'] = asi.family.h12p
+	result['isComplete'] = asi.familyComplete
 	return result
 
 def grabAsiSocial1Fields(asi):
@@ -6683,6 +6691,7 @@ def grabAsiSocial1Fields(asi):
 	result['f37'] = asi.social1.f37
 	result['f38'] = asi.social1.f38
 	result['comments'] = asi.social1.comments
+	result['isComplete'] = asi.social1Complete
 	return result
 
 def grabAsiSocial2Fields(asi):
@@ -6743,6 +6752,7 @@ def grabAsiSocial2Fields(asi):
 	result['f26yearBad'] = asi.social2.f26yearBad
 
 	result['comments'] = asi.social2.comments
+	result['isComplete'] = asi.social2Complete
 	return result
 
 def grabAsiPsychFields(asi):
@@ -6782,6 +6792,7 @@ def grabAsiPsychFields(asi):
 	result['p22'] = asi.psych.p22
 	result['p23'] = asi.psych.p23
 	result['comments'] = asi.psych.comments
+	result['isComplete'] = asi.psychComplete
 	return result
 
 def grabASIFields(asi, section):
@@ -7712,6 +7723,7 @@ def processAsiData(request, current_section):
 	result['image'] = image
 	result['next_url'] = next_url
 	result['session'] = session
+	result['current_section'] = current_section
 	result['asi'] = asi
 	result['fields'] = fields
 	result['json_data'] = json_data
