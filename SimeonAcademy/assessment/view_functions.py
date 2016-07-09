@@ -8357,6 +8357,10 @@ def grabGenericForm(form_type, form_id):
 		form = MentalHealth.objects.get(id=form_id)
 	elif str(form_type) == 'ut':
 		form = UrineResults.objects.get(id=form_id)
+	elif str(form_type) == 'asi':
+		form = ASI.objects.get(id=form_id)
+	elif str(form_type) == 'discharge':
+		form = Discharge.objects.get(id=form_id)
 
 	return form
 
