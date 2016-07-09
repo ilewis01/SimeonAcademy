@@ -5679,6 +5679,7 @@ function continue_to_asi_form() {
 }
 
 function sideBarASI(page) {
+	document.getElementById('save_this').value = 'false';
 	var form = document.getElementById('asi_form');
 	form.action = page;
 	form.submit();
@@ -5695,11 +5696,138 @@ function asi_radioBtn_select(sel_val, r1, r2) {
 	}
 }
 
+function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
+	m_val = String(m_val);
+
+	if (m_val === '0') {
+		r0.checked = true;
+	}
+	else if (m_val === '1') {
+		r1.checked = true;
+	}
+	else if (m_val === '2') {
+		r2.checked = true;
+	}
+	else if (m_val === '3') {
+		r3.checked = true;
+	}
+	else if (m_val === '4') {
+		r4.checked = true;
+	}
+	else if (m_val === '5') {
+		r5.checked = true;
+	}
+	else if (m_val === '6') {
+		r6.checked = true;
+	}
+	else if (m_val === '7') {
+		r7.checked = true;
+	}
+	else if (m_val === '8') {
+		r8.checked = true;
+	}
+	else if (m_val === '9') {
+		r9.checked = true;
+	}
+}
+
 function init_asi_admin(json_data) {
 	document.getElementById('g8').selectedIndex = json_data.g8;
 	document.getElementById('g9').selectedIndex = json_data.g9;
 	document.getElementById('g12').selectedIndex = json_data.g12;
 	asi_radioBtn_select(json_data.g10, document.getElementById('isMale'), document.getElementById('isFemale'));
+}
+
+function init_asi_general(json_data) {
+	//SEVERITY RADIO ENTRIES
+	var m0 = document.getElementById('m0');
+	var m1 = document.getElementById('m1');
+	var m2 = document.getElementById('m2');
+	var m3 = document.getElementById('m3');
+	var m4 = document.getElementById('m4');
+	var m5 = document.getElementById('m5');
+	var m6 = document.getElementById('m6');
+	var m7 = document.getElementById('m7');
+	var m8 = document.getElementById('m8');
+	var m9 = document.getElementById('m9');
+
+	var e0 = document.getElementById('e0');
+	var e1 = document.getElementById('e1');
+	var e2 = document.getElementById('e2');
+	var e3 = document.getElementById('e3');
+	var e4 = document.getElementById('e4');
+	var e5 = document.getElementById('e5');
+	var e6 = document.getElementById('e6');
+	var e7 = document.getElementById('e7');
+	var e8 = document.getElementById('e8');
+	var e9 = document.getElementById('e9');
+
+	var a0 = document.getElementById('a0');
+	var a1 = document.getElementById('a1');
+	var a2 = document.getElementById('a2');
+	var a3 = document.getElementById('a3');
+	var a4 = document.getElementById('a4');
+	var a5 = document.getElementById('a5');
+	var a6 = document.getElementById('a6');
+	var a7 = document.getElementById('a7');
+	var a8 = document.getElementById('a8');
+	var a9 = document.getElementById('a9');
+
+	var d0 = document.getElementById('d0');
+	var d1 = document.getElementById('d1');
+	var d2 = document.getElementById('d2');
+	var d3 = document.getElementById('d3');
+	var d4 = document.getElementById('d4');
+	var d5 = document.getElementById('d5');
+	var d6 = document.getElementById('d6');
+	var d7 = document.getElementById('d7');
+	var d8 = document.getElementById('d8');
+	var d9 = document.getElementById('d9');
+
+	var l0 = document.getElementById('l0');
+	var l1 = document.getElementById('l1');
+	var l2 = document.getElementById('l2');
+	var l3 = document.getElementById('l3');
+	var l4 = document.getElementById('l4');
+	var l5 = document.getElementById('l5');
+	var l6 = document.getElementById('l6');
+	var l7 = document.getElementById('l7');
+	var l8 = document.getElementById('l8');
+	var l9 = document.getElementById('l9');
+
+	var f0 = document.getElementById('f0');
+	var f1 = document.getElementById('f1');
+	var f2 = document.getElementById('f2');
+	var f3 = document.getElementById('f3');
+	var f4 = document.getElementById('f4');
+	var f5 = document.getElementById('f5');
+	var f6 = document.getElementById('f6');
+	var f7 = document.getElementById('f7');
+	var f8 = document.getElementById('f8');
+	var f9 = document.getElementById('f9');
+
+	var p0 = document.getElementById('p0');
+	var p1 = document.getElementById('p1');
+	var p2 = document.getElementById('p2');
+	var p3 = document.getElementById('p3');
+	var p4 = document.getElementById('p4');
+	var p5 = document.getElementById('p5');
+	var p6 = document.getElementById('p6');
+	var p7 = document.getElementById('p7');
+	var p8 = document.getElementById('p8');
+	var p9 = document.getElementById('p9');
+
+	assign_radio1_9(json_data.medical, m0, m1, m2, m3, m4, m5, m6, m7, m8, m9);
+	assign_radio1_9(json_data.employ, e0, e1, e2, e3, e4, e5, e6, e7, e8, e9);
+	assign_radio1_9(json_data.alcohol, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	assign_radio1_9(json_data.drug, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9);
+	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
+	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
+	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+
+	document.getElementById('g17').selectedIndex = json_data.g17;
+	document.getElementById('g18').selectedIndex = json_data.g18;
+	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
 function continue_asi_form(section) {

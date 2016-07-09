@@ -66,38 +66,43 @@ class Client(models.Model):
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)
 
-class Discharge(models.Model):
-	client = models.ForeignKey(Client, default=None, blank=True, null=True)
-	discharge_date = models.DateField(default=None, blank=True, null=True)
-	termReason = models.ForeignKey(TermReason, default=None, blank=True, null=True)
-	diagnosis = models.CharField(max_length=100, default=None, blank=True, null=True)
-	recommendations = models.CharField(max_length=250, default=None, blank=True, null=True)
-	treatmentNotes = models.CharField(max_length=250, default=None, blank=True, null=True)
-
-	def __unicode__(self):
-		return "Discharge: " + str(self.client)
-
 class UrineResults(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
-	testDate = models.DateField(default=None, blank=True, null=True)
-	drug1 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug2 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug3 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug4 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug5 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug6 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug7 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug8 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug9 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug10 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug11 = models.CharField(max_length=20, default=None, blank=True, null=True)
-	drug12 = models.CharField(max_length=20, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(default=None, blank=True, null=True)
+	
+	drug1 = models.BooleanField(default=True, blank=True)
+	drug2 = models.BooleanField(default=True, blank=True)
+	drug3 = models.BooleanField(default=True, blank=True)
+	drug4 = models.BooleanField(default=True, blank=True)
+	drug5 = models.BooleanField(default=True, blank=True)
+	drug6 = models.BooleanField(default=True, blank=True)
+	drug7 = models.BooleanField(default=True, blank=True)
+	drug8 = models.BooleanField(default=True, blank=True)
+	drug9 = models.BooleanField(default=True, blank=True)
+	drug10 = models.BooleanField(default=True, blank=True)
+	drug11 = models.BooleanField(default=True, blank=True)
 
 	isOpen = models.BooleanField(default=False, blank=True)
 	isComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return "Urine Results: " + str(self.client)
+
+class Discharge(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(default=None, blank=True, null=True)
+
+	reasonRefered = models.CharField(max_length=200, default=None, blank=True, null=True)
+	diagnosis = models.CharField(max_length=50, default=None, blank=True, null=True)
+	reasonTerminated = models.CharField(max_length=75, default=None, blank=True, null=True)
+	clientAttitude = models.CharField(max_length=200, default=None, blank=True, null=True)
+	recommendations = models.CharField(max_length=200, default=None, blank=True, null=True)
+
+	isOpen = models.BooleanField(default=False, blank=True)
+	isComplete = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return "Discharge: " + str(self.client)
 
 ##DEMOGRAPHIC SECTION OF THE SAP FORM------------------------------------------------------
 class SapDemographics(models.Model):
@@ -1404,8 +1409,8 @@ class AIS_Psych(models.Model):
 class ASI(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
 	date_of_assessment = models.DateField(blank=True, default=None, null=True)
-	startTime = models.CharField(max_length=4, default=None, blank=True, null=True)
-	endTime = models.CharField(max_length=4, default=None, blank=True, null=True)
+	startTime = models.CharField(max_length=5, default=None, blank=True, null=True)
+	endTime = models.CharField(max_length=5, default=None, blank=True, null=True)
 
 	admin = models.ForeignKey(AIS_Admin, default=None, blank=True, null=True)
 	general = models.ForeignKey(AIS_General, default=None, blank=True, null=True)

@@ -75,8 +75,6 @@ urlpatterns = patterns('',
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),
     url(r'^ut_testResults/$', 'assessment.views.ut_testResults'),
     url(r'^ut_viewForm/$', 'assessment.views.ut_viewForm'),
-    url(r'^ut_form_saved/$', 'assessment.views.ut_form_saved'),
-    url(r'^ut_form_saved2/$', 'assessment.views.ut_form_saved2'),
 
     ## Discharge Views
     url(r'^discharge_preliminary/$', 'assessment.views.discharge_preliminary'),

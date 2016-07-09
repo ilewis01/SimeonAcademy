@@ -1963,6 +1963,8 @@ def sap_viewForm(request):
 #------------------------------------------------------------- URINE TEST ----------------------------------------------------------------#
 ###########################################################################################################################################
 ###########################################################################################################################################
+
+
 @login_required(login_url='/index')
 def ut_preliminary(request):
 	user = request.user
@@ -1978,8 +1980,13 @@ def ut_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Urine Test Analysis"
-			return render_to_response('counselor/forms/UrineTest/getClient.html', content)
+			content = startForm(request, 'ut')
+
+			if content['isNew'] == False:
+				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
+
+			else:
+				return render_to_response('counselor/forms/UrineTest/instructions.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def ut_testResults(request):
@@ -1996,13 +2003,8 @@ def ut_testResults(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			drugs = Drug.objects.all()
-			client = request.POST.get('client_ID', '')
-			client = Client.objects.get(id=client)
-			content['client'] = client
-			content['drugs'] = drugs
-			content['title'] = "Simeon Academy | Urine Test Analysis"
-			return render_to_response('counselor/forms/UrineTest/testResults.html', content)
+			content = fetchContent(request, 'ut', None)
+			return render_to_response('counselor/forms/UrineTest/results.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def ut_viewForm(request):
@@ -2019,126 +2021,8 @@ def ut_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			drugs = Drug.objects.all()
-			client_id = request.POST.get('client_id', '')
-			client = Client.objects.get(id=client_id)
-			date = request.POST.get('datepicker', '')
-			date = convert_datepicker(date)
-			date = date['date']
-			ut = UrineResults(client=client, testDate=date)
-			results = []
-
-			for d in drugs:
-				result = request.POST.get(d.drug, '')
-				if str(result) == "Positive":
-					results.append(d.drug)
-
-			amount = len(results)
-			phrase = None
-			phrase2 = None
-
-			if amount == 1:
-				phrase = 'match'
-				phrase2 = 'was'
-			else:
-				phrase = 'matches'
-				phrase2 = 'were'
-
-			if amount > 0:
-				for i in range(amount):
-					if i == 0:
-						ut.drug1=results[i]
-					elif i == 1:
-						ut.drug2=results[i]
-					elif i == 2:
-						ut.drug3=results[i]
-					elif i == 3:
-						ut.drug4=results[i]
-					elif i == 4:
-						ut.drug5=results[i]
-					elif i == 5:
-						ut.drug6=results[i]
-					elif i == 6:
-						ut.drug7=results[i]
-					elif i == 7:
-						ut.drug8=results[i]
-					elif i == 8:
-						ut.drug9=results[i]
-					elif i == 9:
-						ut.drug10=results[i]
-					elif i == 10:
-						ut.drug11=results[i]
-					elif i == 11:
-						ut.drug12=results[i]
-
-			if utExist(ut) == False:
-				ut.save()
-				content['ut'] = ut
-				content['matches'] = amount
-				content['results'] = results
-				content['phrase'] = phrase
-				content['phrase2'] = phrase2
-				content['title'] = "Simeon Academy | Urine Test Results"
-				return render_to_response('counselor/forms/UrineTest/viewForm.html', content)
-			else:
-				ut.save()
-				uts = getUtsByDate(ut)
-				formMatches = len(uts)
-				content['matches'] = formMatches
-				content['ut'] = ut
-				content['uts'] = uts
-				content['title'] = "ERROR"
-				return render_to_response('counselor/forms/UrineTest/getClient.html', content)
-
-@login_required(login_url='/index')
-def ut_form_saved(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			ut_id = request.POST.get('ut_id', '')
-			ut = UrineResults.objects.get(id=ut_id)
-			content['ut'] = ut
-			content['title'] = "Simeon Academy | Urine Test Results"
-			return render_to_response('counselor/forms/UrineTest/form_created.html', content)
-
-@login_required(login_url='/index')
-def ut_form_saved2(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			choice = request.POST.get('ut_op', '')
-			ut_id = request.POST.get('ut_id', '')
-			ut = UrineResults.objects.get(id=ut_id)
-			content['ut'] = ut
-			content['title'] = "Simeon Academy | Urine Test Results"
-
-			if str(choice) == 'keep':				
-				return render_to_response('counselor/forms/UrineTest/form_created.html', content)
-			elif str(choice) == 'delete':
-				keepThis = ut
-				deleteOldUTS(ut.testDate)
-				ut.save()
-				return render_to_response('counselor/forms/UrineTest/form_created.html', content)
+			content = fetchContent(request, 'ut', None)
+			return render_to_response('counselor/forms/UrineTest/viewForm.html', content, context_instance=RequestContext(request))
 
 
 ###########################################################################################################################################
@@ -2168,8 +2052,14 @@ def discharge_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Discharge"
-			return render_to_response('counselor/forms/Discharge/getClient.html', content)
+			content = startForm(request, 'discharge')
+
+			if content['isNew'] == False:
+				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
+
+			else:
+				return render_to_response('counselor/forms/Discharge/getClient.html', content, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/index')
 def discharge_client(request):
@@ -2186,13 +2076,8 @@ def discharge_client(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = request.POST.get('client_ID', '')
-			client = Client.objects.get(id=client)
-			term = TermReason.objects.all()
-			content['client'] = client
-			content['term'] = term
-			content['title'] = "Simeon Academy | Discharge"
-			return render_to_response('counselor/forms/Discharge/clientDischarge.html', content)
+			content = fetchContent(request, 'discharge', None)
+			return render_to_response('counselor/forms/Discharge/clientDischarge.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def discharge_viewForm(request):
@@ -2209,8 +2094,10 @@ def discharge_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "Simeon Academy | Discharge"
-			return render_to_response('counselor/forms/Discharge/viewForm.html', content)
+			content = fetchContent(request, 'discharge', None)
+			return render_to_response('counselor/forms/Discharge/viewForm.html', content, context_instance=RequestContext(request))
+
+
 
 
 

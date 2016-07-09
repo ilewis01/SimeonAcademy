@@ -23,6 +23,12 @@ MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
 
+def clientEqual(c1, c2):
+	isEqual = False
+	if str(c1.fname) == str(c2.fname) and str(c1.lname) == str(c2.lname) and str(c1.id) == str(c2.id) and str(c1.clientID) == str(c2.clientID):
+		isEqual = True
+	return isEqual
+
 def onTrue_offFalse(data):
 	if data == 'on':
 		data = True
@@ -144,19 +150,6 @@ def grabClientASIForms(client):
 				results.append(a)
 	return results
 
-def grabClientUtForms(client):
-	uts = UrineResults.objects.all()
-	search = True
-	results = []
-
-	if len(uts) == 0:
-		search = False
-
-	if search == True:
-		for u in uts:
-			if (str(client.id) == str(u.client.id)) and (str(client.clientID) == str(u.client.clientID)):
-				results.append(u)
-	return results
 
 ########################################################################################################
 
@@ -6304,7 +6297,13 @@ def findIncompleteClientASI(client):
 def newASI(the_client):
 	the_date = datetime.now()
 	date = the_date.date()
-	time = the_date.time()
+	temp_time = str(the_date.time())
+	time = ''
+	time += temp_time[0]
+	time += temp_time[1]
+	time += temp_time[2]
+	time += temp_time[3]
+	time += temp_time[4]
 
 	asi = ASI(client=the_client, date_of_assessment=date, startTime=time)
 
@@ -6433,6 +6432,9 @@ def grabAsiGeneralFields(asi):
 	result['legal'] 	= asi.general.legal
 	result['family'] 	= asi.general.family
 	result['psych'] 	= asi.general.psych
+	result['test1'] 	= asi.general.test1
+	result['test2'] 	= asi.general.test2
+	result['test3'] 	= asi.general.test3
 	return result
 
 def grabAsiMedicalFields(asi):
@@ -6851,6 +6853,12 @@ def saveASIgeneral(request, asi):
 	asi.general.legal = request.POST.get('legal')
 	asi.general.family = request.POST.get('family')
 	asi.general.psych = request.POST.get('psych')
+
+	print "Medical: " + str(asi.general.medical)
+
+	asi.general.test1 = request.POST.get('test1')
+	asi.general.test2 = request.POST.get('test2')
+	asi.general.test3 = request.POST.get('test3')
 
 	asi.general.save()
 
@@ -7716,7 +7724,303 @@ def processAsiData(request, current_section):
 ################################################################ END ASI ##################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#-------------------------------------------------------------- DISCHARGE ----------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
 
+
+def grabClientDischargeForms(client):
+	results = []
+	dis = Discharge.objects.all()
+
+	for d in dis:
+		if clientEqual(client, d) == True:
+			results.append(d)
+	return results
+
+def hasIncompleteDischarge(client):
+	hasIncomplete = False
+	d_list = grabClientDischargeForms(client)
+	for d in d_list:
+		if d.isComplete == False:
+			hasIncomplete = True
+			break
+	return hasIncomplete
+
+def getClientIncompleteDischarge(client):
+	result = None
+	d_list = grabClientDischargeForms(client)
+
+	for d in d_list:
+		if d.isComplete == False:
+			result = d
+			break
+	return result
+
+def newDischarge(client):
+	date = datetime.now()
+	date = date.date()
+	d = Discharge(client=client, date_of_assessment=date)
+	d.save()
+	return d
+
+def startDischarge(client):
+	result = {}
+
+	if hasIncompleteDischarge(client) == True:
+		result['discharge'] = getClientIncompleteDischarge(client)
+		result['isNew'] = False
+	else:
+		result['discharge'] = newDischarge(client)
+		result['isNew'] = True
+
+	return result
+
+def getDischargeFields(discharge):
+	fields = {}
+	fields['reasonRefered'] 	= discharge.reasonRefered
+	fields['diagnosis'] 		= discharge.diagnosis
+	fields['reasonTerminated'] 	= discharge.reasonTerminated
+	fields['clientAttitude'] 	= discharge.clientAttitude
+	fields['recommendations'] 	= discharge.recommendations
+	return fields
+
+def saveDischarge(request, discharge):
+	discharge.reasonRefered 	= request.POST.get('reasonRefered')
+	discharge.diagnosis 		= request.POST.get('diagnosis')
+	discharge.reasonTerminated 	= request.POST.get('reasonTerminated')
+	discharge.clientAttitude 	= request.POST.get('clientAttitude')
+	discharge.recommendations 	= request.POST.get('recommendations')
+	discharge.save()
+
+def refreshDischarge(discharge):
+	discharge.reasonRefered 	= ''
+	discharge.diagnosis 		= ''
+	discharge.reasonTerminated 	= ''
+	discharge.clientAttitude 	= ''
+	discharge.recommendations	= ''
+	ut.save()
+
+def finishDischarge(discharge):
+	discharge.isComplete = True
+	discharge.save()
+
+def beginDischarge(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startDischarge(client)
+	d = action['discharge']
+	setGlobalID(d.id)
+
+	openForm('discharge', d, client)
+
+	result['discharge'] = d
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | Client Discharge"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		result['form'] = d
+		result['form_type'] = 'discharge'
+		result['type_header'] = 'Client Discharge'
+
+	return result
+
+def processDischargeData(request):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	d_id = request.POST.get('d_id', '')
+	save_this = request.POST.get('save_this', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	d = Discharge.objects.get(id=d_id)
+	fields = getDischargeFields(d)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveDischarge(request, d)
+		finishUT(ut)
+
+	result['session'] = session
+	result['discharge'] = d
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | Client Discharge"
+
+	return result
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+############################################################ END DISCHARGE ################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#------------------------------------------------------------- URINE TEST ----------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+
+def grabClientUtForms(client):
+	results = []
+	uts = UrineResults.objects.all()
+
+	for u in uts:
+		if clientEqual(client, u) == True:
+			results.append(u)
+	return results
+
+def hasIncompleteUT(client):
+	hasIncomplete = False
+	ut_list = grabClientUtForms(client)
+	for u in ut_list:
+		if u.isComplete == False:
+			hasIncomplete = True
+			break
+	return hasIncomplete
+
+def getClientIncompleteUt(client):
+	result = None
+	ut_list = grabClientUtForms(client)
+
+	for u in ut_list:
+		if u.isComplete == False:
+			result = u
+			break
+	return result
+
+def newUT(client):
+	date = datetime.now()
+	date = date.date()
+	ut = UrineResults(client=client, date_of_assessment=date)
+	ut.save()
+	return ut
+
+def startUT(client):
+	result = {}
+
+	if hasIncompleteUT(client) == True:
+		result['ut'] = getClientIncompleteUt(client)
+		result['isNew'] = False
+	else:
+		result['ut'] = newUT(client)
+		result['isNew'] = True
+
+	return result
+
+def getUtFields(ut):
+	fields = {}
+	fields['drug1'] = ut.drug1
+	fields['drug2'] = ut.drug2
+	fields['drug3'] = ut.drug3
+	fields['drug4'] = ut.drug4
+	fields['drug5'] = ut.drug5
+	fields['drug6'] = ut.drug6
+	fields['drug7'] = ut.drug7
+	fields['drug8'] = ut.drug8
+	fields['drug9'] = ut.drug9
+	fields['drug10'] = ut.drug10
+	fields['drug11'] = ut.drug11
+	return fields
+
+def saveUT(request, ut):
+	ut.drug1 = truePythonBool(request.POST.get('drug1'))
+	ut.drug2 = truePythonBool(request.POST.get('drug2'))
+	ut.drug3 = truePythonBool(request.POST.get('drug3'))
+	ut.drug4 = truePythonBool(request.POST.get('drug4'))
+	ut.drug5 = truePythonBool(request.POST.get('drug5'))
+	ut.drug6 = truePythonBool(request.POST.get('drug6'))
+	ut.drug7 = truePythonBool(request.POST.get('drug7'))
+	ut.drug8 = truePythonBool(request.POST.get('drug8'))
+	ut.drug9 = truePythonBool(request.POST.get('drug9'))
+	ut.drug10 = truePythonBool(request.POST.get('drug10'))
+	ut.drug11 = truePythonBool(request.POST.get('drug11'))
+	ut.save()
+
+def refreshUT(ut):
+	ut.drug1 = False
+	ut.drug2 = False
+	ut.drug3 = False
+	ut.drug4 = False
+	ut.drug5 = False
+	ut.drug6 = False
+	ut.drug7 = False
+	ut.drug8 = False
+	ut.drug9 = False
+	ut.drug10 = False
+	ut.drug11 = False
+	ut.save()
+
+def finishUT(ut):
+	ut.isComplete = True
+	ut.save()
+
+def beginUT(request):
+	result = {}
+	client_id = request.POST.get('client_id', '')
+	session_id = request.POST.get('session_id', '')
+
+	client = Client.objects.get(id=client_id)
+	session = ClientSession.objects.get(id=session_id)
+
+	action = startUT(client)
+	ut = action['ut']
+	setGlobalID(ut.id)
+
+	openForm('ut', ut, client)
+
+	result['ut'] = ut
+	result['session'] = session
+	result['isNew'] = action['isNew']
+	result['title'] = "Simeon Academy | Urine Analysis"
+	result['save_this'] = 'false'
+
+	if action['isNew'] == False:
+		result['form'] = ut
+		result['form_type'] = 'ut'
+		result['type_header'] = 'Urine Analysis'
+
+	return result
+
+def processUtData(request):
+	result = {}
+
+	session_id = request.POST.get('session_id', '')
+	ut_id = request.POST.get('ut_id', '')
+	save_this = request.POST.get('save_this', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	ut = UrineResults.objects.get(id=asi_id)
+	fields = getUtFields(ut)
+	json_data = json.dumps(fields)
+
+	if save_this == 'true':
+		saveUT(request, ut)
+		finishUT(ut)
+
+	result['session'] = session
+	result['ut'] = ut
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['title'] = "Simeon Academy | Urine Test Analysis"
+
+	return result
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+############################################################ END DISCHARGE ################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 
 ###########################################################################################################################################
@@ -7724,6 +8028,12 @@ def processAsiData(request, current_section):
 #---------------------------------------------------------- OPEN/CLOSE FORMS -------------------------------------------------------------#
 #*****************************************************************************************************************************************#
 ###########################################################################################################################################
+
+def formEqual(f1, f2):
+	formEqual = False
+	if str(f1.id) == str(f2.id) and str(f1.date_of_assessment) == str(f2.date_of_assessment) and clientEqual(f1.client, f2.client):
+		formEqual = True
+	return formEqual
 
 def formIsOpen(form):
 	opened = False
@@ -7850,6 +8160,7 @@ def openForm(form_type, form, client):
 	mhs = grabClientMHForms(client)
 	asis = grabClientASIForms(client)
 	uts = grabClientUtForms(client)
+	dis = grabClientDischargeForms(client)
 
 	if str(form_type) == 'am':
 		if ams != None:
@@ -7872,6 +8183,9 @@ def openForm(form_type, form, client):
 			for ai in asis:
 				ai.isOpen = False
 				ai.save()
+			for d in dis:
+				d.isOpen = False
+				d.save()
 
 	elif str(form_type) == 'sap':
 		if saps != None:
@@ -7894,6 +8208,9 @@ def openForm(form_type, form, client):
 			for ai in asis:
 				ai.isOpen = False
 				ai.save()
+			for d in dis:
+				d.isOpen = False
+				d.save()
 
 	elif str(form_type) == 'mh':
 		if mhs != None:
@@ -7916,6 +8233,9 @@ def openForm(form_type, form, client):
 			for ai in asis:
 				ai.isOpen = False
 				ai.save()
+			for d in dis:
+				d.isOpen = False
+				d.save()
 
 	elif str(form_type) == 'asi':
 		if asis != None:
@@ -7938,6 +8258,9 @@ def openForm(form_type, form, client):
 			for m in  mhs:
 				m.isOpen = False
 				m.save()
+			for d in dis:
+				d.isOpen = False
+				d.save()
 
 	elif str(form_type) == 'ut':
 		if uts != None:
@@ -7960,6 +8283,34 @@ def openForm(form_type, form, client):
 			for ai in asis:
 				ai.isOpen = False
 				ai.save()
+			for d in dis:
+				d.isOpen = False
+				d.save()
+
+	elif str(form_type) == 'discharge':
+		if dis != None:
+			for d in dis:
+				if str(form.id) == str(d.id):
+					d.isOpen = True
+					d.save()
+				else:
+					d.isOpen = False
+					d.save()
+			for a in ams:
+				a.isOpen = False
+				a.save()
+			for m in  mhs:
+				m.isOpen = False
+				m.save()
+			for s in saps:
+				s.isOpen = False
+				s.save()
+			for ai in asis:
+				ai.isOpen = False
+				ai.save()
+			for u in uts:
+				u.isOpen = False
+				u.save()
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ############################################################## END OPEN/CLOSE #############################################################
@@ -8156,6 +8507,12 @@ def startForm(request, form_type):
 	elif form_type == 'asi':
 		result = beginASI(request)
 
+	elif form_type == 'ut':
+		result = beginUT(request)
+
+	elif form_type == 'ut':
+		result = beginDischarge(request)
+
 	return result
 
 def fetchUrl(form_type, current_page, form):
@@ -8185,6 +8542,10 @@ def fetchContent(request, form_type, current_section):
 		content = processMhData(request, current_section)
 	elif form_type == 'asi':
 		content = processAsiData(request, current_section)
+	elif form_type == 'ut':
+		content = processUtData(request)
+	elif form_type == 'discharge':
+		content = processDischargeData(request)
 
 	return content
 
@@ -8197,10 +8558,14 @@ def saveForm(request, form_type, section, form):
 		saveMentalHealth(request, section, form)
 	elif form_type == 'asi':
 		saveASI(request, section, form)
+	elif form_type == 'ut':
+		saveUT(request, section, form)
+	elif form_type == 'discharge':
+		saveDischarge(request, discharge)
 
 def saveAndFinish(request, form_type, section, form):
 	if form_type == 'am':
-		setAmSectionComplete(request, section, form)
+		saveCompletedAmSection(request, section, form)
 		setAmSectionComplete(form, section)
 	elif form_type == 'sap':
 		saveSap(request, section, form)
@@ -8211,6 +8576,12 @@ def saveAndFinish(request, form_type, section, form):
 	elif form_type == 'asi':
 		saveASI(request, section, form)
 		setASIcomplete(section, form)
+	elif form_type == 'ut':
+		saveUT(request, form)
+		finishUT(form)
+	elif form_type == 'discharge':
+		saveDischarge(request, discharge)
+		finishDischarge(form)
 
 def fetchForm(form_type, form_id):
 	form = None
@@ -8225,6 +8596,8 @@ def fetchForm(form_type, form_id):
 		form = ASI.objects.get(id=form_id)
 	elif str(form_type) == 'ut':
 		form = UrineResults.objects.get(id=form_id)
+	elif str(form_type) == 'discharge':
+		form = Discharge.objects.get(id=form_id)
 
 	return form
 
@@ -8239,6 +8612,8 @@ def deleteForm(form_type, form):
 		deleteMh(form)
 	elif form_type == 'asi':
 		deleteASI(form)
+	elif form_type == 'ut' or form_type == 'discharge':
+		form.delete()
 
 def refreshForm(form_type, form):
 	if str(form_type) == 'am':
@@ -8249,6 +8624,10 @@ def refreshForm(form_type, form):
 		refreshMh(form)
 	elif str(form_type) == 'asi':
 		refreshASI(form)
+	elif str(form_type) == 'ut':
+		refreshUT(form)
+	elif str(form_type) == 'discharge':
+		refreshDischarge(form)
 
 def force_URL_priority(form_type, section, form):
 	form_type = str(form_type)
