@@ -1828,6 +1828,14 @@ button:hover {
 	font-style: italic;
 }
 
+#ital_sub_head_small2 {
+	font-weight: bold;
+	font-size: 15px;
+	margin-bottom: 10px;
+	color: #88898A;
+	font-style: italic;
+}
+
 .question_wrapper {
 	margin-top: 30px;
 }

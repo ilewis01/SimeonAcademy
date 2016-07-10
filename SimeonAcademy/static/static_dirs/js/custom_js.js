@@ -5676,7 +5676,7 @@ function mhBank() {
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//
-//------------------------------------------------------ POSTING ------------------------------------------------------//
+//------------------------------------------------- SUPPORT FUNCTIONS ------------------------------------------------//
 //*********************************************************************************************************************//
 //#####################################################################################################################//
 
@@ -5704,6 +5704,75 @@ function fieldIsEmpty(field) {
 
 	return fieldEmpty;
 }
+
+function quickRadioText(trigger, label, field) {
+	if (trigger.checked === true) {
+		field.disabled = false;
+		opacityHigh(label);
+		opacityHigh(field);
+	}
+	else {
+		opacityLow(label);
+		opacityLow(field);
+		field.value = '';
+		field.disabled = true;
+	}
+}
+
+function quickRadioNumber(trigger, label, field) {
+	if (trigger.checked === true) {
+		field.disabled = false;
+		opacityHigh(label);
+		opacityHigh(field);
+	}
+	else {
+		opacityLow(label);
+		opacityLow(field);
+		field.value = '0';
+		field.disabled = true;
+	}
+}
+
+function specialRadio(trigger, label1, label2, label3, field1, field2) {
+	if (trigger.checked === true) {
+		field1.disabled = false;
+		field2.disabled = false;
+		opacityHigh(label1);
+		opacityHigh(label2);
+		opacityHigh(label3);
+		opacityHigh(field1);
+		opacityHigh(field2);
+	}
+	else {
+		opacityLow(label1);
+		opacityLow(label2);
+		opacityLow(label3);
+		opacityLow(field1);
+		opacityLow(field2);
+		field1.checked = true;
+		field1.disabled = true;
+		field2.disabled = true;
+	}
+}
+
+function quickRadio(isText, trigger, label1, field1) {
+	if (isText === true) {
+		quickRadioText(trigger, label1, field1);
+	}
+	else {
+		quickRadioNumber(trigger, label1, field1);
+	}
+}
+
+function additionalLabel(trigger, label) {
+	if (trigger.checked === true) {
+		opacityHigh(label);
+	}
+	else {
+		opacityLow(label);
+	}
+}
+
 
 function isValidNumber(m_val) {
 	var isValid = false;
@@ -5931,7 +6000,11 @@ function number_init_asi(isComplete, field) {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=================================================++ END POSTING======================================================//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-//=====================================================================================================================//
+//=====================================================================================================================//\
+
+
+
+
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//
@@ -5939,66 +6012,8 @@ function number_init_asi(isComplete, field) {
 //*********************************************************************************************************************//
 //#####################################################################################################################//
 
-function continue_to_asi_form() {
-	var form = document.getElementById('asi_instructions');
-	form.action = '/asi_admin/';
-	form.submit();
-}
 
-function sideBarASI(page) {
-	document.getElementById('save_this').value = 'false';
-	var form = document.getElementById('asi_form');
-	form.action = page;
-	form.submit();
-}
-
-function asi_radioBtn_select(sel_val, r1, r2) {
-	sel_val = String(sel_val);
-
-	if (sel_val === '1') {
-		r1.checked = true;
-	}
-	else {
-		r2.checked = true;
-	}
-}
-
-function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
-	m_val = String(m_val);
-
-	if (m_val === '0') {
-		r0.checked = true;
-	}
-	else if (m_val === '1') {
-		r1.checked = true;
-	}
-	else if (m_val === '2') {
-		r2.checked = true;
-	}
-	else if (m_val === '3') {
-		r3.checked = true;
-	}
-	else if (m_val === '4') {
-		r4.checked = true;
-	}
-	else if (m_val === '5') {
-		r5.checked = true;
-	}
-	else if (m_val === '6') {
-		r6.checked = true;
-	}
-	else if (m_val === '7') {
-		r7.checked = true;
-	}
-	else if (m_val === '8') {
-		r8.checked = true;
-	}
-	else if (m_val === '9') {
-		r9.checked = true;
-	}
-}
-
-// ___________________________________ASI INITIALIZATIONS___________________________________
+//*********************************************** ASI INITIALIZATIONS *************************************************//
 
 function initialize_asi(section, json_data) {
 	section = String(section);
@@ -6160,10 +6175,6 @@ function init_asi_general(json_data) {
 	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
-function m5Radio() {
-	twoElementRadioSetup(document.getElementById('m5yes'), document.getElementById('m5Exp_lab'), document.getElementById('m5Exp'));
-}
-
 function init_asi_medical(json_data) {
 	number_init(json_data.isComplete, document.getElementById('m2yrs'));
 	number_init(json_data.isComplete, document.getElementById('m2mth'));
@@ -6187,7 +6198,10 @@ function init_asi_medical(json_data) {
 }
 
 function init_asi_employmentl(json_data) {
-	
+	e3Radio();
+	e4Radio();
+	e7Radio();
+	e8Radio();
 }
 
 function init_asi_drug1(json_data) {
@@ -6218,7 +6232,7 @@ function init_asi_psych(json_data) {
 	
 }
 
-// ________________________________POST ASI DATA_______________________________
+//*********************************************** ASI POST FUNCTIONS *************************************************//
 // post(isDynamic, field_type, field, trigger, target)
 
 function processAsiAdmin() {
@@ -6328,6 +6342,78 @@ function processAsiFields(page) {
 	}
 }
 
+//*********************************************** ASI SUPPORT FUNCTIONS *************************************************//
+
+function asi_radioBtn_select(sel_val, r1, r2) {
+	sel_val = String(sel_val);
+
+	if (sel_val === '1') {
+		r1.checked = true;
+	}
+	else {
+		r2.checked = true;
+	}
+}
+
+function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
+	m_val = String(m_val);
+
+	if (m_val === '0') {
+		r0.checked = true;
+	}
+	else if (m_val === '1') {
+		r1.checked = true;
+	}
+	else if (m_val === '2') {
+		r2.checked = true;
+	}
+	else if (m_val === '3') {
+		r3.checked = true;
+	}
+	else if (m_val === '4') {
+		r4.checked = true;
+	}
+	else if (m_val === '5') {
+		r5.checked = true;
+	}
+	else if (m_val === '6') {
+		r6.checked = true;
+	}
+	else if (m_val === '7') {
+		r7.checked = true;
+	}
+	else if (m_val === '8') {
+		r8.checked = true;
+	}
+	else if (m_val === '9') {
+		r9.checked = true;
+	}
+}
+
+function m5Radio() {
+	quickRadio(true, document.getElementById('m5yes'), document.getElementById('m5Exp_lab'), document.getElementById('m5Exp'));
+}
+
+function e3Radio() {
+	quickRadio(true, document.getElementById('e3yes'), document.getElementById('e3Exp_lab'), document.getElementById('e3Exp'));
+}
+
+function e4Radio() {
+	specialRadio(document.getElementById('e4yes'),document.getElementById('e5_lab'),document.getElementById('e5yes_lab'),document.getElementById('e5no_lab'),document.getElementById('e5no'),document.getElementById('e5yes'));
+	additionalLabel(document.getElementById('e4yes'), document.getElementById('extra5'));
+}
+
+function e7Radio() {
+	quickRadio(true, document.getElementById('e7yes'), document.getElementById('e7Exp_lab'), document.getElementById('e7Exp'));
+}
+
+function e8Radio() {
+	specialRadio(document.getElementById('e8yes'),document.getElementById('e9_lab'),document.getElementById('e9no_lab'),document.getElementById('e9yes_lab'),document.getElementById('e9no'),document.getElementById('e9yes'));
+	additionalLabel(document.getElementById('e8yes'), document.getElementById('extra9'));
+}
+
+//*********************************************** ASI PAGE SUBMITS *************************************************//
+
 function continue_asi_form(section) {
 	section = String(section);
 	var form = document.getElementById('asi_form');
@@ -6343,7 +6429,18 @@ function continue_asi_form(section) {
 	}
 }
 
+function continue_to_asi_form() {
+	var form = document.getElementById('asi_instructions');
+	form.action = '/asi_admin/';
+	form.submit();
+}
 
+function sideBarASI(page) {
+	document.getElementById('save_this').value = 'false';
+	var form = document.getElementById('asi_form');
+	form.action = page;
+	form.submit();
+}
 
 
 //=====================================================================================================================//

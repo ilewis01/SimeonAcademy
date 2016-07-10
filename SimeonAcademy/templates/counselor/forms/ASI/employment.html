@@ -230,6 +230,11 @@
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
+                            <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
+                            <input type='hidden' name='m_e5' id='m_e5' value=''>
+                            <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
+                            <input type='hidden' name='m_e9' id='m_e9' value=''>
+
                             <table>
                               <tr>
                                 <td><div id='asiNumber'>E1.</div></td>
@@ -246,7 +251,7 @@
                                   </div>
                                 </td>
 
-                                <td><div>years</div></td>
+                                <td><div id='years_months'>years</div></td>
 
                                 <td>
                                   <div id='fix_my_text'>
@@ -254,7 +259,7 @@
                                   </div>
                                 </td>
 
-                                <td><div>months</div></td>
+                                <td><div id='years_months'>months</div></td>
                               </tr>
                             </table>
 
@@ -274,7 +279,7 @@
                                   </div>
                                 </td>
 
-                                <td><div>months</div></td>
+                                <td><div id='years_months'>months</div></td>
                               </tr>
                             </table>
 
@@ -310,7 +315,7 @@
                               <tr>
                                 <td>
                                   <div id='asi_2nd_line_indent'>
-                                    <label>Please specify:</label>
+                                    <label id='e3Exp_lab'>Please specify:</label>
                                   </div>
                                 </td>
                               </tr>
@@ -336,7 +341,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e4' id='e4yes' value='1'>
+                                    <input type='radio' name='e4' id='e4yes' value='1' onClick='javascript: e4Radio();'>
                                   </div>
                                 </td>
 
@@ -344,7 +349,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e4' id='e4no' value='0' checked>
+                                    <input type='radio' name='e4' id='e4no' value='0' onClick='javascript: e4Radio();' checked>
                                   </div>
                                 </td>
 
@@ -354,10 +359,10 @@
 
                             <table>
                               <tr>
-                                <td><div id='asiNumber'>E5.</div></td>
+                                <td><div id='asiNumber'><div id='extra5'>E5.</div></div></td>
 
                                 <td>
-                                  <label>
+                                  <label id='e5_lab'>
                                     Do you have an automobile available for use?
                                   </label>
                                 </td>
@@ -368,7 +373,7 @@
                                   </div>
                                 </td>
 
-                                <td><label>Yes</label></td>
+                                <td><label id='e5yes_lab'>Yes</label></td>
 
                                 <td>
                                   <div id='fix_my_radio'>
@@ -376,7 +381,7 @@
                                   </div>
                                 </td>
 
-                                <td><label>No</label></td>
+                                <td><label id='e5no_lab'>No</label></td>
                               </tr>
                             </table>
 
@@ -396,7 +401,7 @@
                                   </div>
                                 </td>
 
-                                <td><div>years</div></td>
+                                <td><div id='years_months'>years</div></td>
 
                                 <td>
                                   <div id='fix_my_text'>
@@ -404,7 +409,7 @@
                                   </div>
                                 </td>
 
-                                <td><div>months</div></td>
+                                <td><div id='years_months'>months</div></td>
                               </tr>
                             </table>
 
@@ -419,17 +424,27 @@
                                 </td>
 
                                 <td>
-                                  <div id='fix_my_text'>
-                                    <input type='text' name='e7' id='e7' value='{{fields.e7}}'>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e7' id='e7yes' value='1' onClick='javascript: e7Radio();'>
                                   </div>
                                 </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e7' id='e7no' value='0' onClick='javascript: e7Radio();' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
                               </tr>
                             </tabel>
 
                             <table>
                                 <td>
                                   <div id='asi_2nd_line_indent'>
-                                    <label>Specify in detail:</label>
+                                    <label id='e7Exp_lab'>Specify in detail:</label>
                                   </div>
                                 </td>
 
@@ -453,7 +468,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e8' id='e8yes' value='1'>
+                                    <input type='radio' name='e8' id='e8yes' value='1' onClick='javascript: e8Radio();'>
                                   </div>
                                 </td>
 
@@ -461,7 +476,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e8' id='e8no' value='0' checked>
+                                    <input type='radio' name='e8' id='e8no' value='0' onClick='javascript: e8Radio();' checked>
                                   </div>
                                 </td>
 
@@ -471,10 +486,10 @@
 
                             <table>
                               <tr>
-                                <td><div id='asiNumber'>E9.</div></td>
+                                <td><div id='asiNumber'><div id='extra9'>E9.</div></div></td>
 
                                 <td>
-                                  <label>
+                                  <label id='e9_lab'>
                                     Does this constitue the majority of your support?
                                   </label>
                                 </td>
@@ -485,7 +500,7 @@
                                   </div>
                                 </td>
 
-                                <td><label>Yes</label></td>
+                                <td><label id='e9yes_lab'>Yes</label></td>
 
                                 <td>
                                   <div id='fix_my_radio'>
@@ -493,7 +508,7 @@
                                   </div>
                                 </td>
 
-                                <td><label>No</label></td>
+                                <td><label id='e9no_lab'>No</label></td>
                               </tr>
                             </table>
 
@@ -568,11 +583,104 @@
 				           				            
 				        </div><!--  END OF LEFT SIDE -->
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
-				    			</form>
+
+
+				    			
 				    </div>
+            <div class="col-md-6 col-sm-6">
+              <table>
+                <tr>
+                  <td>
+                    <div id='ital_sub_head_small2'>
+                      How much money did you receive from the following<br>sources in the past 30 days?
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E12.</div></td>
+                  
+                    <td><label>Employment (Net income):</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e12' id='e12' value='{{fields.e12}}'>
+                      </div>
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td><div id='asiNumber'>E13.</div></td>
+                  
+                    <td><label>Unemployment Compensation:</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e13' id='e13' value='{{fields.e13}}'>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><div id='asiNumber'>E14.</div></td>
+                  
+                    <td><label>DPA:</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e14' id='e14' value='{{fields.e14}}'>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><div id='asiNumber'>E15.</div></td>
+                  
+                    <td><label>Pension, Benefits, or SSI:</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e5' id='e15' value='{{fields.e15}}'>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><div id='asiNumber'>E16.</div></td>
+                  
+                    <td><label>Mate, Family, and/or Friends:</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e16' id='e16' value='{{fields.e16}}'>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><div id='asiNumber'>E17.</div></td>
+                  
+                    <td><label>Illegal:</label></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        $
+                        <input type='number' name='e17' id='e17' value='{{fields.e17}}'>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+            </div>
+
+            </form>
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>

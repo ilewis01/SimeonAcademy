@@ -6175,6 +6175,7 @@ def asiPriority(asi, section):
 		result = priority_asi_soc2(asi)
 	elif section == '/asi_psych/':
 		result = priority_asi_psych(asi)
+	asi.save()
 
 def deprioritizeASI(asi):
 	asi.adminPriority 		= False
@@ -6188,6 +6189,7 @@ def deprioritizeASI(asi):
 	asi.social1Priority 	= False
 	asi.social2Priority 	= False
 	asi.psychPriority 		= False
+	asi.save()
 
 def forceNextAsiPage(asi):
 	result 	= None
