@@ -229,6 +229,342 @@
                             <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E1.</div></td>
+
+                                <td>
+                                  <label>
+                                    Education completed:
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='e1yrs' id='e1yrs' value='{{fields.e1yrs}}'>
+                                  </div>
+                                </td>
+
+                                <td><div>years</div></td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='e1mth' id='e1mth' value='{{fields.e1mth}}'>
+                                  </div>
+                                </td>
+
+                                <td><div>months</div></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E2.</div></td>
+
+                                <td>
+                                  <label>
+                                    Training or technical training completed:
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='e2' id='e2' value='{{fields.e2}}'>
+                                  </div>
+                                </td>
+
+                                <td><div>months</div></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E3.</div></td>
+
+                                <td>
+                                  <label>
+                                    Do you have a professional trade or skill?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e2' id='e3yes' value='1' onClick='javascript: e3Radio();'>
+                                  </div>
+                                </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e2' id='e3no' value='0' onClick='javascript: e3Radio();' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <div id='asi_2nd_line_indent'>
+                                    <label>Please specify:</label>
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <div id='asi_2nd_line_indent'>
+                                    <input type='text' style='width:200px;' name='e3Exp' id='e3Exp' value='{{fields.e3Exp}}'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E4.</div></td>
+
+                                <td>
+                                  <label>
+                                    Do you have a valid driver's license?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e4' id='e4yes' value='1'>
+                                  </div>
+                                </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e4' id='e4no' value='0' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E5.</div></td>
+
+                                <td>
+                                  <label>
+                                    Do you have an automobile available for use?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e5' id='e5yes' value='1'>
+                                  </div>
+                                </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e5' id='e5no' value='0' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E6.</div></td>
+
+                                <td>
+                                  <label>
+                                    Time at longest full-time job:
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='e6yrs' id='e6yrs' value='{{fields.e6yrs}}'>
+                                  </div>
+                                </td>
+
+                                <td><div>years</div></td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' name='e6mth' id='e6mth' value='{{fields.e6mth}}'>
+                                  </div>
+                                </td>
+
+                                <td><div>months</div></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E7.</div></td>
+
+                                <td>
+                                  <label>
+                                    Usual (or last) occupation?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='text' name='e7' id='e7' value='{{fields.e7}}'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tabel>
+
+                            <table>
+                                <td>
+                                  <div id='asi_2nd_line_indent'>
+                                    <label>Specify in detail:</label>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}' style='width:300px;'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E8.</div></td>
+
+                                <td>
+                                  <label>
+                                    Does anyone contribute to your support in any way?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e8' id='e8yes' value='1'>
+                                  </div>
+                                </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e8' id='e8no' value='0' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E9.</div></td>
+
+                                <td>
+                                  <label>
+                                    Does this constitue the majority of your support?
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e9' id='e9yes' value='1'>
+                                  </div>
+                                </td>
+
+                                <td><label>Yes</label></td>
+
+                                <td>
+                                  <div id='fix_my_radio'>
+                                    <input type='radio' name='e9' id='e9no' value='0' checked>
+                                  </div>
+                                </td>
+
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E10.</div></td>
+
+                                <td>
+                                  <label>
+                                    Unusual employment pattern, last 3 years:
+                                  </label>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_select'>
+                                    <select name='e10' id='e10'>
+                                      <option value='0'>Select</option>
+                                      <option value='1'>Full-time (40 hrs/wk</option>
+                                      <option value='2'>Part-time (reg. hrs.)</option>
+                                      <option value='3'>Part-time (irreg, daywork)</option>
+                                      <option value='4'>Student</option>
+                                      <option value='5'>Service</option>
+                                      <option value='6'>Retired/Disability</option>
+                                      <option value='7'>Unemployed</option>
+                                      <option value='8'>In controlled environment</option>
+                                    </select>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><div id='asiNumber'>E11.</div></td>
+
+                                <td>
+                                  <label>
+                                    How many times were you paid for work in the last 30 days?
+                                  </label>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <div style='margin-left:34px;'>
+                                    <label>Please include undercover work:</label>
+                                  </div>
+                                </td>
+
+                                <td>
+                                  <div id='fix_my_text'>
+                                    <input type='number' id='e11' name='e11' value='{{fields.e11}}'>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td>
+                                  <label>Comments:</label>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <textarea rows='5' cols='75' name='comments' id='comments'>{{fields.comments}}</textarea>
+                                </td>
+                              </tr>
+                            </table>
 				           				            
 				        </div><!--  END OF LEFT SIDE -->
 
