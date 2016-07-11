@@ -1154,6 +1154,9 @@ class AIS_Drug1(models.Model):
 	d12Year = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d12Route = models.CharField(max_length=1, default=None, blank=True, null=True)
 	d13 = models.CharField(max_length=1, default=None, blank=True, null=True)
+	d14 = models.CharField(max_length=2, default=None, blank=True, null=True)
+	d15 = models.CharField(max_length=2, default=None, blank=True, null=True)
+	d16 = models.CharField(max_length=2, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1161,9 +1164,6 @@ class AIS_Drug1(models.Model):
 class AIS_Drug2(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 
-	d14 = models.CharField(max_length=2, default=None, blank=True, null=True)
-	d15 = models.CharField(max_length=2, default=None, blank=True, null=True)
-	d16 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d17 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d18 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d19 = models.CharField(max_length=2, default=None, blank=True, null=True)

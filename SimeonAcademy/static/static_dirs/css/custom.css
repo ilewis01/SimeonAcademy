@@ -1743,6 +1743,20 @@ button:hover {
 	padding:1%;
 }
 
+.sev_container2 {
+	width: 90%;
+	background-color: #e7e6e7;
+	border: 1px solid gray;
+	padding:1%;
+}
+
+.sev_container2 input {
+	width:100%;
+	height:100%;
+	margin: auto;
+	text-align: center;
+}
+
 .sev_table {
 	width: 100%;
 	padding: 20%;
@@ -1771,6 +1785,11 @@ button:hover {
 #vert_sev_head {
 	margin-left: 3%;
 	font-style: italic;
+}
+
+#vert_sev_head2 {
+	width:230px;
+	text-align: center;
 }
 
 .sev_desc_text {
@@ -1846,6 +1865,17 @@ button:hover {
 
 .question_wrapper {
 	margin-top: 30px;
+}
+
+.center_table {
+	width:90%;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 22px;
+	margin-bottom: 5px;
+	border: 3px solid black;
+	background-color: #e7e6e7;
 }
 
 

@@ -6578,13 +6578,14 @@ def grabAsiDrug1Fields(asi):
 
 	result['d13'] = asi.drug1.d13
 	result['isComplete'] = asi.drug1Complete
+
+	result['d14'] = asi.drug1.d14
+	result['d15'] = asi.drug1.d15
+	result['d16'] = asi.drug1.d16
 	return result
 
 def grabAsiDrug2Fields(asi):
-	result = {}
-	result['d14'] = asi.drug2.d14
-	result['d15'] = asi.drug2.d15
-	result['d16'] = asi.drug2.d16
+	result = {}	
 	result['d17'] = asi.drug2.d17
 	result['d18'] = asi.drug2.d18
 	result['d19'] = asi.drug2.d19
@@ -7012,13 +7013,13 @@ def saveASIdrug1(request, asi):
 	asi.drug1.d12Route = request.POST.get('d12Route')
 
 	asi.drug1.d13 = request.POST.get('d13')
+	asi.drug1.d14 = request.POST.get('d14')
+	asi.drug1.d15 = request.POST.get('d15')
+	asi.drug1.d16 = request.POST.get('d16')
 
 	asi.drug1.save()
 
-def saveASIdrug2(request, asi):
-	asi.drug2.d14 = request.POST.get('d14')
-	asi.drug2.d15 = request.POST.get('d15')
-	asi.drug2.d16 = request.POST.get('d16')
+def saveASIdrug2(request, asi):	
 	asi.drug2.d17 = request.POST.get('d17')
 	asi.drug2.d18 = request.POST.get('d18')
 	asi.drug2.d19 = request.POST.get('d19')

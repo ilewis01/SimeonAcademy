@@ -213,7 +213,7 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:30px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Drug and Alcohol Use</h3>
                 </div>
 
@@ -229,14 +229,740 @@
                             <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>  
                             <input type='hidden' name='new_form' id='new_form' value='false'>
                             <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
+				           				     
 
-				        <div class="col-md-6 col-sm-6">
-				        	
+                            <table class='center_table'>
+                              <tr><td>Drug/Alcohol Use Table</td></tr>
+                            </table>
+
+                            <div class='sev_container2'>
+                              <table class='sev_table'>
+                                <tr>
+                                  <th><div id='vert_sev_head2'>Type of Use</div></th>
+
+                                  <th><div>Past 30 Days</div></th>
+
+                                  <th><div>Lifetime (Years)</div></th>
+
+                                  <th><div>Route of Admin</div></th>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Alcohol - Any use at all</div></td>
+
+                                  <td><div><input type='number' name='d1Day' id='d1Day' value='{{fields.d1Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d1Year' id='d1Year' value='{{fields.d1Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d1Route' id='d1Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Alcohol - Intoxication</div></td>
+
+                                  <td><div><input type='number' name='d2Day' id='d2Day' value='{{fields.d2Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d2Year' id='d2Year' value='{{fields.d2Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d2Route' id='d2Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Heroin</div></td>
+
+                                  <td><div><input type='number' name='d3Day' id='d3Day' value='{{fields.d3Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d3Year' id='d3Year' value='{{fields.d3Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d3Route' id='d3Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Methadone</div></td>
+
+                                  <td><div><input type='number' name='d4Day' id='d4Day' value='{{fields.d4Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d4Year' id='d4Year' value='{{fields.d4Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d4Route' id='d4Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Other Opiates/Analgesics</div></td>
+
+                                  <td><div><input type='number' name='d5Day' id='d5Day' value='{{fields.d5Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d5Year' id='d5Year' value='{{fields.d5Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d5Route' id='d5Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Barbiturates</div></td>
+
+                                  <td><div><input type='number' name='d6Day' id='d6Day' value='{{fields.d6Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d6Year' id='d6Year' value='{{fields.d6Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d6Route' id='d6Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Other Sedatives/Hyp/Tranquilizers</div></td>
+
+                                  <td><div><input type='number' name='d7Day' id='d7Day' value='{{fields.d7Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d7Year' id='d7Year' value='{{fields.d7Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d7Route' id='d7Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Cocaine</div></td>
+
+                                  <td><div><input type='number' name='d8Day' id='d8Day' value='{{fields.d8Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d8Year' id='d8Year' value='{{fields.d8Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d8Route' id='d8Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Amphetamines</div></td>
+
+                                  <td><div><input type='number' name='d9Day' id='d9Day' value='{{fields.d9Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d9Year' id='d9Year' value='{{fields.d9Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d9Route' id='d9Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Cannabis</div></td>
+
+                                  <td><div><input type='number' name='d10Day' id='d10Day' value='{{fields.d10Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d10Year' id='d10Year' value='{{fields.d10Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d10Route' id='d10Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Hallucinogens</div></td>
+
+                                  <td><div><input type='number' name='d11Day' id='d11Day' value='{{fields.d11Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d11Year' id='d11Year' value='{{fields.d11Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d11Route' id='d11Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>Inhalants</div></td>
+
+                                  <td><div><input type='number' name='d12Day' id='d12Day' value='{{fields.d12Day}}'></div></td>
+
+                                  <td><div><input type='number' name='d12Year' id='d12Year' value='{{fields.d12Year}}'></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d12Route' id='d12Route'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><div id='vert_sev_head'>More than 1/day</div></td>
+
+                                  <td><div></div></td>
+
+                                  <td><div></div></td>
+
+                                  <td>
+                                    <div>
+                                      <select name='d13' id='d13'>
+                                        <option value='0'>Select</option>
+                                        <option value='1'>Oral</option>
+                                        <option value='2'>Nasal</option>
+                                        <option value='3'>Smoking</option>
+                                        <option value='4'>Non-IV inj.</option>
+                                        <option value='5'>IV inj.</option>
+                                        <option value='N'>Not applicable</option>
+                                        <option value='X'>Not Answered</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div> 
+
+                              <table>
+                                <tr><td><div style='margin-bottom: 30px;'></div></td></tr>
+                                <tr>
+                                  <td><div id='asiNumber'>D14.</div></td>
+                                  <td><label>Which substance is the major problem?</label></td>
+                                 <td>
+                                    <div id='fix_my_select'>
+                                      <select name='d14' id='d14'>
+                                        <option value='Select'>Select</option>
+                                        <option value='00'>No Problem</option>
+                                        <option value='01'>Alcohol (Any use)</option>
+                                        <option value='02'>Alcohol (Intoxication</option>
+                                        <option value='03'>Heroin</option>
+                                        <option value='04'>Methadone</option>
+                                        <option value='05'>Opiates/Analgesics</option>
+                                        <option value='06'>Barbiturates</option>
+                                        <option value='07'>Sedatives/Hyp/Tranquilizers</option>
+                                        <option value='08'>Cocaine</option>
+                                        <option value='09'>Amphetamines</option>
+                                        <option value='10'>Cannabis</option>
+                                        <option value='11'>Hallucinogens</option>
+                                        <option value='12'>Inhalants</option>
+                                        <option value='15'>Alcohol & Drug</option>
+                                        <option value='16'>Polydrug</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div id='asiNumber'>D15.</div></td>
+                                  <td><label>How long was your last period of voluntary absitnence?</label></td>
+                                </tr>
+                              </table>
+                              <table>
+                                <tr>
+                                  <td><div id='asi_2nd_line_indent_db'><label>Enter "00" for never abstinent:</label></div></td>
+                                  <td><div id='fix_my_text'><input type='number' name='d15' id='d15' value='{{fields.d15}}'></div></td>
+                                </tr>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div id='asiNumber'>D16.</div></td>
+                                  <td><label>How many months ago did this abstinence end?</label></td>
+                                </tr>
+                              </table>
+                              <table>
+                                <tr>
+                                  <td><div id='asi_2nd_line_indent_db'><label>Enter "00" for still abstinent:</label></div></td>
+                                  <td><div id='fix_my_text'><input type='number' name='d16' id='d16' value='{{fields.d16}}'></div></td>
+                                </tr>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div id='asiNumber'>D17.</div></td>
+                                  <td><label>How many days have you been treated in an outpatient setting</label></td>
+                                </tr>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div id='asi_2nd_line_indent_db'><label>for alcohol or drugs in the past 30 days?</label></div></td>
+                                  <td><div id='fix_my_text'><input type='number' name='d25' id='d25' value='{{fields.d25}}'></div></td>
+                                </tr>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <div style='margin-top:12px;'><td><label>Comments:</label></td></div>
+                                </tr>
+
+                                <tr>
+                                  <td><textarea rows='5' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
+                                </tr>
+                              </table>
+                                  
+				                </div>
+
 				        </div>
-				    			</form>
-				    </div>
+
+            <div class="col-md-6 col-sm-6">
+                  <table>
+                    <tr>
+                      <td><label>How many times have you:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D18.</div></li></td>
+                        <td><label>Had alcohol d.t's?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d17' id='d17' value='{{fields.d17}}'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D19.</div></li></td>
+                        <td><label>Overdosed on drugs?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d18' id='d18' value='{{fields.d18}}'></div></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td><label>How many times in your life have you been treated for:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D20.</div></li></td>
+                        <td><label>Alcohol Abuse?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d19' id='d19' value='{{fields.d19}}'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D21.</div></li></td>
+                        <td><label>Drug Abuse?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d20' id='d20' value='{{fields.d20}}'></div></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td><label>How many of these were detox only?</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D22.</div></li></td>
+                        <td><label>Alcohol:</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d21' id='d21' value='{{fields.d21}}'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D23.</div></li></td>
+                        <td><label>Drugs:</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d22' id='d22' value='{{fields.d22}}'></div></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td><label>In the last 30 days, how much have you spent on:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D24.</div></li></td>
+                        <td><label>Alcohol?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d23' id='d23' value='{{fields.d23}}'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D25.</div></li></td>
+                        <td><label>Drugs?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d24' id='d24' value='{{fields.d24}}'></div></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td><label>How many times in the past 30 days have you experienced:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D26.</div></li></td>
+                        <td><label>Alcohol Problems?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d26' id='d26' value='{{fields.d26}}'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D27.</div></li></td>
+                        <td><label>Drug Problems?</label></td>
+                        <td><div id='fix_my_text'><input type='number' name='d27' id='d27' value='{{fields.d27}}'></div></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td><label>How troubled or bothered have you been in the past 30 days by these:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D28.</div></li></td>
+                        <td><label>Alcohol Problems?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d28' id='d28'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>Not at all</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerably</option>
+                              <option value='4'>Extremely</option>
+                              <option value='N'>Question not applicable</option>
+                              <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D29.</div></li></td>
+                        <td><label>Drug Problems?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d29' id='d29'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>Not at all</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerably</option>
+                              <option value='4'>Extremely</option>
+                              <option value='N'>Question not applicable</option>
+                              <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </ul>
+
+
+                  <table>
+                    <tr>
+                      <td><label>How important to you now is treatment for these:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D30.</div></li></td>
+                        <td><label>Alcohol Problems?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d30' id='d30'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>Not at all</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerably</option>
+                              <option value='4'>Extremely</option>
+                              <option value='N'>Question not applicable</option>
+                              <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D31.</div></li></td>
+                        <td><label>Drug Problems?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d31' id='d31'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>Not at all</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerably</option>
+                              <option value='4'>Extremely</option>
+                              <option value='N'>Question not applicable</option>
+                              <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td>
+                        <div id='ital_sub_head'>
+                          Interviewer Severity Rating
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+
+                  <table>
+                    <tr>
+                      <td><label>How would you rate the patient's need for treatment for:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D32.</div></li></td>
+                        <td><label>Alcohol Abuse?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d32' id='d32'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>0</option>
+                              <option value='1'>1</option>
+                              <option value='2'>2</option>
+                              <option value='3'>3</option>
+                              <option value='4'>4</option>
+                              <option value='5'>5</option>
+                              <option value='6'>6</option>
+                              <option value='7'>7</option>
+                              <option value='8'>8</option>
+                              <option value='9'>9</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D33.</div></li></td>
+                        <td><label>Drug Problems?</label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='d33' id='d33'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>0</option>
+                              <option value='1'>1</option>
+                              <option value='2'>2</option>
+                              <option value='3'>3</option>
+                              <option value='4'>4</option>
+                              <option value='5'>5</option>
+                              <option value='6'>6</option>
+                              <option value='7'>7</option>
+                              <option value='8'>8</option>
+                              <option value='9'>9</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </ul>
+
+                  <table>
+                    <tr>
+                      <td>
+                        <div id='ital_sub_head'>
+                          Confidence Rating
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table>
+                    <tr>
+                      <td><label>Is the above information significantly distorted by:</label></td>
+                    </tr>
+                  </table>
+
+                  <ul>
+                    <table>
+                      <tr>
+                        <td><li><div id='asiNumber'>D34.</div></li></td>
+                        <td><label>Patient's misrepresentation?</label></td>
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='d34' id='d34yes' value='1'>
+                          </div>
+                        </td>
+                        <td><label>Yes</label></td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='d34' id='d34no' value='0'>
+                          </div>
+                        </td>
+                        <td><label>No</label></td>
+                      </tr>
+
+                      <tr>
+                        <td><li><div id='asiNumber'>D35.</div></li></td>
+                        <td><label>Patient's inability to understand?</label></td>
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='d35' id='d35yes' value='1'>
+                          </div>
+                        </td>
+                        <td><label>Yes</label></td>
+
+                        <td>
+                          <div id='fix_my_radio'>
+                            <input type='radio' name='d35' id='d35no' value='0'>
+                          </div>
+                        </td>
+                        <td><label>No</label></td>
+                      </tr>
+                    </table>
+                  </ul>
+
+            </div>
+          </form>
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>
