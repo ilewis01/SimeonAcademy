@@ -20,7 +20,7 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
-Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
+Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
 
 def clientEqual(c1, c2):
@@ -5921,7 +5921,6 @@ def get_asi_names():
 	result.append('medical')
 	result.append('employment')
 	result.append('drug1')
-	result.append('drug2')
 	result.append('legal')
 	result.append('family')
 	result.append('social1')
@@ -5936,7 +5935,6 @@ def get_asi_urls():
 	result.append('/asi_medical/')
 	result.append('/asi_employment/')
 	result.append('/asi_drug1/')
-	result.append('/asi_drug2/')
 	result.append('/asi_legal/')
 	result.append('/asi_family/')
 	result.append('/asi_social1/')
@@ -5951,7 +5949,6 @@ def get_asi_butons():
 	result.append('asi_medical_image')
 	result.append('asi_employment_image')
 	result.append('asi_drug1_image')
-	result.append('asi_drug2_image')
 	result.append('asi_legal_image')
 	result.append('asi_family_image')
 	result.append('asi_social1_image')
@@ -5966,7 +5963,6 @@ def get_asi_complete(asi):
 	result.append(asi.medicalComplete)
 	result.append(asi.employmentComplete)
 	result.append(asi.drug1Complete)
-	result.append(asi.drug2Complete)
 	result.append(asi.legalComplete)
 	result.append(asi.familyComplete)
 	result.append(asi.social1Complete)
@@ -5981,7 +5977,6 @@ def get_asi_priority(asi):
 	result.append(asi.medicalPriority)
 	result.append(asi.employmentPriority)
 	result.append(asi.drug1Priority)
-	result.append(asi.drug2Priority)
 	result.append(asi.legalPriority)
 	result.append(asi.familyPriority)
 	result.append(asi.social1Priority)
@@ -6013,7 +6008,6 @@ def priority_asi_admin(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6026,7 +6020,6 @@ def priority_asi_general(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6039,7 +6032,6 @@ def priority_asi_medical(asi):
 	asi.medicalPriority 	= True
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6052,7 +6044,6 @@ def priority_asi_employment(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= True
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6065,25 +6056,12 @@ def priority_asi_drug1(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= True
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
 	asi.social2Priority 	= False
 	asi.psychPriority 		= False
 
-def priority_asi_drug2(asi):
-	asi.adminPriority 		= False
-	asi.generalPriority 	= False
-	asi.medicalPriority 	= False
-	asi.employmentPriority 	= False
-	asi.drug1Priority 		= False
-	asi.drug2Priority 		= True
-	asi.legalPriority 		= False
-	asi.familyPriority 		= False
-	asi.social1Priority 	= False
-	asi.social2Priority 	= False
-	asi.psychPriority 		= False
 
 def priority_asi_legal(asi):
 	asi.adminPriority 		= False
@@ -6091,7 +6069,6 @@ def priority_asi_legal(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= True
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6104,7 +6081,6 @@ def priority_asi_family(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= True
 	asi.social1Priority 	= False
@@ -6117,7 +6093,6 @@ def priority_asi_soc1(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= True
@@ -6130,7 +6105,6 @@ def priority_asi_soc2(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6143,7 +6117,6 @@ def priority_asi_psych(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6163,8 +6136,6 @@ def asiPriority(asi, section):
 		result = priority_asi_employment(asi)
 	elif section == '/asi_drug1/':
 		result = priority_asi_drug1(asi)
-	elif section == '/asi_drug2/':
-		result = priority_asi_drug2(asi)
 	elif section == '/asi_legal/':
 		result = priority_asi_legal(asi)
 	elif section == '/asi_family/':
@@ -6183,7 +6154,6 @@ def deprioritizeASI(asi):
 	asi.medicalPriority 	= False
 	asi.employmentPriority 	= False
 	asi.drug1Priority 		= False
-	asi.drug2Priority 		= False
 	asi.legalPriority 		= False
 	asi.familyPriority 		= False
 	asi.social1Priority 	= False
@@ -6247,13 +6217,12 @@ def grabASIClassesCSS(asi, m_page):
 	classes['asiGeneral'] = processCompletedClass(asi[1]['complete'], asi[1]['url'], m_page, green, current, normal)
 	classes['asiMedical'] = processCompletedClass(asi[2]['complete'], asi[2]['url'], m_page, green, current, normal)
 	classes['asiEmployment'] = processCompletedClass(asi[3]['complete'], asi[3]['url'], m_page, green, current, normal)
-	classes['asiDrug1'] = processCompletedClass(asi[4]['complete'], asi[4]['url'], m_page, green, current, normal)
-	classes['asiDrug2'] = processCompletedClass(asi[5]['complete'], asi[5]['url'], m_page, green, current, normal)	
-	classes['asiLegal'] = processCompletedClass(asi[6]['complete'], asi[6]['url'], m_page, green, current, normal)
-	classes['asiFamily'] = processCompletedClass(asi[7]['complete'], asi[7]['url'], m_page, green, current, normal)
-	classes['asiSocial1'] = processCompletedClass(asi[8]['complete'], asi[8]['url'], m_page, green, current, normal)
-	classes['asiSocial2'] = processCompletedClass(asi[9]['complete'], asi[9]['url'], m_page, green, current, normal)
-	classes['asiPsych'] = processCompletedClass(asi[10]['complete'], asi[10]['url'], m_page, green, current, normal)
+	classes['asiDrug1'] = processCompletedClass(asi[4]['complete'], asi[4]['url'], m_page, green, current, normal)	
+	classes['asiLegal'] = processCompletedClass(asi[5]['complete'], asi[5]['url'], m_page, green, current, normal)
+	classes['asiFamily'] = processCompletedClass(asi[6]['complete'], asi[6]['url'], m_page, green, current, normal)
+	classes['asiSocial1'] = processCompletedClass(asi[7]['complete'], asi[7]['url'], m_page, green, current, normal)
+	classes['asiSocial2'] = processCompletedClass(asi[8]['complete'], asi[8]['url'], m_page, green, current, normal)
+	classes['asiPsych'] = processCompletedClass(asi[9]['complete'], asi[9]['url'], m_page, green, current, normal)
 
 	return classes
 
@@ -6314,7 +6283,6 @@ def newASI(the_client):
 	medical 	= AIS_Medical(clientID=the_client.clientID)
 	employment 	= AIS_Employment(clientID=the_client.clientID)
 	drug1 		= AIS_Drug1(clientID=the_client.clientID)
-	drug2 		= AIS_Drug2(clientID=the_client.clientID)
 	legal 		= AIS_Legal(clientID=the_client.clientID)
 	family 		= AIS_Family(clientID=the_client.clientID)
 	social1 	= AIS_Social1(clientID=the_client.clientID)
@@ -6326,7 +6294,6 @@ def newASI(the_client):
 	medical.save()
 	employment.save()
 	drug1.save()
-	drug2.save()
 	legal.save()
 	family.save()
 	social1.save()
@@ -6338,7 +6305,6 @@ def newASI(the_client):
 	asi.medical 	= medical
 	asi.employment 	= employment
 	asi.drug1 		= drug1
-	asi.drug2 		= drug2
 	asi.legal 		= legal
 	asi.family 		= family
 	asi.social1 	= social1
@@ -6582,31 +6548,26 @@ def grabAsiDrug1Fields(asi):
 	result['d14'] = asi.drug1.d14
 	result['d15'] = asi.drug1.d15
 	result['d16'] = asi.drug1.d16
-	return result
-
-def grabAsiDrug2Fields(asi):
-	result = {}	
-	result['d17'] = asi.drug2.d17
-	result['d18'] = asi.drug2.d18
-	result['d19'] = asi.drug2.d19
-	result['d20'] = asi.drug2.d20
-	result['d21'] = asi.drug2.d21
-	result['d22'] = asi.drug2.d22
-	result['d23'] = asi.drug2.d23
-	result['d24'] = asi.drug2.d24
-	result['d25'] = asi.drug2.d25
-	result['d26'] = asi.drug2.d26
-	result['d27'] = asi.drug2.d27
-	result['d28'] = asi.drug2.d28
-	result['d29'] = asi.drug2.d29
-	result['d30'] = asi.drug2.d30
-	result['d31'] = asi.drug2.d31
-	result['d32'] = asi.drug2.d32
-	result['d33'] = asi.drug2.d33
-	result['d34'] = asi.drug2.d34
-	result['d35'] = asi.drug2.d35
-	result['comments'] = asi.drug2.comments
-	result['isComplete'] = asi.drug2Complete
+	result['d17'] = asi.drug1.d17
+	result['d18'] = asi.drug1.d18
+	result['d19'] = asi.drug1.d19
+	result['d20'] = asi.drug1.d20
+	result['d21'] = asi.drug1.d21
+	result['d22'] = asi.drug1.d22
+	result['d23'] = asi.drug1.d23
+	result['d24'] = asi.drug1.d24
+	result['d25'] = asi.drug1.d25
+	result['d26'] = asi.drug1.d26
+	result['d27'] = asi.drug1.d27
+	result['d28'] = asi.drug1.d28
+	result['d29'] = asi.drug1.d29
+	result['d30'] = asi.drug1.d30
+	result['d31'] = asi.drug1.d31
+	result['d32'] = asi.drug1.d32
+	result['d33'] = asi.drug1.d33
+	result['d34'] = asi.drug1.d34
+	result['d35'] = asi.drug1.d35
+	result['comments'] = asi.drug1.comments
 	return result
 
 def grabAsiLegalFields(asi):
@@ -6842,8 +6803,6 @@ def grabASIFields(asi, section):
 		result = grabAsiEmploymentFields(asi)
 	elif section == '/asi_drug1/':
 		result = grabAsiDrug1Fields(asi)
-	elif section == '/asi_drug2/':
-		result = grabAsiDrug2Fields(asi)
 	elif section == '/asi_legal/':
 		result = grabAsiLegalFields(asi)
 	elif section == '/asi_family/':
@@ -7017,31 +6976,29 @@ def saveASIdrug1(request, asi):
 	asi.drug1.d15 = request.POST.get('d15')
 	asi.drug1.d16 = request.POST.get('d16')
 
+	asi.drug1.d17 = request.POST.get('d17')
+	asi.drug1.d18 = request.POST.get('d18')
+	asi.drug1.d19 = request.POST.get('d19')
+	asi.drug1.d20 = request.POST.get('d20')
+	asi.drug1.d21 = request.POST.get('d21')
+	asi.drug1.d22 = request.POST.get('d22')
+	asi.drug1.d23 = request.POST.get('d23')
+	asi.drug1.d24 = request.POST.get('d24')
+	asi.drug1.d25 = request.POST.get('d25')
+	asi.drug1.d26 = request.POST.get('d26')
+	asi.drug1.d27 = request.POST.get('d27')
+	asi.drug1.d28 = request.POST.get('d28')
+	asi.drug1.d29 = request.POST.get('d29')
+	asi.drug1.d30 = request.POST.get('d30')
+	asi.drug1.d31 = request.POST.get('d31')
+	asi.drug1.d32 = request.POST.get('d32')
+	asi.drug1.d33 = request.POST.get('d33')
+	asi.drug1.d34 = request.POST.get('d34')
+	asi.drug1.d35 = request.POST.get('d35')
+	asi.drug1.comments = request.POST.get('comments')
+
 	asi.drug1.save()
 
-def saveASIdrug2(request, asi):	
-	asi.drug2.d17 = request.POST.get('d17')
-	asi.drug2.d18 = request.POST.get('d18')
-	asi.drug2.d19 = request.POST.get('d19')
-	asi.drug2.d20 = request.POST.get('d20')
-	asi.drug2.d21 = request.POST.get('d21')
-	asi.drug2.d22 = request.POST.get('d22')
-	asi.drug2.d23 = request.POST.get('d23')
-	asi.drug2.d24 = request.POST.get('d24')
-	asi.drug2.d25 = request.POST.get('d25')
-	asi.drug2.d26 = request.POST.get('d26')
-	asi.drug2.d27 = request.POST.get('d27')
-	asi.drug2.d28 = request.POST.get('d28')
-	asi.drug2.d29 = request.POST.get('d29')
-	asi.drug2.d30 = request.POST.get('d30')
-	asi.drug2.d31 = request.POST.get('d31')
-	asi.drug2.d32 = request.POST.get('d32')
-	asi.drug2.d33 = request.POST.get('d33')
-	asi.drug2.d34 = request.POST.get('d34')
-	asi.drug2.d35 = request.POST.get('d35')
-	asi.drug2.comments = request.POST.get('comments')
-
-	asi.drug2.save()
 
 def saveASIlegal(request, asi):
 	asi.legal.l1 = request.POST.get('l1')
@@ -7271,8 +7228,6 @@ def saveASI(request, section, asi):
 		saveASIemployment(request, asi)
 	elif section == '/asi_drug1/':
 		saveASIdrug1(request, asi)
-	elif section == '/asi_drug2/':
-		saveASIdrug2(request, asi)
 	elif section == '/asi_legal/':
 		saveASIlegal(request, asi)
 	elif section == '/asi_family/':
@@ -7297,8 +7252,6 @@ def setASIcomplete(asi, section):
 		asi.employmentComplete = True
 	elif section == '/asi_drug1/':
 		asi.drug1Complete = True
-	elif section == '/asi_drug2/':
-		asi.drug2Complete = True
 	elif section == '/asi_legal/':
 		asi.legalComplete = True
 	elif section == '/asi_family/':
@@ -7318,7 +7271,6 @@ def deleteASI(asi):
 	asi.medical.delete()
 	asi.employment.delete()
 	asi.drug1.delete()
-	asi.drug2.delete()
 	asi.legal.delete()
 	asi.family.delete()
 	asi.social1.delete()
@@ -7459,35 +7411,31 @@ def refreshASIdrug1(asi):
 	asi.drug1.d12Year = None
 	asi.drug1.d12Route = None
 	asi.drug1.d13 = None
+	asi.drug1.d14 = None
+	asi.drug1.d15 = None
+	asi.drug1.d16 = None
+	asi.drug1.d17 = None
+	asi.drug1.d18 = None
+	asi.drug1.d19 = None
+	asi.drug1.d20 = None
+	asi.drug1.d21 = None
+	asi.drug1.d22 = None
+	asi.drug1.d23 = None
+	asi.drug1.d24 = None
+	asi.drug1.d25 = None
+	asi.drug1.d26 = None
+	asi.drug1.d27 = None
+	asi.drug1.d28 = None
+	asi.drug1.d29 = None
+	asi.drug1.d30 = None
+	asi.drug1.d31 = None
+	asi.drug1.d32 = None
+	asi.drug1.d33 = None
+	asi.drug1.d34 = False
+	asi.drug1.d35 = False
+	asi.drug1.comments = None
 
 	asi.drug1.save()
-
-def refreshASIdrug2(asi):
-	asi.drug2.d14 = None
-	asi.drug2.d15 = None
-	asi.drug2.d16 = None
-	asi.drug2.d17 = None
-	asi.drug2.d18 = None
-	asi.drug2.d19 = None
-	asi.drug2.d20 = None
-	asi.drug2.d21 = None
-	asi.drug2.d22 = None
-	asi.drug2.d23 = None
-	asi.drug2.d24 = None
-	asi.drug2.d25 = None
-	asi.drug2.d26 = None
-	asi.drug2.d27 = None
-	asi.drug2.d28 = None
-	asi.drug2.d29 = None
-	asi.drug2.d30 = None
-	asi.drug2.d31 = None
-	asi.drug2.d32 = None
-	asi.drug2.d33 = None
-	asi.drug2.d34 = False
-	asi.drug2.d35 = False
-	asi.drug2.comments = None
-
-	asi.drug2.save()
 
 def refreshASIlegal(asi):
 	asi.legal.l1 = False

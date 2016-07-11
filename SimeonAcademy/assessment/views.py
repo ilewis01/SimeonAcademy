@@ -24,7 +24,7 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
-AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, AIS_Drug2, \
+AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
@@ -1643,23 +1643,6 @@ def asi_drug1(request):
 			content = fetchContent(request, 'asi', '/asi_drug1/')
 			return render_to_response('counselor/forms/ASI/drug1.html', content, context_instance=RequestContext(request))
 
-@login_required(login_url='/index')
-def asi_drug2(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = fetchContent(request, 'asi', '/asi_drug2/')
-			return render_to_response('counselor/forms/ASI/drug2.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def asi_legal(request):

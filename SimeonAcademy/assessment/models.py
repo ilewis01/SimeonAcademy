@@ -1157,13 +1157,6 @@ class AIS_Drug1(models.Model):
 	d14 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d15 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d16 = models.CharField(max_length=2, default=None, blank=True, null=True)
-
-	def __unicode__(self):
-		return str(self.clientID)
-
-class AIS_Drug2(models.Model):
-	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
-
 	d17 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d18 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	d19 = models.CharField(max_length=2, default=None, blank=True, null=True)
@@ -1181,8 +1174,8 @@ class AIS_Drug2(models.Model):
 	d31 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	d32 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	d33 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	d34 = models.BooleanField(default=False, blank=True)
-	d35 = models.BooleanField(default=False, blank=True)
+	d34 = models.IntegerField(default=0)
+	d35 = models.IntegerField(default=0)
 	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
 
 	def __unicode__(self):
@@ -1416,7 +1409,6 @@ class ASI(models.Model):
 	medical = models.ForeignKey(AIS_Medical, default=None, blank=True, null=True)
 	employment = models.ForeignKey(AIS_Employment, default=None, blank=True, null=True)
 	drug1 = models.ForeignKey(AIS_Drug1, default=None, blank=True, null=True)
-	drug2 = models.ForeignKey(AIS_Drug2, default=None, blank=True, null=True)
 	legal = models.ForeignKey(AIS_Legal, default=None, blank=True, null=True)
 	family = models.ForeignKey(AIS_Family, default=None, blank=True, null=True)
 	social1 = models.ForeignKey(AIS_Social1, default=None, blank=True, null=True)
@@ -1428,7 +1420,6 @@ class ASI(models.Model):
 	medicalComplete = models.BooleanField(default=False, blank=True)
 	employmentComplete = models.BooleanField(default=False, blank=True)
 	drug1Complete = models.BooleanField(default=False, blank=True)
-	drug2Complete = models.BooleanField(default=False, blank=True)
 	legalComplete = models.BooleanField(default=False, blank=True)
 	familyComplete = models.BooleanField(default=False, blank=True)
 	social1Complete = models.BooleanField(default=False, blank=True)
@@ -1440,7 +1431,6 @@ class ASI(models.Model):
 	medicalPriority = models.BooleanField(default=False, blank=True)
 	employmentPriority = models.BooleanField(default=False, blank=True)
 	drug1Priority = models.BooleanField(default=False, blank=True)
-	drug2Priority = models.BooleanField(default=False, blank=True)
 	legalPriority = models.BooleanField(default=False, blank=True)
 	familyPriority = models.BooleanField(default=False, blank=True)
 	social1Priority = models.BooleanField(default=False, blank=True)
