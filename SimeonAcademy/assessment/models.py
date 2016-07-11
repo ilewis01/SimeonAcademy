@@ -1088,7 +1088,6 @@ class AIS_Employment(models.Model):
 	e3Exp = models.CharField(max_length=50, default=None, blank=True, null=True)
 	e4 = models.IntegerField(default=0)
 	e5 = models.IntegerField(default=0)
-	e5Exp = models.IntegerField(default=0)
 	e6yrs = models.CharField(max_length=2, default=None, blank=True, null=True)
 	e6mth = models.CharField(max_length=2, default=None, blank=True, null=True)
 	e7 = models.IntegerField(default=0)

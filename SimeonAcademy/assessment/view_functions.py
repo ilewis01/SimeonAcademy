@@ -6396,26 +6396,24 @@ def beginASI(request):
 
 def getInterviewerIndex(m_val):
 	index = 0
-	m_val = str(m_val)
 
-	if m_val == 'Select':
-		index = 0
-	else:
+	if m_val != None and m_val != 'Select' and m_val != '':
 		index = int(m_val) + 1
 
 	return index
 
 
 def getPatientIndex(m_val):
-	index = 0
 	m_val = str(m_val)
+	index = 0
 
-	if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4':
-		index = int(m_val) + 1
-	elif m_val=='X':
-		index = 6
-	elif m_val == 'N':
-		index = 7
+	if m_val != 'None' and m_val != 'Select' and m_val != '':
+		if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4':
+			index = int(m_val) + 1
+		elif m_val=='X':
+			index = 6
+		elif m_val == 'N':
+			index = 7
 
 	return index
 
@@ -6468,16 +6466,9 @@ def grabAsiGeneralFields(asi):
 
 def grabAsiMedicalFields(asi):
 	result = {}
-	m7 = None
-	m8 = None
-	m9 = None
-
-	if asi.medical.m7 != None:
-		m7 = getPatientIndex(asi.medical.m7)
-	if asi.medical.m8 != None:
-		m8 = getPatientIndex(asi.medical.m8)
-	if asi.medical.m9 != None:
-		m9 = getInterviewerIndex(asi.medical.m9)
+	m7 = getPatientIndex(asi.medical.m7)
+	m8 = getPatientIndex(asi.medical.m8)
+	m9 = getInterviewerIndex(asi.medical.m9)
 
 	result['m1'] = asi.medical.m1
 	result['m2yrs'] = asi.medical.m2yrs
@@ -6498,6 +6489,10 @@ def grabAsiMedicalFields(asi):
 
 def grabAsiEmploymentFields(asi):
 	result = {}
+	e20 = getPatientIndex(asi.employment.e20)
+	e21 = getPatientIndex(asi.employment.e21)
+	e22 = getInterviewerIndex(asi.employment.e22)
+
 	result['e1yrs'] = asi.employment.e1yrs
 	result['e1mth'] = asi.employment.e1mth
 	result['e2'] = asi.employment.e2
@@ -6505,7 +6500,6 @@ def grabAsiEmploymentFields(asi):
 	result['e3Exp'] = asi.employment.e3Exp
 	result['e4'] = asi.employment.e4
 	result['e5'] = asi.employment.e5
-	result['e5Exp'] = asi.employment.e5Exp
 	result['e6yrs'] = asi.employment.e6yrs
 	result['e6mth'] = asi.employment.e6mth
 	result['e7'] = asi.employment.e7
@@ -6522,9 +6516,9 @@ def grabAsiEmploymentFields(asi):
 	result['e17'] = asi.employment.e17
 	result['e18'] = asi.employment.e18
 	result['e19'] = asi.employment.e19
-	result['e20'] = asi.employment.e20
-	result['e21'] = asi.employment.e21
-	result['e22'] = asi.employment.e22
+	result['e20'] = e20
+	result['e21'] = e21
+	result['e22'] = e22
 	result['e23'] = asi.employment.e23
 	result['e24'] = asi.employment.e24
 	result['comments'] = asi.employment.comments
@@ -6911,8 +6905,6 @@ def saveASIgeneral(request, asi):
 	asi.general.family = request.POST.get('family')
 	asi.general.psych = request.POST.get('psych')
 
-	print "Medical: " + str(asi.general.medical)
-
 	asi.general.test1 = request.POST.get('test1')
 	asi.general.test2 = request.POST.get('test2')
 	asi.general.test3 = request.POST.get('test3')
@@ -6942,16 +6934,15 @@ def saveASIemployment(request, asi):
 	asi.employment.e1mth = request.POST.get('e1mth')
 	asi.employment.e2 = request.POST.get('e2')
 	asi.employment.e3 = request.POST.get('e3')
-	asi.employment.e3Exp = request.POST.get('e3Exp')
+	asi.employment.e3Exp = request.POST.get('m_e3Exp')
 	asi.employment.e4 = request.POST.get('e4')
-	asi.employment.e5 = request.POST.get('e5')
-	asi.employment.e5Exp = request.POST.get('e5Exp')
+	asi.employment.e5 = request.POST.get('m_e5')
 	asi.employment.e6yrs = request.POST.get('e6yrs')
 	asi.employment.e6mth = request.POST.get('e6mth')
 	asi.employment.e7 = request.POST.get('e7')
-	asi.employment.e7Exp = request.POST.get('e7Exp')
+	asi.employment.e7Exp = request.POST.get('m_e7Exp')
 	asi.employment.e8 = request.POST.get('e8')
-	asi.employment.e9 = request.POST.get('e9')
+	asi.employment.e9 = request.POST.get('m_e9')
 	asi.employment.e10 = request.POST.get('e10')
 	asi.employment.e11 = request.POST.get('e11')
 	asi.employment.e12 = request.POST.get('e12')
@@ -8702,6 +8693,56 @@ def force_URL_priority(form_type, section, form):
 		setMhPriority(form, section)
 	elif form_type == 'am':
 		setAmPriorityURL(section, form)
+
+def milHr_toStd(hr):
+	result = ''
+	hr = str(hr)
+	if hr == '01' or hr == '13':
+		result = '1'
+	elif hr == '02' or hr == '14':
+		result = '2'
+	elif hr == '03' or hr == '15':
+		result = '3'
+	elif hr == '04' or hr == '16':
+		result = '4'
+	elif hr == '05' or hr == '17':
+		result = '5'
+	elif hr == '06' or hr == '18':
+		result = '6'
+	elif hr == '07' or hr == '19':
+		result = '7'
+	elif hr == '08' or hr == '20':
+		result = '8'
+	elif hr == '09' or hr == '21':
+		result = '9'
+	elif hr == '10' or hr == '22':
+		result = '10'
+	elif hr == '11' or hr == '23':
+		result = '11'
+	elif hr == '12' or hr == '00':
+		result = '12'
+	return result
+
+
+def millitary_to_std(time):
+	result = ''
+	hr = ''
+	ampm = 'am'
+	time = str(time)
+	hr += time[0]
+	hr += time[1]
+
+	if int(hr) > 11:
+		ampm = 'pm'
+
+	hr = milHr_toStd(hr)
+
+	result = str(hr) + str(time[2]) + str(time[3]) + str(time[4]) + ampm
+	return result
+
+
+
+
 
 
 

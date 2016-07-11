@@ -1802,6 +1802,14 @@ button:hover {
 	margin-left: 28px;
 }
 
+#asi_2nd_line_indent_db {
+	margin-left: 35px;
+}
+
+#asi_2nd_line_indent_db_sel {
+	margin-left: 29px;
+}
+
 #number_subText {
 	font-style: italic;
 	padding-left: 5px;

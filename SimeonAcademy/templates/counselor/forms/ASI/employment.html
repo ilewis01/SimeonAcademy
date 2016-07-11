@@ -213,7 +213,7 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:50px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Employment/Support Status</h3>
                 </div>
 
@@ -295,7 +295,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e2' id='e3yes' value='1' onClick='javascript: e3Radio();'>
+                                    <input type='radio' name='e3' id='e3yes' value='1' onClick='javascript: e3Radio();'>
                                   </div>
                                 </td>
 
@@ -303,7 +303,7 @@
 
                                 <td>
                                   <div id='fix_my_radio'>
-                                    <input type='radio' name='e2' id='e3no' value='0' onClick='javascript: e3Radio();' checked>
+                                    <input type='radio' name='e3' id='e3no' value='0' onClick='javascript: e3Radio();' checked>
                                   </div>
                                 </td>
 
@@ -571,12 +571,12 @@
                             <table>
                               <tr>
                                 <td>
-                                  <label>Comments:</label>
+                                  <div style='margin-top:30px;'><label>Comments:</label></div>
                                 </td>
                               </tr>
                               <tr>
                                 <td>
-                                  <textarea rows='5' cols='75' name='comments' id='comments'>{{fields.comments}}</textarea>
+                                  <textarea rows='7' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea>
                                 </td>
                               </tr>
                             </table>
@@ -646,7 +646,7 @@
                     <td>
                       <div id='fix_my_text'>
                         $
-                        <input type='number' name='e5' id='e15' value='{{fields.e15}}'>
+                        <input type='number' name='e15' id='e15' value='{{fields.e15}}'>
                       </div>
                     </td>
                   </tr>
@@ -675,6 +675,226 @@
                         <input type='number' name='e17' id='e17' value='{{fields.e17}}'>
                       </div>
                     </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E18.</div></td>
+
+                    <td>
+                      <label>How many people depend on you for financial support?</label>
+                    </td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        <input type='number' name='e18' id='e18' value='{{fields.e18}}'>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E19.</div></td>
+
+                    <td>                      
+                      <label>How many days have you experienced employment problems</label>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asi_2nd_line_indent_db'><label>in the past month?</label></div></td>
+
+                    <td>
+                      <div id='fix_my_text'>
+                        <input type='number' name='e19' id='e19' value='{{fields.e19}}'>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <div id='ital_sub_head_small'>
+                        For questions E20 & E21, please use the <b>Patient's Rating Scale</b>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E20.</div></td>
+
+                    <td>
+                      <label>How troubleed or bothered have you been by these employment</label>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <div id='asi_2nd_line_indent_db'>
+                        <label>problems in the past month?</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div id='fix_my_select'>
+                        <select name='e20' id='e20'>
+                          <option value='Select'>Select</option>
+                          <option value='0'>Not at all</option>
+                          <option value='1'>Slightly</option>
+                          <option value='2'>Moderately</option>
+                          <option value='3'>Considerably</option>
+                          <option value='4'>Extremely</option>
+                          <option value='N'>Question not applicable</option>
+                          <option value='X'>Question not answered</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E21.</div></td>
+
+                    <td>
+                      <label>How important to you now is counseling for these employment</label>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asi_2nd_line_indent_db'><label>problems?</label></div></td>
+
+                    <td>
+                      <div id='fix_my_select'>
+                        <select name='e21' id='e21'>
+                          <option value='Select'>Select</option>
+                          <option value='0'>Not at all</option>
+                          <option value='1'>Slightly</option>
+                          <option value='2'>Moderately</option>
+                          <option value='3'>Considerably</option>
+                          <option value='4'>Extremely</option>
+                          <option value='N'>Question not applicable</option>
+                          <option value='X'>Question not answered</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <div id='ital_sub_head_small'>
+                        For question E21, please use the Interviewer's Rating Scale
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E22.</div></td>
+
+                    <td>
+                      <label>How would you rate the patient's need for employment counseling?</label>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <div id='asi_2nd_line_indent_db_sel'>
+                        <div id='fix_my_select'>
+                          <select name='e22' id='e22'>
+                            <option value='Select'>Select</option>
+                            <option value='0'>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                            <option value='6'>6</option>
+                            <option value='7'>7</option>
+                            <option value='8'>8</option>
+                            <option value='9'>9</option>
+                          </select>
+                        </div>
+                      </div>  
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td>
+                      <div id='ital_sub_head_small'>
+                        Is the above information significantly distorted by:
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E23.</div></td>
+
+                    <td>
+                      <label>Patient's misrepresentation?</label>
+                    </td>
+
+                    <td>
+                      <div id='fix_my_radio'>
+                        <input type='radio' name='e23' id='e23yes' value='1'>
+                      </div>
+                    </td>
+
+                    <td><label>Yes</label></td>
+
+                    <td>
+                      <div id='fix_my_radio'>
+                        <input type='radio' name='e23' id='e23no' value='0' checked>
+                      </div>
+                    </td>
+
+                    <td><label>No</label></td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><div id='asiNumber'>E24.</div></td>
+
+                    <td>
+                      <label>Patient's inability to understand?</label>
+                    </td>
+
+                    <td>
+                      <div id='fix_my_radio'>
+                        <input type='radio' name='e24' id='e24yes' value='1'>
+                      </div>
+                    </td>
+
+                    <td><label>Yes</label></td>
+
+                    <td>
+                      <div id='fix_my_radio'>
+                        <input type='radio' name='e24' id='e24no' value='0' checked>
+                      </div>
+                    </td>
+
+                    <td><label>No</label></td>
                   </tr>
                 </table>
 
