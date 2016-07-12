@@ -6013,7 +6013,44 @@ function init_asi_legal(json_data) {
 }
 
 function init_asi_family(json_data) {
-	
+	document.getElementById('h1a').selectedIndex = json_data.h1a;
+	document.getElementById('h2a').selectedIndex = json_data.h2a;
+	document.getElementById('h3a').selectedIndex = json_data.h3a;
+	document.getElementById('h4a').selectedIndex = json_data.h4a;
+	document.getElementById('h5a').selectedIndex = json_data.h5a;
+	document.getElementById('h6a').selectedIndex = json_data.h6a;
+	document.getElementById('h7a').selectedIndex = json_data.h7a;
+	document.getElementById('h8a').selectedIndex = json_data.h8a;
+	document.getElementById('h9a').selectedIndex = json_data.h9a;
+	document.getElementById('h10a').selectedIndex = json_data.h10a;
+	document.getElementById('h11a').selectedIndex = json_data.h11a;
+	document.getElementById('h12a').selectedIndex = json_data.h12a;
+
+	document.getElementById('h1d').selectedIndex = json_data.h1d;
+	document.getElementById('h2d').selectedIndex = json_data.h2d;
+	document.getElementById('h3d').selectedIndex = json_data.h3d;
+	document.getElementById('h4d').selectedIndex = json_data.h4d;
+	document.getElementById('h5d').selectedIndex = json_data.h5d;
+	document.getElementById('h6d').selectedIndex = json_data.h6d;
+	document.getElementById('h7d').selectedIndex = json_data.h7d;
+	document.getElementById('h8d').selectedIndex = json_data.h8d;
+	document.getElementById('h9d').selectedIndex = json_data.h9d;
+	document.getElementById('h10d').selectedIndex = json_data.h10d;
+	document.getElementById('h11d').selectedIndex = json_data.h11d;
+	document.getElementById('h12d').selectedIndex = json_data.h12d;
+
+	document.getElementById('h1p').selectedIndex = json_data.h1p;
+	document.getElementById('h2p').selectedIndex = json_data.h2p;
+	document.getElementById('h3p').selectedIndex = json_data.h3p;
+	document.getElementById('h4p').selectedIndex = json_data.h4p;
+	document.getElementById('h5p').selectedIndex = json_data.h5p;
+	document.getElementById('h6p').selectedIndex = json_data.h6p;
+	document.getElementById('h7p').selectedIndex = json_data.h7p;
+	document.getElementById('h8p').selectedIndex = json_data.h8p;
+	document.getElementById('h9p').selectedIndex = json_data.h9p;
+	document.getElementById('h10p').selectedIndex = json_data.h10p;
+	document.getElementById('h11p').selectedIndex = json_data.h11p;
+	document.getElementById('h12p').selectedIndex = json_data.h12p;
 }
 
 function init_asi_soc1(json_data) {
@@ -6164,10 +6201,6 @@ function processAsiLegal() {
 	post_asi(false, 'text', document.getElementById('comments'), null, null);
 }
 
-function processAsiFamily() {
-	
-}
-
 function processAsiSocial1() {
 	
 }
@@ -6200,9 +6233,6 @@ function processAsiFields(page) {
 	}
 	else if (page === '/asi_legal/') {
 		processAsiLegal();
-	}
-	else if (page === '/asi_family/') {
-		processAsiFamily();
 	}
 	else if (page === '/asi_social1/') {
 		processAsiSocial1();

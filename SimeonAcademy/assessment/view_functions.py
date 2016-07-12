@@ -6421,6 +6421,21 @@ def getLegalChargesIndex(m_val):
 
 	return index
 
+def getLegalFamilyIndex(m_val):
+	m_val = str(m_val)
+	index = 0
+
+	if m_val == '1':
+		index = 1
+	elif m_val == '0':
+		index = 2
+	elif m_val == 'X':
+		index = 3
+	elif m_val == 'N':
+		index = 4
+
+	return index
+
 def grabAsiAdminFields(asi):
 	result = {}
 	result['g1'] = asi.admin.g1
@@ -6677,53 +6692,53 @@ def grabAsiLegalFields(asi):
 
 def grabAsiFamilyFields(asi):
 	result = {}
-	result['h1a'] = asi.family.h1a
-	result['h1d'] = asi.family.h1d
-	result['h1p'] = asi.family.h1p
+	result['h1a'] = getLegalFamilyIndex(asi.family.h1a)
+	result['h1d'] = getLegalFamilyIndex(asi.family.h1d)
+	result['h1p'] = getLegalFamilyIndex(asi.family.h1p)
 
-	result['h1a'] = asi.family.h2a
-	result['h1d'] = asi.family.h2d
-	result['h1p'] = asi.family.h2p
+	result['h2a'] = getLegalFamilyIndex(asi.family.h2a)
+	result['h2d'] = getLegalFamilyIndex(asi.family.h2d)
+	result['h2p'] = getLegalFamilyIndex(asi.family.h2p)
 
-	result['h1a'] = asi.family.h3a
-	result['h1d'] = asi.family.h3d
-	result['h1p'] = asi.family.h3p
+	result['h3a'] = getLegalFamilyIndex(asi.family.h3a)
+	result['h3d'] = getLegalFamilyIndex(asi.family.h3d)
+	result['h3p'] = getLegalFamilyIndex(asi.family.h3p)
 
-	result['h1a'] = asi.family.h4a
-	result['h1d'] = asi.family.h4d
-	result['h1p'] = asi.family.h4p
+	result['h4a'] = getLegalFamilyIndex(asi.family.h4a)
+	result['h4d'] = getLegalFamilyIndex(asi.family.h4d)
+	result['h4p'] = getLegalFamilyIndex(asi.family.h4p)
 
-	result['h1a'] = asi.family.h5a
-	result['h1d'] = asi.family.h5d
-	result['h1p'] = asi.family.h5p
+	result['h5a'] = getLegalFamilyIndex(asi.family.h5a)
+	result['h5d'] = getLegalFamilyIndex(asi.family.h5d)
+	result['h5p'] = getLegalFamilyIndex(asi.family.h5p)
 
-	result['h1a'] = asi.family.h6a
-	result['h1d'] = asi.family.h6d
-	result['h1p'] = asi.family.h6p
+	result['h6a'] = getLegalFamilyIndex(asi.family.h6a)
+	result['h6d'] = getLegalFamilyIndex(asi.family.h6d)
+	result['h6p'] = getLegalFamilyIndex(asi.family.h6p)
 
-	result['h1a'] = asi.family.h7a
-	result['h1d'] = asi.family.h7d
-	result['h1p'] = asi.family.h7p
+	result['h7a'] = getLegalFamilyIndex(asi.family.h7a)
+	result['h7d'] = getLegalFamilyIndex(asi.family.h7d)
+	result['h7p'] = getLegalFamilyIndex(asi.family.h7p)
 
-	result['h1a'] = asi.family.h8a
-	result['h1d'] = asi.family.h8d
-	result['h1p'] = asi.family.h8p
+	result['h8a'] = getLegalFamilyIndex(asi.family.h8a)
+	result['h8d'] = getLegalFamilyIndex(asi.family.h8d)
+	result['h8p'] = getLegalFamilyIndex(asi.family.h8p)
 
-	result['h1a'] = asi.family.h9a
-	result['h1d'] = asi.family.h9d
-	result['h1p'] = asi.family.h9p
+	result['h9a'] = getLegalFamilyIndex(asi.family.h9a)
+	result['h9d'] = getLegalFamilyIndex(asi.family.h9d)
+	result['h9p'] = getLegalFamilyIndex(asi.family.h9p)
 
-	result['h1a'] = asi.family.h10a
-	result['h1d'] = asi.family.h10d
-	result['h1p'] = asi.family.h10p
+	result['h10a'] = getLegalFamilyIndex(asi.family.h10a)
+	result['h10d'] = getLegalFamilyIndex(asi.family.h10d)
+	result['h10p'] = getLegalFamilyIndex(asi.family.h10p)
 
-	result['h1a'] = asi.family.h11a
-	result['h1d'] = asi.family.h11d
-	result['h1p'] = asi.family.h11p
+	result['h11a'] = getLegalFamilyIndex(asi.family.h11a)
+	result['h11d'] = getLegalFamilyIndex(asi.family.h11d)
+	result['h11p'] = getLegalFamilyIndex(asi.family.h11p)
 
-	result['h1a'] = asi.family.h12a
-	result['h1d'] = asi.family.h12d
-	result['h1p'] = asi.family.h12p
+	result['h12a'] = getLegalFamilyIndex(asi.family.h12a)
+	result['h12d'] = getLegalFamilyIndex(asi.family.h12d)
+	result['h12p'] = getLegalFamilyIndex(asi.family.h12p)
 	result['isComplete'] = asi.familyComplete
 	return result
 

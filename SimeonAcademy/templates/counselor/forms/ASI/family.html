@@ -135,7 +135,7 @@
               <td>
                 <div class='{{class.asiFamily}}'>
                   <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_family/');" name='asiFamilyBtn' id='asiFamilyBtn'>
+                  <a href="#" name='asiFamilyBtn' id='asiFamilyBtn'>
                     Family History
                   </a>
                 </div>
@@ -200,33 +200,536 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:30px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Family History</h3>
+                  <div id='header_p'>Have any of your relatives had what you would call a significant drinking, drug use, or psych problem - One that did or should have led to treatment?</div>
                 </div>
 
                 <div class="container">
             		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
+                  <div class="col-md-12 col-sm-12">
+                  	<div>
+                  		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
+                        <input type='hidden' name='save_this' id='save_this' value=''>
+                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                        <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
+                        <input type='hidden' name='new_form' id='new_form' value='false'>
+                        <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
-				    			</form>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
+                        <div id='ASI_FH_HEAD'>
+                          Family History
+                        </div>
 
-				<div>
+                        <div class='container_asiH'>
+                          <table class='asi_family_table'>
+                            <tr>
+                              <th><div id='asi_fam_hori_label'>RELATIVE</div></th>
+                              <th><div>ALCOHOL</div></th>
+                              <th><div>DRUG</div></th>
+                              <th><div>PSYCH</div></th>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Maternal Grandmother</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h1a' id='h1a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h1d' id='h1d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h1p' id='h1p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Maternal Grandfather</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h2a' id='h2a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h2d' id='h2d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h2p' id='h2p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Maternal Mother</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h3a' id='h3a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h3d' id='h3d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h3p' id='h3p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Maternal Aunt</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h4a' id='h4a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h4d' id='h4d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h4p' id='h4p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Maternal Uncle</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h5a' id='h5a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h5d' id='h5d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h5p' id='h5p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+
+
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Paternal Grandmother</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h6a' id='h6a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h6d' id='h6d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h6p' id='h6p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Paternal Grandfather</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h7a' id='h7a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h7d' id='h7d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h7p' id='h7p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Paternal Mother</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h8a' id='h8a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h8d' id='h8d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h8p' id='h8p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Paternal Aunt</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h9a' id='h9a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h9d' id='h9d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h9p' id='h9p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Paternal Uncle</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h10a' id='h10a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h10d' id='h10d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h10p' id='h10p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+
+
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Brother</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h11a' id='h11a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h11d' id='h11d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h11p' id='h11p'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head'>Sister</div></td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h12a' id='h12a'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='h12d' id='h12d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='hp' id='hp'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+
+                            </tr>
+                          </table>
+                        </div>
+                      </form>			            
+				            </div>
+				          </div>
+				        </div> <!-- END PAGE CONTAINER -->
+
+				<div style='margin-left:14%'>
 					<!-- ____________________________BUTTONS________________________________ -->
 					<table class='toggle-div-page'>
 						<tr><td><div style='margin-top:30px;'></div></td></tr>

@@ -1878,6 +1878,75 @@ button:hover {
 	background-color: #e7e6e7;
 }
 
+#header_p {
+	font-style: italic;
+
+}
+
+#asi_fam_hori_label {
+	width:225px;
+}
+
+#td_select {
+	padding-bottom: 3%
+}
+
+.container_asiH {
+	width: 50%;
+	margin-left: 15%;
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	padding:1%;
+	border-radius: 5px;
+}
+
+.asi_family_table {
+	width:100%;
+	margin: auto;
+}
+
+.asi_family_table th {
+	width:20%;
+	margin: auto;
+	padding: 1%;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.asi_family_table td {
+	width:20%;
+	margin: auto;
+	border: 1px solid black;
+	text-align: left;
+}
+
+.asi_family_table select {
+	width:96%;
+	margin-left: 2%;
+}
+
+#ASI_FH_HEAD {
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	width: 50%;
+	text-align: center;
+	margin-left:15%;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-style: italic;
+	border-radius: 5px;
+}
+
+#asi_vert_head {
+	font-style: italic;
+	padding-left: 5%;
+}
+
+#asi_table_btn {
+	margin-top: 10%;
+}
+
 
 /*###############################################################################################################*/
 /*###############################################################################################################*/
