@@ -5974,7 +5974,42 @@ function init_asi_drug1(json_data) {
 }
 
 function init_asi_legal(json_data) {
-	
+	number_init(json_data.isComplete, document.getElementById('l3'));
+	number_init(json_data.isComplete, document.getElementById('l4'));
+	number_init(json_data.isComplete, document.getElementById('l5'));
+	number_init(json_data.isComplete, document.getElementById('l6'));
+	number_init(json_data.isComplete, document.getElementById('l7'));
+	number_init(json_data.isComplete, document.getElementById('l8'));
+	number_init(json_data.isComplete, document.getElementById('l9'));
+	number_init(json_data.isComplete, document.getElementById('l10'));
+	number_init(json_data.isComplete, document.getElementById('l11'));
+	number_init(json_data.isComplete, document.getElementById('l12'));
+	number_init(json_data.isComplete, document.getElementById('l13'));
+	number_init(json_data.isComplete, document.getElementById('l14'));
+	number_init(json_data.isComplete, document.getElementById('l15'));
+	number_init(json_data.isComplete, document.getElementById('l16'));
+	number_init(json_data.isComplete, document.getElementById('l17'));
+	number_init(json_data.isComplete, document.getElementById('l18'));
+	number_init(json_data.isComplete, document.getElementById('l19'));
+	number_init(json_data.isComplete, document.getElementById('l20'));
+	number_init(json_data.isComplete, document.getElementById('l21'));
+	number_init(json_data.isComplete, document.getElementById('l22'));
+	number_init(json_data.isComplete, document.getElementById('l26'));
+	number_init(json_data.isComplete, document.getElementById('l27'));
+
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	asi_radioBtn_select(json_data.l1, document.getElementById('l1yes'), document.getElementById('l1no'));
+	asi_radioBtn_select(json_data.l2, document.getElementById('l2yes'), document.getElementById('l2no'));
+	asi_radioBtn_select(json_data.l24, document.getElementById('l24yes'), document.getElementById('l24no'));
+	asi_radioBtn_select(json_data.l31, document.getElementById('l31yes'), document.getElementById('l31no'));
+	asi_radioBtn_select(json_data.l32, document.getElementById('l32yes'), document.getElementById('l32no'));
+
+	document.getElementById('l23').selectedIndex = json_data.l23;
+	document.getElementById('l25').selectedIndex = json_data.l25;
+	document.getElementById('l28').selectedIndex = json_data.l28;
+	document.getElementById('l29').selectedIndex = json_data.l29;
+	document.getElementById('l30').selectedIndex = json_data.l30;
 }
 
 function init_asi_family(json_data) {
@@ -6103,7 +6138,30 @@ function processAsiDrug1() {
 }
 
 function processAsiLegal() {
-	
+	post_asi(false, 'number', document.getElementById('l3'), null, null);
+	post_asi(false, 'number', document.getElementById('l4'), null, null);
+	post_asi(false, 'number', document.getElementById('l5'), null, null);
+	post_asi(false, 'number', document.getElementById('l6'), null, null);
+	post_asi(false, 'number', document.getElementById('l7'), null, null);
+	post_asi(false, 'number', document.getElementById('l8'), null, null);
+	post_asi(false, 'number', document.getElementById('l9'), null, null);
+	post_asi(false, 'number', document.getElementById('l10'), null, null);
+	post_asi(false, 'number', document.getElementById('l11'), null, null);
+	post_asi(false, 'number', document.getElementById('l12'), null, null);
+	post_asi(false, 'number', document.getElementById('l13'), null, null);
+	post_asi(false, 'number', document.getElementById('l14'), null, null);
+	post_asi(false, 'number', document.getElementById('l15'), null, null);
+	post_asi(false, 'number', document.getElementById('l16'), null, null);
+	post_asi(false, 'number', document.getElementById('l17'), null, null);
+	post_asi(false, 'number', document.getElementById('l18'), null, null);
+	post_asi(false, 'number', document.getElementById('l19'), null, null);
+	post_asi(false, 'number', document.getElementById('l20'), null, null);
+	post_asi(false, 'number', document.getElementById('l21'), null, null);
+	post_asi(false, 'number', document.getElementById('l22'), null, null);
+	post_asi(false, 'number', document.getElementById('l26'), null, null);
+	post_asi(false, 'number', document.getElementById('l27'), null, null);
+
+	post_asi(false, 'text', document.getElementById('comments'), null, null);
 }
 
 function processAsiFamily() {

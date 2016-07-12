@@ -1184,8 +1184,8 @@ class AIS_Drug1(models.Model):
 class AIS_Legal(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 
-	l1 = models.BooleanField(default=False, blank=True)
-	l2 = models.BooleanField(default=False, blank=True)
+	l1 = models.IntegerField(default=0)
+	l2 = models.IntegerField(default=0)
 	l3 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l4 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l5 = models.CharField(max_length=2, default=None, blank=True, null=True)
@@ -1207,15 +1207,15 @@ class AIS_Legal(models.Model):
 	l21 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l22 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l23 = models.CharField(max_length=2, default=None, blank=True, null=True)
-	l24 = models.BooleanField(default=False, blank=True)
+	l24 = models.IntegerField(default=0)
 	l25 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l26 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l27 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l28 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	l29 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	l30 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	l31 = models.BooleanField(default=False, blank=True)
-	l32 = models.BooleanField(default=False, blank=True)
+	l31 = models.IntegerField(default=0)
+	l32 = models.IntegerField(default=0)
 	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
 
 	def __unicode__(self):

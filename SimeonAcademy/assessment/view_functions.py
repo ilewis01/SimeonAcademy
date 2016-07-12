@@ -6405,10 +6405,20 @@ def getASIDrugMajor(m_val):
 		if m_val=='00' or m_val=='01'or m_val=='02'or m_val=='03'or m_val=='04'or m_val=='05'or m_val=='06'or m_val=='07'or m_val=='08'or m_val=='09':
 			temp = m_val[1]
 			index = int(temp) + 1
-		elif m_val=='10' or m_val=='11' or m_val=='12':
-			index = int(m_val) + 1
 		else:
 			index = int(m_val) - 1
+	return index
+
+def getLegalChargesIndex(m_val):
+	m_val = str(m_val)
+	index = 0
+
+	if m_val != 'None' and m_val != 'Select' and m_val != '':
+		if m_val=='18' or m_val=='19' or m_val=='20':
+			index = int(m_val) - 3
+		else:
+			index = int(m_val) - 2
+
 	return index
 
 def grabAsiAdminFields(asi):
@@ -6622,6 +6632,13 @@ def grabAsiDrug1Fields(asi):
 
 def grabAsiLegalFields(asi):
 	result = {}
+
+	l23 = getLegalChargesIndex(asi.legal.l23)
+	l25 = getLegalChargesIndex(asi.legal.l25)
+	l28 = getPatientIndex(asi.legal.l28)
+	l29 = getPatientIndex(asi.legal.l29)
+	l30 = getInterviewerIndex(asi.legal.l30)
+
 	result['l1'] = asi.legal.l1
 	result['l2'] = asi.legal.l2
 	result['l3'] = asi.legal.l3
@@ -6644,14 +6661,14 @@ def grabAsiLegalFields(asi):
 	result['l20'] = asi.legal.l20
 	result['l21'] = asi.legal.l21
 	result['l22'] = asi.legal.l22
-	result['l23'] = asi.legal.l23
+	result['l23'] = l23
 	result['l24'] = asi.legal.l24
-	result['l25'] = asi.legal.l25
+	result['l25'] = l25
 	result['l26'] = asi.legal.l26
 	result['l27'] = asi.legal.l27
-	result['l28'] = asi.legal.l28
-	result['l29'] = asi.legal.l29
-	result['l30'] = asi.legal.l30
+	result['l28'] = l28
+	result['l29'] = l29
+	result['l30'] = l30
 	result['l31'] = asi.legal.l31
 	result['l32'] = asi.legal.l32
 	result['comments'] = asi.legal.comments
