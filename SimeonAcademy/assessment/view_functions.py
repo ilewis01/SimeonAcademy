@@ -6383,6 +6383,34 @@ def getPatientIndex(m_val):
 
 	return index
 
+def getDrugTableIndex(m_val):
+	m_val = str(m_val)
+	index = 0
+
+	if m_val != 'None' and m_val != 'Select' and m_val != '':
+		if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4':
+			index = int(m_val)
+		elif m_val=='X':
+			index = 6
+		elif m_val == 'N':
+			index = 7
+
+	return index
+
+def getASIDrugMajor(m_val):
+	m_val = str(m_val)
+	index = 0
+
+	if m_val != 'None' and m_val != 'Select' and m_val != '':
+		if m_val=='00' or m_val=='01'or m_val=='02'or m_val=='03'or m_val=='04'or m_val=='05'or m_val=='06'or m_val=='07'or m_val=='08'or m_val=='09':
+			temp = m_val[1]
+			index = int(temp) + 1
+		elif m_val=='10' or m_val=='11' or m_val=='12':
+			index = int(m_val) + 1
+		else:
+			index = int(m_val) - 1
+	return index
+
 def grabAsiAdminFields(asi):
 	result = {}
 	result['g1'] = asi.admin.g1
@@ -6494,58 +6522,78 @@ def grabAsiEmploymentFields(asi):
 
 def grabAsiDrug1Fields(asi):
 	result = {}
+	d1Route = getDrugTableIndex(asi.drug1.d1Route)
+	d2Route = getDrugTableIndex(asi.drug1.d2Route)
+	d3Route = getDrugTableIndex(asi.drug1.d3Route)
+	d4Route = getDrugTableIndex(asi.drug1.d4Route)
+	d5Route = getDrugTableIndex(asi.drug1.d5Route)
+	d6Route = getDrugTableIndex(asi.drug1.d6Route)
+	d7Route = getDrugTableIndex(asi.drug1.d7Route)
+	d8Route = getDrugTableIndex(asi.drug1.d8Route)
+	d9Route = getDrugTableIndex(asi.drug1.d9Route)
+	d10Route = getDrugTableIndex(asi.drug1.d10Route)
+	d11Route = getDrugTableIndex(asi.drug1.d11Route)
+	d12Route = getDrugTableIndex(asi.drug1.d12Route)
+
+	d13 = getDrugTableIndex(asi.drug1.d13)
+	d14 = getASIDrugMajor(asi.drug1.d14)
+	d28 = getPatientIndex(asi.drug1.d28)
+	d29 = getPatientIndex(asi.drug1.d29)
+	d30 = getPatientIndex(asi.drug1.d30)
+	d31 = getPatientIndex(asi.drug1.d31)
+	d32 = getInterviewerIndex(asi.drug1.d32)
+	d33 = getInterviewerIndex(asi.drug1.d33)
+
 	result['d1Day'] = asi.drug1.d1Day
 	result['d1Year'] = asi.drug1.d1Year
-	result['d1Route'] = asi.drug1.d1Route
+	result['d1Route'] = d1Route
 
 	result['d2Day'] = asi.drug1.d2Day
 	result['d2Year'] = asi.drug1.d2Year
-	result['d2Route'] = asi.drug1.d2Route
+	result['d2Route'] = d2Route
 
 	result['d3Day'] = asi.drug1.d3Day
 	result['d3Year'] = asi.drug1.d3Year
-	result['d3Route'] = asi.drug1.d3Route
+	result['d3Route'] = d3Route
 
 	result['d4Day'] = asi.drug1.d4Day
 	result['d4Year'] = asi.drug1.d4Year
-	result['d4Route'] = asi.drug1.d4Route
+	result['d4Route'] = d4Route
 
 	result['d5Day'] = asi.drug1.d5Day
 	result['d5Year'] = asi.drug1.d5Year
-	result['d5Route'] = asi.drug1.d5Route
+	result['d5Route'] = d5Route
 
 	result['d6Day'] = asi.drug1.d6Day
 	result['d6Year'] = asi.drug1.d6Year
-	result['d6Route'] = asi.drug1.d6Route
+	result['d6Route'] = d6Route
 
 	result['d7Day'] = asi.drug1.d7Day
 	result['d7Year'] = asi.drug1.d7Year
-	result['d7Route'] = asi.drug1.d7Route
+	result['d7Route'] = d7Route
 
 	result['d8Day'] = asi.drug1.d8Day
 	result['d8Year'] = asi.drug1.d8Year
-	result['d8Route'] = asi.drug1.d8Route
+	result['d8Route'] = d8Route
 
 	result['d9Day'] = asi.drug1.d9Day
 	result['d9Year'] = asi.drug1.d9Year
-	result['d9Route'] = asi.drug1.d9Route
+	result['d9Route'] = d9Route
 
 	result['d10Day'] = asi.drug1.d10Day
 	result['d10Year'] = asi.drug1.d10Year
-	result['d10Route'] = asi.drug1.d10Route
+	result['d10Route'] = d10Route
 
 	result['d11Day'] = asi.drug1.d11Day
 	result['d11Year'] = asi.drug1.d11Year
-	result['d11Route'] = asi.drug1.d11Route
+	result['d11Route'] = d11Route
 
 	result['d12Day'] = asi.drug1.d12Day
 	result['d12Year'] = asi.drug1.d12Year
-	result['d12Route'] = asi.drug1.d12Route
+	result['d12Route'] = d12Route
 
-	result['d13'] = asi.drug1.d13
-	result['isComplete'] = asi.drug1Complete
-
-	result['d14'] = asi.drug1.d14
+	result['d13'] = d13
+	result['d14'] = d14
 	result['d15'] = asi.drug1.d15
 	result['d16'] = asi.drug1.d16
 	result['d17'] = asi.drug1.d17
@@ -6559,15 +6607,17 @@ def grabAsiDrug1Fields(asi):
 	result['d25'] = asi.drug1.d25
 	result['d26'] = asi.drug1.d26
 	result['d27'] = asi.drug1.d27
-	result['d28'] = asi.drug1.d28
-	result['d29'] = asi.drug1.d29
-	result['d30'] = asi.drug1.d30
-	result['d31'] = asi.drug1.d31
-	result['d32'] = asi.drug1.d32
-	result['d33'] = asi.drug1.d33
+	result['d28'] = d28
+	result['d29'] = d29
+	result['d30'] = d30
+	result['d31'] = d31
+	result['d32'] = d32
+	result['d33'] = d33
 	result['d34'] = asi.drug1.d34
 	result['d35'] = asi.drug1.d35
+
 	result['comments'] = asi.drug1.comments
+	result['isComplete'] = asi.drug1Complete
 	return result
 
 def grabAsiLegalFields(asi):

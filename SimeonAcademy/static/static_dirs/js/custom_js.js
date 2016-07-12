@@ -5674,6 +5674,591 @@ function mhBank() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=====================================================================================================================//
 
+
+
+//#####################################################################################################################//
+//*********************************************************************************************************************//
+//------------------------------------------------- ASI FUNCTIONS -----------------------------------------------------//
+//*********************************************************************************************************************//
+//#####################################################################################################################//
+
+
+//*********************************************** ASI INITIALIZATIONS *************************************************//
+
+function initialize_asi(section, json_data) {
+	section = String(section);
+
+	if (section === '/asi_admin/') {
+		init_asi_admin(json_data);
+	}
+	else if (section === '/asi_general/') {
+		init_asi_general(json_data);
+	}
+	else if (section === '/asi_medical/') {
+		init_asi_medical(json_data);
+	}
+	else if (section === '/asi_employment/') {
+		init_asi_employmentl(json_data);
+	}
+	else if (section === '/asi_drug1/') {
+		init_asi_drug1(json_data);
+	}
+	else if (section === '/asi_legal/') {
+		init_asi_legal(json_data);
+	}
+	else if (section === '/asi_family/') {
+		init_asi_family(json_data);
+	}
+	else if (section === '/asi_social1/') {
+		init_asi_soc1(json_data);
+	}
+	else if (section === '/asi_social2/') {
+		init_asi_soc2(json_data);
+	}
+	else if (section === '/asi_psych/') {
+		init_asi_psych(json_data);
+	}
+}
+
+function init_asi_admin(json_data) {
+	blank_init_asi(json_data.isComplete, document.getElementById('g1'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g2'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g3'));
+	blank_init_asi(json_data.isComplete, document.getElementById('popupDatepicker'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g11'));
+
+	document.getElementById('g8').selectedIndex = json_data.g8;
+	document.getElementById('g9').selectedIndex = json_data.g9;
+	document.getElementById('g12').selectedIndex = json_data.g12;
+	asi_radioBtn_select(json_data.g10, document.getElementById('isMale'), document.getElementById('isFemale'));
+}
+
+function init_asi_general(json_data) {
+	blank_init_asi(json_data.isComplete, document.getElementById('g13'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g21'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g22'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g23'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g24'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g25'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g26'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g27'));
+	blank_init_asi(json_data.isComplete, document.getElementById('g28'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test1'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test2'));
+	blank_init_asi(json_data.isComplete, document.getElementById('test3'));
+
+	number_init(json_data.isComplete, document.getElementById('g14yrs'));
+	number_init(json_data.isComplete, document.getElementById('g14mos'));
+	number_init(json_data.isComplete, document.getElementById('g20'));
+
+	//SEVERITY RADIO ENTRIES
+	var m0 = document.getElementById('m0');
+	var m1 = document.getElementById('m1');
+	var m2 = document.getElementById('m2');
+	var m3 = document.getElementById('m3');
+	var m4 = document.getElementById('m4');
+	var m5 = document.getElementById('m5');
+	var m6 = document.getElementById('m6');
+	var m7 = document.getElementById('m7');
+	var m8 = document.getElementById('m8');
+	var m9 = document.getElementById('m9');
+
+	var e0 = document.getElementById('e0');
+	var e1 = document.getElementById('e1');
+	var e2 = document.getElementById('e2');
+	var e3 = document.getElementById('e3');
+	var e4 = document.getElementById('e4');
+	var e5 = document.getElementById('e5');
+	var e6 = document.getElementById('e6');
+	var e7 = document.getElementById('e7');
+	var e8 = document.getElementById('e8');
+	var e9 = document.getElementById('e9');
+
+	var a0 = document.getElementById('a0');
+	var a1 = document.getElementById('a1');
+	var a2 = document.getElementById('a2');
+	var a3 = document.getElementById('a3');
+	var a4 = document.getElementById('a4');
+	var a5 = document.getElementById('a5');
+	var a6 = document.getElementById('a6');
+	var a7 = document.getElementById('a7');
+	var a8 = document.getElementById('a8');
+	var a9 = document.getElementById('a9');
+
+	var d0 = document.getElementById('d0');
+	var d1 = document.getElementById('d1');
+	var d2 = document.getElementById('d2');
+	var d3 = document.getElementById('d3');
+	var d4 = document.getElementById('d4');
+	var d5 = document.getElementById('d5');
+	var d6 = document.getElementById('d6');
+	var d7 = document.getElementById('d7');
+	var d8 = document.getElementById('d8');
+	var d9 = document.getElementById('d9');
+
+	var l0 = document.getElementById('l0');
+	var l1 = document.getElementById('l1');
+	var l2 = document.getElementById('l2');
+	var l3 = document.getElementById('l3');
+	var l4 = document.getElementById('l4');
+	var l5 = document.getElementById('l5');
+	var l6 = document.getElementById('l6');
+	var l7 = document.getElementById('l7');
+	var l8 = document.getElementById('l8');
+	var l9 = document.getElementById('l9');
+
+	var f0 = document.getElementById('f0');
+	var f1 = document.getElementById('f1');
+	var f2 = document.getElementById('f2');
+	var f3 = document.getElementById('f3');
+	var f4 = document.getElementById('f4');
+	var f5 = document.getElementById('f5');
+	var f6 = document.getElementById('f6');
+	var f7 = document.getElementById('f7');
+	var f8 = document.getElementById('f8');
+	var f9 = document.getElementById('f9');
+
+	var p0 = document.getElementById('p0');
+	var p1 = document.getElementById('p1');
+	var p2 = document.getElementById('p2');
+	var p3 = document.getElementById('p3');
+	var p4 = document.getElementById('p4');
+	var p5 = document.getElementById('p5');
+	var p6 = document.getElementById('p6');
+	var p7 = document.getElementById('p7');
+	var p8 = document.getElementById('p8');
+	var p9 = document.getElementById('p9');
+
+	assign_radio1_9(json_data.medical, m0, m1, m2, m3, m4, m5, m6, m7, m8, m9);
+	assign_radio1_9(json_data.employ, e0, e1, e2, e3, e4, e5, e6, e7, e8, e9);
+	assign_radio1_9(json_data.alcohol, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+	assign_radio1_9(json_data.drug, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9);
+	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
+	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
+	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+
+	document.getElementById('g17').selectedIndex = json_data.g17;
+	document.getElementById('g18').selectedIndex = json_data.g18;
+	document.getElementById('g19').selectedIndex = json_data.g19;
+}
+
+function init_asi_medical(json_data) {
+	number_init(json_data.isComplete, document.getElementById('m2yrs'));
+	number_init(json_data.isComplete, document.getElementById('m2mth'));
+	number_init(json_data.isComplete, document.getElementById('m1'));
+	number_init(json_data.isComplete, document.getElementById('m6'));
+
+	blank_init_asi(json_data.isComplete, document.getElementById('m5Exp'));
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	document.getElementById('m7').selectedIndex = Number(json_data.m7);
+	document.getElementById('m8').selectedIndex = Number(json_data.m8);
+	document.getElementById('m9').selectedIndex = Number(json_data.m9);
+	
+	asi_radioBtn_select(json_data.m3, document.getElementById('m3yes'), document.getElementById('m3no'));
+	asi_radioBtn_select(json_data.m4, document.getElementById('m4yes'), document.getElementById('m4no'));
+	asi_radioBtn_select(json_data.m5, document.getElementById('m5yes'), document.getElementById('m5no'));
+	asi_radioBtn_select(json_data.m10, document.getElementById('m10yes'), document.getElementById('m10no'));
+	asi_radioBtn_select(json_data.m11, document.getElementById('m11yes'), document.getElementById('m11no'));
+
+	m5Radio();
+}
+
+function init_asi_employmentl(json_data) {
+	number_init(json_data.isComplete, document.getElementById('e1yrs'));
+	number_init(json_data.isComplete, document.getElementById('e1mth'));
+	number_init(json_data.isComplete, document.getElementById('e2'));
+	number_init(json_data.isComplete, document.getElementById('e6yrs'));
+	number_init(json_data.isComplete, document.getElementById('e6mth'));
+	number_init(json_data.isComplete, document.getElementById('e11'));
+	number_init(json_data.isComplete, document.getElementById('e12'));
+	number_init(json_data.isComplete, document.getElementById('e13'));
+	number_init(json_data.isComplete, document.getElementById('e14'));
+	number_init(json_data.isComplete, document.getElementById('e15'));
+	number_init(json_data.isComplete, document.getElementById('e16'));
+	number_init(json_data.isComplete, document.getElementById('e17'));
+	number_init(json_data.isComplete, document.getElementById('e18'));
+	number_init(json_data.isComplete, document.getElementById('e19'));
+
+	blank_init_asi(json_data.isComplete, document.getElementById('e3Exp'));
+	blank_init_asi(json_data.isComplete, document.getElementById('e7Exp'));
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	document.getElementById('e10').selectedIndex = json_data.e10;
+	document.getElementById('e20').selectedIndex = json_data.e20;
+	document.getElementById('e21').selectedIndex = json_data.e21;
+	document.getElementById('e22').selectedIndex = json_data.e22;
+
+	asi_radioBtn_select(json_data.e3, document.getElementById('e3yes'), document.getElementById('e3no'));
+	asi_radioBtn_select(json_data.e4, document.getElementById('e4yes'), document.getElementById('e4no'));
+	asi_radioBtn_select(json_data.e5, document.getElementById('e5yes'), document.getElementById('e5no'));
+	asi_radioBtn_select(json_data.e7, document.getElementById('e7yes'), document.getElementById('e7no'));
+	asi_radioBtn_select(json_data.e8, document.getElementById('e8yes'), document.getElementById('e8no'));
+	asi_radioBtn_select(json_data.e9, document.getElementById('e9yes'), document.getElementById('e9no'));
+	asi_radioBtn_select(json_data.e23, document.getElementById('e23yes'), document.getElementById('e23no'));
+	asi_radioBtn_select(json_data.e24, document.getElementById('e24yes'), document.getElementById('e24no'));
+
+	e3Radio();
+	e4Radio();
+	e7Radio();
+	e8Radio();
+}
+
+function init_asi_drug1(json_data) {
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	number_init(json_data.isComplete, document.getElementById('d1Day'));
+	number_init(json_data.isComplete, document.getElementById('d2Day'));
+	number_init(json_data.isComplete, document.getElementById('d3Day'));
+	number_init(json_data.isComplete, document.getElementById('d4Day'));
+	number_init(json_data.isComplete, document.getElementById('d5Day'));
+	number_init(json_data.isComplete, document.getElementById('d6Day'));
+	number_init(json_data.isComplete, document.getElementById('d7Day'));
+	number_init(json_data.isComplete, document.getElementById('d8Day'));
+	number_init(json_data.isComplete, document.getElementById('d9Day'));
+	number_init(json_data.isComplete, document.getElementById('d10Day'));
+	number_init(json_data.isComplete, document.getElementById('d11Day'));
+	number_init(json_data.isComplete, document.getElementById('d12Day'));
+
+	number_init(json_data.isComplete, document.getElementById('d1Year'));
+	number_init(json_data.isComplete, document.getElementById('d2Year'));
+	number_init(json_data.isComplete, document.getElementById('d3Year'));
+	number_init(json_data.isComplete, document.getElementById('d4Year'));
+	number_init(json_data.isComplete, document.getElementById('d5Year'));
+	number_init(json_data.isComplete, document.getElementById('d6Year'));
+	number_init(json_data.isComplete, document.getElementById('d7Year'));
+	number_init(json_data.isComplete, document.getElementById('d8Year'));
+	number_init(json_data.isComplete, document.getElementById('d9Year'));
+	number_init(json_data.isComplete, document.getElementById('d10Year'));
+	number_init(json_data.isComplete, document.getElementById('d11Year'));
+	number_init(json_data.isComplete, document.getElementById('d12Year'));
+
+	number_init(json_data.isComplete, document.getElementById('d15'));
+	number_init(json_data.isComplete, document.getElementById('d16'));
+	number_init(json_data.isComplete, document.getElementById('d17'));
+	number_init(json_data.isComplete, document.getElementById('d18'));
+	number_init(json_data.isComplete, document.getElementById('d19'));
+	number_init(json_data.isComplete, document.getElementById('d20'));
+	number_init(json_data.isComplete, document.getElementById('d21'));
+	number_init(json_data.isComplete, document.getElementById('d22'));
+	number_init(json_data.isComplete, document.getElementById('d23'));
+	number_init(json_data.isComplete, document.getElementById('d24'));
+	number_init(json_data.isComplete, document.getElementById('d25'));
+	number_init(json_data.isComplete, document.getElementById('d26'));
+	number_init(json_data.isComplete, document.getElementById('d27'));
+
+	document.getElementById('d1Route').selectedIndex = json_data.d1Route;
+	document.getElementById('d2Route').selectedIndex = json_data.d2Route;
+	document.getElementById('d3Route').selectedIndex = json_data.d3Route;
+	document.getElementById('d4Route').selectedIndex = json_data.d4Route;
+	document.getElementById('d5Route').selectedIndex = json_data.d5Route;
+	document.getElementById('d6Route').selectedIndex = json_data.d6Route;
+	document.getElementById('d7Route').selectedIndex = json_data.d7Route;
+	document.getElementById('d8Route').selectedIndex = json_data.d8Route;
+	document.getElementById('d9Route').selectedIndex = json_data.d9Route;
+	document.getElementById('d10Route').selectedIndex = json_data.d10Route;
+	document.getElementById('d11Route').selectedIndex = json_data.d11Route;
+	document.getElementById('d12Route').selectedIndex = json_data.d12Route;
+
+	document.getElementById('d13').selectedIndex = json_data.d13;
+	document.getElementById('d14').selectedIndex = json_data.d14;
+	document.getElementById('d28').selectedIndex = json_data.d28;
+	document.getElementById('d29').selectedIndex = json_data.d29;
+	document.getElementById('d30').selectedIndex = json_data.d30;
+	document.getElementById('d31').selectedIndex = json_data.d31;
+	document.getElementById('d32').selectedIndex = json_data.d32;
+	document.getElementById('d33').selectedIndex = json_data.d33;
+
+	asi_radioBtn_select(json_data.d34, document.getElementById('d34yes'), document.getElementById('d34no'));
+	asi_radioBtn_select(json_data.d35, document.getElementById('d35yes'), document.getElementById('d35no'));
+}
+
+function init_asi_legal(json_data) {
+	
+}
+
+function init_asi_family(json_data) {
+	
+}
+
+function init_asi_soc1(json_data) {
+	
+}
+
+function init_asi_soc2(json_data) {
+	
+}
+
+function init_asi_psych(json_data) {
+	
+}
+
+//*********************************************** ASI POST FUNCTIONS *************************************************//
+// post(isDynamic, field_type, field, trigger, target)
+
+function processAsiAdmin() {
+	post_asi(false, 'text', document.getElementById('g1'), null, null);
+	post_asi(false, 'text', document.getElementById('g2'), null, null);
+	post_asi(false, 'text', document.getElementById('g3'), null, null);
+	post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
+	post_asi(false, 'text', document.getElementById('g11'), null, null);
+}
+
+function processAsiGeneral() {
+	post_asi(false, 'number', document.getElementById('g14yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('g14mos'), null, null);
+	post_asi(false, 'number', document.getElementById('g20'), null, null);
+
+	post_asi(false, 'text', document.getElementById('g13'), null, null);	
+	post_asi(false, 'text', document.getElementById('g21'), null, null);
+	post_asi(false, 'text', document.getElementById('g22'), null, null);
+	post_asi(false, 'text', document.getElementById('g23'), null, null);
+	post_asi(false, 'text', document.getElementById('g24'), null, null);
+	post_asi(false, 'text', document.getElementById('g25'), null, null);
+	post_asi(false, 'text', document.getElementById('g26'), null, null);
+	post_asi(false, 'text', document.getElementById('g27'), null, null);
+	post_asi(false, 'text', document.getElementById('g28'), null, null);
+	post_asi(false, 'text', document.getElementById('test1'), null, null);
+	post_asi(false, 'text', document.getElementById('test2'), null, null);
+	post_asi(false, 'text', document.getElementById('test3'), null, null);
+}
+
+function processAsiMedical() {
+	post_asi(true, 'text', document.getElementById('m5Exp'), document.getElementById('m5yes'), document.getElementById('m_m5Exp'));
+	post_asi(false, 'text', document.getElementById('comments'), null, null);
+
+	post_asi(false, 'number', document.getElementById('m1'), null, null);
+	post_asi(false, 'number', document.getElementById('m2yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('m2mth'), null, null);
+	post_asi(false, 'number', document.getElementById('m6'), null, null);
+}
+
+// function post_asi(isDynamic, field_type, field, trigger, target)
+function processAsiEmployment() {
+	//PROCESS THE DYNAMIC FIELDS
+	post_asi(true, 'text', document.getElementById('e3Exp'), document.getElementById('e3yes'), document.getElementById('m_e3Exp'));
+	post_asi(true, 'radio', document.getElementById('e5yes'), document.getElementById('e4yes'), document.getElementById('m_e5'));
+	post_asi(true, 'text', document.getElementById('e7Exp'), document.getElementById('e7yes'), document.getElementById('m_e7Exp'));
+	post_asi(true, 'radio', document.getElementById('e9yes'), document.getElementById('e8yes'), document.getElementById('m_e9'));
+
+	post_asi(false, 'number', document.getElementById('e1yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('e1mth'), null, null);
+	post_asi(false, 'number', document.getElementById('e2'), null, null);
+	post_asi(false, 'number', document.getElementById('e6yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('e6mth'), null, null);
+	post_asi(false, 'number', document.getElementById('e11'), null, null);
+	post_asi(false, 'number', document.getElementById('e12'), null, null);
+	post_asi(false, 'number', document.getElementById('e13'), null, null);
+	post_asi(false, 'number', document.getElementById('e14'), null, null);
+	post_asi(false, 'number', document.getElementById('e15'), null, null);
+	post_asi(false, 'number', document.getElementById('e16'), null, null);
+	post_asi(false, 'number', document.getElementById('e17'), null, null);
+	post_asi(false, 'number', document.getElementById('e18'), null, null);
+	post_asi(false, 'number', document.getElementById('e19'), null, null);
+}
+
+// function post_asi(isDynamic, field_type, field, trigger, target)
+function processAsiDrug1() {
+	post_asi(false, 'number', document.getElementById('d1Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d2Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d3Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d4Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d5Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d6Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d7Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d8Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d9Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d10Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d11Day'), null, null);
+	post_asi(false, 'number', document.getElementById('d12Day'), null, null);
+
+	post_asi(false, 'number', document.getElementById('d1Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d2Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d3Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d4Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d5Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d6Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d7Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d8Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d9Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d10Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d11Year'), null, null);
+	post_asi(false, 'number', document.getElementById('d12Year'), null, null);
+
+	post_asi(false, 'number', document.getElementById('d15'), null, null);
+	post_asi(false, 'number', document.getElementById('d16'), null, null);	
+	post_asi(false, 'number', document.getElementById('d17'), null, null);
+	post_asi(false, 'number', document.getElementById('d18'), null, null);
+	post_asi(false, 'number', document.getElementById('d19'), null, null);
+	post_asi(false, 'number', document.getElementById('d20'), null, null);
+	post_asi(false, 'number', document.getElementById('d21'), null, null);
+	post_asi(false, 'number', document.getElementById('d22'), null, null);
+	post_asi(false, 'number', document.getElementById('d23'), null, null);
+	post_asi(false, 'number', document.getElementById('d24'), null, null);
+	post_asi(false, 'number', document.getElementById('d25'), null, null);
+	post_asi(false, 'number', document.getElementById('d26'), null, null);
+	post_asi(false, 'number', document.getElementById('d27'), null, null);
+
+	post_asi(false, 'text', document.getElementById('comments'), null, null);
+}
+
+function processAsiLegal() {
+	
+}
+
+function processAsiFamily() {
+	
+}
+
+function processAsiSocial1() {
+	
+}
+
+function processAsiSocial2() {
+	
+}
+
+function processAsiPsych() {
+	
+}
+
+function processAsiFields(page) {
+	page = String(page);
+
+	if (page === '/asi_admin/') {
+		processAsiAdmin();
+	}
+	else if (page === '/asi_general/') {
+		processAsiGeneral();
+	}
+	else if (page === '/asi_medical/') {
+		processAsiMedical();
+	}
+	else if (page === '/asi_employment/') {
+		processAsiEmployment();
+	}
+	else if (page === '/asi_drug1/') {
+		processAsiDrug1();
+	}
+	else if (page === '/asi_legal/') {
+		processAsiLegal();
+	}
+	else if (page === '/asi_family/') {
+		processAsiFamily();
+	}
+	else if (page === '/asi_social1/') {
+		processAsiSocial1();
+	}
+	else if (page === '/asi_social2/') {
+		processAsiSocial2();
+	}
+	else if (page === '/asi_psych/') {
+		processAsiPsych();
+	}
+}
+
+//*********************************************** ASI SUPPORT FUNCTIONS *************************************************//
+
+function asi_radioBtn_select(sel_val, r1, r2) {
+	sel_val = String(sel_val);
+
+	if (sel_val === '1') {
+		r1.checked = true;
+	}
+	else {
+		r2.checked = true;
+	}
+}
+
+function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
+	m_val = String(m_val);
+
+	if (m_val === '0') {
+		r0.checked = true;
+	}
+	else if (m_val === '1') {
+		r1.checked = true;
+	}
+	else if (m_val === '2') {
+		r2.checked = true;
+	}
+	else if (m_val === '3') {
+		r3.checked = true;
+	}
+	else if (m_val === '4') {
+		r4.checked = true;
+	}
+	else if (m_val === '5') {
+		r5.checked = true;
+	}
+	else if (m_val === '6') {
+		r6.checked = true;
+	}
+	else if (m_val === '7') {
+		r7.checked = true;
+	}
+	else if (m_val === '8') {
+		r8.checked = true;
+	}
+	else if (m_val === '9') {
+		r9.checked = true;
+	}
+}
+
+function m5Radio() {
+	quickRadio(true, document.getElementById('m5yes'), document.getElementById('m5Exp_lab'), document.getElementById('m5Exp'));
+}
+
+function e3Radio() {
+	quickRadio(true, document.getElementById('e3yes'), document.getElementById('e3Exp_lab'), document.getElementById('e3Exp'));
+}
+
+function e4Radio() {
+	specialRadio(document.getElementById('e4yes'),document.getElementById('e5_lab'),document.getElementById('e5yes_lab'),document.getElementById('e5no_lab'),document.getElementById('e5no'),document.getElementById('e5yes'));
+	additionalLabel(document.getElementById('e4yes'), document.getElementById('extra5'));
+}
+
+function e7Radio() {
+	quickRadio(true, document.getElementById('e7yes'), document.getElementById('e7Exp_lab'), document.getElementById('e7Exp'));
+}
+
+function e8Radio() {
+	specialRadio(document.getElementById('e8yes'),document.getElementById('e9_lab'),document.getElementById('e9no_lab'),document.getElementById('e9yes_lab'),document.getElementById('e9no'),document.getElementById('e9yes'));
+	additionalLabel(document.getElementById('e8yes'), document.getElementById('extra9'));
+}
+
+//*********************************************** ASI PAGE SUBMITS *************************************************//
+
+function continue_asi_form(section) {
+	section = String(section);
+	var form = document.getElementById('asi_form');
+	var next_url = document.getElementById('next_url');
+	var proceed = true;
+
+	processAsiFields(section);
+
+	if (proceed === true) {
+		document.getElementById('save_this').value = 'true';
+		form.action = next_url.value;
+		form.submit();
+	}
+}
+
+function continue_to_asi_form() {
+	var form = document.getElementById('asi_instructions');
+	form.action = '/asi_admin/';
+	form.submit();
+}
+
+function sideBarASI(page) {
+	document.getElementById('save_this').value = 'false';
+	var form = document.getElementById('asi_form');
+	form.action = page;
+	form.submit();
+}
+
+
+
 //#####################################################################################################################//
 //*********************************************************************************************************************//
 //------------------------------------------------- SUPPORT FUNCTIONS ------------------------------------------------//
@@ -6015,499 +6600,6 @@ function number_init_asi(isComplete, field) {
 //=================================================++ END POSTING======================================================//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //=====================================================================================================================//\
-
-
-
-
-
-//#####################################################################################################################//
-//*********************************************************************************************************************//
-//------------------------------------------------- ASI FUNCTIONS -----------------------------------------------------//
-//*********************************************************************************************************************//
-//#####################################################################################################################//
-
-
-//*********************************************** ASI INITIALIZATIONS *************************************************//
-
-function initialize_asi(section, json_data) {
-	section = String(section);
-
-	if (section === '/asi_admin/') {
-		init_asi_admin(json_data);
-	}
-	else if (section === '/asi_general/') {
-		init_asi_general(json_data);
-	}
-	else if (section === '/asi_medical/') {
-		init_asi_medical(json_data);
-	}
-	else if (section === '/asi_employment/') {
-		init_asi_employmentl(json_data);
-	}
-	else if (section === '/asi_drug1/') {
-		init_asi_drug1(json_data);
-	}
-	else if (section === '/asi_drug2/') {
-		init_asi_drug2(json_data);
-	}
-	else if (section === '/asi_legal/') {
-		init_asi_legal(json_data);
-	}
-	else if (section === '/asi_family/') {
-		init_asi_family(json_data);
-	}
-	else if (section === '/asi_social1/') {
-		init_asi_soc1(json_data);
-	}
-	else if (section === '/asi_social2/') {
-		init_asi_soc2(json_data);
-	}
-	else if (section === '/asi_psych/') {
-		init_asi_psych(json_data);
-	}
-}
-
-function init_asi_admin(json_data) {
-	blank_init_asi(json_data.isComplete, document.getElementById('g1'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g2'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g3'));
-	blank_init_asi(json_data.isComplete, document.getElementById('popupDatepicker'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g11'));
-
-	document.getElementById('g8').selectedIndex = json_data.g8;
-	document.getElementById('g9').selectedIndex = json_data.g9;
-	document.getElementById('g12').selectedIndex = json_data.g12;
-	asi_radioBtn_select(json_data.g10, document.getElementById('isMale'), document.getElementById('isFemale'));
-}
-
-function init_asi_general(json_data) {
-	blank_init_asi(json_data.isComplete, document.getElementById('g13'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g21'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g22'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g23'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g24'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g25'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g26'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g27'));
-	blank_init_asi(json_data.isComplete, document.getElementById('g28'));
-	blank_init_asi(json_data.isComplete, document.getElementById('test1'));
-	blank_init_asi(json_data.isComplete, document.getElementById('test2'));
-	blank_init_asi(json_data.isComplete, document.getElementById('test3'));
-
-	number_init(json_data.isComplete, document.getElementById('g14yrs'));
-	number_init(json_data.isComplete, document.getElementById('g14mos'));
-	number_init(json_data.isComplete, document.getElementById('g20'));
-
-	//SEVERITY RADIO ENTRIES
-	var m0 = document.getElementById('m0');
-	var m1 = document.getElementById('m1');
-	var m2 = document.getElementById('m2');
-	var m3 = document.getElementById('m3');
-	var m4 = document.getElementById('m4');
-	var m5 = document.getElementById('m5');
-	var m6 = document.getElementById('m6');
-	var m7 = document.getElementById('m7');
-	var m8 = document.getElementById('m8');
-	var m9 = document.getElementById('m9');
-
-	var e0 = document.getElementById('e0');
-	var e1 = document.getElementById('e1');
-	var e2 = document.getElementById('e2');
-	var e3 = document.getElementById('e3');
-	var e4 = document.getElementById('e4');
-	var e5 = document.getElementById('e5');
-	var e6 = document.getElementById('e6');
-	var e7 = document.getElementById('e7');
-	var e8 = document.getElementById('e8');
-	var e9 = document.getElementById('e9');
-
-	var a0 = document.getElementById('a0');
-	var a1 = document.getElementById('a1');
-	var a2 = document.getElementById('a2');
-	var a3 = document.getElementById('a3');
-	var a4 = document.getElementById('a4');
-	var a5 = document.getElementById('a5');
-	var a6 = document.getElementById('a6');
-	var a7 = document.getElementById('a7');
-	var a8 = document.getElementById('a8');
-	var a9 = document.getElementById('a9');
-
-	var d0 = document.getElementById('d0');
-	var d1 = document.getElementById('d1');
-	var d2 = document.getElementById('d2');
-	var d3 = document.getElementById('d3');
-	var d4 = document.getElementById('d4');
-	var d5 = document.getElementById('d5');
-	var d6 = document.getElementById('d6');
-	var d7 = document.getElementById('d7');
-	var d8 = document.getElementById('d8');
-	var d9 = document.getElementById('d9');
-
-	var l0 = document.getElementById('l0');
-	var l1 = document.getElementById('l1');
-	var l2 = document.getElementById('l2');
-	var l3 = document.getElementById('l3');
-	var l4 = document.getElementById('l4');
-	var l5 = document.getElementById('l5');
-	var l6 = document.getElementById('l6');
-	var l7 = document.getElementById('l7');
-	var l8 = document.getElementById('l8');
-	var l9 = document.getElementById('l9');
-
-	var f0 = document.getElementById('f0');
-	var f1 = document.getElementById('f1');
-	var f2 = document.getElementById('f2');
-	var f3 = document.getElementById('f3');
-	var f4 = document.getElementById('f4');
-	var f5 = document.getElementById('f5');
-	var f6 = document.getElementById('f6');
-	var f7 = document.getElementById('f7');
-	var f8 = document.getElementById('f8');
-	var f9 = document.getElementById('f9');
-
-	var p0 = document.getElementById('p0');
-	var p1 = document.getElementById('p1');
-	var p2 = document.getElementById('p2');
-	var p3 = document.getElementById('p3');
-	var p4 = document.getElementById('p4');
-	var p5 = document.getElementById('p5');
-	var p6 = document.getElementById('p6');
-	var p7 = document.getElementById('p7');
-	var p8 = document.getElementById('p8');
-	var p9 = document.getElementById('p9');
-
-	assign_radio1_9(json_data.medical, m0, m1, m2, m3, m4, m5, m6, m7, m8, m9);
-	assign_radio1_9(json_data.employ, e0, e1, e2, e3, e4, e5, e6, e7, e8, e9);
-	assign_radio1_9(json_data.alcohol, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
-	assign_radio1_9(json_data.drug, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9);
-	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
-	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
-	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-
-	document.getElementById('g17').selectedIndex = json_data.g17;
-	document.getElementById('g18').selectedIndex = json_data.g18;
-	document.getElementById('g19').selectedIndex = json_data.g19;
-}
-
-function init_asi_medical(json_data) {
-	number_init(json_data.isComplete, document.getElementById('m2yrs'));
-	number_init(json_data.isComplete, document.getElementById('m2mth'));
-	number_init(json_data.isComplete, document.getElementById('m1'));
-	number_init(json_data.isComplete, document.getElementById('m6'));
-
-	blank_init_asi(json_data.isComplete, document.getElementById('m5Exp'));
-	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
-
-	document.getElementById('m7').selectedIndex = Number(json_data.m7);
-	document.getElementById('m8').selectedIndex = Number(json_data.m8);
-	document.getElementById('m9').selectedIndex = Number(json_data.m9);
-	
-	asi_radioBtn_select(json_data.m3, document.getElementById('m3yes'), document.getElementById('m3no'));
-	asi_radioBtn_select(json_data.m4, document.getElementById('m4yes'), document.getElementById('m4no'));
-	asi_radioBtn_select(json_data.m5, document.getElementById('m5yes'), document.getElementById('m5no'));
-	asi_radioBtn_select(json_data.m10, document.getElementById('m10yes'), document.getElementById('m10no'));
-	asi_radioBtn_select(json_data.m11, document.getElementById('m11yes'), document.getElementById('m11no'));
-
-	m5Radio();
-}
-
-function init_asi_employmentl(json_data) {
-	number_init(json_data.isComplete, document.getElementById('e1yrs'));
-	number_init(json_data.isComplete, document.getElementById('e1mth'));
-	number_init(json_data.isComplete, document.getElementById('e2'));
-	number_init(json_data.isComplete, document.getElementById('e6yrs'));
-	number_init(json_data.isComplete, document.getElementById('e6mth'));
-	number_init(json_data.isComplete, document.getElementById('e11'));
-	number_init(json_data.isComplete, document.getElementById('e12'));
-	number_init(json_data.isComplete, document.getElementById('e13'));
-	number_init(json_data.isComplete, document.getElementById('e14'));
-	number_init(json_data.isComplete, document.getElementById('e15'));
-	number_init(json_data.isComplete, document.getElementById('e16'));
-	number_init(json_data.isComplete, document.getElementById('e17'));
-	number_init(json_data.isComplete, document.getElementById('e18'));
-	number_init(json_data.isComplete, document.getElementById('e19'));
-
-	blank_init_asi(json_data.isComplete, document.getElementById('e3Exp'));
-	blank_init_asi(json_data.isComplete, document.getElementById('e7Exp'));
-	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
-
-	document.getElementById('e10').selectedIndex = json_data.e10;
-	document.getElementById('e20').selectedIndex = json_data.e20;
-	document.getElementById('e21').selectedIndex = json_data.e21;
-	document.getElementById('e22').selectedIndex = json_data.e22;
-
-	asi_radioBtn_select(json_data.e3, document.getElementById('e3yes'), document.getElementById('e3no'));
-	asi_radioBtn_select(json_data.e4, document.getElementById('e4yes'), document.getElementById('e4no'));
-	asi_radioBtn_select(json_data.e5, document.getElementById('e5yes'), document.getElementById('e5no'));
-	asi_radioBtn_select(json_data.e7, document.getElementById('e7yes'), document.getElementById('e7no'));
-	asi_radioBtn_select(json_data.e8, document.getElementById('e8yes'), document.getElementById('e8no'));
-	asi_radioBtn_select(json_data.e9, document.getElementById('e9yes'), document.getElementById('e9no'));
-	asi_radioBtn_select(json_data.e23, document.getElementById('e23yes'), document.getElementById('e23no'));
-	asi_radioBtn_select(json_data.e24, document.getElementById('e24yes'), document.getElementById('e24no'));
-
-	e3Radio();
-	e4Radio();
-	e7Radio();
-	e8Radio();
-}
-
-function init_asi_drug1(json_data) {
-
-}
-
-function init_asi_drug2(json_data) {
-	
-}
-
-function init_asi_legal(json_data) {
-	
-}
-
-function init_asi_family(json_data) {
-	
-}
-
-function init_asi_soc1(json_data) {
-	
-}
-
-function init_asi_soc2(json_data) {
-	
-}
-
-function init_asi_psych(json_data) {
-	
-}
-
-//*********************************************** ASI POST FUNCTIONS *************************************************//
-// post(isDynamic, field_type, field, trigger, target)
-
-function processAsiAdmin() {
-	post_asi(false, 'text', document.getElementById('g1'), null, null);
-	post_asi(false, 'text', document.getElementById('g2'), null, null);
-	post_asi(false, 'text', document.getElementById('g3'), null, null);
-	post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
-	post_asi(false, 'text', document.getElementById('g11'), null, null);
-}
-
-function processAsiGeneral() {
-	post_asi(false, 'number', document.getElementById('g14yrs'), null, null);
-	post_asi(false, 'number', document.getElementById('g14mos'), null, null);
-	post_asi(false, 'number', document.getElementById('g20'), null, null);
-
-	post_asi(false, 'text', document.getElementById('g13'), null, null);	
-	post_asi(false, 'text', document.getElementById('g21'), null, null);
-	post_asi(false, 'text', document.getElementById('g22'), null, null);
-	post_asi(false, 'text', document.getElementById('g23'), null, null);
-	post_asi(false, 'text', document.getElementById('g24'), null, null);
-	post_asi(false, 'text', document.getElementById('g25'), null, null);
-	post_asi(false, 'text', document.getElementById('g26'), null, null);
-	post_asi(false, 'text', document.getElementById('g27'), null, null);
-	post_asi(false, 'text', document.getElementById('g28'), null, null);
-	post_asi(false, 'text', document.getElementById('test1'), null, null);
-	post_asi(false, 'text', document.getElementById('test2'), null, null);
-	post_asi(false, 'text', document.getElementById('test3'), null, null);
-}
-
-function processAsiMedical() {
-	post_asi(true, 'text', document.getElementById('m5Exp'), document.getElementById('m5yes'), document.getElementById('m_m5Exp'));
-	post_asi(false, 'text', document.getElementById('comments'), null, null);
-
-	post_asi(false, 'number', document.getElementById('m1'), null, null);
-	post_asi(false, 'number', document.getElementById('m2yrs'), null, null);
-	post_asi(false, 'number', document.getElementById('m2mth'), null, null);
-	post_asi(false, 'number', document.getElementById('m6'), null, null);
-}
-
-// function post_asi(isDynamic, field_type, field, trigger, target)
-function processAsiEmployment() {
-	//PROCESS THE DYNAMIC FIELDS
-	post_asi(true, 'text', document.getElementById('e3Exp'), document.getElementById('e3yes'), document.getElementById('m_e3Exp'));
-	post_asi(true, 'radio', document.getElementById('e5yes'), document.getElementById('e4yes'), document.getElementById('m_e5'));
-	post_asi(true, 'text', document.getElementById('e7Exp'), document.getElementById('e7yes'), document.getElementById('m_e7Exp'));
-	post_asi(true, 'radio', document.getElementById('e9yes'), document.getElementById('e8yes'), document.getElementById('m_e9'));
-
-	post_asi(false, 'number', document.getElementById('e1yrs'), null, null);
-	post_asi(false, 'number', document.getElementById('e1mth'), null, null);
-	post_asi(false, 'number', document.getElementById('e2'), null, null);
-	post_asi(false, 'number', document.getElementById('e6yrs'), null, null);
-	post_asi(false, 'number', document.getElementById('e6mth'), null, null);
-	post_asi(false, 'number', document.getElementById('e11'), null, null);
-	post_asi(false, 'number', document.getElementById('e12'), null, null);
-	post_asi(false, 'number', document.getElementById('e13'), null, null);
-	post_asi(false, 'number', document.getElementById('e14'), null, null);
-	post_asi(false, 'number', document.getElementById('e15'), null, null);
-	post_asi(false, 'number', document.getElementById('e16'), null, null);
-	post_asi(false, 'number', document.getElementById('e17'), null, null);
-	post_asi(false, 'number', document.getElementById('e18'), null, null);
-	post_asi(false, 'number', document.getElementById('e19'), null, null);
-}
-
-function processAsiDrug1() {
-	
-}
-
-function processAsiDrug2() {
-	
-}
-
-function processAsiLegal() {
-	
-}
-
-function processAsiFamily() {
-	
-}
-
-function processAsiSocial1() {
-	
-}
-
-function processAsiSocial2() {
-	
-}
-
-function processAsiPsych() {
-	
-}
-
-function processAsiFields(page) {
-	page = String(page);
-
-	if (page === '/asi_admin/') {
-		processAsiAdmin();
-	}
-	else if (page === '/asi_general/') {
-		processAsiGeneral();
-	}
-	else if (page === '/asi_medical/') {
-		processAsiMedical();
-	}
-	else if (page === '/asi_employment/') {
-		processAsiEmployment();
-	}
-	else if (page === '/asi_drug1/') {
-		processAsiDrug1();
-	}
-	else if (page === '/asi_drug2/') {
-		processAsiDrug2();
-	}
-	else if (page === '/asi_legal/') {
-		processAsiLegal();
-	}
-	else if (page === '/asi_family/') {
-		processAsiFamily();
-	}
-	else if (page === '/asi_social1/') {
-		processAsiSocial1();
-	}
-	else if (page === '/asi_social2/') {
-		processAsiSocial2();
-	}
-	else if (page === '/asi_psych/') {
-		processAsiPsych();
-	}
-}
-
-//*********************************************** ASI SUPPORT FUNCTIONS *************************************************//
-
-function asi_radioBtn_select(sel_val, r1, r2) {
-	sel_val = String(sel_val);
-
-	if (sel_val === '1') {
-		r1.checked = true;
-	}
-	else {
-		r2.checked = true;
-	}
-}
-
-function assign_radio1_9(m_val, r0, r1, r2, r3, r4, r5, r6, r7, r8, r9) {
-	m_val = String(m_val);
-
-	if (m_val === '0') {
-		r0.checked = true;
-	}
-	else if (m_val === '1') {
-		r1.checked = true;
-	}
-	else if (m_val === '2') {
-		r2.checked = true;
-	}
-	else if (m_val === '3') {
-		r3.checked = true;
-	}
-	else if (m_val === '4') {
-		r4.checked = true;
-	}
-	else if (m_val === '5') {
-		r5.checked = true;
-	}
-	else if (m_val === '6') {
-		r6.checked = true;
-	}
-	else if (m_val === '7') {
-		r7.checked = true;
-	}
-	else if (m_val === '8') {
-		r8.checked = true;
-	}
-	else if (m_val === '9') {
-		r9.checked = true;
-	}
-}
-
-function m5Radio() {
-	quickRadio(true, document.getElementById('m5yes'), document.getElementById('m5Exp_lab'), document.getElementById('m5Exp'));
-}
-
-function e3Radio() {
-	quickRadio(true, document.getElementById('e3yes'), document.getElementById('e3Exp_lab'), document.getElementById('e3Exp'));
-}
-
-function e4Radio() {
-	specialRadio(document.getElementById('e4yes'),document.getElementById('e5_lab'),document.getElementById('e5yes_lab'),document.getElementById('e5no_lab'),document.getElementById('e5no'),document.getElementById('e5yes'));
-	additionalLabel(document.getElementById('e4yes'), document.getElementById('extra5'));
-}
-
-function e7Radio() {
-	quickRadio(true, document.getElementById('e7yes'), document.getElementById('e7Exp_lab'), document.getElementById('e7Exp'));
-}
-
-function e8Radio() {
-	specialRadio(document.getElementById('e8yes'),document.getElementById('e9_lab'),document.getElementById('e9no_lab'),document.getElementById('e9yes_lab'),document.getElementById('e9no'),document.getElementById('e9yes'));
-	additionalLabel(document.getElementById('e8yes'), document.getElementById('extra9'));
-}
-
-//*********************************************** ASI PAGE SUBMITS *************************************************//
-
-function continue_asi_form(section) {
-	section = String(section);
-	var form = document.getElementById('asi_form');
-	var next_url = document.getElementById('next_url');
-	var proceed = true;
-
-	processAsiFields(section);
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = next_url.value;
-		form.submit();
-	}
-}
-
-function continue_to_asi_form() {
-	var form = document.getElementById('asi_instructions');
-	form.action = '/asi_admin/';
-	form.submit();
-}
-
-function sideBarASI(page) {
-	document.getElementById('save_this').value = 'false';
-	var form = document.getElementById('asi_form');
-	form.action = page;
-	form.submit();
-}
 
 
 //=====================================================================================================================//
