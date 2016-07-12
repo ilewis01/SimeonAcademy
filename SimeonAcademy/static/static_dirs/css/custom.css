@@ -1946,6 +1946,15 @@ button:hover {
 	border-radius: 5px;
 }
 
+.container_asiH4 {
+	width: 100%;
+	/*margin-left: 15%;*/
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	padding:1%;
+	border-radius: 5px;
+}
+
 .asi_family_table {
 	width:100%;
 	margin: auto;
@@ -2015,8 +2024,13 @@ button:hover {
 	border-radius: 5px;
 }
 
+
 #main_asi_soc2_vert {
 	width:200px;
+}
+
+#main_asi_soc4_vert {
+	width:320px;
 }
 
 #table_btn_asi {
@@ -2034,6 +2048,11 @@ button:hover {
 #asi_vert_head {
 	font-style: italic;
 	padding-left: 5%;
+}
+
+#asi_vert_head4 {
+	font-style: italic;
+	padding-left: 2%;
 }
 
 #asi_table_btn {

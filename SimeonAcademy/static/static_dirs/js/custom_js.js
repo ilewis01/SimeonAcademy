@@ -6117,7 +6117,10 @@ function init_asi_soc2(json_data) {
 }
 
 function init_asi_psych(json_data) {
-	
+	number_init(json_data.isComplete, grab('p1'));
+	number_init(json_data.isComplete, grab('p2'));
+
+	asi_radioBtn_select(json_data.p3, grab('p3yes'), grab('p3no'));
 }
 
 //*********************************************** ASI POST FUNCTIONS *************************************************//
@@ -6265,11 +6268,6 @@ function processAsiSocial1() {
 	post_asi(false, 'number', document.getElementById('f30'), null, null);
 	post_asi(false, 'number', document.getElementById('f31'), null, null);
 }
-
-function processAsiSocial2() {
-	
-}
-
 function processAsiPsych() {
 	
 }
@@ -6297,9 +6295,6 @@ function processAsiFields(page) {
 	}
 	else if (page === '/asi_social1/') {
 		processAsiSocial1();
-	}
-	else if (page === '/asi_social2/') {
-		processAsiSocial2();
 	}
 	else if (page === '/asi_psych/') {
 		processAsiPsych();
@@ -6425,6 +6420,25 @@ function reset_asi_subf(ftype) {
 		resetSelect(grab('d11Route'));
 		resetSelect(grab('d12Route'));
 		resetSelect(grab('d13'));
+	}
+	else if (ftype === 'psych') {
+		resetSelect(grab('p4d'));
+		resetSelect(grab('p5d'));
+		resetSelect(grab('p6d'));
+		resetSelect(grab('p7d'));
+		resetSelect(grab('p8d'));
+		resetSelect(grab('p9d'));
+		resetSelect(grab('p10d'));
+		resetSelect(grab('p11d'));
+
+		resetSelect(grab('p4y'));
+		resetSelect(grab('p5y'));
+		resetSelect(grab('p6y'));
+		resetSelect(grab('p7y'));
+		resetSelect(grab('p8y'));
+		resetSelect(grab('p9y'));
+		resetSelect(grab('p10y'));
+		resetSelect(grab('p11y'));
 	}
 }
 

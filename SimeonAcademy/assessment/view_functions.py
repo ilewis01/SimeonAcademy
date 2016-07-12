@@ -6124,6 +6124,7 @@ def priority_asi_psych(asi):
 	asi.psychPriority 		= True
 
 def asiPriority(asi, section):
+#Will place a priority flag on the specified URL
 	section = str(section)
 
 	if section == '/asi_admin/':
@@ -6149,6 +6150,7 @@ def asiPriority(asi, section):
 	asi.save()
 
 def deprioritizeASI(asi):
+#Will set all priority booleans to False
 	asi.adminPriority 		= False
 	asi.generalPriority 	= False
 	asi.medicalPriority 	= False
@@ -6179,6 +6181,7 @@ def forceNextAsiPage(asi):
 	return result
 
 def nextAsiPage(asi, section):
+#Returns a string containing the next URL to go to.
 	result 		= None
 	nextSection = None
 	proceed 	= True
@@ -6207,6 +6210,7 @@ def nextAsiPage(asi, section):
 	return result
 
 def grabASIClassesCSS(asi, m_page):
+#Returns dictionary list of the CSS class for the specified button
 	classes = {}
 	asi = get_asi_parameters(asi)
 	normal = 'sideBarMargin'
@@ -6256,6 +6260,7 @@ def hasIncompleteASI(client):
 	return exist
 
 def findIncompleteClientASI(client):
+#Returns all incomplete ASI objects for the client
 	asis = ASI.objects.all()
 	result = None
 
@@ -6266,6 +6271,8 @@ def findIncompleteClientASI(client):
 	return result
 
 def newASI(the_client):
+#Creates all components of a ASI and sets default values
+#Returns the new ASI object
 	the_date = datetime.now()
 	date = the_date.date()
 	temp_time = str(the_date.time())
@@ -6318,6 +6325,7 @@ def newASI(the_client):
 
 
 def startASI(client):
+#Returns a dictionary with either a new ASI or a incomplete ASI along with True bool if new and False if not
 	result = {}
 
 	if hasIncompleteASI(client) == False:
@@ -6331,6 +6339,9 @@ def startASI(client):
 	return result
 
 def beginASI(request):
+# function 1. Returns dictionary object with all the page content
+# function 2. Collects all POST data and translates them
+# function 3. Sets global ID and Opens A form in the session.
 	result = {}
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
@@ -6446,6 +6457,7 @@ def getASI_YNI(m_val):
 	return index
 
 def grabAsiAdminFields(asi):
+	# Returns a dictionary List of ASI.admin fields
 	result = {}
 	result['g1'] = asi.admin.g1
 	result['g2'] = asi.admin.g2
@@ -6459,6 +6471,7 @@ def grabAsiAdminFields(asi):
 	return result
 
 def grabAsiGeneralFields(asi):
+	# Returns a dictionary List of ASI.general fields
 	result = {}
 	result['g13'] 		= asi.general.g13
 	result['g14yrs'] 	= asi.general.g14yrs
@@ -6493,6 +6506,7 @@ def grabAsiGeneralFields(asi):
 	return result
 
 def grabAsiMedicalFields(asi):
+	# Returns a dictionary List of ASI.medical fields
 	result = {}
 	m7 = getPatientIndex(asi.medical.m7)
 	m8 = getPatientIndex(asi.medical.m8)
@@ -6516,6 +6530,7 @@ def grabAsiMedicalFields(asi):
 	return result
 
 def grabAsiEmploymentFields(asi):
+	# Returns a dictionary List of ASI.employment fields
 	result = {}
 	e20 = getPatientIndex(asi.employment.e20)
 	e21 = getPatientIndex(asi.employment.e21)
@@ -6555,6 +6570,7 @@ def grabAsiEmploymentFields(asi):
 	return result
 
 def grabAsiDrug1Fields(asi):
+	# Returns a dictionary List of ASI.drug fields
 	result = {}
 	d1Route = getDrugTableIndex(asi.drug1.d1Route)
 	d2Route = getDrugTableIndex(asi.drug1.d2Route)
@@ -6655,6 +6671,7 @@ def grabAsiDrug1Fields(asi):
 	return result
 
 def grabAsiLegalFields(asi):
+	# Returns a dictionary List of ASI.legal fields
 	result = {}
 
 	l23 = getLegalChargesIndex(asi.legal.l23)
@@ -6700,6 +6717,7 @@ def grabAsiLegalFields(asi):
 	return result
 
 def grabAsiFamilyFields(asi):
+	# Returns a dictionary List of ASI.family fields
 	result = {}
 	result['h1a'] = getLegalFamilyIndex(asi.family.h1a)
 	result['h1d'] = getLegalFamilyIndex(asi.family.h1d)
@@ -6752,6 +6770,7 @@ def grabAsiFamilyFields(asi):
 	return result
 
 def grabAsiSocial1Fields(asi):
+	# Returns a dictionary List of ASI.social1 fields
 	result = {}
 	result['f1'] = asi.social1.f1
 	result['f2yrs'] = asi.social1.f2yrs
@@ -6779,6 +6798,7 @@ def grabAsiSocial1Fields(asi):
 	return result
 
 def grabAsiSocial2Fields(asi):
+	# Returns a dictionary List of ASI.social2 fields
 	result = {}
 	result['f12'] = getLegalFamilyIndex(asi.social2.f12)
 	result['f13'] = getLegalFamilyIndex(asi.social2.f13)
@@ -6817,6 +6837,7 @@ def grabAsiSocial2Fields(asi):
 	return result
 
 def grabAsiPsychFields(asi):
+	# Returns a dictionary List of ASI.psych fields
 	result = {}
 	result['p1'] = asi.psych.p1
 	result['p2'] = asi.psych.p2
@@ -6856,6 +6877,21 @@ def grabAsiPsychFields(asi):
 	result['isComplete'] = asi.psychComplete
 	return result
 
+def grabASIViewFields(asi):
+	result = {}
+	##Return all ASI fields and Image Locations where applicable
+	admin 		= grabAsiAdminFields(asi)
+	general 	= grabAsiGeneralFields(asi)
+	medical 	= grabAsiGeneralFields(asi)
+	employment 	= grabAsiGeneralFields(asi)
+	drug 		= grabAsiGeneralFields(asi)
+	legal 		= grabAsiGeneralFields(asi)
+	family 		= grabAsiGeneralFields(asi)
+	social1 	= grabAsiGeneralFields(asi)
+	social2 	= grabAsiGeneralFields(asi)
+	psych 		= grabAsiGeneralFields(asi)
+	return result
+
 def grabASIFields(asi, section):
 	section = str(section)
 	result = {}
@@ -6880,6 +6916,8 @@ def grabASIFields(asi, section):
 		result = grabAsiSocial2Fields(asi)
 	elif section == '/asi_psych/':
 		result = grabAsiPsychFields(asi)
+	elif section == '/asi_viewForm/':
+		result = grabASIViewFields(asi)
 
 	return result
 

@@ -206,24 +206,305 @@
 
                 <div class="container">
             		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>  
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
+                  <div class="col-md-6 col-sm-6">
+                  	<div>
+                  		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
+                        <input type='hidden' name='save_this' id='save_this' value=''>
+                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                        <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>  
+                        <input type='hidden' name='new_form' id='new_form' value='false'>
+                        <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
+                        <table>
+                          <tr>
+                            <td><label><em>How many times have you been treated for any psychological or emotional problems:</em></label></td>
+                          </tr>
+                        </table>
+
+                        <ul>
+                          <table>
+                            <tr>
+                              <td><li><div id='asiNumber'>P1.</div></li></td>
+                              <td><label>In a hospital?</label></td>
+                              <td><div id='fix_my_text'><input type='number' name='p1' id='p1' value='fields.p1'></div></td>
+                            </tr>
+                          </table>
+                          <table>
+                            <tr>
+                              <td><li><div id='asiNumber'>P2.</div></li></td>
+                              <td><label>As an outpatient or private patient?</label></td>
+                              <td><div id='fix_my_text'><input type='number' name='p2' id='p2' value='fields.p2'></div></td>
+                            </tr>
+                          </table>
+                        </ul>
+
+                        <table>
+                          <tr>
+                            <td><div id='asiNumber'>P3.</div></td>
+                            <td><label>Do you receive a pension for a psychiatric disability?</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='p3' id='p3yes' value='1'></div></td>
+                            <td><label>Yes</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='p3' id='p3no' value='0' checked></div></td>
+                            <td><label>No</label></td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <div id='ital_sub_head'>
+                                Psychological History
+                              </div>
+                            </td>
+                          </tr>
+                      </table>
+
+                        <table>
+                          <tr>
+                            <td><div><label><em>Have you ever had a significant period, (that was not a direct result of drug/alcohol use), in which you have experienced:</em></label></div></td>
+                          </tr>
+                        </table>
+
+                        <div class='container_asiH4'>
+                          <table class='asi_family_table'>
+                            <tr>
+                              <th><div id='main_asi_soc4_vert'></div></th>
+                              <th>Past 30 Days</th>
+                              <th>In Your Life</th>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Serious Depression</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p4d' id='p4d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p4y' id='p4y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Serious Anxiety or Tension</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p5d' id='p5d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p5y' id='p5y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Hallucinations</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p6d' id='p6d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p6y' id='p6y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Trouble Concentrating/Remembering</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p7d' id='p7d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p7y' id='p7y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Trouble Controlling Violent Behavior</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p8d' id='p8d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p8y' id='p8y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Serious Thoughts of Suicide</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p9d' id='p9d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p9y' id='p9y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Suicide Attempt</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p10d' id='p10d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p10y' id='p10y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td><div id='asi_vert_head4'>Prescribed Medicine for Psych/Emotional Problems</div></td>
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p11d' id='p11d'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div id='td_select'>
+                                  <select name='p11y' id='p11y'>
+                                    <option value='Select'>Select</option>
+                                    <option value='1'>Yes</option>
+                                    <option value='0'>No</option>
+                                    <option value='X'>Uncertain</option>
+                                    <option value='N'>N/A</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <div id='table_btn_asi'>
+                            <button type='button' onClick="javascript: reset_asi_subf('psych');">Reset</button>
+                          </div>
+                        </div>
+				           				            
+				              </div>
+                    </div><!--  END OF LEFT SIDE -->
+
+				          <div class="col-md-6 col-sm-6">
+                    Right Side
+				          </div>
 				    			</form>
-				    </div>
+				    
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>
