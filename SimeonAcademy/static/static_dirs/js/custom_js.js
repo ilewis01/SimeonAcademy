@@ -6306,6 +6306,128 @@ function processAsiFields(page) {
 	}
 }
 
+function reset_asi_subf(ftype) {
+	ftype = String(ftype);
+
+	if (ftype === 'social') {
+		resetSelect(grab('f18d'));
+		resetSelect(grab('f19d'));
+		resetSelect(grab('f20d'));
+		resetSelect(grab('f21d'));
+		resetSelect(grab('f22d'));
+		resetSelect(grab('f23d'));
+		resetSelect(grab('f24d'));
+		resetSelect(grab('f25d'));
+		resetSelect(grab('f26d'));
+
+		resetSelect(grab('f18y'));
+		resetSelect(grab('f19y'));
+		resetSelect(grab('f20y'));
+		resetSelect(grab('f21y'));
+		resetSelect(grab('f22y'));
+		resetSelect(grab('f23y'));
+		resetSelect(grab('f24y'));
+		resetSelect(grab('f25y'));
+		resetSelect(grab('f26y'));
+	}
+	else if (ftype === 'relate') {
+		resetSelect(grab('f12'));
+		resetSelect(grab('f13'));
+		resetSelect(grab('f14'));
+		resetSelect(grab('f16'));
+		resetSelect(grab('f17'));
+	}
+	else if (ftype === 'abuse') {
+		resetSelect(grab('f27d'));
+		resetSelect(grab('f28d'));
+		resetSelect(grab('f29d'));
+		resetSelect(grab('f27y'));
+		resetSelect(grab('f28y'));
+		resetSelect(grab('f29y'));
+	}
+	else if (ftype === 'fh') {
+		resetSelect(grab('h1a'));
+		resetSelect(grab('h2a'));
+		resetSelect(grab('h3a'));
+		resetSelect(grab('h4a'));
+		resetSelect(grab('h5a'));
+		resetSelect(grab('h6a'));
+		resetSelect(grab('h7a'));
+		resetSelect(grab('h8a'));
+		resetSelect(grab('h9a'));
+		resetSelect(grab('h10a'));
+		resetSelect(grab('h11a'));
+		resetSelect(grab('h12a'));
+
+		resetSelect(grab('h1d'));
+		resetSelect(grab('h2d'));
+		resetSelect(grab('h3d'));
+		resetSelect(grab('h4d'));
+		resetSelect(grab('h5d'));
+		resetSelect(grab('h6d'));
+		resetSelect(grab('h7d'));
+		resetSelect(grab('h8d'));
+		resetSelect(grab('h9d'));
+		resetSelect(grab('h10d'));
+		resetSelect(grab('h11d'));
+		resetSelect(grab('h12d'));
+
+		resetSelect(grab('h1p'));
+		resetSelect(grab('h2p'));
+		resetSelect(grab('h3p'));
+		resetSelect(grab('h4p'));
+		resetSelect(grab('h5p'));
+		resetSelect(grab('h6p'));
+		resetSelect(grab('h7p'));
+		resetSelect(grab('h8p'));
+		resetSelect(grab('h9p'));
+		resetSelect(grab('h10p'));
+		resetSelect(grab('h11p'));
+		resetSelect(grab('hp12'));
+	}
+	else if (ftype === 'drug') {
+		resetNumber(grab('d1Day'));
+		resetNumber(grab('d2Day'));
+		resetNumber(grab('d3Day'));
+		resetNumber(grab('d4Day'));
+		resetNumber(grab('d5Day'));
+		resetNumber(grab('d6Day'));
+		resetNumber(grab('d7Day'));
+		resetNumber(grab('d8Day'));
+		resetNumber(grab('d9Day'));
+		resetNumber(grab('d10Day'));
+		resetNumber(grab('d11Day'));
+		resetNumber(grab('d12Day'));
+
+		resetNumber(grab('d1Year'));
+		resetNumber(grab('d2Year'));
+		resetNumber(grab('d3Year'));
+		resetNumber(grab('d4Year'));
+		resetNumber(grab('d5Year'));
+		resetNumber(grab('d6Year'));
+		resetNumber(grab('d7Year'));
+		resetNumber(grab('d8Year'));
+		resetNumber(grab('d9Year'));
+		resetNumber(grab('d10Year'));
+		resetNumber(grab('d11Year'));
+		resetNumber(grab('d12Year'));
+
+		resetSelect(grab('d1Route'));
+		resetSelect(grab('d2Route'));
+		resetSelect(grab('d3Route'));
+		resetSelect(grab('d4Route'));
+		resetSelect(grab('d5Route'));
+		resetSelect(grab('d6Route'));
+		resetSelect(grab('d7Route'));
+		resetSelect(grab('d8Route'));
+		resetSelect(grab('d9Route'));
+		resetSelect(grab('d10Route'));
+		resetSelect(grab('d11Route'));
+		resetSelect(grab('d12Route'));
+		resetSelect(grab('d13'));
+	}
+}
+
 //*********************************************** ASI SUPPORT FUNCTIONS *************************************************//
 
 function asi_radioBtn_select(sel_val, r1, r2) {
@@ -6741,6 +6863,19 @@ function number_init_asi(isComplete, field) {
 			field.value = 0;
 		}
 	}
+}
+
+function grab(elementName) {
+	var el = document.getElementById(elementName);
+	return el;
+}
+
+function resetSelect(field) {
+	field.selectedIndex = 0;
+}
+
+function resetNumber(field) {
+	field.value = 0;
 }
 
 

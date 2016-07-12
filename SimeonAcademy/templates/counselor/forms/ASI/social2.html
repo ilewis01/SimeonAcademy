@@ -200,7 +200,7 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:50px;'>
+                <div style='margin-bottom:20px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Family/Social Relationships II</h3>
                 </div>
 
@@ -217,7 +217,11 @@
                         <input type='hidden' name='new_form' id='new_form' value='false'>
                         <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
-                      <div id='ASI_FH_HEAD2'>
+                      <!-- <div id='ASI_FH_HEAD2'>
+                        Social Issues
+                      </div> -->
+
+                      <div id='ital_sub_head'>
                         Social Issues
                       </div>
 
@@ -478,17 +482,17 @@
                         </table>
 
                         <div id='table_btn_asi'>
-                          <button onClick="javascript: reset_asi_form('social');">Reset</button>
+                          <button type='button' onClick="javascript: reset_asi_subf('social');">Reset</button>
                         </div>
                       </div>
 
                       <div style='margin-top:23px;'>
                         <table>
                           <tr>
-                            <td><label>Additional Comments:</label></td>
+                            <td><div id='ital_sub_head'>Additional Comments:</div></td>
                           </tr>
                           <tr>
-                            <td><textarea rows='7' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
+                            <td><textarea rows='6' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
                           </tr>
                         </table>
                       </div>
@@ -497,7 +501,7 @@
                   </div><!--  END OF LEFT SIDE -->
 
 				          <div class="col-md-6 col-sm-6"> <!-- RIGHT SIDE -->
-                    <div id='ASI_FH_HEAD3'>
+                    <div id='ital_sub_head'>
                       Relationships
                     </div>
 
@@ -589,11 +593,11 @@
                       </table>
 
                       <div id='table_btn_asi'>
-                          <button onClick="javascript: reset_asi_form('relate');">Reset</button>
-                        </div>
+                          <button type='button' onClick="javascript: reset_asi_subf('relate');">Reset</button>
+                      </div>
                     </div>
 
-                    <div id='ASI_FH_HEAD3' style='margin-top:40px;'>
+                    <div id='ital_sub_head' style='margin-top:40px;'>
                       Abuse
                     </div>
 
@@ -695,8 +699,8 @@
                       </table>
 
                       <div id='table_btn_asi'>
-                          <button onClick="javascript: reset_asi_form('abuse');">Reset</button>
-                        </div>
+                          <button type='button' onClick="javascript: reset_asi_subf('abuse');">Reset</button>
+                      </div>
                     </div>
                   </div>
               </form>
