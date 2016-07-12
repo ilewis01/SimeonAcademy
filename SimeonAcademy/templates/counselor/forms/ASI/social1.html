@@ -148,7 +148,7 @@
               <td>
                 <div class='{{class.asiSocial1}}'>
                   <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
+                  <a href="#" name='asiSocial1Btn' id='asiSocial1Btn'>
                     Social
                   </a>
                 </div>
@@ -200,30 +200,410 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:30px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Family/Social Relationships</h3>
                 </div>
 
                 <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
+              		<div class="row">                   
+                    <div class="col-md-6 col-sm-6">
+                    	<div>
+                    		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+                    			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                          <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
+                          <input type='hidden' name='save_this' id='save_this' value=''>
+                          <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                          <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
+                          <input type='hidden' name='new_form' id='new_form' value='false'>
+                          <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
-				    			</form>
-				    </div>
+                          <table>
+                            <tr>
+                              <td><div id='ital_sub_head_small'>Marital Status & Living Arrangements:</div></td>
+                            </tr>
+                          </table>
+				           				            
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F1.</div></td>
+                              <td><label>Marital status:</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f1' id='f1'>
+                                    <option value='0'>Select</option>
+                                    <option value='1'>Married</option>
+                                    <option value='2'>Remarried</option>
+                                    <option value='3'>Widowed</option>
+                                    <option value='4'>Separated</option>
+                                    <option value='5'>Divorced</option>
+                                    <option value='6'>Never Married</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F2.</div></td>
+                              <td><label>How long have you been in this marital status?</label></td>
+                            </tr>
+                          </table>
+                          <table>
+                            <tr>
+                              <td>
+                                <div id='asi_2nd_line_indent'>
+                                  <div id='fix_my_text'><input type='number' name='f2yrs' id='f2yrs' value='{{fields.f2yrs}}'></div>
+                                </div>
+                              </td>
+                              <td><div id='number_subText'>years</div></td>
+                              <td><div id='fix_my_text'><input type='number' name='f2mth' id='f2mth' value='{{fields.f2mth}}'></div></td>
+                              <td><div id='number_subText'>months</div></td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F3.</div></td>
+                              <td><label>Are you satisfied with this situation?</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f3' id='f3'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>No</option>
+                                    <option value='1'>Indifferent</option>
+                                    <option value='2'>Yes</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F4.</div></td>
+                              <td><label>Usual living arrangements (Past 3 yrs):</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f4' id='f4'>
+                                    <option value='0'>Select</option>
+                                    <option value='1'>With Sexual Partner and Children</option>
+                                    <option value='2'>With Sexual Partner Alone</option>
+                                    <option value='3'>With Children Alone</option>
+                                    <option value='4'>With Parents</option>
+                                    <option value='5'>With Family</option>
+                                    <option value='6'>With Friends</option>
+                                    <option value='7'>Alone</option>
+                                    <option value='8'>Controlled Environment</option>
+                                    <option value='9'>No Stable Arrangements</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F5.</div></td>
+                              <td><label>How long have you lived in those arrangements?</label></td>
+                            </tr>
+                          </table>
+                          <table>
+                            <tr>
+                              <td>
+                                <div id='asi_2nd_line_indent'>
+                                  <div id='fix_my_text'><input type='number' name='f5yrs' id='f5yrs' value='{{fields.f5yrs}}'></div>
+                                </div>
+                              </td>
+                              <td><div id='number_subText'>years</div></td>
+                              <td><div id='fix_my_text'><input type='number' name='f5mth' id='f5mth' value='{{fields.f5mth}}'></div></td>
+                              <td><div id='number_subText'>months</div></td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F6.</div></td>
+                              <td><label>Are you satisfied with these living arrangements</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f6' id='f6'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>No</option>
+                                    <option value='1'>Indifferent</option>
+                                    <option value='2'>Yes</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='ital_sub_head_small'>Do you live with anyone who:</div></td>
+                            </tr>
+                          </table>
+
+                          <ul>
+                            <table>
+                              <tr>
+                                <td><li><div id='asiNumber'>F7.</div></li></td>
+                                <td><label>Has a current alcohol problem?</label></td>
+                                <td><div id='fix_my_radio'><input type='radio' name='f7' id='f7yes' value='1'></div></td>
+                                <td><label>Yes</label></td>
+                                <td><div id='fix_my_radio'><input type='radio' name='f7' id='f7no' value='0' checked></div></td>
+                                <td><label>No</label></td>
+                              </tr>
+
+                              <tr>
+                                <td><li><div id='asiNumber'>F8.</div></li></td>
+                                <td><label>Uses non-prescription drugs?</label></td>
+                                <td><div id='fix_my_radio'><input type='radio' name='f8' id='f8yes' value='1'></div></td>
+                                <td><label>Yes</label></td>
+                                <td><div id='fix_my_radio'><input type='radio' name='f8' id='f8no' value='0' checked></div></td>
+                                <td><label>No</label></td>
+                              </tr>
+                            </table>
+                          </ul>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F9.</div></td>
+                              <td><label>With whom do you spend most of your free time?</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f9' id='f9'>
+                                    <option value='0'>Select</option>
+                                    <option value='1'>Family</option>
+                                    <option value='2'>Friends</option>
+                                    <option value='3'>Alone</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F10.</div></td>
+                              <td><label>Are you satisfied with spending your free time this way?</label></td>
+                              <td>
+                                <div id='fix_my_select'>
+                                  <select name='f10' id='f10'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>No</option>
+                                    <option value='1'>Indifferent</option>
+                                    <option value='2'>Yes</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='asiNumber'>F11.</div></td>
+                              <td><label>How many close friends do you have?</label></td>
+                              <td><div id='fix_my_text'><input type='number' name='f11' id='f11' value='{{fields.f11}}'></div></td>
+                            </tr>
+                          </table>
+
+                          <table>
+                            <tr>
+                              <td><div id='ital_sub_head_small'>How many days in the past 30 have you had serious conflicts:</div></td>
+                            </tr>
+                          </table>
+
+                          <ul>
+                            <table>
+                              <tr>
+                                <td><li><div id='asiNumber'>F12.</div></li></td>
+                                <td><label>With you family?</label></td>
+                                <td><div id='fix_my_text'><input type='number' name='f30' id='f30' value='{{fields.f30}}'></div></td>
+                              </tr>
+                            </table>
+
+                            <table>
+                              <tr>
+                                <td><li><div id='asiNumber'>F13.</div></li></td>
+                                <td><label>With other people? (Excluding family):</label></td>
+                                <td><div id='fix_my_text'><input type='number' name='f31' id='f31' value='{{fields.f31}}'></div></td>
+                              </tr>
+                            </table>
+                          </ul>
+				              </div>
+				            </div><!--  END OF LEFT SIDE -->
+
+                    <div class="col-md-6 col-sm-6">   <!-- RIGHT SIDE -->
+                      <table>
+                        <tr>
+                          <td><div id='ital_sub_head_small'>How troubled or bothered have you been in the past 30 days by the following:</div></td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F14.</div></li></td>
+                            <td><label>Family problems?</label></td>
+                            <td>
+                                <div id='fix_my_select'>
+                                  <select name='f32' id='f32'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>Not at all</option>
+                                    <option value='1'>Slightly</option>
+                                    <option value='2'>Moderately</option>
+                                    <option value='3'>Considerably</option>
+                                    <option value='4'>Extremely</option>
+                                    <option value='N'>Question not applicable</option>
+                                    <option value='X'>Question not answered</option>
+                                  </select>
+                                </div>
+                              </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F15.</div></li></td>
+                            <td><label>Social problems?</label></td>
+                            <td>
+                                <div id='fix_my_select'>
+                                  <select name='f33' id='f33'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>Not at all</option>
+                                    <option value='1'>Slightly</option>
+                                    <option value='2'>Moderately</option>
+                                    <option value='3'>Considerably</option>
+                                    <option value='4'>Extremely</option>
+                                    <option value='N'>Question not applicable</option>
+                                    <option value='X'>Question not answered</option>
+                                  </select>
+                                </div>
+                              </td>
+                          </tr>
+                        </table>
+                      </ul>
+
+                      <table>
+                        <tr>
+                          <td><div id='ital_sub_head_small'>How important to you now is treatment or counseling for these:</div></td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F16.</div></li></td>
+                            <td><label>Family problems?</label></td>
+                            <td>
+                                <div id='fix_my_select'>
+                                  <select name='f34' id='f34'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>Not at all</option>
+                                    <option value='1'>Slightly</option>
+                                    <option value='2'>Moderately</option>
+                                    <option value='3'>Considerably</option>
+                                    <option value='4'>Extremely</option>
+                                    <option value='N'>Question not applicable</option>
+                                    <option value='X'>Question not answered</option>
+                                  </select>
+                                </div>
+                              </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F17.</div></li></td>
+                            <td><label>Social problems?</label></td>
+                            <td>
+                                <div id='fix_my_select'>
+                                  <select name='f35' id='f35'>
+                                    <option value='Select'>Select</option>
+                                    <option value='0'>Not at all</option>
+                                    <option value='1'>Slightly</option>
+                                    <option value='2'>Moderately</option>
+                                    <option value='3'>Considerably</option>
+                                    <option value='4'>Extremely</option>
+                                    <option value='N'>Question not applicable</option>
+                                    <option value='X'>Question not answered</option>
+                                  </select>
+                                </div>
+                              </td>
+                          </tr>
+                        </table>
+                      </ul>
+
+                      <table>
+                        <tr>
+                          <td>
+                            <div id='ital_sub_head'>
+                              Interviewer Severity Rating
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div id='asiNumber'>F18.</div></td>
+                          <td><label>How would you rate the patient's need for family and/or social counseling?</label></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                            <td>
+                              <div id='fix_my_select'>
+                                <select name='f36' id='f36'>
+                                  <option value='Select'>Select</option>
+                                  <option value='0'>0</option>
+                                  <option value='1'>1</option>
+                                  <option value='2'>2</option>
+                                  <option value='3'>3</option>
+                                  <option value='4'>4</option>
+                                  <option value='5'>5</option>
+                                  <option value='6'>6</option>
+                                  <option value='7'>7</option>
+                                  <option value='8'>8</option>
+                                  <option value='9'>9</option>
+                                </select>
+                              </div>
+                            </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div id='ital_sub_head_small'>Is the above information significantly distorted by:</div></td>
+                        </tr>
+                      </table>
+
+                      <ul>
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F19.</div></li></td>
+                            <td><label>Patient's misrepresentation?</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='f37' id='f37yes' value='1'></div></td>
+                            <td><label>Yes</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='f37' id='f37no' value='0' checked></div></td>
+                            <td><label>No</label></td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td><li><div id='asiNumber'>F20.</div></li></td>
+                            <td><label>Patient's inability to understand?</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='f38' id='f38yes' value='1'></div></td>
+                            <td><label>Yes</label></td>
+                            <td><div id='fix_my_radio'><input type='radio' name='f38' id='f38no' value='0' checked></div></td>
+                            <td><label>No</label></td>
+                          </tr>
+                        </table>
+                      </ul>
+                    </div>
+                  </form>
+
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>

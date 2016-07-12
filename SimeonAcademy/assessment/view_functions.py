@@ -6436,6 +6436,15 @@ def getLegalFamilyIndex(m_val):
 
 	return index
 
+def getASI_YNI(m_val):
+	m_val = str(m_val)
+	index = 0
+
+	if m_val != 'None' and m_val != 'Select' and m_val != '':
+		index = int(m_val) + 1
+
+	return index
+
 def grabAsiAdminFields(asi):
 	result = {}
 	result['g1'] = asi.admin.g1
@@ -6747,85 +6756,61 @@ def grabAsiSocial1Fields(asi):
 	result['f1'] = asi.social1.f1
 	result['f2yrs'] = asi.social1.f2yrs
 	result['f2mth'] = asi.social1.f2mth
-	result['f3'] = asi.social1.f3
+	result['f3'] = getASI_YNI(asi.social1.f3)
 	result['f4'] = asi.social1.f4
 	result['f5yrs'] = asi.social1.f5yrs
 	result['f5mth'] = asi.social1.f5mth
-	result['f6'] = asi.social1.f6
+	result['f6'] = getASI_YNI(asi.social1.f6)
 	result['f7'] = asi.social1.f7
 	result['f8'] = asi.social1.f8
 	result['f9'] = asi.social1.f9
-	result['f10'] = asi.social1.f10
+	result['f10'] = getASI_YNI(asi.social1.f10)
 	result['f11'] = asi.social1.f11
 	result['f30'] = asi.social1.f30
 	result['f31'] = asi.social1.f31
-	result['f32'] = asi.social1.f32
-	result['f33'] = asi.social1.f33
-	result['f34'] = asi.social1.f34
-	result['f35'] = asi.social1.f35
-	result['f36'] = asi.social1.f36
+	result['f32'] = getPatientIndex(asi.social1.f32)
+	result['f33'] = getPatientIndex(asi.social1.f33)
+	result['f34'] = getPatientIndex(asi.social1.f34)
+	result['f35'] = getPatientIndex(asi.social1.f35)
+	result['f36'] = getInterviewerIndex(asi.social1.f36)
 	result['f37'] = asi.social1.f37
 	result['f38'] = asi.social1.f38
-	result['comments'] = asi.social1.comments
 	result['isComplete'] = asi.social1Complete
 	return result
 
 def grabAsiSocial2Fields(asi):
 	result = {}
-	result['f12'] = asi.social2.f12
-	result['f13'] = asi.social2.f13
-	result['f14'] = asi.social2.f14
-	result['f16'] = asi.social2.f16
-	result['f17'] = asi.social2.f17
+	result['f12'] = getLegalFamilyIndex(asi.social2.f12)
+	result['f13'] = getLegalFamilyIndex(asi.social2.f13)
+	result['f14'] = getLegalFamilyIndex(asi.social2.f14)
+	result['f16'] = getLegalFamilyIndex(asi.social2.f16)
+	result['f17'] = getLegalFamilyIndex(asi.social2.f17)
 
-	result['f18d'] = asi.social2.f18d
-	result['f18y'] = asi.social2.f18y
-	result['f19d'] = asi.social2.f19d
-	result['f19y'] = asi.social2.f19y
-	result['f20d'] = asi.social2.f20d
-	result['f20y'] = asi.social2.f20y
-	result['f21d'] = asi.social2.f21d
-	result['f21y'] = asi.social2.f21y
-	result['f22d'] = asi.social2.f22d
-	result['f22y'] = asi.social2.f22y
-	result['f23d'] = asi.social2.f23d
-	result['f23y'] = asi.social2.f23y
-	result['f24d'] = asi.social2.f24d
-	result['f24y'] = asi.social2.f24y
-	result['f25d'] = asi.social2.f25d
-	result['f25y'] = asi.social2.f25y
-	result['f26d'] = asi.social2.f26d
-	result['f26y'] = asi.social2.f26y
+	result['f18d'] = getLegalFamilyIndex(asi.social2.f18d)
+	result['f18y'] = getLegalFamilyIndex(asi.social2.f18y)
+	result['f19d'] = getLegalFamilyIndex(asi.social2.f19d)
+	result['f19y'] = getLegalFamilyIndex(asi.social2.f19y)
+	result['f20d'] = getLegalFamilyIndex(asi.social2.f20d)
+	result['f20y'] = getLegalFamilyIndex(asi.social2.f20y)
+	result['f21d'] = getLegalFamilyIndex(asi.social2.f21d)
+	result['f21y'] = getLegalFamilyIndex(asi.social2.f21y)
+	result['f22d'] = getLegalFamilyIndex(asi.social2.f22d)
+	result['f22y'] = getLegalFamilyIndex(asi.social2.f22y)
+	result['f23d'] = getLegalFamilyIndex(asi.social2.f23d)
+	result['f23y'] = getLegalFamilyIndex(asi.social2.f23y)
+	result['f24d'] = getLegalFamilyIndex(asi.social2.f24d)
+	result['f24y'] = getLegalFamilyIndex(asi.social2.f24y)
+	result['f25d'] = getLegalFamilyIndex(asi.social2.f25d)
+	result['f25y'] = getLegalFamilyIndex(asi.social2.f25y)
+	result['f26d'] = getLegalFamilyIndex(asi.social2.f26d)
+	result['f26y'] = getLegalFamilyIndex(asi.social2.f26y)
 	
-	result['fa18'] = asi.social2.fa18
-	result['fa19'] = asi.social2.fa19
-	result['fa20'] = asi.social2.fa20
-	result['fa21'] = asi.social2.fa21
-	result['fa22'] = asi.social2.fa22
-	result['fa23'] = asi.social2.fa23
-	result['fa24'] = asi.social2.fa24
-	result['fa25'] = asi.social2.fa25
-	result['fa26'] = asi.social2.fa26
-
-	result['f18dayBad'] = asi.social2.f18dayBad
-	result['f19dayBad'] = asi.social2.f19dayBad
-	result['f20dayBad'] = asi.social2.f20dayBad
-	result['f21dayBad'] = asi.social2.f21dayBad
-	result['f22dayBad'] = asi.social2.f22dayBad
-	result['f23dayBad'] = asi.social2.f23dayBad
-	result['f24dayBad'] = asi.social2.f24dayBad
-	result['f25dayBad'] = asi.social2.f25dayBad
-	result['f26dayBad'] = asi.social2.f26dayBad
-
-	result['f18yearBad'] = asi.social2.f18yearBad
-	result['f19yearBad'] = asi.social2.f19yearBad
-	result['f20yearBad'] = asi.social2.f20yearBad
-	result['f21yearBad'] = asi.social2.f21yearBad
-	result['f22yearBad'] = asi.social2.f22yearBad
-	result['f23yearBad'] = asi.social2.f23yearBad
-	result['f24yearBad'] = asi.social2.f24yearBad
-	result['f25yearBad'] = asi.social2.f25yearBad
-	result['f26yearBad'] = asi.social2.f26yearBad
+	result['d27d'] = asi.social2.d27d
+	result['d27y'] = asi.social2.d27y
+	result['d28d'] = asi.social2.d28d
+	result['d28y'] = asi.social2.d28y
+	result['d29d'] = asi.social2.d29d
+	result['d29y'] = asi.social2.d29y
 
 	result['comments'] = asi.social2.comments
 	result['isComplete'] = asi.social2Complete

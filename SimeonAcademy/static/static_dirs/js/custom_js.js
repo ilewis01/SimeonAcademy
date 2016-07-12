@@ -6054,7 +6054,28 @@ function init_asi_family(json_data) {
 }
 
 function init_asi_soc1(json_data) {
-	
+	number_init(json_data.isComplete, document.getElementById('f2'));
+	number_init(json_data.isComplete, document.getElementById('f5'));
+	number_init(json_data.isComplete, document.getElementById('f11'));
+	number_init(json_data.isComplete, document.getElementById('f30'));
+	number_init(json_data.isComplete, document.getElementById('f31'));
+
+	document.getElementById('f1').selectedIndex = json_data.f1;
+	document.getElementById('f3').selectedIndex = json_data.f3;
+	document.getElementById('f4').selectedIndex = json_data.f4;
+	document.getElementById('f6').selectedIndex = json_data.f6;
+	document.getElementById('f9').selectedIndex = json_data.f9;
+	document.getElementById('f10').selectedIndex = json_data.f10;
+	document.getElementById('f32').selectedIndex = json_data.f32;
+	document.getElementById('f33').selectedIndex = json_data.f33;
+	document.getElementById('f34').selectedIndex = json_data.f34;
+	document.getElementById('f35').selectedIndex = json_data.f35;
+	document.getElementById('f36').selectedIndex = json_data.f36;
+
+	asi_radioBtn_select(json_data.f7, document.getElementById('f7yes'), document.getElementById('f7no'));
+	asi_radioBtn_select(json_data.f8, document.getElementById('f8yes'), document.getElementById('f8no'));
+	asi_radioBtn_select(json_data.f37, document.getElementById('f37yes'), document.getElementById('f37no'));
+	asi_radioBtn_select(json_data.f38, document.getElementById('f38yes'), document.getElementById('f38no'));
 }
 
 function init_asi_soc2(json_data) {
@@ -6202,7 +6223,13 @@ function processAsiLegal() {
 }
 
 function processAsiSocial1() {
-	
+	post_asi(false, 'number', document.getElementById('f2yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('f2mth'), null, null);
+	post_asi(false, 'number', document.getElementById('f5yrs'), null, null);
+	post_asi(false, 'number', document.getElementById('f5mth'), null, null);
+	post_asi(false, 'number', document.getElementById('f11'), null, null);
+	post_asi(false, 'number', document.getElementById('f30'), null, null);
+	post_asi(false, 'number', document.getElementById('f31'), null, null);
 }
 
 function processAsiSocial2() {
