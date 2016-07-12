@@ -6805,12 +6805,12 @@ def grabAsiSocial2Fields(asi):
 	result['f26d'] = getLegalFamilyIndex(asi.social2.f26d)
 	result['f26y'] = getLegalFamilyIndex(asi.social2.f26y)
 	
-	result['d27d'] = asi.social2.d27d
-	result['d27y'] = asi.social2.d27y
-	result['d28d'] = asi.social2.d28d
-	result['d28y'] = asi.social2.d28y
-	result['d29d'] = asi.social2.d29d
-	result['d29y'] = asi.social2.d29y
+	result['f27d'] = asi.social2.f27d
+	result['f27y'] = asi.social2.f27y
+	result['f28d'] = asi.social2.f28d
+	result['f28y'] = asi.social2.f28y
+	result['f29d'] = asi.social2.f29d
+	result['f29y'] = asi.social2.f29y
 
 	result['comments'] = asi.social2.comments
 	result['isComplete'] = asi.social2Complete

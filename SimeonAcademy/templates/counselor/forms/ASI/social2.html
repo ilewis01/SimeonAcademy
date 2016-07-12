@@ -161,7 +161,7 @@
               <td>
                 <div class='{{class.asiSocial2}}'>
                   <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social2/');" name='asiSocial2Btn' id='asiSocial2Btn'>
+                  <a href="#" name='asiSocial2Btn' id='asiSocial2Btn'>
                     Social II
                   </a>
                 </div>
@@ -200,30 +200,506 @@
                 <!-- Page Content -->
         <div id="page-content-wrapper">
             <div>
-                <div style='margin-bottom:10px;'>
+                <div style='margin-bottom:50px;'>
                 	<h3 id='am-h2'>Addiction Severity Index: Family/Social Relationships II</h3>
                 </div>
 
                 <div class="container">
             		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
+                  <div class="col-md-6 col-sm-6">
+                  	<div>
+                  		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
+                        <input type='hidden' name='save_this' id='save_this' value=''>
+                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                        <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
+                        <input type='hidden' name='new_form' id='new_form' value='false'>
+                        <input type='hidden' name='exit_type' id='exit_type' value='asi'>
 
-				        <div class="col-md-6 col-sm-6">
-				        	
-				        </div>
-				    			</form>
-				    </div>
+                      <div id='ASI_FH_HEAD2'>
+                        Social Issues
+                      </div>
+
+                      <div id='ASI_FH_INST2'>
+                        Would you say that you have had close, long lasting personal relationships with any of the following people in your life?
+                      </div>
+
+                      <div class='container_asiH2'>
+                        <table class='asi_family_table'>
+                          <tr>
+                            <th><div id='th_head_soc2'><div id='main_asi_soc2_vert'>Relative</div></div></th>
+                            <th>Past 30 Days</th>
+                            <th>In Your Life</th>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Mother</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f18d' id='f18d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f18y' id='f18y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Father</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f19d' id='f19d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f19y' id='f19y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Siblings</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f20d' id='f20d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f20y' id='f20y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Sexual Partner/Spouse</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f21d' id='f21d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f21y' id='f21y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Children</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f22d' id='f22d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f22y' id='f22y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Other Significant Family</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f23d' id='f23d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f23y' id='f23y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Close Friends</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f24d' id='f24d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f24y' id='f24y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Neighbors</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f25d' id='f25d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f25y' id='f25y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><div id='asi_vert_head'>Co-workers</div></td>
+                            <td>
+                              <div id='td_select'>
+                                <select name='f26d' id='f26d'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div id='td_select'>
+                                <select name='f26y' id='f26y'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div id='table_btn_asi'>
+                          <button onClick="javascript: reset_asi_form('social');">Reset</button>
+                        </div>
+                      </div>
+
+                      <div style='margin-top:23px;'>
+                        <table>
+                          <tr>
+                            <td><label>Additional Comments:</label></td>
+                          </tr>
+                          <tr>
+                            <td><textarea rows='7' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
+                          </tr>
+                        </table>
+                      </div>
+				           				            
+				            </div>
+                  </div><!--  END OF LEFT SIDE -->
+
+				          <div class="col-md-6 col-sm-6"> <!-- RIGHT SIDE -->
+                    <div id='ASI_FH_HEAD3'>
+                      Relationships
+                    </div>
+
+                    <div id='ASI_FH_INST3'>
+                      Have you had significant periods in which you have experienced serious problems getting along with:
+                    </div>
+
+                    <div class='container_asiH3'>
+                      <table  class='asi_family_table'>
+                        <tr>
+                          <th><div id='th_asi_relate_head'>Relative</div></th>
+                          <th>Relationship</th>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Mother</div></td>
+                          <td>
+                              <div id='td_select'>
+                                <select name='f12' id='f12'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Father</div></td>
+                          <td>
+                              <div id='td_select'>
+                                <select name='f13' id='f13'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Siblings</div></td>
+                          <td>
+                              <div id='td_select'>
+                                <select name='f14' id='f14'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Children</div></td>
+                          <td>
+                              <div id='td_select'>
+                                <select name='f16' id='f16'>
+                                  <option value='Select'>Select</option>
+                                  <option value='1'>Yes</option>
+                                  <option value='0'>No</option>
+                                  <option value='X'>Uncertain</option>
+                                  <option value='N'>N/A</option>
+                                </select>
+                              </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Friends</div></td>
+                          <td>
+                            <div id='td_select'>
+                              <select name='f17' id='f17'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div id='table_btn_asi'>
+                          <button onClick="javascript: reset_asi_form('relate');">Reset</button>
+                        </div>
+                    </div>
+
+                    <div id='ASI_FH_HEAD3' style='margin-top:40px;'>
+                      Abuse
+                    </div>
+
+                    <div id='ASI_FH_INST2'>
+                      Did any of these people abuse you?
+                    </div>
+
+                    <div class='container_asiH3'>
+                      <table  class='asi_family_table'>
+                        <tr>
+                          <th><div style='margin-left:9%;'><div id='th_asi_relate_head2'>Relative</div></div></th>
+                          <th>Past 30 Days</th>
+                          <th>In Your Life</th>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Emotionally</div></td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f27' id='f27d'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f27' id='f27y'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Physically</div></td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f28d' id='f28d'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f28y' id='f28y'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='asi_vert_head'>Sexually</div></td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f29d' id='f29d'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div id='td_select'>
+                              <select name='f29y' id='f29y'>
+                                <option value='Select'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Uncertain</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div id='table_btn_asi'>
+                          <button onClick="javascript: reset_asi_form('abuse');">Reset</button>
+                        </div>
+                    </div>
+                  </div>
+              </form>
 				</div> <!-- END PAGE CONTAINER -->
 
 				<div>

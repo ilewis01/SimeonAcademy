@@ -1302,7 +1302,7 @@ class AIS_Social2(models.Model):
 	f14 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	f16 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	f17 = models.CharField(max_length=1, default=None, blank=True, null=True)
-	
+
 	f18d = models.CharField(max_length=1, default=None, blank=True, null=True)
 	f18y = models.CharField(max_length=1, default=None, blank=True, null=True)
 	f19d = models.CharField(max_length=1, default=None, blank=True, null=True)
@@ -1322,12 +1322,12 @@ class AIS_Social2(models.Model):
 	f26d = models.CharField(max_length=1, default=None, blank=True, null=True)
 	f26y = models.CharField(max_length=1, default=None, blank=True, null=True)
 
-	d27d = models.IntegerField(default=0)
-	d27y = models.IntegerField(default=0)
-	d28d = models.IntegerField(default=0)
-	d28y = models.IntegerField(default=0)
-	d29d = models.IntegerField(default=0)
-	d29y = models.IntegerField(default=0)
+	f27d = models.IntegerField(default=0)
+	f27y = models.IntegerField(default=0)
+	f28d = models.IntegerField(default=0)
+	f28y = models.IntegerField(default=0)
+	f29d = models.IntegerField(default=0)
+	f29y = models.IntegerField(default=0)
 
 	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
 

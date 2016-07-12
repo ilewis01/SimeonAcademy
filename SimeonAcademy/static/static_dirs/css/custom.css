@@ -1889,6 +1889,14 @@ button:hover {
 	width:225px;
 }
 
+#th_asi_relate_head {
+	width: 200px;
+}
+
+#th_asi_relate_head2 {
+	width: 125px;
+}
+
 #td_select {
 	padding-bottom: 3%
 }
@@ -1902,7 +1910,48 @@ button:hover {
 	border-radius: 5px;
 }
 
+.container_asiH2 {
+	width: 80%;
+	/*margin-left: 15%;*/
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	padding:1%;
+	border-radius: 5px;
+}
+
+#ASI_FH_INST2 {
+	font-style: italic;
+	width: 80%;
+	text-align: justify;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+}
+
+#ASI_FH_INST3 {
+	font-style: italic;
+	width: 65%;
+	text-align: justify;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+}
+
+.container_asiH3 {
+	width: 65%;
+	/*margin-left: 15%;*/
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	padding:1%;
+	border-radius: 5px;
+}
+
 .asi_family_table {
+	width:100%;
+	margin: auto;
+}
+
+.asi_soc2_table {
 	width:100%;
 	margin: auto;
 }
@@ -1938,6 +1987,48 @@ button:hover {
 	margin-bottom: 5px;
 	font-style: italic;
 	border-radius: 5px;
+}
+
+#ASI_FH_HEAD2 {
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	width: 80%;
+	text-align: center;
+	/*margin-left:15%;*/
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-style: italic;
+	border-radius: 5px;
+}
+
+#ASI_FH_HEAD3 {
+	background-color: #e7e6e7;
+	border: 3px solid gray;
+	width: 65%;
+	text-align: center;
+	/*margin-left:15%;*/
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-style: italic;
+	border-radius: 5px;
+}
+
+#main_asi_soc2_vert {
+	width:200px;
+}
+
+#table_btn_asi {
+	margin-top: 5px;
+	width:100%;
+	text-align: right;
+	border: 1px solid gray;
+	padding: 3px;
+}
+
+#th_head_soc2 {
+	font-size: 17px;
 }
 
 #asi_vert_head {

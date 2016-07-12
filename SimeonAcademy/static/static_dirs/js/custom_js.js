@@ -6079,7 +6079,41 @@ function init_asi_soc1(json_data) {
 }
 
 function init_asi_soc2(json_data) {
-	
+	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+
+	document.getElementById('f12').selectedIndex = json_data.f12;
+	document.getElementById('f13').selectedIndex = json_data.f13;
+	document.getElementById('f14').selectedIndex = json_data.f14;
+	document.getElementById('f16').selectedIndex = json_data.f16;
+	document.getElementById('f17').selectedIndex = json_data.f17;
+
+	document.getElementById('f27d').selectedIndex = json_data.f27d;
+	document.getElementById('f28d').selectedIndex = json_data.f28d;
+	document.getElementById('f29d').selectedIndex = json_data.f29d;
+
+	document.getElementById('f27y').selectedIndex = json_data.f27y;
+	document.getElementById('f28y').selectedIndex = json_data.f28y;
+	document.getElementById('f29y').selectedIndex = json_data.f28y;
+
+	document.getElementById('f18d').selectedIndex = json_data.f18d;
+	document.getElementById('f19d').selectedIndex = json_data.f19d;
+	document.getElementById('f20d').selectedIndex = json_data.f20d;
+	document.getElementById('f21d').selectedIndex = json_data.f21d;
+	document.getElementById('f22d').selectedIndex = json_data.f22d;
+	document.getElementById('f23d').selectedIndex = json_data.f23d;
+	document.getElementById('f24d').selectedIndex = json_data.f24d;
+	document.getElementById('f25d').selectedIndex = json_data.f25d;
+	document.getElementById('f26d').selectedIndex = json_data.f26d;
+
+	document.getElementById('f18y').selectedIndex = json_data.f18y;
+	document.getElementById('f19y').selectedIndex = json_data.f19y;
+	document.getElementById('f20y').selectedIndex = json_data.f20y;
+	document.getElementById('f21y').selectedIndex = json_data.f21y;
+	document.getElementById('f22y').selectedIndex = json_data.f22y;
+	document.getElementById('f23y').selectedIndex = json_data.f23y;
+	document.getElementById('f24y').selectedIndex = json_data.f24y;
+	document.getElementById('f25y').selectedIndex = json_data.f25y;
+	document.getElementById('f26y').selectedIndex = json_data.f26y;
 }
 
 function init_asi_psych(json_data) {
