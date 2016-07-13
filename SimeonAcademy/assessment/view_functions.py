@@ -6843,14 +6843,14 @@ def grabAsiPsychFields(asi):
 	result['p2'] = asi.psych.p2
 	result['p3'] = asi.psych.p3
 
-	result['p4d'] = asi.psych.p4d
-	result['p5d'] = asi.psych.p5d
-	result['p6d'] = asi.psych.p6d
-	result['p7d'] = asi.psych.p7d
-	result['p8d'] = asi.psych.p8d
-	result['p9d'] = asi.psych.p9d
-	result['p10d'] = asi.psych.p10d
-	result['p11d'] = asi.psych.p11d
+	result['p4d'] = getLegalFamilyIndex(asi.psych.p4d)
+	result['p5d'] = getLegalFamilyIndex(asi.psych.p5d)
+	result['p6d'] = getLegalFamilyIndex(asi.psych.p6d)
+	result['p7d'] = getLegalFamilyIndex(asi.psych.p7d)
+	result['p8d'] = getLegalFamilyIndex(asi.psych.p8d)
+	result['p9d'] = getLegalFamilyIndex(asi.psych.p9d)
+	result['p10d'] = getLegalFamilyIndex(asi.psych.p10d)
+	result['p11d'] = getLegalFamilyIndex(asi.psych.p11d)
 
 	result['p4y'] = asi.psych.p4y
 	result['p5y'] = asi.psych.p5y
@@ -6862,15 +6862,15 @@ def grabAsiPsychFields(asi):
 	result['p11y'] = asi.psych.p11y
 
 	result['p12'] = asi.psych.p12
-	result['p13'] = asi.psych.p13
-	result['p14'] = asi.psych.p14
+	result['p13'] = getPatientIndex(asi.psych.p13)
+	result['p14'] = getPatientIndex(asi.psych.p14)
 	result['p15'] = asi.psych.p15
 	result['p16'] = asi.psych.p16
 	result['p17'] = asi.psych.p17
 	result['p18'] = asi.psych.p18
 	result['p19'] = asi.psych.p19
 	result['p20'] = asi.psych.p20
-	result['p21'] = asi.psych.p21
+	result['p21'] = getInterviewerIndex(asi.psych.p21)
 	result['p22'] = asi.psych.p22
 	result['p23'] = asi.psych.p23
 	result['comments'] = asi.psych.comments
@@ -7317,6 +7317,7 @@ def saveASIpsych(request, asi):
 	asi.psych.p21 = request.POST.get('p21')
 	asi.psych.p22 = request.POST.get('p22')
 	asi.psych.p23 = request.POST.get('p23')
+	asi.psych.comments = request.POST.get('comments')
 
 	asi.psych.save()
 
@@ -7751,7 +7752,6 @@ def refreshASI(asi):
 	refreshASImedical(asi)
 	refreshASIemployment(asi)
 	refreshASIdrug1(asi)
-	refreshASIdrug2(asi)
 	refreshASIlegal(asi)
 	refreshASIfamily(asi)
 	refreshASIsocial1(asi)
@@ -7763,7 +7763,6 @@ def refreshASI(asi):
 	asi.medicalComplete = False
 	asi.employmentComplete = False
 	asi.drug1Complete = False
-	asi.drug2Complete = False
 	asi.legalComplete = False
 	asi.familyComplete = False
 	asi.social1Complete = False
@@ -7775,7 +7774,6 @@ def refreshASI(asi):
 	asi.medicalPriority = False
 	asi.employmentPriority = False
 	asi.drug1Priority = False
-	asi.drug2Priority = False
 	asi.legalPriority = False
 	asi.familyPriority = False
 	asi.social1Priority = False

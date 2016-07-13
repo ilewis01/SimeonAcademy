@@ -228,14 +228,14 @@
                             <tr>
                               <td><li><div id='asiNumber'>P1.</div></li></td>
                               <td><label>In a hospital?</label></td>
-                              <td><div id='fix_my_text'><input type='number' name='p1' id='p1' value='fields.p1'></div></td>
+                              <td><div id='fix_my_text'><input type='number' name='p1' id='p1' value='{{fields.p1}}'></div></td>
                             </tr>
                           </table>
                           <table>
                             <tr>
                               <td><li><div id='asiNumber'>P2.</div></li></td>
                               <td><label>As an outpatient or private patient?</label></td>
-                              <td><div id='fix_my_text'><input type='number' name='p2' id='p2' value='fields.p2'></div></td>
+                              <td><div id='fix_my_text'><input type='number' name='p2' id='p2' value='{{fields.p2}}'></div></td>
                             </tr>
                           </table>
                         </ul>
@@ -496,12 +496,204 @@
                             <button type='button' onClick="javascript: reset_asi_subf('psych');">Reset</button>
                           </div>
                         </div>
+
+                        <table>
+                          <tr>
+                            <td>
+                              <div style='margin-top: 20px;'>
+                                <div id='ital_sub_head_small_no'>How many times in the last 30 days have you experienced these</div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <table>
+                          <tr>
+                            <td><div id='ital_sub_head_small_no'>psychological or emotional problems?</div></td>
+                            <td><div id='fix_my_text'><input type='number' name='p12' id='p12' value='{{fields.p12}}'></div></td>
+                          </tr>
+                        </table>
 				           				            
 				              </div>
                     </div><!--  END OF LEFT SIDE -->
 
 				          <div class="col-md-6 col-sm-6">
-                    Right Side
+                    <table>
+                      <tr>
+                        <td><div id='asiNumber'>P4.</div></td>
+                        <td><label>How much have you been bothered by these psychological or emotional</label></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><label><div id='asi_2nd_line_indent'>problems in the past 30 days?</div></label></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='p13' id='p13'>
+                              <option value='Select'>Select</option>
+                                <option value='0'>Not at all</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='N'>Question not applicable</option>
+                                <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+
+                    <table>
+                      <tr>
+                        <td><div id='asiNumber'>P5.</div></td>
+                        <td><label>How important to you now is treatment for these psychological problems?</label></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div id='fix_my_select'>
+                            <select name='p14' id='p14'>
+                              <option value='Select'>Select</option>
+                                <option value='0'>Not at all</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='N'>Question not applicable</option>
+                                <option value='X'>Question not answered</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div id='ital_sub_head'>To Be Completed by Interviewer:</div></td>
+                      </tr>
+                      <tr>
+                        <td><label><em>At the time of interview, is the patient:</em></label></td>
+                      </tr>
+                    </table>
+
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><li><label>Obviously Depressed/Withdrawn?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p15' id='p15yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p15' id='p15no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+
+                        <td><li><label>Obviously Hostile?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p16' id='p16yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p16' id='p16no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+
+                        <td><li><label>Obviously Anxious/Nervous?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p17' id='p17yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p17' id='p17no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+
+                        <td><li><label>Having Trouble with Reality/Paranoid?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p18' id='p18yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p18' id='p18no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+
+                        <td><li><label>Trouble Comprehending/Remembering?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p19' id='p19yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p19' id='p19no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+
+                        <td><li><label>Having Suicidal Thoughts?</label></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p20' id='p20yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p20' id='p20no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+                        </tr>
+                      </table>
+                    </ul>
+
+                    <table>
+                      <tr>
+                        <td><div id='ital_sub_head_small_no'>How would you rate the patient's need for psychiatric/ psychological</div></td>
+                      </tr>
+                    </table>
+                    <table>
+                      <tr>
+                        <td><div id='ital_sub_head_small_no'>counseling?</div></td>
+                        <td>
+                          <div id='fix_my_select_big'>
+                            <select name='p21' id='p21'>
+                              <option value='Select'>Select</option>
+                              <option value='0'>0</option>
+                              <option value='1'>1</option>
+                              <option value='2'>2</option>
+                              <option value='3'>3</option>
+                              <option value='4'>4</option>
+                              <option value='5'>5</option>
+                              <option value='6'>6</option>
+                              <option value='7'>7</option>
+                              <option value='8'>8</option>
+                              <option value='9'>9</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div id='ital_sub_head_small'>Is the above information significantly distorted by:</div></td>
+                      </tr>
+                    </table>
+
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><li><div><label>Patient's Misrepresentation?</label></div></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p22' id='p22yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+
+                          <td><div id='fix_my_radio'><input type='radio' name='p22' id='p22no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><li><div><label>Patient's Inability to Understand?</label></div></li></td>
+                          <td><div id='fix_my_radio'><input type='radio' name='p23' id='p23yes' value='1'></div></td>
+                          <td><label>Yes</label></td>
+
+                          <td><div id='fix_my_radio'><input type='radio' name='p23' id='p23no' value='0' checked></div></td>
+                          <td><label>No</label></td>
+                        </tr>
+                      </table>
+                    </ul>
+
+                    <table>
+                      <tr>
+                        <td><div id='ital_sub_head_small_no'>Additional Comments:</div></td>
+                      </tr>
+                      <tr>
+                        <td><textarea name='comments' id='comments' rows='6' cols='80'>{{fields.comments}}</textarea></td>
+                      </tr>
+                    </table>
 				          </div>
 				    			</form>
 				    

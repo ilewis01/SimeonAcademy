@@ -6119,8 +6119,41 @@ function init_asi_soc2(json_data) {
 function init_asi_psych(json_data) {
 	number_init(json_data.isComplete, grab('p1'));
 	number_init(json_data.isComplete, grab('p2'));
+	number_init(json_data.isComplete, grab('p12'));
+	blank_init_asi(json_data.isComplete, grab('comments'));
+
+	grab('p4d').selectedIndex = json_data.p4d;
+	grab('p5d').selectedIndex = json_data.p5d;
+	grab('p6d').selectedIndex = json_data.p6d;
+	grab('p7d').selectedIndex = json_data.p7d;
+	grab('p8d').selectedIndex = json_data.p8d;
+	grab('p9d').selectedIndex = json_data.p9d;
+	grab('p10d').selectedIndex = json_data.p10d;
+	grab('p11d').selectedIndex = json_data.p11d;
+
+	grab('p4y').selectedIndex = json_data.p4y;
+	grab('p5y').selectedIndex = json_data.p5y;
+	grab('p6y').selectedIndex = json_data.p6y;
+	grab('p7y').selectedIndex = json_data.p7y;
+	grab('p8y').selectedIndex = json_data.p8y;
+	grab('p9y').selectedIndex = json_data.p9y;
+	grab('p10y').selectedIndex = json_data.p10y;
+	grab('p11y').selectedIndex = json_data.p11y;
+
+	grab('p13').selectedIndex = json_data.p13;
+	grab('p14').selectedIndex = json_data.p14;
+	grab('p21').selectedIndex = json_data.p21;
 
 	asi_radioBtn_select(json_data.p3, grab('p3yes'), grab('p3no'));
+	asi_radioBtn_select(json_data.p15, grab('p15yes'), grab('p15no'));
+	asi_radioBtn_select(json_data.p16, grab('p16yes'), grab('p16no'));
+	asi_radioBtn_select(json_data.p17, grab('p17yes'), grab('p17no'));
+	asi_radioBtn_select(json_data.p18, grab('p18yes'), grab('p18no'));
+	asi_radioBtn_select(json_data.p19, grab('p19yes'), grab('p19no'));
+	asi_radioBtn_select(json_data.p20, grab('p20yes'), grab('p20no'));
+
+	asi_radioBtn_select(json_data.p22, grab('p22yes'), grab('p22no'));
+	asi_radioBtn_select(json_data.p23, grab('p23yes'), grab('p23no'));
 }
 
 //*********************************************** ASI POST FUNCTIONS *************************************************//
@@ -6269,7 +6302,11 @@ function processAsiSocial1() {
 	post_asi(false, 'number', document.getElementById('f31'), null, null);
 }
 function processAsiPsych() {
+	post_asi(false, 'number', grab('p1'), null, null);
+	post_asi(false, 'number', grab('p2'), null, null);
+	post_asi(false, 'number', grab('p12'), null, null);
 	
+	post_asi(false, 'text', document.getElementById('comments'), null, null);
 }
 
 function processAsiFields(page) {

@@ -685,6 +685,12 @@ def genericFormRefreshed(request):
 			elif str(form_type) == 'ut':
 				type_header = 'Urine Test'
 				form = UrineResults.objects.get(id=form_id)
+			elif str(form_type) == 'asi':
+				type_header = 'Addiction Severity'
+				form = ASI.objects.get(id=form_id)
+			elif str(form_type) == 'discharge':
+				type_header = 'Discharge Client'
+				form = Discharge.objects.get(id=form_id)
 
 			refreshForm(form_type, form)
 			location = fetchUrl(form_type, None ,form)
@@ -1749,7 +1755,7 @@ def asi_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = universalContent(request, 'asi', '/asi_admin/')
+			content = fetchContent(request, 'asi', '/asi_viewForm/')
 			return render_to_response('counselor/forms/ASI/viewForm.html', content, context_instance=RequestContext(request))
 
 ###########################################################################################################################################
