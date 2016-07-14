@@ -49,7 +49,7 @@
                     </form>
                 </li>
                 <li>
-                    <form action='/ut_testResults/' method='post' name='ut' id='ut'> {% csrf_token %}
+                    <form action='/ut_preliminary/' method='post' name='ut' id='ut'> {% csrf_token %}
                         <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
                         <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
                         <input type='hidden' id='back' name='back' value='true'>

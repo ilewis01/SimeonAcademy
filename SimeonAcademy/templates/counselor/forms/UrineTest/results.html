@@ -1,8 +1,158 @@
-<h1>Urine Test Form Created</h1>
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
 
-<form action='/clientOptions/' method='post' id='ut-options'> {% csrf_token %}
-	<input type='hidden' id='cli-id' name='cli-id' value='{{ut.client.id}}'>
-	<input type='submit' value='Continue Session'>
-</form>
+<body class="gradient-white" style='text-align:center' onLoad='javascript: initialize_ut({{json_data}});'>
 
-<a href='/adminHome'><button type='button'>End Session</button></a>
+	<div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              URINE ANALYSIS
+                        </div>
+
+                        <form action='' method='post' id='ut_form'> {% csrf_token %}
+                        	<input type='hidden' name='ut_id' id='ut_id' value='{{ut.id}}'>
+                        	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        	<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                        	<input type='hidden' name='new_session' id='new_session' value='false'>
+                        	<input type='hidden' name='save_this' id='save_this' value=''>
+                        	<input type='hidden' name='goToNext' id='goToNext' value='false'>
+
+                        	<input type='hidden' name='m_ut1' id='m_ut1' value=''>
+                        	<input type='hidden' name='m_ut2' id='m_ut2' value=''>
+                        	<input type='hidden' name='m_ut3' id='m_ut3' value=''>
+                        	<input type='hidden' name='m_ut4' id='m_ut4' value=''>
+                        	<input type='hidden' name='m_ut5' id='m_ut5' value=''>
+                        	<input type='hidden' name='m_ut6' id='m_ut6' value=''>
+                        	<input type='hidden' name='m_ut7' id='m_ut7' value=''>
+                        	<input type='hidden' name='m_ut8' id='m_ut8' value=''>
+                        	<input type='hidden' name='m_ut9' id='m_ut9' value=''>
+                        	<input type='hidden' name='m_ut10' id='m_ut10' value=''>
+                        	<input type='hidden' name='m_ut11' id='m_ut11' value=''>
+                        	<input type='hidden' name='m_date' id='m_date' value=''>
+                        </form>
+
+                        <div id='ut_rHead'>
+	                        <div style='margin-bottom:10px;'>
+	                			<h3 id='am-h2'>Urine Test Results</h3>
+	                		</div>
+	                	</div>
+
+	                	<div id='center_sub_ut'>
+	                		Please check each substance for which the client has tested positive. (check all that apply)
+	                	</div>
+                  </div>
+            </div>
+
+            <div class="row">
+            	<div class="col-md-2"> <!-- LEFT MARGIN -->
+            	</div>
+
+            	<div class="col-md-8">
+            		<div class='ut_result_container'>
+            			<div id='ut_header_container'>
+            				<table>
+            					<tr>
+            						<td><div id='ut_quest'><label><em>Client:</em></label></div></td>
+            						<td>
+            							<div id='ut_answers'>{{session.client.fname}} {{session.client.lname}}</div>
+            						</td>
+            					</tr>
+            				</table>
+            				<table>
+            					<tr>
+            						<td><div id='ut_quest'><label><em>Date Administered:</em></label></div></td>
+
+            						<td class='popUpDate'>
+            							<div style='margin-bottom:5px;'>
+            								<input type="text" id="popupDatepicker" name='ut_date' value='{{date}}'>
+            							</div>
+            						</td>
+            					</tr>
+            				</table>
+            			</div>
+
+            			<table class='ut_result_table'>
+            				<tr>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut1' id='ut1'></div></td>
+            					<td><div id='inner_ut_M'><label>Cannibus</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut2' id='ut2'></div></td>
+            					<td><div id='inner_ut_M'><label>Amphetamine</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut3' id='ut3'></div></td>
+            					<td><div id='inner_ut_M'><label>Cocaine</label></div></td>
+            				</tr>
+
+
+            				<tr>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut4' id='ut4'></div></td>
+            					<td><div id='inner_ut_M'><label>Opiate</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut5' id='ut5'></div></td>
+            					<td><div id='inner_ut_M'><label>Benodiazepine</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut6' id='ut6'></div></td>
+            					<td><div id='inner_ut_M'><label>Barbiturates</label></div></td>
+            				</tr>
+
+
+            				<tr>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut7' id='ut7'></div></td>
+            					<td><div id='inner_ut_M'><label>PCP</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut8' id='ut8'></div></td>
+            					<td><div id='inner_ut_M'><label>OxyContin</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut9' id='ut9'></div></td>
+            					<td><div id='inner_ut_M'><label>Methamphetamine</label></div></td>
+            				</tr>
+
+
+            				<tr>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut10' id='ut10'></div></td>
+            					<td><div id='inner_ut_M'><label>Morphine</label></div></td>
+
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut11' id='ut11'></div></td>
+            					<td><div id='inner_ut_M'><label>Methadone</label></div></td>
+
+            					<td></td>
+            					<td></td>
+            				</tr>
+            			</table>
+
+            			<div id='reset_btn'>
+                          <button type='button' onClick="javascript: reset_ut('social');">Reset</button>
+                        </div>
+            		</div>
+
+            		<div id='ut_form_btns'>
+            			<table>
+            				<tr>
+            					<td>
+            						<div>
+            							<button type='button' onClick='javascript: continue_ut();'>Continue</button>
+            						</div>
+            					</td>
+
+            					<td>
+            						<div style='margin-left:10px;'>
+            							<button type='button' onClick='javascript: cancel_ut();'>Cancel</button>
+            						</div>
+            					</td>
+            				</tr>
+            			</table>
+            		</div>
+            	</div>
+
+            	<div class="col-md-2"> <!-- RIGHT MARGIN -->
+            	</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

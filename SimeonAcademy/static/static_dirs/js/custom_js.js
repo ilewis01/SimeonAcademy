@@ -6579,6 +6579,122 @@ function sideBarASI(page) {
 	form.submit();
 }
 
+//#####################################################################################################################//
+//*********************************************************************************************************************//
+//------------------------------------------------------ END ASI ------------------------------------------------------//
+//*********************************************************************************************************************//
+//#####################################################################################################################//
+
+
+
+//#####################################################################################################################//
+//*********************************************************************************************************************//
+//-------------------------------------------------- SUPPORT FUNCTIONS ------------------------------------------------//
+//*********************************************************************************************************************//
+//#####################################################################################################################//
+
+function ut_check_init(data, box) {
+	data = String(data);
+
+	if (data === 'true') {
+		box.checked = true;
+	}
+	else {
+		box.checked = false;
+	}
+}
+
+function post_ut_check(box, target) {
+	if (box.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
+	}
+}
+
+function initialize_ut(json) {
+	ut_check_init(json.drug1, grab('ut1'));
+	ut_check_init(json.drug2, grab('ut2'));
+	ut_check_init(json.drug3, grab('ut3'));
+	ut_check_init(json.drug4, grab('ut4'));
+	ut_check_init(json.drug5, grab('ut5'));
+	ut_check_init(json.drug6, grab('ut6'));
+	ut_check_init(json.drug7, grab('ut7'));
+	ut_check_init(json.drug8, grab('ut8'));
+	ut_check_init(json.drug9, grab('ut9'));
+	ut_check_init(json.drug10, grab('ut10'));
+	ut_check_init(json.drug11, grab('ut11'));
+}
+
+function doNotPayUT() {
+	grab('ut_form').action = '/clientOptions/';
+	grab('ut_form').submit();
+}
+
+function payUT() {
+	var w = 550, h = 485;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var opWin = window.open('/ut_pay/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+}
+
+function ut_was_paid() {
+	document.getElementById('p_form').submit();
+}
+
+function ut_payment_accepted() {
+	var form = window.opener.document.getElementById('ut_form');
+	form.action = '/ut_preliminary/';
+	window.close()
+	form.submit();
+}
+
+function reset_ut() {
+	grab('ut1').checked = false;
+	grab('ut2').checked = false;
+	grab('ut3').checked = false;
+	grab('ut4').checked = false;
+	grab('ut5').checked = false;
+	grab('ut6').checked = false;
+	grab('ut7').checked = false;
+	grab('ut8').checked = false;
+	grab('ut9').checked = false;
+	grab('ut10').checked = false;
+	grab('ut11').checked = false;
+	grab('popupDatepicker').value = '';
+}
+
+function cancel_ut() {
+	grab('ut_form').action = '/clientOptions/';
+	grab('ut_form').submit();
+}
+
+function continue_ut() {
+	post_ut_check(grab('ut1'), grab('m_ut1'));
+	post_ut_check(grab('ut2'), grab('m_ut2'));
+	post_ut_check(grab('ut3'), grab('m_ut3'));
+	post_ut_check(grab('ut4'), grab('m_ut4'));
+	post_ut_check(grab('ut5'), grab('m_ut5'));
+	post_ut_check(grab('ut6'), grab('m_ut6'));
+	post_ut_check(grab('ut7'), grab('m_ut7'));
+	post_ut_check(grab('ut8'), grab('m_ut8'));
+	post_ut_check(grab('ut9'), grab('m_ut9'));
+	post_ut_check(grab('ut10'), grab('m_ut10'));
+	post_ut_check(grab('ut11'), grab('m_ut11'));
+	grab('m_date').value = grab('popupDatepicker').value;
+
+	grab('save_this').value = 'true';
+	grab('ut_form').action = '/ut_viewForm/';
+	grab('ut_form').submit();
+}
+
+//#####################################################################################################################//
+//*********************************************************************************************************************//
+//--------------------------------------------------------- END UT ----------------------------------------------------//
+//*********************************************************************************************************************//
+//#####################################################################################################################//
+
 
 
 //#####################################################################################################################//
@@ -7207,6 +7323,7 @@ function amSideBtnSubmit(url) {
 	form.action = url;
 	form.submit();
 }
+
 
 
 

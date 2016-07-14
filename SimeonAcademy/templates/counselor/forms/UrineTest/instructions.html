@@ -2,41 +2,88 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Urine Test Results</h1>
-<span style='color:red;'><b>{{matches}} test(s) {{phrase2}} found for {{ut.testDate}}</b></span><br>
-<em>Are you sure that you would like to enter new test results?</em><br>
+<body class="gradient-white" style='text-align:center'>
 
-<div style='margin-bottom:30px;'></div>
-<form action='/ut_form_saved2/' method='post' id=''> {% csrf_token %}
-	<input type='hidden' id='ut_id' name='ut_id' value='{{ut.id}}'>
-	<table>
-		<tr>
-			<td>
-				<input type='radio' name='ut_op' id='ut_op' value='delete' checked='true'>
-			</td>
-			<td>
-				<label for=''>Delete previous results and save new results</label>
-			</td>
-		</tr>
+	<div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              URINE ANALYSIS
+                        </div>
 
-		<tr>
-			<td>
-				<input type='radio' name='ut_op' id='ut_op' value='keep'>
-			</td>
-			<td>
-				<label for=''>Keep previous results and save new results</label>
-			</td>
-		</tr>
+                        <form action='' method='post' id='ut_form'> {% csrf_token %}
+                        	<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                        	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        	<input type='hidden' name='paid_id' id='paid_id' value='{{paid_profile.id}}'>
+                        	<input type='hidden' name='goToNext' id='goToNext' value='false'>
+                        	<input type='hidden' name='new_session' id='new_session' value='false'>
+                        </form>
 
-		<tr>
-			<td>
-				<div style='margin-bottom:30px;'></div>
-			</td>
-		</tr>
-	</table>
-	<input type='submit' value='Continue'>
-</form>
+                        <table class='instruction_ut_class'>
+                        	<tr><td><div><img src="{% static 'images/warning.png' %}" alt="inst_warning" id='inst_warning'></div></td></tr>
+                            <tr>
+                                <td>
+                                    <div id='instru_head'>
+                                    	A Payment of <span>${{s_type.fee}}</span> Must Be Received Before You Can Begin Urine Analysis
+                                    </div>
+                                </td>
+                            </tr>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+                            <tr>
+                            	<td>
+                            		<div id='instru_second'>Would you like to continue to billing?</div>
+                            	</td>
+                            </tr>
+                        </table>
 
+                        <table class='two_btn_table'>
+                            <tr>
+                            	<td>
+                            		<div>
+                            			<a href="javascript: payUT();">
+                            				<div class='center-rounded'>
+                            					<div class='round-button'>
+                            						<div class='round-button-circle'>
+                            							<div class='roundIconClass4'>
+                            								<img src="{% static 'images/money.png' %}" alt="" class='money_icon'>
+                            							</div>
+                            						</div>
+                            					</div>
+                            				</div>
+
+                            				<div class='exitBtn_small'>
+                            					Continue
+                            				</div>
+                            			</a>
+                            		</div>
+                            	</td>
+
+                            	<td>
+                            		<div>
+                            			<a href="javascript: doNotPayUT();">
+                            				<div class='center-rounded'>
+                            					<div class='round-button'>
+                            						<div class='round-button-circle'>
+                            							<div class='roundIconClass'>
+                            								<img src="{% static 'images/exit_white.png' %}" alt="" class='image_icon'>
+                            							</div>
+                            						</div>
+                            					</div>
+                            				</div>
+
+                            				<div class='exitBtn_small'>
+                            					Exit
+                            				</div>
+                            			</a>
+                            		</div>
+                            	</td>
+                            </tr>
+                        </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+</body>
 {% endblock %}

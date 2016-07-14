@@ -66,24 +66,32 @@ class Client(models.Model):
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)
 
+class UtPaid(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	isPaid = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return str(self.client.fname) + ' ' + str(self.client.lname) + "    UT PAID: " + str(self.isPaid)
+
 class UrineResults(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
 	date_of_assessment = models.DateField(default=None, blank=True, null=True)
 	
-	drug1 = models.BooleanField(default=True, blank=True)
-	drug2 = models.BooleanField(default=True, blank=True)
-	drug3 = models.BooleanField(default=True, blank=True)
-	drug4 = models.BooleanField(default=True, blank=True)
-	drug5 = models.BooleanField(default=True, blank=True)
-	drug6 = models.BooleanField(default=True, blank=True)
-	drug7 = models.BooleanField(default=True, blank=True)
-	drug8 = models.BooleanField(default=True, blank=True)
-	drug9 = models.BooleanField(default=True, blank=True)
-	drug10 = models.BooleanField(default=True, blank=True)
-	drug11 = models.BooleanField(default=True, blank=True)
+	drug1 = models.BooleanField(default=False, blank=True)
+	drug2 = models.BooleanField(default=False, blank=True)
+	drug3 = models.BooleanField(default=False, blank=True)
+	drug4 = models.BooleanField(default=False, blank=True)
+	drug5 = models.BooleanField(default=False, blank=True)
+	drug6 = models.BooleanField(default=False, blank=True)
+	drug7 = models.BooleanField(default=False, blank=True)
+	drug8 = models.BooleanField(default=False, blank=True)
+	drug9 = models.BooleanField(default=False, blank=True)
+	drug10 = models.BooleanField(default=False, blank=True)
+	drug11 = models.BooleanField(default=False, blank=True)
 
 	isOpen = models.BooleanField(default=False, blank=True)
 	isComplete = models.BooleanField(default=False, blank=True)
+	isPaid = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return "Urine Results: " + str(self.client)
@@ -1452,21 +1460,97 @@ class Appointment(models.Model):
 	def __unicode__(self):
 		return str(self.date) + " " + str(self.time) + " " + str(self.time)
 
-## SESSIONS--------------------------------------------------------------------------------------------
-class Invoice(models.Model):
-	billed_to = models.CharField(max_length=50, default=None, blank=True, null=True)
-	date = models.DateTimeField(default=None, blank=True, null=True)
-	service1 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	service2 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	service3 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	service4 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	service5 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	service6 = models.CharField(max_length=50, default=None, blank=True, null=True)
-	amount = models.IntegerField(default=0)
+
+## BILLING---------------------------------------------------------------------------------------------
+class CashPay(models.Model):
+	received 	= models.IntegerField(default=0)
+	oweChange 	= models.BooleanField(default=False, blank=True)
+	changeAmt 	= models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return str(self.billed_to) + ' ' + str(self.date) + ' $' + str(self.amount)
+		return str(self.received)
 
+class CreditPay(models.Model):
+	nameOnCard 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	cardNumber 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	expDate 	= models.CharField(max_length=10, default=None, blank=True, null=True)
+	CRV 		= models.CharField(max_length=7, default=None, blank=True, null=True)
+	zipCode 	= models.CharField(max_length=10, default=None, blank=True, null=True)
+	isApproved 	= models.BooleanField(default=False, blank=True)
+	received 	= models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.received)
+
+class CheckPay(models.Model):
+	name 			= models.CharField(max_length=50, default=None, blank=True, null=True)
+	accountNumber 	= models.CharField(max_length=20, default=None, blank=True, null=True)
+	routingNumber 	= models.CharField(max_length=20, default=None, blank=True, null=True)
+	checkNumber	 	= models.CharField(max_length=20, default=None, blank=True, null=True)
+	address 		= models.CharField(max_length=50, default=None, blank=True, null=True)
+	city 			= models.CharField(max_length=20, default=None, blank=True, null=True)
+	state 			= models.ForeignKey(State, default=None, blank=True, null=True)
+	zipCode 		= models.CharField(max_length=10, default=None, blank=True, null=True)
+	received 		= models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.received)
+
+class InsurancePay(models.Model):
+	InsuranceCompany 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	accountNumber 		= models.CharField(max_length=50, default=None, blank=True, null=True)
+	accountName 		= models.CharField(max_length=50, default=None, blank=True, null=True)
+	received 			= models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.received)
+
+class Payment(models.Model):
+	paymentType = models.CharField(max_length=25, default=None, blank=True, null=True)
+	date 		= models.DateField(default=None, blank=True, null=True)
+	isPartial 	= models.BooleanField(default=False, blank=True) 
+	received 	= models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.received)
+
+class Invoice(models.Model):
+	client 			= models.ForeignKey(Client, default=None, blank=True, null=True)
+	date 			= models.DateTimeField(default=None, blank=True, null=True)
+
+	service1 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity1 	= models.IntegerField(default=0)
+	total1 		= models.IntegerField(default=0)
+	
+	service2 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity2 	= models.IntegerField(default=0)
+	total2 		= models.IntegerField(default=0)
+
+	service3 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity3 	= models.IntegerField(default=0)
+	total3 		= models.IntegerField(default=0)
+
+	service4 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity4 	= models.IntegerField(default=0)
+	total4 		= models.IntegerField(default=0)
+
+	service5 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity5 	= models.IntegerField(default=0)
+	total5 		= models.IntegerField(default=0)
+
+	service6 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	quantity6 	= models.IntegerField(default=0)
+	total6 		= models.IntegerField(default=0)
+
+	grandTotal = models.IntegerField(default=0)
+	isPaid = models.BooleanField(default=False, blank=True)
+	partialPaid = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return str(self.client) + ' BALANCE: $' + str(self.grandTotal)
+
+
+## SESSIONS--------------------------------------------------------------------------------------------
 class ClientSession(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
 	s_type = models.ForeignKey(SType, default=None, blank=True, null=True)

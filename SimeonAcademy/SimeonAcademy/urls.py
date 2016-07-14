@@ -73,6 +73,8 @@ urlpatterns = patterns('',
 
     ## Urine Test Views
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),
+    url(r'^ut_pay/$', 'assessment.views.ut_pay'),
+    url(r'^ut_paid/$', 'assessment.views.ut_paid'),
     url(r'^ut_testResults/$', 'assessment.views.ut_testResults'),
     url(r'^ut_viewForm/$', 'assessment.views.ut_viewForm'),
 

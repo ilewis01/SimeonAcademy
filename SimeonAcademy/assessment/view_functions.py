@@ -21,7 +21,7 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid
 
 def clientEqual(c1, c2):
 	isEqual = False
@@ -7979,7 +7979,7 @@ def grabClientUtForms(client):
 	uts = UrineResults.objects.all()
 
 	for u in uts:
-		if clientEqual(client, u) == True:
+		if clientEqual(client, u.client) == True:
 			results.append(u)
 	return results
 
@@ -8002,6 +8002,27 @@ def getClientIncompleteUt(client):
 			break
 	return result
 
+def hasUtPaid(client):
+	hasPaid = False
+	p_list = UtPaid.objects.all()
+
+	for p in p_list:
+		if clientEqual(client, p.client) == True:
+			hasPaid = True
+			break
+	return hasPaid
+
+def getUtPaid(client):
+	result = None
+	p_list = UtPaid.objects.all()
+
+	for p in p_list:
+		if clientEqual(client, p.client) == True:
+			result = p
+			break
+	return result
+
+
 def newUT(client):
 	date = datetime.now()
 	date = date.date()
@@ -8010,14 +8031,12 @@ def newUT(client):
 	return ut
 
 def startUT(client):
-	result = {}
+	result = None
 
 	if hasIncompleteUT(client) == True:
-		result['ut'] = getClientIncompleteUt(client)
-		result['isNew'] = False
+		result = getClientIncompleteUt(client)
 	else:
-		result['ut'] = newUT(client)
-		result['isNew'] = True
+		result = newUT(client)
 
 	return result
 
@@ -8037,17 +8056,18 @@ def getUtFields(ut):
 	return fields
 
 def saveUT(request, ut):
-	ut.drug1 = truePythonBool(request.POST.get('drug1'))
-	ut.drug2 = truePythonBool(request.POST.get('drug2'))
-	ut.drug3 = truePythonBool(request.POST.get('drug3'))
-	ut.drug4 = truePythonBool(request.POST.get('drug4'))
-	ut.drug5 = truePythonBool(request.POST.get('drug5'))
-	ut.drug6 = truePythonBool(request.POST.get('drug6'))
-	ut.drug7 = truePythonBool(request.POST.get('drug7'))
-	ut.drug8 = truePythonBool(request.POST.get('drug8'))
-	ut.drug9 = truePythonBool(request.POST.get('drug9'))
-	ut.drug10 = truePythonBool(request.POST.get('drug10'))
-	ut.drug11 = truePythonBool(request.POST.get('drug11'))
+	ut.date_of_assessment = process_jq_date(request.POST.get('m_date'))
+	ut.drug1 = truePythonBool(request.POST.get('m_ut1'))
+	ut.drug2 = truePythonBool(request.POST.get('m_ut2'))
+	ut.drug3 = truePythonBool(request.POST.get('m_ut3'))
+	ut.drug4 = truePythonBool(request.POST.get('m_ut4'))
+	ut.drug5 = truePythonBool(request.POST.get('m_ut5'))
+	ut.drug6 = truePythonBool(request.POST.get('m_ut6'))
+	ut.drug7 = truePythonBool(request.POST.get('m_ut7'))
+	ut.drug8 = truePythonBool(request.POST.get('m_ut8'))
+	ut.drug9 = truePythonBool(request.POST.get('m_ut9'))
+	ut.drug10 = truePythonBool(request.POST.get('m_ut10'))
+	ut.drug11 = truePythonBool(request.POST.get('m_ut11'))
 	ut.save()
 
 def refreshUT(ut):
@@ -8076,22 +8096,37 @@ def beginUT(request):
 	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
 
-	action = startUT(client)
-	ut = action['ut']
-	setGlobalID(ut.id)
+	s_type = getStype('ut')
+	result['s_type'] = s_type
 
-	openForm('ut', ut, client)
+	if hasUtPaid(client) == True:
+		proceed = getUtPaid(client)
 
-	result['ut'] = ut
-	result['session'] = session
-	result['isNew'] = action['isNew']
+		if proceed.isPaid == True:
+			ut = startUT(client)
+			setGlobalID(ut.id)
+			openForm('ut', ut, client)
+			fields = getUtFields(ut)
+			json_data = json.dumps(fields)
+
+			result['date'] = ut.date_of_assessment
+			result['fields'] = fields
+			result['json_data'] = json_data
+			result['url'] = 'counselor/forms/UrineTest/results.html'
+			result['ut'] = ut
+		else:
+			result['url'] = 'counselor/forms/UrineTest/instructions.html'
+			result['paid_profile'] = proceed
+			setGlobalID(proceed.id)
+	else:
+		newPaid = UtPaid(client=client)
+		newPaid.save()
+		result['url'] = 'counselor/forms/UrineTest/instructions.html'
+		result['paid_profile'] = newPaid
+		setGlobalID(newPaid.id)
+	
+	result['session'] = session	
 	result['title'] = "Simeon Academy | Urine Analysis"
-	result['save_this'] = 'false'
-
-	if action['isNew'] == False:
-		result['form'] = ut
-		result['form_type'] = 'ut'
-		result['type_header'] = 'Urine Analysis'
 
 	return result
 
@@ -8102,14 +8137,16 @@ def processUtData(request):
 	ut_id = request.POST.get('ut_id', '')
 	save_this = request.POST.get('save_this', '')
 
+	print "UT ID: " + str(ut_id) 
+
 	session = ClientSession.objects.get(id=session_id)
-	ut = UrineResults.objects.get(id=asi_id)
+	ut = UrineResults.objects.get(id=ut_id)
 	fields = getUtFields(ut)
 	json_data = json.dumps(fields)
 
 	if save_this == 'true':
 		saveUT(request, ut)
-		finishUT(ut)
+		# finishUT(ut)
 
 	result['session'] = session
 	result['ut'] = ut
@@ -8121,6 +8158,31 @@ def processUtData(request):
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ############################################################ END DISCHARGE ################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
+###########################################################################################################################################
+#*****************************************************************************************************************************************#
+#--------------------------------------------------------------- BILLING -----------------------------------------------------------------#
+#*****************************************************************************************************************************************#
+###########################################################################################################################################
+
+def getStype(ftype):
+	ftype = str(ftype)
+	result = None
+	if ftype == 'am':
+		result = SType.objects.get(id=1)
+	elif ftype == 'mh':
+		result = SType.objects.get(id=2)
+	elif ftype == 'ut':
+		result = SType.objects.get(id=3)
+	elif ftype == 'sap':
+		result = SType.objects.get(id=4)
+	elif ftype == 'asi':
+		result = SType.objects.get(id=5)
+	return result
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+############################################################## END BILLING ################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 
@@ -8447,128 +8509,128 @@ def openForm(form_type, form, client):
 #*****************************************************************************************************************************************#
 ###########################################################################################################################################
 
-def grabGenericForm(form_type, form_id):
-	form = None
+# def grabGenericForm(form_type, form_id):
+# 	form = None
 
-	if str(form_type) == 'am':
-		form = AngerManagement.objects.get(id=form_id)
-	elif str(form_type) == 'sap':
-		form = SAP.objects.get(id=form_id)
-	elif str(form_type) == 'mh':
-		form = MentalHealth.objects.get(id=form_id)
-	elif str(form_type) == 'ut':
-		form = UrineResults.objects.get(id=form_id)
-	elif str(form_type) == 'asi':
-		form = ASI.objects.get(id=form_id)
-	elif str(form_type) == 'discharge':
-		form = Discharge.objects.get(id=form_id)
+# 	if str(form_type) == 'am':
+# 		form = AngerManagement.objects.get(id=form_id)
+# 	elif str(form_type) == 'sap':
+# 		form = SAP.objects.get(id=form_id)
+# 	elif str(form_type) == 'mh':
+# 		form = MentalHealth.objects.get(id=form_id)
+# 	elif str(form_type) == 'ut':
+# 		form = UrineResults.objects.get(id=form_id)
+# 	elif str(form_type) == 'asi':
+# 		form = ASI.objects.get(id=form_id)
+# 	elif str(form_type) == 'discharge':
+# 		form = Discharge.objects.get(id=form_id)
 
-	return form
+# 	return form
 
-def deleteGenericForm(form_type, form):
-	if form_type == 'am':
-		deleteAM(form)
-	elif form_type == 'sap':
-		deleteSap(form)
-	elif form_type == 'mh':
-		deleteMh(form)
-	elif form_type == 'asi':
-		deleteASI(form)
+# def deleteGenericForm(form_type, form):
+# 	if form_type == 'am':
+# 		deleteAM(form)
+# 	elif form_type == 'sap':
+# 		deleteSap(form)
+# 	elif form_type == 'mh':
+# 		deleteMh(form)
+# 	elif form_type == 'asi':
+# 		deleteASI(form)
 
-def universalLocation(form_type, form_id):
-	location = None
+# def universalLocation(form_type, form_id):
+# 	location = None
 
-	if str(form_type) == 'am':
-		am = AngerManagement.objects.get(id=form_id)
-		nextAmPage(am, None)
-	elif str(form_type) == 'sap':
-		sap = SAP.objects.get(id=form_id)
-		location = nextSAPage(sap, None)
-	elif str(form_type) == 'mh':
-		mh = MentalHealth.objects.get(id=form_id)
-		location = nextMhPage(mh, None)
-	elif str(form_type) == 'ut':
-		ut = UrineResults.objects.get(id=form_id)
+# 	if str(form_type) == 'am':
+# 		am = AngerManagement.objects.get(id=form_id)
+# 		nextAmPage(am, None)
+# 	elif str(form_type) == 'sap':
+# 		sap = SAP.objects.get(id=form_id)
+# 		location = nextSAPage(sap, None)
+# 	elif str(form_type) == 'mh':
+# 		mh = MentalHealth.objects.get(id=form_id)
+# 		location = nextMhPage(mh, None)
+# 	elif str(form_type) == 'ut':
+# 		ut = UrineResults.objects.get(id=form_id)
 
-	return location
+# 	return location
 
-def universalRefresh(form_type, form):
-	if str(form_type) == 'am':
-		refreshAM(form)
-	elif str(form_type) == 'sap':
-		refreshSap(form)
-	elif str(form_type) == 'mh':
-		refreshMh(form)
-	elif str(form_type) == 'asi':
-		refreshASI(form)
+# def universalRefresh(form_type, form):
+# 	if str(form_type) == 'am':
+# 		refreshAM(form)
+# 	elif str(form_type) == 'sap':
+# 		refreshSap(form)
+# 	elif str(form_type) == 'mh':
+# 		refreshMh(form)
+# 	elif str(form_type) == 'asi':
+# 		refreshASI(form)
 
-def universalSaveForm(request, form_type, section, form):
-	if form_type == 'am':
-		no = None
-	elif form_type == 'sap':
-		no = None
-	elif form_type == 'mh':
-		saveMentalHealth(request, section, form)
-	elif form_type == 'asi':
-		saveASI(request, section, form)
+# def universalSaveForm(request, form_type, section, form):
+# 	if form_type == 'am':
+# 		no = None
+# 	elif form_type == 'sap':
+# 		no = None
+# 	elif form_type == 'mh':
+# 		saveMentalHealth(request, section, form)
+# 	elif form_type == 'asi':
+# 		saveASI(request, section, form)
 
-def universalSaveFinishForm(request, form_type, section, form):
-	if form_type == 'am':
-		no = None
-	elif form_type == 'sap':
-		no = None
-	elif form_type == 'mh':
-		saveMentalHealth(request, section, form)
-		finishMhSection(form, section)
-	elif form_type == 'asi':
-		saveASI(request, section, form)
-		setASIcomplete(section, form)
+# def universalSaveFinishForm(request, form_type, section, form):
+# 	if form_type == 'am':
+# 		no = None
+# 	elif form_type == 'sap':
+# 		no = None
+# 	elif form_type == 'mh':
+# 		saveMentalHealth(request, section, form)
+# 		finishMhSection(form, section)
+# 	elif form_type == 'asi':
+# 		saveASI(request, section, form)
+# 		setASIcomplete(section, form)
 
-def universalContent(request, form_type, gField):
-	## TAKES DJANGO REQUEST, THE TYPE OF FORM BEING PROCESSED AND THE SECTION FOR WHICH YOU ARE REQUESTING THE FIELDS
-	## THIS FUNCTION SAVES THE FORM'S SECTION IF CONDITIONS ARE MET
-	## RETURNS ALL THE CONTENT ASSOCIATED WITH THE FORM AND SECTION (INCLUDING THE FORM AND SESSION)
-	result = None
+# def universalContent(request, form_type, gField):
+# 	## TAKES DJANGO REQUEST, THE TYPE OF FORM BEING PROCESSED AND THE SECTION FOR WHICH YOU ARE REQUESTING THE FIELDS
+# 	## THIS FUNCTION SAVES THE FORM'S SECTION IF CONDITIONS ARE MET
+# 	## RETURNS ALL THE CONTENT ASSOCIATED WITH THE FORM AND SECTION (INCLUDING THE FORM AND SESSION)
+# 	result = None
 
-	if form_type == 'am':
-		no = None
-	elif form_type == 'sap':
-		no = None
-	elif form_type == 'mh':
-		result = processMhData(request, gField)
+# 	if form_type == 'am':
+# 		no = None
+# 	elif form_type == 'sap':
+# 		no = None
+# 	elif form_type == 'mh':
+# 		result = processMhData(request, gField)
 
-	return result
+# 	return result
 
-def universalGrabFields(form_type, section, form):
-	form_type = str(form_type)
-	section = str(section)
-	result = {}
+# def universalGrabFields(form_type, section, form):
+# 	form_type = str(form_type)
+# 	section = str(section)
+# 	result = {}
 
-	if form_type == 'am':
-		result = getAMFields(form, section)
-	elif form_type == 'mh':
-		result = getMhFields(form, section)
-	elif form_type == 'asi':
-		result = grabASIFields(form, section)
-	elif form_type == 'sap':
-		result = None
+# 	if form_type == 'am':
+# 		result = getAMFields(form, section)
+# 	elif form_type == 'mh':
+# 		result = getMhFields(form, section)
+# 	elif form_type == 'asi':
+# 		result = grabASIFields(form, section)
+# 	elif form_type == 'sap':
+# 		result = None
 
-	return result
+# 	return result
 
-def universalStartForm(form_type, client):
-	form_type = str(form_type)
-	result = None
+# def universalStartForm(form_type, client):
+# 	form_type = str(form_type)
+# 	result = None
 
-	if form_type == 'am':
-		result = startAM(client)
-	elif form_type == 'mh':
-		result = startMH(client)
-	elif form_type == 'sap':
-		result = getSAP(client)
-	elif form_type == 'asi':
-		result = startASI(client)
+# 	if form_type == 'am':
+# 		result = startAM(client)
+# 	elif form_type == 'mh':
+# 		result = startMH(client)
+# 	elif form_type == 'sap':
+# 		result = getSAP(client)
+# 	elif form_type == 'asi':
+# 		result = startASI(client)
 
-	return result
+# 	return result
 
 ############################################################################################
 	              ##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
@@ -8664,7 +8726,7 @@ def saveForm(request, form_type, section, form):
 	elif form_type == 'asi':
 		saveASI(request, section, form)
 	elif form_type == 'ut':
-		saveUT(request, section, form)
+		saveUT(request, form)
 	elif form_type == 'discharge':
 		saveDischarge(request, discharge)
 

@@ -25,15 +25,16 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
 getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
 getActiveClients, getDischargedClients, getTimes, convert_phone, phone_to_integer, \
-grabClientOpenForm, grabGenericForm, deleteGenericForm, getOrderedStateIndex, \
+grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
-fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, startSession
+fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, startSession, \
+getStype
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
 # getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -721,8 +722,8 @@ def genericFormDeleted(request):
 			form_type = request.POST.get('parent_form_type', '')
 			form_id = request.POST.get('parent_form_id', '')
 
-			form = grabGenericForm(form_type, form_id)
-			deleteGenericForm(form_type, form)
+			form = fetchForm(form_type, form_id)
+			deleteForm(form_type, form)
 
 			content['form_type'] = form_type
 			content['form_id'] = form_id
@@ -1970,12 +1971,46 @@ def ut_preliminary(request):
 
 		else:
 			content = startForm(request, 'ut')
+			return render_to_response(content['url'], content, context_instance=RequestContext(request))
 
-			if content['isNew'] == False:
-				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
+@login_required(login_url='/index')
+def ut_pay(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
 
-			else:
-				return render_to_response('counselor/forms/UrineTest/instructions.html', content, context_instance=RequestContext(request))
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['p_id'] = getGlobalID()
+			return render_to_response('counselor/forms/UrineTest/invoice.html', content)
+
+@login_required(login_url='/index')
+def ut_paid(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			proceed = UtPaid.objects.get(id=(request.POST.get('p_id')))
+			proceed.isPaid = True
+			proceed.save()
+			return render_to_response('counselor/forms/UrineTest/invoice_paid.html', content)
+			
 
 @login_required(login_url='/index')
 def ut_testResults(request):
