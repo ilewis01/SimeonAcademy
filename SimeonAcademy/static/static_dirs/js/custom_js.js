@@ -600,27 +600,33 @@ function toClientOptions(form_id) {
 }
 
 function new_am() {
-	document.getElementById('am').submit();
+	grab('c_form').action = '/am_preliminary/';
+	grab('c_form').submit();
 }
 
 function new_asi() {
-	document.getElementById('asi').submit();
+	grab('c_form').action = '/asi_preliminary/';
+	grab('c_form').submit();
 }
 
 function new_mh() {
-	document.getElementById('mh').submit();
+	grab('c_form').action = '/mh_preliminary/';
+	grab('c_form').submit();
 }
 
 function new_sap() {
-	document.getElementById('sap').submit();
+	grab('c_form').action = '/sap_preliminary/';
+	grab('c_form').submit();
 }
 
 function new_ut() {
-	document.getElementById('ut').submit();
+	grab('c_form').action = '/ut_preliminary/';
+	grab('c_form').submit();
 }
 
-function discharge() {
-	document.getElementById('discharge').submit();
+function new_discharge() {
+	grab('c_form').action = '/discharge_preliminary/';
+	grab('c_form').submit();
 }
 
 function close_client_session() {
@@ -7115,17 +7121,23 @@ function getFormElement(form_type) {
 	var result = null;
 
 	if (String(form_type) === 'am') {
-		result = document.getElementById('am_demo');
+		result = grab('am_demo');
 	}
 	else if (String(form_type) === 'sap') {
-		result = document.getElementById('sap_form');
+		result = grab('sap_form');
 	}
 	else if (String(form_type) === 'mh') {
-		result = document.getElementById('mh_form');
+		result = grab('mh_form');
 	}
 
 	else if (String(form_type) === 'asi') {
-		result = document.getElementById('asi_form');
+		result = grab('asi_form');
+	}
+	else if (String(form_type) === 'ut') {
+		result = grab('ut_form')
+	}
+	else if (String(form_type) === 'discharge') {
+		result = grab('d_form')
 	}
 
 	return result;
@@ -7180,6 +7192,9 @@ function universal_generic_exit(form_type, page) {
 
 	if (form_type === 'asi') {
 		processAsiFields(page);
+	}
+	if (form_type === 'ut') {
+		continue_ut();
 	}
 
 	form.action = '/uni_generic_exit/';

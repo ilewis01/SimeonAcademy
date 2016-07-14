@@ -538,7 +538,7 @@ def uni_generic_exit(request):
 				type_header = 'A.S.I'
 
 			elif str(form_type) == 'ut':
-				ut_id = request.POST.get(id=ut_id)
+				ut_id = request.POST.get('ut_id', '')
 				form = UrineResults.objects.get(id=ut_id)
 				type_header = 'Urine Test'
 

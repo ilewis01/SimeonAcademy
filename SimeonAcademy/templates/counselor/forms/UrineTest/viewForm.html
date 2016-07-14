@@ -2,64 +2,24 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Urine Test Results</h1>
+<body class="gradient-white" style='text-align:center' onLoad='javascript: initialize_ut({{json_data}});'>
 
-<h3>Please Confirm The Urine Test Results</h3>
-<h4>Test Date: {{ut.testDate}}</h4>
-<form action='/ut_form_saved/' method='post' id='ut-form-verify'> {% csrf_token %}
-	<table>
-		<tr>
-			<td>
-				<b>Client: </b>
-			</td>
-			<td>
-				<em>{{ut.client.fname}} {{ut.client.lname}}</em>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<b>ID: </b>
-			</td>
-			<td>
-				<em>{{ut.client.clientID}}</em>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<b>DOB: </b>
-			</td>
-			<td>
-				<em>{{ut.client.dob}}</em>
-			</td>
-		</tr>
-		<tr><td><div style='margin-bottom: 10px;'></div></td></tr>
-	</table>
-	<table>
-		<tr>
-			<td>
-				<b>Address: </b>
-			</td>
-		</tr>
-		<tr>
-			<td>{{ut.client.street_no}} {{ut.client.street_name}} {{ut.client.apartment_no}}</td>		
-		</tr>
-		<tr>
-			<td>{{ut.client.city}}, {{ut.client.state}} {{ut.client.zip_code}}</td>			
-		</tr>
-	</table>
+	<div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              URINE ANALYSIS
+                        </div>
 
-	<h2>{{matches}} positive {{phrase}} {{phrase2}} detected</h2>
-	<ul>
-		{% for r in results %}
-			<li>
-				{{r}}
-			</li>
-		{% endfor %}
-	</ul>
-	<input type='hidden' id='ut_id' name='ut_id' value='{{ut.id}}'>
-	<input type='submit' value='submit'>
-</form>
+                        
+                  </div>
+            </div>
 
-<a href='/adminHome'><button type='button'>Home Page</button></a>
+            
+        </div>
+    </div>
+
+</body>
 
 {% endblock %}

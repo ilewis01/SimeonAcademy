@@ -14,72 +14,41 @@
                     <div style='margin-bottom:40px; padding-top:8%;'>
                         <h3>Options</h3>
                     </div>
-                </li>
-                <li>
-                    <form action='/am_preliminary/' method='post' name='am' id='am'> {% csrf_token %}
+
+                    <form action='' method='post' name='c_form' id='c_form'> {% csrf_token %}
+                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
                         <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type="hidden" id='goToNext' name='goToNext' value='{{goToNext}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                        <a href="javascript: new_am();">Anger Management</a>
                     </form>
+
                 </li>
                 <li>
-                    <form action='/asi_preliminary/' method='post' name='asi' id='asi'> {% csrf_token %} 
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'> 
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'> 
-                        <input type='hidden' id='back' name='back' value='true'>              
-                        <a href="javascript: new_asi();">Addiction Severity Index</a>
-                    </form>
+                    <a href="javascript: new_am();">Anger Management</a>
                 </li>
                 <li>
-                    <form action='/mh_preliminary/' method='post' name='mh' id='mh'> {% csrf_token %} 
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'> 
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                        <a href="javascript: new_mh();">Mental Health Assessment</a>
-                    </form>
+                    <a href="javascript: new_asi();">Addiction Severity Index</a>
                 </li>
                 <li>
-                    <form action='/sap_preliminary/' method='post' name='sap' id='sap'> {% csrf_token %}
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                        <a href="javascript: new_sap();">S.A.P Form</a>
-                    </form>
+                    <a href="javascript: new_mh();">Mental Health Assessment</a>
                 </li>
                 <li>
-                    <form action='/ut_preliminary/' method='post' name='ut' id='ut'> {% csrf_token %}
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                        <a href="javascript: new_ut();">Urine Test Results</a>
-                    </form>
+                    <a href="javascript: new_sap();">S.A.P Form</a>
                 </li>
                 <li>
-                    <a href="#">Client History</a>
+                    <a href="javascript: new_ut();">Urine Test Results</a>
                 </li>
                 <li>
-                    <form action='/discharge_client/' method='post' name='discharge' id='discharge'> {% csrf_token %}
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                        <a href="javascript: discharge();">Discharge</a>
-                    </form>
-                </li>
-                
-                <li>
-                    <a href="#">Appointment Manager</a>
+                    <a href="javascript: get_client_history();">Client History</a>
                 </li>
                 <li>
-                    <a href="#">Delete Current Session</a>
+                    <a href="javascript: new_discharge();">Discharge</a>
+                </li>               
+                <li>
+                    <a href="javascript: go_to_appointments();">Appointment Manager</a>
                 </li>
                 <li>
-                    <form action='/comfirmSessionEnd/' method='post' name='closeSession' id='closeSession'> {% csrf_token %}
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type="hidden" id='session_id' name='session_id' value='{{session_id}}'>
-                        <input type='hidden' id='back' name='back' value='true'>
-                    </form>
+                    <a href="javascript: delete_session();">Delete Current Session</a>
+                </li>
+                <li>
                     <a href="javascript: close_client_session();">Close Session</a>
                 </li>
             </ul>

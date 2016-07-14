@@ -18,7 +18,9 @@
                         	<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                         	<input type='hidden' name='new_session' id='new_session' value='false'>
                         	<input type='hidden' name='save_this' id='save_this' value=''>
+                              <input type='hidden' name='save_section' id='save_section' value='/ut_testResults/'>
                         	<input type='hidden' name='goToNext' id='goToNext' value='false'>
+                              <input type='hidden' name='exit_type' id='exit_type' value='ut'>
 
                         	<input type='hidden' name='m_ut1' id='m_ut1' value=''>
                         	<input type='hidden' name='m_ut2' id='m_ut2' value=''>
@@ -131,17 +133,17 @@
             		<div id='ut_form_btns'>
             			<table>
             				<tr>
-            					<td>
-            						<div>
-            							<button type='button' onClick='javascript: continue_ut();'>Continue</button>
-            						</div>
-            					</td>
+                                          <td>
+                                                <div>
+                                                      <button type='button' onClick="javascript: universal_generic_exit('ut', '/ut_preliminary/');">Exit</button>
+                                                </div>
+                                          </td>
 
-            					<td>
-            						<div style='margin-left:10px;'>
-            							<button type='button' onClick='javascript: cancel_ut();'>Cancel</button>
-            						</div>
-            					</td>
+                                          <td>
+                                                <div>
+                                                      <button type='button' onClick='javascript: continue_ut();'>Continue</button>
+                                                </div>
+                                          </td>
             				</tr>
             			</table>
             		</div>

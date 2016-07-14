@@ -8143,6 +8143,7 @@ def processUtData(request):
 	ut = UrineResults.objects.get(id=ut_id)
 	fields = getUtFields(ut)
 	json_data = json.dumps(fields)
+	result['date'] = ut.date_of_assessment
 
 	if save_this == 'true':
 		saveUT(request, ut)
