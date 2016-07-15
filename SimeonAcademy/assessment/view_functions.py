@@ -297,28 +297,152 @@ def getClientByName(fname, lname):
 
 	return results
 
-def startSession(client, session_type):
-	sessionList = ClientSession.objects.all()
-	check_sessions = True
-	createNewSession = True
-	session = None
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#****************************************************** SESSION FUNCTIONS *******************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
 
-	if len(sessionList) == 0:
-		check_sessions = False
+def sessionEqual(s1, s2):
+	isEqual = False
+	if str(s1.id) == str(s2.str) and clientEqual(s1.client, s2.client):
+		isEqual = True
+	return isEqual
 
-	if check_sessions == True:
-		for s in sessionList:
-			if (str(s.client.clientID) == str(client.clientID)) and (s.isComplete == False):
-				session = s
-				createNewSession = False
-				break
+def fetchSessions(client):
+	sessions = ClientSession.objects.all()
+	result = []
+	for s in sessions:
+		if clientEqual(s.client, client) == True:
+			result.append(s)
+	return result
 
-	if createNewSession == True:
-		startTime = datetime.now()
-		session = ClientSession(client=client, start=startTime, s_type=session_type)
-		session.save()
-
+def newSession(the_client):
+	start = datetime.now()
+	session = ClientSession(client=the_client, startTime=start)
+	the_date = start.date()
+	invoice = Invoice(client=the_client, date=the_date, isOpen=True)
+	invoice.save()
+	session.invoice = invoice
+	session.save()
 	return session
+
+def openSession(session):
+	sss = fetchSessions(session.client)
+	for s in sss:
+		if sessionEqual(session, s) == True:
+			s.isOpen = True
+			s.save()
+		else:
+			s.isOpen = False
+			s.save()
+
+def hasUnfinishedSession(client):
+	hasUnfinished = False
+	sss = fetchSessions(client)
+	for s in sss:
+		if clientEqual(s.client, client) == True and s.isComplete == False:
+			hasUnfinished = True
+			break
+	return hasUnfinished
+
+def fetchUnfinishedSession(client):
+	result = None
+	sss = fetchSessions(client)
+	for s in sss:
+		if clientEqual(client, s.client):
+			result = s
+			break
+	return result
+
+def addService(session, s_type):
+	if session.noServices == 1:
+		session.invoice.service1 = str(s_type.session_type)
+		session.invoice.total1 = s_type.fee
+		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+	elif session.noServices == 2:
+		session.invoice.service2 = str(s_type.session_type)
+		session.invoice.total2 = s_type.fee
+		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+	elif session.noServices == 3:
+		session.invoice.service3 = str(s_type.session_type)
+		session.invoice.total3 = s_type.fee
+		session.invoice.grandTotal= s_type.fee + session.invoice.grandTotal
+	elif session.noServices == 4:
+		session.invoice.service4 = str(s_type.session_type)
+		session.invoice.total4 = s_type.fee
+		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+	elif session.noServices == 5:
+		session.invoice.service5 = str(s_type.session_type)
+		session.invoice.total5 = s_type.fee
+		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+	elif session.noServices == 6:
+		session.invoice.service6 = str(s_type.session_type)
+		session.invoice.total6 = s_type.fee
+		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+	session.invoice.save()
+
+def startSession(client):
+	result = {}
+	if hasUnfinishedSession(client) == True:
+		result['session'] = fetchUnfinishedSession(client)
+		result['isNew'] = False
+	else:
+		result['session'] = newSession(client)
+		result['isNew'] = True
+	return result
+
+def deleteSession(session):
+	session.invoice.delete()
+	session.delete()
+
+def refreshSession(session):
+	session.startTime = ''
+	session.endTime = ''
+	session.counselor = ''
+	session.noServices = 1
+	session.isPaid = False
+	session.isComplete = False
+	resetInvoice(session.invoice)
+	session.save()
+
+def endSession(session, isfinished):
+	session.invoice.isOpen = False
+	session.isOpen = False
+	session.isComplete = isfinished
+	session.invoice.save()
+	session.save()
+
+def beginSession(request):
+	result = {}
+	client = Client.objects.get(id=(request.POST.get('client_id')))
+
+	action = startSession(client)
+	session = action['session']
+	result['session'] = session
+	#THINK ABOUT THE PHONE SECTION
+
+	if action['isNew'] == False:
+		result['url'] = 'counselor/session/existingSession.html'
+	else:
+		result['url'] = 'counselor/client/client_options.html'
+	return result
+
+def processSession(form_type, session):
+	form_type = str(form_type)
+	currentS = int(session.noServices)
+
+	s_type = getStype(form_type)
+	addService(session, s_type)
+	session.noServices = currentS + 1
+	session.save()
+
+
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#********************************************************** END SESSION *********************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
 
 
 def getMaritalID(marital):
@@ -1180,6 +1304,7 @@ def newAM(client):
 	date = datetime.now()
 	am = AngerManagement(client=client, AMComplete=False, start_time=date)
 	date = date.date()
+	am.date_of_assessment = date
 
 	demo = AM_Demographic(client_id=client.clientID, date_of_assessment=date)
 	drugHistory = AM_DrugHistory(client_id=client.clientID, finishedTreatment=True)
@@ -1222,6 +1347,7 @@ def newAM(client):
 	am.currentProblems = currentProblems
 	am.control = amControl
 	am.final = amFinal
+	am.initialized = False
 
 	am.save()
 
@@ -2373,28 +2499,6 @@ def hasAM(client):
 	return exist
 
 
-# def startAM(client):
-# 	results = {}
-# 	create_new = True
-# 	am = None
-
-# 	if hasAM(client) == True:
-# 		amList = AngerManagement.objects.all()
-
-# 		for a in amList:
-# 			if (a.AMComplete == False) and (str(a.client.clientID) == str(client.clientID)):
-# 				create_new = False
-# 				am = a
-# 				break
-
-# 	if create_new == True:
-# 		am = newAM(client)
-
-# 	results['am'] = am
-# 	results['isNew'] = create_new
-
-# 	return results
-
 def grabAmSideBarString(location):
 	m_page = None
 
@@ -2787,15 +2891,16 @@ def startAM(client):
 
 def beginAM(request):
 	result = {}
-	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	action = startAM(client)
 	am = action['am']
 	setGlobalID(am.id)
+
+	chooseToBill('am', am, session)
 
 	openForm('am', am, client)
 
@@ -2828,6 +2933,8 @@ def processAMData(request, current_section):
 	deprioritizeAM(am)
 	fields = getAMFields(am, current_section)
 	json_data = json.dumps(fields)
+
+	chooseToBill('am', am, session)
 
 	if save_this == 'true':
 		saveCompletedAmSection(request, section, am)
@@ -3217,12 +3324,14 @@ def beginSAP(request):
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	action = startSAP(client)
 	sap = action['sap']
 	setGlobalID(sap.id)
+
+	chooseToBill('sap', sap, session)
 
 	openForm('sap', sap, client)
 
@@ -4153,6 +4262,8 @@ def processSapData(request, current_section):
 	fields = getSapFields(sap, current_section)
 	json_data = json.dumps(fields)
 
+	chooseToBill('sap', sap, session)
+
 	if save_this == 'true':
 		saveSap(request, section, sap)
 		setSapSectionComplete(sap, section)
@@ -4410,12 +4521,14 @@ def beginMH(request):
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	action = startMH(client)
 	mh = action['mh']
 	setGlobalID(mh.id)
+
+	chooseToBill('mh', mh, session)
 
 	openForm('mh', mh, client)
 
@@ -5746,6 +5859,8 @@ def processMhData(request, current_section):
 	fields = getMhFields(mh, current_section)
 	json_data = json.dumps(fields)
 
+	chooseToBill('mh', mh, session)
+
 	if current_section == '/mh_demographic/':
 		states = State.objects.all().order_by('state')
 		result['states'] = states
@@ -6346,12 +6461,14 @@ def beginASI(request):
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	action = startASI(client)
 	asi = action['asi']
 	setGlobalID(asi.id)
+
+	chooseToBill('asi', asi, session)
 
 	openForm('asi', asi, client)
 
@@ -7796,6 +7913,8 @@ def processAsiData(request, current_section):
 	fields = grabASIFields(asi, current_section)
 	json_data = json.dumps(fields)
 
+	chooseToBill('asi', asi, session)
+
 	if current_section == '/asi_admin/':
 		ad_date = asi.admin.g4
 		result['ad_date'] = ad_date
@@ -8022,6 +8141,10 @@ def getUtPaid(client):
 			break
 	return result
 
+def deleteUT(ut):
+	paid = getUtPaid(ut.client)
+	paid.delete()
+	ut.delete()
 
 def newUT(client):
 	date = datetime.now()
@@ -8158,7 +8281,7 @@ def processUtData(request):
 	return result
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-############################################################ END DISCHARGE ################################################################
+################################################################ END URINE ################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 ###########################################################################################################################################
@@ -8181,6 +8304,42 @@ def getStype(ftype):
 	elif ftype == 'asi':
 		result = SType.objects.get(id=5)
 	return result
+
+def getInvoices(client):
+	result = []
+	invoices = Invoice.objects.all()
+	for i in invoice:
+		if clientEqual(i.client, client):
+			result.append(i)
+	return result
+
+def chooseToBill(form_type, form, session):
+	if form.initialized == False:
+		print "START FORM INIT: " + str(form.initialized)
+		processSession(form_type, session)
+		form.initialized = True
+		print "END FORM INIT: " + str(form.initialized)
+
+		form.save()
+
+def resetInvoice(invoice):
+	invoice.date = ''
+	invoice.service1 = ''
+	invoice.service2 = ''
+	invoice.service3 = ''
+	invoice.service4 = ''
+	invoice.service5 = ''
+	invoice.service6 = ''
+	invoice.total1 = 0
+	invoice.total2 = 0
+	invoice.total3 = 0
+	invoice.total4 = 0
+	invoice.total5 = 0
+	invoice.total6 = 0
+	invoice.grandTotal = 0
+	invoice.isPaid = False
+	invoice.partialPaid = False
+	invoice.save()
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ############################################################## END BILLING ################################################################
@@ -8510,131 +8669,234 @@ def openForm(form_type, form, client):
 #*****************************************************************************************************************************************#
 ###########################################################################################################################################
 
-# def grabGenericForm(form_type, form_id):
-# 	form = None
-
-# 	if str(form_type) == 'am':
-# 		form = AngerManagement.objects.get(id=form_id)
-# 	elif str(form_type) == 'sap':
-# 		form = SAP.objects.get(id=form_id)
-# 	elif str(form_type) == 'mh':
-# 		form = MentalHealth.objects.get(id=form_id)
-# 	elif str(form_type) == 'ut':
-# 		form = UrineResults.objects.get(id=form_id)
-# 	elif str(form_type) == 'asi':
-# 		form = ASI.objects.get(id=form_id)
-# 	elif str(form_type) == 'discharge':
-# 		form = Discharge.objects.get(id=form_id)
-
-# 	return form
-
-# def deleteGenericForm(form_type, form):
-# 	if form_type == 'am':
-# 		deleteAM(form)
-# 	elif form_type == 'sap':
-# 		deleteSap(form)
-# 	elif form_type == 'mh':
-# 		deleteMh(form)
-# 	elif form_type == 'asi':
-# 		deleteASI(form)
-
-# def universalLocation(form_type, form_id):
-# 	location = None
-
-# 	if str(form_type) == 'am':
-# 		am = AngerManagement.objects.get(id=form_id)
-# 		nextAmPage(am, None)
-# 	elif str(form_type) == 'sap':
-# 		sap = SAP.objects.get(id=form_id)
-# 		location = nextSAPage(sap, None)
-# 	elif str(form_type) == 'mh':
-# 		mh = MentalHealth.objects.get(id=form_id)
-# 		location = nextMhPage(mh, None)
-# 	elif str(form_type) == 'ut':
-# 		ut = UrineResults.objects.get(id=form_id)
-
-# 	return location
-
-# def universalRefresh(form_type, form):
-# 	if str(form_type) == 'am':
-# 		refreshAM(form)
-# 	elif str(form_type) == 'sap':
-# 		refreshSap(form)
-# 	elif str(form_type) == 'mh':
-# 		refreshMh(form)
-# 	elif str(form_type) == 'asi':
-# 		refreshASI(form)
-
-# def universalSaveForm(request, form_type, section, form):
-# 	if form_type == 'am':
-# 		no = None
-# 	elif form_type == 'sap':
-# 		no = None
-# 	elif form_type == 'mh':
-# 		saveMentalHealth(request, section, form)
-# 	elif form_type == 'asi':
-# 		saveASI(request, section, form)
-
-# def universalSaveFinishForm(request, form_type, section, form):
-# 	if form_type == 'am':
-# 		no = None
-# 	elif form_type == 'sap':
-# 		no = None
-# 	elif form_type == 'mh':
-# 		saveMentalHealth(request, section, form)
-# 		finishMhSection(form, section)
-# 	elif form_type == 'asi':
-# 		saveASI(request, section, form)
-# 		setASIcomplete(section, form)
-
-# def universalContent(request, form_type, gField):
-# 	## TAKES DJANGO REQUEST, THE TYPE OF FORM BEING PROCESSED AND THE SECTION FOR WHICH YOU ARE REQUESTING THE FIELDS
-# 	## THIS FUNCTION SAVES THE FORM'S SECTION IF CONDITIONS ARE MET
-# 	## RETURNS ALL THE CONTENT ASSOCIATED WITH THE FORM AND SECTION (INCLUDING THE FORM AND SESSION)
-# 	result = None
-
-# 	if form_type == 'am':
-# 		no = None
-# 	elif form_type == 'sap':
-# 		no = None
-# 	elif form_type == 'mh':
-# 		result = processMhData(request, gField)
-
-# 	return result
-
-# def universalGrabFields(form_type, section, form):
-# 	form_type = str(form_type)
-# 	section = str(section)
-# 	result = {}
-
-# 	if form_type == 'am':
-# 		result = getAMFields(form, section)
-# 	elif form_type == 'mh':
-# 		result = getMhFields(form, section)
-# 	elif form_type == 'asi':
-# 		result = grabASIFields(form, section)
-# 	elif form_type == 'sap':
-# 		result = None
-
-# 	return result
-
-# def universalStartForm(form_type, client):
-# 	form_type = str(form_type)
-# 	result = None
-
-# 	if form_type == 'am':
-# 		result = startAM(client)
-# 	elif form_type == 'mh':
-# 		result = startMH(client)
-# 	elif form_type == 'sap':
-# 		result = getSAP(client)
-# 	elif form_type == 'asi':
-# 		result = startASI(client)
-
-# 	return result
 
 ############################################################################################
-	              ##MUST WRITE DELETE METHOD FOR OTHER FORMS AS CREATED
+	              ## CLIENT OPTION FUNCTIONS
+############################################################################################
+
+def orderedASI(order, client):
+	result = []
+	order = str(order)
+	asi = None
+
+	if order == 'low':
+		asi = ASI.objects.all().order_by('date_of_assessment')
+	elif order == 'high':
+		asi = ASI.objects.all().order_by('-date_of_assessment')
+
+	for a in asi:
+		if clientEqual(client, a.client):
+			data = {}
+			data['form_type'] = 'asi'
+			data['form'] = a
+			data['name'] = 'Addiction Severity Index'
+			result.append(data)
+
+	return result
+
+def orderedAM(order, client):
+	result = []
+	order = str(order)
+	am = None
+
+	if order == 'low':
+		am = AngerManagement.objects.all().order_by('date_of_assessment')
+	elif order == 'high':
+		am = AngerManagement.objects.all().order_by('-date_of_assessment')
+
+	for a in am:
+		if clientEqual(client, a.client):
+			data = {}
+			data['form_type'] = 'am'
+			data['form'] = a
+			data['name'] = 'Anger Management'
+			result.append(data)
+
+	return result
+
+def orderedSAP(order, client):
+	result = []
+	order = str(order)
+	sap = None
+
+	if order == 'low':
+		sap = SAP.objects.all().order_by('date_of_assessment')
+	elif order == 'high':
+		sap = SAP.objects.all().order_by('-date_of_assessment')
+
+	for s in sap:
+		if clientEqual(client, s.client):
+			data = {}
+			data['form_type'] = 'sap'
+			data['form'] = s
+			data['name'] = 'S.A.P'
+			result.append(data)
+
+	return result
+
+def orderedMH(order, client):
+	result = []
+	order = str(order)
+	mh = None
+
+	if order == 'low':
+		mh = MentalHealth.objects.all().order_by('date_of_assessment')
+	elif order == 'high':
+		mh = MentalHealth.objects.all().order_by('-date_of_assessment')
+
+	for m in mh:
+		if clientEqual(client, m.client):
+			data = {}
+			data['form_type'] = 'mh'
+			data['form'] = m
+			data['name'] = 'Mental Health'
+			result.append(data)
+
+	return result
+
+def orderedUT(order, client):
+	result = []
+	order = str(order)
+	ut = None
+
+	if order == 'low':
+		ut = UrineResults.objects.all().order_by('date_of_assessment')
+	elif order == 'high':
+		ut = UrineResults.objects.all().order_by('-date_of_assessment')
+
+	for u in ut:
+		if clientEqual(client, u.client):
+			data = {}
+			data['form_type'] = 'ut'
+			data['form'] = u
+			data['name'] = 'Urine Analysis'
+			result.append(data)
+
+	return result
+
+def formLowDateLow(client):
+	result = []
+	am 	= orderedAM('low', client)
+	asi = orderedASI('low', client)
+	mh 	= orderedMH('low', client)
+	sap = orderedSAP('low', client)
+	ut 	= orderedUT('low', client)
+	for a in am:
+		result.append(a)
+	for ai in asi:
+		result.append(ai)
+	for m in mh:
+		result.append(m)
+	for s in sap:
+		result.append(s)
+	for u in ut:
+		result.append(u)
+	return result
+
+def formLowDateHi(client):
+	result = []
+	am 	= orderedAM('high', client)
+	asi = orderedASI('high', client)
+	mh 	= orderedMH('high', client)
+	sap = orderedSAP('high', client)
+	ut 	= orderedUT('high', client)
+	for a in am:
+		result.append(a)
+	for ai in asi:
+		result.append(ai)
+	for m in mh:
+		result.append(m)
+	for s in sap:
+		result.append(s)
+	for u in ut:
+		result.append(u)
+	return result
+
+def formHiDateLow(client):
+	result = []
+	am 	= orderedAM('low', client)
+	asi = orderedASI('low', client)
+	mh 	= orderedMH('low', client)
+	sap = orderedSAP('low', client)
+	ut 	= orderedUT('low', client)	
+	for u in ut:
+		result.append(u)
+	for s in sap:
+		result.append(s)
+	for m in mh:
+		result.append(m)
+	for ai in asi:
+		result.append(ai)
+	for a in am:
+		result.append(a)
+	return result
+
+def formHiDateHi(client):
+	result = []
+	am 	= orderedAM('high', client)
+	asi = orderedASI('high', client)
+	mh 	= orderedMH('high', client)
+	sap = orderedSAP('high', client)
+	ut 	= orderedUT('high', client)	
+	for u in ut:
+		result.append(u)
+	for s in sap:
+		result.append(s)
+	for m in mh:
+		result.append(m)
+	for ai in asi:
+		result.append(ai)
+	for a in am:
+		result.append(a)
+	return result
+
+def getOrderedHistory(f_order, d_order, client):
+	result = []
+	f_order = str(f_order)
+	d_order = str(d_order)
+	
+	if f_order == 'low' and d_order == 'high':
+		result = formLowDateHi(client)
+	elif f_order == 'high' and d_order == 'low':
+		result = formHiDateLow(client)
+	elif f_order == 'high' and d_order == 'high':
+		result = formHiDateHi(client)
+	else:
+		result = formLowDateLow(client)		
+	return result
+
+
+def processClientHistory(request):
+	result = {}
+	fields = {}
+	session_id = request.POST.get('session_id')
+	session = ClientSession.objects.get(id=session_id)
+	f_order = request.POST.get('forder')
+	d_order = request.POST.get('dorder')
+	client = session.client
+
+	h_list = getOrderedHistory(f_order, d_order, client)
+
+	print '\n' + "ORDERED LIST...." +'\n'
+	for h in h_list:
+		print h
+
+	fields['f_order'] = f_order
+	fields['d_order'] = d_order
+	json_data = json.dumps(fields)
+
+	result['json_data'] = json_data
+	result['h_list'] 	= h_list	
+	result['session'] 	= session
+	result['title']		= 'Simeon Academy | Client History'
+
+ 	return result
+
+
+
+
+############################################################################################
+	              ## END CLIENT OPTION FUNCTIONS
 ############################################################################################
 
 def setGlobalID(the_id):
@@ -8780,7 +9042,9 @@ def deleteForm(form_type, form):
 		deleteMh(form)
 	elif form_type == 'asi':
 		deleteASI(form)
-	elif form_type == 'ut' or form_type == 'discharge':
+	elif form_type == 'ut':
+		deleteUT(form)
+	elif form_type == 'discharge':
 		form.delete()
 
 def refreshForm(form_type, form):

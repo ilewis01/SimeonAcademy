@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),
+    url(r'^clientHistory/$', 'assessment.views.clientHistory'),
     url(r'^client_appointment/$', 'assessment.views.client_appointment'),
     url(r'^client_documents/$', 'assessment.views.client_documents'),
     url(r'^all_active_clients/$', 'assessment.views.all_active_clients'),

@@ -33,8 +33,8 @@ getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
 getActiveClients, getDischargedClients, getTimes, convert_phone, phone_to_integer, \
 grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
-fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, startSession, \
-getStype
+fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
+processClientHistory
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
 # getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -410,6 +410,24 @@ def clientSearchResults(request):
 			return render_to_response('counselor/client/client_search_results.html', content)
 
 @login_required(login_url='/index')
+def clientHistory(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = processClientHistory(request)
+			return render_to_response('counselor/client/clientHistory.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def clientOptions(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -424,41 +442,9 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client_id = request.POST.get('client_id', '')
-			new_session = request.POST.get('new_session', '')
-			goToNext = request.POST.get('goToNext', '')
+			content = beginSession(request)
+			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
-			client = Client.objects.get(id=client_id)
-			start = datetime.now()
-			phone = convert_phone(client.phone)
-
-			session = None
-			session_type = None
-
-			if new_session == 'false':
-				session_id = request.POST.get('session_id', '')
-				session = ClientSession.objects.get(id=session_id)
-				session_type = session.s_type.session_type
-
-			else:
-				session_type = request.POST.get('session_type', '')
-				session_type = SType.objects.get(id=session_type)
-				session = startSession(client, session_type)
-
-
-			# session = ClientSession(client=client, start=start, s_type=session_type)
-			# session.save()
-
-			content['title'] = "Client Options | Simeon Academy"
-			content['goToNext'] = goToNext
-			content['phone'] = phone
-			content['client'] = client
-			content['session_type'] = session_type
-			content['start'] = start
-			content['session_id'] = session.id
-			content['session'] = session
-			content['back'] = 'false'
-			return render_to_response('counselor/client/client_options.html', content)
 
 @login_required(login_url='/index')
 def comfirmSessionEnd(request):
@@ -2077,12 +2063,30 @@ def discharge_preliminary(request):
 
 		else:
 			content = startForm(request, 'discharge')
+			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
-			if content['isNew'] == False:
-				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
+# @login_required(login_url='/index')
+# def discharge_preliminary(request):
+# 	user = request.user
+# 	if not user.is_authenticated():
+# 		render_to_response('global/index.html')
 
-			else:
-				return render_to_response('counselor/forms/Discharge/getClient.html', content, context_instance=RequestContext(request))
+# 	else:
+# 		content = {}
+# 		content.update(csrf(request))
+# 		content['user'] = user
+# 		if user.account.is_counselor == False:
+# 			content['title'] = 'Restricted Access'
+# 			return render_to_response('global/restricted.html', content)
+
+# 		else:
+# 			content = startForm(request, 'discharge')
+
+# 			if content['isNew'] == False:
+# 				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
+
+# 			else:
+# 				return render_to_response('counselor/forms/Discharge/getClient.html', content, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/index')

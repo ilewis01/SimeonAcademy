@@ -89,12 +89,12 @@ class UrineResults(models.Model):
 	drug10 = models.BooleanField(default=False, blank=True)
 	drug11 = models.BooleanField(default=False, blank=True)
 
+	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(default=False, blank=True)
 	isComplete = models.BooleanField(default=False, blank=True)
-	isPaid = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Urine Results: " + str(self.client)
+		return 'UT: ' + str(self.client.fname) + ' ' + str(self.client.lname)
 
 class Discharge(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)
@@ -251,11 +251,12 @@ class SAP(models.Model):
 	otherPriority = models.BooleanField(blank=True, default=False)
 	sourcesPriority = models.BooleanField(blank=True, default=False)
 
+	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(blank=True, default=False)
 	SapComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return "SAP: " + str(self.client.clientID)
+		return 'SAP: ' + str(self.client.fname) + ' ' + str(self.client.lname)
 
 ##ANGER MANAGEMENT DEMOGRAPHIC------------------------------------------------------------
 class AM_Demographic(models.Model):
@@ -610,11 +611,12 @@ class AngerManagement(models.Model):
 	controlPriority = models.BooleanField(blank= True, default = False)
 	finalPriority = models.BooleanField(blank= True, default = False)
 
+	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(blank=True, default=False)
 	AMComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
-		return str(self.client.fname) + ' ' + str(self.client.lname) + " " + str(self.start_time)
+		return 'AM: ' + str(self.client.fname) + ' ' + str(self.client.lname)
 
 class MHDemographic(models.Model):
 	#HISTORY I
@@ -998,11 +1000,12 @@ class MentalHealth(models.Model):
 	psychPriority = models.BooleanField(default=False, blank=True)
 	usePriority = models.BooleanField(default=False, blank=True)
 
+	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(default=False, blank=True)
 	MHComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "Mental Health Form: " + str(self.client)
+		return 'MH: ' + str(self.client.fname) + ' ' + str(self.client.lname)
 
 ################################################################################################################################
 #******************************************************************************************************************************#
@@ -1424,11 +1427,12 @@ class ASI(models.Model):
 	social2Priority = models.BooleanField(default=False, blank=True)
 	psychPriority = models.BooleanField(default=False, blank=True)
 
+	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(default=False, blank=True)
 	AIS_Complete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return "AIS Date: " + str(self.date_of_assessment) + ' | ' + str(self.client.clientID)
+		return 'ASI: ' + str(self.client.fname) + ' ' + str(self.client.lname)
 
 
 ################################################################################################################################
@@ -1519,32 +1523,27 @@ class Invoice(models.Model):
 	date 			= models.DateTimeField(default=None, blank=True, null=True)
 
 	service1 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity1 	= models.IntegerField(default=0)
 	total1 		= models.IntegerField(default=0)
 	
 	service2 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity2 	= models.IntegerField(default=0)
 	total2 		= models.IntegerField(default=0)
 
 	service3 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity3 	= models.IntegerField(default=0)
 	total3 		= models.IntegerField(default=0)
 
 	service4 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity4 	= models.IntegerField(default=0)
 	total4 		= models.IntegerField(default=0)
 
 	service5 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity5 	= models.IntegerField(default=0)
 	total5 		= models.IntegerField(default=0)
 
 	service6 	= models.CharField(max_length=50, default=None, blank=True, null=True)
-	quantity6 	= models.IntegerField(default=0)
 	total6 		= models.IntegerField(default=0)
 
-	grandTotal = models.IntegerField(default=0)
-	isPaid = models.BooleanField(default=False, blank=True)
+	grandTotal 	= models.IntegerField(default=0)
+	isPaid 		= models.BooleanField(default=False, blank=True)
 	partialPaid = models.BooleanField(default=False, blank=True)
+	isOpen 		= models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return str(self.client) + ' BALANCE: $' + str(self.grandTotal)
@@ -1552,15 +1551,21 @@ class Invoice(models.Model):
 
 ## SESSIONS--------------------------------------------------------------------------------------------
 class ClientSession(models.Model):
-	client = models.ForeignKey(Client, default=None, blank=True, null=True)
-	s_type = models.ForeignKey(SType, default=None, blank=True, null=True)
-	invoice = models.ForeignKey(Invoice, default=None, blank=True, null=True)
-	start = models.DateTimeField(default=None, blank=True, null=True)
-	end = models.DateTimeField(default=None, blank=True, null=True)
-	isComplete = models.BooleanField(default=False, blank=True)
+	startTime 		= models.DateTimeField(default=None, blank=True, null=True)
+	endTime 		= models.DateTimeField(default=None, blank=True, null=True)
+
+	client 			= models.ForeignKey(Client, default=None, blank=True, null=True)
+	counselor 		= models.CharField(max_length=50, default=None, blank=True, null=True)
+	invoice 		= models.ForeignKey(Invoice, default=None, blank=True, null=True)
+
+	noServices		= models.IntegerField(default=1)
+
+	isOpen	 		= models.BooleanField(default=False, blank=True)
+	isPaid			= models.BooleanField(default=False, blank=True)
+	isComplete 		= models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return str(self.client) + ' ' + str(self.start)
+		return str(self.client) + ' ' + str(self.startTime)
 
 
 ## This is a phony session but cannot be deleted due to the many to many field
