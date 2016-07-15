@@ -1564,6 +1564,18 @@ class ClientSession(models.Model):
 	isPaid			= models.BooleanField(default=False, blank=True)
 	isComplete 		= models.BooleanField(default=False, blank=True)
 
+	am 				= models.ForeignKey(AngerManagement, default=None, blank=True, null=True)
+	mh 				= models.ForeignKey(MentalHealth, default=None, blank=True, null=True)
+	ut 				= models.ForeignKey(UrineResults, default=None, blank=True, null=True)
+	asi 			= models.ForeignKey(ASI, default=None, blank=True, null=True)
+	sap 			= models.ForeignKey(SAP, default=None, blank=True, null=True)
+
+	hasAM 			= models.BooleanField(default=False, blank=True)
+	hasMH 			= models.BooleanField(default=False, blank=True)
+	hasUT 			= models.BooleanField(default=False, blank=True)
+	hasASI 			= models.BooleanField(default=False, blank=True)
+	hasSAP 			= models.BooleanField(default=False, blank=True)
+
 	def __unicode__(self):
 		return str(self.client) + ' ' + str(self.startTime)
 
