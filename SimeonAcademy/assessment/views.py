@@ -34,7 +34,7 @@ getActiveClients, getDischargedClients, getTimes, convert_phone, phone_to_intege
 grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
-processClientHistory
+processClientHistory, getDischarge
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
 # getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -2065,29 +2065,6 @@ def discharge_preliminary(request):
 			content = startForm(request, 'discharge')
 			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
-# @login_required(login_url='/index')
-# def discharge_preliminary(request):
-# 	user = request.user
-# 	if not user.is_authenticated():
-# 		render_to_response('global/index.html')
-
-# 	else:
-# 		content = {}
-# 		content.update(csrf(request))
-# 		content['user'] = user
-# 		if user.account.is_counselor == False:
-# 			content['title'] = 'Restricted Access'
-# 			return render_to_response('global/restricted.html', content)
-
-# 		else:
-# 			content = startForm(request, 'discharge')
-
-# 			if content['isNew'] == False:
-# 				return render_to_response('global/resolve_form.html', content, context_instance=RequestContext(request))
-
-# 			else:
-# 				return render_to_response('counselor/forms/Discharge/getClient.html', content, context_instance=RequestContext(request))
-
 
 @login_required(login_url='/index')
 def discharge_client(request):
@@ -2104,8 +2081,8 @@ def discharge_client(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = fetchContent(request, 'discharge', None)
-			return render_to_response('counselor/forms/Discharge/clientDischarge.html', content, context_instance=RequestContext(request))
+			content = startForm(request, 'discharge')
+			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def discharge_viewForm(request):
@@ -2122,7 +2099,12 @@ def discharge_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = fetchContent(request, 'discharge', None)
+			session_id = getGlobalID()
+			session = ClientSession.objects.get(id=session_id)
+			discharge = getDischarge(session.client)
+			content['session'] = session
+			content['discharge'] = discharge
+			content['title'] = 'Simeon Academy | Client Discharge'
 			return render_to_response('counselor/forms/Discharge/viewForm.html', content, context_instance=RequestContext(request))
 
 

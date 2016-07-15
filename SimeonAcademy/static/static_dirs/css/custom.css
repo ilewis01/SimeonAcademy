@@ -2076,6 +2076,107 @@ button:hover {
 	margin-left: 10px;
 }
 
+/*DISCHARGE VIEWS----------------------------------------------------------------*/
+
+.discharge_container {
+	margin-top: 3%;
+	text-align: left;
+}
+
+.discharge_container label {
+	margin-top: 10%;
+	margin-right: 5px;
+}
+
+#dis_ans {
+	font-style: italic;
+	font-size: 15px;
+	padding: 3px;
+}
+
+#disLab {
+	font-size: 15px;
+	font-weight: bold;
+	margin-right: 7px;
+	padding: 3px;
+}
+
+#label_fix_d {
+	margin-top: 2%;
+	margin-right: 7px;
+}
+
+.d_container1 {
+	margin-top: 5%;
+	text-align: left;
+}
+
+.d_container2 {
+	margin-top: 5%;
+	text-align: left;
+}
+
+.d_right1 {
+	margin-top: 40%;
+	text-align: left;
+}
+
+.d_right1 label {
+	margin-top: 8%;
+	margin-right: 7px;
+}
+
+.d_right1 select {
+	font-size: 20px;
+}
+
+.d_right2 {
+	text-align: left;
+	margin-top: 5%;
+}
+
+.d_btn_cont {
+	margin-top: 3%;
+}
+
+.dis_verify {
+	background-color: #e9e7e9;
+	text-align: left;
+	font-family: Arial;
+	padding: 2%;
+}
+
+.dis_verify h3 {
+	font-style: italic;
+	margin-left: 5%;
+}
+
+.dis_pop_container {
+	width: 90%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	height: 150px;
+}
+
+#dis_reset {
+	width:98%;
+	margin-top: 25px;
+	text-align: right;
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 1%;
+}
+
+.dis_btn_wrapper {
+	width: 90%;
+	margin: auto;
+}
+
+.dis_btn_wrapper button {
+	width:60px;
+}
+
 
 /*###############################################################################################################*/
 /*###############################################################################################################*/

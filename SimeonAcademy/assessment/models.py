@@ -106,7 +106,7 @@ class Discharge(models.Model):
 	clientAttitude = models.CharField(max_length=200, default=None, blank=True, null=True)
 	recommendations = models.CharField(max_length=200, default=None, blank=True, null=True)
 
-	isOpen = models.BooleanField(default=False, blank=True)
+	isOpen = models.BooleanField(default=True, blank=True)
 	isComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):

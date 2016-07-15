@@ -2,8 +2,171 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Discharge</h1>
+<body class="gradient-white" style='text-align:center' onLoad='init_discharge()'>
 
-<a href='/adminHome'>Home Page</a>
+	<div class='header-images'>
+        <div class="container">
+            <div class="row">                   
+                <div class="col-md-12">
+                    <div id='header-text'>
+                              DISCHARGE SUMMARY
+                    </div>
 
+                    <form action='' method='post' id='d_form'> {% csrf_token %}
+                        <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                        <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        <input type='hidden' name='d_id' id='d_id' value='{{form.id}}'>
+                    </form>                    
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-md-1"></div> --> <!-- LEFT MARGIN -->
+
+                <div class="col-md-6">
+                    <div class='discharge_container'>
+                        <table>
+                            <tr>
+                                <td><div id='ital_sub_head' style='margin-bottom:10%;'>Client Information:</div></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td><div id='disLab'>Name:</div></td>
+                                <td><div id='dis_ans'>{{session.client.fname}} {{session.client.middleInit}} {{session.client.lname}}</div></td>
+                            </tr>
+                            <tr>
+                                <td><div id='disLab'>DOB:</div></td>
+                                <td><div id='dis_ans'>{{session.client.dob}}</div></td>
+                            </tr>
+                            <tr>
+                                <td><div id='disLab'>Client ID:</div></td>
+                                <td><div id='dis_ans'>{{session.client.clientID}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='disLab'>Address:</div></td>
+                                <td><div id='dis_ans'>{{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}</div></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><div id='dis_ans'>{{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}</div></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class='d_container1'>
+                        <table>
+                            <tr>
+                                <td><div id='disLab'>Reason referred to the program: </div></td>
+                                <td><div id='dis_ans'>{{session.client.reason_ref}}</div></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id='disLab'>Please include additional details regarding reason for referral:</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows='4' cols='80' name='' id=''>{{fields.reasonRefered}}</textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class='d_container1'>
+                        <table>
+                            <tr>
+                                <td><div id='disLab'>Describe patient's demeanor during treatment:</div></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows='5' cols='80' name='clientAttitude' id='clientAttitude'>{{fields.clientAttitude}}</textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class='d_btn_cont'>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <button type='button' onClick='javascript: continue_discharge();'>Continue</button>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div>
+                                        <button type='button' onClick='javascript: exit_discharge();'>Cancel</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-6">
+                    <div class='d_right1'>
+                        <table>
+                            <tr>
+                                <td><div><div id='disLab'>Diagnosis:</div></div></td>
+                                <td>
+                                    <div>
+                                        <select name='diagnosis' id='diagnosis'>
+                                            <option value='Select'>Select</option>
+                                            <option value='Diagnosis 1'>Diagnosis 1</option>
+                                            <option value='Diagnosis 2'>Diagnosis 2</option>
+                                            <option value='Diagnosis 3'>Diagnosis 3</option>
+                                            <option value='Diagnosis 4'>Diagnosis 4</option>
+                                            <option value='Diagnosis 5'>Diagnosis 5</option>
+                                            <option value='Diagnosis 6'>Diagnosis 6</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td><div><div id='disLab'>Reason for termination:</div></div></td>
+                                <td>
+                                    <div>
+                                        <select name='reasonTerminated' id='reasonTerminated'>
+                                            <option value='Select'>Select</option>
+                                            <option value='Client withdrew from program'>Client Withdrew From Program</option>
+                                            <option value='Client arrested/New charge'>Client Arrested/New Charge</option>
+                                            <option value='Administrative discharge'>Administrative Discharge</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class='d_right2'>
+                        <table>
+                            <tr>
+                                <td><div id='disLab'>What are the reccommendations for the client?</div></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows='10' cols='80' name='clientAttitude' id='clientAttitude'>{{fields.clientAttitude}}</textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-1"></div>  --><!-- RIGHT MARGIN -->
+
+            </div>
+        </div>
+    </div>
+
+</body>
 {% endblock %}

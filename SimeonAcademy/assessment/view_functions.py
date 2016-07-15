@@ -305,7 +305,7 @@ def getClientByName(fname, lname):
 
 def sessionEqual(s1, s2):
 	isEqual = False
-	if str(s1.id) == str(s2.str) and clientEqual(s1.client, s2.client):
+	if str(s1.id) == str(s2.id) and clientEqual(s1.client, s2.client):
 		isEqual = True
 	return isEqual
 
@@ -421,6 +421,13 @@ def beginSession(request):
 	session = action['session']
 	result['session'] = session
 	#THINK ABOUT THE PHONE SECTION
+
+	user = request.user
+	counselor = ''
+	counselor = str(user.first_name) + ' ' + str(user.last_name)
+	session.counselor = counselor
+	session.save()
+	openSession(session)
 
 	if action['isNew'] == False:
 		result['url'] = 'counselor/session/existingSession.html'
@@ -7956,7 +7963,7 @@ def grabClientDischargeForms(client):
 	dis = Discharge.objects.all()
 
 	for d in dis:
-		if clientEqual(client, d) == True:
+		if clientEqual(client, d.client) == True:
 			results.append(d)
 	return results
 
@@ -7969,7 +7976,7 @@ def hasIncompleteDischarge(client):
 			break
 	return hasIncomplete
 
-def getClientIncompleteDischarge(client):
+def getDischarge(client):
 	result = None
 	d_list = grabClientDischargeForms(client)
 
@@ -7990,7 +7997,7 @@ def startDischarge(client):
 	result = {}
 
 	if hasIncompleteDischarge(client) == True:
-		result['discharge'] = getClientIncompleteDischarge(client)
+		result['discharge'] = getDischarge(client)
 		result['isNew'] = False
 	else:
 		result['discharge'] = newDischarge(client)
@@ -8013,6 +8020,8 @@ def saveDischarge(request, discharge):
 	discharge.reasonTerminated 	= request.POST.get('reasonTerminated')
 	discharge.clientAttitude 	= request.POST.get('clientAttitude')
 	discharge.recommendations 	= request.POST.get('recommendations')
+	discharge.isOpen 			= False
+	discharge.isComplete 		= True
 	discharge.save()
 
 def refreshDischarge(discharge):
@@ -8032,12 +8041,12 @@ def beginDischarge(request):
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	action = startDischarge(client)
 	d = action['discharge']
-	setGlobalID(d.id)
+	setGlobalID(session.id)
 
 	openForm('discharge', d, client)
 
@@ -8059,16 +8068,13 @@ def processDischargeData(request):
 
 	session_id = request.POST.get('session_id', '')
 	d_id = request.POST.get('d_id', '')
-	save_this = request.POST.get('save_this', '')
 
 	session = ClientSession.objects.get(id=session_id)
 	d = Discharge.objects.get(id=d_id)
 	fields = getDischargeFields(d)
 	json_data = json.dumps(fields)
 
-	if save_this == 'true':
-		saveDischarge(request, d)
-		finishUT(ut)
+	saveDischarge(request, d)
 
 	result['session'] = session
 	result['discharge'] = d
@@ -8940,7 +8946,7 @@ def startForm(request, form_type):
 	elif form_type == 'ut':
 		result = beginUT(request)
 
-	elif form_type == 'ut':
+	elif form_type == 'discharge':
 		result = beginDischarge(request)
 
 	return result

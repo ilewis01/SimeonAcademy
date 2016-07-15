@@ -625,7 +625,7 @@ function new_ut() {
 }
 
 function new_discharge() {
-	grab('c_form').action = '/discharge_preliminary/';
+	grab('c_form').action = '/discharge_client/';
 	grab('c_form').submit();
 }
 
@@ -666,6 +666,44 @@ function hideToggle() {
 		btn.innerHTML = "Show Details";
 	}
 }
+
+//#####################################################################################################################//
+//#####################################################################################################################//
+//-------------------------------------------------- DISCHARGE FUNCTIONS ----------------------------------------------//
+//#####################################################################################################################//
+//#####################################################################################################################//
+
+function init_discharge() {
+	grab('reasonRefered').value = '';
+	grab('clientAttitude').value = '';
+	grab('recommendations').value = '';
+}
+
+function exit_discharge() {
+	grab('d_form').action = '/clientOptions/';
+	grab('d_form').submit();
+}
+
+function continue_discharge() {
+	var w = 425, h = 325;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var opWin = window.open('/discharge_viewForm/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+}
+
+function discharge_proceed() {
+	
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//**************************************************** END DISCHARGE **************************************************//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+//#####################################################################################################################//
+//#####################################################################################################################//
+//----------------------------------------------------- AM FUNCTIONS --------------------------------------------------//
+//#####################################################################################################################//
+//#####################################################################################################################//
 
 function clearNullTextField(element) {
 	if (element.value === null) {
@@ -744,20 +782,6 @@ function post_dynamic_am_connections() {
 		m_connectionExplain.value = 'N/A';
 	}
 }
-
-// function continue_to_worst() {
-// 	var proceed = true;
-// 	var form = document.getElementById('am_demo');
-// 	var next_url = document.getElementById('next_url');
-
-// 	post_dynamic_am_connections();
-
-// 	if (proceed === true) {
-// 		document.getElementById('save_this').value = 'true';
-// 		form.action = next_url.value;
-// 		form.submit();
-// 	}
-// }
 
 // AM WORST EPISODES FUNCTIONS
 function worstCheck() {

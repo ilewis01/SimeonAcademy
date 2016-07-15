@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" style='text-align:center' onLoad='javascript: init_clientHistory({{json_data}});'>
+
+	<div class='header-images'>
+      <div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              CLIENT HISTORY
+                        </div>
+
+                        <form action='' method='post' id='c_form'> {% csrf_token %}
+                        	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        	<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                        	<input type='hidden' name='new_session' id='new_session' value='false'>
+                        	<input type='hidden' name='dorder' id='dorder' value=''>
+                        	<input type='hidden' name='forder' id='forder' value=''>
+                        </form>
+
+                        	<div id='head2_history'>Select A Form To Proceed:</div>
+
+	                        <div class='history_container'>
+	                        	<div class='sort-header-his'>Sort Options:</div>
+	                        	<table>
+	                        		<tr>
+	                        			<td><div id='sort_text'>Sort Form:</div></td>
+
+	                        			<td>
+	                        				<div id='fix_my_select2'>
+	                        				    <select name='f_order' id='f_order' onChange='javascript: sort_history();'>
+	                        					    <option value='low'>Low To High</option>
+	                        					    <option value='high'>High To Low</option>
+	                        				    </select>
+	                        				</div>
+	                        			</td>
+
+
+	                        			<td><div style='margin-left:60px;'><div id='sort_text'>Sort Date:</div></div></td>
+
+	                        			<td>
+	                        				<div id='fix_my_select2'>
+	                        				    <select name='d_order' id='d_order' onChange='javascript: sort_history();'>
+	                        					    <option value='low'>Low To High</option>
+	                        					    <option value='high'>High To Low</option>
+	                        				    </select>
+	                        				</div>
+	                        			</td>
+	                        		</tr>
+	                        	</table>
+	                        </div>
+
+	                        <div class='history-container'>
+	                        	<ul>
+	                        		<table>
+		                        		{% for  h in h_list %}
+		                        			<tr>
+		                        				<td>
+		                        					<li>
+		                        						<a href="javascript: viewThisForm('{{h.form_type}}', {{h.form.id}})">
+		                        							<div>{{h.name}}: {{h.form.date_of_assessment}}</div>
+		                        							<div style='margin-bottom:7px;'></div>
+		                        						</a>
+		                        					</li>
+		                        				</td>
+		                        			</tr>	
+		                        		{% endfor %}
+		                        	</table>
+		                        </ul>
+	                        </div>
+
+	                        <div class='history_btn_exit'>
+	                        	<button type='button' onClick='javascript: history_to_options();'>Exit</button>
+	                        </div>
+                  </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}
