@@ -21,7 +21,8 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
+Global_Session_ID
 
 def clientEqual(c1, c2):
 	isEqual = False
@@ -388,19 +389,138 @@ def startSession(client):
 		result['isNew'] = True
 	return result
 
-def deleteSession(session):
-	session.invoice.delete()
+def isMultiAM():
+	isMulti = False
+	sessions = ClientSession.objects.all()
+	ams = AngerManagement.objects.all()
+	count = 0
 
+	for s in sessions:
+		for a in ams:
+			if str(a.id) == str(s.am.id):
+				count = count + 1
+				if count > 1:
+					isMulti = True
+					break
+	return isMulti
+
+def isMultiMH():
+	isMulti = False
+	sessions = ClientSession.objects.all()
+	mhs = MentalHealth.objects.all()
+	count = 0
+
+	for s in sessions:
+		for m in mhs:
+			if str(m.id) == str(s.mh.id):
+				count = count + 1
+				if count > 1:
+					isMulti = True
+					break
+	return isMulti
+
+def isMultiUT():
+	isMulti = False
+	sessions = ClientSession.objects.all()
+	uts = UrineResults.objects.all()
+	count = 0
+
+	for s in sessions:
+		for u in uts:
+			if str(u.id) == str(s.ut.id):
+				count = count + 1
+				if count > 1:
+					isMulti = True
+					break
+	return isMulti
+
+def isMultiSAP():
+	isMulti = False
+	sessions = ClientSession.objects.all()
+	saps = SAP.objects.all()
+	count = 0
+
+	for s in sessions:
+		for sap in saps:
+			if str(sap.id) == str(s.sap.id):
+				count = count + 1
+				if count > 1:
+					isMulti = True
+					break
+	return isMulti
+
+def isMultiASI():
+	isMulti = False
+	sessions = ClientSession.objects.all()
+	asis = ASI.objects.all()
+	count = 0
+
+	for s in sessions:
+		for a in asis:
+			if str(s.id) == str(s.asi.id):
+				count = count + 1
+				if count > 1:
+					isMulti = True
+					break
+	return isMulti
+
+def runMultiQuery(session):
 	if session.hasAM == True:
-		session.am.delete()
+		if isMultiAM() == False:
+			deleteAM(session.am)
+
 	if session.hasMH == True:
-		session.mh.delete()
+		if isMultiMH() == False:
+			deleteMh(session.mh)
+
 	if session.hasUT == True:
-		session.ut.delete()
-	if session.hasASI == True:
-		session.asi.delete()
+		if isMultiUT() == False:
+			deleteUT(session.ut)
+
 	if session.hasSAP == True:
-		session.sap.delete()
+		if isMultiSAP() == False:
+			deleteSap(session.sap)
+
+	if session.hasASI == True:
+		if isMultiASI() == False:
+			deleteASI(session.asi)
+
+def runIncompleteQuery(session):
+	if session.isComplete == True:
+		if session.hasAM == True:
+			if session.am.isComplete == False and isMultiAM() == False:
+				deleteAM(session.am)
+				session.hasAM = False
+
+		if session.hasMH == True:
+			if session.mh.isComplete == False and isMultiMH() == False:
+				deleteMh(session.mh)
+				session.hasMH = False
+
+		if session.hasUT == True:
+			if session.ut.isComplete == False and isMultiUT() == False:
+				deleteUT(session.ut)
+				session.hasUT = False
+
+		if session.hasSAP == True:
+			if session.sap.isComplete == False and isMultiSAP() == False:
+				deleteSap(session.sap)
+				session.hasSAP = False
+
+		if session.hasASI == True:
+			if session.asi.isComplete == False and isMultiASI() == False:
+				deleteASI(session.asi)
+				session.hasASI = False
+
+		session.save()
+
+
+def deleteCurrentSession(session):
+	runMultiQuery(session)
+
+	if session.hasInvoice == True:
+		session.invoice.delete()
+
 	session.delete()
 
 def refreshSession(session):
@@ -424,36 +544,50 @@ def refreshSession(session):
 	session.save()
 
 def endSession(session, isfinished):
+	continueProcessing = True
 	date = datetime.now()
-	invoice = Invoice(client=client, date=date)
+	session.isComplete = isfinished	
 	session.endTime = date
-	session.invoice = invoice
 	session.save()
 
-	if session.hasAM == True:
-		if session.am.isComplete == True:
-			s_type = getStype('am')
-			addService(session, s_type)
-	if session.hasMH == True:
-		if session.mh.isComplete == True:
-			s_type = getStype('mh')
-			addService(session, s_type)
-	if session.hasUT == True:
-		if session.ut.isComplete == True:
-			s_type = getStype('ut')
-			addService(session, s_type)
-	if session.hasASI == True:
-		if session.asi.isComplete == True:
-			s_type = getStype('asi')
-			addService(session, s_type)
-	if session.hasSAP == True:
-		if session.sap.isComplete == True:
-			s_type = getStype('sap')
-			addService(session, s_type)
+	if isfinished == True:
+		invoice = Invoice(client=session.client, date=date)
+		invoice.save()
+		session.invoice = invoice
+		session.hasInvoice = True
+		session.save()
 
-	session.isOpen = False
-	session.isComplete = isfinished
-	session.save()
+	if session.hasInvoice == True:
+		if session.hasAM == True:
+			if session.am.isComplete == True:
+				s_type = getStype('am')
+				addService(session, s_type)
+		if session.hasMH == True:
+			if session.mh.isComplete == True:
+				s_type = getStype('mh')
+				addService(session, s_type)
+		if session.hasUT == True:
+			if session.ut.isComplete == True:
+				s_type = getStype('ut')
+				addService(session, s_type)
+		if session.hasASI == True:
+			if session.asi.isComplete == True:
+				s_type = getStype('asi')
+				addService(session, s_type)
+		if session.hasSAP == True:
+			if session.sap.isComplete == True:
+				s_type = getStype('sap')
+				addService(session, s_type)
+
+	if session.invoice.grandTotal == 0:
+		deleteCurrentSession(session)
+		continueProcessing = False
+
+	if continueProcessing == True:
+		runIncompleteQuery(session)
+		session.isOpen = False
+		session.save()
+
 
 def beginSession(request):
 	result = {}
@@ -470,6 +604,7 @@ def beginSession(request):
 	session.counselor = counselor
 	session.save()
 	openSession(session)
+	setGlobalSession(session.id)
 
 	if action['isNew'] == False:
 		result['url'] = 'counselor/session/existingSession.html'
@@ -651,7 +786,7 @@ def findClientAM(client):
 	am_list = getClientAmList(client)
 
 	for a in am_list:
-		if a.AMComplete == False:
+		if a.isComplete == False:
 			result['incomplete'] = True
 			result['am'] = a
 			break
@@ -664,7 +799,7 @@ def findClientMH(client):
 	mh_list = getClientMhList(client)
 
 	for m in mh_list:
-		if m.MHComplete == False:
+		if m.isComplete == False:
 			result['incomplete'] = True
 			result['mh'] = m
 			break
@@ -677,7 +812,7 @@ def findClientSAP(client):
 	sap_list = getClientSAPList(client)
 
 	for s in sap_list:
-		if s.SapComplete == False:
+		if s.isComplete == False:
 			result['incomplete'] = True
 			result['sap'] = s
 			break
@@ -1351,7 +1486,7 @@ def deleteAM(am):
 
 def newAM(client):
 	date = datetime.now()
-	am = AngerManagement(client=client, AMComplete=False, start_time=date)
+	am = AngerManagement(client=client, isComplete=False, start_time=date)
 	date = date.date()
 	am.date_of_assessment = date
 
@@ -2520,7 +2655,7 @@ def getDuplicateAM(client):
 	results = []
 
 	for a in amList:
-		if str(a.client.clientID) == str(client.clientID) and a.AMComplete == False:
+		if str(a.client.clientID) == str(client.clientID) and a.isComplete == False:
 			results.append(a)
 
 	return results
@@ -2909,7 +3044,7 @@ def hasIncompleteAM(client):
 	ams = AngerManagement.objects.all()
 
 	for a in ams:
-		if a.client == client and a.AMComplete == False:
+		if a.client == client and a.isComplete == False:
 			exist = True
 			break
 	return exist
@@ -2919,7 +3054,7 @@ def findIncompleteClientAM(client):
 	result = None
 
 	for a in ams:
-		if a.client == client and a.AMComplete == False:
+		if a.client == client and a.isComplete == False:
 			result = a
 			break
 	return result
@@ -3026,7 +3161,7 @@ def sapExist(client):
 
 	if filter_form == True:
 		for s in saps:
-			if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.SapComplete == False):
+			if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.isComplete == False):
 				exist = True
 				break
 	return exist
@@ -3036,7 +3171,7 @@ def grabIncompleteSap(client):
 	saps = SAP.objects.all()
 
 	for s in saps:
-		if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.SapComplete == False):
+		if (str(s.client.clientID) == str(client.clientID)) and (str(s.client.id) == str(client.id)) and (s.isComplete == False):
 			result = s
 			break
 	return result
@@ -3247,7 +3382,7 @@ def snatchSAPcomplete(sap):
 	result.append(sap.specialComplete)
 	result.append(sap.otherComplete)
 	result.append(sap.sourcesComplete)
-	result.append(sap.SapComplete)
+	result.append(sap.isComplete)
 	return result
 
 def snatchSAPpriority(sap):
@@ -3319,10 +3454,8 @@ def nextSAPage(sap, section):
 			break
 
 	if proceed == True:
-		print 'THERE ARE NO SAP PRIORITIES...'
 		for i in range(len(sap_list)):
 			if sap_list[i]['complete'] == False:
-				print "FOUND A FALSE VALUE AT INDEX: " + str(i)
 				next_section = sap_list[i]['url']
 				break
 
@@ -3338,7 +3471,7 @@ def hasIncompleteSAP(client):
 	sap = SAP.objects.all()
 
 	for s in sap:
-		if s.client == client and s.SapComplete == False:
+		if s.client == client and s.isComplete == False:
 			exist = True
 			break
 	return exist
@@ -3348,7 +3481,7 @@ def findIncompleteClientSAP(client):
 	result = None
 
 	for s in sap:
-		if s.client == client and s.SapComplete == False:
+		if s.client == client and s.isComplete == False:
 			result = s
 			break
 	return result
@@ -4275,7 +4408,7 @@ def refreshSap(sap):
 	demo.save()
 	psy.save()
 
-	sap.SapComplete = False
+	sap.isComplete = False
 	sap.save()
 
 def setSapSectionComplete(sap, section):
@@ -4498,7 +4631,7 @@ def hasIncompleteMh(client):
 	mhs = MentalHealth.objects.all()
 
 	for m in mhs:
-		if m.client == client and m.MHComplete == False:
+		if m.client == client and m.isComplete == False:
 			exist = True
 			break
 	return exist
@@ -4508,7 +4641,7 @@ def findIncompleteClientMh(client):
 	result = None
 
 	for m in mhs:
-		if m.client == client and m.MHComplete == False:
+		if m.client == client and m.isComplete == False:
 			result = m
 			break
 	return result
@@ -4544,7 +4677,7 @@ def newMh(the_client):
 	mh.useTable = useTable
 
 	mh.isOpen = True
-	mh.MHComplete = False
+	mh.isComplete = False
 	mh.save()
 
 	return mh
@@ -5746,7 +5879,7 @@ def refreshMh(mh):
 	mh.legalPriority = False
 	mh.psychPriority = False
 	mh.usePriority = False
-	mh.MHComplete = False
+	mh.isComplete = False
 	mh.save()
 
 def deleteMh(mh):
@@ -6415,7 +6548,7 @@ def hasIncompleteASI(client):
 	asis = ASI.objects.all()
 
 	for a in asis:
-		if a.client == client and a.AIS_Complete == False:
+		if a.client == client and a.isComplete == False:
 			exist = True
 			break
 	return exist
@@ -6426,7 +6559,7 @@ def findIncompleteClientASI(client):
 	result = None
 
 	for a in asis:
-		if a.client == client and a.AIS_Complete == False:
+		if a.client == client and a.isComplete == False:
 			result = a
 			break
 	return result
@@ -7943,7 +8076,7 @@ def refreshASI(asi):
 	asi.social1Priority = False
 	asi.social2Priority = False
 	asi.psychPriority = False
-	asi.AIS_Complete = False
+	asi.isComplete = False
 	asi.save()
 
 def processAsiData(request, current_section):
@@ -8950,6 +9083,15 @@ def setGlobalID(the_id):
 
 def getGlobalID():
 	gloVar = Global_ID.objects.get(id=1)
+	return gloVar.global_id
+
+def setGlobalSession(the_id):
+	gloVar = Global_Session_ID.objects.get(id=1)
+	gloVar.global_id = the_id
+	gloVar.save()
+
+def getSessionID():
+	gloVar = Global_Session_ID.objects.get(id=1)
 	return gloVar.global_id
 
 def decodeCharfield(text):

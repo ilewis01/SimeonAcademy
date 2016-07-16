@@ -2177,6 +2177,80 @@ button:hover {
 	width:60px;
 }
 
+.session_exit_body {
+	background-color: #e9e7e9;
+	font-family: Arial;
+	padding: 2%;
+}
+
+.session_exit_wrapper {
+	width: 95%;
+	height: 185px;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.session_exit_wrapper span {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.session_exit_wrapper table {
+	width:100%;
+	margin-top: 5%;
+	margin-bottom: 7%;
+	padding: 2%;
+}
+
+.session_exit_wrapper td {
+	/*width:20%;*/
+}
+
+.session_exit_wrapper button {
+	width:70px;
+	height:28px;
+	font-size: 12px;
+}
+
+.session_warning {
+	width:95%;
+	margin: auto;
+}
+
+#s_img_div {
+	width:60px;
+	height:20px;
+}
+
+#s_text_div {
+	width:350px;
+	height:20px;
+	margin-top: 40px;
+}
+
+#session_exitButtons {
+	width:90%;
+	margin:auto;
+	text-align: right;
+}
+
+#sucess_session_exit {
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 15%;
+	margin-bottom: 10%;
+}
+
+#sucess_session_exit span {
+	font-size: 15px;
+}
+
+
+
 
 /*###############################################################################################################*/
 /*###############################################################################################################*/
@@ -2526,6 +2600,8 @@ button:hover {
 .history_btn_exit button {
 	width: 90px;
 }
+
+
 
 
 

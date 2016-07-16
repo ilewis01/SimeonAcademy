@@ -634,8 +634,18 @@ function get_client_history() {
 	grab('c_form').submit();
 }
 
-function close_client_session() {
-	document.getElementById('closeSession').submit();
+function close_session() {
+	var w = 500, h = 250;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var opWin = window.open('/closeSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+}
+
+function delete_session() {
+	var w = 500, h = 250;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var opWin = window.open('/deleteSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 }
 
 function return_to_options2() {
@@ -692,7 +702,7 @@ function continue_discharge() {
 }
 
 function discharge_proceed() {
-	
+
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -7306,10 +7316,37 @@ function generic_to_session() {
 	form.submit();
 }
 
-function generic_exit_home() {
-	var form = document.getElementById('exit_form');
-	form.action = '/comfirmSessionEnd/';
+function v_exit_session() {
+	grab('s_form').submit();
+}
+
+function chooseSessionExit(answer) {
+	grab('close_type').value = String(answer);
+	grab('s_form').submit();
+}
+
+function session_exit_performed() {
+	var e_type = window.opener.document.getElementById('session_end_url').value;
+	var form = null;
+	e_type = String(e_type);
+
+	if (e_type === 'clientOptions') {
+		form = window.opener.document.getElementById('c_form');
+	}
+	else if (e_type === 'genericExit') {
+		form = window.opener.document.getElementById('exit_form');
+	}
+	
+	form.action = '/adminHome/';
 	form.submit();
+	window.close();
+}
+
+function generic_exit_home() {
+	var w = 500, h = 250;
+	var lefts = Number((screen.width/2) - (w/2));
+	var tops = Number((screen.height/2) - (h/2));
+	var opWin = window.open('/closeSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 }
 
 function generic_delete_form() {

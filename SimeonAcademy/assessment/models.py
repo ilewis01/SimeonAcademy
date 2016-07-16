@@ -16,6 +16,12 @@ class Global_ID(models.Model):
 	def __unicode__(self):
 		return str(self.global_id)
 
+class Global_Session_ID(models.Model):
+	global_id = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return str(self.global_id)
+
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)
 
@@ -1563,6 +1569,7 @@ class ClientSession(models.Model):
 	isOpen	 		= models.BooleanField(default=False, blank=True)
 	isPaid			= models.BooleanField(default=False, blank=True)
 	isComplete 		= models.BooleanField(default=False, blank=True)
+	hasInvoice 		= models.BooleanField(default=False, blank=True)
 
 	am 				= models.ForeignKey(AngerManagement, default=None, blank=True, null=True)
 	mh 				= models.ForeignKey(MentalHealth, default=None, blank=True, null=True)

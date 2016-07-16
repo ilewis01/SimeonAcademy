@@ -101,10 +101,13 @@ urlpatterns = patterns('',
     ##Global Views
     url(r'^generic_exit/$', 'assessment.views.generic_exit'),
     url(r'^uni_generic_exit/$', 'assessment.views.uni_generic_exit'),
-    url(r'^comfirmSessionEnd/$', 'assessment.views.comfirmSessionEnd'),
     url(r'^genericDelete/$', 'assessment.views.genericDelete'),
     url(r'^genericFormDeleted/$', 'assessment.views.genericFormDeleted'),
     url(r'^genericRefreshForm/$', 'assessment.views.genericRefreshForm'),
     url(r'^genericFormRefreshed/$', 'assessment.views.genericFormRefreshed'),
+    url(r'^closeSession/$', 'assessment.views.closeSession'),
+    url(r'^deleteSession/$', 'assessment.views.deleteSession'),
+    url(r'^closeType/$', 'assessment.views.closeType'),
+    url(r'^uni_exit_session/$', 'assessment.views.uni_exit_session'),
     
 )

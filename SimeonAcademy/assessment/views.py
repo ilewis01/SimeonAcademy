@@ -25,7 +25,8 @@ AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
-AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid
+AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
+Global_Session_ID
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -34,7 +35,9 @@ getActiveClients, getDischargedClients, getTimes, convert_phone, phone_to_intege
 grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
-processClientHistory, getDischarge
+processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
+truePythonBool
+
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
 # getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -446,28 +449,6 @@ def clientOptions(request):
 			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/index')
-def comfirmSessionEnd(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			session_id = request.POST.get('session_id', '')
-			session = ClientSession.objects.get(id=session_id)
-
-			content['session'] = session
-			content['title'] = "Simeon Academy | Confirm Billing Details"
-			return render_to_response('global/comfirmSessionEnd.html', content)
-
 ###########################################################################################################################################
 ################################################################ END CLIENT ###############################################################
 ###########################################################################################################################################
@@ -715,6 +696,93 @@ def genericFormDeleted(request):
 			content['form_id'] = form_id
 			content['title'] = "Simeon Academy"
 			return render_to_response('global/genericFormDeleted.html', content)
+
+@login_required(login_url='/index')
+def closeSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/closeSession.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def deleteSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/deleteSession.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def closeType(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['close_type'] = request.POST.get('close_type')
+			content['exit_type'] = request.POST.get('exit_type')
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/closeType.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def uni_exit_session(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID()))
+			exit_type = request.POST.get('exit_type')
+			exit_type = str(exit_type)
+
+			if exit_type == 'close':
+				close_type = truePythonBool(request.POST.get('close_type'))
+				endSession(session, close_type)
+				content['exit_type'] = 'closed.'
+
+			elif exit_type == 'delete':
+				deleteCurrentSession(session)
+				content['exit_type'] = 'deleted.'
+
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
 
 
