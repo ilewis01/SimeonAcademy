@@ -253,7 +253,7 @@ class SAP(models.Model):
 
 	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(blank=True, default=False)
-	SapComplete = models.BooleanField(blank=True, default=False)
+	isComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
 		return 'SAP: ' + str(self.client.fname) + ' ' + str(self.client.lname)
@@ -613,7 +613,7 @@ class AngerManagement(models.Model):
 
 	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(blank=True, default=False)
-	AMComplete = models.BooleanField(blank=True, default=False)
+	isComplete = models.BooleanField(blank=True, default=False)
 
 	def __unicode__(self):
 		return 'AM: ' + str(self.client.fname) + ' ' + str(self.client.lname)
@@ -1002,7 +1002,7 @@ class MentalHealth(models.Model):
 
 	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(default=False, blank=True)
-	MHComplete = models.BooleanField(default=False, blank=True)
+	isComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return 'MH: ' + str(self.client.fname) + ' ' + str(self.client.lname)
@@ -1429,7 +1429,7 @@ class ASI(models.Model):
 
 	initialized = models.BooleanField(default=False, blank=True)
 	isOpen = models.BooleanField(default=False, blank=True)
-	AIS_Complete = models.BooleanField(default=False, blank=True)
+	isComplete = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return 'ASI: ' + str(self.client.fname) + ' ' + str(self.client.lname)

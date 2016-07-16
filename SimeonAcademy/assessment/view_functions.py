@@ -320,10 +320,6 @@ def fetchSessions(client):
 def newSession(the_client):
 	start = datetime.now()
 	session = ClientSession(client=the_client, startTime=start)
-	the_date = start.date()
-	invoice = Invoice(client=the_client, date=the_date, isOpen=True)
-	invoice.save()
-	session.invoice = invoice
 	session.save()
 	return session
 
@@ -394,6 +390,17 @@ def startSession(client):
 
 def deleteSession(session):
 	session.invoice.delete()
+
+	if session.hasAM == True:
+		session.am.delete()
+	if session.hasMH == True:
+		session.mh.delete()
+	if session.hasUT == True:
+		session.ut.delete()
+	if session.hasASI == True:
+		session.asi.delete()
+	if session.hasSAP == True:
+		session.sap.delete()
 	session.delete()
 
 def refreshSession(session):
@@ -401,16 +408,51 @@ def refreshSession(session):
 	session.endTime = ''
 	session.counselor = ''
 	session.noServices = 1
+	refreshAM(session.am)
+	refreshMh(session.mh)
+	refreshUT(session.ut)
+	refreshSap(session.sap)
+	refreshASI(session.asi)
+	session.hasAM = False
+	session.hasMH = False
+	session.hasUT = False
+	session.hasASI = False
+	session.hasSAP = False
 	session.isPaid = False
 	session.isComplete = False
 	resetInvoice(session.invoice)
 	session.save()
 
 def endSession(session, isfinished):
-	session.invoice.isOpen = False
+	date = datetime.now()
+	invoice = Invoice(client=client, date=date)
+	session.endTime = date
+	session.invoice = invoice
+	session.save()
+
+	if session.hasAM == True:
+		if session.am.isComplete == True:
+			s_type = getStype('am')
+			addService(session, s_type)
+	if session.hasMH == True:
+		if session.mh.isComplete == True:
+			s_type = getStype('mh')
+			addService(session, s_type)
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			s_type = getStype('ut')
+			addService(session, s_type)
+	if session.hasASI == True:
+		if session.asi.isComplete == True:
+			s_type = getStype('asi')
+			addService(session, s_type)
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			s_type = getStype('sap')
+			addService(session, s_type)
+
 	session.isOpen = False
 	session.isComplete = isfinished
-	session.invoice.save()
 	session.save()
 
 def beginSession(request):
@@ -2907,9 +2949,10 @@ def beginAM(request):
 	am = action['am']
 	setGlobalID(am.id)
 
-	chooseToBill('am', am, session)
-
 	openForm('am', am, client)
+	session.hasAM = True
+	session.am = am
+	session.save()
 
 	result['AM'] = am
 	result['session'] = session
@@ -2940,8 +2983,6 @@ def processAMData(request, current_section):
 	deprioritizeAM(am)
 	fields = getAMFields(am, current_section)
 	json_data = json.dumps(fields)
-
-	chooseToBill('am', am, session)
 
 	if save_this == 'true':
 		saveCompletedAmSection(request, section, am)
@@ -3338,9 +3379,10 @@ def beginSAP(request):
 	sap = action['sap']
 	setGlobalID(sap.id)
 
-	chooseToBill('sap', sap, session)
-
 	openForm('sap', sap, client)
+	session.hasSAP = True
+	session.sap = sap
+	session.save()
 
 	result['sap'] = sap
 	result['session'] = session
@@ -4269,8 +4311,6 @@ def processSapData(request, current_section):
 	fields = getSapFields(sap, current_section)
 	json_data = json.dumps(fields)
 
-	chooseToBill('sap', sap, session)
-
 	if save_this == 'true':
 		saveSap(request, section, sap)
 		setSapSectionComplete(sap, section)
@@ -4535,9 +4575,10 @@ def beginMH(request):
 	mh = action['mh']
 	setGlobalID(mh.id)
 
-	chooseToBill('mh', mh, session)
-
 	openForm('mh', mh, client)
+	session.hasMH = True
+	session.mh = mh
+	session.save()
 
 	result['mh'] = mh
 	result['session'] = session
@@ -5866,8 +5907,6 @@ def processMhData(request, current_section):
 	fields = getMhFields(mh, current_section)
 	json_data = json.dumps(fields)
 
-	chooseToBill('mh', mh, session)
-
 	if current_section == '/mh_demographic/':
 		states = State.objects.all().order_by('state')
 		result['states'] = states
@@ -6475,9 +6514,10 @@ def beginASI(request):
 	asi = action['asi']
 	setGlobalID(asi.id)
 
-	chooseToBill('asi', asi, session)
-
 	openForm('asi', asi, client)
+	session.asi = asi
+	session.hasASI = True
+	session.save()
 
 	result['asi'] = asi
 	result['session'] = session
@@ -7920,8 +7960,6 @@ def processAsiData(request, current_section):
 	fields = grabASIFields(asi, current_section)
 	json_data = json.dumps(fields)
 
-	chooseToBill('asi', asi, session)
-
 	if current_section == '/asi_admin/':
 		ad_date = asi.admin.g4
 		result['ad_date'] = ad_date
@@ -8222,8 +8260,8 @@ def beginUT(request):
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
-	client = Client.objects.get(id=client_id)
 	session = ClientSession.objects.get(id=session_id)
+	client = session.client
 
 	s_type = getStype('ut')
 	result['s_type'] = s_type
@@ -8237,6 +8275,9 @@ def beginUT(request):
 			openForm('ut', ut, client)
 			fields = getUtFields(ut)
 			json_data = json.dumps(fields)
+			session.hasUT = True
+			session.ut = ut
+			session.save()
 
 			result['date'] = ut.date_of_assessment
 			result['fields'] = fields
@@ -8321,11 +8362,8 @@ def getInvoices(client):
 
 def chooseToBill(form_type, form, session):
 	if form.initialized == False:
-		print "START FORM INIT: " + str(form.initialized)
 		processSession(form_type, session)
 		form.initialized = True
-		print "END FORM INIT: " + str(form.initialized)
-
 		form.save()
 
 def resetInvoice(invoice):
