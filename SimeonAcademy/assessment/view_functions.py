@@ -543,6 +543,39 @@ def refreshSession(session):
 	resetInvoice(session.invoice)
 	session.save()
 
+def invoiceQuery(session):
+	create = False
+	amCheck = False
+	mhCheck = False
+	utCheck = False
+	sapCheck = False
+	asiCheck = False
+
+	if session.hasAM == True:
+		if session.am.isComplete == True:
+			amCheck = True
+
+	if session.hasMH == True:
+		if session.mh.isComplete == True:
+			mhCheck = True
+
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			utCheck = True
+
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			sapCheck = True
+
+	if session.hasASI == True:
+		if session.asi.isComplete == True:
+			asiCheck = True
+
+	if amCheck==True or mhCheck==True or utCheck==True or sapCheck==True or asiCheck==True:
+		create = True
+
+	return create
+
 def endSession(session, isfinished):
 	continueProcessing = True
 	date = datetime.now()
@@ -550,40 +583,41 @@ def endSession(session, isfinished):
 	session.endTime = date
 	session.save()
 
-	if isfinished == True:
+	if invoiceQuery(session) == True:
 		invoice = Invoice(client=session.client, date=date)
 		invoice.save()
 		session.invoice = invoice
 		session.hasInvoice = True
 		session.save()
-
-	if session.hasInvoice == True:
-		if session.hasAM == True:
-			if session.am.isComplete == True:
-				s_type = getStype('am')
-				addService(session, s_type)
-		if session.hasMH == True:
-			if session.mh.isComplete == True:
-				s_type = getStype('mh')
-				addService(session, s_type)
-		if session.hasUT == True:
-			if session.ut.isComplete == True:
-				s_type = getStype('ut')
-				addService(session, s_type)
-		if session.hasASI == True:
-			if session.asi.isComplete == True:
-				s_type = getStype('asi')
-				addService(session, s_type)
-		if session.hasSAP == True:
-			if session.sap.isComplete == True:
-				s_type = getStype('sap')
-				addService(session, s_type)
-
-	if session.invoice.grandTotal == 0:
-		deleteCurrentSession(session)
-		continueProcessing = False
+	else:
+		if session.isComplete == True:
+			deleteCurrentSession(session)
+			continueProcessing = False
 
 	if continueProcessing == True:
+		if session.hasInvoice == True:
+			if session.hasAM == True:
+				if session.am.isComplete == True:
+					s_type = getStype('am')
+					addService(session, s_type)
+			if session.hasMH == True:
+				if session.mh.isComplete == True:
+					s_type = getStype('mh')
+					addService(session, s_type)
+			if session.hasUT == True:
+				if session.ut.isComplete == True:
+					s_type = getStype('ut')
+					addService(session, s_type)
+			if session.hasASI == True:
+				if session.asi.isComplete == True:
+					s_type = getStype('asi')
+					addService(session, s_type)
+			if session.hasSAP == True:
+				if session.sap.isComplete == True:
+					s_type = getStype('sap')
+					addService(session, s_type)
+
+
 		runIncompleteQuery(session)
 		session.isOpen = False
 		session.save()
