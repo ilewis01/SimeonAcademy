@@ -7186,11 +7186,6 @@ function v_exit_session() {
 }
 
 function chooseSessionExit(answer) {
-	grab('close_type').value = String(answer);
-	grab('s_form').submit();
-}
-
-function session_exit_performed() {
 	var e_type = window.opener.document.getElementById('session_end_url').value;
 	var form = null;
 	e_type = String(e_type);
@@ -7201,10 +7196,12 @@ function session_exit_performed() {
 	else if (e_type === 'genericExit') {
 		form = window.opener.document.getElementById('exit_form');
 	}
-	
+
 	form.action = '/adminHome/';
 	form.submit();
-	window.close();
+
+	grab('close_type').value = String(answer);
+	grab('s_form').submit();
 }
 
 function generic_exit_home() {

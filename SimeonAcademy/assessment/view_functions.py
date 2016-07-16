@@ -322,14 +322,15 @@ def getClientByName(fname, lname):
 	for c in clients:
 		compF = str(c.fname).lower()
 		compL = str(c.lname).lower()
-		if str(fname) == str(compF) and str(lname) == str(compL):
-			results.append(c)
-		elif str(lname) == None or str(lname) == '':
-			if str(fname) == str(compF):
+		if c.isDischarged == False:
+			if str(fname) == str(compF) and str(lname) == str(compL):
 				results.append(c)
-		elif str(fname) == None or str(fname) == '':
-			if str(lname) == str(compL):
-				results.append(c)
+			elif str(lname) == None or str(lname) == '':
+				if str(fname) == str(compF):
+					results.append(c)
+			elif str(fname) == None or str(fname) == '':
+				if str(lname) == str(compL):
+					results.append(c)
 
 	return results
 
