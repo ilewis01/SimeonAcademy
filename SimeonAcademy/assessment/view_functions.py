@@ -612,6 +612,57 @@ def invoiceQuery(session):
 
 	return create
 
+# def shouldDeleteSession(session):
+# 	shouldDelete = False
+# 	amDelete = False
+# 	mhDelete = False
+# 	utDelete = False
+# 	sapDelete = False
+# 	asiDelete = False
+
+# 	if session.hasAM == True:
+# 		if session.am.isComplete == False:
+# 			amDelete = True
+# 	else:
+# 		amDelete = True
+
+# 	if session.hasMH == True:
+# 		if session.mh.isComplete == False:
+# 			mhDelete = True
+# 	else:
+# 		mhDelete = True
+
+# 	if session.hasUT == True:
+# 		if session.ut.isComplete == False:
+# 			utDelete = True
+# 	else:
+# 		utDelete = True
+
+# 	if session.hasSAP == True:
+# 		if session.sap.isComplete == False:
+# 			sapDelete = True
+# 	else:
+# 		sapDelete = True
+
+# 	if session.hasASI == True:
+# 		if session.asi.isComplete == False:
+# 			asiDelete = True
+# 	else:
+# 		asiDelete = True
+
+# 	if amDelete ==True and mhDelete ==True and utDelete ==True and sapDelete ==True and asiDelete ==True:
+# 		shouldDelete = True
+# 	return shouldDelete
+
+def shouldDeleteSession(session):
+	shouldDelete = True
+
+	if session.hasAM==True or session.hasMH==True or session.hasUT==True or session.hasSAP==True or session.hasASI==True:
+		shouldDelete = False 
+
+	print "SHOULD I DELETE THIS? " + str(shouldDelete)
+	return shouldDelete
+
 def endSession(session, isfinished):
 	continueProcessing = True
 	date = datetime.now()
@@ -626,7 +677,7 @@ def endSession(session, isfinished):
 		session.hasInvoice = True
 		session.save()
 	else:
-		if session.isComplete == True:
+		if shouldDeleteSession(session) == True:
 			deleteCurrentSession(session)
 			continueProcessing = False
 

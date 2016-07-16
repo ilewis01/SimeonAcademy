@@ -7183,9 +7183,7 @@ function generic_to_session() {
 
 function v_exit_session() {
 	grab('s_form').submit();
-}
-
-function chooseSessionExit(answer) {
+	
 	var e_type = window.opener.document.getElementById('session_end_url').value;
 	var form = null;
 	e_type = String(e_type);
@@ -7199,8 +7197,43 @@ function chooseSessionExit(answer) {
 
 	form.action = '/adminHome/';
 	form.submit();
+}
 
-	grab('close_type').value = String(answer);
+function c_exit_session() {
+	grab('s_form').submit();
+
+	var e_type = window.opener.document.getElementById('session_end_url').value;
+	var form = null;
+	e_type = String(e_type);
+
+	if (e_type === 'clientOptions') {
+		form = window.opener.document.getElementById('c_form');
+	}
+	else if (e_type === 'genericExit') {
+		form = window.opener.document.getElementById('exit_form');
+	}
+
+	form.action = '/adminHome/';
+	form.submit();
+}
+
+function chooseSessionExit(answer) {
+	// var e_type = window.opener.document.getElementById('session_end_url').value;
+	// var form = null;
+	// e_type = String(e_type);
+
+	// if (e_type === 'clientOptions') {
+	// 	form = window.opener.document.getElementById('c_form');
+	// }
+	// else if (e_type === 'genericExit') {
+	// 	form = window.opener.document.getElementById('exit_form');
+	// }
+
+	// form.action = '/adminHome/';
+	// form.submit();
+
+	// grab('close_type').value = String(answer);
+	grab('s_form').action = '/sessionClosed/';
 	grab('s_form').submit();
 }
 

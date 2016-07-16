@@ -8,7 +8,7 @@
 <body class='session_exit_body'>
 	<div class='session_exit_wrapper'>
 
-		<form action='/closeType/' method='post' name='s_form' id='s_form'> {% csrf_token %}
+		<form action='/uni_exit_session/' method='post' name='s_form' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='exit_type' id='exit_type' value='close'>
 		</form>
 
@@ -32,7 +32,7 @@
 
 			<div id='session_exitButtons'>
 				<div id='sm_btn_wr'>
-					<button type='button' onClick="javascript: v_exit_session();">Proceed</button>
+					<button type='button' onClick="javascript: c_exit_session();">Proceed</button>
 		            <button type='button' onClick="javascript: window.close();">Cancel</button>
 		        </div>
 	        </div>

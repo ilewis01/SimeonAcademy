@@ -36,7 +36,7 @@ grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
-truePythonBool
+truePythonBool, shouldDeleteSession
 
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
@@ -733,25 +733,6 @@ def deleteSession(request):
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/deleteSession.html', content, context_instance=RequestContext(request))
 
-@login_required(login_url='/index')
-def closeType(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content['close_type'] = request.POST.get('close_type')
-			content['exit_type'] = request.POST.get('exit_type')
-			content['title'] = 'Simeon Academy'
-			return render_to_response('counselor/session/closeType.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def uni_exit_session(request):
@@ -773,9 +754,15 @@ def uni_exit_session(request):
 			exit_type = str(exit_type)
 
 			if exit_type == 'close':
-				close_type = truePythonBool(request.POST.get('close_type'))
-				endSession(session, close_type)
-				content['exit_type'] = 'closed.'
+				if shouldDeleteSession(session) == False:
+					content['close_type'] = request.POST.get('close_type')
+					content['exit_type'] = request.POST.get('exit_type')
+					content['title'] = 'Simeon Academy'
+					return render_to_response('counselor/session/closeType.html', content, context_instance=RequestContext(request))
+				else:
+					close_type = truePythonBool(request.POST.get('close_type'))
+					endSession(session, close_type)
+					content['exit_type'] = 'closed.'
 
 			elif exit_type == 'delete':
 				deleteCurrentSession(session)
@@ -783,6 +770,24 @@ def uni_exit_session(request):
 
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def sessionClosed(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
 
 
 
