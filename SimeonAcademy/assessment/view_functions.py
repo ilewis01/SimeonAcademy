@@ -243,6 +243,34 @@ def filterSS(ss_num):
 			result += s
 	return result
 
+def cleanWhiteSpace(text):
+	text = str(text)
+	result = ''
+	for t in text:
+		if t != ' ':
+			result += t
+	print result
+	return result
+
+def setUpNumberSearch(text):
+	text = str(text)
+	text = cleanWhiteSpace(text)
+	text = filterSS(text)
+	return text
+
+def birthDaySearchSet(dob):
+	result = ''
+	result += dob[4]
+	result += dob[5]
+	result += dob[6]
+	result += dob[7]
+	result += dob[0]
+	result += dob[1]
+	result += dob[2]
+	result += dob[3]
+	return result
+
+
 def getClientBySS(ss_num):
 	results = []
 	clients = Client.objects.all()
@@ -271,8 +299,12 @@ def getClientByDOB(dob):
 	results = []
 	clients = Client.objects.all()
 
+	dob = setUpNumberSearch(dob)
+	dob = birthDaySearchSet(dob)
+
 	for c in clients:
-		if str(dob) == str(c.dob):
+		temp = setUpNumberSearch(c.dob)
+		if dob == temp:
 			results.append(c)
 
 	return results
@@ -280,6 +312,9 @@ def getClientByDOB(dob):
 def getClientByName(fname, lname):
 	results = []
 	clients = Client.objects.all()
+
+	fname = cleanWhiteSpace(fname)
+	lname = cleanWhiteSpace(lname)
 
 	fname = fname.lower()
 	lname = lname.lower()

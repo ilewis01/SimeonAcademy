@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body onLoad="set_radio_buttons()" class="gradient-white">
+<body onLoad="javascript: searchRadio();" class="gradient-white">
 
     <div class='header-images'>
       <div class="container">
@@ -21,18 +21,19 @@
             <div class="row">                   
                   <div class="col-md-12">
                         <div class='main-windows-left'>
-                              <h3>Select Client Search Criteria</h3>
+                              <h3><em>Which client would you like to start a new session for?</em></h3>
+                              <div style='margin-bottom:3%;'>Select Client Search Criteria</div>
                         </div>
                   </div>
 
                   <div class="col-md-12">
                         <div class='main-windows'>
-                              <form action="/clientSearchResults/" method="post" id='client-search' name='client-search'> {% csrf_token %}
-                                    <input type='hidden' name='s-type' id='s-type' value=''>
+                              <form action="/clientSearchResults/" method="post" id='c_search' name='c_search'> {% csrf_token %}
+                                    <input type='hidden' name='m_search_type' id='m_search_type' value=''>
                                     <table>
                                           <tr>
                                                 <td>
-                                                      <input type='radio' id='name_radio' name='search-radio' checked='true' value='name' onCLick="javascript: updateName();">
+                                                      <input type='radio' id='name_radio' name='search-radio' checked='true' value='' onCLick="javascript: searchRadio();">
                                                 </td>
                                                 <td>
                                                       <div id='radio-select' id=''>
@@ -70,11 +71,11 @@
                                     <table>
                                           <tr>
                                                 <td>
-                                                      <input type='radio' id='dob_radio' name='search-radio' value='dob' onClick="javascript: updateDOB();">
+                                                      <input type='radio' id='dob_radio' name='search-radio' value='' onClick="javascript: searchRadio();">
                                                 </td>
                                                 <td>
                                                       <div id='radio-select'>
-                                                            <label for='dob'>Date of Birth <span id='faded-text'>(mm/dd/yyyy)</span></label>
+                                                            <label for='dob' id='dobLab'>Date of Birth <span id='faded-text'>(mm/dd/yyyy)</span></label>
                                                       </div>
                                                 </td>
                                           </tr>                                     
@@ -101,7 +102,7 @@
                                     <table>
                                           <tr>
                                                 <td>
-                                                      <input type='radio' id='ss_radio' name='search-radio' value='ss_num' onClick="javascript: updateSS();">
+                                                      <input type='radio' id='ss_radio' name='search-radio' value='' onClick="javascript: searchRadio();">
                                                 </td>
                                                 <td>
                                                       <div id='radio-select'>
@@ -132,7 +133,7 @@
                                           <table>
                                           <tr>
                                                 <td>
-                                                      <input type='radio' id='id_radio' name='search-radio' value='ID' onClick="javascript: updateID();">
+                                                      <input type='radio' id='id_radio' name='search-radio' value='' onClick="javascript: searchRadio();">
                                                 </td>
                                                 <td>
                                                       <div id='radio-select'>
@@ -160,25 +161,6 @@
                                           <tr><td><div id='space'></div></td></tr>
                                     </table> 
 
-                                    <div style='margin-bottom:25px;'>
-                                          <table>
-                                                <tr>
-                                                      <td>
-                                                            <label for='stype'>Please choose the type of evaluation for this client: </label>
-                                                      </td>
-                                                      <td>
-                                                            <div id='type-selector'>
-                                                                  <select name='stype' id='stype'>
-                                                                        <option value='choose'>Choose</option>
-
-                                                                        {% for s in session_types %}
-                                                                              <option value='{{s.id}}'>{{s.session_type}}</option>
-                                                                        {% endfor %}
-                                                                  </select>
-                                                            </div>
-                                                      </td>
-                                                </tr>
-                                          </table>
                                           <table>
                                                 <tr>
                                                       <td>

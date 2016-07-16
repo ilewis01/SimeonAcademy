@@ -348,8 +348,6 @@ def searchClients(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			types = SType.objects.all()
-			content['session_types'] = types
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/search_clients.html', content)
 
@@ -368,8 +366,9 @@ def clientSearchResults(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			search_type = request.POST.get('s-type', '')
-			session_type = request.POST.get('stype', '')
+			search_type = request.POST.get('m_search_type')
+
+			print "Search Type: " + str(search_type)
 
 			s_results = None
 			phrase = None
@@ -397,6 +396,8 @@ def clientSearchResults(request):
 				s_results = getClientByID(getThis)
 				searched = getThis
 
+			matches = None
+
 			matches = len(s_results)
 			if matches == 1:
 				phrase = 'result'
@@ -408,7 +409,6 @@ def clientSearchResults(request):
 			content['results'] = s_results
 			content['phrase'] = phrase
 			content['type'] = search_type
-			content['session'] = session_type
 			content['searched'] = searched
 			return render_to_response('counselor/client/client_search_results.html', content)
 

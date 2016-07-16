@@ -302,141 +302,61 @@ function sideFinal() {
 	form.submit();
 }
 
-function updateSS() {
-	var ss_num = document.getElementById('ss_num');
-	var fname = document.getElementById('fname');
-	var lname = document.getElementById('lname');
-	var dob = document.getElementById('dob');
-	var client_ID = document.getElementById('client_ID');
-	var s_type = document.getElementById('s-type');
+function searchRadio() {
+	if (grab('name_radio').checked == true) {
+		grab('fname').disabled = false;
+		grab('lname').disabled = false;
+		opacityHigh(grab('fname'));
+		opacityHigh(grab('lname'));
 
-	document.getElementById('error1').innerHTML = '';
-	document.getElementById('error2').innerHTML = '';
-	document.getElementById('error3').innerHTML = '';
-	document.getElementById('error4').innerHTML = '';
+		opacityLow(grab('dob'));
+		opacityLow(grab('ss_num'));
+		opacityLow(grab('client_ID'));
+		grab('dob').disabled = true;
+		grab('ss_num').disabled = true;
+		grab('client_ID').disabled = true;
+	}
+	if (grab('dob_radio').checked === true) {
+		grab('dob').disabled = false;
+		opacityHigh(grab('dob'));
 
-	s_type.value = 'ss_num';
+		opacityLow(grab('fname'));
+		opacityLow(grab('lname'));
+		opacityLow(grab('ss_num'));
+		opacityLow(grab('client_ID'));
+		grab('fname').disabled = true;
+		grab('lname').disabled = true;
+		grab('ss_num').disabled = true;
+		grab('client_ID').disabled = true;
+	}
+	if (grab('ss_radio').checked === true) {
+		grab('ss_num').disabled = false;
+		opacityHigh(grab('ss_num'));
 
-	ss_num.disabled = false;
-	fname.disabled = true;
-	lname.disabled = true;
-	dob.disabled = true;
-	client_ID.disabled = true;
+		opacityLow(grab('fname'));
+		opacityLow(grab('lname'));
+		opacityLow(grab('dob'));
+		opacityLow(grab('client_ID'));
+		grab('fname').disabled = true;
+		grab('lname').disabled = true;
+		grab('dob').disabled = true;
+		grab('client_ID').disabled = true;
+	}
+	if (grab('id_radio').checked === true) {
+		grab('client_ID').disabled = false;
+		opacityHigh(grab('client_ID'));
 
-	ss_num.style.opacity = '1.0';
-	fname.style.opacity = '0.5';
-	lname.style.opacity = '0.5';
-	dob.style.opacity = '0.5';
-	client_ID.style.opacity = '0.5';
-
-	ss_num.value = '';
-	fname.value = '';
-	lname.value = '';
-	dob.value = '';
-	client_ID.value = '';
+		opacityLow(grab('fname'));
+		opacityLow(grab('lname'));
+		opacityLow(grab('dob'));
+		opacityLow(grab('ss_num'));
+		grab('fname').disabled = true;
+		grab('lname').disabled = true;
+		grab('dob').disabled = true;
+		grab('ss_num').disabled = true;
+	}
 }
 
-function updateName() {
-	var ss_num = document.getElementById('ss_num');
-	var fname = document.getElementById('fname');
-	var lname = document.getElementById('lname');
-	var dob = document.getElementById('dob');
-	var client_ID = document.getElementById('client_ID');
-	var s_type = document.getElementById('s-type');
-
-	document.getElementById('error1').innerHTML = '';
-	document.getElementById('error2').innerHTML = '';
-	document.getElementById('error3').innerHTML = '';
-	document.getElementById('error4').innerHTML = '';
-
-	s_type.value = 'name';
-
-	ss_num.disabled = true;
-	fname.disabled = false;
-	lname.disabled = false;
-	dob.disabled = true;
-	client_ID.disabled = true;
-
-	ss_num.style.opacity = '0.5';
-	fname.style.opacity = '1.0';
-	lname.style.opacity = '1.0';
-	dob.style.opacity = '0.5';
-	client_ID.style.opacity = '0.5';
-
-	ss_num.value = '';
-	fname.value = '';
-	lname.value = '';
-	dob.value = '';
-	client_ID.value = '';
-}
-
-function updateDOB() {
-	var ss_num = document.getElementById('ss_num')
-	var fname = document.getElementById('fname');
-	var lname = document.getElementById('lname');
-	var dob = document.getElementById('dob');
-	var client_ID = document.getElementById('client_ID');
-	var s_type = document.getElementById('s-type');
-
-	document.getElementById('error1').innerHTML = '';
-	document.getElementById('error2').innerHTML = '';
-	document.getElementById('error3').innerHTML = '';
-	document.getElementById('error4').innerHTML = '';
-
-	s_type.value = 'dob';
-
-	ss_num.disabled = true;
-	fname.disabled = true;
-	lname.disabled = true;
-	dob.disabled = false;
-	client_ID.disabled = true;
-
-	ss_num.style.opacity = '0.5';
-	fname.style.opacity = '0.5';
-	lname.style.opacity = '0.5';
-	dob.style.opacity = '1.0';
-	client_ID.style.opacity = '0.5';
-
-	ss_num.value = '';
-	fname.value = '';
-	lname.value = '';
-	dob.value = '';
-	client_ID.value = '';
-}
-
-function updateID() {
-	var ss_num = document.getElementById('ss_num')
-	var fname = document.getElementById('fname');
-	var lname = document.getElementById('lname');
-	var dob = document.getElementById('dob');
-	var client_ID = document.getElementById('client_ID');
-	var s_type = document.getElementById('s-type');
-
-	document.getElementById('error1').innerHTML = '';
-	document.getElementById('error2').innerHTML = '';
-	document.getElementById('error3').innerHTML = '';
-	document.getElementById('error4').innerHTML = '';
-
-	s_type.value = 'id';
-
-	ss_num.disabled = true;
-	fname.disabled = true;
-	lname.disabled = true;
-	dob.disabled = true;
-	client_ID.disabled = false;
-
-	ss_num.style.opacity = '0.5';
-	fname.style.opacity = '0.5';
-	lname.style.opacity = '0.5';
-	dob.style.opacity = '0.5';
-	client_ID.style.opacity = '1.0';
-
-	ss_num.value = '';
-	fname.value = '';
-	lname.value = '';
-	dob.value = '';
-	client_ID.value = '';
-}
 
 function filterDOB() {
 	var valid = true;
@@ -519,79 +439,24 @@ function filterSS() {
 }
 
 function submit_session() {
-	var name_radio = document.getElementById('name_radio');
-	var dob_radio = document.getElementById('dob_radio');
-	var id_radio = document.getElementById('id_radio');
-	var ss_radio = document.getElementById('ss_radio');
-	var stype = document.getElementById('stype');
-	var proceed = false;
+	var proceed = true;
+	var m_search_type = grab('m_search_type');
 
-	if (name_radio.checked === true) 
-	{
-		var fname = document.getElementById('fname');
-		var lname = document.getElementById('lname');
-
-		if (fname.value === '' || fname.value === null || lname.value === '' || lname.value === null || fname.value === ' ' || lname.value === ' ') 
-		{
-			document.getElementById('error1').innerHTML = '*YOU MUST ENTER A VALID NAME';
-			proceed = false;
-		}
-		else {proceed = true;}		
+	if (grab('name_radio').checked === true) {
+		m_search_type.value = 'name';
 	}
-	else if (dob_radio.checked === true)
-	{
-		var dob = document.getElementById('dob');
-		var valid = filterDOB();
-
-		if (dob.value === '' || dob.value === ' ' || dob.value === null)
-		{
-			document.getElementById('error2').innerHTML = '*YOU MUST ENTER A VALID BIRTHDATE';
-			proceed = false;
-		}
-		else if (valid === false)
-		{
-			document.getElementById('error2').innerHTML = '*DATE MUST BE IN THE FORM MM/DD/YYYY';
-			proceed = false;
-		}
-		else {proceed = true;}
+	else if (grab('dob_radio').checked === true) {
+		m_search_type.value = 'dob';
 	}
-	else if (ss_radio.checked === true)
-	{
-		var ss_num = document.getElementById('ss_num');
-		var validSS = filterSS();
-
-		if (ss_num.value === '' || ss_num.value === ' ' || ss_num.value === null) 
-		{
-			document.getElementById('error3').innerHTML = '*YOU MUST ENTER A VALID SOCIAL SECURITY NUMBER';
-			proceed = false;
-		}
-		else if (validSS === false) {
-			document.getElementById('error3').innerHTML = '*SOCIAL SECURITY NUMBER MUST BE N THE FORM XXX-XX-XXXX';
-			proceed = false;
-		}
-		else {proceed = true;}
+	else if (grab('ss_radio').checked === true) {
+		m_search_type.value = 'ss_num';
 	}
-	else if (id_radio.checked === true)
-	{
-		var client_id = document.getElementById('client_ID');
-
-		if (client_id.value === '' || client_id.value === ' ' || client_id.value === null)
-		{
-			document.getElementById('error4').innerHTML = '*YOU MUST ENTER A VALID CLIENT ID';
-			proceed = false;
-		}
-		else {proceed = true;}
+	else if (grab('id_radio').checked === true) {
+		m_search_type.value = 'ID';
 	}
-
-	if (stype.value === 'choose') {
-		document.getElementById('error5').innerHTML = '*YOU MUST CHOOSE A SESSION TYPE TO PROCEDE';
-		proceed = false;
-	}
-	else {proceed = true;}
-
 
 	if (proceed === true) {
-		document.getElementById('client-search').submit();
+		grab('c_search').submit();
 	}
 }
 
