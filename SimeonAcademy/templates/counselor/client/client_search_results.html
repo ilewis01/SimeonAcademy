@@ -18,15 +18,18 @@
 					<ul style='width:250px;'>
 						{% for r in results %}
 						<li style='text-align:left;'>
-							<form action="/clientOptions/" method='post' id="{{r.id}}"> {% csrf_token %}
-								<input type='hidden' name="client_id" id="client_id" value="{{r.id}}"> 
+							<form action="/clientOptions/" method='post' id="{{r.client.id}}"> {% csrf_token %}
+								<input type='hidden' name="client_id" id="client_id" value="{{r.client.id}}"> 
+								<input type='hidden' name="hasUnfinished" id="hasUnfinished" value="{{r.client.hasUnfinished}}"> 
 								<input type='hidden' name="session_type" id="session_type" value="{{session}}">
-								<a href='javascript: toClientOptions({{r.id}})'>
+								<input type='hidden' name="session_end_url" id="session_end_url" value="searchOptions">
+								<input type='hidden' name='form_name' id='form_name' value='{{r.client.id}}'>
+								<a href="javascript: toClientOptions({{r.client.id}}, '{{r.hasUnfinished}}')">
 									<div class='li-a'>
-										<span id='li-name'>{{r.fname}} {{r.lname}}</span> <br>
-										<span id='li-label'>ID: </span><span id='li-ans'>{{r.clientID}}</span> <br>
-										<span id='li-label'>DOB: </span><span id='li-ans'>{{r.dob}}</span> <br>
-										<span id='li-label'>SS: </span><span id='li-ans'>{{r.ss_num}}</span> <br>
+										<span id='li-name'>{{r.client.fname}} {{r.client.lname}}</span> <br>
+										<span id='li-label'>ID: </span><span id='li-ans'>{{r.client.clientID}}</span> <br>
+										<span id='li-label'>DOB: </span><span id='li-ans'>{{r.client.dob}}</span> <br>
+										<span id='li-label'>SS: </span><span id='li-ans'>{{r.client.ss_num}}</span> <br>
 									</div>
 								</a>
 							</form>

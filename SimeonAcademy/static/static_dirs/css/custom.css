@@ -2601,6 +2601,105 @@ button:hover {
 	width: 90px;
 }
 
+.pop_up_main_body {
+	font-family: Arial;
+	background-color: #eceaec;
+}
+
+.s_resolve_wrapper {
+	width:95%;
+	padding:2%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.s_resolve_wrapper2 {
+	width:95%;
+	height: 95%;
+	padding:2%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.s_resolve_wrapper li {
+	font-size: 12px;
+	margin-left: 30px;
+}
+
+#s_resolve_head {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 17px;
+}
+
+#s_resolve_head span {
+	color:red;
+	font-weight: none;
+}
+
+#s_resove_sub_head2 {
+	font-size: 15px;
+	color:blue;
+}
+
+#s_resove_sub_head3 {
+	font-size: 14px;
+	color:red;
+	text-align: center;
+	margin-top: 40px;
+}
+
+#resolve-session-top {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+#s_resolve_lab {
+	font-size: 13px;
+}
+
+#s_resolve_check input{
+	margin-left: 30px;
+}
+
+.deleted_session_resolve {
+	text-align: center;
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+	/*margin-top: 25%;*/
+}
+
+.deleted_session_resolve button {
+	width: 30px;
+	margin: auto;
+	text-align: center;
+}
+
+.s_resolveBtn {
+	width: 170px;
+	margin:auto;
+}
+
+.s_resolveBtn button {
+	width:80px;
+	height:25px;
+	font-size: 12px;
+	margin-top: 25%;
+}
+
+#s_img_div_resolve {
+	width:25%;
+	margin: auto;
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
 
 
 

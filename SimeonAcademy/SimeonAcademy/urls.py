@@ -106,8 +106,10 @@ urlpatterns = patterns('',
     url(r'^genericRefreshForm/$', 'assessment.views.genericRefreshForm'),
     url(r'^genericFormRefreshed/$', 'assessment.views.genericFormRefreshed'),
     url(r'^closeSession/$', 'assessment.views.closeSession'),
+    url(r'^refreshSession/$', 'assessment.views.refreshSession'),
     url(r'^sessionClosed/$', 'assessment.views.sessionClosed'),
     url(r'^deleteSession/$', 'assessment.views.deleteSession'),
     url(r'^uni_exit_session/$', 'assessment.views.uni_exit_session'),
-    
+    url(r'^hasExistingSession/$', 'assessment.views.hasExistingSession'),
+    url(r'^existingResolve/$', 'assessment.views.existingResolve'),
 )

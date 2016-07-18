@@ -18,7 +18,7 @@
                     <form action='' method='post' name='c_form' id='c_form'> {% csrf_token %}
                         <input type="hidden" id='session_id' name='session_id' value='{{session.id}}'>
                         <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type='hidden' name='session_end_url' id='session_end_url' value='clientOptions'>
+                        <input type='hidden' name='form_name' id='form_name' value='c_form'>
                     </form>
 
                 </li>

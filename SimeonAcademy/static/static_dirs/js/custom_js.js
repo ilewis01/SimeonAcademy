@@ -460,8 +460,56 @@ function submit_session() {
 	}
 }
 
-function toClientOptions(form_id) {
-	document.getElementById(form_id).submit();
+function toClientOptions(form_id, hasUnfinished) {
+	hasUnfinished = String(hasUnfinished);
+
+	if (hasUnfinished == 'True') {
+		var w = 600, h = 500;
+		openPopUp('auto', '/hasExistingSession/',w, h);
+	}
+
+	else {
+		document.getElementById(form_id).submit();
+	}
+}
+
+function set_session_option() {
+	if (grab('continue').checked === true) {
+		grab('s_option').value = 'continue';
+	}
+	else if (grab('refresh').checked === true) {
+		grab('s_option').value = 'refresh';
+	}
+	else if (grab('delete').checked === true) {
+		grab('s_option').value = 'delete';
+	}
+}
+
+function processExistingSession() {
+	var form 		= null;
+	var s_option 	= grab('s_option').value;
+	s_option 		= String(s_option);
+
+	if (s_option === 'continue') {
+		var form_id = grab('client_id').value;
+		form_id = String(form_id);
+		form = getPopParent(form_id);
+		window.close();
+		form.submit();
+	}
+	else if (s_option === 'delete') {
+		openPopUp('auto', '/deleteSession/', 500, 250);
+		window.close();
+	}
+	else if (s_option === 'refresh') {
+		openPopUp('auto', '/refreshSession/', 500, 250);
+		window.close();
+	}	
+}
+
+function finializeSessionResolve() {
+	openPopUp('auto', '/uni_exit_session/',500, 250);
+	window.close();
 }
 
 function new_am() {
@@ -501,16 +549,12 @@ function get_client_history() {
 
 function close_session() {
 	var w = 500, h = 250;
-	var lefts = Number((screen.width/2) - (w/2));
-	var tops = Number((screen.height/2) - (h/2));
-	var opWin = window.open('/closeSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	openPopUp('auto', '/closeSession/', w, h);
 }
 
 function delete_session() {
 	var w = 500, h = 250;
-	var lefts = Number((screen.width/2) - (w/2));
-	var tops = Number((screen.height/2) - (h/2));
-	var opWin = window.open('/deleteSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	openPopUp('auto', '/deleteSession/', w, h);
 }
 
 function return_to_options2() {
@@ -6391,6 +6435,24 @@ function reset_asi_subf(ftype) {
 
 //*********************************************** ASI SUPPORT FUNCTIONS *************************************************//
 
+function openPopUp(location, url, w, h) {
+	location = String(location);
+	url = String(url);
+
+	if (location === 'auto') {
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var opWin = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+		// var opWin = window.open('/hasExistingSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	}
+}
+
+function getPopParent(element) {
+	element = String(element);
+	var result = window.opener.document.getElementById(element);
+	return result;
+}
+
 function asi_radioBtn_select(sel_val, r1, r2) {
 	sel_val = String(sel_val);
 
@@ -7181,19 +7243,12 @@ function generic_to_session() {
 	form.submit();
 }
 
-function v_exit_session() {
-	grab('s_form').submit();
-	
-	var e_type = window.opener.document.getElementById('session_end_url').value;
-	var form = null;
-	e_type = String(e_type);
+function v_exit_session() {	
+	var f_id = getPopParent('form_name').value;
+	var form = getPopParent(f_id);
 
-	if (e_type === 'clientOptions') {
-		form = window.opener.document.getElementById('c_form');
-	}
-	else if (e_type === 'genericExit') {
-		form = window.opener.document.getElementById('exit_form');
-	}
+	grab('s_form').submit();
+	f_id = String(f_id);
 
 	form.action = '/adminHome/';
 	form.submit();
@@ -7202,39 +7257,26 @@ function v_exit_session() {
 function c_exit_session() {
 	grab('s_form').submit();
 
-	var e_type = window.opener.document.getElementById('session_end_url').value;
-	var form = null;
-	e_type = String(e_type);
+	var f_id = getPopParent('form_name').value;
+	var form = getPopParent(f_id);
 
-	if (e_type === 'clientOptions') {
-		form = window.opener.document.getElementById('c_form');
-	}
-	else if (e_type === 'genericExit') {
-		form = window.opener.document.getElementById('exit_form');
-	}
+	grab('s_form').submit();
+	f_id = String(f_id);
 
 	form.action = '/adminHome/';
 	form.submit();
 }
 
 function chooseSessionExit(answer) {
-	// var e_type = window.opener.document.getElementById('session_end_url').value;
-	// var form = null;
-	// e_type = String(e_type);
-
-	// if (e_type === 'clientOptions') {
-	// 	form = window.opener.document.getElementById('c_form');
-	// }
-	// else if (e_type === 'genericExit') {
-	// 	form = window.opener.document.getElementById('exit_form');
-	// }
-
-	// form.action = '/adminHome/';
-	// form.submit();
-
-	// grab('close_type').value = String(answer);
 	grab('s_form').action = '/sessionClosed/';
 	grab('s_form').submit();
+
+	var f_id = getPopParent('form_name').value;
+	f_id = String(f_id);
+
+	var form = getPopParent(f_id);
+	form.action = '/adminHome/';
+	form.submit();
 }
 
 function generic_exit_home() {

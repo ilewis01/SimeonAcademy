@@ -279,9 +279,14 @@ def getClientBySS(ss_num):
 	for c in clients:
 		sNum = filterSS(c.ss_num)
 		if str(ss_num) == str(sNum):
-			results.append(c)
+			data = {}
+			hasUnfinished = hasUnfinishedSession(c)
+			data['hasUnfinished'] = hasUnfinished
+			data['client'] = c
+			results.append(data)
 
 	return results
+
 
 def getClientByID(clientID):
 	results = []
@@ -291,7 +296,11 @@ def getClientByID(clientID):
 	for c in clients:
 		compare = str(c.clientID).lower()
 		if str(clientID) == str(compare):
-			results.append(c)
+			data = {}
+			hasUnfinished = hasUnfinishedSession(c)
+			data['hasUnfinished'] = hasUnfinished
+			data['client'] = c
+			results.append(data)
 
 	return results
 
@@ -305,7 +314,11 @@ def getClientByDOB(dob):
 	for c in clients:
 		temp = setUpNumberSearch(c.dob)
 		if dob == temp:
-			results.append(c)
+			data = {}
+			hasUnfinished = hasUnfinishedSession(c)
+			data['hasUnfinished'] = hasUnfinished
+			data['client'] = c
+			results.append(data)
 
 	return results
 
@@ -324,15 +337,28 @@ def getClientByName(fname, lname):
 		compL = str(c.lname).lower()
 		if c.isDischarged == False:
 			if str(fname) == str(compF) and str(lname) == str(compL):
-				results.append(c)
+				data = {}
+				hasUnfinished = hasUnfinishedSession(c)
+				data['hasUnfinished'] = hasUnfinished
+				data['client'] = c
+				results.append(data)
 			elif str(lname) == None or str(lname) == '':
 				if str(fname) == str(compF):
-					results.append(c)
+					data = {}
+					hasUnfinished = hasUnfinishedSession(c)
+					data['hasUnfinished'] = hasUnfinished
+					data['client'] = c
+					results.append(data)
 			elif str(fname) == None or str(fname) == '':
 				if str(lname) == str(compL):
-					results.append(c)
+					data = {}
+					hasUnfinished = hasUnfinishedSession(c)
+					data['hasUnfinished'] = hasUnfinished
+					data['client'] = c
+					results.append(data)
 
 	return results
+
 
 ##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#
@@ -415,15 +441,6 @@ def addService(session, s_type):
 		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
 	session.invoice.save()
 
-def startSession(client):
-	result = {}
-	if hasUnfinishedSession(client) == True:
-		result['session'] = fetchUnfinishedSession(client)
-		result['isNew'] = False
-	else:
-		result['session'] = newSession(client)
-		result['isNew'] = True
-	return result
 
 def isMultiAM():
 	isMulti = False
@@ -564,19 +581,27 @@ def refreshSession(session):
 	session.endTime = ''
 	session.counselor = ''
 	session.noServices = 1
-	refreshAM(session.am)
-	refreshMh(session.mh)
-	refreshUT(session.ut)
-	refreshSap(session.sap)
-	refreshASI(session.asi)
+
+	if session.hasAM == True:
+		refreshAM(session.am)
+	if session.hasMH == True:
+		refreshMh(session.mh)
+	if session.hasUT == True:
+		refreshUT(session.ut)
+	if session.hasSAP == True:
+		refreshSap(session.sap)
+	if session.hasASI == True:
+		refreshASI(session.asi)
+	if session.hasInvoice == True:
+		resetInvoice(session.invoice)
+
 	session.hasAM = False
 	session.hasMH = False
 	session.hasUT = False
 	session.hasASI = False
 	session.hasSAP = False
 	session.isPaid = False
-	session.isComplete = False
-	resetInvoice(session.invoice)
+	session.isComplete = False	
 	session.save()
 
 def invoiceQuery(session):
@@ -612,47 +637,6 @@ def invoiceQuery(session):
 
 	return create
 
-# def shouldDeleteSession(session):
-# 	shouldDelete = False
-# 	amDelete = False
-# 	mhDelete = False
-# 	utDelete = False
-# 	sapDelete = False
-# 	asiDelete = False
-
-# 	if session.hasAM == True:
-# 		if session.am.isComplete == False:
-# 			amDelete = True
-# 	else:
-# 		amDelete = True
-
-# 	if session.hasMH == True:
-# 		if session.mh.isComplete == False:
-# 			mhDelete = True
-# 	else:
-# 		mhDelete = True
-
-# 	if session.hasUT == True:
-# 		if session.ut.isComplete == False:
-# 			utDelete = True
-# 	else:
-# 		utDelete = True
-
-# 	if session.hasSAP == True:
-# 		if session.sap.isComplete == False:
-# 			sapDelete = True
-# 	else:
-# 		sapDelete = True
-
-# 	if session.hasASI == True:
-# 		if session.asi.isComplete == False:
-# 			asiDelete = True
-# 	else:
-# 		asiDelete = True
-
-# 	if amDelete ==True and mhDelete ==True and utDelete ==True and sapDelete ==True and asiDelete ==True:
-# 		shouldDelete = True
-# 	return shouldDelete
 
 def shouldDeleteSession(session):
 	shouldDelete = True
@@ -709,6 +693,29 @@ def endSession(session, isfinished):
 		session.isOpen = False
 		session.save()
 
+def getExistingSessionForms(session):
+	result = []
+	if session.hasASI == True:
+		result.append('Addiction Severity Index')
+	if session.hasAM == True:
+		result.append('Anger Management Assessment')
+	if session.hasMH == True:
+		result.append('Mental Health Assessment')
+	if session.hasSAP == True:
+		result.append('S.A.P Profile')
+	if session.hasUT == True:
+		result.append('Urine Analysis')	
+	return result
+
+def startSession(client):
+	result = {}
+	if hasUnfinishedSession(client) == True:
+		result['session'] = fetchUnfinishedSession(client)
+		result['isNew'] = False
+	else:
+		result['session'] = newSession(client)
+		result['isNew'] = True
+	return result
 
 def beginSession(request):
 	result = {}
@@ -717,6 +724,7 @@ def beginSession(request):
 	action = startSession(client)
 	session = action['session']
 	result['session'] = session
+	result['isNew'] = action['isNew']
 	#THINK ABOUT THE PHONE SECTION
 
 	user = request.user
@@ -728,6 +736,7 @@ def beginSession(request):
 	setGlobalSession(session.id)
 
 	if action['isNew'] == False:
+		result['init'] = getExistingSessionForms(session)
 		result['url'] = 'counselor/session/existingSession.html'
 	else:
 		result['url'] = 'counselor/client/client_options.html'

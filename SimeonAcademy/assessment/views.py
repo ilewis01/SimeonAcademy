@@ -36,7 +36,7 @@ grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
-truePythonBool, shouldDeleteSession
+truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshSession
 
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
@@ -368,8 +368,6 @@ def clientSearchResults(request):
 		else:
 			search_type = request.POST.get('m_search_type')
 
-			print "Search Type: " + str(search_type)
-
 			s_results = None
 			phrase = None
 			searched = None
@@ -429,6 +427,49 @@ def clientHistory(request):
 		else:
 			content = processClientHistory(request)
 			return render_to_response('counselor/client/clientHistory.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def hasExistingSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID()))
+			content['session'] = session
+			content['init'] = getExistingSessionForms(session)
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/existingSession.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def existingResolve(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			s_head = request.POST.get('s_option')
+
+			session = ClientSession.objects.get(id=(getSessionID()))
+			content['s_head'] = s_head
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/existingResolve.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def clientOptions(request):
@@ -733,6 +774,24 @@ def deleteSession(request):
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/deleteSession.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def refreshSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/refreshSession.html', content, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/index')
 def uni_exit_session(request):
@@ -768,6 +827,10 @@ def uni_exit_session(request):
 				deleteCurrentSession(session)
 				content['exit_type'] = 'deleted.'
 
+			elif exit_type == 'refresh':
+				refreshSession(session)
+				content['exit_type'] = 'reset.'
+
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
@@ -786,6 +849,9 @@ def sessionClosed(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session = ClientSession.objects.get(id=(getSessionID))
+			session.isOpen = False
+			session.save()
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
 
