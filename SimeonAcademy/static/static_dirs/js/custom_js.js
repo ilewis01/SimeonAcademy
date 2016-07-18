@@ -464,6 +464,7 @@ function toClientOptions(form_id, hasUnfinished) {
 	hasUnfinished = String(hasUnfinished);
 
 	if (hasUnfinished == 'True') {
+		grab('form_name').value = String(form_id);
 		var w = 600, h = 500;
 		openPopUp('auto', '/hasExistingSession/',w, h);
 	}
@@ -497,19 +498,26 @@ function processExistingSession() {
 		window.close();
 		form.submit();
 	}
-	else if (s_option === 'delete') {
-		openPopUp('auto', '/deleteSession/', 500, 250);
-		window.close();
+	else {
+		grab('s_form').submit();
 	}
-	else if (s_option === 'refresh') {
-		openPopUp('auto', '/refreshSession/', 500, 250);
-		window.close();
-	}	
 }
 
-function finializeSessionResolve() {
-	openPopUp('auto', '/uni_exit_session/',500, 250);
-	window.close();
+function finializeSessionResolve() {	
+	var eType = grab('exit_type').value;
+	eType = String(eType);
+	grab('s_form').submit();
+
+	if (eType === 'refresh') {
+		var f_id = getPopParent('form_name').value;
+		f_id = String(f_id);
+		var form = getPopParent(f_id);
+		form.submit();
+	}
+
+	else if (eType === 'delete') {
+		getPopParent('result_form').submit();
+	}
 }
 
 function new_am() {
@@ -6453,6 +6461,12 @@ function getPopParent(element) {
 	return result;
 }
 
+function getTopParent(element) {
+	element = String(element);
+	var result = window.top.document.getElementById(element);
+	return result;
+}
+
 function asi_radioBtn_select(sel_val, r1, r2) {
 	sel_val = String(sel_val);
 
@@ -7245,10 +7259,11 @@ function generic_to_session() {
 
 function v_exit_session() {	
 	var f_id = getPopParent('form_name').value;
+	f_id = String(f_id);
 	var form = getPopParent(f_id);
 
 	grab('s_form').submit();
-	f_id = String(f_id);
+	
 
 	form.action = '/adminHome/';
 	form.submit();
@@ -7257,8 +7272,8 @@ function v_exit_session() {
 function c_exit_session() {
 	grab('s_form').submit();
 
-	var f_id = getPopParent('form_name').value;
-	var form = getPopParent(f_id);
+	var f_id = getTopParent('form_name').value;
+	var form = getTopParent(f_id);
 
 	grab('s_form').submit();
 	f_id = String(f_id);

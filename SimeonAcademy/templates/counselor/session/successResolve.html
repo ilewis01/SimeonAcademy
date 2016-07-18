@@ -13,22 +13,16 @@
 
 	<div class='s_resolve_wrapper2'>
 		<div id='s_img_div_resolve'>
-			<img src="{% static 'images/warning.png' %}" alt="session_warning" class='session_warning'>
+			<img src="{% static 'images/popCheck.png' %}" alt="session_warning" class='session_warning'>
 		</div>
 
 		<div class='deleted_session_resolve'>
-			Are you sure that you want to {{s_head}} this session?
+			The session was sucessfully {{s_head}}
 		</div>
 
-		<div id='s_resove_sub_head3'>
-			All data associated with this session will be permanently erased.
-		</div>
 
-		<input type='hidden' name='exit_type' id='exit_type' value='{{s_head}}'>
-
-		<div class='s_resolveBtn'>
-			<button type='button' onClick="javascript: finializeSessionResolve();">Continue</button>
-			<button type='button' onClick='javascript: window.close();'>Cancel</button>
+		<div class='center_single_btn'>
+			<button type='button' onClick="javascript: window.close();">Continue</button>
 		</div>
 	</div>
 

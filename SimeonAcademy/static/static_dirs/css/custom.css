@@ -2686,7 +2686,19 @@ button:hover {
 	margin:auto;
 }
 
+.s_resolveBtn4 {
+	width: 80;
+	margin:auto;
+}
+
 .s_resolveBtn button {
+	width:80px;
+	height:25px;
+	font-size: 12px;
+	margin-top: 25%;
+}
+
+.s_resolveBtn4 button {
 	width:80px;
 	height:25px;
 	font-size: 12px;
@@ -2698,6 +2710,18 @@ button:hover {
 	margin: auto;
 	padding-top: 5%;
 	padding-bottom: 5%;
+}
+
+.center_single_btn {
+	width: 80px;
+	margin:auto;
+}
+
+.center_single_btn button {
+	width:80px;
+	height:25px;
+	font-size: 12px;
+	margin-top: 50%;
 }
 
 

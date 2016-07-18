@@ -36,7 +36,7 @@ grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
-truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshSession
+truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession
 
 
 # from assessment.view_functions import convert_datepicker, generateClientID,\
@@ -470,6 +470,41 @@ def existingResolve(request):
 			content['s_head'] = s_head
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/existingResolve.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def sessionResolveSuccess(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			exit_type = request.POST.get('exit_type')
+			exit_type = str(exit_type)
+			s_head = ''
+			session = ClientSession.objects.get(id=(getSessionID()))
+
+
+			if exit_type == 'refresh':
+				refreshCurrentSession(session)
+				s_head = 'reset'
+				url = '/clientOptions/'
+			elif exit_type == 'delete':
+				deleteCurrentSession(session)
+				s_head = 'deleted'
+				url ='/adminHome/'
+
+			content['s_head'] = s_head
+			content['url'] = url
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/successResolve.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def clientOptions(request):

@@ -576,24 +576,24 @@ def deleteCurrentSession(session):
 
 	session.delete()
 
-def refreshSession(session):
-	session.startTime = ''
-	session.endTime = ''
+def refreshCurrentSession(session):
+	session.startTime = datetime.now()
+	session.endTime = None
 	session.counselor = ''
 	session.noServices = 1
 
 	if session.hasAM == True:
-		refreshAM(session.am)
+		deleteAM(session.am)
 	if session.hasMH == True:
-		refreshMh(session.mh)
+		deleteMh(session.mh)
 	if session.hasUT == True:
-		refreshUT(session.ut)
+		deleteUT(session.ut)
 	if session.hasSAP == True:
-		refreshSap(session.sap)
+		deleteSap(session.sap)
 	if session.hasASI == True:
-		refreshASI(session.asi)
+		deleteASI(session.asi)
 	if session.hasInvoice == True:
-		resetInvoice(session.invoice)
+		session.invoice.delete()
 
 	session.hasAM = False
 	session.hasMH = False
@@ -603,6 +603,16 @@ def refreshSession(session):
 	session.isPaid = False
 	session.isComplete = False	
 	session.save()
+
+	print 'SESSION START TIME: ' + str(session.startTime)
+	print 'SESSION COUNSELOR: ' + str(session.counselor)
+	print 'SESSION NUMBER SERVICES: ' + str(session.noServices)
+
+	print 'SESSION hasAM: ' + str(session.hasAM)
+	print 'SESSION hasMH: ' + str(session.hasMH)
+	print 'SESSION hasUT: ' + str(session.hasUT)
+	print 'SESSION hasASI: ' + str(session.hasASI)
+	print 'SESSION hasSAP: ' + str(session.hasSAP)
 
 def invoiceQuery(session):
 	create = False
@@ -1611,8 +1621,6 @@ def deleteAM(am):
 	am.control.delete()
 	am.final.delete()
 	am.delete()
-
-	return am
 
 def newAM(client):
 	date = datetime.now()
