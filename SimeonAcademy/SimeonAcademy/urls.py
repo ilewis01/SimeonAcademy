@@ -80,9 +80,10 @@ urlpatterns = patterns('',
     url(r'^ut_viewForm/$', 'assessment.views.ut_viewForm'),
 
     ## Discharge Views
-    url(r'^discharge_preliminary/$', 'assessment.views.discharge_preliminary'),
+    url(r'^discharge_success/$', 'assessment.views.discharge_success'),
     url(r'^discharge_client/$', 'assessment.views.discharge_client'),
     url(r'^discharge_viewForm/$', 'assessment.views.discharge_viewForm'),
+    url(r'^process_discharge/$', 'assessment.views.process_discharge'),
 
     ##Addiction Severity Views
     url(r'^asi_preliminary/$', 'assessment.views.asi_preliminary'),

@@ -619,7 +619,8 @@ function continue_discharge() {
 }
 
 function discharge_proceed() {
-
+	grab('d_form').submit();
+	getPopParent('d_form').submit();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//

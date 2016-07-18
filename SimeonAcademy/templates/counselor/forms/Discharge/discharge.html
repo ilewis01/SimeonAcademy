@@ -12,11 +12,11 @@
                               DISCHARGE SUMMARY
                     </div>
 
-                    <form action='' method='post' id='d_form'> {% csrf_token %}
+                    <form action='/process_discharge/' method='post' id='d_form'> {% csrf_token %}
                         <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                         <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                        <input type='hidden' name='d_id' id='d_id' value='{{form.id}}'>
-                    </form>                    
+                        <input type='hidden' name='d_id' id='d_id' value='{{discharge.id}}'>
+                                       
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea rows='4' cols='80' name='' id=''>{{fields.reasonRefered}}</textarea>
+                                    <textarea rows='4' cols='80' name='reasonRefered' id='reasonRefered'></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -85,7 +85,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea rows='5' cols='80' name='clientAttitude' id='clientAttitude'>{{fields.clientAttitude}}</textarea>
+                                    <textarea rows='5' cols='80' name='clientAttitude' id='clientAttitude'></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -155,12 +155,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea rows='10' cols='80' name='clientAttitude' id='clientAttitude'>{{fields.clientAttitude}}</textarea>
+                                    <textarea rows='10' cols='80' name='recommendations' id='recommendations'></textarea>
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
+                </form> 
 
                 <!-- <div class="col-md-1"></div>  --><!-- RIGHT MARGIN -->
 

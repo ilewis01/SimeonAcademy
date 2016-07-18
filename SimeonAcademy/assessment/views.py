@@ -39,17 +39,6 @@ processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSessi
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession
 
 
-# from assessment.view_functions import convert_datepicker, generateClientID,\
-# getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
-# getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
-# amDemographicExist, findClientAM, clientAmExist, continueToAmSection, \
-# mhDemographicExist, clientMhExist, getClientMhList, findClientMH, \
-# continueToMhSection, getActiveClients, getDischargedClients, utExist, \
-# getUtsByDate, deleteOldUTS, getTimes, convert_phone, phone_to_integer, \
-# saveIncompleteSapForm, grabClientOpenForm, grabGenericForm, deleteGenericForm, \
-# getOrderedStateIndex, getGlobalID, decodeCharfield, force_URL_priority, \
-# startForm, fetchUrl, fetchContent, saveForm,  deleteForm, refreshForm, saveAndFinish, \
-
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
 	return render_to_response('global/index.html')
@@ -2222,7 +2211,7 @@ def ut_viewForm(request):
 
 
 @login_required(login_url='/index')
-def discharge_preliminary(request):
+def discharge_success(request):
 	user = request.user
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
@@ -2236,8 +2225,7 @@ def discharge_preliminary(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = startForm(request, 'discharge')
-			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
+			return render_to_response('counselor/forms/Discharge/verified.html', content, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/index')
@@ -2280,6 +2268,24 @@ def discharge_viewForm(request):
 			content['discharge'] = discharge
 			content['title'] = 'Simeon Academy | Client Discharge'
 			return render_to_response('counselor/forms/Discharge/viewForm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def process_discharge(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			fetchContent(request, 'discharge', None)
+			return render_to_response('counselor/home.html', content, context_instance=RequestContext(request))
 
 
 

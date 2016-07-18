@@ -8373,25 +8373,15 @@ def beginDischarge(request):
 	return result
 
 def processDischargeData(request):
-	result = {}
-
-	session_id = request.POST.get('session_id', '')
-	d_id = request.POST.get('d_id', '')
-
+	session_id = request.POST.get('session_id')
+	d_id = request.POST.get('d_id')
 	session = ClientSession.objects.get(id=session_id)
-	d = Discharge.objects.get(id=d_id)
-	fields = getDischargeFields(d)
-	json_data = json.dumps(fields)
+	discharge = Discharge.objects.get(id=d_id)
+	saveDischarge(request, discharge)
+	session.client.isDischarged = True
+	session.client.save()
+	endSession(session, True)
 
-	saveDischarge(request, d)
-
-	result['session'] = session
-	result['discharge'] = d
-	result['fields'] = fields
-	result['json_data'] = json_data
-	result['title'] = "Simeon Academy | Client Discharge"
-
-	return result
 
 
 
