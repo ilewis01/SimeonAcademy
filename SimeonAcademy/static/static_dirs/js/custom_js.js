@@ -7316,7 +7316,6 @@ function c_exit_session() {
 	else {
 		var f_id = getPopParent('form_name').value;
 		f_id = String(f_id);
-		getPopParent('textSub').value = f_id;
 		var form = getPopParent(f_id);
 		form.action = '/adminHome/';
 		grab('s_form').action = '/sessionClosed/';

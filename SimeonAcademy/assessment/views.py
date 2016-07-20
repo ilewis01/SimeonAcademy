@@ -920,9 +920,11 @@ def sessionClosedAlt(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			eType = request.POST.get('exit_type')
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			session.isOpen = False;
 			session.save()
+			content['exit_type'] = eType
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
