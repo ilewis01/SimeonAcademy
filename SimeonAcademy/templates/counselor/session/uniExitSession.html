@@ -6,14 +6,18 @@
 </head>
 
 <body class='session_exit_body'>
-	<div class='session_exit_wrapper'>
+	<div class='s_resolve_wrapper3'>
 
-		<div id='sucess_session_exit'>
+		<div id='s_img_div_resolve'>
+			<img src="{% static 'images/popCheck.png' %}" alt="session_warning" class='session_warning'>
+		</div>
+
+		<div id='close_error_head'>
 			The session has been sucessfully {{exit_type}}
 		</div>
 
-		<div id=''>
-			<div id='sm_btn_wr'>
+		<div>
+			<div id='sm_btn_wr_uno'>
 	            <button type='button' onClick="javascript: window.close();">OK</button>
 	        </div>
         </div>

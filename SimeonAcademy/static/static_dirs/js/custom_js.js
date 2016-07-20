@@ -559,12 +559,12 @@ function get_client_history() {
 }
 
 function close_session() {
-	var w = 500, h = 250;
+	var w = 550, h = 400;
 	openPopUp('auto', '/closeSession/', w, h);
 }
 
 function delete_session() {
-	var w = 500, h = 250;
+	var w = 550, h = 400;
 	openPopUp('auto', '/deleteSession/', w, h);
 }
 
@@ -6545,7 +6545,7 @@ function sessionChecking(btnType) {
 	btn = String(btnType);
 
 	if (actionApp === 'Session') {
-		var w = 400;
+		var w = 550;
 		var h = 400;
 		openPopUp('auto', '/session_open_error/', w, h);
 	}

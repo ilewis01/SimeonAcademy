@@ -2270,21 +2270,22 @@ button:hover {
 	font-size: 15px;
 }
 
-#S_C1 {
-	width:84px;
-	text-align: left;
+#close_error_head {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 19px;
 }
 
-#S_C2 {
-	width:13px;
+#close_error_head_sm {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 17px;
 }
 
-#S_C3 {
-	width:70px;
-}
+#sm_btn_wr_uno {
 
-#S_C4 {
-	padding-right: 65px;
 }
 
 
@@ -2659,6 +2660,39 @@ button:hover {
 	border-radius: 5px;
 }
 
+.s_resolve_wrapper3 {
+	width:95%;
+	height: 95%;
+	padding:2%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.s_resolve_wrapper3 button {
+	width: 140px;
+	height:25px;
+	font-size: 13px;
+}
+
+#sm_btn_wr_uno {
+	width: 140px;
+	margin: auto;
+	padding-top: 10%;
+}
+
+.s_resolve_wrapper3 table {
+	width: 120px;
+	margin: auto;
+}
+
+#crazySpace {
+	margin-bottom: 10%;
+}
+
+/*#crazySpaceLite {
+	margin-bottom: 5%;
+}*/
 .s_resolve_wrapper li {
 	font-size: 12px;
 	margin-left: 30px;

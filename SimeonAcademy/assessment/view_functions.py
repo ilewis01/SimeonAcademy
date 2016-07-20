@@ -507,12 +507,13 @@ def isMultiMH():
 	count = 0
 
 	for s in sessions:
-		for m in mhs:
-			if str(m.id) == str(s.mh.id):
-				count = count + 1
-				if count > 1:
-					isMulti = True
-					break
+		if s.hasMH == True:
+			for m in mhs:
+				if str(m.id) == str(s.mh.id):
+					count = count + 1
+					if count > 1:
+						isMulti = True
+						break
 	return isMulti
 
 def isMultiUT():
@@ -522,12 +523,13 @@ def isMultiUT():
 	count = 0
 
 	for s in sessions:
-		for u in uts:
-			if str(u.id) == str(s.ut.id):
-				count = count + 1
-				if count > 1:
-					isMulti = True
-					break
+		if s.hasUT == True:
+			for u in uts:
+				if str(u.id) == str(s.ut.id):
+					count = count + 1
+					if count > 1:
+						isMulti = True
+						break
 	return isMulti
 
 def isMultiSAP():
@@ -537,12 +539,13 @@ def isMultiSAP():
 	count = 0
 
 	for s in sessions:
-		for sap in saps:
-			if str(sap.id) == str(s.sap.id):
-				count = count + 1
-				if count > 1:
-					isMulti = True
-					break
+		if s.hasSAP == True:
+			for sap in saps:
+				if str(sap.id) == str(s.sap.id):
+					count = count + 1
+					if count > 1:
+						isMulti = True
+						break
 	return isMulti
 
 def isMultiASI():
@@ -552,12 +555,13 @@ def isMultiASI():
 	count = 0
 
 	for s in sessions:
-		for a in asis:
-			if str(s.id) == str(s.asi.id):
-				count = count + 1
-				if count > 1:
-					isMulti = True
-					break
+		if s.hasASI == True:
+			for a in asis:
+				if str(s.id) == str(s.asi.id):
+					count = count + 1
+					if count > 1:
+						isMulti = True
+						break
 	return isMulti
 
 def runMultiQuery(session):

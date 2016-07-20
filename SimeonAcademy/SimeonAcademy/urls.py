@@ -115,4 +115,5 @@ urlpatterns = patterns('',
     url(r'^hasExistingSession/$', 'assessment.views.hasExistingSession'),
     url(r'^existingResolve/$', 'assessment.views.existingResolve'),
     url(r'^sessionResolveSuccess/$', 'assessment.views.sessionResolveSuccess'),
+    url(r'^session_open_error/$', 'assessment.views.session_open_error'),
 )

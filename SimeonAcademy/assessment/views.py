@@ -928,6 +928,27 @@ def sessionClosedAlt(request):
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def session_open_error(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:			
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			shouldDelete = shouldDeleteSession(session)
+			content['title'] = 'Simeon Academy'
+			content['shouldDelete'] = shouldDelete
+			return render_to_response('counselor/session/sessionOpenError.html', content, context_instance=RequestContext(request))
+
 
 
 ###########################################################################################################################################

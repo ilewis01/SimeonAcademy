@@ -7,20 +7,18 @@
 
 <body class='session_exit_body'>
 	<div class='s_resolve_wrapper3'>
-
 		<div id='crazySpaceLite'></div>
 
-		<form action='/sessionClosedAlt/' method='post' name='s_form' id='s_form'> {% csrf_token %}
-			<input type='hidden' name='exit_type' id='exit_type' value='closed'>
+		<form action='/uni_exit_session/' method='post' id='s_form'> {% csrf_token %}
+			<input type='hidden' name='exit_type' id='exit_type' value='close'>
+			<input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
 		</form>
 
 		<div id='s_img_div_resolve'>
 			<img src="{% static 'images/warning.png' %}" alt="session_warning" class='session_warning'>
 		</div>
 
-		<div id='close_error_head_sm'>
-			<span>Would you like to come back to this session at a later time?</span>
-		</div>
+		<div id='close_error_head'>You must close this session before you can exit.</div>
 
 		<div id='crazySpace'></div>
 
@@ -28,11 +26,11 @@
 			<table>
 				<tr>
 					<td>
-						<button type='button' onClick="javascript: chooseSessionExit('False');">Yes</button>
+						<button type='button' onClick='javascript: c_exit_session();'>Close Session</button>
 					</td>
 
 					<td>
-						<button type='button' onClick="javascript: chooseSessionExit('True');">No</button>
+						<button type='button' onClick='javascript: window.close();'>Continue Session</button>
 					</td>
 				</tr>
 			</table>
