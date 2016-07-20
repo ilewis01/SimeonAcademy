@@ -9,18 +9,25 @@ class account(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
-class Global_ID(models.Model):
+class G_Form_ID(models.Model):
 	name = models.CharField(max_length=20, default=None, blank=True, null=True)
-	global_id = models.IntegerField(default=0)
+	g_id = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return str(self.global_id)
+		return str(self.g_id)
 
-class Global_Session_ID(models.Model):
-	global_id = models.IntegerField(default=0)
+class G_Session_ID(models.Model):
+	s_id = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return str(self.global_id)
+		return str(self.s_id)
+
+class SolidState(models.Model):
+	state 	= models.CharField(max_length=25, default=None, blank=True, null=True)
+	url 	= models.CharField(max_length=25, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.state)
 
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)

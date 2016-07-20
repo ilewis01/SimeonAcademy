@@ -20,9 +20,9 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
-Global_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
+G_Form_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-Global_Session_ID
+G_Session_ID
 
 def clientEqual(c1, c2):
 	isEqual = False
@@ -9205,22 +9205,22 @@ def processClientHistory(request):
 ############################################################################################
 
 def setGlobalID(the_id):
-	gloVar = Global_ID.objects.get(id=1)
-	gloVar.global_id = the_id
+	gloVar = G_Form_ID.objects.get(id=1)
+	gloVar.g_id = the_id
 	gloVar.save()
 
 def getGlobalID():
-	gloVar = Global_ID.objects.get(id=1)
-	return gloVar.global_id
+	gloVar = G_Form_ID.objects.get(id=1)
+	return gloVar.g_id
 
 def setGlobalSession(the_id):
-	gloVar = Global_Session_ID.objects.get(id=1)
-	gloVar.global_id = the_id
+	gloVar = G_Session_ID.objects.get(id=1)
+	gloVar.s_id = the_id
 	gloVar.save()
 
 def getSessionID():
-	gloVar = Global_Session_ID.objects.get(id=1)
-	return gloVar.global_id
+	gloVar = G_Session_ID.objects.get(id=1)
+	return gloVar.s_id
 
 def decodeCharfield(text):
 	result = []

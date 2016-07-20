@@ -6,22 +6,23 @@ MHFamilyHistory, AM_Demographic, AM_DrugHistory,AM_ChildhoodHistory, \
 AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarget, \
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
-MHStressor, MHLegalHistory, SType, Invoice, AM_AngerHistory3, Global_ID,\
+MHStressor, MHLegalHistory, SType, Invoice, AM_AngerHistory3, G_Form_ID,\
 A_Time, Appointment, ClientSession, AIS_Admin, AIS_General, AIS_Medical, \
 AIS_Employment, AIS_Drug1, AIS_Legal, AIS_Family, AIS_Social1, \
-AIS_Social2, AIS_Psych, ASI, UtPaid, Global_Session_ID
+AIS_Social2, AIS_Psych, ASI, UtPaid, G_Session_ID, SolidState
 
 admin.site.register(account)
 admin.site.register(State)
 admin.site.register(RefReason)
 admin.site.register(Client)
-admin.site.register(Global_ID)
+admin.site.register(G_Form_ID)
 admin.site.register(Drug)
 admin.site.register(TermReason)
 admin.site.register(Discharge)
 admin.site.register(UrineResults)
 admin.site.register(UtPaid)
-admin.site.register(Global_Session_ID)
+admin.site.register(G_Session_ID)
+admin.site.register(SolidState)
 
 ##AIS REGISTERS
 admin.site.register(AIS_Admin)
