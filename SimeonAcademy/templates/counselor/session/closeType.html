@@ -12,6 +12,7 @@
 
 		<form action='/sessionClosedAlt/' method='post' name='s_form' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='exit_type' id='exit_type' value='closed'>
+			<input type='hidden' name='multiNav' id='multiNav' value='{{multiNav}}'>
 		</form>
 
 		<div id='s_img_div_resolve'>

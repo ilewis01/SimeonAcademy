@@ -6543,8 +6543,9 @@ function sessionChecking(btnType) {
 	var actionApp = grab('tracking').value;
 	actionApp = String(actionApp);
 	btn = String(btnType);
+	grab('nextUrl').value = btn;
 
-	if (actionApp === 'Session') {
+	if (actionApp === 'Session') {		
 		var w = 550;
 		var h = 400;
 		openPopUp('auto', '/session_open_error/', w, h);
@@ -7326,6 +7327,8 @@ function c_exit_session() {
 
 function chooseSessionExit(answer) {
 	answer = String(answer);
+	var nextUrl = getPopParent('nextUrl').value;
+	nextUrl = String(nextUrl);
 
 	if (answer === 'False') {
 		grab('s_form').action = '/sessionClosedAlt/';
@@ -7339,7 +7342,28 @@ function chooseSessionExit(answer) {
 	f_id = String(f_id);
 
 	var form = getPopParent(f_id);
-	form.action = '/adminHome/';
+	var multiNav = grab('multiNav').value;
+
+	if (multiNav === 'True') {
+		if (nextUrl === 'home') {
+			form.action = '/adminHome/';
+		}
+		else if (nextUrl === 'bill') {
+			form.action = '//';
+		}
+		else if (nextUrl === 'admin') {
+			form.action = '//';
+		}
+		else if (nextUrl === 'appt') {
+			form.action = '//';
+		}
+		else if (nextUrl === 'logout') {
+			form.action = '/logout/';
+		}
+	}
+	else {
+		form.action = '/adminHome/';
+	}	
 
 	grab('s_form').submit();
 	form.submit();

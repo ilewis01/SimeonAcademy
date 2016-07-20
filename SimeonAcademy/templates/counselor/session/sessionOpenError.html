@@ -12,6 +12,8 @@
 		<form action='/uni_exit_session/' method='post' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='exit_type' id='exit_type' value='close'>
 			<input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
+			<input type='hidden' name='multiNav' id='multiNav' value='True'>
+			<input type='hidden' name='nextUrl' id='nextUrl' value=''>
 		</form>
 
 		<div id='s_img_div_resolve'>

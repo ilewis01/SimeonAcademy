@@ -864,23 +864,28 @@ def uni_exit_session(request):
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			exit_type = request.POST.get('exit_type')
+			multiNav = request.POST.get('multiNav')
 			exit_type = str(exit_type)
 
 			if exit_type == 'close':				
 				if shouldDeleteSession(session) == False:
 					content['title'] = 'Simeon Academy'
+					content['multiNav'] = multiNav
 					return render_to_response('counselor/session/closeType.html', content, context_instance=RequestContext(request))
 				else:
 					deleteCurrentSession(session)
+					content['multiNav'] = multiNav
 					content['exit_type'] = 'closed.'
 
 			elif exit_type == 'delete':
 				deleteCurrentSession(session)
 				content['exit_type'] = 'deleted.'
+				content['multiNav'] = multiNav
 
 			elif exit_type == 'refresh':
 				refreshSession(session)
 				content['exit_type'] = 'reset.'
+				content['multiNav'] = multiNav
 
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
@@ -902,6 +907,8 @@ def sessionClosed(request):
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			deleteCurrentSession(session)
+			multiNav = request.POST.get('multiNav')
+			content['multiNav'] = multiNav
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
 
@@ -924,6 +931,8 @@ def sessionClosedAlt(request):
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			session.isOpen = False;
 			session.save()
+			multiNav = request.POST.get('multiNav')
+			content['multiNav'] = multiNav
 			content['exit_type'] = eType
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
