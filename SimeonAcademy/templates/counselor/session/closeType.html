@@ -8,8 +8,7 @@
 <body class='session_exit_body'>
 	<div class='session_exit_wrapper'>
 
-		<form action='/uni_exit_session/' method='post' name='s_form' id='s_form'> {% csrf_token %}
-			<input type='hidden' name='close_type' id='close_type' value=''>
+		<form action='/sessionClosedAlt/' method='post' name='s_form' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='exit_type' id='exit_type' value='close'>
 		</form>
 

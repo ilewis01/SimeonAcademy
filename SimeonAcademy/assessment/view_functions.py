@@ -491,12 +491,13 @@ def isMultiAM():
 	count = 0
 
 	for s in sessions:
-		for a in ams:
-			if str(a.id) == str(s.am.id):
-				count = count + 1
-				if count > 1:
-					isMulti = True
-					break
+		if s.hasAM == True:
+			for a in ams:
+				if str(a.id) == str(s.am.id):
+					count = count + 1
+					if count > 1:
+						isMulti = True
+						break
 	return isMulti
 
 def isMultiMH():
@@ -696,7 +697,6 @@ def shouldDeleteSession(session):
 	if session.hasAM==True or session.hasMH==True or session.hasUT==True or session.hasSAP==True or session.hasASI==True:
 		shouldDelete = False 
 
-	print "SHOULD I DELETE THIS? " + str(shouldDelete)
 	return shouldDelete
 
 def endSession(session, isfinished):

@@ -2231,11 +2231,32 @@ button:hover {
 	margin-top: 40px;
 }
 
-#session_exitButtons {
+#s_text_div_par {
+	width:350px;
+	height:20px;
+	margin-top: 40px;
+}
+
+#s_img_div_par {
+	width:60px;
+	height:20px;
+}
+
+#shrink_label {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.session_exitButtons {
 	width:90%;
 	margin:auto;
 	text-align: right;
 }
+
+.session_exitButtons table {
+	width:100%;
+}
+
 
 #sucess_session_exit {
 	font-size: 17px;
@@ -2249,7 +2270,22 @@ button:hover {
 	font-size: 15px;
 }
 
+#S_C1 {
+	width:84px;
+	text-align: left;
+}
 
+#S_C2 {
+	width:13px;
+}
+
+#S_C3 {
+	width:70px;
+}
+
+#S_C4 {
+	padding-right: 65px;
+}
 
 
 /*###############################################################################################################*/

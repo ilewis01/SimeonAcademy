@@ -10,19 +10,20 @@
 
 		<form action='/uni_exit_session/' method='post' name='s_form' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='exit_type' id='exit_type' value='close'>
+			<input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
 		</form>
 
 			<div>
 				<table>
 					<tr>
 						<td>
-							<div id='s_img_div'>
+							<div id='s_img_div_par'>
 								<img src="{% static 'images/warning.png' %}" alt="session_warning" class='session_warning'>
 							</div>
 						</td>
 
 						<td>
-							<div id='s_text_div'>
+							<div id='s_text_div_par'>
 								<span>Are you sure you want to close this session?</span>
 							</div>
 						</td>
@@ -30,8 +31,8 @@
 				</table>
 			</div>
 
-			<div id='session_exitButtons'>
-				<div id='sm_btn_wr'>
+			<div class='session_exitButtons'>
+				<div>					
 					<button type='button' onClick="javascript: c_exit_session();">Proceed</button>
 		            <button type='button' onClick="javascript: window.close();">Cancel</button>
 		        </div>

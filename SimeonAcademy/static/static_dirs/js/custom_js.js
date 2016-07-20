@@ -7307,27 +7307,42 @@ function v_exit_session() {
 }
 
 function c_exit_session() {
-	grab('s_form').submit();
-
-	var f_id = getTopParent('form_name').value;
-	f_id = String(f_id);
-	var form = getTopParent(f_id);
-
-	form.action = '/adminHome/';
-	form.submit();
-
-	grab('s_form').submit();	
+	var shouldDelete = grab('shouldDelete').value;
+	shouldDelete = String(shouldDelete);
+	
+	if (shouldDelete === 'False') {
+		grab('s_form').submit();
+	}
+	else {
+		var f_id = getPopParent('form_name').value;
+		f_id = String(f_id);
+		getPopParent('textSub').value = f_id;
+		var form = getPopParent(f_id);
+		form.action = '/adminHome/';
+		grab('s_form').action = '/sessionClosed/';
+		grab('s_form').submit();
+		form.submit();
+	}
 }
 
 function chooseSessionExit(answer) {
-	grab('s_form').action = '/sessionClosed/';
-	grab('s_form').submit();
+	answer = String(answer);
+
+	if (answer === 'False') {
+		grab('s_form').action = '/sessionClosedAlt/';
+	}
+
+	else {
+		grab('s_form').action = '/sessionClosed/';
+	}
 
 	var f_id = getPopParent('form_name').value;
 	f_id = String(f_id);
 
 	var form = getPopParent(f_id);
 	form.action = '/adminHome/';
+
+	grab('s_form').submit();
 	form.submit();
 }
 

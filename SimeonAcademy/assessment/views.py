@@ -803,6 +803,10 @@ def closeSession(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			track = getTrack(user)
+			session = ClientSession.objects.get(id=(track.s_id))
+			shouldDelete = shouldDeleteSession(session)
+			content['shouldDelete'] = shouldDelete
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/closeSession.html', content, context_instance=RequestContext(request))
 
@@ -862,15 +866,12 @@ def uni_exit_session(request):
 			exit_type = request.POST.get('exit_type')
 			exit_type = str(exit_type)
 
-			if exit_type == 'close':
+			if exit_type == 'close':				
 				if shouldDeleteSession(session) == False:
-					content['close_type'] = request.POST.get('close_type')
-					content['exit_type'] = request.POST.get('exit_type')
 					content['title'] = 'Simeon Academy'
 					return render_to_response('counselor/session/closeType.html', content, context_instance=RequestContext(request))
 				else:
-					close_type = truePythonBool(request.POST.get('close_type'))
-					endSession(session, close_type)
+					deleteCurrentSession(session)
 					content['exit_type'] = 'closed.'
 
 			elif exit_type == 'delete':
@@ -900,10 +901,30 @@ def sessionClosed(request):
 
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
-			session.isOpen = False
-			session.save()
+			deleteCurrentSession(session)
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def sessionClosedAlt(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			session.isOpen = False;
+			session.save()
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
 
 
