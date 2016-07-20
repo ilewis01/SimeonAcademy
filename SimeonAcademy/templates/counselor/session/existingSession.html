@@ -9,11 +9,12 @@
 	<div id='resolve-session-top'>Session Options</div>
 	<div class='s_resolve_wrapper'>
 		<div id='s_resolve_head'>
-			A session for {{session.client.fname}} {{session.client.lname}} <span>(<em>{{session.client.clientID}}</em>)</span> was previously created that is incomplete.
+			A session for this client was previously created that is incomplete.
 		</div>
 
 		<form action='/existingResolve/' method='post' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+			<input type='hidden' name='session_id' id='session_id' value=''>
 			<input type='hidden' name='s_option' id='s_option' value=''>
 		</form>
 

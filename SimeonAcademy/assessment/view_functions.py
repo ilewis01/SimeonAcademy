@@ -20,9 +20,9 @@ AM_AngerHistory, AM_AngerHistory2, AM_Connections, AM_WorstEpisode, AM_AngerTarg
 AM_FamilyOrigin, AM_CurrentProblem, AM_Control, AM_Final, \
 SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
-G_Form_ID, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
+TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-G_Session_ID
+SolidState
 
 def clientEqual(c1, c2):
 	isEqual = False
@@ -58,13 +58,13 @@ def getOrderedStateIndex(the_state):
 
 	return index
 
-def convertRadioToBoolean(data):
-	result = True
+# def convertRadioToBoolean(data):
+# 	result = True
 
-	if data == 'no':
-		result = False
+# 	if data == 'no':
+# 		result = False
 
-	return result
+# 	return result
 
 def convert_phone(phone):
 	result = '('
@@ -281,6 +281,13 @@ def getClientBySS(ss_num):
 		if str(ss_num) == str(sNum):
 			data = {}
 			hasUnfinished = hasUnfinishedSession(c)
+
+			if hasUnfinished == True:
+				session = fetchUnfinishedSession(c)
+				data['session'] = session
+			else:
+				data['session'] = None
+
 			data['hasUnfinished'] = hasUnfinished
 			data['client'] = c
 			results.append(data)
@@ -298,6 +305,13 @@ def getClientByID(clientID):
 		if str(clientID) == str(compare):
 			data = {}
 			hasUnfinished = hasUnfinishedSession(c)
+
+			if hasUnfinished == True:
+				session = fetchUnfinishedSession(c)
+				data['session'] = session
+			else:
+				data['session'] = None
+
 			data['hasUnfinished'] = hasUnfinished
 			data['client'] = c
 			results.append(data)
@@ -316,6 +330,13 @@ def getClientByDOB(dob):
 		if dob == temp:
 			data = {}
 			hasUnfinished = hasUnfinishedSession(c)
+
+			if hasUnfinished == True:
+				session = fetchUnfinishedSession(c)
+				data['session'] = session
+			else:
+				data['session'] = None
+
 			data['hasUnfinished'] = hasUnfinished
 			data['client'] = c
 			results.append(data)
@@ -339,6 +360,13 @@ def getClientByName(fname, lname):
 			if str(fname) == str(compF) and str(lname) == str(compL):
 				data = {}
 				hasUnfinished = hasUnfinishedSession(c)
+
+				if hasUnfinished == True:
+					session = fetchUnfinishedSession(c)
+					data['session'] = session
+				else:
+					data['session'] = None
+
 				data['hasUnfinished'] = hasUnfinished
 				data['client'] = c
 				results.append(data)
@@ -346,6 +374,13 @@ def getClientByName(fname, lname):
 				if str(fname) == str(compF):
 					data = {}
 					hasUnfinished = hasUnfinishedSession(c)
+
+					if hasUnfinished == True:
+						session = fetchUnfinishedSession(c)
+						data['session'] = session
+					else:
+						data['session'] = None
+
 					data['hasUnfinished'] = hasUnfinished
 					data['client'] = c
 					results.append(data)
@@ -353,6 +388,13 @@ def getClientByName(fname, lname):
 				if str(lname) == str(compL):
 					data = {}
 					hasUnfinished = hasUnfinishedSession(c)
+
+					if hasUnfinished == True:
+						session = fetchUnfinishedSession(c)
+						data['session'] = session
+					else:
+						data['session'] = None
+
 					data['hasUnfinished'] = hasUnfinished
 					data['client'] = c
 					results.append(data)
@@ -743,7 +785,10 @@ def beginSession(request):
 	session.counselor = counselor
 	session.save()
 	openSession(session)
-	setGlobalSession(session.id)
+	setGlobalSession(session.id, request.user)
+	track = getTrack(user)
+	quickTrack('Session', track)
+	result['tracking'] = track.state.state
 
 	if action['isNew'] == False:
 		result['init'] = getExistingSessionForms(session)
@@ -3220,18 +3265,21 @@ def beginAM(request):
 
 	action = startAM(client)
 	am = action['am']
-	setGlobalID(am.id)
+	setGlobalID(am.id, request.user)
 
 	openForm('am', am, client)
 	session.hasAM = True
 	session.am = am
 	session.save()
 
+	track = getTrack(request.user)
+
 	result['AM'] = am
 	result['session'] = session
 	result['isNew'] = action['isNew']
 	result['title'] = "Simeon Academy | Anger Management"
 	result['save_this'] = 'false'
+	result['tracking'] = track.state.state
 
 	if action['isNew'] == False:
 		next_section = nextAmPage(am, None)
@@ -3264,7 +3312,9 @@ def processAMData(request, current_section):
 	next_url = nextAmPage(am, current_section)
 	classes = grabAmClassesCSS(am, current_section)
 	image = amSidebarImages(am, current_section)
+	track = getTrack(request.user)
 
+	result['tracking'] = track.state.state
 	result['class'] = classes
 	result['image'] = image
 	result['next_url'] = next_url
@@ -3648,7 +3698,7 @@ def beginSAP(request):
 
 	action = startSAP(client)
 	sap = action['sap']
-	setGlobalID(sap.id)
+	setGlobalID(sap.id, request.user)
 
 	openForm('sap', sap, client)
 	session.hasSAP = True
@@ -4844,7 +4894,7 @@ def beginMH(request):
 
 	action = startMH(client)
 	mh = action['mh']
-	setGlobalID(mh.id)
+	setGlobalID(mh.id, request.user)
 
 	openForm('mh', mh, client)
 	session.hasMH = True
@@ -6783,7 +6833,7 @@ def beginASI(request):
 
 	action = startASI(client)
 	asi = action['asi']
-	setGlobalID(asi.id)
+	setGlobalID(asi.id, request.user)
 
 	openForm('asi', asi, client)
 	session.asi = asi
@@ -8355,7 +8405,7 @@ def beginDischarge(request):
 
 	action = startDischarge(client)
 	d = action['discharge']
-	setGlobalID(session.id)
+	setGlobalSession(session.id, request.user)
 
 	openForm('discharge', d, client)
 
@@ -8532,7 +8582,7 @@ def beginUT(request):
 
 		if proceed.isPaid == True:
 			ut = startUT(client)
-			setGlobalID(ut.id)
+			setGlobalID(ut.id, request.user)
 			openForm('ut', ut, client)
 			fields = getUtFields(ut)
 			json_data = json.dumps(fields)
@@ -8548,13 +8598,13 @@ def beginUT(request):
 		else:
 			result['url'] = 'counselor/forms/UrineTest/instructions.html'
 			result['paid_profile'] = proceed
-			setGlobalID(proceed.id)
+			setGlobalID(proceed.id, request.user)
 	else:
 		newPaid = UtPaid(client=client)
 		newPaid.save()
 		result['url'] = 'counselor/forms/UrineTest/instructions.html'
 		result['paid_profile'] = newPaid
-		setGlobalID(newPaid.id)
+		setGlobalID(newPaid.id, request.user)
 	
 	result['session'] = session	
 	result['title'] = "Simeon Academy | Urine Analysis"
@@ -9203,24 +9253,94 @@ def processClientHistory(request):
 ############################################################################################
 	              ## END CLIENT OPTION FUNCTIONS
 ############################################################################################
+def userHasTrack(user):
+	hasTrack = False
+	tracks = TrackApp.objects.all()
 
-def setGlobalID(the_id):
-	gloVar = G_Form_ID.objects.get(id=1)
-	gloVar.g_id = the_id
-	gloVar.save()
+	for t in tracks:
+		if str(t.c_id) == str(user.id):
+			hasTrack = True
+			break
 
-def getGlobalID():
-	gloVar = G_Form_ID.objects.get(id=1)
-	return gloVar.g_id
+	return hasTrack
 
-def setGlobalSession(the_id):
-	gloVar = G_Session_ID.objects.get(id=1)
-	gloVar.s_id = the_id
-	gloVar.save()
+def getUserTrack(user):
+	tracking = None
 
-def getSessionID():
-	gloVar = G_Session_ID.objects.get(id=1)
-	return gloVar.s_id
+	tracks = TrackApp.objects.all()
+
+	for t in tracks:
+		if str(t.c_id) == str(user.id):
+			tracking = t
+			break
+
+	return tracking
+
+def getTrack(user):
+	tracking = None
+
+	if userHasTrack(user) == True:
+		tracking = getUserTrack(user)
+	else:
+		m_counselor = ''
+		m_counselor += str(user.first_name)
+		m_counselor += ' '
+		m_counselor += str(user.last_name)
+		m_id = str(user.id)
+		tracking = TrackApp(counselor=m_counselor, c_id=m_id)
+		tracking.save()
+
+	return tracking
+
+def getAppAction(m_action):
+	result = None
+	m_action = str(m_action)
+
+	if m_action == 'Admin':
+		result = SolidState.objects.get(id=1)
+	elif m_action == 'General':
+		result = SolidState.objects.get(id=2)
+	elif m_action == 'Session':
+		result = SolidState.objects.get(id=3)
+	elif m_action == 'Search':
+		result = SolidState.objects.get(id=4)
+
+	return result
+
+
+def setGlobalID(the_id, user):
+	track = getUserTrack(user)
+	track.f_id = the_id
+	track.save()
+
+def getGlobalID(user):
+	track = getUserTrack(user)
+	return track.f_id
+
+def setGlobalSession(the_id, user):
+	track = getUserTrack(user)
+	track.s_id = the_id
+	track.save()
+
+def getSessionID(user):
+	track = getUserTrack(user)
+	return track.s_id
+
+def setAppTrack(m_action, user):
+	track = getUserTrack(user)
+	loc = getAppAction(m_action)
+	track.state = loc
+	track.save()
+
+def quickTrack(m_action, track):
+	loc = getAppAction(m_action)
+	track.state = loc
+	track.save()
+
+
+def getAppTrack(user):
+	track = getUserTrack(user)
+	return track.state
 
 def decodeCharfield(text):
 	result = []

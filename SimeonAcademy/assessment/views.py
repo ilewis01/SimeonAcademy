@@ -26,7 +26,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState
+SolidState, TrackApp
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -36,7 +36,8 @@ grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
 getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
-truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession
+truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
+setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -56,6 +57,8 @@ def auth_view(request):
     if user is not None:
         auth.login(request, user)
         if user.account.is_counselor == True:
+        	track = getTrack(user)
+        	quickTrack('General', track)
         	return HttpResponseRedirect('/adminHome/')
         else:
         	return HttpResponseRedirect('/clientHome')
@@ -167,23 +170,31 @@ def adminHome(request):
 	else:
 		content = {}
 		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
 			content['title'] = "Simeon Academy"
-			return render_to_response('counselor/home.html', content)
+			return render_to_response('counselor/home.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def newClient(request):
 	user = request.user
+	
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
 
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', track)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -200,11 +211,14 @@ def newClient(request):
 @login_required(login_url='/index')
 def confirmNewClient(request):
 	user = request.user
+
 	if not user.is_authenticated():
 		render_to_response('global/index.html')
 
 	else:
 		content = {}
+		track = getTrack(user)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -265,6 +279,8 @@ def clientCreated(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -331,7 +347,13 @@ def searchClients(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
 		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html')
@@ -349,6 +371,8 @@ def clientSearchResults(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -408,6 +432,9 @@ def clientHistory(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -432,9 +459,6 @@ def hasExistingSession(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session = ClientSession.objects.get(id=(getSessionID()))
-			content['session'] = session
-			content['init'] = getExistingSessionForms(session)
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/existingSession.html', content, context_instance=RequestContext(request))
 
@@ -454,8 +478,8 @@ def existingResolve(request):
 
 		else:
 			s_head = request.POST.get('s_option')
-
-			session = ClientSession.objects.get(id=(getSessionID()))
+			session = ClientSession.objects.get(id=(request.POST.get('session_id')))
+			setGlobalSession(session.id, user)
 			content['s_head'] = s_head
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/existingResolve.html', content, context_instance=RequestContext(request))
@@ -478,7 +502,7 @@ def sessionResolveSuccess(request):
 			exit_type = request.POST.get('exit_type')
 			exit_type = str(exit_type)
 			s_head = ''
-			session = ClientSession.objects.get(id=(getSessionID()))
+			session = ClientSession.objects.get(id=(getSessionID(user)))
 
 
 			if exit_type == 'refresh':
@@ -534,6 +558,8 @@ def uni_generic_exit(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		content['tracking'] = track.state.state
 		content['user'] = user
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -832,7 +858,7 @@ def uni_exit_session(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session = ClientSession.objects.get(id=(getSessionID()))
+			session = ClientSession.objects.get(id=(getSessionID(user)))
 			exit_type = request.POST.get('exit_type')
 			exit_type = str(exit_type)
 
@@ -873,7 +899,7 @@ def sessionClosed(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			session = ClientSession.objects.get(id=(getSessionID))
+			session = ClientSession.objects.get(id=(getSessionID(user)))
 			session.isOpen = False
 			session.save()
 			content['title'] = 'Simeon Academy'

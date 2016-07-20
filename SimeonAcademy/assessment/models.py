@@ -9,25 +9,22 @@ class account(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
-class G_Form_ID(models.Model):
-	name = models.CharField(max_length=20, default=None, blank=True, null=True)
-	g_id = models.IntegerField(default=0)
-
-	def __unicode__(self):
-		return str(self.g_id)
-
-class G_Session_ID(models.Model):
-	s_id = models.IntegerField(default=0)
-
-	def __unicode__(self):
-		return str(self.s_id)
-
 class SolidState(models.Model):
 	state 	= models.CharField(max_length=25, default=None, blank=True, null=True)
 	url 	= models.CharField(max_length=25, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.state)
+
+class TrackApp(models.Model):
+	counselor 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	c_id 		= models.IntegerField(default=0)
+	f_id 		= models.IntegerField(default=0)
+	s_id 		= models.IntegerField(default=0)
+	state 		= models.ForeignKey(SolidState, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.counselor)
 
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)

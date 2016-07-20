@@ -53,23 +53,28 @@
                     <img src="{% static 'images/simeon_logo.png' %}" alt="logo-nav" class='logo-nav'>
                 </div>
             </div>
+            
+            <form action='/adminHome/' method='post' id='n_form_main'> {% csrf_token %}
+                <input type='hidden' name='tracking' id='tracking' value="{{tracking}}">
+            </form>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/adminHome">Home</a>
+                        <a href="javascript: sessionChecking('home');">Home</a>
                     </li>
                     <li>
-                        <a href="#">Billing</a>
+                        <a href="javascript: sessionChecking('bill');">Billing</a>
                     </li>
                     <li>
-                        <a href="#">Administration</a>
+                        <a href="javascript: sessionChecking('admin');">Administration</a>
                     </li>
                     <li>
-                        <a href="/appointment_management">Appointments</a>
+                        <a href="javascript: sessionChecking('appt');">Appointments</a>
                     </li>
                     <li>
-                        <a href="/logout">Logout</a>
+                        <a href="javascript: sessionChecking('logout');">Logout</a>
                     </li>
                 </ul>
             </div>

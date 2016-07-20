@@ -465,6 +465,7 @@ function toClientOptions(form_id, hasUnfinished) {
 
 	if (hasUnfinished == 'True') {
 		grab('form_name').value = String(form_id);
+		grab('se_id').value = grab('session_id').value;
 		var w = 600, h = 500;
 		openPopUp('auto', '/hasExistingSession/',w, h);
 	}
@@ -475,6 +476,8 @@ function toClientOptions(form_id, hasUnfinished) {
 }
 
 function set_session_option() {
+	grab('session_id').value = getPopParent('se_id').value;
+
 	if (grab('continue').checked === true) {
 		grab('s_option').value = 'continue';
 	}
@@ -492,11 +495,11 @@ function processExistingSession() {
 	s_option 		= String(s_option);
 
 	if (s_option === 'continue') {
-		var form_id = grab('client_id').value;
-		form_id = String(form_id);
-		form = getPopParent(form_id);
-		window.close();
+		var f_id = getPopParent('form_name').value;
+		f_id = String(f_id);
+		form = getPopParent(f_id);
 		form.submit();
+		window.close();
 	}
 	else {
 		grab('s_form').submit();
@@ -6536,6 +6539,39 @@ function e8Radio() {
 	additionalLabel(document.getElementById('e8yes'), document.getElementById('extra9'));
 }
 
+function sessionChecking(btnType) {
+	var actionApp = grab('tracking').value;
+	actionApp = String(actionApp);
+	btn = String(btnType);
+
+	if (actionApp === 'Session') {
+		var w = 400;
+		var h = 400;
+		openPopUp('auto', '/session_open_error/', w, h);
+	}
+	else {
+		var form = grab('n_form_main');
+
+		if (btn === 'home') {
+			form.action = '/adminHome/';
+		}
+		else if (btn === 'bill') {
+			form.action = '//'
+		}
+		else if (btn === 'admin') {
+			form.action = '//'
+		}
+		else if (btn === 'appt') {
+			form.action = '//'
+		}
+		else if (btn === 'logout') {
+			form.action = '/logout/'
+		}
+
+		form.submit();
+	}
+}
+
 //*********************************************** ASI PAGE SUBMITS *************************************************//
 
 function continue_asi_form(section) {
@@ -7274,13 +7310,13 @@ function c_exit_session() {
 	grab('s_form').submit();
 
 	var f_id = getTopParent('form_name').value;
-	var form = getTopParent(f_id);
-
-	grab('s_form').submit();
 	f_id = String(f_id);
+	var form = getTopParent(f_id);
 
 	form.action = '/adminHome/';
 	form.submit();
+
+	grab('s_form').submit();	
 }
 
 function chooseSessionExit(answer) {

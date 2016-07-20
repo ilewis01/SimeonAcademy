@@ -17,6 +17,7 @@
 
 					<form action='/adminHome/' method='post' id='result_form'> {% csrf_token %}
 						<input type='hidden' name='form_name' id='form_name' value=''>
+						<input type='hidden' name='se_id' id='se_id' value=''>
 					</form>
 
 					<ul style='width:250px;'>
@@ -24,7 +25,8 @@
 						<li style='text-align:left;'>
 							<form action="/clientOptions/" method='post' id="{{r.client.id}}"> {% csrf_token %}
 								<input type='hidden' name="client_id" id="client_id" value="{{r.client.id}}"> 
-								<input type='hidden' name="hasUnfinished" id="hasUnfinished" value="{{r.client.hasUnfinished}}"> 
+								<input type='hidden' name="session_id" id="session_id" value="{{r.session.id}}">
+								<input type='hidden' name="hasUnfinished" id="hasUnfinished" value="{{r.hasUnfinished}}"> 
 								<input type='hidden' name="session_type" id="session_type" value="{{session}}">
 								<a href="javascript: toClientOptions({{r.client.id}}, '{{r.hasUnfinished}}')">
 									<div class='li-a'>
