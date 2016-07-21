@@ -3800,408 +3800,320 @@ function continue_AM_session() {
 	form.submit();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//*********************************************************** SAP FUNCTIONS ***********************************************************//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//SAP FUNCTIONS
+function initialize_sap(section, json_data) {
+	section = String(section);
 
-function continue_to_sap_form(next_page) {
-	var proceed = true;
-	var form = document.getElementById('sap_instructions');
-
-	if (proceed === true) {
-		if (String(next_page) === 'options') {
-			form.action = '/clientOptions/';
-		}
-
-		else {
-			form.action = '/sap_demographic/';
-		}
-
-		form.submit();
+	if (section === '/sap_demographic/') {
+		init_sap_demo(json_data);
+	}
+	else if (section === '/sap_social/') {
+		init_sap_social(json_data);
+	}
+	else if (section === '/sap_psychoactive/') {
+		init_sap_psych1(json_data);
+	}
+	else if (section === '/sap_psychoactive2/') {
+		init_sap_psych2(json_data);
+	}
+	else if (section === '/sap_special/') {
+		init_sap_special(json_data);
+	}
+	else if (section === '/sap_other/') {
+		init_sap_other(json_data);
+	}
+	else if (section === '/sap_sources/') {
+		init_sap_sources(json_data);
+	}
+	else if (section === '/sap_viewForm/') {
+		init_sap_viewForm(json_data);
 	}
 }
 
-function initialize_sap_clinic() {
-	var back = document.getElementById('back');
+function init_sap_demo(json_data) {
+	blank_init(json_data.clinicalComplete, grab('problem'));
+	blank_init(json_data.clinicalComplete, grab('health'));
+}
 
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('problem'));
-		nullTextMustDie(document.getElementById('health'));
+function init_sap_social(json_data) {
+	blank_init(json_data.socialComplete, grab('family'));
+}
+
+function init_sap_psych1(json_data) {
+	blank_init(json_data.psychoComplete, grab('alcoholFrequency'));
+	blank_init(json_data.psychoComplete, grab('alcoholQuantity'));
+	blank_init(json_data.psychoComplete, grab('alcoholLast'));
+	blank_init(json_data.psychoComplete, grab('alcoholHow'));
+	number_init(json_data.psychoComplete, grab('alcoholAge'));
+
+	blank_init(json_data.psychoComplete, grab('amphFrequency'));
+	blank_init(json_data.psychoComplete, grab('amphQuantity'));
+	blank_init(json_data.psychoComplete, grab('amphLast'));
+	blank_init(json_data.psychoComplete, grab('amphHow'));
+	number_init(json_data.psychoComplete, grab('amphAge'));
+
+	blank_init(json_data.psychoComplete, grab('caffineFrequency'));
+	blank_init(json_data.psychoComplete, grab('caffineQuantity'));
+	blank_init(json_data.psychoComplete, grab('caffineLast'));
+	blank_init(json_data.psychoComplete, grab('caffineHow'));
+	number_init(json_data.psychoComplete, grab('caffineAge'));
+
+	blank_init(json_data.psychoComplete, grab('weedFrequency'));
+	blank_init(json_data.psychoComplete, grab('weedQuantity'));
+	blank_init(json_data.psychoComplete, grab('weedLast'));
+	blank_init(json_data.psychoComplete, grab('weedHow'));
+	number_init(json_data.psychoComplete, grab('weedAge'));
+
+	blank_init(json_data.psychoComplete, grab('cokeFrequency'));
+	blank_init(json_data.psychoComplete, grab('cokeQuantity'));
+	blank_init(json_data.psychoComplete, grab('cokeLast'));
+	blank_init(json_data.psychoComplete, grab('cokeHow'));
+	number_init(json_data.psychoComplete, grab('cokeAge'));
+
+	blank_init(json_data.psychoComplete, grab('hallFrequency'));
+	blank_init(json_data.psychoComplete, grab('hallQuantity'));
+	blank_init(json_data.psychoComplete, grab('hallLast'));
+	blank_init(json_data.psychoComplete, grab('hallHow'));
+	number_init(json_data.psychoComplete, grab('hallAge'));
+
+	blank_init(json_data.psychoComplete, grab('inhaleFrequency'));
+	blank_init(json_data.psychoComplete, grab('inhaleQuantity'));
+	blank_init(json_data.psychoComplete, grab('inhaleLast'));
+	blank_init(json_data.psychoComplete, grab('inhaleHow'));
+	number_init(json_data.psychoComplete, grab('inhaleAge'));
+
+	blank_init(json_data.psychoComplete, grab('smokeFrequency'));
+	blank_init(json_data.psychoComplete, grab('smokeQuantity'));
+	blank_init(json_data.psychoComplete, grab('smokeLast'));
+	blank_init(json_data.psychoComplete, grab('smokeHow'));
+	number_init(json_data.psychoComplete, grab('smokeAge'));
+
+	blank_init(json_data.psychoComplete, grab('opFrequency'));
+	blank_init(json_data.psychoComplete, grab('opQuantity'));
+	blank_init(json_data.psychoComplete, grab('opLast'));
+	blank_init(json_data.psychoComplete, grab('opHow'));
+	number_init(json_data.psychoComplete, grab('opAge'));
+
+	blank_init(json_data.psychoComplete, grab('pcpFrequency'));
+	blank_init(json_data.psychoComplete, grab('pcpQuantity'));
+	blank_init(json_data.psychoComplete, grab('pcpLast'));
+	blank_init(json_data.psychoComplete, grab('pcpHow'));
+	number_init(json_data.psychoComplete, grab('pcpAge'));
+
+	blank_init(json_data.psychoComplete, grab('sedFrequency'));
+	blank_init(json_data.psychoComplete, grab('sedQuantity'));
+	blank_init(json_data.psychoComplete, grab('sedLast'));
+	blank_init(json_data.psychoComplete, grab('sedHow'));
+	number_init(json_data.psychoComplete, grab('sedAge'));
+
+	blank_init(json_data.psychoComplete, grab('otherFrequency'));
+	blank_init(json_data.psychoComplete, grab('otherQuantity'));
+	blank_init(json_data.psychoComplete, grab('otherLast'));
+	blank_init(json_data.psychoComplete, grab('otherHow'));
+	number_init(json_data.psychoComplete, grab('otherAge'));
+}
+
+function init_sap_psych2(json_data) {
+	blank_init(json_data.psycho2Complete, grab('psychoactive'));
+}
+
+function init_sap_special(json_data) {
+	blank_init(json_data.specialComplete, grab('special'));
+
+	initializeAllCheckBoxes(json_data.isChild, grab('isChild'));
+	initializeAllCheckBoxes(json_data.isSenior, grab('isSenior'));
+	initializeAllCheckBoxes(json_data.isDual, grab('isDual'));
+	initializeAllCheckBoxes(json_data.isOther, grab('isOther'));
+	initializeAllCheckBoxes(json_data.isNone, grab('isNone'));
+
+	disable_sap_special();
+}
+
+function init_sap_other(json_data) {
+	blank_init(json_data.otherComplete, grab('psychological'));
+	blank_init(json_data.otherComplete, grab('gambling'));
+	blank_init(json_data.otherComplete, grab('abilities'));
+	blank_init(json_data.otherComplete, grab('other'));
+}
+
+function init_sap_sources(json_data) {
+	blank_init(json_data.sourcesComplete, grab('source1'));
+	blank_init(json_data.sourcesComplete, grab('source2'));
+	blank_init(json_data.sourcesComplete, grab('relationship1'));
+	blank_init(json_data.sourcesComplete, grab('relationship2'));
+}
+
+function init_sap_viewForm(json_data) {
+	
+}
+
+
+function postSapFields(page) {
+	page = String(page);
+
+	if (page === '/sap_demographic/') {
+		postSapDemo();
 	}
-
-	else {
-		nullTextMustDie2(document.getElementById('problem'));
-		nullTextMustDie2(document.getElementById('health'));
+	else if (page === '/sap_social/') {
+		postSapSocial();
+	}
+	else if (page === '/sap_psychoactive/') {
+		postSapPsycho1();
+	}
+	else if (page === '/sap_psychoactive2/') {
+		postSapPsycho2();
+	}
+	else if (page === '/sap_special/') {
+		postSapSpecial();
+	}
+	else if (page === '/sap_other/') {
+		postSapOther();
+	}
+	else if (page === '/sap_sources/') {
+		postSapSources();
+	}
+	else if (page === '/sap_viewForm/') {
+		postSapViewForm();
 	}
 }
 
-function initialize_sap_social() {
-	var back = document.getElementById('back');
+// function post(isDynamic, field_type, field, trigger, target)
 
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('family'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('family'));
-	}
+function postSapDemo() {
+	post(false, 'text', grab('problem'), null, null);
+	post(false, 'text', grab('health'), null, null);
 }
 
-function initialize_sap_psycho1() {
-	var back = document.getElementById('back');
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('alcoholFrequency'));
-		nullTextMustDie(document.getElementById('alcoholQuantity'));
-		nullTextMustDie(document.getElementById('alcoholLast'));
-		nullTextMustDie(document.getElementById('alcoholHow'));
-
-		nullTextMustDie(document.getElementById('amphFrequency'));
-		nullTextMustDie(document.getElementById('amphQuantity'));
-		nullTextMustDie(document.getElementById('amphLast'));
-		nullTextMustDie(document.getElementById('amphHow'));
-
-		nullTextMustDie(document.getElementById('caffineFrequency'));
-		nullTextMustDie(document.getElementById('caffineQuantity'));
-		nullTextMustDie(document.getElementById('caffineLast'));
-		nullTextMustDie(document.getElementById('caffineHow'));
-
-		nullTextMustDie(document.getElementById('weedFrequency'));
-		nullTextMustDie(document.getElementById('weedQuantity'));
-		nullTextMustDie(document.getElementById('weedLast'));
-		nullTextMustDie(document.getElementById('weedHow'));
-
-		nullTextMustDie(document.getElementById('cokeFrequency'));
-		nullTextMustDie(document.getElementById('cokeQuantity'));
-		nullTextMustDie(document.getElementById('cokeLast'));
-		nullTextMustDie(document.getElementById('cokeHow'));
-
-		nullTextMustDie(document.getElementById('hallFrequency'));
-		nullTextMustDie(document.getElementById('hallQuantity'));
-		nullTextMustDie(document.getElementById('hallLast'));
-		nullTextMustDie(document.getElementById('hallHow'));
-
-		nullTextMustDie(document.getElementById('inhaleFrequency'));
-		nullTextMustDie(document.getElementById('inhaleQuantity'));
-		nullTextMustDie(document.getElementById('inhaleLast'));
-		nullTextMustDie(document.getElementById('inhaleHow'));
-
-		nullTextMustDie(document.getElementById('smokeFrequency'));
-		nullTextMustDie(document.getElementById('smokeQuantity'));
-		nullTextMustDie(document.getElementById('smokeLast'));
-		nullTextMustDie(document.getElementById('smokeHow'));
-
-		nullTextMustDie(document.getElementById('opFrequency'));
-		nullTextMustDie(document.getElementById('opQuantity'));
-		nullTextMustDie(document.getElementById('opLast'));
-		nullTextMustDie(document.getElementById('opHow'));
-
-		nullTextMustDie(document.getElementById('pcpFrequency'));
-		nullTextMustDie(document.getElementById('pcpQuantity'));
-		nullTextMustDie(document.getElementById('pcpLast'));
-		nullTextMustDie(document.getElementById('pcpHow'));
-
-		nullTextMustDie(document.getElementById('sedFrequency'));
-		nullTextMustDie(document.getElementById('sedQuantity'));
-		nullTextMustDie(document.getElementById('sedLast'));
-		nullTextMustDie(document.getElementById('sedHow'));
-
-		nullTextMustDie(document.getElementById('otherFrequency'));
-		nullTextMustDie(document.getElementById('otherQuantity'));
-		nullTextMustDie(document.getElementById('otherLast'));
-		nullTextMustDie(document.getElementById('otherHow'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('alcoholFrequency'));
-		nullTextMustDie2(document.getElementById('alcoholQuantity'));
-		nullTextMustDie2(document.getElementById('alcoholLast'));
-		nullTextMustDie2(document.getElementById('alcoholHow'));
-
-		nullTextMustDie2(document.getElementById('amphFrequency'));
-		nullTextMustDie2(document.getElementById('amphQuantity'));
-		nullTextMustDie2(document.getElementById('amphLast'));
-		nullTextMustDie2(document.getElementById('amphHow'));
-
-		nullTextMustDie2(document.getElementById('caffineFrequency'));
-		nullTextMustDie2(document.getElementById('caffineQuantity'));
-		nullTextMustDie2(document.getElementById('caffineLast'));
-		nullTextMustDie2(document.getElementById('caffineHow'));
-
-		nullTextMustDie2(document.getElementById('weedFrequency'));
-		nullTextMustDie2(document.getElementById('weedQuantity'));
-		nullTextMustDie2(document.getElementById('weedLast'));
-		nullTextMustDie2(document.getElementById('weedHow'));
-
-		nullTextMustDie2(document.getElementById('cokeFrequency'));
-		nullTextMustDie2(document.getElementById('cokeQuantity'));
-		nullTextMustDie2(document.getElementById('cokeLast'));
-		nullTextMustDie2(document.getElementById('cokeHow'));
-
-		nullTextMustDie2(document.getElementById('hallFrequency'));
-		nullTextMustDie2(document.getElementById('hallQuantity'));
-		nullTextMustDie2(document.getElementById('hallLast'));
-		nullTextMustDie2(document.getElementById('hallHow'));
-
-		nullTextMustDie2(document.getElementById('inhaleFrequency'));
-		nullTextMustDie2(document.getElementById('inhaleQuantity'));
-		nullTextMustDie2(document.getElementById('inhaleLast'));
-		nullTextMustDie2(document.getElementById('inhaleHow'));
-
-		nullTextMustDie2(document.getElementById('smokeFrequency'));
-		nullTextMustDie2(document.getElementById('smokeQuantity'));
-		nullTextMustDie2(document.getElementById('smokeLast'));
-		nullTextMustDie2(document.getElementById('smokeHow'));
-
-		nullTextMustDie2(document.getElementById('opFrequency'));
-		nullTextMustDie2(document.getElementById('opQuantity'));
-		nullTextMustDie2(document.getElementById('opLast'));
-		nullTextMustDie2(document.getElementById('opHow'));
-
-		nullTextMustDie2(document.getElementById('pcpFrequency'));
-		nullTextMustDie2(document.getElementById('pcpQuantity'));
-		nullTextMustDie2(document.getElementById('pcpLast'));
-		nullTextMustDie2(document.getElementById('pcpHow'));
-
-		nullTextMustDie2(document.getElementById('sedFrequency'));
-		nullTextMustDie2(document.getElementById('sedQuantity'));
-		nullTextMustDie2(document.getElementById('sedLast'));
-		nullTextMustDie2(document.getElementById('sedHow'));
-
-		nullTextMustDie2(document.getElementById('otherFrequency'));
-		nullTextMustDie2(document.getElementById('otherQuantity'));
-		nullTextMustDie2(document.getElementById('otherLast'));
-		nullTextMustDie2(document.getElementById('otherHow'));
-	}
+function postSapSocial() {
+	post(false, 'text', grab('family'), null, null);
 }
 
-function initialize_sap_psycho2() {
-	var back = document.getElementById('back');
+function postSapPsycho1() {
+	post(false, 'text', grab('alcoholFrequency'), null, null);
+	post(false, 'text', grab('alcoholQuantity'), null, null);
+	post(false, 'text', grab('alcoholLast'), null, null);
+	post(false, 'text', grab('alcoholHow'), null, null);
+	post(false, 'number', grab('alcoholAge'), null, null);
 
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('psychoactive'));
-	}
+	post(false, 'text', grab('amphFrequency'), null, null);
+	post(false, 'text', grab('amphQuantity'), null, null);
+	post(false, 'text', grab('amphLast'), null, null);
+	post(false, 'text', grab('amphHow'), null, null);
+	post(false, 'number', grab('amphAge'), null, null);
 
-	else {
-		nullTextMustDie2(document.getElementById('psychoactive'));
-	}
+	post(false, 'text', grab('caffineFrequency'), null, null);
+	post(false, 'text', grab('caffineQuantity'), null, null);
+	post(false, 'text', grab('caffineLast'), null, null);
+	post(false, 'text', grab('caffineHow'), null, null);
+	post(false, 'number', grab('caffineAge'), null, null);
+
+	post(false, 'text', grab('weedFrequency'), null, null);
+	post(false, 'text', grab('weedQuantity'), null, null);
+	post(false, 'text', grab('weedLast'), null, null);
+	post(false, 'text', grab('weedHow'), null, null);
+	post(false, 'number', grab('weedAge'), null, null);
+
+	post(false, 'text', grab('cokeFrequency'), null, null);
+	post(false, 'text', grab('cokeQuantity'), null, null);
+	post(false, 'text', grab('cokeLast'), null, null);
+	post(false, 'text', grab('cokeHow'), null, null);
+	post(false, 'number', grab('cokeAge'), null, null);
+
+	post(false, 'text', grab('hallFrequency'), null, null);
+	post(false, 'text', grab('hallQuantity'), null, null);
+	post(false, 'text', grab('hallLast'), null, null);
+	post(false, 'text', grab('hallHow'), null, null);
+	post(false, 'number', grab('hallAge'), null, null);
+
+	post(false, 'text', grab('inhaleFrequency'), null, null);
+	post(false, 'text', grab('inhaleQuantity'), null, null);
+	post(false, 'text', grab('inhaleLast'), null, null);
+	post(false, 'text', grab('inhaleHow'), null, null);
+	post(false, 'number', grab('inhaleAge'), null, null);
+
+	post(false, 'text', grab('smokeFrequency'), null, null);
+	post(false, 'text', grab('smokeQuantity'), null, null);
+	post(false, 'text', grab('smokeLast'), null, null);
+	post(false, 'text', grab('smokeHow'), null, null);
+	post(false, 'number', grab('smokeAge'), null, null);
+
+	post(false, 'text', grab('opFrequency'), null, null);
+	post(false, 'text', grab('opQuantity'), null, null);
+	post(false, 'text', grab('opLast'), null, null);
+	post(false, 'text', grab('opHow'), null, null);
+	post(false, 'number', grab('opAge'), null, null);
+
+	post(false, 'text', grab('pcpFrequency'), null, null);
+	post(false, 'text', grab('pcpQuantity'), null, null);
+	post(false, 'text', grab('pcpLast'), null, null);
+	post(false, 'text', grab('pcpHow'), null, null);
+	post(false, 'number', grab('pcpAge'), null, null);
+
+	post(false, 'text', grab('sedFrequency'), null, null);
+	post(false, 'text', grab('sedQuantity'), null, null);
+	post(false, 'text', grab('sedLast'), null, null);
+	post(false, 'text', grab('sedHow'), null, null);
+	post(false, 'number', grab('sedAge'), null, null);
+
+	post(false, 'text', grab('otherFrequency'), null, null);
+	post(false, 'text', grab('otherQuantity'), null, null);
+	post(false, 'text', grab('otherLast'), null, null);
+	post(false, 'text', grab('otherHow'), null, null);
+	post(false, 'number', grab('otherAge'), null, null);
 }
 
-function initialize_sap_other() {
-	var back = document.getElementById('back');
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('psychological'));
-		nullTextMustDie(document.getElementById('gambling'));
-		nullTextMustDie(document.getElementById('abilities'));
-		nullTextMustDie(document.getElementById('other'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('psychological'));
-		nullTextMustDie2(document.getElementById('gambling'));
-		nullTextMustDie2(document.getElementById('abilities'));
-		nullTextMustDie2(document.getElementById('other'));
-	}
+function postSapPsycho2() {
+	post(false, 'text', grab('psychoactive'), null, null);
 }
 
-function initialize_sap_sources() {
-	var back = document.getElementById('back');
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('source1'));
-		nullTextMustDie(document.getElementById('source2'));
-		nullTextMustDie(document.getElementById('relationship1'));
-		nullTextMustDie(document.getElementById('relationship2'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('source1'));
-		nullTextMustDie2(document.getElementById('source2'));
-		nullTextMustDie2(document.getElementById('relationship1'));
-		nullTextMustDie2(document.getElementById('relationship2'));
-	}
-}
-
-function post_dynamic_sap_sources() {
-	//NULL TEXT
-	var source1 = document.getElementById('source1');
-	var source2 = document.getElementById('source2');
-	var relationship1 = document.getElementById('relationship1');
-	var relationship2 = document.getElementById('relationship2');
-
-	postTextNA(source1);
-	postTextNA(source2);
-	postTextNA(relationship1);
-	postTextNA(relationship2);
-}
-
-function post_dynamic_sap_other() {
-	//TEXT
-	var psychological = document.getElementById('psychological');
-	var gambling = document.getElementById('gambling');
-	var abilities = document.getElementById('abilities');
-	var other = document.getElementById('other');
-
-	postTextNA(psychological);
-	postTextNA(gambling);
-	postTextNA(abilities);
-	postTextNA(other);
-}
-
-function post_dynamic_sap_special() {
-	//M_VALUE ELEMENTS
-	var m_isChild = document.getElementById('m_isChild');
-	var m_isSenior = document.getElementById('m_isSenior');
-	var m_isDual = document.getElementById('m_isDual');
-	var m_isOther = document.getElementById('m_isOther');
-	var m_isNone = document.getElementById('m_isNone');
-	var m_special = document.getElementById('m_special');
-
-	//CHECKBOXES
-	var isChild = document.getElementById('isChild');
-	var isSenior = document.getElementById('isSenior');
-	var isDual = document.getElementById('isDual');
-	var isOther = document.getElementById('isOther');
-	var isNone = document.getElementById('isNone');
-
-	var special = document.getElementById('special');
-
-	if (special.value === '' || special.value === null) {
-		m_special.value = 'N/A';
-	}
-
-	postCheckboxValue(isChild, m_isChild);
-	postCheckboxValue(isSenior, m_isSenior);
-	postCheckboxValue(isDual, m_isDual);
-	postCheckboxValue(isOther, m_isOther);
-	postCheckboxValue(isNone, m_isNone);
-
+function postSapSpecial() {
 	if (String(special.value) === '' || String(special.value) === null) {
 		m_special.value = 'N/A';
 	}
 	else {
 		m_special.value = special.value;
 	}
+
+	postCheckboxValue(grab('isChild'), grab('m_isChild'));
+	postCheckboxValue(grab('isSenior'), grab('m_isSenior'));
+	postCheckboxValue(grab('isDual'), grab('m_isDual'));
+	postCheckboxValue(grab('isOther'), grab('m_isOther'));
+	postCheckboxValue(grab('isNone'), grab('m_isNone'));
 }
 
-function post_dynamic_sap_psycho2() {
-	//TEXT PROCESSING
-	var psychoactive = document.getElementById('psychoactive');
-	postTextNA(psychoactive);
+function postSapOther() {
+	post(false, 'text', grab('psychological'), null, null);
+	post(false, 'text', grab('gambling'), null, null);
+	post(false, 'text', grab('abilities'), null, null);
+	post(false, 'text', grab('other'), null, null);
 }
 
-function post_dynamic_sap_psycho1() {
-	postTextNA(document.getElementById('alcoholFrequency'));
-	postTextNA(document.getElementById('alcoholQuantity'));
-	postTextNA(document.getElementById('alcoholLast'));
-	postTextNA(document.getElementById('alcoholHow'));
-
-	postTextNA(document.getElementById('amphFrequency'));
-	postTextNA(document.getElementById('amphQuantity'));
-	postTextNA(document.getElementById('amphLast'));
-	postTextNA(document.getElementById('amphHow'));
-
-	postTextNA(document.getElementById('caffineFrequency'));
-	postTextNA(document.getElementById('caffineQuantity'));
-	postTextNA(document.getElementById('caffineLast'));
-	postTextNA(document.getElementById('caffineHow'));
-
-	postTextNA(document.getElementById('weedFrequency'));
-	postTextNA(document.getElementById('weedQuantity'));
-	postTextNA(document.getElementById('weedLast'));
-	postTextNA(document.getElementById('weedHow'));
-
-	postTextNA(document.getElementById('cokeFrequency'));
-	postTextNA(document.getElementById('cokeQuantity'));
-	postTextNA(document.getElementById('cokeLast'));
-	postTextNA(document.getElementById('cokeHow'));
-
-	postTextNA(document.getElementById('hallFrequency'));
-	postTextNA(document.getElementById('hallQuantity'));
-	postTextNA(document.getElementById('hallLast'));
-	postTextNA(document.getElementById('hallHow'));
-
-	postTextNA(document.getElementById('inhaleFrequency'));
-	postTextNA(document.getElementById('inhaleQuantity'));
-	postTextNA(document.getElementById('inhaleLast'));
-	postTextNA(document.getElementById('inhaleHow'));
-
-	postTextNA(document.getElementById('smokeFrequency'));
-	postTextNA(document.getElementById('smokeQuantity'));
-	postTextNA(document.getElementById('smokeLast'));
-	postTextNA(document.getElementById('smokeHow'));
-
-	postTextNA(document.getElementById('opFrequency'));
-	postTextNA(document.getElementById('opQuantity'));
-	postTextNA(document.getElementById('opLast'));
-	postTextNA(document.getElementById('opHow'));
-
-	postTextNA(document.getElementById('pcpFrequency'));
-	postTextNA(document.getElementById('pcpQuantity'));
-	postTextNA(document.getElementById('pcpLast'));
-	postTextNA(document.getElementById('pcpHow'));
-
-	postTextNA(document.getElementById('sedFrequency'));
-	postTextNA(document.getElementById('sedQuantity'));
-	postTextNA(document.getElementById('sedLast'));
-	postTextNA(document.getElementById('sedHow'));
-
-	postTextNA(document.getElementById('otherFrequency'));
-	postTextNA(document.getElementById('otherQuantity'));
-	postTextNA(document.getElementById('otherLast'));
-	postTextNA(document.getElementById('otherHow'));
+function postSapSources() {
+	post(false, 'text', grab('source1'), null, null);
+	post(false, 'text', grab('source2'), null, null);
+	post(false, 'text', grab('relationship1'), null, null);
+	post(false, 'text', grab('relationship2'), null, null);
 }
 
-function post_dynamic_sap_social() {
-	var family = document.getElementById('family');
-	postTextNA(family);
+function postSapViewForm() {
+	
 }
 
-function post_dynamic_sap_demo() {
-	//TEXT FIELDS
-	var problem = document.getElementById('problem');
-	var health = document.getElementById('health');
+function uni_sap_proceed(section) {
+	var proceed 	= true;
+	var form 		= grab('sap_form');
+	var next_url 	= grab('next_url');
 
-	postTextNA(problem);
-	postTextNA(health);
-}
-
-function post_dynamic_sap_fields(section) {
-	section = String(section);
-
-	if (section === '/sap_demographic/') {
-		post_dynamic_sap_demo();
-	}
-	else if (section === '/sap_social/') {
-		post_dynamic_sap_social();
-	}
-	else if (section === '/sap_psychoactive/') {
-		post_dynamic_sap_psycho1();
-	}
-	else if (section === '/sap_psychoactive2/') {
-		post_dynamic_sap_psycho2();
-	}
-	else if (section === '/sap_special/') {
-		post_dynamic_sap_special();
-	}
-	else if (section === '/sap_other/') {
-		post_dynamic_sap_other();
-	}
-	else if (section === '/sap_sources/') {
-		post_dynamic_sap_sources();
-	}
-}
-
-function continue_sap_form(section) {
-	var proceed = true;
-	var form = document.getElementById('sap_form');
-	var next_url = document.getElementById('next_url');
-
-	post_dynamic_sap_fields(section);
+	postSapFields(section);
 
 	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = next_url.value;
+		grab('save_this').value = 'true';
+		form.action 			= next_url.value;
 		form.submit();
 	}
 }
@@ -4272,29 +4184,7 @@ function disable_sap_special() {
 	}
 }
 
-function initialize_sap_special(json_data) {
-	var isChild = document.getElementById('isChild');
-	var isSenior = document.getElementById('isSenior');
-	var isDual = document.getElementById('isDual');
-	var isOther = document.getElementById('isOther');
-	var isNone = document.getElementById('isNone');
-	var back = document.getElementById('back');
 
-	initializeAllCheckBoxes(json_data.isChild, isChild);
-	initializeAllCheckBoxes(json_data.isSenior, isSenior);
-	initializeAllCheckBoxes(json_data.isDual, isDual);
-	initializeAllCheckBoxes(json_data.isOther, isOther);
-	initializeAllCheckBoxes(json_data.isNone, isNone);
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('special'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('special'));
-	}
-
-	disable_sap_special();
-}
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//

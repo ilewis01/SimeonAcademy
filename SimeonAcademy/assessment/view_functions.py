@@ -30,6 +30,7 @@ def clientEqual(c1, c2):
 		isEqual = True
 	return isEqual
 
+
 def onTrue_offFalse(data):
 	if data == 'on':
 		data = True
@@ -57,14 +58,6 @@ def getOrderedStateIndex(the_state):
 		index = index + 1
 
 	return index
-
-# def convertRadioToBoolean(data):
-# 	result = True
-
-# 	if data == 'no':
-# 		result = False
-
-# 	return result
 
 def convert_phone(phone):
 	result = '('
@@ -2178,6 +2171,7 @@ def get_am_priority(am):
 	result.append(am.finalPriority)
 	return result
 
+
 def get_am_parameters(am):
 	result = []
 
@@ -2192,6 +2186,7 @@ def get_am_parameters(am):
 		data['priority'] = priority[l]
 		result.append(data)
 	return result
+
 
 def forceNextAmPage(am):
 	result 	= None
@@ -2801,6 +2796,9 @@ def grabAmFinal(am):
 	fields['changeLearn3'] = am.final.changeLearn3
 	fields['whoLivesWithClient'] = am.demographic.whoLivesWithClient
 
+def grabAMViewForm(am):
+	no = None
+
 	return fields
 
 def getAMFields(am, location):
@@ -2833,6 +2831,8 @@ def getAMFields(am, location):
 		fields = grabAmWorstEpisodes(am)
 	elif location == '/am_final/':
 		fields = grabAmFinal(am)
+	elif location == '/am_final/':
+		fields = grabAMViewForm(am)
 
 	return fields
 
@@ -3820,6 +3820,8 @@ def getSapFields(sap, section):
 
 	if section == '/sap_psychoactive/':
 		result = grabSapPsychoFields(sap)
+	elif section == '/sap_viewForm/':
+		result = grabSapViewFields(sap)
 	else:
 		result = grabSapDemoFields(sap)
 
@@ -3847,6 +3849,13 @@ def grabSapDemoFields(sap):
 	fields['isDual'] = sap.demographics.isDual
 	fields['isOther'] = sap.demographics.isOther
 	fields['isNone'] = sap.demographics.isNone
+
+	fields['clinicalComplete'] = sap.clinicalComplete
+	fields['socialComplete'] = sap.socialComplete
+	fields['psycho2Complete'] = sap.psycho2Complete
+	fields['specialComplete'] = sap.specialComplete
+	fields['otherComplete'] = sap.otherComplete
+	fields['sourcesComplete'] = sap.sourcesComplete
 
 	return fields
 
@@ -3924,6 +3933,8 @@ def grabSapPsychoFields(sap):
 	fields['otherQuantity'] = sap.psychoactive.otherQuantity
 	fields['otherLast'] = sap.psychoactive.otherLast
 	fields['otherHow'] = sap.psychoactive.otherHow
+
+	fields['psychoComplete'] = sap.psychoComplete
 
 	return fields
 
@@ -4078,6 +4089,23 @@ def saveSapPhycho1(request, sap):
 	sap.psychoComplete = True
 	sap.save()
 
+def getSAPViewImages(sap):
+	results = {}
+	results['isChild'] = getViewFormCheckImages(sap.demographics.isChild)
+	results['isSenior'] = getViewFormCheckImages(sap.demographics.isSenior)
+	results['isDual'] = getViewFormCheckImages(sap.demographics.isDual)
+	results['isOther'] = getViewFormCheckImages(sap.demographics.isOther)
+	results['isNone'] = getViewFormCheckImages(sap.demographics.isNone)
+	return results
+
+def grabSapViewFields(sap):
+	result = {}
+	result['images'] 	= getSAPViewImages(sap)
+	result['main'] 		= grabSapDemoFields(sap)
+	result['psycho']	= grabSapPsychoFields(sap)
+	# result['date']		= str(sap.date_of_assessment)
+	return result
+
 def saveSapDemoSection(request, section, sap):
 	demo = sap.demographics
 
@@ -4116,7 +4144,7 @@ def saveSapDemoSection(request, section, sap):
 		isDual = request.POST.get('m_isDual', '')
 		isOther = request.POST.get('m_isOther', '')
 		isNone = request.POST.get('m_isNone', '')
-		special = request.POST.get('m_special', '')
+		special = request.POST.get('m_special')
 
 		isChild = truePythonBool(isChild)
 		isSenior = truePythonBool(isSenior)
@@ -4644,6 +4672,10 @@ def processSapData(request, current_section):
 	image = grabSapImages(sap, current_section)
 	classes = grabSapClassesCSS(sap, current_section)
 
+	if current_section == '/sap_viewForm/':
+		result['s_date'] = sap.date_of_assessment
+
+	result['current_section'] = current_section
 	result['class'] = classes
 	result['image'] = image
 	result['next_url'] = next_url
@@ -6944,6 +6976,10 @@ def getASI_YNI(m_val):
 		index = int(m_val) + 1
 
 	return index
+
+def fetchASIBoolImages(asi):
+	result = {}
+	result['g15'] = getBooleanChecks(asi.general.g15)
 
 def grabAsiAdminFields(asi):
 	# Returns a dictionary List of ASI.admin fields
@@ -9556,6 +9592,17 @@ def millitary_to_std(time):
 
 	result = str(hr) + str(time[2]) + str(time[3]) + str(time[4]) + ampm
 	return result
+
+def getViewFormCheckImages(torf):
+	image = None
+	check 	= "/static/images/checked_checkbox.png"
+	uncheck = "/static/images/unchecked_checkbox.png"
+
+	if torf == True:
+		image = check
+	else:
+		image = uncheck
+	return image
 
 
 

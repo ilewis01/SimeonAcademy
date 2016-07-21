@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="">
+<body class="gradient-white-form">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -52,16 +52,6 @@
                       </div>
               </td>
             </tr>
-
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
 
             <tr>
               <td>
@@ -168,29 +158,520 @@
 
                 <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div>
-                <h3 id='am-h2'>S.A.P: Verify Information</h3>
+          <div>
 
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-12 col-sm-12">
-                  			<div>
-                  				<form action='/sap_viewForm/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'> 
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='sap'>				            
+            <h3 id='am-h2'>S.A.P: Verify Information</h3>
+
+            <div class="container">
+            	<div class="row">                   
+                <div class="col-md-12 col-sm-12">
+                  <div>
+                  	<form action='/sap_viewForm/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+                  		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                      <input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
+                      <input type='hidden' name='save_this' id='save_this' value=''>
+                      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                      <input type='hidden' name='save_section' id='save_section' value='/sap_demographic/'> 
+                      <input type='hidden' name='new_form' id='new_form' value='false'>
+                      <input type='hidden' name='exit_type' id='exit_type' value='sap'>	
+
+<div class='viewFormClass'>
+  <div class="container">
+      <div class="row">
+        <div class="col-xs-12" id="header">
+          <h1 id="title">Clinical Assessment Outline</h1>
+          <table class="clientNameAndID" style="height: 75px">
+            <tr>
+              <td>
+                <b>Client Name (Last, First, MI)</b>
+                <div class="formInput">{{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}</div>
+              </td>
+              <td>
+                <b>ID #</b>
+                <div class="formInput">{{session.client.clientID}}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    
+    <div class="row">
+      <div class="col-xs-12" >
+        <div class="question">
+          <span class="topic"><u>Presenting Problem</u>:</span>
+          <p class="description"> Include reason for entry, source of referral, legal involvement, self-identified problems and recent stressors.</p>
+        </div>
+        <div class="formInputLarge">{{fields.main.problem}}</div>
+        
+        <div class="question">
+          <span class="topic"><u>Health/Medical History</u>:</span>
+          <p class="description"> Describe general health, nutrition, medical problems (include visual and motor function), prenatal exposure to alcohol or other drugs and possible effects, remarkable developmental milestone delays, medications for the past year, allergies, hospitalizations, disabilities, tuberculosis screening and HIV-risk behaviors. Identify need for assistive technology or resources. Provide physician's name and telephone number. Complete "Special Populations" section as apporpriate.</p>
+        </div>
+        <div class="formInputLarge">{{fields.main.health}}</div>
+        
+        <div class="question">
+          <span class="topic"><u>Family/Social Interaction</u>:</span>
+          <p class="description"> In chronological order, describe family of origin and present family, including relationships with all family members.Describe any history as a survivor and/or as a perpetrator of psychological, emotional, physical and/or sexual abuse. Include family history of substance use/abuse, current family use and family psychiatric history. Describe other intimate and social relationships. Identify needed and available social supports. Include peer group functioning. Include pertinent current and historical life situation information on sexual orientation, cultural background and spiritual beliefs.</p>
+        </div>
+        <div class="formInputLarge" style="height:1000px">{{fields.main.family}}</div>
+        
+        <table class="clientNameAndID" style="height: 10%">
+          <tr>
+            <td>
+              <b>Client Name (Last, First, MI)</b>
+              <div class="formInput">{{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}</div>
+            </td>
+            <td>
+              <b>ID #</b>
+              <div class="formInput">{{session.client.clientID}}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="drugHistoryTable">
+          <tr>
+            <td style="font-size: 20px" colspan="6">
+              <b>Psychoactive Substance Use History</b>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 20%">
+              Drug
+            </td>
+            <td>
+              Age at<br>First Use
+            </td>
+            <td style="width: 15%">
+              Frequency<br>(last 12 months)
+            </td>
+            <td style="width: 30%">
+              Quantity<br>(specify time frame)
+            </td>
+            <td style="width: 12%">
+              Last (3)<br>Uses
+            </td>
+            <td style="width: 10%">
+              How<br>Used
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Alcohol</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.alcoholAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.alcoholFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.alcoholQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.alcoholLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.alcoholHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Amphetamine</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.amphAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.amphFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.amphQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.amphLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.amphHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Caffeine</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.caffineAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.caffineFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.caffineQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.caffineLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.caffineHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Cannabis</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.weedAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.weedFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.weedQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.weedLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.weedHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Cocaine</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.cokeAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.cokeFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.cokeQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.cokeLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.cokeHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Hallucinogen</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.hallAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.hallFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.hallQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.hallLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.hallHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Inhalant</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.inhaleAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.inhaleFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.inhaleQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.inhaleLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.inhaleHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Nicotine</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.smokeAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.smokeFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.smokeQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.smokeLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.smokeHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Opiod</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.opAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.opFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.opQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.opLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.opHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>PCP</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.pcpAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.pcpFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.pcpQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.pcpLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.pcpHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Sedative Hypnotic</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.sedAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.sedFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.sedQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.sedLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.sedHow}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tableSidePanel" style="width: 20%">
+              <b>Other</b>
+            </td>
+            <td>
+              <div class="formInput">{{fields.psycho.otherAge}}</div>
+            </td>
+            <td style="width: 15%">
+              <div class="formInput">{{fields.psycho.otherFrequency}}</div>
+            </td>
+            <td style="width: 30%">
+              <div class="formInput">{{fields.psycho.otherQuantity}}</div>
+            </td>
+            <td style="width: 12%">
+              <div class="formInput">{{fields.psycho.otherLast}}</div>
+            </td>
+            <td style="width: 10%">
+              <div class="formInput">{{fields.psycho.otherHow}}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="question">
+          <span class="topic"><u>Psychoactive Substance Use</u>:</span>
+          <p class="description"> Include other relevant substance use factors such as loss of control, tolerance, treatment, history, patterns of use and problems related to use. Include data to differentiate between use, abuse and dependence.</p>
+        </div>
+        <div class="formInputLarge">{{fields.main.psychoactive}}</div>
+      </div>
+    </div>
+    
+    <div id="specialPopulations" class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-3 sp">
+            Special Populations:
+          </div>
+          <div class="col-xs-9">
+            Client is member of the following special population group:
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-1"></div>
+      <div class="col-xs-3">
+        <img src="{{fields.images.isChild}}" alt='box' class="checkbox"/>
+        <p>Child/Adolescent</p>
+      </div>
+      <div class="col-xs-2">
+        <img src="{{fields.images.isSenior}}" alt='box' class="checkbox"/>
+        <p>Seniors</p>
+      </div>
+      <div class="col-xs-3">
+        <img src="{{fields.images.isDual}}" alt='box' class="checkbox"/>
+        <p>Dual Diagnosis</p>
+      </div>
+      <div class="col-xs-3">
+        <img src="{{fields.images.isOther}}" alt='box' class="checkbox"/>
+        <p><em>Other coexisting<br>Disabilities/Disorders</em></p>
+      </div>
+      <div class="col-xs-1"></div>
+      <div class="col-xs-11">
+        <img src="{{fields.images.isNone}}" alt='box' class="checkbox"/>
+        <p class="sp">None of the above (if so, go to the next page)
+      </div>
+      <div class="col-xs-12" style="font-size: 20px">
+        <b><em>Assessment for children/adolescents must include motor and functioning; speech, hearing and language functioning; immmunization status; evaluation of developmental age factors, learning ability and intellectual functioning. Assessment for seniors must include mototr, speech, hearing, lagnuage and cognitive functioning.)</em> Assessment for persons with coexisting psychiatric disabilities and other coexisting disabilities/disorders must include(if appropiate or applicable) history of previous mental health services, previous medical history, pharmacotherapy, hospitalization, use of community programs, differential diagnosis, mental status, all prescription and non-prescription medications at time of admission and at least the previous six months, past and current medication efficacy, medication allergies and/or adverse medication reactions, and adjustment to disability/disorder.</b>        
+      </div>
+    </div>
+    <div class="formInputMedium">{{fields.main.special}}</div>
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="question">
+          <span class="topic"><u>Psychological</u>:</span>
+          <p class="description"> Include mental status, cognitive functioning, activities of daily living, communication skill/abilities, present emotional state, behavioral functioning and issues, management of emotions, risk of taking behaviors, violence, suicide attempts/thoughts, hallucinations and other psychiatric history (to include history of eating disorder behaviors). Special populations section completed as appropiate.</p>
+        </div>
+        <div class="formInputMedium">{{fields.main.psychological}}</div>
+      </div>
+      <div class="col-xs-12">
+        <div class="question">
+          <span class="topic"><u>Gambling</u>:</span>
+          <p class="description"> Include the age at which gambling began and describe preoccupation with gambling, loss of control, tolerance, treatment history, gambling patterns (including patterns impacted by substance use/abuse) and problems related to gambling.</p>
+        </div>
+        <div class="formInputMedium">{{fields.main.gambling}}</div>
+      </div>
+      <div class="col-xs-12">
+        <div class="question">
+          <span class="topic"><u>Abilities, Strengths, Needs and Preferences</u>:</span>
+          <p class="description"> Describe client and clinician perceptions of abilities, strengths, needs and preferences. Include unique factors affecting the course of treatment and client expectations of treatment outcomes.</p>
+        </div>
+        <div class="formInputMedium">{{fields.main.abilities}}</div>
+      </div>
+      <div class="col-xs-12">
+        <div class="question">
+          <span class="topic"><u>Other</u>:</span>
+          <p class="description"> Include financial status, leisure skills/activities and recovery environment.</p>
+        </div>
+        <div class="formInputMedium">{{fields.main.other}}</div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-12" style="margin-bottom: 25px">
+        <h3>
+          <b>Sources of information other than client:</b>
+        </h3>
+      </div>
+      <div class="col-xs-12">
+        <table>
+          <tr>
+            <td><h4>Name</h4></td>
+            <td style="width: 50%">
+              <div class="formInputUnderline">{{fields.main.source1}}</div>
+            </td>
+            <td><h4>Relationship</h4></td>
+            <td style="width: 50%">
+              <div class="formInputUnderline">{{fields.main.relationship1}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td><h4>Name</h4></td>
+            <td style="width: 50%">
+              <div class="formInputUnderline">{{fields.main.source2}}</div>
+            </td>
+            <td><h4>Relationship</h4></td>
+            <td style="width: 50%">
+              <div class="formInputUnderline">{{fields.main.relationship2}}</div>
+            </td>
+          </tr>
+        </table> 
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="interviewInfo">
+          <tr>
+            <th colspan="3">
+              <h2 class="tableTitle" colspan=3><b>Assessment Interview Information</b></h2>
+            </th>
+          <tr>
+            <th style="width: 30%"><h5>Assessment Date</h5></th>
+            <th style="width: 20%"><h5>Client Time</h5></th>
+            <th style="width: 50%"><h5>Clinician Signature and Title</h5></th>
+          </tr>
+          <tr>
+            <td style="width: 30%">
+              <div class="formInputUnderline">{{s_date}}</div>
+            </td>
+            <td style="width: 20%">
+              <div class="formInputUnderline">12:00 p.m.</div>
+            </td>
+            <td style="width: 50%;padding-right: 0px">
+              <div class="formInputUnderline">I.P.</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 30%"><div class="formInputUnderline"></div></td>
+            <td style="width: 20%"><div class="formInputUnderline"></div></td>
+            <td style="width: 50%;padding-right: 0px"><div class="formInputUnderline"></div></td>
+          </tr>
+          <tr>
+            <td style="width: 30%">
+              <div class="formInputUnderline"></div>
+            </td>
+            <td style="width: 20%">
+              <div class="formInputUnderline"></div>
+            </td>
+            <td style="width: 50%;padding-right: 0px">
+              <div class="formInputUnderline"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="height: 10px;" colspan="3"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
                     </form>
-                    </div>
+                  </div>
 				        </div>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
+				      </div>
+				    </div> <!-- END PAGE CONTAINER -->
+				  <div>
 					<!-- ____________________________BUTTONS________________________________ -->
 					<table class='toggle-div-page'>
 						<tr><td><div style='margin-top:30px;'></div></td></tr>

@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_sap_special({{json_data}});">
+<body class="gradient-white" onLoad="javascript: initialize_sap('{{current_section}}', {{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -355,7 +355,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: continue_sap_form('/sap_special/');">
+			                		<a href="javascript: uni_sap_proceed('{{current_section}}');">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>
