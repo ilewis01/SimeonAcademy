@@ -2248,6 +2248,8 @@ def print_sap(request):
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			content = fetchPrintFields('sap' ,session.sap)
+			content['date'] = session.sap.date_of_assessment
+			content['session'] = session
 			return render_to_response('counselor/forms/SAP/print_sap.html', content, context_instance=RequestContext(request))
 
 

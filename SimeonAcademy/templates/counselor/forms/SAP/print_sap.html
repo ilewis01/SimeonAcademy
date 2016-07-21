@@ -28,11 +28,11 @@
               <tr>
                 <td>
                   <b>Client Name (Last, First, MI)</b>
-                  <div class="formInput">name</div>
+                  <div class="formInput">{{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}</div>
                 </td>
                 <td>
                   <b>ID #</b>
-                  <div class="formInput">123456789</div>
+                  <div class="formInput">{{session.client.clientID}}</div>
                 </td>
               </tr>
             </table>
@@ -45,29 +45,38 @@
             <span class="topic"><u>Presenting Problem</u>:</span>
             <p class="description"> Include reason for entry, source of referral, legal involvement, self-identified problems and recent stressors.</p>
           </div>
-          <div class="formInputLarge">sample text</div>
+          <div class="formInputLarge">{{main.problem}}</div>
           
           <div class="question">
             <span class="topic"><u>Health/Medical History</u>:</span>
             <p class="description"> Describe general health, nutrition, medical problems (include visual and motor function), prenatal exposure to alcohol or other drugs and possible effects, remarkable developmental milestone delays, medications for the past year, allergies, hospitalizations, disabilities, tuberculosis screening and HIV-risk behaviors. Identify need for assistive technology or resources. Provide physician's name and telephone number. Complete "Special Populations" section as apporpriate.</p>
           </div>
-          <div class="formInputLarge"></div>
+          <div class="formInputLarge">{{main.health}}</div>
+
+          <div class='add100Pixels'></div>
+          <!-- <div class='add20Pixels'></div>
+          <div class='add20Pixels'></div> -->
           
           <div class="question">
             <span class="topic"><u>Family/Social Interaction</u>:</span>
             <p class="description"> In chronological order, describe family of origin and present family, including relationships with all family members.Describe any history as a survivor and/or as a perpetrator of psychological, emotional, physical and/or sexual abuse. Include family history of substance use/abuse, current family use and family psychiatric history. Describe other intimate and social relationships. Identify needed and available social supports. Include peer group functioning. Include pertinent current and historical life situation information on sexual orientation, cultural background and spiritual beliefs.</p>
           </div>
-          <div class="formInputLarge" style="height:1000px"></div>
+          <div class="formInputLarge" style="height:1000px">{{main.family}}</div>
+
+          <div class='add100Pixels'></div>
+          <div class='add100Pixels'></div>
+          <div class='add20Pixels'></div>
+          <div class='add20Pixels'></div>
           
           <table class="clientNameAndID" style="height: 10%">
             <tr>
               <td>
                 <b>Client Name (Last, First, MI)</b>
-                <div class="formInput"></div>
+                <div class="formInput">{{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}</div>
               </td>
               <td>
                 <b>ID #</b>
-                <div class="formInput"></div>
+                <div class="formInput">{{session.client.clientID}}</div>
               </td>
             </tr>
           </table>
@@ -107,19 +116,19 @@
                 <b>Alcohol</b>
               </td>
               <td>
-                <div class="formInput">10</div>
+                <div class="formInput">{{psycho.alcoholAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput">200</div>
+                <div class="formInput">{{psycho.alcoholFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput">4/day</div>
+                <div class="formInput">{{psycho.alcoholQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput">last night</div>
+                <div class="formInput">{{psycho.alcoholLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput">shot</div>
+                <div class="formInput">{{psycho.alcoholHow}}</div>
               </td>
             </tr>
             <tr>
@@ -127,19 +136,19 @@
                 <b>Amphetamine</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.amphAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.amphFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.amphQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.amphLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.amphHow}}</div>
               </td>
             </tr>
             <tr>
@@ -147,19 +156,19 @@
                 <b>Caffeine</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.caffineAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.caffineFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.caffineQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.caffineLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.caffineHow}}</div>
               </td>
             </tr>
             <tr>
@@ -167,19 +176,19 @@
                 <b>Cannabis</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.weedAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.weedFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.weedQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.weedLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.weedHow}}</div>
               </td>
             </tr>
             <tr>
@@ -187,19 +196,19 @@
                 <b>Cocaine</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.cokeAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.cokeFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.cokeQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.cokeLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.cokeHow}}</div>
               </td>
             </tr>
             <tr>
@@ -207,19 +216,19 @@
                 <b>Hallucinogen</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.hallAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.hallFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.hallQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.hallLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.hallHow}}</div>
               </td>
             </tr>
             <tr>
@@ -227,19 +236,19 @@
                 <b>Inhalant</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.inhaleAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.inhaleFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.inhaleQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.inhaleLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.inhaleHow}}</div>
               </td>
             </tr>
             <tr>
@@ -247,19 +256,19 @@
                 <b>Nicotine</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.smokeAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.smokeFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.smokeQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.smokeLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.smokeHow}}</div>
               </td>
             </tr>
             <tr>
@@ -267,19 +276,19 @@
                 <b>Opiod</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.opAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.opFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.opQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.opLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.opHow}}</div>
               </td>
             </tr>
             <tr>
@@ -287,19 +296,19 @@
                 <b>PCP</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.pcpAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.pcpFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.pcpQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.pcpLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.pcpHow}}</div>
               </td>
             </tr>
             <tr>
@@ -307,19 +316,19 @@
                 <b>Sedative Hypnotic</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.sedAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.sedFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.sedQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.sedLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.sedHow}}</div>
               </td>
             </tr>
             <tr>
@@ -327,19 +336,19 @@
                 <b>Other</b>
               </td>
               <td>
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.otherAge}}</div>
               </td>
               <td style="width: 15%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.otherFrequency}}</div>
               </td>
               <td style="width: 30%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.otherQuantity}}</div>
               </td>
               <td style="width: 12%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.otherLast}}</div>
               </td>
               <td style="width: 10%">
-                <div class="formInput"></div>
+                <div class="formInput">{{psycho.otherHow}}</div>
               </td>
             </tr>
           </table>
@@ -352,9 +361,13 @@
             <span class="topic"><u>Psychoactive Substance Use</u>:</span>
             <p class="description"> Include other relevant substance use factors such as loss of control, tolerance, treatment, history, patterns of use and problems related to use. Include data to differentiate between use, abuse and dependence.</p>
           </div>
-          <div class="formInputLarge"></div>
+          <div class="formInputLarge">{{main.psychoactive}}</div>
         </div>
       </div>
+
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
       
       <div id="specialPopulations" class="row">
         <div class="col-xs-12">
@@ -369,30 +382,40 @@
         </div>
         <div class="col-xs-1"></div>
         <div class="col-xs-3">
-          <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" alt='checked box' class="checkbox"/>
+          <img src="{{images.isChild}}" alt='checked box' class="checkbox"/>
           <p>Child/Adolescent</p>
         </div>
         <div class="col-xs-2">
-          <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" alt='unchecked box' class="checkbox"/>
+          <img src="{{images.isSenior}}" alt='unchecked box' class="checkbox"/>
           <p>Seniors</p>
         </div>
         <div class="col-xs-3">
-          <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" alt='unchecked box' class="checkbox"/>
+          <img src="{{images.isDual}}" alt='unchecked box' class="checkbox"/>
           <p>Dual Diagnosis</p>
         </div>
         <div class="col-xs-3">
-          <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" alt='unchecked box' class="checkbox"/>
+          <img src="{{images.isOther}}" alt='unchecked box' class="checkbox"/>
           <p><em>Other coexisting<br>Disabilities/Disorders</em></p>
         </div>
         <div class="col-xs-1"></div>
         <div class="col-xs-11">
-          <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" alt='uchecked box' class="checkbox"/>
+          <img src="{{images.isNone}}" alt='uchecked box' class="checkbox"/>
           <p class="sp">None of the above (if so, go to the next page)
         </div>
         <div class="col-xs-12" style="font-size: 20px">
           <b><em>Assessment for children/adolescents must include motor and functioning; speech, hearing and language functioning; immmunization status; evaluation of developmental age factors, learning ability and intellectual functioning. Assessment for seniors must include mototr, speech, hearing, lagnuage and cognitive functioning.)</em> Assessment for persons with coexisting psychiatric disabilities and other coexisting disabilities/disorders must include(if appropiate or applicable) history of previous mental health services, previous medical history, pharmacotherapy, hospitalization, use of community programs, differential diagnosis, mental status, all prescription and non-prescription medications at time of admission and at least the previous six months, past and current medication efficacy, medication allergies and/or adverse medication reactions, and adjustment to disability/disorder.</b>
         </div>
       </div>
+      <div class="formInputMedium">{{main.special}}</div>
+
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add100Pixels'></div>
+      <div class='add20Pixels'></div>
+      <div class='add20Pixels'></div>
       
       <div class="row">
         <div class="col-xs-12">
@@ -400,28 +423,28 @@
             <span class="topic"><u>Psychological</u>:</span>
             <p class="description"> Include mental status, cognitive functioning, activities of daily living, communication skill/abilities, present emotional state, behavioral functioning and issues, management of emotions, risk of taking behaviors, violence, suicide attempts/thoughts, hallucinations and other psychiatric history (to include history of eating disorder behaviors). Special populations section completed as appropiate.</p>
           </div>
-          <div class="formInputMedium">sample text</div>
+          <div class="formInputSpecial">{{main.psychological}}</div>
         </div>
         <div class="col-xs-12">
           <div class="question">
             <span class="topic"><u>Gambling</u>:</span>
             <p class="description"> Include the age at which gambling began and describe preoccupation with gambling, loss of control, tolerance, treatment history, gambling patterns (including patterns impacted by substance use/abuse) and problems related to gambling.</p>
           </div>
-          <div class="formInputMedium"></div>
+          <div class="formInputSpecial">{{main.gambling}}</div>
         </div>
         <div class="col-xs-12">
           <div class="question">
             <span class="topic"><u>Abilities, Strengths, Needs and Preferences</u>:</span>
             <p class="description"> Describe client and clinician perceptions of abilities, strengths, needs and preferences. Include unique factors affecting the course of treatment and client expectations of treatment outcomes.</p>
           </div>
-          <div class="formInputMedium"></div>
+          <div class="formInputSpecial">{{main.abilities}}</div>
         </div>
         <div class="col-xs-12">
           <div class="question">
             <span class="topic"><u>Other</u>:</span>
             <p class="description"> Include financial status, leisure skills/activities and recovery environment.</p>
           </div>
-          <div class="formInputMedium"></div>
+          <div class="formInputSpecial">{{main.other}}</div>
         </div>
       </div>
       
@@ -436,21 +459,21 @@
             <tr>
               <td><h4>Name</h4></td>
               <td style="width: 50%">
-                <div class="formInputUnderline">name</div>
+                <div class="formInputUnderline">{{main.source1}}</div>
               </td>
               <td><h4>Relationship</h4></td>
               <td style="width: 50%">
-                <div class="formInputUnderline">relationship</div>
+                <div class="formInputUnderline">{{main.relationship1}}</div>
               </td>
             </tr>
             <tr>
               <td><h4>Name</h4></td>
               <td style="width: 50%">
-                <div class="formInputUnderline"></div>
+                <div class="formInputUnderline">{{main.source2}}</div>
               </td>
               <td><h4>Relationship</h4></td>
               <td style="width: 50%">
-                <div class="formInputUnderline"></div>
+                <div class="formInputUnderline">{{main.relationship2}}</div>
               </td>
             </tr>
           </table> 
@@ -471,7 +494,7 @@
             </tr>
             <tr>
               <td style="width: 30%">
-                <div class="formInputUnderline">7/1/2016</div>
+                <div class="formInputUnderline">{{date}}</div>
               </td>
               <td style="width: 20%">
                 <div class="formInputUnderline">12:00 p.m.</div>
