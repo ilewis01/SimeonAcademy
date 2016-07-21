@@ -53,6 +53,7 @@ urlpatterns = patterns('',
     url(r'^sap_other/$', 'assessment.views.sap_other'),
     url(r'^sap_sources/$', 'assessment.views.sap_sources'),
     url(r'^sap_viewForm/$', 'assessment.views.sap_viewForm'),
+    url(r'^print_sap/$', 'assessment.views.print_sap'),
 
     ## Anger Management Views
     url(r'^am_preliminary/$', 'assessment.views.am_preliminary'),
@@ -116,4 +117,7 @@ urlpatterns = patterns('',
     url(r'^existingResolve/$', 'assessment.views.existingResolve'),
     url(r'^sessionResolveSuccess/$', 'assessment.views.sessionResolveSuccess'),
     url(r'^session_open_error/$', 'assessment.views.session_open_error'),
+    url(r'^form_complete/$', 'assessment.views.form_complete'),
+    url(r'^form_saved/$', 'assessment.views.form_saved'),
+
 )

@@ -2803,6 +2803,44 @@ button:hover {
 	margin-top: 50%;
 }
 
+.f_c_image {
+	width:100%;
+	margin: auto;
+}
+
+#center_war {
+	width: 100px;
+	margin:auto;
+}
+
+.f_form_warning {
+	width:100px;
+	margin:auto;
+}
+
+#save_f_sub {
+	text-align: center;
+	font-size: 15px;
+	color: red;
+	margin-top: 2%;
+	font-style: italic;
+}
+
+#save_f_sub2 {
+	text-align: center;
+	font-size: 18px;
+	color: #6f6f6e;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 6%;
+}
+
+#crazySpaceLite {
+	margin-bottom: 30px;
+}
+
+
+
 
 
 

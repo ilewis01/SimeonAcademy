@@ -539,8 +539,17 @@ function new_mh() {
 }
 
 function new_sap() {
-	grab('c_form').action = '/sap_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeSAP').value;
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 1200, h = 1300;
+		openPopUp('auto', '/print_sap/', w, h);
+	}
+	else if (isForm == 'False') {
+		grab('c_form').action = '/sap_preliminary/';
+		grab('c_form').submit();
+	}	
 }
 
 function new_ut() {
@@ -4184,6 +4193,10 @@ function disable_sap_special() {
 	}
 }
 
+function continue_to_sap_form() {
+	grab('sap_instructions').submit();
+}
+
 
 
 //#####################################################################################################################//
@@ -7217,8 +7230,8 @@ function c_exit_session() {
 
 function chooseSessionExit(answer) {
 	answer = String(answer);
-	var nextUrl = getPopParent('nextUrl').value;
-	nextUrl = String(nextUrl);
+	// var nextUrl = getPopParent('nextUrl').value;
+	// nextUrl = String(nextUrl);
 
 	if (answer === 'False') {
 		grab('s_form').action = '/sessionClosedAlt/';
@@ -7360,6 +7373,55 @@ function amSideBtnSubmit(url) {
 	document.getElementById('save_this').value = 'false';
 	form.action = url;
 	form.submit();
+}
+
+function verified_form() {
+	var w = 550, h = 400;
+	openPopUp('auto', '/form_complete/', w, h);
+}
+
+function save_uni_form() {
+	grab('s_form').submit();
+}
+
+function final_session_view() {
+	grab('s_form').action = '/uni_exit_session/';
+	grab('s_form').submit();
+}
+
+function go_to_print(fType) {
+	var w = 1200, h = 1300;
+	openPopUp('auto', '/print_form/', w, h);
+	window.close();
+}
+
+function uni_continue_back_session() {
+	var form = getPopParent('sap_form');
+	var eType = getPopParent('exit_type').value;
+	eType = String(eType);
+
+	if (eType === 'sap') {
+		form = getPopParent('sap_form');
+	}
+	else if (eType === 'asi') {
+		form = getPopParent('asi_form');
+	}
+
+	else if (eType === 'am') {
+		form = getPopParent('am_demo');
+	}
+
+	else if (eType === 'mh') {
+		form = getPopParent('mh_form');
+	}
+
+	else if (eType === 'ut') {
+		form = getPopParent('ut_form');
+	}
+
+	form.action = '/clientOptions/';
+	form.submit();
+	window.close();
 }
 
 

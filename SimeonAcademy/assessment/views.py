@@ -37,7 +37,8 @@ getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
-setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession
+setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
+fetchPrintFields
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -957,6 +958,65 @@ def session_open_error(request):
 			content['title'] = 'Simeon Academy'
 			content['shouldDelete'] = shouldDelete
 			return render_to_response('counselor/session/sessionOpenError.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def form_complete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/session/form_complete.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def form_saved(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			sap = fetchCurrentFile('sap', session.client)
+			sap.isOpen = False
+			sap.isComplete = True
+			sap.save()
+			content['sap'] = sap
+			content['session'] = session
+			content['title'] = 'Simeon Academy | S.A.P'
+			return render_to_response('counselor/session/form_saved.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def print_form(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/session/print_form.html', content, context_instance=RequestContext(request))
 
 
 
@@ -2170,6 +2230,27 @@ def sap_viewForm(request):
 		else:
 			content = fetchContent(request, 'sap', '/sap_viewForm/')
 			return render_to_response('counselor/forms/SAP/viewForm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def print_sap(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			content = fetchPrintFields('sap' ,session.sap)
+			return render_to_response('counselor/forms/SAP/print_sap.html', content, context_instance=RequestContext(request))
+
+
 
 ###########################################################################################################################################
 ################################################################ END SAP ##################################################################

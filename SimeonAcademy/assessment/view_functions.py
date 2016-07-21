@@ -776,6 +776,38 @@ def beginSession(request):
 	result['isNew'] = action['isNew']
 	#THINK ABOUT THE PHONE SECTION
 
+	completeAM = False
+	completeMH = False
+	completeUT = False
+	completeASI = False
+	completeSAP = False
+
+	if session.hasAM == True:
+		if session.am.isComplete == True:
+			completeAM = True
+
+	if session.hasMH == True:
+		if session.mh.isComplete == True:
+			completeMH = True
+
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			completeUT = True
+
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			completeSAP = True
+
+	if session.hasASI == True:
+		if session.asi.isComplete == True:
+			completeASI = True
+
+	result['completeAM'] = completeAM
+	result['completeMH'] = completeMH
+	result['completeUT'] = completeUT
+	result['completeASI'] = completeASI
+	result['completeSAP'] = completeSAP
+
 	user = request.user
 	counselor = ''
 	counselor = str(user.first_name) + ' ' + str(user.last_name)
@@ -3694,24 +3726,36 @@ def startSAP(client):
 
 def beginSAP(request):
 	result = {}
+	proceed = True
+	sap = None
+	action = {}
+	action['isNew'] = False
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
 	session = ClientSession.objects.get(id=session_id)
 	client = session.client
 
-	action = startSAP(client)
-	sap = action['sap']
-	setGlobalID(sap.id, request.user)
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			sap = session.sap
+			setGlobalID(sap.id, request.user)
+			result['isNew'] = False
+			proceed = False
+
+	if proceed == True:
+		action = startSAP(client)
+		sap = action['sap']
+		setGlobalID(sap.id, request.user)
+		result['isNew'] = action['isNew']
 
 	openForm('sap', sap, client)
 	session.hasSAP = True
 	session.sap = sap
 	session.save()
-
 	result['sap'] = sap
 	result['session'] = session
-	result['isNew'] = action['isNew']
+	
 	result['title'] = "Simeon Academy | S.A.P"
 	result['save_this'] = 'false'
 
@@ -4630,6 +4674,27 @@ def refreshSap(sap):
 
 	sap.isComplete = False
 	sap.save()
+
+def fetchAllClientSaps(client):
+	result = []
+	saps = SAP.objects.all()
+
+	for s in saps:
+		if clientEqual(client, s.client) == True:
+			result.append(s)
+
+	return result
+
+def getClientOpenSap(client):
+	result = None
+	saps = fetchAllClientSaps(client)
+
+	for s in saps:
+		if s.isOpen == True:
+			result = s
+			break
+	return result
+
 
 def setSapSectionComplete(sap, section):
 	section = str(section)
@@ -9434,6 +9499,22 @@ def fetchUrl(form_type, current_page, form):
 
 	return url
 
+def fetchPrintFields(form_type, form):
+	result = {}
+	form_type = str(form_type)
+
+	if form_type == 'am':
+		result = None
+	elif form_type == 'mh':
+		result = None
+	elif form_type == 'ut':
+		result = None
+	elif form_type == 'sap':
+		result = grabSapViewFields(form)
+	elif form_type == 'asi':
+		result = None
+	return result
+
 def fetchContent(request, form_type, current_section):
 	current_section = str(current_section)
 	content = None
@@ -9603,6 +9684,23 @@ def getViewFormCheckImages(torf):
 	else:
 		image = uncheck
 	return image
+
+def fetchCurrentFile(form_type, client):
+	result = None
+	form_type = str(form_type)
+
+	if form_type == 'am':
+		result = None
+	elif form_type == 'mh':
+		result = None
+	elif form_type == 'ut':
+		result = None
+	elif form_type == 'sap':
+		result = getClientOpenSap(client)
+	elif form_type == 'asi':
+		result = None
+
+	return result
 
 
 
