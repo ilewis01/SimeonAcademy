@@ -38,7 +38,7 @@ fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
-fetchPrintFields
+fetchPrintFields, processInvoice, fetchBillableItems
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -892,6 +892,28 @@ def uni_exit_session(request):
 			return render_to_response('counselor/session/uniExitSession.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def invoice(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			if session.hasInvoice == True:
+				content['items'] = fetchBillableItems(session)
+			return render_to_response('counselor/session/invoice.html', content, context_instance=RequestContext(request))
+
+
+
+@login_required(login_url='/index')
 def sessionClosed(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -907,11 +929,16 @@ def sessionClosed(request):
 
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
-			deleteCurrentSession(session)
-			multiNav = request.POST.get('multiNav')
-			content['multiNav'] = multiNav
-			content['title'] = 'Simeon Academy'
-			return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
+
+			if session.hasInvoice == True:
+				fetchBillableItems(session)
+				return render_to_response('counselor/session/invoice.html', content, context_instance=RequestContext(request))
+			else:
+				deleteCurrentSession(session)
+				multiNav = request.POST.get('multiNav')
+				content['multiNav'] = multiNav
+				content['title'] = 'Simeon Academy'
+				return render_to_response('counselor/session/sessionClosed.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def sessionClosedAlt(request):
@@ -2230,6 +2257,7 @@ def sap_saved(request):
 			sap.isOpen = False
 			sap.isComplete = True
 			sap.save()
+			processInvoice(session)
 			content['sap'] = sap
 			content['session'] = session
 			content['title'] = 'Simeon Academy | S.A.P'

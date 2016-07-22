@@ -119,5 +119,6 @@ urlpatterns = patterns('',
     url(r'^existingResolve/$', 'assessment.views.existingResolve'),
     url(r'^sessionResolveSuccess/$', 'assessment.views.sessionResolveSuccess'),
     url(r'^session_open_error/$', 'assessment.views.session_open_error'),
+    url(r'^invoice/$', 'assessment.views.invoice'),
 
 )

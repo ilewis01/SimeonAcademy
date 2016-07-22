@@ -453,28 +453,44 @@ def addService(session, s_type):
 	if session.noServices == 1:
 		session.invoice.service1 = str(s_type.session_type)
 		session.invoice.total1 = s_type.fee
-		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
 	elif session.noServices == 2:
 		session.invoice.service2 = str(s_type.session_type)
 		session.invoice.total2 = s_type.fee
-		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
 	elif session.noServices == 3:
 		session.invoice.service3 = str(s_type.session_type)
 		session.invoice.total3 = s_type.fee
-		session.invoice.grandTotal= s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
 	elif session.noServices == 4:
 		session.invoice.service4 = str(s_type.session_type)
 		session.invoice.total4 = s_type.fee
-		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
 	elif session.noServices == 5:
 		session.invoice.service5 = str(s_type.session_type)
 		session.invoice.total5 = s_type.fee
-		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
 	elif session.noServices == 6:
 		session.invoice.service6 = str(s_type.session_type)
 		session.invoice.total6 = s_type.fee
-		session.invoice.grandTotal = s_type.fee + session.invoice.grandTotal
+		session.invoice.save()
+
+	temp_no = session.noServices
+	temp_no = temp_no + 1
+	session.noServices = temp_no
+	session.save()
 	session.invoice.save()
+
+def getInvoiceTotal(session):
+	total = session.invoice.total1
+	total = total + session.invoice.total2
+	total = total + session.invoice.total3
+	total = total + session.invoice.total4
+	total = total + session.invoice.total5
+	total = total + session.invoice.total6
+	session.invoice.grandTotal = int(total)
+	session.save()
+	print 'GRAND TOTAL: ' + str(total)
 
 
 def isMultiAM():
@@ -644,16 +660,6 @@ def refreshCurrentSession(session):
 	session.isComplete = False	
 	session.save()
 
-	print 'SESSION START TIME: ' + str(session.startTime)
-	print 'SESSION COUNSELOR: ' + str(session.counselor)
-	print 'SESSION NUMBER SERVICES: ' + str(session.noServices)
-
-	print 'SESSION hasAM: ' + str(session.hasAM)
-	print 'SESSION hasMH: ' + str(session.hasMH)
-	print 'SESSION hasUT: ' + str(session.hasUT)
-	print 'SESSION hasASI: ' + str(session.hasASI)
-	print 'SESSION hasSAP: ' + str(session.hasSAP)
-
 def invoiceQuery(session):
 	create = False
 	amCheck = False
@@ -686,6 +692,72 @@ def invoiceQuery(session):
 		create = True
 
 	return create
+
+
+def updateInvoice(session):
+	if session.hasAM == True:
+		if session.am.isComplete == True:
+			s_type = getStype('am')
+			addService(session, s_type)
+	if session.hasMH == True:
+		if session.mh.isComplete == True:
+			s_type = getStype('mh')
+			addService(session, s_type)
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			s_type = getStype('ut')
+			addService(session, s_type)
+	if session.hasASI == True:
+		if session.asi.isComplete == True:
+			s_type = getStype('asi')
+			addService(session, s_type)
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			s_type = getStype('sap')
+			addService(session, s_type)
+
+	session.invoice.save()
+	getInvoiceTotal(session)
+
+def processInvoice(session):
+	if session.hasInvoice == False and invoiceQuery(session) == True:
+		date = datetime.now()
+		invoice = Invoice(client=session.client, date=date)
+		invoice.save()
+		session.invoice = invoice
+		session.hasInvoice = True
+		session.save()
+	updateInvoice(session)
+
+def fetchBillableItems(session):
+	result = []
+	names = []
+	costs = []
+
+	names.append(session.invoice.service1)
+	names.append(session.invoice.service2)
+	names.append(session.invoice.service3)
+	names.append(session.invoice.service4)
+	names.append(session.invoice.service5)
+	names.append(session.invoice.service6)
+
+	costs.append(session.invoice.total1)
+	costs.append(session.invoice.total2)
+	costs.append(session.invoice.total3)
+	costs.append(session.invoice.total4)
+	costs.append(session.invoice.total5)
+	costs.append(session.invoice.total6)
+
+	for i in range(int(session.noServices) - 1):
+		data = {}
+		no = i + 1
+		service = 'Service ' + str(no)
+		data['service'] = service
+		data['name'] = names[i]
+		data['cost'] = costs[i]
+		result.append(data)
+
+	return result
 
 
 def shouldDeleteSession(session):
