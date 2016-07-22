@@ -1,0 +1,154 @@
+/*body {
+  font-family: TimesNewRoman, serif;
+}*/
+
+/* ids */
+#title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#drugHistoryTable {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+#drugHistoryTable .tableSidePanel {
+  text-align: left;
+  padding-left: 5px;
+}
+#drugHistoryTable td {
+  border: 3px solid black;
+  vertical-align: bottom;
+}
+
+#specialPopulations {
+  margin-bottom: 100px;
+  font-weight: bold;
+  font-size: 16px;
+}
+#specialPopulations .sp {
+  font-size: 18px;
+}
+#specialPopulations p {
+  padding: 15px;
+  margin-left: 30px;
+  overflow: hidden;
+}
+
+#interviewInfo {
+  margin-top: 50px;
+  /*margin-bottom: 100px;*/
+  width: 100%;
+  border: 3px solid black;
+}
+#interviewInfo .tableTitle {
+  margin-top: 3px;
+  margin-left: 5px;
+}
+#interviewInfo th h5 {
+  margin-left: 5px;
+  font-weight: bold;
+}
+#interviewInfo td {
+  padding-right: 50px;
+  height: 30px;
+}
+#interviewInfo td div {
+  border-bottom: 3px solid black;
+}
+
+/* classes */
+.formInput {
+  font-style: italic;
+  font-family: monospace;
+  height: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.formInputMedium {
+  font-style: italic;
+  font-family: monospace;
+  height: 200px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.formInputLarge {
+  font-style: italic;
+  font-family: monospace;
+  height: 500px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.formInputSpecial {
+  font-style: italic;
+  font-family: monospace;
+  height: 150px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.formInputUnderline {
+  font-style: italic;
+  font-family: monospace;
+  height: 10px;
+  border-bottom: 1px solid black;
+  padding-left: 10px;
+  padding-bottom: 20px;
+}
+
+.clientNameAndID {
+  width: 100%;
+}
+.clientNameAndID td {
+  vertical-align: top;
+  border: 3px solid black;
+  padding-left: 5px;
+  width: 50%;
+}
+
+.question {
+  margin-left: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  width:99%;
+  text-align: justify;
+  margin: auto;
+}
+.question .topic {
+  font-size: 20px;
+}
+.question .description {
+  display: inline;
+  font-size: 18px;
+}
+
+.checkbox {
+  width: 20px;
+  padding-top: 6px;
+  margin-left: 10px;
+  float: left;
+  clear: left;
+}
+
+.add10Pixels {
+  padding-bottom: 10px;
+}
+
+.add20Pixels {
+  padding-bottom: 20px;
+}
+
+.add100Pixels {
+  padding-bottom: 100px;
+}

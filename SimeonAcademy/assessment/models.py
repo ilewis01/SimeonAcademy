@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from awesome_avatar.fields import AvatarField
 
 class account(models.Model):
 	user = models.OneToOneField(User)
@@ -72,6 +73,7 @@ class Client(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)
 	probationOfficer = models.CharField(max_length=60, default=None, blank=True, null=True)
+	photo = models.ImageField(upload_to='./profile/', default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)

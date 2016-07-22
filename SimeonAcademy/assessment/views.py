@@ -38,7 +38,7 @@ fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
-fetchPrintFields, processInvoice, fetchBillableItems
+fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -535,7 +535,16 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			history = []
 			content = beginSession(request)
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			if session.client.isMale == True:
+				content['gender'] = 'Male'
+			else:
+				content['gender'] = 'Female'
+
+			history = fetchClientHistory(session, 5)
+			content['history'] = history
 			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
 

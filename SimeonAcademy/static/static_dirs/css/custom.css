@@ -2912,6 +2912,83 @@ button:hover {
 	width:100px;
 }
 
+.client_img {
+	width:210px;
+	height: 210px;
+	border: 2px solid #787875;
+	margin-bottom: 5%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.avatar-container {
+	/*width:210px;*/
+}
+
+#profile_header {
+	font-size: 24px;
+	font-weight: bold;
+	color: #787875;
+	margin-bottom: 7%;
+}
+
+#pro-question {
+	font-weight: bold;
+	font-size: 15px;
+	margin-right: 9px;
+}
+
+#pro-answer {
+	font-size: 15px;
+	font-style: italic;
+}
+
+.clientProfileTable {
+	background-color: #eceaec;
+	width:400px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	margin-left: 10%;
+}
+
+.clientProfileTable tr {
+	border-bottom: 1px solid black;
+	height:30px;
+	padding-left: 200px;
+}
+
+.clientProfileTable td {
+	border-left: 1px solid black;
+	padding-left: 10px;
+}
+
+.underline-wrapper {
+	border-bottom: 1px solid black;
+}
+
+#superHead {
+	font-size: 35px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 12%;
+	margin-bottom: 3%;
+}
+
+#profile_history_head {
+	margin-top: 20%;
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+/*#proTableMarginR {
+	width:20px;
+}
+
+#proTableMargin {
+	width:30px;
+}*/
+
 
 
 

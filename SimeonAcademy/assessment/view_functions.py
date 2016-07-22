@@ -828,6 +828,56 @@ def getExistingSessionForms(session):
 		result.append('Urine Analysis')	
 	return result
 
+def getAllAmForms(session):
+	result = None
+	if session.hasAM == True:
+		if session.am.isComplete == True:
+			data = {}
+			data['form_type'] = 'Anger Management Assessment'
+			data['form'] = session.am
+			result = data
+	return result
+
+def getAllMhForms(session):
+	result = None
+	if session.hasMH == True:
+		if session.mh.isComplete == True:
+			data = {}
+			data['form_type'] = 'Mental Health Assessment'
+			data['form'] = session.mh
+			result = data
+	return result
+
+def getAllUtForms(session):
+	result = None
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			data = {}
+			data['form_type'] = 'Urine Analysis'
+			data['form'] = session.ut
+			result = data
+	return result
+
+def getAllSapForms(session):
+	result = None
+	if session.hasSAP == True:
+		if session.sap.isComplete == True:
+			data = {}
+			data['form_type'] = 'S.A.P Profile'
+			data['form'] = session.sap
+			result = data
+	return result
+
+def getAllAsiForms(session):
+	result = None
+	if session.hasASI == True:
+		if session.asi.isComplete == True:
+			data = {}
+			data['form_type'] = 'Addiction Severity Index'
+			data['form'] = session.asi
+			result = data
+	return result
+
 def startSession(client):
 	result = {}
 	if hasUnfinishedSession(client) == True:
@@ -9773,6 +9823,46 @@ def fetchCurrentFile(form_type, client):
 		result = None
 
 	return result
+
+
+def fetchClientHistory(session, numberRequested):
+	result = []
+	sessions = ClientSession.objects.all()
+	
+	for s in sessions:
+		if len(result) < numberRequested:
+			if clientEqual(s.client, session.client):
+				data = getAllAmForms(session)
+				if data != None:
+					result.append(data)
+
+		if len(result) < numberRequested:
+			if clientEqual(s.client, session.client):
+				data = getAllMhForms(session)
+				if data != None:
+					result.append(data)
+
+		if len(result) < numberRequested:
+			if clientEqual(s.client, session.client):
+				data = getAllUtForms(session)
+				if data != None:
+					result.append(data)
+
+		if len(result) < numberRequested:
+			if clientEqual(s.client, session.client):
+				data = getAllAsiForms(session)
+				if data != None:
+					result.append(data)
+
+		if len(result) < numberRequested:
+			if clientEqual(s.client, session.client):
+				data = getAllSapForms(session)
+				if data != None:
+					result.append(data)
+	return result
+
+
+
 
 
 

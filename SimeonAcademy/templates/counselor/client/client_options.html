@@ -67,13 +67,208 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12" style='text-align:'>
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-11">
                         <div>
-                          
+                            <table><tr><td><div id='superHead'>Client Assessment Session:</div></td></tr></table>
+                            <table style=''>
+                                <tr>
+                                    <td>
+                                        <div id='profile_header'>
+                                            Details for {{session.client.fname}} {{session.client.middleInit}} {{session.client.lname}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
                             <table>
                                 <tr>
                                     <td>
-                                        <h2>Client Session</h2>
+                                        <div class='avatar-container'>
+                                            <img src="/static/media/{{session.client.photo}}" alt="client_img" class='client_img'>
+                                            <!-- <img src="{{session.client.photo.url}}"> -->
+                                            <!-- <img src="/{{session.client.photo}}" alt="client_img" class='client_img'> -->
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <table class='clientProfileTable'>
+                                            <tr>
+                                                <td><div id='pro-question'>Intake Date:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.intake_date}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>DOB:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.dob}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>SSN:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.ss_num}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>Gender:</div></td>
+                                                <td><div id='pro-answer'>{{gender}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>Phone:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.phone}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>Email:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.email}}</div></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><div id='pro-question'>Address:</div></td>
+
+                                                <td>
+                                                    <div id='pro-address'>
+                                                        {{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
+                                                    </div>
+                                                
+                                                    <div id='pro-address'>
+                                                        {{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <table style='100%; margin:auto;'>
+                                            <tr>
+                                                <td><div id='pro-question'>ID:</div></td>
+                                                <td><div id='pro-answer'>{{session.client.clientID}}</div></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+                            <table>
+                                <tr>
+                                    <td><div id='profile_history_head'>Most Recent History</div></td>
+                                </tr>
+                            </table>
+
+                            <ul>
+                                <table>
+                                    {% for h in history %}
+                                    <tr>
+                                        <td>
+                                            <li>
+                                                <a href="javascript: get_main_p_history({{h.form.id}})">
+                                                    <div>
+                                                        <form action='' method='post' id='{{h.form.id}}'> {% csrf_token %}
+                                                            <input type='hidden' name='form_id' id='form_id' value='{{h.form.id}}'>
+                                                            <input type='hidden' name='form_type' id='form_type' value='{{h.form_type}}'>
+                                                        </form>
+
+                                                        <span>Form Type:&nbsp</span>
+                                                        {{h.form_type}}
+                                                        &nbsp&nbsp&nbsp
+                                                        <span>{{h.form.date_of_assessment}}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </ul>
+               
+                           
+<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
+                       <!--  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-5" style='text-align:'>
+                        <table class='clientProfileTable'>
+                            <tr>
+                                <td><div id='pro-question'>Intake Date:</div></td>
+                                <td><div id='pro-answer'>{{session.client.intake_date}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>DOB:</div></td>
+                                <td><div id='pro-answer'>{{session.client.dob}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>SSN:</div></td>
+                                <td><div id='pro-answer'>{{session.client.ss_num}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>Gender:</div></td>
+                                <td><div id='pro-answer'>{{gender}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>Phone:</div></td>
+                                <td><div id='pro-answer'>{{session.client.phone}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>Email:</div></td>
+                                <td><div id='pro-answer'>{{session.client.email}}</div></td>
+                            </tr>
+
+                            <tr>
+                                <td><div id='pro-question'>Address:</div></td>
+
+                                <td>
+                                    <div id='pro-address'>
+                                        {{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
+                                    </div>
+                                
+                                    <div id='pro-address'>
+                                        {{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table> -->
+                    </div>
+
+                    <div class="col-lg-3" style='text-align:'>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+    </div>
+</body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <table>
+                                <tr>
+                                    <td>
+                                        <h2>Client Profile</h2>
                                     </td>
                                 </tr>
 
@@ -154,16 +349,4 @@
                                         <span id='option-ans'>{{session.client.email}}</span>
                                     </td>
                                 </tr>
-                            </table>
-<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
-                       <!--  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /#page-content-wrapper -->
-        </div>
-    </div>
-</body>
-
-{% endblock %}
+                            </table> -->
