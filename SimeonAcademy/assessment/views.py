@@ -38,7 +38,8 @@ fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
-fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory
+fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
+getUtViewImages
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -2058,6 +2059,7 @@ def sap_preliminary(request):
 			else:
 				return render_to_response('counselor/forms/SAP/instructions.html', content, context_instance=RequestContext(request))
 
+
 @login_required(login_url='/index')
 def sap_demographic(request):
 	user = request.user
@@ -2305,6 +2307,23 @@ def ut_preliminary(request):
 			return render_to_response(content['url'], content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def existingUT(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/forms/UrineTest/existingUT.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def ut_pay(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -2319,7 +2338,7 @@ def ut_pay(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['p_id'] = getGlobalID()
+			content['p_id'] = getGlobalID(user)
 			return render_to_response('counselor/forms/UrineTest/invoice.html', content)
 
 @login_required(login_url='/index')
@@ -2376,8 +2395,54 @@ def ut_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
 			content = fetchContent(request, 'ut', None)
+			content['testResults'] = fetchUtPositive(session)
 			return render_to_response('counselor/forms/UrineTest/viewForm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def UT_complete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			session.ut.isComplete = True
+			session.ut.isOpen = False
+			session.ut.save()
+			content['session'] = session
+			return render_to_response('counselor/forms/UrineTest/utComplete.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def printUT(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			date = datetime.now()
+			content['date'] = date.date()
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			content['images'] = getUtViewImages(session.ut)
+			content['session'] = session
+			return render_to_response('counselor/forms/UrineTest/printUT.html', content, context_instance=RequestContext(request))
 
 
 ###########################################################################################################################################

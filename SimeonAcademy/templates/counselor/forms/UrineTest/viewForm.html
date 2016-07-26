@@ -12,7 +12,87 @@
                               URINE ANALYSIS
                         </div>
 
-                        
+                        <form action='' method='post' id='ut_form'> {% csrf_token %}
+                          <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+                          <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        </form>
+
+                        <div id='ut_warning'>
+                          <img src="{% static 'images/warning.png' %}" alt="session_warning" class='session_warning'>
+                        </div>
+
+                        <div id='ut-head1'>Please verify that the data has been entered correctly</div>
+                        <div id='ut-head2'>Once the form is processed, it cannot be changed.</div>
+                        <div id='ut-head3'>{{session.client.fname}} {{session.client.lname}} <span>({{session.client.clientID}})</span> tested positive for the following substances:</div>
+
+                        {% for t in testResults %}
+                          <div id='drug-result'>{{t}}</div>
+                        {% endfor %}
+
+                        <div class='ut-main-container'>
+                          <table class='ut-main-table'>
+                            <tr>
+                              <td>
+                                <div>
+                                  <!-- <a href="javascript: finalize_ut();"> -->
+                                  <a href="javascript: ut_complete_options();">
+                                    <div class='center-rounded'>
+                                      <div class='round-button'>
+                                        <div class='round-button-circle'>
+                                          <div class='roundIconClass5'>
+                                            <img src="{% static 'images/save_as.png' %}" alt="" class='image_icon'>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class='exitBtn_small'>
+                                              Finish & Save
+                                    </div>
+                                  </a>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div>
+                                  <a href="javascript: edit_ut();">
+                                    <div class='center-rounded'>
+                                      <div class='round-button'>
+                                        <div class='round-button-circle'>
+                                          <div class='roundIconClass'>
+                                            <img src="{% static 'images/exit_form.png' %}" alt="" class='image_icon'>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class='exitBtn_small'>
+                                              Edit
+                                    </div>
+                                  </a>
+                                </div>
+                              </td>
+
+                              <td>
+                                <div>
+                                  <a href="javascript: back_from_ut();">
+                                    <div class='center-rounded'>
+                                      <div class='round-button'>
+                                        <div class='round-button-circle'>
+                                          <div class='roundIconClass6'>
+                                            <img src="{% static 'images/cancel.png' %}" alt="" class='money_icon'>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class='exitBtn_small'>
+                                              Cancel
+                                    </div>
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+
                   </div>
             </div>
 

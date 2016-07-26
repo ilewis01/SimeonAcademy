@@ -1128,6 +1128,17 @@ button:hover {
 	margin-left: 5px;
 }
 
+.roundIconClass5 {
+	margin-top: 18px;
+	margin-left: 8px;
+	/*margin-right: 5px;*/
+}
+
+.roundIconClass6 {
+	margin-top: 14px;
+	margin-left: 12px;
+}
+
 .image_icon {
 	width:65%;
 }
@@ -2981,14 +2992,140 @@ button:hover {
 	font-style: italic;
 }
 
-/*#proTableMarginR {
-	width:20px;
+#drug-result {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 18px;
+	color:#dd730c;
 }
 
-#proTableMargin {
-	width:30px;
-}*/
+#ut-head1 {
+	/*margin-top: 6%*/;
+	font-size: 30px;
+	font-weight: bold;
+	font-style: italic;
+}
 
+#ut-head2 {
+	color:#dd730c;
+	font-size: 15px;
+}
+
+#ut-head3 {
+	margin-top: 4%;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+	/*color: #787875;*/
+}
+
+#ut-head3 span {
+	color:#6b6b4b;
+}
+
+#ut_warning {
+	width:200px;
+	margin:auto;
+	padding-top: 3%;
+}
+
+#ut-buttons {
+	margin-top: 3%;
+}
+
+#ut-buttons button {
+	width:120px;
+}
+
+.ut-main-container {
+	width:40%;
+	margin:auto;
+	padding-top: 3%;
+}
+
+.ut-main-table {
+	width:100%;
+	margin:auto;
+}
+
+#ut-result-header {
+	width:95%;
+	margin: auto;
+	font-family: Times;
+	font-size: 28px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 3%;
+	padding-bottom: 1%;
+	border-bottom: 1px solid #6e1925;
+}
+
+#big-ut-line {
+	width:95%;
+	margin: auto;
+	margin-top: 2px;
+	background-color: #6e1925;
+	height: 5px;
+}
+
+#ut-ack {
+	width: 95%;
+	margin: auto;
+	padding-top: 5%;
+	text-align: left;
+	font-size: 18px;
+}
+
+#result_formal_ut {
+	width: 95%;
+	margin:auto;
+	padding-left: 5%;
+}
+
+#result_formal_ut tr {
+	height:40px;
+}
+
+#result_formal_ut table {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.ut_result_img {
+	width:17px;
+	margin-right: 7px;
+}
+
+#utTextResult {
+	font-size: 17px;
+}
+
+#sign_line {
+	width:400px;
+	border-bottom: 1px solid black;
+	height:25px;
+}
+
+#date_line {
+	width:150px;
+	border-bottom: 1px solid black;
+	height:25px;
+}
+
+.signatures1 {
+	width:95%;
+	margin:auto;
+}
+
+.ut-space {
+	width:50px;
+}
+
+#sig-header {
+	font-weight: bold;
+	font-family: Times;
+	font-size: 17px;
+}
 
 
 

@@ -81,6 +81,9 @@ urlpatterns = patterns('',
     url(r'^ut_paid/$', 'assessment.views.ut_paid'),
     url(r'^ut_testResults/$', 'assessment.views.ut_testResults'),
     url(r'^ut_viewForm/$', 'assessment.views.ut_viewForm'),
+    url(r'^printUT/$', 'assessment.views.printUT'),
+    url(r'^UT_complete/$', 'assessment.views.UT_complete'),
+    url(r'^existingUT/$', 'assessment.views.existingUT'),
 
     ## Discharge Views
     url(r'^discharge_success/$', 'assessment.views.discharge_success'),

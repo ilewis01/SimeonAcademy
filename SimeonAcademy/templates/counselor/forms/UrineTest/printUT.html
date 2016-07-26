@@ -1,0 +1,108 @@
+{% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id='ut-result-header'>
+		Simeon Urine Result Form
+	</div>
+
+	<div id='big-ut-line'></div>
+
+	<div id='ut-ack'>
+		I,&nbsp&nbsp<em>{{session.client.fname}} {{session.client.lname}}</em>, agreed to a urine test facilitated by Simeon Academy. The following are he results of this test:
+	</div>
+
+	<div id='result_formal_ut'>
+		<table>
+			<tr>
+				<td><div><img src="{{images.drug1}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Cannibus</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug2}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Amphetamine</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug3}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Cocaine</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug4}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Opiate</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug5}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Benzodiazepine</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug6}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Barbiturates</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug7}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>PCP</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug8}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>OxyContin</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug9}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Methamphetamine</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug10}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Morphine</div></td>
+			</tr>
+
+			<tr>
+				<td><div><img src="{{images.drug11}}" alt='ut_result_img' class='ut_result_img'></div></td>
+				<td><div id='utTextResult'>Methadone</div></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class='signatures1'>
+		<table>
+			<tr>
+				<td><div id='sign_line'></div></td>
+				<td><div class='ut-space'></div></td>
+				<td><div id='date_line'>{{date}}</div></td>
+			</tr>
+			<tr>
+				<td><div id='sig-header'>Client Signature</div></td>
+				<td><div class='ut-space'></div></td>
+				<td><div id='sig-header'>Date</div></td>
+			</tr>
+		</table>
+
+		<div style='margin-bottom:30px;'></div>
+		<table>
+			<tr>
+				<td><div id='sign_line'></div></td>
+				<td><div class='ut-space'></div></td>
+				<td><div id='date_line'>{{date}}</div></td>
+			</tr>
+			<tr>
+				<td><div id='sig-header'>Counselor Signature</div></td>
+				<td><div class='ut-space'></div></td>
+				<td><div id='sig-header'>Date</div></td>
+			</tr>
+		</table>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>

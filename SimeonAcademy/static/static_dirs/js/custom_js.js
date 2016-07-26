@@ -546,15 +546,24 @@ function new_sap() {
 		var w = 1200, h = 1300;
 		openPopUp('auto', '/print_sap/', w, h);
 	}
-	else if (isForm == 'False') {
+	else if (isForm === 'False') {
 		grab('c_form').action = '/sap_preliminary/';
 		grab('c_form').submit();
 	}	
 }
 
 function new_ut() {
-	grab('c_form').action = '/ut_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeUT').value;
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 1200, h = 1300;
+		openPopUp('auto', '/printUT/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/ut_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_discharge() {
@@ -6516,9 +6525,41 @@ function sideBarASI(page) {
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//
-//-------------------------------------------------- SUPPORT FUNCTIONS ------------------------------------------------//
+//----------------------------------------------------- UT FUNCTIONS --------------------------------------------------//
 //*********************************************************************************************************************//
 //#####################################################################################################################//
+
+function ut_complete_options() {
+	var w = 550, h = 400;
+	openPopUp('auto', '/UT_complete/', w, h);
+}
+
+function end_ut_session() {
+	getPopParent('ut_form').action = '/adminHome/';
+	getPopParent('ut_form').submit();
+	window.close();
+}
+
+function cont_during_ut() {
+	getPopParent('ut_form').action = '/clientOptions/';
+	getPopParent('ut_form').submit();
+	window.close();
+}
+
+function finalize_ut() {
+	var w = 1100, h = 1300;
+	openPopUp('auto', '/printUT/', w, h);
+}
+
+function back_from_ut() {
+	grab('ut_form').action = '/clientOptions/';
+	grab('ut_form').submit();
+}
+
+function edit_ut() {
+	grab('ut_form').action = '/ut_preliminary/';
+	grab('ut_form').submit();
+}
 
 function ut_check_init(data, box) {
 	data = String(data);

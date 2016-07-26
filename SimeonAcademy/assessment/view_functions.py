@@ -8793,6 +8793,50 @@ def finishUT(ut):
 	ut.isComplete = True
 	ut.save()
 
+def getUtData(ut):
+	result = []
+
+	if ut.drug1 == True:
+		result.append('Cannibus')
+	if ut.drug2 == True:
+		result.append('Amphetamine')
+	if ut.drug3 == True:
+		result.append('Cocaine')
+	if ut.drug4 == True:
+		result.append('Opiate')
+	if ut.drug5 == True:
+		result.append('Benzodiazepine')
+	if ut.drug6 == True:
+		result.append('Barbiturates')
+	if ut.drug7 == True:
+		result.append('PCP')
+	if ut.drug8 == True:
+		result.append('OxyContin')
+	if ut.drug9 == True:
+		result.append('Methamphetamine')
+	if ut.drug10 == True:
+		result.append('Morphine')
+	if ut.drug11 == True:
+		result.append('Methadone')
+
+	return result
+
+def getUtViewImages(ut):
+	images = {}
+	images['drug1'] = getViewFormCheckImages(ut.drug1)
+	images['drug2'] = getViewFormCheckImages(ut.drug2)
+	images['drug3'] = getViewFormCheckImages(ut.drug3)
+	images['drug4'] = getViewFormCheckImages(ut.drug4)
+	images['drug5'] = getViewFormCheckImages(ut.drug5)
+	images['drug6'] = getViewFormCheckImages(ut.drug6)
+	images['drug7'] = getViewFormCheckImages(ut.drug7)
+	images['drug8'] = getViewFormCheckImages(ut.drug8)
+	images['drug9'] = getViewFormCheckImages(ut.drug9)
+	images['drug10'] = getViewFormCheckImages(ut.drug10)
+	images['drug11'] = getViewFormCheckImages(ut.drug11)
+	return images
+
+
 def beginUT(request):
 	result = {}
 	client_id = request.POST.get('client_id', '')
@@ -8804,37 +8848,47 @@ def beginUT(request):
 	s_type = getStype('ut')
 	result['s_type'] = s_type
 
-	if hasUtPaid(client) == True:
-		proceed = getUtPaid(client)
-
-		if proceed.isPaid == True:
-			ut = startUT(client)
+	if session.hasUT == True:
+		if session.ut.isComplete == True:
+			ut = session.ut
 			setGlobalID(ut.id, request.user)
-			openForm('ut', ut, client)
-			fields = getUtFields(ut)
-			json_data = json.dumps(fields)
-			session.hasUT = True
-			session.ut = ut
-			session.save()
+			result['isNew'] = False
+			result['session'] = session
+			result['title'] = 'Simeon Academy | Urine Analysis'
+			result['url'] = 'counselor/forms/UrineTest/existingUT.html'
 
-			result['date'] = ut.date_of_assessment
-			result['fields'] = fields
-			result['json_data'] = json_data
-			result['url'] = 'counselor/forms/UrineTest/results.html'
-			result['ut'] = ut
-		else:
-			result['url'] = 'counselor/forms/UrineTest/instructions.html'
-			result['paid_profile'] = proceed
-			setGlobalID(proceed.id, request.user)
 	else:
-		newPaid = UtPaid(client=client)
-		newPaid.save()
-		result['url'] = 'counselor/forms/UrineTest/instructions.html'
-		result['paid_profile'] = newPaid
-		setGlobalID(newPaid.id, request.user)
-	
-	result['session'] = session	
-	result['title'] = "Simeon Academy | Urine Analysis"
+		if hasUtPaid(client) == True:
+			proceed = getUtPaid(client)
+
+			if proceed.isPaid == True:
+				ut = startUT(client)
+				setGlobalID(ut.id, request.user)
+				openForm('ut', ut, client)
+				fields = getUtFields(ut)
+				json_data = json.dumps(fields)
+				session.hasUT = True
+				session.ut = ut
+				session.save()
+
+				result['date'] = ut.date_of_assessment
+				result['fields'] = fields
+				result['json_data'] = json_data
+				result['url'] = 'counselor/forms/UrineTest/results.html'
+				result['ut'] = ut
+			else:
+				result['url'] = 'counselor/forms/UrineTest/instructions.html'
+				result['paid_profile'] = proceed
+				setGlobalID(proceed.id, request.user)
+		else:
+			newPaid = UtPaid(client=client)
+			newPaid.save()
+			result['url'] = 'counselor/forms/UrineTest/instructions.html'
+			result['paid_profile'] = newPaid
+			setGlobalID(newPaid.id, request.user)
+		
+		result['session'] = session	
+		result['title'] = "Simeon Academy | Urine Analysis"
 
 	return result
 
@@ -9860,6 +9914,13 @@ def fetchClientHistory(session, numberRequested):
 				if data != None:
 					result.append(data)
 	return result
+
+def fetchUtPositive(session):
+	result = None
+	if session.hasUT == True:
+		result = getUtData(session.ut)
+	return result
+
 
 
 
