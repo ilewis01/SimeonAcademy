@@ -5781,6 +5781,193 @@ def getMhFields(mh, section):
 	return result
 
 
+
+def grabMhViewImages(mh):
+	result = {}
+	check = "/static/images/check_o.png"
+	nope = '/static/images/nope.png'
+
+	if mh.demographics.maritalStatus == 'Married':
+		result['Married'] = check
+		result['Single'] = nope
+		result['Divorced'] = nope
+		result['Widowed'] = nope
+		result['Seperated'] = nope
+	elif mh.demographics.maritalStatus == 'Single':
+		result['Married'] = nope
+		result['Single'] = check
+		result['Divorced'] = nope
+		result['Widowed'] = nope
+		result['Seperated'] = nope
+	elif mh.demographics.maritalStatus == 'Divorced':
+		result['Married'] = nope
+		result['Single'] = nope
+		result['Divorced'] = check
+		result['Widowed'] = nope
+		result['Seperated'] = nope
+	elif mh.demographics.maritalStatus == 'Widowed':
+		result['Married'] = nope
+		result['Single'] = nope
+		result['Divorced'] = nope
+		result['Widowed'] = check
+		result['Seperated'] = nope
+	elif mh.demographics.maritalStatus == 'Seperated':
+		result['Married'] = nope
+		result['Single'] = nope
+		result['Divorced'] = nope
+		result['Widowed'] = nope
+		result['Seperated'] = check
+
+	if mh.client.isMale == True:
+		result['male'] = check
+		result['female'] = nope
+	else:
+		result['male'] = nope
+		result['female'] = check
+
+	if mh.education.BehaviorProblemsKto6 == True:
+		result['bk6'] = 'Yes'
+	else:
+		result['bk6'] = 'None'
+
+	if mh.education.BehaviorProblems7to9 == True:
+		result['b79'] = 'Yes'
+	else:
+		result['b79'] = 'None'
+
+	if mh.education.BehaviorProblems10to12 == True:
+		result['b1012'] = 'Yes'
+	else:
+		result['b1012'] = 'None'
+
+
+	if mh.education.AcademicProblemsKto6 == True:
+		result['ak6'] = 'Yes'
+	else:
+		result['ak6'] = 'None'
+
+	if mh.education.AcademicProblems7to9 == True:
+		result['a79'] = 'Yes'
+	else:
+		result['a79'] = 'None'
+
+	if mh.education.AcademicProblems10to12 == True:
+		result['a1012'] = 'Yes'
+	else:
+		result['a1012'] = 'None'
+
+
+	if mh.education.FriendshipsKto6 < 5:
+		result['fs1'] = ' '
+	else:
+		result['fs1'] = mh.education.FriendshipsKto6
+	if mh.education.Friendships7to9 < 5:
+		result['fs2'] = ' '
+	else:
+		result['fs2'] = mh.education.Friendships7to9
+	if mh.education.Friendships10to12 < 5:
+		result['fs3'] = ' '
+	else:
+		result['fs3'] = mh.education.Friendships10to12
+
+
+	if mh.education.FriendshipsKto6 == 1:
+		result['a1'] = 'junkie'
+		result['a2'] = None
+		result['a3'] = None
+		result['a4'] = None
+		result['a5'] = None
+	elif mh.education.FriendshipsKto6 == 2:
+		result['a1'] = None
+		result['a2'] = 'junkie'
+		result['a3'] = None
+		result['a4'] = None
+		result['a5'] = None
+	elif mh.education.FriendshipsKto6 == 3:
+		result['a1'] = None
+		result['a2'] = None
+		result['a3'] = 'junkie'
+		result['a4'] = None
+		result['a5'] = None
+	elif mh.education.FriendshipsKto6 == 4:
+		result['a1'] = None
+		result['a2'] = None
+		result['a3'] = None
+		result['a4'] = 'junkie'
+		result['a5'] = None
+	elif mh.education.FriendshipsKto6 > 4:
+		result['a1'] = None
+		result['a2'] = None
+		result['a3'] = None
+		result['a4'] = None
+		result['a5'] = 'junkie'
+
+	if mh.education.Friendships7to9 == 1:
+		result['b1'] = 'junkie'
+		result['b2'] = None
+		result['b3'] = None
+		result['b4'] = None
+		result['b5'] = None
+	elif mh.education.Friendships7to9 == 2:
+		result['b1'] = None
+		result['b2'] = 'junkie'
+		result['b3'] = None
+		result['b4'] = None
+		result['b5'] = None
+	elif mh.education.Friendships7to9 == 3:
+		result['b1'] = None
+		result['b2'] = None
+		result['b3'] = 'junkie'
+		result['b4'] = None
+		result['b5'] = None
+	elif mh.education.Friendships7to9 == 4:
+		result['b1'] = None
+		result['b2'] = None
+		result['b3'] = None
+		result['b4'] = 'junkie'
+		result['b5'] = None
+	elif mh.education.Friendships7to9 > 4:
+		result['b1'] = None
+		result['b2'] = None
+		result['b3'] = None
+		result['b4'] = None
+		result['b5'] = 'junkie'
+
+	if mh.education.Friendships10to12 == 1:
+		result['c1'] = 'junkie'
+		result['c2'] = None
+		result['c3'] = None
+		result['c4'] = None
+		result['c5'] = None
+	elif mh.education.Friendships10to12 == 2:
+		result['c1'] = None
+		result['c2'] = 'junkie'
+		result['c3'] = None
+		result['c4'] = None
+		result['c5'] = None
+	elif mh.education.Friendships10to12 == 3:
+		result['c1'] = None
+		result['c2'] = None
+		result['c3'] = 'junkie'
+		result['c4'] = None
+		result['c5'] = None
+	elif mh.education.Friendships10to12 == 4:
+		result['c1'] = None
+		result['c2'] = None
+		result['c3'] = None
+		result['c4'] = 'junkie'
+		result['c5'] = None
+	elif mh.education.Friendships10to12 > 4:
+		result['c1'] = None
+		result['c2'] = None
+		result['c3'] = None
+		result['c4'] = None
+		result['c5'] = 'junkie'
+
+
+	return result
+
+
 def saveMhDemo(request, mh):
 	momLive = request.POST.get('motherLiving', '')
 	dadLive  =request.POST.get('fatherLiving', '')

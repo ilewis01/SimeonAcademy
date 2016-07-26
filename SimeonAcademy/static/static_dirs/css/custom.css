@@ -7,6 +7,11 @@ side_option_headbody {
   background-color: white;
 }
 
+.viewFormClass2 {
+  font-family: Times, serif;
+  background-color: white;
+}
+
 .gradient-white {
 	background: url('../images/grey1.jpg');
 }
@@ -3129,6 +3134,15 @@ button:hover {
 
 .cli-history-a:hover{
 	color:#d67222;
+}
+
+.check_o {
+	width:20px;
+}
+
+.junkie {
+	border: 2px solid black;
+	border-radius: 25px;
 }
 
 

@@ -2,8 +2,2000 @@
 {% block body %}
 {% load staticfiles %}
 
-<h1>Mental Health View Form</h1>
+<body class="gradient-white-form">
+    <!-- _________________________SIDE BAR_________________________ -->
 
-<a href='/adminHome'>Home Page</a>
+    <div id="wrapper" class='shift-rr'>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <table class='session-side'>
+            <tr>
+              <td>
+                <div id='sideBarMainHeader'>
+                  Session Details:
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div style='color:#fee047'>
+                  <h4>Mental Health Profile</h4>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div>
+                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
+                      </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div id='sidebar-space-lower2'>
+                          <span class="sidebar-id">{{mh.client.clientID}}</span>
+                      </div>
+              </td>
+            </tr>
+
+
+
+            <!-- <div style='margin-bottom: 80px;'></div> -->
+            <tr>
+              <td>
+                <div id='sidebar-space-lower'>
+                          <h4>Progress:</h4>
+                      </div>
+              </td>
+            </tr>
+
+            <!-- PROGRESS -->
+<!-- 
+            <tr>
+              <td>
+                <div id='sideProgress'>
+                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
+                </div>
+              </td>
+            </tr> -->
+
+            <tr>
+              <td>
+                <div class='{{class.mhHistory}}'>
+                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
+                  <a href="#" name='mhHistoryBtn' id='mhHistoryBtn'>
+                    History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhEducation}}'>
+                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_education/');" name='mhEducationBtn' id='mhEducationBtn'>
+                     Education
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhBackground}}'>
+                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_background/');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
+                    Finance & Background
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhStress}}'>
+                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
+                    Stressors
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhFamily}}'>
+                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_familyHistory/');" name='mhFamilyBtn' id='mhFamilyBtn'>
+                    Family History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhLegal}}'>
+                  <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
+                    Legal History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhPsych}}'>
+                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_psych/');" name='mhPsychBtn' id='mhPsychBtn'>
+                    Psychiatric History
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class='{{class.mhUse}}'>
+                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
+                  <a href="javascript: sideBarMh('/mh_useTable/');" name='mhUseBtn' id='mhUseBtn'>
+                    Use
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
+
+            <tr>
+              <td>
+                <div class='exit_btn_text'>
+                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
+                  <a href="javascript: universal_generic_exit('mh', '/mh_demographic/');" name='sourceBtn' class='exit_a_tag'>
+                    Exit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div>
+
+            <h3 id='am-h2'>Mental Health Assessment: Verify Information</h3>
+
+            <div class="container">
+            	<div class="row">                   
+                <div class="col-md-12 col-sm-12">
+                  <div>
+                  	<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+                  		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                      	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                        <input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
+                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+                        <input type='hidden' name='save_section' id='save_section' value='/mh_viewForm/'> 
+                        <input type='hidden' name='new_form' id='new_form' value='false'>
+                        <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+                        <input type='hidden' name='save_this' id='save_this' value=''>
+
+<div class='viewFormClass2'>
+  <div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="clientInfo_mh_c">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">
+              Name
+            </td>
+            <td width="75%" class="formInput_mh_c">
+              {{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}
+            </td>
+            <td width="1%" class="viewLabel_mh_c">
+              Date
+            </td>
+            <td width="15%" class="formInput_mh_c">
+              {{session.mh.date_of_assessment}}
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">
+              Address
+            </td>
+            <td width="42%" class="formInput_mh_c">
+            	{{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
+            </td>
+            <td class="viewLabel_mh_c">
+              City
+            </td>
+            <td width="32%" class="formInput_mh_c">
+            	{{session.client.city}}
+            </td>
+            <td width="1%" class="viewLabel_mh_c">
+              State
+            </td>
+            <td width="6%" class="formInput_mh_c">
+            	{{session.client.state}}
+            </td>
+            <td width="1%" class="viewLabel_mh_c">
+              Zip
+            </td>
+            <td width="20%" class="formInput_mh_c">
+            	{{session.client.zip_code}}
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Phone</td>
+            <td width="5%" class="viewLabel_mh_c">Numbers:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Home</td>
+            
+            <td width="20%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Cell</td>
+            
+            <td width="20%" class="formInput_mh_c">{{session.client.phone}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Work</td>
+            
+            <td width="20%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">SS#</td>
+            
+            <td width="20%" class="formInput_mh_c">
+            	{{session.client.ss_num}}
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Date</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Birth</td>
+            
+            <td width="25%" class="formInput_mh_c">{{session.client.dob}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Male</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.male}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Female</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.female}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Birthplace</td>
+            
+            <td width="30%" class="formInput_mh_c">{{session.mh.demographics.birthplace}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Raised</td>
+            
+            <td width="30%" class="formInput_mh_c">{{session.mh.demographics.raised}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Marital</td>
+            <td width="5%" class="viewLabel_mh_c">Status:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Married</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.Married}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Single</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.Single}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Divorced</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.Divorced}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Widowed</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.Widowed}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Separated</td>
+            
+            <td width="5%" class="formInput_mh_c"><img src="{{images.Seperated}}" class='check_o'></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Past</td>
+            <td width="5%" class="viewLabel_mh_c">Marriages:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            <td width="5%" class="formInput_mh_c">
+            	{{session.mh.demographics.numMarriages}}
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Occupation</td>
+            <td width="25%" class="formInput_mh_c">
+            	{{session.mh.demographics.occupation}}
+            </td>
+            <td width="1%" class="viewLabel_mh_c">Current</td>
+            <td width="1%" class="viewLabel_mh_c">Employment</td>
+            
+            <td width="45%" class="formInput_mh_c">{{session.mh.demographics.employer}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">How</td>
+            <td width="1%" class="viewLabel_mh_c">long?</td>
+            
+            <td width="10%" class="formInput_mh_c">
+            	{{session.mh.demographics.employedMo}}mos&nbsp{{session.mh.demographics.employedYrs}}yrs
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Past</td>
+            <td width="1%" class="viewLabel_mh_c">Jobs</td>
+            <td width="1%" class="viewLabel_mh_c">or</td>
+            <td width="1%" class="viewLabel_mh_c">Line</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Work</td>
+            <td width="1%" class="viewLabel_mh_c">(Last</td>
+            <td width="1%" class="viewLabel_mh_c">5</td>
+            <td width="1%" class="viewLabel_mh_c">years)</td>
+            
+            <td width="75%" class="formInput_mh_c">{{session.mh.demographics.pastJobs}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td class="formInput_mh_c">This is the second line...work this out! count the number of chars in input</td>
+          </tr>
+        </table>
+      </div>      
+      <!-- end clientInfo -->
+      <div id="family">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">
+              <b>Family</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Spouse</td>
+            <td width="1%" class="viewLabel_mh_c">/</td>
+            <td width="1%" class="viewLabel_mh_c">Significant</td>
+            <td width="5%" class="viewLabel_mh_c">Other</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.spouseAge}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Occupation</td>
+            
+            <td width="10%"class="formInput_mh_c">{{session.mh.demographics.spouseOccupation}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Current</td>
+            <td width="1%" class="viewLabel_mh_c">Employment</td>
+            
+            <td width="20%" class="formInput_mh_c">{{session.mh.demographics.spouseEmployer}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">How</td>
+            <td width="1%" class="viewLabel_mh_c">Long?</td>
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.spouseWorkMos}}mos&nbsp{{session.mh.demographics.spouseWorkYrs}}yrs</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td class="viewLabel_mh_c">Children</td>
+            <td width="25%" class="viewLabel_mh_c">Age/City/State</td>
+            <td width="15%" class="viewLabel_mh_c"><b>Examples:</b></td>
+            <td width="12%" class="viewLabel_mh_c">22/Boise, ID</td>
+            <td class="viewLabel_mh_c">8/Dallas, Texas</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Male</td>
+            
+            <td class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Female</td>
+            
+            <td class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Recent</td>
+            <td width="1%" class="viewLabel_mh_c">Moves</td>
+            <td width="1%" class="viewLabel_mh_c">(Last</td>
+            <td width="1%" class="viewLabel_mh_c">5</td>
+            <td width="1%" class="viewLabel_mh_c">years)</td>
+            
+            <td class="formInput_mh_c">{{session.mh.demographics.recentMove}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="5%" class="viewLabel_mh_c">Mother</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Occupation</td>
+            
+            <td width="20%" class="formInput_mh_c">{{session.mh.demographics.motherOccupation}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">City/State</td>
+            
+            <td width="25%"class="formInput_mh_c">{{session.mh.demographics.motherCity}}, {{session.mh.demographics.motherState}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.motherAge}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            <td width="1%" class="viewLabel_mh_c">at</td>
+            <td width="1%" class="viewLabel_mh_c">Death</td>
+            
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.motherAgeDeath}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="5%" class="viewLabel_mh_c">Father</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Occupation</td>
+            
+            <td width="20%" class="formInput_mh_c">{{session.mh.demographics.fatherOccupation}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">City/State</td>
+            
+            <td width="25%"class="formInput_mh_c">{{session.mh.demographics.fatherCity}}, {{session.mh.demographics.fatherState}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.fatherAge}}</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Age</td>
+            <td width="1%" class="viewLabel_mh_c">at</td>
+            <td width="1%" class="viewLabel_mh_c">Death</td>
+            
+            <td width="5%" class="formInput_mh_c">{{session.mh.demographics.fatherAgeDeath}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="5%" class="viewLabel_mh_c">Brothers</td>
+            <td width="1%" class="viewLabel_mh_c">Age/City/State</td>
+            
+            <td class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="5%" class="viewLabel_mh_c">Sisters</td>
+            <td width="1%" class="viewLabel_mh_c">Age/City/State</td>
+            
+            <td class="formInput_mh_c"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end family -->
+      <div id="education">
+        <table class="shortTable">
+          <tr>
+            <td width="7%" class="viewLabel_mh_c" style="font-size: 20px"><b>Education</b></td>
+            <td width="1%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c"><b>Grades</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>K</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>-</b></td>
+            <td width="3%" class="viewLabel_mh_c"><b>6</b></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            <td width="1%" class="viewLabel_mh_c">Grades</td>
+            <td width="1%" class="viewLabel_mh_c">(A</td>
+            <td width="1%" class="viewLabel_mh_c">-</td>
+            <td width="1%" class="viewLabel_mh_c">F)</td>
+            
+            <td width="5%"class="formInput_mh_c">{{session.mh.education.GradesKto6}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            <td width="1%" class="viewLabel_mh_c">Friendships</td>
+            <td width="1%" class="viewLabel_mh_c"><div id='ar1' class='{{images.al}}'>1</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='ar2' class='{{images.a2}}'>2</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='ar3' class='{{images.a3}}'>3</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='ar4' class='{{images.a4}}'>4</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='ar5' class='{{images.a5}}'>More</div></td>
+            
+            <td width="5%" class="formInput_mh_c">{{images.fs1}}</td>
+          </tr>
+        </table>
+        <table class="shortTable">
+          <tr>
+            <td width="17%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Behavioral</td>
+            <td width="4%" class="viewLabel_mh_c">Problems?</td>
+            
+            <td width="5%"class="formInput_mh_c">{{images.bk6}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Academic</td>
+            <td width="1%" class="viewLabel_mh_c">Problems</td>
+            
+            <td width="11%" class="formInput_mh_c">{{images.ak6}}</td>
+          </tr>
+        </table>
+        <table class="shortTable">
+          <tr>
+            <td width="9%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c"><b>Grades</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>7</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>-</b></td>
+            <td width="3%" class="viewLabel_mh_c"><b>9</b></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            <td width="1%" class="viewLabel_mh_c">Grades</td>
+            <td width="1%" class="viewLabel_mh_c">(A</td>
+            <td width="1%" class="viewLabel_mh_c">-</td>
+            <td width="1%" class="viewLabel_mh_c">F)</td>
+            
+            <td width="5%"class="formInput_mh_c">{{session.mh.education.Grades7to9}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            <td width="1%" class="viewLabel_mh_c">Friendships</td>
+            <td width="1%" class="viewLabel_mh_c"><div id='br1' class='{{images.bl}}'>1</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='br2' class='{{images.b2}}'>2</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='br3' class='{{images.b3}}'>3</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='br4' class='{{images.b4}}'>4</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='br5' class='{{images.b5}}'>More</div></td>
+            
+            <td width="5%" class="formInput_mh_c">{{images.fs2}}</td>
+          </tr>
+        </table>
+        <table class="shortTable">
+          <tr>
+            <td width="17%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Behavioral</td>
+            <td width="4%" class="viewLabel_mh_c">Problems?</td>
+            
+            <td width="5%"class="formInput_mh_c">{{images.b79}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Academic</td>
+            <td width="1%" class="viewLabel_mh_c">Problems</td>
+            
+            <td width="11%" class="formInput_mh_c">{{images.a79}}</td>
+          </tr>
+        </table>
+        <table class="shortTable">
+          <tr>
+            <td width="9%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c"><b>Grades</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>9</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>-</b></td>
+            <td width="3%" class="viewLabel_mh_c"><b>12</b></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            <td width="1%" class="viewLabel_mh_c">Grades</td>
+            <td width="1%" class="viewLabel_mh_c">(A</td>
+            <td width="1%" class="viewLabel_mh_c">-</td>
+            <td width="1%" class="viewLabel_mh_c">F)</td>
+            
+            <td width="5%"class="formInput_mh_c">{{session.mh.education.Grades10to12}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            <td width="1%" class="viewLabel_mh_c">Friendships</td>
+            <td width="1%" class="viewLabel_mh_c"><div id='cr1' class='{{images.cl}}'>1</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='cr2' class='{{images.c2}}'>2</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='cr3' class='{{images.c3}}'>3</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='cr4' class='{{images.c4}}'>4</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='cr5' class='{{images.c5}}'>More</div></td>
+            
+            <td width="5%" class="formInput_mh_c">{{images.fs3}}</td>
+          </tr>
+        </table>
+        <table class="shortTable">
+          <tr>
+            <td width="17%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Behavioral</td>
+            <td width="4%" class="viewLabel_mh_c">Problems?</td>
+            
+            <td width="5%"class="formInput_mh_c">{{images.b1012}}</td>
+            <td width="8%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Academic</td>
+            <td width="1%" class="viewLabel_mh_c">Problems</td>
+            
+            <td width="11%" class="formInput_mh_c">{{images.a1012}}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">College</td>
+            <td width="1%" class="viewLabel_mh_c">Years</td>
+            <td width="1%" class="viewLabel_mh_c">1</td>
+            <td width="1%" class="viewLabel_mh_c">2</td>
+            <td width="1%" class="viewLabel_mh_c">3</td>
+            <td width="1%" class="viewLabel_mh_c">4</td>
+            <td width="1%" class="viewLabel_mh_c">Graduated</td>
+            <td width="1%" class="viewLabel_mh_c">Degree</td>
+            
+            <td width="8%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Major</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Advanced</td>
+            <td width="1%" class="viewLabel_mh_c">Degrees</td>
+            
+            <td width="3%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Trade/Technical</td>
+            <td width="1%" class="viewLabel_mh_c">School</td>
+            
+            <td width="50%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Area(s)</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Training</td>
+            
+            <td width="50%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Military</td>
+            <td width="1%" class="viewLabel_mh_c">Service</td>
+            <td width="1%" class="viewLabel_mh_c">Branch</td>
+            
+            <td width="25%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Years</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Highest</td>
+            <td width="1%" class="viewLabel_mh_c">Rank</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Honorable</td>
+            <td width="1%" class="viewLabel_mh_c">Discharge</td>
+            <td width="5%" class="viewLabel_mh_c">Yes</td>
+            <td width="5%" class="viewLabel_mh_c">No</td>
+          </tr>
+        </table>
+      </div>
+      <!-- end education -->
+      <div id="financialStatus">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Financial</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Status</b></td>
+            <td width="98%"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Residence:</td>
+            <td width="1%" class="viewLabel_mh_c">Rent</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Own</td>
+            <td width="1%" class="viewLabel_mh_c">Home</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Subsidized</td>
+            <td width="1%" class="viewLabel_mh_c">Housing</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+            
+            <td width="12%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Income:</td>
+            <td width="1%" class="viewLabel_mh_c">Low</td>
+            
+            <td width="14%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Medium</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">High</td>
+            
+            <td width="14%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Debt:</td>
+            <td width="1%" class="viewLabel_mh_c">Low</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Medium</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">High</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="6%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Credit:</td>
+            
+            <td width="6%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Fair</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Bankruptcy</td>
+            
+            <td width="11%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Healthcare:</td>
+            <td width="1%" class="viewLabel_mh_c">Company</td>
+            <td width="1%" class="viewLabel_mh_c">Health</td>
+            <td width="1%" class="viewLabel_mh_c">Benefits</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Private</td>
+            <td width="1%" class="viewLabel_mh_c">Insurance</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Medicaid</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Medicare</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Self</td>
+            <td width="1%" class="viewLabel_mh_c">-</td>
+            <td width="1%" class="viewLabel_mh_c">Pay</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Other</td>
+            <td width="1%" class="viewLabel_mh_c">Income:</td>
+            <td width="1%" class="viewLabel_mh_c">Alimony</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Child</td>
+            <td width="1%" class="viewLabel_mh_c">Support</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Aid</td>
+            <td width="1%" class="viewLabel_mh_c">to</td>
+            <td width="1%" class="viewLabel_mh_c">Dependant</td>
+            <td width="1%" class="viewLabel_mh_c">Children</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">SSI</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Retired</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Support</td>
+            <td width="1%" class="viewLabel_mh_c">from</td>
+            <td width="1%" class="viewLabel_mh_c">Relatives</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end financialStatus -->
+      <div id="relationships">
+        <table>
+          <tr>
+            <td width="1%"><b>Relationships</b></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="10%" class="viewLabel_mh_c">Spouse:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="5%"></td>
+            
+            <td width="10%" class="viewLabel_mh_c">Parents:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="10%" class="viewLabel_mh_c">Brothers:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="5%"></td>
+            
+            <td width="10%" class="viewLabel_mh_c">Sisters:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="10%" class="viewLabel_mh_c">Children:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="5%"></td>
+            
+            <td width="10%" class="viewLabel_mh_c">Ex-Spouse:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Poor</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Average</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Good</td>
+            
+            <td width="5%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Close</td>
+            <td width="1%" class="viewLabel_mh_c">Friends:</td>
+            <td width="1%" class="viewLabel_mh_c">I</td>
+            <td width="1%" class="viewLabel_mh_c">can</td>
+            <td width="1%" class="viewLabel_mh_c">call</td>
+            <td width="1%" class="viewLabel_mh_c">on</td>
+            <td width="1%" class="viewLabel_mh_c">if</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">trouble:</td>
+            
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Visit</td>
+            <td width="1%" class="viewLabel_mh_c">times:</td>
+            <td width="1%" class="viewLabel_mh_c">Weekly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Monthly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Yearly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Aquaintances:</td>
+            <td width="33%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Visit</td>
+            <td width="1%" class="viewLabel_mh_c">times:</td>
+            <td width="1%" class="viewLabel_mh_c">Weekly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Monthly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Yearly</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end relationships -->
+      <div id="activities">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Activities</b></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Interests</td>
+            <td width="1%" class="viewLabel_mh_c">(fishing,</td>
+            <td width="1%" class="viewLabel_mh_c">sewing,</td>
+            <td width="1%" class="viewLabel_mh_c">reading,</td>
+            <td width="1%" class="viewLabel_mh_c">etc.)</td>
+            
+            <td width="25%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Activity</td>
+            
+            <td width="25%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            <td width="1%" class="viewLabel_mh_c">per</td>
+            <td width="1%" class="viewLabel_mh_c">week</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Month</td>
+            
+            <td width="12%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Activities</td>
+            <td width="1%" class="viewLabel_mh_c">with</td>
+            <td width="1%" class="viewLabel_mh_c">Friends</td>
+            
+            <td width="41%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Activity</td>
+            
+            <td width="21%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            <td width="1%" class="viewLabel_mh_c">per</td>
+            <td width="1%" class="viewLabel_mh_c">week</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Month</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Activities</td>
+            <td width="1%" class="viewLabel_mh_c">at</td>
+            <td width="1%" class="viewLabel_mh_c">Work</td>
+            
+            <td width="47%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Activity</td>
+            
+            <td width="21%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            <td width="1%" class="viewLabel_mh_c">per</td>
+            <td width="1%" class="viewLabel_mh_c">week</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Month</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Church</td>
+            <td width="1%" class="viewLabel_mh_c">Affiliation</td>
+            
+            <td width="50%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            <td width="1%" class="viewLabel_mh_c">I</td>
+            <td width="1%" class="viewLabel_mh_c">Attend:</td>
+            
+            <td width="5%"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Weekly</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Monthly</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Yearly</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end activities -->
+      <div id="environmentalStressors">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Environmental</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Stressors</b></td>
+            <td width="98%"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Have</td>
+            <td width="1%" class="viewLabel_mh_c">there</td>
+            <td width="1%" class="viewLabel_mh_c">been</td>
+            <td width="1%" class="viewLabel_mh_c">any</td>
+            <td width="1%" class="viewLabel_mh_c">major</td>
+            <td width="1%" class="viewLabel_mh_c">changes</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">your</td>
+            <td width="1%" class="viewLabel_mh_c">life</td>
+            <td width="1%" class="viewLabel_mh_c">or</td>
+            <td width="1%" class="viewLabel_mh_c">your</td>
+            <td width="1%" class="viewLabel_mh_c">family?</td>
+            <td width="1%" class="viewLabel_mh_c">Please</td>
+            <td width="1%" class="viewLabel_mh_c">Describe</td>
+            <td width="30%"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Death</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">friend</td>
+            <td width="1%" class="viewLabel_mh_c">or</td>
+            <td width="1%" class="viewLabel_mh_c">family</td>
+            <td width="1%" class="viewLabel_mh_c">member</td>
+            <td width="75%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Divorce</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Moves</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Significant</td>
+            <td width="1%" class="viewLabel_mh_c">Medical</td>
+            <td width="1%" class="viewLabel_mh_c">Problems</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Ill</td>
+            <td width="1%" class="viewLabel_mh_c">Health</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Family</td>
+            <td width="1%" class="viewLabel_mh_c">Member</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Financial</td>
+            <td width="1%" class="viewLabel_mh_c">Problems</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Abuse</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">Family</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Addiction</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">Family</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Violence</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">Family</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Other</td>
+            <td width="1%" class="viewLabel_mh_c">Stressors</td>
+            <td width="95%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end environmentalStressors -->
+      <div id="pastPsychHistory" style="margin-top: 20px">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Past</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Psychiatric</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>History</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>and/or</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Past</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Mental</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Health</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>Counseling</b></td>
+            <td width="95%"></td>
+          </tr>
+        </table>
+        <table>
+          <td width="1%" class="viewLabel_mh_c"><b>Please</b></td>
+          <td width="1%" class="viewLabel_mh_c"><b>Inclue:</b></td>
+          <td width="1%" class="viewLabel_mh_c">Doctor/Counselor</td>
+          <td width="1%" class="viewLabel_mh_c">names,</td>
+          <td width="1%" class="viewLabel_mh_c">Diagnosis,</td>
+          <td width="1%" class="viewLabel_mh_c">Dates</td>
+          <td width="1%" class="viewLabel_mh_c">of</td>
+          <td width="1%" class="viewLabel_mh_c">treatment/counseling,</td>
+          <td width="1%" class="viewLabel_mh_c">any</td>
+          <td width="1%" class="viewLabel_mh_c">Medications</td>
+          <td width="1%" class="viewLabel_mh_c">with</td>
+          <td width="1%" class="viewLabel_mh_c">dosages</td>
+          <td width="5%"></td>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+        <table>
+          <tr><td class="formInput_mh_c"></td></tr>
+        </table>
+      </div>
+      <!-- end pastPsychHistory -->
+      <div id="familyHistory" style="margin-top: 20px">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Family</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>History</b></td>
+            <td width="98%"></td>
+          </tr>
+        </table>
+        <p class="viewLabel_mh_c">
+          Have any of your <u>biological</u> relatives (mother, father, sisters, brothers, children, aunts, uncles, grandparents) suffered from any of the following conditions? Please specify which family member and whether it is a paternal (father's side) or maternal (mother's side) relative. (For example, maternal grandmother, paternal uncle.)
+        </p>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Depression</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Alcohol</td>
+          <td width="1%" class="viewLabel_mh_c">Problems</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Hyperactivity</td>
+          <td width="1%" class="viewLabel_mh_c">(ADD)</td>
+          
+          <td width="39%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Drug</td>
+          <td width="1%" class="viewLabel_mh_c">Problems</td>
+          
+          <td width="43%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Bed</td>
+          <td width="1%" class="viewLabel_mh_c">Wetting</td>
+          
+          <td width="43%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Schizophrenia</td>
+          
+          <td width="42%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Bipolar</td>
+          <td width="1%" class="viewLabel_mh_c">Disorder</td>
+          <td width="1%" class="viewLabel_mh_c">(Manic</td>
+          <td width="1%" class="viewLabel_mh_c">Depression)</td>
+          
+          <td width="26%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Seizures</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Attempted</td>
+          <td width="1%" class="viewLabel_mh_c">Suicide</td>
+          
+          <td width="42%" class="formInput_mh_c"></td>
+          
+          <td width="12%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Completed</td>
+          <td width="1%" class="viewLabel_mh_c">Suicide</td>
+          
+          <td width="42%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Physical</td>
+          <td width="1%" class="viewLabel_mh_c">Abuse</td>
+          
+          <td width="42%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Sexual</td>
+          <td width="1%" class="viewLabel_mh_c">Abuse</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Problems</td>
+          <td width="1%" class="viewLabel_mh_c">with</td>
+          <td width="1%" class="viewLabel_mh_c">the</td>
+          <td width="1%" class="viewLabel_mh_c">Law</td>
+          
+          <td width="37%" class="formInput_mh_c"></td>
+          
+          <td width="12%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Panic</td>
+          <td width="1%" class="viewLabel_mh_c">Attacks</td>
+          
+          <td width="44%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Learning</td>
+          <td width="1%" class="viewLabel_mh_c">Disability</td>
+          
+          <td width="37%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Anxiety</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Tic</td>
+          <td width="1%" class="viewLabel_mh_c">Disorder</td>
+          
+          <td width="49%" class="formInput_mh_c"></td>
+          
+          <td width="13%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Obsessive</td>
+          <td width="1%" class="viewLabel_mh_c">Compulsive</td>
+          <td width="1%" class="viewLabel_mh_c">Behavior</td>
+          
+          <td width="33%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Thyroid</td>
+          <td width="1%" class="viewLabel_mh_c">Disorder</td>
+          
+          <td width="40%" class="formInput_mh_c"></td>
+          
+          <td width="12%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Diabetes</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Heart</td>
+          <td width="1%" class="viewLabel_mh_c">Disease</td>
+          
+          <td width="40%" class="formInput_mh_c"></td>
+          
+          <td width="11%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Cancer</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Overweight</td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="12%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">High</td>
+          <td width="1%" class="viewLabel_mh_c">Blood</td>
+          <td width="1%" class="viewLabel_mh_c">Pressure</td>
+          
+          <td width="38%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="1%" class="viewLabel_mh_c">Mood</td>
+          <td width="1%" class="viewLabel_mh_c">Swings</td>
+          
+          <td width="43%" class="formInput_mh_c"></td>
+          
+          <td width="12%"></td>
+          
+          <td width="1%" class="viewLabel_mh_c">Anger</td>
+          <td width="1%" class="viewLabel_mh_c">Problems</td>
+          
+          <td width="42%" class="formInput_mh_c"></td>
+        </table>
+        <table class="shortTable">
+          <td width="45%" class="formInput_mh_c"></td>
+          
+          <td width="10%"></td>
+          
+          <td width="45%" class="formInput_mh_c"></td>
+        </table>
+      </div>
+      <!-- end familyHistory -->
+      <div id="legalHistory" style="margin-top: 50px">
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c"><b>Legal</b></td>
+            <td width="1%" class="viewLabel_mh_c"><b>History</b></td>
+            <td width="98%"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Arrests:</td>
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Charges</td>
+            
+            <td width="65%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Convictions:</td>
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            
+            <td width="10%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Charges</td>
+            
+            <td width="65%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Driving</td>
+            <td width="1%" class="viewLabel_mh_c">Under</td>
+            <td width="1%" class="viewLabel_mh_c">the</td>
+            <td width="1%" class="viewLabel_mh_c">Influence:</td>
+            <td width="1%" class="viewLabel_mh_c">Charged</td>
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Convicted</td>
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Probation:</td>
+            <td width="1%" class="viewLabel_mh_c">Present</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Past</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Probation</td>
+            <td width="1%" class="viewLabel_mh_c">Officer</td>
+            
+            <td width="30%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">What</td>
+            <td width="1%" class="viewLabel_mh_c">Offenses?</td>
+            
+            <td width="98%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Suspended</td>
+            <td width="1%" class="viewLabel_mh_c">Driver's</td>
+            <td width="1%" class="viewLabel_mh_c">License:</td>
+            <td width="1%" class="viewLabel_mh_c">Present</td>
+            
+            <td width="20%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Past</td>
+            <td width="1%" class="viewLabel_mh_c">Number</td>
+            <td width="1%" class="viewLabel_mh_c">of</td>
+            <td width="1%" class="viewLabel_mh_c">Times</td>
+            
+            <td width="30%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Are</td>
+            <td width="1%" class="viewLabel_mh_c">you</td>
+            <td width="1%" class="viewLabel_mh_c">a</td>
+            <td width="1%" class="viewLabel_mh_c">party</td>
+            <td width="1%" class="viewLabel_mh_c">to</td>
+            <td width="1%" class="viewLabel_mh_c">any</td>
+            <td width="1%" class="viewLabel_mh_c">lawsuits?</td>
+            
+            <td width="30%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Is</td>
+            <td width="1%" class="viewLabel_mh_c">this</td>
+            <td width="1%" class="viewLabel_mh_c">causing</td>
+            <td width="1%" class="viewLabel_mh_c">stress</td>
+            <td width="1%" class="viewLabel_mh_c">for</td>
+            <td width="1%" class="viewLabel_mh_c">you?</td>
+            
+            <td width="30%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Are</td>
+            <td width="1%" class="viewLabel_mh_c">you</td>
+            <td width="1%" class="viewLabel_mh_c">presently</td>
+            <td width="1%" class="viewLabel_mh_c">involved</td>
+            <td width="1%" class="viewLabel_mh_c">in:</td>
+            <td width="1%" class="viewLabel_mh_c">Divorce</td>
+            <td width="12%" class="viewLabel_mh_c">Proceeding</td>
+            <td width="1%" class="viewLabel_mh_c">Yes</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">No</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">Child</td>
+            <td width="1%" class="viewLabel_mh_c">Custody</td>
+            <td width="1%" class="viewLabel_mh_c">Dispute?</td>
+            <td width="1%" class="viewLabel_mh_c">Yes</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">No</td>
+            
+            <td width="15%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Have</td>
+            <td width="1%" class="viewLabel_mh_c">you</td>
+            <td width="1%" class="viewLabel_mh_c">ever</td>
+            <td width="1%" class="viewLabel_mh_c">been</td>
+            <td width="1%" class="viewLabel_mh_c">involved</td>
+            <td width="1%" class="viewLabel_mh_c">in</td>
+            <td width="1%" class="viewLabel_mh_c">a</td>
+            <td width="1%" class="viewLabel_mh_c">bankruptcy</td>
+            <td width="1%" class="viewLabel_mh_c">proceeding?</td>
+            <td width="1%" class="viewLabel_mh_c">Yes</td>
+            
+            <td width="20%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">No</td>
+            
+            <td width="20%" class="formInput_mh_c"></td>
+            
+            <td width="1%" class="viewLabel_mh_c">If</td>
+            <td width="1%" class="viewLabel_mh_c">yes,</td>
+            <td width="1%" class="viewLabel_mh_c">when?</td>
+            
+            <td width="30%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td width="1%" class="viewLabel_mh_c">Please</td>
+            <td width="1%" class="viewLabel_mh_c">explain</td>
+            <td width="1%" class="viewLabel_mh_c">any</td>
+            <td width="1%" class="viewLabel_mh_c">positive</td>
+            <td width="1%" class="viewLabel_mh_c">answers.</td>
+            
+            <td width="75%" class="formInput_mh_c"></td>
+          </tr>
+        </table>
+        <table><tr><td class="formInput_mh_c"></td></tr></table>
+        <table><tr><td class="formInput_mh_c"></td></tr></table>
+        <table><tr><td class="formInput_mh_c"></td></tr></table>
+      </div>
+      <!-- end legalHistory -->
+      <div id="drugUse" style="margin-top: 50px">
+        <table>
+          <tr><td class="viewLabel_mh_c"><b>EXAMPLE OF HOW TO FILL OUT THIS PAGE</b></td></tr>
+        </table>
+        <table class="drugTable">
+          <tr>
+            <td width="25%" class="side">Substances<br>Examples</td>
+            <td>How much I<br>use</td>
+            <td>How often I<br>use</td>
+            <td>How long I have<br>used</td>
+            <td>How old I was<br>when I started</td>
+            <td>When I last<br>used</td>
+          </tr>
+          <tr>
+            <td class="side">Alcohol</td>
+            <td class="formInputDrug">1 case a day</td>
+            <td class="formInputDrug">Daily</td>
+            <td class="formInputDrug">14 years</td>
+            <td class="formInputDrug">12</td>
+            <td class="formInputDrug">Last night</td>
+          </tr>
+          <tr>
+            <td class="side">Marijuana</td>
+            <td class="formInputDrug">10 bowls a day</td>
+            <td class="formInputDrug">Every Weekend</td>
+            <td class="formInputDrug">16 years</td>
+            <td class="formInputDrug">10</td>
+            <td class="formInputDrug">2 weeks ago</td>
+          </tr>
+        </table>
+        
+        <table style="margin-top: 50px">
+          <tr><td class="viewLabel_mh_c" style="text-align: center"><b>Your Drug and Alcohol Use</b></td></tr>
+        </table>
+        
+        <table class="drugTable">
+          <tr>
+            <td width="25%" style="border: none">Substance</td>
+            <td>How much I use</td>
+            <td>How often I use</td>
+            <td>How long I have<br>used</td>
+            <td>How old I was<br>when I started</td>
+            <td>When I last<br>used</td>
+          </tr>
+          <tr>
+            <td class="side">Cigarettes/Chew</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Caffeine</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Alcohol</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Marijuana(Pot)</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">LSD (Acid, Fry)</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">PCP (Angel Dust)<br>Ketamine "Special K"</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Cocaine (Coke)</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Crack</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Speed (Crank)</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Crystal Meth</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Heroin</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Gasoline</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Visine eye drops<br>(To hide use of marijuana)</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Abuse of cough syrup,<br>over the counter drugs</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Mescaline ("Shrooms")</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Ecstasy</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">OxyContin/Narcotic pain<br>medications, Morphine</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Glue, Paint thinner, Spray<br>paint, "Huffing"</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Dramamine</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Abused prescribed<br>medications</td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+          <tr>
+            <td class="side">Other Substances<br>Abused <span class="formInputDrugCell"></span></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+            <td class="formInputDrug"></td>
+          </tr>
+        </table>
+      </div>
+      <!-- end drugUse -->
+    </div>
+  </div>
+  <div class="row"><div class="col-xs-12" style="margin-top: 50px"></div></div>
+</div>
+</div>
+
+
+
+
+
+                    </form>
+                  </div>
+				        </div>
+				      </div>
+				    </div> <!-- END PAGE CONTAINER -->
+				  <div>
+					<!-- ____________________________BUTTONS________________________________ -->
+					<table class='toggle-div-page'>
+						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                        <tr>
+                        	<td>
+                        		<div style='margin-left:12px;'>
+				                    <a href="#menu-toggle" id="menu-toggle">
+				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
+				                    </a>
+				                </div>
+			                </td>
+
+			                <td><div style='margin-right:5px;'></div></td>
+
+			                <td>
+			                	<div>
+			                		<a href="javascript: verified_form();">
+			                			<button type='button'>Finish & Save</button>
+			                		</a>
+			                	</div>
+			                </td>
+			            </tr>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 {% endblock %}

@@ -39,7 +39,7 @@ processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSessi
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
-getUtViewImages, getUtPaid
+getUtViewImages, getUtPaid, grabMhViewImages
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1558,6 +1558,7 @@ def mh_viewForm(request):
 
 		else:
 			content = fetchContent(request, 'mh', '/mh_viewForm/')
+			content['images'] = grabMhViewImages(content['session'].mh)
 			return render_to_response('counselor/forms/MentalHealth/viewForm.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

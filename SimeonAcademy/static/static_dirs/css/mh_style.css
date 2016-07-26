@@ -1,0 +1,72 @@
+.viewFormClass2 table {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.viewFormClass2 table td {
+  font-size: 20px;
+  vertical-align: bottom;
+  height: 30px;
+}
+
+.viewFormClass2 p {
+  font-size: 20px;
+}
+
+/* ids */
+#clientInfo_mh_c {
+  margin-top: 50px;
+}
+
+/* classes */
+.viewLabel_mh_c {
+  font-family: Arial, sans-serif;
+  padding-left: 5px;
+}
+
+.formInput_mh_c {
+  font-family: monospace;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+.formInputDrug {
+  font-family: monospace;
+  border-bottom: 2px solid black;
+  text-align: center;
+  font-weight: normal;
+}
+
+.formInputDrugCell {
+  font-family: monospace;
+  border-bottom: 2px solid black;
+  margin-right: 20px;
+  float: right;
+  text-align: center;
+  font-weight: normal;
+  height: 20px;
+  width: 60%;
+}
+
+.shortTable {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.shortTable td {
+  font-size: 15px;
+  vertical-align: bottom;
+  height: 10px;
+}
+
+.drugTable {
+  text-align: center;
+  font-weight: bold;
+}
+.drugTable td {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  height: 50px;
+  border: 2px solid black;
+}
+.drugTable .side {
+  text-align: left;
+}
