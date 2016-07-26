@@ -2,7 +2,6 @@
 {% block body %}
 {% load staticfiles %}
 
-<!-- <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}} ,{{json_data}})"> -->
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}})">
     <!-- _________________________SIDE BAR_________________________ -->
 
@@ -936,7 +935,7 @@
 
 			                <td>
 			                	<div>
-			                		<a href="javascript: mh_continue_demographic();">
+			                		<a href="javascript: post_mh_data({{current_section}});">
 			                			<button type='button'>Continue</button>
 			                		</a>
 			                	</div>

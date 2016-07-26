@@ -5493,7 +5493,7 @@ def getMhStressorFields(mh):
 
 	result['psychiatricHistory'] = mh.stressors.psychiatricHistory
 
-	results['isComplete'] = mh.stressorComplete
+	result['isComplete'] = mh.stressorComplete
 
 	return result
 

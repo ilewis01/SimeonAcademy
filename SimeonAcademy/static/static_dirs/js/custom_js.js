@@ -4226,25 +4226,25 @@ function mh_initialize(section, json_data) {
 		d_init_mh_demo(json_data);
 	}
 	else if (section == '/mh_education/') {
-		d_init_mh_education(json_data);
+		initialize_mh_education(json_data);
 	}
 	else if (section == '/mh_background/') {
-		d_init_mh_background(json_data);
+		initialize_mh_background(json_data);
 	}
 	else if (section == '/mh_stress/') {
-		d_init_mh_stress(json_data);
+		initialize_mh_stress(json_data);
 	}
 	else if (section == '/mh_familyHistory/') {
-		d_init_mh_family(json_data);
+		initialize_mh_family(json_data);
 	}
 	else if (section == '/mh_legal/') {
-		d_init_mh_legal(json_data);
+		initialize_mh_legal(json_data);
 	}
 	else if (section == '/mh_psych/') {
-		d_init_mh_psych(json_data);
+		// d_init_mh_psych(json_data);
 	}
 	else if (section == '/mh_useTable/') {
-		d_init_mh_use(json_data);
+		initialize_mh_use(json_data);
 	}
 }
 
@@ -4309,33 +4309,10 @@ function d_init_mh_demo(json_data) {
 	mhBrother();
 }
 
-function d_init_mh_education(json_data) {
-	
-}
-
-function d_init_mh_background(json_data) {
-	
-}
-
-function d_init_mh_stress(json_data) {
-	
-}
-
-function d_init_mh_family(json_data) {
-	
-}
-
-function d_init_mh_legal(json_data) {
-	
-}
-
 function d_init_mh_psych(json_data) {
 	
 }
 
-function d_init_mh_use(json_data) {
-	
-}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -4371,66 +4348,38 @@ function d_post_mh_demo() {
 	post(true, 'number', grab('fatherAgeDeath'), grab('dadNotLiving'), grab('fatherAgeDeath'));
 }
 
-function d_post_mh_education() {
-	
-}
-
-function d_post_mh_background() {
-	
-}
-
-function d_post_mh_stress() {
-	
-}
-
-function d_post_mh_family() {
-	
-}
-
-function d_post_mh_legal() {
-	
-}
-
-function d_post_mh_psych() {
-	
-}
-
-function d_post_mh_use() {
-	
-}
-
 function postMhFields(section) {
 	section = String(section);
 
 	if (section == '/mh_demographic/') {
-		d_post_mh_demo();
+		mh_continue_demographic();
 	}
 	else if (section == '/mh_education/') {
-		d_post_mh_education();
+		proceed_mh_education();
 	}
 	else if (section == '/mh_background/') {
-		d_post_mh_background();
+		proceed_mh_background();
 	}
 	else if (section == '/mh_stress/') {
-		d_post_mh_stress();
+		proceed_mh_stress();
 	}
 	else if (section == '/mh_familyHistory/') {
-		d_post_mh_family();
+		proceed_mh_familyHistory();
 	}
 	else if (section == '/mh_legal/') {
-		d_post_mh_legal();
+		proceed_mh_legalHistory();
 	}
 	else if (section == '/mh_psych/') {
-		d_post_mh_psych();
+		proceed_mh_psychHistory();
 	}
 	else if (section == '/mh_useTable/') {
-		d_post_mh_use();
+		proceed_mh_useTable();
 	}
 }
 
 function post_mh_data(section) {
 	var proceed 	= true;
-	var form 		= grab('sap_form');
+	var form 		= grab('mh_form');
 	var next_url 	= grab('next_url');
 
 	postMhFields(section);
@@ -5013,41 +4962,38 @@ function initialize_mh_education(json_data) {
 }
 
 function initialize_mh_background(json_data) {
-	//RELATIONSHIP RADIOS
-	var isPoorSpouse = document.getElementById('isPoorSpouse');
-	var isAvgSpouse = document.getElementById('isAvgSpouse');
-	var isGoodSpouse = document.getElementById('isGoodSpouse');
-	var isPoorParents = document.getElementById('isPoorParents');
-	var isAvgParents = document.getElementById('isAvgParents');
-	var isGoodParents = document.getElementById('isGoodParents');
-	var isPoorBro = document.getElementById('isPoorBro');
-	var isAvgBro = document.getElementById('isAvgBro');
-	var isGoodBro = document.getElementById('isGoodBro');
-	var isPoorSis = document.getElementById('isPoorSis');
-	var isAvgSis = document.getElementById('isAvgSis');
-	var isGoodSis = document.getElementById('isGoodSis');
-	var isPoorKids = document.getElementById('isPoorKids');
-	var isAvgKids = document.getElementById('isAvgKids');
-	var isGoodKids = document.getElementById('isGoodKids');
-	var isPoorEx = document.getElementById('isPoorEx');
-	var isAvgEx = document.getElementById('isAvgEx');
-	var isGoodEx = document.getElementById('isGoodEx');
+	blank_init(json_data.isComplete, grab('interest'));
+	blank_init(json_data.isComplete, grab('friendAct'));
+	blank_init(json_data.isComplete, grab('workAct'));
+	blank_init(json_data.isComplete, grab('churchAffiliation'));
 
-	document.getElementById('residence').selectedIndex = json_data.residence;
-	document.getElementById('income').selectedIndex = json_data.income;
-	document.getElementById('debt').selectedIndex = json_data.debt;
-	document.getElementById('credit').selectedIndex = json_data.credit;
-	document.getElementById('healthCare').selectedIndex = json_data.healthCare;
-	document.getElementById('otherIncome').selectedIndex = json_data.otherIncome;
-	document.getElementById('closeFriendVisit').selectedIndex = json_data.closeFriendVisit;
-	document.getElementById('acqVisit').selectedIndex = json_data.acqVisit;
+	number_init(json_data.isComplete, grab('closeFriendNumber'));
+	number_init(json_data.isComplete, grab('acqNumber'));
+	number_init(json_data.isComplete, grab('interestWeek'));
+	number_init(json_data.isComplete, grab('interestMonth'));
+	number_init(json_data.isComplete, grab('friendActWeek'));
+	number_init(json_data.isComplete, grab('friendActMonth'));
+	number_init(json_data.isComplete, grab('workActWeek'));
+	number_init(json_data.isComplete, grab('workActMonth'));
+	number_init(json_data.isComplete, grab('churchWeek'));
+	number_init(json_data.isComplete, grab('churchMonth'));
+	number_init(json_data.isComplete, grab('churchYear'));
 
-	grabMhRelationshipRadios(json_data.spouseRelationship, isPoorSpouse, isAvgSpouse, isGoodSpouse);
-	grabMhRelationshipRadios(json_data.brothersRelationship, isPoorBro, isAvgBro, isGoodBro);
-	grabMhRelationshipRadios(json_data.childrenRelationship, isPoorKids, isAvgKids, isGoodKids);
-	grabMhRelationshipRadios(json_data.parentsRelationship, isPoorParents, isAvgParents, isGoodParents);
-	grabMhRelationshipRadios(json_data.sistersRelationship, isPoorSis, isAvgSis, isGoodSis);
-	grabMhRelationshipRadios(json_data.exRelationship, isPoorEx, isAvgEx, isGoodEx);
+	grab('residence').selectedIndex = json_data.residence;
+	grab('income').selectedIndex = json_data.income;
+	grab('debt').selectedIndex = json_data.debt;
+	grab('credit').selectedIndex = json_data.credit;
+	grab('healthCare').selectedIndex = json_data.healthCare;
+	grab('otherIncome').selectedIndex = json_data.otherIncome;
+	grab('closeFriendVisit').selectedIndex = json_data.closeFriendVisit;
+	grab('acqVisit').selectedIndex = json_data.acqVisit;
+
+	grabMhRelationshipRadios(json_data.spouseRelationship, grab('isPoorSpouse'), grab('isAvgSpouse'), grab('isGoodSpouse'));
+	grabMhRelationshipRadios(json_data.parentsRelationship, grab('isPoorParents'), grab('isAvgParents'), grab('isGoodParents'));
+	grabMhRelationshipRadios(json_data.brothersRelationship, grab('isPoorBro'), grab('isAvgBro'), grab('isGoodBro'));
+	grabMhRelationshipRadios(json_data.sistersRelationship, grab('isPoorSis'), grab('isAvgSis'), grab('isGoodSis'));
+	grabMhRelationshipRadios(json_data.childrenRelationship, grab('isPoorKids'), grab('isAvgKids'), grab('isGoodKids'));
+	grabMhRelationshipRadios(json_data.exRelationship, grab('isPoorEx'), grab('isAvgEx'), grab('isGoodEx'));
 }
 
 function initialize_mh_stress(json_data) {
@@ -5485,14 +5431,22 @@ function proceed_mh_education() {
 }
 
 function proceed_mh_background() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
+	post(false, 'text', grab('interest'), null, null);
+	post(false, 'text', grab('friendAct'), null, null);
+	post(false, 'text', grab('workAct'), null, null);
+	post(false, 'text', grab('churchAffiliation'), null, null);
 
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
+	post(false, 'number', grab('closeFriendNumber'), null, null);
+	post(false, 'number', grab('acqNumber'), null, null);
+	post(false, 'number', grab('interestWeek'), null, null);
+	post(false, 'number', grab('interestMonth'), null, null);
+	post(false, 'number', grab('friendActWeek'), null, null);
+	post(false, 'number', grab('friendActMonth'), null, null);
+	post(false, 'number', grab('workActWeek'), null, null);
+	post(false, 'number', grab('workActMonth'), null, null);
+	post(false, 'number', grab('churchWeek'), null, null);
+	post(false, 'number', grab('churchMonth'), null, null);
+	post(false, 'number', grab('churchYear'), null, null);
 }
 
 function processDynamicMhStress() {
