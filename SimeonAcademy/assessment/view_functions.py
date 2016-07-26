@@ -5612,6 +5612,12 @@ def getMhFamilyFields(mh):
 
 	return result
 
+def getMhPsychFields(mh):
+	result = {}
+	result['psychiatricHistory'] = mh.stressors.psychiatricHistory
+	result['isComplete'] = mh.psychComplete
+	return result
+
 def getMhLegalFields(mh):
 	result = {}
 
@@ -5767,6 +5773,8 @@ def getMhFields(mh, section):
 		result = getMhFamilyFields(mh)
 	elif str(section) == '/mh_legal/':
 		result = getMhLegalFields(mh)
+	elif str(section) == '/mh_psych/':
+		result = getMhPsychFields(mh)
 	elif str(section) == '/mh_useTable/':
 		result = getMhUseFields(mh)
 
@@ -5974,7 +5982,7 @@ def saveMhLegal(request, mh):
 	mh.legalHistory.explainPositiveAnswers = request.POST.get('explainPositiveAnswers')
 	mh.legalHistory.probationOfficer = request.POST.get('m_probationOfficer')
 	mh.legalHistory.probationOffense = request.POST.get('m_probationOffense')
-	mh.legalHistory.lawsuitStress = request.POST.get('m_lawsuitStress')
+	mh.legalHistory.lawsuitStress = truePythonBool(request.POST.get('m_lawsuitStress'))
 	mh.legalHistory.dateBenkrupcy = request.POST.get('m_dateBenkrupcy')
 
 	mh.legalHistory.save()

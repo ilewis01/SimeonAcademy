@@ -4241,7 +4241,7 @@ function mh_initialize(section, json_data) {
 		initialize_mh_legal(json_data);
 	}
 	else if (section == '/mh_psych/') {
-		// d_init_mh_psych(json_data);
+		d_init_mh_psych(json_data);
 	}
 	else if (section == '/mh_useTable/') {
 		initialize_mh_use(json_data);
@@ -4602,32 +4602,27 @@ function initialize_mh_stress(json_data) {
 
 
 function initialize_mh_legal(json_data) {
-	//RADIO VARIABLES
-	var yesPresent = document.getElementById('yesPresent');
-	var noPresent = document.getElementById('noPresent');
-	var yesPast = document.getElementById('yesPast');
-	var noPast = document.getElementById('noPast');
-	var isSuspended = document.getElementById('isSuspended');
-	var notSuspended = document.getElementById('notSuspended');
-	var yesSuit = document.getElementById('yesSuit');
-	var noSuit = document.getElementById('noSuit');
-	var yesStress = document.getElementById('yesStress');
-	var noStress = document.getElementById('noStress');
-	var yesDivPro = document.getElementById('yesDivPro');
-	var noDivPro = document.getElementById('noDivPro');
-	var yesChildDis = document.getElementById('yesChildDis');
-	var noChildDis = document.getElementById('noChildDis');
-	var yesBank = document.getElementById('yesBank');
-	var noBank = document.getElementById('noBank');
+	blank_init(json_data.isComplete, grab('arrestCharges'));
+	blank_init(json_data.isComplete, grab('convictionCharges'));
+	blank_init(json_data.isComplete, grab('probationOfficer'));
+	blank_init(json_data.isComplete, grab('probationOffense'));
+	blank_init(json_data.isComplete, grab('dateBenkrupcy'));
+	blank_init(json_data.isComplete, grab('explainPositiveAnswers'));
 
-	setRadioElement(json_data.probationPresent, yesPresent, noPresent);
-	setRadioElement(json_data.probationPast, yesPast, noPast);
-	setRadioElement(json_data.suspendedDrivePresent, isSuspended, notSuspended);
-	setRadioElement(json_data.hasLawsuit, yesSuit, noSuit);
-	setRadioElement(json_data.lawsuitStress, yesStress, noStress);
-	setRadioElement(json_data.inDivorce, yesDivPro, noDivPro);
-	setRadioElement(json_data.childCustody, yesChildDis, noChildDis);
-	setRadioElement(json_data.hasBankrupcy, yesBank, noBank);
+	number_init(json_data.isComplete, grab('num_arrest'));
+	number_init(json_data.isComplete, grab('num_convictions'));
+	number_init(json_data.isComplete, grab('num_suspended'));
+	number_init(json_data.isComplete, grab('num_DUI_charges'));
+	number_init(json_data.isComplete, grab('num_DUI_convictions'));
+
+	setRadioElement(json_data.probationPresent, grab('yesPresent'), grab('noPresent'));
+	setRadioElement(json_data.probationPast, grab('yesPast'), grab('noPast'));
+	setRadioElement(json_data.suspendedDrivePresent, grab('isSuspended'), grab('notSuspended'));
+	setRadioElement(json_data.hasLawsuit, grab('yesSuit'), grab('noSuit'));
+	setRadioElement(json_data.lawsuitStress, grab('yesStress'), grab('noStress'));
+	setRadioElement(json_data.inDivorce, grab('yesDivPro'), grab('noDivPro'));
+	setRadioElement(json_data.childCustody, grab('yesChildDis'), grab('noChildDis'));
+	setRadioElement(json_data.hasBankrupcy, grab('yesBank'), grab('noBank'));
 
 	mhProbation();
 	mhLawsuits();
@@ -4635,7 +4630,7 @@ function initialize_mh_legal(json_data) {
 }
 
 function d_init_mh_psych(json_data) {
-	
+	blank_init(json_data.isComplete, grab('psychiatricHistory'));
 }
 
 
@@ -4865,6 +4860,49 @@ function proceed_mh_familyHistory() {
 	combineFamilyValues(document.getElementById('yesCancer'), document.getElementById('sideCancer'), document.getElementById('memCancer'), document.getElementById('cancer'));
 	combineFamilyValues(document.getElementById('yesBlood'), document.getElementById('sideBlood'), document.getElementById('memBlood'), document.getElementById('highBloodPressure'));
 	combineFamilyValues(document.getElementById('yesAngry'), document.getElementById('sideAngry'), document.getElementById('memAngry'), document.getElementById('anger'));
+}
+
+function proceed_mh_legalHistory() {
+	post(false, 'number', grab('num_arrest'), null, null);
+	post(false, 'number', grab('num_convictions'), null, null);
+	post(false, 'number', grab('num_suspended'), null, null);
+	post(false, 'number', grab('num_DUI_charges'), null, null);
+	post(false, 'number', grab('num_DUI_convictions'), null, null);
+
+	post(false, 'text', grab('arrestCharges'), null, null);
+	post(false, 'text', grab('convictionCharges'), null, null);
+	post(false, 'text', grab('explainPositiveAnswers'), null, null);
+
+	post(true, 'text', grab('dateBenkrupcy'), grab('yesBank'), grab('m_dateBenkrupcy'));
+
+	if (grab('noPresent').checked === true && grab('noPast').checked === true) {
+		grab('m_probationOfficer').value = 'N/A';
+		grab('m_probationOffense').value = 'N/A';
+	}
+	else if (grab('yesPresent').checked === true || grab('yesPast').checked === true) {
+		grab('m_probationOfficer').value = grab('probationOfficer').value;
+		grab('m_probationOffense').value = grab('probationOffense').value;
+	}
+
+	if (grab('yesSuit').checked === true) {
+		if (grab('yesStress').checked === true) {
+			grab('m_lawsuitStress').value = 'True';
+		}
+		else {
+			grab('m_lawsuitStress').value = 'False';
+		}
+	}
+	else {
+		grab('m_lawsuitStress').value = 'False';
+	}
+}
+
+function proceed_mh_psychHistory() {
+	post(false, 'text', grab('psychiatricHistory'), null, null);
+}
+
+function proceed_mh_useTable() {
+	
 }
 
 //******************************** MH SUPPORT FUNCTIONS ************************************************
@@ -5346,18 +5384,6 @@ function processDynamicMhLegal() {
 	postUniversalRadioNumber(yesBank, dateBenkrupcy, m_dateBenkrupcy);
 }
 
-function proceed_mh_legalHistory() {
-	
-}
-
-function proceed_mh_psychHistory() {
-	
-}
-
-function proceed_mh_useTable() {
-	
-}
-
 function mhStressRadio(trigger_id, label_id, element_id) {
 	var trigger = document.getElementById(trigger_id);
 	var label = document.getElementById(label_id);
@@ -5457,7 +5483,7 @@ function mhLawsuits() {
 		opacityLow(noStressLab);
 		opacityLow(yesStress);
 		opacityLow(noStress);
-		yesStress.checked = true;
+		noStress.checked = true;
 		yesStress.disabled = true;
 		noStress.disabled = true;
 	}
