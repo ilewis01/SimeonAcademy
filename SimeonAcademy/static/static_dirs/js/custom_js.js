@@ -4337,7 +4337,115 @@ function d_init_mh_use(json_data) {
 	
 }
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+function d_post_mh_demo() {
+	post(false, 'text', grab('birthplace'), null, null);
+	post(false, 'text', grab('raised'), null, null);
+	post(false, 'text', grab('occupation'), null, null);
+	post(false, 'text', grab('employer'), null, null);
+	post(false, 'text', grab('pastJobs'), null, null);
+	post(false, 'text', grab('recentMove'), null, null);
+	post(true, 'text', grab('spouseOccupation'), grab('single'), grab('m_spouseOccupation'));
+	post(true, 'text', grab('spouseEmployer'), grab('single'), grab('m_spouseEmployer'));
+	post(false, 'text', grab('motherOccupation'), null, null);
+	post(false, 'text', grab('motherCity'), null, null);
+	post(false, 'text', grab('fatherOccupation'), null, null);
+	post(false, 'text', grab('fatherCity'), null, null);
+
+	post(true, 'number', grab('numMarriages'), grab('single'), grab('m_numMarriages'));
+	post(false, 'number', grab('employedMo'), null, null);
+	post(false, 'number', grab('employedYrs'), null, null);
+	post(true, 'number', grab('spouseAge'), grab('single'), grab('m_spouseAge'));
+	post(true, 'number', grab('spouseWorkMos'), grab('single'), grab('m_spouseWorkMos'));
+	post(true, 'number', grab('spouseWorkYrs'), grab('single'), grab('m_spouseWorkYrs'));
+	post(true, 'number', grab('numChildren'), grab('yesChild'), grab('m_numChildren'));
+	post(true, 'number', grab('numSisters'), grab('yesSister'), grab('m_numSisters'));
+	post(true, 'number', grab('numBrothers'), grab('yesBrother'), grab('m_numBrothers'));
+	post(true, 'number', grab('motherAge'), grab('momIsLiving'), grab('motherAge'));
+	post(true, 'number', grab('motherAgeDeath'), grab('momNotLiving'), grab('motherAgeDeath'));
+	post(true, 'number', grab('fatherAge'), grab('dadIsLiving'), grab('fatherAge'));
+	post(true, 'number', grab('fatherAgeDeath'), grab('dadNotLiving'), grab('fatherAgeDeath'));
+}
+
+function d_post_mh_education() {
+	
+}
+
+function d_post_mh_background() {
+	
+}
+
+function d_post_mh_stress() {
+	
+}
+
+function d_post_mh_family() {
+	
+}
+
+function d_post_mh_legal() {
+	
+}
+
+function d_post_mh_psych() {
+	
+}
+
+function d_post_mh_use() {
+	
+}
+
+function postMhFields(section) {
+	section = String(section);
+
+	if (section == '/mh_demographic/') {
+		d_post_mh_demo();
+	}
+	else if (section == '/mh_education/') {
+		d_post_mh_education();
+	}
+	else if (section == '/mh_background/') {
+		d_post_mh_background();
+	}
+	else if (section == '/mh_stress/') {
+		d_post_mh_stress();
+	}
+	else if (section == '/mh_familyHistory/') {
+		d_post_mh_family();
+	}
+	else if (section == '/mh_legal/') {
+		d_post_mh_legal();
+	}
+	else if (section == '/mh_psych/') {
+		d_post_mh_psych();
+	}
+	else if (section == '/mh_useTable/') {
+		d_post_mh_use();
+	}
+}
+
+function post_mh_data(section) {
+	var proceed 	= true;
+	var form 		= grab('sap_form');
+	var next_url 	= grab('next_url');
+
+	postMhFields(section);
+
+	if (proceed === true) {
+		grab('save_this').value = 'true';
+		form.action 			= next_url.value;
+		form.submit();
+	}
+}
+
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
 
 function mhSpouse() {
 	//TRIGGERS
@@ -5192,9 +5300,6 @@ function initialize_mh_legal(json_data) {
 	mhBank();
 }
 
-function initialize_mh_use(json_data) {
-
-}
 
 function processDynamicMhHistory() {
 	//TRIGGERS

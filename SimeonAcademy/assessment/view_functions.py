@@ -5415,7 +5415,7 @@ def getMhEducationFields(mh):
 	result['militaryRank'] = mh.education.militaryRank
 	result['honorableDischarge'] = mh.education.honorableDischarge
 
-	results['isComplete'] = mh.educationComplete
+	result['isComplete'] = mh.educationComplete
 
 	return result
 
