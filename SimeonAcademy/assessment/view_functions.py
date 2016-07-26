@@ -5608,7 +5608,7 @@ def getMhFamilyFields(mh):
 	result['angerM'] = anger['member']
 	result['isanger'] = mh.familyHistory.isanger
 
-	results['isComplete'] = mh.familyComplete
+	result['isComplete'] = mh.familyComplete
 
 	return result
 
@@ -5635,7 +5635,7 @@ def getMhLegalFields(mh):
 	result['dateBenkrupcy'] = mh.legalHistory.dateBenkrupcy
 	result['explainPositiveAnswers'] = mh.legalHistory.explainPositiveAnswers
 
-	results['isComplete'] = mh.legalComplete
+	result['isComplete'] = mh.legalComplete
 
 	return result
 
@@ -5748,7 +5748,7 @@ def getMhUseFields(mh):
 	result['howOld21'] = mh.useTable.howOld21
 	result['lastTime21'] = mh.useTable.lastTime21
 
-	results['isComplete'] = mh.useComplete
+	result['isComplete'] = mh.useComplete
 
 	return result
 
@@ -5900,6 +5900,7 @@ def saveMhStress(request, mh):
 
 def saveMhFamily(request, mh):
 	mh.familyHistory.isdepressed 			= truePythonBool(request.POST.get('isdepressed'))
+	print "IS DEPRESSED: " + str(request.POST.get('isdepressed'))
 	mh.familyHistory.isadd 					= truePythonBool(request.POST.get('isadd'))
 	mh.familyHistory.isbedWetting 			= truePythonBool(request.POST.get('isbedWetting'))
 	mh.familyHistory.isbipolar 				= truePythonBool(request.POST.get('isbipolar'))
