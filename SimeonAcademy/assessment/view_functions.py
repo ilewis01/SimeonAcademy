@@ -8839,56 +8839,47 @@ def getUtViewImages(ut):
 
 def beginUT(request):
 	result = {}
+	paid = None
 	client_id = request.POST.get('client_id', '')
 	session_id = request.POST.get('session_id', '')
 
 	session = ClientSession.objects.get(id=session_id)
 	client = session.client
 
+	result['session'] = session
+
 	s_type = getStype('ut')
 	result['s_type'] = s_type
 
-	if session.hasUT == True:
-		if session.ut.isComplete == True:
-			ut = session.ut
-			setGlobalID(ut.id, request.user)
+	if hasUtPaid(client) == True:
+		paid = getUtPaid(client)
+		setGlobalID(paid.id, request.user)
+		result['paid'] = paid
+
+		if session.hasUT == True:
 			result['isNew'] = False
-			result['session'] = session
-			result['title'] = 'Simeon Academy | Urine Analysis'
-			result['url'] = 'counselor/forms/UrineTest/existingUT.html'
+		else:
+			date = datetime.now()
+			ut = UrineResults(client=client, date_of_assessment=date.date())
+			ut.save()
+			session.ut = ut
+			session.hasUT = True
+			session.save()
+			result['isNew'] = True
+
+		setGlobalID(session.ut.id, request.user)
+		result['ut'] = session.ut
+
+		if paid.isPaid == True:
+			result['url'] = 'counselor/forms/UrineTest/results.html'
+		else:			
+			result['url'] = 'counselor/forms/UrineTest/instructions.html'
 
 	else:
-		if hasUtPaid(client) == True:
-			proceed = getUtPaid(client)
-
-			if proceed.isPaid == True:
-				ut = startUT(client)
-				setGlobalID(ut.id, request.user)
-				openForm('ut', ut, client)
-				fields = getUtFields(ut)
-				json_data = json.dumps(fields)
-				session.hasUT = True
-				session.ut = ut
-				session.save()
-
-				result['date'] = ut.date_of_assessment
-				result['fields'] = fields
-				result['json_data'] = json_data
-				result['url'] = 'counselor/forms/UrineTest/results.html'
-				result['ut'] = ut
-			else:
-				result['url'] = 'counselor/forms/UrineTest/instructions.html'
-				result['paid_profile'] = proceed
-				setGlobalID(proceed.id, request.user)
-		else:
-			newPaid = UtPaid(client=client)
-			newPaid.save()
-			result['url'] = 'counselor/forms/UrineTest/instructions.html'
-			result['paid_profile'] = newPaid
-			setGlobalID(newPaid.id, request.user)
-		
-		result['session'] = session	
-		result['title'] = "Simeon Academy | Urine Analysis"
+		paid = UtPaid(client=client)
+		paid.save()
+		setGlobalID(paid.id, request.user)
+		result['url'] = 'counselor/forms/UrineTest/instructions.html'
 
 	return result
 

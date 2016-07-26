@@ -39,7 +39,7 @@ processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSessi
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
-getUtViewImages
+getUtViewImages, getUtPaid
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -2338,7 +2338,9 @@ def ut_pay(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['p_id'] = getGlobalID(user)
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			paid = getUtPaid(session.client)
+			content['p_id'] = paid.id
 			return render_to_response('counselor/forms/UrineTest/invoice.html', content)
 
 @login_required(login_url='/index')
@@ -2419,6 +2421,8 @@ def UT_complete(request):
 			session.ut.isComplete = True
 			session.ut.isOpen = False
 			session.ut.save()
+			paid = getUtPaid(session.client)
+			paid.delete()
 			content['session'] = session
 			return render_to_response('counselor/forms/UrineTest/utComplete.html', content, context_instance=RequestContext(request))
 
