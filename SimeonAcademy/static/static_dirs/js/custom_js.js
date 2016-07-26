@@ -4633,6 +4633,134 @@ function d_init_mh_psych(json_data) {
 	blank_init(json_data.isComplete, grab('psychiatricHistory'));
 }
 
+function initialize_mh_use(json_data) {
+	blank_init(json_data.isComplete, grab('howMuch1'));
+	blank_init(json_data.isComplete, grab('howOften1'));
+	blank_init(json_data.isComplete, grab('howLong1'));
+	blank_init(json_data.isComplete, grab('howOld1'));
+	blank_init(json_data.isComplete, grab('lastTime1'));
+
+	blank_init(json_data.isComplete, grab('howMuch2'));
+	blank_init(json_data.isComplete, grab('howOften2'));
+	blank_init(json_data.isComplete, grab('howLong2'));
+	blank_init(json_data.isComplete, grab('howOld2'));
+	blank_init(json_data.isComplete, grab('lastTime2'));
+
+	blank_init(json_data.isComplete, grab('howMuch3'));
+	blank_init(json_data.isComplete, grab('howOften3'));
+	blank_init(json_data.isComplete, grab('howLong3'));
+	blank_init(json_data.isComplete, grab('howOld3'));
+	blank_init(json_data.isComplete, grab('lastTime3'));
+
+	blank_init(json_data.isComplete, grab('howMuch4'));
+	blank_init(json_data.isComplete, grab('howOften4'));
+	blank_init(json_data.isComplete, grab('howLong4'));
+	blank_init(json_data.isComplete, grab('howOld4'));
+	blank_init(json_data.isComplete, grab('lastTime4'));
+
+	blank_init(json_data.isComplete, grab('howMuch5'));
+	blank_init(json_data.isComplete, grab('howOften5'));
+	blank_init(json_data.isComplete, grab('howLong5'));
+	blank_init(json_data.isComplete, grab('howOld5'));
+	blank_init(json_data.isComplete, grab('lastTime5'));
+
+	blank_init(json_data.isComplete, grab('howMuch6'));
+	blank_init(json_data.isComplete, grab('howOften6'));
+	blank_init(json_data.isComplete, grab('howLong6'));
+	blank_init(json_data.isComplete, grab('howOld6'));
+	blank_init(json_data.isComplete, grab('lastTime6'));
+
+	blank_init(json_data.isComplete, grab('howMuch7'));
+	blank_init(json_data.isComplete, grab('howOften7'));
+	blank_init(json_data.isComplete, grab('howLong7'));
+	blank_init(json_data.isComplete, grab('howOld7'));
+	blank_init(json_data.isComplete, grab('lastTime7'));
+
+	blank_init(json_data.isComplete, grab('howMuch8'));
+	blank_init(json_data.isComplete, grab('howOften8'));
+	blank_init(json_data.isComplete, grab('howLong8'));
+	blank_init(json_data.isComplete, grab('howOld8'));
+	blank_init(json_data.isComplete, grab('lastTime8'));
+
+	blank_init(json_data.isComplete, grab('howMuch9'));
+	blank_init(json_data.isComplete, grab('howOften9'));
+	blank_init(json_data.isComplete, grab('howLong9'));
+	blank_init(json_data.isComplete, grab('howOld9'));
+	blank_init(json_data.isComplete, grab('lastTime9'));
+
+	blank_init(json_data.isComplete, grab('howMuch10'));
+	blank_init(json_data.isComplete, grab('howOften10'));
+	blank_init(json_data.isComplete, grab('howLong10'));
+	blank_init(json_data.isComplete, grab('howOld10'));
+	blank_init(json_data.isComplete, grab('lastTime10'));
+
+	blank_init(json_data.isComplete, grab('howMuch11'));
+	blank_init(json_data.isComplete, grab('howOften11'));
+	blank_init(json_data.isComplete, grab('howLong11'));
+	blank_init(json_data.isComplete, grab('howOld11'));
+	blank_init(json_data.isComplete, grab('lastTime11'));
+
+	blank_init(json_data.isComplete, grab('howMuch12'));
+	blank_init(json_data.isComplete, grab('howOften12'));
+	blank_init(json_data.isComplete, grab('howLong12'));
+	blank_init(json_data.isComplete, grab('howOld12'));
+	blank_init(json_data.isComplete, grab('lastTime12'));
+
+	blank_init(json_data.isComplete, grab('howMuch13'));
+	blank_init(json_data.isComplete, grab('howOften13'));
+	blank_init(json_data.isComplete, grab('howLong13'));
+	blank_init(json_data.isComplete, grab('howOld13'));
+	blank_init(json_data.isComplete, grab('lastTime13'));
+
+	blank_init(json_data.isComplete, grab('howMuch14'));
+	blank_init(json_data.isComplete, grab('howOften14'));
+	blank_init(json_data.isComplete, grab('howLong14'));
+	blank_init(json_data.isComplete, grab('howOld14'));
+	blank_init(json_data.isComplete, grab('lastTime14'));
+
+	blank_init(json_data.isComplete, grab('howMuch15'));
+	blank_init(json_data.isComplete, grab('howOften15'));
+	blank_init(json_data.isComplete, grab('howLong15'));
+	blank_init(json_data.isComplete, grab('howOld15'));
+	blank_init(json_data.isComplete, grab('lastTime15'));
+
+	blank_init(json_data.isComplete, grab('howMuch16'));
+	blank_init(json_data.isComplete, grab('howOften16'));
+	blank_init(json_data.isComplete, grab('howLong16'));
+	blank_init(json_data.isComplete, grab('howOld16'));
+	blank_init(json_data.isComplete, grab('lastTime16'));
+
+	blank_init(json_data.isComplete, grab('howMuch17'));
+	blank_init(json_data.isComplete, grab('howOften17'));
+	blank_init(json_data.isComplete, grab('howLong17'));
+	blank_init(json_data.isComplete, grab('howOld17'));
+	blank_init(json_data.isComplete, grab('lastTime17'));
+
+	blank_init(json_data.isComplete, grab('howMuch18'));
+	blank_init(json_data.isComplete, grab('howOften18'));
+	blank_init(json_data.isComplete, grab('howLong18'));
+	blank_init(json_data.isComplete, grab('howOld18'));
+	blank_init(json_data.isComplete, grab('lastTime18'));
+
+	blank_init(json_data.isComplete, grab('howMuch19'));
+	blank_init(json_data.isComplete, grab('howOften19'));
+	blank_init(json_data.isComplete, grab('howLong19'));
+	blank_init(json_data.isComplete, grab('howOld19'));
+	blank_init(json_data.isComplete, grab('lastTime19'));
+
+	blank_init(json_data.isComplete, grab('howMuch20'));
+	blank_init(json_data.isComplete, grab('howOften20'));
+	blank_init(json_data.isComplete, grab('howLong20'));
+	blank_init(json_data.isComplete, grab('howOld20'));
+	blank_init(json_data.isComplete, grab('lastTime20'));
+
+	blank_init(json_data.isComplete, grab('howMuch21'));
+	blank_init(json_data.isComplete, grab('howOften21'));
+	blank_init(json_data.isComplete, grab('howLong21'));
+	blank_init(json_data.isComplete, grab('howOld21'));
+	blank_init(json_data.isComplete, grab('lastTime21'));
+}
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -4902,7 +5030,131 @@ function proceed_mh_psychHistory() {
 }
 
 function proceed_mh_useTable() {
-	
+	post(false, 'text', grab('howMuch1'), null, null);
+	post(false, 'text', grab('howOften1'), null, null);
+	post(false, 'text', grab('howLong1'), null, null);
+	post(false, 'text', grab('howOld1'), null, null);
+	post(false, 'text', grab('lastTime1'), null, null);
+
+	post(false, 'text', grab('howMuch2'), null, null);
+	post(false, 'text', grab('howOften2'), null, null);
+	post(false, 'text', grab('howLong2'), null, null);
+	post(false, 'text', grab('howOld2'), null, null);
+	post(false, 'text', grab('lastTime2'), null, null);
+
+	post(false, 'text', grab('howMuch3'), null, null);
+	post(false, 'text', grab('howOften3'), null, null);
+	post(false, 'text', grab('howLong3'), null, null);
+	post(false, 'text', grab('howOld3'), null, null);
+	post(false, 'text', grab('lastTime3'), null, null);
+
+	post(false, 'text', grab('howMuch4'), null, null);
+	post(false, 'text', grab('howOften4'), null, null);
+	post(false, 'text', grab('howLong4'), null, null);
+	post(false, 'text', grab('howOld4'), null, null);
+	post(false, 'text', grab('lastTime4'), null, null);
+
+	post(false, 'text', grab('howMuch5'), null, null);
+	post(false, 'text', grab('howOften5'), null, null);
+	post(false, 'text', grab('howLong5'), null, null);
+	post(false, 'text', grab('howOld5'), null, null);
+	post(false, 'text', grab('lastTime5'), null, null);
+
+	post(false, 'text', grab('howMuch6'), null, null);
+	post(false, 'text', grab('howOften6'), null, null);
+	post(false, 'text', grab('howLong6'), null, null);
+	post(false, 'text', grab('howOld6'), null, null);
+	post(false, 'text', grab('lastTime6'), null, null);
+
+	post(false, 'text', grab('howMuch7'), null, null);
+	post(false, 'text', grab('howOften7'), null, null);
+	post(false, 'text', grab('howLong7'), null, null);
+	post(false, 'text', grab('howOld7'), null, null);
+	post(false, 'text', grab('lastTime7'), null, null);
+
+	post(false, 'text', grab('howMuch8'), null, null);
+	post(false, 'text', grab('howOften8'), null, null);
+	post(false, 'text', grab('howLong8'), null, null);
+	post(false, 'text', grab('howOld8'), null, null);
+	post(false, 'text', grab('lastTime8'), null, null);
+
+	post(false, 'text', grab('howMuch9'), null, null);
+	post(false, 'text', grab('howOften9'), null, null);
+	post(false, 'text', grab('howLong9'), null, null);
+	post(false, 'text', grab('howOld9'), null, null);
+	post(false, 'text', grab('lastTime9'), null, null);
+
+	post(false, 'text', grab('howMuch10'), null, null);
+	post(false, 'text', grab('howOften10'), null, null);
+	post(false, 'text', grab('howLong10'), null, null);
+	post(false, 'text', grab('howOld10'), null, null);
+	post(false, 'text', grab('lastTime10'), null, null);
+
+	post(false, 'text', grab('howMuch11'), null, null);
+	post(false, 'text', grab('howOften11'), null, null);
+	post(false, 'text', grab('howLong11'), null, null);
+	post(false, 'text', grab('howOld11'), null, null);
+	post(false, 'text', grab('lastTime11'), null, null);
+
+	post(false, 'text', grab('howMuch12'), null, null);
+	post(false, 'text', grab('howOften12'), null, null);
+	post(false, 'text', grab('howLong12'), null, null);
+	post(false, 'text', grab('howOld12'), null, null);
+	post(false, 'text', grab('lastTime12'), null, null);
+
+	post(false, 'text', grab('howMuch13'), null, null);
+	post(false, 'text', grab('howOften13'), null, null);
+	post(false, 'text', grab('howLong13'), null, null);
+	post(false, 'text', grab('howOld13'), null, null);
+	post(false, 'text', grab('lastTime13'), null, null);
+
+	post(false, 'text', grab('howMuch14'), null, null);
+	post(false, 'text', grab('howOften14'), null, null);
+	post(false, 'text', grab('howLong14'), null, null);
+	post(false, 'text', grab('howOld14'), null, null);
+	post(false, 'text', grab('lastTime14'), null, null);
+
+	post(false, 'text', grab('howMuch15'), null, null);
+	post(false, 'text', grab('howOften15'), null, null);
+	post(false, 'text', grab('howLong15'), null, null);
+	post(false, 'text', grab('howOld15'), null, null);
+	post(false, 'text', grab('lastTime15'), null, null);
+
+	post(false, 'text', grab('howMuch16'), null, null);
+	post(false, 'text', grab('howOften16'), null, null);
+	post(false, 'text', grab('howLong16'), null, null);
+	post(false, 'text', grab('howOld16'), null, null);
+	post(false, 'text', grab('lastTime16'), null, null);
+
+	post(false, 'text', grab('howMuch17'), null, null);
+	post(false, 'text', grab('howOften17'), null, null);
+	post(false, 'text', grab('howLong17'), null, null);
+	post(false, 'text', grab('howOld17'), null, null);
+	post(false, 'text', grab('lastTime17'), null, null);
+
+	post(false, 'text', grab('howMuch18'), null, null);
+	post(false, 'text', grab('howOften18'), null, null);
+	post(false, 'text', grab('howLong18'), null, null);
+	post(false, 'text', grab('howOld18'), null, null);
+	post(false, 'text', grab('lastTime18'), null, null);
+
+	post(false, 'text', grab('howMuch19'), null, null);
+	post(false, 'text', grab('howOften19'), null, null);
+	post(false, 'text', grab('howLong19'), null, null);
+	post(false, 'text', grab('howOld19'), null, null);
+	post(false, 'text', grab('lastTime19'), null, null);
+
+	post(false, 'text', grab('howMuch20'), null, null);
+	post(false, 'text', grab('howOften20'), null, null);
+	post(false, 'text', grab('howLong20'), null, null);
+	post(false, 'text', grab('howOld20'), null, null);
+	post(false, 'text', grab('lastTime20'), null, null);
+
+	post(false, 'text', grab('howMuch21'), null, null);
+	post(false, 'text', grab('howOften21'), null, null);
+	post(false, 'text', grab('howLong21'), null, null);
+	post(false, 'text', grab('howOld21'), null, null);
+	post(false, 'text', grab('lastTime21'), null, null);
 }
 
 //******************************** MH SUPPORT FUNCTIONS ************************************************
