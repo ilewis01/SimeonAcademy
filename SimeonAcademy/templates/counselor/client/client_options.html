@@ -166,7 +166,7 @@
                                     <tr>
                                         <td>
                                             <li>
-                                                <a href="javascript: get_main_p_history({{h.form.id}})">
+                                                <a href="javascript: get_main_p_history({{h.form.id}})" class='cli-history-a'>
                                                     <div>
                                                         <form action='' method='post' id='{{h.form.id}}'> {% csrf_token %}
                                                             <input type='hidden' name='form_id' id='form_id' value='{{h.form.id}}'>
@@ -191,53 +191,6 @@
                        <!--  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
                         </div>
                     </div>
-
-                    <!-- <div class="col-lg-5" style='text-align:'>
-                        <table class='clientProfileTable'>
-                            <tr>
-                                <td><div id='pro-question'>Intake Date:</div></td>
-                                <td><div id='pro-answer'>{{session.client.intake_date}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>DOB:</div></td>
-                                <td><div id='pro-answer'>{{session.client.dob}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>SSN:</div></td>
-                                <td><div id='pro-answer'>{{session.client.ss_num}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>Gender:</div></td>
-                                <td><div id='pro-answer'>{{gender}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>Phone:</div></td>
-                                <td><div id='pro-answer'>{{session.client.phone}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>Email:</div></td>
-                                <td><div id='pro-answer'>{{session.client.email}}</div></td>
-                            </tr>
-
-                            <tr>
-                                <td><div id='pro-question'>Address:</div></td>
-
-                                <td>
-                                    <div id='pro-address'>
-                                        {{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
-                                    </div>
-                                
-                                    <div id='pro-address'>
-                                        {{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table> -->
                     </div>
 
                     <div class="col-lg-3" style='text-align:'>

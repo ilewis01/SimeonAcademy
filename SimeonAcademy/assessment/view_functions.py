@@ -5346,6 +5346,9 @@ def decodeMhFamilyText(m_value):
 def getMhDemoFields(mh):
 	results = {}
 
+	m_state = getOrderedStateIndex(mh.demographics.motherState)
+	f_state = getOrderedStateIndex(mh.demographics.fatherState)
+
 	results['birthplace'] = mh.demographics.birthplace
 	results['raised'] = mh.demographics.raised
 	results['maritalStatus'] = mh.demographics.maritalStatus
@@ -5364,7 +5367,7 @@ def getMhDemoFields(mh):
 
 	results['motherOccupation'] = mh.demographics.motherOccupation
 	results['motherCity'] = mh.demographics.motherCity
-	results['motherState'] = mh.demographics.motherState
+	results['motherState'] = m_state
 	results['motherLiving'] = mh.demographics.motherLiving
 	results['motherAge'] = mh.demographics.motherAge
 	results['motherAgeDeath'] = mh.demographics.motherAgeDeath
@@ -5372,13 +5375,15 @@ def getMhDemoFields(mh):
 	results['fatherOccupation'] = mh.demographics.fatherOccupation
 	results['fatherCity'] = mh.demographics.fatherCity
 	results['fatherLiving'] = mh.demographics.fatherLiving
-	results['fatherState'] = mh.demographics.fatherState
+	results['fatherState'] = f_state
 	results['fatherAge'] = mh.demographics.fatherAge
 	results['fatherAgeDeath'] = mh.demographics.fatherAgeDeath
 
 	results['numChildren'] = mh.demographics.numChildren
 	results['numSisters'] = mh.demographics.numSisters
 	results['numBrothers'] = mh.demographics.numBrothers
+
+	results['isComplete'] = mh.demographicsComplete
 
 	return results
 
@@ -5409,6 +5414,8 @@ def getMhEducationFields(mh):
 	result['militaryYears'] = mh.education.militaryYears
 	result['militaryRank'] = mh.education.militaryRank
 	result['honorableDischarge'] = mh.education.honorableDischarge
+
+	results['isComplete'] = mh.educationComplete
 
 	return result
 
@@ -5456,6 +5463,8 @@ def getMhBackgroundFields(mh):
 	results['churchMonth'] = mh.background.churchMonth
 	results['churchYear'] = mh.background.churchYear
 
+	results['isComplete'] = mh.backgroundComplete
+
 	return results
 
 def getMhStressorFields(mh):
@@ -5483,6 +5492,8 @@ def getMhStressorFields(mh):
 	result['otherStressExp'] = mh.stressors.otherStressExp
 
 	result['psychiatricHistory'] = mh.stressors.psychiatricHistory
+
+	results['isComplete'] = mh.stressorComplete
 
 	return result
 
@@ -5597,6 +5608,8 @@ def getMhFamilyFields(mh):
 	result['angerM'] = anger['member']
 	result['isanger'] = mh.familyHistory.isanger
 
+	results['isComplete'] = mh.familyComplete
+
 	return result
 
 def getMhLegalFields(mh):
@@ -5621,6 +5634,8 @@ def getMhLegalFields(mh):
 	result['hasBankrupcy'] = mh.legalHistory.hasBankrupcy
 	result['dateBenkrupcy'] = mh.legalHistory.dateBenkrupcy
 	result['explainPositiveAnswers'] = mh.legalHistory.explainPositiveAnswers
+
+	results['isComplete'] = mh.legalComplete
 
 	return result
 
@@ -5732,6 +5747,8 @@ def getMhUseFields(mh):
 	result['howLong21'] = mh.useTable.howLong21
 	result['howOld21'] = mh.useTable.howOld21
 	result['lastTime21'] = mh.useTable.lastTime21
+
+	results['isComplete'] = mh.useComplete
 
 	return result
 
@@ -6463,6 +6480,7 @@ def processMhData(request, current_section):
 	image = grabMhSideImages(mh, current_section)
 	classes = grabMhClassesCSS(mh, current_section)
 
+	result['current_section'] = current_section
 	result['class'] = classes
 	result['image'] = image
 	result['next_url'] = next_url

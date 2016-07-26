@@ -592,6 +592,11 @@ function return_to_options2() {
 	form.submit();
 }
 
+function get_main_p_history(form_id) {
+	var w = 1100, h = 1300;
+	openPopUp('auto', '/printUT/', w, h);
+}
+
 function return_to_options3() {
 	form = document.getElementById('asi_instructions');
 	form.action = '/clientOptions/';
@@ -4213,6 +4218,126 @@ function continue_to_sap_form() {
 //-------------------------------------------------- MH FUNCTIONS -----------------------------------------------------//
 //*********************************************************************************************************************//
 //#####################################################################################################################//
+
+function mh_initialize(section, json_data) {
+	section = String(section);
+
+	if (section == '/mh_demographic/') {
+		d_init_mh_demo(json_data);
+	}
+	else if (section == '/mh_education/') {
+		d_init_mh_education(json_data);
+	}
+	else if (section == '/mh_background/') {
+		d_init_mh_background(json_data);
+	}
+	else if (section == '/mh_stress/') {
+		d_init_mh_stress(json_data);
+	}
+	else if (section == '/mh_familyHistory/') {
+		d_init_mh_family(json_data);
+	}
+	else if (section == '/mh_legal/') {
+		d_init_mh_legal(json_data);
+	}
+	else if (section == '/mh_psych/') {
+		d_init_mh_psych(json_data);
+	}
+	else if (section == '/mh_useTable/') {
+		d_init_mh_use(json_data);
+	}
+}
+
+function d_init_mh_demo(json_data) {
+	blank_init(json_data.isComplete, grab('birthplace'));
+	blank_init(json_data.isComplete, grab('raised'));
+	blank_init(json_data.isComplete, grab('occupation'));
+	blank_init(json_data.isComplete, grab('employer'));
+	blank_init(json_data.isComplete, grab('pastJobs'));
+	blank_init(json_data.isComplete, grab('recentMove'));
+	blank_init(json_data.isComplete, grab('spouseOccupation'));
+	blank_init(json_data.isComplete, grab('spouseEmployer'));
+	blank_init(json_data.isComplete, grab('motherOccupation'));
+	blank_init(json_data.isComplete, grab('motherCity'));
+	blank_init(json_data.isComplete, grab('fatherOccupation'));
+	blank_init(json_data.isComplete, grab('fatherCity'));
+
+	number_init(json_data.isComplete, grab('numMarriages'));
+	number_init(json_data.isComplete, grab('employedMo'));
+	number_init(json_data.isComplete, grab('employedYrs'));
+	number_init(json_data.isComplete, grab('spouseAge'));
+	number_init(json_data.isComplete, grab('spouseWorkMos'));
+	number_init(json_data.isComplete, grab('spouseWorkYrs'));
+	number_init(json_data.isComplete, grab('numChildren'));
+	number_init(json_data.isComplete, grab('numSisters'));
+	number_init(json_data.isComplete, grab('numBrothers'));
+	number_init(json_data.isComplete, grab('motherAge'));
+	number_init(json_data.isComplete, grab('motherAgeDeath'));
+	number_init(json_data.isComplete, grab('fatherAge'));
+	number_init(json_data.isComplete, grab('fatherAgeDeath'));
+
+	motherState.selectedIndex = json_data.motherState;
+	fatherState.selectedIndex = json_data.fatherState;
+
+	if (json_data.maritalStatus === 'Married') {
+		grab('married').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Single') {
+		grab('single').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Divorced') {
+		grab('divorced').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Widowed') {
+		grab('widowed').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Seperated') {
+		grab('seperated').checked = true;
+	}
+
+	setRadioElement(json_data.haveChildren, grab('yesChild'), grab('noChild'));
+	setRadioElement(json_data.haveSisters, grab('yesSister'), grab('noSister'));
+	setRadioElement(json_data.haveBrothers, grab('yesBrother'), grab('noBrother'));
+	setRadioElement(json_data.motherLiving, grab('momIsLiving'), grab('momNotLiving'));
+	setRadioElement(json_data.fatherLiving, grab('dadIsLiving'), grab('dadNotLiving'));
+
+	mhSpouse();
+	motherShift();
+	fatherShift();
+	mhChildren();
+	mhSister();
+	mhBrother();
+}
+
+function d_init_mh_education(json_data) {
+	
+}
+
+function d_init_mh_background(json_data) {
+	
+}
+
+function d_init_mh_stress(json_data) {
+	
+}
+
+function d_init_mh_family(json_data) {
+	
+}
+
+function d_init_mh_legal(json_data) {
+	
+}
+
+function d_init_mh_psych(json_data) {
+	
+}
+
+function d_init_mh_use(json_data) {
+	
+}
+
+
 
 function mhSpouse() {
 	//TRIGGERS
