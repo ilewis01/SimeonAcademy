@@ -5964,6 +5964,335 @@ def grabMhViewImages(mh):
 		result['c4'] = None
 		result['c5'] = 'junkie'
 
+	if mh.education.collegeYears == 1:
+		result['d1'] = 'junkie'
+		result['d2'] = None
+		result['d3'] = None
+		result['d4'] = None
+		result['d5'] = None
+	elif mh.education.collegeYears == 2:
+		result['d1'] = None
+		result['d2'] = 'junkie'
+		result['d3'] = None
+		result['d4'] = None
+		result['d5'] = None
+	elif mh.education.collegeYears == 3:
+		result['d1'] = None
+		result['d2'] = None
+		result['d3'] = 'junkie'
+		result['d4'] = None
+		result['d5'] = None
+	elif mh.education.collegeYears == 4:
+		result['d1'] = None
+		result['d2'] = None
+		result['d3'] = None
+		result['d4'] = 'junkie'
+		result['d5'] = None
+	elif mh.education.collegeYears > 4:
+		result['d1'] = None
+		result['d2'] = None
+		result['d3'] = None
+		result['d4'] = None
+		result['d5'] = 'junkie'
+
+	if mh.education.collegeDegree == True:
+		result['grad'] = 'junkie'
+
+	if mh.education.advanceDegree == True:
+		result['advDeg'] = check
+	else:
+		result['advDeg'] = nope
+
+	if mh.education.honorableDischarge == True:
+		result['yeshonor'] = 'junkie'
+		result['nohonor'] = nope
+	else:
+		result['yeshonor'] = nope
+		result['nohonor'] = 'junkie'
+
+	if mh.background.residence == 'Rent':
+		result['rent'] = check
+		result['own'] = nope
+		result['subHouse'] = nope
+	elif mh.background.residence == 'Own Home':
+		result['own'] = check
+		result['rent'] = nope
+		result['subHouse'] = nope
+	elif mh.background.residence == 'Subsidized Housing':
+		result['subHouse'] = check
+		result['own'] = nope
+		result['rent'] = nope
+
+	if mh.background.income == 'Low':
+		result['ilow'] = check
+		result['imed'] = nope
+		result['ihi'] = nope
+	elif mh.background.income == 'Medium':
+		result['imed'] = check
+		result['ilow'] = nope
+		result['ihi'] = nope
+	elif mh.background.income == 'High':
+		result['ihi'] = check
+		result['ilow'] = nope
+		result['imed'] = nope
+
+	if mh.background.debt == 'Low':
+		result['dlow'] = check
+		result['dmed'] = nope
+		result['dhi'] = nope
+	elif mh.background.debt == 'Medium':
+		result['dmed'] = check
+		result['dlow'] = nope
+		result['dhi'] = nope
+	elif mh.background.debt == 'High':
+		result['dhi'] = check
+		result['dlow'] = nope
+		result['dmed'] = nope
+
+	if mh.background.credit == 'Poor':
+		result['poor'] = check
+		result['fair'] = nope
+		result['good'] = nope
+		result['bankrupt'] = nope
+	elif mh.background.credit == 'Fair':
+		result['fair'] = check
+		result['poor'] = nope
+		result['good'] = nope
+		result['bankrupt'] = nope
+	elif mh.background.credit == 'Good':
+		result['good'] = check
+		result['poor'] = nope
+		result['bankrupt'] = nope
+		result['fair'] = nope
+	elif mh.background.credit == 'Bankruptcy':
+		result['bankrupt'] = check
+		result['poor'] = nope
+		result['good'] = nope
+		result['fair'] = nope
+
+	if mh.background.healthCare == 'Company Health Benefits':
+		result['hc'] = check
+		result['pi'] = nope
+		result['medicaid'] = nope
+		result['medicare'] = nope
+		result['selfpay'] = nope
+	elif mh.background.healthCare == 'Private Insurance':
+		result['pi'] = check
+		result['hc'] = nope
+		result['medicaid'] = nope
+		result['medicare'] = nope
+		result['selfpay'] = nope
+	elif mh.background.healthCare == 'Medicaid':
+		result['medicaid'] = check
+		result['pi'] = nope
+		result['hc'] = nope
+		result['medicare'] = nope
+		result['selfpay'] = nope
+	elif mh.background.healthCare == 'Medicare':
+		result['medicare'] = check
+		result['pi'] = nope
+		result['hc'] = nope
+		result['medicaid'] = nope
+		result['selfpay'] = nope
+	elif mh.background.healthCare == 'Self-Pay':
+		result['selfpay'] = check
+		result['pi'] = nope
+		result['hc'] = nope
+		result['medicare'] = nope
+		result['medicaid'] = nope
+
+	if mh.background.otherIncome == 'Alimony':
+		result['ali'] = check
+		result['cs'] = nope
+		result['adc'] = nope
+		result['ssi'] = nope
+		result['retired'] = nope
+		result['sfr'] = nope
+	elif mh.background.otherIncome == 'Child Support':
+		result['ali'] = nope
+		result['cs'] = check
+		result['adc'] = nope
+		result['ssi'] = nope
+		result['retired'] = nope
+		result['sfr'] = nope
+	elif mh.background.otherIncome == 'Aid to Dependant Children':
+		result['ali'] = nope
+		result['cs'] = nope
+		result['adc'] = check
+		result['ssi'] = nope
+		result['retired'] = nope
+		result['sfr'] = nope
+	elif mh.background.otherIncome == 'SSI':
+		result['ali'] = nope
+		result['cs'] = nope
+		result['adc'] = nope
+		result['ssi'] = check
+		result['retired'] = nope
+		result['sfr'] = nope
+	elif mh.background.otherIncome == 'Retired':
+		result['ali'] = nope
+		result['cs'] = nope
+		result['adc'] = nope
+		result['ssi'] = nope
+		result['retired'] = check
+		result['sfr'] = nope
+	elif mh.background.otherIncome == 'Support from Relatives':
+		result['ali'] = nope
+		result['cs'] = nope
+		result['adc'] = nope
+		result['ssi'] = nope
+		result['retired'] = nope
+		result['sfr'] = check
+
+	if mh.background.spouseRelationship == 'Poor':
+		result['spouseP'] = check
+		result['spouseA'] = nope
+		result['spouseG'] = nope
+	elif mh.background.spouseRelationship == 'Average':
+		result['spouseP'] = nope
+		result['spouseA'] = check
+		result['spouseG'] = nope
+	elif mh.background.spouseRelationship == 'Good':
+		result['spouseP'] = nope
+		result['spouseA'] = nope
+		result['spouseG'] = check
+
+	if mh.background.brothersRelationship == 'Poor':
+		result['broP'] = check
+		result['broA'] = nope
+		result['broG'] = nope
+	elif mh.background.brothersRelationship == 'Average':
+		result['broP'] = nope
+		result['broA'] = check
+		result['broG'] = nope
+	elif mh.background.brothersRelationship == 'Good':
+		result['broP'] = nope
+		result['broA'] = nope
+		result['broG'] = check
+
+	if mh.background.childrenRelationship == 'Poor':
+		result['childP'] = check
+		result['childA'] = nope
+		result['childG'] = nope
+	elif mh.background.childrenRelationship == 'Average':
+		result['childP'] = nope
+		result['childA'] = check
+		result['childG'] = nope
+	elif mh.background.childrenRelationship == 'Good':
+		result['childP'] = nope
+		result['childA'] = nope
+		result['childG'] = check
+
+	if mh.background.parentsRelationship == 'Poor':
+		result['parentP'] = check
+		result['parentA'] = nope
+		result['parentG'] = nope
+	elif mh.background.parentsRelationship == 'Average':
+		result['parentP'] = nope
+		result['parentA'] = check
+		result['parentG'] = nope
+	elif mh.background.parentsRelationship == 'Good':
+		result['parentP'] = nope
+		result['parentA'] = nope
+		result['parentG'] = check
+
+	if mh.background.sistersRelationship == 'Poor':
+		result['sisP'] = check
+		result['sisA'] = nope
+		result['sisG'] = nope
+	elif mh.background.sistersRelationship == 'Average':
+		result['sisP'] = nope
+		result['sisA'] = check
+		result['sisG'] = nope
+	elif mh.background.sistersRelationship == 'Good':
+		result['sisP'] = nope
+		result['sisA'] = nope
+		result['sisG'] = check
+
+	if mh.background.exRelationship == 'Poor':
+		result['exP'] = check
+		result['exA'] = nope
+		result['exG'] = nope
+	elif mh.background.exRelationship == 'Average':
+		result['exP'] = nope
+		result['exA'] = check
+		result['exG'] = nope
+	elif mh.background.exRelationship == 'Good':
+		result['exP'] = nope
+		result['exA'] = nope
+		result['exG'] = check
+
+	if mh.background.closeFriendVisit == 'Weekly':
+		result['cfw'] = check
+		result['cfm'] = nope
+		result['cfy'] = nope
+	elif mh.background.closeFriendVisit == 'Monthly':
+		result['cfw'] = nope
+		result['cfm'] = check
+		result['cfy'] = nope
+	elif mh.background.closeFriendVisit == 'Yearly':
+		result['cfw'] = nope
+		result['cfm'] = nope
+		result['cfy'] = check
+
+	if mh.background.acqVisit == 'Weekly':
+		result['afw'] = check
+		result['afm'] = nope
+		result['afy'] = nope
+	elif mh.background.acqVisit == 'Monthly':
+		result['afw'] = nope
+		result['afm'] = check
+		result['afy'] = nope
+	elif mh.background.acqVisit == 'Yearly':
+		result['afw'] = nope
+		result['afm'] = nope
+		result['afy'] = check
+
+	if mh.legalHistory.probationPresent == True:
+		result['probPresent'] = check
+	else:
+		result['probPresent'] = nope
+
+	if mh.legalHistory.probationPast == True:
+		result['probPast'] = check
+	else:
+		result['probPast'] = nope
+
+	if mh.legalHistory.suspendedDrivePresent == True:
+		result['susPre'] = check
+	else:
+		result['susPre'] = nope
+
+	if mh.legalHistory.hasLawsuit == True:
+		result['lawsuit'] = 'Yes'
+	else:
+		result['lawsuit'] = 'No'
+
+	if mh.legalHistory.lawsuitStress == True:
+		result['lawStress'] = 'Yes'
+	else:
+		result['lawStress'] = 'No'
+
+	if mh.legalHistory.inDivorce == True:
+		result['inDiv'] = check
+		result['noIsDiv'] = nope
+	else:
+		result['inDiv'] = nope
+		result['noIsDiv'] = check
+
+	if mh.legalHistory.childCustody == True:
+		result['inCust'] = check
+		result['noCust'] = nope
+	else:
+		result['inCust'] = nope
+		result['noCust'] = check
+
+	if mh.legalHistory.hasBankrupcy == True:
+		result['inBnkR'] = check
+		result['noBnkR'] = nope
+	else:
+		result['inBnkR'] = nope
+		result['noBnkR'] = check
 
 	return result
 

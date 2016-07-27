@@ -646,23 +646,23 @@
           <tr>
             <td width="1%" class="viewLabel_mh_c">College</td>
             <td width="1%" class="viewLabel_mh_c">Years</td>
-            <td width="1%" class="viewLabel_mh_c">1</td>
-            <td width="1%" class="viewLabel_mh_c">2</td>
-            <td width="1%" class="viewLabel_mh_c">3</td>
-            <td width="1%" class="viewLabel_mh_c">4</td>
-            <td width="1%" class="viewLabel_mh_c">Graduated</td>
+            <td width="1%" class="viewLabel_mh_c"><div id='dr1' class='{{images.dl}}'>1</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='dr1' class='{{images.d2}}'>2</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='dr1' class='{{images.d3}}'>3</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='dr1' class='{{images.d4}}'>4</div></td>
+            <td width="1%" class="viewLabel_mh_c"><div id='dr1' class='{{images.grad}}'>Graduated</div></td>
             <td width="1%" class="viewLabel_mh_c">Degree</td>
             
             <td width="8%" class="formInput_mh_c"></td>
             
             <td width="1%" class="viewLabel_mh_c">Major</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.education.collegeMajor}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Advanced</td>
             <td width="1%" class="viewLabel_mh_c">Degrees</td>
             
-            <td width="3%" class="formInput_mh_c"></td>
+            <td width="3%" class="formInput_mh_c"><img src="{{images.advDeg}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -670,13 +670,13 @@
             <td width="1%" class="viewLabel_mh_c">Trade/Technical</td>
             <td width="1%" class="viewLabel_mh_c">School</td>
             
-            <td width="50%" class="formInput_mh_c"></td>
+            <td width="50%" class="formInput_mh_c">{{session.mh.education.tradeSchool}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Area(s)</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Training</td>
             
-            <td width="50%" class="formInput_mh_c"></td>
+            <td width="50%" class="formInput_mh_c">{{session.mh.education.tradeAreaStudy}}</td>
           </tr>
         </table>
         <table>
@@ -685,21 +685,21 @@
             <td width="1%" class="viewLabel_mh_c">Service</td>
             <td width="1%" class="viewLabel_mh_c">Branch</td>
             
-            <td width="25%" class="formInput_mh_c"></td>
+            <td width="25%" class="formInput_mh_c">{{session.mh.education.militaryBranch}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Years</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.education.militaryYears}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Highest</td>
             <td width="1%" class="viewLabel_mh_c">Rank</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.education.militaryRank}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Honorable</td>
             <td width="1%" class="viewLabel_mh_c">Discharge</td>
-            <td width="5%" class="viewLabel_mh_c">Yes</td>
-            <td width="5%" class="viewLabel_mh_c">No</td>
+            <td width="5%" class="viewLabel_mh_c"><div class='{{images.yeshonor}}'>Yes</div></td>
+            <td width="5%" class="viewLabel_mh_c"><div class='{{images.nohonor}}'>No</div></td>
           </tr>
         </table>
       </div>
@@ -717,32 +717,32 @@
             <td width="1%" class="viewLabel_mh_c">Residence:</td>
             <td width="1%" class="viewLabel_mh_c">Rent</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c"><img src="{{images.rent}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Own</td>
             <td width="1%" class="viewLabel_mh_c">Home</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c"><img src="{{images.own}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Subsidized</td>
             <td width="1%" class="viewLabel_mh_c">Housing</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c"><img src="{{images.subHouse}}" class='check_o'></td>
             
             <td width="12%"></td>
             
             <td width="1%" class="viewLabel_mh_c">Income:</td>
             <td width="1%" class="viewLabel_mh_c">Low</td>
             
-            <td width="14%" class="formInput_mh_c"></td>
+            <td width="14%" class="formInput_mh_c"><img src="{{images.ilow}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Medium</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c"><img src="{{images.imed}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">High</td>
             
-            <td width="14%" class="formInput_mh_c"></td>
+            <td width="14%" class="formInput_mh_c"><img src="{{images.ihi}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -750,15 +750,15 @@
             <td width="1%" class="viewLabel_mh_c">Debt:</td>
             <td width="1%" class="viewLabel_mh_c">Low</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.dlow}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Medium</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.dmed}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">High</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.dhi}}" class='check_o'></td>
             
             <td width="6%"></td>
             
@@ -768,19 +768,19 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.poor}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Fair</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.fair}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.good}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Bankruptcy</td>
             
-            <td width="11%" class="formInput_mh_c"></td>
+            <td width="11%" class="formInput_mh_c"><img src="{{images.bankrupt}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -790,26 +790,26 @@
             <td width="1%" class="viewLabel_mh_c">Health</td>
             <td width="1%" class="viewLabel_mh_c">Benefits</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.hc}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Private</td>
             <td width="1%" class="viewLabel_mh_c">Insurance</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.pi}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Medicaid</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.medicaid}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Medicare</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.medicare}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Self</td>
             <td width="1%" class="viewLabel_mh_c">-</td>
             <td width="1%" class="viewLabel_mh_c">Pay</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.selfpay}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -818,33 +818,33 @@
             <td width="1%" class="viewLabel_mh_c">Income:</td>
             <td width="1%" class="viewLabel_mh_c">Alimony</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.ali}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Child</td>
             <td width="1%" class="viewLabel_mh_c">Support</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.cs}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Aid</td>
             <td width="1%" class="viewLabel_mh_c">to</td>
             <td width="1%" class="viewLabel_mh_c">Dependant</td>
             <td width="1%" class="viewLabel_mh_c">Children</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.adc}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">SSI</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.ssi}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Retired</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.retired}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Support</td>
             <td width="1%" class="viewLabel_mh_c">from</td>
             <td width="1%" class="viewLabel_mh_c">Relatives</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c"><img src="{{images.sfr}}" class='check_o'></td>
           </tr>
         </table>
       </div>
@@ -861,15 +861,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.spouseP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.spouseA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.spouseG}}" class='check_o'></td>
             
             <td width="5%"></td>
             
@@ -877,15 +877,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.parentP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.parentA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.parentG}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -894,15 +894,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.broP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.broA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.broG}}" class='check_o'></td>
             
             <td width="5%"></td>
             
@@ -910,15 +910,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.sisP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.sisA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.sisG}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -927,15 +927,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.childP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.childA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.childG}}" class='check_o'></td>
             
             <td width="5%"></td>
             
@@ -943,15 +943,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Poor</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.exP}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Average</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.exA}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Good</td>
             
-            <td width="5%" class="formInput_mh_c"></td>
+            <td width="5%" class="formInput_mh_c"><img src="{{images.exG}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -968,21 +968,21 @@
             
             <td width="1%" class="viewLabel_mh_c">Number</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c">{{session.mh.background.closeFriendNumber}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Visit</td>
             <td width="1%" class="viewLabel_mh_c">times:</td>
             <td width="1%" class="viewLabel_mh_c">Weekly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.cfw}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Monthly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.cfm}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Yearly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.cfy}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -992,21 +992,21 @@
             
             <td width="1%" class="viewLabel_mh_c">Number</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c">{{session.mh.background.acqNumber}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Visit</td>
             <td width="1%" class="viewLabel_mh_c">times:</td>
             <td width="1%" class="viewLabel_mh_c">Weekly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.afw}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Monthly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.afm}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Yearly</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.afy}}" class='check_o'></td>
           </tr>
         </table>
       </div>
@@ -1029,18 +1029,18 @@
             
             <td width="1%" class="viewLabel_mh_c">Activity</td>
             
-            <td width="25%" class="formInput_mh_c"></td>
+            <td width="25%" class="formInput_mh_c">{{session.mh.background.interest}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Times</td>
             <td width="1%" class="viewLabel_mh_c">per</td>
             <td width="1%" class="viewLabel_mh_c">week</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c">{{session.mh.background.interestWeek}}</td>
             
-            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Per</td>
             <td width="1%" class="viewLabel_mh_c">Month</td>
             
-            <td width="12%" class="formInput_mh_c"></td>
+            <td width="12%" class="formInput_mh_c">{{session.mh.background.interestMonth}}</td>
           </tr>
         </table>
         <table>
@@ -1053,18 +1053,18 @@
             
             <td width="1%" class="viewLabel_mh_c">Activity</td>
             
-            <td width="21%" class="formInput_mh_c"></td>
+            <td width="21%" class="formInput_mh_c">{{session.mh.background.friendAct}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Times</td>
             <td width="1%" class="viewLabel_mh_c">per</td>
             <td width="1%" class="viewLabel_mh_c">week</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.friendActWeek}}</td>
             
-            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Per</td>
             <td width="1%" class="viewLabel_mh_c">Month</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.friendActMonth}}</td>
           </tr>
         </table>
         <table>
@@ -1077,18 +1077,18 @@
             
             <td width="1%" class="viewLabel_mh_c">Activity</td>
             
-            <td width="21%" class="formInput_mh_c"></td>
+            <td width="21%" class="formInput_mh_c">{{session.mh.background.workAct}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Times</td>
             <td width="1%" class="viewLabel_mh_c">per</td>
             <td width="1%" class="viewLabel_mh_c">week</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.workActWeek}}</td>
             
-            <td width="1%" class="viewLabel_mh_c">Peer</td>
+            <td width="1%" class="viewLabel_mh_c">Per</td>
             <td width="1%" class="viewLabel_mh_c">Month</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.workActMonth}}</td>
           </tr>
         </table>
         <table>
@@ -1096,7 +1096,7 @@
             <td width="1%" class="viewLabel_mh_c">Church</td>
             <td width="1%" class="viewLabel_mh_c">Affiliation</td>
             
-            <td width="50%" class="formInput_mh_c"></td>
+            <td width="50%" class="formInput_mh_c">{{session.mh.background.churchAffiliation}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Number</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
@@ -1108,15 +1108,15 @@
             
             <td width="1%" class="viewLabel_mh_c">Weekly</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.churchWeek}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Monthly</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.churchMonth}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Yearly</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.background.churchYear}}</td>
           </tr>
         </table>
       </div>
@@ -1156,19 +1156,19 @@
             <td width="1%" class="viewLabel_mh_c">or</td>
             <td width="1%" class="viewLabel_mh_c">family</td>
             <td width="1%" class="viewLabel_mh_c">member</td>
-            <td width="75%" class="formInput_mh_c"></td>
+            <td width="75%" class="formInput_mh_c">{{session.mh.stressors.deathStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Divorce</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.divorceStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Moves</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.moveStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1176,7 +1176,7 @@
             <td width="1%" class="viewLabel_mh_c">Significant</td>
             <td width="1%" class="viewLabel_mh_c">Medical</td>
             <td width="1%" class="viewLabel_mh_c">Problems</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.medicalStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1186,14 +1186,14 @@
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
             <td width="1%" class="viewLabel_mh_c">Member</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.familyHealthStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Financial</td>
             <td width="1%" class="viewLabel_mh_c">Problems</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.financialStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1201,7 +1201,7 @@
             <td width="1%" class="viewLabel_mh_c">Abuse</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.abuseStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1209,7 +1209,7 @@
             <td width="1%" class="viewLabel_mh_c">Addiction</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.addictionFamilyStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1217,14 +1217,14 @@
             <td width="1%" class="viewLabel_mh_c">Violence</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.violenceFamilyStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Other</td>
             <td width="1%" class="viewLabel_mh_c">Stressors</td>
-            <td width="95%" class="formInput_mh_c"></td>
+            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.otherStressExp}}</td>
           </tr>
         </table>
       </div>
@@ -1259,7 +1259,7 @@
           <td width="5%"></td>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_c">{{session.mh.stressors.psychiatricHistory}}</td></tr>
         </table>
         <table>
           <tr><td class="formInput_mh_c"></td></tr>
@@ -1292,14 +1292,14 @@
         <table class="shortTable">
           <td width="1%" class="viewLabel_mh_c">Depression</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.depressed}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Alcohol</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.alcohol}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1312,14 +1312,14 @@
           <td width="1%" class="viewLabel_mh_c">Hyperactivity</td>
           <td width="1%" class="viewLabel_mh_c">(ADD)</td>
           
-          <td width="39%" class="formInput_mh_c"></td>
+          <td width="39%" class="formInput_mh_c">{{session.mh.familyHistory.add}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Drug</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="43%" class="formInput_mh_c"></td>
+          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.drugs}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1332,13 +1332,13 @@
           <td width="1%" class="viewLabel_mh_c">Bed</td>
           <td width="1%" class="viewLabel_mh_c">Wetting</td>
           
-          <td width="43%" class="formInput_mh_c"></td>
+          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.bedWetting}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Schizophrenia</td>
           
-          <td width="42%" class="formInput_mh_c"></td>
+          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.schizo}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1353,13 +1353,13 @@
           <td width="1%" class="viewLabel_mh_c">(Manic</td>
           <td width="1%" class="viewLabel_mh_c">Depression)</td>
           
-          <td width="26%" class="formInput_mh_c"></td>
+          <td width="26%" class="formInput_mh_c">{{session.mh.familyHistory.bipolar}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Seizures</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.seizures}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1372,14 +1372,14 @@
           <td width="1%" class="viewLabel_mh_c">Attempted</td>
           <td width="1%" class="viewLabel_mh_c">Suicide</td>
           
-          <td width="42%" class="formInput_mh_c"></td>
+          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.suicideAttempt}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Completed</td>
           <td width="1%" class="viewLabel_mh_c">Suicide</td>
           
-          <td width="42%" class="formInput_mh_c"></td>
+          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.completedSuicide}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1392,14 +1392,14 @@
           <td width="1%" class="viewLabel_mh_c">Physical</td>
           <td width="1%" class="viewLabel_mh_c">Abuse</td>
           
-          <td width="42%" class="formInput_mh_c"></td>
+          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.physicalAbuse}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Sexual</td>
           <td width="1%" class="viewLabel_mh_c">Abuse</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.sexAbuse}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1414,14 +1414,14 @@
           <td width="1%" class="viewLabel_mh_c">the</td>
           <td width="1%" class="viewLabel_mh_c">Law</td>
           
-          <td width="37%" class="formInput_mh_c"></td>
+          <td width="37%" class="formInput_mh_c">{{session.mh.familyHistory.law}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Panic</td>
           <td width="1%" class="viewLabel_mh_c">Attacks</td>
           
-          <td width="44%" class="formInput_mh_c"></td>
+          <td width="44%" class="formInput_mh_c">{{session.mh.familyHistory.panic}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1434,13 +1434,13 @@
           <td width="1%" class="viewLabel_mh_c">Learning</td>
           <td width="1%" class="viewLabel_mh_c">Disability</td>
           
-          <td width="37%" class="formInput_mh_c"></td>
+          <td width="37%" class="formInput_mh_c">{{session.mh.familyHistory.ld}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Anxiety</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.anxiety}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1453,7 +1453,7 @@
           <td width="1%" class="viewLabel_mh_c">Tic</td>
           <td width="1%" class="viewLabel_mh_c">Disorder</td>
           
-          <td width="49%" class="formInput_mh_c"></td>
+          <td width="49%" class="formInput_mh_c">{{session.mh.familyHistory.tic}}</td>
           
           <td width="13%"></td>
           
@@ -1461,7 +1461,7 @@
           <td width="1%" class="viewLabel_mh_c">Compulsive</td>
           <td width="1%" class="viewLabel_mh_c">Behavior</td>
           
-          <td width="33%" class="formInput_mh_c"></td>
+          <td width="33%" class="formInput_mh_c">{{session.mh.familyHistory.OCD}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1474,13 +1474,13 @@
           <td width="1%" class="viewLabel_mh_c">Thyroid</td>
           <td width="1%" class="viewLabel_mh_c">Disorder</td>
           
-          <td width="40%" class="formInput_mh_c"></td>
+          <td width="40%" class="formInput_mh_c">{{session.mh.familyHistory.thyroid}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Diabetes</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.diabetes}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1493,13 +1493,13 @@
           <td width="1%" class="viewLabel_mh_c">Heart</td>
           <td width="1%" class="viewLabel_mh_c">Disease</td>
           
-          <td width="40%" class="formInput_mh_c"></td>
+          <td width="40%" class="formInput_mh_c">{{session.mh.familyHistory.heart}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Cancer</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.cancer}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1511,7 +1511,7 @@
         <table class="shortTable">
           <td width="1%" class="viewLabel_mh_c">Overweight</td>
           
-          <td width="45%" class="formInput_mh_c"></td>
+          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.overweight}}</td>
           
           <td width="12%"></td>
           
@@ -1519,7 +1519,7 @@
           <td width="1%" class="viewLabel_mh_c">Blood</td>
           <td width="1%" class="viewLabel_mh_c">Pressure</td>
           
-          <td width="38%" class="formInput_mh_c"></td>
+          <td width="38%" class="formInput_mh_c">{{session.mh.familyHistory.highBloodPressure}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1532,14 +1532,14 @@
           <td width="1%" class="viewLabel_mh_c">Mood</td>
           <td width="1%" class="viewLabel_mh_c">Swings</td>
           
-          <td width="43%" class="formInput_mh_c"></td>
+          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.mood}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Anger</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="42%" class="formInput_mh_c"></td>
+          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.anger}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1563,11 +1563,11 @@
             <td width="1%" class="viewLabel_mh_c">Arrests:</td>
             <td width="1%" class="viewLabel_mh_c">Number</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.legalHistory.num_arrest}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Charges</td>
             
-            <td width="65%" class="formInput_mh_c"></td>
+            <td width="65%" class="formInput_mh_c">{{session.mh.legalHistory.arrestCharges}}</td>
           </tr>
         </table>
         <table>
@@ -1575,11 +1575,11 @@
             <td width="1%" class="viewLabel_mh_c">Convictions:</td>
             <td width="1%" class="viewLabel_mh_c">Number</td>
             
-            <td width="10%" class="formInput_mh_c"></td>
+            <td width="10%" class="formInput_mh_c">{{session.mh.legalHistory.num_convictions}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Charges</td>
             
-            <td width="65%" class="formInput_mh_c"></td>
+            <td width="65%" class="formInput_mh_c">{{session.mh.legalHistory.convictionCharges}}</td>
           </tr>
         </table>
         <table>
@@ -1593,14 +1593,14 @@
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Times</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c">{{session.mh.legalHistory.num_DUI_charges}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Convicted</td>
             <td width="1%" class="viewLabel_mh_c">Number</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Times</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c">{{session.mh.legalHistory.num_DUI_convictions}}</td>
           </tr>
         </table>
         <table>
@@ -1608,16 +1608,16 @@
             <td width="1%" class="viewLabel_mh_c">Probation:</td>
             <td width="1%" class="viewLabel_mh_c">Present</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.probPresent}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Past</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.probPast}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Probation</td>
             <td width="1%" class="viewLabel_mh_c">Officer</td>
             
-            <td width="30%" class="formInput_mh_c"></td>
+            <td width="30%" class="formInput_mh_c">{{session.mh.legalHistory.probationOfficer}}</td>
           </tr>
         </table>
         <table>
@@ -1625,7 +1625,7 @@
             <td width="1%" class="viewLabel_mh_c">What</td>
             <td width="1%" class="viewLabel_mh_c">Offenses?</td>
             
-            <td width="98%" class="formInput_mh_c"></td>
+            <td width="98%" class="formInput_mh_c">{{session.mh.legalHistory.probationOffense}}</td>
           </tr>
         </table>
         <table>
@@ -1635,14 +1635,14 @@
             <td width="1%" class="viewLabel_mh_c">License:</td>
             <td width="1%" class="viewLabel_mh_c">Present</td>
             
-            <td width="20%" class="formInput_mh_c"></td>
+            <td width="20%" class="formInput_mh_c"><img src="{{images.susPre}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Past</td>
             <td width="1%" class="viewLabel_mh_c">Number</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Times</td>
             
-            <td width="30%" class="formInput_mh_c"></td>
+            <td width="30%" class="formInput_mh_c">{{session.mh.legalHistory.num_suspended}}</td>
           </tr>
         </table>
         <table>
@@ -1655,7 +1655,7 @@
             <td width="1%" class="viewLabel_mh_c">any</td>
             <td width="1%" class="viewLabel_mh_c">lawsuits?</td>
             
-            <td width="30%" class="formInput_mh_c"></td>
+            <td width="30%" class="formInput_mh_c">{{images.lawsuit}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Is</td>
             <td width="1%" class="viewLabel_mh_c">this</td>
@@ -1664,7 +1664,7 @@
             <td width="1%" class="viewLabel_mh_c">for</td>
             <td width="1%" class="viewLabel_mh_c">you?</td>
             
-            <td width="30%" class="formInput_mh_c"></td>
+            <td width="30%" class="formInput_mh_c">{{images.lawStress}}</td>
           </tr>
         </table>
         <table>
@@ -1678,22 +1678,22 @@
             <td width="12%" class="viewLabel_mh_c">Proceeding</td>
             <td width="1%" class="viewLabel_mh_c">Yes</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.inDiv}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">No</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.noIsDiv}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">Child</td>
             <td width="1%" class="viewLabel_mh_c">Custody</td>
             <td width="1%" class="viewLabel_mh_c">Dispute?</td>
             <td width="1%" class="viewLabel_mh_c">Yes</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.inCust}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">No</td>
             
-            <td width="15%" class="formInput_mh_c"></td>
+            <td width="15%" class="formInput_mh_c"><img src="{{images.noCust}}" class='check_o'></td>
           </tr>
         </table>
         <table>
@@ -1709,17 +1709,17 @@
             <td width="1%" class="viewLabel_mh_c">proceeding?</td>
             <td width="1%" class="viewLabel_mh_c">Yes</td>
             
-            <td width="20%" class="formInput_mh_c"></td>
+            <td width="20%" class="formInput_mh_c"><img src="{{images.inBnkR}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">No</td>
             
-            <td width="20%" class="formInput_mh_c"></td>
+            <td width="20%" class="formInput_mh_c"><img src="{{images.noBnkR}}" class='check_o'></td>
             
             <td width="1%" class="viewLabel_mh_c">If</td>
             <td width="1%" class="viewLabel_mh_c">yes,</td>
             <td width="1%" class="viewLabel_mh_c">when?</td>
             
-            <td width="30%" class="formInput_mh_c"></td>
+            <td width="30%" class="formInput_mh_c">{{session.mh.legalHistory.dateBenkrupcy}}</td>
           </tr>
         </table>
         <table>
@@ -1730,7 +1730,7 @@
             <td width="1%" class="viewLabel_mh_c">positive</td>
             <td width="1%" class="viewLabel_mh_c">answers.</td>
             
-            <td width="75%" class="formInput_mh_c"></td>
+            <td width="75%" class="formInput_mh_c">{{session.mh.legalHistory.explainPositiveAnswers}}</td>
           </tr>
         </table>
         <table><tr><td class="formInput_mh_c"></td></tr></table>
