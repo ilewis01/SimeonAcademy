@@ -207,7 +207,7 @@
             <td width="1%" class="viewLabel_mh_c">
               Name
             </td>
-            <td width="75%" class="formInput_mh_c">
+            <td width="75%" class="formInput_mh_b">
               {{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}
             </td>
             <td width="1%" class="viewLabel_mh_c">
@@ -223,13 +223,13 @@
             <td width="1%" class="viewLabel_mh_c">
               Address
             </td>
-            <td width="42%" class="formInput_mh_c">
+            <td width="42%" class="formInput_mh_b">
             	{{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
             </td>
             <td class="viewLabel_mh_c">
               City
             </td>
-            <td width="32%" class="formInput_mh_c">
+            <td width="32%" class="formInput_mh_b">
             	{{session.client.city}}
             </td>
             <td width="1%" class="viewLabel_mh_c">
@@ -364,12 +364,12 @@
             <td width="1%" class="viewLabel_mh_c">5</td>
             <td width="1%" class="viewLabel_mh_c">years)</td>
             
-            <td width="75%" class="formInput_mh_c">{{session.mh.demographics.pastJobs}}</td>
+            <td width="75%" class="formInput_mh_b">{{images.pastWork.line1}}</td>
           </tr>
         </table>
         <table>
           <tr>
-            <td class="formInput_mh_c">This is the second line...work this out! count the number of chars in input</td>
+            <td class="formInput_mh_b">{{images.pastWork.line2}}</td>
           </tr>
         </table>
       </div>      
@@ -438,7 +438,7 @@
             <td width="1%" class="viewLabel_mh_c">5</td>
             <td width="1%" class="viewLabel_mh_c">years)</td>
             
-            <td class="formInput_mh_c">{{session.mh.demographics.recentMove}}</td>
+            <td class="formInput_mh_b">{{session.mh.demographics.recentMove}}</td>
           </tr>
         </table>
         <table>
@@ -447,11 +447,11 @@
             
             <td width="1%" class="viewLabel_mh_c">Occupation</td>
             
-            <td width="20%" class="formInput_mh_c">{{session.mh.demographics.motherOccupation}}</td>
+            <td width="20%" class="formInput_mh_b">{{session.mh.demographics.motherOccupation}}</td>
             
             <td width="1%" class="viewLabel_mh_c">City/State</td>
             
-            <td width="25%"class="formInput_mh_c">{{session.mh.demographics.motherCity}}, {{session.mh.demographics.motherState}}</td>
+            <td width="25%"class="formInput_mh_b">{{session.mh.demographics.motherCity}}, {{session.mh.demographics.motherState}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Age</td>
             
@@ -470,11 +470,11 @@
             
             <td width="1%" class="viewLabel_mh_c">Occupation</td>
             
-            <td width="20%" class="formInput_mh_c">{{session.mh.demographics.fatherOccupation}}</td>
+            <td width="20%" class="formInput_mh_b">{{session.mh.demographics.fatherOccupation}}</td>
             
             <td width="1%" class="viewLabel_mh_c">City/State</td>
             
-            <td width="25%"class="formInput_mh_c">{{session.mh.demographics.fatherCity}}, {{session.mh.demographics.fatherState}}</td>
+            <td width="25%"class="formInput_mh_b">{{session.mh.demographics.fatherCity}}, {{session.mh.demographics.fatherState}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Age</td>
             
@@ -670,13 +670,13 @@
             <td width="1%" class="viewLabel_mh_c">Trade/Technical</td>
             <td width="1%" class="viewLabel_mh_c">School</td>
             
-            <td width="50%" class="formInput_mh_c">{{session.mh.education.tradeSchool}}</td>
+            <td width="50%" class="formInput_mh_b">{{session.mh.education.tradeSchool}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Area(s)</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Training</td>
             
-            <td width="50%" class="formInput_mh_c">{{session.mh.education.tradeAreaStudy}}</td>
+            <td width="50%" class="formInput_mh_b">{{session.mh.education.tradeAreaStudy}}</td>
           </tr>
         </table>
         <table>
@@ -685,7 +685,7 @@
             <td width="1%" class="viewLabel_mh_c">Service</td>
             <td width="1%" class="viewLabel_mh_c">Branch</td>
             
-            <td width="25%" class="formInput_mh_c">{{session.mh.education.militaryBranch}}</td>
+            <td width="25%" class="formInput_mh_b">{{session.mh.education.militaryBranch}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Years</td>
             
@@ -1096,7 +1096,7 @@
             <td width="1%" class="viewLabel_mh_c">Church</td>
             <td width="1%" class="viewLabel_mh_c">Affiliation</td>
             
-            <td width="50%" class="formInput_mh_c">{{session.mh.background.churchAffiliation}}</td>
+            <td width="50%" class="formInput_mh_b">{{session.mh.background.churchAffiliation}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Number</td>
             <td width="1%" class="viewLabel_mh_c">of</td>
@@ -1156,19 +1156,19 @@
             <td width="1%" class="viewLabel_mh_c">or</td>
             <td width="1%" class="viewLabel_mh_c">family</td>
             <td width="1%" class="viewLabel_mh_c">member</td>
-            <td width="75%" class="formInput_mh_c">{{session.mh.stressors.deathStressExp}}</td>
+            <td width="75%" class="formInput_mh_b">{{session.mh.stressors.deathStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Divorce</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.divorceStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.divorceStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Moves</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.moveStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.moveStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1176,7 +1176,7 @@
             <td width="1%" class="viewLabel_mh_c">Significant</td>
             <td width="1%" class="viewLabel_mh_c">Medical</td>
             <td width="1%" class="viewLabel_mh_c">Problems</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.medicalStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.medicalStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1186,14 +1186,14 @@
             <td width="1%" class="viewLabel_mh_c">of</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
             <td width="1%" class="viewLabel_mh_c">Member</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.familyHealthStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.familyHealthStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Financial</td>
             <td width="1%" class="viewLabel_mh_c">Problems</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.financialStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.financialStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1201,7 +1201,7 @@
             <td width="1%" class="viewLabel_mh_c">Abuse</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.abuseStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.abuseStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1209,7 +1209,7 @@
             <td width="1%" class="viewLabel_mh_c">Addiction</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.addictionFamilyStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.addictionFamilyStressExp}}</td>
           </tr>
         </table>
         <table>
@@ -1217,14 +1217,14 @@
             <td width="1%" class="viewLabel_mh_c">Violence</td>
             <td width="1%" class="viewLabel_mh_c">in</td>
             <td width="1%" class="viewLabel_mh_c">Family</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.violenceFamilyStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.violenceFamilyStressExp}}</td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Other</td>
             <td width="1%" class="viewLabel_mh_c">Stressors</td>
-            <td width="95%" class="formInput_mh_c">{{session.mh.stressors.otherStressExp}}</td>
+            <td width="95%" class="formInput_mh_b">{{session.mh.stressors.otherStressExp}}</td>
           </tr>
         </table>
       </div>
@@ -1259,22 +1259,22 @@
           <td width="5%"></td>
         </table>
         <table>
-          <tr><td class="formInput_mh_c">{{session.mh.stressors.psychiatricHistory}}</td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line1}}</td></tr>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line2}}</td></tr>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line3}}</td></tr>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line4}}</td></tr>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line5}}</td></tr>
         </table>
         <table>
-          <tr><td class="formInput_mh_c"></td></tr>
+          <tr><td class="formInput_mh_a">{{images.psychHistory.line6}}</td></tr>
         </table>
       </div>
       <!-- end pastPsychHistory -->
@@ -1292,14 +1292,14 @@
         <table class="shortTable">
           <td width="1%" class="viewLabel_mh_c">Depression</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.depressed}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.depressed}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Alcohol</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.alcohol}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.alcohol}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1312,14 +1312,14 @@
           <td width="1%" class="viewLabel_mh_c">Hyperactivity</td>
           <td width="1%" class="viewLabel_mh_c">(ADD)</td>
           
-          <td width="39%" class="formInput_mh_c">{{session.mh.familyHistory.add}}</td>
+          <td width="39%" class="formInput_mh_b">{{session.mh.familyHistory.add}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Drug</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.drugs}}</td>
+          <td width="43%" class="formInput_mh_b">{{session.mh.familyHistory.drugs}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1332,13 +1332,13 @@
           <td width="1%" class="viewLabel_mh_c">Bed</td>
           <td width="1%" class="viewLabel_mh_c">Wetting</td>
           
-          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.bedWetting}}</td>
+          <td width="43%" class="formInput_mh_b">{{session.mh.familyHistory.bedWetting}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Schizophrenia</td>
           
-          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.schizo}}</td>
+          <td width="42%" class="formInput_mh_b">{{session.mh.familyHistory.schizo}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1353,13 +1353,13 @@
           <td width="1%" class="viewLabel_mh_c">(Manic</td>
           <td width="1%" class="viewLabel_mh_c">Depression)</td>
           
-          <td width="26%" class="formInput_mh_c">{{session.mh.familyHistory.bipolar}}</td>
+          <td width="26%" class="formInput_mh_b">{{session.mh.familyHistory.bipolar}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Seizures</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.seizures}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.seizures}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1372,14 +1372,14 @@
           <td width="1%" class="viewLabel_mh_c">Attempted</td>
           <td width="1%" class="viewLabel_mh_c">Suicide</td>
           
-          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.suicideAttempt}}</td>
+          <td width="42%" class="formInput_mh_b">{{session.mh.familyHistory.suicideAttempt}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Completed</td>
           <td width="1%" class="viewLabel_mh_c">Suicide</td>
           
-          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.completedSuicide}}</td>
+          <td width="42%" class="formInput_mh_b">{{session.mh.familyHistory.completedSuicide}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1392,14 +1392,14 @@
           <td width="1%" class="viewLabel_mh_c">Physical</td>
           <td width="1%" class="viewLabel_mh_c">Abuse</td>
           
-          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.physicalAbuse}}</td>
+          <td width="42%" class="formInput_mh_b">{{session.mh.familyHistory.physicalAbuse}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Sexual</td>
           <td width="1%" class="viewLabel_mh_c">Abuse</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.sexAbuse}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.sexAbuse}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1414,14 +1414,14 @@
           <td width="1%" class="viewLabel_mh_c">the</td>
           <td width="1%" class="viewLabel_mh_c">Law</td>
           
-          <td width="37%" class="formInput_mh_c">{{session.mh.familyHistory.law}}</td>
+          <td width="37%" class="formInput_mh_b">{{session.mh.familyHistory.law}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Panic</td>
           <td width="1%" class="viewLabel_mh_c">Attacks</td>
           
-          <td width="44%" class="formInput_mh_c">{{session.mh.familyHistory.panic}}</td>
+          <td width="44%" class="formInput_mh_b">{{session.mh.familyHistory.panic}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1434,13 +1434,13 @@
           <td width="1%" class="viewLabel_mh_c">Learning</td>
           <td width="1%" class="viewLabel_mh_c">Disability</td>
           
-          <td width="37%" class="formInput_mh_c">{{session.mh.familyHistory.ld}}</td>
+          <td width="37%" class="formInput_mh_b">{{session.mh.familyHistory.ld}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Anxiety</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.anxiety}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.anxiety}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1453,7 +1453,7 @@
           <td width="1%" class="viewLabel_mh_c">Tic</td>
           <td width="1%" class="viewLabel_mh_c">Disorder</td>
           
-          <td width="49%" class="formInput_mh_c">{{session.mh.familyHistory.tic}}</td>
+          <td width="49%" class="formInput_mh_b">{{session.mh.familyHistory.tic}}</td>
           
           <td width="13%"></td>
           
@@ -1461,7 +1461,7 @@
           <td width="1%" class="viewLabel_mh_c">Compulsive</td>
           <td width="1%" class="viewLabel_mh_c">Behavior</td>
           
-          <td width="33%" class="formInput_mh_c">{{session.mh.familyHistory.OCD}}</td>
+          <td width="33%" class="formInput_mh_b">{{session.mh.familyHistory.OCD}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1474,13 +1474,13 @@
           <td width="1%" class="viewLabel_mh_c">Thyroid</td>
           <td width="1%" class="viewLabel_mh_c">Disorder</td>
           
-          <td width="40%" class="formInput_mh_c">{{session.mh.familyHistory.thyroid}}</td>
+          <td width="40%" class="formInput_mh_b">{{session.mh.familyHistory.thyroid}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Diabetes</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.diabetes}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.diabetes}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1493,13 +1493,13 @@
           <td width="1%" class="viewLabel_mh_c">Heart</td>
           <td width="1%" class="viewLabel_mh_c">Disease</td>
           
-          <td width="40%" class="formInput_mh_c">{{session.mh.familyHistory.heart}}</td>
+          <td width="40%" class="formInput_mh_b">{{session.mh.familyHistory.heart}}</td>
           
           <td width="11%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Cancer</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.cancer}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.cancer}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1511,7 +1511,7 @@
         <table class="shortTable">
           <td width="1%" class="viewLabel_mh_c">Overweight</td>
           
-          <td width="45%" class="formInput_mh_c">{{session.mh.familyHistory.overweight}}</td>
+          <td width="45%" class="formInput_mh_b">{{session.mh.familyHistory.overweight}}</td>
           
           <td width="12%"></td>
           
@@ -1519,7 +1519,7 @@
           <td width="1%" class="viewLabel_mh_c">Blood</td>
           <td width="1%" class="viewLabel_mh_c">Pressure</td>
           
-          <td width="38%" class="formInput_mh_c">{{session.mh.familyHistory.highBloodPressure}}</td>
+          <td width="38%" class="formInput_mh_b">{{session.mh.familyHistory.highBloodPressure}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1532,14 +1532,14 @@
           <td width="1%" class="viewLabel_mh_c">Mood</td>
           <td width="1%" class="viewLabel_mh_c">Swings</td>
           
-          <td width="43%" class="formInput_mh_c">{{session.mh.familyHistory.mood}}</td>
+          <td width="43%" class="formInput_mh_b">{{session.mh.familyHistory.mood}}</td>
           
           <td width="12%"></td>
           
           <td width="1%" class="viewLabel_mh_c">Anger</td>
           <td width="1%" class="viewLabel_mh_c">Problems</td>
           
-          <td width="42%" class="formInput_mh_c">{{session.mh.familyHistory.anger}}</td>
+          <td width="42%" class="formInput_mh_b">{{session.mh.familyHistory.anger}}</td>
         </table>
         <table class="shortTable">
           <td width="45%" class="formInput_mh_c"></td>
@@ -1567,7 +1567,7 @@
             
             <td width="1%" class="viewLabel_mh_c">Charges</td>
             
-            <td width="65%" class="formInput_mh_c">{{session.mh.legalHistory.arrestCharges}}</td>
+            <td width="65%" class="formInput_mh_b">{{session.mh.legalHistory.arrestCharges}}</td>
           </tr>
         </table>
         <table>
@@ -1579,7 +1579,7 @@
             
             <td width="1%" class="viewLabel_mh_c">Charges</td>
             
-            <td width="65%" class="formInput_mh_c">{{session.mh.legalHistory.convictionCharges}}</td>
+            <td width="65%" class="formInput_mh_b">{{session.mh.legalHistory.convictionCharges}}</td>
           </tr>
         </table>
         <table>
@@ -1617,7 +1617,7 @@
             <td width="1%" class="viewLabel_mh_c">Probation</td>
             <td width="1%" class="viewLabel_mh_c">Officer</td>
             
-            <td width="30%" class="formInput_mh_c">{{session.mh.legalHistory.probationOfficer}}</td>
+            <td width="30%" class="formInput_mh_b">{{session.mh.legalHistory.probationOfficer}}</td>
           </tr>
         </table>
         <table>
@@ -1625,7 +1625,7 @@
             <td width="1%" class="viewLabel_mh_c">What</td>
             <td width="1%" class="viewLabel_mh_c">Offenses?</td>
             
-            <td width="98%" class="formInput_mh_c">{{session.mh.legalHistory.probationOffense}}</td>
+            <td width="98%" class="formInput_mh_b">{{session.mh.legalHistory.probationOffense}}</td>
           </tr>
         </table>
         <table>
@@ -1730,12 +1730,12 @@
             <td width="1%" class="viewLabel_mh_c">positive</td>
             <td width="1%" class="viewLabel_mh_c">answers.</td>
             
-            <td width="75%" class="formInput_mh_c">{{session.mh.legalHistory.explainPositiveAnswers}}</td>
+            <td width="75%" class="formInput_mh_b">{{images.pAnsExp.line1}}</td>
           </tr>
         </table>
-        <table><tr><td class="formInput_mh_c"></td></tr></table>
-        <table><tr><td class="formInput_mh_c"></td></tr></table>
-        <table><tr><td class="formInput_mh_c"></td></tr></table>
+        <table><tr><td class="formInput_mh_a">{{images.pAnsExp.line2}}</td></tr></table>
+        <table><tr><td class="formInput_mh_a">{{images.pAnsExp.line3}}</td></tr></table>
+        <table><tr><td class="formInput_mh_a">{{images.pAnsExp.line4}}</td></tr></table>
       </div>
       <!-- end legalHistory -->
       <div id="drugUse" style="margin-top: 50px">
@@ -1784,171 +1784,171 @@
           </tr>
           <tr>
             <td class="side">Cigarettes/Chew</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch1}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften1}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong1}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld1}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime1}}</td>
           </tr>
           <tr>
             <td class="side">Caffeine</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch2}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften2}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong2}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld2}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime2}}</td>
           </tr>
           <tr>
             <td class="side">Alcohol</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch3}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften3}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong3}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld3}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime3}}</td>
           </tr>
           <tr>
             <td class="side">Marijuana(Pot)</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch4}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften4}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong4}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld4}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime4}}</td>
           </tr>
           <tr>
             <td class="side">LSD (Acid, Fry)</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch5}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften5}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong5}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld5}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime5}}</td>
           </tr>
           <tr>
             <td class="side">PCP (Angel Dust)<br>Ketamine "Special K"</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch6}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften6}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong6}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld6}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime6}}</td>
           </tr>
           <tr>
             <td class="side">Cocaine (Coke)</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch7}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften7}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong7}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld7}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime7}}</td>
           </tr>
           <tr>
             <td class="side">Crack</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch8}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften8}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong8}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld8}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime8}}</td>
           </tr>
           <tr>
             <td class="side">Speed (Crank)</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch9}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften9}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong9}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld9}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime9}}</td>
           </tr>
           <tr>
             <td class="side">Crystal Meth</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch10}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften10}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong10}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld10}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime10}}</td>
           </tr>
           <tr>
             <td class="side">Heroin</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch11}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften11}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong11}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld11}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime11}}</td>
           </tr>
           <tr>
             <td class="side">Gasoline</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch12}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften12}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong12}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld12}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime12}}</td>
           </tr>
           <tr>
             <td class="side">Visine eye drops<br>(To hide use of marijuana)</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch13}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften13}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong13}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld13}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime13}}</td>
           </tr>
           <tr>
             <td class="side">Abuse of cough syrup,<br>over the counter drugs</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch14}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften14}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong14}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld14}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime14}}</td>
           </tr>
           <tr>
             <td class="side">Mescaline ("Shrooms")</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch15}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften15}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong15}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld15}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime15}}</td>
           </tr>
           <tr>
             <td class="side">Ecstasy</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch16}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften16}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong16}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld16}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime16}}</td>
           </tr>
           <tr>
             <td class="side">OxyContin/Narcotic pain<br>medications, Morphine</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch17}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften17}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong17}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld17}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime17}}</td>
           </tr>
           <tr>
             <td class="side">Glue, Paint thinner, Spray<br>paint, "Huffing"</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch18}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften18}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong18}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld18}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime18}}</td>
           </tr>
           <tr>
             <td class="side">Dramamine</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch19}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften19}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong19}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld19}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime19}}</td>
           </tr>
           <tr>
             <td class="side">Abused prescribed<br>medications</td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch20}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften20}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong20}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld20}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime20}}</td>
           </tr>
           <tr>
             <td class="side">Other Substances<br>Abused <span class="formInputDrugCell"></span></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
-            <td class="formInputDrug"></td>
+            <td class="formInputDrug">{{session.mh.useTable.howMuch21}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOften21}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howLong21}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.howOld21}}</td>
+            <td class="formInputDrug">{{session.mh.useTable.lastTime21}}</td>
           </tr>
         </table>
       </div>

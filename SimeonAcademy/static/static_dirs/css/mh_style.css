@@ -29,6 +29,20 @@
   text-align: center;
 }
 
+.formInput_mh_b {
+  font-family: monospace;
+  border-bottom: 2px solid black;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.formInput_mh_a {
+  font-family: monospace;
+  border-bottom: 2px solid black;
+  text-align: left;
+  padding-left: 10px;
+}
+
 .formInputDrug {
   font-family: monospace;
   border-bottom: 2px solid black;

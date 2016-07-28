@@ -5780,12 +5780,140 @@ def getMhFields(mh, section):
 
 	return result
 
+def getLastWordIndex(text):
+	count = len(text) - 1
+	while text[count] != ' ':
+		count = count - 1
+	count = count + 1
+	return count
+
+def getLastWord(text):
+	result = ''
+	start = getLastWordIndex(text)
+	for i in range(start, len(text)):
+		result += text[i]
+	return result
+
+def splitWords(text):
+	result = []
+	temp = ''
+
+	for t in text:
+		if t != ' ':
+			temp += t
+		else:
+			temp += ' '
+			result.append(temp)
+			temp = ''
+
+	lWord = getLastWord(text)
+	result.append(lWord)
+	return result
+
+def wordFits(lineLength, word):
+	canFit = False
+	if len(word) <= lineLength:
+		canFit = True
+	return canFit
+
+def grabSingleLine(lineLength, text):
+	word = splitWords(text)
+	current = 0
+	numWords = 0
+	line = ''
+	result = {}
+
+	for w in word:
+		lineLength = lineLength - current
+		if wordFits(lineLength, w):
+			line += w
+			current = len(w)
+			numWords += 1
+		else:
+			break
+	result['numWords'] = numWords
+	result['line'] = line
+	return result
+
+def grabLines(lineLength, text):
+	word = splitWords(text)
+	nLine = lineLength
+	nWord = ''
+	current = 0
+	index = 0
+	line = ''
+	result = []
+
+	for w in word:
+		nLine = nLine - current
+		line += nWord
+
+		if wordFits(nLine, w):
+			line += w
+			current = len(w)
+			index += 1
+			nWord = ''
+		else:
+			result.append(line)
+			nLine = lineLength
+			current = 0
+			line = ''
+			nWord = w
+
+	result.append(line)
+
+	return result
+
+def splitFormLines(numLines, lineLength, text):
+	result = {}
+	lines = grabLines(lineLength, text)
+
+	for i in range(numLines):
+		num = i + 1
+		name = 'line' + str(num)
+
+		if i < len(lines):
+			result[name] = lines[i]
+		else:
+			result[name] = ' '
+
+	return result
+
+def multiLineSplit(numLines, line1Length, otherLineLength, text):
+	result = {}
+	firstInfo = grabSingleLine(line1Length, text)
+	lin1 = firstInfo['line']
+	t2 = ''
+
+	words = splitWords(text)
+	for i in range(firstInfo['numWords'], len(words)):
+		t2 += words[i]
+
+	lines = grabLines(otherLineLength, t2)
+
+	for i in range(numLines):
+		num = i + 1
+		name = 'line' + str(num)
+
+		if i < len(lines):
+			if i == 0:
+				result[name] = lin1
+
+			else:
+				result[name] = lines[i - 1]
+		else:
+			result[name] = ' '
+	return result
 
 
 def grabMhViewImages(mh):
 	result = {}
 	check = "/static/images/check_o.png"
 	nope = '/static/images/nope.png'
+
+	result['pastWork'] = multiLineSplit(2, 60, 85, str(mh.demographics.pastJobs))
+	result['psychHistory'] = splitFormLines(6, 85, str(mh.stressors.psychiatricHistory))
+	result['pAnsExp'] = multiLineSplit(4, 60, 85, str(mh.legalHistory.explainPositiveAnswers))
 
 	if mh.demographics.maritalStatus == 'Married':
 		result['Married'] = check
