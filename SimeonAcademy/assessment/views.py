@@ -33,13 +33,13 @@ getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
 getClientByID, getClientBySS, getEducationID, getLivingID, getMaritalID, \
 getActiveClients, getDischargedClients, getTimes, convert_phone, phone_to_integer, \
 grabClientOpenForm, fetchForm, deleteForm, getOrderedStateIndex, \
-getGlobalID, decodeCharfield, force_URL_priority, startForm, fetchUrl, \
+getGlobalID, force_URL_priority, startForm, fetchUrl, grabMhViewImages, \
 fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
-getUtViewImages, getUtPaid, grabMhViewImages
+getUtViewImages, getUtPaid 
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1576,7 +1576,7 @@ def mhDemoOpPage(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			mh_id = getGlobalID()
+			mh_id = getGlobalID(user)
 			mh = MentalHealth.objects.get(id=mh_id)
 			states = State.objects.all().order_by('state')
 

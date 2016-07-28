@@ -5905,6 +5905,37 @@ def multiLineSplit(numLines, line1Length, otherLineLength, text):
 			result[name] = ' '
 	return result
 
+def fetchClientSSDisplay(ss):
+	result = ''
+	result += ss[0]
+	result += ss[1]
+	result += ss[2]
+	result += '-'
+	result += ss[3]
+	result += ss[4]
+	result += '-'
+	result += ss[5]
+	result += ss[6]
+	result += ss[7]
+	result += ss[8]
+	return result
+
+def fetchClientPhoneDisplay(phone):
+	result = ''
+	result += '('
+	result += phone[0]
+	result += phone[1]
+	result += phone[2]
+	result += ') '
+	result += phone[3]
+	result += phone[4]
+	result += phone[5]
+	result += '-'
+	result += phone[6]
+	result += phone[7]
+	result += phone[8]
+	result += phone[9]
+	return result
 
 def grabMhViewImages(mh):
 	result = {}
@@ -5914,6 +5945,12 @@ def grabMhViewImages(mh):
 	result['pastWork'] = multiLineSplit(2, 60, 85, str(mh.demographics.pastJobs))
 	result['psychHistory'] = splitFormLines(6, 85, str(mh.stressors.psychiatricHistory))
 	result['pAnsExp'] = multiLineSplit(4, 60, 85, str(mh.legalHistory.explainPositiveAnswers))
+	result['m_children'] = decodeCharfield(mh.demographics.childrenMale)
+	result['f_children'] = decodeCharfield(mh.demographics.childrenFemale)
+	result['m_brothers'] = decodeCharfield(mh.demographics.bothers)
+	result['f_sisters'] = decodeCharfield(mh.demographics.sisters)
+	result['RSSN'] = fetchClientSSDisplay(mh.client.ss_num)
+	result['RCPHONE'] = fetchClientPhoneDisplay(mh.client.phone)
 
 	if mh.demographics.maritalStatus == 'Married':
 		result['Married'] = check
@@ -10286,8 +10323,8 @@ def getAppTrack(user):
 	return track.state
 
 def decodeCharfield(text):
-	result = []
 	temp = ''
+	result = []
 
 	for t in text:
 		if str(t) != '~':
@@ -10296,6 +10333,7 @@ def decodeCharfield(text):
 			result.append(temp)
 			temp = ''
 
+	result.append(temp)
 	return result
 
 def startForm(request, form_type):

@@ -257,7 +257,7 @@
             
             <td width="1%" class="viewLabel_mh_c">Cell</td>
             
-            <td width="20%" class="formInput_mh_c">{{session.client.phone}}</td>
+            <td width="20%" class="formInput_mh_c">{{images.RCPHONE}}</td>
             
             <td width="1%" class="viewLabel_mh_c">Work</td>
             
@@ -266,7 +266,7 @@
             <td width="1%" class="viewLabel_mh_c">SS#</td>
             
             <td width="20%" class="formInput_mh_c">
-            	{{session.client.ss_num}}
+            	{{images.RSSN}}
             </td>
           </tr>
         </table>
@@ -420,14 +420,22 @@
           <tr>
             <td width="1%" class="viewLabel_mh_c">Male</td>
             
-            <td class="formInput_mh_c"></td>
+            <td class="formInput_mh_b">
+              {% for mc in images.m_children %}
+              {{mc}} &nbsp&nbsp&nbsp&nbsp
+              {% endfor %}
+            </td>
           </tr>
         </table>
         <table>
           <tr>
             <td width="1%" class="viewLabel_mh_c">Female</td>
             
-            <td class="formInput_mh_c"></td>
+            <td class="formInput_mh_b">
+              {% for fc in images.f_children %}
+              {{fc}} &nbsp&nbsp&nbsp&nbsp
+              {% endfor %}
+            </td>
           </tr>
         </table>
         <table>
@@ -492,7 +500,11 @@
             <td width="5%" class="viewLabel_mh_c">Brothers</td>
             <td width="1%" class="viewLabel_mh_c">Age/City/State</td>
             
-            <td class="formInput_mh_c"></td>
+            <td class="formInput_mh_b">
+              {% for mbot in images.m_brothers %}
+              {{mbot}} &nbsp&nbsp&nbsp&nbsp
+              {% endfor %}
+            </td>
           </tr>
         </table>
         <table>
@@ -500,7 +512,11 @@
             <td width="5%" class="viewLabel_mh_c">Sisters</td>
             <td width="1%" class="viewLabel_mh_c">Age/City/State</td>
             
-            <td class="formInput_mh_c"></td>
+            <td class="formInput_mh_b">
+              {% for fsis in images.f_sisters %}
+              {{fsis}} &nbsp&nbsp&nbsp&nbsp
+              {% endfor %}
+            </td>
           </tr>
         </table>
       </div>
