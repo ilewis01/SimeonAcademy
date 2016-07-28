@@ -524,18 +524,45 @@ function finializeSessionResolve() {
 }
 
 function new_am() {
-	grab('c_form').action = '/am_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeAM').value;
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 400;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/am_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_asi() {
-	grab('c_form').action = '/asi_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeASI').value;
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 400;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/asi_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_mh() {
-	grab('c_form').action = '/mh_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeMH').value;
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 400;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/mh_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_sap() {
@@ -543,8 +570,10 @@ function new_sap() {
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 1200, h = 1300;
-		openPopUp('auto', '/print_sap/', w, h);
+		var w = 550, h = 400;
+		openPopUp('auto', '/form_existing/', w, h);
+		// var w = 1200, h = 1300;
+		// openPopUp('auto', '/print_sap/', w, h);
 	}
 	else if (isForm === 'False') {
 		grab('c_form').action = '/sap_preliminary/';
@@ -557,8 +586,8 @@ function new_ut() {
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 1200, h = 1300;
-		openPopUp('auto', '/printUT/', w, h);
+		var w = 550, h = 400;
+		openPopUp('auto', '/form_existing/', w, h);
 	}
 	else if (isForm === 'False') {
 		grab('c_form').action = '/ut_preliminary/';

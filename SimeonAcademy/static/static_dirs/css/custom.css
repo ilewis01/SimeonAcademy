@@ -2722,6 +2722,10 @@ button:hover {
 	margin-bottom: 10%;
 }
 
+#crazySpace2 {
+	margin-bottom: 5%;
+}
+
 /*#crazySpaceLite {
 	margin-bottom: 5%;
 }*/
@@ -2849,6 +2853,14 @@ button:hover {
 	font-style: italic;
 }
 
+#save_f_sub4 {
+	text-align: center;
+	font-size: 15px;
+	color: #ce6500;
+	margin-top: 2%;
+	font-style: italic;
+}
+
 #save_f_sub2 {
 	text-align: center;
 	font-size: 18px;
@@ -2856,6 +2868,15 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	margin-top: 6%;
+}
+
+#save_f_sub6 {
+	text-align: center;
+	font-size: 18px;
+	color: #6f6f6e;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 3%;
 }
 
 #save_f_sub3 {
@@ -2946,6 +2967,10 @@ button:hover {
 	font-weight: bold;
 	color: #787875;
 	margin-bottom: 7%;
+}
+
+#profile_header span {
+	color: #ce6500;
 }
 
 #pro-question {

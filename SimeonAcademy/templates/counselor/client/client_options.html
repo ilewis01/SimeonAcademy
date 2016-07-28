@@ -44,9 +44,9 @@
                 <li>
                     <a href="javascript: new_ut();">Urine Test Results</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="javascript: get_client_history();">Client History</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="javascript: new_discharge();">Discharge</a>
                 </li>               
@@ -76,7 +76,7 @@
                                 <tr>
                                     <td>
                                         <div id='profile_header'>
-                                            Details for {{session.client.fname}} {{session.client.middleInit}} {{session.client.lname}}
+                                            Details for <span>{{session.client.fname}} {{session.client.middleInit}} {{session.client.lname}}</span>
                                         </div>
                                     </td>
                                 </tr>
