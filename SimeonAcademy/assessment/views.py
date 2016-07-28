@@ -39,7 +39,7 @@ processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSessi
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
-getUtViewImages, getUtPaid 
+getUtViewImages, getUtPaid, deprioritizeURL
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1041,6 +1041,7 @@ def form_saved(request):
 			elif form_type == 'asi':
 				form = session.asi
 
+			deprioritizeURL(form_type, form)
 			form.isOpen = False
 			form.isComplete = True
 			form.save()

@@ -7373,31 +7373,17 @@ function universal_generic_exit(form_type, page) {
 	var exit_type = document.getElementById('exit_type');
 	var form = getFormElement(form_type);
 
-	if (page === '/mh_demographic/') {
-		processDynamicMhHistory();
-	}
-	else if (page === '/mh_education/') {
-		processDynamicMhEducation();
-	}
-	else if (page === '/mh_stress/') {
-		processDynamicMhStress();
-	}
-	else if (page === '/mh_familyHistory/') {
-		processDynamicMhFamily();
-	}
-	else if (page === '/mh_legal/') {
-		processDynamicMhLegal();
-	}
-
 	if (form_type === 'am') {
 		universal_am_dynamic_post(page);
 	}
-
-	if (form_type === 'asi') {
+	else if (form_type === 'asi') {
 		processAsiFields(page);
 	}
-	if (form_type === 'ut') {
+	else if (form_type === 'ut') {
 		continue_ut();
+	}
+	else if (form_type === 'mh') {
+		postMhFields(page);
 	}
 
 	form.action = '/uni_generic_exit/';

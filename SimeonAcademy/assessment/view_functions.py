@@ -4897,6 +4897,7 @@ def getOrderedMhNames():
 	result.append('legal')
 	result.append('psych')
 	result.append('use')
+	result.append('viewForm')
 
 	return result
 
@@ -4911,6 +4912,7 @@ def getOrderedMhCompleteName():
 	result.append('legalComplete')
 	result.append('psychComplete')
 	result.append('useComplete')
+	result.append('isComplete')
 
 	return result
 
@@ -4925,7 +4927,7 @@ def getOrderedMhURLS():
 	result.append('/mh_legal/')
 	result.append('/mh_psych/')
 	result.append('/mh_useTable/')
-	# result.append('/mh_viewForm/')
+	result.append('/mh_viewForm/')
 
 	return result
 
@@ -4940,6 +4942,7 @@ def getOrderedMhButtonNames():
 	result.append('mhLegal_image')
 	result.append('mhPsych_image')
 	result.append('mhUse_image')
+	result.append(' ')
 
 	return result
 
@@ -4954,6 +4957,7 @@ def getMhOrderedCompleteValues(mh):
 	result.append(mh.legalComplete)
 	result.append(mh.psychComplete)
 	result.append(mh.useComplete)
+	result.append(mh.isComplete)
 
 	return result
 
@@ -4968,6 +4972,7 @@ def getOrderedMhPriorityValue(mh):
 	result.append(mh.legalPriority)
 	result.append(mh.psychPriority)
 	result.append(mh.psychPriority)
+	result.append(False)
 
 	return result
 
@@ -4993,9 +4998,9 @@ def grabOrderedMh(mh):
 	return mh_list
 
 def forceNextMhPage(mh):
-	result 	= None
-	flag 	= None
-	mh_list = grabOrderedMh(mh)
+	result 		= None
+	flag 		= None
+	mh_list 	= grabOrderedMh(mh)
 
 	for i in range(len(mh_list)):
 		if mh_list[i]['complete'] == False:
@@ -5010,10 +5015,11 @@ def forceNextMhPage(mh):
 	return result
 
 def nextMhPage(mh, section):
-	result 		= None
-	nextSection = None
-	proceed 	= True
-	mh_list 	= grabOrderedMh(mh)
+	result = ''
+	next_section = ''
+	proceed = True
+	no_result = False
+	mh_list = grabOrderedMh(mh)
 
 	for m in mh_list:
 		if m['priority'] == True:
@@ -5024,16 +5030,13 @@ def nextMhPage(mh, section):
 	if proceed == True:
 		for i in range(len(mh_list)):
 			if mh_list[i]['complete'] == False:
-				nextSection = mh_list[i]['url']
+				next_section = mh_list[i]['url']
 				break
 
-		if str(nextSection) == str(section):
+		if str(next_section) == str(section):
 			result = forceNextMhPage(mh)
 		else:
-			result = nextSection
-
-	if result == None:
-		result = '/mh_viewForm/'
+			result = next_section
 
 	return result
 
@@ -10620,6 +10623,18 @@ def fetchUtPositive(session):
 	if session.hasUT == True:
 		result = getUtData(session.ut)
 	return result
+
+def deprioritizeURL(form_type, form):
+	f = str(form_type)
+	if f == 'asi':
+		deprioritizeASI(form)
+	elif f == 'sap':
+		deprioritizeSAP(form)
+	elif f == 'am':
+		deprioritizeAM(form)
+	elif f == 'mh':
+		deprioritizeMH(form)
+	form.save()
 
 
 
