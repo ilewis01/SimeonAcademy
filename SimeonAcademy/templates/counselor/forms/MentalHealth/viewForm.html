@@ -188,8 +188,8 @@
                 <div class="col-md-12 col-sm-12">
                   <div>
                   	<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                  		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                      	<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+                  		  <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>>
+                        <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
                         <input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
                         <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
                         <input type='hidden' name='save_section' id='save_section' value='/mh_viewForm/'> 

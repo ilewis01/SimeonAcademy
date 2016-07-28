@@ -10,7 +10,7 @@
 		<div id='crazySpaceLite'></div>
 
 		<form action='/form_saved/' method='post' id='s_form'> {% csrf_token %}
-			<input type='hidden' name='exit_type' id='exit_type' value='close'>
+			<input type='hidden' name='exit_type' id='exit_type' value=''>
 			<input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
 			<input type='hidden' name='multiNav' id='multiNav' value='True'>
 			<input type='hidden' name='nextUrl' id='nextUrl' value=''>
@@ -34,7 +34,7 @@
 			<table>
 				<tr>
 					<td>
-						<button type='button' onClick='javascript: save_uni_form();'>Save & Finish</button>
+						<button type='button' onClick='javascript: save_uni_form();'>Finish & Save</button>
 					</td>
 
 					<td>

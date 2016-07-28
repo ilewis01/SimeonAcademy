@@ -41,7 +41,9 @@ urlpatterns = patterns('',
     url(r'^mh_legal/$', 'assessment.views.mh_legal'),
     url(r'^mh_psych/$', 'assessment.views.mh_psych'),
     url(r'^mh_useTable/$', 'assessment.views.mh_useTable'),
-    url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),   
+    url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
+    url(r'^mh_complete/$', 'assessment.views.mh_complete'),
+    url(r'^mh_saved/$', 'assessment.views.mh_saved'), 
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),
@@ -123,5 +125,7 @@ urlpatterns = patterns('',
     url(r'^sessionResolveSuccess/$', 'assessment.views.sessionResolveSuccess'),
     url(r'^session_open_error/$', 'assessment.views.session_open_error'),
     url(r'^invoice/$', 'assessment.views.invoice'),
+    url(r'^form_complete/$', 'assessment.views.form_complete'),
+    url(r'^form_saved/$', 'assessment.views.form_saved'),
 
 )

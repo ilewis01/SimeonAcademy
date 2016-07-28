@@ -996,6 +996,59 @@ def session_open_error(request):
 			content['shouldDelete'] = shouldDelete
 			return render_to_response('counselor/session/sessionOpenError.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def form_complete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/session/form_complete.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def form_saved(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			form_type = request.POST.get('exit_type')
+			print "EXIT TYPE: " + str(form_type)
+
+			if form_type == 'mh':
+				form = session.mh
+			elif form_type == 'am':
+				form = session.am
+			elif form_type == 'sap':
+				form = session.sap
+			elif form_type == 'asi':
+				form = session.asi
+
+			form.isOpen = False
+			form.isComplete = True
+			form.save()
+
+			content['session'] = session
+			content['title'] = 'Simeon Academy | S.A.P'
+			return render_to_response('counselor/session/form_saved.html', content, context_instance=RequestContext(request))
+
 
 
 ###########################################################################################################################################
@@ -1789,6 +1842,49 @@ def verify_mhOp(request):
 			content['mh'] = mh
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/verify_mhOp.html', content)
+
+@login_required(login_url='/index')
+def mh_complete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/forms/MentalHealth/form_complete.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def mh_saved(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			sap = fetchCurrentFile('sap', session.client)
+			sap.isOpen = False
+			sap.isComplete = True
+			sap.save()
+			processInvoice(session)
+			content['sap'] = sap
+			content['session'] = session
+			content['title'] = 'Simeon Academy | S.A.P'
+			return render_to_response('counselor/forms/SAP/form_saved.html', content, context_instance=RequestContext(request))
 
 
 ###########################################################################################################################################

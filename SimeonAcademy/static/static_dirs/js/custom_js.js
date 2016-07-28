@@ -7619,10 +7619,13 @@ function amSideBtnSubmit(url) {
 
 function verified_form() {
 	var w = 550, h = 400;
-	openPopUp('auto', '/sap_complete/', w, h);
+	openPopUp('auto', '/form_complete/', w, h);
 }
 
+
 function save_uni_form() {
+	var form_type = getPopParent('exit_type').value;
+	grab('exit_type').value = form_type;
 	grab('s_form').submit();
 }
 
