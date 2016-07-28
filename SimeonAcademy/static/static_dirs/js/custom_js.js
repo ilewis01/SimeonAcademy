@@ -525,10 +525,11 @@ function finializeSessionResolve() {
 
 function new_am() {
 	var isForm = grab('completeAM').value;
+	grab('fType').value = 'am';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 550, h = 400;
+		var w = 550, h = 450;
 		openPopUp('auto', '/form_existing/', w, h);
 	}
 	else if (isForm === 'False') {
@@ -539,10 +540,11 @@ function new_am() {
 
 function new_asi() {
 	var isForm = grab('completeASI').value;
+	grab('fType').value = 'asi';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 550, h = 400;
+		var w = 550, h = 450;
 		openPopUp('auto', '/form_existing/', w, h);
 	}
 	else if (isForm === 'False') {
@@ -553,10 +555,11 @@ function new_asi() {
 
 function new_mh() {
 	var isForm = grab('completeMH').value;
+	grab('fType').value = 'mh';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 550, h = 400;
+		var w = 550, h = 450;
 		openPopUp('auto', '/form_existing/', w, h);
 	}
 	else if (isForm === 'False') {
@@ -567,13 +570,12 @@ function new_mh() {
 
 function new_sap() {
 	var isForm = grab('completeSAP').value;
+	grab('fType').value = 'sap';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 550, h = 400;
+		var w = 550, h = 450;
 		openPopUp('auto', '/form_existing/', w, h);
-		// var w = 1200, h = 1300;
-		// openPopUp('auto', '/print_sap/', w, h);
 	}
 	else if (isForm === 'False') {
 		grab('c_form').action = '/sap_preliminary/';
@@ -583,16 +585,69 @@ function new_sap() {
 
 function new_ut() {
 	var isForm = grab('completeUT').value;
+	grab('fType').value = 'ut';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 550, h = 400;
+		var w = 550, h = 450;
 		openPopUp('auto', '/form_existing/', w, h);
 	}
 	else if (isForm === 'False') {
 		grab('c_form').action = '/ut_preliminary/';
 		grab('c_form').submit();
 	}
+}
+
+function setExistingFType() {
+	var fType = getPopParent('fType').value;
+	grab('fType').value = fType;
+
+	if (fType === 'am') {
+		grab('formName').innerHTML = 'Anger Management Form';
+		grab('formName2').innerHTML = 'Anger Management Form';
+	}
+	if (fType === 'mh') {
+		grab('formName').innerHTML = 'Mental Health Assessment Form';
+		grab('formName2').innerHTML = 'Mental Health Assessment Form';
+	}
+	if (fType === 'ut') {
+		grab('formName').innerHTML = 'Urine Analysis Form';
+		grab('formName2').innerHTML = 'Urine Analysis Form';
+	}
+	if (fType === 'sap') {
+		grab('formName').innerHTML = 'S.A.P Form';
+		grab('formName2').innerHTML = 'S.A.P Form';
+	}
+	if (fType === 'asi') {
+		grab('formName').innerHTML = 'Addiction Severity Index Form';
+		grab('formName2').innerHTML = 'Addiction Severity Index Form';
+	}
+}
+
+function universalPrint() {
+	var w = 1200, h = 1300;
+	var fType = grab('fType').value;
+	fType = String(fType);
+	var location = null;
+
+	if (fType === 'am') {
+		location = '/printAM/';
+	}
+	else if (fType === 'mh') {
+		location = '/printMH/';
+	}
+	else if (fType === 'ut') {
+		location = '/printUT/';
+	}
+	else if (fType === 'asi') {
+		location = '/printASI/';
+	}
+	else if (fType === 'sap') {
+		location = '/print_sap/';
+	}
+
+	openPopUp('auto', location, w, h);
+	window.close();
 }
 
 function new_discharge() {

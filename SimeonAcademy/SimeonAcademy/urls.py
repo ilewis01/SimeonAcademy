@@ -42,6 +42,7 @@ urlpatterns = patterns('',
     url(r'^mh_psych/$', 'assessment.views.mh_psych'),
     url(r'^mh_useTable/$', 'assessment.views.mh_useTable'),
     url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
+    url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),
@@ -53,7 +54,7 @@ urlpatterns = patterns('',
     url(r'^sap_other/$', 'assessment.views.sap_other'),
     url(r'^sap_sources/$', 'assessment.views.sap_sources'),
     url(r'^sap_viewForm/$', 'assessment.views.sap_viewForm'),
-    url(r'^print_sap/$', 'assessment.views.print_sap'),
+    url(r'^printMH/$', 'assessment.views.printMH'),
 
     ## Anger Management Views
     url(r'^am_preliminary/$', 'assessment.views.am_preliminary'),

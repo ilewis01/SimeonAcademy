@@ -12,6 +12,11 @@ side_option_headbody {
   background-color: white;
 }
 
+.viewFormClassShrink {
+  font-family: Times, serif;
+  background-color: white;
+}
+
 .gradient-white {
 	background: url('../images/grey1.jpg');
 }

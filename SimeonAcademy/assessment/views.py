@@ -1861,6 +1861,28 @@ def verify_mhOp(request):
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/verify_mhOp.html', content)
 
+@login_required(login_url='/index')
+def printMH(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			# content = fetchPrintFields('mh' ,session.sap)
+			content['date'] = session.mh.date_of_assessment
+			content['images'] = grabMhViewImages(session.mh)
+			content['session'] = session
+			return render_to_response('counselor/forms/MentalHealth/printMH.html', content, context_instance=RequestContext(request))
+
 
 
 ###########################################################################################################################################
