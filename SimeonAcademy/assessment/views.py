@@ -40,7 +40,7 @@ truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSess
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
-fetchClientPhoneDisplay, calculateHistoryPages
+fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -2189,7 +2189,22 @@ def asi_viewForm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			date = datetime.now()
+			time = date.time()
+			time = str(time)
+			t = ''
+			t += time[0]
+			t += time[1]
+			t += time[2]
+			t += time[3]
+			t += time[4]
+
 			content = fetchContent(request, 'asi', '/asi_viewForm/')
+
+			content['session'].asi.endTime = t
+			content['session'].asi.save()
+			
+			content['data'] = fetchASIViewItems(content['session'].asi)
 			return render_to_response('counselor/forms/ASI/viewForm.html', content, context_instance=RequestContext(request))
 
 ###########################################################################################################################################

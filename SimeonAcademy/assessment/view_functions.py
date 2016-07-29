@@ -5926,12 +5926,12 @@ def multiLineSplit(numLines, line1Length, otherLineLength, text):
 
 def fetchClientSSDisplay(ss):
 	result = ''
-	result += ss[0]
-	result += ss[1]
-	result += ss[2]
+	result += '*'
+	result += '*'
+	result += '*'
 	result += '-'
-	result += ss[3]
-	result += ss[4]
+	result += '*'
+	result += '*'
 	result += '-'
 	result += ss[5]
 	result += ss[6]
@@ -7367,6 +7367,7 @@ def get_asi_names():
 	result.append('social1')
 	result.append('social2')
 	result.append('psych')
+	result.append('viewForm')
 	return result
 
 def get_asi_urls():
@@ -7381,6 +7382,7 @@ def get_asi_urls():
 	result.append('/asi_social1/')
 	result.append('/asi_social2/')
 	result.append('/asi_psych/')
+	result.append('/asi_viewForm/')
 	return result
 
 def get_asi_butons():
@@ -7395,6 +7397,7 @@ def get_asi_butons():
 	result.append('asi_social1_image')
 	result.append('asi_social2_image')
 	result.append('asi_psych_image')
+	result.append(' ')
 	return result
 
 def get_asi_complete(asi):
@@ -7409,6 +7412,7 @@ def get_asi_complete(asi):
 	result.append(asi.social1Complete)
 	result.append(asi.social2Complete)
 	result.append(asi.psychComplete)
+	result.append(asi.isComplete)
 	return result
 
 def get_asi_priority(asi):
@@ -7423,6 +7427,7 @@ def get_asi_priority(asi):
 	result.append(asi.social1Priority)
 	result.append(asi.social2Priority)
 	result.append(asi.psychPriority)
+	result.append(asi.isComplete)
 	return result
 
 def get_asi_parameters(asi):
@@ -7903,6 +7908,96 @@ def getASI_YNI(m_val):
 def fetchASIBoolImages(asi):
 	result = {}
 	result['g15'] = getBooleanChecks(asi.general.g15)
+
+def decodeASIFields(numBoxes, field):
+	field = str(field)
+	items = []
+	result = {}
+	adjust = None
+	pre = 'box'
+
+	fieldLen = len(field)
+
+	if fieldLen < numBoxes:
+		adjust = numBoxes - fieldLen
+
+		for a in range(adjust):
+			items.append('0')
+
+	for f in field:
+		items.append(f)
+
+	for i in range(numBoxes):
+		num = i + 1
+		name = pre + str(num)
+		result[name] = items[i]
+
+	return result
+
+def decodeASIdate(date):
+	result = {}
+	date = str(date)
+	result['box1'] = date[5]
+	result['box2'] = date[6]
+	result['box3'] = date[8]
+	result['box4'] = date[9]
+	result['box5'] = date[2]
+	result['box6'] = date[3]
+	return result
+
+def decodeASITime(time):
+	time = str(time)
+	result = {}
+	result['box1'] = time[0]
+	result['box2'] = time[1]
+	result['box3'] = time[3]
+	result['box4'] = time[4]
+	return result
+
+def decodeASIBool(val):
+	result = 0
+	if val == True:
+		result = 1
+	return result
+
+def snagAsiAdmin(asi):
+	result = {}
+	g10 = '2'
+	if asi.client.isMale == True:
+		g10 = '1'
+
+	result['g1'] 	= decodeASIFields(4, asi.admin.g1)
+	result['g2'] 	= decodeASIFields(4, asi.admin.g2)
+	result['g3'] 	= decodeASIFields(3, asi.admin.g3)
+	result['g4'] 	= decodeASIdate(asi.admin.g4)
+	result['g5'] 	= decodeASIdate(asi.date_of_assessment)
+	result['g6'] 	= decodeASITime(asi.startTime)
+	result['g7'] 	= decodeASITime(asi.endTime)
+	result['g8'] 	= decodeASIFields(1, asi.admin.g8)
+	result['g9'] 	= decodeASIFields(1, asi.admin.g9)
+	result['g10'] 	= g10
+	result['g11'] 	= decodeASIFields(2, asi.admin.g11)
+	result['g12'] 	= decodeASIFields(1,asi.admin.g12)
+	return result
+
+def snagASIgeneral(asi):
+	result = {}
+	result['g13'] 		= decodeASIFields(3, asi.general.g13)
+	result['g14yrs'] 	= decodeASIFields(2, asi.general.g14yrs)
+	result['g14mos'] 	= decodeASIFields(2, asi.general.g14mos)
+	result['g15'] 		= decodeASIBool(asi.general.g15)
+	result['g16'] 		= decodeASIdate(asi.client.dob)
+	result['g16mth'] 	= decodeASIFields(2, asi.general.g16mth)
+	result['g16day'] 	= decodeASIFields(2, asi.general.g16day)
+	result['g16year'] 	= decodeASIFields(2, asi.general.g16year)
+	result['g20'] 		= decodeASIFields(2, asi.general.g20)
+	return result
+
+def fetchASIViewItems(asi):
+	result = {}
+	result['admin'] = snagAsiAdmin(asi)
+	result['general'] = snagASIgeneral(asi)
+	return result
 
 def grabAsiAdminFields(asi):
 	# Returns a dictionary List of ASI.admin fields

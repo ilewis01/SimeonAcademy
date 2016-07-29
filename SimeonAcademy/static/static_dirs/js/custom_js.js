@@ -5952,6 +5952,10 @@ function init_asi_general(json_data) {
 	number_init(json_data.isComplete, document.getElementById('g14mos'));
 	number_init(json_data.isComplete, document.getElementById('g20'));
 
+	document.getElementById('g17').selectedIndex = json_data.g17;
+	document.getElementById('g18').selectedIndex = json_data.g18;
+	document.getElementById('g19').selectedIndex = json_data.g19;
+
 	//SEVERITY RADIO ENTRIES
 	var m0 = document.getElementById('m0');
 	var m1 = document.getElementById('m1');
@@ -6037,10 +6041,6 @@ function init_asi_general(json_data) {
 	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
 	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
 	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-
-	document.getElementById('g17').selectedIndex = json_data.g17;
-	document.getElementById('g18').selectedIndex = json_data.g18;
-	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
 function init_asi_medical(json_data) {

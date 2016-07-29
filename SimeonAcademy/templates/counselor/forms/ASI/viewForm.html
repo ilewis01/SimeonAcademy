@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
+<body class="gradient-white-form" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -187,7 +187,7 @@
               <td>
                 <div class='exit_btn_text'>
                   <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_psych/');" name='sourceBtn' class='exit_a_tag'>
+                  <a href="javascript: universal_generic_exit('asi', 'None');" name='sourceBtn' class='exit_a_tag'>
                     Exit
                   </a>
                 </div>
@@ -206,7 +206,7 @@
 
                 <div class="container">
             		<div class="row">                   
-                  <div class="col-md-6 col-sm-6">
+                  <div class="col-md-12 col-sm-12">
                   	<div>
                   		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
                   			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
@@ -221,6 +221,4012 @@
                         </div>  
 				          </div>
 				    			</form>
+
+<div class='asi_class'>
+<div class="container-fluid">
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight">
+
+      <h1>
+          INSTRUCTIONS
+      </h1>
+      <br>
+      <ol>
+        <li>
+          <p>
+            <u>Leave No Blanks</u> - Where appropriate code items:
+            <br><br>
+            <b>X = question not answered</b>
+            <br>
+            <b>N = questions not applicable</b>
+            <br><br> Use <u>only</u> one character per item.
+          </p>
+        </li>
+        <li>
+          <p>
+            Item numbers <u>underlined</u> are to be asked at follow-up, Items with an asterisk are cumulative and should be rephrased at follow-up (see Manual).
+          </p>
+        </li>
+        <li>
+          <p>
+            Space is provided after sections for additional comments.
+          </p>
+        </li>
+      </ol>
+      <!-- end leftDiv -->
+    </div>
+    <!-- end col-xs-4 leftDiv -->
+    <div class="col-xs-4 centralDiv sameHeight">
+      <h1>SEVERITY RATINGS</h1>
+      <br>
+      <p>
+        The severity ratings are interviewer estimates of the patient's need for additional treatment in each area. The scales range from 0 (no treatment necessary) to 9 (treatment needed to intervene in life-threatening situation).
+        <br><br> Each ratings is based upon the patient's history of problem symptoms, present condition and subjective assessment of his treatment needs in a given area. For a detailed description of severity ratings' deprivation procedures and conventions,
+        see manual. <b>Note:</b> These severity ratings are optional.
+      </p>
+    </div>
+    <!-- end col-xs-4 centerDiv -->
+    <div class="col-xs-4 rightDiv sameHeight">
+      <h1 id="AddictionSeverityIndex">
+          <b>Addiction Severity Index</b>
+          <br>
+          <em>Fifth Edition</em>
+      </h1>
+      <h2>
+          SUMMARY OF PATIENTS RATING<br> SCALE
+      </h2>
+      <div id="ratingScale">
+        <ul>
+          <li>
+            <p>0 - Not at all</p>
+          </li>
+          <li>
+            <p>1 - Slightly</p>
+          </li>
+          <li>
+            <p>2 - Moderately</p>
+          </li>
+          <li>
+            <p>3 - Considerably</p>
+          </li>
+          <li>
+            <p>4 - Extremely</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end col-xs-4 rightDiv -->
+  </div>
+  <!-- end row -->
+  <div class="rowLine"></div>
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight">
+      <div id="generalInfoLeft">
+        <ul class="questionList">
+          <li>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g1.box1}}</td>
+                <td class="formCell">{{data.admin.g1.box2}}</td>
+                <td class="formCell">{{data.admin.g1.box3}}</td>
+                <td class="formCell">{{data.admin.g1.box4}}</td>
+              </tr>
+            </table>
+            <p>G1. I.D NUMBER</p>
+          </li>
+          <li>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g2.box1}}</td>
+                <td class="formCell">{{data.admin.g2.box2}}</td>
+                <td class="formCell">{{data.admin.g2.box3}}</td>
+                <td class="formCell">{{data.admin.g2.box4}}</td>
+              </tr>
+            </table>
+            <p>G2. LAST 4 DIGITS</p><br>
+            <p style="padding-left: 30px">OF SSN</p>
+          </li>
+          <li>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g3.box1}}</td>
+                <td class="formCell">{{data.admin.g3.box2}}</td>
+                <td class="formCell">{{data.admin.g3.box3}}</td>
+              </tr>
+            </table>
+            <p>G3. PROGRAM NUMBER</p>
+          </li>
+          <li>
+            <table>
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g4.box1}}</td>
+                      <td class="formCell">{{data.admin.g4.box2}}</td>
+                    </tr>
+                  </table>
+                  <h4>Mth.</h4>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g4.box3}}</td>
+                      <td class="formCell">{{data.admin.g4.box4}}</td>
+                    </tr>
+                  </table>
+                  <h4>Day</h4>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g4.box5}}</td>
+                      <td class="formCell">{{data.admin.g4.box6}}</td>
+                    </tr>
+                  </table>
+                  <h4>Year</h4>
+                </td>
+              </tr>
+            </table>
+            <p>G4. DATE OF</p><br>
+            <p style="padding-left: 30px">ADMISSION</p>
+          </li>
+          <li>
+            <table>
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g5.box1}}</td>
+                      <td class="formCell">{{data.admin.g5.box2}}</td>
+                    </tr>
+                  </table>
+                  <h4>Mth.</h4>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g5.box3}}</td>
+                      <td class="formCell">{{data.admin.g5.box4}}</td>
+                    </tr>
+                  </table>
+                  <h4>Day</h4>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g5.box5}}</td>
+                      <td class="formCell">{{data.admin.g5.box6}}</td>
+                    </tr>
+                  </table>
+                  <h4>Year</h4>
+                </td>
+              </tr>
+            </table>
+            <p>G5. DATE OF</p><br>
+            <p style="padding-left: 30px">INTERVIEW</p>
+          </li>
+          <li>
+            <p>G6. TIME BEGUN</p>
+            <table>
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g6.box1}}</td>
+                      <td class="formCell">{{data.admin.g6.box2}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <p><b>:</b></p>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g6.box3}}</td>
+                      <td class="formCell">{{data.admin.g6.box4}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            <p>G6. TIME ENDED</p>
+            <table>
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g7.box1}}</td>
+                      <td class="formCell">{{data.admin.g7.box2}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <p><b>:</b></p>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td class="formCell">{{data.admin.g7.box3}}</td>
+                      <td class="formCell">{{data.admin.g7.box4}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            <p>G8. CLASS:</p>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g8.box1}}</td>
+              </tr>
+            </table>
+            <ul class="smallList">
+              <li>
+                <p>1 - Intake</p>
+              </li>
+              <li>
+                <p>2 - Follow-up</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>G9. CONTACT CODE:</p>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g9.box1}}</td>
+              </tr>
+            </table>
+            <ul class="smallList">
+              <li>
+                <p>1 - In Person</p>
+              </li>
+              <li>
+                <p>2 - Phone</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>G10. GENDER:</p>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g10}}</td>
+              </tr>
+            </table>
+            <ul class="smallList">
+              <li>
+                <p>1 - Male</p>
+              </li>
+              <li>
+                <p>2 - Female</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g11.box1}}</td>
+                <td class="formCell">{{data.admin.g11.box2}}</td>
+              </tr>
+            </table>
+            <p>G11. INTERVIEWER</p><br>
+            <p style="padding-left: 40px">CODE NUMBER</p>
+          </li>
+          <li>
+            <p>G12. SPECIAL:</p>
+            <table>
+              <tr>
+                <td class="formCell">{{data.admin.g12.box1}}</td>
+              </tr>
+            </table>
+            <ul class="smallList">
+              <li><p>1 - Patient terminated</p></li>
+              <li><p>2 - Patient refused</p></li>
+              <li><p>3 - Patient unable to respond</p></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- end questionList -->
+      </div>
+      <!-- end generalInfoLeft -->
+    </div>
+    <!-- end leftDiv -->
+    <div class="col-xs-4 centralDiv sameHeight">
+      <h2 style="margin: 0px">GENERAL INFORMATION</h2>
+      <br>
+      <table>
+        <tr>
+          <td width="2%"><p>NAME</p></td>
+          <td><div class="formInputLine">{{session.client.lname}}, {{session.client.fname}}, {{session.client.middleInit}}</div></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td width="2%"><p>CURRENT&nbsp;</p></td>
+          <td width="2%"><p>ADDRESS</p></td>
+          <td><div class="formInputLine"></div></td>
+        </tr>
+      </table>
+      <table width="100%">
+        <tr>
+          <td><div class="formInputLineLeftHI">{{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}</div></td>
+        </tr>
+      </table>
+      <table width="100%">
+        <tr>
+          <td><div class="formInputLineLeftHI">{{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}</div></td>
+        </tr>
+      </table>
+      <br>
+      <ul class="questionList">
+        <li>
+          <p>G13. GEOGRAPHIC CODE</p>
+          <table>
+            <tr>
+              <td class="formCell">{{data.general.g13.box1}}</td>
+              <td class="formCell">{{data.general.g13.box2}}</td>
+              <td class="formCell">{{data.general.g13.box3}}</td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell">{{data.general.g14yrs.box1}}</td>
+                    <td class="formCell">{{data.general.g14yrs.box2}}</td>
+                  </tr> 
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell">{{data.general.g14mos.box1}}</td>
+                    <td class="formCell">{{data.general.g14mos.box2}}</td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>G14. How long have you</p><br>
+          <p style="margin-left: 40px">lived at this address?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell">{{data.general.g15}}</td>
+            </tr>
+          </table>
+          <p>G15. Is this residence owned</p><br>
+          <p style="margin-left: 40px">by you or your family?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell">{{data.general.g16.box1}}</td>
+                    <td class="formCell">{{data.general.g16.box2}}</td>
+                  </tr> 
+                </table>
+                <h4>Mth.</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell">{{data.general.g16.box3}}</td>
+                    <td class="formCell">{{data.general.g16.box4}}</td>
+                  </tr>
+                </table>
+                <h4>Day</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell">{{data.general.g16.box5}}</td>
+                    <td class="formCell">{{data.general.g16.box6}}</td>
+                  </tr>
+                </table>
+                <h4>Year</h4>
+              </td>
+            </tr>
+          </table>
+          <p>G16. DATE OF</p><br>
+          <p style="margin-left: 40px">BIRTH</p>
+        </li>
+        <li>
+          <p>G17. RACE</p>
+          <table>
+            <tr>
+              <td class="formCell">{{session.asi.general.g17}}</td>
+            </tr>
+          </table>
+          <ul class="smallList">
+            <li><p>1 - White (Not of Hispanic Origin)</p></li>
+            <li><p>2 - Black (Not of Hispanic Origin)</p></li>
+            <li><p>3 - American Indian</p></li>
+            <li><p>4 - Alaskan Native</p></li>
+            <li><p>5 - Asian or Pacific Islander</p></li>
+            <li><p>6 - Hispanic - Mexican</p></li>
+            <li><p>7 - Hispanic - Puerto Rican</p></li>
+            <li><p>8 - Hispanic - Cuban</p></li>
+            <li><p>9 - Other Hispanic</p></li>
+          </ul>
+        </li>
+        <li>
+          <p>G18. RELIGIOUS PREFERENCE</p>
+          <table>
+            <tr>
+              <td class="formCell">{{session.asi.general.g18}}</td>
+            </tr>
+          </table>
+          <ul class="smallList">
+            <li><p>1 - Protestant</p></li>
+            <li><p>2 - Catholic</p></li>
+            <li><p>3 - Jewish</p></li>
+            <li><p>4 - Islamic</p></li>
+            <li><p>5 - Other</p></li>
+            <li><p>6 - None</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell">{{session.asi.general.g19}}</td>
+            </tr>
+          </table>
+          <p><u>G19.</u> Have you been in a controlled</p><br>
+          <p style="margin-left: 40px">environment in the past 30 days?</p>
+          <ul class="smallList">
+            <li><p>1 - No</p></li>
+            <li><p>2 - Jail</p></li>
+            <li><p>3 - Alcohol or Drug Treatment</p></li>
+            <li><p>4 - Medical Treatment</p></li>
+            <li><p>5 - Psychiatric Treatment</p></li>
+            <li><p>6 - Other</p></li>
+          </ul>
+        </li>
+        <li>
+          <p><u>G20.</u> How many days? </p>
+          <table>
+            <tr>
+              <td class="formCell">{{data.general.g20.box1}}</td>
+              <td class="formCell">{{data.general.g20.box2}}</td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+    </div>
+    <!-- end centralDiv -->
+    <div class="col-xs-4 rightDiv sameHeight">
+      <h2 style="margin: 0px">ADDITIONAL TEST RESULTS</h2>
+      <br>
+      <ul class="questionList">
+        <li>
+          <p>G21. Shipley C.Q.</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <p>G22. Shipley I.Q.</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <p>G23. Beck Total Score</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <p>G24. SCL-90 Total</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <p>G25. MAST</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>G26.</p>
+          <div class='formInputLine' style="width: 65%"></div>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>G27.</p>
+          <div class='formInputLine' style="width: 65%"></div>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>G28.</p>
+          <div class='formInputLine' style="width: 65%"></div>
+        </li>
+      </ul>
+      <br>
+      <h2>SEVERITY PROFILE</h2>
+      <br>
+      <table id="severityTable">
+        <tr id="topBold">
+          <td><p><b>9</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>8</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>7</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>6</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>5</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>4</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>3</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr>
+          <td><p><b>1</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr id="bottomBold">
+          <td><p><b>0</b></p></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+          <td class="formSeverity"></td>
+        </tr>
+        <tr id="vertical">
+          <td><p><b>Problems</b></p></td>
+          <td><p>Medical</p></td>
+          <td><p>Employ/Support</p></td>
+          <td><p>Alcohol</p></td>
+          <td><p>Drug</p></td>
+          <td><p>Legal</p></td>
+          <td><p>Family/Social</p></td>
+          <td><p>Psychiatric</p></td>
+        </tr>
+      </table>
+    </div>
+    <!-- end rightDiv -->
+  </div>
+  <!-- end row -->
+  <div class="rowLine"></div>
+  <div class="row">
+    <div class="col-xs-2">
+      <table style="margin-top: 10px; margin-left: 10px">
+        <tr>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-10">
+      <h1 style="margin-left: -20%">MEDICAL STATUS</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M1.</u> How many times in your life</p><br>
+          <p style="margin-left: 35px">have you been hospitalized for</p><br>
+          <p style="margin-left: 35px">medicalproblems?</p><br>
+          <p style="margin-left: 35px">(Include o.d.'s, d.t.'s exlude detox.)</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>M2. How long ago was your</p><br>
+          <p style="margin-left: 35px">last hospitalization</p><br>
+          <p style="margin-left: 35px">for a physical problem?</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>M3. Do you have any chronic medical</p><br>
+          <p style="margin-left: 35px">problems which continue to interfere</p><br>
+          <p style="margin-left: 35px">with your life?</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M4.</u> Are you taking any prescribed</p><br>
+          <p style="margin-left: 35px">medication on a regular basis for a</p><br>
+          <p style="margin-left: 35px">physical problem? 0 - No 1 - Yes</p><br>
+        </li>
+      </ul>
+    </div>
+    <!-- end leftDiv -->
+    <div class="col-xs-4 centralDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <p><u>M5.</u> Do you receive a pension for a</p><br>
+          <p style="margin-left: 35px">physical disability? (Exclude</p><br>
+          <p style="margin-left: 35px">psychiatric disability.)</p><br>
+          <ul class="smallList">
+            <li><p>0 - No</p></li>
+            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%"></div></li>
+            <li><p style="margin-left: 50%">Specify</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M6.</u> How many days have you</p><br>
+          <p style="margin-left: 35px">experienced medical problems</p><br>
+          <p style="margin-left: 35px">in the past 30 days?</p>
+        </li>
+        <li>
+          <p><em>For questions M7 &amp; M8 please ask the patient to use the <b>Patient's Rating Scale</b>.</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M7.</u> How troubled or bothered have you</p><br>
+          <p style="margin-left: 35px">been by these medical problems</p><br>
+          <p style="margin-left: 35px">in the past 30 days?</p>
+        </li>
+      </ul>
+    </div>
+    <!-- end centralDiv -->
+    <div class="col-xs-4 rightDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M8.</u> How important to you now is</p><br>
+          <p style="margin-left: 35px">treatment for these medical problems?</p><br>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Interviewer Severity Rating</b></em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>M9. How would you rate the patient's</p><br>
+          <p style="margin-left: 35px">need for medical treatment?</p><br>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li style="text-align: center">
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M10.</u> Patient's misrepresentation?</p><br>
+          <p style="margin-left: 100px">0 - No 1 - Yes</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>M11.</u> Patient's inability to understand?</p><br>
+          <p style="margin-left: 100px">0 - No 1 - Yes</p><br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="rowLine" style="margin-bottom: 5px"></div>
+  <div class="row">
+    <div class="col-xs-2">
+      <h2 style="padding: 0px; margin: 0px">COMMENTS</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px">comments</div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>EMPLOYMENT/SUPPORT STATUS</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p><u>E1.</u> Education completed</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p><u>E2.</u> Training or technical</p><br>
+          <p style="margin-left: 30px">education completed</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E3.</u> Do you have a profession, trade</p><br>
+          <p style="margin-left: 30px">or skill?</p>
+          <ul class="smallList">
+            <li><p>0 - No</p></li>
+            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%"></div></li>
+            <li><p style="margin-left: 40%">Please Specify</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E4.</u> Do you have a valid driver's license?</p><br>
+          <p style="margin-left: 30px">0 - No 1 - Yes</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E5.</u> Do you have an automobile available</p><br>
+          <p style="margin-left: 30px">for use? (Answer No if no valid</p><br>
+          <p style="margin-left: 30px">driver's license.)&nbsp;&nbsp;&nbsp;&nbsp;0 - No 1 - Yes</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>E6. How long was your</p><br>
+          <p style="margin-left: 30px">longest full-time job?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E7.</u> Usual (or last) occupation?</p>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 95%;margin-left: 20px"></div>
+        </li>
+        <li>
+          <p style="margin-left: 35%">Specify in Detail</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E8.</u> Does someone contribute to your</p><br>
+          <p style="margin-left: 30px">support in any way?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E9.</u> (ONLY IF "ITEM 8" IS YES)</p><br>
+          <p style="margin-left: 30px">Does this constitute the majority</p><br>
+          <p style="margin-left: 30px">of your support?</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E10. Usual employment pattern,</p><br>
+          <p style="margin-left:40px">past 3 years.</p>
+          <ul class="smallList">
+            <li>
+              <p>1 - full time (40 hrs/wk)</p>
+            </li>
+            <li>
+              <p>2 - part time (reg. hrs.)</p>
+            </li>
+            <li>
+              <p>3 - part time (irreg., daywork)</p>
+            </li>
+            <li>
+              <p>4 - student</p>
+            </li>
+            <li>
+              <p>5 - service</p>
+            </li>
+            <li>
+              <p>6 - retired/disability</p>
+            </li>
+            <li>
+              <p>7 - unemployed</p>
+            </li>
+            <li>
+              <p>8 - in controlled environment</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E11.</u> How many days were you paid</p><br>
+          <p style="margin-left: 40px">for working in the past 30?</p><br>
+          <p style="margin-left: 40px">(include "under the table" work.)</p>
+        </li>
+        <li>
+          <p>How much money did you receive from the following sources in the past 30 days?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E12.</u> Employment</p><br>
+          <p style="margin-left: 40px">(net income)</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E13.</u> Unemployment</p><br>
+          <p style="margin-left: 40px">compensation</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E14.</u> DPA</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E15.</u> Pension, benefits or</p><br>
+          <p style="margin-left: 40px">social security</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E16.</u> Mate, family or friends</p><br>
+          <p style="margin-left: 40px">(Money for personal</p><br>
+          <p style="margin-left: 40px">expenses)</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E17.</u> Illegal</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E18. How many people depend on you</p><br>
+          <p style="margin-left: 40px">for the majority of their food,</p><br>
+          <p style="margin-left: 40px">shelter, etc.?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E19. How many days have you</p><br>
+          <p style="margin-left: 40px">experienced employment</p><br>
+          <p style="margin-left: 40px">problems in the past 30 days?</p>
+        </li>
+        <li>
+          <p><em>For questions E20&nbsp;E21 please ask patient to use the <b>Patient Rating Scale</b>.</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E20. How troubled or bothered have</p><br>
+          <p style="margin-left: 40px">you been by these employment</p><br>
+          <p style="margin-left: 40px">problems in the past 30 days?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E21. How important to you now is</p><br>
+          <p style="margin-left: 40px">counseling for these employment</p><br>
+          <p style="margin-left: 40px">problems?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Interviewer Severity Rating</b></em></p>
+        </li>
+        <li>
+          <p>E22. How would you rate the patient's</p><br>
+          <p style="margin-left: 40px">need for employment conunseling?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li style="text-align: center">
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E23. Patient's misrepresentation?</p><br>
+          <p style="margin-left: 100px">0 - No 1 - Yes</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>E24. How important to you now is</p><br>
+          <p style="margin-left: 100px">0 - No 1 - Yes</p><br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="rowLine" style="margin-bottom: 5px"></div>
+  <div class="row">
+    <div class="col-xs-2">
+      <h2 style="padding: 0px; margin: 0px">COMMENTS</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-2">
+      <table style="margin-top: 10px; margin-left: 10px">
+        <tr>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-10">
+      <h1 style="margin-left: -20%">DRUG/ALCOHOL USE</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="height: 0px;border:none"></td>
+                    <td class="formCell" style="height: 0px;border:none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: left">Past 30<br> days</h5>
+              </td>
+              <td>
+                <h5 style="text-align: center">Lifetime<br> years</h5>
+                <table>
+                  <tr>
+                    <td class="formCell" style="height: 0px;border:none"></td>
+                    <td class="formCell" style="height: 0px;border:none"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <h5 style="text-align: right">Use<br>Route<br>Admin</h5>
+                <table>
+                  <tr>
+                    <td class="formCell" style="height: 0px;border:none"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table><br><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D1.</u> Alcohol - any</p><br>
+          <p style="margin-left: 30px">use at all</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D2.</u> Alcohol to</p><br>
+          <p style="margin-left: 30px">Intoxication</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D3.</u> Heroin</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D4.</u> Methadone</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D5.</u> Other opiates/</p><br>
+          <p style="margin-left: 30px">analgesics</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D6.</u> Barbiturates</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D7.</u> Other sedatives/</p><br>
+          <p style="margin-left: 30px">hyp/tranquilizers</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D8.</u> Cocaine</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D9.</u> Amphetamines</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D10.</u> Cannabis</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D11.</u> Hallucinogens</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>D12.</u> Inhalants</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>D13.</u> More than one</p><br>
+          <p style="margin-left: 40px">substance per day</p><br>
+          <p style="margin-left: 40px">(including alcohol)</p>
+        </li>
+        <li>
+          <p><u>Note:</u> See manuel for representative examples for each drug class</p>
+        </li>
+        <li>
+          <p><u>Route of Administration</u>: 1 = Oral, 2 = Nasal,<br> 3 = Smoking, 4 = Non IV inj., 5 = IV inj.</p>
+        </li>
+        <li><h2 style="text-align: left; margin-left: 20px; padding: 0px"><u>COMMENTS</u></h2></li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>D14.</u> Which substance is the major</p><br>
+          <p style="margin-left: 40px">problem?<em> Please code as</em></p><br>
+          <p style="margin-left: 40px"><em>above or</em> or 00 - No problem;</p><br>
+          <p style="margin-left: 40px">15 - Alcohol &amp; Drug (Dual</p><br>
+          <p style="margin-left: 40px">addiction); 16 - Polydrug;</p><br>
+          <p style="margin-left: 40px"><em>when not clear, ask patient.</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>D15.</u> How long was your last</p><br>
+          <p style="margin-left: 40px">period of voluntary abstinence</p><br>
+          <p style="margin-left: 40px">from this major substance?</p><br>
+          <p style="margin-left: 40px">(00 - never abstinent)</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>D16.</u> How many months ago did</p><br>
+          <p style="margin-left: 40px">this abstinence end?</p><br>
+          <p style="margin-left: 40px">(00 - still abstinent)</p>
+        </li>
+        <li>
+          <p>How many times have you:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D17.</u> Had alcohol d.t.'s?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D18.</u> Overdosed on drugs?</p>
+        </li>
+        <li>
+          <p>How many times in your life have you been treated for:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D19.</u> Alcohol Abuse:</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D20.</u> Drug Abuse:</p>
+        </li>
+        <li>
+          <p>How many of these were detox only?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D21.</u> Alcohol:</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D22.</u> Drug:</p>
+        </li>
+        <li>
+          <p>How much would you say you spent during the past 30 days on:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D23.</u> Alcohol?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D24.</u> Drugs?</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>D25.</u> How many days have you</p><br>
+          <p style="margin-left: 40px">been treated in an outpatient</p><br>
+          <p style="margin-left: 40px">setting for alcohol or drugs in the past 30</p><br>
+          <p style="margin-left: 40px">days? (Include NA, AA).</p>
+        </li>
+        <li>
+          <p>How many days in the past 30 days have you experienced:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D26.</u> Alcohol Problems?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D27.</u> Drug Problems?</p>
+        </li>
+        <li>
+          <p><em>For questions D28 - D31 please ask the patient to use the <b>Patient's Rating Scale</b>.</em></p>
+        </li>
+        <li>
+          <p>How troubled or bothered have you been in the past 30 days by these:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D28.</u> Alcohol Problems?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D29.</u> Drug Problems?</p>
+        </li>
+        <li>
+          <p>How important to you now is treatment for these:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D30.</u> Alcohol Problems?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D31.</u> Drug Problems?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Interviewer Severity Rating</b></em></p>
+        </li>
+        <li>
+          <p>How would you rate the patient's need for treatment for:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D32.</u> Alcohol Abuse?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D33.</u> Drug Abuse?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li>
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D34.</u> Patient's misrepresentation?</p><br>
+          <ul class="smallList" style="margin-left: 45px">
+            <li><p>0 - No 1 - Yes</p></li>
+          </ul>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>D35.</u> Patient's inablility to understand?</p>
+          <ul class="smallList" style="margin-left: 45px">
+            <li><p>0 - No 1 - Yes</p></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px;"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-2">
+      <table style="margin-top: 10px; margin-left: 10px">
+        <tr>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-10">
+      <h1 style="margin-left: -20%">LEGAL STATUS</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p><u>L1.</u> Was this admission prompted or</p><br>
+          <p style="margin-left: 30px">suggested by the criminal justice</p><br>
+          <p style="margin-left: 30px">system (judge, probation/parole officer, etc.)</p><br>
+          <p style="margin-left: 30px">0 - No 1 - Yes</p>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>          
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L2.</u> Are you on probation or parole?</p>
+          <p style="margin-left: 30px">0 - No 1 - Yes</p>
+        </li>
+        <li>
+          <p>How many times in your life have you been arrested and <u>charged</u> with the following:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L3.</u> - shoplifting/vandalism</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L4.</u> - parole/probation violations</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L5.</u> - drug charges</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L6.</u> - forgery</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L7.</u> - weapons offense</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L8.</u> - burglary, larceny, B&amp;F</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L9.</u> - robbery</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L10.</u> - assault</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L11.</u> - arson</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L12.</u> - rape</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L13.</u> - homicide/manslaughter</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L14.</u> - prostitution</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L15.</u> - contempt of court</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p style="margin-left: 45px"><u>L16.</u> - other</p><br>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L17.</u> How many of these charges</p><br>
+          <p style="margin-left: 40px">resulted in convictions?</p>
+        </li>
+        <li>
+          <p><b>How many times in your life have you been charged with the following:</b></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L18.</u> Disorderly conduct, vagrancy,</p><br>
+          <p style="margin-left: 40px">public intoxication</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L19.</u> Driving while intoxicated</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L20.</u> Major driving violations</p><br>
+          <p style="margin-left: 40px">(reckless driving, speeding,</p><br>
+          <p style="margin-left: 40px">no license, etc.)</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p><u>L21.</u> How many months were you</p><br>
+          <p style="margin-left: 40px">incarcerated in your life?</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>L22. How long was your last</p><br>
+          <p style="margin-left: 40px">incarceration?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>L23. What was it for? <em>(use codes</em></p><br>
+          <p style="margin-left: 40px"><em>3-16, 18-20. If multiple charges,</em></p><br>
+          <p style="margin-left: 40px"><em>code most severe)</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L24.</u> Are you presently awaiting</p><br>
+          <p style="margin-left: 40px">charges, trial or sentence?</p><br>
+          <p style="margin-left: 40px">0 - No 1 - Yes</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L25.</u> What for? (If multiple charges,</p><br>
+          <p style="margin-left: 40px">use most severe).</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>L26. How many days in the past 30</p><br>
+          <p style="margin-left: 40px">were you detained or</p><br>
+          <p style="margin-left: 40px">incarcerated?</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L27.</u> How many days in the past 30</p><br>
+          <p style="margin-left: 40px">have you engaged in illegal</p><br>
+          <p style="margin-left: 40px"><em>activities for profit?</em></p>
+        </li>
+        <li>
+          <p>
+            <em>For questions L28 &amp; L29 please ask the patient to use the <b>Patient's Rating Scale</b>.</em>
+          </p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L28.</u> How serious do you feel your</p><br>
+          <p style="margin-left: 40px">present legal problems are?</p><br>
+          <p style="margin-left: 40px">(Exclude civil problems)</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L29.</u> How important to you now is</p><br>
+          <p style="margin-left: 40px">counseling or referral for these legal</p><br>
+          <p style="margin-left: 40px">problems?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Interviewer Severity Rating</b></em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>L30. How would you rate the patient's</p><br>
+          <p style="margin-left: 35px">need for legal services or counseling?</p><br>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li style="text-align: center">
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L31.</u> Patient's misrepresentation?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>L32.</u> Patient's inability to understand?</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-2">
+      <h2 style="padding: 0px; margin: 0px"><u>COMMENTS</u></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Family History</h1>
+      <p style="text-align:center">Have any of your relatives had what you would call a significant drinking, drug use, or psych problem = one that did or should have led to treatment?</p>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p style="margin-left: 25%"><u>Mother's Side</u></p> 
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Alc</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Drug</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Psych</h5>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H1. Grandmother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H2. Grandfather</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H3. Mother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H4. Aunt</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H5. Uncle</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p style="margin-left: 25%"><u>Father's Side</u></p> 
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Alc</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Drug</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Psych</h5>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H6. Grandmother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H7. Grandfather</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H8. Mother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H9. Aunt</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H10. Uncle</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p style="margin-left: 25%"><u>Siblings</u></p> 
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Alc</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Drug</h5>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                    <h5>Psych</h5>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H11. Brother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p>H12. Sister</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <p><b><em>Direction:</em></b> Place "0" in relative category where the answer is clearly <u>no for all relatives in the category</u>; "1" where the answer is clearly yes for any <u>relative within the category</u>; "X" where the answer is <u>uncertain or "I don't know"</u> and "N" where there <u>never was a relative from that category</u>. Code most problematic relatives in cases of multiple members per category.</p>
+    </div>
+  </div>
+  <div class="rowLine"></div>
+  <div class="row">
+    <div class="col-xs-2">
+      <table style="margin-top: 10px; margin-left: 10px">
+        <tr>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-10">
+      <h1 style="margin-left: -20%">FAMILY/SOCIAL RELATIONSHIPS</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F1.</u> Marital Status</p>
+          <table style="float: left">
+            <tr>
+              <td>
+                <ul class="smallList">
+                  <li><p>1 - Married</p></li>
+                  <li><p>2 - Remarried</p></li>
+                  <li><p>3 - Widowed</p></li>
+                </ul>
+              </td>
+              <td>
+                <ul class="smallList">
+                  <li><p>4 - Separated</p></li>
+                  <li><p>5 - Divorced</p></li>
+                  <li><p>6 - Never Married</p></li>
+                </ul>
+              </td>
+              </tr>
+          </table>
+        </li>
+        <li>
+          <br><br><br><br>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>F2. How long have you been</p><br>
+          <p style="margin-left: 30px">in this marital status?</p><br>
+          <p style="margin-left: 30px"><em>(If never married, since age 18).</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F3.</u> Are you satisfied with this situation?</p>
+          <ul class="smallList">
+            <li><p>0 - No</p></li>
+            <li><p>1 - Indifferent</p></li>
+            <li><p>2 - Yes</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F4.</u> Usual living arrangements (past 3 yr.)</p>
+          <ul class="smallList">
+            <li><p>1 - With sexual partner and children</p></li>
+            <li><p>2 - With sexual partner alone</p></li>
+            <li><p>3 - With children alone</p></li>
+            <li><p>4 - With parents</p></li>
+            <li><p>5 - With family</p></li>
+            <li><p>6 - With friends</p></li>
+            <li><p>7 - Alone</p></li>
+            <li><p>8 - Controlled environments</p></li>
+            <li><p>9 - No stable arrangements</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Years</h4>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+                <h4>Months</h4>
+              </td>
+            </tr>
+          </table>
+          <p>F5. How long have you</p><br>
+          <p style="margin-left: 30px">lived in those</p><br>
+          <p style="margin-left: 30px">arrangements? (If with</p><br>
+          <p style="margin-left: 30px">parents or family, since age 18).</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F6.</u> Are you satisfied with this situation?</p>
+          <ul class="smallList">
+            <li><p>0 - No</p></li>
+            <li><p>1 - Indifferent</p></li>
+            <li><p>2 - Yes</p></li>
+          </ul>
+        </li>
+        <li>
+          <p>Do you live with anyone who:</p><br>
+          <ul class="smallList">0 - No 1 - Yes</ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F7.</u> Has a current alcohol problem?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F8.</u> Uses non-prescribed drugs?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F9.</u> With whom do you spend most of</p><br>
+          <p style="margin-left: 30px">your free time:</p>
+          <ul class="smallList">
+            <li><p>1 - Family</p></li>
+            <li><p>2 - Friends</p></li>
+            <li><p>3 - Alone</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F10.</u> Are you satisfied with spending your</p><br>
+          <p style="margin-left: 40px">free time this way?</p>
+          <ul class="smallList">
+            <li><p>0 - No</p></li>
+            <li><p>1 - Indifferent</p></li>
+            <li><p>2 - Yes</p></li>
+          </ul>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F11.</u> How many close friends do you </p><br>
+          <p style="margin-left: 40px">have?</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p>
+            Direction for F12-F26: Place "0" in relative category where the answer is clearly <u>no for all relatives in the category</u>; "1" where the answer is clearly yes for any <u>relative within the category</u>; "X" where the answer is <u>uncertain or "I don't know"</u> and "N" where there <u>never was a relative from that category</u>.
+          </p>
+        </li>
+        <li>
+          <p>Would you say you have had close, long lasting, personal relationships with any of the following people in your life:
+          </p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F12. Mother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F13. Father</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F14. Brothers/Sisters</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F16. Children</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F17. Friends</p>
+        </li>
+        <li>
+          <p>Have you had significant periods in which you have experienced serious problems getting along with:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">Past 30<br>Days</h5>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">In&nbsp;Your<br> Life</h5>
+              </td>
+            </tr>
+          </table><br><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F18.</u> Mother</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F19.</u> Father</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F20.</u> Brothers/Sisters</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F21.</u> Sexual partner/spouse</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F22.</u> Children</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F23.</u> Other significant family</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F24.</u> Close friends</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F25.</u> Neighbors</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F26.</u> Co-workers</p>
+        </li>
+        <li>
+          <p>Did any of these people</p><br>
+          <p>(F18-F26) abuse you?</p><br>
+          <p>0 = No 1 = Yes</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">Past 30<br>Days</h5>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">In&nbsp;Your<br> Life</h5>
+              </td>
+            </tr>
+          </table><br><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F27.</u> Emotionally (make you</p><br>
+          <p style="margin-left: 40px">feel bad through harsh</p><br>
+          <p style="margin-left: 40px">words)?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F28.</u> Physically (caused you</p><br>
+          <p style="margin-left: 40px">physical harm)?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>F29.</u> Sexually (forced sexual</p><br>
+          <p style="margin-left: 40px">advances or sexual acts)?</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p>How many days in the past 30 have you had serious conflicts:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E30.</u> With your family?</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>E31.</u> With other people?</p><br>
+          <p style="margin-left: 40px">(excluding family)</p>
+        </li>
+        <li>
+          <p><em>For questions <b>F32-F35</b> please ask the patient to use the <b>Patient's Rating Scale</b>.</em></p>
+        </li>
+        <li>
+          <p>How troubled or bothered have you been in the past 30 days by these:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>32.</u> Family problems</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>33.</u> Social problems</p>
+        </li>
+        <li>
+          <p>How important to you now is treatment or counseling for these:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>34.</u> Family problems</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>35.</u> Social problems</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Interviewer Severity Rating</b></em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>F36. How would you rate the</p><br>
+          <p style="margin-left: 40px">patient's need for family and/or</p><br>
+          <p style="margin-left: 40px">social counseling</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li>
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F37.</u> Patient's misrepresentation?</p><br>
+          <ul class="smallList" style="margin-left: 40px">
+            <li><p>0 - No 1 - Yes</p></li>
+          </ul>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>F38.</u> Patient's inablility to understand?</p>
+          <ul class="smallList" style="margin-left: 40px">
+            <li><p>0 - No 1 - Yes</p></li>
+          </ul>
+        </li>
+        <li>
+          <h2 style="text-align: left;padding: 0px; margin: 0px">COMMENTS</h2>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 100%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+        <li>
+          <div class="formInputLine" style="width: 96%"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <table style="margin-top: 10px; margin-left: 10px">
+        <tr>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+          <td class="formCell"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-10">
+      <h1 style="margin-left: -20%">PSYCHIATRIC STATUS</h1>
+    </div>
+  </div>
+  <!-- end row -->
+  <div class="row rowSameHeight">
+    <div class="col-xs-4 leftDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <p>How many times have you been treated for any psychological or emotional problems?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P1.</u> In a hospital</p><br>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P2.</u> As an Outpatient or Private pt.</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P3.</u> Do you receive a pension for a </p><br>
+          <p style="margin-left: 30px">psychiatric disability?</p><br>
+          <p style="margin-left: 30px">0 - No 1 - Yes</p>
+        </li>
+        <li>
+          <p>Have you had a significant period, (that was not a direct result of drug/alchohol use), in which you have:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">Past 30<br>Days</h5>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell" style="border: none"></td>
+                  </tr>
+                </table>
+                <h5 style="text-align: center">In&nbsp;Your<br> Life</h5>
+              </td>
+            </tr>
+          </table><br><br><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P4.</u> Experienced serious</p><br>
+          <p style="margin-left: 30px">depression</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P5.</u> Experienced serious</p><br>
+          <p style="margin-left: 30px">anxiety or tension</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P6.</u> Experienced hallucinations</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P7.</u> Experienced trouble</p><br>
+          <p style="margin-left: 30px">understanding, concentrating</p><br>
+          <p style="margin-left: 30px">or remembering</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P8.</u> Experienced trouble</p><br>
+          <p style="margin-left: 30px">controlling violent behavior</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P9.</u> Experienced serious</p><br>
+          <p style="margin-left: 30px">thoughts of suicide</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P10.</u> Attempted suicide</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <table style="margin-right: 40px">
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td class="formCell"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <p><u>P11.</u> Been prescribed medication</p><br>
+          <p style="margin-left: 40px">for any psychological</p><br>
+          <p style="margin-left: 40px">emotional problem</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 centralDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P12.</u> How many times in the past 30</p><br>
+          <p style="margin-left: 40px">have you experienced these</p><br>
+          <p style="margin-left: 40px">psychological or emotional problems?</p>
+        </li>
+        <li>
+          <p>
+            <em>
+              For questions <b>P13 &amp; P14</b> please ask the patient to use the <b>Patient's Rating Scale</b>.
+            </em>
+          </p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P13.</u> How much have you been</p><br>
+          <p style="margin-left: 40px">troubled or bothered by these</p><br>
+          <p style="margin-left: 40px">psychological or emotional</p><br>
+          <p style="margin-left: 40px">problems in the past 30 days?</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P14.</u> How important to you now is</p><br>
+          <p style="margin-left: 40px">treatment for these psychological</p><br>
+          <p style="margin-left: 40px">problems?</p>
+        </li>
+        <li>
+          <p><em>THE FOLLOWING ITEMS ARE TO BE COMPLETED BY THE INTERVIEWER</em></p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P15.</u> Obviously depressed/withdrawn</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P16.</u> Obviously hostile</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P17.</u> Obviously anxious/nervous</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P18.</u> Having trouble with reality testing,</p><br>
+          <p style="margin-left: 40px">thought disorders, paranoid thinking</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P19.</u> Having trouble comprehending,</p><br>
+          <p style="margin-left: 40px">concentrating, remembering</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P20.</u> Having suicidal thoughts</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-4 rightDiv sameHeight" style="border: none">
+      <ul class="questionList">
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p>P21. How would you rate the patient's </p><br>
+          <p style="margin-left: 40px">need for pychiatric/psychological</p><br>
+          <p style="margin-left: 40px">treatment?</p>
+        </li>
+        <li style="text-align: center">
+          <p><em><b>Confidence Rating</b></em></p>
+        </li>
+        <li style="text-align: center">
+          <p>Is the above information significantly distorted by:</p>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P22.</u> Patient's misrepresentation?</p><br>
+          <p style="margin-left: 40px">0 - No 1 - Yes</p><br>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td class="formCell"></td>
+            </tr>
+          </table>
+          <p><u>P23.</u> Patient's inability to understand?</p><br>
+          <p style="margin-left: 40px">0 - No 1 - Yes</p><br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class='col-xs-12'>
+      <h2>COMMENTS</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- end container -->
+
+
 				    
 				</div> <!-- END PAGE CONTAINER -->
 
