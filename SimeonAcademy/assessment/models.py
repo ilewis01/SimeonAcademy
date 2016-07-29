@@ -17,12 +17,33 @@ class SolidState(models.Model):
 	def __unicode__(self):
 		return str(self.state)
 
+class PrintableForms(models.Model):
+	counselor 	= models.CharField(max_length=50, default=None, blank=True, null=True)
+	p1_id = models.IntegerField(default=0)
+	p1_type = models.CharField(max_length=3, default=None, blank=True, null=True)
+
+	p2_id = models.IntegerField(default=0)
+	p2_type = models.CharField(max_length=3, default=None, blank=True, null=True)
+
+	p3_id = models.IntegerField(default=0)
+	p3_type = models.CharField(max_length=3, default=None, blank=True, null=True)
+
+	p4_id = models.IntegerField(default=0)
+	p4_type = models.CharField(max_length=3, default=None, blank=True, null=True)
+
+	p5_id = models.IntegerField(default=0)
+	p5_type = models.CharField(max_length=3, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.counselor)
+
 class TrackApp(models.Model):
 	counselor 	= models.CharField(max_length=50, default=None, blank=True, null=True)
 	c_id 		= models.IntegerField(default=0)
 	f_id 		= models.IntegerField(default=0)
 	s_id 		= models.IntegerField(default=0)
 	state 		= models.ForeignKey(SolidState, default=None, blank=True, null=True)
+	printable 	= models.ForeignKey(PrintableForms, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.counselor)

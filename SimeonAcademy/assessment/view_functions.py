@@ -22,7 +22,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState
+SolidState, PrintableForms
 
 def clientEqual(c1, c2):
 	isEqual = False
@@ -10298,6 +10298,11 @@ def getTrack(user):
 		tracking = TrackApp(counselor=m_counselor, c_id=m_id)
 		tracking.save()
 
+		thePrint = PrintableForms(counselor=m_counselor)
+		thePrint.save()
+		tracking.printable = thePrint
+		tracking.save()
+
 	return tracking
 
 def getAppAction(m_action):
@@ -10606,6 +10611,119 @@ def fetchCurrentFile(form_type, client):
 
 	return result
 
+def fetchAllClientHistory(session):
+	result = []
+	sessions = ClientSession.objects.all().order_by('startTime');
+	counter = 100
+	pre = 'hist'
+	match = 0
+
+	for s in sessions:
+		if clientEqual(session.client, s.client):
+			form = getAllAmForms(session)
+			if form != None:
+				data = {}
+				data['session'] = s
+				data['form_type'] = 'am'
+				data['name'] = 'Anger Management Assessment'
+				data['form'] = s.am
+				data['id'] = pre + str(counter)
+				counter += 1
+				result.append(data)
+
+		if clientEqual(session.client, s.client):
+			form = getAllMhForms(session)
+			if form != None:
+				data = {}
+				data['session'] = s
+				data['form_type'] = 'mh'
+				data['name'] = 'Mental Health Profile'
+				data['form'] = s.mh
+				data['id'] = pre + str(counter)
+				counter += 1
+				result.append(data)
+
+		if clientEqual(session.client, s.client):
+			form = getAllUtForms(session)
+			if form != None:
+				data = {}
+				data['session'] = s
+				data['form_type'] = 'ut'
+				data['name'] = 'Urine Analysis'
+				data['form'] = s.ut
+				data['id'] = pre + str(counter)
+				counter += 1
+				result.append(data)
+
+		if clientEqual(session.client, s.client):
+			form = getAllAsiForms(session)
+			if form != None:
+				data = {}
+				data['session'] = s
+				data['form_type'] = 'asi'
+				data['name'] = 'Addiction Severity Index'
+				data['form'] = s.asi
+				data['id'] = pre + str(counter)
+				counter += 1
+				result.append(data)
+
+		if clientEqual(session.client, s.client):
+			form = getAllSapForms(session)
+			if form != None:
+				data = {}
+				data['session'] = s
+				data['form_type'] = 'sap'
+				data['name'] = 'S.A.P Profile'
+				data['form'] = s.sap
+				data['id'] = pre + str(counter)
+				counter += 1
+				result.append(data)
+
+	return result
+
+def setPrintable(index, printable, his):
+	if index == 0:
+		printable.p1_id = his['session'].id
+		printable.p1_type = his['form_type']
+	elif index == 1:
+		printable.p2_id = his['session'].id
+		printable.p2_type = his['form_type']
+	elif index == 2:
+		printable.p3_id = his['session'].id
+		printable.p3_type = his['form_type']
+	elif index == 3:
+		printable.p4_id = his['session'].id
+		printable.p4_type = his['form_type']
+	elif index == 4:
+		printable.p5_id = his['session'].id
+		printable.p5_type = his['form_type']
+	printable.save()
+
+def setClientHistory5(page, history, user):
+	index = []
+	forms = []
+	count = 0
+	matches = len(history)
+
+	track = getUserTrack(user)
+	printable = track.printable
+	startIndex = (page * 5) - 5
+	endIndex = page * 5
+
+	for j in range(startIndex, endIndex):
+		if j < matches:
+			index.append(j)
+		else:
+			break
+
+	for i in index:
+		forms.append(history[i])
+
+	for f in forms:
+		setPrintable(count, printable, f)
+		count += 1
+
+	return forms
 
 def fetchClientHistory(session, numberRequested):
 	result = []

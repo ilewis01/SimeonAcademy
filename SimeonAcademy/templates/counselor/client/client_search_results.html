@@ -28,6 +28,8 @@
 								<input type='hidden' name="session_id" id="session_id" value="{{r.session.id}}">
 								<input type='hidden' name="hasUnfinished" id="hasUnfinished" value="{{r.hasUnfinished}}"> 
 								<input type='hidden' name="session_type" id="session_type" value="{{session}}">
+								<input type='hidden' name="initLoad" id="initLoad" value="true">
+
 								<a href="javascript: toClientOptions({{r.client.id}}, '{{r.hasUnfinished}}')">
 									<div class='li-a'>
 										<span id='li-name'>{{r.client.fname}} {{r.client.lname}}</span> <br>

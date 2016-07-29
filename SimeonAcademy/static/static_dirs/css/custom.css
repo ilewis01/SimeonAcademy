@@ -3175,6 +3175,15 @@ button:hover {
 	border-radius: 25px;
 }
 
+#clickToView {
+	text-align: center;
+	font-size: 15px;
+	font-style: italic;
+	font-weight: bold; 
+	margin-top: 5%;
+	color:#cf6c0d;
+}
+
 
 
 

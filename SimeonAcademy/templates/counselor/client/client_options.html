@@ -21,6 +21,11 @@
                         <input type='hidden' name='form_name' id='form_name' value='c_form'>
                         <input type='hidden' name='nextUrl' id='nextUrl' value="">
                         <input type='hidden' name='fType' id='fType' value="">
+                        <input type='hidden' name='histPage' id='histPage' value="1">
+                        <input type='hidden' name='initLoad' id='initLoad' value="false">
+
+                        <input type='hidden' name='m_session_id' id='m_session_id' value="">
+                        <input type='hidden' name='m_fType' id='m_fType' value="">
 
                         <input type='hidden' name='completeAM' id='completeAM' value="{{completeAM}}">
                         <input type='hidden' name='completeMH' id='completeMH' value="{{completeMH}}">
@@ -167,17 +172,15 @@
                                     <tr>
                                         <td>
                                             <li>
-                                                <a href="javascript: get_main_p_history({{h.form.id}})" class='cli-history-a'>
+                                                <a href="javascript: get_main_p_history('{{h.form_type}}', {{h.session.id}});" class='cli-history-a'>
                                                     <div>
-                                                        <form action='' method='post' id='{{h.form.id}}'> {% csrf_token %}
-                                                            <input type='hidden' name='form_id' id='form_id' value='{{h.form.id}}'>
-                                                            <input type='hidden' name='form_type' id='form_type' value='{{h.form_type}}'>
+                                                        <form action='' method='post' id='{{h.id}}'> {% csrf_token %}
+                                                            <input type='hidden' name='{{h.id}}' id='{{h.id}}' value='{{h.session.id}}'>
                                                         </form>
-
                                                         <span>Form Type:&nbsp</span>
-                                                        {{h.form_type}}
+                                                        {{h.name}}
                                                         &nbsp
-                                                        <span>{{h.form.date_of_assessment}}</span>
+                                                        <span>{{h.session.startTime}}</span>
                                                     </div>
                                                 </a>
                                             </li>

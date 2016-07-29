@@ -676,9 +676,30 @@ function return_to_options2() {
 	form.submit();
 }
 
-function get_main_p_history(form_id) {
-	var w = 1100, h = 1300;
-	openPopUp('auto', '/printUT/', w, h);
+function get_main_p_history(form_type, session_id) {
+	form_type = String(form_type);
+	session_id = String(session_id);
+
+	grab('m_fType').value = form_type;
+	grab('m_session_id').value = session_id;
+
+	var w = 550, h = 400;
+	openPopUp('auto', '/printLoaded/', w, h);
+}
+
+function loadPrintForm() {
+	grab('form_type').value = getPopParent('m_fType').value;
+	grab('session_id').value = getPopParent('m_session_id').value;
+}
+
+function showPrintable() {
+	var w = 1200, h = 1300;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+    window.focus(); 
+    grab('history_form').submit();
 }
 
 function return_to_options3() {

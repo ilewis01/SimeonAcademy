@@ -38,8 +38,8 @@ fetchContent, saveForm, deleteForm, refreshForm, saveAndFinish, beginSession, \
 processClientHistory, getDischarge, getSessionID, endSession, deleteCurrentSession, \
 truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSession, \
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
-fetchPrintFields, processInvoice, fetchBillableItems, fetchClientHistory, fetchUtPositive, \
-getUtViewImages, getUtPaid, deprioritizeURL
+fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
+getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -537,14 +537,21 @@ def clientOptions(request):
 
 		else:
 			history = []
+			page = 1
 			content = beginSession(request)
 			session = ClientSession.objects.get(id=(getSessionID(user)))
+			initLoad = request.POST.get('initLoad')
+
+			if initLoad == 'false':
+				page = request.POST.get('histPage')
+
 			if session.client.isMale == True:
 				content['gender'] = 'Male'
 			else:
 				content['gender'] = 'Female'
 
-			history = fetchClientHistory(session, 5)
+			allHistory = fetchAllClientHistory(session)
+			history = setClientHistory5(page, allHistory, user)
 			content['history'] = history
 			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
@@ -1065,6 +1072,59 @@ def form_existing(request):
 
 		else:
 			return render_to_response('counselor/session/form_existing.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def printLoaded(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/session/printLoaded.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def printForm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session_id = request.POST.get('session_id')
+			form_type = request.POST.get('form_type')
+			session = ClientSession.objects.get(id=session_id)
+			url = None
+
+			if form_type == 'am':
+				url = 'counselor/forms/AngerManagement/printAM.html'
+			elif form_type == 'mh':
+				url = 'counselor/forms/MentalHealth/printMH.html'
+			elif form_type == 'ut':
+				url = 'counselor/forms/UrineTest/printUT.html'
+			elif form_type == 'sap':
+				content = fetchPrintFields('sap' ,session.sap)
+				content['date'] = session.sap.date_of_assessment
+				url = 'counselor/forms/SAP/print_sap.html'
+			elif form_type == 'asi':
+				url = 'counselor/forms/ASI/printASI.html'
+
+			content['session'] = session
+			return render_to_response(url, content, context_instance=RequestContext(request))
 
 
 
