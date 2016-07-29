@@ -654,7 +654,6 @@ def generic_exit(request):
 			elif str(form_type) == 'sap':
 				sap_id = request.POST.get('sap_id', '')
 				form = SAP.objects.get(id=sap_id)
-				prioritySapSection(last_section, form)
 				type_header = "S.A.P"
 
 			elif str(form_type) == 'mh':

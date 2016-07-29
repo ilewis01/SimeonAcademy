@@ -4252,7 +4252,6 @@ def saveSapPhycho1(request, sap):
 	psycho.otherHow = otherHow
 
 	psycho.save()
-	sap.psychoComplete = True
 	sap.save()
 
 def getSAPViewImages(sap):
@@ -4360,19 +4359,23 @@ def saveSapDemoSection(request, section, sap):
 		sap.save()
 
 def saveSap(request, section, sap):
+	demo = sap.demographics
+
 	if str(section) == '/sap_demographic/':
 		problem = request.POST.get('problem', '')
 		health = request.POST.get('health', '')
 
-		sap.demographics.problem = problem
-		sap.demographics.health = health
-		sap.demographics.save()
+		demo.problem = problem
+		demo.health = health
+		demo.save()
+		sap.save()
 
 	elif str(section) == '/sap_social/':
 		family = request.POST.get('family')
 
-		sap.demographics.family = family
-		sap.demographics.save()
+		demo.family = family
+		demo.save()
+		sap.save()
 
 	elif str(section) == '/sap_psychoactive/':
 		saveSapPhycho1(request, sap)
@@ -4380,8 +4383,9 @@ def saveSap(request, section, sap):
 	elif str(section) == '/sap_psychoactive2/':
 		psychoactive = request.POST.get('psychoactive')
 
-		sap.demographics.psychoactive = psychoactive
-		sap.demographics.save()
+		demo.psychoactive = psychoactive
+		demo.save()
+		sap.save()
 
 	elif str(section) == '/sap_special/':
 		isChild = request.POST.get('m_isChild', '')
@@ -4389,7 +4393,7 @@ def saveSap(request, section, sap):
 		isDual = request.POST.get('m_isDual', '')
 		isOther = request.POST.get('m_isOther', '')
 		isNone = request.POST.get('m_isNone', '')
-		special = request.POST.get('m_special', '')
+		special = request.POST.get('m_special')
 
 		isChild = truePythonBool(isChild)
 		isSenior = truePythonBool(isSenior)
@@ -4397,14 +4401,15 @@ def saveSap(request, section, sap):
 		isOther = truePythonBool(isOther)
 		isNone = truePythonBool(isNone)
 
-		sap.demographics.special = special
-		sap.demographics.isChild = isChild
-		sap.demographics.isSenior = isSenior
-		sap.demographics.isDual = isDual
-		sap.demographics.isOther = isOther
-		sap.demographics.isNone = isNone
+		demo.special = special
+		demo.isChild = isChild
+		demo.isSenior = isSenior
+		demo.isDual = isDual
+		demo.isOther = isOther
+		demo.isNone = isNone
 
-		sap.demographics.save()
+		demo.save()
+		sap.save()
 
 	elif str(section) == '/sap_other/':
 		psychological = request.POST.get('psychological', '')
@@ -4412,12 +4417,13 @@ def saveSap(request, section, sap):
 		abilities = request.POST.get('abilities', '')
 		other = request.POST.get('other', '')
 
-		sap.demographics.psychological = psychological
-		sap.demographics.gambling = gambling
-		sap.demographics.abilities = abilities
-		sap.demographics.other = other
+		demo.psychological = psychological
+		demo.gambling = gambling
+		demo.abilities = abilities
+		demo.other = other
 
-		sap.demographics.save()
+		demo.save()
+		sap.save()
 
 	elif str(section) == '/sap_sources/':
 		source1 = request.POST.get('source1', '')
@@ -4425,12 +4431,13 @@ def saveSap(request, section, sap):
 		relationship1 = request.POST.get('relationship1', '')
 		relationship2 = request.POST.get('relationship2', '')
 
-		sap.demographics.source1 = source1
-		sap.demographics.source2 = source2
-		sap.demographics.relationship1 = relationship1
-		sap.demographics.relationship2 = relationship2
+		demo.source1 = source1
+		demo.source2 = source2
+		demo.relationship1 = relationship1
+		demo.relationship2 = relationship2
 
-		sap.demographics.save()
+		demo.save()
+		sap.save()
 
 def saveIncompleteSapPsycho1(request, sap):
 	alcoholAge = request.POST.get('alcoholAge', '')
@@ -5784,10 +5791,16 @@ def getMhFields(mh, section):
 	return result
 
 def getLastWordIndex(text):
-	count = len(text) - 1
-	while text[count] != ' ':
+	count = len(text) 
+	print str(text)
+	print 'LENGTH: ' + str(count)
+ 
+	while text[count] != ' ' and count != 0:
 		count = count - 1
-	count = count + 1
+
+		if count == 0:
+			break;
+	# count = count + 1
 	return count
 
 def getLastWord(text):
@@ -5809,8 +5822,9 @@ def splitWords(text):
 			result.append(temp)
 			temp = ''
 
-	lWord = getLastWord(text)
-	result.append(lWord)
+	result.append(temp)
+	# lWord = getLastWord(text)
+	# result.append(lWord)
 	return result
 
 def wordFits(lineLength, word):
@@ -5893,12 +5907,14 @@ def multiLineSplit(numLines, line1Length, otherLineLength, text):
 		t2 += words[i]
 
 	lines = grabLines(otherLineLength, t2)
+	s_num = len(lines)
+	s_num += 1
 
 	for i in range(numLines):
 		num = i + 1
 		name = 'line' + str(num)
 
-		if i < len(lines):
+		if i < s_num:
 			if i == 0:
 				result[name] = lin1
 
@@ -5945,9 +5961,9 @@ def grabMhViewImages(mh):
 	check = "/static/images/check_o.png"
 	nope = '/static/images/nope.png'
 
-	result['pastWork'] = multiLineSplit(2, 60, 85, str(mh.demographics.pastJobs))
-	result['psychHistory'] = splitFormLines(6, 85, str(mh.stressors.psychiatricHistory))
-	result['pAnsExp'] = multiLineSplit(4, 60, 85, str(mh.legalHistory.explainPositiveAnswers))
+	result['pastWork'] = multiLineSplit(2, 60, 80, str(mh.demographics.pastJobs))
+	result['psychHistory'] = splitFormLines(6, 80, str(mh.stressors.psychiatricHistory))
+	result['pAnsExp'] = multiLineSplit(4, 60, 80, str(mh.legalHistory.explainPositiveAnswers))
 	result['m_children'] = decodeCharfield(mh.demographics.childrenMale)
 	result['f_children'] = decodeCharfield(mh.demographics.childrenFemale)
 	result['m_brothers'] = decodeCharfield(mh.demographics.bothers)
@@ -7024,6 +7040,7 @@ def mhDemo_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhEdu_priority(mh):
 	mh.demoPriority 		= False
@@ -7034,6 +7051,7 @@ def mhEdu_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhBack_priority(mh):
 	mh.demoPriority 		= False
@@ -7044,6 +7062,7 @@ def mhBack_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhStress_priority(mh):
 	mh.demoPriority 		= False
@@ -7054,6 +7073,7 @@ def mhStress_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhFamily_priority(mh):
 	mh.demoPriority 		= False
@@ -7064,6 +7084,7 @@ def mhFamily_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhLegal_priority(mh):
 	mh.demoPriority 		= False
@@ -7074,6 +7095,7 @@ def mhLegal_priority(mh):
 	mh.legalPriority 		= True
 	mh.psychPriority 		= False
 	mh.usePriority 			= False
+	mh.save()
 
 def mhPsych_priority(mh):
 	mh.demoPriority 		= False
@@ -7084,6 +7106,7 @@ def mhPsych_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= True
 	mh.usePriority 			= False
+	mh.save()
 
 def mhUse_priority(mh):
 	mh.demoPriority 		= False
@@ -7094,6 +7117,7 @@ def mhUse_priority(mh):
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
 	mh.usePriority 			= True
+	mh.save()
 
 def deprioritizeMH(mh):
 	mh.demoPriority 		= False
@@ -7103,7 +7127,8 @@ def deprioritizeMH(mh):
 	mh.familyPriority 		= False
 	mh.legalPriority 		= False
 	mh.psychPriority 		= False
-	mh.usePriority 			= True
+	mh.usePriority 			= False
+	mh.save()
 
 def setMhPriority(mh, section):
 	section = str(section)

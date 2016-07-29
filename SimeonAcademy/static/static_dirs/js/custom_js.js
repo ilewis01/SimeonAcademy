@@ -7469,6 +7469,9 @@ function universal_generic_exit(form_type, page) {
 	else if (form_type === 'mh') {
 		postMhFields(page);
 	}
+	else if (form_type === 'sap') {
+		postSapFields(page);
+	}
 
 	form.action = '/uni_generic_exit/';
 	exit_type.value = String(form_type);
