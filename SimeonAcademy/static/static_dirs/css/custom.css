@@ -2697,6 +2697,15 @@ button:hover {
 	border-radius: 5px;
 }
 
+.s_resolve_wrapperHistory {
+	width:95%;
+	height: 80%;
+	padding:2%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
 .s_resolve_wrapper3 {
 	width:95%;
 	height: 95%;
@@ -3182,6 +3191,15 @@ button:hover {
 	font-weight: bold; 
 	margin-top: 5%;
 	color:#cf6c0d;
+}
+
+#historyHeaderMain {
+	text-align: left;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 26px;
+	margin-bottom: 3%;
+	color: #605f5d;
 }
 
 
