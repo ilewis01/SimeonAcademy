@@ -8828,10 +8828,12 @@ def processASIbool(val):
 	return result
 
 def saveASIadmin(request, asi):
+	g4 = process_jq_date(request.POST.get('g4'))
+	print 'G4: ' + str(g4)
 	asi.admin.g1 = request.POST.get('g1')
 	asi.admin.g2 = request.POST.get('g2')
 	asi.admin.g3 = request.POST.get('g3')
-	asi.admin.g4 = process_jq_date(request.POST.get('g4'))
+	asi.admin.g4 = g4
 	asi.admin.g8 = request.POST.get('g8')
 	asi.admin.g9 = request.POST.get('g9')
 	asi.admin.g10 = request.POST.get('g10')

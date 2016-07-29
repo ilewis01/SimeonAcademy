@@ -6364,7 +6364,7 @@ function processAsiAdmin() {
 	post_asi(false, 'text', document.getElementById('g1'), null, null);
 	post_asi(false, 'text', document.getElementById('g2'), null, null);
 	post_asi(false, 'text', document.getElementById('g3'), null, null);
-	post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
+	// post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
 	post_asi(false, 'text', document.getElementById('g11'), null, null);
 }
 
