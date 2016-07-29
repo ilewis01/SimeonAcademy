@@ -697,10 +697,26 @@ function showPrintable() {
 	var l = Number((screen.width/2) - (w/2));
 	var t = Number((screen.height/2) - (h/2));
 	grab('history_form').submit();
-	
+
 	window.resizeTo(w, h);
 	window.moveTo(l, t);
     window.focus(); 
+}
+
+function initialize_options(numPages) {
+	numPages = Number(numPages);
+
+	if (numPages === 1) {
+		grab('prevBtn').disabled = true;
+		grab('nextBtn').disabled = true;
+		grab('hisPageSelect').disabled = true;
+
+		grab('prevBtn').className = 'phSelectDisabled';
+		grab('nextBtn').className = 'phSelectDisabled';
+
+		grab('prevBtn').style.opacity = '0.5';		
+		grab('nextBtn').style.opacity = '0.5';
+	}
 }
 
 function return_to_options3() {

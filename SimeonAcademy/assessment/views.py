@@ -40,7 +40,7 @@ truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSess
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
-fetchClientPhoneDisplay
+fetchClientPhoneDisplay, calculateHistoryPages
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -537,7 +537,6 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			history = []
 			page = 1
 			content = beginSession(request)
 			session = ClientSession.objects.get(id=(getSessionID(user)))
@@ -553,9 +552,15 @@ def clientOptions(request):
 
 			allHistory = fetchAllClientHistory(session)
 			history = setClientHistory5(page, allHistory, user)
+
+			matches = len(allHistory)
+			pages = calculateHistoryPages(matches)
+
 			content['phone'] = fetchClientPhoneDisplay(session.client.phone)
 			content['ssn'] =fetchClientSSDisplay(session.client.ss_num)
 			content['history'] = history
+			content['pages'] = pages
+			content['numPages'] = len(pages)
 			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
 

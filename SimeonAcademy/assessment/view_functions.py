@@ -10725,6 +10725,25 @@ def setClientHistory5(page, history, user):
 
 	return forms
 
+def calculateHistoryPages(matches):
+	selList = []
+	np = 0
+	offset = matches % 5
+
+	if offset > 0:
+		np = 1
+
+	if matches > 5:
+		matches -= offset
+		otherP = matches / 5
+		np += otherP
+
+	for i in range(np):
+		num = i + 1
+		selList.append(num)
+
+	return selList
+
 def fetchClientHistory(session, numberRequested):
 	result = []
 	sessions = ClientSession.objects.all()

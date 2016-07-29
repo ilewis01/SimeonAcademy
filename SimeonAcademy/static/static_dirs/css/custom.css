@@ -3202,6 +3202,31 @@ button:hover {
 	color: #605f5d;
 }
 
+.phSelectableTable {
+	height:20px;
+}
+
+.phSelectableTable button {
+	border-radius: 6px;
+	height:20px;
+	width: 80px;
+	margin:auto;
+	font-size: 12px;
+	text-align: center;
+	padding-bottom: 17px;
+}
+
+.phSelectDisabled {
+	background-color: #aaaaa9;
+}
+
+.phSelectableTable select {
+	margin-right: 7px;
+	margin-left: 7px;
+	font-size: 30px;
+}
+
+
 
 
 

@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white">
+<body class="gradient-white" onLoad='javascript: initialize_options({{numPages}});'>
     <!-- _________________________SIDE BAR_________________________ -->
 
     <div id="wrapper" class='shift-rr'>
@@ -26,6 +26,7 @@
 
                         <input type='hidden' name='m_session_id' id='m_session_id' value="">
                         <input type='hidden' name='m_fType' id='m_fType' value="">
+                        <input type='hidden' name='numPages' id='numPages' value="{{numPages}}">
 
                         <input type='hidden' name='completeAM' id='completeAM' value="{{completeAM}}">
                         <input type='hidden' name='completeMH' id='completeMH' value="{{completeMH}}">
@@ -189,6 +190,28 @@
                                     {% endfor %}
                                 </table>
                             </ul>
+
+                            <table class='phSelectableTable'>
+                                <tr>
+                                    <td>
+                                        <button id='prevBtn' class=''>&laquo&nbspPrevious</button>
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            <select id='hisPageSelect'>
+                                                {% for p in pages %}
+                                                <option value='{{p}}'>{{p}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <button id='nextBtn'>Next&nbsp&raquo</button>
+                                    </td>
+                                </tr>
+                            </table>
                
                            
 <!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
