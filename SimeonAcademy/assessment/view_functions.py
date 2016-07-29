@@ -8231,10 +8231,20 @@ def snagASIlegal(asi):
 
 def snagASIsocial(asi):
 	result = {}
+	result['f2yrs'] = decodeASIFields(2, asi.social1.f2yrs)
+	result['f2mth'] = decodeASIFields(2, asi.social1.f2mth)
+	result['f5yrs'] = decodeASIFields(2, asi.social1.f5yrs)
+	result['f5mth'] = decodeASIFields(2, asi.social1.f5mth)
+	result['f30'] = decodeASIFields(2, asi.social1.f30)
+	result['f31'] = decodeASIFields(2, asi.social1.f31)
 	return result
 
 def snagASIpsych(asi):
 	result = {}
+	result['p1'] = decodeASIFields(2, asi.psych.p1)
+	result['p2'] = decodeASIFields(2, asi.psych.p2)
+	result['p12'] = decodeASIFields(2, asi.psych.p12)
+	result['comments'] 	= splitFormLines(12, 90, str(asi.psych.comments))
 	return result
 
 def fetchASIViewItems(asi):
@@ -8645,14 +8655,14 @@ def grabAsiPsychFields(asi):
 	result['p10d'] = getLegalFamilyIndex(asi.psych.p10d)
 	result['p11d'] = getLegalFamilyIndex(asi.psych.p11d)
 
-	result['p4y'] = asi.psych.p4y
-	result['p5y'] = asi.psych.p5y
-	result['p6y'] = asi.psych.p6y
-	result['p7y'] = asi.psych.p7y
-	result['p8y'] = asi.psych.p8y
-	result['p9y'] = asi.psych.p9y
-	result['p10y'] = asi.psych.p10y
-	result['p11y'] = asi.psych.p11y
+	result['p4y'] = getLegalFamilyIndex(asi.psych.p4y)
+	result['p5y'] = getLegalFamilyIndex(asi.psych.p5y)
+	result['p6y'] = getLegalFamilyIndex(asi.psych.p6y)
+	result['p7y'] = getLegalFamilyIndex(asi.psych.p7y)
+	result['p8y'] = getLegalFamilyIndex(asi.psych.p8y)
+	result['p9y'] = getLegalFamilyIndex(asi.psych.p9y)
+	result['p10y'] = getLegalFamilyIndex(asi.psych.p10y)
+	result['p11y'] = getLegalFamilyIndex(asi.psych.p11y)
 
 	result['p12'] = asi.psych.p12
 	result['p13'] = getPatientIndex(asi.psych.p13)
