@@ -5881,6 +5881,45 @@ def grabLines(lineLength, text):
 
 	return result
 
+def grabLinesInfo(numLines, lineLength, text):
+	word = splitWords(text)
+	nLine = lineLength
+	nWord = ''
+	current = 0
+	c_line = 0
+	index = 0
+	line = ''
+	lines = []
+	result = {}
+
+	for w in word:
+		nLine = nLine - current
+		line += nWord
+
+		if nWord != '':
+			index += 1
+
+		if wordFits(nLine, w):
+			line += w
+			current = len(w)
+			index += 1
+			nWord = ''
+		else:
+			lines.append(line)
+			nLine = lineLength
+			current = 0
+			line = ''
+			nWord = w
+
+		c_line = len(lines)
+		if c_line == numLines:
+			break
+
+	lines.append(line)
+	result['lines'] = lines
+	result['index'] = index
+	return result
+
 def splitFormLines(numLines, lineLength, text):
 	result = {}
 	lines = grabLines(lineLength, text)
@@ -5895,6 +5934,25 @@ def splitFormLines(numLines, lineLength, text):
 			result[name] = ' '
 
 	return result
+
+def splitFormLinesInfo(numLines, lineLength, text):
+	result = {}
+	data = grabLinesInfo(lineLength, text)
+	index = data['index']
+	lines = data['lines']
+
+	for i in range(numLines):
+		num = i + 1
+		name = 'line' + str(num)
+
+		if i < len(lines):
+			result[name] = lines[i]
+		else:
+			result[name] = ' '
+
+	result['index'] = index
+	return result
+
 
 def multiLineSplit(numLines, line1Length, otherLineLength, text):
 	result = {}
@@ -5922,6 +5980,44 @@ def multiLineSplit(numLines, line1Length, otherLineLength, text):
 				result[name] = lines[i - 1]
 		else:
 			result[name] = ' '
+	return result
+
+def superSplit(section1Length, numSec1, section2Length, numSec2, text):
+	result = {}
+	t2 = ''
+	totalLines = numSec1 + numSec2 + 1
+	start2 = numSec1 + 1
+
+	sec1 = grabLinesInfo(numSec1, section1Length, text)
+	index = sec1['index']
+
+	words = splitWords(text)
+	print 'FIRST WORD: ' + str(words[index])
+
+	for i in range(index, len(words)):
+		t2 += words[i]
+
+	sec2 = grabLinesInfo(numSec2, section2Length, t2)
+
+	sec1 = sec1['lines']
+	sec2 = sec2['lines']
+
+	sc = []
+
+	for s1 in sec1:
+		sc.append(s1)
+	for s2 in sec2:
+		sc.append(s2)
+
+	for i in range(totalLines):
+		num = i + 1
+		name = 'line' + str(num)
+
+		if i < len(sc):
+			result[name] = sc[i]
+		else:
+			result[name] = ' '
+
 	return result
 
 def fetchClientSSDisplay(ss):
@@ -8237,6 +8333,7 @@ def snagASIsocial(asi):
 	result['f5mth'] = decodeASIFields(2, asi.social1.f5mth)
 	result['f30'] = decodeASIFields(2, asi.social1.f30)
 	result['f31'] = decodeASIFields(2, asi.social1.f31)
+	result['comments'] = superSplit(20, 11, 85, 4, str(asi.social2.comments))
 	return result
 
 def snagASIpsych(asi):
