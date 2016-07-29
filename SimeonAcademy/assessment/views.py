@@ -1113,8 +1113,13 @@ def printForm(request):
 			if form_type == 'am':
 				url = 'counselor/forms/AngerManagement/printAM.html'
 			elif form_type == 'mh':
+				content['date'] = session.mh.date_of_assessment
+				content['images'] = grabMhViewImages(session.mh)
 				url = 'counselor/forms/MentalHealth/printMH.html'
 			elif form_type == 'ut':
+				date = datetime.now()
+				content['date'] = date.date()
+				content['images'] = getUtViewImages(session.ut)
 				url = 'counselor/forms/UrineTest/printUT.html'
 			elif form_type == 'sap':
 				content = fetchPrintFields('sap' ,session.sap)
