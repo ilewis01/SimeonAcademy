@@ -1110,7 +1110,7 @@ class AIS_Medical(models.Model):
 	m3 = models.IntegerField(default=0)
 	m4 = models.IntegerField(default=0)
 	m5 = models.IntegerField(default=0)
-	m5Exp = models.CharField(max_length=100, default=None, blank=True, null=True)
+	m5Exp = models.CharField(max_length=22, default=None, blank=True, null=True)
 	m6 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	m7 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	m8 = models.CharField(max_length=1, default=None, blank=True, null=True)

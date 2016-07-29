@@ -7905,10 +7905,6 @@ def getASI_YNI(m_val):
 
 	return index
 
-def fetchASIBoolImages(asi):
-	result = {}
-	result['g15'] = getBooleanChecks(asi.general.g15)
-
 def decodeASIFields(numBoxes, field):
 	field = str(field)
 	items = []
@@ -7920,9 +7916,14 @@ def decodeASIFields(numBoxes, field):
 
 	if fieldLen < numBoxes:
 		adjust = numBoxes - fieldLen
+		lastIndex = fieldLen - 1
 
-		for a in range(adjust):
-			items.append('0')
+		if fieldLen == 1 and str(field[lastIndex]) == 'N':
+			for a in range(adjust):
+				items.append('X')
+		else:
+			for a in range(adjust):
+				items.append('0')
 
 	for f in field:
 		items.append(f)
@@ -7932,6 +7933,124 @@ def decodeASIFields(numBoxes, field):
 		name = pre + str(num)
 		result[name] = items[i]
 
+	return result
+
+def fetchSPchecks(val):
+	result = {}
+	val = str(val)
+	check = "/static/images/check_o.png"
+	nope = '/static/images/nope.png'
+
+	if val == '0':
+		result['q0'] = check
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '1':
+		result['q0'] = nope
+		result['q1'] = check
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '2':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = check
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '3':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = check
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '4':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = check
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '5':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = check
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '6':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = check
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '7':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = check
+		result['q8'] = nope
+		result['q9'] = nope
+	elif val == '8':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = check
+		result['q9'] = nope
+	elif val == '9':
+		result['q0'] = nope
+		result['q1'] = nope
+		result['q2'] = nope
+		result['q3'] = nope
+		result['q4'] = nope
+		result['q5'] = nope
+		result['q6'] = nope
+		result['q7'] = nope
+		result['q8'] = nope
+		result['q9'] = check
 	return result
 
 def decodeASIdate(date):
@@ -7981,7 +8100,7 @@ def snagAsiAdmin(asi):
 	return result
 
 def snagASIgeneral(asi):
-	result = {}
+	result 				= {}
 	result['g13'] 		= decodeASIFields(3, asi.general.g13)
 	result['g14yrs'] 	= decodeASIFields(2, asi.general.g14yrs)
 	result['g14mos'] 	= decodeASIFields(2, asi.general.g14mos)
@@ -7991,12 +8110,143 @@ def snagASIgeneral(asi):
 	result['g16day'] 	= decodeASIFields(2, asi.general.g16day)
 	result['g16year'] 	= decodeASIFields(2, asi.general.g16year)
 	result['g20'] 		= decodeASIFields(2, asi.general.g20)
+
+	result['g21'] 		= decodeASIFields(3, asi.general.g21)
+	result['g22'] 		= decodeASIFields(3, asi.general.g22)
+	result['g23'] 		= decodeASIFields(2, asi.general.g23)
+	result['g24'] 		= decodeASIFields(3, asi.general.g24)
+	result['g25'] 		= decodeASIFields(2, asi.general.g25)
+	result['g26'] 		= decodeASIFields(3, asi.general.g26)
+	result['g27'] 		= decodeASIFields(3, asi.general.g27)
+	result['g28'] 		= decodeASIFields(3, asi.general.g28)
+
+	result['medical'] 	= fetchSPchecks(asi.general.medical)
+	result['employ'] 	= fetchSPchecks(asi.general.employ)
+	result['alcohol'] 	= fetchSPchecks(asi.general.alcohol)
+	result['drug'] 		= fetchSPchecks(asi.general.drug)
+	result['legal'] 	= fetchSPchecks(asi.general.legal)
+	result['family'] 	= fetchSPchecks(asi.general.family)
+	result['psych'] 	= fetchSPchecks(asi.general.psych)
+	return result
+
+def snagASImedical(asi):
+	result 				= {}
+	result['m1'] 		= decodeASIFields(2, asi.medical.m1)
+	result['m2yrs'] 	= decodeASIFields(2, asi.medical.m2yrs)
+	result['m2mth'] 	= decodeASIFields(2, asi.medical.m2mth)
+	result['m6'] 		= decodeASIFields(2, asi.medical.m6)
+	result['comments'] 	= splitFormLines(2, 90, str(asi.medical.comments))
+	return result
+
+def snagASIemployment(asi):
+	result 				= {}
+	result['e1yrs'] 	= decodeASIFields(2, asi.employment.e1yrs)
+	result['e1mth'] 	= decodeASIFields(2, asi.employment.e1mth)
+	result['e2'] 		= decodeASIFields(2, asi.employment.e2)
+	result['e6yrs'] 	= decodeASIFields(2, asi.employment.e6yrs)
+	result['e6mth'] 	= decodeASIFields(2, asi.employment.e6mth)
+	result['e11'] 		= decodeASIFields(2, asi.employment.e11)
+	result['e12'] 		= decodeASIFields(4, asi.employment.e12)
+	result['e13'] 		= decodeASIFields(4, asi.employment.e13)
+	result['e14'] 		= decodeASIFields(4, asi.employment.e14)
+	result['e15'] 		= decodeASIFields(4, asi.employment.e15)
+	result['e16'] 		= decodeASIFields(4, asi.employment.e16)
+	result['e17'] 		= decodeASIFields(4, asi.employment.e17)
+	result['comments'] 	= splitFormLines(3, 90, str(asi.employment.comments))
+	return result
+
+def snagASIdrug(asi):
+	result = {}
+	result['d1Day'] = decodeASIFields(2, asi.drug1.d1Day)
+	result['d1Year'] = decodeASIFields(2, asi.drug1.d1Year)
+	result['d2Day'] = decodeASIFields(2, asi.drug1.d2Day)
+	result['d2Year'] = decodeASIFields(2, asi.drug1.d2Year)
+	result['d3Day'] = decodeASIFields(2, asi.drug1.d3Day)
+	result['d3Year'] = decodeASIFields(2, asi.drug1.d3Year)
+	result['d4Day'] = decodeASIFields(2, asi.drug1.d4Day)
+	result['d4Year'] = decodeASIFields(2, asi.drug1.d4Year)
+	result['d5Day'] = decodeASIFields(2, asi.drug1.d5Day)
+	result['d5Year'] = decodeASIFields(2, asi.drug1.d5Year)
+	result['d6Day'] = decodeASIFields(2, asi.drug1.d6Day)
+	result['d6Year'] = decodeASIFields(2, asi.drug1.d6Year)
+	result['d7Day'] = decodeASIFields(2, asi.drug1.d7Day)
+	result['d7Year'] = decodeASIFields(2, asi.drug1.d7Year)
+	result['d8Day'] = decodeASIFields(2, asi.drug1.d8Day)
+	result['d8Year'] = decodeASIFields(2, asi.drug1.d8Year)
+	result['d9Day'] = decodeASIFields(2, asi.drug1.d9Day)
+	result['d9Year'] = decodeASIFields(2, asi.drug1.d9Year)
+	result['d10Day'] = decodeASIFields(2, asi.drug1.d10Day)
+	result['d10Year'] = decodeASIFields(2, asi.drug1.d10Year)
+	result['d11Day'] = decodeASIFields(2, asi.drug1.d11Day)
+	result['d11Year'] = decodeASIFields(2, asi.drug1.d11Year)
+	result['d12Day'] = decodeASIFields(2, asi.drug1.d12Day)
+	result['d12Year'] = decodeASIFields(2, asi.drug1.d12Year)
+	result['d14'] = decodeASIFields(2, asi.drug1.d14)
+	result['d15'] = decodeASIFields(2, asi.drug1.d15)
+	result['d16'] = decodeASIFields(2, asi.drug1.d16)
+	result['d17'] = decodeASIFields(2, asi.drug1.d17)
+	result['d18'] = decodeASIFields(2, asi.drug1.d18)
+	result['d19'] = decodeASIFields(2, asi.drug1.d19)
+	result['d20'] = decodeASIFields(2, asi.drug1.d20)
+	result['d21'] = decodeASIFields(2, asi.drug1.d21)
+	result['d22'] = decodeASIFields(2, asi.drug1.d22)
+	result['d23'] = decodeASIFields(2, asi.drug1.d23)
+	result['d24'] = decodeASIFields(2, asi.drug1.d24)
+	result['d25'] = decodeASIFields(2, asi.drug1.d25)
+	result['d26'] = decodeASIFields(2, asi.drug1.d26)
+	result['d27'] = decodeASIFields(2, asi.drug1.d27)
+	result['d28'] = decodeASIFields(2, asi.drug1.d28)
+	result['d29'] = decodeASIFields(2, asi.drug1.d29)
+	result['comments'] 	= splitFormLines(11, 90, str(asi.drug1.comments))
+	return result
+
+def snagASIlegal(asi):
+	result = {}
+	result['l3'] = decodeASIFields(2, asi.legal.l3)
+	result['l4'] = decodeASIFields(2, asi.legal.l4)
+	result['l5'] = decodeASIFields(2, asi.legal.l5)
+	result['l6'] = decodeASIFields(2, asi.legal.l6)
+	result['l7'] = decodeASIFields(2, asi.legal.l7)
+	result['l8'] = decodeASIFields(2, asi.legal.l8)
+	result['l9'] = decodeASIFields(2, asi.legal.l9)
+	result['l10'] = decodeASIFields(2, asi.legal.l10)
+	result['l11'] = decodeASIFields(2, asi.legal.l11)
+	result['l12'] = decodeASIFields(2, asi.legal.l12)
+	result['l13'] = decodeASIFields(2, asi.legal.l13)
+	result['l14'] = decodeASIFields(2, asi.legal.l14)
+	result['l15'] = decodeASIFields(2, asi.legal.l15)
+	result['l16'] = decodeASIFields(2, asi.legal.l16)
+	result['l17'] = decodeASIFields(2, asi.legal.l17)
+	result['l18'] = decodeASIFields(2, asi.legal.l18)
+	result['l19'] = decodeASIFields(2, asi.legal.l19)
+	result['l20'] = decodeASIFields(2, asi.legal.l20)
+	result['l21'] = decodeASIFields(2, asi.legal.l21)
+	result['l22'] = decodeASIFields(2, asi.legal.l22)
+	result['l23'] = decodeASIFields(2, asi.legal.l23)
+	result['l25'] = decodeASIFields(2, asi.legal.l25)
+	result['l26'] = decodeASIFields(2, asi.legal.l26)
+	result['l27'] = decodeASIFields(2, asi.legal.l27)
+	result['comments'] 	= splitFormLines(5, 90, str(asi.legal.comments))
+	return result
+
+def snagASIsocial(asi):
+	result = {}
+	return result
+
+def snagASIpsych(asi):
+	result = {}
 	return result
 
 def fetchASIViewItems(asi):
 	result = {}
-	result['admin'] = snagAsiAdmin(asi)
-	result['general'] = snagASIgeneral(asi)
+	result['admin'] 	= snagAsiAdmin(asi)
+	result['general'] 	= snagASIgeneral(asi)
+	result['medical'] 	= snagASImedical(asi)
+	result['employ'] 	= snagASIemployment(asi)
+	result['drug'] 		= snagASIdrug(asi)
+	result['legal'] 	= snagASIlegal(asi)
+	result['social'] 	= snagASIsocial(asi)
+	result['psych'] 	= snagASIpsych(asi)
 	return result
 
 def grabAsiAdminFields(asi):

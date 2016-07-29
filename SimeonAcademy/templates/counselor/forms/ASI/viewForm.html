@@ -715,9 +715,9 @@
           <p>G21. Shipley C.Q.</p>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g21.box1}}</td>
+              <td class="formCell">{{data.general.g21.box2}}</td>
+              <td class="formCell">{{data.general.g21.box3}}</td>
             </tr>
           </table>
         </li>
@@ -725,9 +725,9 @@
           <p>G22. Shipley I.Q.</p>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g22.box1}}</td>
+              <td class="formCell">{{data.general.g22.box2}}</td>
+              <td class="formCell">{{data.general.g22.box3}}</td>
             </tr>
           </table>
         </li>
@@ -735,8 +735,8 @@
           <p>G23. Beck Total Score</p>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g23.box1}}</td>
+              <td class="formCell">{{data.general.g23.box2}}</td>
             </tr>
           </table>
         </li>
@@ -744,9 +744,9 @@
           <p>G24. SCL-90 Total</p>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g24.box1}}</td>
+              <td class="formCell">{{data.general.g24.box2}}</td>
+              <td class="formCell">{{data.general.g24.box3}}</td>
             </tr>
           </table>
         </li>
@@ -754,43 +754,43 @@
           <p>G25. MAST</p>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g25.box1}}</td>
+              <td class="formCell">{{data.general.g25.box2}}</td>
             </tr>
           </table>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g26.box1}}</td>
+              <td class="formCell">{{data.general.g26.box2}}</td>
+              <td class="formCell">{{data.general.g26.box3}}</td>
             </tr>
           </table>
           <p>G26.</p>
-          <div class='formInputLine' style="width: 65%"></div>
+          <div class='formInputLine' style="width: 65%">{{session.asi.general.test1}}</div>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g27.box1}}</td>
+              <td class="formCell">{{data.general.g27.box2}}</td>
+              <td class="formCell">{{data.general.g27.box3}}</td>
             </tr>
           </table>
           <p>G27.</p>
-          <div class='formInputLine' style="width: 65%"></div>
+          <div class='formInputLine' style="width: 65%">{{session.asi.general.test2}}</div>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.general.g28.box1}}</td>
+              <td class="formCell">{{data.general.g28.box2}}</td>
+              <td class="formCell">{{data.general.g28.box3}}</td>
             </tr>
           </table>
           <p>G28.</p>
-          <div class='formInputLine' style="width: 65%"></div>
+          <div class='formInputLine' style="width: 65%">{{session.asi.general.test3}}</div>
         </li>
       </ul>
       <br>
@@ -799,94 +799,105 @@
       <table id="severityTable">
         <tr id="topBold">
           <td><p><b>9</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q9}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q9}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>8</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q8}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q8}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>7</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q7}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q7}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>6</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q6}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q6}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>5</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q5}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q5}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>4</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q4}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q4}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>3</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q3}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q3}}" class='asi_check_img'></td>
+        </tr>
+        <tr>
+          <td><p><b>2</b></p></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q2}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q2}}" class='asi_check_img'></td>
         </tr>
         <tr>
           <td><p><b>1</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q1}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q1}}" class='asi_check_img'></td>
         </tr>
         <tr id="bottomBold">
           <td><p><b>0</b></p></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
-          <td class="formSeverity"></td>
+          <td class="formSeverity"><img src="{{data.general.medical.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.employ.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.alcohol.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.drug.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.legal.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.family.q0}}" class='asi_check_img'></td>
+          <td class="formSeverity"><img src="{{data.general.psych.q0}}" class='asi_check_img'></td>
         </tr>
+
         <tr id="vertical">
           <td><p><b>Problems</b></p></td>
           <td><p>Medical</p></td>
@@ -925,8 +936,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.medical.m1.box1}}</td>
+              <td class="formCell">{{data.medical.m1.box2}}</td>
             </tr>
           </table>
           <p><u>M1.</u> How many times in your life</p><br>
@@ -940,8 +951,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.medical.m2yrs.box1}}</td>
+                    <td class="formCell">{{data.medical.m2yrs.box2}}</td>
                   </tr>
                 </table>
                 <h4>Years</h4>
@@ -949,8 +960,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.medical.m2mth.box1}}</td>
+                    <td class="formCell">{{data.medical.m2mth.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -964,7 +975,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m3}}</td>
             </tr>
           </table>
           <p>M3. Do you have any chronic medical</p><br>
@@ -974,7 +985,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m4}}</td>
             </tr>
           </table>
           <p><u>M4.</u> Are you taking any prescribed</p><br>
@@ -992,15 +1003,15 @@
           <p style="margin-left: 35px">psychiatric disability.)</p><br>
           <ul class="smallList">
             <li><p>0 - No</p></li>
-            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%"></div></li>
+            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%">{{session.asi.medical.m5Exp}}</div></li>
             <li><p style="margin-left: 50%">Specify</p></li>
           </ul>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.medical.m6.box1}}</td>
+              <td class="formCell">{{data.medical.m6.box2}}</td>
             </tr>
           </table>
           <p><u>M6.</u> How many days have you</p><br>
@@ -1013,7 +1024,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m7}}</td>
             </tr>
           </table>
           <p><u>M7.</u> How troubled or bothered have you</p><br>
@@ -1028,7 +1039,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m8}}</td>
             </tr>
           </table>
           <p><u>M8.</u> How important to you now is</p><br>
@@ -1040,7 +1051,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m9}}</td>
             </tr>
           </table>
           <p>M9. How would you rate the patient's</p><br>
@@ -1055,7 +1066,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m10}}</td>
             </tr>
           </table>
           <p><u>M10.</u> Patient's misrepresentation?</p><br>
@@ -1064,7 +1075,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.medical.m11}}</td>
             </tr>
           </table>
           <p><u>M11.</u> Patient's inability to understand?</p><br>
@@ -1081,13 +1092,13 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px">comments</div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px">{{data.medical.comments.line1}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px; margin-top:15px;">{{data.medical.comments.line2}}</div>
     </div>
   </div>
   <!-- end row -->
@@ -1106,8 +1117,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.employ.e1yrs.box1}}</td>
+                    <td class="formCell">{{data.employ.e1yrs.box2}}</td>
                   </tr>
                 </table>
                 <h4>Years</h4>
@@ -1115,8 +1126,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.employ.e1mth.box1}}</td>
+                    <td class="formCell">{{data.employ.e1mth.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -1131,8 +1142,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.employ.e2.box1}}</td>
+                    <td class="formCell">{{data.employ.e2.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -1145,21 +1156,21 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e3}}</td>
             </tr>
           </table>
           <p><u>E3.</u> Do you have a profession, trade</p><br>
           <p style="margin-left: 30px">or skill?</p>
           <ul class="smallList">
             <li><p>0 - No</p></li>
-            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%"></div></li>
+            <li><p>1 - Yes&nbsp;</p><div class="formInputLine" style="width: 85%">{{session.asi.employment.e3Exp}}</div></li>
             <li><p style="margin-left: 40%">Please Specify</p></li>
           </ul>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e4}}</td>
             </tr>
           </table>
           <p><u>E4.</u> Do you have a valid driver's license?</p><br>
@@ -1168,7 +1179,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e5}}</td>
             </tr>
           </table>
           <p><u>E5.</u> Do you have an automobile available</p><br>
@@ -1181,8 +1192,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.employ.e6yrs.box1}}</td>
+                    <td class="formCell">{{data.employ.e6yrs.box2}}</td>
                   </tr>
                 </table>
                 <h4>Years</h4>
@@ -1190,8 +1201,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.employ.e6mth.box1}}</td>
+                    <td class="formCell">{{data.employ.e6mth.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -1204,13 +1215,13 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e7}}</td>
             </tr>
           </table>
           <p><u>E7.</u> Usual (or last) occupation?</p>
         </li>
         <li>
-          <div class="formInputLine" style="width: 95%;margin-left: 20px"></div>
+          <div class="formInputLine" style="width: 95%;margin-left: 20px">{{session.asi.employment.e7Exp}}</div>
         </li>
         <li>
           <p style="margin-left: 35%">Specify in Detail</p>
@@ -1218,7 +1229,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e8}}</td>
             </tr>
           </table>
           <p><u>E8.</u> Does someone contribute to your</p><br>
@@ -1227,7 +1238,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e9}}</td>
             </tr>
           </table>
           <p><u>E9.</u> (ONLY IF "ITEM 8" IS YES)</p><br>
@@ -1241,7 +1252,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e10}}</td>
             </tr>
           </table>
           <p>E10. Usual employment pattern,</p><br>
@@ -1276,8 +1287,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e11.box1}}</td>
+              <td class="formCell">{{data.employ.e11.box2}}</td>
             </tr>
           </table>
           <p><u>E11.</u> How many days were you paid</p><br>
@@ -1290,10 +1301,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e12.box1}}</td>
+              <td class="formCell">{{data.employ.e12.box2}}</td>
+              <td class="formCell">{{data.employ.e12.box3}}</td>
+              <td class="formCell">{{data.employ.e12.box4}}</td>
             </tr>
           </table>
           <p><u>E12.</u> Employment</p><br>
@@ -1302,10 +1313,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e13.box1}}</td>
+              <td class="formCell">{{data.employ.e13.box2}}</td>
+              <td class="formCell">{{data.employ.e13.box3}}</td>
+              <td class="formCell">{{data.employ.e13.box4}}</td>
             </tr>
           </table>
           <p><u>E13.</u> Unemployment</p><br>
@@ -1314,10 +1325,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e14.box1}}</td>
+              <td class="formCell">{{data.employ.e14.box2}}</td>
+              <td class="formCell">{{data.employ.e14.box3}}</td>
+              <td class="formCell">{{data.employ.e14.box4}}</td>
             </tr>
           </table>
           <p><u>E14.</u> DPA</p>
@@ -1325,10 +1336,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e15.box1}}</td>
+              <td class="formCell">{{data.employ.e15.box2}}</td>
+              <td class="formCell">{{data.employ.e15.box3}}</td>
+              <td class="formCell">{{data.employ.e15.box4}}</td>
             </tr>
           </table>
           <p><u>E15.</u> Pension, benefits or</p><br>
@@ -1337,10 +1348,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e16.box1}}</td>
+              <td class="formCell">{{data.employ.e16.box2}}</td>
+              <td class="formCell">{{data.employ.e16.box3}}</td>
+              <td class="formCell">{{data.employ.e16.box4}}</td>
             </tr>
           </table>
           <p><u>E16.</u> Mate, family or friends</p><br>
@@ -1350,10 +1361,10 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.employ.e17.box1}}</td>
+              <td class="formCell">{{data.employ.e17.box2}}</td>
+              <td class="formCell">{{data.employ.e17.box3}}</td>
+              <td class="formCell">{{data.employ.e17.box4}}</td>
             </tr>
           </table>
           <p><u>E17.</u> Illegal</p>
@@ -1365,7 +1376,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e18}}</td>
             </tr>
           </table>
           <p>E18. How many people depend on you</p><br>
@@ -1375,7 +1386,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e19}}</td>
             </tr>
           </table>
           <p>E19. How many days have you</p><br>
@@ -1388,7 +1399,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e20}}</td>
             </tr>
           </table>
           <p>E20. How troubled or bothered have</p><br>
@@ -1398,7 +1409,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e21}}</td>
             </tr>
           </table>
           <p>E21. How important to you now is</p><br>
@@ -1416,12 +1427,12 @@
           <p><em><b>Confidence Rating</b></em></p>
         </li>
         <li style="text-align: center">
-          <p>Is the above information significantly distorted by:</p>
+          <span class='shrinkM22'>Is the above information significantly distorted by:</span>
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e23}}</td>
             </tr>
           </table>
           <p>E23. Patient's misrepresentation?</p><br>
@@ -1430,7 +1441,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.employment.e24}}</td>
             </tr>
           </table>
           <p>E24. How important to you now is</p><br>
@@ -1448,19 +1459,19 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px">{{data.employ.comments.line1}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.employ.comments.line2}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.employ.comments.line3}}</div>
     </div>
   </div>
   <!-- end row -->
@@ -1521,23 +1532,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d1Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d1Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d1Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d1Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d1Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1552,23 +1563,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d2Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d2Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d2Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d2Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d2Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1583,23 +1594,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d3Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d3Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d3Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d3Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d3Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1613,23 +1624,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d4Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d4Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d4Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d4Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d4Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1643,23 +1654,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d5Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d5Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d5Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d5Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d5Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1674,23 +1685,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d6Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d6Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d6Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d6Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d6Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1704,23 +1715,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d7Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d7Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d7Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d7Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d7Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1735,23 +1746,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d8Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d8Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d8Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d8Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d8Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1765,23 +1776,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d9Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d9Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d9Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d9Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d9Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1795,23 +1806,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d10Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d10Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d10Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d10Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d10Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1825,23 +1836,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d11Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d11Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d11Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d11Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d11Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1855,23 +1866,23 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d12Day.box1}}</td>
+                    <td class="formCell">{{data.drug.d12Day.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.drug.d12Year.box1}}</td>
+                    <td class="formCell">{{data.drug.d12Year.box2}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.drug1.d12Route}}</td>
                   </tr>
                 </table>
               </td>
@@ -1882,7 +1893,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d13}}</td>
             </tr>
           </table>
           <p><u>D13.</u> More than one</p><br>
@@ -1903,8 +1914,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d14.box1}}</td>
+              <td class="formCell">{{data.drug.d14.box2}}</td>
             </tr>
           </table>
           <p><u>D14.</u> Which substance is the major</p><br>
@@ -1917,8 +1928,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d15.box1}}</td>
+              <td class="formCell">{{data.drug.d15.box2}}</td>
             </tr>
           </table>
           <p><u>D15.</u> How long was your last</p><br>
@@ -1929,8 +1940,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d16.box1}}</td>
+              <td class="formCell">{{data.drug.d16.box2}}</td>
             </tr>
           </table>
           <p><u>D16.</u> How many months ago did</p><br>
@@ -1943,15 +1954,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d17.box1}}</td>
+              <td class="formCell">{{data.drug.d17.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D17.</u> Had alcohol d.t.'s?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d18.box1}}</td>
+              <td class="formCell">{{data.drug.d18.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D18.</u> Overdosed on drugs?</p>
@@ -1962,15 +1973,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d19.box1}}</td>
+              <td class="formCell">{{data.drug.d19.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D19.</u> Alcohol Abuse:</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d20.box1}}</td>
+              <td class="formCell">{{data.drug.d20.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D20.</u> Drug Abuse:</p>
@@ -1981,15 +1992,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d21.box1}}</td>
+              <td class="formCell">{{data.drug.d21.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D21.</u> Alcohol:</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d22.box1}}</td>
+              <td class="formCell">{{data.drug.d22.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D22.</u> Drug:</p>
@@ -2000,15 +2011,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d23.box1}}</td>
+              <td class="formCell">{{data.drug.d23.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D23.</u> Alcohol?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d24.box1}}</td>
+              <td class="formCell">{{data.drug.d24.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D24.</u> Drugs?</p>
@@ -2020,8 +2031,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d25.box1}}</td>
+              <td class="formCell">{{data.drug.d25.box2}}</td>
             </tr>
           </table>
           <p><u>D25.</u> How many days have you</p><br>
@@ -2035,15 +2046,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d26.box1}}</td>
+              <td class="formCell">{{data.drug.d26.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D26.</u> Alcohol Problems?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d27.box1}}</td>
+              <td class="formCell">{{data.drug.d27.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D27.</u> Drug Problems?</p>
@@ -2057,15 +2068,15 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d28.box1}}</td>
+              <td class="formCell">{{data.drug.d28.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D28.</u> Alcohol Problems?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.drug.d29.box1}}</td>
+              <td class="formCell">{{data.drug.d29.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D29.</u> Drug Problems?</p>
@@ -2076,13 +2087,13 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d30}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D30.</u> Alcohol Problems?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d31}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D31.</u> Drug Problems?</p>
@@ -2096,13 +2107,13 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d32}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D32.</u> Alcohol Abuse?</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d33}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D33.</u> Drug Abuse?</p>
@@ -2116,7 +2127,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d34}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D34.</u> Patient's misrepresentation?</p><br>
@@ -2125,7 +2136,7 @@
           </ul>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.drug1.d35}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>D35.</u> Patient's inablility to understand?</p>
@@ -2139,67 +2150,67 @@
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px;"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px;">{{data.drug.comments.line1}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line2}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line3}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line4}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line5}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line6}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line7}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line8}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line9}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line10}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.drug.comments.line11}}</div>
     </div>
   </div>
   <!-- end row -->
@@ -2229,14 +2240,14 @@
           <p style="margin-left: 30px">0 - No 1 - Yes</p>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l1}}</td>
             </tr>
           </table>          
         </li>
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l2}}</td>
             </tr>
           </table>
           <p><u>L2.</u> Are you on probation or parole?</p>
@@ -2248,99 +2259,99 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l3.box1}}</td>
+              <td class="formCell">{{data.legal.l3.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L3.</u> - shoplifting/vandalism</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l4.box1}}</td>
+              <td class="formCell">{{data.legal.l4.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L4.</u> - parole/probation violations</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l5.box1}}</td>
+              <td class="formCell">{{data.legal.l5.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L5.</u> - drug charges</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l6.box1}}</td>
+              <td class="formCell">{{data.legal.l6.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L6.</u> - forgery</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l7.box1}}</td>
+              <td class="formCell">{{data.legal.l7.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L7.</u> - weapons offense</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l8.box1}}</td>
+              <td class="formCell">{{data.legal.l8.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L8.</u> - burglary, larceny, B&amp;F</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l9.box1}}</td>
+              <td class="formCell">{{data.legal.l9.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L9.</u> - robbery</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l10.box1}}</td>
+              <td class="formCell">{{data.legal.l10.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L10.</u> - assault</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l11.box1}}</td>
+              <td class="formCell">{{data.legal.l11.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L11.</u> - arson</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l12.box1}}</td>
+              <td class="formCell">{{data.legal.l12.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L12.</u> - rape</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l13.box1}}</td>
+              <td class="formCell">{{data.legal.l13.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L13.</u> - homicide/manslaughter</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l14.box1}}</td>
+              <td class="formCell">{{data.legal.l14.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L14.</u> - prostitution</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l15.box1}}</td>
+              <td class="formCell">{{data.legal.l15.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L15.</u> - contempt of court</p><br>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l16.box1}}</td>
+              <td class="formCell">{{data.legal.l16.box2}}</td>
             </tr>
           </table>
           <p style="margin-left: 45px"><u>L16.</u> - other</p><br>
@@ -2352,8 +2363,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l17.box1}}</td>
+              <td class="formCell">{{data.legal.l17.box2}}</td>
             </tr>
           </table>
           <p><u>L17.</u> How many of these charges</p><br>
@@ -2365,8 +2376,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l18.box1}}</td>
+              <td class="formCell">{{data.legal.l18.box2}}</td>
             </tr>
           </table>
           <p><u>L18.</u> Disorderly conduct, vagrancy,</p><br>
@@ -2375,8 +2386,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l19.box1}}</td>
+              <td class="formCell">{{data.legal.l19.box2}}</td>
             </tr>
           </table>
           <p><u>L19.</u> Driving while intoxicated</p>
@@ -2384,8 +2395,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l20.box1}}</td>
+              <td class="formCell">{{data.legal.l20.box2}}</td>
             </tr>
           </table>
           <p><u>L20.</u> Major driving violations</p><br>
@@ -2398,8 +2409,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.legal.l21.box1}}</td>
+                    <td class="formCell">{{data.legal.l21.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -2415,8 +2426,8 @@
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{data.legal.l22.box1}}</td>
+                    <td class="formCell">{{data.legal.l22.box2}}</td>
                   </tr>
                 </table>
                 <h4>Months</h4>
@@ -2429,8 +2440,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l23.box1}}</td>
+              <td class="formCell">{{data.legal.l23.box2}}</td>
             </tr>
           </table>
           <p>L23. What was it for? <em>(use codes</em></p><br>
@@ -2440,7 +2451,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l24}}</td>
             </tr>
           </table>
           <p><u>L24.</u> Are you presently awaiting</p><br>
@@ -2450,8 +2461,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l25.box1}}</td>
+              <td class="formCell">{{data.legal.l25.box2}}</td>
             </tr>
           </table>
           <p><u>L25.</u> What for? (If multiple charges,</p><br>
@@ -2460,8 +2471,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l26.box1}}</td>
+              <td class="formCell">{{data.legal.l26.box2}}</td>
             </tr>
           </table>
           <p>L26. How many days in the past 30</p><br>
@@ -2475,8 +2486,8 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
-              <td class="formCell"></td>
+              <td class="formCell">{{data.legal.l27.box1}}</td>
+              <td class="formCell">{{data.legal.l27.box2}}</td>
             </tr>
           </table>
           <p><u>L27.</u> How many days in the past 30</p><br>
@@ -2491,7 +2502,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l28}}</td>
             </tr>
           </table>
           <p><u>L28.</u> How serious do you feel your</p><br>
@@ -2501,7 +2512,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l29}}</td>
             </tr>
           </table>
           <p><u>L29.</u> How important to you now is</p><br>
@@ -2514,7 +2525,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l30}}</td>
             </tr>
           </table>
           <p>L30. How would you rate the patient's</p><br>
@@ -2529,7 +2540,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l31}}</td>
             </tr>
           </table>
           <p><u>L31.</u> Patient's misrepresentation?</p>
@@ -2537,7 +2548,7 @@
         <li>
           <table>
             <tr>
-              <td class="formCell"></td>
+              <td class="formCell">{{session.asi.legal.l32}}</td>
             </tr>
           </table>
           <p><u>L32.</u> Patient's inability to understand?</p>
@@ -2553,31 +2564,31 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px">{{data.legal.comments.line1}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.legal.comments.line2}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.legal.comments.line3}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.legal.comments.line4}}</div>
     </div>
   </div>
   <!-- end row -->
   <div class="row">
     <div class="col-xs-12">
-      <div class="formInputLine" style="margin-left: 25px;margin-right: 25px; height: 50px"></div>
+      <div class="formInputLineLeft" style="margin-left: 25px;margin-right: 25px; height: 50px">{{data.legal.comments.line5}}</div>
     </div>
   </div>
   <!-- end row -->
@@ -2630,21 +2641,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h1a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h1d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h1p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2658,21 +2669,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h2a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h2d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h2p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2686,21 +2697,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h3a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h3d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h3p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2714,21 +2725,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h4a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h4d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h4p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2742,21 +2753,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h5a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h5d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h5p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2807,21 +2818,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h6a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h6d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h6p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2835,21 +2846,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h7a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h7d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h7p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2863,21 +2874,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h8a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h8d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h8p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2891,21 +2902,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h9a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h9d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h9p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2919,21 +2930,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h10a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h10d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h10p}}</td>
                   </tr>
                 </table>
               </td>
@@ -2984,21 +2995,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h11a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h11d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h11p}}</td>
                   </tr>
                 </table>
               </td>
@@ -3012,21 +3023,21 @@
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h12a}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table style="margin-right: 40px">
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h12d}}</td>
                   </tr>
                 </table>
               </td>
               <td>
                 <table>
                   <tr>
-                    <td class="formCell"></td>
+                    <td class="formCell">{{session.asi.family.h12p}}</td>
                   </tr>
                 </table>
               </td>
