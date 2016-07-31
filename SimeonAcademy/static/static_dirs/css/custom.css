@@ -1149,8 +1149,22 @@ button:hover {
 	margin-left: 12px;
 }
 
+.roundIconClass7 {
+	margin-top: 15px;
+	margin-right: 3px;
+}
+
+.roundIconClass8 {
+	margin-top: 10px;
+	margin-right: 3px;
+}
+
 .image_icon {
 	width:65%;
+}
+
+.image_icon_cog {
+	width:77%;
 }
 
 .image_icon2 {
@@ -1161,6 +1175,9 @@ button:hover {
 	width:40%;
 }
 
+.image_icon4 {
+	width:60%;
+}
 .exit_page_main {
 	text-align: center;
 }
@@ -3224,6 +3241,25 @@ button:hover {
 	margin-right: 7px;
 	margin-left: 7px;
 	font-size: 30px;
+}
+
+.the-home-wrapper-options {
+	text-align: center;
+}
+
+.the-home-wrapper-options a {
+	color: #666666;
+}
+
+.the-home-wrapper-options a:hover {
+	color: #adad89;
+}
+
+.home_btn_text {
+	margin-top: 4px;
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
 }
 
 

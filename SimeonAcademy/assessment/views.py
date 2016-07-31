@@ -2203,9 +2203,29 @@ def asi_viewForm(request):
 
 			content['session'].asi.endTime = t
 			content['session'].asi.save()
-			
+
 			content['data'] = fetchASIViewItems(content['session'].asi)
 			return render_to_response('counselor/forms/ASI/viewForm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def printASI(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			content['data'] = fetchASIViewItems(session.asi)
+			content['session'] = session
+			return render_to_response('counselor/forms/ASI/printASI.html', content, context_instance=RequestContext(request))
 
 ###########################################################################################################################################
 ################################################################# END ASI #################################################################

@@ -242,7 +242,6 @@ def cleanWhiteSpace(text):
 	for t in text:
 		if t != ' ':
 			result += t
-	print result
 	return result
 
 def setUpNumberSearch(text):
@@ -2271,6 +2270,8 @@ def getAmPrioritySection(am):
 		section = '/am_control/'
 	elif am.finalPriority == True:
 		section = '/am_final/'
+	elif am.isComplete == True:
+		section = '/am_viewForm/'
 
 	return section
 
@@ -2289,6 +2290,7 @@ def get_am_urls():
 	result.append('/am_problems/')
 	result.append('/am_control/')
 	result.append('/am_final/')
+	result.append('/am_viewForm/')
 	return result
 
 def get_am_complete(am):
@@ -2306,6 +2308,7 @@ def get_am_complete(am):
 	result.append(am.currentProblemsComplete)
 	result.append(am.controlComplete)
 	result.append(am.finalComplete)
+	result.append(False)
 	return result
 
 def get_am_priority(am):
@@ -2323,6 +2326,7 @@ def get_am_priority(am):
 	result.append(am.currentPriority)
 	result.append(am.controlPriority)
 	result.append(am.finalPriority)
+	result.append(am.isComplete)
 	return result
 
 
@@ -2670,6 +2674,7 @@ def grabAmDhFields(am):
 	result['drinkLastEpisode'] = am.drugHistory.drinkLastEpisode
 	result['drinkRelationshipProblem'] = am.drugHistory.drinkRelationshipProblem
 	result['needHelpDrugs'] = am.drugHistory.needHelpDrugs
+	result['isComplete'] = am.drugHistoryComplete
 
 	if result['curUse'] == True:
 		result['everDrank'] = False
@@ -2800,30 +2805,31 @@ def getAMDemoFields(am):
 
 	data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus)
 	data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation)
-	data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation)
+	data['education'] = convertEducationToIndex(am.demographic.education)
 
 	if am.demographic.employer_phone == None or am.demographic.employer_phone == '' or am.demographic.employer_phone == 'None':
 		phone = am.demographic.employer_phone
 	else:
 		phone = convert_phone(am.demographic.employer_phone)
 
-	data['own'] = convertToJavascriptBool(am.demographic.own)
-	data['months_res'] = am.demographic.months_res
-	data['years_res'] = am.demographic.years_res
-	data['num_children'] = am.demographic.num_children
-	data['other_dependants'] = am.demographic.other_dependants
-	data['drop_out'] = convertToJavascriptBool(am.demographic.drop_out)
-	data['resasonDO'] = convertNullTextFields(am.demographic.resasonDO)
-	data['employee'] = convertNullTextFields(am.demographic.employee)
-	data['job_title'] = convertNullTextFields(am.demographic.job_title)
-	data['emp_address'] = convertNullTextFields(am.demographic.emp_address)
-	data['employed_months'] = am.demographic.employed_months
-	data['employed_years'] = am.demographic.employed_years
-	data['employer_phone'] = phone
-	data['health_problem'] = convertToJavascriptBool(am.demographic.health_problem)
-	data['medication'] = convertToJavascriptBool(am.demographic.medication)
-	data['whatMedicine'] = convertNullTextFields(am.demographic.whatMedicine)
-	data['health_exp'] = convertNullTextFields(am.demographic.health_exp)
+	data['own'] 				= am.demographic.own
+	data['months_res'] 			= am.demographic.months_res
+	data['years_res'] 			= am.demographic.years_res
+	data['num_children'] 		= am.demographic.num_children
+	data['other_dependants'] 	= am.demographic.other_dependants
+	data['drop_out'] 			= am.demographic.drop_out
+	data['resasonDO'] 			= am.demographic.resasonDO
+	data['employee'] 			= am.demographic.employee
+	data['job_title'] 			= am.demographic.job_title
+	data['emp_address'] 		= am.demographic.emp_address
+	data['employed_months'] 	= am.demographic.employed_months
+	data['employed_years'] 		= am.demographic.employed_years
+	data['employer_phone'] 		= phone
+	data['health_problem'] 		= am.demographic.health_problem
+	data['medication'] 			= am.demographic.medication
+	data['whatMedicine'] 		= am.demographic.whatMedicine
+	data['health_exp'] 			= am.demographic.health_exp
+	data['isComplete'] 			= am.demographicComplete
 
 	return data
 
@@ -3480,6 +3486,7 @@ def processAMData(request, current_section):
 	result['AM'] = am
 	result['fields'] = fields
 	result['json_data'] = json_data
+	result['current_section'] = current_section
 	result['title'] = "Simeon Academy | Anger Management"
 
 	return result
@@ -5792,8 +5799,6 @@ def getMhFields(mh, section):
 
 def getLastWordIndex(text):
 	count = len(text) 
-	print str(text)
-	print 'LENGTH: ' + str(count)
  
 	while text[count] != ' ' and count != 0:
 		count = count - 1
@@ -5992,7 +5997,6 @@ def superSplit(section1Length, numSec1, section2Length, numSec2, text):
 	index = sec1['index']
 
 	words = splitWords(text)
-	print 'FIRST WORD: ' + str(words[index])
 
 	for i in range(index, len(words)):
 		t2 += words[i]
@@ -8829,7 +8833,6 @@ def processASIbool(val):
 
 def saveASIadmin(request, asi):
 	g4 = process_jq_date(request.POST.get('g4'))
-	print 'G4: ' + str(g4)
 	asi.admin.g1 = request.POST.get('g1')
 	asi.admin.g2 = request.POST.get('g2')
 	asi.admin.g3 = request.POST.get('g3')
@@ -10080,8 +10083,6 @@ def processUtData(request):
 	ut_id = request.POST.get('ut_id', '')
 	save_this = request.POST.get('save_this', '')
 
-	print "UT ID: " + str(ut_id) 
-
 	session = ClientSession.objects.get(id=session_id)
 	ut = UrineResults.objects.get(id=ut_id)
 	fields = getUtFields(ut)
@@ -10693,10 +10694,6 @@ def processClientHistory(request):
 	client = session.client
 
 	h_list = getOrderedHistory(f_order, d_order, client)
-
-	print '\n' + "ORDERED LIST...." +'\n'
-	for h in h_list:
-		print h
 
 	fields['f_order'] = f_order
 	fields['d_order'] = d_order
