@@ -524,37 +524,130 @@ function finializeSessionResolve() {
 }
 
 function new_am() {
-	grab('c_form').action = '/am_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeAM').value;
+	grab('fType').value = 'am';
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 450;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/am_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_asi() {
-	grab('c_form').action = '/asi_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeASI').value;
+	grab('fType').value = 'asi';
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 450;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/asi_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_mh() {
-	grab('c_form').action = '/mh_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeMH').value;
+	grab('fType').value = 'mh';
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 450;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/mh_preliminary/';
+		grab('c_form').submit();
+	}
 }
 
 function new_sap() {
 	var isForm = grab('completeSAP').value;
+	grab('fType').value = 'sap';
 	isForm = String(isForm);
 
 	if (isForm === 'True') {
-		var w = 1200, h = 1300;
-		openPopUp('auto', '/print_sap/', w, h);
+		var w = 550, h = 450;
+		openPopUp('auto', '/form_existing/', w, h);
 	}
-	else if (isForm == 'False') {
+	else if (isForm === 'False') {
 		grab('c_form').action = '/sap_preliminary/';
 		grab('c_form').submit();
 	}	
 }
 
 function new_ut() {
-	grab('c_form').action = '/ut_preliminary/';
-	grab('c_form').submit();
+	var isForm = grab('completeUT').value;
+	grab('fType').value = 'ut';
+	isForm = String(isForm);
+
+	if (isForm === 'True') {
+		var w = 550, h = 450;
+		openPopUp('auto', '/form_existing/', w, h);
+	}
+	else if (isForm === 'False') {
+		grab('c_form').action = '/ut_preliminary/';
+		grab('c_form').submit();
+	}
+}
+
+function setExistingFType() {
+	var fType = getPopParent('fType').value;
+	grab('fType').value = fType;
+
+	if (fType === 'am') {
+		grab('formName').innerHTML = 'Anger Management Form';
+		grab('formName2').innerHTML = 'Anger Management Form';
+	}
+	if (fType === 'mh') {
+		grab('formName').innerHTML = 'Mental Health Assessment Form';
+		grab('formName2').innerHTML = 'Mental Health Assessment Form';
+	}
+	if (fType === 'ut') {
+		grab('formName').innerHTML = 'Urine Analysis Form';
+		grab('formName2').innerHTML = 'Urine Analysis Form';
+	}
+	if (fType === 'sap') {
+		grab('formName').innerHTML = 'S.A.P Form';
+		grab('formName2').innerHTML = 'S.A.P Form';
+	}
+	if (fType === 'asi') {
+		grab('formName').innerHTML = 'Addiction Severity Index Form';
+		grab('formName2').innerHTML = 'Addiction Severity Index Form';
+	}
+}
+
+function universalPrint() {
+	var w = 1200, h = 1300;
+	var fType = grab('fType').value;
+	fType = String(fType);
+	var location = null;
+
+	if (fType === 'am') {
+		location = '/printAM/';
+	}
+	else if (fType === 'mh') {
+		location = '/printMH/';
+	}
+	else if (fType === 'ut') {
+		location = '/printUT/';
+	}
+	else if (fType === 'asi') {
+		location = '/printASI/';
+	}
+	else if (fType === 'sap') {
+		location = '/print_sap/';
+	}
+
+	openPopUp('auto', location, w, h);
+	window.close();
 }
 
 function new_discharge() {
@@ -581,6 +674,49 @@ function return_to_options2() {
 	form = document.getElementById('mh_instructions');
 	form.action = '/clientOptions/';
 	form.submit();
+}
+
+function get_main_p_history(form_type, session_id) {
+	form_type = String(form_type);
+	session_id = String(session_id);
+
+	grab('m_fType').value = form_type;
+	grab('m_session_id').value = session_id;
+
+	var w = 550, h = 450;
+	openPopUp('auto', '/printLoaded/', w, h);
+}
+
+function loadPrintForm() {
+	grab('form_type').value = getPopParent('m_fType').value;
+	grab('session_id').value = getPopParent('m_session_id').value;
+}
+
+function showPrintable() {
+	var w = 1200, h = 1300;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	grab('history_form').submit();
+
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+    window.focus(); 
+}
+
+function initialize_options(numPages) {
+	numPages = Number(numPages);
+
+	if (numPages === 1) {
+		grab('prevBtn').disabled = true;
+		grab('nextBtn').disabled = true;
+		grab('hisPageSelect').disabled = true;
+
+		grab('prevBtn').className = 'phSelectDisabled';
+		grab('nextBtn').className = 'phSelectDisabled';
+
+		grab('prevBtn').style.opacity = '0.5';		
+		grab('nextBtn').style.opacity = '0.5';
+	}
 }
 
 function return_to_options3() {
@@ -680,24 +816,6 @@ function connectionCheck() {
 	}
 }
 
-function initalize_am_connections(json_data) {
-	var angerWorse = document.getElementById('angerWorse');
-	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
-	var lessAngry = document.getElementById('lessAngry');
-	var othersTellMe = document.getElementById('othersTellMe');
-	var noConnection = document.getElementById('noConnection');
-	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
-	var connectionExplain = document.getElementById('connectionExplain');
-
-	initializeAllCheckBoxes(json_data.angerWorse, angerWorse);
-	initializeAllCheckBoxes(json_data.troubleWhenUsing, troubleWhenUsing);
-	initializeAllCheckBoxes(json_data.lessAngry, lessAngry);
-	initializeAllCheckBoxes(json_data.othersTellMe, othersTellMe);
-	initializeAllCheckBoxes(json_data.noConnection, noConnection);
-	initializeAllCheckBoxes(json_data.otherConnectionsUsing, otherConnectionsUsing);
-
-	connectionCheck();
-}
 
 function post_dynamic_am_connections() {
 	var angerWorse = document.getElementById('angerWorse');
@@ -753,54 +871,6 @@ function activateWorstRadio() {
 		label.style.opacity = '0.5';
 		selectBox.style.opacity = '0.5';
 		selectBox.disabled = true;
-	}
-}
-
-function initalize_am_worst(json_data) {
-	var back = document.getElementById('back_btn');
-
-	var whoWorst = document.getElementById('whoWorst');
-	var happenedWorst = document.getElementById('happenedWorst');
-	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
-	var howStartWorst = document.getElementById('howStartWorst');
-	var howEndWorst = document.getElementById('howEndWorst');
-	var whoDidItFight = document.getElementById('whoDidItFight');
-	var theyUsedWorst = document.getElementById('theyUsedWorst');
-	var physicalWorst = document.getElementById('physicalWorst');
-	var verbalWorst = document.getElementById('verbalWorst');
-	var threatsWorst = document.getElementById('threatsWorst');
-	var propertyWorst = document.getElementById('propertyWorst');
-	var otherWorst = document.getElementById('otherWorst');
-	var otherWorstDescription = document.getElementById('otherWorstDescription');
-
-	var hadDrugs = document.getElementById('hadDrugs');
-	var noDrugs = document.getElementById('noDrugs');
-
-	setRadioElement(json_data.useWorst, hadDrugs, noDrugs);
-	whoDidItFight.selectedIndex = json_data.whoDidItFight;
-
-	initializeAllCheckBoxes(json_data.physicalWorst, physicalWorst);
-	initializeAllCheckBoxes(json_data.verbalWorst, verbalWorst);
-	initializeAllCheckBoxes(json_data.threatsWorst, threatsWorst);
-	initializeAllCheckBoxes(json_data.propertyWorst, propertyWorst);
-	initializeAllCheckBoxes(json_data.otherWorst, otherWorst);
-
-	worstCheck();
-	activateWorstRadio();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('whoWorst'));
-		nullTextMustDie(document.getElementById('happenedWorst'));
-		nullTextMustDie(document.getElementById('wordThoughtWorst'));
-		nullTextMustDie(document.getElementById('howStartWorst'));
-		nullTextMustDie(document.getElementById('howEndWorst'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('whoWorst'));
-		nullTextMustDie2(document.getElementById('happenedWorst'));
-		nullTextMustDie2(document.getElementById('wordThoughtWorst'));
-		nullTextMustDie2(document.getElementById('howStartWorst'));
-		nullTextMustDie2(document.getElementById('howEndWorst'));
 	}
 }
 
@@ -860,40 +930,6 @@ function amTargetOther() {
 	}
 }
 
-function initalize_am_target(json_data) {
-	var back = document.getElementById('back_btn');
-
-	var angryPartner = document.getElementById('angryPartner');
-	var angryParents = document.getElementById('angryParents');
-	var angryChildren = document.getElementById('angryChildren');
-	var angryRelatives = document.getElementById('angryRelatives');
-	var angryEmployer = document.getElementById('angryEmployer');
-	var angryFriends = document.getElementById('angryFriends');
-	var angryOther = document.getElementById('angryOther');
-	var otherWhom = document.getElementById('otherWhom');
-	var angryAbout = document.getElementById('angryAbout');
-	var seldomUpset = document.getElementById('seldomUpset');
-
-	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
-	initializeAllCheckBoxes(json_data.angryParents, angryParents);
-	initializeAllCheckBoxes(json_data.angryChildren, angryChildren);
-	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
-	initializeAllCheckBoxes(json_data.angryRelatives, angryRelatives);
-	initializeAllCheckBoxes(json_data.angryEmployer, angryEmployer);
-	initializeAllCheckBoxes(json_data.angryFriends, angryFriends);
-	initializeAllCheckBoxes(json_data.angryOther, angryOther);
-	initializeAllCheckBoxes(json_data.seldomUpset, seldomUpset);
-
-	amTargetOther();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('angryAbout'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('angryAbout'));
-	}
-}
-
 function post_dynamic_am_target() {
 	var angryPartner = document.getElementById('angryPartner');
 	var angryParents = document.getElementById('angryParents');
@@ -928,33 +964,7 @@ function post_dynamic_am_target() {
 }
 
 // AM FAMILY OF ORIGIN FUNCTIONS
-function initalize_family_origin(json_data) {
-	var back = document.getElementById('back_btn');
 
-	var hasLovingMother = document.getElementById('hasLovingMother');
-	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
-	var hasSuicide = document.getElementById('hasSuicide');
-	var noSuicide = document.getElementById('noSuicide');
-
-	initializeAllCheckBoxes(json_data.hasLovingMother, hasLovingMother);
-	initializeAllCheckBoxes(json_data.hasLovingSiblings, hasLovingSiblings);
-	setRadioElement(json_data.suicideHistory, hasSuicide, noSuicide);
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('kidDadAnger'));
-		nullTextMustDie(document.getElementById('kidMomAnger'));
-		nullTextMustDie(document.getElementById('kidSiblingAnger'));
-		nullTextMustDie(document.getElementById('kidOtherAnger'));
-		nullTextMustDie(document.getElementById('learnFamilyAnger'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('kidDadAnger'));
-		nullTextMustDie2(document.getElementById('kidMomAnger'));
-		nullTextMustDie2(document.getElementById('kidSiblingAnger'));
-		nullTextMustDie2(document.getElementById('kidOtherAnger'));
-		nullTextMustDie2(document.getElementById('learnFamilyAnger'));
-	}
-}
 
 function post_dynamic_am_family() {
 	var m_hasLovingMother = document.getElementById('m_hasLovingMother');
@@ -1008,33 +1018,6 @@ function am_problems_radio() {
 	}
 }
 
-function initalize_am_problems(json_data) {
-	var brainInjury = document.getElementById('brainInjury');
-	var stroke = document.getElementById('stroke');
-	var epilepsy = document.getElementById('epilepsy');
-	var attentionDD = document.getElementById('attentionDD');
-	var pms = document.getElementById('pms');
-	var depression = document.getElementById('depression');
-	var ptsd = document.getElementById('ptsd');
-	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
-
-	var onMeds = document.getElementById('onMeds');
-	var noMeds = document.getElementById('noMeds');
-
-	initializeAllCheckBoxes(json_data.brainInjury, brainInjury);
-	initializeAllCheckBoxes(json_data.stroke, stroke);
-	initializeAllCheckBoxes(json_data.epilepsy, epilepsy);
-	initializeAllCheckBoxes(json_data.attentionDD, attentionDD);
-	initializeAllCheckBoxes(json_data.pms, pms);
-	initializeAllCheckBoxes(json_data.depression, depression);
-	initializeAllCheckBoxes(json_data.ptsd, ptsd);
-	initializeAllCheckBoxes(json_data.otherSeriousIllness, otherSeriousIllness);
-
-	setRadioElement(json_data.currentlyOnMeds, onMeds, noMeds);
-
-	am_problems_check();
-	am_problems_radio();
-}
 
 function post_dynamic_am_current() {
 	//M_VALUES
@@ -1346,6 +1329,7 @@ function healthRadioBtn() {
 		opacityLow(no_med_label);
 		opacityLow(yes_med_label);
 		opacityLow(explain_label_health);
+		opacityLow(health_exp);
 
 		health_exp.value = '';
 		health_exp.disabled = true;
@@ -1362,42 +1346,580 @@ function medsRadioBtn() {
 	twoElementRadioSetup(on_meds, explain_label_health, whatMedicine);
 }
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//************************************************************ AM VIEWS ***********************************************************//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 function initialize_am_demo(json_data) {
+	grab('maritalStatus').selectedIndex = json_data.maritalStatus;
+	grab('livingSituation').selectedIndex = json_data.livingSituation;
+	grab('education').selectedIndex = json_data.education;
 
-	//DROP DOWN MENUS
-	var maritalStatus = document.getElementById('maritalStatus');
-	var livingSituation = document.getElementById('livingSituation');
-	var education = document.getElementById('education');
+	number_init(json_data.isComplete, grab('months_res'));
+	number_init(json_data.isComplete, grab('years_res'));
+	number_init(json_data.isComplete, grab('num_children'));
+	number_init(json_data.isComplete, grab('other_dependants'));
+	number_init(json_data.isComplete, grab('employed_months'));
+	number_init(json_data.isComplete, grab('employed_years'));
 
-	//RADIO BUTTONS
-	var doesRent = document.getElementById('doesRent');
-	var doesOwn = document.getElementById('doesOwn');
-	var hs_grad = document.getElementById('hs_grad');
-	var hs_drop = document.getElementById('hs_drop');
-	var healthy = document.getElementById('healthy');
-	var not_healthy = document.getElementById('not_healthy');
-	var on_meds = document.getElementById('on_meds');
-	var no_med = document.getElementById('no_med');
-
-	//PROCESS DROP DOWN MENUS
-	maritalStatus.selectedIndex = json_data.maritalStatus;
-	livingSituation.selectedIndex = json_data.livingSituation;
-	education.selectedIndex = json_data.education;
+	blank_init(json_data.isComplete, grab('resasonDO'));
+	blank_init(json_data.isComplete, grab('job_title'));
+	blank_init(json_data.isComplete, grab('employer'));
+	blank_init(json_data.isComplete, grab('emp_address'));
+	blank_init(json_data.isComplete, grab('employer_phone'));
+	blank_init(json_data.isComplete, grab('health_exp'));
+	blank_init(json_data.isComplete, grab('whatMedicine'));
 
 	//PROCESS RADIO BUTTONS
-	setRadioElement(json_data.own, doesOwn, doesRent);
-	setRadioElement(json_data.drop_out, hs_drop, hs_grad);
-	setRadioElement(json_data.health_problem, healthy, not_healthy);
-	setRadioElement(json_data.medication, on_meds, no_med);
+	setRadioElement(json_data.own, grab('doesOwn'), grab('doesRent'));
+	setRadioElement(json_data.drop_out, grab('hs_drop'), grab('hs_grad'));
+	setRadioElement(json_data.health_problem, grab('healthy'), grab('not_healthy'));
+	setRadioElement(json_data.medication, grab('on_meds'), grab('no_med'));
 
 	dropOutRadio();
 	healthRadioBtn();
+}
 
-	if (back.value === 'false') {
-		nullTextMustDie(document.getElementById('job_title'));
-		nullTextMustDie(document.getElementById('employer'));
-		nullTextMustDie(document.getElementById('emp_address'));
-		nullTextMustDie(document.getElementById('employer_phone'));
+function initialize_am_drug_history(json_data) {
+	number_init(json_data.isComplete, grab('first_drink'));
+	number_init(json_data.isComplete, grab('dui_amount'));
+	number_init(json_data.isComplete, grab('quitMos'));
+	number_init(json_data.isComplete, grab('quitYrs'));
+
+	blank_init(json_data.isComplete, grab('first_use_type'));
+	blank_init(json_data.isComplete, grab('what-you-use'));
+	blank_init(json_data.isComplete, grab('how-often-you-use'));
+	blank_init(json_data.isComplete, grab('how-much-you-use'));
+	blank_init(json_data.isComplete, grab('reason_quit'));
+	blank_init(json_data.isComplete, grab('BAL'));
+	blank_init(json_data.isComplete, grab('when_treated'));
+	blank_init(json_data.isComplete, grab('where_treated'));
+	blank_init(json_data.isComplete, grab('no_treat_explain'));
+	blank_init(json_data.isComplete, grab('relapse_explain'));
+
+	setRadioElement(json_data.curUse, grab('current_use'), grab('no_current_use'));
+	setRadioElement(json_data.everDrank, grab('has_used'), grab('never_used'));
+	setRadioElement(json_data.DUI, grab('dui'), grab('no_dui'));
+	setRadioElement(json_data.needHelpDrugs, grab('give_me_help'), grab('no_help'));
+	setRadioElement(json_data.drugTreatment, grab('had_treatment'), grab('no_treatment'));
+	setRadioElement(json_data.finishedTreatment, grab('did_complete'), grab('not_completed'));
+	setRadioElement(json_data.isClean, grab('is_abstinent'), grab('not_abstinent'));
+	setRadioElement(json_data.drinkLastEpisode, grab('was_drinking'), grab('not_drinking'));
+	setRadioElement(json_data.drinkRelationshipProblem, grab('is_problem'), grab('no_problem'));
+
+	topLevelDH();
+	dhRadio2();
+	dhRadio3();
+	dhLeftRadio1();
+	dhLeftRadio2();
+	dhLeftRadio3();
+}
+
+function initialize_am_childhood(json_data) {
+	var back = document.getElementById('back_btn');
+
+	//text fields
+	var raisedBy = document.getElementById('raisedBy');
+	var traumaExplain = document.getElementById('traumaExplain');
+	var howLeftHome = document.getElementById('howLeftHome');
+	var dadCloseExplain = document.getElementById('dadCloseExplain');
+	var momCloseExplain = document.getElementById('momCloseExplain');
+	var abusedBy = document.getElementById('abusedBy');
+	var abuseImpact = document.getElementById('abuseImpact');
+	var childAngerExplain = document.getElementById('childAngerExplain');
+	var otherChildExplain = document.getElementById('otherChildExplain');
+	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
+	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
+	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
+
+	//boolean fields
+	var momAlive = document.getElementById('momAlive');
+	var dadAlive = document.getElementById('dadAlive');
+	var childTrama = document.getElementById('childTrama');
+	var siblingsClose = document.getElementById('siblingsClose');
+	var dadClose = document.getElementById('dadClose');
+	var momClose = document.getElementById('momClose');
+	var wasAbused = document.getElementById('wasAbused');
+	var childAnger = document.getElementById('childAnger');
+	var otherChild = document.getElementById('otherChild');
+	var parentViolence = document.getElementById('parentViolence');
+
+	//sub radio button declarations
+	var motherLiving = document.getElementById('motherLiving');
+	var motherNotLiving = document.getElementById('motherNotLiving');
+	var fatherLiving = document.getElementById('fatherLiving');
+	var fatherNotLiving = document.getElementById('fatherNotLiving');
+	var hadTramua = document.getElementById('hadTramua');
+	var noTrauma = document.getElementById('noTrauma');
+	var sibsClose = document.getElementById('sibsClose');
+	var sibsNotClose = document.getElementById('sibsNotClose');
+	var dadIsClose = document.getElementById('dadIsClose');
+	var dadNotClose = document.getElementById('dadNotClose');
+	var childAbused = document.getElementById('childAbused');
+	var childNotAbused = document.getElementById('childNotAbused');
+	var meMomClose = document.getElementById('meMomClose');
+	var meMomNotClose = document.getElementById('meMomNotClose');
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var noAngerChild = document.getElementById('noAngerChild');
+	var haveOtherEvents = document.getElementById('haveOtherEvents');
+	var noOtherEvents = document.getElementById('noOtherEvents');
+	var sawViolence = document.getElementById('sawViolence');
+	var didntSeeViolence = document.getElementById('didntSeeViolence');
+	var hadAngerChild = document.getElementById('hadAngerChild');
+	var noAngerChild = document.getElementById('noAngerChild');
+
+	//PROCESS THE DROPDOWN MENU
+	raisedBy.selectedIndex = json_data.raisedBy;
+
+	//PROCESS RADIO BUTTONS
+	setRadioElement(json_data.momAlive, motherLiving, motherNotLiving);
+	setRadioElement(json_data.dadAlive, fatherLiving, fatherNotLiving);
+	setRadioElement(json_data.childTrama, hadTramua, noTrauma);
+	setRadioElement(json_data.siblingsClose, sibsClose, sibsNotClose);
+	setRadioElement(json_data.dadClose, dadIsClose, dadNotClose);
+	setRadioElement(json_data.momClose, meMomClose, meMomNotClose);
+	setRadioElement(json_data.wasAbused, childAbused, childNotAbused);
+	setRadioElement(json_data.childAnger, hadAngerChild, noAngerChild);
+	setRadioElement(json_data.otherChild, haveOtherEvents, noOtherEvents);
+	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);
+
+	childTraumaRadio();
+	childAbusedRadio();
+	hadChildAngerRadio();
+	otherEventsHelpRadio();
+	parentsFoughtRadio();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('howLeftHome'));
+		nullTextMustDie(document.getElementById('siblingsRelationshipExplain'));
+		nullTextMustDie(document.getElementById('dadCloseExplain'));
+		nullTextMustDie(document.getElementById('momCloseExplain'));
+	}
+	else {
+		nullTextMustDie3(document.getElementById('howLeftHome'));
+		nullTextMustDie3(document.getElementById('siblingsRelationshipExplain'));
+		nullTextMustDie3(document.getElementById('dadCloseExplain'));
+		nullTextMustDie3(document.getElementById('momCloseExplain'));
+	}
+}
+
+function initialize_am_angerHistory(json_data) {
+	back = document.getElementById('back_btn');
+
+	//CHECKE BOXES
+	var physicalRecentV = document.getElementById('physicalRecentV');
+	var verbalRecentV = document.getElementById('verbalRecentV');
+	var threatsRecentV = document.getElementById('threatsRecentV');
+	var propertyRecentV = document.getElementById('propertyRecentV');
+	var otherRecentV = document.getElementById('otherRecentV');
+	var wasTense = document.getElementById('wasTense');
+	var hadRush = document.getElementById('hadRush');
+	var feltStrong = document.getElementById('feltStrong');
+
+	//RADIO BUTTONS
+	var wasTreated = document.getElementById('wasTreated');
+	var notTreated = document.getElementById('notTreated');
+	var didComplete = document.getElementById('didComplete');
+	var notCompleted = document.getElementById('notCompleted');
+
+	setRadioElement(json_data.psychoRecentV, wasTreated, notTreated);
+	setRadioElement(json_data.didCompleteTreatRecentV, didComplete, notCompleted);
+
+	initializeAllCheckBoxes(json_data.physicalRecentV, physicalRecentV);
+	initializeAllCheckBoxes(json_data.verbalRecentV, verbalRecentV);
+	initializeAllCheckBoxes(json_data.threatsRecentV, threatsRecentV);
+	initializeAllCheckBoxes(json_data.propertyRecentV, propertyRecentV);
+	initializeAllCheckBoxes(json_data.otherRecentV, otherRecentV);
+	initializeAllCheckBoxes(json_data.wasTense, wasTense);
+	initializeAllCheckBoxes(json_data.hadRush, hadRush);
+	initializeAllCheckBoxes(json_data.feltStrong, feltStrong);
+
+	// AHcompletedRadioActivate();
+	turnOnAH1();
+	psychoClick();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('recentIncidentV'));
+		nullTextMustDie(document.getElementById('happenedRecentV'));
+		nullTextMustDie(document.getElementById('typeWordsRecentV'));
+		nullTextMustDie(document.getElementById('recentVDate'));
+		nullTextMustDie(document.getElementById('recentVlocation'));
+		nullTextMustDie(document.getElementById('withWhomRecentV'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('recentIncidentV'));
+		nullTextMustDie2(document.getElementById('happenedRecentV'));
+		nullTextMustDie2(document.getElementById('typeWordsRecentV'));
+		nullTextMustDie2(document.getElementById('recentVDate'));
+		nullTextMustDie2(document.getElementById('recentVlocation'));
+		nullTextMustDie2(document.getElementById('withWhomRecentV'));
+	}
+}
+
+function initialize_am_angerHistory2(json_data) {
+	var back = document.getElementById('back_btn');
+
+	//RADIO BUTTONS
+	var hasExperience = document.getElementById('hasExperience');
+	var noExperience = document.getElementById('noExperience');
+	var hasTension = document.getElementById('hasTension');
+	var noTension = document.getElementById('noTension');
+	var hasHallu = document.getElementById('hasHallu');
+	var noHallu = document.getElementById('noHallu');
+	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
+	var noTroubleAH2 = document.getElementById('noTroubleAH2');	
+	var canControl = document.getElementById('canControl');
+	var canNotControl = document.getElementById('canNotControl');
+	var suicideThoughts = document.getElementById('suicideThoughts');
+	var noSuicideThoughts = document.getElementById('noSuicideThoughts');
+	var isSuicidalToday = document.getElementById('isSuicidalToday');
+	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
+	var doesHavePlan = document.getElementById('doesHavePlan');
+	var doesNotHavePlan = document.getElementById('doesNotHavePlan');
+	var haveAttempted = document.getElementById('haveAttempted');
+	var haveNotAttempted = document.getElementById('haveNotAttempted');
+
+	setRadioElement(json_data.depress30RecentV, hasExperience, noExperience);
+	setRadioElement(json_data.anxietyRecentV, hasTension, noTension);
+	setRadioElement(json_data.hallucinationRecentV, hasHallu, noHallu);
+	setRadioElement(json_data.understandingRecentV, hasTroubleAH2, noTroubleAH2);
+	setRadioElement(json_data.troubleControlRecentV, canControl, canNotControl);
+	setRadioElement(json_data.suicide30RecentV, suicideThoughts, noSuicideThoughts);
+	setRadioElement(json_data.suicideTodayRecentV, isSuicidalToday, isNotSuicidalToday);
+	setRadioElement(json_data.suicideTodayPlanRecentV, doesHavePlan, doesNotHavePlan);
+	setRadioElement(json_data.hasAttemptedSuicide, haveAttempted, haveNotAttempted);
+
+
+	explainDep();
+	tensionRadio();
+	halluRadio();
+	troubleRadioAH2();
+	troubleControlAH2();
+	suicide30recent();
+}
+
+function initialize_am_angerHistory3(json_data) {
+	var back = document.getElementById('back_btn');
+
+	//RADIO BUTTONS
+	var isHomicidal = document.getElementById('isHomicidal');
+	var notHomicidal = document.getElementById('notHomicidal');
+	var hasMedRecent = document.getElementById('hasMedRecent');
+	var noMedRecent = document.getElementById('noMedRecent');
+	var treatmentSuccess = document.getElementById('treatmentSuccess');
+	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
+
+	var intensityRecentV = document.getElementById('intensityRecentV');
+
+	setRadioElement(json_data.homicidal, isHomicidal, notHomicidal);
+	setRadioElement(json_data.medRecentV, hasMedRecent, noMedRecent);
+	setRadioElement(json_data.medSuccessRecentV, treatmentSuccess, noTreatmentSuccess);
+
+	if (String(json_data.intensityRecentV) === '1') {
+		document.getElementById('one').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '2') {
+		document.getElementById('two').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '3') {
+		document.getElementById('three').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '4') {
+		document.getElementById('four').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '5') {
+		document.getElementById('five').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '6') {
+		document.getElementById('six').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '7') {
+		document.getElementById('seven').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '8') {
+		document.getElementById('eight').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '9') {
+		document.getElementById('nine').checked = true;
+	}
+	if (String(json_data.intensityRecentV) === '10') {
+		document.getElementById('ten').checked = true;
+	}
+
+
+
+	if (String(json_data.howOften) === 'This time only') {
+		document.getElementById('thisTimeOnly').checked = true;
+	}
+	if (String(json_data.howOften) === 'Since childhood') {
+		document.getElementById('sinceChildhood').checked = true;
+	}
+	if (String(json_data.howOften) === 'This month only') {
+		document.getElementById('ThisMonthOnly').checked = true;
+	}
+	if (String(json_data.howOften) === 'Adolescent') {
+		document.getElementById('adolescent').checked = true;
+	}
+	if (String(json_data.howOften) === 'Last six months') {
+		document.getElementById('lastSixMonth').checked = true;
+	}
+	if (String(json_data.howOften) === 'Only as an adult') {
+		document.getElementById('onlyAdult').checked = true;
+	}
+
+	homicidalRadio();
+	ah3number2();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('durationRecentV'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('durationRecentV'));
+	}
+}
+
+function initalize_am_connections(json_data) {
+	var angerWorse = document.getElementById('angerWorse');
+	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
+	var lessAngry = document.getElementById('lessAngry');
+	var othersTellMe = document.getElementById('othersTellMe');
+	var noConnection = document.getElementById('noConnection');
+	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
+	var connectionExplain = document.getElementById('connectionExplain');
+
+	initializeAllCheckBoxes(json_data.angerWorse, angerWorse);
+	initializeAllCheckBoxes(json_data.troubleWhenUsing, troubleWhenUsing);
+	initializeAllCheckBoxes(json_data.lessAngry, lessAngry);
+	initializeAllCheckBoxes(json_data.othersTellMe, othersTellMe);
+	initializeAllCheckBoxes(json_data.noConnection, noConnection);
+	initializeAllCheckBoxes(json_data.otherConnectionsUsing, otherConnectionsUsing);
+
+	connectionCheck();
+}
+
+function initalize_am_worst(json_data) {
+	var back = document.getElementById('back_btn');
+
+	var whoWorst = document.getElementById('whoWorst');
+	var happenedWorst = document.getElementById('happenedWorst');
+	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
+	var howStartWorst = document.getElementById('howStartWorst');
+	var howEndWorst = document.getElementById('howEndWorst');
+	var whoDidItFight = document.getElementById('whoDidItFight');
+	var theyUsedWorst = document.getElementById('theyUsedWorst');
+	var physicalWorst = document.getElementById('physicalWorst');
+	var verbalWorst = document.getElementById('verbalWorst');
+	var threatsWorst = document.getElementById('threatsWorst');
+	var propertyWorst = document.getElementById('propertyWorst');
+	var otherWorst = document.getElementById('otherWorst');
+	var otherWorstDescription = document.getElementById('otherWorstDescription');
+
+	var hadDrugs = document.getElementById('hadDrugs');
+	var noDrugs = document.getElementById('noDrugs');
+
+	setRadioElement(json_data.useWorst, hadDrugs, noDrugs);
+	whoDidItFight.selectedIndex = json_data.whoDidItFight;
+
+	initializeAllCheckBoxes(json_data.physicalWorst, physicalWorst);
+	initializeAllCheckBoxes(json_data.verbalWorst, verbalWorst);
+	initializeAllCheckBoxes(json_data.threatsWorst, threatsWorst);
+	initializeAllCheckBoxes(json_data.propertyWorst, propertyWorst);
+	initializeAllCheckBoxes(json_data.otherWorst, otherWorst);
+
+	worstCheck();
+	activateWorstRadio();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('whoWorst'));
+		nullTextMustDie(document.getElementById('happenedWorst'));
+		nullTextMustDie(document.getElementById('wordThoughtWorst'));
+		nullTextMustDie(document.getElementById('howStartWorst'));
+		nullTextMustDie(document.getElementById('howEndWorst'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('whoWorst'));
+		nullTextMustDie2(document.getElementById('happenedWorst'));
+		nullTextMustDie2(document.getElementById('wordThoughtWorst'));
+		nullTextMustDie2(document.getElementById('howStartWorst'));
+		nullTextMustDie2(document.getElementById('howEndWorst'));
+	}
+}
+
+function initalize_am_target(json_data) {
+	var back = document.getElementById('back_btn');
+
+	var angryPartner = document.getElementById('angryPartner');
+	var angryParents = document.getElementById('angryParents');
+	var angryChildren = document.getElementById('angryChildren');
+	var angryRelatives = document.getElementById('angryRelatives');
+	var angryEmployer = document.getElementById('angryEmployer');
+	var angryFriends = document.getElementById('angryFriends');
+	var angryOther = document.getElementById('angryOther');
+	var otherWhom = document.getElementById('otherWhom');
+	var angryAbout = document.getElementById('angryAbout');
+	var seldomUpset = document.getElementById('seldomUpset');
+
+	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
+	initializeAllCheckBoxes(json_data.angryParents, angryParents);
+	initializeAllCheckBoxes(json_data.angryChildren, angryChildren);
+	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
+	initializeAllCheckBoxes(json_data.angryRelatives, angryRelatives);
+	initializeAllCheckBoxes(json_data.angryEmployer, angryEmployer);
+	initializeAllCheckBoxes(json_data.angryFriends, angryFriends);
+	initializeAllCheckBoxes(json_data.angryOther, angryOther);
+	initializeAllCheckBoxes(json_data.seldomUpset, seldomUpset);
+
+	amTargetOther();
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('angryAbout'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('angryAbout'));
+	}
+}
+
+
+function initalize_family_origin(json_data) {
+	var back = document.getElementById('back_btn');
+
+	var hasLovingMother = document.getElementById('hasLovingMother');
+	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
+	var hasSuicide = document.getElementById('hasSuicide');
+	var noSuicide = document.getElementById('noSuicide');
+
+	initializeAllCheckBoxes(json_data.hasLovingMother, hasLovingMother);
+	initializeAllCheckBoxes(json_data.hasLovingSiblings, hasLovingSiblings);
+	setRadioElement(json_data.suicideHistory, hasSuicide, noSuicide);
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('kidDadAnger'));
+		nullTextMustDie(document.getElementById('kidMomAnger'));
+		nullTextMustDie(document.getElementById('kidSiblingAnger'));
+		nullTextMustDie(document.getElementById('kidOtherAnger'));
+		nullTextMustDie(document.getElementById('learnFamilyAnger'));
+	}
+	else {
+		nullTextMustDie2(document.getElementById('kidDadAnger'));
+		nullTextMustDie2(document.getElementById('kidMomAnger'));
+		nullTextMustDie2(document.getElementById('kidSiblingAnger'));
+		nullTextMustDie2(document.getElementById('kidOtherAnger'));
+		nullTextMustDie2(document.getElementById('learnFamilyAnger'));
+	}
+}
+
+function initalize_am_problems(json_data) {
+	var brainInjury = document.getElementById('brainInjury');
+	var stroke = document.getElementById('stroke');
+	var epilepsy = document.getElementById('epilepsy');
+	var attentionDD = document.getElementById('attentionDD');
+	var pms = document.getElementById('pms');
+	var depression = document.getElementById('depression');
+	var ptsd = document.getElementById('ptsd');
+	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
+
+	var onMeds = document.getElementById('onMeds');
+	var noMeds = document.getElementById('noMeds');
+
+	initializeAllCheckBoxes(json_data.brainInjury, brainInjury);
+	initializeAllCheckBoxes(json_data.stroke, stroke);
+	initializeAllCheckBoxes(json_data.epilepsy, epilepsy);
+	initializeAllCheckBoxes(json_data.attentionDD, attentionDD);
+	initializeAllCheckBoxes(json_data.pms, pms);
+	initializeAllCheckBoxes(json_data.depression, depression);
+	initializeAllCheckBoxes(json_data.ptsd, ptsd);
+	initializeAllCheckBoxes(json_data.otherSeriousIllness, otherSeriousIllness);
+
+	setRadioElement(json_data.currentlyOnMeds, onMeds, noMeds);
+
+	am_problems_check();
+	am_problems_radio();
+}
+
+function initalize_am_control(json_data) {
+	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
+	var talkToMyself = document.getElementById('talkToMyself');
+	var leaveScene = document.getElementById('leaveScene');
+	var selfHelpGroup = document.getElementById('selfHelpGroup');
+	var relax = document.getElementById('relax');
+	var otherControlAnger = document.getElementById('otherControlAnger');
+
+	initializeAllCheckBoxes(json_data.neverAttemptedControl, neverAttemptedControl);
+	initializeAllCheckBoxes(json_data.talkToMyself, talkToMyself);
+	initializeAllCheckBoxes(json_data.leaveScene, leaveScene);
+	initializeAllCheckBoxes(json_data.selfHelpGroup, selfHelpGroup);
+	initializeAllCheckBoxes(json_data.relax, relax);
+	initializeAllCheckBoxes(json_data.otherControlAnger, otherControlAnger);
+
+	talkMyself();
+	leaveSceneCheckbox();
+	howRelaxCheckbox();
+	otherControlCheckbox();
+}
+
+function initalize_am_final() {
+	var back = document.getElementById('back_btn');
+
+	if (String(back.value) === 'false') {
+		nullTextMustDie(document.getElementById('whoLivesWithClient'));
+		nullTextMustDie(document.getElementById('anythingelse'));
+		nullTextMustDie(document.getElementById('changeLearn1'));
+		nullTextMustDie(document.getElementById('changeLearn2'));
+		nullTextMustDie(document.getElementById('changeLearn3'));
+	}
+
+	else {
+		nullTextMustDie2(document.getElementById('whoLivesWithClient'));
+		nullTextMustDie2(document.getElementById('anythingelse'));
+		nullTextMustDie2(document.getElementById('changeLearn1'));
+		nullTextMustDie2(document.getElementById('changeLearn2'));
+		nullTextMustDie2(document.getElementById('changeLearn3'));
+	}
+}
+
+function initialize_am(section, json_data) {
+	section = String(section)
+
+	if (section === '/am_demographic/') {
+		initialize_am_demo(json_data);
+	}
+	else if (section === '/am_drugHistory/') {
+		initialize_am_drug_history(json_data);
+	}
+	else if (section === '/am_childhood/') {
+		initialize_am_childhood(json_data);
+	}
+	else if (section === '/am_angerHistory/') {
+		initialize_am_angerHistory(json_data);
+	}
+	else if (section === '/am_angerHistory2/') {
+		initialize_am_angerHistory2(json_data);
+	}
+	else if (section === '/am_angerHistory3/') {
+		initialize_am_angerHistory3(json_data);
+	}
+	else if (section === '/am_connections/') {
+		initalize_am_connections(json_data);
+	}
+	else if (section === '/am_worst/') {
+		initalize_am_worst(json_data);
+	}
+	else if (section === '/am_angerTarget/') {
+		initalize_am_target(json_data);
+	}
+	else if (section === '/am_familyOrigin/') {
+		initalize_family_origin(json_data);
+	}
+	else if (section === '/am_problems/') {
+		initalize_am_problems(json_data);
+	}
+	else if (section === '/am_control/') {
+		initalize_am_control(json_data);
+	}
+	else if (section === '/am_final/') {
+		initalize_am_final(json_data);
 	}
 }
 
@@ -2474,85 +2996,6 @@ function radioRightNoLower() {
 	}
 }
 
-function initialize_am_drug_history(json_data) {
-	//INITIALIZE RADIO BUTTONS
-	var current_use = document.getElementById('current_use');
-	var no_current_use = document.getElementById('no_current_use');
-	var has_used = document.getElementById('has_used');
-	var never_used = document.getElementById('never_used');
-	var dui = document.getElementById('dui');
-	var no_dui = document.getElementById('no_dui');
-	var give_me_help = document.getElementById('give_me_help');
-	var no_help = document.getElementById('no_help');
-	var had_treatment = document.getElementById('had_treatment');
-	var no_treatment = document.getElementById('no_treatment');
-	var did_complete = document.getElementById('did_complete');
-	var not_completed = document.getElementById('not_completed');
-	var is_abstinent = document.getElementById('is_abstinent');
-	var not_abstinent = document.getElementById('not_abstinent');
-	var was_drinking = document.getElementById('was_drinking');
-	var not_drinking = document.getElementById('not_drinking');
-	var is_problem = document.getElementById('is_problem');
-	var no_problem = document.getElementById('no_problem');
-
-	setRadioElement(json_data.curUse, current_use, no_current_use);
-
-	if (current_use.checked === true) {
-		never_used.checked = true;
-	}
-
-	setRadioElement(json_data.everDrank, has_used, never_used);	
-	setRadioElement(json_data.drugTreatment, had_treatment, no_treatment);
-	setRadioElement(json_data.finishedTreatment, did_complete, not_completed);
-	setRadioElement(json_data.isClean, is_abstinent, not_abstinent);
-	setRadioElement(json_data.drinkLastEpisode, was_drinking, not_drinking);
-	setRadioElement(json_data.drinkRelationshipProblem, is_problem, no_problem);
-	setRadioElement(json_data.needHelpDrugs, give_me_help, no_help);
-
-	//TURN ON DYNAMIC RADIO BUTTONS
-	radioRightNoLower();
-	setRadioElement(json_data.DUI, dui, no_dui);
-	dhRadio3();
-	dhLeftRadio1();
-
-	if (dui.checked === true) {
-		document.getElementById('dui_amount').value = json_data.numDUI;
-		document.getElementById('BAL').value = json_data.BALevel;
-	}
-
-	if (had_treatment.checked === true) {
-		document.getElementById('when_treated').value = json_data.dateTreated;
-		document.getElementById('where_treated').value = json_data.treatmentPlace;
-	}
-
-	if (not_completed.checked === true) {
-		document.getElementById('no_treat_explain').value = json_data.reasonNotFinishedTreatment;
-	}
-
-	if (not_abstinent.checked === true) {
-		document.getElementById('relapse_explain').value = json_data.relapseTrigger;
-	}
-
-	if (has_used.checked === true) {
-		document.getElementById('quitMos').value = json_data.monthsQuit;
-		document.getElementById('quitYrs').value = json_data.yearsQuit;
-		document.getElementById('reason_quit').value = json_data.reasonQuit;
-	}
-
-	if (is_abstinent.checked === true) {
-		opacityLow(document.getElementById('relapse_explain'));
-		opacityLow(document.getElementById('trigger_label'));
-		document.getElementById('relapse_explain').disabled = true;
-	}
-	
-	if (String(back.value) == 'false') {
-		nullTextMustDie(document.getElementById('first_use_type'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('first_use_type'));
-	}
-}
-
 function processAM_DH_data() {
 	//HIDDEN FIELDS
 	var m_useType = document.getElementById('m_useType');
@@ -2653,94 +3096,6 @@ function parentsFoughtRadio() {
 
 	twoElementRadioSetup(sawViolence, parentViolenceExplain_label, parentViolenceExplain);
 	twoElementRadioSetup(sawViolence, parentViolenceImpact_label, parentViolenceImpact);
-}
-
-function initialize_am_childhood(json_data) {
-	var back = document.getElementById('back_btn');
-
-	//text fields
-	var raisedBy = document.getElementById('raisedBy');
-	var traumaExplain = document.getElementById('traumaExplain');
-	var howLeftHome = document.getElementById('howLeftHome');
-	var dadCloseExplain = document.getElementById('dadCloseExplain');
-	var momCloseExplain = document.getElementById('momCloseExplain');
-	var abusedBy = document.getElementById('abusedBy');
-	var abuseImpact = document.getElementById('abuseImpact');
-	var childAngerExplain = document.getElementById('childAngerExplain');
-	var otherChildExplain = document.getElementById('otherChildExplain');
-	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
-	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
-	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
-
-	//boolean fields
-	var momAlive = document.getElementById('momAlive');
-	var dadAlive = document.getElementById('dadAlive');
-	var childTrama = document.getElementById('childTrama');
-	var siblingsClose = document.getElementById('siblingsClose');
-	var dadClose = document.getElementById('dadClose');
-	var momClose = document.getElementById('momClose');
-	var wasAbused = document.getElementById('wasAbused');
-	var childAnger = document.getElementById('childAnger');
-	var otherChild = document.getElementById('otherChild');
-	var parentViolence = document.getElementById('parentViolence');
-
-	//sub radio button declarations
-	var motherLiving = document.getElementById('motherLiving');
-	var motherNotLiving = document.getElementById('motherNotLiving');
-	var fatherLiving = document.getElementById('fatherLiving');
-	var fatherNotLiving = document.getElementById('fatherNotLiving');
-	var hadTramua = document.getElementById('hadTramua');
-	var noTrauma = document.getElementById('noTrauma');
-	var sibsClose = document.getElementById('sibsClose');
-	var sibsNotClose = document.getElementById('sibsNotClose');
-	var dadIsClose = document.getElementById('dadIsClose');
-	var dadNotClose = document.getElementById('dadNotClose');
-	var childAbused = document.getElementById('childAbused');
-	var childNotAbused = document.getElementById('childNotAbused');
-	var meMomClose = document.getElementById('meMomClose');
-	var meMomNotClose = document.getElementById('meMomNotClose');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
-	var haveOtherEvents = document.getElementById('haveOtherEvents');
-	var noOtherEvents = document.getElementById('noOtherEvents');
-	var sawViolence = document.getElementById('sawViolence');
-	var didntSeeViolence = document.getElementById('didntSeeViolence');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
-
-	//PROCESS THE DROPDOWN MENU
-	raisedBy.selectedIndex = json_data.raisedBy;
-
-	//PROCESS RADIO BUTTONS
-	setRadioElement(json_data.momAlive, motherLiving, motherNotLiving);
-	setRadioElement(json_data.dadAlive, fatherLiving, fatherNotLiving);
-	setRadioElement(json_data.childTrama, hadTramua, noTrauma);
-	setRadioElement(json_data.siblingsClose, sibsClose, sibsNotClose);
-	setRadioElement(json_data.dadClose, dadIsClose, dadNotClose);
-	setRadioElement(json_data.momClose, meMomClose, meMomNotClose);
-	setRadioElement(json_data.wasAbused, childAbused, childNotAbused);
-	setRadioElement(json_data.childAnger, hadAngerChild, noAngerChild);
-	setRadioElement(json_data.otherChild, haveOtherEvents, noOtherEvents);
-	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);
-
-	childTraumaRadio();
-	childAbusedRadio();
-	hadChildAngerRadio();
-	otherEventsHelpRadio();
-	parentsFoughtRadio();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('howLeftHome'));
-		nullTextMustDie(document.getElementById('siblingsRelationshipExplain'));
-		nullTextMustDie(document.getElementById('dadCloseExplain'));
-		nullTextMustDie(document.getElementById('momCloseExplain'));
-	}
-	else {
-		nullTextMustDie3(document.getElementById('howLeftHome'));
-		nullTextMustDie3(document.getElementById('siblingsRelationshipExplain'));
-		nullTextMustDie3(document.getElementById('dadCloseExplain'));
-		nullTextMustDie3(document.getElementById('momCloseExplain'));
-	}
 }
 
 function process_am_child_data() {
@@ -2874,26 +3229,7 @@ function otherControlCheckbox() {
 	}
 }
 
-function initalize_am_control(json_data) {
-	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
-	var talkToMyself = document.getElementById('talkToMyself');
-	var leaveScene = document.getElementById('leaveScene');
-	var selfHelpGroup = document.getElementById('selfHelpGroup');
-	var relax = document.getElementById('relax');
-	var otherControlAnger = document.getElementById('otherControlAnger');
 
-	initializeAllCheckBoxes(json_data.neverAttemptedControl, neverAttemptedControl);
-	initializeAllCheckBoxes(json_data.talkToMyself, talkToMyself);
-	initializeAllCheckBoxes(json_data.leaveScene, leaveScene);
-	initializeAllCheckBoxes(json_data.selfHelpGroup, selfHelpGroup);
-	initializeAllCheckBoxes(json_data.relax, relax);
-	initializeAllCheckBoxes(json_data.otherControlAnger, otherControlAnger);
-
-	talkMyself();
-	leaveSceneCheckbox();
-	howRelaxCheckbox();
-	otherControlCheckbox();
-}
 
 function post_dynamic_am_control() {
 	//M_VALUES
@@ -2936,26 +3272,6 @@ function post_dynamic_am_control() {
 	processDynamicTextPostValue(leaveScene, whatDoLeave, m_whatDoLeave);
 	processDynamicTextPostValue(relax, howRelax, m_howRelax);
 	processDynamicTextPostValue(otherControlAnger, doWhatOtherControl, m_doWhatOtherControl);
-}
-
-function initalize_am_final() {
-	var back = document.getElementById('back_btn');
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('whoLivesWithClient'));
-		nullTextMustDie(document.getElementById('anythingelse'));
-		nullTextMustDie(document.getElementById('changeLearn1'));
-		nullTextMustDie(document.getElementById('changeLearn2'));
-		nullTextMustDie(document.getElementById('changeLearn3'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('whoLivesWithClient'));
-		nullTextMustDie2(document.getElementById('anythingelse'));
-		nullTextMustDie2(document.getElementById('changeLearn1'));
-		nullTextMustDie2(document.getElementById('changeLearn2'));
-		nullTextMustDie2(document.getElementById('changeLearn3'));
-	}
 }
 
 function initializeAllCheckBoxes(trigger, box) {
@@ -3074,59 +3390,6 @@ function psychoClick() {
 		didComplete.disabled = true;
 		notCompleted.disabled = true;
 	}	
-}
-
-function initialize_am_angerHistory(json_data) {
-	back = document.getElementById('back_btn');
-
-	//CHECKE BOXES
-	var physicalRecentV = document.getElementById('physicalRecentV');
-	var verbalRecentV = document.getElementById('verbalRecentV');
-	var threatsRecentV = document.getElementById('threatsRecentV');
-	var propertyRecentV = document.getElementById('propertyRecentV');
-	var otherRecentV = document.getElementById('otherRecentV');
-	var wasTense = document.getElementById('wasTense');
-	var hadRush = document.getElementById('hadRush');
-	var feltStrong = document.getElementById('feltStrong');
-
-	//RADIO BUTTONS
-	var wasTreated = document.getElementById('wasTreated');
-	var notTreated = document.getElementById('notTreated');
-	var didComplete = document.getElementById('didComplete');
-	var notCompleted = document.getElementById('notCompleted');
-
-	setRadioElement(json_data.psychoRecentV, wasTreated, notTreated);
-	setRadioElement(json_data.didCompleteTreatRecentV, didComplete, notCompleted);
-
-	initializeAllCheckBoxes(json_data.physicalRecentV, physicalRecentV);
-	initializeAllCheckBoxes(json_data.verbalRecentV, verbalRecentV);
-	initializeAllCheckBoxes(json_data.threatsRecentV, threatsRecentV);
-	initializeAllCheckBoxes(json_data.propertyRecentV, propertyRecentV);
-	initializeAllCheckBoxes(json_data.otherRecentV, otherRecentV);
-	initializeAllCheckBoxes(json_data.wasTense, wasTense);
-	initializeAllCheckBoxes(json_data.hadRush, hadRush);
-	initializeAllCheckBoxes(json_data.feltStrong, feltStrong);
-
-	// AHcompletedRadioActivate();
-	turnOnAH1();
-	psychoClick();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('recentIncidentV'));
-		nullTextMustDie(document.getElementById('happenedRecentV'));
-		nullTextMustDie(document.getElementById('typeWordsRecentV'));
-		nullTextMustDie(document.getElementById('recentVDate'));
-		nullTextMustDie(document.getElementById('recentVlocation'));
-		nullTextMustDie(document.getElementById('withWhomRecentV'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('recentIncidentV'));
-		nullTextMustDie2(document.getElementById('happenedRecentV'));
-		nullTextMustDie2(document.getElementById('typeWordsRecentV'));
-		nullTextMustDie2(document.getElementById('recentVDate'));
-		nullTextMustDie2(document.getElementById('recentVlocation'));
-		nullTextMustDie2(document.getElementById('withWhomRecentV'));
-	}
 }
 
 function process_am_ah1_data() {
@@ -3482,48 +3745,6 @@ function suicide30recent() { //top level radio button
 	activateAH2SubSuicide();
 }
 
-function initialize_am_angerHistory2(json_data) {
-	var back = document.getElementById('back_btn');
-
-	//RADIO BUTTONS
-	var hasExperience = document.getElementById('hasExperience');
-	var noExperience = document.getElementById('noExperience');
-	var hasTension = document.getElementById('hasTension');
-	var noTension = document.getElementById('noTension');
-	var hasHallu = document.getElementById('hasHallu');
-	var noHallu = document.getElementById('noHallu');
-	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
-	var noTroubleAH2 = document.getElementById('noTroubleAH2');	
-	var canControl = document.getElementById('canControl');
-	var canNotControl = document.getElementById('canNotControl');
-	var suicideThoughts = document.getElementById('suicideThoughts');
-	var noSuicideThoughts = document.getElementById('noSuicideThoughts');
-	var isSuicidalToday = document.getElementById('isSuicidalToday');
-	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
-	var doesHavePlan = document.getElementById('doesHavePlan');
-	var doesNotHavePlan = document.getElementById('doesNotHavePlan');
-	var haveAttempted = document.getElementById('haveAttempted');
-	var haveNotAttempted = document.getElementById('haveNotAttempted');
-
-	setRadioElement(json_data.depress30RecentV, hasExperience, noExperience);
-	setRadioElement(json_data.anxietyRecentV, hasTension, noTension);
-	setRadioElement(json_data.hallucinationRecentV, hasHallu, noHallu);
-	setRadioElement(json_data.understandingRecentV, hasTroubleAH2, noTroubleAH2);
-	setRadioElement(json_data.troubleControlRecentV, canControl, canNotControl);
-	setRadioElement(json_data.suicide30RecentV, suicideThoughts, noSuicideThoughts);
-	setRadioElement(json_data.suicideTodayRecentV, isSuicidalToday, isNotSuicidalToday);
-	setRadioElement(json_data.suicideTodayPlanRecentV, doesHavePlan, doesNotHavePlan);
-	setRadioElement(json_data.hasAttemptedSuicide, haveAttempted, haveNotAttempted);
-
-
-	explainDep();
-	tensionRadio();
-	halluRadio();
-	troubleRadioAH2();
-	troubleControlAH2();
-	suicide30recent();
-}
-
 function post_am_dynamic2() {
 	//M_ELEMENTS
 	var m_depress30RecentV = document.getElementById('m_depress30RecentV');
@@ -3680,86 +3901,6 @@ function ah3number2() {
 		noTreatmentSuccess.disabled = true;
 		medRecentVExplain.disabled = true;
 		medSuccessExplainRecentV.disabled = true;
-	}
-}
-
-function initialize_am_angerHistory3(json_data) {
-	var back = document.getElementById('back_btn');
-
-	//RADIO BUTTONS
-	var isHomicidal = document.getElementById('isHomicidal');
-	var notHomicidal = document.getElementById('notHomicidal');
-	var hasMedRecent = document.getElementById('hasMedRecent');
-	var noMedRecent = document.getElementById('noMedRecent');
-	var treatmentSuccess = document.getElementById('treatmentSuccess');
-	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
-
-	var intensityRecentV = document.getElementById('intensityRecentV');
-
-	setRadioElement(json_data.homicidal, isHomicidal, notHomicidal);
-	setRadioElement(json_data.medRecentV, hasMedRecent, noMedRecent);
-	setRadioElement(json_data.medSuccessRecentV, treatmentSuccess, noTreatmentSuccess);
-
-	if (String(json_data.intensityRecentV) === '1') {
-		document.getElementById('one').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '2') {
-		document.getElementById('two').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '3') {
-		document.getElementById('three').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '4') {
-		document.getElementById('four').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '5') {
-		document.getElementById('five').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '6') {
-		document.getElementById('six').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '7') {
-		document.getElementById('seven').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '8') {
-		document.getElementById('eight').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '9') {
-		document.getElementById('nine').checked = true;
-	}
-	if (String(json_data.intensityRecentV) === '10') {
-		document.getElementById('ten').checked = true;
-	}
-
-
-
-	if (String(json_data.howOften) === 'This time only') {
-		document.getElementById('thisTimeOnly').checked = true;
-	}
-	if (String(json_data.howOften) === 'Since childhood') {
-		document.getElementById('sinceChildhood').checked = true;
-	}
-	if (String(json_data.howOften) === 'This month only') {
-		document.getElementById('ThisMonthOnly').checked = true;
-	}
-	if (String(json_data.howOften) === 'Adolescent') {
-		document.getElementById('adolescent').checked = true;
-	}
-	if (String(json_data.howOften) === 'Last six months') {
-		document.getElementById('lastSixMonth').checked = true;
-	}
-	if (String(json_data.howOften) === 'Only as an adult') {
-		document.getElementById('onlyAdult').checked = true;
-	}
-
-	homicidalRadio();
-	ah3number2();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('durationRecentV'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('durationRecentV'));
 	}
 }
 
@@ -4205,6 +4346,949 @@ function continue_to_sap_form() {
 //*********************************************************************************************************************//
 //#####################################################################################################################//
 
+function mh_initialize(section, json_data) {
+	section = String(section);
+
+	if (section == '/mh_demographic/') {
+		d_init_mh_demo(json_data);
+	}
+	else if (section == '/mh_education/') {
+		initialize_mh_education(json_data);
+	}
+	else if (section == '/mh_background/') {
+		initialize_mh_background(json_data);
+	}
+	else if (section == '/mh_stress/') {
+		initialize_mh_stress(json_data);
+	}
+	else if (section == '/mh_familyHistory/') {
+		initialize_mh_family(json_data);
+	}
+	else if (section == '/mh_legal/') {
+		initialize_mh_legal(json_data);
+	}
+	else if (section == '/mh_psych/') {
+		d_init_mh_psych(json_data);
+	}
+	else if (section == '/mh_useTable/') {
+		initialize_mh_use(json_data);
+	}
+}
+
+function d_init_mh_demo(json_data) {
+	blank_init(json_data.isComplete, grab('birthplace'));
+	blank_init(json_data.isComplete, grab('raised'));
+	blank_init(json_data.isComplete, grab('occupation'));
+	blank_init(json_data.isComplete, grab('employer'));
+	blank_init(json_data.isComplete, grab('pastJobs'));
+	blank_init(json_data.isComplete, grab('recentMove'));
+	blank_init(json_data.isComplete, grab('spouseOccupation'));
+	blank_init(json_data.isComplete, grab('spouseEmployer'));
+	blank_init(json_data.isComplete, grab('motherOccupation'));
+	blank_init(json_data.isComplete, grab('motherCity'));
+	blank_init(json_data.isComplete, grab('fatherOccupation'));
+	blank_init(json_data.isComplete, grab('fatherCity'));
+
+	number_init(json_data.isComplete, grab('numMarriages'));
+	number_init(json_data.isComplete, grab('employedMo'));
+	number_init(json_data.isComplete, grab('employedYrs'));
+	number_init(json_data.isComplete, grab('spouseAge'));
+	number_init(json_data.isComplete, grab('spouseWorkMos'));
+	number_init(json_data.isComplete, grab('spouseWorkYrs'));
+	number_init(json_data.isComplete, grab('numChildren'));
+	number_init(json_data.isComplete, grab('numSisters'));
+	number_init(json_data.isComplete, grab('numBrothers'));
+	number_init(json_data.isComplete, grab('motherAge'));
+	number_init(json_data.isComplete, grab('motherAgeDeath'));
+	number_init(json_data.isComplete, grab('fatherAge'));
+	number_init(json_data.isComplete, grab('fatherAgeDeath'));
+
+	motherState.selectedIndex = json_data.motherState;
+	fatherState.selectedIndex = json_data.fatherState;
+
+	if (json_data.maritalStatus === 'Married') {
+		grab('married').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Single') {
+		grab('single').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Divorced') {
+		grab('divorced').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Widowed') {
+		grab('widowed').checked = true;
+	}
+	else if (json_data.maritalStatus === 'Seperated') {
+		grab('seperated').checked = true;
+	}
+
+	setRadioElement(json_data.haveChildren, grab('yesChild'), grab('noChild'));
+	setRadioElement(json_data.haveSisters, grab('yesSister'), grab('noSister'));
+	setRadioElement(json_data.haveBrothers, grab('yesBrother'), grab('noBrother'));
+	setRadioElement(json_data.motherLiving, grab('momIsLiving'), grab('momNotLiving'));
+	setRadioElement(json_data.fatherLiving, grab('dadIsLiving'), grab('dadNotLiving'));
+
+	mhSpouse();
+	motherShift();
+	fatherShift();
+	mhChildren();
+	mhSister();
+	mhBrother();
+}
+
+function initialize_mh_education(json_data) {
+	//AVERAGE GRADES
+	var a = document.getElementById('k6a');
+	var b = document.getElementById('k6b');
+	var c = document.getElementById('k6c');
+	var d = document.getElementById('k6d');
+	var e = document.getElementById('k6e');
+	var f = document.getElementById('k6f');
+	var g7a = document.getElementById('g7_9a');
+	var g7b = document.getElementById('g7_9b');
+	var g7c = document.getElementById('g7_9c');
+	var g7d = document.getElementById('g7_9d');
+	var g7e = document.getElementById('g7_9e');
+	var g7f = document.getElementById('g7_9f');
+	var g10a = document.getElementById('g10_12a');
+	var g10b = document.getElementById('g10_12b');
+	var g10c = document.getElementById('g10_12c');
+	var g10d = document.getElementById('g10_12d');
+	var g10e = document.getElementById('g10_12e');
+	var g10f = document.getElementById('g10_12f');
+
+	//RADIO ELEMENTS
+	var behaved 		= document.getElementById('behaved');
+	var notBehaved 		= document.getElementById('notBehaved');
+	var yesAcademic 	= document.getElementById('yesAcademic');
+	var noAcademic 		= document.getElementById('noAcademic');
+	var behaved2 		= document.getElementById('behaved2');
+	var notBehaved2 	= document.getElementById('notBehaved2');
+	var yesAcademic2 	= document.getElementById('yesAcademic2');
+	var noAcademic2 	= document.getElementById('noAcademic2');
+	var behaved3 		= document.getElementById('behaved3');
+	var notBehaved3 	= document.getElementById('notBehaved3');
+	var yesAcademic3 	= document.getElementById('yesAcademic3');
+	var noAcademic3 	= document.getElementById('noAcademic3');
+
+	var yesGrad 		= document.getElementById('yesGrad');
+	var noGrad 			= document.getElementById('noGrad');
+	var hasAdvanced 	= document.getElementById('hasAdvanced');
+	var noAdvanced 		= document.getElementById('noAdvanced');
+	var yesTrade 		= document.getElementById('yesTrade');
+	var noTrade 		= document.getElementById('noTrade');
+	var isMilitary 		= document.getElementById('isMilitary');
+	var notMilitary 	= document.getElementById('notMilitary');
+	var isHonor 		= document.getElementById('isHonor');
+	var notHonor 		= document.getElementById('notHonor');
+
+	//FRIENDSHIP RADIOS
+	var kf1 = document.getElementById('friend1');
+	var kf2 = document.getElementById('friend2');
+	var kf3 = document.getElementById('friend3');
+	var kf4 = document.getElementById('friend4');
+	var kfm = document.getElementById('friendMore');
+	var g7f1 = document.getElementById('friend1g7');
+	var g7f2 = document.getElementById('friend2g7');
+	var g7f3 = document.getElementById('friend3g7');
+	var g7f4 = document.getElementById('friend4g7');
+	var g7fm = document.getElementById('friendMoreg7');
+	var g10f1 = document.getElementById('friend1g10');
+	var g10f2 = document.getElementById('friend2g10');
+	var g10f3 = document.getElementById('friend3g10');
+	var g10f4 = document.getElementById('friend4g10');
+	var g10fm = document.getElementById('friendMoreg10');
+
+	//SET THE GRADE RADIO FIELDS
+	grabGradeRadio(json_data.GradesKto6, a, b, c, d, e, f);
+	grabGradeRadio(json_data.Grades7to9, g7a, g7b, g7c, g7d, g7e, g7f);
+	grabGradeRadio(json_data.Grades10to12, g10a, g10b, g10c, g10d, g10e, g10f);
+
+	//INITIALIZE THE RADIO BUTTONS
+	setRadioElement(json_data.BehaviorProblemsKto6, behaved, notBehaved);
+	setRadioElement(json_data.AcademicProblemsKto6, yesAcademic, noAcademic);
+	setRadioElement(json_data.BehaviorProblems7to9, behaved2, notBehaved2);
+	setRadioElement(json_data.AcademicProblems7to9, yesAcademic2, noAcademic2);
+	setRadioElement(json_data.BehaviorProblems10to12, behaved3, notBehaved3);
+	setRadioElement(json_data.AcademicProblems10to12, yesAcademic3, noAcademic3);
+	setRadioElement(json_data.collegeDegree, yesGrad, noGrad);
+	setRadioElement(json_data.advanceDegree, hasAdvanced, noAdvanced);
+	setRadioElement(json_data.tradeSch, yesTrade, noTrade);
+	setRadioElement(json_data.military, isMilitary, notMilitary);
+	setRadioElement(json_data.honorableDischarge, isHonor, notHonor);
+
+	//SET THE NUMBER OF FRIENDSHIP RADIOS AND NUMBER FIELDS
+	grabFriendRadio(json_data.FriendshipsKto6, kf1, kf2, kf3, kf4, kfm);
+	grabFriendRadio(json_data.Friendships7to9, g7f1, g7f2, g7f3, g7f4, g7fm);
+	grabFriendRadio(json_data.Friendships10to12, g10f1, g10f2, g10f3, g10f4, g10fm);
+
+	//SET THE NUMBER OF COLLEGE YEARS RADIO RUTTONS
+	if (String(json_data.collegeYears) === '1') {
+		document.getElementById('college1').checked = true;
+	}
+	else if (String(json_data.collegeYears) === '2') {
+		document.getElementById('college2').checked = true;
+	}
+	else if (String(json_data.collegeYears) === '3') {
+		document.getElementById('college3').checked = true;
+	}
+	else {
+		document.getElementById('college4').checked = true;
+	}
+
+	//SET DYNAMIC FIELD RADIO BUTTONS
+	moreFriends('friendMore', 'numMore_label', 'numMore');
+	moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');
+	moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');
+	mhCollegeRadio();
+	mhTrade();
+	mhMilitary();
+}
+
+function initialize_mh_family(json_data) {
+	setRadioElement(json_data.isdepressed, grab('yesDepress'), grab('noDepress'));
+	setRadioElement(json_data.isadd, grab('yesADD'), grab('noADD'));
+	setRadioElement(json_data.isbedWetting, grab('yesBed'), grab('noBed'));
+	setRadioElement(json_data.isbipolar, grab('yesBi'), grab('noBi'));
+	setRadioElement(json_data.issuicideAttempt, grab('yesATT'), grab('noATT'));
+	setRadioElement(json_data.isphysicalAbuse, grab('yesPA'), grab('noPA'));
+	setRadioElement(json_data.islaw, grab('yesLaw'), grab('noLaw'));
+	setRadioElement(json_data.isld, grab('yesLD'), grab('noLD'));
+	setRadioElement(json_data.istic, grab('yesTic'), grab('noTic'));
+	setRadioElement(json_data.isthyroid, grab('yesThy'), grab('noThy'));
+	setRadioElement(json_data.isheart, grab('yesHeart'), grab('noHeart'));
+	setRadioElement(json_data.isoverweight, grab('yesOW'), grab('noOW'));
+	setRadioElement(json_data.ismood, grab('yesMood'), grab('noMood'));
+	setRadioElement(json_data.isalcohol, grab('yesAlc'), grab('noAlc'));
+	setRadioElement(json_data.isdrugs, grab('yesDrug'), grab('noDrug'));
+	setRadioElement(json_data.isschizo, grab('yesSch'), grab('noSch'));	
+	setRadioElement(json_data.isseizures, grab('YesSe'), grab('noCS'));
+	setRadioElement(json_data.iscompletedSuicide, grab('yesCS'), grab('noCS'));
+	setRadioElement(json_data.issexAbuse, grab('yesSex'), grab('noSex'));
+	setRadioElement(json_data.ispanic, grab('yesPanick'), grab('noPanick'));
+	setRadioElement(json_data.isanxiety, grab('yesAnx'), grab('noAnx'));
+	setRadioElement(json_data.isOCD, grab('yesSugar'), grab('noSudar'));
+	setRadioElement(json_data.iscancer, grab('yesCancer'), grab('noCancer'));
+	setRadioElement(json_data.ishighBloodPressure, grab('yesBlood'), grab('noBlood'));
+	setRadioElement(json_data.isanger, grab('yesAngry'), grab('noAngry'));
+
+	//FAMILY SIDE SELECT OPTIONS
+	grab('depressSide').selectedIndex 	= json_data.depressedS
+	grab('sideADD').selectedIndex 		= json_data.addS
+	grab('sideBed').selectedIndex		= json_data.bedWettingS
+	grab('sideBi').selectedIndex 		= json_data.bipolarS
+	grab('sideATT').selectedIndex 		= json_data.suicideAttemptS
+	grab('sidePA').selectedIndex 		= json_data.physicalAbuseS
+	grab('sideLaw').selectedIndex 		= json_data.lawS
+	grab('sideLD').selectedIndex 		= json_data.ldS
+	grab('sideTic').selectedIndex 		= json_data.ticS
+	grab('sideThy').selectedIndex 		= json_data.thyroidS
+	grab('sideHeart').selectedIndex 	= json_data.heartS
+	grab('sideOW').selectedIndex 		= json_data.overweightS
+	grab('sideMood').selectedIndex 		= json_data.moodS
+	grab('sideAlc').selectedIndex 		= json_data.alcoholS
+	grab('sideDrug').selectedIndex 		= json_data.drugsS
+	grab('sideSch').selectedIndex 		= json_data.schizoS
+	grab('sideSe').selectedIndex 		= json_data.seizuresS
+	grab('sideCS').selectedIndex 		= json_data.completedSuicideS
+	grab('sideSex').selectedIndex 		= json_data.sexAbuseS
+	grab('sidePanick').selectedIndex 	= json_data.panicS
+	grab('sideAnx').selectedIndex 		= json_data.anxietyS
+	grab('sideOCD').selectedIndex 		= json_data.OCDS
+	grab('sideSugar').selectedIndex 	= json_data.diabetesS
+	grab('sideCancer').selectedIndex 	= json_data.cancerS
+	grab('sideBlood').selectedIndex 	= json_data.highBloodPressureS
+	grab('sideAngry').selectedIndex 	= json_data.angerS
+
+	//FAMILY MEMBER SELECT OPTIONS
+	grab('depressMember').selectedIndex 	= json_data.depressedM
+	grab('memADD').selectedIndex 			= json_data.addM
+	grab('memBed').selectedIndex			= json_data.bedWettingM
+	grab('memBi').selectedIndex 			= json_data.bipolarM
+	grab('memATT').selectedIndex 			= json_data.suicideAttemptM
+	grab('memPA').selectedIndex 			= json_data.physicalAbuseM
+	grab('memLaw').selectedIndex 			= json_data.lawM
+	grab('memLD').selectedIndex 			= json_data.ldM
+	grab('memTic').selectedIndex 			= json_data.ticM
+	grab('memThy').selectedIndex 			= json_data.thyroidM
+	grab('memHeart').selectedIndex 			= json_data.heartM
+	grab('memOW').selectedIndex 			= json_data.overweightM
+	grab('memMood').selectedIndex 			= json_data.moodM
+	grab('memAlc').selectedIndex 			= json_data.alcoholM
+	grab('memDrug').selectedIndex 			= json_data.drugsM
+	grab('memSch').selectedIndex 			= json_data.schizoM
+	grab('memSe').selectedIndex 			= json_data.seizuresM
+	grab('memCS').selectedIndex 			= json_data.completedSuicideM
+	grab('memSex').selectedIndex 			= json_data.sexAbuseM
+	grab('memPanick').selectedIndex 		= json_data.panicM
+	grab('memAnx').selectedIndex 			= json_data.anxietyM
+	grab('memOCD').selectedIndex 			= json_data.OCDM
+	grab('memSugar').selectedIndex 			= json_data.diabetesM
+	grab('memCancer').selectedIndex 		= json_data.cancerM
+	grab('memBlood').selectedIndex 			= json_data.highBloodPressureM
+	grab('memAngry').selectedIndex 			= json_data.angerM
+
+	mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');
+	mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');
+	mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');
+	mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');
+	mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');
+	mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');
+	mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');
+	mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');
+	mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');
+	mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');
+	mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');
+	mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');
+	mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');
+	mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');
+	mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');
+	mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');
+	mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');
+	mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');
+	mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');
+	mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');
+	mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');
+	mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');
+	mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');
+	mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');
+	mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');
+	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
+}
+
+function initialize_mh_background(json_data) {
+	blank_init(json_data.isComplete, grab('interest'));
+	blank_init(json_data.isComplete, grab('friendAct'));
+	blank_init(json_data.isComplete, grab('workAct'));
+	blank_init(json_data.isComplete, grab('churchAffiliation'));
+
+	number_init(json_data.isComplete, grab('closeFriendNumber'));
+	number_init(json_data.isComplete, grab('acqNumber'));
+	number_init(json_data.isComplete, grab('interestWeek'));
+	number_init(json_data.isComplete, grab('interestMonth'));
+	number_init(json_data.isComplete, grab('friendActWeek'));
+	number_init(json_data.isComplete, grab('friendActMonth'));
+	number_init(json_data.isComplete, grab('workActWeek'));
+	number_init(json_data.isComplete, grab('workActMonth'));
+	number_init(json_data.isComplete, grab('churchWeek'));
+	number_init(json_data.isComplete, grab('churchMonth'));
+	number_init(json_data.isComplete, grab('churchYear'));
+
+	grab('residence').selectedIndex = json_data.residence;
+	grab('income').selectedIndex = json_data.income;
+	grab('debt').selectedIndex = json_data.debt;
+	grab('credit').selectedIndex = json_data.credit;
+	grab('healthCare').selectedIndex = json_data.healthCare;
+	grab('otherIncome').selectedIndex = json_data.otherIncome;
+	grab('closeFriendVisit').selectedIndex = json_data.closeFriendVisit;
+	grab('acqVisit').selectedIndex = json_data.acqVisit;
+
+	grabMhRelationshipRadios(json_data.spouseRelationship, grab('isPoorSpouse'), grab('isAvgSpouse'), grab('isGoodSpouse'));
+	grabMhRelationshipRadios(json_data.parentsRelationship, grab('isPoorParents'), grab('isAvgParents'), grab('isGoodParents'));
+	grabMhRelationshipRadios(json_data.brothersRelationship, grab('isPoorBro'), grab('isAvgBro'), grab('isGoodBro'));
+	grabMhRelationshipRadios(json_data.sistersRelationship, grab('isPoorSis'), grab('isAvgSis'), grab('isGoodSis'));
+	grabMhRelationshipRadios(json_data.childrenRelationship, grab('isPoorKids'), grab('isAvgKids'), grab('isGoodKids'));
+	grabMhRelationshipRadios(json_data.exRelationship, grab('isPoorEx'), grab('isAvgEx'), grab('isGoodEx'));
+}
+
+function initialize_mh_stress(json_data) {
+	setRadioElement(json_data.deathStress, grab('yesDeath'), grab('noDeath'));
+	setRadioElement(json_data.divorceStress, grab('yesDivorce'), grab('noDivorce'));
+	setRadioElement(json_data.moveStress, grab('yesMove'), grab('noMove'));
+	setRadioElement(json_data.medicalStress, grab('yesMedical'), grab('noMedical'));
+	setRadioElement(json_data.familyHealthStress, grab('yesFamily'), grab('noFamily'));
+	setRadioElement(json_data.financialStress, grab('yesMoney'), ('noMoney'));
+	setRadioElement(json_data.abuseStress, grab('yesAbuse'), grab('noAbuse'));
+	setRadioElement(json_data.addictionFamilyStress, grab('yesAddiction'), grab('noAddiction'));
+	setRadioElement(json_data.violenceFamilyStress, grab('yesViolence'), grab('noViolence'));
+	setRadioElement(json_data.otherStress, grab('yesOther'), grab('noOther'));
+
+	blank_init(json_data.isComplete, grab('deathStressExp'));
+	blank_init(json_data.isComplete, grab('divorceStressExp'));
+	blank_init(json_data.isComplete, grab('moveStressExp'));
+	blank_init(json_data.isComplete, grab('medicalStressExp'));
+	blank_init(json_data.isComplete, grab('familyHealthStressExp'));
+	blank_init(json_data.isComplete, grab('financialStressExp'));
+	blank_init(json_data.isComplete, grab('abuseStressExp'));
+	blank_init(json_data.isComplete, grab('addictionFamilyStressExp'));
+	blank_init(json_data.isComplete, grab('violenceFamilyStressExp'));
+	blank_init(json_data.isComplete, grab('otherStressExp'));
+
+
+	mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');
+	mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');
+	mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');
+	mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');
+	mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');
+	mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');
+	mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');
+	mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');
+	mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');
+	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
+}
+
+
+function initialize_mh_legal(json_data) {
+	blank_init(json_data.isComplete, grab('arrestCharges'));
+	blank_init(json_data.isComplete, grab('convictionCharges'));
+	blank_init(json_data.isComplete, grab('probationOfficer'));
+	blank_init(json_data.isComplete, grab('probationOffense'));
+	blank_init(json_data.isComplete, grab('dateBenkrupcy'));
+	blank_init(json_data.isComplete, grab('explainPositiveAnswers'));
+
+	number_init(json_data.isComplete, grab('num_arrest'));
+	number_init(json_data.isComplete, grab('num_convictions'));
+	number_init(json_data.isComplete, grab('num_suspended'));
+	number_init(json_data.isComplete, grab('num_DUI_charges'));
+	number_init(json_data.isComplete, grab('num_DUI_convictions'));
+
+	setRadioElement(json_data.probationPresent, grab('yesPresent'), grab('noPresent'));
+	setRadioElement(json_data.probationPast, grab('yesPast'), grab('noPast'));
+	setRadioElement(json_data.suspendedDrivePresent, grab('isSuspended'), grab('notSuspended'));
+	setRadioElement(json_data.hasLawsuit, grab('yesSuit'), grab('noSuit'));
+	setRadioElement(json_data.lawsuitStress, grab('yesStress'), grab('noStress'));
+	setRadioElement(json_data.inDivorce, grab('yesDivPro'), grab('noDivPro'));
+	setRadioElement(json_data.childCustody, grab('yesChildDis'), grab('noChildDis'));
+	setRadioElement(json_data.hasBankrupcy, grab('yesBank'), grab('noBank'));
+
+	mhProbation();
+	mhLawsuits();
+	mhBank();
+}
+
+function d_init_mh_psych(json_data) {
+	blank_init(json_data.isComplete, grab('psychiatricHistory'));
+}
+
+function initialize_mh_use(json_data) {
+	blank_init(json_data.isComplete, grab('howMuch1'));
+	blank_init(json_data.isComplete, grab('howOften1'));
+	blank_init(json_data.isComplete, grab('howLong1'));
+	blank_init(json_data.isComplete, grab('howOld1'));
+	blank_init(json_data.isComplete, grab('lastTime1'));
+
+	blank_init(json_data.isComplete, grab('howMuch2'));
+	blank_init(json_data.isComplete, grab('howOften2'));
+	blank_init(json_data.isComplete, grab('howLong2'));
+	blank_init(json_data.isComplete, grab('howOld2'));
+	blank_init(json_data.isComplete, grab('lastTime2'));
+
+	blank_init(json_data.isComplete, grab('howMuch3'));
+	blank_init(json_data.isComplete, grab('howOften3'));
+	blank_init(json_data.isComplete, grab('howLong3'));
+	blank_init(json_data.isComplete, grab('howOld3'));
+	blank_init(json_data.isComplete, grab('lastTime3'));
+
+	blank_init(json_data.isComplete, grab('howMuch4'));
+	blank_init(json_data.isComplete, grab('howOften4'));
+	blank_init(json_data.isComplete, grab('howLong4'));
+	blank_init(json_data.isComplete, grab('howOld4'));
+	blank_init(json_data.isComplete, grab('lastTime4'));
+
+	blank_init(json_data.isComplete, grab('howMuch5'));
+	blank_init(json_data.isComplete, grab('howOften5'));
+	blank_init(json_data.isComplete, grab('howLong5'));
+	blank_init(json_data.isComplete, grab('howOld5'));
+	blank_init(json_data.isComplete, grab('lastTime5'));
+
+	blank_init(json_data.isComplete, grab('howMuch6'));
+	blank_init(json_data.isComplete, grab('howOften6'));
+	blank_init(json_data.isComplete, grab('howLong6'));
+	blank_init(json_data.isComplete, grab('howOld6'));
+	blank_init(json_data.isComplete, grab('lastTime6'));
+
+	blank_init(json_data.isComplete, grab('howMuch7'));
+	blank_init(json_data.isComplete, grab('howOften7'));
+	blank_init(json_data.isComplete, grab('howLong7'));
+	blank_init(json_data.isComplete, grab('howOld7'));
+	blank_init(json_data.isComplete, grab('lastTime7'));
+
+	blank_init(json_data.isComplete, grab('howMuch8'));
+	blank_init(json_data.isComplete, grab('howOften8'));
+	blank_init(json_data.isComplete, grab('howLong8'));
+	blank_init(json_data.isComplete, grab('howOld8'));
+	blank_init(json_data.isComplete, grab('lastTime8'));
+
+	blank_init(json_data.isComplete, grab('howMuch9'));
+	blank_init(json_data.isComplete, grab('howOften9'));
+	blank_init(json_data.isComplete, grab('howLong9'));
+	blank_init(json_data.isComplete, grab('howOld9'));
+	blank_init(json_data.isComplete, grab('lastTime9'));
+
+	blank_init(json_data.isComplete, grab('howMuch10'));
+	blank_init(json_data.isComplete, grab('howOften10'));
+	blank_init(json_data.isComplete, grab('howLong10'));
+	blank_init(json_data.isComplete, grab('howOld10'));
+	blank_init(json_data.isComplete, grab('lastTime10'));
+
+	blank_init(json_data.isComplete, grab('howMuch11'));
+	blank_init(json_data.isComplete, grab('howOften11'));
+	blank_init(json_data.isComplete, grab('howLong11'));
+	blank_init(json_data.isComplete, grab('howOld11'));
+	blank_init(json_data.isComplete, grab('lastTime11'));
+
+	blank_init(json_data.isComplete, grab('howMuch12'));
+	blank_init(json_data.isComplete, grab('howOften12'));
+	blank_init(json_data.isComplete, grab('howLong12'));
+	blank_init(json_data.isComplete, grab('howOld12'));
+	blank_init(json_data.isComplete, grab('lastTime12'));
+
+	blank_init(json_data.isComplete, grab('howMuch13'));
+	blank_init(json_data.isComplete, grab('howOften13'));
+	blank_init(json_data.isComplete, grab('howLong13'));
+	blank_init(json_data.isComplete, grab('howOld13'));
+	blank_init(json_data.isComplete, grab('lastTime13'));
+
+	blank_init(json_data.isComplete, grab('howMuch14'));
+	blank_init(json_data.isComplete, grab('howOften14'));
+	blank_init(json_data.isComplete, grab('howLong14'));
+	blank_init(json_data.isComplete, grab('howOld14'));
+	blank_init(json_data.isComplete, grab('lastTime14'));
+
+	blank_init(json_data.isComplete, grab('howMuch15'));
+	blank_init(json_data.isComplete, grab('howOften15'));
+	blank_init(json_data.isComplete, grab('howLong15'));
+	blank_init(json_data.isComplete, grab('howOld15'));
+	blank_init(json_data.isComplete, grab('lastTime15'));
+
+	blank_init(json_data.isComplete, grab('howMuch16'));
+	blank_init(json_data.isComplete, grab('howOften16'));
+	blank_init(json_data.isComplete, grab('howLong16'));
+	blank_init(json_data.isComplete, grab('howOld16'));
+	blank_init(json_data.isComplete, grab('lastTime16'));
+
+	blank_init(json_data.isComplete, grab('howMuch17'));
+	blank_init(json_data.isComplete, grab('howOften17'));
+	blank_init(json_data.isComplete, grab('howLong17'));
+	blank_init(json_data.isComplete, grab('howOld17'));
+	blank_init(json_data.isComplete, grab('lastTime17'));
+
+	blank_init(json_data.isComplete, grab('howMuch18'));
+	blank_init(json_data.isComplete, grab('howOften18'));
+	blank_init(json_data.isComplete, grab('howLong18'));
+	blank_init(json_data.isComplete, grab('howOld18'));
+	blank_init(json_data.isComplete, grab('lastTime18'));
+
+	blank_init(json_data.isComplete, grab('howMuch19'));
+	blank_init(json_data.isComplete, grab('howOften19'));
+	blank_init(json_data.isComplete, grab('howLong19'));
+	blank_init(json_data.isComplete, grab('howOld19'));
+	blank_init(json_data.isComplete, grab('lastTime19'));
+
+	blank_init(json_data.isComplete, grab('howMuch20'));
+	blank_init(json_data.isComplete, grab('howOften20'));
+	blank_init(json_data.isComplete, grab('howLong20'));
+	blank_init(json_data.isComplete, grab('howOld20'));
+	blank_init(json_data.isComplete, grab('lastTime20'));
+
+	blank_init(json_data.isComplete, grab('howMuch21'));
+	blank_init(json_data.isComplete, grab('howOften21'));
+	blank_init(json_data.isComplete, grab('howLong21'));
+	blank_init(json_data.isComplete, grab('howOld21'));
+	blank_init(json_data.isComplete, grab('lastTime21'));
+}
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++ MH Post Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+function postMhFields(section) {
+	section = String(section);
+
+	if (section == '/mh_demographic/') {
+		mh_continue_demographic();
+	}
+	else if (section == '/mh_education/') {
+		proceed_mh_education();
+	}
+	else if (section == '/mh_background/') {
+		proceed_mh_background();
+	}
+	else if (section == '/mh_stress/') {
+		proceed_mh_stress();
+	}
+	else if (section == '/mh_familyHistory/') {
+		proceed_mh_familyHistory();
+	}
+	else if (section == '/mh_legal/') {
+		proceed_mh_legalHistory();
+	}
+	else if (section == '/mh_psych/') {
+		proceed_mh_psychHistory();
+	}
+	else if (section == '/mh_useTable/') {
+		proceed_mh_useTable();
+	}
+}
+
+function post_mh_data(section) {
+	var proceed 	= true;
+	var form 		= grab('mh_form');
+	var next_url 	= grab('next_url');
+
+	postMhFields(section);
+
+	if (proceed === true) {
+		grab('save_this').value = 'true';
+		form.action 			= next_url.value;
+		form.submit();
+	}
+}
+
+function mh_continue_demographic() {
+	var yesChild = document.getElementById('yesChild');
+	var yesSister = document.getElementById('yesSister');
+	var yesBrother = document.getElementById('yesBrother');
+	var momIsLiving = document.getElementById('momIsLiving');	
+	var dadIsLiving = document.getElementById('dadIsLiving');
+	var single = document.getElementById('single');
+
+	//M DATA
+	var m_motherAge = document.getElementById('m_motherAge');
+	var m_motherAgeDeath = document.getElementById('m_motherAgeDeath');
+	var m_fatherAge = document.getElementById('m_fatherAge');
+	var m_fatherAgeDeath = document.getElementById('m_fatherAgeDeath');
+	var m_numChildren = document.getElementById('m_numChildren');
+	var m_numSisters = document.getElementById('m_numSisters');
+	var m_numBrothers = document.getElementById('m_numBrothers');
+	var m_numMarriages = document.getElementById('m_numMarriages');
+	var m_spouseOccupation = document.getElementById('m_spouseOccupation');
+	var m_spouseEmployer = document.getElementById('m_spouseEmployer');
+	var m_spouseAge = document.getElementById('m_spouseAge');
+	var m_spouseWorkMos = document.getElementById('m_spouseWorkMos');
+	var m_spouseWorkYrs = document.getElementById('m_spouseWorkYrs');
+
+	//DYNAMIC FIELDS
+	var motherAge = document.getElementById('motherAge');
+	var motherAgeDeath = document.getElementById('motherAgeDeath');
+	var fatherAge = document.getElementById('fatherAge');
+	var fatherAgeDeath = document.getElementById('fatherAgeDeath');
+	var numChildren = document.getElementById('numChildren');
+	var numSisters = document.getElementById('numSisters');
+	var numBrothers = document.getElementById('numBrothers');
+	var numMarriages = document.getElementById('numMarriages');
+	var spouseOccupation = document.getElementById('spouseOccupation');
+	var spouseEmployer = document.getElementById('spouseEmployer');
+	var spouseAge = document.getElementById('spouseAge');
+	var spouseWorkMos = document.getElementById('spouseWorkMos');
+	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
+
+	postMhFamily(yesChild, numChildren, m_numChildren);
+	postMhFamily(yesSister, numSisters, m_numSisters);
+	postMhFamily(yesBrother, numBrothers, m_numBrothers);
+
+	postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
+	postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
+
+	postMhNoMarriages(single, numMarriages, m_numMarriages);
+	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);	
+
+	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
+		var w = 750, h = 600;
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	}	
+
+}
+
+function proceed_mh_background() {
+	post(false, 'text', grab('interest'), null, null);
+	post(false, 'text', grab('friendAct'), null, null);
+	post(false, 'text', grab('workAct'), null, null);
+	post(false, 'text', grab('churchAffiliation'), null, null);
+
+	post(false, 'number', grab('closeFriendNumber'), null, null);
+	post(false, 'number', grab('acqNumber'), null, null);
+	post(false, 'number', grab('interestWeek'), null, null);
+	post(false, 'number', grab('interestMonth'), null, null);
+	post(false, 'number', grab('friendActWeek'), null, null);
+	post(false, 'number', grab('friendActMonth'), null, null);
+	post(false, 'number', grab('workActWeek'), null, null);
+	post(false, 'number', grab('workActMonth'), null, null);
+	post(false, 'number', grab('churchWeek'), null, null);
+	post(false, 'number', grab('churchMonth'), null, null);
+	post(false, 'number', grab('churchYear'), null, null);
+}
+
+function proceed_mh_education() {
+	var fk1 = document.getElementById('friend1');
+	var fk2 = document.getElementById('friend2');
+	var fk3 = document.getElementById('friend3');
+	var fk4 = document.getElementById('friend4');
+	var fkm = document.getElementById('friendMore');
+	var numMore = document.getElementById('numMore');
+	var m_FriendshipsKto6 = document.getElementById('m_FriendshipsKto6');
+	var f7g1 = document.getElementById('friend1g7');
+	var f7g2 = document.getElementById('friend2g7');
+	var f7g3 = document.getElementById('friend3g7');
+	var f7g4 = document.getElementById('friend4g7');
+	var f7gm = document.getElementById('friendMoreg7');
+	var numMoreg7 = document.getElementById('numMoreg7');
+	var m_Friendships7to9 = document.getElementById('m_Friendships7to9');
+	var f10g1 = document.getElementById('friend1g10');
+	var f10g2 = document.getElementById('friend2g10');
+	var f10g3 = document.getElementById('friend3g10');
+	var f10g4 = document.getElementById('friend4g10');
+	var f10gm = document.getElementById('friendMoreg10');
+	var numMoreg10 = document.getElementById('numMoreg10');
+	var Friendships10to12 = document.getElementById('m_Friendships10to12');	
+	var yesGrad = document.getElementById('yesGrad');
+	var collegeMajor = document.getElementById('collegeMajor');	
+	var m_collegeMajor = document.getElementById('m_collegeMajor');
+	var hasAdvanced = document.getElementById('hasAdvanced');
+	var m_advanceDegree = document.getElementById('m_advanceDegree');
+
+	var yesTrade = document.getElementById('yesTrade');
+	var tradeSchool = document.getElementById('tradeSchool');
+	var tradeAreaStudy = document.getElementById('tradeAreaStudy');
+	var m_tradeSchool = document.getElementById('m_tradeSchool');
+	var m_tradeAreaStudy = document.getElementById('m_tradeAreaStudy');
+
+	var isMilitary = document.getElementById('isMilitary');
+	var militaryBranch = document.getElementById('militaryBranch');
+	var militaryRank = document.getElementById('militaryRank');
+	var militaryYears = document.getElementById('militaryYears');
+	var isHonor = document.getElementById('isHonor');
+	var m_militaryBranch = document.getElementById('m_militaryBranch');
+	var m_militaryRank = document.getElementById('m_militaryRank');
+	var m_militaryYears = document.getElementById('m_militaryYears');
+	var m_honorableDischarge = document.getElementById('m_honorableDischarge');
+
+	postMhEducationFriendNumber(fk1, fk2, fk3, fk4, fkm, numMore, m_FriendshipsKto6);
+	postMhEducationFriendNumber(f7g1, f7g2, f7g3, f7g4, f7gm, numMoreg7, m_Friendships7to9);
+	postMhEducationFriendNumber(f10g1, f10g2, f10g3, f10g4, f10gm, numMoreg10, Friendships10to12);
+
+	postUniversalRadioText(yesGrad, collegeMajor, m_collegeMajor);	
+	postUniversalRadioText(yesTrade, tradeSchool, m_tradeSchool);
+	postUniversalRadioText(yesTrade, tradeAreaStudy, m_tradeAreaStudy);
+	postUniversalRadioText(isMilitary, militaryBranch, m_militaryBranch);
+	postUniversalRadioText(isMilitary, militaryRank, m_militaryRank);
+
+	postUniversalRadioNumber(isMilitary, militaryYears, m_militaryYears);
+
+	postUniversalRadioRadio(yesGrad, hasAdvanced, m_advanceDegree);
+	postUniversalRadioRadio(isMilitary, isHonor, m_honorableDischarge);	
+}
+
+function proceed_mh_stress() {
+	post(true, 'text', grab('deathStressExp'), grab('yesDeath'), grab('m_deathStressExp'));
+	post(true, 'text', grab('divorceStressExp'), grab('yesDivorce'), grab('m_divorceStressExp'));
+	post(true, 'text', grab('moveStressExp'), grab('yesMove'), grab('m_moveStressExp'));
+	post(true, 'text', grab('medicalStressExp'), grab('yesMedical'), grab('m_medicalStressExp'));
+	post(true, 'text', grab('familyHealthStressExp'), grab('yesFamily'), grab('m_familyHealthStressExp'));
+	post(true, 'text', grab('financialStressExp'), grab('yesMoney'), grab('m_financialStressExp'));
+	post(true, 'text', grab('abuseStressExp'), grab('yesAbuse'), grab('m_abuseStressExp'));
+	post(true, 'text', grab('addictionFamilyStressExp'), grab('yesAddiction'), grab('m_addictionFamilyStressExp'));
+	post(true, 'text', grab('violenceFamilyStressExp'), grab('yesViolence'), grab('m_violenceFamilyStressExp'));
+	post(true, 'text', grab('otherStressExp'), grab('yesOther'), grab('m_otherStressExp'));
+}
+
+function proceed_mh_familyHistory() {
+	combineFamilyValues(document.getElementById('yesDepress'), document.getElementById('depressSide'), document.getElementById('depressMember'), document.getElementById('depressed'));
+	combineFamilyValues(document.getElementById('yesADD'), document.getElementById('sideADD'), document.getElementById('memADD'), document.getElementById('add'));
+	combineFamilyValues(document.getElementById('yesBed'), document.getElementById('sideBed'), document.getElementById('memBed'), document.getElementById('bedWetting'));
+	combineFamilyValues(document.getElementById('yesBi'), document.getElementById('sideBi'), document.getElementById('memBi'), document.getElementById('bipolar'));
+	combineFamilyValues(document.getElementById('yesATT'), document.getElementById('sideATT'), document.getElementById('memATT'), document.getElementById('suicideAttempt'));
+	combineFamilyValues(document.getElementById('yesPA'), document.getElementById('sidePA'), document.getElementById('memPA'), document.getElementById('physicalAbuse'));
+	combineFamilyValues(document.getElementById('yesLaw'), document.getElementById('sideLaw'), document.getElementById('memLaw'), document.getElementById('law'));
+	combineFamilyValues(document.getElementById('yesLD'), document.getElementById('sideLD'), document.getElementById('memLD'), document.getElementById('ld'));
+	combineFamilyValues(document.getElementById('yesTic'), document.getElementById('sideTic'), document.getElementById('memTic'), document.getElementById('tic'));
+	combineFamilyValues(document.getElementById('yesThy'), document.getElementById('sideThy'), document.getElementById('memThy'), document.getElementById('thyroid'));
+	combineFamilyValues(document.getElementById('yesHeart'), document.getElementById('sideHeart'), document.getElementById('memHeart'), document.getElementById('heart'));
+	combineFamilyValues(document.getElementById('yesOW'), document.getElementById('sideOW'), document.getElementById('memOW'), document.getElementById('overweight'));
+	combineFamilyValues(document.getElementById('yesMood'), document.getElementById('sideMood'), document.getElementById('memMood'), document.getElementById('mood'));
+	combineFamilyValues(document.getElementById('yesAlc'), document.getElementById('sideAlc'), document.getElementById('memAlc'), document.getElementById('alcohol'));
+
+	combineFamilyValues(document.getElementById('yesDrug'), document.getElementById('sideDrug'), document.getElementById('memDrug'), document.getElementById('drugs'));
+	combineFamilyValues(document.getElementById('yesSch'), document.getElementById('sideSch'), document.getElementById('memSch'), document.getElementById('schizo'));
+	combineFamilyValues(document.getElementById('YesSe'), document.getElementById('sideSe'), document.getElementById('memSe'), document.getElementById('seizures'));
+	combineFamilyValues(document.getElementById('yesCS'), document.getElementById('sideCS'), document.getElementById('memCS'), document.getElementById('completedSuicide'));
+	combineFamilyValues(document.getElementById('yesSex'), document.getElementById('sideSex'), document.getElementById('memSex'), document.getElementById('sexAbuse'));
+	combineFamilyValues(document.getElementById('yesPanick'), document.getElementById('sidePanick'), document.getElementById('memPanick'), document.getElementById('panic'));
+	combineFamilyValues(document.getElementById('yesAnx'), document.getElementById('sideAnx'), document.getElementById('memAnx'), document.getElementById('anxiety'));
+
+	combineFamilyValues(document.getElementById('yesOCD'), document.getElementById('sideOCD'), document.getElementById('memOCD'), document.getElementById('OCD'));
+	combineFamilyValues(document.getElementById('yesSugar'), document.getElementById('sideSugar'), document.getElementById('memSugar'), document.getElementById('diabetes'));
+	combineFamilyValues(document.getElementById('yesCancer'), document.getElementById('sideCancer'), document.getElementById('memCancer'), document.getElementById('cancer'));
+	combineFamilyValues(document.getElementById('yesBlood'), document.getElementById('sideBlood'), document.getElementById('memBlood'), document.getElementById('highBloodPressure'));
+	combineFamilyValues(document.getElementById('yesAngry'), document.getElementById('sideAngry'), document.getElementById('memAngry'), document.getElementById('anger'));
+}
+
+function proceed_mh_legalHistory() {
+	post(false, 'number', grab('num_arrest'), null, null);
+	post(false, 'number', grab('num_convictions'), null, null);
+	post(false, 'number', grab('num_suspended'), null, null);
+	post(false, 'number', grab('num_DUI_charges'), null, null);
+	post(false, 'number', grab('num_DUI_convictions'), null, null);
+
+	post(false, 'text', grab('arrestCharges'), null, null);
+	post(false, 'text', grab('convictionCharges'), null, null);
+	post(false, 'text', grab('explainPositiveAnswers'), null, null);
+
+	post(true, 'text', grab('dateBenkrupcy'), grab('yesBank'), grab('m_dateBenkrupcy'));
+
+	if (grab('noPresent').checked === true && grab('noPast').checked === true) {
+		grab('m_probationOfficer').value = 'N/A';
+		grab('m_probationOffense').value = 'N/A';
+	}
+	else if (grab('yesPresent').checked === true || grab('yesPast').checked === true) {
+		grab('m_probationOfficer').value = grab('probationOfficer').value;
+		grab('m_probationOffense').value = grab('probationOffense').value;
+	}
+
+	if (grab('yesSuit').checked === true) {
+		if (grab('yesStress').checked === true) {
+			grab('m_lawsuitStress').value = 'True';
+		}
+		else {
+			grab('m_lawsuitStress').value = 'False';
+		}
+	}
+	else {
+		grab('m_lawsuitStress').value = 'False';
+	}
+}
+
+function proceed_mh_psychHistory() {
+	post(false, 'text', grab('psychiatricHistory'), null, null);
+}
+
+function proceed_mh_useTable() {
+	post(false, 'text', grab('howMuch1'), null, null);
+	post(false, 'text', grab('howOften1'), null, null);
+	post(false, 'text', grab('howLong1'), null, null);
+	post(false, 'text', grab('howOld1'), null, null);
+	post(false, 'text', grab('lastTime1'), null, null);
+
+	post(false, 'text', grab('howMuch2'), null, null);
+	post(false, 'text', grab('howOften2'), null, null);
+	post(false, 'text', grab('howLong2'), null, null);
+	post(false, 'text', grab('howOld2'), null, null);
+	post(false, 'text', grab('lastTime2'), null, null);
+
+	post(false, 'text', grab('howMuch3'), null, null);
+	post(false, 'text', grab('howOften3'), null, null);
+	post(false, 'text', grab('howLong3'), null, null);
+	post(false, 'text', grab('howOld3'), null, null);
+	post(false, 'text', grab('lastTime3'), null, null);
+
+	post(false, 'text', grab('howMuch4'), null, null);
+	post(false, 'text', grab('howOften4'), null, null);
+	post(false, 'text', grab('howLong4'), null, null);
+	post(false, 'text', grab('howOld4'), null, null);
+	post(false, 'text', grab('lastTime4'), null, null);
+
+	post(false, 'text', grab('howMuch5'), null, null);
+	post(false, 'text', grab('howOften5'), null, null);
+	post(false, 'text', grab('howLong5'), null, null);
+	post(false, 'text', grab('howOld5'), null, null);
+	post(false, 'text', grab('lastTime5'), null, null);
+
+	post(false, 'text', grab('howMuch6'), null, null);
+	post(false, 'text', grab('howOften6'), null, null);
+	post(false, 'text', grab('howLong6'), null, null);
+	post(false, 'text', grab('howOld6'), null, null);
+	post(false, 'text', grab('lastTime6'), null, null);
+
+	post(false, 'text', grab('howMuch7'), null, null);
+	post(false, 'text', grab('howOften7'), null, null);
+	post(false, 'text', grab('howLong7'), null, null);
+	post(false, 'text', grab('howOld7'), null, null);
+	post(false, 'text', grab('lastTime7'), null, null);
+
+	post(false, 'text', grab('howMuch8'), null, null);
+	post(false, 'text', grab('howOften8'), null, null);
+	post(false, 'text', grab('howLong8'), null, null);
+	post(false, 'text', grab('howOld8'), null, null);
+	post(false, 'text', grab('lastTime8'), null, null);
+
+	post(false, 'text', grab('howMuch9'), null, null);
+	post(false, 'text', grab('howOften9'), null, null);
+	post(false, 'text', grab('howLong9'), null, null);
+	post(false, 'text', grab('howOld9'), null, null);
+	post(false, 'text', grab('lastTime9'), null, null);
+
+	post(false, 'text', grab('howMuch10'), null, null);
+	post(false, 'text', grab('howOften10'), null, null);
+	post(false, 'text', grab('howLong10'), null, null);
+	post(false, 'text', grab('howOld10'), null, null);
+	post(false, 'text', grab('lastTime10'), null, null);
+
+	post(false, 'text', grab('howMuch11'), null, null);
+	post(false, 'text', grab('howOften11'), null, null);
+	post(false, 'text', grab('howLong11'), null, null);
+	post(false, 'text', grab('howOld11'), null, null);
+	post(false, 'text', grab('lastTime11'), null, null);
+
+	post(false, 'text', grab('howMuch12'), null, null);
+	post(false, 'text', grab('howOften12'), null, null);
+	post(false, 'text', grab('howLong12'), null, null);
+	post(false, 'text', grab('howOld12'), null, null);
+	post(false, 'text', grab('lastTime12'), null, null);
+
+	post(false, 'text', grab('howMuch13'), null, null);
+	post(false, 'text', grab('howOften13'), null, null);
+	post(false, 'text', grab('howLong13'), null, null);
+	post(false, 'text', grab('howOld13'), null, null);
+	post(false, 'text', grab('lastTime13'), null, null);
+
+	post(false, 'text', grab('howMuch14'), null, null);
+	post(false, 'text', grab('howOften14'), null, null);
+	post(false, 'text', grab('howLong14'), null, null);
+	post(false, 'text', grab('howOld14'), null, null);
+	post(false, 'text', grab('lastTime14'), null, null);
+
+	post(false, 'text', grab('howMuch15'), null, null);
+	post(false, 'text', grab('howOften15'), null, null);
+	post(false, 'text', grab('howLong15'), null, null);
+	post(false, 'text', grab('howOld15'), null, null);
+	post(false, 'text', grab('lastTime15'), null, null);
+
+	post(false, 'text', grab('howMuch16'), null, null);
+	post(false, 'text', grab('howOften16'), null, null);
+	post(false, 'text', grab('howLong16'), null, null);
+	post(false, 'text', grab('howOld16'), null, null);
+	post(false, 'text', grab('lastTime16'), null, null);
+
+	post(false, 'text', grab('howMuch17'), null, null);
+	post(false, 'text', grab('howOften17'), null, null);
+	post(false, 'text', grab('howLong17'), null, null);
+	post(false, 'text', grab('howOld17'), null, null);
+	post(false, 'text', grab('lastTime17'), null, null);
+
+	post(false, 'text', grab('howMuch18'), null, null);
+	post(false, 'text', grab('howOften18'), null, null);
+	post(false, 'text', grab('howLong18'), null, null);
+	post(false, 'text', grab('howOld18'), null, null);
+	post(false, 'text', grab('lastTime18'), null, null);
+
+	post(false, 'text', grab('howMuch19'), null, null);
+	post(false, 'text', grab('howOften19'), null, null);
+	post(false, 'text', grab('howLong19'), null, null);
+	post(false, 'text', grab('howOld19'), null, null);
+	post(false, 'text', grab('lastTime19'), null, null);
+
+	post(false, 'text', grab('howMuch20'), null, null);
+	post(false, 'text', grab('howOften20'), null, null);
+	post(false, 'text', grab('howLong20'), null, null);
+	post(false, 'text', grab('howOld20'), null, null);
+	post(false, 'text', grab('lastTime20'), null, null);
+
+	post(false, 'text', grab('howMuch21'), null, null);
+	post(false, 'text', grab('howOften21'), null, null);
+	post(false, 'text', grab('howLong21'), null, null);
+	post(false, 'text', grab('howOld21'), null, null);
+	post(false, 'text', grab('lastTime21'), null, null);
+}
+
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+//******************************** MH SUPPORT FUNCTIONS ************************************************
+
 function mhSpouse() {
 	//TRIGGERS
 	var divorced = document.getElementById('divorced');
@@ -4380,70 +5464,6 @@ function fatherShift() {
 		opacityLow(fatherAge_label);
 		fatherAge.disabled = true;
 	}
-}
-
-function initialize_mh_demo(json_data) {
-	var married = document.getElementById('married');
-	var single = document.getElementById('single');
-	var divorced = document.getElementById('divorced');
-	var widowed = document.getElementById('widowed');
-	var seperated = document.getElementById('seperated');
-	var maritalStatus = String(json_data.maritalStatus);
-
-	var d_mom_state = document.getElementById('d_mom_state').value;
-	var d_dad_state = document.getElementById('d_dad_state').value;
-	var motherState = document.getElementById('motherState');
-	var fatherState = document.getElementById('fatherState');
-
-	motherState.selectedIndex = d_mom_state;
-	fatherState.selectedIndex = d_dad_state;
-
-	if (maritalStatus === 'Married') {
-		married.checked = true;
-	}
-	else if (maritalStatus === 'Single') {
-		single.checked = true;
-	}
-	else if (maritalStatus === 'Divorced') {
-		divorced.checked = true;
-	}
-	else if (maritalStatus === 'Widowed') {
-		widowed.checked = true;
-	}
-	else if (maritalStatus === 'Seperated') {
-		seperated.checked = true;
-	}
-
-
-	if (String(json_data.numChildren) !== '0') {
-		document.getElementById('yesChild').checked = true;
-	}
-	else {
-		document.getElementById('numChildren').value = '0';
-		document.getElementById('noChild').checked = true;
-	}
-	if (String(json_data.numSisters) !== '0') {
-		document.getElementById('yesSister').checked = true;
-	}
-	else {
-		document.getElementById('noSister').checked = true;
-	}
-	if (String(json_data.numBrothers) !== '0') {
-		document.getElementById('yesBrother').checked = true;
-	}
-	else {
-		document.getElementById('noBrother').checked = true;
-	}
-
-	setRadioElement(json_data.motherLiving, document.getElementById('momIsLiving'), document.getElementById('momNotLiving'));
-	setRadioElement(json_data.fatherLiving, document.getElementById('dadIsLiving'), document.getElementById('dadNotLiving'));
-
-	mhSpouse();
-	motherShift();
-	fatherShift();
-	mhChildren();
-	mhSister();
-	mhBrother();
 }
 
 function postMhFamily(trigger, element, m_element) {
@@ -4661,480 +5681,6 @@ function grabMhRelationshipRadios(rating, r1, r2, r3) {
 	}
 }
 
-function initialize_mh_education(json_data) {
-	//AVERAGE GRADES
-	var a = document.getElementById('k6a');
-	var b = document.getElementById('k6b');
-	var c = document.getElementById('k6c');
-	var d = document.getElementById('k6d');
-	var e = document.getElementById('k6e');
-	var f = document.getElementById('k6f');
-	var g7a = document.getElementById('g7_9a');
-	var g7b = document.getElementById('g7_9b');
-	var g7c = document.getElementById('g7_9c');
-	var g7d = document.getElementById('g7_9d');
-	var g7e = document.getElementById('g7_9e');
-	var g7f = document.getElementById('g7_9f');
-	var g10a = document.getElementById('g10_12a');
-	var g10b = document.getElementById('g10_12b');
-	var g10c = document.getElementById('g10_12c');
-	var g10d = document.getElementById('g10_12d');
-	var g10e = document.getElementById('g10_12e');
-	var g10f = document.getElementById('g10_12f');
-
-	//RADIO ELEMENTS
-	var behaved 		= document.getElementById('behaved');
-	var notBehaved 		= document.getElementById('notBehaved');
-	var yesAcademic 	= document.getElementById('yesAcademic');
-	var noAcademic 		= document.getElementById('noAcademic');
-	var behaved2 		= document.getElementById('behaved2');
-	var notBehaved2 	= document.getElementById('notBehaved2');
-	var yesAcademic2 	= document.getElementById('yesAcademic2');
-	var noAcademic2 	= document.getElementById('noAcademic2');
-	var behaved3 		= document.getElementById('behaved3');
-	var notBehaved3 	= document.getElementById('notBehaved3');
-	var yesAcademic3 	= document.getElementById('yesAcademic3');
-	var noAcademic3 	= document.getElementById('noAcademic3');
-
-	var yesGrad 		= document.getElementById('yesGrad');
-	var noGrad 			= document.getElementById('noGrad');
-	var hasAdvanced 	= document.getElementById('hasAdvanced');
-	var noAdvanced 		= document.getElementById('noAdvanced');
-	var yesTrade 		= document.getElementById('yesTrade');
-	var noTrade 		= document.getElementById('noTrade');
-	var isMilitary 		= document.getElementById('isMilitary');
-	var notMilitary 	= document.getElementById('notMilitary');
-	var isHonor 		= document.getElementById('isHonor');
-	var notHonor 		= document.getElementById('notHonor');
-
-	//FRIENDSHIP RADIOS
-	var kf1 = document.getElementById('friend1');
-	var kf2 = document.getElementById('friend2');
-	var kf3 = document.getElementById('friend3');
-	var kf4 = document.getElementById('friend4');
-	var kfm = document.getElementById('friendMore');
-	var g7f1 = document.getElementById('friend1g7');
-	var g7f2 = document.getElementById('friend2g7');
-	var g7f3 = document.getElementById('friend3g7');
-	var g7f4 = document.getElementById('friend4g7');
-	var g7fm = document.getElementById('friendMoreg7');
-	var g10f1 = document.getElementById('friend1g10');
-	var g10f2 = document.getElementById('friend2g10');
-	var g10f3 = document.getElementById('friend3g10');
-	var g10f4 = document.getElementById('friend4g10');
-	var g10fm = document.getElementById('friendMoreg10');
-
-	//SET THE GRADE RADIO FIELDS
-	grabGradeRadio(json_data.GradesKto6, a, b, c, d, e, f);
-	grabGradeRadio(json_data.Grades7to9, g7a, g7b, g7c, g7d, g7e, g7f);
-	grabGradeRadio(json_data.Grades10to12, g10a, g10b, g10c, g10d, g10e, g10f);
-
-	//INITIALIZE THE RADIO BUTTONS
-	setRadioElement(json_data.BehaviorProblemsKto6, behaved, notBehaved);
-	setRadioElement(json_data.AcademicProblemsKto6, yesAcademic, noAcademic);
-	setRadioElement(json_data.BehaviorProblems7to9, behaved2, notBehaved2);
-	setRadioElement(json_data.AcademicProblems7to9, yesAcademic2, noAcademic2);
-	setRadioElement(json_data.BehaviorProblems10to12, behaved3, notBehaved3);
-	setRadioElement(json_data.AcademicProblems10to12, yesAcademic3, noAcademic3);
-	setRadioElement(json_data.collegeDegree, yesGrad, noGrad);
-	setRadioElement(json_data.advanceDegree, hasAdvanced, noAdvanced);
-	setRadioElement(json_data.tradeSch, yesTrade, noTrade);
-	setRadioElement(json_data.military, isMilitary, notMilitary);
-	setRadioElement(json_data.honorableDischarge, isHonor, notHonor);
-
-	//SET THE NUMBER OF FRIENDSHIP RADIOS AND NUMBER FIELDS
-	grabFriendRadio(json_data.FriendshipsKto6, kf1, kf2, kf3, kf4, kfm);
-	grabFriendRadio(json_data.Friendships7to9, g7f1, g7f2, g7f3, g7f4, g7fm);
-	grabFriendRadio(json_data.Friendships10to12, g10f1, g10f2, g10f3, g10f4, g10fm);
-
-	//SET THE NUMBER OF COLLEGE YEARS RADIO RUTTONS
-	if (String(json_data.collegeYears) === '1') {
-		document.getElementById('college1').checked = true;
-	}
-	else if (String(json_data.collegeYears) === '2') {
-		document.getElementById('college2').checked = true;
-	}
-	else if (String(json_data.collegeYears) === '3') {
-		document.getElementById('college3').checked = true;
-	}
-	else {
-		document.getElementById('college4').checked = true;
-	}
-
-	//SET DYNAMIC FIELD RADIO BUTTONS
-	moreFriends('friendMore', 'numMore_label', 'numMore');
-	moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');
-	moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');
-	mhCollegeRadio();
-	mhTrade();
-	mhMilitary();
-}
-
-function initialize_mh_background(json_data) {
-	//RELATIONSHIP RADIOS
-	var isPoorSpouse = document.getElementById('isPoorSpouse');
-	var isAvgSpouse = document.getElementById('isAvgSpouse');
-	var isGoodSpouse = document.getElementById('isGoodSpouse');
-	var isPoorParents = document.getElementById('isPoorParents');
-	var isAvgParents = document.getElementById('isAvgParents');
-	var isGoodParents = document.getElementById('isGoodParents');
-	var isPoorBro = document.getElementById('isPoorBro');
-	var isAvgBro = document.getElementById('isAvgBro');
-	var isGoodBro = document.getElementById('isGoodBro');
-	var isPoorSis = document.getElementById('isPoorSis');
-	var isAvgSis = document.getElementById('isAvgSis');
-	var isGoodSis = document.getElementById('isGoodSis');
-	var isPoorKids = document.getElementById('isPoorKids');
-	var isAvgKids = document.getElementById('isAvgKids');
-	var isGoodKids = document.getElementById('isGoodKids');
-	var isPoorEx = document.getElementById('isPoorEx');
-	var isAvgEx = document.getElementById('isAvgEx');
-	var isGoodEx = document.getElementById('isGoodEx');
-
-	document.getElementById('residence').selectedIndex = json_data.residence;
-	document.getElementById('income').selectedIndex = json_data.income;
-	document.getElementById('debt').selectedIndex = json_data.debt;
-	document.getElementById('credit').selectedIndex = json_data.credit;
-	document.getElementById('healthCare').selectedIndex = json_data.healthCare;
-	document.getElementById('otherIncome').selectedIndex = json_data.otherIncome;
-	document.getElementById('closeFriendVisit').selectedIndex = json_data.closeFriendVisit;
-	document.getElementById('acqVisit').selectedIndex = json_data.acqVisit;
-
-	grabMhRelationshipRadios(json_data.spouseRelationship, isPoorSpouse, isAvgSpouse, isGoodSpouse);
-	grabMhRelationshipRadios(json_data.brothersRelationship, isPoorBro, isAvgBro, isGoodBro);
-	grabMhRelationshipRadios(json_data.childrenRelationship, isPoorKids, isAvgKids, isGoodKids);
-	grabMhRelationshipRadios(json_data.parentsRelationship, isPoorParents, isAvgParents, isGoodParents);
-	grabMhRelationshipRadios(json_data.sistersRelationship, isPoorSis, isAvgSis, isGoodSis);
-	grabMhRelationshipRadios(json_data.exRelationship, isPoorEx, isAvgEx, isGoodEx);
-}
-
-function initialize_mh_stress(json_data) {
-	//RADIO ELEMENTS
-	var yesDeath = document.getElementById('yesDeath');
-	var noDeath = document.getElementById('noDeath');
-	var yesDivorce = document.getElementById('yesDivorce');
-	var noDivorce = document.getElementById('noDivorce');
-	var yesMove = document.getElementById('yesMove');
-	var noMove = document.getElementById('noMove');
-	var yesMedical = document.getElementById('yesMedical');
-	var noMedical = document.getElementById('noMedical');
-	var yesFamily = document.getElementById('yesFamily');
-	var noFamily = document.getElementById('noFamily');
-	var yesMoney = document.getElementById('yesMoney');
-	var noMoney = document.getElementById('noMoney');
-	var yesAbuse = document.getElementById('yesAbuse');
-	var noAbuse = document.getElementById('noAbuse');
-	var yesAddiction = document.getElementById('yesAddiction');
-	var noAddiction = document.getElementById('noAddiction');
-	var yesViolence = document.getElementById('yesViolence');
-	var noViolence = document.getElementById('noViolence');
-	var yesOther = document.getElementById('yesOther');
-	var noOther = document.getElementById('noOther');
-
-	setRadioElement(json_data.deathStress, yesDeath, noDeath);
-	setRadioElement(json_data.divorceStress, yesDivorce, noDivorce);
-	setRadioElement(json_data.moveStress, yesMove, noMove);
-	setRadioElement(json_data.medicalStress, yesMedical, noMedical);
-	setRadioElement(json_data.familyHealthStress, yesFamily, noFamily);
-	setRadioElement(json_data.financialStress, yesMoney, noMoney);
-	setRadioElement(json_data.abuseStress, yesAbuse, noAbuse);
-	setRadioElement(json_data.addictionFamilyStress, yesAddiction, noAddiction);
-	setRadioElement(json_data.violenceFamilyStress, yesViolence, noViolence);
-	setRadioElement(json_data.otherStress, yesOther, noOther);
-
-	mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');
-	mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');
-	mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');
-	mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');
-	mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');
-	mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');
-	mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');
-	mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');
-	mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');
-	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
-}
-
-function initialize_mh_family(json_data) {
-	//CONFIGURE THE RADIO BUTTONS
-	var yesDepress = document.getElementById('yesDepress');
-	var noDepress = document.getElementById('noDepress');
-	var yesADD = document.getElementById('yesADD');
-	var noADD = document.getElementById('noADD');
-	var yesBed = document.getElementById('yesBed');
-	var noBed = document.getElementById('noBed');
-	var yesBi = document.getElementById('yesBi');
-	var noBi = document.getElementById('noBi');
-	var yesATT = document.getElementById('yesATT');
-	var noATT = document.getElementById('noATT');
-	var yesPA = document.getElementById('yesPA');
-	var noPA = document.getElementById('noPA');
-	var yesLaw = document.getElementById('yesLaw');
-	var noLaw = document.getElementById('noLaw');
-	var yesLD = document.getElementById('yesLD');
-	var noLD = document.getElementById('noLD');
-	var yesTic = document.getElementById('yesTic');
-	var noTic = document.getElementById('noTic');
-	var yesThy = document.getElementById('yesThy');
-	var noThy = document.getElementById('noThy');
-	var yesHeart = document.getElementById('yesHeart');
-	var noHeart = document.getElementById('noHeart');
-	var yesOW = document.getElementById('yesOW');
-	var noOW = document.getElementById('noOW');
-	var yesMood = document.getElementById('yesMood');
-	var noMood = document.getElementById('noMood');
-	var yesAlc = document.getElementById('yesAlc');
-	var noAlc = document.getElementById('noAlc');
-	var yesDrug = document.getElementById('yesDrug');
-	var noDrug = document.getElementById('noDrug');
-	var yesSch = document.getElementById('yesSch');
-	var noSch = document.getElementById('noSch');
-	var YesSe = document.getElementById('YesSe');
-	var noSe = document.getElementById('noSe');
-	var yesCS = document.getElementById('yesCS');
-	var noCS = document.getElementById('noCS');
-	var yesSex = document.getElementById('yesSex');
-	var noSex = document.getElementById('noSex');
-	var yesPanick = document.getElementById('yesPanick');
-	var noPanick = document.getElementById('noPanick');
-	var yesAnx = document.getElementById('yesAnx');
-	var noAnx = document.getElementById('noAnx');
-	var yesOCD = document.getElementById('yesOCD');
-	var noOCD = document.getElementById('noOCD');
-	var yesSugar = document.getElementById('yesSugar');
-	var noSudar = document.getElementById('noSudar');
-
-	var yesCancer = document.getElementById('yesCancer');
-	var noCancer = document.getElementById('noCancer');
-
-	var yesCancer = document.getElementById('yesCancer');
-	var noCancer = document.getElementById('noCancer');
-	var yesBlood = document.getElementById('yesBlood');
-	var noBlood = document.getElementById('noBlood');
-	var yesAngry = document.getElementById('yesAngry');
-	var noAngry = document.getElementById('noAngry');
-
-	setRadioElement(json_data.isdepressed, yesDepress, noDepress);
-	setRadioElement(json_data.isadd, yesADD, noADD);
-	setRadioElement(json_data.isbedWetting, yesBed, noBed);
-	setRadioElement(json_data.isbipolar, yesBi, noBi);
-	setRadioElement(json_data.issuicideAttempt, yesATT, noATT);
-	setRadioElement(json_data.isphysicalAbuse, yesPA, noPA);
-	setRadioElement(json_data.islaw, yesLaw, noLaw);
-	setRadioElement(json_data.isld, yesLD, noLD);
-	setRadioElement(json_data.istic, yesTic, noTic);
-	setRadioElement(json_data.isthyroid, yesThy, noThy);
-	setRadioElement(json_data.isheart, yesHeart, noHeart);
-	setRadioElement(json_data.isoverweight, yesOW, noOW);
-	setRadioElement(json_data.ismood, yesMood, noMood);
-	setRadioElement(json_data.isalcohol, yesAlc, noAlc);
-	setRadioElement(json_data.isdrugs, yesDrug, noDrug);
-	setRadioElement(json_data.isschizo, yesSch, noSch);	
-	setRadioElement(json_data.isseizures, YesSe, noCS);
-	setRadioElement(json_data.iscompletedSuicide, yesCS, noCS);
-	setRadioElement(json_data.issexAbuse, yesSex, noSex);
-	setRadioElement(json_data.ispanic, yesPanick, noPanick);
-	setRadioElement(json_data.isanxiety, yesAnx, noAnx);
-	setRadioElement(json_data.isOCD, yesSugar, noSudar);
-	setRadioElement(json_data.iscancer, yesCancer, noCancer);
-	setRadioElement(json_data.ishighBloodPressure, yesBlood, noBlood);
-	setRadioElement(json_data.isanger, yesAngry, noAngry);
-
-	//FAMILY SIDE SELECT OPTIONS
-	document.getElementById('depressSide').selectedIndex 	= json_data.depressedS
-	document.getElementById('sideADD').selectedIndex 		= json_data.addS
-
-	document.getElementById('sideBed').selectedIndex		= json_data.bedWettingS
-	document.getElementById('sideBi').selectedIndex 		= json_data.bipolarS
-	document.getElementById('sideATT').selectedIndex 		= json_data.suicideAttemptS
-	document.getElementById('sidePA').selectedIndex 		= json_data.physicalAbuseS
-
-	document.getElementById('sideLaw').selectedIndex 		= json_data.lawS
-	document.getElementById('sideLD').selectedIndex 		= json_data.ldS
-	document.getElementById('sideTic').selectedIndex 		= json_data.ticS
-	document.getElementById('sideThy').selectedIndex 		= json_data.thyroidS
-	document.getElementById('sideHeart').selectedIndex 		= json_data.heartS
-	document.getElementById('sideOW').selectedIndex 		= json_data.overweightS
-	document.getElementById('sideMood').selectedIndex 		= json_data.moodS
-	document.getElementById('sideAlc').selectedIndex 		= json_data.alcoholS
-	document.getElementById('sideDrug').selectedIndex 		= json_data.drugsS
-	document.getElementById('sideSch').selectedIndex 		= json_data.schizoS
-	document.getElementById('sideSe').selectedIndex 		= json_data.seizuresS
-	document.getElementById('sideCS').selectedIndex 		= json_data.completedSuicideS
-	document.getElementById('sideSex').selectedIndex 		= json_data.sexAbuseS
-	document.getElementById('sidePanick').selectedIndex 	= json_data.panicS
-	document.getElementById('sideAnx').selectedIndex 		= json_data.anxietyS
-	document.getElementById('sideOCD').selectedIndex 		= json_data.OCDS
-	document.getElementById('sideSugar').selectedIndex 		= json_data.diabetesS
-	document.getElementById('sideCancer').selectedIndex 	= json_data.cancerS
-	document.getElementById('sideBlood').selectedIndex 		= json_data.highBloodPressureS
-	document.getElementById('sideAngry').selectedIndex 		= json_data.angerS
-
-	//FAMILY MEMBER SELECT OPTIONS
-	document.getElementById('depressMember').selectedIndex 	= json_data.depressedM
-	document.getElementById('memADD').selectedIndex 		= json_data.addM
-	document.getElementById('memBed').selectedIndex			= json_data.bedWettingM
-	document.getElementById('memBi').selectedIndex 			= json_data.bipolarM
-	document.getElementById('memATT').selectedIndex 		= json_data.suicideAttemptM
-	document.getElementById('memPA').selectedIndex 			= json_data.physicalAbuseM
-	document.getElementById('memLaw').selectedIndex 		= json_data.lawM
-	document.getElementById('memLD').selectedIndex 			= json_data.ldM
-	document.getElementById('memTic').selectedIndex 		= json_data.ticM
-	document.getElementById('memThy').selectedIndex 		= json_data.thyroidM
-	document.getElementById('memHeart').selectedIndex 		= json_data.heartM
-	document.getElementById('memOW').selectedIndex 			= json_data.overweightM
-	document.getElementById('memMood').selectedIndex 		= json_data.moodM
-	document.getElementById('memAlc').selectedIndex 		= json_data.alcoholM
-	document.getElementById('memDrug').selectedIndex 		= json_data.drugsM
-	document.getElementById('memSch').selectedIndex 		= json_data.schizoM
-	document.getElementById('memSe').selectedIndex 			= json_data.seizuresM
-	document.getElementById('memCS').selectedIndex 			= json_data.completedSuicideM
-	document.getElementById('memSex').selectedIndex 		= json_data.sexAbuseM
-	document.getElementById('memPanick').selectedIndex 		= json_data.panicM
-	document.getElementById('memAnx').selectedIndex 		= json_data.anxietyM
-	document.getElementById('memOCD').selectedIndex 		= json_data.OCDM
-	document.getElementById('memSugar').selectedIndex 		= json_data.diabetesM
-	document.getElementById('memCancer').selectedIndex 		= json_data.cancerM
-	document.getElementById('memBlood').selectedIndex 		= json_data.highBloodPressureM
-	document.getElementById('memAngry').selectedIndex 		= json_data.angerM
-
-	mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');
-	mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');
-	mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');
-	mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');
-	mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');
-	mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');
-	mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');
-	mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');
-	mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');
-	mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');
-	mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');
-	mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');
-	mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');
-	mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');
-	mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');
-	mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');
-	mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');
-	mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');
-	mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');
-	mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');
-	mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');
-	mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');
-	mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');
-	mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');
-	mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');
-	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
-}
-
-function initialize_mh_legal(json_data) {
-	//RADIO VARIABLES
-	var yesPresent = document.getElementById('yesPresent');
-	var noPresent = document.getElementById('noPresent');
-	var yesPast = document.getElementById('yesPast');
-	var noPast = document.getElementById('noPast');
-	var isSuspended = document.getElementById('isSuspended');
-	var notSuspended = document.getElementById('notSuspended');
-	var yesSuit = document.getElementById('yesSuit');
-	var noSuit = document.getElementById('noSuit');
-	var yesStress = document.getElementById('yesStress');
-	var noStress = document.getElementById('noStress');
-	var yesDivPro = document.getElementById('yesDivPro');
-	var noDivPro = document.getElementById('noDivPro');
-	var yesChildDis = document.getElementById('yesChildDis');
-	var noChildDis = document.getElementById('noChildDis');
-	var yesBank = document.getElementById('yesBank');
-	var noBank = document.getElementById('noBank');
-
-	setRadioElement(json_data.probationPresent, yesPresent, noPresent);
-	setRadioElement(json_data.probationPast, yesPast, noPast);
-	setRadioElement(json_data.suspendedDrivePresent, isSuspended, notSuspended);
-	setRadioElement(json_data.hasLawsuit, yesSuit, noSuit);
-	setRadioElement(json_data.lawsuitStress, yesStress, noStress);
-	setRadioElement(json_data.inDivorce, yesDivPro, noDivPro);
-	setRadioElement(json_data.childCustody, yesChildDis, noChildDis);
-	setRadioElement(json_data.hasBankrupcy, yesBank, noBank);
-
-	mhProbation();
-	mhLawsuits();
-	mhBank();
-}
-
-function initialize_mh_use(json_data) {
-
-}
-
-function processDynamicMhHistory() {
-	//TRIGGERS
-	var yesChild = document.getElementById('yesChild');
-	var yesSister = document.getElementById('yesSister');
-	var yesBrother = document.getElementById('yesBrother');
-	var momIsLiving = document.getElementById('momIsLiving');	
-	var dadIsLiving = document.getElementById('dadIsLiving');
-	var single = document.getElementById('single');
-
-	//M DATA
-	var m_motherAge = document.getElementById('m_motherAge');
-	var m_motherAgeDeath = document.getElementById('m_motherAgeDeath');
-	var m_fatherAge = document.getElementById('m_fatherAge');
-	var m_fatherAgeDeath = document.getElementById('m_fatherAgeDeath');
-	var m_numChildren = document.getElementById('m_numChildren');
-	var m_numSisters = document.getElementById('m_numSisters');
-	var m_numBrothers = document.getElementById('m_numBrothers');
-	var m_numMarriages = document.getElementById('m_numMarriages');
-	var m_spouseOccupation = document.getElementById('m_spouseOccupation');
-	var m_spouseEmployer = document.getElementById('m_spouseEmployer');
-	var m_spouseAge = document.getElementById('m_spouseAge');
-	var m_spouseWorkMos = document.getElementById('m_spouseWorkMos');
-	var m_spouseWorkYrs = document.getElementById('m_spouseWorkYrs');
-
-	//DYNAMIC FIELDS
-	var motherAge = document.getElementById('motherAge');
-	var motherAgeDeath = document.getElementById('motherAgeDeath');
-	var fatherAge = document.getElementById('fatherAge');
-	var fatherAgeDeath = document.getElementById('fatherAgeDeath');
-	var numChildren = document.getElementById('numChildren');
-	var numSisters = document.getElementById('numSisters');
-	var numBrothers = document.getElementById('numBrothers');
-	var numMarriages = document.getElementById('numMarriages');
-	var spouseOccupation = document.getElementById('spouseOccupation');
-	var spouseEmployer = document.getElementById('spouseEmployer');
-	var spouseAge = document.getElementById('spouseAge');
-	var spouseWorkMos = document.getElementById('spouseWorkMos');
-	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
-
-	postMhFamily(yesChild, numChildren, m_numChildren);
-	postMhFamily(yesSister, numSisters, m_numSisters);
-	postMhFamily(yesBrother, numBrothers, m_numBrothers);
-
-	postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
-	postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
-
-	postMhNoMarriages(single, numMarriages, m_numMarriages);
-	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
-}
-
-function mh_continue_demographic() {
-	var proceed = true;
-	var yesChild = document.getElementById('yesChild');
-	var yesSister = document.getElementById('yesSister');
-	var yesBrother = document.getElementById('yesBrother');
-	var form = document.getElementById('mh_form');
-
-	processDynamicMhHistory();	
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-
-		if (yesChild.checked === true || yesSister.checked === true || yesBrother.checked === true) {
-			var w = 750, h = 600;
-			var lefts = Number((screen.width/2) - (w/2));
-			var tops = Number((screen.height/2) - (h/2));
-			var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
-		}	
-	}
-}
-
 function postUniversalRadioText(trigger, textField, m_post) {
 	if (trigger.checked === true) {
 		m_post.value = textField.value;
@@ -5172,138 +5718,7 @@ function postUniversalRadioRadio(trigger, yesRadio, m_post) {
 }
 
 
-function processDynamicMhEducation() {
-	//DYNAMIC RADIO FRIEND NUMBER TRIGGERS
-	var fk1 = document.getElementById('friend1');
-	var fk2 = document.getElementById('friend2');
-	var fk3 = document.getElementById('friend3');
-	var fk4 = document.getElementById('friend4');
-	var fkm = document.getElementById('friendMore');
-	var numMore = document.getElementById('numMore');
-	var m_FriendshipsKto6 = document.getElementById('m_FriendshipsKto6');
-	var f7g1 = document.getElementById('friend1g7');
-	var f7g2 = document.getElementById('friend2g7');
-	var f7g3 = document.getElementById('friend3g7');
-	var f7g4 = document.getElementById('friend4g7');
-	var f7gm = document.getElementById('friendMoreg7');
-	var numMoreg7 = document.getElementById('numMoreg7');
-	var m_Friendships7to9 = document.getElementById('m_Friendships7to9');
-	var f10g1 = document.getElementById('friend1g10');
-	var f10g2 = document.getElementById('friend2g10');
-	var f10g3 = document.getElementById('friend3g10');
-	var f10g4 = document.getElementById('friend4g10');
-	var f10gm = document.getElementById('friendMoreg10');
-	var numMoreg10 = document.getElementById('numMoreg10');
-	var Friendships10to12 = document.getElementById('m_Friendships10to12');	
-	var yesGrad = document.getElementById('yesGrad');
-	var collegeMajor = document.getElementById('collegeMajor');	
-	var m_collegeMajor = document.getElementById('m_collegeMajor');
-	var hasAdvanced = document.getElementById('hasAdvanced');
-	var m_advanceDegree = document.getElementById('m_advanceDegree');
 
-	var yesTrade = document.getElementById('yesTrade');
-	var tradeSchool = document.getElementById('tradeSchool');
-	var tradeAreaStudy = document.getElementById('tradeAreaStudy');
-	var m_tradeSchool = document.getElementById('m_tradeSchool');
-	var m_tradeAreaStudy = document.getElementById('m_tradeAreaStudy');
-
-	var isMilitary = document.getElementById('isMilitary');
-	var militaryBranch = document.getElementById('militaryBranch');
-	var militaryRank = document.getElementById('militaryRank');
-	var militaryYears = document.getElementById('militaryYears');
-	var isHonor = document.getElementById('isHonor');
-	var m_militaryBranch = document.getElementById('m_militaryBranch');
-	var m_militaryRank = document.getElementById('m_militaryRank');
-	var m_militaryYears = document.getElementById('m_militaryYears');
-	var m_honorableDischarge = document.getElementById('m_honorableDischarge');
-
-	postMhEducationFriendNumber(fk1, fk2, fk3, fk4, fkm, numMore, m_FriendshipsKto6);
-	postMhEducationFriendNumber(f7g1, f7g2, f7g3, f7g4, f7gm, numMoreg7, m_Friendships7to9);
-	postMhEducationFriendNumber(f10g1, f10g2, f10g3, f10g4, f10gm, numMoreg10, Friendships10to12);
-
-	postUniversalRadioText(yesGrad, collegeMajor, m_collegeMajor);	
-	postUniversalRadioText(yesTrade, tradeSchool, m_tradeSchool);
-	postUniversalRadioText(yesTrade, tradeAreaStudy, m_tradeAreaStudy);
-	postUniversalRadioText(isMilitary, militaryBranch, m_militaryBranch);
-	postUniversalRadioText(isMilitary, militaryRank, m_militaryRank);
-
-	postUniversalRadioNumber(isMilitary, militaryYears, m_militaryYears);
-
-	postUniversalRadioRadio(yesGrad, hasAdvanced, m_advanceDegree);
-	postUniversalRadioRadio(isMilitary, isHonor, m_honorableDischarge);
-}
-
-function proceed_mh_education() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-	processDynamicMhEducation();	
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
-}
-
-function proceed_mh_background() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
-}
-
-function processDynamicMhStress() {
-	//TRIGGERS
-	var yesDeath 		= document.getElementById('yesDeath');
-	var yesDivorce 		= document.getElementById('yesDivorce');
-	var yesMove 		= document.getElementById('yesMove');
-	var yesMedical 		= document.getElementById('yesMedical');
-	var yesFamily 		= document.getElementById('yesFamily');
-	var yesMoney 		= document.getElementById('yesMoney');
-	var yesAbuse 		= document.getElementById('yesAbuse');
-	var yesAddiction 	= document.getElementById('yesAddiction');
-	var yesViolence 	= document.getElementById('yesViolence');
-	var yesOther 		= document.getElementById('yesOther');
-
-	//FIELDS
-	var deathStressExp 				= document.getElementById('deathStressExp');
-	var divorceStressExp 			= document.getElementById('divorceStressExp');
-	var moveStressExp 				= document.getElementById('moveStressExp');
-	var medicalStressExp 			= document.getElementById('medicalStressExp');
-	var familyHealthStressExp 		= document.getElementById('familyHealthStressExp');
-	var financialStressExp 			= document.getElementById('financialStressExp');
-	var abuseStressExp 				= document.getElementById('abuseStressExp');
-	var addictionFamilyStressExp 	= document.getElementById('addictionFamilyStressExp');
-	var violenceFamilyStressExp 	= document.getElementById('violenceFamilyStressExp');
-	var otherStressExp 				= document.getElementById('otherStressExp');
-
-	postUniversalRadioText(yesDeath, deathStressExp, m_deathStressExp);
-	postUniversalRadioText(yesDivorce, divorceStressExp, m_divorceStressExp);
-	postUniversalRadioText(yesMove, moveStressExp, m_moveStressExp);
-	postUniversalRadioText(yesMedical, medicalStressExp, m_medicalStressExp);
-	postUniversalRadioText(yesFamily, familyHealthStressExp, m_familyHealthStressExp);
-	postUniversalRadioText(yesMoney, financialStressExp, m_financialStressExp);
-	postUniversalRadioText(yesAbuse, abuseStressExp, m_abuseStressExp);
-	postUniversalRadioText(yesAddiction, addictionFamilyStressExp, m_addictionFamilyStressExp);
-	postUniversalRadioText(yesViolence, violenceFamilyStressExp, m_violenceFamilyStressExp);
-	postUniversalRadioText(yesOther, otherStressExp, m_otherStressExp);
-}
-
-function proceed_mh_stress() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-	processDynamicMhStress();
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
-}
 
 function combineFamilyValues(trigger, fSide, fMem, m_post) {
 	if (trigger.checked === true) {
@@ -5313,50 +5728,6 @@ function combineFamilyValues(trigger, fSide, fMem, m_post) {
 
 	else {
 		m_post.value = 'N/A';
-	}
-}
-
-function processDynamicMhFamily() {
-	combineFamilyValues(document.getElementById('yesDepress'), document.getElementById('depressSide'), document.getElementById('depressMember'), document.getElementById('depressed'));
-	combineFamilyValues(document.getElementById('yesADD'), document.getElementById('sideADD'), document.getElementById('memADD'), document.getElementById('add'));
-	combineFamilyValues(document.getElementById('yesBed'), document.getElementById('sideBed'), document.getElementById('memBed'), document.getElementById('bedWetting'));
-	combineFamilyValues(document.getElementById('yesBi'), document.getElementById('sideBi'), document.getElementById('memBi'), document.getElementById('bipolar'));
-	combineFamilyValues(document.getElementById('yesATT'), document.getElementById('sideATT'), document.getElementById('memATT'), document.getElementById('suicideAttempt'));
-	combineFamilyValues(document.getElementById('yesPA'), document.getElementById('sidePA'), document.getElementById('memPA'), document.getElementById('physicalAbuse'));
-	combineFamilyValues(document.getElementById('yesLaw'), document.getElementById('sideLaw'), document.getElementById('memLaw'), document.getElementById('law'));
-	combineFamilyValues(document.getElementById('yesLD'), document.getElementById('sideLD'), document.getElementById('memLD'), document.getElementById('ld'));
-	combineFamilyValues(document.getElementById('yesTic'), document.getElementById('sideTic'), document.getElementById('memTic'), document.getElementById('tic'));
-	combineFamilyValues(document.getElementById('yesThy'), document.getElementById('sideThy'), document.getElementById('memThy'), document.getElementById('thyroid'));
-	combineFamilyValues(document.getElementById('yesHeart'), document.getElementById('sideHeart'), document.getElementById('memHeart'), document.getElementById('heart'));
-	combineFamilyValues(document.getElementById('yesOW'), document.getElementById('sideOW'), document.getElementById('memOW'), document.getElementById('overweight'));
-	combineFamilyValues(document.getElementById('yesMood'), document.getElementById('sideMood'), document.getElementById('memMood'), document.getElementById('mood'));
-	combineFamilyValues(document.getElementById('yesAlc'), document.getElementById('sideAlc'), document.getElementById('memAlc'), document.getElementById('alcohol'));
-
-	combineFamilyValues(document.getElementById('yesDrug'), document.getElementById('sideDrug'), document.getElementById('memDrug'), document.getElementById('drugs'));
-	combineFamilyValues(document.getElementById('yesSch'), document.getElementById('sideSch'), document.getElementById('memSch'), document.getElementById('schizo'));
-	combineFamilyValues(document.getElementById('YesSe'), document.getElementById('sideSe'), document.getElementById('memSe'), document.getElementById('seizures'));
-	combineFamilyValues(document.getElementById('yesCS'), document.getElementById('sideCS'), document.getElementById('memCS'), document.getElementById('completedSuicide'));
-	combineFamilyValues(document.getElementById('yesSex'), document.getElementById('sideSex'), document.getElementById('memSex'), document.getElementById('sexAbuse'));
-	combineFamilyValues(document.getElementById('yesPanick'), document.getElementById('sidePanick'), document.getElementById('memPanick'), document.getElementById('panic'));
-	combineFamilyValues(document.getElementById('yesAnx'), document.getElementById('sideAnx'), document.getElementById('memAnx'), document.getElementById('anxiety'));
-
-	combineFamilyValues(document.getElementById('yesOCD'), document.getElementById('sideOCD'), document.getElementById('memOCD'), document.getElementById('OCD'));
-	combineFamilyValues(document.getElementById('yesSugar'), document.getElementById('sideSugar'), document.getElementById('memSugar'), document.getElementById('diabetes'));
-	combineFamilyValues(document.getElementById('yesCancer'), document.getElementById('sideCancer'), document.getElementById('memCancer'), document.getElementById('cancer'));
-	combineFamilyValues(document.getElementById('yesBlood'), document.getElementById('sideBlood'), document.getElementById('memBlood'), document.getElementById('highBloodPressure'));
-	combineFamilyValues(document.getElementById('yesAngry'), document.getElementById('sideAngry'), document.getElementById('memAngry'), document.getElementById('anger'));
-
-}
-
-function proceed_mh_familyHistory() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-	processDynamicMhFamily();	
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
 	}
 }
 
@@ -5390,40 +5761,6 @@ function processDynamicMhLegal() {
 
 	postUniversalRadioRadio(yesSuit, yesStress, m_lawsuitStress);
 	postUniversalRadioNumber(yesBank, dateBenkrupcy, m_dateBenkrupcy);
-}
-
-function proceed_mh_legalHistory() {
-	var proceed = true;
-	processDynamicMhLegal();
-	form = document.getElementById('mh_form');
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
-}
-
-function proceed_mh_psychHistory() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
-}
-
-function proceed_mh_useTable() {
-	var proceed = true;
-	form = document.getElementById('mh_form');
-
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
-		form.action = document.getElementById('next_url').value;
-		form.submit();
-	}
 }
 
 function mhStressRadio(trigger_id, label_id, element_id) {
@@ -5525,7 +5862,7 @@ function mhLawsuits() {
 		opacityLow(noStressLab);
 		opacityLow(yesStress);
 		opacityLow(noStress);
-		yesStress.checked = true;
+		noStress.checked = true;
 		yesStress.disabled = true;
 		noStress.disabled = true;
 	}
@@ -5620,6 +5957,10 @@ function init_asi_general(json_data) {
 	number_init(json_data.isComplete, document.getElementById('g14mos'));
 	number_init(json_data.isComplete, document.getElementById('g20'));
 
+	document.getElementById('g17').selectedIndex = json_data.g17;
+	document.getElementById('g18').selectedIndex = json_data.g18;
+	document.getElementById('g19').selectedIndex = json_data.g19;
+
 	//SEVERITY RADIO ENTRIES
 	var m0 = document.getElementById('m0');
 	var m1 = document.getElementById('m1');
@@ -5705,10 +6046,6 @@ function init_asi_general(json_data) {
 	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
 	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
 	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-
-	document.getElementById('g17').selectedIndex = json_data.g17;
-	document.getElementById('g18').selectedIndex = json_data.g18;
-	document.getElementById('g19').selectedIndex = json_data.g19;
 }
 
 function init_asi_medical(json_data) {
@@ -6032,7 +6369,6 @@ function processAsiAdmin() {
 	post_asi(false, 'text', document.getElementById('g1'), null, null);
 	post_asi(false, 'text', document.getElementById('g2'), null, null);
 	post_asi(false, 'text', document.getElementById('g3'), null, null);
-	post_asi(false, 'date', document.getElementById('popupDatepicker'), null, null);
 	post_asi(false, 'text', document.getElementById('g11'), null, null);
 }
 
@@ -6516,9 +6852,41 @@ function sideBarASI(page) {
 
 //#####################################################################################################################//
 //*********************************************************************************************************************//
-//-------------------------------------------------- SUPPORT FUNCTIONS ------------------------------------------------//
+//----------------------------------------------------- UT FUNCTIONS --------------------------------------------------//
 //*********************************************************************************************************************//
 //#####################################################################################################################//
+
+function ut_complete_options() {
+	var w = 550, h = 400;
+	openPopUp('auto', '/UT_complete/', w, h);
+}
+
+function end_ut_session() {
+	getPopParent('ut_form').action = '/adminHome/';
+	getPopParent('ut_form').submit();
+	window.close();
+}
+
+function cont_during_ut() {
+	getPopParent('ut_form').action = '/clientOptions/';
+	getPopParent('ut_form').submit();
+	window.close();
+}
+
+function finalize_ut() {
+	var w = 1100, h = 1300;
+	openPopUp('auto', '/printUT/', w, h);
+}
+
+function back_from_ut() {
+	grab('ut_form').action = '/clientOptions/';
+	grab('ut_form').submit();
+}
+
+function edit_ut() {
+	grab('ut_form').action = '/ut_preliminary/';
+	grab('ut_form').submit();
+}
 
 function ut_check_init(data, box) {
 	data = String(data);
@@ -7131,31 +7499,20 @@ function universal_generic_exit(form_type, page) {
 	var exit_type = document.getElementById('exit_type');
 	var form = getFormElement(form_type);
 
-	if (page === '/mh_demographic/') {
-		processDynamicMhHistory();
-	}
-	else if (page === '/mh_education/') {
-		processDynamicMhEducation();
-	}
-	else if (page === '/mh_stress/') {
-		processDynamicMhStress();
-	}
-	else if (page === '/mh_familyHistory/') {
-		processDynamicMhFamily();
-	}
-	else if (page === '/mh_legal/') {
-		processDynamicMhLegal();
-	}
-
 	if (form_type === 'am') {
 		universal_am_dynamic_post(page);
 	}
-
-	if (form_type === 'asi') {
+	else if (form_type === 'asi') {
 		processAsiFields(page);
 	}
-	if (form_type === 'ut') {
+	else if (form_type === 'ut') {
 		continue_ut();
+	}
+	else if (form_type === 'mh') {
+		postMhFields(page);
+	}
+	else if (form_type === 'sap') {
+		postSapFields(page);
 	}
 
 	form.action = '/uni_generic_exit/';
@@ -7377,10 +7734,13 @@ function amSideBtnSubmit(url) {
 
 function verified_form() {
 	var w = 550, h = 400;
-	openPopUp('auto', '/sap_complete/', w, h);
+	openPopUp('auto', '/form_complete/', w, h);
 }
 
+
 function save_uni_form() {
+	var form_type = getPopParent('exit_type').value;
+	grab('exit_type').value = form_type;
 	grab('s_form').submit();
 }
 

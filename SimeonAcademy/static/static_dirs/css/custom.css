@@ -3355,6 +3355,58 @@ button:hover {
 	font-style: italic;
 }
 
+.colorImgDiv {
+
+}
+
+.newImgColor {
+	width:85%;
+}
+
+.colorImgDiv1 {
+	margin-top: 13px;
+}
+
+.colorImgDiv2 {
+	margin-top: 15px;
+	margin-left: 8px;
+}
+
+.colorImgDiv3 {
+	margin-top: 15px;
+}
+
+.colorImgDiv4 {
+	margin-top: 10px;
+	margin-left: 6px;
+}
+
+.colorImgDiv5 {
+	margin-top: 13px;
+	margin-left: 4px;
+}
+
+.colorImgDiv6 {
+	margin-top: 12px;
+	margin-left: 5px;
+}
+
+.newImgColor1 {
+	width:72%;
+}
+
+.newImgColor2 {
+	width:65%;
+}
+
+.newImgColor3 {
+	width:80%;
+}
+
+.newImgColor4 {
+	width:47%;
+}
+
 
 
 
