@@ -32,24 +32,63 @@ side_option_headbody {
 .round-button {
 	width:25%;
 }
+
 .round-button-circle {
 	width: 100px;
 	height:100px;
 	padding-bottom: 100%;
     border-radius: 50%;
     border:10px solid #666666;
-	/*border:10px solid #cfdcec;*/
     overflow:hidden;
-    
-    /*background: #4679BD;*/ 
     background: #adad85;
     box-shadow: 0 0 3px gray;
 }
 .round-button-circle:hover {
-	/*background: #fee047;*/
 	background: #6b6b47;
-	/*background:#30588e;*/
 }
+
+.round-button-circle-gray {
+	width: 100px;
+	height:100px;
+	padding-bottom: 100%;
+    border-radius: 50%;
+    border:10px solid #666666;
+    overflow:hidden;
+    background: #9BA4B3;
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle-gray:hover {
+	background: #6A768A;
+}
+
+.round-button-circle-red {
+	width: 100px;
+	height:100px;
+	padding-bottom: 100%;
+    border-radius: 50%;
+    border:10px solid #666666;
+    overflow:hidden;
+    background: #C4BFB7;
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle-red:hover {
+	background: #82796B;
+}
+
+.round-button-circle-green {
+	width: 100px;
+	height:100px;
+	padding-bottom: 100%;
+    border-radius: 50%;
+    border:10px solid #666666;
+    overflow:hidden;
+    background: #B7C7B1;
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle-green:hover {
+	background: #7E8A79;
+}
+
 .round-button a {
     display:block;
 	float:left;
@@ -121,10 +160,32 @@ side_option_headbody {
 	height: 40px;
 }
 
+.header-images-gray {
+	background: url('../images/header_gray.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	/*font-family: arial;*/
+}
+
+.header-images-red {
+	background: url('../images/header_red.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	/*font-family: arial;*/
+}
+
+.header-images-green {
+	background: url('../images/header_green.png');
+	background-repeat: no-repeat;
+	height: 40px;
+	/*font-family: arial;*/
+}
+
 .header-images {
 	background: url('../images/header.png');
 	background-repeat: no-repeat;
 	height: 40px;
+	/*padding-right: 50px;*/
 	/*font-family: arial;*/
 }
 
@@ -3249,10 +3310,42 @@ button:hover {
 
 .the-home-wrapper-options a {
 	color: #666666;
+	text-align: center;
 }
 
 .the-home-wrapper-options a:hover {
 	color: #adad89;
+	text-align: center;
+}
+
+.the-home-wrapper-options-red a {
+	color: #666666;
+	text-align: center;
+}
+
+.the-home-wrapper-options-red a:hover {
+	color: #B5A17F;
+	text-align: center;
+}
+
+.the-home-wrapper-options-green a {
+	color: #666666;
+	text-align: center;
+}
+
+.the-home-wrapper-options-green a:hover {
+	color: #8FAD84;
+	text-align: center;
+}
+
+.the-home-wrapper-options-gray a {
+	color: #666666;
+	text-align: center;
+}
+
+.the-home-wrapper-options-gray a:hover {
+	color: #95A4BD;
+	text-align: center;
 }
 
 .home_btn_text {

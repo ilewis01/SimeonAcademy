@@ -2,38 +2,33 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white">
-	<div class="container">
-        <div class="row">                
-            <div class="col-md-12">
-            	<div id='center-page' style='margin-bottom:23px;'>
-            		<em>
-            			<h3>Welcome back, {{user.first_name}}!</h3>
-            		</em>
-            	</div>
+<body onLoad="javascript: searchRadio();" class="gradient-white">
+
+    <div class='header-images-green'>
+      	<div class="container">
+            <div class="row">                   
+                  <div class="col-md-12">
+                        <div id='header-text'>
+                              BILLING & INVOICES
+                        </div>
+                  </div>
             </div>
 
-            <div class="col-md-3 col-sm-3" style='background-color:red;'></div>
-            <div class="col-md-3 col-sm-3" style='background-color:green;'></div>
-            <div class="col-md-3 col-sm-3" style='background-color:blue;'></div>
-            <div class="col-md-3 col-sm-3" style='background-color:orange;'></div>
-        </div>
+            <div style='margin-bottom:18%;'></div>
 
-        <div style='margin-bottom:15%;'></div>
-
-        <div class='the-home-wrapper-options'>
+        <div class='the-home-wrapper-options-green'>
 	        <div class="row"> <!-- TOP ROW OF BUTTONS -->
 	        	<div class="col-sm-2 col-md-2"></div> <!-- LEFT MARGIN -->
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchClients/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass'>
-			           							<img src="{% static 'images/new_images.session.png' %}" alt="" class='image_icon'>
+			           							<img src="{% static 'images/exit_form.png' %}" alt="" class='image_icon'>
 			           						</div>
 			           					</div>
 			           				</div>
@@ -41,7 +36,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Start Session
+			           			View Outstanding
 			           		</div>
 			           	</a>
 	        		</div>
@@ -49,11 +44,11 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchClientMain/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass'>
 			           							<img src="{% static 'images/client_search.png' %}" alt="" class='image_icon_cog'>
 			           						</div>
@@ -63,7 +58,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Search Clients
+			           			Accept Payment
 			           		</div>
 			           	</a>
 	        		</div>
@@ -71,11 +66,11 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchFormMain/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass3'>
 			           							<img src="{% static 'images/search_form.png' %}" alt="" class='image_icon'>
 			           						</div>
@@ -85,7 +80,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Search Forms
+			           			Client History
 			           		</div>
 			           	</a>
 	        		</div>
@@ -93,11 +88,11 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/appointmentMain/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass2'>
 			           							<img src="{% static 'images/calendar.png' %}" alt="" class='image_icon4'>
 			           						</div>
@@ -107,14 +102,14 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Appointments
+			           			New Invoice
 			           		</div>
 			           	</a>
 	        		</div>
 	        	</div>
 
 	        	<div class="col-sm-2 col-md-2"></div> <!-- RIGHT MARGIN -->
-	        </div> <!-- END BOTTOM ROW OF BUTTONS -->
+	        </div> <!-- END TOP ROW OF BUTTONS -->
 
 	        <div style='margin-bottom:3%;'></div>
 
@@ -123,11 +118,11 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/billingMain/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass3'>
 			           							<img src="{% static 'images/money.png' %}" alt="" class='image_icon'>
 			           						</div>
@@ -137,7 +132,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Billing
+			           			Search Invoice
 			           		</div>
 			           	</a>
 	        		</div>
@@ -145,11 +140,11 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/AdministrativeMain/">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass8'>
 			           							<img src="{% static 'images/cogs.png' %}" alt="" class='image_icon_cog'>
 			           						</div>
@@ -159,7 +154,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Administrative
+			           			Recent Activity
 			           		</div>
 			           	</a>
 	        		</div>
@@ -167,11 +162,33 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="#">
+	        			<a href="//">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
+			           					<div class='round-button-circle-green'>
+			           						<div class='roundIconClass8'>
+			           							<img src="{% static 'images/cogs.png' %}" alt="" class='image_icon_cog'>
+			           						</div>
+			           					</div>
+			           				</div>
+			           			</div>
+			           		</div>
+
+			           		<div class='home_btn_text'>
+			           			Annual
+			           		</div>
+			           	</a>
+	        		</div>
+	        	</div>
+
+	        	<div class="col-sm-2 col-md-2">
+	        		<div>
+	        			<a href="/adminHome/">
+			           		<div>
+			           			<div class='center-rounded'>
+			           				<div class='round-button'>
+			           					<div class='round-button-circle-green'>
 			           						<div class='roundIconClass2'>
 			           							<img src="{% static 'images/email.png' %}" alt="" class='image_icon'>
 			           						</div>
@@ -181,42 +198,24 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Email
+			           			Home
 			           		</div>
 			           	</a>
 	        		</div>
 	        	</div>
 
-	        	<div class="col-sm-2 col-md-2">
-	        		<div>
-	        			<a href="/logout/">
-			           		<div>
-			           			<div class='center-rounded'>
-			           				<div class='round-button'>
-			           					<div class='round-button-circle'>
-			           						<div class='roundIconClass7'>
-			           							<img src="{% static 'images/exit_door.png' %}" alt="" class='image_icon'>
-			           						</div>
-			           					</div>
-			           				</div>
-			           			</div>
-			           		</div>
-
-			           		<div class='home_btn_text'>
-			           			Logout
-			           		</div>
-			           	</a>
-	        		</div>
-	        	</div>
-
-	        	<div class="col-sm-2 col-md-2"></div> <!-- RIGHT MARGIN -->
-	        </div> <!-- END BOTTOM ROW OF BUTTONS -->
-	    </div> <!-- END HOME OPTIONS WRAPPER -->
-
+	        	<div class="col-sm-2 col-md-2"></div> <!-- LEFT MARGIN -->
         </div>
     </div>
+
+    <div class="container">
+        <div class="row">                   
+            <div class="col-md-12">
+                  
+            </div>
+        </div>
+    </div>
+
 </body>
-
-
-
 {% endblock %}
+

@@ -12,6 +12,11 @@ urlpatterns = patterns('',
     url(r'^invalid_login/$', 'assessment.views.invalid_login'),
     url(r'^index/$', 'assessment.views.index'),
     url(r'^adminHome/$', 'assessment.views.adminHome'),
+    url(r'^searchClientMain/$', 'assessment.views.searchClientMain'),
+    url(r'^searchFormMain/$', 'assessment.views.searchFormMain'),
+    url(r'^appointmentMain/$', 'assessment.views.appointmentMain'),
+    url(r'^billingMain/$', 'assessment.views.billingMain'),
+    url(r'^AdministrativeMain/$', 'assessment.views.AdministrativeMain'),
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),

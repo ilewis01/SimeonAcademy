@@ -161,6 +161,120 @@ def all_discharged_clients(request):
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## HOME PAGE VIEWS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@login_required(login_url='/index')
+def searchClientMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/searchClient.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def searchFormMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/searchForm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def appointmentMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/appointments.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def billingMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/billing.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def AdministrativeMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/admin.html', content, context_instance=RequestContext(request))
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## COUNSELOR VIEWS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @login_required(login_url='/index')
