@@ -17,6 +17,9 @@ urlpatterns = patterns('',
     url(r'^appointmentMain/$', 'assessment.views.appointmentMain'),
     url(r'^billingMain/$', 'assessment.views.billingMain'),
     url(r'^AdministrativeMain/$', 'assessment.views.AdministrativeMain'),
+    url(r'^uniClientSearch/$', 'assessment.views.uniClientSearch'),
+    url(r'^uniFormSearch/$', 'assessment.views.uniFormSearch'),
+    url(r'^emailMain/$', 'assessment.views.emailMain'),
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),

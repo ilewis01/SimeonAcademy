@@ -1,29 +1,16 @@
-{% extends "base.html" %}
-{% block body %}
 {% load staticfiles %}
 
-<body onLoad="javascript: searchRadio();" class="gradient-white">
+<head>
+  <title>Simeon Academy</title>
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
 
-    <div class='header-images'>
-      	<div class="container">
-            <div class="row">                   
-                  <div class="col-md-12">
-                        <div id='header-text'>
-                              FORM SEARCH
-                        </div>
-                  </div>
-            </div>
-        </div>
-    </div>
+<body class='session_exit_body' onLoad='javascript: getClientSearchStuff();'>
+  <h1>Universal form search</h1>
 
-    <div class="container">
-        <div class="row">                   
-            <div class="col-md-12">
-                  
-            </div>
-        </div>
-    </div>
-
+  <form action='//' method='post' id='f_form'> {% csrf_token %}
+    <input type='hidden' name='' id=''>
+    <button onClick='javascript: window.close();'>Back</button>
+  </form>
+  <script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
 </body>
-{% endblock %}
-

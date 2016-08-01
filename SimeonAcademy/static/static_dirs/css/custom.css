@@ -3391,6 +3391,11 @@ button:hover {
 	margin-left: 5px;
 }
 
+.colorImgDivCal {
+	margin-left: 6px;
+	margin-top: 3px;
+}
+
 .newImgColor1 {
 	width:72%;
 }
@@ -3406,6 +3411,163 @@ button:hover {
 .newImgColor4 {
 	width:47%;
 }
+
+.headImageClass {
+	width:125px;
+}
+
+.headImageWrapper {
+	/*width: 100%;
+	margin: auto;*/
+}
+
+#cli_search_head_uniF {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 22px;
+	padding-bottom: 2%
+}
+
+.uniSearchWrapper {
+	width: 94%;
+	padding: 3%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	height: 61%;
+}
+
+.mainClientSearcherContainer input {
+	width: 180px;
+	height: 23px;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+.sTypeBtnWrapperF {
+	width: 99%;
+	padding: 3px;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	height:55px;
+	margin-top: 3px;
+	text-align: center;
+}
+
+.sTypeBtnWrapperF button {
+	width:80px;
+	height:25px;
+	font-size: 13px;
+	margin-top: 15px;
+}
+
+.mainClientSearcherContainer td {
+	height: 30px;
+}
+
+.mainClientSearcherContainer table {
+	margin-left: 33px;
+}
+
+#cliSearchQuest {
+	font-weight: bold;
+	font-size: 14px;
+	font-style: italic;
+}
+
+#cliSearchQuestSub {
+	font-style: italic;
+	font-size: 11px;
+	margin-left: 10px;
+}
+
+#cliSearchQuestMar {
+	padding-bottom: 11px;
+	font-weight: bold;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.popSearchClientSession {
+	width:55px;
+	padding-right: 15px;
+}
+
+.popSearchClientGeneral {
+	width:50px;
+	padding-right: 10px;
+}
+
+.popSearchForm {
+	width:60px;
+}
+
+.popSearchFormDiv {
+	margin-bottom: 50px;
+}
+
+.main_s_image_search_head {
+	width: 94%;
+	padding: 3%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-bottom: 3px;
+	height: 50px;
+}
+
+.main_s_image_search_head p {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 22px;
+}
+
+#searchInstructionText {
+	text-align: center;
+	font-style: italic;
+	font-size: 13px;
+	padding-bottom: 20px;
+	color:#0881c6;
+}
+
+.apptImgSize {
+	width:65%;
+}
+
+.apptImgSize1 {
+	width:100%;
+}
+
+.appImgMarginXM {
+	margin-top: 17px;
+}
+
+.appImgMargin {
+	margin-top: 14px;
+}
+
+.appImgMarginLt {
+	margin-top: 14px;
+}
+
+.appImgMarginSm {
+	margin-left:3px;
+	margin-top: 3px;
+}
+
+.apptImgSize1Small2 {
+	width:60%;
+}
+
+.apptImgSize1Small {
+	width:75%;
+}
+
+
+
+
+
 
 
 

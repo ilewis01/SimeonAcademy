@@ -460,6 +460,62 @@ function submit_session() {
 	}
 }
 
+function uniClientSearchF(sType) {
+	var w = 400, h = 500;
+	sType = String(sType);
+	grab('cSearch').value = sType;
+	openPopUp('auto', '/uniClientSearch/',w, h);
+}
+
+function uniFormSearchF() {
+	var w = 400, h = 500;
+	openPopUp('auto', '/uniFormSearch/',w, h);
+}
+
+function getClientSearchStuff() {
+	var sType = getPopParent('cSearch').value;
+	sType = String(sType);
+	
+	if (sType === 'session') {
+		grab('sImage').src = '/static/images/new_images/session.png';
+		grab('sImage').className = 'popSearchClientSession';
+		grab('sTypeText').innerHTML = 'Begin Client Session';
+	}
+	else if (sType === 'general') {
+		grab('sImage').src = '/static/images/new_images/searchClient.png';
+		grab('sImage').className = 'popSearchClientGeneral';
+		grab('sTypeText').innerHTML = 'Search Client Database';
+	}
+}
+
+function correctClientDOBForm() {
+	var m = grab('c_mob');
+	var d = grab('c_dob');
+	var y = grab('c_yob');
+	var leap = (y.value) % 4;
+
+	if (leap === 0) {
+		if (m.selectedIndex === 2) {
+			if (d.selectedIndex > 29) {
+				d.selectedIndex = 0;
+			}
+		}
+	}
+	else if (d.selectedIndex > 28) {
+		d.selectedIndex = 0;
+	}
+
+	if (m.selectedIndex === 4 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+	else if (m.selectedIndex === 9 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+	else if (m.selectedIndex === 11 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+}
+
 function toClientOptions(form_id, hasUnfinished) {
 	hasUnfinished = String(hasUnfinished);
 
@@ -6782,7 +6838,6 @@ function sessionChecking(btnType) {
 	var actionApp = grab('tracking').value;
 	actionApp = String(actionApp);
 	btn = String(btnType);
-	grab('nextUrl').value = btn;
 
 	if (actionApp === 'Session') {		
 		var w = 550;
@@ -6796,13 +6851,13 @@ function sessionChecking(btnType) {
 			form.action = '/adminHome/';
 		}
 		else if (btn === 'bill') {
-			form.action = '//'
+			form.action = '/billingMain/'
 		}
 		else if (btn === 'admin') {
-			form.action = '//'
+			form.action = '/AdministrativeMain/'
 		}
 		else if (btn === 'appt') {
-			form.action = '//'
+			form.action = '/appointmentMain/'
 		}
 		else if (btn === 'logout') {
 			form.action = '/logout/'

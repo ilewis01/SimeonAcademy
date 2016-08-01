@@ -4,7 +4,7 @@
 
 <body class="gradient-white">
 	<div class="container">
-        <div class="row">                
+        <div class="row">
             <div class="col-md-12">
             	<div id='center-page' style='margin-bottom:23px;'>
             		<em>
@@ -19,6 +19,12 @@
             <div class="col-md-3 col-sm-3" style='background-color:orange;'></div>
         </div>
 
+        <input type='hidden' name='cSearch' id='cSearch' value=''>
+
+        <!-- <div class='headImageWrapper'>
+        	<img src="{% static 'images/new_images/home.png' %}" alt="" class='headImageClass'>
+        </div> -->
+
         <div style='margin-bottom:15%;'></div>
 
         <div class='the-home-wrapper-options'>
@@ -27,7 +33,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchClients/">
+	        			<a href="javascript: uniClientSearchF('session');">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -41,7 +47,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Start Session
+			           			Begin Session
 			           		</div>
 			           	</a>
 	        		</div>
@@ -49,7 +55,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchClientMain/">
+	        			<a href="javascript: uniClientSearchF('general');">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -71,7 +77,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="/searchFormMain/">
+	        			<a href="javascript: uniFormSearchF();">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -98,7 +104,7 @@
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
 			           					<div class='round-button-circle'>
-			           						<div class='roundIconClass2'>
+			           						<div class='colorImgDivCal'>
 			           							<img src="{% static 'images/new_images/calendar.png' %}" alt="" class='newImgColor'>
 			           						</div>
 			           					</div>
@@ -159,7 +165,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			Administrative
+			           			Tools
 			           		</div>
 			           	</a>
 	        		</div>
@@ -167,7 +173,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="#">
+	        			<a href="/emailMain/">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>

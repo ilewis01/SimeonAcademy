@@ -273,6 +273,28 @@ def AdministrativeMain(request):
 			content['title'] = "Simeon Academy"
 			return render_to_response('counselor/main/admin.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def emailMain(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/email.html', content, context_instance=RequestContext(request))
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## COUNSELOR VIEWS+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -478,6 +500,71 @@ def searchClients(request):
 		else:
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/search_clients.html', content)
+
+@login_required(login_url='/index')
+def uniClientSearch(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			date = datetime.now()
+			temp = []
+			years = []
+			year = date.year
+			year = int(year)
+			firstYear = year - 80
+			lastYear = year - 5
+
+			for y in range(firstYear, lastYear):
+				temp.append(y)
+
+			count = len(temp) - 1
+			for i in range(count):
+				years.append(temp[count])
+				count -= 1
+
+			content['years'] = years
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/main/searchClient.html', content)
+
+@login_required(login_url='/index')
+def uniFormSearch(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/main/searchForm.html', content)
 
 @login_required(login_url='/index')
 def clientSearchResults(request):
