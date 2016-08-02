@@ -3608,6 +3608,75 @@ button:hover {
 	margin:auto;
 }
 
+.clientSearchResultsInfoWrapper {
+	width: 95%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+	background-color: #cbe3f0;
+}
+
+.clientSearchResultsInfoWrapper table {
+	
+}
+
+.nextSearchPageArrow {
+	width: 22px;
+}
+
+.clientsResultsContainer {
+	width: 95%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+	height: 415px;
+}
+
+.client_search_img {
+	width: 70px;
+	height: 70px;
+	border: 2px solid black;
+	margin-right: 5px;
+}
+
+.client_search_img:hover {
+	opacity: 0.3;
+}
+
+#s_resultInfoQues {
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	color: #adad89;
+}
+
+#s_resultInfoText {
+	font-size: 12px;
+}
+
+#s_resultInfoText span {
+	font-style: italic;
+	font-weight: none;
+	color: #666666;
+}
+
+.c_search_count {
+	width: 40px;
+	text-align: left;
+	/*height: 70px;*/
+}
+
+#csInfoText {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+
+
+
+
 
 
 

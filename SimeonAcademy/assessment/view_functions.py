@@ -393,6 +393,43 @@ def processDataMatch(fType, text1, text2):
 			break
 	return isMatch
 
+def snagSearchPhone(phone):
+	result = None
+	if fieldIsEmpty(phone) == False:
+		phone = prepareNumbersearch(phone)
+		result = '('
+		result += phone[0]
+		result += phone[1]
+		result += phone[2]
+		result += ') '
+		result += phone[3]
+		result += phone[4]
+		result += phone[5]
+		result += '-'
+		result += phone[6]
+		result += phone[7]
+		result += phone[8]
+		result += phone[9]
+	return result
+
+def snagSearchSSN(ssn):
+	result = None
+	if fieldIsEmpty(ssn) == False:
+		ssn = prepareNumbersearch(ssn)
+		result = ''
+		result += ssn[0]
+		result += ssn[1]
+		result += ssn[2]
+		result += '-'
+		result += ssn[3]
+		result += ssn[4]
+		result += '-'
+		result += ssn[5]
+		result += ssn[6]
+		result += ssn[7]
+		result += ssn[8]
+	return result
+
 def selectToDateObject(request):
 	m = request.POST.get('c_mob')
 	d = request.POST.get('c_dob')
@@ -488,21 +525,60 @@ def clientSort(includeDischarge, sortBy):
 			for c2 in za:
 				if c2.isDischarged == False:
 					result.append(c2)
+	return result
 
-	print 'SORTED NAMES...'
-	for r in result:
-		print str(r.lname) + ', ' + str(r.fname)
+def fetchNumSearchPages(numMatches, numPerPage):
+	numPages = 0
+	mod = numMatches % numPerPage
+
+	if mod != 0:
+		numPages = 1
+
+	remain = numMatches - mod
+	remain /= numPerPage
+	numPages += remain
+	return numPages
+
+def grabSearchPageResults(page, history, numPerPage):
+	result = []
+	page = int(page)
+	numPerPage = int(numPerPage)
+	startIndex = (page * numPerPage) - numPerPage
+	endIndex = startIndex + numPerPage
+	numMatches = len(history)
+
+	numPages = fetchNumSearchPages(numMatches, numPerPage)
+	if page == int(numPages):
+		endIndex = numMatches % numPerPage
+
+	for i in range(startIndex, endIndex):
+		result.append(history[i])
+	return result
+
+def snagSearchPages(history, numPerPage, page):
+	result = {}
+	numMatches = len(history)
+	numPages = fetchNumSearchPages(numMatches, numPerPage)
+	result['numPages'] = numPages
+	result['entries'] = grabSearchPageResults(page, history, numPerPage) 
 	return result
 
 def completeClientSearch(request, sortBy):
 	result = []
+	count = 1
 	includeDischarge 	= request.POST.get('incD')
 
 	clients = clientSort(includeDischarge, sortBy)
 
 	for c in clients:
 		if universal_client_match(request, c) == True:
-			result.append(c)
+			data = {}
+			data['ssn'] = snagSearchSSN(c.ss_num)
+			data['phone'] = snagSearchPhone(c.phone)
+			data['number'] = count
+			data['client'] = c
+			result.append(data)
+			count += 1
 
 	return result
 
@@ -758,7 +834,6 @@ def getInvoiceTotal(session):
 	total = total + session.invoice.total6
 	session.invoice.grandTotal = int(total)
 	session.save()
-	print 'GRAND TOTAL: ' + str(total)
 
 
 def isMultiAM():
@@ -3624,7 +3699,6 @@ def amDhExist(drug_history):
 
 def setAmSectionComplete(am, section):
 	section = str(section)
-	print "Current section to complete: " + str(section)
 
 	if section == '/am_demographic/':
 		am.demographicComplete = True
@@ -6977,7 +7051,6 @@ def saveMhStress(request, mh):
 
 def saveMhFamily(request, mh):
 	mh.familyHistory.isdepressed 			= truePythonBool(request.POST.get('isdepressed'))
-	print "IS DEPRESSED: " + str(request.POST.get('isdepressed'))
 	mh.familyHistory.isadd 					= truePythonBool(request.POST.get('isadd'))
 	mh.familyHistory.isbedWetting 			= truePythonBool(request.POST.get('isbedWetting'))
 	mh.familyHistory.isbipolar 				= truePythonBool(request.POST.get('isbipolar'))

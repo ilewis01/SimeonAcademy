@@ -16,7 +16,78 @@
 				</tr>
 			</table>
 		</div>
-	</div>	
+	</div>
+
+	<div class='clientSearchResultsInfoWrapper'>
+		<div>
+			<table>
+				<tr>
+					<td><div id='csInfoText'>{{numMatches}} {{matchWord}} Found</div></td>
+					<td><img src="{% static 'images/nextLeft.png' %}" alt="" class='nextSearchPageArrow'></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class='clientsResultsContainer'>
+		<table>
+			{% for m in matches %}
+			<tr>
+				<td>
+					<div class='c_search_count'>{{m.number}}.<div>
+				</td>
+				<td>
+					<a href="">
+						<form action='' method='post' id=''> {% csrf_token %}
+							<input type='hidden' method='post' id=''>
+						</form>
+						<table class='scs_table_result'>
+							<tr>
+								<td>
+									<td><div><img src="/static/media/{{m.client.photo}}" alt="search_img" class='client_search_img'></div></td>
+								</td>
+
+								<td>
+									<div class='control_hover_special'>
+										<table>
+											<tr>
+												<td>
+													<div id='s_resultInfoText'><b><u>{{m.client.lname}}, {{m.client.fname}}, {{m.client.middleInit}}</u>&nbsp&nbsp&nbsp<span>({{m.client.clientID}})</b></span></div>
+												</td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>SSN:</div></td>
+												<td><div id='s_resultInfoText'>{{m.ssn}}</div></td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>DOB:</div></td>
+												<td><div id='s_resultInfoText'>{{m.client.dob}}</div></td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>Phone:</div></td>
+												<td><div id='s_resultInfoText'>{{m.phone}}</div></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</a>
+				</td>
+				<td><div style='margin-bottom:100px;'></div></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
 </body>

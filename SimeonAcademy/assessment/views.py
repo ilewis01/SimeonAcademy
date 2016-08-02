@@ -40,7 +40,8 @@ truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSess
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
-fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch
+fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch, \
+snagSearchPages
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -584,12 +585,23 @@ def clientSearchResults(request):
 
 		else:
 			sortBy = request.POST.get('sortBy')
+			page = request.POST.get('page')
 			matches = completeClientSearch(request, sortBy)
+			numMatches = len(matches)
+			pageData = snagSearchPages(matches, 4, page)
 
+			if numMatches == 1:
+				content['matchWord'] = 'Result'
+			else:
+				content['matchWord'] = 'Results'
+
+			content['numPages']	= pageData['numPages']
+			content['page'] 	= page
 			content['image'] 	= request.POST.get('image')
 			content['sType'] 	= request.POST.get('cSearch')
 			content['header'] 	= request.POST.get('header')
-			content['matches'] 	= matches
+			content['matches'] 	= pageData['entries']
+			content['numMatches'] = numMatches
 			return render_to_response('counselor/main/clientSearchResults.html', content)
 
 @login_required(login_url='/index')
