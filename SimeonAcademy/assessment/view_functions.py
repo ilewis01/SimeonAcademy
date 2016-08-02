@@ -236,6 +236,23 @@ def filterSS(ss_num):
 			result += s
 	return result
 
+def fetchActiveClients():
+	result = []
+	clients = Client.objects.all()
+
+	for c in clients:
+		if c.isDischarged == False:
+			result.append(c)
+
+	return result
+
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#********************************************************* SEARCH CLIENTS *******************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
+
+
 def cleanWhiteSpace(text):
 	text = str(text)
 	result = ''
@@ -243,6 +260,258 @@ def cleanWhiteSpace(text):
 		if t != ' ':
 			result += t
 	return result
+
+def fieldIsEmpty(text):
+	text = str(text)
+	proceed = True
+	isEmpty = False
+
+	if text == None or text == '' or text == ' ':
+		isEmpty = True
+		proceed = False
+
+	if proceed == True:
+		text = cleanWhiteSpace(text)
+		if len(text) == 0:
+			isEmpty = True
+	return isEmpty
+
+def grabSearchField(text):
+	result = ''
+	text = str(text)
+	text = cleanWhiteSpace(text)
+	for t in text:
+		t = t.lower()
+		result += t
+	return result
+
+def grabSearchParameters(request):
+	result 		= {}
+
+	fname 		= request.POST.get('fname')
+	mi 			= request.POST.get('mi')
+	lname 		= request.POST.get('lname')
+	phone 		= request.POST.get('phone')
+	ssn 		= request.POST.get('ssn')
+	clientID 	= request.POST.get('clientID')
+	yob 		= request.POST.get('c_yob')
+
+	yob = str(yob)
+
+	result['fname'] 	= False
+	result['mi'] 		= False
+	result['lname'] 	= False
+	result['phone'] 	= False
+	result['ssn'] 		= False
+	result['clientID'] 	= False
+	result['dob'] 		= False
+
+	if fieldIsEmpty(fname) == False:
+		result['fname'] = True
+
+	if fieldIsEmpty(mi) == False:
+		result['mi'] = True
+
+	if fieldIsEmpty(lname) == False:
+		result['lname'] = True
+
+	if fieldIsEmpty(phone) == False:
+		result['phone'] = True
+
+	if fieldIsEmpty(ssn) == False:
+		result['ssn'] = True
+
+	if fieldIsEmpty(clientID) == False:
+		result['clientID'] = True
+
+	if yob != '0':
+		result['dob'] = True
+	return result
+
+def prepareNumbersearch(ssn):
+	result = ''
+	ssn = str(ssn)
+	ssn = cleanWhiteSpace(ssn)
+
+	for s in ssn:
+		if s=='0' or s=='1' or s=='2' or s=='3' or s=='4' or s=='5' or s=='6' or s=='7' or s=='8' or s=='9':
+			result += s
+	return result
+
+def hasCorrectChars(numberChars, text):
+	has3 = False
+	if numberChars <= len(text):
+		has3 = True
+	return has3
+
+def newWordCut(index, text):
+	result = ''
+	for i in range(index, len(text)):
+		result += text[i]
+	return result
+
+def grabChars(index, text1, text2):
+	result = {}
+	numChars = len(text1)
+	word = newWordCut(index, text2)
+	text = ''
+	proceed = hasCorrectChars(numChars, word)
+
+	if proceed == True:
+		for i in range(numChars):
+			text += word[i]
+		result['text'] = text
+	result['proceed'] = proceed
+	return result
+
+def prepareSearchField(fType, text):
+	result = None
+	fType = str(fType)
+	if fType == 'number':
+		result = prepareNumbersearch(text)
+	elif fType == 'text':
+		result = grabSearchField(text)
+	return result
+
+def fieldMatch(fType, index, text1, text2):
+	isMatch = False
+	text1 = prepareSearchField(fType, text1)
+	text2 = prepareSearchField(fType, text2)
+	data = grabChars(index, text1, text2)
+
+	if data['proceed'] == True:
+		if data['text'] == text1:
+			isMatch = True
+	return isMatch
+
+def processDataMatch(fType, text1, text2):
+	isMatch = False
+
+	for i in range(len(text2)):
+		if fieldMatch(fType, i, text1, text2) == True:
+			isMatch = True
+			break
+	return isMatch
+
+def selectToDateObject(request):
+	m = request.POST.get('c_mob')
+	d = request.POST.get('c_dob')
+	y = request.POST.get('c_yob')
+	m = int(m)
+	d = int(d)
+	y = int(y)
+	date = datetime(y, m, d)
+	date = date.date()
+	return date
+
+def universal_client_match(request, client):
+	isMatch = False
+	fm 		= True
+	lm 		= True
+	mm		= True
+	pm 		= True
+	sm 		= True
+	cm 		= True
+	dm 		= True
+	search 		= grabSearchParameters(request)
+
+	if search['fname'] == True:
+		fname = request.POST.get('fname')
+		cfn = str(client.fname)
+		if processDataMatch('text', fname, cfn) == False:
+			fm = False
+
+	if search['lname'] == True:
+		lname = request.POST.get('lname')
+		cln = str(client.lname)
+		if processDataMatch('text', lname, cln) == False:
+			lm = False
+
+	if search['mi'] == True:
+		mi = request.POST.get('mi')
+		cmi = str(client.middleInit)
+		if processDataMatch('text', mi, cmi) == False:
+			mm = False
+
+	if search['phone'] == True:
+		phone = request.POST.get('phone')
+		cph = str(client.phone)
+		if processDataMatch('number', phone, cph) == False:
+			pm = False
+
+	if search['ssn'] == True:
+		ssn = request.POST.get('ssn')
+		csn = str(client.ss_num)
+		if processDataMatch('number', ssn, csn) == False:
+			sm = False
+
+	if search['clientID'] == True:
+		clientID = request.POST.get('clientID')
+		cci = str(client.clientID)
+		if processDataMatch('text', cci, clientID) == False:
+			cm = False
+
+	if search['dob'] == True:
+		dob = selectToDateObject(request)
+		cdob = client.dob
+		dob = str(dob)
+		cdob = str(cdob)
+		if processDataMatch('number', dob, cdob) == False:
+			dm = False
+
+	if fm==True and lm==True and mm==True and pm==True and sm==True and cm==True and dm==True:
+		isMatch = True
+	return isMatch
+
+def clientSort(includeDischarge, sortBy):
+	result = []
+
+	if includeDischarge == None:
+		includeDischarge = False
+	else:
+		includeDischarge = True
+
+	if sortBy == 'az':
+		az = Client.objects.all().order_by('lname')
+		if includeDischarge == True:
+			result = az
+		else:
+			for c1 in az:
+				if c1.isDischarged == False:
+					result.append(c1)
+
+	elif sortBy == 'za':
+		za = Client.objects.all().order_by('-lname')
+		if includeDischarge == True:
+			result = za
+		else:
+			for c2 in za:
+				if c2.isDischarged == False:
+					result.append(c2)
+
+	print 'SORTED NAMES...'
+	for r in result:
+		print str(r.lname) + ', ' + str(r.fname)
+	return result
+
+def completeClientSearch(request, sortBy):
+	result = []
+	includeDischarge 	= request.POST.get('incD')
+
+	clients = clientSort(includeDischarge, sortBy)
+
+	for c in clients:
+		if universal_client_match(request, c) == True:
+			result.append(c)
+
+	return result
+
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#****************************************************** END SEARCH ALGORITHM ****************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
+
 
 def setUpNumberSearch(text):
 	text = str(text)

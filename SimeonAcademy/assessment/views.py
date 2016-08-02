@@ -40,7 +40,7 @@ truePythonBool, shouldDeleteSession, getExistingSessionForms, refreshCurrentSess
 setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFile, \
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
-fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems
+fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -583,49 +583,14 @@ def clientSearchResults(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			search_type = request.POST.get('m_search_type')
+			sortBy = request.POST.get('sortBy')
+			matches = completeClientSearch(request, sortBy)
 
-			s_results = None
-			phrase = None
-			searched = None
-
-			if search_type == "ss_num":
-				getThis = request.POST.get('ss_num', '')
-				search_type = "social security number"
-				s_results = getClientBySS(getThis)
-				searched = getThis
-			elif search_type == "name":
-				getFirst = request.POST.get('fname', '')
-				getLast = request.POST.get('lname', '')
-				search_type = "name"
-				s_results = getClientByName(getFirst, getLast)
-				searched = str(getFirst) + " " + str(getLast)
-			elif search_type == "dob":
-				getThis = request.POST.get('dob', '')
-				search_type = "birthdate"
-				s_results = getClientByDOB(getThis)
-				searched = getThis
-			elif search_type == "id":
-				getThis = request.POST.get('client_ID', '')
-				search_type = "client ID"
-				s_results = getClientByID(getThis)
-				searched = getThis
-
-			matches = None
-
-			matches = len(s_results)
-			if matches == 1:
-				phrase = 'result'
-			else:
-				phrase = 'results'
-
-			content['title'] = "Client Search | Simeon Academy"
-			content['matches'] = matches
-			content['results'] = s_results
-			content['phrase'] = phrase
-			content['type'] = search_type
-			content['searched'] = searched
-			return render_to_response('counselor/client/client_search_results.html', content)
+			content['image'] 	= request.POST.get('image')
+			content['sType'] 	= request.POST.get('cSearch')
+			content['header'] 	= request.POST.get('header')
+			content['matches'] 	= matches
+			return render_to_response('counselor/main/clientSearchResults.html', content)
 
 @login_required(login_url='/index')
 def clientHistory(request):

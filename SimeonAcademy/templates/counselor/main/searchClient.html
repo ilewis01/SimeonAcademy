@@ -8,6 +8,10 @@
 <body class='session_exit_body' onLoad='javascript: getClientSearchStuff();'>
   <form action='' method='post' id='sc_form'> {% csrf_token %}
     <input type='hidden' name='cSearch' id='cSearch' value=''>
+    <input type='hidden' name='image' id='image' value=''>
+    <input type='hidden' name='header' id='header' value=''>
+    <input type='hidden' name='useDischarged' id='useDischarged' value=''>
+    <input type='hidden' name='sortBy' id='sortBy' value='az'>
 
     <div class='main_s_image_search_head'>
       <table>
@@ -40,17 +44,17 @@
 
           <tr>
             <td><div id='cliSearchQuest'>Phone:</div></td>
-            <td><input type='text' name='' id='' value=''></td>
+            <td><input type='text' name='phone' id='phone' value=''></td>
           </tr>
 
           <tr>
             <td><div id='cliSearchQuest'>SSN:</div></td>
-            <td><input type='text' name='' id='' value=''></td>
+            <td><input type='text' name='ssn' id='ssn' value=''></td>
           </tr>
 
           <tr>
             <td><div id='cliSearchQuest'>Client ID:</div></td>
-            <td><input type='text' name='' id='' value=''></td>
+            <td><input type='text' name='clientID' id='clientID' value=''></td>
           </tr>
         </table>
 
@@ -59,7 +63,7 @@
             <td><div id='cliSearchQuestMar'>DOB:</div></td>
             <!-- <td><div id='cliSearchQuestSub'>month:</div></td> -->
             <td>
-              <select id='c_mob' onChange="javascript: correctClientDOBForm();">
+              <select id='c_mob' name='c_mob' onChange="javascript: correctClientDOBForm();">
                 <option value='0'>Select</option>
                 <option value='1'>January</option>
                 <option value='2'>February</option>
@@ -79,7 +83,7 @@
 
             <!-- <td><div id='cliSearchQuestSub'>day:</div></td> -->
             <td>
-              <select id='c_dob' onChange="javascript: correctClientDOBForm();">
+              <select id='c_dob' name='c_dob'onChange="javascript: correctClientDOBForm();">
                 <option value='0'>Select</option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -116,9 +120,9 @@
               <div id='cliSearchQuestSub'>day</div>
             </td>
 
-            <!-- <td><div id='cliSearchQuestSub'>year:</div></td> -->
             <td>
-              <select id='c_yob' onChange="javascript: correctClientDOBForm();">
+              <!-- <div id='cliSearchQuestSub'>year</div> -->
+              <select id='c_yob' name='c_yob' onChange="javascript: correctClientDOBForm();">
                 <option value='0'>Select</option>
                 {% for y in years %}
                 <option value='{{y}}'>{{y}}</option>
@@ -129,7 +133,13 @@
           </tr>
         </table>
       </div>
+
+      <div class='cSearchCheckMainF'>
+        <input type='checkbox' name='incD' id='incD' value='False' onClick='javascript: setClientSearchCheck();'>
+        Include discharged clients
+      </div>
     </div>
+
   </form>
 
   <div class='sTypeBtnWrapperF'>

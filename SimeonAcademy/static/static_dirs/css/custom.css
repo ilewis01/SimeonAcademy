@@ -164,21 +164,24 @@ side_option_headbody {
 	background: url('../images/header_gray.png');
 	background-repeat: no-repeat;
 	height: 40px;
-	/*font-family: arial;*/
 }
 
 .header-images-red {
 	background: url('../images/header_red.png');
 	background-repeat: no-repeat;
 	height: 40px;
-	/*font-family: arial;*/
 }
 
 .header-images-green {
 	background: url('../images/header_green.png');
 	background-repeat: no-repeat;
 	height: 40px;
-	/*font-family: arial;*/
+}
+
+.header-images-green-sm {
+	background: url('../images/header_green.png');
+	background-repeat: no-repeat;
+	height: 40px;
 }
 
 .header-images {
@@ -3431,10 +3434,9 @@ button:hover {
 .uniSearchWrapper {
 	width: 94%;
 	padding: 3%;
-	margin: auto;
 	border: 1px solid black;
 	border-radius: 5px;
-	height: 61%;
+	height: 65%;
 }
 
 .mainClientSearcherContainer input {
@@ -3445,13 +3447,10 @@ button:hover {
 }
 
 .sTypeBtnWrapperF {
-	width: 99%;
-	padding: 3px;
-	margin: auto;
+	height: 45px;
+	width: 100%;
 	border: 1px solid black;
 	border-radius: 5px;
-	height:55px;
-	margin-top: 3px;
 	text-align: center;
 }
 
@@ -3459,7 +3458,7 @@ button:hover {
 	width:80px;
 	height:25px;
 	font-size: 13px;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .mainClientSearcherContainer td {
@@ -3479,7 +3478,23 @@ button:hover {
 #cliSearchQuestSub {
 	font-style: italic;
 	font-size: 11px;
-	margin-left: 10px;
+	text-align: right;
+	margin-right: 18px;
+	/*margin-left: 10px;*/
+}
+
+#cliSearchQuestSub2 {
+	font-style: italic;
+	font-size: 14px;
+	/*margin-left: 10px;*/
+}
+
+.cSearchCheckMainF {
+	width: 100%;
+	height:20px;
+	margin-top: 15px;
+	font-size: 14px;
+	margin-left: 129px;
 }
 
 #cliSearchQuestMar {
@@ -3563,6 +3578,36 @@ button:hover {
 .apptImgSize1Small {
 	width:75%;
 }
+
+.searchResultsBody {
+	font-family: Arial;
+	background-color: #e9e7e9;
+}
+
+.resultImageClass {
+	width: 50px;
+	padding-right: 15px;
+}
+
+.clientSearchResultsHeaderText {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.searchResultsHeaderWrapper {
+	width: 95%;
+	margin:auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+}
+
+.center-inner-content {
+	width:80%;
+	margin:auto;
+}
+
 
 
 

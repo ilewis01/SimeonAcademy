@@ -461,7 +461,7 @@ function submit_session() {
 }
 
 function uniClientSearchF(sType) {
-	var w = 400, h = 500;
+	var w = 400, h = 510;
 	sType = String(sType);
 	grab('cSearch').value = sType;
 	openPopUp('auto', '/uniClientSearch/',w, h);
@@ -473,19 +473,52 @@ function uniFormSearchF() {
 }
 
 function getClientSearchStuff() {
+	var image = null;
 	var sType = getPopParent('cSearch').value;
 	sType = String(sType);
 	
 	if (sType === 'session') {
-		grab('sImage').src = '/static/images/new_images/session.png';
+		image = '/static/images/new_images/session.png';
+		header = 'Client Session'
+		grab('sImage').src = image
 		grab('sImage').className = 'popSearchClientSession';
 		grab('sTypeText').innerHTML = 'Begin Client Session';
 	}
 	else if (sType === 'general') {
-		grab('sImage').src = '/static/images/new_images/searchClient.png';
+		image = '/static/images/new_images/searchClient.png';
+		header = 'Client Database'
+		grab('sImage').src = image
 		grab('sImage').className = 'popSearchClientGeneral';
 		grab('sTypeText').innerHTML = 'Search Client Database';
 	}
+
+	grab('useDischarged').value = grab('incD').value;
+	grab('header').value = header;
+	grab('image').value = image;
+	grab('cSearch').value = sType;
+}
+
+function setClientSearchCheck() {
+	var box = grab('incD');
+
+	if (incD.checked === true) {
+		incD.value = 'True';
+	}
+	else {
+		incD.value = 'False';
+	}
+}
+
+function submit_uniClientSearch() {
+	var w = 600, h = 600;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	grab('sc_form').action = '/clientSearchResults/';
+	grab('sc_form').submit();
+
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+    window.focus(); 
 }
 
 function correctClientDOBForm() {
