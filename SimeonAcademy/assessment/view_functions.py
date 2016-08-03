@@ -563,8 +563,134 @@ def snagSearchPages(history, numPerPage, page):
 	result['entries'] = grabSearchPageResults(page, history, numPerPage) 
 	return result
 
+def snagSearchDate(date):
+	date = str(date)
+	m = ''
+	d = ''
+	y = ''
+
+	y += date[0]
+	y += date[1]
+	y += date[2]
+	y += date[3]
+
+	d += date[8]
+	d += date[9]
+
+	m += date[5]
+	m += date[6]
+
+	if m == '01':
+		m = 'January'
+	elif m == '02':
+		m = 'February'
+	elif m == '03':
+		m = 'March'
+	elif m == '04':
+		m = 'April'
+	elif m == '05':
+		m = 'May'
+	elif m == '06':
+		m = 'June'
+	elif m == '07':
+		m = 'July'
+	elif m == '08':
+		m = 'August'
+	elif m == '09':
+		m = 'September'
+	elif m == '10':
+		m = 'October'
+	elif m == '11':
+		m = 'November'
+	elif m == '12':
+		m = 'December'
+	result = m + ' ' + d + ', ' + y
+	return result
+
+
+def superPageSelector(numEntries, matches):
+	result = {}
+	numPages = 0
+	count = 0
+	pageData = []
+	numMatches = len(matches)
+	remainder = numMatches % numEntries
+
+	if remainder != 0:
+		numPages = 1
+
+	otherPages = (numMatches - remainder) / numEntries
+	numPages += otherPages
+
+	for n in range(numPages):
+		newArray = []
+		pageData.append(newArray)
+
+	for i in range(numPages):
+		for j in range(numEntries):
+			fname 		= str(matches[count].fname)
+			lname 		= str(matches[count].lname)
+			mi 			= str(matches[count].middleInit)
+			name 		= lname + ', ' + fname + ', ' + mi
+			dob 		= snagSearchDate(matches[count].dob)
+			ssn 		= snagSearchSSN(matches[count].ss_num)
+			phone 		= snagSearchPhone(matches[count].phone)
+			photo 		= str(matches[count].photo)
+			clientID 	= str(matches[count].clientID)
+			cli_id 		= int(matches[count].id)
+
+			content 				= {}
+			content['c_name'] 		= name
+			content['c_dob'] 			= dob
+			content['c_ssn'] 			= ssn
+			content['c_phone'] 		= phone
+			content['c_photo'] 		= photo
+			content['c_clientID'] 	= clientID
+			content['c_id'] 		= cli_id
+
+			pageData[i].append(content)
+			count += 1
+
+			if count == numMatches:
+				break
+
+	for p in range(numPages):
+		inde = p + 1
+		a_name = 'page' + str(inde)
+		result[a_name] = pageData[p]
+	result['numMatches'] = numMatches
+	result['numPages'] = numPages
+	return result
+
+def snagSlots(numSlots):
+	slots = []
+	for n in range(numSlots):
+		data = {}
+		num = n + 1
+		data['input'] = num
+		data['number'] = 'c_number' + str(num)
+		data['name'] = 'c_name' + str(num)
+		data['ssn'] = 'c_ssn' + str(num)
+		data['dob'] = 'c_dob' + str(num)
+		data['photo'] = 'c_photo' + str(num)
+		data['phone'] = 'c_phone' + str(num)
+		data['clientID'] = 'c_clientID' + str(num)
+		data['id'] = 'c_id' + str(num)
+		slots.append(data)
+	return slots
+
+def fetchResultTags(numResults, numPerPage):
+	slots = []
+
+	if numResults < numPerPage:
+		mod = numResults % numPerPage
+		slots = snagSlots(mod)
+	else:
+		slots = snagSlots(numPerPage)
+	return slots
+
 def completeClientSearch(request, sortBy):
-	result = []
+	initData = []
 	count = 1
 	includeDischarge 	= request.POST.get('incD')
 
@@ -572,15 +698,11 @@ def completeClientSearch(request, sortBy):
 
 	for c in clients:
 		if universal_client_match(request, c) == True:
-			data = {}
-			data['ssn'] = snagSearchSSN(c.ss_num)
-			data['phone'] = snagSearchPhone(c.phone)
-			data['number'] = count
-			data['client'] = c
-			result.append(data)
-			count += 1
+			initData.append(c)
 
-	return result
+	superSearch = superPageSelector(4, initData)
+
+	return superSearch
 
 ##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#

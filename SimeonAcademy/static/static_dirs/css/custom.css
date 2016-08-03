@@ -3622,7 +3622,7 @@ button:hover {
 }
 
 .nextSearchPageArrow {
-	width: 22px;
+	width: 17px;
 }
 
 .clientsResultsContainer {
@@ -3652,11 +3652,17 @@ button:hover {
 	color: #adad89;
 }
 
-#s_resultInfoText {
+.s_resultInfoText {
 	font-size: 12px;
 }
 
-#s_resultInfoText span {
+.s_resultInfoTextName {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.s_resultInfoTextName span {
 	font-style: italic;
 	font-weight: none;
 	color: #666666;
@@ -3673,6 +3679,26 @@ button:hover {
 	font-weight: bold;
 }
 
+
+.s_resultMainBUTTONS {
+	width:95%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+	height:50px;
+	text-align: right;
+	/*background: url('../images/nav_background2.jpg');*/
+	background-color: #cbcbcb;
+	/*background-color: #cfcdcf;*/
+}
+
+.s_resultMainBUTTONS button {
+	width: 100px;
+	height:27px;
+	font-size: 13px;
+	margin-top: 12px;
+}
 
 
 

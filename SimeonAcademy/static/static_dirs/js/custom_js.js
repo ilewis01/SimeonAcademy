@@ -510,7 +510,7 @@ function setClientSearchCheck() {
 }
 
 function submit_uniClientSearch() {
-	var w = 600, h = 600;
+	var w = 600, h = 660;
 	var l = Number((screen.width/2) - (w/2));
 	var t = Number((screen.height/2) - (h/2));
 	grab('sc_form').action = '/clientSearchResults/';
@@ -519,6 +519,134 @@ function submit_uniClientSearch() {
 	window.resizeTo(w, h);
 	window.moveTo(l, t);
     window.focus(); 
+}
+
+function grabResultPage(pageNum, json_data) {
+	var result = null;
+	pageNum = Number(pageNum);
+	if (pageNum === 1) {result = json_data.page1;}
+	else if (pageNum === 2) {result = json_data.page2;}
+	else if (pageNum === 3) {result = json_data.page3;}
+	else if (pageNum === 4) {result = json_data.page4;}
+	else if (pageNum === 5) {result = json_data.page5;}
+	else if (pageNum === 6) {result = json_data.page6;}
+	else if (pageNum === 7) {result = json_data.page7;}
+	else if (pageNum === 8) {result = json_data.page8;}
+	else if (pageNum === 9) {result = json_data.page9;}
+	else if (pageNum === 10) {result = json_data.page10;}
+	else if (pageNum === 11) {result = json_data.page11;}
+	else if (pageNum === 12) {result = json_data.page12;}
+	else if (pageNum === 13) {result = json_data.page13;}
+	else if (pageNum === 14) {result = json_data.page14;}
+	else if (pageNum === 15) {result = json_data.page15;}
+	else if (pageNum === 16) {result = json_data.page16;}
+	else if (pageNum === 17) {result = json_data.page17;}
+	else if (pageNum === 18) {result = json_data.page18;}
+	else if (pageNum === 19) {result = json_data.page19;}
+	else if (pageNum === 20) {result = json_data.page20;}
+	else if (pageNum === 21) {result = json_data.page21;}
+	else if (pageNum === 22) {result = json_data.page22;}
+	else if (pageNum === 23) {result = json_data.page23;}
+	else if (pageNum === 24) {result = json_data.page24;}
+	else if (pageNum === 25) {result = json_data.page25;}
+	else if (pageNum === 26) {result = json_data.page26;}
+	else if (pageNum === 27) {result = json_data.page27;}
+	else if (pageNum === 28) {result = json_data.page28;}
+	else if (pageNum === 29) {result = json_data.page29;}
+	else if (pageNum === 30) {result = json_data.page30;}
+	else if (pageNum === 31) {result = json_data.page31;}
+	else if (pageNum === 32) {result = json_data.page32;}
+	else if (pageNum === 33) {result = json_data.page33;}
+	else if (pageNum === 34) {result = json_data.page34;}
+	else if (pageNum === 35) {result = json_data.page35;}
+	else if (pageNum === 36) {result = json_data.page36;}
+	else if (pageNum === 37) {result = json_data.page37;}
+	else if (pageNum === 38) {result = json_data.page38;}
+	else if (pageNum === 39) {result = json_data.page39;}
+	else if (pageNum === 40) {result = json_data.page40;}
+	else if (pageNum === 41) {result = json_data.page41;}
+	else if (pageNum === 42) {result = json_data.page42;}
+	else if (pageNum === 43) {result = json_data.page43;}
+	else if (pageNum === 44) {result = json_data.page44;}
+	else if (pageNum === 45) {result = json_data.page45;}
+	else if (pageNum === 46) {result = json_data.page46;}
+	else if (pageNum === 47) {result = json_data.page47;}
+	else if (pageNum === 48) {result = json_data.page48;}
+	else if (pageNum === 49) {result = json_data.page49;}
+	else if (pageNum === 50) {result = json_data.page50;}
+	return result;
+}
+
+function grabPhoto(slot, displayPosition) {
+	var result = null;
+	var photo = '/static/media/';
+	displayPosition = Number(displayPosition);
+
+	if (displayPosition === 1) {result = slot.photo1;}
+	else if (displayPosition === 2) {result = slot.photo2;}
+	else if (displayPosition === 3) {result = slot.photo3;}
+	else if (displayPosition === 4) {result = slot.photo4;}
+	else if (displayPosition === 5) {result = slot.photo5;}
+	else if (displayPosition === 6) {result = slot.photo6;}
+	else if (displayPosition === 7) {result = slot.photo7;}
+	else if (displayPosition === 8) {result = slot.photo8;}
+	else if (displayPosition === 9) {result = slot.photo9;}
+	else if (displayPosition === 10) {result = slot.photo10;}
+	photo += String(result);
+	return photo;
+}
+
+function loadSearchResult(pageNum, slotNum, displayPosition, json_data) {
+	var slot 		= grabResultSlot(pageNum, slotNum, json_data);
+	var slotData 	= grab_client_search_result(slot, displayPosition);
+	var name 		= 'c_name' + String(slotNum);
+	var ssn 		= 'c_ssn' + String(slotNum);
+	var dob 		= 'c_dob' + String(slotNum);
+	var photo 		= 'c_photo' + String(slotNum);
+	var phone 		= 'c_phone' + String(slotNum);
+	var clientID 	= 'c_clientID' + String(slotNum);
+
+	grab(name).innerHTML 		= slotData['name'];
+	grab(ssn).innerHTML 		= slotData['ssn'];
+	grab(dob).innerHTML 		= slotData['dob'];
+	grab(photo).innerHTML 		= slotData['photo'];
+	grab(phone).innerHTML 		= slotData['phone'];
+	grab(clientID).innerHTML 	= slotData['clientID'];
+}
+
+function superResultsPage(pageNum, numOnPage, json_data) {
+	pageNum 	= Number(pageNum);
+	numOnPage 	= Number(numOnPage);
+	
+
+	thisPage = grabResultPage(pageNum, json_data);
+
+	for (var i = 0; i < numOnPage; i++) {
+		var pre = '/static/media/profile/dannyjpg_copy.jpg';
+		var preURL = '/static/media/';
+
+		grabThis 		= i + 1;
+		tag_name 		= 'c_name' + String(grabThis);
+		tag_ssn 		= 'c_ssn' + String(grabThis);
+		tag_dob 		= 'c_dob' + String(grabThis);
+		tag_phone 		= 'c_phone' + String(grabThis);
+		tag_photo 		= 'c_photo' + String(grabThis);
+		tag_clientID 	= 'c_clientID' + String(grabThis);
+
+		grab(tag_name).innerHTML 	= thisPage[i].c_name;
+		grab(tag_ssn).innerHTML 	= thisPage[i].c_ssn;
+		grab(tag_dob).innerHTML 	= thisPage[i].c_dob;
+		grab(tag_phone).innerHTML 	= thisPage[i].c_phone;
+		grab(tag_photo).src 		= preURL + String(thisPage[i].c_photo);
+		// grab(tag_clientID).innerHTML = thisPage[i].c_name;
+	}
+}
+
+function initialize_clientResults(json_data) {
+	var numOnPage = grab('pageOne').value;
+	numOnPage = Number(numOnPage);
+
+	superResultsPage(1, numOnPage, json_data);
 }
 
 function correctClientDOBForm() {

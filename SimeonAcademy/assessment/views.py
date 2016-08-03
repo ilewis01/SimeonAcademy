@@ -41,7 +41,7 @@ setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFi
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
 fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch, \
-snagSearchPages
+fetchResultTags
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -587,21 +587,27 @@ def clientSearchResults(request):
 			sortBy = request.POST.get('sortBy')
 			page = request.POST.get('page')
 			matches = completeClientSearch(request, sortBy)
-			numMatches = len(matches)
-			pageData = snagSearchPages(matches, 4, page)
+			slots = fetchResultTags(matches['numMatches'], 4)
+			json_data = json.dumps(matches)
 
-			if numMatches == 1:
+			if matches['numMatches'] < 4:
+				content['pageOne'] = matches['numMatches'] % 4
+			else:
+				content['pageOne'] = 4
+
+			if matches['numMatches'] == 1:
 				content['matchWord'] = 'Result'
 			else:
 				content['matchWord'] = 'Results'
 
-			content['numPages']	= pageData['numPages']
-			content['page'] 	= page
-			content['image'] 	= request.POST.get('image')
-			content['sType'] 	= request.POST.get('cSearch')
-			content['header'] 	= request.POST.get('header')
-			content['matches'] 	= pageData['entries']
-			content['numMatches'] = numMatches
+			content['json_data'] 	= json_data
+			content['slots']			= slots
+			content['image'] 		= request.POST.get('image')
+			content['sType'] 		= request.POST.get('cSearch')
+			content['header'] 		= request.POST.get('header')
+			content['matches'] 		= matches
+			content['numMatches'] 	= matches['numMatches']
+			content['numPages'] 	= matches['numPages']
 			return render_to_response('counselor/main/clientSearchResults.html', content)
 
 @login_required(login_url='/index')
@@ -1222,7 +1228,6 @@ def form_saved(request):
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
 			form_type = request.POST.get('exit_type')
-			print "EXIT TYPE: " + str(form_type)
 
 			if form_type == 'mh':
 				form = session.mh
