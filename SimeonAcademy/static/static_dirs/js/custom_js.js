@@ -809,6 +809,8 @@ function toClientOptions2(c_id, hasSession, session_id) {
 	grab('s_option').value 				= 'Some Text for something';
 
 	if (search_type === 'general') {
+		getPopParent('hasExisting').value = hasSession;
+		getPopParent('session_id').value = session_id;
 		getPopParent('m_form').action = '/clientProfile/';
 		getPopParent('m_form').submit();
 		window.close();
@@ -825,6 +827,22 @@ function toClientOptions2(c_id, hasSession, session_id) {
 			getPopParent('m_form').submit();
 			window.close();
 		}
+	}
+}
+
+function toClientOptionsProfile() {
+	var hasExisting = grab('hasExisting').value;
+	hasExisting = String(hasExisting);
+
+	if (hasExisting === 'true') {
+		var w = 600, h = 665;
+		var l = Number((screen.width/2) - (w/2));
+		var t = Number((screen.height/2) - (h/2));
+		openPopUp('auto', '/hasExistingSession/', w, h);
+	}
+	else {
+		grab('b_form').action = '/clientOptions/';
+		grab('b_form').submit();
 	}
 }
 
@@ -852,6 +870,7 @@ function processExistingSession() {
 		var f_id = getPopParent('form_name').value;
 		f_id = String(f_id);
 		form = getPopParent(f_id);
+		form.action = '/clientOptions/';
 		form.submit();
 		window.close();
 	}

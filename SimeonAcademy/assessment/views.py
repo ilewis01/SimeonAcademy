@@ -773,6 +773,9 @@ def clientProfile(request):
 
 		else:
 			client = Client.objects.get(id=(request.POST.get('client_id')))
+			session_id = request.POST.get('session_id')
+			hasExisting = request.POST.get('hasExisting')
+
 			status = fetchStatusDisplay(client.isDischarged)
 			activeClass = 'clientIsActive'
 			activeButton = 'Discharge Client'
@@ -781,6 +784,12 @@ def clientProfile(request):
 				activeClass = 'clientNotActive'
 				activeButton = 'Reinstate Client'
 
+			if client.isPending == True:
+				status = 'PENDING'
+				activeClass = 'clientIsPending'
+
+			content['session_id']	= session_id
+			content['hasExisting']	= hasExisting
 			content['client'] 		= client
 			content['activeClass'] 	= activeClass
 			content['activeButton'] = activeButton

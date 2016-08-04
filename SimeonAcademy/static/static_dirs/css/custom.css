@@ -3221,6 +3221,12 @@ button:hover {
 	font-style: italic;
 }
 
+#clientIsPending {
+	color:#f19825;
+	font-weight: bold;
+	font-style: italic;
+}
+
 .clientProfileTable {
 	background-color: #eceaec;
 	width:400px;
