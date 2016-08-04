@@ -41,7 +41,8 @@ setAppTrack, getAppTrack, getTrack, quickTrack, setGlobalSession, fetchCurrentFi
 fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fetchUtPositive, \
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
 fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch, \
-fetchResultTags
+fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
+fetchStatusDisplay
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -764,6 +765,20 @@ def clientProfile(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(request.POST.get('client_id')))
+			status = fetchStatusDisplay(client.isDischarged)
+			activeClass = 'clientIsActive'
+
+			if status == 'DISCHARGED':
+				activeClass = 'clientNotActive'
+
+			content['client'] = client
+			content['activeClass'] = activeClass
+			content['Emphone'] = fetchClientPhoneDisplay(client.emer_phone)
+			content['phone'] = fetchClientPhoneDisplay(client.phone)
+			content['f_ssn'] = fetchClientSSDisplay(client.ss_num)
+			content['gender'] = fetchGenderDisplay(client.isMale)
+			content['status'] = status
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/main/clientProfile.html', content, context_instance=RequestContext(request))
 

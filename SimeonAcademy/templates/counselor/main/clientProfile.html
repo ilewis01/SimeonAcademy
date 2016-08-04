@@ -1,2 +1,288 @@
-<h1>Client Profile</h1>
-<a href="/adminHome"><h5>Back</h5></a>
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            	<div class='clientProfileConatiner'>
+            		<div class="container">
+            			<div class="row">
+            				<div class="col-md-9">
+            					<div id='profile-total-head'>Client Profile</div>
+            				</div>
+            			</div>
+
+        				<div class="row">
+            				<div class="col-md-6">
+            					<form action='' method='post' id='b_form'> {% csrf_token %}
+            						<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+            					</form>
+
+            					<table>
+            						<tr>
+            							<td>
+            								<div class='avatar-container'>
+            									<img src="/static/media/{{client.photo}}" alt="client_img" class='client_img_profile'>
+            								</div>
+            							</td>
+
+            							<td>
+            								<table class='left-to-pic-table'>
+            									<tr>
+            										<td>
+            											<table>
+            												<tr>
+            													<td><div id='profile-name-head'>{{client.fname}} {{client.lname}}</div></td>
+            												</tr>
+            											</table>
+
+            											<table>
+            												<tr>
+            													<td><div id='profile-cliId-head'>{{client.clientID}}</div></td>
+            												</tr>
+            											</table>
+
+            											<table>
+            												<tr><td><div id='profile-contact-head'>Contact Information:</div></td></tr>
+            												<tr>
+            													<td><div id='profile-email-head'>{{client.email}}</div></td>
+            												</tr>
+            											</table>
+
+            											<table>
+            												<tr>
+            													<td><div id='profile-phone-head'>{{phone}}</div></td>
+            												</tr>
+            											</table>
+
+            											<table><tr><td><div id='address-head-profile'>Address:</div></td></tr></table>
+
+            											<table>
+            												<tr>
+            													<td>
+            														<div id='profile-address-head'>
+            															{{client.street_no}} {{client.street_name}} {{client.apartment_no}}
+            														</div>
+            													</td>
+            												</tr>
+
+            												<tr>
+            													<td>
+            														<div id='profile-address-head'>
+            															{{client.city}}, {{client.state}} {{client.zip_code}}
+            														</div>
+            													</td>
+            												</tr>
+            											</table>
+            										</td>
+            									</tr>
+            								</table>
+            							</td>
+            						</tr>
+            					</table>
+
+            					<div>
+            						<table>
+            							<tr>
+            								<th><div id='profile-subHeader-client1'>Additional Information:</div></th>
+            								<th><div id='profile-subHeader-client1'>Emergency Contact Information:</div></th>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Status:</div></td>
+            											<td><div id='{{activeClass}}'>{{status}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Contact:</div></td>
+            											<td><div id='profileTotalAnswer'>{{client.emer_contact_name}}</div>
+            										</tr>
+            									</table>
+            								</td>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Intake Date:</div></td>
+            											<td><div id='profileTotalAnswer'>{{client.intake_date}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Phone:</div></td>
+            											<td><div id='profileTotalAnswer'>{{Emphone}}</div>
+            										</tr>
+            									</table>
+            								</td>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Gender:</div></td>
+            											<td><div id='profileTotalAnswer'>{{gender}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<td></td>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Work Phone:</div></td>
+            											<td><div id='profileTotalAnswer'>{{workPhone}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<th>
+            									<div>Probation Information:</div>
+            								</th>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>DOB:</div></td>
+            											<td><div id='profileTotalAnswer'>{{client.dob}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Officer:</div></td>
+            											<td><div id='profileTotalAnswer'>{{client.probationOfficer}}</div>
+            										</tr>
+            									</table>
+            								</td>
+            							</tr>
+
+            							<tr>
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>SSN:</div></td>
+            											<td><div id='profileTotalAnswer'>{{f_ssn}}</div>
+            										</tr>
+            									</table>
+            								</td>
+
+            								<td>
+            									<table>
+            										<tr>
+            											<td><div id='profileTotalQuestion'>Phone:</div></td>
+            											<td><div id='profileTotalAnswer'>{{probationPhone}}</div>
+            										</tr>
+            									</table>
+            								</td>
+            							</tr>
+
+            							<!-- <tr>
+            								<td><div id='profileTotalQuestion'>Intake Date:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.intake_date}}</div></td>
+            							</tr>
+
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Status:</div></td>
+            								<td><div id='profileTotalAnswer'>{{status}}</div></td>
+            							</tr>
+
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Gender:</div></td>
+            								<td><div id='profileTotalAnswer'>{{gender}}</div></td>
+            							</tr>
+            						</table>
+
+            						<table>
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Work Phone:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.workPhone}}</div></td>
+            							</tr>
+            						</table>
+
+            						<table>
+            							<tr>
+            								<td><div id='profileTotalQuestion'>DOB:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.dob}}</div></td>
+            							</tr>
+
+            							<tr>
+            								<td><div id='profileTotalQuestion'>SSN:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.ss_num}}</div></td>
+            							</tr>
+            						</table>
+
+            						<table>
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Probation Officer:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.probationOfficer}}</div></td>
+            							</tr>
+            						</table>
+
+            						<table>
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Contact:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.emer_contact_name}}</div></td>
+            							</tr>
+
+            							<tr>
+            								<td><div id='profileTotalQuestion'>Phone:</div></td>
+            								<td><div id='profileTotalAnswer'>{{client.emer_phone}}</div></td>
+            							</tr> -->
+            						</table>
+            					</div>
+            				</div>
+
+            				<div class="col-md-3">
+            					<div class='profile-btn-head-container'>
+            						<div id='profile-option-header'>Options</div>
+            					</div>
+
+            					<div class='profile-btn-container'>
+            						<div>
+            							<div style='border-top:2px solid black;'><button>Appointment Manager</button></div>
+            							<button>Delete Client</button>
+            							<button>Discharge Client</button>
+            							<button>Edit Client Information</button>            							
+            							<button>Invoices & Payments</button>
+            							<button>Start Session</button>
+            							<button>View Client Files</button>
+            							<button>View Incomplete Forms</button>
+            							<div style='border-bottom:2px solid black;'>
+            								<button onClick='javascript: goHomeProfile();'>Exit</button>
+            							</div>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+	    	</div> <!-- END CONTAINER -->
+        </div>
+    </div>
+</body>
+
+
+
+{% endblock %}

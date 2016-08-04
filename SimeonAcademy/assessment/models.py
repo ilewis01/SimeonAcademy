@@ -90,6 +90,8 @@ class Client(models.Model):
 	reason_ref = models.ForeignKey(RefReason, null=True, blank=True, default=None)
 	phone = models.CharField(max_length=14, default=None, blank=True, null=True)
 	emer_phone = models.CharField(max_length=14, default=None, blank=True, null=True)
+	work_phone = models.CharField(max_length=14, default=None, blank=True, null=True)
+	probation_phone = models.CharField(max_length=14, default=None, blank=True, null=True)
 	email = models.EmailField(default=None, blank=True, null=True)
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)

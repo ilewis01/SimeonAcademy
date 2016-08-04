@@ -6493,35 +6493,53 @@ def superSplit(section1Length, numSec1, section2Length, numSec2, text):
 	return result
 
 def fetchClientSSDisplay(ss):
-	result = ''
-	result += '*'
-	result += '*'
-	result += '*'
-	result += '-'
-	result += '*'
-	result += '*'
-	result += '-'
-	result += ss[5]
-	result += ss[6]
-	result += ss[7]
-	result += ss[8]
+	if fieldIsEmpty(ss) == False and len(ss) > 8:
+		ss = cleanWhiteSpace(ss)
+		ss = prepareNumbersearch(ss)
+		result = ''
+		result += ss[0]
+		result += ss[1]
+		result += ss[2]
+		result += '-'
+		result += ss[3]
+		result += ss[4]
+		result += '-'
+		result += ss[5]
+		result += ss[6]
+		result += ss[7]
+		result += ss[8]
 	return result
 
 def fetchClientPhoneDisplay(phone):
-	result = ''
-	result += '('
-	result += phone[0]
-	result += phone[1]
-	result += phone[2]
-	result += ') '
-	result += phone[3]
-	result += phone[4]
-	result += phone[5]
-	result += '-'
-	result += phone[6]
-	result += phone[7]
-	result += phone[8]
-	result += phone[9]
+	if fieldIsEmpty(phone) == False and len(phone) > 9:
+		phone = cleanWhiteSpace(phone)
+		phone = prepareNumbersearch(phone)
+		result = ''
+		result += '('
+		result += phone[0]
+		result += phone[1]
+		result += phone[2]
+		result += ') '
+		result += phone[3]
+		result += phone[4]
+		result += phone[5]
+		result += '-'
+		result += phone[6]
+		result += phone[7]
+		result += phone[8]
+		result += phone[9]
+	return result
+
+def fetchGenderDisplay(isMale):
+	result = 'Female'
+	if isMale == True:
+		result = 'Male'
+	return result
+
+def fetchStatusDisplay(isDischarged):
+	result = 'ACTIVE'
+	if isDischarged == True:
+		result = 'DISCHARGED'
 	return result
 
 def grabMhViewImages(mh):

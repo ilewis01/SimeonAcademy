@@ -785,6 +785,11 @@ function toClientOptions(form_id, hasUnfinished) {
 	}
 }
 
+function goHomeProfile() {
+	grab('b_form').action = '/adminHome/';
+	grab('b_form').submit();
+}
+
 function toClientOptions2(c_id) {
 	var search_type = grab('search_type').value;
 	search_type = String(search_type);
