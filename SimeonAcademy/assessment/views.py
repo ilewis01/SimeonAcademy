@@ -775,20 +775,23 @@ def clientProfile(request):
 			client = Client.objects.get(id=(request.POST.get('client_id')))
 			status = fetchStatusDisplay(client.isDischarged)
 			activeClass = 'clientIsActive'
+			activeButton = 'Discharge Client'
 
 			if status == 'DISCHARGED':
 				activeClass = 'clientNotActive'
+				activeButton = 'Reinstate Client'
 
-			content['client'] = client
-			content['activeClass'] = activeClass
-			content['Emphone'] = fetchClientPhoneDisplay(client.emer_phone)
-			content['workPhone'] = fetchClientPhoneDisplay(client.work_phone)
+			content['client'] 		= client
+			content['activeClass'] 	= activeClass
+			content['activeButton'] = activeButton
+			content['Emphone'] 		= fetchClientPhoneDisplay(client.emer_phone)
+			content['workPhone'] 	= fetchClientPhoneDisplay(client.work_phone)
 			content['probationPhone'] = fetchClientPhoneDisplay(client.probation_phone)
-			content['phone'] = fetchClientPhoneDisplay(client.phone)
-			content['f_ssn'] = fetchClientSSDisplay(client.ss_num)
-			content['gender'] = fetchGenderDisplay(client.isMale)
-			content['status'] = status
-			content['title'] = 'Simeon Academy'
+			content['phone'] 		= fetchClientPhoneDisplay(client.phone)
+			content['f_ssn'] 		= fetchClientSSDisplay(client.ss_num)
+			content['gender'] 		= fetchGenderDisplay(client.isMale)
+			content['status'] 		= status
+			content['title'] 		= 'Simeon Academy'
 			return render_to_response('counselor/main/clientProfile.html', content, context_instance=RequestContext(request))
 
 
