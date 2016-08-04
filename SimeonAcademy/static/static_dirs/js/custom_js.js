@@ -631,7 +631,9 @@ function superResultsPage(pageNum, numOnPage, json_data) {
 		tag_phone 		= 'c_phone' + String(grabThis);
 		tag_photo 		= 'c_photo' + String(grabThis);
 		tag_clientID 	= 'c_clientID' + String(grabThis);
+		tag_number		= 'c_number' + String(grabThis);
 
+		grab(tag_number).innerHTML	= thisPage[i].c_number;
 		grab(tag_name).innerHTML 	= thisPage[i].c_name;
 		grab(tag_ssn).innerHTML 	= thisPage[i].c_ssn;
 		grab(tag_dob).innerHTML 	= thisPage[i].c_dob;

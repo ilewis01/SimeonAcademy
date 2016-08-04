@@ -30,11 +30,24 @@
 				<tr>
 					<td><div id='csInfoText'>{{numMatches}} {{matchWord}} Found</div></td>
 					<td>
-						<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+						<a href="#">
+							<div id='sortByBtn'>
+								Sort Descending
+							</div>
+						</a>
 					</td>
-					<td><div id='csInfoText'>Page <span id='thisPageNumber'></span> of {{numPages}}</div></td>
 					<td>
-						<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+						<table>
+							<tr>
+								<td>
+									<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+								</td>
+								<td><div id='csInfoText'>Page <span id='thisPageNumber'></span> of {{numPages}}</div></td>
+								<td>
+									<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
@@ -46,7 +59,7 @@
 			{% for s in slots %}
 			<tr>
 				<td>
-					<div class='c_search_count' id='{{s.c_number}}'>{{s.input}}.<div>
+					<div class='c_search_count' id='{{s.number}}'><div>
 				</td>
 				<td>
 					<a href="">

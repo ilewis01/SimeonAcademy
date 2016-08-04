@@ -94,7 +94,7 @@ class Client(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)
 	probationOfficer = models.CharField(max_length=60, default=None, blank=True, null=True)
-	photo = models.ImageField(upload_to='./profile/', default='./profile/defaultAvatar.png', blank=True, null=True)
+	photo = models.ImageField(upload_to='./profile/', default='/static/images/defaultAvatar.jpg', blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)

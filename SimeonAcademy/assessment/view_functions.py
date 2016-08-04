@@ -612,6 +612,7 @@ def superPageSelector(numEntries, matches):
 	result = {}
 	numPages = 0
 	count = 0
+	slot = 1
 	pageData = []
 	numMatches = len(matches)
 	remainder = numMatches % numEntries
@@ -641,15 +642,17 @@ def superPageSelector(numEntries, matches):
 
 			content 				= {}
 			content['c_name'] 		= name
-			content['c_dob'] 			= dob
-			content['c_ssn'] 			= ssn
+			content['c_dob'] 		= dob
+			content['c_ssn'] 		= ssn
 			content['c_phone'] 		= phone
 			content['c_photo'] 		= photo
 			content['c_clientID'] 	= clientID
 			content['c_id'] 		= cli_id
+			content['c_number']		= str(slot) + str('.')
 
 			pageData[i].append(content)
 			count += 1
+			slot += 1
 
 			if count == numMatches:
 				break

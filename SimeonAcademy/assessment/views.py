@@ -590,6 +590,8 @@ def clientSearchResults(request):
 			slots = fetchResultTags(matches['numMatches'], 4)
 			json_data = json.dumps(matches)
 
+			print slots
+
 			if matches['numMatches'] < 4:
 				content['pageOne'] = matches['numMatches'] % 4
 			else:
