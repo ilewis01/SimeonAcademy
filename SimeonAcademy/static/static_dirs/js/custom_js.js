@@ -625,8 +625,12 @@ function superResultsPage(pageNum, numOnPage, json_data) {
 		tag_clientID 	= 'c_clientID' + String(grabThis);
 		tag_number		= 'c_number' + String(grabThis);
 		tag_id 			= 'c_id' + String(grabThis);
+		tag_session 	= 'hasSession' + String(grabThis);
+		tag_s_id 		= 'session_id' + String(grabThis);
 
 		grab(tag_id).value 			= thisPage[i].c_id;
+		grab(tag_s_id).value 		= thisPage[i].session_id;
+		grab(tag_session).value 	= thisPage[i].hasSession;
 		grab(tag_number).innerHTML	= thisPage[i].c_number;
 		grab(tag_name).innerHTML 	= thisPage[i].c_name;
 		grab(tag_ssn).innerHTML 	= thisPage[i].c_ssn;
@@ -770,7 +774,7 @@ function correctClientDOBForm() {
 	}
 }
 
-function toClientOptions(form_id, hasUnfinished) {
+function toClientOptions(form_id) {
 	hasUnfinished = String(hasUnfinished);
 
 	if (hasUnfinished == 'True') {
@@ -790,25 +794,43 @@ function goHomeProfile() {
 	grab('b_form').submit();
 }
 
-function toClientOptions2(c_id) {
+function toClientOptions2(c_id, hasSession, session_id) {
 	var search_type = grab('search_type').value;
+
+	hasSession 	= String(hasSession.value);
+	session_id 	= String(session_id.value);
+	c_id 		= String(c_id.value);
 	search_type = String(search_type);
-	c_id = String(c_id.value);
-	getPopParent('client_id').value = c_id;
+
+	getPopParent('client_id').value 	= c_id;
+	getPopParent('session_id').value 	= session_id;
+	getPopParent('cSearch').value 		= search_type;
+	grab('session_id').value 			= session_id;
+	grab('s_option').value 				= 'Some Text for something';
 
 	if (search_type === 'general') {
 		getPopParent('m_form').action = '/clientProfile/';
+		getPopParent('m_form').submit();
+		window.close();
 	}
 	else if (search_type === 'session') {
 		getPopParent('m_form').action = '/clientOptions/';
+		getPopParent('search_clientSession').value = 'True';
+
+		if (hasSession === 'true') {
+			grab('b_form').action = '/hasExistingSession/';
+			grab('b_form').submit();
+		}
+		else {
+			getPopParent('m_form').submit();
+			window.close();
+		}
 	}
-	
-	getPopParent('m_form').submit();
-	window.close();
 }
 
+
 function set_session_option() {
-	grab('session_id').value = getPopParent('se_id').value;
+	grab('session_id').value = getPopParent('session_id').value;
 
 	if (grab('continue').checked === true) {
 		grab('s_option').value = 'continue';

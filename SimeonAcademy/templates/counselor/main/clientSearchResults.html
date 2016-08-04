@@ -13,6 +13,9 @@
 		<input type='hidden' name='numMatches' id='numMatches' value='{{numMatches}}'>
 		<input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
 		<input type='hidden' name='pageOne' id='pageOne' value='{{pageOne}}'>
+		<input type='hidden' name='session_id' id='session_id' value=''>
+		<input type='hidden' name='s_option' id='s_option' value=''>
+		<!-- <input type='text' id='testT'> -->
 	</form>
 
 	<div class='searchResultsHeaderWrapper'>
@@ -68,12 +71,15 @@
 					<div class='c_search_count' id='{{s.number}}'><div>
 				</td>
 				<td>
-					<a href="javascript: toClientOptions2({{s.id}});">
+					<a href="javascript: toClientOptions2({{s.id}}, {{s.hasSession}}, {{s.session_id}});">
 						<form action='' method='post' id=''> {% csrf_token %}
 							<input type='hidden' method='post' id='{{s.id}}' name='client_id' value=''>
+							<input type='hidden' method='post' id='{{s.hasSession}}' name='hasSession' value=''>
+							<input type='hidden' method='post' id='{{s.session_id}}' name='session_id' value=''>
 						</form>
 						<table class='scs_table_result'>
 							<tr>
+								<!-- <td><input type='text' value='{{s.hasSession}}'></td> -->
 								<td>
 									<td><div><img src="" alt="search_img" class='client_search_img' id='{{s.photo}}'></div></td>
 								</td>

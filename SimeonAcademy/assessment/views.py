@@ -320,6 +320,14 @@ def adminHome(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			searchExistingSessions = request.POST.get('search_clientSession')
+			client = None
+
+			if searchExistingSessions == 'True':
+				client = Client.objects.get(id=(request.POST.get(client_id)))
+				content['client'] = client
+
+
 			content['title'] = "Simeon Academy"
 			return render_to_response('counselor/home.html', content, context_instance=RequestContext(request))
 
@@ -410,6 +418,31 @@ def confirmNewClient(request):
 
 			content['title'] = "New Client | Simeon Academy"
 			return render_to_response('counselor/client/verify_client.html', content)
+
+
+@login_required(login_url='/index')
+def uniFormSearch(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/main/searchForm.html', content)
 
 @login_required(login_url='/index')
 def clientCreated(request):
@@ -545,30 +578,6 @@ def uniClientSearch(request):
 			return render_to_response('counselor/main/searchClient.html', content)
 
 @login_required(login_url='/index')
-def uniFormSearch(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		track = getTrack(user)
-		quickTrack('Search', track)
-		content['tracking'] = track.state.state
-		content['user'] = user
-		track = getTrack(user)
-		quickTrack('Search', track)
-
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html')
-
-		else:
-			content['title'] = "Client Search | Simeon Academy"
-			return render_to_response('counselor/main/searchForm.html', content)
-
-@login_required(login_url='/index')
 def clientSearchResults(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -591,8 +600,6 @@ def clientSearchResults(request):
 			slots = fetchResultTags(matches['numMatches'], 4)
 			json_data = json.dumps(matches)
 
-			print slots
-
 			if matches['numMatches'] < 4:
 				content['pageOne'] = matches['numMatches'] % 4
 			else:
@@ -604,7 +611,7 @@ def clientSearchResults(request):
 				content['matchWord'] = 'Results'
 
 			content['json_data'] 	= json_data
-			content['slots']			= slots
+			content['slots']		= slots
 			content['image'] 		= request.POST.get('image')
 			content['sType'] 		= request.POST.get('cSearch')
 			content['header'] 		= request.POST.get('header')

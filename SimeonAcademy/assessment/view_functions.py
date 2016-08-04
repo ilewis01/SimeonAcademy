@@ -629,6 +629,7 @@ def superPageSelector(numEntries, matches):
 
 	for i in range(numPages):
 		for j in range(numEntries):
+			content 	= {}
 			fname 		= str(matches[count].fname)
 			lname 		= str(matches[count].lname)
 			mi 			= str(matches[count].middleInit)
@@ -640,7 +641,13 @@ def superPageSelector(numEntries, matches):
 			clientID 	= str(matches[count].clientID)
 			cli_id 		= int(matches[count].id)
 
-			content 				= {}
+			hasUnfinished = hasUnfinishedSession(matches[count])
+			if hasUnfinished == True:
+				session_id = fetchUnfinishedSession(matches[count]).id
+				content['session_id'] = session_id
+			else:
+				content['session_id'] = 'NULL'
+
 			content['c_name'] 		= name
 			content['c_dob'] 		= dob
 			content['c_ssn'] 		= ssn
@@ -649,6 +656,7 @@ def superPageSelector(numEntries, matches):
 			content['c_clientID'] 	= clientID
 			content['c_id'] 		= cli_id
 			content['c_number']		= str(slot) + str('.')
+			content['hasSession']	= hasUnfinished
 
 			pageData[i].append(content)
 			count += 1
@@ -663,6 +671,7 @@ def superPageSelector(numEntries, matches):
 		result[a_name] = pageData[p]
 	result['numMatches'] = numMatches
 	result['numPages'] = numPages
+
 	return result
 
 def snagSlots(numSlots):
@@ -679,6 +688,8 @@ def snagSlots(numSlots):
 		data['phone'] = 'c_phone' + str(num)
 		data['clientID'] = 'c_clientID' + str(num)
 		data['id'] = 'c_id' + str(num)
+		data['hasSession'] = 'hasSession' + str(num)
+		data['session_id'] = 'session_id' + str(num)
 		slots.append(data)
 	return slots
 
@@ -6493,41 +6504,45 @@ def superSplit(section1Length, numSec1, section2Length, numSec2, text):
 	return result
 
 def fetchClientSSDisplay(ss):
-	if fieldIsEmpty(ss) == False and len(ss) > 8:
-		ss = cleanWhiteSpace(ss)
-		ss = prepareNumbersearch(ss)
-		result = ''
-		result += ss[0]
-		result += ss[1]
-		result += ss[2]
-		result += '-'
-		result += ss[3]
-		result += ss[4]
-		result += '-'
-		result += ss[5]
-		result += ss[6]
-		result += ss[7]
-		result += ss[8]
+	result = None
+	if ss != None:
+		if fieldIsEmpty(ss) == False and len(ss) > 8:
+			ss = cleanWhiteSpace(ss)
+			ss = prepareNumbersearch(ss)
+			result = ''
+			result += ss[0]
+			result += ss[1]
+			result += ss[2]
+			result += '-'
+			result += ss[3]
+			result += ss[4]
+			result += '-'
+			result += ss[5]
+			result += ss[6]
+			result += ss[7]
+			result += ss[8]
 	return result
 
 def fetchClientPhoneDisplay(phone):
-	if fieldIsEmpty(phone) == False and len(phone) > 9:
-		phone = cleanWhiteSpace(phone)
-		phone = prepareNumbersearch(phone)
-		result = ''
-		result += '('
-		result += phone[0]
-		result += phone[1]
-		result += phone[2]
-		result += ') '
-		result += phone[3]
-		result += phone[4]
-		result += phone[5]
-		result += '-'
-		result += phone[6]
-		result += phone[7]
-		result += phone[8]
-		result += phone[9]
+	result = None
+	if phone != None:
+		if fieldIsEmpty(phone) == False and len(phone) > 9:
+			phone = cleanWhiteSpace(phone)
+			phone = prepareNumbersearch(phone)
+			result = ''
+			result += '('
+			result += phone[0]
+			result += phone[1]
+			result += phone[2]
+			result += ') '
+			result += phone[3]
+			result += phone[4]
+			result += phone[5]
+			result += '-'
+			result += phone[6]
+			result += phone[7]
+			result += phone[8]
+			result += phone[9]
 	return result
 
 def fetchGenderDisplay(isMale):
