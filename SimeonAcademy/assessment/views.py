@@ -775,6 +775,8 @@ def clientProfile(request):
 			content['client'] = client
 			content['activeClass'] = activeClass
 			content['Emphone'] = fetchClientPhoneDisplay(client.emer_phone)
+			content['workPhone'] = fetchClientPhoneDisplay(client.work_phone)
+			content['probationPhone'] = fetchClientPhoneDisplay(client.probation_phone)
 			content['phone'] = fetchClientPhoneDisplay(client.phone)
 			content['f_ssn'] = fetchClientSSDisplay(client.ss_num)
 			content['gender'] = fetchGenderDisplay(client.isMale)
