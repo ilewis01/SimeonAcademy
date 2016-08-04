@@ -12,7 +12,6 @@
 	<input type='hidden' name='numMatches' id='numMatches' value='{{numMatches}}'>
 	<input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
 	<input type='hidden' name='pageOne' id='pageOne' value='{{pageOne}}'>
-	<input type='text' id='testT' style='width:500px;'>
 
 	<div class='searchResultsHeaderWrapper'>
 		<div class='center-inner-content'>
@@ -30,9 +29,13 @@
 			<table>
 				<tr>
 					<td><div id='csInfoText'>{{numMatches}} {{matchWord}} Found</div></td>
-					<td><img src="{% static 'images/nextLeft.png' %}" alt="" class='nextSearchPageArrow'></td>
-					<td><div id='csInfoText'>{{page}}-{{numPages}}</div></td>
-					<td><img src="{% static 'images/nextRight.png' %}" alt="" class='nextSearchPageArrow'></td>
+					<td>
+						<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+					</td>
+					<td><div id='csInfoText'>Page <span id='thisPageNumber'></span> of {{numPages}}</div></td>
+					<td>
+						<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+					</td>
 				</tr>
 			</table>
 		</div>

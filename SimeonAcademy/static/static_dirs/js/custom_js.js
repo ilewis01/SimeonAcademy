@@ -622,7 +622,6 @@ function superResultsPage(pageNum, numOnPage, json_data) {
 	thisPage = grabResultPage(pageNum, json_data);
 
 	for (var i = 0; i < numOnPage; i++) {
-		var pre = '/static/media/profile/dannyjpg_copy.jpg';
 		var preURL = '/static/media/';
 
 		grabThis 		= i + 1;
@@ -645,8 +644,106 @@ function superResultsPage(pageNum, numOnPage, json_data) {
 function initialize_clientResults(json_data) {
 	var numOnPage = grab('pageOne').value;
 	numOnPage = Number(numOnPage);
+	grab('pageNumber').value = 1;
 
 	superResultsPage(1, numOnPage, json_data);
+
+	setPrevResultBtn();
+	setNextResultBtn();
+}
+
+function prevResultHover() {
+	grab('nextArrowLeft').src = '/static/images/nextLeftHover.png';
+}
+
+function prevResultOff() {
+	grab('nextArrowLeft').src = '/static/images/nextLeftshort.png';
+}
+
+function nextResultHover() {
+	grab('nextArrowRight').src = '/static/images/nextRightHover.png';
+}
+
+function nextResultOff() {
+	grab('nextArrowRight').src = '/static/images/nextRightshort.png';
+}
+
+function setPrevResultBtn() {
+	var btn = grab('nextArrowLeft');
+	var currentPage = grab('pageNumber').value;
+	currentPage = Number(currentPage);
+
+	if (currentPage <= 1) {
+		btn.style.opacity = '0.0';
+		grab('pageNumber').value = 1;
+	}
+	else {
+		btn.style.opacity = '1.0';
+	}
+
+	grab('thisPageNumber').innerHTML = currentPage;
+
+	setNextResultBtn();
+}
+
+function setNextResultBtn() {
+	var btn = grab('nextArrowRight');
+	var currentPage = grab('pageNumber').value;
+	var numPages = grab('numPages').value;
+
+	currentPage = Number(currentPage);
+	numPages = Number(numPages);
+
+	if (currentPage >= numPages) {
+		btn.style.opacity = '0.0';
+		grab('pageNumber').value = numPages;
+	}
+	else {
+		btn.style.opacity = '1.0';
+	}
+
+	grab('thisPageNumber').innerHTML = currentPage;
+
+	setPrevResultBtn();
+}
+
+function loadPrevSearchPage(json_data) {
+	var thePage 		= grab('pageNumber').value;
+	var numberOfPages 	= grab('numPages').value;
+	thePage 			= Number(thePage);
+	numberOfPages 		= Number(numberOfPages);
+
+	thePage = thePage - 1;
+	if (thePage >= 1) {
+		grab('pageNumber').value = thePage;
+		page = grabResultPage(thePage, json_data);
+		numOnPage = page.length;
+		superResultsPage(thePage, numOnPage, json_data);
+	}
+
+	setPrevResultBtn();
+}
+
+function loadNextSearchPage(json_data) {
+	var thePage 		= grab('pageNumber').value;
+	var numberOfPages 	= grab('numPages').value;
+	thePage 			= Number(thePage);
+	numberOfPages 		= Number(numberOfPages);
+
+	thePage += 1;
+	if (thePage <= numberOfPages) {
+		grab('pageNumber').value = thePage;
+		page = grabResultPage(thePage, json_data);
+		numOnPage = page.length;
+		superResultsPage(thePage, numOnPage, json_data);
+	}
+
+	if (thePage >= numberOfPages) {
+		thePage = numberOfPages;
+		grab('nextArrowRight').style.opacity = '0.0';
+	}
+
+	setNextResultBtn();	
 }
 
 function correctClientDOBForm() {
