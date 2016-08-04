@@ -467,6 +467,16 @@ function uniClientSearchF(sType) {
 	openPopUp('auto', '/uniClientSearch/',w, h);
 }
 
+function backToClientSearch() {
+	grab('b_form').submit();
+	var w = 400, h = 530;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+}
+
 function uniFormSearchF() {
 	var w = 400, h = 500;
 	openPopUp('auto', '/uniFormSearch/',w, h);
@@ -510,7 +520,7 @@ function setClientSearchCheck() {
 }
 
 function submit_uniClientSearch() {
-	var w = 600, h = 660;
+	var w = 600, h = 665;
 	var l = Number((screen.width/2) - (w/2));
 	var t = Number((screen.height/2) - (h/2));
 	grab('sc_form').action = '/clientSearchResults/';
@@ -596,24 +606,6 @@ function grabPhoto(slot, displayPosition) {
 	return photo;
 }
 
-function loadSearchResult(pageNum, slotNum, displayPosition, json_data) {
-	var slot 		= grabResultSlot(pageNum, slotNum, json_data);
-	var slotData 	= grab_client_search_result(slot, displayPosition);
-	var name 		= 'c_name' + String(slotNum);
-	var ssn 		= 'c_ssn' + String(slotNum);
-	var dob 		= 'c_dob' + String(slotNum);
-	var photo 		= 'c_photo' + String(slotNum);
-	var phone 		= 'c_phone' + String(slotNum);
-	var clientID 	= 'c_clientID' + String(slotNum);
-
-	grab(name).innerHTML 		= slotData['name'];
-	grab(ssn).innerHTML 		= slotData['ssn'];
-	grab(dob).innerHTML 		= slotData['dob'];
-	grab(photo).innerHTML 		= slotData['photo'];
-	grab(phone).innerHTML 		= slotData['phone'];
-	grab(clientID).innerHTML 	= slotData['clientID'];
-}
-
 function superResultsPage(pageNum, numOnPage, json_data) {
 	pageNum 	= Number(pageNum);
 	numOnPage 	= Number(numOnPage);
@@ -632,7 +624,9 @@ function superResultsPage(pageNum, numOnPage, json_data) {
 		tag_photo 		= 'c_photo' + String(grabThis);
 		tag_clientID 	= 'c_clientID' + String(grabThis);
 		tag_number		= 'c_number' + String(grabThis);
+		tag_id 			= 'c_id' + String(grabThis);
 
+		grab(tag_id).value 			= thisPage[i].c_id;
 		grab(tag_number).innerHTML	= thisPage[i].c_number;
 		grab(tag_name).innerHTML 	= thisPage[i].c_name;
 		grab(tag_ssn).innerHTML 	= thisPage[i].c_ssn;
@@ -789,6 +783,23 @@ function toClientOptions(form_id, hasUnfinished) {
 	else {
 		document.getElementById(form_id).submit();
 	}
+}
+
+function toClientOptions2(c_id) {
+	var search_type = grab('search_type').value;
+	search_type = String(search_type);
+	c_id = String(c_id.value);
+	getPopParent('client_id').value = c_id;
+
+	if (search_type === 'general') {
+		getPopParent('m_form').action = '/clientProfile/';
+	}
+	else if (search_type === 'session') {
+		getPopParent('m_form').action = '/clientOptions/';
+	}
+	
+	getPopParent('m_form').submit();
+	window.close();
 }
 
 function set_session_option() {

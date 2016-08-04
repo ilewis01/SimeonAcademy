@@ -7,11 +7,13 @@
 
 <body class='searchResultsBody' onLoad='javascript: initialize_clientResults({{json_data}});'>
 
-	<input type='hidden' name='pageNumber' id='pageNumber' value=''>
-	<input type='hidden' name='search_type' id='search_type' value='{{sType}}'>
-	<input type='hidden' name='numMatches' id='numMatches' value='{{numMatches}}'>
-	<input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
-	<input type='hidden' name='pageOne' id='pageOne' value='{{pageOne}}'>
+	<form action='/clientSearchResults/' method='post' id='b_form'> {% csrf_token %}
+		<input type='hidden' name='pageNumber' id='pageNumber' value=''>
+		<input type='hidden' name='search_type' id='search_type' value='{{sType}}'>
+		<input type='hidden' name='numMatches' id='numMatches' value='{{numMatches}}'>
+		<input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
+		<input type='hidden' name='pageOne' id='pageOne' value='{{pageOne}}'>
+	</form>
 
 	<div class='searchResultsHeaderWrapper'>
 		<div class='center-inner-content'>
@@ -40,11 +42,15 @@
 						<table>
 							<tr>
 								<td>
-									<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+									<a href="#">
+										<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+									</a>
 								</td>
 								<td><div id='csInfoText'>Page <span id='thisPageNumber'></span> of {{numPages}}</div></td>
 								<td>
-									<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+									<a href="#">
+										<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+									</a>
 								</td>
 							</tr>
 						</table>
@@ -62,9 +68,9 @@
 					<div class='c_search_count' id='{{s.number}}'><div>
 				</td>
 				<td>
-					<a href="">
+					<a href="javascript: toClientOptions2({{s.id}});">
 						<form action='' method='post' id=''> {% csrf_token %}
-							<input type='hidden' method='post' id=''>
+							<input type='hidden' method='post' id='{{s.id}}' name='client_id' value=''>
 						</form>
 						<table class='scs_table_result'>
 							<tr>
@@ -116,7 +122,7 @@
 
 	<div class='s_resultMainBUTTONS'>
 		<button onClick='javascript: window.close();'>Cancel</button>
-		<button onClick='javascript: uniClientSearchF();'>New Search</button>
+		<button onClick='javascript: backToClientSearch();'>New Search</button>
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

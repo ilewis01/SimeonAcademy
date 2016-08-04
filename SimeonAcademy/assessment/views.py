@@ -749,6 +749,24 @@ def clientOptions(request):
 			content['numPages'] = len(pages)
 			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def clientProfile(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/main/clientProfile.html', content, context_instance=RequestContext(request))
+
 
 ###########################################################################################################################################
 ################################################################ END CLIENT ###############################################################

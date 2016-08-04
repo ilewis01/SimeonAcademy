@@ -137,4 +137,5 @@ urlpatterns = patterns('',
     url(r'^form_existing/$', 'assessment.views.form_existing'),
     url(r'^printForm/$', 'assessment.views.printForm'),
     url(r'^printLoaded/$', 'assessment.views.printLoaded'),
+    url(r'^clientProfile/$', 'assessment.views.clientProfile'),
 )

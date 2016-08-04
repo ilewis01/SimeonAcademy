@@ -19,7 +19,14 @@
             <div class="col-md-3 col-sm-3" style='background-color:orange;'></div>
         </div>
 
-        <input type='hidden' name='cSearch' id='cSearch' value=''>
+        <form action='' method='post' id='m_form'> {% csrf_token %}
+	        <input type='hidden' name='cSearch' id='cSearch' value=''>
+	        <input type='hidden' name='pageNumber' id='pageNumber' value='1'>
+	        <input type='hidden' name='initialLoad' id='initialLoad' value='True'>
+	        <input type='hidden' name='numOnPage' id='numOnPage' value=''>
+	        <input type='hidden' name='numResults' id='numResults' value=''>
+	        <input type='hidden' name='client_id' id='client_id' value=''>
+	    </form>
 
         <!-- <div class='headImageWrapper'>
         	<img src="{% static 'images/new_images/home.png' %}" alt="" class='headImageClass'>

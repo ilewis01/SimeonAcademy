@@ -3315,12 +3315,12 @@ button:hover {
 }
 
 .the-home-wrapper-options a {
-	color: #666666;
+	color: #43423e;
 	text-align: center;
 }
 
 .the-home-wrapper-options a:hover {
-	color: #adad89;
+	color: #c3cfca;
 	text-align: center;
 }
 
@@ -3604,6 +3604,7 @@ button:hover {
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 1%;
+	background-color: #b8c9c6;
 }
 
 .center-inner-content {
@@ -3617,7 +3618,9 @@ button:hover {
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 1%;
-	background-color: #cbe3f0;
+	background-color: #d2e1df;
+	/*background-color: #c4d5d2;*/
+	/*background-color: #cbe3f0;*/
 }
 
 .clientSearchResultsInfoWrapper td {
@@ -3699,8 +3702,8 @@ button:hover {
 	height:50px;
 	text-align: right;
 	/*background: url('../images/nav_background2.jpg');*/
-	background-color: #cbcbcb;
-	/*background-color: #cfcdcf;*/
+	background-color: #98aeaa;
+	/*background-color: #cbcbcb;*/
 }
 
 .s_resultMainBUTTONS button {
