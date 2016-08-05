@@ -945,6 +945,15 @@ function proceedStatusUpdate() {
 	grab('u_form').submit();
 }
 
+function editClientInformation() {
+	w = 600, h = 655;
+	openPopUp('auto', '/editClientInfo/', w, h);
+}
+
+function processEditedClientData() {
+	
+}
+
 
 function set_session_option() {
 	grab('session_id').value = getPopParent('session_id').value;

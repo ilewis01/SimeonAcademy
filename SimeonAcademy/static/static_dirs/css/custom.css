@@ -3970,6 +3970,58 @@ button:hover {
 	color:#5d5c5c;
 }
 
+.superGreenPopHead {
+	width:97%;
+	margin:auto;
+	border:1px solid black;
+	border-radius: 5px;
+	height:10%;
+	background: url('../images/superGreen.png');
+	background-size: 97%;
+
+}
+
+.superGreenPopBody {
+	width:95%;
+	height:70%;
+	margin:auto;
+	border:1px solid black;
+	border-radius: 5px;
+	padding:1%;
+}
+
+.superGreenPopFoot {
+	width:95%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+	height:9%;
+	text-align: right;
+	background: url('../images/superGreen.png');
+	background-size: 95%;
+}
+
+.superGreenPopFoot button {
+	width: 100px;
+	height:27px;
+	font-size: 13px;
+	margin-top: 15px;
+}
+
+.superGreenHeadText {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color:#3b3e3d;
+	margin-top: 3%;
+}
+
+.uniEditHeadText {
+
+}
+
 
 
 
