@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white">
+<body class="gradient-white" onLoad='javascript: setActiveTagParent();'>
 	<div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -20,7 +20,11 @@
                                     <input type='hidden' name='form_name' id='form_name' value='m_form'>
                                     <input type='hidden' name='hasExisting' id='hasExisting' value='{{hasExisting}}'>
                                     <input type='hidden' name='session_id' id='session_id' value='{{session_id}}'>
-                                   <!--  <input type='text' id='testT'> -->
+                                    <input type='hidden' name='isPending' id='isPending' value='{{client.isPending}}'>
+                                    <input type='hidden' name='isDischarged' id='isDischarged' value='{{client.isDischarged}}'>
+                                    <input type='hidden' name='updateClass' id='updateClass' value='{{updateClass}}'>
+                                    <input type='hidden' name='activeClass' id='activeClass' value='{{activeClass}}'>
+                                    <!-- <input type='text' id='testT'> -->
                               </form>
 
         				<div class="row">
@@ -104,7 +108,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Status:</div></td>
-            											<td><div id='{{activeClass}}'>{{status}}</div>
+            											<td><div class='' id='status'>{{status}}</div>
             										</tr>
             									</table>
             								</td>
@@ -219,7 +223,7 @@
             						<div>
             							<div style='border-top:2px solid black;'><button>Appointment Manager</button></div>
             							<button>Delete Client</button>
-            							<button onClick="javascript: updateClientStats();" id='trick'>Update Client Status</button>
+            							<button onClick='javascript: updateClientStats();'>Update Client Status</button>
             							<button>Edit Client Information</button>            							
             							<button>Invoices & Payments</button>
             							<button onClick="javascript: toClientOptionsProfile();">Start Session</button>

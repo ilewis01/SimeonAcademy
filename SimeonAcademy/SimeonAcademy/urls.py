@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^uniClientSearch/$', 'assessment.views.uniClientSearch'),
     url(r'^uniFormSearch/$', 'assessment.views.uniFormSearch'),
     url(r'^emailMain/$', 'assessment.views.emailMain'),
+    url(r'^updateStatus/$', 'assessment.views.updateStatus'),
+    url(r'^updateSuccess/$', 'assessment.views.updateSuccess'),
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),

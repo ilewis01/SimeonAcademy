@@ -1,0 +1,16 @@
+{% load staticfiles %}
+
+<head>
+  <title>Simeon Academy</title>
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='session_exit_body' onLoad='javascript: initialize_statusUpdate();'>
+	<form action='/statsUpdated/' method='post' id='u_form'> {% csrf_token %}
+		<input type='hidden' name='client_id' id='client_id' value=''>
+		<input type='hidden' name='isPending' id='isPending' value=''>
+		<input type='hidden' name='isDischarged' id='isDischarged' value=''>
+	</form>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>

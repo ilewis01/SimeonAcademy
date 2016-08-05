@@ -3209,19 +3209,19 @@ button:hover {
 	margin-right:7px;
 }
 
-#clientIsActive {
+.clientIsActive {
 	color:green;
 	font-weight: bold;
 	font-style: italic;
 }
 
-#clientNotActive {
+.clientNotActive {
 	color:red;
 	font-weight: bold;
 	font-style: italic;
 }
 
-#clientIsPending {
+.clientIsPending {
 	color:#f19825;
 	font-weight: bold;
 	font-style: italic;
@@ -3858,6 +3858,117 @@ button:hover {
 	margin-top: 12px;
 }
 
+.BoxPopUpWrapperHead {
+	width:98%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	height:15%;
+	background: url('../images/orageRadial.png');
+	background-size: 98%;
+	/*background-color: #e09d5d;*/
+}
+
+.BoxPopUpWrapperHeadGreen {
+	width:98%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	height:15%;
+	background: url('../images/greenRadial.png');
+	background-size: 98%;
+	/*background-color: #e09d5d;*/
+}
+
+.BoxPopUpWrapperBody {
+	width:98%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	height:63%;
+}
+
+.BoxPopUpWrapperFoot {
+	width:98%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	height:20%;
+	background: url('../images/orageRadial.png');
+	background-size: 98%;
+	/*background-color: #ce6500;*/
+}
+
+.BoxPopUpWrapperFootGreen {
+	width:98%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+	height:20%;
+	background: url('../images/greenRadial.png');
+	background-size: 98%;
+	/*background-color: #ce6500;*/
+}
+
+.boxButton {
+	width:55px;
+	margin-top: 17px;
+}
+
+.BoxPopMainImageWrapper {
+	width:100%;
+	margin:auto;
+	text-align: center;
+}
+
+.BoxButtonContainer {
+	width: 100%;
+	margin: auto;
+	height:100%;
+}
+
+.popBoxWarning {
+	width:20%;
+	margin-top: 15%;
+	margin-bottom: 9%;
+}
+
+.popBoxWarningCheck {
+	width:20%;
+	margin-top: 15%;
+	margin-bottom: 5%;
+}
+
+#warningClassHeadText {
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 4%;
+	color:#5d5c5c;
+}
+
+#warningClassHeadGreen {
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 4%;
+	color:#e9e7e9;
+}
+
+#warningClassBodyText {
+	text-align: center;
+	font-size: 15px;
+	font-style: italic;
+	font-weight: bold;
+	color:#5d5c5c;
+}
 
 
 

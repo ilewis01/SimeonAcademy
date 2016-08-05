@@ -536,6 +536,57 @@ def searchClients(request):
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/search_clients.html', content)
 
+
+@login_required(login_url='/index')
+def updateStatus(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/client/updateStatus.html', content, context_instance=RequestContext(request))
+
+
+@login_required(login_url='/index')
+def updateSuccess(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			client = Client.objects.get(id=(request.POST.get('client_id')))
+			newStatus = request.POST.get('newStatus')
+			client.isPending = False
+
+			if newStatus == 'ACTIVE':
+				client.isDischarged = False
+			elif newStatus == 'DISCHARGED':
+				client.isDischarged = True
+			client.save()
+
+			content['newStatus'] = newStatus
+			content['client'] = client
+			content['title'] = 'Simeon Academy'
+			return render_to_response('counselor/client/updateSuccess.html', content, context_instance=RequestContext(request))
+
+
 @login_required(login_url='/index')
 def uniClientSearch(request):
 	user = request.user
@@ -575,7 +626,7 @@ def uniClientSearch(request):
 
 			content['years'] = years
 			content['title'] = "Client Search | Simeon Academy"
-			return render_to_response('counselor/main/searchClient.html', content)
+			return render_to_response('counselor/client/searchClient.html', content)
 
 @login_required(login_url='/index')
 def clientSearchResults(request):
@@ -618,7 +669,7 @@ def clientSearchResults(request):
 			content['matches'] 		= matches
 			content['numMatches'] 	= matches['numMatches']
 			content['numPages'] 	= matches['numPages']
-			return render_to_response('counselor/main/clientSearchResults.html', content)
+			return render_to_response('counselor/client/clientSearchResults.html', content)
 
 @login_required(login_url='/index')
 def clientHistory(request):
@@ -640,6 +691,106 @@ def clientHistory(request):
 		else:
 			content = processClientHistory(request)
 			return render_to_response('counselor/client/clientHistory.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientOptions(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			page = 1
+			content = beginSession(request)
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+			initLoad = request.POST.get('initLoad')
+
+			if initLoad == 'false':
+				page = request.POST.get('histPage')
+
+			if session.client.isMale == True:
+				content['gender'] = 'Male'
+			else:
+				content['gender'] = 'Female'
+
+			allHistory = fetchAllClientHistory(session)
+			history = setClientHistory5(page, allHistory, user)
+
+			matches = len(allHistory)
+			pages = calculateHistoryPages(matches)
+
+			content['phone'] = fetchClientPhoneDisplay(session.client.phone)
+			content['ssn'] =fetchClientSSDisplay(session.client.ss_num)
+			content['history'] = history
+			content['pages'] = pages
+			content['numPages'] = len(pages)
+			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientProfile(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			updateClass = None
+			client = Client.objects.get(id=(request.POST.get('client_id')))
+			session_id = request.POST.get('session_id')
+			hasExisting = request.POST.get('hasExisting')
+
+			status = fetchStatusDisplay(client.isDischarged)
+			activeClass = 'clientIsActive'
+			activeButton = 'Discharge Client'
+
+			if status == 'DISCHARGED':
+				activeClass = 'clientNotActive'
+				activeButton = 'Reinstate Client'
+
+			if client.isPending == True:
+				status = 'PENDING'
+				activeClass = 'clientIsPending'
+
+			if status == 'PENDING' or status == 'DISCHARGED':
+				updateClass = 'clientIsActive'
+			else:
+				updateClass = 'clientNotActive'
+
+			content['updateClass']	= updateClass
+			content['session_id']	= session_id
+			content['hasExisting']	= hasExisting
+			content['client'] 		= client
+			content['activeClass'] 	= activeClass
+			content['activeButton'] = activeButton
+			content['Emphone'] 		= fetchClientPhoneDisplay(client.emer_phone)
+			content['workPhone'] 	= fetchClientPhoneDisplay(client.work_phone)
+			content['probationPhone'] = fetchClientPhoneDisplay(client.probation_phone)
+			content['phone'] 		= fetchClientPhoneDisplay(client.phone)
+			content['f_ssn'] 		= fetchClientSSDisplay(client.ss_num)
+			content['gender'] 		= fetchGenderDisplay(client.isMale)
+			content['status'] 		= status
+			content['title'] 		= 'Simeon Academy'
+			return render_to_response('counselor/client/clientProfile.html', content, context_instance=RequestContext(request))
+
+##################################################################################################################################
+##################################################################################################################################
+##################################################### END CLIENT VIEWS ###########################################################
+##################################################################################################################################
+##################################################################################################################################
 
 @login_required(login_url='/index')
 def hasExistingSession(request):
@@ -716,97 +867,7 @@ def sessionResolveSuccess(request):
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/successResolve.html', content, context_instance=RequestContext(request))
 
-@login_required(login_url='/index')
-def clientOptions(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
 
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			page = 1
-			content = beginSession(request)
-			session = ClientSession.objects.get(id=(getSessionID(user)))
-			initLoad = request.POST.get('initLoad')
-
-			if initLoad == 'false':
-				page = request.POST.get('histPage')
-
-			if session.client.isMale == True:
-				content['gender'] = 'Male'
-			else:
-				content['gender'] = 'Female'
-
-			allHistory = fetchAllClientHistory(session)
-			history = setClientHistory5(page, allHistory, user)
-
-			matches = len(allHistory)
-			pages = calculateHistoryPages(matches)
-
-			content['phone'] = fetchClientPhoneDisplay(session.client.phone)
-			content['ssn'] =fetchClientSSDisplay(session.client.ss_num)
-			content['history'] = history
-			content['pages'] = pages
-			content['numPages'] = len(pages)
-			return render_to_response('counselor/client/client_options.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def clientProfile(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			client = Client.objects.get(id=(request.POST.get('client_id')))
-			session_id = request.POST.get('session_id')
-			hasExisting = request.POST.get('hasExisting')
-
-			status = fetchStatusDisplay(client.isDischarged)
-			activeClass = 'clientIsActive'
-			activeButton = 'Discharge Client'
-
-			if status == 'DISCHARGED':
-				activeClass = 'clientNotActive'
-				activeButton = 'Reinstate Client'
-
-			if client.isPending == True:
-				status = 'PENDING'
-				activeClass = 'clientIsPending'
-
-			content['session_id']	= session_id
-			content['hasExisting']	= hasExisting
-			content['client'] 		= client
-			content['activeClass'] 	= activeClass
-			content['activeButton'] = activeButton
-			content['Emphone'] 		= fetchClientPhoneDisplay(client.emer_phone)
-			content['workPhone'] 	= fetchClientPhoneDisplay(client.work_phone)
-			content['probationPhone'] = fetchClientPhoneDisplay(client.probation_phone)
-			content['phone'] 		= fetchClientPhoneDisplay(client.phone)
-			content['f_ssn'] 		= fetchClientSSDisplay(client.ss_num)
-			content['gender'] 		= fetchGenderDisplay(client.isMale)
-			content['status'] 		= status
-			content['title'] 		= 'Simeon Academy'
-			return render_to_response('counselor/main/clientProfile.html', content, context_instance=RequestContext(request))
-
-
-###########################################################################################################################################
-################################################################ END CLIENT ###############################################################
-###########################################################################################################################################
 
 
 ###########################################################################################################################################

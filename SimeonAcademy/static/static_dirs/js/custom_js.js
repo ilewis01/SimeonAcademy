@@ -846,6 +846,105 @@ function toClientOptionsProfile() {
 	}
 }
 
+function updateClientStats() {
+	var w = 300;
+	openPopUp('auto', '/updateStatus/', w, w);
+}
+
+function initialize_statusUpdate() {
+	var isPending 		= getPopParent('isPending').value;
+	var isDischarged 	= getPopParent('isDischarged').value;
+	isPending 			= String(isPending);
+	isDischarged 		= String(isDischarged);
+
+	grab('isPending').value 	= isPending;
+	grab('isDischarged').value 	= isDischarged;
+	grab('client_id').value 	= getPopParent('client_id').value;
+	grab('status').className 	= getPopParent('updateClass').value;
+
+	if (isDischarged === 'True' || isPending === 'True') {
+		grab('status').innerHTML = 'ACTIVE';
+		grab('newStatus').value = 'ACTIVE';
+	}
+	else if (isDischarged === 'False' && isPending === 'False') {
+		grab('status').innerHTML = 'DISCHARGED';
+		grab('newStatus').value = 'DISCHARGED';
+	}
+
+	setUpdateClass();
+}
+
+function setUpdateClass() {
+	var current = getPopParent('status').className;
+	current = String(current);
+
+	if (current === 'clientNotActive') {
+		grab('status').className = 'clientIsActive';
+	}
+	else if (current === 'clientIsActive'){
+		grab('status').className = 'clientNotActive';
+	}
+}
+
+function setActiveTagParent() {
+	var statusClass = null;
+	var isPending = grab('isPending').value;
+	var isDischarged = grab('isDischarged').value;
+
+	isPending = String(isPending);
+	isDischarged = String(isDischarged);
+
+	if (isPending === 'True') {
+		statusClass = 'clientIsPending';
+	}
+	else if (isDischarged === 'True') {
+		statusClass = 'clientNotActive';
+	}
+	else {
+		statusClass = 'clientIsActive';
+	}
+
+	grab('status').className = statusClass;
+}
+
+function setActiveTag() {
+	var statusClass = null;
+	var isPending = getPopParent('isPending').value;
+	var isDischarged = getPopParent('isDischarged').value;
+
+	isPending = String(isPending);
+	isDischarged = String(isDischarged);
+
+	if (isPending === 'True') {
+		statusClass = 'clientIsPending';
+	}
+	else if (isDischarged === 'True') {
+		statusClass = 'clientNotActive';
+	}
+	else {
+		statusClass = 'clientIsActive';
+	}
+
+	getPopParent('status').className = statusClass;
+}
+
+function proceedStatusUpdate() {
+	var newStatus 	= grab('newStatus').value;
+	newStatus 	= String(newStatus);
+	getPopParent('status').innerHTML = newStatus;
+	getPopParent('isPending').value = 'False';
+
+	if (newStatus === 'ACTIVE') {
+		getPopParent('isDischarged').value = 'False';
+	}
+	else if (newStatus === 'DISCHARGED') {
+		getPopParent('isDischarged').value = 'True';
+	}
+
+	setActiveTag();
+	grab('u_form').submit();
+}
+
 
 function set_session_option() {
 	grab('session_id').value = getPopParent('session_id').value;

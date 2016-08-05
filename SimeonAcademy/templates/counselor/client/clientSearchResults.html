@@ -1,0 +1,135 @@
+{% load staticfiles %}
+
+<head>
+  <title>Simeon Academy</title>
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='searchResultsBody' onLoad='javascript: initialize_clientResults({{json_data}});'>
+
+	<form action='/clientSearchResults/' method='post' id='b_form'> {% csrf_token %}
+		<input type='hidden' name='pageNumber' id='pageNumber' value=''>
+		<input type='hidden' name='search_type' id='search_type' value='{{sType}}'>
+		<input type='hidden' name='numMatches' id='numMatches' value='{{numMatches}}'>
+		<input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
+		<input type='hidden' name='pageOne' id='pageOne' value='{{pageOne}}'>
+		<input type='hidden' name='session_id' id='session_id' value=''>
+		<input type='hidden' name='s_option' id='s_option' value=''>
+		<!-- <input type='text' id='testT'> -->
+	</form>
+
+	<div class='searchResultsHeaderWrapper'>
+		<div class='center-inner-content'>
+			<table>
+				<tr>
+					<td><img src="{{image}}" id="header_image" class="resultImageClass"></td>
+					<td><div class="clientSearchResultsHeaderText">Search Results: {{header}}</div></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class='clientSearchResultsInfoWrapper'>
+		<div>
+			<table>
+				<tr>
+					<td><div id='csInfoText'>{{numMatches}} {{matchWord}} Found</div></td>
+					<td>
+						<a href="#">
+							<div id='sortByBtn'>
+								Sort Descending
+							</div>
+						</a>
+					</td>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<a href="#">
+										<img src="{% static 'images/nextLeftshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowLeft' onmouseover='javascript: prevResultHover();' onmouseout="javascript: prevResultOff();" onClick='javascript: loadPrevSearchPage({{json_data}});'>
+									</a>
+								</td>
+								<td><div id='csInfoText'>Page <span id='thisPageNumber'></span> of {{numPages}}</div></td>
+								<td>
+									<a href="#">
+										<img src="{% static 'images/nextRightshort.png' %}" alt="" class='nextSearchPageArrow' id='nextArrowRight' onmouseover='javascript: nextResultHover();' onmouseout='javascript: nextResultOff();' onClick='javascript: loadNextSearchPage({{json_data}});'>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class='clientsResultsContainer'>
+		<table>
+			{% for s in slots %}
+			<tr>
+				<td>
+					<div class='c_search_count' id='{{s.number}}'><div>
+				</td>
+				<td>
+					<a href="javascript: toClientOptions2({{s.id}}, {{s.hasSession}}, {{s.session_id}});">
+						<form action='' method='post' id=''> {% csrf_token %}
+							<input type='hidden' method='post' id='{{s.id}}' name='client_id' value=''>
+							<input type='hidden' method='post' id='{{s.hasSession}}' name='hasSession' value=''>
+							<input type='hidden' method='post' id='{{s.session_id}}' name='session_id' value=''>
+						</form>
+						<table class='scs_table_result'>
+							<tr>
+								<!-- <td><input type='text' value='{{s.hasSession}}'></td> -->
+								<td>
+									<td><div><img src="" alt="search_img" class='client_search_img' id='{{s.photo}}'></div></td>
+								</td>
+
+								<td>
+									<div class='control_hover_special'>
+										<table>
+											<tr>
+												<td>
+													<div class='s_resultInfoTextName' id='{{s.name}}'></div>
+												</td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>SSN:</div></td>
+												<td><div class='s_resultInfoText' id='{{s.ssn}}'></div></td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>DOB:</div></td>
+												<td><div class='s_resultInfoText' id='{{s.dob}}'></div></td>
+											</tr>
+										</table>
+
+										<table>
+											<tr>
+												<td><div id='s_resultInfoQues'>Phone:</div></td>
+												<td><div class='s_resultInfoText' id='{{s.phone}}'></div></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</a>
+				</td>
+				<td><div style='margin-bottom:100px;'></div></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+
+	<div class='s_resultMainBUTTONS'>
+		<button onClick='javascript: window.close();'>Cancel</button>
+		<button onClick='javascript: backToClientSearch();'>New Search</button>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>
