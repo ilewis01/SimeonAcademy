@@ -32,6 +32,11 @@ urlpatterns = patterns('',
     url(r'^uniClientSearch/$', 'assessment.views.uniClientSearch'),
     url(r'^searchClientMain/$', 'assessment.views.searchClientMain'),
     url(r'^editClientInfo/$', 'assessment.views.editClientInfo'),
+    url(r'^confirmDeleteClient/$', 'assessment.views.confirmDeleteClient'),
+    url(r'^clientDeleteSucess/$', 'assessment.views.clientDeleteSucess'),
+    url(r'^clientInvoiceMain/$', 'assessment.views.clientInvoiceMain'),
+    url(r'^clientFiles/$', 'assessment.views.clientFiles'),
+    url(r'^clientAppointments/$', 'assessment.views.clientAppointments'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

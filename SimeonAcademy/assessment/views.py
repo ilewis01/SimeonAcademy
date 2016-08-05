@@ -692,6 +692,107 @@ def editClientInfo(request):
 			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def confirmDeleteClient(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientDeleteSucess(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientInvoiceMain(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/client/clientInvoiceMain.html', content, context_instance=RequestContext(request))
+
+
+@login_required(login_url='/index')
+def clientFiles(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/client/clientFiles.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientAppointments(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/client/clientAppointments.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def clientHistory(request):
 	user = request.user
 	if not user.is_authenticated():

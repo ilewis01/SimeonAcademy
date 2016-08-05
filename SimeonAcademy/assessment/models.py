@@ -96,6 +96,8 @@ class Client(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	isDischarged = models.BooleanField(default=False, blank=True)
 	isPending = models.BooleanField(default=True, blank=True)
+	hasFiles = models.BooleanField(default=False, blank=True)
+	isRemoved = models.BooleanField(default=False, blank=True)
 	probationOfficer = models.CharField(max_length=60, default=None, blank=True, null=True)
 	photo = models.ImageField(upload_to='./profile/', default='/static/images/defaultAvatar.jpg', blank=True, null=True)
 

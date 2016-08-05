@@ -24,6 +24,7 @@
                                     <input type='hidden' name='isDischarged' id='isDischarged' value='{{client.isDischarged}}'>
                                     <input type='hidden' name='updateClass' id='updateClass' value='{{updateClass}}'>
                                     <input type='hidden' name='activeClass' id='activeClass' value='{{activeClass}}'>
+                                    <input type='hidden' name='viewType' id='viewType' value=''>
                                     <!-- <input type='text' id='testT'> -->
                               </form>
 
@@ -221,15 +222,17 @@
 
             					<div class='profile-btn-container'>
             						<div>
-            							<div style='border-top:2px solid black;'><button>Appointment Manager</button></div>
-            							<button>Delete Client</button>
+                                                      <div style='border-top:2px solid black;'>
+                                                            <button onClick="javascript: toClientOptionsProfile();">Start Session</button>
+                                                      </div>
+                                                      <button onClick="javascript: viewClientFiles('history');">View Client Files</button>
+            							<button onClick='javascript: appointmentsClientProfile();'>Appointment Manager</button>
+                                                      <button onClick='javascript: viewClientInvoices();'>Invoices & Payments</button>
+                                                      <button onClick="javascript: viewClientFiles('incomplete');">View Incomplete Forms</button>
+                                                      <button onClick='javascript: editClientInformation();'>Update Client Account</button>
             							<button onClick='javascript: updateClientStats();'>Update Client Status</button>
-            							<button onClick='javascript: editClientInformation();'>Edit Client Information</button>            							
-            							<button>Invoices & Payments</button>
-            							<button onClick="javascript: toClientOptionsProfile();">Start Session</button>
-            							<button>View Client Files</button>
-            							<button>View Incomplete Forms</button>
-            							<div style='border-bottom:2px solid black;'>
+                                                      <button onClick='javascript: deleteClientProfile();'>Delete Client</button>
+                                                      <div style='border-bottom:2px solid black;'>
             								<button onClick='javascript: goHomeProfile();'>Exit</button>
             							</div>
             						</div>

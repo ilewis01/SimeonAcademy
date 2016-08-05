@@ -951,7 +951,43 @@ function editClientInformation() {
 }
 
 function processEditedClientData() {
-	
+
+}
+
+function deleteClientProfile() {
+	w = 400;
+	openPopUp('auto', '/confirmDeleteClient/', w, w);
+}
+
+function viewClientInvoices() {
+	w = 600, h = 655;
+	openPopUp('auto', '/clientInvoiceMain/', w, h);
+}
+
+function viewClientFiles(viewType) {
+	viewType = String(viewType);
+	grab('viewType').value = viewType;
+
+	w = 600, h = 655;
+	openPopUp('auto', '/clientFiles/', w, h);
+}
+
+function initial_clientFiles() {
+	var viewType = getPopParent('viewType').value;
+	var headTag = grab('clientFilesHeader');
+	viewType = String(viewType);
+
+	if (viewType === 'history') {
+		headTag.innerHTML = 'View Client History';
+	}
+	else if (viewType === 'incomplete') {
+		headTag.innerHTML = 'View Incomplete Files';
+	}
+}
+
+function appointmentsClientProfile() {
+	w = 600, h = 655;
+	openPopUp('auto', '/clientAppointments/', w, h);
 }
 
 
