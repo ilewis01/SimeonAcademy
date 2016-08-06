@@ -3108,7 +3108,7 @@ button:hover {
 	font-style: italic;
 }
 
-#profile-address-head {
+.profile-address-head {
 	font-size: 13px;
 	/*font-weight: bold;*/
 	font-style: italic;
@@ -3978,7 +3978,16 @@ button:hover {
 	height:10%;
 	background: url('../images/superGreen.png');
 	background-size: 97%;
+}
 
+.superGreenPopHead2 {
+	width:97%;
+	margin:auto;
+	border:1px solid black;
+	border-radius: 5px;
+	height:13%;
+	background: url('../images/superGreen.png');
+	background-size: 97%;
 }
 
 .superGreenPopBody {
@@ -3988,6 +3997,22 @@ button:hover {
 	border:1px solid black;
 	border-radius: 5px;
 	padding:1%;
+}
+
+.superGreenPopBody2 {
+	width:95%;
+	height:67%;
+	margin:auto;
+	border:1px solid black;
+	border-radius: 5px;
+	padding:1%;
+}
+
+.single-line-pop-small {
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
 }
 
 .superGreenPopFoot {
@@ -4002,11 +4027,32 @@ button:hover {
 	background-size: 100%;
 }
 
+.superGreenPopFoot2 {
+	width:95%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 1%;
+	height:11%;
+	text-align: right;
+	background: url('../images/superGreen.png');
+	background-size: 100%;
+}
+
 .superGreenPopFoot button {
 	width: 100px;
 	height:27px;
 	font-size: 13px;
-	margin-top: 15px;
+	margin-top: 3%;
+	/*margin-top: 15px;*/
+}
+
+.superGreenPopFoot2 button {
+	width: 100px;
+	height:27px;
+	font-size: 13px;
+	margin-top: 2%;
+	/*margin-top: 15px;*/
 }
 
 .superGreenHeadText {
@@ -4016,6 +4062,15 @@ button:hover {
 	text-align: center;
 	color:#3b3e3d;
 	margin-top: 3%;
+}
+
+.superGreenHeadText2 {
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color:#3b3e3d;
+	margin-top: 4%;
 }
 
 .uniEditHeadText {

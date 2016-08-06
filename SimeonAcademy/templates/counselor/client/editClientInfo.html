@@ -7,12 +7,12 @@
 
 <body class='searchResultsBody' onLoad='javascript: initialize_editClientPage({{json_data}});'>
 <div class='searchResultsDiv'>
-	<form action='/clientAccountUpdated/' method='post' id='b_form'> {% csrf_token %}
+	<form action='/submitClientUpdate/' method='post' id='b_form'> {% csrf_token %}
 		<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
 		<!-- <input type='text' id='testT'> -->
 
 		<div class='superGreenPopHead'>
-			<div class="superGreenHeadText">Edit Client Information</div>
+			<div class="superGreenHeadText">Update Client Profile</div>
 		</div>
 
 		<div class='clientSearchResultsInfoWrapper'>

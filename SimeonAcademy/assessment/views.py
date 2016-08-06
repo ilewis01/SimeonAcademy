@@ -43,7 +43,8 @@ getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDis
 fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch, \
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
-getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate
+getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
+fetchClientUpdatedFields
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -736,6 +737,29 @@ def editClientInfo(request):
 			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def submitClientUpdate(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			client = Client.objects.get(id=(track.client_id))
+			updateClientAccount(client, request)
+			print "NAME CHANGED: " + str(client.fname)
+			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def clientAccountUpdated(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -753,9 +777,33 @@ def clientAccountUpdated(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			client = Client.objects.get(id=(request.POST.get('client_id')))
-			updateClientAccount(client, request)
+			client = Client.objects.get(id=(track.client_id))
+			content['client_id'] = client.id
 			return render_to_response('counselor/client/updateAccountSuccess.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def updateClientPage(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			client = Client.objects.get(id=(track.client_id))
+			fields = fetchClientUpdatedFields(client)
+			json_data = json.dumps(fields)
+			content['json_data'] = json_data
+			return render_to_response('counselor/client/updatingParent.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def confirmDeleteClient(request):

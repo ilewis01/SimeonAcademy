@@ -46,25 +46,15 @@ def getRefReasons():
 	return result
 
 def getOrderedRefIndex(refReason):
-	index = 0
+	index = 1
+	ref_list = RefReason.objects.all().order_by('reason')
 	r = str(refReason)
 
-	if r == 'Anger Management':
-		index = 1
-	elif r == 'Anxiety':
-		index = 2
-	elif r == 'Couple Counseling':
-		index = 3
-	elif r == 'Depression':
-		index = 4
-	elif r == 'Domestic Violence':
-		index = 5
-	elif r == 'Mental Health':
-		index = 6
-	elif r == 'Other':
-		index = 7
-	elif r == 'Substance Abuse':
-		index = 8
+	for r in ref_list:
+		if refReason == str(r.reason):
+			break
+		else:
+			index += 1
 
 	return index
 
@@ -839,6 +829,44 @@ def completeClientSearch(request, sortBy):
 #--------------------------------------------------------------------------------------------------------------------------------#
 #****************************************************** END SEARCH ALGORITHM ****************************************************#
 #--------------------------------------------------------------------------------------------------------------------------------#
+
+def fetchClientUpdatedFields(client):
+	fields 		= {}
+	gender 		= 'Female'
+	dob 		= decodeDate(client.dob)
+	fname 		= str(client.fname)
+	lname 		= str(client.lname)	
+	street_no   = str(client.street_no)
+	street_name = str(client.street_name)
+	apt 		= str(client.apartment_no)
+	city 		= str(client.city)
+	state 		= str(client.state.state)
+	zip_code	= str(client.zip_code)
+
+	the_name 	= fname + ' ' + lname
+	address1	= street_no + ' ' + street_name + ' ' + apt
+	address2 	= city + ', ' + state + ' ' + zip_code
+
+	if client.isMale == True:
+		gender = 'Male'
+
+	fields['the_name'] 		= the_name
+	fields['isMale']		= client.isMale
+	fields['address1']	 	= address1
+	fields['address2'] 		= address2
+	fields['gender'] 		= gender
+	fields['ss_num']		= fetchClientSSDisplay(str(client.ss_num))
+	fields['em_contact']	= client.emer_contact_name
+	fields['em_phone'] 		= fetchClientPhoneDisplay(str(client.emer_phone))
+	fields['probOfficer']	= client.probationOfficer
+	fields['prob_phone']	= fetchClientPhoneDisplay(str(client.probation_phone))
+	fields['email']			= client.email
+	fields['phone'] 		= fetchClientPhoneDisplay(str(client.phone))
+	fields['work']			= fetchClientPhoneDisplay(str(client.work_phone))
+	fields['state_index'] 	= getOrderedStateIndex(client.state.state)
+	fields['ref_index']		= getOrderedRefIndex(client.reason_ref.reason)
+	fields['dob']			= snagSearchDate(client.dob)
+	return fields
 
 def updateClientAccount(client, request):
 	client.fname 				= request.POST.get('fname')

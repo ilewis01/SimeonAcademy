@@ -1,1 +1,30 @@
-<h1>Account Updated</h1>
+{% load staticfiles %}
+
+<head>
+  <title>Simeon Academy</title>
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<form action='/updateClientPage/' method='post' id='b_form'> {% csrf_token %}
+	<input type='hidden' name='client_id' id='client_id' value='{{client_id}}'>
+</form>
+
+<body class='searchResultsBody'>
+	<div class='superGreenPopHead2'>
+		<div class="superGreenHeadText2">Update Client Profile</div>
+	</div>
+
+	<div class='superGreenPopBody2'>
+		<div class='BoxPopMainImageWrapper'>
+			<img src="{% static 'images/popCheck.png' %}" alt="popBoxWarningCheck" class='popBoxWarningCheck'>
+		</div>
+		<div class='single-line-pop-small'>Profile Sucessfully Updated</div>
+	</div>
+
+	<div class='searchResultsDiv'>
+		<div class='superGreenPopFoot2'>
+			<button onClick="javascript: setNewClientFields();">OK</button>
+		</div>
+	</div>
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>

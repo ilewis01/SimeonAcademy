@@ -76,7 +76,7 @@
             											<table>
             												<tr>
             													<td>
-            														<div id='profile-address-head'>
+            														<div class='profile-address-head' id='address1'>
             															{{client.street_no}} {{client.street_name}} {{client.apartment_no}}
             														</div>
             													</td>
@@ -84,7 +84,7 @@
 
             												<tr>
             													<td>
-            														<div id='profile-address-head'>
+            														<div class='profile-address-head' id='address2'>
             															{{client.city}}, {{client.state}} {{client.zip_code}}
             														</div>
             													</td>
@@ -118,7 +118,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Contact:</div></td>
-            											<td><div id='profileTotalAnswer'>{{client.emer_contact_name}}</div>
+            											<td><div class='profileTotalAnswer' id='em_contact'>{{client.emer_contact_name}}</div>
             										</tr>
             									</table>
             								</td>
@@ -129,7 +129,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Intake Date:</div></td>
-            											<td><div id='profileTotalAnswer'>{{client.intake_date}}</div>
+            											<td><div class='profileTotalAnswer'>{{client.intake_date}}</div>
             										</tr>
             									</table>
             								</td>
@@ -138,7 +138,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Phone:</div></td>
-            											<td><div id='profileTotalAnswer'>{{Emphone}}</div>
+            											<td><div class='profileTotalAnswer' id='em_phone'>{{Emphone}}</div>
             										</tr>
             									</table>
             								</td>
@@ -149,7 +149,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Gender:</div></td>
-            											<td><div id='profileTotalAnswer'>{{gender}}</div>
+            											<td><div class='profileTotalAnswer' id='gender'>{{gender}}</div>
             										</tr>
             									</table>
             								</td>
@@ -162,7 +162,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Work Phone:</div></td>
-            											<td><div id='profileTotalAnswer'>{{workPhone}}</div>
+            											<td><div class='profileTotalAnswer' id='workPhone'>{{workPhone}}</div>
             										</tr>
             									</table>
             								</td>
@@ -177,7 +177,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>DOB:</div></td>
-            											<td><div id='profileTotalAnswer'>{{client.dob}}</div>
+            											<td><div class='profileTotalAnswer' id='dob'>{{client.dob}}</div>
             										</tr>
             									</table>
             								</td>
@@ -186,7 +186,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Officer:</div></td>
-            											<td><div id='profileTotalAnswer'>{{client.probationOfficer}}</div>
+            											<td><div class='profileTotalAnswer' id='prob_off'>{{client.probationOfficer}}</div>
             										</tr>
             									</table>
             								</td>
@@ -197,7 +197,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>SSN:</div></td>
-            											<td><div id='profileTotalAnswer'>{{f_ssn}}</div>
+            											<td><div class='profileTotalAnswer' id='f_ssn'>{{f_ssn}}</div>
             										</tr>
             									</table>
             								</td>
@@ -206,7 +206,7 @@
             									<table>
             										<tr>
             											<td><div id='profileTotalQuestion'>Phone:</div></td>
-            											<td><div id='profileTotalAnswer'>{{probationPhone}}</div>
+            											<td><div class='profileTotalAnswer' id='prob_phone'>{{probationPhone}}</div>
             										</tr>
             									</table>
             								</td>
@@ -229,8 +229,8 @@
             							<button onClick='javascript: appointmentsClientProfile();'>Appointment Manager</button>
                                                       <button onClick='javascript: viewClientInvoices();'>Invoices & Payments</button>
                                                       <button onClick="javascript: viewClientFiles('incomplete');">View Incomplete Forms</button>
-                                                      <button onClick='javascript: editClientInformation();'>Update Client Account</button>
-            							<button onClick='javascript: updateClientStats();'>Update Client Status</button>
+                                                      <button onClick='javascript: editClientInformation();'>Edit Client Profile</button>
+            							<button onClick='javascript: updateClientStats();'>Update Status</button>
                                                       <button onClick='javascript: deleteClientProfile();'>Delete Client</button>
                                                       <div style='border-bottom:2px solid black;'>
             								<button onClick='javascript: goHomeProfile();'>Exit</button>

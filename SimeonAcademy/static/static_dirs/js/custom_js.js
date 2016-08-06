@@ -982,7 +982,55 @@ function initialize_editClientPage(json_data) {
 }
 
 function updateClientAccount() {
+	var w = 400, h = 400;
 	grab('b_form').submit();
+	openPopUp('auto', '/clientAccountUpdated/', w, h);	
+}
+
+function setNewClientFields(data) {
+	grab('b_form').submit();
+}
+
+function refreshClientParentPage(data) {
+	superParent('profile-name-head').innerHTML 	= data.the_name;
+	superParent('profile-email-head').innerHTML = data.email;
+	superParent('address1').innerHTML 			= data.address1;
+	superParent('address2').innerHTML 			= data.address2;
+	superParent('profile-phone-head').innerHTML = data.phone;
+	superParent('em_contact').innerHTML 		= data.em_contact;
+	superParent('em_phone').innerHTML 			= data.em_phone;
+	superParent('prob_off').innerHTML 			= data.probOfficer;
+	superParent('prob_phone').innerHTML 		= data.prob_phone;
+	superParent('f_ssn').innerHTML 				= data.ss_num;
+	superParent('gender').innerHTML 			= data.gender;
+	superParent('workPhone').innerHTML 			= data.work;
+	superParent('dob').innerHTML				= data.dob
+
+	closeAllWindows(2);
+}
+
+function superParent(field) {
+	field = String(field);
+	return window.opener.getPopParent(field);
+}
+
+function closeAllWindows(numWindows) {
+	numWindows = Number(numWindows);
+	window.close();
+
+	for (var i = 0; i < numWindows; i++) {
+		window.opener.close();
+	}	
+}
+
+function waitSeconds(iMilliSeconds) {
+    var counter= 0
+        , start = new Date().getTime()
+        , end = 0;
+    while (counter < iMilliSeconds) {
+        end = new Date().getTime();
+        counter = end - start;
+    }
 }
 
 function initial_clientFiles() {
