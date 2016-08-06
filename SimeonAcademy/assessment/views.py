@@ -42,7 +42,8 @@ fetchPrintFields, processInvoice, fetchBillableItems, fetchAllClientHistory, fet
 getUtViewImages, getUtPaid, deprioritizeURL, setClientHistory5, fetchClientSSDisplay, \
 fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClientSearch, \
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
-fetchStatusDisplay
+fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
+getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -689,7 +690,72 @@ def editClientInfo(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			date = datetime.now()
+			temp = []
+			years = []
+			year = date.year
+			year = int(year)
+			firstYear = year - 80
+			lastYear = year - 5
+
+			for y in range(firstYear, lastYear):
+				temp.append(y)
+
+			count = len(temp) - 1
+			for i in range(count):
+				years.append(temp[count])
+				count -= 1
+
+			content['years'] = years
+
+			states 		= getStates()
+			refs 		= getRefReasons()
+			client 		= Client.objects.get(id=(getGlobalClientID(user)))
+			selects 	= {}
+			stateSel 	= getOrderedStateIndex(str(client.state))
+			refSel 		= getOrderedRefIndex(str(client.reason_ref))
+
+			dob = decodeDate(client.dob)
+
+			selects['state']  	= stateSel
+			selects['ref']	  	= refSel
+			selects['gender'] 	= client.isMale
+			selects['day'] 		= dob['day']
+			selects['month'] 	= dob['month']
+			selects['year']	  	= snagYearIndex(dob['year'])
+			json_data = json.dumps(selects)
+
+			content['client'] 			= client
+			content['states'] 			= states
+			content['reason']			= refs
+			content['phone'] 			= fetchClientPhoneDisplay(client.phone)
+			content['ssn']				= fetchClientSSDisplay(client.ss_num)
+			content['work_phone']		= fetchClientPhoneDisplay(client.work_phone)
+			content['prob_phone']		= fetchClientPhoneDisplay(client.probation_phone)
+			content['json_data'] 		= json_data
 			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def clientAccountUpdated(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', user)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			client = Client.objects.get(id=(request.POST.get('client_id')))
+			updateClientAccount(client, request)
+			return render_to_response('counselor/client/updateAccountSuccess.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def confirmDeleteClient(request):
@@ -873,6 +939,8 @@ def clientProfile(request):
 			client = Client.objects.get(id=(request.POST.get('client_id')))
 			session_id = request.POST.get('session_id')
 			hasExisting = request.POST.get('hasExisting')
+
+			setGlobalClientID(client.id, user)
 
 			status = fetchStatusDisplay(client.isDischarged)
 			activeClass = 'clientIsActive'

@@ -5,31 +5,313 @@
   <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='searchResultsBody'>
-
-	<form action='/clientSearchResults/' method='post' id='b_form'> {% csrf_token %}
-		<input type='hidden' name='' id='' value=''>
+<body class='searchResultsBody' onLoad='javascript: initialize_editClientPage({{json_data}});'>
+<div class='searchResultsDiv'>
+	<form action='/clientAccountUpdated/' method='post' id='b_form'> {% csrf_token %}
+		<input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
 		<!-- <input type='text' id='testT'> -->
+
+		<div class='superGreenPopHead'>
+			<div class="superGreenHeadText">Edit Client Information</div>
+		</div>
+
+		<div class='clientSearchResultsInfoWrapper'>
+			<div>
+			</div>
+		</div>
+
+		<div class='superGreenPopBody'>
+			<div class="page-splitter"> <!-- LEFT SIDE -->
+				<table class="split-table">
+					<tr>
+						<th><div id='PopEditMainLabel'>Client Name</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Name:</div></div></td>
+									<td><input type='text' name='fname' id='fname' value='{{client.fname}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>MI:</div></div></td>
+									<td><input type='text' name='mi' id='mi' value='{{client.middleInit}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>Last:</div></div></td>
+									<td><input type='text' name='lname' id='lname' value='{{client.lname}}'></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr><td><div id='super-space1'></div></td></tr>
+
+					<tr>
+						<th><div id='PopEditMainLabel'>Address</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Street No:</div></div></td>
+									<td><input type='text' name='street_no' id='street_no' style='width:152px;' value='{{client.street_no}}'></td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Street Name:</div></div></td>
+									<td><input type='text' name='street_name' id='street_name' style='width:135px;' value='{{client.street_name}}'></td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Apt:</div></div></td>
+									<td><input type='text' name='apt' id='apt' style='width:145px;' value='{{client.apartment_no}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>City:</div></div></td>
+									<td><input type='text' name='city' id='city' style='width:145px;' value='{{client.city}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>State:</div></div></td>
+									<td>
+										<select name='state' id='state'>
+											<option value='0'>Select</option>
+											{% for s in states %}
+											<option value='{{s}}'>{{s}}</option>
+											{% endfor %}
+										</select>
+									</td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Zip Code:</div></div></td>
+									<td><input type='text' name='zip' id='zip' style='width:134px;' value='{{client.zip_code}}'></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr><td><div id='super-space1'></div></td></tr>
+
+					<tr>
+						<th><div id='PopEditMainLabel'>Probation Information</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Officer:</div></div></td>
+									<td><input type='text' name='probationOfficer' id='probationOfficer' value='{{client.probationOfficer}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>Phone:</div></div></td>
+									<td><input type='text' name='probation_phone' id='probation_phone' value='{{prob_phone}}'></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="page-splitter"> <!-- RIGHT SIDE -->
+				<table>
+					<tr>
+						<th><div id='PopEditMainLabel'>General Information</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Gender:</div></div></td>
+									<td>
+										<table>
+											<tr>
+												<td><div><input type='radio' name='isMale' id='male' value='True' checked></div></td>
+												<td><div id='radio-labe-p'>Male</div></td>
+
+												<td><div><input type='radio' name='isMale' id='female' value='False'></div></td>
+												<td><div id='radio-labe-p'>Female</div></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>SSN:</div></div></td>
+									<td><input type='text' name='ssn' id='ssn' value='{{ssn}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>DOB:</div></div></td>
+									<td>
+										<table>
+											<tr>
+												<td>
+													<select name='c_mob' id='c_mob' onChange="javascript: correctClientDOBForm();">
+														<option value='0'>---</option>
+														<option value='1'>1</option>
+														<option value='2'>2</option>
+														<option value='3'>3</option>
+														<option value='4'>4</option>
+														<option value='5'>5</option>
+														<option value='6'>6</option>
+														<option value='7'>7</option>
+														<option value='8'>8</option>
+														<option value='9'>9</option>
+														<option value='10'>10</option>
+														<option value='11'>11</option>
+														<option value='12'>12</option>
+													</select>
+													<div id='cliSearchQuestSub'>month</div>
+												</td>
+
+												<td>
+													<select name='c_dob' id='c_dob' onChange="javascript: correctClientDOBForm();">
+														<option value='0'>---</option>
+														<option value='1'>1</option>
+														<option value='2'>2</option>
+														<option value='3'>3</option>
+														<option value='4'>4</option>
+														<option value='5'>5</option>
+														<option value='6'>6</option>
+														<option value='7'>7</option>
+														<option value='8'>8</option>
+														<option value='9'>9</option>
+														<option value='10'>10</option>
+														<option value='11'>11</option>
+														<option value='12'>12</option>
+														<option value='13'>13</option>
+														<option value='14'>14</option>
+														<option value='15'>15</option>
+														<option value='16'>16</option>
+														<option value='17'>17</option>
+														<option value='18'>18</option>
+														<option value='19'>19</option>
+														<option value='20'>20</option>
+														<option value='21'>21</option>
+														<option value='22'>22</option>
+														<option value='23'>23</option>
+														<option value='24'>24</option>
+														<option value='25'>25</option>
+														<option value='26'>26</option>
+														<option value='27'>27</option>
+														<option value='28'>28</option>
+														<option value='29'>29</option>
+														<option value='30'>30</option>
+														<option value='31'>31</option>
+													</select>
+													<div id='cliSearchQuestSub'>day</div>
+												</td>
+
+												<td>
+													<select name='c_yob' id='c_yob' onChange="javascript: correctClientDOBForm();">
+														<option value='0'>---</option>
+														{% for y in years %}
+														<option value='{{y}}'>{{y}}</option>
+														{% endfor %}
+													</select>
+													<div id='cliSearchQuestSub'>year</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+									<!-- <td><input type='text' name='dob' id='dob' value='{{client.dob}}'></td> -->
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr><td><div id='super-space1'></div></td></tr>
+
+					<tr>
+						<th><div id='PopEditMainLabel'>Contact Information</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Email:</div></div></td>
+									<td><input type='email' name='email' id='email' style='width:170px;' value='{{client.email}}'></td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label' style='width:100px;'>Primary Phone:</div></div></td>
+									<td><input type='text' name='phone' id='phone' style='width:110px;' value='{{phone}}'></td>
+								</tr>
+							</table>
+
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Work Phone:</div></div></td>
+									<td><input type='text' name='workPhone' id='workPhone' style='width:131px;' value='{{work_phone}}'></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr><td><div id='super-space1'></div></td></tr>
+
+					<tr>
+						<th><div id='PopEditMainLabel'>Emergency Contact</div></th>
+					</tr>
+
+					<tr>
+						<td>
+							<table class='sub-split-table'>
+								<tr>
+									<td><div id='super_label'>Contact:</div></div></td>
+									<td><input type='text' name='emer_contact_name' id='emer_contact_name' style='width:157px;' value='{{client.emer_contact_name}}'></td>
+								</tr>
+
+								<tr>
+									<td><div id='super_label'>Phone:</div></div></td>
+									<td><input type='text' name='emer_phone' id='emer_phone' style='width:157px;' value='{{client.emer_phone}}'></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr><td><div id='super-space1'></div></td></tr>
+				</table>
+
+				<div id='super_label2'>Reason For Referral:</div>
+				<div>
+					<select name='reasonRef' id='reasonRef'>
+						<option value='0'>Select</option>
+						{% for r in reason %}
+						<option value='{{r}}'>{{r}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		</div>
 	</form>
 
-	<div class='superGreenPopHead'>
-		<div class="superGreenHeadText">Edit Client Information</div>
-	</div>
-
-	<div class='clientSearchResultsInfoWrapper'>
-		<div>
-		</div>
-	</div>
-
-	<div class='superGreenPopBody'>
-		<div>
-		</div>
-	</div>
-
 	<div class='superGreenPopFoot'>
-		<button onClick='javascript: processEditedClientData();'>Submit</button>
+		<button onClick='javascript: updateClientAccount();'>Submit</button>
 		<button onClick='javascript: window.close();'>Cancel</button>
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</div>
 </body>

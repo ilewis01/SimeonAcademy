@@ -3999,7 +3999,7 @@ button:hover {
 	height:9%;
 	text-align: right;
 	background: url('../images/superGreen.png');
-	background-size: 95%;
+	background-size: 100%;
 }
 
 .superGreenPopFoot button {
@@ -4021,6 +4021,60 @@ button:hover {
 .uniEditHeadText {
 
 }
+
+.page-splitter {
+	width:47%;
+	height:95%;
+	float:left;
+	padding-left: 3%;
+	padding-top: 2%;
+	text-align: left;
+}
+
+.split-table {
+	text-align: left;
+}
+
+.sub-split-table {
+	margin-left: 10px;
+}
+
+#super_label {
+	font-size: 13px;
+	font-weight: bold;
+	color:#484848;
+}
+
+#super_label2 {
+	font-size: 15px;
+	font-weight: bold;
+	font-style: italic;
+	color:#7a8d8a;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+
+#PopEditMainLabel {
+	font-size: 15px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: left;
+	color:#7a8d8a;
+}
+
+.searchResultsDiv {
+	/*height:300px;*/
+}
+
+#radio-labe-p {
+	font-style: italic;
+	font-size: 13px;
+}
+
+#super-space1 {
+	height:10px;
+}
+
 
 
 

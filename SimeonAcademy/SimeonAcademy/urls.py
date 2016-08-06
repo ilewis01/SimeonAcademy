@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^clientInvoiceMain/$', 'assessment.views.clientInvoiceMain'),
     url(r'^clientFiles/$', 'assessment.views.clientFiles'),
     url(r'^clientAppointments/$', 'assessment.views.clientAppointments'),
+    url(r'^clientAccountUpdated/$', 'assessment.views.clientAccountUpdated'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

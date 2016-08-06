@@ -972,6 +972,19 @@ function viewClientFiles(viewType) {
 	openPopUp('auto', '/clientFiles/', w, h);
 }
 
+function initialize_editClientPage(json_data) {
+	grab('state').selectedIndex = json_data.state;
+	grab('reasonRef').selectedIndex = json_data.ref;
+	grab('c_dob').selectedIndex = json_data.day
+	grab('c_mob').selectedIndex = json_data.month
+	grab('c_yob').selectedIndex = json_data.year
+	setRadioElement(json_data.gender, grab('male'), grab('female'));
+}
+
+function updateClientAccount() {
+	grab('b_form').submit();
+}
+
 function initial_clientFiles() {
 	var viewType = getPopParent('viewType').value;
 	var headTag = grab('clientFilesHeader');

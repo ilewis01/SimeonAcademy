@@ -38,6 +38,64 @@ def onTrue_offFalse(data):
 		data = False
 	return data
 
+def getRefReasons():
+	result = []
+	refs = RefReason.objects.all().order_by('reason')
+	for r in refs:
+		result.append(r)
+	return result
+
+def getOrderedRefIndex(refReason):
+	index = 0
+	r = str(refReason)
+
+	if r == 'Anger Management':
+		index = 1
+	elif r == 'Anxiety':
+		index = 2
+	elif r == 'Couple Counseling':
+		index = 3
+	elif r == 'Depression':
+		index = 4
+	elif r == 'Domestic Violence':
+		index = 5
+	elif r == 'Mental Health':
+		index = 6
+	elif r == 'Other':
+		index = 7
+	elif r == 'Substance Abuse':
+		index = 8
+
+	return index
+
+def fetchRefReasonID(refReason):
+	result = None
+	refReason = str(refReason)
+	refReasons = RefReason.objects.all()
+
+	for r in refReasons:
+		if str(r.reason) == refReason:
+			result = r.id
+			break
+	return result
+
+def getStates():
+	results = []
+	states = State.objects.all().order_by('state')
+	for s in states:
+		results.append(s)
+	return results
+
+def fetchStateID(state):
+	result = None
+	state = str(state)
+	states = State.objects.all()
+	for s in states:
+		if state == str(s.state):
+			result = s.id
+			break
+	return result
+
 def getOrderedStateIndex(the_state):
 	index = 0
 
@@ -56,6 +114,70 @@ def getOrderedStateIndex(the_state):
 		index = 0
 	else:
 		index = index + 1
+
+	return index
+
+def snagSelectDate(request):
+	m = request.POST.get('c_mob')
+	d = request.POST.get('c_dob')
+	y = request.POST.get('c_yob')
+
+	m = int(m)
+	d = int(d)
+	y = int(y)
+
+	date = datetime(y, m, d)
+	return date.date()
+
+def decodeDate(date):
+	result = {}
+	date = str(date)
+	y = ''
+	m = ''
+	d = ''
+
+	y += date[0]
+	y += date[1]
+	y += date[2]
+	y += date[3]
+
+	m += date[5]
+	m += date[6]
+
+	d += date[8]
+	d += date[9]
+
+	m = int(m)
+	d = int(d)
+	y = int(y)
+
+	result['month'] = m
+	result['day'] 	= d
+	result['year'] 	= y
+	return result
+
+
+def snagYearIndex(select):
+	select = str(select)
+	date = datetime.now()
+	temp = []
+	index = 0
+	year = date.year
+	year = int(year)
+	firstYear = year - 80
+	lastYear = year - 5
+
+	for y in range(firstYear, lastYear):
+		temp.append(y)
+
+	count = len(temp) - 1
+
+	for i in range(count):	
+		count -= 1
+
+		if str(temp[count]) == select:
+			index = i + 2
+			break
 
 	return index
 
@@ -236,21 +358,17 @@ def filterSS(ss_num):
 			result += s
 	return result
 
-def fetchActiveClients():
-	result = []
-	clients = Client.objects.all()
 
-	for c in clients:
-		if c.isDischarged == False:
-			result.append(c)
-
-	return result
 
 ##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#
-#********************************************************* SEARCH CLIENTS *******************************************************#
+#******************************************************** CLIENT FUNTIONS *******************************************************#
 #--------------------------------------------------------------------------------------------------------------------------------#
 ##################################################################################################################################
+
+#--------------------------------------------------------------------------------------------------------------------------------#
+#*************************************************** CLIENT SEARCH ALGORITHM ****************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
 
 
 def cleanWhiteSpace(text):
@@ -718,11 +836,49 @@ def completeClientSearch(request, sortBy):
 
 	return superSearch
 
-##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#
 #****************************************************** END SEARCH ALGORITHM ****************************************************#
 #--------------------------------------------------------------------------------------------------------------------------------#
-##################################################################################################################################
+
+def updateClientAccount(client, request):
+	client.fname 				= request.POST.get('fname')
+	client.lname 				= request.POST.get('lname')
+	client.middleInit 			= request.POST.get('mi')
+	client.street_no 			= request.POST.get('street_no')
+	client.street_name 			= request.POST.get('street_name')
+	client.apartment_no 		= request.POST.get('apt')
+	client.city 				= request.POST.get('city')
+	client.zip_code 			= request.POST.get('zip')
+	client.ss_num 				= request.POST.get('ssn')
+	client.dob 					= snagSelectDate(request)
+	client.phone 				= request.POST.get('phone')
+	client.work_phone 			= request.POST.get('workPhone')
+	client.email 				= request.POST.get('email')
+	client.emer_contact_name 	= request.POST.get('emer_contact_name')
+	client.emer_phone 			= request.POST.get('emer_phone')
+	client.probationOfficer 	= request.POST.get('probationOfficer')
+	client.probation_phone 		= request.POST.get('probation_phone')
+
+	client.isMale 		= truePythonBool(request.POST.get('isMale'))
+	client.state 		= State.objects.get(id=(fetchStateID(request.POST.get('state'))))
+	client.reason_ref 	= RefReason.objects.get(id=(fetchRefReasonID(request.POST.get('reasonRef'))))
+	client.save()
+
+def fetchActiveClients():
+	result = []
+	clients = Client.objects.all()
+
+	for c in clients:
+		if c.isDischarged == False:
+			result.append(c)
+
+	return result
+
+def removeClient(client):
+	if client.hasFiles == True:
+		client.isRemoved = True
+	else:
+		client.delete()
 
 
 def setUpNumberSearch(text):
@@ -11280,6 +11436,15 @@ def setGlobalID(the_id, user):
 def getGlobalID(user):
 	track = getUserTrack(user)
 	return track.f_id
+
+def setGlobalClientID(the_id, user):
+	track = getUserTrack(user)
+	track.client_id = the_id
+	track.save()
+
+def getGlobalClientID(user):
+	track = getUserTrack(user)
+	return track.client_id
 
 def setGlobalSession(the_id, user):
 	track = getUserTrack(user)
