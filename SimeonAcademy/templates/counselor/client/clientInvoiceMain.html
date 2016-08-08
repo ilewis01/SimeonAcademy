@@ -22,8 +22,31 @@
 	</div>
 
 	<div class='superGreenPopBody'>
-		<div>
-		</div>
+		<div class='apptManagerMargin'> <!-- BODY WRAPPER -->
+			<table>
+				<tr>
+					<td>
+						<div>
+            				<img src="/static/media/{{client.photo}}" alt="client_img_med" class='client_img_profile_med'>
+            			</div>
+					</td>
+
+					<td>
+						<table>
+							<tr><td><div id='name' class='apptNameHead'>{{client.fname}} {{client.lname}}</div></td></tr>
+							<tr><td><div id='clientID' class='apptIDMain'>{{client.clientID}}</div></td></tr>
+							<tr><td><div id='apptContactHead'>Contact Information:</div></td></tr>
+							<tr><td><div id='email' class='apptEmailMain'>{{client.email}}</div></td></tr>
+							<tr><td><div id='phone' class='apptPhoneMain'>{{client.phone}}</div></td></tr>
+							<tr><td><div id='apptAddressHead'>Address:</div></td></tr>
+							<tr><td><div id='address1' class='apptPhoneMain'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</div></td></tr>
+							<tr><td><div id='address2' class='apptPhoneMain'>{{client.city}}, {{client.state}} {{client.zip_code}}</div></td></tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div> <!-- END BODY WRAPPER-->
+		</div> <!-- END BODY WRAPPER-->
 	</div>
 
 	<div class='superGreenPopFoot'>

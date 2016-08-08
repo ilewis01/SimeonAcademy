@@ -823,7 +823,7 @@ def confirmDeleteClient(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+			return render_to_response('counselor/client/confirmDelete.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def clientDeleteSucess(request):
@@ -843,7 +843,7 @@ def clientDeleteSucess(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
+			return render_to_response('counselor/client/clientRemoved.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def clientInvoiceMain(request):
@@ -863,6 +863,8 @@ def clientInvoiceMain(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(track.client_id))
+			content['client'] = client
 			return render_to_response('counselor/client/clientInvoiceMain.html', content, context_instance=RequestContext(request))
 
 
@@ -884,6 +886,8 @@ def clientFiles(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(track.client_id))
+			content['client'] = client
 			return render_to_response('counselor/client/clientFiles.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -904,6 +908,8 @@ def clientAppointments(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			client = Client.objects.get(id=(track.client_id))
+			content['client'] = client
 			return render_to_response('counselor/client/clientAppointments.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

@@ -17,18 +17,98 @@
 	</div>
 
 	<div class='clientSearchResultsInfoWrapper'>
-		<div>
-		</div>
 	</div>
 
 	<div class='superGreenPopBody'>
-		<div>
-		</div>
+		<div class='apptManagerMargin'> <!-- BODY WRAPPER -->
+			<table>
+				<tr>
+					<td>
+						<div>
+            				<img src="/static/media/{{client.photo}}" alt="client_img_med" class='client_img_profile_med'>
+            			</div>
+					</td>
+
+					<td>
+						<table>
+							<tr><td><div id='name' class='apptNameHead'>{{client.fname}} {{client.lname}}</div></td></tr>
+							<tr><td><div id='clientID' class='apptIDMain'>{{client.clientID}}</div></td></tr>
+							<tr><td><div id='apptContactHead'>Contact Information:</div></td></tr>
+							<tr><td><div id='email' class='apptEmailMain'>{{client.email}}</div></td></tr>
+							<tr><td><div id='phone' class='apptPhoneMain'>{{client.phone}}</div></td></tr>
+							<tr><td><div id='apptAddressHead'>Address:</div></td></tr>
+							<tr><td><div id='address1' class='apptPhoneMain'>{{client.street_no}} {{client.street_name}} {{client.apartment_no}}</div></td></tr>
+							<tr><td><div id='address2' class='apptPhoneMain'>{{client.city}}, {{client.state}} {{client.zip_code}}</div></td></tr>
+						</table>
+					</td>
+				</tr>
+				<tr><td><div style='height:60px;'></div></td></tr>
+			</table>
+
+			<div class='divider_gradient'></div>
+
+			<div class='appt_center_content'>
+				<table class='appt_table_main'>
+					<tr>
+						<td>
+							<div>
+			        			<a href="#">
+					           		<div>
+					           			<div class='round-up-again'>
+					           				<!-- <img src="{% static 'images/manager/add.png' %}" alt="" class='appManageSize' id='btn1'> -->
+					           			</div>
+					           		</div>
+
+					           		<div class='appt_btn_text' id='newBtn' onmouseenter="javascript: newApptOn('btn1');" onmouseout="javascript: newApptOff('btn1');">
+					           			New
+					           		</div>
+					           	</a>
+			        		</div>
+						</td>
+
+						<td>
+							<div>
+			        			<a href="#">
+					           		<div>
+					           			<div class='round-up-again'>
+					           				<div>
+					           					<!-- <img src="{% static 'images/manager/edit.png' %}" alt="" class='appManageSize'> -->
+					           				</div>
+					           			</div>
+					           		</div>
+
+					           		<div class='appt_btn_text'>
+					           			Edit
+					           		</div>
+					           	</a>
+			        		</div>
+						</td>
+
+						<td>
+							<div>
+			        			<a href="#">
+					           		<div>
+					           			<div class='round-up-again'>
+					           				<div>
+					           					<!-- <img src="{% static 'images/manager/all.png' %}" alt="" class='appManageSize'> -->
+					           				</div>
+					           			</div>
+					           		</div>
+
+					           		<div class='appt_btn_text'>
+					           			History
+					           		</div>
+					           	</a>
+			        		</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div> <!-- END BODY WRAPPER-->
 	</div>
 
 	<div class='superGreenPopFoot'>
-		<button onClick='javascript: processEditedClientData();'>Submit</button>
-		<button onClick='javascript: window.close();'>Cancel</button>
+		<button onClick='javascript: window.close();'>Close</button>
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

@@ -34,6 +34,23 @@ side_option_headbody {
 	width:25%;
 }
 
+.round-up-again {
+	width: 90px;
+	height: 90px;
+	margin: auto;
+	background-image: url('../images/circleBtn.png');
+	background-size: 100%;
+}
+
+.appManageSize {
+	width: 100%;
+}
+
+.searchResultsBody a {
+	font-size: 15px;
+	text-decoration: none;
+}
+
 .round-button-circle {
 	width: 100px;
 	height:100px;
@@ -3065,6 +3082,89 @@ button:hover {
 	vertical-align: top;
 }
 
+.client_img_profile_med {
+	width:175px;
+	height: 175px;
+	border: 2px solid #787875;
+	margin-right: 30px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.apptManagerMargin {
+	margin: 3%;	
+}
+
+.appt_center_content {
+	width:100%;
+	margin: auto;
+	margin-top: 17px;
+}
+
+.divider_gradient {
+	width:95%;
+	padding-top: 10px;
+	margin: auto;
+	background: url('../images/divider_gradient.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.appt_table_main {
+	width: 95%;
+	margin: auto;
+}
+
+.appt_btn_text {
+	font-size: 15px;
+	font-weight: bold;
+	font-style: italic;
+	color: #464747;
+}
+
+.appt_table_main td {
+	/*width:33%;*/
+	margin: auto;
+	text-align: center;
+}
+
+.apptNameHead {
+	font-size: 22px;
+	font-style: italic;
+	font-weight: bold;
+	color: #836b76;
+}
+
+.apptIDMain {
+	font-size: ;
+	font-weight: bold;
+	font-style: italic;
+	color: #a58f74;
+	margin-bottom: 7px;
+}
+
+.apptEmailMain {
+	font-size: 13px;
+	font-style: italic;
+	color: #588aad;
+}
+
+.apptPhoneMain {
+	font-style: italic;
+	font-size: 13px;
+}
+
+#apptContactHead {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#apptAddressHead {
+	font-weight: bold;
+	font-size: 13px;
+	margin-top: 7px;
+}
+
 .clientProfileConatiner {
 	width: 85%;
 	height: 600px;
@@ -3160,10 +3260,6 @@ button:hover {
 
 .left-to-pic-table {
 	height:200px;
-}
-
-.avatar-container {
-	/*width:210px;*/
 }
 
 #profile-total-head {
@@ -3997,6 +4093,8 @@ button:hover {
 	border:1px solid black;
 	border-radius: 5px;
 	padding:1%;
+	background: url('../images/gray_reflected_background.png');
+	background-size: 100%;
 }
 
 .superGreenPopBody2 {

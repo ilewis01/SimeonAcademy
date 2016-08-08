@@ -1009,6 +1009,19 @@ function refreshClientParentPage(data) {
 	closeAllWindows(2);
 }
 
+function newApptOn(btn) {
+	btn = String(btn);
+
+	if (btn === 'btn1') {
+		image = '/static/images/manager/addOver.png';
+		grab('btn1').src = image;
+	}
+}
+
+function newApptOff(btn) {
+	btn = String(btn);
+}
+
 function superParent(field) {
 	field = String(field);
 	return window.opener.getPopParent(field);
