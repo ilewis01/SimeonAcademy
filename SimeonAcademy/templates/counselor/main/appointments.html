@@ -4,6 +4,10 @@
 
 <body onLoad="javascript: searchRadio();" class="gradient-white">
 
+	<form action='//' method='post' id='a_form'> {% csrf_token %}
+		<input type='hidden' name='cSearch' id='cSearch' value=''>
+	</form>
+
     <div class='header-images-gray'>
       	<div class="container">
             <div class="row">                   
@@ -22,7 +26,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="/setSchedule/">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -44,7 +48,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="/viewAppointments/">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -58,7 +62,7 @@
 			           		</div>
 
 			           		<div class='home_btn_text'>
-			           			View Appointments
+			           			View Calendar
 			           		</div>
 			           	</a>
 	        		</div>
@@ -66,7 +70,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="javascript: uniClientSearchF('editAppt');">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -88,7 +92,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="/avaiableAppointments/">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -118,7 +122,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="javascript: uniClientSearchF('searchAppt');">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>
@@ -140,7 +144,7 @@
 
 	        	<div class="col-sm-2 col-md-2">
 	        		<div>
-	        			<a href="//">
+	        			<a href="/apptHistory/">
 			           		<div>
 			           			<div class='center-rounded'>
 			           				<div class='round-button'>

@@ -18,7 +18,12 @@ urlpatterns = patterns('',
     url(r'^AdministrativeMain/$', 'assessment.views.AdministrativeMain'),    
     url(r'^uniFormSearch/$', 'assessment.views.uniFormSearch'),
     url(r'^emailMain/$', 'assessment.views.emailMain'),
-    
+
+    ##Counselor Schedule
+    url(r'^setSchedule/$', 'assessment.views.setSchedule'),
+    url(r'^viewAppointments/$', 'assessment.views.viewAppointments'),
+    url(r'^avaiableAppointments/$', 'assessment.views.avaiableAppointments'),
+    url(r'^apptHistory/$', 'assessment.views.apptHistory'),
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),
@@ -40,6 +45,7 @@ urlpatterns = patterns('',
     url(r'^submitClientUpdate/$', 'assessment.views.submitClientUpdate'),
     url(r'^clientAccountUpdated/$', 'assessment.views.clientAccountUpdated'),
     url(r'^updateClientPage/$', 'assessment.views.updateClientPage'),
+    url(r'^clientProfile/$', 'assessment.views.clientProfile'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),
@@ -149,5 +155,6 @@ urlpatterns = patterns('',
     url(r'^form_existing/$', 'assessment.views.form_existing'),
     url(r'^printForm/$', 'assessment.views.printForm'),
     url(r'^printLoaded/$', 'assessment.views.printLoaded'),
-    url(r'^clientProfile/$', 'assessment.views.clientProfile'),
+    url(r'^underConstruction/$', 'assessment.views.underConstruction'),
+    
 )

@@ -1683,11 +1683,108 @@ def printForm(request):
 			return render_to_response(url, content, context_instance=RequestContext(request))
 
 
+@login_required(login_url='/index')
+def underConstruction(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/underConstruction.html', content, context_instance=RequestContext(request))
+
+
 
 ###########################################################################################################################################
 ################################################################ END GENERIC ##############################################################
 ###########################################################################################################################################
 
+###########################################################################################################################################
+###########################################################################################################################################
+#----------------------------------------------------------------- SCHEDULE --------------------------------------------------------------#
+###########################################################################################################################################
+###########################################################################################################################################
+
+
+@login_required(login_url='/index')
+def setSchedule(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/schedule/setSchedule.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def viewAppointments(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/schedule/viewAppointments.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def avaiableAppointments(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/schedule/avaiableAppointments.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def apptHistory(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/schedule/apptHistory.html', content, context_instance=RequestContext(request))
+
+
+###########################################################################################################################################
+################################################################ END SCHEDULE #############################################################
+###########################################################################################################################################
 
 ###########################################################################################################################################
 ###########################################################################################################################################
