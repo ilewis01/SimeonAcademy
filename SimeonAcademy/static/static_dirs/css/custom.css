@@ -4236,27 +4236,64 @@ button:hover {
 	height:10px;
 }
 
-#cal_container {
+.cal_container {
 	width: 80%;
 	margin: auto;
 	padding: 1%;
 	margin-top: 1%;
 }
 
-#cal_tot_head {
-	width: 910px;
+.cal_container a {
+	color: #2d99de;
+}
+
+.cal_container a:hover {
+	color: #0d53f0;
+	text-decoration: none;
+}
+
+#cal_heading_wrapper {
+	width:910px;
 	margin: auto;
-	text-align: center;
-	font-size: 26px;
-	font-weight: bold;
-	color: #738884;
 	background-color: white;
+	padding: 7px;
 	border-right: 1px solid #b9bac1;
 	border-left: 1px solid #b9bac1;
 	border-top: 1px solid #b9bac1;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	padding: 5px;
+}
+
+#cal_tot_head {
+	width: 220px;
+	margin: auto;
+	text-align: center;
+	font-size: 26px;
+	font-weight: bold;
+	color: #738884;
+}
+
+.cal-nav-left {
+	width:30px;
+	border: 1px solid #b9bac1;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.cal-nav-right {
+	width:30px;
+	border: 1px solid #b9bac1;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.cal_header_table {
+	width: 180px;
+	margin:auto;
 }
 
 #cal_head_divide {
@@ -4319,8 +4356,20 @@ button:hover {
 	background-color: white;
 }
 
+.normalDay:hover {
+	background-color: #c1e3dd;
+}
+
 .prevMonth {
 	background-color: #e3e7e6;
+	color: #999999;
+}
+
+.prevMonth a {
+	color: #999999;
+}
+
+.prevMonth a:hover {
 	color: #999999;
 }
 
@@ -4328,8 +4377,16 @@ button:hover {
 	background-color: #f0f1a6;
 }
 
+.thisDay:hover {
+	background-color: #c1e3dd;
+}
+
 .nextMonth {
-	background-color: #e3e7e6;
+	background-color: #efeae1;
+}
+
+.nextMonth:hover {
+	background-color: #c1e3dd;
 }
 
 

@@ -611,12 +611,11 @@ function nextMonth(mm, yy) {
 	var lastWeekDay = snagLastDayOfWeek(mm, yy);
 	var the_class = 'nextMonth', the_id = null;
 
-	if (mm === 12) {
+	mm += 1;
+
+	if (mm === 13) {
 		mm = 1;
 		yy += 1;
-	}
-	else {
-		mm += 1;
 	}
 
 	for (var i = 1; i <= (6 - lastWeekDay); i++) {
@@ -795,13 +794,117 @@ function buildCalendar(date, weekList, data) {
 }
 
 function init_calendar() {
-	// var today = snagCurrentDate();
-	var today = fetchADate(2016, 1, 6);
+	var today = snagCurrentDate();
 	var data = getCalendarData(today['year'], today['month'], today['day']);
 	var weeks = fetchNumberWeeks(today);
 	var weekList = fetchWeekDivs(weeks);
 
+	clearWeeks();
 	buildCalendar(today, weekList, data);
+
+	grab('month').value = today['month'];
+	grab('year').value = today['year']
+}
+
+function cal_prevOn() {
+	grab('cal_prevBtn').src = '/static/images/left_sOver.png';
+	grab('cal_prevBtn').style.opacity = '0.8';
+}
+
+function cal_prevOff() {
+	grab('cal_prevBtn').src = '/static/images/left_s.png';
+	grab('cal_prevBtn').style.opacity = '1.0';
+}
+
+function cal_nextOn() {
+	grab('cal_nextBtn').src = '/static/images/right_sOver.png';
+	grab('cal_nextBtn').style.opacity = '0.8';
+}
+
+function cal_nextOff() {
+	grab('cal_nextBtn').src = '/static/images/right_s.png';
+	grab('cal_nextBtn').style.opacity = '1.0';
+}
+
+function nextMonthPayload() {
+	var date = null;
+	var mm = grab('month').value;
+	var yy = grab('year').value;
+
+	mm = Number(mm);
+	yy = Number(yy);
+
+	mm += 1;
+
+	if (mm === 13) {
+		mm = 1;
+		yy += 1;
+	}
+
+	clearWeeks();
+	today = snagCurrentDate();
+
+	if (today['month'] === mm && today['year'] === yy) {
+		date = today;
+	}
+	else {
+		date = fetchADate(yy, mm, 1);
+	}
+
+	var data = getCalendarData(date['year'], date['month'], date['day']);
+	var weeks = fetchNumberWeeks(date);
+	var weekList = fetchWeekDivs(weeks);
+
+	buildCalendar(date, weekList, data);
+
+	grab('month').value = date['month'];
+	grab('year').value = date['year']
+}
+
+function clearWeeks() {
+	grab('week1').innerHTML = '';
+	grab('week2').innerHTML = '';
+	grab('week3').innerHTML = '';
+	grab('week4').innerHTML = '';
+	grab('week5').innerHTML = '';
+	grab('week6').innerHTML = '';
+	grab('week7').innerHTML = '';
+	grab('week8').innerHTML = '';
+}
+
+function prevMonthPayload() {
+	var mm = grab('month').value;
+	var yy = grab('year').value;
+	var date = null;
+
+	mm = Number(mm);
+	yy = Number(yy);
+
+	mm -= 1;
+
+	if (mm === 0) {
+		mm = 12;
+		yy -= 1;
+	}
+
+	clearWeeks();
+	today = snagCurrentDate();
+
+	if (today['month'] === mm && today['year'] === yy) {
+		date = today;
+	}
+	else {
+		date = fetchADate(yy, mm, 1);
+	}
+
+	var data = getCalendarData(date['year'], date['month'], date['day']);
+	var weeks = fetchNumberWeeks(date);
+	var weekList = fetchWeekDivs(weeks);
+
+	buildCalendar(date, weekList, data);
+
+	grab('month').value = date['month'];
+	grab('year').value = date['year']
 }
 
 function backToClientSearch() {

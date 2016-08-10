@@ -4,12 +4,34 @@
 
 <body class="gradient-white" onLoad='javascript: init_calendar();'>
 
-	<!-- <h3><a href="/appointmentMain/">Back</a></h3> -->
+	<form action='' method='post' id='c_form'> {% csrf_token %}
+		<input type='hidden' name='month' id='month' value=''>
+		<input type='hidden' name='year' id='year' value=''>
+		<!-- <input type='text' id='test1'>
+		<input type='text' id='test2'> -->
+	</form>
 
-	<div id='cal_container'>
-		<div id='cal_tot_head'>
-			<!-- August 2016 -->
+	<div class='cal_container'>
+		<div id='cal_heading_wrapper'>
+			<table class='cal_header_table'>
+				<tr>
+					
+					<td><div id='cal_tot_head'></div></td>
+					<td>
+						<a href="javascript: prevMonthPayload();">
+							<img src="{% static 'images/left_s.png' %}" alt="cal-nav" class='cal-nav-left' onmouseover='javascript: cal_prevOn();' onmouseout='javascript: cal_prevOff();' onClick='javascript: ' id='cal_prevBtn'>
+						</a>
+					</td>
+
+					<td>
+						<a href="javascript: nextMonthPayload();">
+							<img src="{% static 'images/right_s.png' %}" alt="cal-nav" class='cal-nav-right' onmouseover='javascript: cal_nextOn();' onmouseout='javascript: cal_nextOff();' id='cal_nextBtn'>
+						</a>
+					</td>
+				</tr>
+			</table>
 		</div>
+		<!-- <div id='cal_tot_head'></div> -->
 
 		<div id='cal_head_divide'></div>
 
@@ -32,96 +54,6 @@
 			<tr id='week6'></tr>
 			<tr id='week7'></tr>
 			<tr id='week8'></tr>
-
-			<!-- <tr id='week1'>
-				<td class='normalDay'>
-					<div class='dayDiv'>1</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr>
-
-			<tr id='week2'>
-				<td class='normalDay'>
-					<div class='dayDiv'>8</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr>
-
-			<tr id='week3'>
-				<td class='normalDay'>
-					<div class='dayDiv'>15</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr>
-
-			<tr id='week4'>
-				<td class='normalDay'>
-					<div class='dayDiv'>22</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr>
-
-			<tr id='week5'>
-				<td class='normalDay'>
-					<div class='dayDiv'>29</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr>
-
-			<tr id='week6'>
-				<td class='normalDay'>
-					<div class='dayDiv'>31</div>
-					<div class='startDiv'></div>
-					<div class='endDiv'></div>
-				</td>
-
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-				<td class='normalDay'></td>
-			</tr> -->
 		</table>
 	</div>
 
