@@ -11,6 +11,7 @@ import random
 import string
 import json
 import json as simplejson
+from calendar import monthrange
 
 from assessment.models import State, RefReason, Client, \
 AngerManagement, Drug, TermReason, \
@@ -23,6 +24,116 @@ MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
 SolidState, PrintableForms
+
+def isCompleteWeek(day):
+	complete = False
+	if day == 7:
+		complete = True
+	return complete
+
+def getExtraPrevDays(year, month):
+	result = []
+	firstDay = date(year, month, 1).weekday()
+
+	if month == 1:
+		month = 12
+		year = year - 1
+	else:
+		month = month - 1
+
+	extraDays = firstDay + 1
+	lastDay = monthrange(year, month)[1]
+	start = lastDay - extraDays
+
+	for i in range(start, lastDay):
+		data = {}
+		day = i + 1
+		data['day'] 	= day
+		data['class'] 	= 'prevMonth'
+		data['id']		= str(year) + '-' + str(month) + '-' + str(day)
+		result.append(data)
+	return result
+
+def getExtraNextDays(year, month):
+	result = []
+	lastDayMonth = monthrange(year, month)[1]
+	lastWeekday = date(year, month, lastDayMonth).weekday()
+
+	if month == 12:
+		month = 1
+		year += 1
+	else:
+		month += 1
+
+	extraDays = lastWeekday + 1
+
+	for i in range(extraDays):
+		data = {}
+		day = i + 1
+		data['day'] = day
+		data['class'] = 'extraMonth'
+		data['id'] = str(year) + '-' + str(month) + '-' + str(day)
+		result.append(data)
+	return result
+
+def fetchNumWeeks(year, month):
+	week = 1
+	firstDay = (date(year, month, 1).weekday()) + 1
+	numDays = monthrange(year, month)[1]
+
+	for i in range(numDays):
+		firstDay += 1
+
+		if firstDay == 7:
+			week += 1
+			firstDay = 0
+	return week
+
+def fetchCalendarData(year, month):
+	result = []
+	day = 0
+	extraPrevious 	= None
+	extraNext 		= None
+	now = datetime.now().date()
+	now = decodeDate(now)	
+
+	dayRange 	= monthrange(year, month)[1]
+	firstDay 	= date(year, month, 1).weekday()
+	lastDay 	= date(year, month, dayRange).weekday()
+
+	if isCompleteWeek(firstDay) == False:
+		extraPrevious = getExtraPrevDays(year, month)
+		for p in extraPrevious:
+			result.append(p)
+
+	for i in range(dayRange):
+		data = {}
+		day = i + 1
+		data['day'] = day
+		data['id'] = str(year) + '-' + str(month) + '-' + str(day)
+
+		if now['year'] == year and now['month'] == month and now['day'] == day:
+			data['class'] = 'thisDay'
+		elif now['day'] > day:
+			data['class'] = 'prevMonth'
+		else:
+			data['class'] = 'thisMonth'
+
+		result.append(data)
+
+	if isCompleteWeek(lastDay) == False:
+		extraNext = getExtraNextDays(year, month)
+		for n in extraNext:
+			result.append(n)
+
+	for j in range(len(result)):
+		if j % 7 == 0:
+			result[j]['newWeek'] = True
+		else:
+			result[j]['newWeek'] = False
+
+	fetchNumWeeks(year, month)
+	return result
 
 def clientEqual(c1, c2):
 	isEqual = False

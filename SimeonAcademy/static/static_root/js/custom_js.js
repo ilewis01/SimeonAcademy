@@ -460,7 +460,658 @@ function submit_session() {
 	}
 }
 
-function toClientOptions(form_id, hasUnfinished) {
+function uniClientSearchF(sType) {
+	var w = 400, h = 510;
+	sType = String(sType);
+	grab('cSearch').value = sType;
+	openPopUp('auto', '/uniClientSearch/',w, h);
+}
+
+function snagCurrentDate() {
+	var date = {};
+	var today = new Date();
+	date['day'] = today.getDate();
+	date['month'] = today.getMonth() + 1;
+	date['year'] = today.getFullYear();
+	return date;
+}
+
+function fetchADate(yy, mm, dd) {
+	var date = {};
+	var the_date = new Date(yy, mm, dd);
+	date['day'] = the_date.getDate();
+	date['month'] = the_date.getMonth();
+	date['year'] = the_date.getFullYear();
+	return date;
+}
+
+function snagNumDays(month, year) {
+	month = Number(month);
+	year = Number(year);
+	var days = 0;
+
+	if (month === 2) {
+		if ((year % 4) === 0) {
+			days = 29;
+		}
+		else {
+			days = 28;
+		}
+	}
+
+	else if (month === 4 || month === 6 || month === 9 || month === 11) {
+		days = 30;
+	}
+
+	else {
+		days = 31;
+	}
+	return days;
+}
+
+function snagFirstDayOfWeek(mm, yy) {
+	mm = mm - 1;
+	var date = new Date(yy, mm, 1);
+	var firstDay = date.getDay();
+	return firstDay;
+}
+
+function snagLastDayOfWeek(mm, yy) {
+	var lastDay = 0;
+	var dd = snagNumDays(mm, yy);
+	mm = mm - 1;
+	var date = new Date(yy, mm, dd);
+	lastDay = date.getDay();
+	return lastDay;
+}
+
+function isCompleteWeekFirst(dayOfWeek) {
+	var isComplete = false;
+	dayOfWeek = Number(dayOfWeek);
+	if (dayOfWeek === 0) {
+		isComplete = true;
+	}
+	return isComplete;
+}
+
+function isCompleteWeekLast(dayOfWeek) {
+	var isComplete = false;
+	dayOfWeek = Number(dayOfWeek);
+	if (dayOfWeek === 6) {
+		isComplete = true;
+	}
+	return isComplete;
+}
+
+function fetchNumberWeeks(date) {
+	var week = 1;
+	var firstDay = snagFirstDayOfWeek(date['month'], date['year']);
+	var numDays = snagNumDays(date['month'], date['year']);
+
+	if (firstDay === 0) {
+		week = 0;
+	}
+
+	for (var i = 0; i < numDays; i++) {
+		firstDay += 1;
+
+		if (firstDay === 7) {
+			week += 1;
+			firstDay = 0;
+		}
+	}
+	return week;
+}
+
+function fetchWeekDivs(weeks) {
+	result = []
+	var pre = 'week';
+
+	for (var i = 1; i <= weeks; i++) {
+		var temp = pre + String(i);
+		result.push(temp);
+	}
+	return result;
+}
+
+function previousMonth(mm, yy) {
+	var result = [];
+	var firstDay = snagFirstDayOfWeek(mm, yy);
+	var lastDay = snagNumDays(mm, yy);
+	var the_id = null, the_class = 'prevMonth';
+	var test = '';
+
+	if (mm === 1) {
+		mm = 12
+		yy = yy - 1;
+	}
+	else {
+		mm = mm - 1;
+	}
+
+	var prevLastDay = snagNumDays(mm, yy);
+	var start = prevLastDay - firstDay + 1;
+
+	for (var i = start; i <= prevLastDay; i++) {
+		data = {};
+		the_id = String(yy) + '-' + String(mm) + '-' + String(i);
+
+		data['id'] = the_id;
+		data['class'] = the_class;
+		data['day'] = i;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function nextMonth(mm, yy) {
+	var result = [];
+	var lastDayMonth = snagNumDays(mm, yy);
+	var lastWeekDay = snagLastDayOfWeek(mm, yy);
+	var the_class = 'nextMonth', the_id = null;
+
+	if (mm === 12) {
+		mm = 1;
+		yy += 1;
+	}
+	else {
+		mm += 1;
+	}
+
+	for (var i = 1; i <= (6 - lastWeekDay); i++) {
+		data = {};
+		the_id = String(yy) + '-' + String(mm) + '-' + String(i);
+
+		data['id'] = the_id;
+		data['class'] = the_class;
+		data['day'] = i;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function setNewWeek(calData) {
+	var dayDiv = 'dayDiv';
+	var startDiv = 'startDiv';
+	var endDiv = 'endDiv';
+	var inst = 0;
+
+	for (var i = 0; i < calData.length; i++) {
+		if ((i % 7) === 0) {
+			calData[i]['newWeek'] = true;
+		}
+		else {
+			calData[i]['newWeek'] = false;
+		}
+
+		inst = i + 1;
+		inst = String(inst);
+		calData[i]['startDiv'] = startDiv + inst;
+		calData[i]['endDiv'] = endDiv + inst;
+	}
+}
+
+
+function getCalendarData(yy, mm, dd) {
+	var calData = [];
+	var p_month = null, n_month = null;
+	var today = fetchADate(yy, mm, dd);
+	var numDays = snagNumDays(today['month'], today['year']);
+	var firstDay = snagFirstDayOfWeek(today['month'], today['year']);
+	var lastDay = snagLastDayOfWeek(today['month'], today['year']);
+	var sep = '-';
+
+	if (isCompleteWeekFirst(firstDay) === false) {
+		p_month = previousMonth(today['month'], today['year']);
+
+		for (var i = 0; i < p_month.length; i ++) {
+			calData.push(p_month[i]);
+		}
+	}
+
+	for (var j = 1; j <= numDays; j++) {
+		data = {};
+		data['id'] = String(yy) + sep + String(mm) + sep + String(j);
+		data['day'] = j;
+
+		if (today['year'] === yy && today['month'] === mm && today['day'] === j) {
+			data['class'] = 'thisDay';
+		}
+		else if (today['day'] > j) {
+			data['class'] = 'prevMonth';
+		}
+		else {
+			data['class'] = 'normalDay';
+		}
+
+		calData.push(data);
+	}
+
+	if (isCompleteWeekLast(lastDay) === false) {
+		n_month = nextMonth(today['month'], today['year']);
+
+		for (var k = 0; k < n_month.length; k ++) {
+			calData.push(n_month[k]);
+		}
+	}
+
+	setNewWeek(calData);
+
+	return calData;
+}
+
+function printJSMonth(month, year) {
+	month = Number(month);
+	mm = null;
+
+	if (month === 1) {
+		mm = 'January';
+	}
+	else if (month === 2) {
+		mm = 'February';
+	}
+	else if (month === 3) {
+		mm = 'March';
+	}
+	else if (month === 4) {
+		mm = 'April';
+	}
+	else if (month === 5) {
+		mm = 'May';
+	}
+	else if (month === 6) {
+		mm = 'June';
+	}
+	else if (month === 7) {
+		mm = 'July';
+	}
+	else if (month === 8) {
+		mm = 'August';
+	}
+	else if (month === 9) {
+		mm = 'September';
+	}
+	else if (month === 10) {
+		mm = 'October';
+	}
+	else if (month === 11) {
+		mm = 'November';
+	}
+	else if (month === 12) {
+		mm = 'December';
+	}
+
+	return mm + ' ' + String(year);
+}
+
+function buildCalendarHead(month, year) {
+	var head = printJSMonth(month, year);
+	grab('cal_tot_head').innerHTML = head;
+}
+
+function buildCalendarCell(class_id, date_id, day, start_id, end_id) {
+	var html = "<td class='" + class_id + "'>\
+	<a href='javascript: workDateSelector()'>\
+	<div id='" + date_id + "' class='dayDiv'>" + day + "</div>\
+	<div id='" + start_id + "' class='startDiv'></div>\
+	<div id='" + end_id + "' class='endDiv'></div>\
+	</a>\
+	</td>";
+
+	return html;
+}
+
+function getRowStartIndex(row) {
+	var index = 0;
+	row = Number(row);
+	index = (row * 7) - 7;
+	return index;
+}
+
+function buildCalendarRow(week_id, data) {
+	week_id = String(week_id);
+	row = week_id.charAt(4);
+	row = Number(row);
+	var start = getRowStartIndex(row);
+	var end = start + 7;
+	var html = '';
+
+	for (var i = start; i < end; i++) {
+		html += buildCalendarCell(data[i]['class'], data[i]['id'], data[i]['day'], data[i]['startDiv'], data[i]['endDiv']);
+	}
+
+	grab(week_id).innerHTML = html;
+}
+
+function buildCalendar(date, weekList, data) {
+	var week_id = '';
+	buildCalendarHead(date['month'], date['year']);
+
+	for (var i = 0; i < weekList.length; i++) {
+		buildCalendarRow(weekList[i], data);
+	}
+}
+
+function init_calendar() {
+	// var today = snagCurrentDate();
+	var today = fetchADate(2016, 1, 6);
+	var data = getCalendarData(today['year'], today['month'], today['day']);
+	var weeks = fetchNumberWeeks(today);
+	var weekList = fetchWeekDivs(weeks);
+
+	buildCalendar(today, weekList, data);
+}
+
+function backToClientSearch() {
+	grab('b_form').submit();
+	var w = 400, h = 530;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+}
+
+function uniFormSearchF() {
+	var w = 400, h = 500;
+	openPopUp('auto', '/uniFormSearch/',w, h);
+}
+
+function getClientSearchStuff() {
+	var image = null;
+	var sType = getPopParent('cSearch').value;
+	sType = String(sType);
+	
+	if (sType === 'session') {
+		image = '/static/images/new_images/session.png';
+		header = 'Client Session'
+		grab('sImage').src = image
+		grab('sImage').className = 'popSearchClientSession';
+		grab('sTypeText').innerHTML = 'Begin Client Session';
+	}
+	else if (sType === 'general') {
+		image = '/static/images/new_images/searchClient.png';
+		header = 'Client Database'
+		grab('sImage').src = image
+		grab('sImage').className = 'popSearchClientGeneral';
+		grab('sTypeText').innerHTML = 'Search Client Database';
+	}
+
+	grab('useDischarged').value = grab('incD').value;
+	grab('header').value = header;
+	grab('image').value = image;
+	grab('cSearch').value = sType;
+}
+
+function setClientSearchCheck() {
+	var box = grab('incD');
+
+	if (incD.checked === true) {
+		incD.value = 'True';
+	}
+	else {
+		incD.value = 'False';
+	}
+}
+
+function submit_uniClientSearch() {
+	var w = 600, h = 665;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	grab('sc_form').action = '/clientSearchResults/';
+	grab('sc_form').submit();
+
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+    window.focus(); 
+}
+
+function grabResultPage(pageNum, json_data) {
+	var result = null;
+	pageNum = Number(pageNum);
+	if (pageNum === 1) {result = json_data.page1;}
+	else if (pageNum === 2) {result = json_data.page2;}
+	else if (pageNum === 3) {result = json_data.page3;}
+	else if (pageNum === 4) {result = json_data.page4;}
+	else if (pageNum === 5) {result = json_data.page5;}
+	else if (pageNum === 6) {result = json_data.page6;}
+	else if (pageNum === 7) {result = json_data.page7;}
+	else if (pageNum === 8) {result = json_data.page8;}
+	else if (pageNum === 9) {result = json_data.page9;}
+	else if (pageNum === 10) {result = json_data.page10;}
+	else if (pageNum === 11) {result = json_data.page11;}
+	else if (pageNum === 12) {result = json_data.page12;}
+	else if (pageNum === 13) {result = json_data.page13;}
+	else if (pageNum === 14) {result = json_data.page14;}
+	else if (pageNum === 15) {result = json_data.page15;}
+	else if (pageNum === 16) {result = json_data.page16;}
+	else if (pageNum === 17) {result = json_data.page17;}
+	else if (pageNum === 18) {result = json_data.page18;}
+	else if (pageNum === 19) {result = json_data.page19;}
+	else if (pageNum === 20) {result = json_data.page20;}
+	else if (pageNum === 21) {result = json_data.page21;}
+	else if (pageNum === 22) {result = json_data.page22;}
+	else if (pageNum === 23) {result = json_data.page23;}
+	else if (pageNum === 24) {result = json_data.page24;}
+	else if (pageNum === 25) {result = json_data.page25;}
+	else if (pageNum === 26) {result = json_data.page26;}
+	else if (pageNum === 27) {result = json_data.page27;}
+	else if (pageNum === 28) {result = json_data.page28;}
+	else if (pageNum === 29) {result = json_data.page29;}
+	else if (pageNum === 30) {result = json_data.page30;}
+	else if (pageNum === 31) {result = json_data.page31;}
+	else if (pageNum === 32) {result = json_data.page32;}
+	else if (pageNum === 33) {result = json_data.page33;}
+	else if (pageNum === 34) {result = json_data.page34;}
+	else if (pageNum === 35) {result = json_data.page35;}
+	else if (pageNum === 36) {result = json_data.page36;}
+	else if (pageNum === 37) {result = json_data.page37;}
+	else if (pageNum === 38) {result = json_data.page38;}
+	else if (pageNum === 39) {result = json_data.page39;}
+	else if (pageNum === 40) {result = json_data.page40;}
+	else if (pageNum === 41) {result = json_data.page41;}
+	else if (pageNum === 42) {result = json_data.page42;}
+	else if (pageNum === 43) {result = json_data.page43;}
+	else if (pageNum === 44) {result = json_data.page44;}
+	else if (pageNum === 45) {result = json_data.page45;}
+	else if (pageNum === 46) {result = json_data.page46;}
+	else if (pageNum === 47) {result = json_data.page47;}
+	else if (pageNum === 48) {result = json_data.page48;}
+	else if (pageNum === 49) {result = json_data.page49;}
+	else if (pageNum === 50) {result = json_data.page50;}
+	return result;
+}
+
+function grabPhoto(slot, displayPosition) {
+	var result = null;
+	var photo = '/static/media/';
+	displayPosition = Number(displayPosition);
+
+	if (displayPosition === 1) {result = slot.photo1;}
+	else if (displayPosition === 2) {result = slot.photo2;}
+	else if (displayPosition === 3) {result = slot.photo3;}
+	else if (displayPosition === 4) {result = slot.photo4;}
+	else if (displayPosition === 5) {result = slot.photo5;}
+	else if (displayPosition === 6) {result = slot.photo6;}
+	else if (displayPosition === 7) {result = slot.photo7;}
+	else if (displayPosition === 8) {result = slot.photo8;}
+	else if (displayPosition === 9) {result = slot.photo9;}
+	else if (displayPosition === 10) {result = slot.photo10;}
+	photo += String(result);
+	return photo;
+}
+
+function superResultsPage(pageNum, numOnPage, json_data) {
+	pageNum 	= Number(pageNum);
+	numOnPage 	= Number(numOnPage);
+	
+
+	thisPage = grabResultPage(pageNum, json_data);
+
+	for (var i = 0; i < numOnPage; i++) {
+		var preURL = '/static/media/';
+
+		grabThis 		= i + 1;
+		tag_name 		= 'c_name' + String(grabThis);
+		tag_ssn 		= 'c_ssn' + String(grabThis);
+		tag_dob 		= 'c_dob' + String(grabThis);
+		tag_phone 		= 'c_phone' + String(grabThis);
+		tag_photo 		= 'c_photo' + String(grabThis);
+		tag_clientID 	= 'c_clientID' + String(grabThis);
+		tag_number		= 'c_number' + String(grabThis);
+		tag_id 			= 'c_id' + String(grabThis);
+		tag_session 	= 'hasSession' + String(grabThis);
+		tag_s_id 		= 'session_id' + String(grabThis);
+
+		grab(tag_id).value 			= thisPage[i].c_id;
+		grab(tag_s_id).value 		= thisPage[i].session_id;
+		grab(tag_session).value 	= thisPage[i].hasSession;
+		grab(tag_number).innerHTML	= thisPage[i].c_number;
+		grab(tag_name).innerHTML 	= thisPage[i].c_name;
+		grab(tag_ssn).innerHTML 	= thisPage[i].c_ssn;
+		grab(tag_dob).innerHTML 	= thisPage[i].c_dob;
+		grab(tag_phone).innerHTML 	= thisPage[i].c_phone;
+		grab(tag_photo).src 		= preURL + String(thisPage[i].c_photo);
+		// grab(tag_clientID).innerHTML = thisPage[i].c_name;
+	}
+}
+
+function initialize_clientResults(json_data) {
+	var numOnPage = grab('pageOne').value;
+	numOnPage = Number(numOnPage);
+	grab('pageNumber').value = 1;
+
+	superResultsPage(1, numOnPage, json_data);
+
+	setPrevResultBtn();
+	setNextResultBtn();
+}
+
+function prevResultHover() {
+	grab('nextArrowLeft').src = '/static/images/nextLeftHover.png';
+}
+
+function prevResultOff() {
+	grab('nextArrowLeft').src = '/static/images/nextLeftshort.png';
+}
+
+function nextResultHover() {
+	grab('nextArrowRight').src = '/static/images/nextRightHover.png';
+}
+
+function nextResultOff() {
+	grab('nextArrowRight').src = '/static/images/nextRightshort.png';
+}
+
+function setPrevResultBtn() {
+	var btn = grab('nextArrowLeft');
+	var currentPage = grab('pageNumber').value;
+	currentPage = Number(currentPage);
+
+	if (currentPage <= 1) {
+		btn.style.opacity = '0.0';
+		grab('pageNumber').value = 1;
+	}
+	else {
+		btn.style.opacity = '1.0';
+	}
+
+	grab('thisPageNumber').innerHTML = currentPage;
+
+	setNextResultBtn();
+}
+
+function setNextResultBtn() {
+	var btn = grab('nextArrowRight');
+	var currentPage = grab('pageNumber').value;
+	var numPages = grab('numPages').value;
+
+	currentPage = Number(currentPage);
+	numPages = Number(numPages);
+
+	if (currentPage >= numPages) {
+		btn.style.opacity = '0.0';
+		grab('pageNumber').value = numPages;
+	}
+	else {
+		btn.style.opacity = '1.0';
+	}
+
+	grab('thisPageNumber').innerHTML = currentPage;
+
+	setPrevResultBtn();
+}
+
+function loadPrevSearchPage(json_data) {
+	var thePage 		= grab('pageNumber').value;
+	var numberOfPages 	= grab('numPages').value;
+	thePage 			= Number(thePage);
+	numberOfPages 		= Number(numberOfPages);
+
+	thePage = thePage - 1;
+	if (thePage >= 1) {
+		grab('pageNumber').value = thePage;
+		page = grabResultPage(thePage, json_data);
+		numOnPage = page.length;
+		superResultsPage(thePage, numOnPage, json_data);
+	}
+
+	setPrevResultBtn();
+}
+
+function loadNextSearchPage(json_data) {
+	var thePage 		= grab('pageNumber').value;
+	var numberOfPages 	= grab('numPages').value;
+	thePage 			= Number(thePage);
+	numberOfPages 		= Number(numberOfPages);
+
+	thePage += 1;
+	if (thePage <= numberOfPages) {
+		grab('pageNumber').value = thePage;
+		page = grabResultPage(thePage, json_data);
+		numOnPage = page.length;
+		superResultsPage(thePage, numOnPage, json_data);
+	}
+
+	if (thePage >= numberOfPages) {
+		thePage = numberOfPages;
+		grab('nextArrowRight').style.opacity = '0.0';
+	}
+
+	setNextResultBtn();	
+}
+
+function correctClientDOBForm() {
+	var m = grab('c_mob');
+	var d = grab('c_dob');
+	var y = grab('c_yob');
+	var leap = (y.value) % 4;
+
+	if (leap === 0) {
+		if (m.selectedIndex === 2) {
+			if (d.selectedIndex > 29) {
+				d.selectedIndex = 0;
+			}
+		}
+	}
+	else if (d.selectedIndex > 28) {
+		d.selectedIndex = 0;
+	}
+
+	if (m.selectedIndex === 4 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+	else if (m.selectedIndex === 9 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+	else if (m.selectedIndex === 11 && d.selectedIndex > 30) {
+		d.selectedIndex = 0;
+	}
+}
+
+function toClientOptions(form_id) {
 	hasUnfinished = String(hasUnfinished);
 
 	if (hasUnfinished == 'True') {
@@ -475,8 +1126,284 @@ function toClientOptions(form_id, hasUnfinished) {
 	}
 }
 
+function goHomeProfile() {
+	grab('b_form').action = '/adminHome/';
+	grab('b_form').submit();
+}
+
+function toClientOptions2(c_id, hasSession, session_id) {
+	var search_type = grab('search_type').value;
+
+	hasSession 	= String(hasSession.value);
+	session_id 	= String(session_id.value);
+	c_id 		= String(c_id.value);
+	search_type = String(search_type);
+
+	getPopParent('client_id').value 	= c_id;
+	getPopParent('session_id').value 	= session_id;
+	getPopParent('cSearch').value 		= search_type;
+	grab('session_id').value 			= session_id;
+	grab('s_option').value 				= 'Some Text for something';
+
+	if (search_type === 'general') {
+		getPopParent('hasExisting').value = hasSession;
+		getPopParent('session_id').value = session_id;
+		getPopParent('m_form').action = '/clientProfile/';
+		getPopParent('m_form').submit();
+		window.close();
+	}
+	else if (search_type === 'session') {
+		getPopParent('m_form').action = '/clientOptions/';
+		getPopParent('search_clientSession').value = 'True';
+
+		if (hasSession === 'true') {
+			grab('b_form').action = '/hasExistingSession/';
+			grab('b_form').submit();
+		}
+		else {
+			getPopParent('m_form').submit();
+			window.close();
+		}
+	}
+}
+
+function toClientOptionsProfile() {
+	var hasExisting = grab('hasExisting').value;
+	hasExisting = String(hasExisting);
+
+	if (hasExisting === 'true') {
+		var w = 600, h = 665;
+		var l = Number((screen.width/2) - (w/2));
+		var t = Number((screen.height/2) - (h/2));
+		openPopUp('auto', '/hasExistingSession/', w, h);
+	}
+	else {
+		grab('b_form').action = '/clientOptions/';
+		grab('b_form').submit();
+	}
+}
+
+function updateClientStats() {
+	var w = 300;
+	openPopUp('auto', '/updateStatus/', w, w);
+}
+
+function initialize_statusUpdate() {
+	var isPending 		= getPopParent('isPending').value;
+	var isDischarged 	= getPopParent('isDischarged').value;
+	isPending 			= String(isPending);
+	isDischarged 		= String(isDischarged);
+
+	grab('isPending').value 	= isPending;
+	grab('isDischarged').value 	= isDischarged;
+	grab('client_id').value 	= getPopParent('client_id').value;
+	grab('status').className 	= getPopParent('updateClass').value;
+
+	if (isDischarged === 'True' || isPending === 'True') {
+		grab('status').innerHTML = 'ACTIVE';
+		grab('newStatus').value = 'ACTIVE';
+	}
+	else if (isDischarged === 'False' && isPending === 'False') {
+		grab('status').innerHTML = 'DISCHARGED';
+		grab('newStatus').value = 'DISCHARGED';
+	}
+
+	setUpdateClass();
+}
+
+function setUpdateClass() {
+	var current = getPopParent('status').className;
+	current = String(current);
+
+	if (current === 'clientNotActive') {
+		grab('status').className = 'clientIsActive';
+	}
+	else if (current === 'clientIsActive'){
+		grab('status').className = 'clientNotActive';
+	}
+}
+
+function setActiveTagParent() {
+	var statusClass = null;
+	var isPending = grab('isPending').value;
+	var isDischarged = grab('isDischarged').value;
+
+	isPending = String(isPending);
+	isDischarged = String(isDischarged);
+
+	if (isPending === 'True') {
+		statusClass = 'clientIsPending';
+	}
+	else if (isDischarged === 'True') {
+		statusClass = 'clientNotActive';
+	}
+	else {
+		statusClass = 'clientIsActive';
+	}
+
+	grab('status').className = statusClass;
+}
+
+function setActiveTag() {
+	var statusClass = null;
+	var isPending = getPopParent('isPending').value;
+	var isDischarged = getPopParent('isDischarged').value;
+
+	isPending = String(isPending);
+	isDischarged = String(isDischarged);
+
+	if (isPending === 'True') {
+		statusClass = 'clientIsPending';
+	}
+	else if (isDischarged === 'True') {
+		statusClass = 'clientNotActive';
+	}
+	else {
+		statusClass = 'clientIsActive';
+	}
+
+	getPopParent('status').className = statusClass;
+}
+
+function proceedStatusUpdate() {
+	var newStatus 	= grab('newStatus').value;
+	newStatus 	= String(newStatus);
+	getPopParent('status').innerHTML = newStatus;
+	getPopParent('isPending').value = 'False';
+
+	if (newStatus === 'ACTIVE') {
+		getPopParent('isDischarged').value = 'False';
+	}
+	else if (newStatus === 'DISCHARGED') {
+		getPopParent('isDischarged').value = 'True';
+	}
+
+	setActiveTag();
+	grab('u_form').submit();
+}
+
+function editClientInformation() {
+	w = 600, h = 655;
+	openPopUp('auto', '/editClientInfo/', w, h);
+}
+
+function processEditedClientData() {
+
+}
+
+function deleteClientProfile() {
+	w = 400;
+	openPopUp('auto', '/confirmDeleteClient/', w, w);
+}
+
+function viewClientInvoices() {
+	w = 600, h = 655;
+	openPopUp('auto', '/clientInvoiceMain/', w, h);
+}
+
+function viewClientFiles(viewType) {
+	viewType = String(viewType);
+	grab('viewType').value = viewType;
+
+	w = 600, h = 655;
+	openPopUp('auto', '/clientFiles/', w, h);
+}
+
+function initialize_editClientPage(json_data) {
+	grab('state').selectedIndex = json_data.state;
+	grab('reasonRef').selectedIndex = json_data.ref;
+	grab('c_dob').selectedIndex = json_data.day
+	grab('c_mob').selectedIndex = json_data.month
+	grab('c_yob').selectedIndex = json_data.year
+	setRadioElement(json_data.gender, grab('male'), grab('female'));
+}
+
+function updateClientAccount() {
+	var w = 400, h = 400;
+	grab('b_form').submit();
+	openPopUp('auto', '/clientAccountUpdated/', w, h);	
+}
+
+function setNewClientFields(data) {
+	grab('b_form').submit();
+}
+
+function refreshClientParentPage(data) {
+	superParent('profile-name-head').innerHTML 	= data.the_name;
+	superParent('profile-email-head').innerHTML = data.email;
+	superParent('address1').innerHTML 			= data.address1;
+	superParent('address2').innerHTML 			= data.address2;
+	superParent('profile-phone-head').innerHTML = data.phone;
+	superParent('em_contact').innerHTML 		= data.em_contact;
+	superParent('em_phone').innerHTML 			= data.em_phone;
+	superParent('prob_off').innerHTML 			= data.probOfficer;
+	superParent('prob_phone').innerHTML 		= data.prob_phone;
+	superParent('f_ssn').innerHTML 				= data.ss_num;
+	superParent('gender').innerHTML 			= data.gender;
+	superParent('workPhone').innerHTML 			= data.work;
+	superParent('dob').innerHTML				= data.dob
+
+	closeAllWindows(2);
+}
+
+function newApptOn(btn) {
+	btn = String(btn);
+
+	if (btn === 'btn1') {
+		image = '/static/images/manager/addOver.png';
+		grab('btn1').src = image;
+	}
+}
+
+function newApptOff(btn) {
+	btn = String(btn);
+}
+
+function superParent(field) {
+	field = String(field);
+	return window.opener.getPopParent(field);
+}
+
+function closeAllWindows(numWindows) {
+	numWindows = Number(numWindows);
+	window.close();
+
+	for (var i = 0; i < numWindows; i++) {
+		window.opener.close();
+	}	
+}
+
+function waitSeconds(iMilliSeconds) {
+    var counter= 0
+        , start = new Date().getTime()
+        , end = 0;
+    while (counter < iMilliSeconds) {
+        end = new Date().getTime();
+        counter = end - start;
+    }
+}
+
+function initial_clientFiles() {
+	var viewType = getPopParent('viewType').value;
+	var headTag = grab('clientFilesHeader');
+	viewType = String(viewType);
+
+	if (viewType === 'history') {
+		headTag.innerHTML = 'View Client History';
+	}
+	else if (viewType === 'incomplete') {
+		headTag.innerHTML = 'View Incomplete Files';
+	}
+}
+
+function appointmentsClientProfile() {
+	w = 600, h = 655;
+	openPopUp('auto', '/clientAppointments/', w, h);
+}
+
+
 function set_session_option() {
-	grab('session_id').value = getPopParent('se_id').value;
+	grab('session_id').value = getPopParent('session_id').value;
 
 	if (grab('continue').checked === true) {
 		grab('s_option').value = 'continue';
@@ -498,6 +1425,7 @@ function processExistingSession() {
 		var f_id = getPopParent('form_name').value;
 		f_id = String(f_id);
 		form = getPopParent(f_id);
+		form.action = '/clientOptions/';
 		form.submit();
 		window.close();
 	}
@@ -6782,7 +7710,6 @@ function sessionChecking(btnType) {
 	var actionApp = grab('tracking').value;
 	actionApp = String(actionApp);
 	btn = String(btnType);
-	grab('nextUrl').value = btn;
 
 	if (actionApp === 'Session') {		
 		var w = 550;
@@ -6796,13 +7723,13 @@ function sessionChecking(btnType) {
 			form.action = '/adminHome/';
 		}
 		else if (btn === 'bill') {
-			form.action = '//'
+			form.action = '/billingMain/'
 		}
 		else if (btn === 'admin') {
-			form.action = '//'
+			form.action = '/AdministrativeMain/'
 		}
 		else if (btn === 'appt') {
-			form.action = '//'
+			form.action = '/appointmentMain/'
 		}
 		else if (btn === 'logout') {
 			form.action = '/logout/'

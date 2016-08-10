@@ -44,7 +44,7 @@ fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClien
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
-fetchClientUpdatedFields
+fetchClientUpdatedFields, fetchCalendarData
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------

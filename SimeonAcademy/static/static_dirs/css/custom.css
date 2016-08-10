@@ -1,3 +1,11 @@
+html, body {
+    margin:0px;
+    padding:0px;
+    height:100%;
+    overflow:hidden;
+}
+
+
 side_option_headbody {
 	color:#393939;
 }
@@ -4226,6 +4234,102 @@ button:hover {
 
 #super-space1 {
 	height:10px;
+}
+
+#cal_container {
+	width: 80%;
+	margin: auto;
+	padding: 1%;
+	margin-top: 1%;
+}
+
+#cal_tot_head {
+	width: 910px;
+	margin: auto;
+	text-align: center;
+	font-size: 26px;
+	font-weight: bold;
+	color: #738884;
+	background-color: white;
+	border-right: 1px solid #b9bac1;
+	border-left: 1px solid #b9bac1;
+	border-top: 1px solid #b9bac1;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 5px;
+}
+
+#cal_head_divide {
+	width: 910px;
+	height: 10px;
+	margin: auto;
+	border-left: 1px solid #b9bac1;
+	border-right: 1px solid #b9bac1;
+	border-top: 1px solid #b9bac1;
+	background-color: #cce6e1;
+}
+
+.cal_table {
+	width: 910px;
+	margin: auto;
+	border: 1px solid #b9bac1;
+}
+
+.cal_table th {
+	height: 25px;
+	background-color: #849b97;
+	border: 1px solid black;
+}
+
+.cal_table td {
+	width: 130px;
+	height: 90px;
+	border: 1px solid #b9bac1;
+}
+
+#cal-dow {
+	text-align: center;
+}
+
+.dayDiv {
+	width: 100%;
+	height: 16px;
+	font-size: 14px;
+	text-align: right;
+	padding-right: 7px;
+	margin-top: 4px;
+	/*background-color: yellow;*/
+}
+
+.startDiv {
+	width: 100%;
+	height: 35px;
+	overflow: hidden;
+	/*background-color: orange;*/
+}
+
+.endDiv {
+	width: 100%;
+	height: 35px;
+	overflow: hidden;
+	/*background-color: red;*/
+}
+
+.normalDay {
+	background-color: white;
+}
+
+.prevMonth {
+	background-color: #e3e7e6;
+	color: #999999;
+}
+
+.thisDay {
+	background-color: #f0f1a6;
+}
+
+.nextMonth {
+	background-color: #e3e7e6;
 }
 
 

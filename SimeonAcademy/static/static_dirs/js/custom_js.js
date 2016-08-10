@@ -467,6 +467,343 @@ function uniClientSearchF(sType) {
 	openPopUp('auto', '/uniClientSearch/',w, h);
 }
 
+function snagCurrentDate() {
+	var date = {};
+	var today = new Date();
+	date['day'] = today.getDate();
+	date['month'] = today.getMonth() + 1;
+	date['year'] = today.getFullYear();
+	return date;
+}
+
+function fetchADate(yy, mm, dd) {
+	var date = {};
+	var the_date = new Date(yy, mm, dd);
+	date['day'] = the_date.getDate();
+	date['month'] = the_date.getMonth();
+	date['year'] = the_date.getFullYear();
+	return date;
+}
+
+function snagNumDays(month, year) {
+	month = Number(month);
+	year = Number(year);
+	var days = 0;
+
+	if (month === 2) {
+		if ((year % 4) === 0) {
+			days = 29;
+		}
+		else {
+			days = 28;
+		}
+	}
+
+	else if (month === 4 || month === 6 || month === 9 || month === 11) {
+		days = 30;
+	}
+
+	else {
+		days = 31;
+	}
+	return days;
+}
+
+function snagFirstDayOfWeek(mm, yy) {
+	mm = mm - 1;
+	var date = new Date(yy, mm, 1);
+	var firstDay = date.getDay();
+	return firstDay;
+}
+
+function snagLastDayOfWeek(mm, yy) {
+	var lastDay = 0;
+	var dd = snagNumDays(mm, yy);
+	mm = mm - 1;
+	var date = new Date(yy, mm, dd);
+	lastDay = date.getDay();
+	return lastDay;
+}
+
+function isCompleteWeekFirst(dayOfWeek) {
+	var isComplete = false;
+	dayOfWeek = Number(dayOfWeek);
+	if (dayOfWeek === 0) {
+		isComplete = true;
+	}
+	return isComplete;
+}
+
+function isCompleteWeekLast(dayOfWeek) {
+	var isComplete = false;
+	dayOfWeek = Number(dayOfWeek);
+	if (dayOfWeek === 6) {
+		isComplete = true;
+	}
+	return isComplete;
+}
+
+function fetchNumberWeeks(date) {
+	var week = 1;
+	var firstDay = snagFirstDayOfWeek(date['month'], date['year']);
+	var numDays = snagNumDays(date['month'], date['year']);
+
+	if (firstDay === 0) {
+		week = 0;
+	}
+
+	for (var i = 0; i < numDays; i++) {
+		firstDay += 1;
+
+		if (firstDay === 7) {
+			week += 1;
+			firstDay = 0;
+		}
+	}
+	return week;
+}
+
+function fetchWeekDivs(weeks) {
+	result = []
+	var pre = 'week';
+
+	for (var i = 1; i <= weeks; i++) {
+		var temp = pre + String(i);
+		result.push(temp);
+	}
+	return result;
+}
+
+function previousMonth(mm, yy) {
+	var result = [];
+	var firstDay = snagFirstDayOfWeek(mm, yy);
+	var lastDay = snagNumDays(mm, yy);
+	var the_id = null, the_class = 'prevMonth';
+	var test = '';
+
+	if (mm === 1) {
+		mm = 12
+		yy = yy - 1;
+	}
+	else {
+		mm = mm - 1;
+	}
+
+	var prevLastDay = snagNumDays(mm, yy);
+	var start = prevLastDay - firstDay + 1;
+
+	for (var i = start; i <= prevLastDay; i++) {
+		data = {};
+		the_id = String(yy) + '-' + String(mm) + '-' + String(i);
+
+		data['id'] = the_id;
+		data['class'] = the_class;
+		data['day'] = i;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function nextMonth(mm, yy) {
+	var result = [];
+	var lastDayMonth = snagNumDays(mm, yy);
+	var lastWeekDay = snagLastDayOfWeek(mm, yy);
+	var the_class = 'nextMonth', the_id = null;
+
+	if (mm === 12) {
+		mm = 1;
+		yy += 1;
+	}
+	else {
+		mm += 1;
+	}
+
+	for (var i = 1; i <= (6 - lastWeekDay); i++) {
+		data = {};
+		the_id = String(yy) + '-' + String(mm) + '-' + String(i);
+
+		data['id'] = the_id;
+		data['class'] = the_class;
+		data['day'] = i;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function setNewWeek(calData) {
+	var dayDiv = 'dayDiv';
+	var startDiv = 'startDiv';
+	var endDiv = 'endDiv';
+	var inst = 0;
+
+	for (var i = 0; i < calData.length; i++) {
+		if ((i % 7) === 0) {
+			calData[i]['newWeek'] = true;
+		}
+		else {
+			calData[i]['newWeek'] = false;
+		}
+
+		inst = i + 1;
+		inst = String(inst);
+		calData[i]['startDiv'] = startDiv + inst;
+		calData[i]['endDiv'] = endDiv + inst;
+	}
+}
+
+
+function getCalendarData(yy, mm, dd) {
+	var calData = [];
+	var p_month = null, n_month = null;
+	var today = fetchADate(yy, mm, dd);
+	var numDays = snagNumDays(today['month'], today['year']);
+	var firstDay = snagFirstDayOfWeek(today['month'], today['year']);
+	var lastDay = snagLastDayOfWeek(today['month'], today['year']);
+	var sep = '-';
+
+	if (isCompleteWeekFirst(firstDay) === false) {
+		p_month = previousMonth(today['month'], today['year']);
+
+		for (var i = 0; i < p_month.length; i ++) {
+			calData.push(p_month[i]);
+		}
+	}
+
+	for (var j = 1; j <= numDays; j++) {
+		data = {};
+		data['id'] = String(yy) + sep + String(mm) + sep + String(j);
+		data['day'] = j;
+
+		if (today['year'] === yy && today['month'] === mm && today['day'] === j) {
+			data['class'] = 'thisDay';
+		}
+		else if (today['day'] > j) {
+			data['class'] = 'prevMonth';
+		}
+		else {
+			data['class'] = 'normalDay';
+		}
+
+		calData.push(data);
+	}
+
+	if (isCompleteWeekLast(lastDay) === false) {
+		n_month = nextMonth(today['month'], today['year']);
+
+		for (var k = 0; k < n_month.length; k ++) {
+			calData.push(n_month[k]);
+		}
+	}
+
+	setNewWeek(calData);
+
+	return calData;
+}
+
+function printJSMonth(month, year) {
+	month = Number(month);
+	mm = null;
+
+	if (month === 1) {
+		mm = 'January';
+	}
+	else if (month === 2) {
+		mm = 'February';
+	}
+	else if (month === 3) {
+		mm = 'March';
+	}
+	else if (month === 4) {
+		mm = 'April';
+	}
+	else if (month === 5) {
+		mm = 'May';
+	}
+	else if (month === 6) {
+		mm = 'June';
+	}
+	else if (month === 7) {
+		mm = 'July';
+	}
+	else if (month === 8) {
+		mm = 'August';
+	}
+	else if (month === 9) {
+		mm = 'September';
+	}
+	else if (month === 10) {
+		mm = 'October';
+	}
+	else if (month === 11) {
+		mm = 'November';
+	}
+	else if (month === 12) {
+		mm = 'December';
+	}
+
+	return mm + ' ' + String(year);
+}
+
+function buildCalendarHead(month, year) {
+	var head = printJSMonth(month, year);
+	grab('cal_tot_head').innerHTML = head;
+}
+
+function buildCalendarCell(class_id, date_id, day, start_id, end_id) {
+	var html = "<td class='" + class_id + "'>\
+	<a href='javascript: workDateSelector()'>\
+	<div id='" + date_id + "' class='dayDiv'>" + day + "</div>\
+	<div id='" + start_id + "' class='startDiv'></div>\
+	<div id='" + end_id + "' class='endDiv'></div>\
+	</a>\
+	</td>";
+
+	return html;
+}
+
+function getRowStartIndex(row) {
+	var index = 0;
+	row = Number(row);
+	index = (row * 7) - 7;
+	return index;
+}
+
+function buildCalendarRow(week_id, data) {
+	week_id = String(week_id);
+	row = week_id.charAt(4);
+	row = Number(row);
+	var start = getRowStartIndex(row);
+	var end = start + 7;
+	var html = '';
+
+	for (var i = start; i < end; i++) {
+		html += buildCalendarCell(data[i]['class'], data[i]['id'], data[i]['day'], data[i]['startDiv'], data[i]['endDiv']);
+	}
+
+	grab(week_id).innerHTML = html;
+}
+
+function buildCalendar(date, weekList, data) {
+	var week_id = '';
+	buildCalendarHead(date['month'], date['year']);
+
+	for (var i = 0; i < weekList.length; i++) {
+		buildCalendarRow(weekList[i], data);
+	}
+}
+
+function init_calendar() {
+	// var today = snagCurrentDate();
+	var today = fetchADate(2016, 1, 6);
+	var data = getCalendarData(today['year'], today['month'], today['day']);
+	var weeks = fetchNumberWeeks(today);
+	var weekList = fetchWeekDivs(weeks);
+
+	buildCalendar(today, weekList, data);
+}
+
 function backToClientSearch() {
 	grab('b_form').submit();
 	var w = 400, h = 530;
