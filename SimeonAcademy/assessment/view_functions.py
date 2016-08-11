@@ -273,6 +273,48 @@ def decodeCalendarData(obj):
 	result['e_am'] = end['am']
 	return result
 
+def wsEqual(w1, w2):
+	isEqual = False
+
+	if str(w1.date) == str(w2.date) and str(w1.counselor) == str(w2.counselor) and str(w1.counselor_id) == str(w2.counselor_id):
+		isEqual = True
+	return isEqual
+
+def updateWorkSchedule(o, n):
+	o.startHr = n.startHr
+	o.startMin = n.startMin
+	o.endHr = n.endHr
+	o.endMin = n.endMin
+	o.save()
+
+def saveWorkSchedule(ws):
+	saveThis = False
+	ws_list = WorkSchedule.objects.all()
+
+	if len(ws_list) == 0:
+		ws.save()
+	else:
+		for w in ws_list:
+			if wsEqual(w, ws) == False:
+				ws.save()
+			else:
+				updateWorkSchedule(w, ws)
+
+def newWorkSchedule(encode, request):
+	date = datetime(encode['year'], encode['month'], encode['day'])
+	date = date.date()
+	user = request.user
+
+	counselor 	= str(user.first_name) + ' ' + str(user.last_name)
+	ws 			= WorkSchedule(counselor=counselor, counselor_id=user.id)
+	ws.date 	= date
+	ws.startHr 	= encode['s_hour']
+	ws.endHr 	= encode['e_hour']
+	ws.startMin = encode['s_min']
+	ws.endMin 	= encode['e_min']
+
+	saveWorkSchedule(ws)
+
 def clientEqual(c1, c2):
 	isEqual = False
 	if str(c1.fname) == str(c2.fname) and str(c1.lname) == str(c2.lname) and str(c1.id) == str(c2.id) and str(c1.clientID) == str(c2.clientID):

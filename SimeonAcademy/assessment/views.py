@@ -26,7 +26,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, TrackApp
+SolidState, TrackApp, WorkSchedule
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -44,7 +44,7 @@ fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClien
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
-fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, WorkSchedule
+fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1778,11 +1778,10 @@ def calendarSaved(request):
 				obj = request.POST.get(name)
 				saveThese.append(obj)
 
-			for s in saveThese:
-				print 'Object: ' + str(s)
-
 			for st in saveThese:
-				decodeCalendarData(st)
+				data = decodeCalendarData(st)
+				newWorkSchedule(data, request)
+
 
 			content['title'] = "Simeon Academy"
 			return render_to_response('counselor/main/appointments.html', content, context_instance=RequestContext(request))
