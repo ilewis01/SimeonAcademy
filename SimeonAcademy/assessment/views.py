@@ -44,7 +44,8 @@ fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClien
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
-fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule
+fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
+get_JSON_workSchedule
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1727,6 +1728,9 @@ def setSchedule(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			data = get_JSON_workSchedule(user)
+			json_data = json.dumps(data)
+			content['json_data'] = json_data
 			return render_to_response('counselor/schedule/setSchedule.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

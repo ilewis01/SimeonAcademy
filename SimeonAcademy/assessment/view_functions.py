@@ -315,6 +315,65 @@ def newWorkSchedule(encode, request):
 
 	saveWorkSchedule(ws)
 
+def getUserWorkSchedules(user):
+	result = []
+	wss = WorkSchedule.objects.all().order_by('date') 
+
+	for w in wss:
+		if str(user.id) == str(w.counselor_id):
+			result.append(w)
+	return result
+
+def decodeCalMillitary(hour, minute):
+	ampm = 'am'
+	hour = int(hour)
+
+	if hour > 12:
+		hour = hour - 12
+		ampm = 'pm'
+
+	elif hour == 12:
+		ampm = 'pm'
+
+	elif hour == 0:
+		hour = 12
+
+	result = str(hour) + ':' + str(minute) + ' ' + ampm
+	return result
+
+
+def get_JSON_workSchedule(user):
+	content = []
+	schedules = getUserWorkSchedules(user)
+
+	for s in schedules:
+		data = {}
+		date = str(s.date)
+		day = ''
+		month = ''
+		year = ''
+		day += date[8]
+		day += date[9]
+		month += date[5]
+		month += date[6]
+		year += date[0]
+		year += date[1]
+		year += date[2]
+		year += date[3]
+		num = int(day) + 1
+		start_val = decodeCalMillitary(str(s.startHr), str(s.startMin))
+		end_val = decodeCalMillitary(str(s.endHr), str(s.endMin))
+		start_id = 'startDiv' + str(num)
+		end_id = 'endDiv' + str(num)
+		data['start_val'] = start_val
+		data['start_id'] = start_id
+		data['end_val'] = end_val
+		data['end_id'] = end_id
+		data['month'] = month
+		data['year'] = year
+		content.append(data)
+	return content
+
 def clientEqual(c1, c2):
 	isEqual = False
 	if str(c1.fname) == str(c2.fname) and str(c1.lname) == str(c2.lname) and str(c1.id) == str(c2.id) and str(c1.clientID) == str(c2.clientID):

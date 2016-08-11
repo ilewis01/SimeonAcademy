@@ -840,6 +840,34 @@ function force_a_hour() {
 	}
 }
 
+function loadWorkFields(data) {
+	var curr_mm = grab('month').value;
+	var curr_yy = grab('year').value;
+
+	curr_mm = Number(curr_mm);
+	curr_yy = Number(curr_yy);
+
+	var len = data.length;
+
+	for (var i = 0; i < len; i++) {
+		var mm = Number(data[i].month);
+		var yy = Number(data[i].year);
+
+		if (curr_mm === mm && curr_yy === yy) {
+			var start_id 	= String(data[i].start_id);
+			var start_val 	= String(data[i].start_val);
+			var end_id 		= String(data[i].end_id);
+			var end_val 	= String(data[i].end_val);
+
+			var html1 = "<span id='in_cal'>IN: </span>" + start_val;
+			var html2 = "<span id='in_cal'>OUT: </span>" + end_val;
+
+			grab(start_id).innerHTML 	= html1;
+			grab(end_id).innerHTML 		= html2;
+		}
+	}
+}
+
 function pre_save_sch() {
 	var saveThisHtml = getPopParent('saveThis').innerHTML;
 	var numSaved = getPopParent('numSaved').value;

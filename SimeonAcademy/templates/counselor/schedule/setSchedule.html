@@ -2,7 +2,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad='javascript: init_calendar();'>
+<body class="gradient-white" onLoad='javascript: init_calendar(); loadWorkFields({{json_data}});'>
 
 	<form action='/calendarSaved/' method='post' id='c_form'> {% csrf_token %}
 		<input type='hidden' name='month' id='month' value=''>
@@ -32,13 +32,13 @@
 					</td>
 
 					<td>
-						<a href="javascript: prevMonthPayload();">
+						<a href="javascript: prevMonthPayload(); loadWorkFields({{json_data}});">
 							<img src="{% static 'images/left_s.png' %}" alt="cal-nav" class='cal-nav-left' onmouseover='javascript: cal_prevOn();' onmouseout='javascript: cal_prevOff();' onClick='javascript: ' id='cal_prevBtn'>
 						</a>
 					</td>
 
 					<td>
-						<a href="javascript: nextMonthPayload();">
+						<a href="javascript: nextMonthPayload(); loadWorkFields({{json_data}});">
 							<img src="{% static 'images/right_s.png' %}" alt="cal-nav" class='cal-nav-right' onmouseover='javascript: cal_nextOn();' onmouseout='javascript: cal_nextOff();' id='cal_nextBtn'>
 						</a>
 					</td>
