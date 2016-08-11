@@ -4339,17 +4339,52 @@ button:hover {
 }
 
 .startDiv {
-	width: 100%;
+	width: 130px;
 	height: 35px;
 	overflow: hidden;
-	/*background-color: orange;*/
+	font-size: 13px;
+	display: table-cell;
+    vertical-align: bottom;
+    padding-left: 24px;
+    color: green;
+}
+
+.startDiv a {
+	color:red;
 }
 
 .endDiv {
 	width: 100%;
 	height: 35px;
 	overflow: hidden;
+	font-size: 13px;
+	padding-bottom: 5px;
+	margin-left: 24px;
+	color: red;
 	/*background-color: red;*/
+}
+
+.endDiv a {
+	color:green;
+}
+
+.save_btn_cal {
+	width: 120px;
+	text-align: center;
+	margin-right: 5px;
+	border: 1px solid #b9bac1;
+	border-radius: 5px;
+	padding:2px;
+	background-color: #dddcdc;
+}
+
+.save_btn_cal:hover {
+	background-color: #b1b1b1;
+}
+
+#in_cal {
+	font-weight: bold;
+	color: black;
 }
 
 .normalDay {
@@ -4387,6 +4422,45 @@ button:hover {
 
 .nextMonth:hover {
 	background-color: #c1e3dd;
+}
+
+.plain-border {
+	width: 95%;
+	border: 1px solid black;
+	margin: auto;
+	border-radius: 5px;
+	padding: 2%;
+	height: 80%;
+}
+
+#wk_sel_heading {
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 3%;
+	/*margin-left: 20px;*/
+	/*text-align: center;*/
+}
+
+#wk_date {
+	font-style: italic;
+	color: #738884;
+}
+
+#st_label_cal {
+	font-weight: bold;
+	font-size: 14px;
+	color:green;
+}
+
+#et_label_cal {
+	font-weight: bold;
+	font-size: 14px;
+	color:red;
+}
+
+#drop_select_lower {
+	padding-top: 15;
 }
 
 

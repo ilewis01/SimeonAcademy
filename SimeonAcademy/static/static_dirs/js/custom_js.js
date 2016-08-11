@@ -745,6 +745,49 @@ function printJSMonth(month, year) {
 	return mm + ' ' + String(year);
 }
 
+function superJSdate(mm, dd, yy) {
+	mm = Number(mm);
+	month = null;
+
+	if (mm === 1) {
+		month = 'January';
+	}
+	else if (mm === 2) {
+		month = 'February';
+	}
+	else if (mm === 3) {
+		month = 'March';
+	}
+	else if (mm === 4) {
+		month = 'April';
+	}
+	else if (mm === 5) {
+		month = 'May';
+	}
+	else if (mm === 6) {
+		month = 'June';
+	}
+	else if (mm === 7) {
+		month = 'July';
+	}
+	else if (mm === 8) {
+		month = 'August';
+	}
+	else if (mm === 9) {
+		month = 'September';
+	}
+	else if (mm === 10) {
+		month = 'October';
+	}
+	else if (mm === 11) {
+		month = 'November';
+	}
+	else if (mm === 12) {
+		month = 'December';
+	}
+	return month + ' ' + String(dd) + ', ' + String(yy);
+}
+
 function buildCalendarHead(month, year) {
 	var head = printJSMonth(month, year);
 	grab('cal_tot_head').innerHTML = head;
@@ -752,7 +795,7 @@ function buildCalendarHead(month, year) {
 
 function buildCalendarCell(class_id, date_id, day, start_id, end_id) {
 	var html = "<td class='" + class_id + "'>\
-	<a href='javascript: workDateSelector()'>\
+	<a href='javascript: workDateSelector(" + day + ")'>\
 	<div id='" + date_id + "' class='dayDiv'>" + day + "</div>\
 	<div id='" + start_id + "' class='startDiv'></div>\
 	<div id='" + end_id + "' class='endDiv'></div>\
@@ -760,6 +803,84 @@ function buildCalendarCell(class_id, date_id, day, start_id, end_id) {
 	</td>";
 
 	return html;
+}
+
+function workDateSelector(day) {
+	grab('selected_date').value = day;
+	var w = 600, h = 300;
+	openPopUp('auto', '/workDateSelector/', w, h);
+}
+
+function init_wd_selector() {
+	var date = null;
+	var year = getPopParent('year').value;
+	var month = getPopParent('month').value;
+	var day = getPopParent('selected_date').value;
+	day = Number(day);
+	date = superJSdate(month, day, year);
+
+	grab('day').value = day;
+	grab('month').value = month;
+	grab('year').value = year;
+	day += 1;
+	grab('start').value = 'startDiv' + String(day);
+	grab('end').value = 'endDiv' + String(day);
+	grab('wk_date').innerHTML = date;
+}
+
+function force_a_hour() {
+	var s = grab('start_s');
+	var e = grab('end_s');
+	var s_sel = s.selectedIndex;
+	var e_sel = e.selectedIndex;
+	var diff = e_sel - s_sel;
+
+	if (diff <= 4) {
+		e.selectedIndex = (s.selectedIndex + 4);
+	}
+}
+
+function pre_save_sch() {
+	var saveThisHtml = getPopParent('saveThis').innerHTML;
+	var numSaved = getPopParent('numSaved').value;
+	numSaved = Number(numSaved) + 1;
+	var day = String(grab('day').value);
+	var month = String(grab('month').value);
+	var year = String(grab('year').value);
+	var dddd = month + '/' + day + '/' + year
+	var newID = 'save' + String(numSaved);
+	var newEntry = dddd + '/' + '@' + String(grab('start_s').value) + '-' + String(grab('end_s').value);
+	var html = "<input type='hidden' name='" + newID + "' id='" + newID + "' value='" + newEntry + "'>";
+	
+	if (saveThisHtml !== '' || saveThisHtml !== ' ' || saveThisHtml !== 'null' || saveThisHtml !== 'None') {
+		saveThisHtml += html;
+	}
+	else {
+		saveThisHtml = html;
+	}
+
+	getPopParent('saveThis').innerHTML = saveThisHtml;
+	getPopParent('numSaved').value = numSaved;
+
+	loadNewScheduleDate(newEntry);
+	window.close();
+}
+
+function loadNewScheduleDate(value) {
+	var start = snagSavedStart(value);
+	var end = snagSavedEnd(value);
+
+	var s_div = String(grab('start').value);
+	var e_div = String(grab('end').value);
+
+	getPopParent(s_div).innerHTML = '';
+	getPopParent(e_div).innerHTML = '';
+	getPopParent(s_div).innerHTML = "<span id='in_cal'>IN: </span>" + start;
+	getPopParent(e_div).innerHTML = "<span id='in_cal'>OUT: </span>" + end;
+}
+
+function save_curr_calendar() {
+	grab('c_form').submit();
 }
 
 function getRowStartIndex(row) {
@@ -804,6 +925,7 @@ function init_calendar() {
 
 	grab('month').value = today['month'];
 	grab('year').value = today['year']
+	grab('numSaved').value = '0';
 }
 
 function cal_prevOn() {
@@ -8040,6 +8162,88 @@ function eliminateWhiteSpace(field) {
 	}
 
 	return result;
+}
+
+function eliminateWhiteSpaceText(val) {
+	var result = '';
+	var val = String(val);
+
+	for (var i = 0; i < val.length; i++)
+	{
+		if (val.charAt(i) !== ' ') {
+			result += val.charAt(i);
+		}
+	}
+
+	return result;
+}
+
+
+
+function snagSavedDay(val) {
+	var result = '';
+	val = String(val);
+	val = eliminateWhiteSpaceText(val);
+
+	for (var i = 0; i < val.length; i++) {
+		if (val.charAt(i) !== '@') {
+			result += val.charAt(i);
+		}
+		else {
+			break;
+		}
+	}
+	return result;
+}
+
+function getSepIndexSave(val) {
+	var index = 0;
+	val = eliminateWhiteSpaceText(val);
+
+	for (var i = 0; i < val.length; i ++) {
+		if (val.charAt(i) === '-') {
+			index = i + 1;
+			break;
+		}
+	}
+	return index;
+}
+
+function getAfterCharIndexSave(val) {
+	var index = 0;
+	val = eliminateWhiteSpaceText(val);
+
+	for (var i = 0; i < val.length; i++) {
+		if (val.charAt(i) === '@') {
+			index = i + 1;
+			break
+		}
+	}
+	return index;
+}
+
+function snagSavedStart(val) {
+	var result = '';
+	val = eliminateWhiteSpaceText(val);
+	var start = getAfterCharIndexSave(val);
+	var end = getSepIndexSave(val) - 1;
+
+	for (var i = start; i < end; i++) {
+		result += val.charAt(i);
+	}
+	return result
+}
+
+function snagSavedEnd(val) {
+	var result = '';
+	val = eliminateWhiteSpaceText(val);
+	var index = getSepIndexSave(val);
+
+	for (var i = index; i < val.length; i++) {
+		result += val.charAt(i);
+	}
+
+	return result
 }
 
 function fieldIsEmpty(field) {

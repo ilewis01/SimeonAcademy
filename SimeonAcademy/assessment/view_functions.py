@@ -23,7 +23,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, PrintableForms
+SolidState, PrintableForms, WorkSchedule
 
 def isCompleteWeek(day):
 	complete = False
@@ -133,6 +133,144 @@ def fetchCalendarData(year, month):
 			result[j]['newWeek'] = False
 
 	fetchNumWeeks(year, month)
+	return result
+
+def decodeCalDate(obj):
+	result = {}
+	dd = ''
+	mm = ''
+	yy = ''
+	index1 = 0
+	temp = ''
+	temp2 = ''
+
+	for i in range(len(obj)):
+		if obj[i] == '/':
+			index = i 
+			break
+
+	for k in range(index):
+		mm += obj[k]
+
+	for j in range((index + 1), len(obj)):
+		temp += obj[j]
+
+	for n in range(3):
+		if temp[n] == '/':
+			index = n
+			break
+		else:
+			dd += temp[n]
+
+	for p in range((index + 1), len(temp)):
+		temp2 += temp[p]
+
+	for l in range(len(temp2)):
+		if temp2[l] == '/':
+			break
+		else:
+			yy += temp2[l]
+
+	dd = int(dd)
+	mm = int(mm)
+	yy = int(yy)
+	result['day'] = dd
+	result['month'] = mm
+	result['year'] = yy
+	return result
+
+
+def seperateCalendarTime(val):
+	result = {}
+	index = 0
+	temp = ''
+	temp2 = ''
+	start = ''
+	end = ''
+	val = str(val)
+
+	for i in range(len(val)):
+		if val[i] == '@':
+			index = i + 1
+			break
+
+	for j in range(index, len(val)):
+		temp += val[j]
+
+	temp = cleanWhiteSpace(temp)
+
+	for k in range(len(temp)):
+		if temp[k] == '-':
+			index = k + 1
+			break
+		else:
+			start += temp[k]
+
+	for p in range(index, len(temp)):
+		end += temp[p]
+
+	result['start'] = start
+	result['end'] = end
+	return result
+
+def decodeCalendarTime(val):
+	result = {}
+	temp = ''
+	temp2 = ''
+	hh = ''
+	mm = ''
+	am = False
+	index = 0
+
+	for i in range(len(val)):
+		if val[i] == ':':
+			index = i + 1
+			break
+		else:
+			hh += val[i]
+
+	for j in range(index, len(val)):
+		if val[j] == 'a' or val[j] == 'p':
+			index = j 
+			break
+		else:
+			mm += val[j]
+
+	if val[index] == 'a':
+		am = True
+
+	hh = int(hh)
+	mm = int(mm)
+
+	result['am'] = am
+	result['hour'] = hh
+	result['minute'] = mm
+	result = decodeToMillitary(result)
+	return result
+
+def decodeToMillitary(time):
+	if time['am'] == False:
+		time['hour'] += 12
+	if time['hour'] == 24:
+		time['hour'] = 0
+
+	return time
+
+def decodeCalendarData(obj):
+	result = {}
+	date = decodeCalDate(obj)
+	time = seperateCalendarTime(obj)
+	start = decodeCalendarTime(time['start'])
+	end = decodeCalendarTime(time['end'])
+	result['day'] = date['day']
+	result['month'] = date['month']
+	result['year'] = date['year']
+	result['s_hour'] = start['hour']
+	result['s_min'] = start['minute']
+	result['s_am'] = start['am']
+	result['e_hour'] = end['hour']
+	result['e_min'] = end['minute']
+	result['e_am'] = end['am']
 	return result
 
 def clientEqual(c1, c2):

@@ -1490,6 +1490,18 @@ class SType(models.Model):
 		return self.session_type
 
 ## APPIONTMENTS----------------------------------------------------------------------------------------
+class WorkSchedule(models.Model):
+	counselor_id = models.IntegerField(default=0)
+	counselor = models.CharField(max_length=50, default=None, blank=True, null=True)
+	date = models.DateField(blank=True, null=True, default=None)
+	startHr =  models.CharField(max_length=2, default=None, blank=True, null=True)
+	startMin =  models.CharField(max_length=2, default=None, blank=True, null=True)
+	endHr =  models.CharField(max_length=2, default=None, blank=True, null=True)
+	endMin =  models.CharField(max_length=2, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.counselor) + " - " + str(self.date)
+
 class A_Time(models.Model):
 	time = models.CharField(max_length=12, default=None, blank=True, null=True)
 
@@ -1497,13 +1509,15 @@ class A_Time(models.Model):
 		return self.time
 
 class Appointment(models.Model):
+	counselor_id = models.IntegerField(default=0)
+	counselor = models.CharField(max_length=50, default=None, blank=True, null=True)
 	date = models.DateField(blank=True, null=True, default=None)
 	time = models.ForeignKey(A_Time, default=None, blank=True, null=True)
 	client = models.ForeignKey(Client, blank=True, null=True, default=None)
 	sessionType = models.ForeignKey(SType, default=None, blank=True, null=True)
 
 	def __unicode__(self):
-		return str(self.date) + " " + str(self.time) + " " + str(self.time)
+		return str(self.date) + " - " + str(self.counselor)
 
 
 ## BILLING---------------------------------------------------------------------------------------------

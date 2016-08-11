@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^viewAppointments/$', 'assessment.views.viewAppointments'),
     url(r'^avaiableAppointments/$', 'assessment.views.avaiableAppointments'),
     url(r'^apptHistory/$', 'assessment.views.apptHistory'),
+    url(r'^workDateSelector/$', 'assessment.views.workDateSelector'),
+    url(r'^calendarSaved/$', 'assessment.views.calendarSaved'),
 
    	##Client Views
     url(r'^clientHome/$', 'assessment.views.clientHome'),

@@ -44,7 +44,7 @@ fetchClientPhoneDisplay, calculateHistoryPages, fetchASIViewItems, completeClien
 fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDisplay, \
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
-fetchClientUpdatedFields, fetchCalendarData
+fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, WorkSchedule
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -756,7 +756,6 @@ def submitClientUpdate(request):
 		else:
 			client = Client.objects.get(id=(track.client_id))
 			updateClientAccount(client, request)
-			print "NAME CHANGED: " + str(client.fname)
 			return render_to_response('counselor/client/editClientInfo.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -1729,6 +1728,64 @@ def setSchedule(request):
 
 		else:
 			return render_to_response('counselor/schedule/setSchedule.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def workDateSelector(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			times = getTimes()
+			content['times'] = times
+			return render_to_response('counselor/schedule/workDateSelector.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def calendarSaved(request):
+	user = request.user
+
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('General', track)
+		content['tracking'] = track.state.state
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			pre = 'save'
+			saveThese = []
+			numToSave = request.POST.get('numSaved')
+			numToSave = int(numToSave)
+
+			for i in range(numToSave):
+				num = i + 1
+				name = pre + str(num)
+				obj = request.POST.get(name)
+				saveThese.append(obj)
+
+			for s in saveThese:
+				print 'Object: ' + str(s)
+
+			for st in saveThese:
+				decodeCalendarData(st)
+
+			content['title'] = "Simeon Academy"
+			return render_to_response('counselor/main/appointments.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def viewAppointments(request):
