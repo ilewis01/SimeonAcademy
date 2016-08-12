@@ -4463,6 +4463,93 @@ button:hover {
 	padding-top: 15;
 }
 
+.iml-body-wrapper {
+	width:100%;
+	height:80vh;
+	margin:auto;
+	margin-top: 35px;
+	border: 1px solid #666666;
+	border-radius: 8px;
+	background: url('/static/images/iml_bkgnd.png');
+	background-size: 100%;
+	box-shadow: 3px 3px 9px black;
+	/*padding-top: 3%;*/
+	/*background-color: yellow;*/
+}
+
+.iml-nav-wrapper {
+	width:98%;
+	/*height:71vh;*/
+	margin: auto;
+	border:1px solid #999999;
+	border-radius: 8px;
+	background: url('/static/images/superGreen.png');
+	background-size: 100%;
+	padding-bottom: 10%;
+	box-shadow: 3px 3px 10px #888888;
+}
+
+#iml-nav-header {
+	text-align: center;
+	font-size: 23px;
+	font-weight: bold;
+	font-style: italic;
+	padding:9px;
+	color: #4d4a4a;
+}
+
+#iml-content-header {
+	text-align: left;
+	font-size: 23px;
+	font-weight: bold;
+	font-style: italic;
+	padding:11px;
+	color: #4d4a4a;
+	margin-left: 10px;
+}
+
+#iml-info-head {
+	font-size: 28px;
+	font-weight: bold;
+	font-style: italic;
+	margin-left: 1%;
+	padding:1%;
+	text-shadow: 7px 7px 12px #888888;
+}
+
+.inl-nav-btn-cont {
+	width:100%;
+	/*height:57vh;*/
+	margin-top: 1%;
+	border-top: 2px solid black;
+	border-bottom: 1px solid black;
+	background-color: #e2e2e2;
+}
+
+.iml-profile-content {
+	background-color: #e6e6e6;
+	width:100%;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	height:56vh;
+}
+
+.inl-nav-btn-cont button {
+	width: 100%;
+	height: 35px;
+}
+
+.iml-content-wrapper {
+	width:98%;
+	height: 68vh;
+	margin: auto;
+	border:1px solid #999999;
+	border-radius: 8px;
+	background: url('/static/images/superGreenLg.png');
+	background-size: 100%;
+	box-shadow: 7px 7px 10px #888888;
+}
+
 
 
 
