@@ -3831,7 +3831,7 @@ def getAMDemoFields(am):
 	data['years_res'] 			= am.demographic.years_res
 	data['num_children'] 		= am.demographic.num_children
 	data['other_dependants'] 	= am.demographic.other_dependants
-	data['drop_out'] 			= am.demographic.drop_out
+	data['whoLivesWithClient'] 	= am.demographic.whoLivesWithClient
 	data['resasonDO'] 			= am.demographic.resasonDO
 	data['employee'] 			= am.demographic.employee
 	data['job_title'] 			= am.demographic.job_title

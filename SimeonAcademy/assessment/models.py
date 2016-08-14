@@ -310,10 +310,10 @@ class AM_Demographic(models.Model):
 	whoLivesWithClient = models.CharField(max_length=500, default=None, blank=True, null=True)
 	
 	num_children = models.IntegerField(default=0)
+	spouse_dep = models.IntegerField(default=0)
 	other_dependants = models.IntegerField(default=0)
 	
 	education = models.CharField(max_length=30, default=None, blank=True, null=True)
-	drop_out = models.BooleanField(default=False, blank=True)
 	resasonDO = models.CharField(max_length=250, default=None, blank=True, null=True)
 	
 	employee = models.CharField(max_length=50, default=None, blank=True, null=True)

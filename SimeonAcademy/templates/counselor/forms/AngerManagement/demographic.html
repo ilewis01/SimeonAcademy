@@ -1,9 +1,26 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <input type='hidden' name='m_own' id='m_own'>
+      <input type='hidden' name='m_drop_out' id='m_drop_out'>
+      <input type='hidden' name='m_health_problem' id='m_health_problem'>
+      <input type='hidden' name='m_medication' id='m_medication'>
+      <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
+      <input type='hidden' name='m_health_exp' id='m_health_exp'>
+      <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
 
     <div class='container'>
       <div class='row'>
@@ -21,26 +38,89 @@
                     <div class='col-md-12'>
                       <table class='img-single-btn-table'>
                         <tr>
-                          <td><div class='iml-button'>Demographics</div></td>
-                          <td><div class='iml-button'>Drug History</div></td>
-                          <td><div class='iml-button'>Childhood History</div></td>
-                          <td><div class='iml-button'>Anger History I</div></td>
-                          <td><div class='iml-button'>Anger History II</div></td>
-                          <td><div class='iml-button'>Anger History III</div></td>
-                          <td><div class='iml-button'>Connections</div></td>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episode I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episode II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episode III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
                         </tr>
                       </table>
 
-                      <div style='margin-bottom: 3px;'></div>
+                      <div style='margin-bottom: 6px;'></div>
 
                       <table class='img-single-btn-table'>
                         <tr>
-                          <td><div class='iml-button'>Worst Episodes</div></td>
-                          <td><div class='iml-button'>Anger Target</div></td>
-                          <td><div class='iml-button'>Family of Origin</div></td>
-                          <td><div class='iml-button'>Current Problems</div></td>
-                          <td><div class='iml-button'>Anger Control</div></td>
-                          <td><div class='iml-button'>Additional Info</div></td>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
                         </tr>
                       </table>
                     </div>
@@ -93,9 +173,9 @@
                     <table>
                       <tr>
                         <td><div id='iml-label'>3. Time at Current Residence:</div></td>
-                        <td><div class='iml-num'><input type='number' name='' id='' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value=''></div></td>
                         <td><div id='iml-sub-label'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='' id='' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value=''></div></td>
                         <td><div id='iml-sub-label'>months</div></td>
                       </tr>
                     </table>
@@ -103,9 +183,9 @@
                     <table>
                       <tr>
                         <td><div id='iml-label'>4. Does client rent or own?</div></td>
-                        <td><div><input type='radio' name='' id='' value=''></div></td>
+                        <td><div><input type='radio' name='own' id='doesRent' value='False'></div></td>
                         <td><div id='iml-sub-label'>Rent</div></td>
-                        <td><div><input type='radio' name='' id='' value=''></div></td>
+                        <td><div><input type='radio' name='own' id='doesOwn' value='True'></div></td>
                         <td><div id='iml-sub-label'>Own</div></td>
                       </tr>
                     </table>
@@ -113,7 +193,7 @@
                     <table>
                       <tr><td><div id='iml-label'>5. Who lives with client at residence?</div></td></tr>
                       <tr><td><div id='iml-sub-label-left'>(Include names, ages, and relationship)</div></td></tr>
-                      <tr><td><div><textarea rows='3' cols='60' name='' id=''></textarea></div></td></tr>
+                      <tr><td><div><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'></textarea></div></td></tr>
                     </table>
 
                     <table><tr><td><div id='iml-label'>6. Dependents:</div></td></tr></table>
@@ -121,33 +201,33 @@
                     <table>
                       <tr>
                         <td><div id='iml-sub-label'>Children:</div></td>
-                        <td><div class='iml-num'><input type='number' name='' id='' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='num_children' id='num_children' value=''></div></td>
 
                         <td><div id='iml-sub-label'>Spouse:</div></td>
-                        <td><div class='iml-num'><input type='number' name='' id='' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='spouse_dep' id='spouse_dep' value=''></div></td>
 
                         <td><div id='iml-sub-label'>Other dependents</div></td>
-                        <td><div class='iml-num'><input type='number' name='' id='' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value=''></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div id='iml-label'>7. Level of education completed:</div></td>
-                        <td><div><input type='radio' name='' id='' value=''></div></td>
+                        <td><div><input type='radio' name='education' id='GED' value='GED'></div></td>
                         <td><div id='iml-sub-label'>GED</div></td>
 
-                        <td><div><input type='radio' name='' id='' value=''></div></td>
+                        <td><div><input type='radio' name='education' id='HS' value='HS'></div></td>
                         <td><div id='iml-sub-label'>HS</div></td>
 
-                        <td><div><input type='radio' name='' id='' value=''></div></td>
+                        <td><div><input type='radio' name='education' id='College' value='College'></div></td>
                         <td><div id='iml-sub-label'>College</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr><td><div id='iml-sub-label'>Reason for dropout:</div></td></tr>
-                      <tr><td><div><textarea rows='3' cols='60' name='' id='' value=''></textarea></div></td></tr>
+                      <tr><td><div><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''></textarea></div></td></tr>
                     </table>
 
                   </div>
@@ -158,6 +238,7 @@
                 </div>
               </div>
             </div>
+    </form>        
 
             <div>
               <table class='iml-save-btn'>
