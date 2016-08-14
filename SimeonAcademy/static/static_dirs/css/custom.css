@@ -4467,19 +4467,16 @@ button:hover {
 	width:100%;
 	height:80vh;
 	margin:auto;
-	margin-top: 35px;
+	margin-top: 3%;
 	border: 1px solid #666666;
 	border-radius: 8px;
 	background: url('/static/images/iml_bkgnd.png');
 	background-size: 100%;
 	box-shadow: 3px 3px 9px black;
-	/*padding-top: 3%;*/
-	/*background-color: yellow;*/
 }
 
 .iml-nav-wrapper {
 	width:98%;
-	/*height:71vh;*/
 	margin: auto;
 	border:1px solid #999999;
 	border-radius: 8px;
@@ -4495,7 +4492,8 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	padding:9px;
-	color: #4d4a4a;
+	color: #e3dcc8;
+	text-shadow: 1px 1px black;
 }
 
 #iml-content-header {
@@ -4504,17 +4502,26 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	padding:11px;
-	color: #4d4a4a;
+	color: #e3dcc8;
+	text-shadow: 1px 1px black;
 	margin-left: 10px;
 }
 
 #iml-info-head {
+	width:100%;
+	/*margin: auto;*/
 	font-size: 28px;
 	font-weight: bold;
 	font-style: italic;
-	margin-left: 1%;
 	padding:1%;
-	text-shadow: 7px 7px 12px #888888;
+	text-shadow: 1px 1px black;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: 1px solid black;
+	color: #e3dcc8;
+	background: url('/static/images/super_head_bk2.png');
+	background-size: 100%;
+	margin-bottom: 1.5%;
 }
 
 .inl-nav-btn-cont {
@@ -4526,12 +4533,19 @@ button:hover {
 	background-color: #e2e2e2;
 }
 
+.img-top-data-wrapper {
+	width:100%;
+	height:100%;
+	background-color: yellow;
+}
+
 .iml-profile-content {
 	background-color: #e6e6e6;
 	width:100%;
-	border-top: 2px solid black;
-	border-bottom: 2px solid black;
-	height:56vh;
+	border-top: 3px solid black;
+	border-bottom: 2.5px solid black;
+	height:55vh;
+	padding-top:4.5%;
 }
 
 .inl-nav-btn-cont button {
@@ -4541,13 +4555,87 @@ button:hover {
 
 .iml-content-wrapper {
 	width:98%;
-	height: 68vh;
+	height: 66vh;
 	margin: auto;
 	border:1px solid #999999;
 	border-radius: 8px;
 	background: url('/static/images/superGreenLg.png');
 	background-size: 100%;
 	box-shadow: 7px 7px 10px #888888;
+}
+
+.iml-pic-container {
+	width:175px;
+	height:175px;
+	margin:auto;
+	border: 3px solid #545350;
+}
+
+.iml-avatar-img {
+	width:100%;
+	height:100%;
+}
+
+.iml-session-info-table {
+	width:100%;
+	height: 175px;
+	margin:auto;
+	/*border: 3px solid #545350;*/
+}
+
+#iml-session-name {
+	font-size: 22px;
+	font-weight: bold;
+	color:#7b3f1a;
+}
+
+#iml-session-id {
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+	color:#988974;
+}
+
+#iml-head-lg {
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom:3px;
+	color: #;
+}
+
+#iml-head-md {
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+#iml-head-sm {
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+#iml-session-email {
+	font-style: italic;
+	font-size: 13px;
+	color: #4b74ab;
+}
+
+#iml-session-phone {
+	font-size: 13px;
+}
+
+#iml-session-address {
+	font-size: 13px;
+	font-style: italic;
+}
+
+.iml-li-margin-left {
+	margin-left: 20px;
+}
+
+.iml-history-div {
+	width:450px;
 }
 
 

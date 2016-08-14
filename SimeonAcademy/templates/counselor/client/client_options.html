@@ -2,230 +2,143 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad='javascript: initialize_options({{numPages}});'>
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white">
+    <form action='' method='post' id='c_form'> {% csrf_token %}
+        <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+        <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+        <input type='hidden' name='form_name' id='form_name' value='c_form'>
+        <input type='hidden' name='nextUrl' id='nextUrl' value=''>
+        <input type='hidden' name='fType' id='fType' value=''>
+        <input type='hidden' name='histPage' id='histPage' value='1'>
+        <input type='hidden' name='initLoad' id='initLoad' value='false'>
 
-    <div id="wrapper" class='shift-rr'>
+        <input type='hidden' name='m_session_id' id='m_session_id' value=''>
+        <input type='hidden' name='m_fType' id='m_fType' value=''>
+        <input type='hidden' name='numPages' id='numPages' value='{{numPages}}'>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-Header">
-                    <div style='margin-bottom:40px; padding-top:8%;'>
-                        <h3>Options</h3>
-                    </div>
+        <input type='hidden' name='completeAM' id='completeAM' value='{{completeAM}}'>
+        <input type='hidden' name='completeMH' id='completeMH' value='{{completeMH}}'>
+        <input type='hidden' name='completeUT' id='completeUT' value='{{completeUT}}'>
+        <input type='hidden' name='completeASI' id='completeASI' value='{{completeASI}}'>
+        <input type='hidden' name='completeSAP' id='completeSAP' value='{{completeSAP}}'>
+    </form>
 
-                    <form action='' method='post' name='c_form' id='c_form'> {% csrf_token %}
-                        <input type="hidden" id='session_id' name='session_id' value='{{session.id}}'>
-                        <input type="hidden" id='client_id' name='client_id' value='{{client.id}}'>
-                        <input type='hidden' name='form_name' id='form_name' value='c_form'>
-                        <input type='hidden' name='nextUrl' id='nextUrl' value="">
-                        <input type='hidden' name='fType' id='fType' value="">
-                        <input type='hidden' name='histPage' id='histPage' value="1">
-                        <input type='hidden' name='initLoad' id='initLoad' value="false">
-
-                        <input type='hidden' name='m_session_id' id='m_session_id' value="">
-                        <input type='hidden' name='m_fType' id='m_fType' value="">
-                        <input type='hidden' name='numPages' id='numPages' value="{{numPages}}">
-
-                        <input type='hidden' name='completeAM' id='completeAM' value="{{completeAM}}">
-                        <input type='hidden' name='completeMH' id='completeMH' value="{{completeMH}}">
-                        <input type='hidden' name='completeUT' id='completeUT' value="{{completeUT}}">
-                        <input type='hidden' name='completeASI' id='completeASI' value="{{completeASI}}">
-                        <input type='hidden' name='completeSAP' id='completeSAP' value="{{completeSAP}}">
-                    </form>
-
-                </li>
-                <li>
-                    <a href="javascript: new_am();">Anger Management</a>
-                </li>
-                <li>
-                    <a href="javascript: new_asi();">Addiction Severity Index</a>
-                </li>
-                <li>
-                    <a href="javascript: new_mh();">Mental Health Assessment</a>
-                </li>
-                <li>
-                    <a href="javascript: new_sap();">S.A.P Form</a>
-                </li>
-                <li>
-                    <a href="javascript: new_ut();">Urine Test Results</a>
-                </li>
-                <!-- <li>
-                    <a href="javascript: get_client_history();">Client History</a>
-                </li> -->
-                <li>
-                    <a href="javascript: new_discharge();">Discharge</a>
-                </li>               
-                <li>
-                    <a href="javascript: go_to_appointments();">Appointment Manager</a>
-                </li>
-                <li>
-                    <a href="javascript: delete_session();">Delete Current Session</a>
-                </li>
-                <li>
-                    <a href="javascript: close_session();">Close Session</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-1"></div>
-
-                    <div class="col-lg-11">
-                        <div>
-                            <table><tr><td><div id='superHead'>Client Assessment Session:</div></td></tr></table>
-                            <table style=''>
-                                <tr>
-                                    <td>
-                                        <div id='profile_header'>
-                                            Details for <span>{{session.client.fname}} {{session.client.middleInit}} {{session.client.lname}}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div class='avatar-container'>
-                                            <img src="/static/media/{{session.client.photo}}" alt="client_img" class='client_img'>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <table class='clientProfileTable'>
-                                            <tr>
-                                                <td><div id='pro-question'>Intake Date:</div></td>
-                                                <td><div id='pro-answer'>{{session.client.intake_date}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>DOB:</div></td>
-                                                <td><div id='pro-answer'>{{session.client.dob}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>SSN:</div></td>
-                                                <td><div id='pro-answer'>{{ssn}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>Gender:</div></td>
-                                                <td><div id='pro-answer'>{{gender}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>Phone:</div></td>
-                                                <td><div id='pro-answer'>{{phone}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>Email:</div></td>
-                                                <td><div id='pro-answer'>{{session.client.email}}</div></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><div id='pro-question'>Address:</div></td>
-
-                                                <td>
-                                                    <div id='pro-address'>
-                                                        {{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
-                                                    </div>
-                                                
-                                                    <div id='pro-address'>
-                                                        {{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <table style='100%; margin:auto;'>
-                                            <tr>
-                                                <td><div id='pro-question'>ID:</div></td>
-                                                <td><div id='pro-answer'>{{session.client.clientID}}</div></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-
-                            <table>
-                                <tr>
-                                    <td><div id='profile_history_head'>Most Recent History</div></td>
-                                </tr>
-                            </table>
-
-                            <ul>
-                                <table>
-                                    {% for h in history %}
-                                    <tr>
-                                        <td>
-                                            <li>
-                                                <a href="javascript: get_main_p_history('{{h.form_type}}', {{h.session.id}});" class='cli-history-a'>
-                                                    <div>
-                                                        <form action='' method='post' id='{{h.id}}'> {% csrf_token %}
-                                                            <input type='hidden' name='{{h.id}}' id='{{h.id}}' value='{{h.session.id}}'>
-                                                        </form>
-                                                        <span>Form Type:&nbsp</span>
-                                                        {{h.name}}
-                                                        &nbsp
-                                                        <span>{{h.session.startTime}}</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </table>
-                            </ul>
-
-                            <table class='phSelectableTable'>
-                                <tr>
-                                    <td>
-                                        <button id='prevBtn' class=''>&laquo&nbspPrevious</button>
-                                    </td>
-
-                                    <td>
-                                        <div>
-                                            <select id='hisPageSelect'>
-                                                {% for p in pages %}
-                                                <option value='{{p}}'>{{p}}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <button id='nextBtn'>Next&nbsp&raquo</button>
-                                    </td>
-                                </tr>
-                            </table>
-               
-                           
-<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
-                       <!--  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class='iml-body-wrapper'>
+                    <div><div id='iml-info-head'>
+                        <div style='margin-left:3%;'>Client Assessment</div>
+                    </div></div>
+                    <div class="container" style='width:100%; height:100%;'>
+                        <div class='row'>
+                            <!-- <div class='col-md-12'><div id='iml-info-head'>Client Assessment</div></div> -->
                         </div>
-                    </div>
-                    </div>
 
-                    <div class="col-lg-3" style='text-align:'>
+                        <div class="row" style='width:100%; height: 100%; margin:auto;'>
+                            <div class="col-md-3" style='width:30%; height:100%;'>
+                                <div class='iml-nav-wrapper'>
+                                    <div id='iml-nav-header'>Session Options</div>
+
+                                    <div class='inl-nav-btn-cont'>
+                                        <button onClick="javascript: new_am();">Anger Management</button>
+                                        <button onClick="javascript: new_asi();">Addiction Severity Index</button>
+                                        <button onClick="javascript: ">New Form</button>
+                                        <button onClick="javascript: new_mh();">Mental Health</button>
+                                        <button onClick="javascript: new_sap();">S.A.P</button>
+                                        <button onClick="javascript: new_ut();">Urine Analysis</button>
+                                        <button onClick="javascript: viewClientFiles('history');">View Client History</button>
+                                        <button onClick="javascript: appointmentsClientProfile();">Appointment Manager</button>
+                                        <button onClick="javascript: appointmentsClientProfile();">Billing Options</button>
+                                        <button onClick="javascript: editClientInformation();">Edit Client Profile</button>
+                                        <button onClick="javascript: updateClientStats();">Update Client Status</button>
+                                        <button onClick="javascript: new_am();">Close Session</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9" style='width:70%; height:100%;'>
+                                <div class='iml-content-wrapper'>
+                                    <div id='iml-content-header'>Client Information</div>
+
+                                    <div class='iml-profile-content'>
+                                        <div class='container' style='width:100%; height:100%;'>
+                                            <div class='row' style='width:100%; height:175px; margin:auto;'>
+                                                <div class='col-md-3' style='width:30%; height:100%;'>
+                                                    <div class='iml-pic-container'> <!-- CLIENT IMAGE -->
+                                                        <img src="/static/media/{{session.client.photo}}" alt="client_img" class='iml-avatar-img'>
+                                                    </div>
+                                                </div>
+
+                                                <div class='col-md-9' style='width:67%; height:100%;'> <!-- CLIENT INFO -->
+                                                    <table class='iml-session-info-table'>
+                                                        <tr>
+                                                            <td><div id='iml-session-name'>{{session.client.fname}} {{session.client.lname}}</div></td>
+                                                        </tr>
+
+                                                        <tr><td><div id='iml-session-id'>{{session.client.clientID}}</div></td></tr>
+                                                        <tr><td><div id='iml-head-md'>Contact Information:</div></td></tr>
+                                                        <tr><td><div id='iml-session-email'>{{session.client.email}}</div></td></tr>
+                                                        <tr><td><div id='iml-session-phone'>{{session.client.phone}}</div></td></tr>
+                                                        <tr><td><div id='iml-head-sm'>Address:</div></td></tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div id='iml-session-address'>
+                                                                    {{session.client.street_no}} {{session.client.street_name}} {{session.client.apartment_no}}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div id='iml-session-address'>
+                                                                    {{session.client.city}}, {{session.client.state}} {{session.client.zip_code}}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class='row' style='width:95%; height:45%; margin:auto; margin-top:3%;'>
+                                                <div>
+                                                    <table>
+                                                        <ul>
+                                                            <tr>
+                                                                <td><div id='iml-head-lg'>Recent History:</div></td>
+                                                            </tr>
+
+                                                            {% for h in history %}
+                                                            <tr>
+                                                                <td>
+                                                                    <li class='iml-li-margin-left'>
+                                                                        <a href="">
+                                                                            <form action='' method='post' id=''>
+                                                                                <input type='hidden' name='' id='' value=''>
+                                                                            </form>
+
+                                                                            <div class='iml-history-div'>
+                                                                                <span>{{h.name}}</span>
+                                                                                {{h.startTime}}
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
         </div>
     </div>
 </body>
-
 {% endblock %}
-
