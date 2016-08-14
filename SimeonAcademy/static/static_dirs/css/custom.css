@@ -4475,6 +4475,18 @@ button:hover {
 	box-shadow: 3px 3px 9px black;
 }
 
+.iml-body-wrapper2 {
+	width:100%;
+	height:85vh;
+	margin:auto;
+	margin-top: 1%;
+	border: 1px solid #666666;
+	border-radius: 8px;
+	background: url('/static/images/iml_bkgnd.png');
+	background-size: 100%;
+	box-shadow: 3px 3px 9px black;
+}
+
 .iml-nav-wrapper {
 	width:98%;
 	margin: auto;
@@ -4522,6 +4534,22 @@ button:hover {
 	background: url('/static/images/super_head_bk2.png');
 	background-size: 100%;
 	margin-bottom: 1.5%;
+}
+
+#iml-info-head2 {
+	width:100%;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	padding:9px;
+	text-shadow: 1px 1px black;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: 1px solid black;
+	color: #e3dcc8;
+	background: url('/static/images/super_head_bk3.png');
+	background-size: 100%;
+	margin-bottom: 1%;
 }
 
 .inl-nav-btn-cont {
@@ -4641,7 +4669,6 @@ button:hover {
 .iml-form-nav {
 	width:95%;
 	margin: auto;
-	margin-top: 2%;
 }
 
 .iml-form-btn-wrapper {
@@ -4652,20 +4679,28 @@ button:hover {
 .iml-button {
 	width:145px;
 	margin:auto;
-	height: 27px;
+	height: 23px;
 	border: 1px solid black;
-	border-radius: 8px;
-	background-color: #e9e9e9;
+	border-radius: 6px;
+	/*background: url('/static/images/superGreen.png');
+	background-size: 100%;*/
+	background-color: #788e89;
+	/*color: #e3dcc8;*/
+	/*text-shadow: 1px 1px black;*/
+	/*background-color: #e3dcc8;*/
+	/*background-color: #e9e9e9;*/
 	text-align: center;
+	font-size: 13px;
 	font-weight: bold;
 	font-style: italic;
-	padding-top: 2px;
+	padding-top: 1px;
 	margin-left: 2px;
 	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
 }
 
 .iml-button:hover {
-	background-color: #959797;
+	background-color: #9cbdb7;
 }
 
 .img-single-btn-table {
@@ -4675,11 +4710,28 @@ button:hover {
 
 .iml-data-entry-wrapper {
 	width: 92%;
-	height: 50vh;
+	height: 59vh;
 	margin: auto;
-	margin-top: 3%;
+	margin-top: 2%;
 	border: 1px solid black;
 	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-num input{
+	width:40px;
+}
+
+.iml-save-btn {
+	padding: 2%;
+	border: 1px solid black;
+	margin-top: 15px;
+	margin-left: 69%;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-save-btn button {
+	width: 150px;
 }
 
 
