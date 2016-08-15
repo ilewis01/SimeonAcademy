@@ -132,16 +132,17 @@
             <div class='iml-data-entry-wrapper'>
               <div class='container'>
                 <div class='row'>
-                  <div class='col-md-6' style='width:44%; height:100%;'>
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
 
                     <h4>Household</h4>
 
                     <table>
                       <tr>
-                        <td><div id='iml-label'>1. Marital Status:</div></td>
+                        <td><div class='iml-num-div'>1.</div></td>
+                        <td><div class='iml-label'>Marital Status:</div></td>
                         <td>
                           <div>
-                            <select name='maritalStatus' id='maritalStatus'>
+                            <select name='maritalStatus' id='maritalStatus' style='margin-bottom:10px;'>
                               <option value='None Selected'>Select</option>
                               <option value='Divorced'>Divorced</option>
                               <option value='Married'>Married</option>
@@ -155,7 +156,8 @@
 
                     <table>
                       <tr>
-                        <td><div id='iml-label'>2. Living Situation:</div></td>
+                        <td><div class='iml-num-div'>2.</div></td>
+                        <td><div class='iml-label'>Living Situation:</div></td>
                         <td>
                           <div>
                             <select name='livingSituation' id='livingSituation'>
@@ -172,68 +174,153 @@
 
                     <table>
                       <tr>
-                        <td><div id='iml-label'>3. Time at Current Residence:</div></td>
+                        <td><div class='iml-num-div'>3.</div></td>
+                        <td><div class='iml-label'>Time at Current Residence:</div></td>
                         <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value=''></div></td>
-                        <td><div id='iml-sub-label'>years</div></td>
+                        <td><div class='iml-sub-label'>years</div></td>
                         <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value=''></div></td>
-                        <td><div id='iml-sub-label'>months</div></td>
+                        <td><div class='iml-sub-label'>months</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div id='iml-label'>4. Does client rent or own?</div></td>
-                        <td><div><input type='radio' name='own' id='doesRent' value='False'></div></td>
-                        <td><div id='iml-sub-label'>Rent</div></td>
-                        <td><div><input type='radio' name='own' id='doesOwn' value='True'></div></td>
-                        <td><div id='iml-sub-label'>Own</div></td>
+                        <td><div class='iml-num-div'>4.</div></td>
+                        <td><div class='iml-label'>Does client rent or own?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='own' id='doesRent' value='False'></div></td>
+                        <td><div class='iml-sub-label'>Rent</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='own' id='doesOwn' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Own</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div id='iml-label'>5. Who lives with client at residence?</div></td></tr>
-                      <tr><td><div id='iml-sub-label-left'>(Include names, ages, and relationship)</div></td></tr>
-                      <tr><td><div><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'></textarea></div></td></tr>
+                      <tr>
+                        <td><div class='iml-num-div'>5.</div></td>
+                        <td><div class='iml-label'>Who lives with client at residence?</div></td>
+                      </tr>
                     </table>
-
-                    <table><tr><td><div id='iml-label'>6. Dependents:</div></td></tr></table>
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Include names, ages, and relationship</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'></textarea></div></td></tr>
+                    </table>
 
                     <table>
                       <tr>
-                        <td><div id='iml-sub-label'>Children:</div></td>
-                        <td><div class='iml-num'><input type='number' name='num_children' id='num_children' value=''></div></td>
+                        <td><div class='iml-num-div'>6.</div></td>
+                        <td><div class='iml-label'>Dependents:</div></td>
+                      </tr>
+                    </table>
 
-                        <td><div id='iml-sub-label'>Spouse:</div></td>
-                        <td><div class='iml-num'><input type='number' name='spouse_dep' id='spouse_dep' value=''></div></td>
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-l' style='margin-left:25px;'>Children:</div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value=''></div></td>
 
-                        <td><div id='iml-sub-label'>Other dependents</div></td>
+                        <td><div class='iml-sub-label-l'>Spouse:</div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value=''></div></td>
+
+                        <td><div class='iml-sub-label-l'>Other:</div></td>
                         <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value=''></div></td>
                       </tr>
                     </table>
 
+                    <h4></h4>
+
                     <table>
                       <tr>
-                        <td><div id='iml-label'>7. Level of education completed:</div></td>
-                        <td><div><input type='radio' name='education' id='GED' value='GED'></div></td>
-                        <td><div id='iml-sub-label'>GED</div></td>
+                        <td><div class='iml-num-div'>7.</div></td>
+                        <td><div class='iml-label'>Level of education completed:</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='GED' value='GED'></div></td>
+                        <td><div class='iml-sub-label'>GED</div></td>
 
-                        <td><div><input type='radio' name='education' id='HS' value='HS'></div></td>
-                        <td><div id='iml-sub-label'>HS</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='HS' value='HS'></div></td>
+                        <td><div class='iml-sub-label'>HS</div></td>
 
-                        <td><div><input type='radio' name='education' id='College' value='College'></div></td>
-                        <td><div id='iml-sub-label'>College</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='College' value='College'></div></td>
+                        <td><div class='iml-sub-label'>College</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div id='iml-sub-label'>Reason for dropout:</div></td></tr>
-                      <tr><td><div><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''></textarea></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left'><li>Reason for dropout:</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''></textarea></div></td></tr>
                     </table>
 
                   </div>
 
-                  <div class='col-md-6' style='width:44%; height:100%;'>
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
                     <h4>Employment</h4>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>8.</div></td>
+                        <td><div class='iml-label'>Current Employer:</div></td>
+                        <td><div><input type='text' name='' id='' value=''></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>9.</div></td>
+                        <td><div class='iml-label'>Employer Phone:</div></td>
+                        <td><div><input type='text' name='' id='' value=''></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>10.</div></td>
+                        <td><div class='iml-label'>Employer Address:</div></td>
+                        <td><div><input type='text' name='' id='' value=''></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>11.</div></td>
+                        <td><div class='iml-label'>Job title:</div></td>
+                        <td><div><input type='text' name='' id='' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>12.</div></td>
+                        <td><div class='iml-label'>Length of Employment:</div></td>
+                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value=''></div></td>
+                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value=''></div></td>
+                        <td><div class='iml-sub-label'>months</div></td>
+                    </table>
+
+                    <h4>Medical/Health</h4>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>13.</div></td>
+                        <td><div class='iml-label'>Do you have any ongoing health problems?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='not_healthy' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='healthy' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Please explain client health issues:</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>14.</div></td>
+                        <td><div class='iml-label'>Are you currently taking medication?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medication' id='on_meds' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medication' id='no_med' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>What are you taking?</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'></textarea></div></td></tr>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -244,7 +331,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button>Save & Continue</button></td>
-                  <td><button>Exit</button></td>
+                  <td><button>Exit Form</button></td>
                 </tr>
               </table>
             </div>

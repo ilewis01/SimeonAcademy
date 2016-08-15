@@ -4547,7 +4547,7 @@ button:hover {
 	border-top-right-radius: 8px;
 	border-bottom: 1px solid black;
 	color: #e3dcc8;
-	background: url('/static/images/super_head_bk3.png');
+	background: url('/static/images/super_head_bk4.png');
 	background-size: 100%;
 	margin-bottom: 1%;
 }
@@ -4682,13 +4682,7 @@ button:hover {
 	height: 23px;
 	border: 1px solid black;
 	border-radius: 6px;
-	/*background: url('/static/images/superGreen.png');
-	background-size: 100%;*/
-	background-color: #788e89;
-	/*color: #e3dcc8;*/
-	/*text-shadow: 1px 1px black;*/
-	/*background-color: #e3dcc8;*/
-	/*background-color: #e9e9e9;*/
+	background-color: #a4c2ba;
 	text-align: center;
 	font-size: 13px;
 	font-weight: bold;
@@ -4700,12 +4694,22 @@ button:hover {
 }
 
 .iml-button:hover {
-	background-color: #9cbdb7;
+	background-color: #6c7e7a;
+	color:#e3dcc8;
 }
 
 .img-single-btn-table {
 	width:10%;
 	margin:auto;
+}
+
+.img-single-btn-table a {
+	color:#5C5F63;
+}
+
+.img-single-btn-table a:hover {
+	color:#667CAD;
+	text-decoration: none;
 }
 
 .iml-data-entry-wrapper {
@@ -4720,6 +4724,9 @@ button:hover {
 
 .iml-num input{
 	width:40px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-right: 3px;
 }
 
 .iml-save-btn {
@@ -4732,6 +4739,52 @@ button:hover {
 
 .iml-save-btn button {
 	width: 150px;
+}
+
+.iml-radio {
+	padding-bottom: 4px;
+	padding-right: 4px;
+}
+
+.iml-label {
+	margin-right: 6px;
+	font-size: 13px;
+}
+
+.iml-num-div {
+	width: 20px;
+	text-align: center;
+	font-weight: bold;
+	margin-right: 4px;
+	font-size: 13px;
+}
+
+.iml-sub-label {
+	font-size: 13px;
+	font-style: italic;
+	margin-right: 15px;
+	color:#66676B;
+}
+
+.iml-sub-label-l {
+	font-size: 13px;
+	font-style: italic;
+	margin-left: 10px;
+	margin-right: 3px;
+	color:#66676B;
+}
+
+.iml-sub-label-left {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 24px;
+	color: #7A6264;
+}
+
+.iml-text-area-sub {
+	margin-left: 34px;
+	margin-top: 3px;
 }
 
 
