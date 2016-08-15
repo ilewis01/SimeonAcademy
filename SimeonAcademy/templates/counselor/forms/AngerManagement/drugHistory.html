@@ -1,795 +1,347 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_drugHistory/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <!-- <div class="container-fluid"> -->
-                <!-- <div class="row">
-                    <div class="col-lg-12" style='text-align:'> -->
-                        <div>
-                        	<div class="form_headings">
-                            <h3 id='am-h2'>Anger Management: Drug History</h3>
-                          </div>
-
-                    <div class="container">
-            					<div class="row">                   
-                  					<div class="col-md-5 col-sm-5">
-                  						<div>
-                  							<form action='/am_childhood/' method='post' id='am_demo'> {% csrf_token %}
-                  								<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-                  								<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  								<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                  								<input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                  <input type='hidden' name='save_section' id='save_section' value='/am_drugHistory/'>
-                                  <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                  <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                  <input type='hidden' name='save_this' id='save_this' value=''>
-
-                                  <!-- DYNAMIC DATA ENTRIES -->
-                                  <input type='hidden' name='m_useType' id='m_useType' value=''>
-                                  <input type='hidden' name='m_amtPerWeek' id='m_amtPerWeek' value=''>
-                                  <input type='hidden' name='m_useAmt' id='m_useAmt' value=''>
-                                  <input type='hidden' name='m_monthsQuit' id='m_monthsQuit' value=''>
-                                  <input type='hidden' name='m_yearsQuit' id='m_yearsQuit' value=''>
-                                  <input type='hidden' name='m_reasonQuit' id='m_reasonQuit' value=''>
-                                  <input type='hidden' name='m_numDUI' id='m_numDUI' value=''>
-                                  <input type='hidden' name='m_BALevel' id='m_BALevel' value=''>
-                                  <input type='hidden' name='m_treatmentPlace' id='m_treatmentPlace' value=''>
-                                  <input type='hidden' name='m_dateTreated' id='m_dateTreated' value=''>
-                                  <input type='hidden' name='m_reasonNotFinishedTreatment' id='m_reasonNotFinishedTreatment' value=''>
-                                  <input type='hidden' name='m_relapseTrigger' id='m_relapseTrigger' value=''>
-
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='first_drink'>At what age did you have your first drink of alcohol and/or drugs? </label>
-                  											<input class='small-number' type='number' name='first_drink' id='first_drink' value='{{fields.firstDrinkAge}}'>
-                  										</td>
-                  									</tr>
-                  								</table>
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='first_use_type'>What did you use? </label>
-                  										</td>
-                  										<td>
-                  											<div class='left-space-5'>
-                  												<input type='text' id='first_use_type' name='first_use_type' value='{{fields.firstDrinkType}}'>
-                  											</div>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='use_drugs'>Do you currently drink alcohol or use drugs?</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_current_use' name='use_drugs' value='False' onClick='javascript: topLevelDH()'>
-                  											<div>
-                  										</td>
-                  										<td>
-                  											<label for='no_current_use'>No</label>
-                  										</td>
-
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='current_use' name='use_drugs' value='True' onClick='javascript: topLevelDH()'>
-                  										    </div>
-                  										</td>
-                  										<td>
-                  											<label for='current_use'>Yes</label>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<div class='sub-table-indent-40px'>
-	                  								<table>
-	                  									<tr>
-	                  										<td>
-	                  											<label for='what-you-use' id='what_use_label'>What do you use?</label>
-	                  										</td>
-	                  										<td>
-	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='what-you-use' name='what-you-use' value='{{fields.useType}}'>
-	                  											</div>
-	                  										</td>
-	                  									</tr>
-	                  									<tr>
-	                  										<td>
-	                  											<label for='how-often-you-use' id='how_often_label'>How often?</label>
-	                  										</td>
-	                  										<td>
-	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='how-often-you-use' name='how-often-you-use' value='{{fields.amtPerWeek}}'>
-	                  											</div>
-	                  										</td>
-	                  									</tr>
-	                  									<tr>
-	                  										<td>
-	                  											<label for='how-much-you-use' id='how_much_use_label'>How much?</label>
-	                  										</td>
-	                  										<td>
-	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='how-much-you-use' name='how-much-you-use' value='{{fields.useAmt}}'>
-	                  											</div>
-	                  										</td>
-	                  									</tr>
-	                  								</table>
-                  								</div>
-
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='ever_used' id='have_you_ever_label'>Have you ever drank or used drugs?</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='never_used' name='ever_used' value='False' onClick='javascript: dhRadio2();'>
-                  											<div>
-                  										</td>
-                  										<td>
-                  											<label for='never_used' id='never_used_label'>No</label>
-                  										</td>
-
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='has_used' name='ever_used' value='True' onClick="javascript: dhRadio2();">
-                  										    </div>
-                  										</td>
-                  										<td>
-                  											<label for='has_used' id='has_used_label'>Yes</label>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<div class='sub-table-indent-40px'>
-	                  								<table>
-	                  									<tr>
-	                  										<td>
-	                  											<label for='quitYrs' id='quit-label'>How long ago did you quit?</label>
-	                  										</td>
-	                  									</tr>
-	                  									<tr>
-	                  										<td>
-	                  											<table>
-	                  												<tr>
-	                  													<td>
-				                  											<div>
-				                  												<input type='number' name='quitMos' id='quitMos' class='small-number' value=''>
-				                  												<label id='moLabel1'>months</label>
-				                  											</div>
-				                  										</td>
-				                  										<td>
-				                  											<div style='margin-left: 8px;'>
-				                  												<input type='number' name='quitYrs' id='quitYrs' class='small-number' value=''>
-				                  												<label id='yrLabel1'>years</label>
-				                  											</div>
-				                  										</td>
-				                  									</tr>
-	                  											</table>
-	                  										</td>
-	                  									</tr>
-	                  									<table>
-	                  										<tr>
-	                  											<div style='margin-top:5px;'>
-		                  											<td>
-		                  												<label for='reason_quit' id='reason-quit-label'>Why did you quit?</label>
-		                  											</td>
-		                  											<td>
-		                  												<div class='left-space-5'>
-		                  												    <input type='text' id='reason_quit' name='reason_quit' value=''>
-		                  											    </div>
-		                  											</td>
-	                  											</div>
-	                  										</tr>
-	                  									</table>
-	                  								</table>
-                  								</div>
-                  								
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='has_dui' id='got_dui_label'>Have you ever received a DUI?</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='no_dui' name='has_dui' value='False' onClick='javascript: dhRadio3();'>
-                  											<div>
-                  										</td>
-                  										<td>
-                  											<label for='no_dui' id='no_dui_label'>No</label>
-                  										</td>
-
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='dui' name='has_dui' value='True' onClick='javascript: dhRadio3();'>
-                  										    </div>
-                  										</td>
-                  										<td>
-                  											<label for='dui' id='hasADui_label'>Yes</label>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<div class='sub-table-indent-40px'>
-	                  								<table>
-	                  									<tr>
-	                  										<td>
-	                  											<table>
-	                  												<tr>
-	                  													<td>
-	                  														<label for='dui_amount' id='dui_amount_label'>How many?</label>
-	                  													</td>
-	                  													<td>
-	                  														<div class='left-space-5'>
-	                  															<input type='number' id='dui_amount' name='dui_amount' class='small-number'>
-	                  														</div>
-	                  													</td>
-	                  												</tr>
-	                  											</table>
-	                  										</td>
-	                  									</tr>
-	                  									<tr>
-	                  										<td>
-	                  											<label for='BAL' id='bal_label'>What was your blood alcohol level?</label>
-	                  										</td>
-	                  										<td>
-	                  											<div class='left-space-5'>
-	                  											    <input type='text' id='BAL' name='BAL' style='width:40px;'>
-	                  											</div>
-	                  										</td>
-                                        <td>
-                                          <label id='bal_label2'><b>&nbsp%</b></label>
-                                        </td>
-	                  									</tr>
-	                  								</table>
-                  								</div>
-                  							</div>
-
-                  							<table>
-	                  								<tr>
-                  										<td>
-                  											<label for='need_help'>Do you need help for alcohol or drug dependency problems?</label>
-                  										</td>
-                  									</tr>
-                  									<tr>
-                  										<td>
-                  											<table>
-                  												<tr>
-                  													<td>
-                  														<div class='single-line-radio1'>
-                  														    <input type='radio' name='need_help' id='give_me_help' value='True'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='give_me_help'>Yes</label>
-                  													</td>
-                  													
-                  													<td>
-                  														<div class='single-line-radio'>
-                  														    <input type='radio' name='need_help' id='no_help' value='False'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='no_help'>No</label>
-                  													</td>
-                  												</tr>
-                  											</table>
-                  										</td>
-                  									</tr>
-	                  							</table> 
-                  					</div>
-
-
-
-                  					<!-- RIGHT SIDE -->
-                  					<div class="col-md-5 col-sm-5">
-                  						<div>
-                  							<table>
-                  								<tr>
-                  									<td>
-                  										<label for='treatment'>Have you ever received treatment for drug/alcohol abuse?</label>
-                  									</td>
-                  								</tr>
-                  								<tr>
-                  									<td>
-                  										<table>
-                  											<tr>
-                  												<td>
-                  													<div class='single-line-radio1'>
-                  													    <input type='radio' name='treatment' id='had_treatment' value='True' onClick='javascript: dhLeftRadio1();'>
-                  												    </div>
-                  												</td>
-                  												<td>
-                  													<label for='had_treatment' id='had_treatment_label'>Yes</label>
-                  												</td>
-                  												
-                  												<td>
-                  													<div class='single-line-radio'>
-                  													    <input type='radio' name='treatment' id='no_treatment' value='False' onClick='javascript: dhLeftRadio1();'>
-                  													</div>
-                  												</td>
-                  												<td>
-                  													<label for='no_treatment' id='no_treatment_label'>No</label>
-                  												</td>
-                  											</tr>
-                  										</table>
-                  									</td>
-                  								</tr>
-                  							</table>
-
-                  							<div class='sub-table-indent-40px'>
-	                  								<table>
-	                  									<tr>
-	                  										<td>
-	                  											<table>
-	                  												<tr>
-	                  													<td>
-	                  														<label for='when_treated' id='when_treated_label'>When?</label>
-	                  													</td>
-	                  													<td>
-	                  														<div class='left-space-5'>
-	                  															<!-- <textarea rows='1' cols='25' name='when_treated' id='when_treated'></textarea> -->
-                                                  <input type='text' name='when_treated' id='when_treated'>
-	                  														</div>
-	                  													</td>
-	                  												</tr>
-	                  												<tr>
-	                  													<td>
-	                  														<label for='where_treated' id='where_treated_label'>Where?</label>
-	                  													</td>
-	                  													<td>
-	                  														<div class='left-space-5'>
-                                                  <input type='text' name='where_treated' id='where_treated'>
-	                  															<!-- <textarea rows='1' cols='25' name='where_treated' id='where_treated'></textarea> -->
-	                  														</div>
-	                  													</td>
-	                  												</tr>
-	                  											</table>
-	                  										</td>
-	                  									</tr>
-	                  								</table>
-	                  								<table>
-	                  									<tr>
-                  										<td>
-                  											<label for='completed_treatment' id='completed_treatment_label'>Did you complete treatment?</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='did_complete' name='completed_treatment' value='True' onClick='javascript: dhLeftRadio2();'>
-                  										    </div>
-                  										</td>
-                  										<td>
-                  											<label for='did_complete' id='did_complete_label'>Yes</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='not_completed' name='completed_treatment' value='False' onClick='javascript: dhLeftRadio2();'>
-                  											<div>
-                  										</td>
-                  										<td>
-                  											<label for='not_completed' id='not_completed_label'>No</label>
-                  										</td>
-                  									</tr>
-	                  								</table>
-                  								</div>
-
-                  								<table>
-                  									<tr>
-                  										<td>
-                  											<label for='no_treat_explain' id='no_complete_explain_label'>Explain why treatment was not completed below</label>
-                  										</td>
-                  									</tr>
-                  									<tr>
-                  										<td>
-                  											<textarea id='no_treat_explain' name='no_treat_explain' rows='4' cols='50'></textarea>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<table>
-	                  									<tr>
-                  										<td>
-                  											<label for='still_abstinent' id='still_abstinent_label'>Are you still abstinent?</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='is_abstinent' name='still_abstinent' value='True' onClick='javascript: dhLeftRadio3();'>
-                  										    </div>
-                  										</td>
-                  										<td>
-                  											<label for='is_abstinent' id='is_abstinent_label'>Yes</label>
-                  										</td>
-                  										<td>
-                  											<div class='single-line-radio'>
-                  											    <input type='radio' id='not_abstinent' name='still_abstinent' value='False' onClick='javascript: dhLeftRadio3();'>
-                  											<div>
-                  										</td>
-                  										<td>
-                  											<label for='not_abstinent' id='not_abstinent_label'>No</label>
-                  										</td>
-                  									</tr>
-	                  							</table>
-
-												          <table>
-                  									<tr>
-                  										<td>
-                  											<label for='relapse_explain' id='trigger_label'>What triggered your relapse?</label>
-                  										</td>
-                  									</tr>
-                  									<tr>
-                  										<td>
-                  											<textarea id='relapse_explain' name='relapse_explain' rows='4' cols='50'></textarea>
-                  										</td>
-                  									</tr>
-                  								</table>
-
-                  								<table>
-	                  								<tr>
-                  										<td>
-                  											<label for='drinking_last'>Were you drinking and/or using drugs during your most </label>
-                  										</td>
-                  									</tr>
-                  									<tr>
-                  										<td>
-                  											<table>
-                  												<tr>
-                  													<td>
-                  														<label for='drinking_last'>recent abusive episode?</label>
-                  													</td>
-                  													<td>
-                  														<div class='single-line-radio'>
-                  														    <input type='radio' name='drinking_last' id='was_drinking' value='True'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='was_drinking'>Yes</label>
-                  													</td>
-                  													
-                  													<td>
-                  														<div class='single-line-radio'>
-                  														    <input type='radio' name='drinking_last' id='not_drinking' value='False'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='not_drinking'>No</label>
-                  													</td>
-                  												</tr>
-                  											</table>
-                  										</td>
-                  									</tr>
-	                  							</table>  
-
-	                  							<table>
-	                  								<tr>
-                  										<td>
-                  											<label for='relationship_alc'>Is the use of alcohol and or drugs a problem in your</label>
-                  										</td>
-                  									</tr>
-                  									<tr>
-                  										<td>
-                  											<table>
-                  												<tr>
-                  													<td>
-                  														<label for='relationship_alc'>relationship?</label>
-                  													</td>
-                  													<td>
-                  														<div class='single-line-radio'>
-                  														    <input type='radio' name='relationship_alc' id='is_problem' value='True'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='is_problem'>Yes</label>
-                  													</td>
-                  													
-                  													<td>
-                  														<div class='single-line-radio'>
-                  														    <input type='radio' name='relationship_alc' id='no_problem' value='False'>
-                  														</div>
-                  													</td>
-                  													<td>
-                  														<label for='no_problem'>No</label>
-                  													</td>
-                  												</tr>
-                  											</table>
-                  										</td>
-                  									</tr>
-	                  							</table>                  							
-                  						</div>
-                  					</div>
-                          </form>
-
-
-                  					<div class="col-md-2 col-sm-2">
-                  					</div>
-                  				</div>
-                  			</div>
-                          
-                            
-<!-- _____________________________________________TOGGLE BUTTON_______________________________________________ -->
-
-
-
-
-                        <table class='toggle-div-page'>
-                        	<tr>
-                        		<td>
-                        			<div id="error-div-main">
-                        				<p class='error-messages' id='error_msg_field'></p>
-                        			</div>
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        </table>
-                        <table>
-                        		<td>
-                        			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle" class='but_a'>
-				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
-
-			                    <td>
-			                    	<div id="submit-space">
-				                        <a href="javascript: continue_am_form('/am_drugHistory/');" id="continue" class='but_a'>
-				                        	<button type='button' id='continue'>Continue</button>
-				                        </a>
-				                    </div>
-			                    </td>
-			                </tr>
-	                    </table>
-
-                        </div> <!-- end of section -->
-                    </div>
-                </div>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <input type='hidden' name='m_own' id='m_own'>
+      <input type='hidden' name='m_drop_out' id='m_drop_out'>
+      <input type='hidden' name='m_health_problem' id='m_health_problem'>
+      <input type='hidden' name='m_medication' id='m_medication'>
+      <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
+      <input type='hidden' name='m_health_exp' id='m_health_exp'>
+      <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Drug History</div>
             </div>
-            <!-- /#page-content-wrapper -->
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episode I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episode II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episode III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:41%; height:100%; margin-left:20px;'>
+                    <h4>Drug/Alcohol History</h4>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>1.</div></td>
+                        <td><div class='iml-label'>At what age did you have you first drink and/or drugs?</div></td>
+                        <td><div class='iml-num'><input type='number' name='firstDrinkAge' id='firstDrinkAge' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>2.</div></td>
+                        <td><div class='iml-label'>What did you use?</div></td>
+                        <td><div class=''><input type='text' name='firstDrinkType' id='firstDrinkType' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>3.</div></td>
+                        <td><div class='iml-label'>Do you currently drink and/or use drugs?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='curUse' id='yesDrink' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='curUse' id='noDrink' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>How often do you use?</li></div></td>
+                        <td><div><input type='text' name='amtPerWeek' id='amtPerWeek' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>How much?</li></div></td>
+                        <td><div><input type='text' name='useAmt' id='useAmt' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>4.</div></td>
+                        <td><div class='iml-label'>Have you ever drank or used drugs?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='hasDrank' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='noDrank' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>How long ago did you quit?</li></div></td>
+                        <td><div class='iml-num'><input type='number' name='yearsQuit' id='yearsQuit' value=''></div></td>
+                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div class='iml-num'><input type='number' name='monthsQuit' id='monthsQuit' value=''></div></td>
+                        <td><div class='iml-sub-label'>months</div></td>
+                      </tr>
+                    </table>
+                    
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>For what reasons did you quit?</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='4' cols='60' name='reasonQuit' id='reasonQuit' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>5.</div></td>
+                        <td><div class='iml-label'>Have you ever received a DUI?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='DUI' id='hasDUI' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='DUI' id='noDui' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>How many?</li></div></td>
+                        <td><div class='iml-num'><input type='number' name='numDUI' id='numDUI' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>What was your BAL?</li></div></td>
+                        <td><div class=''><input type='text' name='BALevel' id='BALevel' value=''></div></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                    <h4>Treatment History</h4>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>6.</div></td>
+                        <td><div class='iml-label'>Have you ever received treatment for drug/alcohol abuse?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='hadTreatment' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='noTreatment' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>When did you receive treatment?</li></div></td>
+                        <td><div class=''><input type='text' name='dateTreated' id='dateTreated' value=''></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>Where did you receive treatment?</li></div></td>
+                        <td><div class=''><input type='text' name='treatmentPlace' id='treatmentPlace' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>7.</div></td>
+                        <td><div class='iml-label'>Did you successfully complete treatment?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='didFinish' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='noFinish' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Why was treatment terminated?</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='reasonNotFinishedTreatment' id='reasonNotFinishedTreatment' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>8.</div></td>
+                        <td><div class='iml-label'>Are you still abstinent?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='isClean' id='isClean' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='isClean' id='notClean' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>What triggered your relapse?</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='relapseTrigger' id='relapseTrigger' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>9.</div></td>
+                        <td><div class='iml-label'>Were you using during last episode?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drinkLastEpisode' id='yesLast' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drinkLastEpisode' id='noLast' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>10.</div></td>
+                        <td><div class='iml-label'>Is use of alcohol/drug a problem in your relationship?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drinkRelationshipProblem' id='yesProb' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drinkRelationshipProblem' id='noProb' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>11.</div></td>
+                        <td><div class='iml-label'>Do you need help for drug/alcohol abuse?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='needHelpDrugs' id='needHelp' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='needHelpDrugs' id='noHelp' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button>Save & Continue</button></td>
+                  <td><button>Exit Form</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
         </div>
-    </div>        
+      </div>
+    </div>    
 
 </body>
 
 {% endblock %}
-
-
-
-

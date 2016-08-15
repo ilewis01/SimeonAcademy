@@ -4754,9 +4754,11 @@ button:hover {
 .iml-num-div {
 	width: 20px;
 	text-align: center;
+	/*color: #6c7e7a;*/
 	font-weight: bold;
 	margin-right: 4px;
 	font-size: 13px;
+	padding-bottom: 2px;
 }
 
 .iml-sub-label {
@@ -4764,6 +4766,8 @@ button:hover {
 	font-style: italic;
 	margin-right: 15px;
 	color:#66676B;
+	font-weight: bold;
+	margin-bottom: 2px;
 }
 
 .iml-sub-label-l {
@@ -4780,6 +4784,7 @@ button:hover {
 	font-weight: bold;
 	margin-left: 24px;
 	color: #7A6264;
+	margin-right: 6px;
 }
 
 .iml-text-area-sub {
