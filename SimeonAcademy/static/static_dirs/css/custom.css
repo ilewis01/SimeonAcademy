@@ -4787,6 +4787,16 @@ button:hover {
 	margin-right: 6px;
 }
 
+.iml-sub-label-left2 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 24px;
+	color: black;
+	/*color: #2631D1;*/
+	margin-right: 6px;
+}
+
 .iml-text-area-sub {
 	margin-left: 34px;
 	margin-top: 3px;

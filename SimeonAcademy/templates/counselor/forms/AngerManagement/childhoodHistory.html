@@ -1,887 +1,316 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_childhood/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <h3 id='am-h2'>Anger Management: Childhood History</h3>
-
-	            <div class="container">
-	            	<div class="row">                   
-	                  	<div class="col-md-5 col-sm-5">
-	                  		<form action='/am_angerHistory/' method='post' id='am_demo'> {% csrf_token %}
-	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                <input type='hidden' name='save_section' id='save_section' value='/am_childhood/'>
-                                <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                <input type='hidden' name='save_this' id='save_this' value=''>
-
-	                            <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_traumaExplain' id='m_traumaExplain'>
-	                            <input type='hidden' value='' name='m_howLeftHome' id='m_howLeftHome'>
-	                            <input type='hidden' value='' name='m_abusedBy' id='m_abusedBy'>
-	                            <input type='hidden' value='' name='m_abuseImpact' id='m_abuseImpact'>
-                                <input type='hidden' value='' name='m_childAngerExplain' id='m_childAngerExplain'>
-	                            <input type='hidden' value='' name='m_otherChildExplain' id='m_otherChildExplain'>
-	                            <input type='hidden' value='' name='m_parentViolenceExplain' id='m_parentViolenceExplain'>
-	                            <input type='hidden' value='' name='m_parentViolenceImpact' id='m_parentViolenceImpact'>
-	                            
-
-	                            <!-- ____________________________LEFT SIDE_______________________________ -->
-	                            <table>
-	                            	<tr>
-		                            	<td>
-		                            		<div id='seperate-textfield-bottom'>
-			                            		<div id='textfield-label-correction'>
-			                            			<label for='raisedBy'><span id='numbered'>1. </span>By whom were you raised?</label>
-			                            		</div>
-			                            	</div>
-		                            	</td>
-		                            	<td>
-		                            		<select name='raisedBy' id='raisedBy' value=''>
-		                            			<option value='Not Selected'>Select</option>
-		                            			<option value='Parents'>Parents</option>
-		                            			<option value='Grandparents'>Grandparents</option>
-		                            			<option value='Relatives'>Relatives</option>
-		                            			<option value='Foster Care'>Foster Care</option>
-		                            		</select>
-		                            	</td>
-	                            	</tr>
-	                            </table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='momAlive'><span id='numbered'>2. </span>Mother living?</label>
-								        </td>
-								   
-								        <td>
-								        	<div id='move-radio-right'>
-									            <table>
-									                <tr>
-									                    <td>
-									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='momAlive' id='motherLiving' value='True' checked>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='motherLiving'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='momAlive' id='motherNotLiving' value='False'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='motherNotLiving'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for=''><span id='numbered'>3. </span>Father living?</label>
-								        </td>
-								   
-								        <td>
-								        	<div id='move-radio-right'>
-									            <table>
-									                <tr>
-									                    <td>
-									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='dadAlive' id='fatherLiving' value='True' checked>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='fatherLiving'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='dadAlive' id='fatherNotLiving' value='False'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='fatherNotLiving'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='childTrama'><span id='numbered'>4. </span>Have you experienced childhood trama?</label>
-								        </td>
-								   
-								        <td>
-								        	<div id='move-radio-right'>
-									            <table>
-									                <tr>
-									                    <td>
-									                        <div class='single-line-radio1'>
-									                            <input type='radio' name='childTrama' id='hadTramua' value='True' onClick='javascript: childTraumaRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='hadTramua'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childTrama' id='noTrauma' value='False' checked onClick='javascript: childTraumaRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='noTrauma'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='traumaExplain' id='traumaExplain_label'>Explain:</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='traumaExplain' id='traumaExplain'>{{fields.traumaExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-										    <label for='howLeftHome'><span id='numbered'>5. </span>Explain how you came to leave home:</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='howLeftHome' id='howLeftHome'>{{fields.howLeftHome}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-											<div id='label_level_number'>
-												<label for='num_siblings'><span id='numbered'>6. </span>Number of siblings: </label>
-											</div>
-										</td>
-										<td>
-											<div id='submit-space'>
-												<input type='number' style="width:40px;" name='num_siblings' id='num_siblings' value='{{fields.num_siblings}}'>
-											</div>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-										    <label for=''><span id='numbered'>7. </span>Is your relationship with your siblings close or distant?</label>
-
-										</td>
-									</tr>
-								</table>
-								<table>
-									<tr>
-										<td>
-											<div id='single-line-radio2'>
-												<input type='radio' name='siblingsClose' id='sibsClose' value='True' checked>
-											</div>
-										</td>
-										<td>
-											<label for='sibsClose'>Yes</label>
-										</td>
-
-										<td>
-											<div id='single-line-radio2' style='margin-left:15px;'>
-												<input type='radio' name='siblingsClose' id='sibsNotClose' value='False'>
-											</div>
-										</td>
-										<td>
-											<label for='sibsNotClose'>No</label>
-										</td>
-									</tr>
-								</table>
-								<table>
-									<tr>
-										<td>
-											<label for='siblingsRelationshipExplain' id='siblingsRelationshipExplain_label'>Explain:</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain'>{{fields.siblingsRelationshipExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='dadClose'><span id='numbered'>8. </span>How would you describe your relationship with your</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='dadClose'>father?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='dadClose' id='dadIsClose' value='True' checked>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='dadIsClose'>Close</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='dadClose' id='dadNotClose' value='False'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='dadNotClose'>Distant</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='dadCloseExplain' id='dadCloseExplain_label'>Explain what made it close or distant:</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='dadCloseExplain' id='dadCloseExplain'>{{fields.dadCloseExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='wasAbused'><span id='numbered'>9. </span>Were you or any of your siblings physically, psychologically,</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='wasAbused'>or sexually abused as children?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='wasAbused' id='childAbused' value='True' onClick='javascript: childAbusedRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='childAbused'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='wasAbused' id='childNotAbused' value='False' checked onClick='javascript: childAbusedRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='childNotAbused'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-										    <label for='abusedBy' id='abusedBy_label'>By whom?</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='abusedBy' id='abusedBy'>{{fields.abusedBy}}</textarea>
-										</td>
-									</tr>
-								</table> 
-	                    </div>
-
-	                    <div class="col-md-5 col-sm-5">
-	                    <!-- ____________________________RIGHT SIDE_______________________________ -->
-
-	                    		
-								<table>
-									<tr>
-										<td>
-										    <label for='abuseImpact' id='abuseImpact_label'><span id='numbered'>10. </span>What was the impact emotionally and psychologically <br>on the abused?</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='abuseImpact' id='abuseImpact'>{{fields.abuseImpact}}</textarea>
-										</td>
-									</tr>
-								</table> 
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='momClose'><span id='numbered'>11. </span>How would you describe your relationship with your</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='momClose'>mother?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='momClose' id='meMomClose' value='True' checked>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='meMomClose'>Close</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='momClose' id='meMomNotClose' value='False'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='meMomNotClose'>Distant</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='momCloseExplain'>Explain what made it close or distant:</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='momCloseExplain' id='momCloseExplain'>{{fields.momCloseExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='childAnger'><span id='numbered'>12. </span>Did you have any problems with anger or violent</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='childAnger'>behavior as a child or teenager?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='childAnger' id='hadAngerChild' value='True' onClick='javascript: hadChildAngerRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='hadAngerChild'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='childAnger' id='noAngerChild' value='False' checked onClick='javascript: hadChildAngerRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='noAngerChild'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='childAngerExplain' id='childAngerExplain_label'>Explain:</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='childAngerExplain' id='childAngerExplain'>{{fields.childAngerExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='otherChild'><span id='numbered'>13. </span>Were there any other events or circumstances <br>regarding your childhood that may help us understand</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='otherChild'>your particular counseling needs?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='otherChild' id='haveOtherEvents' value='True' onClick='javascript: otherEventsHelpRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='haveOtherEvents'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='otherChild' id='noOtherEvents' value='False' checked onClick='javascript: otherEventsHelpRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='noOtherEvents'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='otherChildExplain' id='otherChildExplain_label'>Explain:</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='otherChildExplain' id='otherChildExplain'>{{fields.otherChildExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-								        <td>
-								            <label for='parentViolence'>Did you ever see your father or mother physically or</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='parentViolence'>psychologically abuse each other?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='parentViolence' id='sawViolence' value='True' onClick='javascript: parentsFoughtRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='sawViolence'>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='parentViolence' id='didntSeeViolence' value='False' checked onClick='javascript: parentsFoughtRadio();'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for='didntSeeViolence'>No</label>
-									                    </td>
-									                </tr>
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-									<tr>
-										<td>
-										    <label for='parentViolenceExplain' id='parentViolenceExplain_label'>Explain:</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='parentViolenceExplain' id='parentViolenceExplain'>{{fields.parentViolenceExplain}}</textarea>
-										</td>
-									</tr>
-								</table>
-
-								<table>
-									<tr>
-										<td>
-										    <label for='parentViolenceImpact' id='parentViolenceImpact_label'>What impact did seeing/hearing one of the your parents <br>abuse the other have on you emotionally, psychologically, <br>or physically?</label>
-
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<textarea cols='57' rows='3' name='parentViolenceImpact' id='parentViolenceImpact'>{{fields.parentViolenceImpact}}</textarea>
-										</td>
-									</tr>
-								</table>
-	                    	</form>
-	                    </div> <!-- END LEFT SIDE -->
-	                </div> <!-- END FIRST ROW -->
-
-	                <!-- ______________________________________BUTTONS____________________________________ -->
-	                <div class="row">
-	                	<table>
-                          <tr>
-                            <td>
-                              <div id="error-div-main">
-                                <p class='error-messages' id='error_message_main'></p>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table class='toggle-div-page'>
-                        	<tr>
-                        		<td>
-                        			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle">
-				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <input type='hidden' name='m_own' id='m_own'>
+      <input type='hidden' name='m_drop_out' id='m_drop_out'>
+      <input type='hidden' name='m_health_problem' id='m_health_problem'>
+      <input type='hidden' name='m_medication' id='m_medication'>
+      <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
+      <input type='hidden' name='m_health_exp' id='m_health_exp'>
+      <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Childhood History</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
 
                           <td>
-                            <div id="submit-space">
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick="javascript: continue_am_form('/am_childhood/');" id='continue'>Continue</button>
-                                </a>
-                            </div>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
                           </td>
-			                </tr>
-	                    </table>
-	                </div> <!-- END BUTTONS -->
-	            </div>
-	        </div>
-	    </div>
-                  							                       
-                            
-<!-- _____________________________________________BUTTONS_______________________________________________ -->
 
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
 
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episode I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episode II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episode III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    <h4>Childhood History</h4>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>1.</div></td>
+                        <td><div class='iml-label'>By whom were you raised?</div></td>
+                        <td>
+                          <div>
+                            <select name='raisedBy' id='raisedBy'>
+                              <option value='None Selected'>Select</option>
+                              <option value='Parents'>Parents</option>
+                              <option value='Grandparents'>Grandparents</option>
+                              <option value='Relatives'>Relatives</option>
+                              <option value='Foster Care'>Foster Care</option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>2.</div></td>
+                        <td><div class='iml-label'>Are you parents living or deceased?</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left2'><li>Mother:</li></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='momAlive' id='momAlive' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Living</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='momAlive' id='momNotAlive' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Deceased</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left2'><li>Father:</li></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='dadAlive' id='dadAlive' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Living</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='dadAlive' id='dadNotAlive' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Deceased</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>3.</div></td>
+                        <td><div class='iml-label'>Did you experience childhood trauma?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='yesTrauma' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='noTrauma' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Please explain childhood trauma:</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='traumaExplain' id='traumaExplain' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>4.</div></td>
+                        <td><div class='iml-label'>Explain how you came to leave home:</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='howLeftHome' id='howLeftHome' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>5.</div></td>
+                        <td><div class='iml-label'>Number of siblings:</div></td>
+                        <td><div class='iml-num'><input type='number' name='num_siblings' id='num_siblings' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>6.</div></td>
+                        <td><div class='iml-label'>Is your relationship with you siblings close/distant?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='siblingsClose' id='sibsClose' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='siblingsClose' id='sibsDistant' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made sibling relationships close/distant:</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain' value=''></textarea></div></td></tr>
+                    </table>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px; margin-top:3%;'>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>7.</div></td>
+                        <td><div class='iml-label'>Is your relationship with you father close/distant?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='dadClose' id='yesDad' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='dadClose' id='noDad' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='dadCloseExplain' id='dadCloseExplain' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>8.</div></td>
+                        <td><div class='iml-label'>Is your relationship with you mother close/distant?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='momClose' id='yesMom' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='momClose' id='noMom' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='momCloseExplain' id='momCloseExplain' value=''></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>9.</div></td>
+                        <td><div class='iml-label'>Were you or your siblings abused as children?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='yesAbuse' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='noAbuse' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>By whom?</li></div></td>
+                        <td><div><input type='text' name='abusedBy' id='abusedBy' value=''></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>What was the impact?</li></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='abuseImpact' id='abuseImpact'></textarea></div></td></tr>
+                      </tr>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
 
 </body>
 
 {% endblock %}
-
-
-
