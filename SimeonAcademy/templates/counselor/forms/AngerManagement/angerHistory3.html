@@ -1,788 +1,181 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_angerHistory3/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div class="form_headings">
-                    <h3 id='am-h2'>Anger Management: Most Recent Anger Episode III</h3>
-                </div>
-
-                <div class="container">
-                    <div class="row">                   
-                        <div class="col-md-5 col-sm-5">
-                            <form action='/am_connections/' method='post' id='am_demo'> {% csrf_token %}
-                                <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-                                <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                                <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-
-                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                <input type='hidden' name='save_section' id='save_section' value='/am_angerHistory3/'>
-                                <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                <input type='hidden' name='save_this' id='save_this' value=''>
-
-                                <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_homicidal' id='m_homicidal'>
-                                <input type='hidden' value='' name='m_homicidalExplain' id='m_homicidalExplain'>
-                                <input type='hidden' value='' name='m_medRecentV' id='m_medRecentV'>
-                                <input type='hidden' value='' name='m_medRecentVExplain' id='m_medRecentVExplain'>
-                                <input type='hidden' value='' name='m_medSuccessRecentV' id='m_medSuccessRecentV'>
-                                <input type='hidden' value='' name='m_medSuccessExplainRecentV' id='m_medSuccessExplainRecentV'>
-                                <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
-                                <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
-                                <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
-                                <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
-                                <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
-                                <input type='hidden' value='' name='m_typeWordsRecentV'             id='m_typeWordsRecentV'>
-                                <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
-                                <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
-                                <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
-                                <input type='hidden' value='' name='m_psychoRecentV'                id='m_psychoRecentV'>
-                                <input type='hidden' value='' name='m_psychoWhyRecentV'             id='m_psychoWhyRecentV'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVmos'       id='m_longAgoTreatRecentVmos'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVyrs'       id='m_longAgoTreatRecentVyrs'>
-                                <input type='hidden' value='' name='m_didCompleteTreatRecentV'      id='m_didCompleteTreatRecentV'>
-                                <input type='hidden' value='' name='m_reasonNotCompleteRecentV'     id='m_reasonNotCompleteRecentV'>
-
-                                <!-- ____________________________LEFT SIDE_______________________________ -->
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <span id='numbered'>1. </span>
-                                                Have you felt like hurting others or committing homicide?
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div id='psychoRadio2'>
-                                                <input type='radio' name='homicidal' id='isHomicidal' value='True' onClick='javascript: homicidalRadio();'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='isHomicidal'>Yes</label>
-                                        </td>
-
-                                        <td>
-                                            <div id='psychoRadio2'>
-                                                <input type='radio' name='homicidal' id='notHomicidal' value='False' onClick='javascript: homicidalRadio();' checked>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='notHomicidal'>No</label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <ul>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label for='homicidalExplain' id='homicidalExplain_label'>
-                                                        Whom did you want to hurt and what were the reasons?
-                                                    </label>
-                                                </li>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <textarea rows='2' cols='60' name='homicidalExplain' id='homicidalExplain'>{{fields.homicidalExplain}}</textarea>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ul>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for='medRecentV'>
-                                                <span id='numbered'>2. </span>
-                                                Have you ever been prescribed medication for any psychological
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for=''>
-                                                or emotional problems?
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='psychoRadio'>
-                                                <input type='radio' name='medRecentV' id='hasMedRecent' value='True' onClick='javascript: ah3number2();'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='hasMedRecent'>
-                                                Yes
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='psychoRadio'>
-                                                <input type='radio' name='medRecentV' id='noMedRecent' value='False' onClick='javascript: ah3number2();' checked>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='noMedRecent'>
-                                                No
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <ul>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label for='medRecentVExplain' id='medRecentVExplain_label'>
-                                                        For what was the medication prescribed?
-                                                    </label>
-                                                </li>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <textarea rows='2' cols='60' name='medRecentVExplain' id='medRecentVExplain'>{{fields.medRecentVExplain}}</textarea>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label for='medSuccessRecentV' id='medSuccessRecentV_label'>
-                                                        Was the treatment successful?
-                                                    </label>
-                                                </li>
-                                            </td>
-
-                                            <td>
-                                                <div id='psychoRadio'>
-                                                    <input type='radio' name='medSuccessRecentV' id='treatmentSuccess' value='True'>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <label for='treatmentSuccess' id='treatmentSuccess_label'>Yes</label>
-                                            </td>
-
-                                            <td>
-                                                <div id='psychoRadio'>
-                                                    <input type='radio' name='medSuccessRecentV' id='noTreatmentSuccess' value='False'checked>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <label for='noTreatmentSuccess' id='noTreatmentSuccess_label'>No</label>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <ul>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <li>
-                                                        <label for='medSuccessExplainRecentV' id='medSuccessExplainRecentV_label'>Please explain treatment details:</label>
-                                                    </li>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <textarea rows='2' cols='53' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'>{{fields.medSuccessExplainRecentV}}</textarea>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </ul>
-                                </ul>
-                        </div>
-
-                        <div class="col-md-5 col-sm-5">
-                                <!-- ____________________________RIGHT SIDE_______________________________ -->
-                            
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for='durationRecentV'>
-                                                <span id='numbered'>3. </span>
-                                                When you become angry, how long do you remain angry?
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <textarea rows='2' cols='60' name='durationRecentV' id='durationRecentV'>{{fields.durationRecentV}}</textarea>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div style='margin-bottom:15px;'></div></td></tr>
-                                </table>
-
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for='durationRecentV'>
-                                                <span id='numbered'>4. </span>
-                                                On a scale of 1 to 10, with 1 representing no anger and 10
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <label for='durationRecentV'>
-                                                representing explosive anger, rate the intensity of your anger
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                     <tr>
-                                        <td>
-                                            <label for='durationRecentV'>
-                                                during angry episodes:
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <div id='number_radio'>
-                                                            <input type='radio' name='intensityRecentV' id='one' value='1' checked>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='one'>
-                                                            1
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='two' value='2'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='two'>
-                                                            2
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='three' value='3'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='three'>
-                                                            3
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='four' value='4'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='four'>
-                                                            4
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='five' value='5'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='five'>
-                                                            5
-                                                        </label>
-                                                    </td>
-
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='six' value='6'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='six'>
-                                                            6
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='seven' value='7'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='seven'>
-                                                            7
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='eight' value='8'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='eight'>
-                                                            8
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='nine' value='9'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='nine'>
-                                                            9
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <div id='number_radio2'>
-                                                            <input type='radio' name='intensityRecentV' id='ten' value='10'>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <label for='ten'>
-                                                            10
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr><td><div style='margin-bottom:15px;'></div></td></tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for='howOften'>
-                                                <span id='numbered'>4. </span>
-                                                How often have you had trouble with your anger?
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div style='margin-left:17px; margin-bottom:7px;'>
-                                                <em>Choose One:</em>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='thisTimeOnly' value='This time only' checked>
-                                            </div>
-                                        </td>
-
-                                        <td style='width:150px;'>
-                                            <label for='thisTimeOnly'>
-                                                This time only
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='sinceChildhood' value='Since childhood'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='sinceChildhood'>
-                                                Since childhood
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='ThisMonthOnly' value='This month only'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='ThisMonthOnly'>
-                                                This month only
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='adolescent' value='Adolescent'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='adolescent'>
-                                                Adolescent
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='lastSixMonth' value='Last six months'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='lastSixMonth'>
-                                                Last six months
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='otherRadioFix'>
-                                                <input type='radio' name='howOften' id='onlyAdult' value='Only as an adult'>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <label for='onlyAdult'>
-                                                Only as an adult
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                <!-- _____________________________________________BUTTONS_______________________________________________ -->
-
-                        <table>
-                          <tr>
-                            <td>
-                              <div id="error-div-main">
-                                <p class='error-messages' id='error_message_main'></p>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table class='toggle-div-page'>
-                            <tr>
-                                <td>
-                                    <div style='margin-left:12px;'>
-                                        <a href="#menu-toggle" id="menu-toggle">
-                                            <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-                                        </a>
-                                    </div>
-                                </td>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='/am_angerHistory3/'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <!-- REAL DATA ENTRIES -->
+      <input type='hidden' value='' name='m_homicidal' id='m_homicidal'>
+      <input type='hidden' value='' name='m_homicidalExplain' id='m_homicidalExplain'>
+      <input type='hidden' value='' name='m_medRecentV' id='m_medRecentV'>
+      <input type='hidden' value='' name='m_medRecentVExplain' id='m_medRecentVExplain'>
+      <input type='hidden' value='' name='m_medSuccessRecentV' id='m_medSuccessRecentV'>
+      <input type='hidden' value='' name='m_medSuccessExplainRecentV' id='m_medSuccessExplainRecentV'>
+      <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
+      <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
+      <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
+      <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
+      <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
+      <input type='hidden' value='' name='m_typeWordsRecentV'             id='m_typeWordsRecentV'>
+      <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
+      <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
+      <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
+      <input type='hidden' value='' name='m_psychoRecentV'                id='m_psychoRecentV'>
+      <input type='hidden' value='' name='m_psychoWhyRecentV'             id='m_psychoWhyRecentV'>
+      <input type='hidden' value='' name='m_longAgoTreatRecentVmos'       id='m_longAgoTreatRecentVmos'>
+      <input type='hidden' value='' name='m_longAgoTreatRecentVyrs'       id='m_longAgoTreatRecentVyrs'>
+      <input type='hidden' value='' name='m_didCompleteTreatRecentV'      id='m_didCompleteTreatRecentV'>
+      <input type='hidden' value='' name='m_reasonNotCompleteRecentV'     id='m_reasonNotCompleteRecentV'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Recent Episodes III</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
 
                           <td>
-                            <div id="submit-space">
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick="javascript: continue_am_form('/am_angerHistory3/');" id='continue'>Continue</button>
-                                </a>
-                            </div>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
                           </td>
-                            </tr>
-                        </table>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episodes I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episodes II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episodes III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
         </div>
-    </body>
+      </div>
+    </div>    
+
+</body>
 
 {% endblock %}
-
-
-
-                  								
-
-
-
-
-
-
-
-
