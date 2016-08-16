@@ -3768,7 +3768,7 @@ def grabAmFamilyOrigin(am):
 def grabAmWorstEpisodes(am):
 	fields = {}
 
-	selectBtn = am.worstEpisode.whoDidItFight
+	selectBtn = am.worstEpisode.whoUsed
 	index = None
 
 	if selectBtn == None:
@@ -3789,8 +3789,7 @@ def grabAmWorstEpisodes(am):
 	fields['howStartWorst'] = am.worstEpisode.howStartWorst
 	fields['howEndWorst'] = am.worstEpisode.howEndWorst
 	fields['useWorst'] = am.worstEpisode.useWorst
-	fields['whoDidItFight'] = index
-	fields['theyUsedWorst'] = am.worstEpisode.theyUsedWorst
+	fields['whoUsed'] = index
 	fields['physicalWorst'] = am.worstEpisode.physicalWorst
 	fields['verbalWorst'] = am.worstEpisode.verbalWorst
 	fields['threatsWorst'] = am.worstEpisode.threatsWorst
