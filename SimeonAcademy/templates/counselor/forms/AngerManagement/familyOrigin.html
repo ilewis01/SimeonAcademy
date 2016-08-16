@@ -1,490 +1,163 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_familyOrigin/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-            	<div class="form_headings_low">
-                	<h3 id='am-h2'>Anger Management: Family of Origin</h3>
-
-                	<div style='margin-top:30px;'>
-                		<span id='header_question'>Please describe what the following individuals do/did with their anger, especially when you were growing up:</span>
-                	</div>
-                </div>
-
-	            <div class="container">
-	            	<div class="row">                   
-	                  	<div class="col-md-5 col-sm-5">
-	                  		<!-- _______________________LEFT SIDE_____________________ -->
-	                  		<form action='/am_problems/' method='post' id='am_demo'> {% csrf_token %}
-	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-
-                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                <input type='hidden' name='save_section' id='save_section' value='/am_familyOrigin/'>
-                                <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                <input type='hidden' name='save_this' id='save_this' value=''>
-
-	                            <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_suicideHistory' id='m_suicideHistory'>
-	                            <input type='hidden' value='' name='m_hasLovingMother' id='m_hasLovingMother'>
-	                            <input type='hidden' value='' name='m_hasLovingSiblings' id='m_hasLovingSiblings'>
-	                           
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<label>1. Your father (step-father):</label>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidDadAnger' id='kidDadAnger'>{{fields.kidDadAnger}}</textarea>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<label>2. Your mother (step-mother):</label>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidMomAnger' id='kidMomAnger'>{{fields.kidMomAnger}}</textarea>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='hasLovingMother' id='hasLovingMother'>
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>Client indicates that his/her mother is a very loving</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td></td>
-	                            		<td>
-	                            			<div style='margin-left:5px;'><label>person.</label></div>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<label>3. Your siblings:</label>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidSiblingAnger' id='kidSiblingAnger'>{{fields.kidSiblingAnger}}</textarea>
-	                            		</td>
-	                            	</tr>
-	                            </table>
-
-	                            <table>
-	                            	<tr>
-	                            		<td>
-	                            			<input type='checkbox' name='hasLovingSiblings' id='hasLovingSiblings'>
-	                            		</td>
-
-	                            		<td>
-	                            			<div id='checkbox_label_fix'>
-	                            				<label>Client indicates that he and his siblings have always had</label>
-	                            			</div>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td></td>
-	                            		<td>
-	                            			<div style='margin-left:5px;'><label>a good relationship.</label></div>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            </table>
-	                            	
-	                    </div>
-
-	                    <div class="col-md-5 col-sm-5">
-	                    	<!-- _________________________________RIGHT SIDE___________________________________ -->
-
-	                    		<table>
-	                            	<tr>
-	                            		<td>
-	                            			<label>4. Other significant persons (grandparents, etc.):</label>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='55' rows='3' name='kidOtherAnger' id='kidOtherAnger'>{{fields.kidOtherAnger}}</textarea>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            </table>
-	                    		
-	                            <table>
-									<tr>
-								        <td>
-								            <label for='suicideHistory'>5. Is ther any family history of bad tempers, assults,</label>
-								        </td>
-								    </tr>
-								   
-								    <tr>
-								        <td>
-								        	<div>
-									            <table>
-									                <tr>
-									                	<td>
-									                		<div style='margin-right:10px;'>
-									                			<label for='suicideHistory'>homicides, or suicides?</label>
-									                		</div>
-									                	</td>
-									                    <td>
-									                        <div class='single-line-radio1' style='margin-left:10px;'>
-									                            <input type='radio' name='suicideHistory' id='hasSuicide' value='True'>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for=''>Yes</label>
-									                    </td>
-									                                                                    
-									                    <td>
-									                        <div class='single-line-radio'>
-									                            <input type='radio' name='suicideHistory' id='noSuicide' value='False' checked>
-									                        </div>
-									                    </td>
-									                    <td>
-									                        <label for=''>No</label>
-									                    </td>
-									                </tr>
-
-									                <tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-									            </table>
-									        </div>
-								        </td>
-								    </tr>
-								</table> 
-
-								<table>
-	                            	<tr>
-	                            		<td>
-	                            			<label>6. In general, what did you learn about anger from <br>your family?</label>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr>
-	                            		<td>
-	                            			<textarea cols='55' rows='3' name='learnFamilyAnger' id='learnFamilyAnger'>{{fields.learnFamilyAnger}}</textarea>
-	                            		</td>
-	                            	</tr>
-
-	                            	<tr><td><div class="worstVerticalSpace"></div></td></tr> <!-- VERTICAL SPACE -->
-	                            </table>
-
-	                        </form>	              
-	                    </div>
-	                </div>
-
-	                <div class="row">
-				<!-- _____________________________________________BUTTONS_______________________________________________ -->
-
-						<table>
-                          <tr>
-                            <td>
-                              <div id="error-div-main">
-                                <p class='error-messages' id='error_message_main'></p>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table class='toggle-div-page'>
-                        	<tr>
-                        		<td>
-                        			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle">
-				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <!-- REAL DATA ENTRIES -->
+      <input type='hidden' value='' name='m_suicideHistory' id='m_suicideHistory'>
+      <input type='hidden' value='' name='m_hasLovingMother' id='m_hasLovingMother'>
+      <input type='hidden' value='' name='m_hasLovingSiblings' id='m_hasLovingSiblings'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Family of Origin</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
 
                           <td>
-                            <div id="submit-space">
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick="javascript: continue_am_form('/am_familyOrigin/');" id='continue'>Continue</button>
-                                </a>
-                            </div>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
                           </td>
-			                </tr>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</body>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episodes I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episodes II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episodes III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
 
 {% endblock %}
-
-
-
-
-
-
-

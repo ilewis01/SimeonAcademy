@@ -4803,9 +4803,43 @@ button:hover {
 	margin-right: 6px;
 }
 
+.iml-sub-label-left3 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 18px;
+	color: #4e5a57;
+	margin-right: 6px;
+}
+
 .iml-text-area-sub {
 	margin-left: 34px;
 	margin-top: 3px;
+}
+
+.iml-text-area-sub2 {
+	margin-left: 16px;
+	margin-top: 3px;
+}
+
+#iml-single-header {
+	margin-top: 40px;
+	margin-left: 50px;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+}
+
+#iml-single-sub-head {
+	font-style: italic;
+	font-size: 14px;
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+
+#iml-sm-ital {
+	font-size: 13px;
+	font-style: italic;
 }
 
 .iml-text-area {
