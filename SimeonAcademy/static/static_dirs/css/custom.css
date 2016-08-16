@@ -4766,6 +4766,16 @@ button:hover {
 	padding-top:2px;
 }
 
+.iml-sub-label2 {
+	font-size: 13px;
+	font-style: italic;
+	margin-right: 15px;
+	color:#7A6264;
+	font-weight: bold;
+	margin-bottom: 6px;
+	padding-top:2px;
+}
+
 .iml-sub-label-l {
 	font-size: 13px;
 	font-style: italic;
@@ -4805,6 +4815,12 @@ button:hover {
 
 .iml-checkbox {
 	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.iml-checkbox-l {
+	margin-bottom: 5px;
+	margin-left: 23px;
 	margin-right: 5px;
 }
 
