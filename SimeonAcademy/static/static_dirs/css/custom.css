@@ -4741,11 +4741,6 @@ button:hover {
 	width: 150px;
 }
 
-.iml-radio {
-	padding-bottom: 4px;
-	padding-right: 4px;
-}
-
 .iml-label {
 	margin-right: 6px;
 	font-size: 13px;
@@ -4768,6 +4763,7 @@ button:hover {
 	color:#66676B;
 	font-weight: bold;
 	margin-bottom: 2px;
+	padding-top:2px;
 }
 
 .iml-sub-label-l {
@@ -4800,6 +4796,21 @@ button:hover {
 .iml-text-area-sub {
 	margin-left: 34px;
 	margin-top: 3px;
+}
+
+.iml-text-area {
+	margin-left: 22px;
+	margin-top: 3px;
+}
+
+.iml-checkbox {
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.iml-radio {
+	padding-bottom: 1px;
+	padding-right: 4px;
 }
 
 

@@ -1,698 +1,306 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_angerHistory/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div class="form_headings">
-                    <h3 id='am-h2'>Anger Management: Most Recent Anger Episode</h3>
-                </div>
-
-                <div class="container">
-                    <div class="row">                   
-                        <div class="col-md-5 col-sm-5">
-                            <form action='/am_angerHistory2/' method='post' id='am_demo'> {% csrf_token %}
-                                <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-                                <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                                <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-                                
-                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                <input type='hidden' name='save_section' id='save_section' value='/am_angerHistory/'>
-                                <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                <input type='hidden' name='save_this' id='save_this' value=''>
-
-                                <!-- REAL DATA ENTRIES -->
-                                <input type='hidden' value='' name='m_physicalRecentV'              id='m_physicalRecentV'>
-                                <input type='hidden' value='' name='m_verbalRecentV'                id='m_verbalRecentV'>
-                                <input type='hidden' value='' name='m_threatsRecentV'               id='m_threatsRecentV'>
-                                <input type='hidden' value='' name='m_propertyRecentV'              id='m_propertyRecentV'>
-                                <input type='hidden' value='' name='m_otherRecentV'                 id='m_otherRecentV'>
-                                <input type='hidden' value='' name='m_otherExplainRecentV'          id='m_otherExplainRecentV'>
-                                <input type='hidden' value='' name='m_wasTense'                     id='m_wasTense'>
-                                <input type='hidden' value='' name='m_hadRush'                      id='m_hadRush'>
-                                <input type='hidden' value='' name='m_feltStrong'                   id='m_feltStrong'>
-                                <input type='hidden' value='' name='m_psychoRecentV'                id='m_psychoRecentV'>
-                                <input type='hidden' value='' name='m_psychoWhyRecentV'             id='m_psychoWhyRecentV'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVmos'       id='m_longAgoTreatRecentVmos'>
-                                <input type='hidden' value='' name='m_longAgoTreatRecentVyrs'       id='m_longAgoTreatRecentVyrs'>
-                                <input type='hidden' value='' name='m_didCompleteTreatRecentV'      id='m_didCompleteTreatRecentV'>
-                                <input type='hidden' value='' name='m_reasonNotCompleteRecentV'     id='m_reasonNotCompleteRecentV'>
-
-                                <!-- ____________________________LEFT SIDE_______________________________ -->
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                1. Please describe in detail your most recent anger incident:
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <textarea rows='3' cols='63' name='recentIncidentV' id='recentIncidentV'>{{fields.recentIncidentV}}</textarea>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                2. When did the anger episode occur?
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='adjust-right-textField'>
-                                                <input type='text' name='recentVDate' id='recentVDate' style='width:140px;' value='{{fields.recentVDate}}'>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                3. Where did the anger episode occur?
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='adjust-right-textField'>
-                                                <input type='text' name='recentVlocation' id='recentVlocation' style='width:136px;' value='{{fields.recentVlocation}}'>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                4. With whom?
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            <div id='adjust-right-textField'>
-                                                <input type='text' name='withWhomRecentV' id='withWhomRecentV' style='width:295px;' value='{{fields.withWhomRecentV}}'>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                5. What happened?
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <textarea rows='2' cols='63' name='happenedRecentV' id='happenedRecentV'>{{fields.happenedRecentV}}</textarea>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                6. What actions did you demostrate during the episode?
-                                            </label><br>
-                                            <span><em>Check all that apply</em></span>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type='checkbox' name='physicalRecentV' id='physicalRecentV'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch'>
-                                                <label>Physical</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <input type='checkbox' name='verbalRecentV' id='verbalRecentV'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch'>
-                                                <label>Verbal</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <input type='checkbox' name='threatsRecentV' id='threatsRecentV'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch'>
-                                                <label>Threats</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <input type='checkbox' name='propertyRecentV' id='propertyRecentV'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch'>
-                                                <label>Property Destruction</label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type='checkbox' name='otherRecentV' id='otherRecentV' onClick='javascript: turnOnAH1();'>
-                                        </td>
-
-                                        <td>
-                                            <div id='AH_labelCheckMatch'>
-                                                <label>Other</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div style='margin-top:6px;'>
-                                                <label id='explain_Label'>(Explain):</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div style='margin-left:3px; margin-top:1px;'>
-                                                <input type='text' name='otherExplainRecentV' id='otherExplainRecentV' style='width:200px' value='{{fields.otherExplainRecentV}}'>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                  
-                        </div>
-
-                        <div class="col-md-5 col-sm-5">
-                                <!-- ____________________________RIGHT SIDE_______________________________ -->
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                7. Main types of angry words and thoughts during the episode:
-                                            </label>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <textarea rows='3' cols='66' name='typeWordsRecentV' id='typeWordsRecentV'>{{fields.typeWordsRecentV}}</textarea>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>8. Explain how you felt physically while angry:</label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div style='margin-left:15px;'>
-                                                <input type='checkbox' name='wasTense' id='wasTense'>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch2'>
-                                                <label>Tense</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <input type='checkbox' name='hadRush' id='hadRush'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch2'>
-                                                <label>Rush</label>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <input type='checkbox' name='feltStrong' id='feltStrong'>
-                                        </td>
-                                        <td>
-                                            <div id='AH_labelCheckMatch2'>
-                                                <label>Strong</label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                9. Have you ever been treated for psychological or
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>emotional problems?</label>
-                                        </td>
-
-                                        <td>
-                                            <div id='psychoRadio'>
-                                                <input type='radio' name='psychoRecentV' id='wasTreated' value='True' onClick='javascript: psychoClick()'>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label>Yes</label>
-                                        </td>
-
-                                        <td>
-                                            <div id='psychoRadio'>
-                                                <input type='radio' name='psychoRecentV' id='notTreated' value='False' checked onClick='javascript: psychoClick()'>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label>No</label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <ul>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label for='psychoWhyRecentV' id='psychoWhyRecentV_label'>
-                                                        For what were you being treated?
-                                                    </label>
-                                                </li>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <textarea name='psychoWhyRecentV' id='psychoWhyRecentV' rows='2' cols='59'>{{fields.psychoWhyRecentV}}</textarea>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label id='longAgoTreatment_label'>
-                                                        How long ago did you receive counseling or treatment?
-                                                    </label>
-                                                </li>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' style='width:40px;' value='{{fields.longAgoTreatRecentVmos}}'>
-                                            </td>
-                                            <td>
-                                                <div id='numberLabel'>
-                                                    <label for='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos_label'>
-                                                        months
-                                                    </label>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' style='width:40px;' value='{{fields.longAgoTreatRecentVyrs}}'>
-                                            </td>
-                                            <td>
-                                                <div id='numberLabel'>
-                                                    <label for='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs_label'>
-                                                        years
-                                                    </label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr><td><div id='AH_space'></div></td></tr> <!-- SPACE -->
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <li>
-                                                    <label for='didCompleteTreatRecentV' id='didCompleteTreatRecentV_label'>
-                                                        Did you complete the program?
-                                                    </label>
-                                                </li>
-                                            </td>
-
-                                            <td>
-                                                <div id='psychoRadio'>
-                                                    <input type='radio' name='didCompleteTreatRecentV' id='didComplete' value='True' checked onClick='javascript: AHcompletedRadioActivate()'>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <label for='didComplete' id='Completed_label'>Yes</label>
-                                            </td>
-
-                                            <td>
-                                                <div id='psychoRadio'>
-                                                    <input type='radio' name='didCompleteTreatRecentV' id='notCompleted' value='False' onClick='javascript: AHcompletedRadioActivate()'>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <label for='notCompleted' id='notCompleted_label2'>No</label>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label for='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV_label'>Why not?</label>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <textarea rows='2' cols='59' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'>{{fields.reasonNotCompleteRecentV}}</textarea>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ul>
-
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                <!-- _____________________________________________BUTTONS_______________________________________________ -->
-
-                        <table>
-                          <tr>
-                            <td>
-                              <div id="error-div-main">
-                                <p class='error-messages' id='error_message_main'></p>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table class='toggle-div-page'>
-                            <tr>
-                                <td>
-                                    <div style='margin-left:12px;'>
-                                        <a href="#menu-toggle" id="menu-toggle">
-                                            <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-                                        </a>
-                                    </div>
-                                </td>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <input type='hidden' name='m_own' id='m_own'>
+      <input type='hidden' name='m_drop_out' id='m_drop_out'>
+      <input type='hidden' name='m_health_problem' id='m_health_problem'>
+      <input type='hidden' name='m_medication' id='m_medication'>
+      <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
+      <input type='hidden' name='m_health_exp' id='m_health_exp'>
+      <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Recent Episodes I</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
 
                           <td>
-                            <div id="submit-space">
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick="javascript: continue_am_form('/am_angerHistory/');" id='continue'>Continue</button>
-                                </a>
-                            </div>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
                           </td>
-                            </tr>
-                        </table>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episodes I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episodes II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episodes III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_control/');">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    <h4>Most Recent Anger Episode</h4>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>1.</div></td>
+                        <td><div class='iml-label'>Please describe in detail your most recent anger incident:</div></td>
+                      </tr>
+                    </table>
+                    <table>
+                      <tr>
+                        <td><div class='iml-text-area'><textarea cols='60' rows='3' name='recentIncidentV' id='recentIncidentV'></textarea></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>2.</div></td>
+                        <td><div class='iml-label'>When did the anger episode occur?</div></td>
+                        <td><div><input type='text' name='recentVDate' id='recentVDate'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>3.</div></td>
+                        <td><div class='iml-label'>Where did the anger episode occur?</div></td>
+                        <td><div><input type='text' name='recentVlocation' id='recentVlocation'></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>4.</div></td>
+                        <td><div class='iml-label'>With whom?</div></td>
+                        <td><div><input type='text' name='withWhomRecentV' id='withWhomRecentV'></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>5.</div></td>
+                        <td><div class='iml-label'>What happened?</div></td>
+                        <td><div><input type='text' name='happenedRecentV' id='happenedRecentV'></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>6.</div></td>
+                        <td><div class='iml-label'>What actions did you demonstrate during the anger episode?</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='physicalRecentV' id='physicalRecentV' value='Physical' style='margin-left:22px;'></div></td>
+                        <td><div class='iml-sub-label'>Physical</div></td>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='verbalRecentV' id='verbalRecentV' value='Verbal Threats'></div></td>
+                        <td><div class='iml-sub-label'>Verbal Threats</div></td>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='propertyRecentV' id='propertyRecentV' value='Property Destruction'></div></td>
+                        <td><div class='iml-sub-label'>Property Destruction</div></td>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='otherRecentV' id='otherRecentV' value='Other'></div></td>
+                        <td><div class='iml-sub-label'>Other</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-text-area'><textarea rows='3' cols='60' name='otherExplainRecentV' id='otherExplainRecentV'></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>7.</div></td>
+                        <td><div class='iml-label'>Main types of angry words and thoughts during angry episode:</div></td>
+                      </tr>
+                    </table>
+                    <table>
+                      <tr>
+                        <td><div class='iml-text-area'><textarea cols='60' rows='2' name='typeWordsRecentV' id='typeWordsRecentV'></textarea></div></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px; margin-top:40px;'>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>8.</div></td>
+                        <td><div class='iml-label'>Explain how you felt physically wile you were angry:</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='wasTense' id='wasTense' value='Tense' style='margin-left:24px;'></div></td>
+                        <td><div class='iml-sub-label'>Tense</div></td>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='hadRush' id='hadRush' value='Rush'></div></td>
+                        <td><div class='iml-sub-label'>Rush</div></td>
+                        <td><div class='iml-checkbox'><input type='checkbox' name='feltStrong' id='feltStrong' value='Strong'></div></td>
+                        <td><div class='iml-sub-label'>Strong</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>9.</div></td>
+                        <td><div class='iml-label'>Have you ever been treated for psychological or emotional problems?</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-radio' style='margin-left:22px;'><input type='radio' name='psychoRecentV' id='yesTreated' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='psychoRecentV' id='noTreated' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>For what were you being treated?</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='psychoWhyRecentV' id='psychoWhyRecentV'></textarea></div></td></tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>How long ago did you receive counseling or treatment?</li></div></td></tr>
+                    </table>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num' style='margin-left:34px;'><input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' value=''></div></td>
+                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div class='iml-num'><input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' value=''></div></td>
+                        <td><div class='iml-sub-label'>months</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label-left'><li>Did you complete the program?</li></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='yesComplete' value='True'></div></td>
+                        <td><div class='iml-sub-label'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='noComplete' value='False'></div></td>
+                        <td><div class='iml-sub-label'>No</div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr><td><div class='iml-sub-label-left'><li>Why was treatment terminated?</li></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'></textarea></div></td></tr>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
         </div>
-    </body>
+      </div>
+    </div>    
+
+</body>
 
 {% endblock %}
-
-
-
-                  								
-
-
-
-
-
-
-
-
