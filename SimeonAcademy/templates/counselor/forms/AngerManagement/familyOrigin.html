@@ -97,7 +97,7 @@
                           </td>
 
                           <td>
-                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                            <a href="#">
                               <div  class='iml-button'>Family of Origin</div>
                             </a>
                           </td>
@@ -131,12 +131,147 @@
               <div class='container'>
                 <div class='row'>
 
+                  <div id='iml-head-md2'>Please describe what the following individuals do/did with their anger, especially while you were growing up.</div>
+
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    <table>
+                      <tr>
+                        <td class='iml-num-div'>1.</td>
+                        <td><div class='iml-label'>Your father/step-father:</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div>
+                            <textarea rows='3' cols='60' name='kidDadAnger' id='kidDadAnger'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class='iml-num-div'>2.</td>
+                        <td><div class='iml-label'>Your mother/step-mother:</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div>
+                            <textarea rows='3' cols='60' name='kidMomAnger' id='kidMomAnger'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <table>
+                            <tr>
+                              <td>
+                                <div class='iml-checkbox-margin'>
+                                  <input type='checkbox' name='hasLovingMother' id='hasLovingMother' value='Client indicates that he/she has a good relationship with his/her mother'>
+                                </div>
+                              </td>
+                              <td>
+                                <div class='iml-sub-check'>
+                                  Client indicates that she/he has a good relationship with mother.
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class='iml-num-div'>2.</td>
+                        <td><div class='iml-label'>Your brothers/sisters:</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div>
+                            <textarea rows='3' cols='60' name='kidSiblingAnger' id='kidSiblingAnger'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <table>
+                            <tr>
+                              <td>
+                                <div class='iml-checkbox-margin'>
+                                  <input type='checkbox' name='hasLovingSiblings' id='hasLovingSiblings' value='Client indicates that he/she has always had a loving relationship with his/her siblings'>
+                                </div>
+                              </td>
+                              <td>
+                                <div class='iml-sub-check'>
+                                  Client indicates that she/he has a good relationship with siblings.
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
 
                   <!-- RIGHT SIDE -->
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>4.</div></td>
+                        <td><div class='iml-label'>Other significant persons (grandparents, etc)</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div>
+                            <textarea rows='3' cols='60' name='kidOtherAnger' id='kidOtherAnger'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>5.</div></td>
+                        <td><div class='iml-label'>Is there any family history of bad temper, assaults, homicides,</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                      
+                        <td>
+                          <table>
+                            <tr>
+                              <td><div class='iml-label'>or suicides?</div></td>
+                              <td><div class='iml-radio'><input type='radio' name='suicideHistory' id='yesAttempt' value='True'></div></td>
+                              <td><div class='iml-sub-label'>Yes</div></td>
+                              <td><div class='iml-radio'><input type='radio' name='suicideHistory' id='noAttempt' value='False' checked></div></td>
+                              <td><div class='iml-sub-label'>No</div></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>6.</div></td>
+                        <td><div class='iml-label'>In general, what did you learn about anger from your family?</div></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div>
+                            <textarea rows='6' cols='60' name='learnFamilyAnger' id='learnFamilyAnger'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
 
                 </div>

@@ -558,6 +558,7 @@ class AM_CurrentProblem(models.Model):
 	depression = models.BooleanField(blank=True, default=False)
 	ptsd = models.BooleanField(blank=True, default=False)
 	otherSeriousIllness = models.BooleanField(blank=True, default=False)
+	otherWhom = models.CharField(max_length=50, default=None, blank=True, null=True)
 	currentlyOnMeds = models.BooleanField(blank=True, default=False)
 	whichMeds = models.CharField(max_length=100, default=None, blank=True, null=True)
 	describeIssue = models.CharField(max_length=100, default=None, blank=True, null=True)

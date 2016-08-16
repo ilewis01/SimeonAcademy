@@ -1,516 +1,171 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Anger Management</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{AM.client.fname}} {{AM.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{AM.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdemo}}'>
-                  <img src="{{image.demo_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_demographic/');" name='' id=''>
-                    Demographics
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMdh}}'>
-                  <img src="{{image.dh_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_drugHistory/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     Drug History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMchild}}'>
-                  <img src="{{image.child_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_childhood/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Childhood
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah1}}'>
-                  <img src="{{image.ah1_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Anger History I
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah2}}'>
-                  <img src="{{image.ah2_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Anger History II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMah3}}'>
-                  <img src="{{image.ah3_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');" name='asiDrug2Btn' id=''>
-                    Anger History III
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMconnect}}'>
-                  <img src="{{image.connect_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_connections/');" name='' id=''>
-                    Abuse Connections
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMworst}}'>
-                  <img src="{{image.worst_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_worst/');" name='' id=''>
-                    Worst Episodes
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMtarget}}'>
-                  <img src="{{image.target_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_angerTarget/');" name='' id=''>
-                    Anger Target
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfamily}}'>
-                  <img src="{{image.family_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');" name='' id=''>
-                    Family
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcurrent}}'>
-                  <img src="{{image.current_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_problems/');" name='' id=''>
-                    Current Problems
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMcontrol}}'>
-                  <img src="{{image.control_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_control/');" name='' id=''>
-                    Anger Control
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.AMfinal}}'>
-                  <img src="{{image.final_img}}" id='bullet-img'> &nbsp
-                  <a href="javascript: amSideBtnSubmit('/am_final/');" name='' id=''>
-                    Additional Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('am', '/am_control/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-            	<div class="form_headings">
-                	<h3 id='am-h2'>Anger Management: Anger Control</h3>
-
-                </div>
-
-	            <div class="container">
-	            	<div class="row">                   
-	                  	<div class="col-md-5 col-sm-5"> <!-- LEFT SIDE -->
-	                  		<form action='/am_final/' method='post' id='am_demo'> {% csrf_token %}
-	                  			<input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
-	                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-	                  			<input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
-
-                                <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-                                <input type='hidden' name='save_section' id='save_section' value='/am_control/'>
-                                <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                                <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                                <input type='hidden' name='save_this' id='save_this' value=''>
-
-	                            <!-- REAL DATA ENTRIES -->
-	                            <input type='hidden' value='' name='m_neverAttemptedControl' id='m_neverAttemptedControl'>
-	                            <input type='hidden' value='' name='m_talkToMyself' id='m_talkToMyself'>
-	                            <input type='hidden' value='' name='m_whatSayYou' id='m_whatSayYou'>
-	                            <input type='hidden' value='' name='m_leaveScene' id='m_leaveScene'>
-	                            <input type='hidden' value='' name='m_howLongLeaveScene' id='m_howLongLeaveScene'>
-	                            <input type='hidden' value='' name='m_whatDoLeave' id='m_whatDoLeave'>
-	                            <input type='hidden' value='' name='m_relax' id='m_relax'>
-	                            <input type='hidden' value='' name='m_howRelax' id='m_howRelax'>
-	                            <input type='hidden' value='' name='m_selfHelpGroup' id='m_selfHelpGroup'>
-	                            <input type='hidden' value='' name='m_otherControlAnger' id='m_otherControlAnger'>
-	                            <input type='hidden' value='' name='m_doWhatOtherControl' id='m_doWhatOtherControl'>
-	                          
-
-	                            <h4>How have you attempted to control your anger?</h4>
-	                            <span><em>Check all that apply</em></span>
-
-	                            <div class='right-indent-form'>
-	                            	<table>
-	                            		<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='neverAttemptedControl' id='neverAttemptedControl'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>I never have.</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='talkToMyself' id='talkToMyself' onClick='javascript: talkMyself();'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>Talk to myself.</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr> <!-- DYNAMIC FIELD -->
-	                            			<td></td>
-	                            			<td>
-	                            				<table>
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<label for='whatSayYou' id='whatSayYou_label'>What do you say to yourself to control your anger?</label>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='whatSayYou' id='whatSayYou'>{{fields.whatSayYou}}</textarea>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-	                            				</table>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='leaveScene' id='leaveScene' onClick='javascript: leaveSceneCheckbox();'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>Leave the scene.</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td></td>
-	                            			<td>
-	                            				<table>
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<label for='howLongLeaveScene' name='howLongLeaveScene_label' id='howLongLeaveScene_label'>How long?</label>
-	                            							</div>
-	                            						</td>
-
-	                            						<td>
-	                            							<div id='inline-text-field'>
-	                            								<input type='text' name='howLongLeaveScene' id='howLongLeaveScene' value='{{fields.howLongLeaveScene}}'>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-	                            				</table>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td></td>
-	                            			<td>
-	                            				<div class='indentForm2'>
-	                            					<label for='whatDoLeave' name='whatDoLeave_label' id='whatDoLeave_label'>What do you do?</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td></td>
-	                            			<td>
-	                            				<div class='indentForm2'>
-	                            					<textarea name='whatDoLeave' id='whatDoLeave' rows='2' cols='53'>{{fields.whatDoLeave}}</textarea>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-	                            	</table>
-	                            </div>
-	                    </div> <!-- END LEFT SIDE -->
-
-	                    <div class="col-md-5 col-sm-5"> <!-- RIGHT SIDE -->
-	                    		<div class='fix-right-col-margin'> <!-- THIS DIV IS TO MATCH THE HEIGHT OF EACH SIDE -->
-	                    			<table>
-	                    				<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='selfHelpGroup' id='selfHelpGroup'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>Go to a self help group such as A.A.</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='relax' id='relax' onClick='javascript: howRelaxCheckbox();'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>Try to relax.</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr> <!-- DYNAMIC FIELD -->
-	                            			<td></td>
-	                            			<td>
-	                            				<table>
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<label for='howRelax' id='howRelax_label'>How?</label>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='howRelax' id='howRelax'>{{fields.howRelax}}</textarea>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-	                            				</table>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr>
-	                            			<td>
-	                            				<input type='checkbox' name='otherControlAnger' id='otherControlAnger' onClick='javascript: otherControlCheckbox();'>
-	                            			</td>
-
-	                            			<td>
-	                            				<div id='checkbox_label_fix'>
-	                            					<label>Other</label>
-	                            				</div>
-	                            			</td>
-	                            		</tr>
-
-	                            		<tr> <!-- DYNAMIC FIELD -->
-	                            			<td></td>
-	                            			<td>
-	                            				<table>
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<label for='doWhatOtherControl' id='doWhatOtherControl_label'>What do you do?</label>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-
-	                            					<tr>
-	                            						<td>
-	                            							<div class='indentForm2'>
-	                            								<textarea cols='53' rows='2' name='doWhatOtherControl' id='doWhatOtherControl'>{{fields.doWhatOtherControl}}</textarea>
-	                            							</div>
-	                            						</td>
-	                            					</tr>
-	                            				</table>
-	                            			</td>
-	                            		</tr>
-	                    			</table>
-	                    		</div>
-	                        </form>	              
-	                    </div>
-	                </div>
-
-	                <div class="row">
-				<!-- _____________________________________________BUTTONS_______________________________________________ -->
-
-						<table>
-                          <tr>
-                            <td>
-                              <div id="error-div-main">
-                                <p class='error-messages' id='error_message_main'></p>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table class='toggle-div-page'>
-                        	<tr>
-                        		<td>
-                        			<div style='margin-left:12px;'>
-				                        <a href="#menu-toggle" id="menu-toggle">
-				                        	<button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                        </a>
-				                    </div>
-			                    </td>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
+
+      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+
+      <!-- REAL DATA ENTRIES -->
+      <input type='hidden' value='' name='m_neverAttemptedControl' id='m_neverAttemptedControl'>
+      <input type='hidden' value='' name='m_talkToMyself' id='m_talkToMyself'>
+      <input type='hidden' value='' name='m_whatSayYou' id='m_whatSayYou'>
+      <input type='hidden' value='' name='m_leaveScene' id='m_leaveScene'>
+      <input type='hidden' value='' name='m_howLongLeaveScene' id='m_howLongLeaveScene'>
+      <input type='hidden' value='' name='m_whatDoLeave' id='m_whatDoLeave'>
+      <input type='hidden' value='' name='m_relax' id='m_relax'>
+      <input type='hidden' value='' name='m_howRelax' id='m_howRelax'>
+      <input type='hidden' value='' name='m_selfHelpGroup' id='m_selfHelpGroup'>
+      <input type='hidden' value='' name='m_otherControlAnger' id='m_otherControlAnger'>
+      <input type='hidden' value='' name='m_doWhatOtherControl' id='m_doWhatOtherControl'>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Anger Management Control</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='iml-button'>Demographics</div>
+                            </a>
+                          </td>
 
                           <td>
-                            <div id="submit-space">
-                                <a href="javascript: " id="continue">
-                                  <button type='button' onClick="javascript: continue_am_form('/am_control/');" id='continue'>Continue</button>
-                                </a>
-                            </div>
+                            <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
+                              <div  class='iml-button'>Drug History</div>
+                            </a>
                           </td>
-			                </tr>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</body>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_childhood/');">
+                              <div  class='iml-button'>Childhood History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
+                              <div  class='iml-button'>Recent Episodes I</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
+                              <div  class='iml-button'>Recent Episodes II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
+                              <div  class='iml-button'>Recent Episodes III</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_connections/');">
+                              <div  class='iml-button'>Abuse Connections</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_worst/');">
+                              <div  class='iml-button'>Worst Episode</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
+                              <div  class='iml-button'>Anger Targets</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
+                              <div  class='iml-button'>Family of Origin</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_problems/');">
+                              <div  class='iml-button'>Current Problems</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="#">
+                              <div  class='iml-button'>Anger Control</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: amSideBtnSubmit('/am_final/');">
+                              <div  class='iml-button'>Additional Info</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
 
 {% endblock %}
-
-
-
-
-
-
-

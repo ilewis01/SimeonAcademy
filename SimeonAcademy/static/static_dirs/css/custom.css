@@ -4842,6 +4842,12 @@ button:hover {
 	font-style: italic;
 }
 
+.iml-sub-check {
+	font-size: 13px;
+	font-style: italic;
+	margin-bottom: 13px;
+}
+
 .iml-text-area {
 	margin-left: 22px;
 	margin-top: 3px;
@@ -4849,6 +4855,11 @@ button:hover {
 
 .iml-checkbox {
 	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.iml-checkbox-margin {
+	margin-bottom: 17px;
 	margin-right: 5px;
 }
 
@@ -4861,6 +4872,14 @@ button:hover {
 .iml-radio {
 	padding-bottom: 1px;
 	padding-right: 4px;
+}
+
+#iml-head-md2 {
+	margin-left: 40px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	font-size: 14px;
+	font-style:italic;
 }
 
 
