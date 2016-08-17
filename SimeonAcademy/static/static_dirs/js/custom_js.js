@@ -2826,31 +2826,16 @@ function initalize_am_target(json_data) {
 
 
 function initalize_family_origin(json_data) {
-	var back = document.getElementById('back_btn');
+	blank_init(json_data.isComplete, grab('kidDadAnger'));
+	blank_init(json_data.isComplete, grab('kidMomAnger'));
+	blank_init(json_data.isComplete, grab('kidSiblingAnger'));
+	blank_init(json_data.isComplete, grab('kidOtherAnger'));
+	blank_init(json_data.isComplete, grab('learnFamilyAnger'));
 
-	var hasLovingMother = document.getElementById('hasLovingMother');
-	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
-	var hasSuicide = document.getElementById('hasSuicide');
-	var noSuicide = document.getElementById('noSuicide');
+	setRadioElement(json_data.suicideHistory, grab('yesAttempt'), grab('noAttempt'));
 
-	initializeAllCheckBoxes(json_data.hasLovingMother, hasLovingMother);
-	initializeAllCheckBoxes(json_data.hasLovingSiblings, hasLovingSiblings);
-	setRadioElement(json_data.suicideHistory, hasSuicide, noSuicide);
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('kidDadAnger'));
-		nullTextMustDie(document.getElementById('kidMomAnger'));
-		nullTextMustDie(document.getElementById('kidSiblingAnger'));
-		nullTextMustDie(document.getElementById('kidOtherAnger'));
-		nullTextMustDie(document.getElementById('learnFamilyAnger'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('kidDadAnger'));
-		nullTextMustDie2(document.getElementById('kidMomAnger'));
-		nullTextMustDie2(document.getElementById('kidSiblingAnger'));
-		nullTextMustDie2(document.getElementById('kidOtherAnger'));
-		nullTextMustDie2(document.getElementById('learnFamilyAnger'));
-	}
+	checkBoolInit(json_data.hasLovingSiblings, grab('hasLovingSiblings'));
+	checkBoolInit(json_data.hasLovingMother, grab('hasLovingMother'));
 }
 
 function initalize_am_problems(json_data) {

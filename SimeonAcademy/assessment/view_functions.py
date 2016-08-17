@@ -3796,7 +3796,6 @@ def grabAmWorstEpisodes(am):
 	fields['whoUsed'] = index
 	fields['physicalWorst'] = am.worstEpisode.physicalWorst
 	fields['verbalWorst'] = am.worstEpisode.verbalWorst
-	fields['threatsWorst'] = am.worstEpisode.threatsWorst
 	fields['propertyWorst'] = am.worstEpisode.propertyWorst
 	fields['otherWorst'] = am.worstEpisode.otherWorst
 	fields['otherWorstDescription'] = am.worstEpisode.otherWorstDescription
