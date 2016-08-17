@@ -4776,6 +4776,10 @@ button:hover {
 	padding-top:2px;
 }
 
+.iml-sub-label2 span {
+	color: #506d70;
+}
+
 .iml-sub-label-l {
 	font-size: 13px;
 	font-style: italic;
@@ -4874,12 +4878,41 @@ button:hover {
 	padding-right: 4px;
 }
 
+.iml-radio-low {
+	padding-bottom: 6px;
+	padding-right: 4px;
+}
+
 #iml-head-md2 {
 	margin-left: 40px;
 	margin-top: 20px;
 	margin-bottom: 30px;
 	font-size: 14px;
 	font-style:italic;
+}
+
+#iml-text-spec {
+	margin-left: 11px;
+	font-weight: bold;
+	font-style: italic;
+	color:#506d70;
+}
+
+#iml-spec-ta {
+	margin-left: 11px;
+}
+
+.iml-spec-ta2 {
+	margin-left: 18px;
+}
+
+.iml-control-text {
+	margin-left: 18px;
+	margin-right: 5px;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	color:#506d70;
 }
 
 

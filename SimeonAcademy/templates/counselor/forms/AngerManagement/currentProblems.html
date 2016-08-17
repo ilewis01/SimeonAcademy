@@ -232,8 +232,28 @@
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:70px;'>
                     <div class='iml-sub-label2'>Please describe:</div>
                     <div>
-                      <textarea rows='8' cols='70' name='describeIssue' id='describeIssue'></textarea>
+                      <textarea rows='5' cols='70' name='describeIssue' id='describeIssue'></textarea>
                     </div>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-sub-label2'><li>Are you currenty taking any medications?</li></div></td>
+                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='onMeds' value='True'></div></td>
+                        <td><div class='iml-sub-label2'>Yes</div></td>
+                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='noMeds' value='False'></div></td>
+                        <td><div class='iml-sub-label2'>No</div></td>
+                      </tr>
+                    </table>
+                    <table>
+                      <tr><td><div class='iml-sub-label2'><li>What are you taking?</li></div></td></tr>
+                      <tr>
+                        <td>
+                          <div class=''>
+                            <textarea cols='70' rows='3' name='whichMeds' id='whichMeds'></textarea>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               </div>
