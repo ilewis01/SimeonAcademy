@@ -2839,72 +2839,46 @@ function initalize_family_origin(json_data) {
 }
 
 function initalize_am_problems(json_data) {
-	var brainInjury = document.getElementById('brainInjury');
-	var stroke = document.getElementById('stroke');
-	var epilepsy = document.getElementById('epilepsy');
-	var attentionDD = document.getElementById('attentionDD');
-	var pms = document.getElementById('pms');
-	var depression = document.getElementById('depression');
-	var ptsd = document.getElementById('ptsd');
-	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
+	checkBoolInit(json_data.brainInjury, grab('brainInjury'));
+	checkBoolInit(json_data.stroke, grab('stroke'));
+	checkBoolInit(json_data.epilepsy, grab('epilepsy'));
+	checkBoolInit(json_data.attentionDD, grab('attentionDD'));
+	checkBoolInit(json_data.pms, grab('pms'));
+	checkBoolInit(json_data.depression, grab('depression'));
+	checkBoolInit(json_data.ptsd, grab('ptsd'));
+	checkBoolInit(json_data.otherSeriousIllness, grab('otherSeriousIllness'));
 
-	var onMeds = document.getElementById('onMeds');
-	var noMeds = document.getElementById('noMeds');
+	setRadioElement(json_data.currentlyOnMeds, grab('onMeds'), grab('noMeds'));
 
-	initializeAllCheckBoxes(json_data.brainInjury, brainInjury);
-	initializeAllCheckBoxes(json_data.stroke, stroke);
-	initializeAllCheckBoxes(json_data.epilepsy, epilepsy);
-	initializeAllCheckBoxes(json_data.attentionDD, attentionDD);
-	initializeAllCheckBoxes(json_data.pms, pms);
-	initializeAllCheckBoxes(json_data.depression, depression);
-	initializeAllCheckBoxes(json_data.ptsd, ptsd);
-	initializeAllCheckBoxes(json_data.otherSeriousIllness, otherSeriousIllness);
-
-	setRadioElement(json_data.currentlyOnMeds, onMeds, noMeds);
-
-	am_problems_check();
-	am_problems_radio();
+	// am_problems_check();
+	// am_problems_radio();
 }
 
 function initalize_am_control(json_data) {
-	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
-	var talkToMyself = document.getElementById('talkToMyself');
-	var leaveScene = document.getElementById('leaveScene');
-	var selfHelpGroup = document.getElementById('selfHelpGroup');
-	var relax = document.getElementById('relax');
-	var otherControlAnger = document.getElementById('otherControlAnger');
+	checkBoolInit(json_data.neverAttemptedControl, grab('neverAttemptedControl'));
+	checkBoolInit(json_data.talkToMyself, grab('talkToMyself'));
+	checkBoolInit(json_data.leaveScene, grab('leaveScene'));
+	checkBoolInit(json_data.relax, grab('relax'));
+	checkBoolInit(json_data.selfHelpGroup, grab('selfHelpGroup'));
+	checkBoolInit(json_data.otherControlAnger, grab('otherControlAnger'));
 
-	initializeAllCheckBoxes(json_data.neverAttemptedControl, neverAttemptedControl);
-	initializeAllCheckBoxes(json_data.talkToMyself, talkToMyself);
-	initializeAllCheckBoxes(json_data.leaveScene, leaveScene);
-	initializeAllCheckBoxes(json_data.selfHelpGroup, selfHelpGroup);
-	initializeAllCheckBoxes(json_data.relax, relax);
-	initializeAllCheckBoxes(json_data.otherControlAnger, otherControlAnger);
+	blank_init(json_data.isComplete, grab('whatSayYou'));
+	blank_init(json_data.isComplete, grab('whatDoLeave'));
+	blank_init(json_data.isComplete, grab('howRelax'));
+	blank_init(json_data.isComplete, grab('doWhatOtherControl'));
+	blank_init(json_data.howLongLeaveScene, grab('howLongLeaveScene'));
 
-	talkMyself();
-	leaveSceneCheckbox();
-	howRelaxCheckbox();
-	otherControlCheckbox();
+	// talkMyself();
+	// leaveSceneCheckbox();
+	// howRelaxCheckbox();
+	// otherControlCheckbox();
 }
 
 function initalize_am_final() {
-	var back = document.getElementById('back_btn');
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('whoLivesWithClient'));
-		nullTextMustDie(document.getElementById('anythingelse'));
-		nullTextMustDie(document.getElementById('changeLearn1'));
-		nullTextMustDie(document.getElementById('changeLearn2'));
-		nullTextMustDie(document.getElementById('changeLearn3'));
-	}
-
-	else {
-		nullTextMustDie2(document.getElementById('whoLivesWithClient'));
-		nullTextMustDie2(document.getElementById('anythingelse'));
-		nullTextMustDie2(document.getElementById('changeLearn1'));
-		nullTextMustDie2(document.getElementById('changeLearn2'));
-		nullTextMustDie2(document.getElementById('changeLearn3'));
-	}
+	blank_init(json_data.isComplete, grab('anythingelse'));
+	blank_init(json_data.isComplete, grab('changeLearn1'));
+	blank_init(json_data.isComplete, grab('changeLearn2'));
+	blank_init(json_data.isComplete, grab('changeLearn3'));
 }
 
 function initialize_am(section, json_data) {

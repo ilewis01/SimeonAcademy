@@ -3752,6 +3752,7 @@ def grabAmCurrentProblems(am):
 	fields['otherSeriousIllness'] = am.currentProblems.otherSeriousIllness
 	fields['currentlyOnMeds'] = am.currentProblems.currentlyOnMeds
 	fields['whichMeds'] = am.currentProblems.whichMeds
+	fields['otherWhom'] = am.currentProblems.otherWhom
 	fields['describeIssue'] = am.currentProblems.describeIssue
 	fields['isComplete'] = am.currentProblemsComplete
 	return fields
@@ -3977,11 +3978,12 @@ def grabAmFinal(am):
 	fields['changeLearn1'] = am.final.changeLearn1
 	fields['changeLearn2'] = am.final.changeLearn2
 	fields['changeLearn3'] = am.final.changeLearn3
-	fields['whoLivesWithClient'] = am.demographic.whoLivesWithClient
 	fields['isComplete'] = am.finalComplete
 
+	return fields
+
 def grabAMViewForm(am):
-	no = None
+	fields = {}
 
 	return fields
 
@@ -4015,8 +4017,8 @@ def getAMFields(am, location):
 		fields = grabAmWorstEpisodes(am)
 	elif location == '/am_final/':
 		fields = grabAmFinal(am)
-	elif location == '/am_final/':
-		fields = grabAMViewForm(am)
+	# elif location == '/am_final/':
+	# 	fields = grabAMViewForm(am)
 
 	return fields
 
