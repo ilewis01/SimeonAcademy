@@ -3818,7 +3818,6 @@ def getAMDemoFields(am):
 
 	data['maritalStatus'] = convertMaritalToIndex(am.demographic.maritalStatus)
 	data['livingSituation'] = convertLivingToIndex(am.demographic.livingSituation)
-	data['education'] = convertEducationToIndex(am.demographic.education)
 
 	if am.demographic.employer_phone == None or am.demographic.employer_phone == '' or am.demographic.employer_phone == 'None':
 		phone = am.demographic.employer_phone
@@ -3829,6 +3828,8 @@ def getAMDemoFields(am):
 	data['months_res'] 			= am.demographic.months_res
 	data['years_res'] 			= am.demographic.years_res
 	data['num_children'] 		= am.demographic.num_children
+	data['education'] 			= am.demographic.education
+	data['spouse_dep'] 			= am.demographic.spouse_dep
 	data['other_dependants'] 	= am.demographic.other_dependants
 	data['whoLivesWithClient'] 	= am.demographic.whoLivesWithClient
 	data['resasonDO'] 			= am.demographic.resasonDO
@@ -3866,17 +3867,17 @@ def grabAmChildhood(am):
 	fields['raisedBy'] = select
 
 	#TEXT FIELDS
-	fields['traumaExplain'] = convertNullTextFields(am.childhood.traumaExplain)
-	fields['howLeftHome'] = convertNullTextFields(am.childhood.howLeftHome)
-	fields['siblingsRelationshipExplain'] = convertNullTextFields(am.childhood.siblingsRelationshipExplain)
-	fields['dadCloseExplain'] = convertNullTextFields(am.childhood.dadCloseExplain)
-	fields['momCloseExplain'] = convertNullTextFields(am.childhood.momCloseExplain)
-	fields['abusedBy'] = convertNullTextFields(am.childhood.abusedBy)
-	fields['abuseImpact'] = convertNullTextFields(am.childhood.abuseImpact)
-	fields['childAngerExplain'] = convertNullTextFields(am.childhood.childAngerExplain)
-	fields['otherChildExplain'] = convertNullTextFields(am.childhood.otherChildExplain)
-	fields['parentViolenceExplain'] = convertNullTextFields(am.childhood.parentViolenceExplain)
-	fields['parentViolenceImpact'] = convertNullTextFields(am.childhood.parentViolenceImpact)
+	fields['traumaExplain'] = am.childhood.traumaExplain
+	fields['howLeftHome'] = am.childhood.howLeftHome
+	fields['siblingsRelationshipExplain'] = am.childhood.siblingsRelationshipExplain
+	fields['dadCloseExplain'] = am.childhood.dadCloseExplain
+	fields['momCloseExplain'] = am.childhood.momCloseExplain
+	fields['abusedBy'] = am.childhood.abusedBy
+	fields['abuseImpact'] = am.childhood.abuseImpact
+	fields['childAngerExplain'] = am.childhood.childAngerExplain
+	fields['otherChildExplain'] = am.childhood.otherChildExplain
+	fields['parentViolenceExplain'] = am.childhood.parentViolenceExplain
+	fields['parentViolenceImpact'] = am.childhood.parentViolenceImpact
 
 
 	#INTEGER FIELDS...NOTHING NEEDS TO BE DONE BECAUSE DEFAULT VALUES ARE SET AT ZERO
@@ -3893,6 +3894,7 @@ def grabAmChildhood(am):
 	fields['childAnger'] = convertToJavascriptBool(am.childhood.childAnger)
 	fields['otherChild'] = convertToJavascriptBool(am.childhood.otherChild)
 	fields['parentViolence'] = convertToJavascriptBool(am.childhood.parentViolence)
+	fields['isComplete'] = am.childhoodComplete
 
 	return fields
 

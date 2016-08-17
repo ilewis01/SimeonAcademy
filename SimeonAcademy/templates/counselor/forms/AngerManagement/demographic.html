@@ -176,9 +176,9 @@
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
                         <td><div class='iml-label'>Time at Current Residence:</div></td>
-                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value='{{fields.years_res}}'></div></td>
                         <td><div class='iml-sub-label'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value='{{fields.months_res}}'></div></td>
                         <td><div class='iml-sub-label'>months</div></td>
                       </tr>
                     </table>
@@ -202,7 +202,7 @@
                     </table>
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Include names, ages, and relationship</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'>{{fields.whoLivesWithClient}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -215,13 +215,13 @@
                     <table>
                       <tr>
                         <td><div class='iml-sub-label-l' style='margin-left:25px;'>Children:</div></td>
-                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value=''></div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value='{{fields.num_children}}'></div></td>
 
                         <td><div class='iml-sub-label-l'>Spouse:</div></td>
-                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value=''></div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value='{{fields.spouse_dep}}'></div></td>
 
                         <td><div class='iml-sub-label-l'>Other:</div></td>
-                        <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value='{{fields.other_dependants}}'></div></td>
                       </tr>
                     </table>
 
@@ -231,6 +231,10 @@
                       <tr>
                         <td><div class='iml-num-div'>7.</div></td>
                         <td><div class='iml-label'>Level of education completed:</div></td>
+
+                        <td><div class='iml-radio'><input type='radio' name='education' id='DO' value='Drop out'></div></td>
+                        <td><div class='iml-sub-label'>Drop out</div></td>
+
                         <td><div class='iml-radio'><input type='radio' name='education' id='GED' value='GED'></div></td>
                         <td><div class='iml-sub-label'>GED</div></td>
 
@@ -244,7 +248,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Reason for dropout:</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''>{{fields.resasonDO}}</textarea></div></td></tr>
                     </table>
 
                   </div>
@@ -256,25 +260,25 @@
                       <tr>
                         <td><div class='iml-num-div'>8.</div></td>
                         <td><div class='iml-label'>Current Employer:</div></td>
-                        <td><div><input type='text' name='employee' id='employee' value=''></div></td>
+                        <td><div><input type='text' name='employee' id='employee' value='{{fields.employee}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>9.</div></td>
                         <td><div class='iml-label'>Employer Phone:</div></td>
-                        <td><div><input type='text' name='employer_phone' id='employer_phone' value=''></div></td>
+                        <td><div><input type='text' name='employer_phone' id='employer_phone' value='{{fields.employer_phone}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>10.</div></td>
                         <td><div class='iml-label'>Employer Address:</div></td>
-                        <td><div><input type='text' name='emp_address' id='emp_address' value=''></div></td>
+                        <td><div><input type='text' name='emp_address' id='emp_address' value='{{fields.emp_address}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>11.</div></td>
                         <td><div class='iml-label'>Job title:</div></td>
-                        <td><div><input type='text' name='job_title' id='job_title' value=''></div></td>
+                        <td><div><input type='text' name='job_title' id='job_title' value='{{fields.job_title}}'></div></td>
                       </tr>
                     </table>
 
@@ -282,9 +286,9 @@
                       <tr>
                         <td><div class='iml-num-div'>12.</div></td>
                         <td><div class='iml-label'>Length of Employment:</div></td>
-                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='employed_years' id='employed_years' value='{{fields.employed_years}}'></div></td>
                         <td><div class='iml-sub-label'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value=''></div></td>
+                        <td><div class='iml-num'><input type='number' name='employed_months' id='employed_months' value='{{fields.employed_months}}'></div></td>
                         <td><div class='iml-sub-label'>months</div></td>
                     </table>
 
@@ -303,7 +307,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Please explain client health issues:</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'>{{fields.health_exp}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -319,7 +323,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>What are you taking?</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'>{{fields.whatMedicine}}</textarea></div></td></tr>
                     </table>
                   </div>
                 </div>

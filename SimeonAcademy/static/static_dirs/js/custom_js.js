@@ -2536,18 +2536,19 @@ function medsRadioBtn() {
 function initialize_am_demo(json_data) {
 	grab('maritalStatus').selectedIndex = json_data.maritalStatus;
 	grab('livingSituation').selectedIndex = json_data.livingSituation;
-	grab('education').selectedIndex = json_data.education;
 
 	number_init(json_data.isComplete, grab('months_res'));
 	number_init(json_data.isComplete, grab('years_res'));
 	number_init(json_data.isComplete, grab('num_children'));
+	number_init(json_data.isComplete, grab('spouse_dep'));
 	number_init(json_data.isComplete, grab('other_dependants'));
 	number_init(json_data.isComplete, grab('employed_months'));
 	number_init(json_data.isComplete, grab('employed_years'));
 
+	blank_init(json_data.isComplete, grab('whoLivesWithClient'));
 	blank_init(json_data.isComplete, grab('resasonDO'));
 	blank_init(json_data.isComplete, grab('job_title'));
-	blank_init(json_data.isComplete, grab('employer'));
+	blank_init(json_data.isComplete, grab('employee'));
 	blank_init(json_data.isComplete, grab('emp_address'));
 	blank_init(json_data.isComplete, grab('employer_phone'));
 	blank_init(json_data.isComplete, grab('health_exp'));
@@ -2555,135 +2556,90 @@ function initialize_am_demo(json_data) {
 
 	//PROCESS RADIO BUTTONS
 	setRadioElement(json_data.own, grab('doesOwn'), grab('doesRent'));
-	setRadioElement(json_data.drop_out, grab('hs_drop'), grab('hs_grad'));
 	setRadioElement(json_data.health_problem, grab('healthy'), grab('not_healthy'));
 	setRadioElement(json_data.medication, grab('on_meds'), grab('no_med'));
 
-	dropOutRadio();
-	healthRadioBtn();
+	var education = String(json_data.education);
+
+	if (education === 'Drop out') {
+		grab('DO').checked = true;
+	}
+	else if (education  === 'GED') {
+		grab('GED').checked = true;
+	}
+	else if (education  === 'College') {
+		grab('College').checked = true;
+	}
+	else {
+		grab('HS').checked = true;
+	}
+
+	// dropOutRadio();
+	// healthRadioBtn();
 }
 
 function initialize_am_drug_history(json_data) {
-	number_init(json_data.isComplete, grab('first_drink'));
-	number_init(json_data.isComplete, grab('dui_amount'));
-	number_init(json_data.isComplete, grab('quitMos'));
-	number_init(json_data.isComplete, grab('quitYrs'));
+	number_init(json_data.isComplete, grab('firstDrinkAge'));
+	number_init(json_data.isComplete, grab('numDUI'));
+	number_init(json_data.isComplete, grab('monthsQuit'));
+	number_init(json_data.isComplete, grab('yearsQuit'));
 
-	blank_init(json_data.isComplete, grab('first_use_type'));
-	blank_init(json_data.isComplete, grab('what-you-use'));
-	blank_init(json_data.isComplete, grab('how-often-you-use'));
-	blank_init(json_data.isComplete, grab('how-much-you-use'));
-	blank_init(json_data.isComplete, grab('reason_quit'));
-	blank_init(json_data.isComplete, grab('BAL'));
-	blank_init(json_data.isComplete, grab('when_treated'));
-	blank_init(json_data.isComplete, grab('where_treated'));
-	blank_init(json_data.isComplete, grab('no_treat_explain'));
-	blank_init(json_data.isComplete, grab('relapse_explain'));
+	blank_init(json_data.isComplete, grab('firstDrinkType'));
+	blank_init(json_data.isComplete, grab('amtPerWeek'));
+	blank_init(json_data.isComplete, grab('useAmt'));
+	blank_init(json_data.isComplete, grab('reasonQuit'));
+	blank_init(json_data.isComplete, grab('BALevel'));
+	blank_init(json_data.isComplete, grab('dateTreated'));
+	blank_init(json_data.isComplete, grab('treatmentPlace'));
+	blank_init(json_data.isComplete, grab('reasonNotFinishedTreatment'));
+	blank_init(json_data.isComplete, grab('relapseTrigger'));
 
-	setRadioElement(json_data.curUse, grab('current_use'), grab('no_current_use'));
-	setRadioElement(json_data.everDrank, grab('has_used'), grab('never_used'));
-	setRadioElement(json_data.DUI, grab('dui'), grab('no_dui'));
-	setRadioElement(json_data.needHelpDrugs, grab('give_me_help'), grab('no_help'));
-	setRadioElement(json_data.drugTreatment, grab('had_treatment'), grab('no_treatment'));
-	setRadioElement(json_data.finishedTreatment, grab('did_complete'), grab('not_completed'));
-	setRadioElement(json_data.isClean, grab('is_abstinent'), grab('not_abstinent'));
-	setRadioElement(json_data.drinkLastEpisode, grab('was_drinking'), grab('not_drinking'));
-	setRadioElement(json_data.drinkRelationshipProblem, grab('is_problem'), grab('no_problem'));
+	setRadioElement(json_data.curUse, grab('yesDrink'), grab('noDrink'));
+	setRadioElement(json_data.everDrank, grab('hasDrank'), grab('noDrank'));
+	setRadioElement(json_data.DUI, grab('hasDUI'), grab('noDui'));
+	setRadioElement(json_data.drugTreatment, grab('hadTreatment'), grab('noTreatment'));
+	setRadioElement(json_data.finishedTreatment, grab('didFinish'), grab('noFinish'));
+	setRadioElement(json_data.isClean, grab('isClean'), grab('notClean'));
+	setRadioElement(json_data.drinkLastEpisode, grab('yesLast'), grab('noLast'));
+	setRadioElement(json_data.drinkRelationshipProblem, grab('yesProb'), grab('noProb'));
+	setRadioElement(json_data.needHelpDrugs, grab('needHelp'), grab('noHelp'));
 
-	topLevelDH();
-	dhRadio2();
-	dhRadio3();
-	dhLeftRadio1();
-	dhLeftRadio2();
-	dhLeftRadio3();
+	// topLevelDH();
+	// dhRadio2();
+	// dhRadio3();
+	// dhLeftRadio1();
+	// dhLeftRadio2();
+	// dhLeftRadio3();
 }
 
 function initialize_am_childhood(json_data) {
-	var back = document.getElementById('back_btn');
-
-	//text fields
-	var raisedBy = document.getElementById('raisedBy');
-	var traumaExplain = document.getElementById('traumaExplain');
-	var howLeftHome = document.getElementById('howLeftHome');
-	var dadCloseExplain = document.getElementById('dadCloseExplain');
-	var momCloseExplain = document.getElementById('momCloseExplain');
-	var abusedBy = document.getElementById('abusedBy');
-	var abuseImpact = document.getElementById('abuseImpact');
-	var childAngerExplain = document.getElementById('childAngerExplain');
-	var otherChildExplain = document.getElementById('otherChildExplain');
-	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
-	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
-	var siblingsRelationshipExplain = document.getElementById('siblingsRelationshipExplain');
-
-	//boolean fields
-	var momAlive = document.getElementById('momAlive');
-	var dadAlive = document.getElementById('dadAlive');
-	var childTrama = document.getElementById('childTrama');
-	var siblingsClose = document.getElementById('siblingsClose');
-	var dadClose = document.getElementById('dadClose');
-	var momClose = document.getElementById('momClose');
-	var wasAbused = document.getElementById('wasAbused');
-	var childAnger = document.getElementById('childAnger');
-	var otherChild = document.getElementById('otherChild');
-	var parentViolence = document.getElementById('parentViolence');
-
-	//sub radio button declarations
-	var motherLiving = document.getElementById('motherLiving');
-	var motherNotLiving = document.getElementById('motherNotLiving');
-	var fatherLiving = document.getElementById('fatherLiving');
-	var fatherNotLiving = document.getElementById('fatherNotLiving');
-	var hadTramua = document.getElementById('hadTramua');
-	var noTrauma = document.getElementById('noTrauma');
-	var sibsClose = document.getElementById('sibsClose');
-	var sibsNotClose = document.getElementById('sibsNotClose');
-	var dadIsClose = document.getElementById('dadIsClose');
-	var dadNotClose = document.getElementById('dadNotClose');
-	var childAbused = document.getElementById('childAbused');
-	var childNotAbused = document.getElementById('childNotAbused');
-	var meMomClose = document.getElementById('meMomClose');
-	var meMomNotClose = document.getElementById('meMomNotClose');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
-	var haveOtherEvents = document.getElementById('haveOtherEvents');
-	var noOtherEvents = document.getElementById('noOtherEvents');
-	var sawViolence = document.getElementById('sawViolence');
-	var didntSeeViolence = document.getElementById('didntSeeViolence');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var noAngerChild = document.getElementById('noAngerChild');
-
 	//PROCESS THE DROPDOWN MENU
 	raisedBy.selectedIndex = json_data.raisedBy;
 
+	number_init(json_data.isComplete, grab('num_siblings'));
+
+	blank_init(json_data.isComplete, grab('traumaExplain'));
+	blank_init(json_data.isComplete, grab('howLeftHome'));
+	blank_init(json_data.isComplete, grab('siblingsRelationshipExplain'));
+	blank_init(json_data.isComplete, grab('dadCloseExplain'));
+	blank_init(json_data.isComplete, grab('momCloseExplain'));
+	blank_init(json_data.isComplete, grab('abusedBy'));
+	blank_init(json_data.isComplete, grab('abuseImpact'));
+
 	//PROCESS RADIO BUTTONS
-	setRadioElement(json_data.momAlive, motherLiving, motherNotLiving);
-	setRadioElement(json_data.dadAlive, fatherLiving, fatherNotLiving);
-	setRadioElement(json_data.childTrama, hadTramua, noTrauma);
-	setRadioElement(json_data.siblingsClose, sibsClose, sibsNotClose);
-	setRadioElement(json_data.dadClose, dadIsClose, dadNotClose);
-	setRadioElement(json_data.momClose, meMomClose, meMomNotClose);
-	setRadioElement(json_data.wasAbused, childAbused, childNotAbused);
-	setRadioElement(json_data.childAnger, hadAngerChild, noAngerChild);
-	setRadioElement(json_data.otherChild, haveOtherEvents, noOtherEvents);
-	setRadioElement(json_data.parentViolence, sawViolence, didntSeeViolence);
+	setRadioElement(json_data.momAlive, grab('momAlive'), grab('momNotAlive'));
+	setRadioElement(json_data.dadAlive, grab('dadAlive'), grab('dadNotAlive'));
+	setRadioElement(json_data.childTrama, grab('yesTrauma'), grab('noTrauma'));
+	setRadioElement(json_data.siblingsClose, grab('sibsClose'), grab('sibsDistant'));
+	setRadioElement(json_data.dadClose, grab('yesDad'), grab('noDad'));
+	setRadioElement(json_data.momClose, grab('yesMom'), grab('noMom'));
+	setRadioElement(json_data.wasAbused, grab('yesAbuse'), grab('noAbuse'));
 
-	childTraumaRadio();
-	childAbusedRadio();
-	hadChildAngerRadio();
-	otherEventsHelpRadio();
-	parentsFoughtRadio();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('howLeftHome'));
-		nullTextMustDie(document.getElementById('siblingsRelationshipExplain'));
-		nullTextMustDie(document.getElementById('dadCloseExplain'));
-		nullTextMustDie(document.getElementById('momCloseExplain'));
-	}
-	else {
-		nullTextMustDie3(document.getElementById('howLeftHome'));
-		nullTextMustDie3(document.getElementById('siblingsRelationshipExplain'));
-		nullTextMustDie3(document.getElementById('dadCloseExplain'));
-		nullTextMustDie3(document.getElementById('momCloseExplain'));
-	}
+	// childTraumaRadio();
+	// childAbusedRadio();
+	// hadChildAngerRadio();
+	// otherEventsHelpRadio();
+	// parentsFoughtRadio();
 }
 
 function initialize_am_angerHistory(json_data) {
