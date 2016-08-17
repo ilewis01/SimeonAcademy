@@ -232,22 +232,22 @@
                         <td><div class='iml-num-div'>7.</div></td>
                         <td><div class='iml-label'>Level of education completed:</div></td>
 
-                        <td><div class='iml-radio'><input type='radio' name='education' id='DO' value='Drop out'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='DO' value='Drop out' onClick='javascript: dropOutRadio();'></div></td>
                         <td><div class='iml-sub-label'>Drop out</div></td>
 
-                        <td><div class='iml-radio'><input type='radio' name='education' id='GED' value='GED'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='GED' value='GED' onClick='javascript: dropOutRadio();'></div></td>
                         <td><div class='iml-sub-label'>GED</div></td>
 
-                        <td><div class='iml-radio'><input type='radio' name='education' id='HS' value='HS'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='HS' value='HS' onClick='javascript: dropOutRadio();'></div></td>
                         <td><div class='iml-sub-label'>HS</div></td>
 
-                        <td><div class='iml-radio'><input type='radio' name='education' id='College' value='College'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='education' id='College' value='College' onClick='javascript: dropOutRadio();'></div></td>
                         <td><div class='iml-sub-label'>College</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Reason for dropout:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='doReason_lab'><li>Reason for dropout:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''>{{fields.resasonDO}}</textarea></div></td></tr>
                     </table>
 
@@ -298,31 +298,31 @@
                       <tr>
                         <td><div class='iml-num-div'>13.</div></td>
                         <td><div class='iml-label'>Do you have any ongoing health problems?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='not_healthy' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='not_healthy' value='True' onClick='javascript: healthRadioBtn();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='healthy' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='health_problem' id='healthy' value='False' onClick='javascript: healthRadioBtn();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain client health issues:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='healthExp_label'><li>Please explain client health issues:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'>{{fields.health_exp}}</textarea></div></td></tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>14.</div></td>
-                        <td><div class='iml-label'>Are you currently taking medication?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='medication' id='on_meds' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='medication' id='no_med' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-num-div' id='num_14'>14.</div></td>
+                        <td><div class='iml-label' id='num_14_lab'>Are you currently taking medication?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medication' id='on_meds' value='True' onClick='javascript: medsRadioBtn();'></div></td>
+                        <td><div class='iml-sub-label' id='onMedLab'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medication' id='no_med' value='False' onClick='javascript: medsRadioBtn();'></div></td>
+                        <td><div class='iml-sub-label' id='noMedLab'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>What are you taking?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='meds_leb'><li>What are you taking?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'>{{fields.whatMedicine}}</textarea></div></td></tr>
                     </table>
                   </div>

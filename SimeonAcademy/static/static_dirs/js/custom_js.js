@@ -2447,6 +2447,49 @@ function secondaryTrigger(trigger, label1, label2, label3, element1, element2) {
 	}
 }
 
+// function craxRadios(trigger, number, label1, label2, label3, radio1, radio2) {
+// 	// grab()
+// 	if (trigger.checked === true) {
+// 		opacityLow(number);
+// 		opacityLow(label1);
+// 		opacityLow(label2);
+// 		opacityLow(label3);
+// 		opacityLow(radio1);
+// 		opacityLow(radio2);
+// 		radio1.disabled = true;
+// 		radio2.disabled = true;
+// 	}
+// 	else {
+// 		radio1.disabled = false;
+// 		radio2.disabled = false;
+// 		opacityHigh(number);
+// 		opacityHigh(label1);
+// 		opacityHigh(label2);
+// 		opacityHigh(label3);
+// 		opacityHigh(radio1);
+// 		opacityHigh(radio2);
+// 	}
+// }
+
+function craxRadios(trigger, number, lab1, lab2, lab3, rad1, rad2) {
+	if (trigger.checked === true) {
+		opacityLow(number);
+		opacityLow(lab1);
+		opacityLow(lab2);
+		opacityLow(lab3);
+		rad1.disabled = true;
+		rad2.disabled = true;
+	}
+	else {
+		rad1.disabled = false;
+		rad2.disabled = false;
+		opacityHigh(number);
+		opacityHigh(lab1);
+		opacityHigh(lab2);
+		opacityHigh(lab3);
+	}
+}
+
 // AM ANGER/VIOLENCE HISTORY FUNCTIONS
 function continue_to_am_connections() {
 	document.getElementById('am_demo').submit();
@@ -2462,69 +2505,22 @@ function insertProcessedText(text) {
 
 // AM DEMOGRAPHIC FUNCTIONS
 function dropOutRadio() {
-	var hs_drop = document.getElementById('hs_drop');
-	var resasonDO = document.getElementById('resasonDO');
-	var resasonDO_label = document.getElementById('resasonDO_label');
-
-	twoElementRadioSetup(hs_drop, resasonDO_label, resasonDO);
-}
+	twoElementRadioSetup(grab('DO'), grab('doReason_lab'), grab('resasonDO'));
+}	
 
 function healthRadioBtn() {
-	//TRIGGER
-	var healthy = document.getElementById('healthy');
+	twoElementRadioSetup(grab('not_healthy'), grab('healthExp_label'), grab('health_exp'));
+	craxRadios(grab('healthy'), grab('num_14'), grab('num_14_lab'), grab('onMedLab'), grab('noMedLab'), grab('on_meds'), grab('no_med'));
 
-	//LABELS
-	var health_exp_label = document.getElementById('health_exp_label');
-	var med_taking_label = document.getElementById('med_taking_label');
-	var no_med_label = document.getElementById('no_med_label');
-	var yes_med_label = document.getElementById('yes_med_label');
-	var explain_label_health = document.getElementById('explain_label_health');
-
-	//ELEMENTS
-	var health_exp = document.getElementById('health_exp');
-	var no_med = document.getElementById('no_med');
-	var on_meds = document.getElementById('on_meds');
-
-	if (healthy.checked == true) {
-		health_exp.disabled = false;
-		no_med.disabled = false;
-		on_meds.disabled = false;
-
-		opacityHigh(health_exp);
-		opacityHigh(no_med);
-		opacityHigh(on_meds);
-
-		opacityHigh(health_exp_label);
-		opacityHigh(med_taking_label);
-		opacityHigh(no_med_label);
-		opacityHigh(yes_med_label);
-		opacityHigh(explain_label_health);
+	if (grab('healthy').checked === true) {
+		grab('no_med').checked = true;
 	}
 
-	else {
-		no_med.checked = true;
-		medsRadioBtn();
-
-		opacityLow(health_exp_label);
-		opacityLow(med_taking_label);
-		opacityLow(no_med_label);
-		opacityLow(yes_med_label);
-		opacityLow(explain_label_health);
-		opacityLow(health_exp);
-
-		health_exp.value = '';
-		health_exp.disabled = true;
-		no_med.disabled = true;
-		on_meds.disabled = true;
-	}
+	medsRadioBtn();
 }
 
 function medsRadioBtn() {
-	var on_meds = document.getElementById('on_meds');
-	var explain_label_health = document.getElementById('explain_label_health');
-	var whatMedicine = document.getElementById('whatMedicine');
-
-	twoElementRadioSetup(on_meds, explain_label_health, whatMedicine);
+	twoElementRadioSetup(grab('on_meds'), grab('meds_leb'), grab('whatMedicine'));
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -2567,7 +2563,7 @@ function initialize_am_demo(json_data) {
 
 	//PROCESS RADIO BUTTONS
 	setRadioElement(json_data.own, grab('doesOwn'), grab('doesRent'));
-	setRadioElement(json_data.health_problem, grab('healthy'), grab('not_healthy'));
+	setRadioElement(json_data.health_problem, grab('not_healthy'), grab('healthy'));
 	setRadioElement(json_data.medication, grab('on_meds'), grab('no_med'));
 
 	var education = String(json_data.education);
@@ -2585,8 +2581,9 @@ function initialize_am_demo(json_data) {
 		grab('HS').checked = true;
 	}
 
-	// dropOutRadio();
-	// healthRadioBtn();
+	dropOutRadio();
+	healthRadioBtn();
+	medsRadioBtn();
 }
 
 function initialize_am_drug_history(json_data) {
