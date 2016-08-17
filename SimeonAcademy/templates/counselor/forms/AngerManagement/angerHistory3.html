@@ -150,7 +150,7 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:42%; height:100%; margin-left:20px; margin-top:10px;'>
+                  <div class='col-md-6' style='width:43%; height:100%; margin-left:20px; margin-top:10px;'>
                     <h4>Psychological Factors (Continued)</h4>
                     <table>
                       <tr>
@@ -165,7 +165,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Whom did you want to hurt and what were the reasons?</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain'>{{fields.homicidalExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -193,7 +193,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>For what was the medication prescribed?</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain'>{{fields.medRecentVExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -208,7 +208,7 @@
 
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Please explain:</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'></textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'>{{fields.medSuccessExplainRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>
 
@@ -227,7 +227,7 @@
                       <tr>
                         <td>
                           <div class='iml-text-area'>
-                            <textarea rows='2' cols='60' name='durationRecentV' id='durationRecentV'></textarea>
+                            <textarea rows='2' cols='60' name='durationRecentV' id='durationRecentV' value='{{fields.durationRecentV}}'>{{fields.durationRecentV}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -253,7 +253,7 @@
                     </table>
                     <table>
                       <tr>
-                        <td><div class='iml-radio' style='margin-left:23px;'><input type='radio' name='intensityRecentV' id='rad1' value='1' checked></div></td>
+                        <td><div class='iml-radio' style='margin-left:23px;'><input type='radio' name='intensityRecentV' id='rad1' value='1'></div></td>
                         <td><div class='iml-sub-label'>1</div></td>
 
                         <td><div class='iml-radio'><input type='radio' name='intensityRecentV' id='rad2' value='2'></div></td>
@@ -297,7 +297,7 @@
                     <table>
                       <tr>
                         <td>
-                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho1' value='This time only' checked></div>
+                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho1' value='This time only'></div>
                         </td>
                         <td><div class='iml-sub-label2'>This time only</div></td>
 
@@ -314,17 +314,17 @@
 
                       <tr>
                         <td>
-                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho4' value='This time only'></div>
+                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho4' value='Since childhood'></div>
                         </td>
                         <td><div class='iml-sub-label2'>Since childhood</div></td>
 
                         <td>
-                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho5' value='This month only'></div>
+                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho5' value='Adolecent'></div>
                         </td>
                         <td><div class='iml-sub-label2'>Adolecent</div></td>
 
                         <td>
-                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho6' value='Last six months'></div>
+                          <div class='iml-checkbox-l'><input type='radio' name='howOften' id='ho6' value='Only as an adult'></div>
                         </td>
                         <td><div class='iml-sub-label2'>Only as an adult</div></td>
                       </tr>

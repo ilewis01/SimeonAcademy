@@ -2684,125 +2684,94 @@ function initialize_am_angerHistory(json_data) {
 }
 
 function initialize_am_angerHistory2(json_data) {
-	var back = document.getElementById('back_btn');
+	blank_init(json_data.isComplete, grab('depress30ExplainRecentV'));
+	blank_init(json_data.isComplete, grab('anxietyExplainRecentV'));
+	blank_init(json_data.isComplete, grab('hallucinationLastV'));
+	blank_init(json_data.isComplete, grab('understandingExplainRecentV'));
+	blank_init(json_data.isComplete, grab('lastTimeTroubleControl'));
+	blank_init(json_data.isComplete, grab('controlTrigger'));
+	blank_init(json_data.isComplete, grab('suicide30ExplainRecentV'));
 
-	//RADIO BUTTONS
-	var hasExperience = document.getElementById('hasExperience');
-	var noExperience = document.getElementById('noExperience');
-	var hasTension = document.getElementById('hasTension');
-	var noTension = document.getElementById('noTension');
-	var hasHallu = document.getElementById('hasHallu');
-	var noHallu = document.getElementById('noHallu');
-	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
-	var noTroubleAH2 = document.getElementById('noTroubleAH2');	
-	var canControl = document.getElementById('canControl');
-	var canNotControl = document.getElementById('canNotControl');
-	var suicideThoughts = document.getElementById('suicideThoughts');
-	var noSuicideThoughts = document.getElementById('noSuicideThoughts');
-	var isSuicidalToday = document.getElementById('isSuicidalToday');
-	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
-	var doesHavePlan = document.getElementById('doesHavePlan');
-	var doesNotHavePlan = document.getElementById('doesNotHavePlan');
-	var haveAttempted = document.getElementById('haveAttempted');
-	var haveNotAttempted = document.getElementById('haveNotAttempted');
+	setRadioElement(json_data.depress30RecentV, grab('yesDepress'), grab('noDepress'));
+	setRadioElement(json_data.anxietyRecentV, grab('yesAnx'), grab('noAnx'));
+	setRadioElement(json_data.hallucinationRecentV, grab('yesHall'), grab('noHall'));
+	setRadioElement(json_data.understandingRecentV, grab('yesTrouble'), grab('noTrouble'));
+	setRadioElement(json_data.troubleControlRecentV, grab('yesControl'), grab('noControl'));
+	setRadioElement(json_data.suicide30RecentV, grab('yesSuicide'), grab('noSuicide'));
 
-	setRadioElement(json_data.depress30RecentV, hasExperience, noExperience);
-	setRadioElement(json_data.anxietyRecentV, hasTension, noTension);
-	setRadioElement(json_data.hallucinationRecentV, hasHallu, noHallu);
-	setRadioElement(json_data.understandingRecentV, hasTroubleAH2, noTroubleAH2);
-	setRadioElement(json_data.troubleControlRecentV, canControl, canNotControl);
-	setRadioElement(json_data.suicide30RecentV, suicideThoughts, noSuicideThoughts);
-	setRadioElement(json_data.suicideTodayRecentV, isSuicidalToday, isNotSuicidalToday);
-	setRadioElement(json_data.suicideTodayPlanRecentV, doesHavePlan, doesNotHavePlan);
-	setRadioElement(json_data.hasAttemptedSuicide, haveAttempted, haveNotAttempted);
-
-
-	explainDep();
-	tensionRadio();
-	halluRadio();
-	troubleRadioAH2();
-	troubleControlAH2();
-	suicide30recent();
+	// explainDep();
+	// tensionRadio();
+	// halluRadio();
+	// troubleRadioAH2();
+	// troubleControlAH2();
+	// suicide30recent();
 }
 
 function initialize_am_angerHistory3(json_data) {
-	var back = document.getElementById('back_btn');
+	blank_init(json_data.isComplete, grab('homicidalExplain'));
+	blank_init(json_data.isComplete, grab('medRecentVExplain'));
+	blank_init(json_data.isComplete, grab('medSuccessExplainRecentV'));
+	blank_init(json_data.isComplete, grab('durationRecentV'));
 
-	//RADIO BUTTONS
-	var isHomicidal = document.getElementById('isHomicidal');
-	var notHomicidal = document.getElementById('notHomicidal');
-	var hasMedRecent = document.getElementById('hasMedRecent');
-	var noMedRecent = document.getElementById('noMedRecent');
-	var treatmentSuccess = document.getElementById('treatmentSuccess');
-	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
+	setRadioElement(json_data.homicidal, grab('yesHomicide'), grab('noHomicode'));
+	setRadioElement(json_data.medRecentV, grab('yesMed'), grab('noMed'));
+	setRadioElement(json_data.medSuccessRecentV, grab('yesSuccess'), grab('noSuccess'));
 
-	var intensityRecentV = document.getElementById('intensityRecentV');
+	var sc = Number(json_data.intensityRecentV);
+	var ta = String(json_data.howOften);
 
-	setRadioElement(json_data.homicidal, isHomicidal, notHomicidal);
-	setRadioElement(json_data.medRecentV, hasMedRecent, noMedRecent);
-	setRadioElement(json_data.medSuccessRecentV, treatmentSuccess, noTreatmentSuccess);
-
-	if (String(json_data.intensityRecentV) === '1') {
-		document.getElementById('one').checked = true;
+	if (sc === 2) {
+		grab('rad2').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '2') {
-		document.getElementById('two').checked = true;
+	else if (sc === 3) {
+		grab('rad3').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '3') {
-		document.getElementById('three').checked = true;
+	else if (sc === 4) {
+		grab('rad4').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '4') {
-		document.getElementById('four').checked = true;
+	else if (sc === 5) {
+		grab('rad5').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '5') {
-		document.getElementById('five').checked = true;
+	else if (sc === 6) {
+		grab('rad6').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '6') {
-		document.getElementById('six').checked = true;
+	else if (sc === 7) {
+		grab('rad7').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '7') {
-		document.getElementById('seven').checked = true;
+	else if (sc === 8) {
+		grab('rad8').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '8') {
-		document.getElementById('eight').checked = true;
+	else if (sc === 9) {
+		grab('rad9').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '9') {
-		document.getElementById('nine').checked = true;
+	else if (sc === 10) {
+		grab('rad10').checked = true;
 	}
-	if (String(json_data.intensityRecentV) === '10') {
-		document.getElementById('ten').checked = true;
+	else{
+		grab('rad1').checked = true;
 	}
 
-
-
-	if (String(json_data.howOften) === 'This time only') {
-		document.getElementById('thisTimeOnly').checked = true;
+	if (ta === 'This time only') {
+		grab('ho1').checked = true;
 	}
-	if (String(json_data.howOften) === 'Since childhood') {
-		document.getElementById('sinceChildhood').checked = true;
+	else if (ta === 'This month only') {
+		grab('ho2').checked = true;
 	}
-	if (String(json_data.howOften) === 'This month only') {
-		document.getElementById('ThisMonthOnly').checked = true;
+	else if (ta === 'Last six months') {
+		grab('ho3').checked = true;
 	}
-	if (String(json_data.howOften) === 'Adolescent') {
-		document.getElementById('adolescent').checked = true;
+	else if (ta === 'Since childhood') {
+		grab('ho4').checked = true;
 	}
-	if (String(json_data.howOften) === 'Last six months') {
-		document.getElementById('lastSixMonth').checked = true;
-	}
-	if (String(json_data.howOften) === 'Only as an adult') {
-		document.getElementById('onlyAdult').checked = true;
-	}
-
-	homicidalRadio();
-	ah3number2();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('durationRecentV'));
+	else if (ta === 'Adolecent') {
+		grab('ho5').checked = true;
 	}
 	else {
-		nullTextMustDie2(document.getElementById('durationRecentV'));
+		grab('ho6').checked = true;
 	}
+
+	// homicidalRadio();
+	// ah3number2();
 }
 
 function initalize_am_connections(json_data) {
