@@ -2533,6 +2533,17 @@ function medsRadioBtn() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+function checkBoolInit(json_data, checkbox) {
+	json_data = String(json_data);
+
+	if (json_data === 'true' || json_data === 'True') {
+		checkbox.checked = true;
+	}
+	else {
+		checkbox.checked = false;
+	}
+}
+
 function initialize_am_demo(json_data) {
 	grab('maritalStatus').selectedIndex = json_data.maritalStatus;
 	grab('livingSituation').selectedIndex = json_data.livingSituation;
@@ -2643,56 +2654,33 @@ function initialize_am_childhood(json_data) {
 }
 
 function initialize_am_angerHistory(json_data) {
-	back = document.getElementById('back_btn');
+	number_init(json_data.isComplete, grab('longAgoTreatRecentVyrs'));
+	number_init(json_data.isComplete, grab('longAgoTreatRecentVmos'));
 
-	//CHECKE BOXES
-	var physicalRecentV = document.getElementById('physicalRecentV');
-	var verbalRecentV = document.getElementById('verbalRecentV');
-	var threatsRecentV = document.getElementById('threatsRecentV');
-	var propertyRecentV = document.getElementById('propertyRecentV');
-	var otherRecentV = document.getElementById('otherRecentV');
-	var wasTense = document.getElementById('wasTense');
-	var hadRush = document.getElementById('hadRush');
-	var feltStrong = document.getElementById('feltStrong');
+	blank_init(json_data.isComplete, grab('recentIncidentV'));
+	blank_init(json_data.isComplete, grab('recentVDate'));
+	blank_init(json_data.isComplete, grab('recentVlocation'));
+	blank_init(json_data.isComplete, grab('withWhomRecentV'));
+	blank_init(json_data.isComplete, grab('happenedRecentV'));
+	blank_init(json_data.isComplete, grab('otherExplainRecentV'));
+	blank_init(json_data.isComplete, grab('typeWordsRecentV'));
+	blank_init(json_data.isComplete, grab('psychoWhyRecentV'));
+	blank_init(json_data.isComplete, grab('reasonNotCompleteRecentV'));
 
-	//RADIO BUTTONS
-	var wasTreated = document.getElementById('wasTreated');
-	var notTreated = document.getElementById('notTreated');
-	var didComplete = document.getElementById('didComplete');
-	var notCompleted = document.getElementById('notCompleted');
+	checkBoolInit(json_data.wasTense, grab('wasTense'));
+	checkBoolInit(json_data.hadRush, grab('hadRush'));
+	checkBoolInit(json_data.feltStrong, grab('feltStrong'));
+	checkBoolInit(json_data.physicalRecentV, grab('physicalRecentV'));
+	checkBoolInit(json_data.verbalRecentV, grab('verbalRecentV'));
+	checkBoolInit(json_data.propertyRecentV, grab('propertyRecentV'));
+	checkBoolInit(json_data.otherRecentV, grab('otherRecentV'));
 
-	setRadioElement(json_data.psychoRecentV, wasTreated, notTreated);
-	setRadioElement(json_data.didCompleteTreatRecentV, didComplete, notCompleted);
-
-	initializeAllCheckBoxes(json_data.physicalRecentV, physicalRecentV);
-	initializeAllCheckBoxes(json_data.verbalRecentV, verbalRecentV);
-	initializeAllCheckBoxes(json_data.threatsRecentV, threatsRecentV);
-	initializeAllCheckBoxes(json_data.propertyRecentV, propertyRecentV);
-	initializeAllCheckBoxes(json_data.otherRecentV, otherRecentV);
-	initializeAllCheckBoxes(json_data.wasTense, wasTense);
-	initializeAllCheckBoxes(json_data.hadRush, hadRush);
-	initializeAllCheckBoxes(json_data.feltStrong, feltStrong);
+	setRadioElement(json_data.psychoRecentV, grab('yesTreated'), grab('noTreated'));
+	setRadioElement(json_data.didCompleteTreatRecentV, grab('yesComplete'), grab('noComplete'));
 
 	// AHcompletedRadioActivate();
-	turnOnAH1();
-	psychoClick();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('recentIncidentV'));
-		nullTextMustDie(document.getElementById('happenedRecentV'));
-		nullTextMustDie(document.getElementById('typeWordsRecentV'));
-		nullTextMustDie(document.getElementById('recentVDate'));
-		nullTextMustDie(document.getElementById('recentVlocation'));
-		nullTextMustDie(document.getElementById('withWhomRecentV'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('recentIncidentV'));
-		nullTextMustDie2(document.getElementById('happenedRecentV'));
-		nullTextMustDie2(document.getElementById('typeWordsRecentV'));
-		nullTextMustDie2(document.getElementById('recentVDate'));
-		nullTextMustDie2(document.getElementById('recentVlocation'));
-		nullTextMustDie2(document.getElementById('withWhomRecentV'));
-	}
+	// turnOnAH1();
+	// psychoClick();
 }
 
 function initialize_am_angerHistory2(json_data) {

@@ -3922,6 +3922,7 @@ def grabAmAngerHistory1(am):
 	fields['longAgoTreatRecentVyrs'] = am.angerHistory.longAgoTreatRecentVyrs
 	fields['didCompleteTreatRecentV'] = am.angerHistory.didCompleteTreatRecentV
 	fields['reasonNotCompleteRecentV'] = am.angerHistory.reasonNotCompleteRecentV
+	fields['isComplete'] = am.angerHistoryComplete
 
 	return fields
 
@@ -3945,6 +3946,7 @@ def grabAmAngerHistory2(am):
 	fields['suicideTodayExplainRecentV'] = am.angerHistory2.suicideTodayExplainRecentV
 	fields['hasAttemptedSuicide'] = am.angerHistory2.hasAttemptedSuicide
 	fields['hasAttemptedExplainRecentV'] = am.angerHistory2.hasAttemptedExplainRecentV
+	fields['isComplete'] = am.angerHistoryComplete2
 	return fields
 
 def grabAmAngerHistory3(am):
@@ -3959,6 +3961,7 @@ def grabAmAngerHistory3(am):
 	fields['durationRecentV'] = am.angerHistory3.durationRecentV
 	fields['intensityRecentV'] = am.angerHistory3.intensityRecentV
 	fields['howOften'] = am.angerHistory3.howOften
+	fields['isComplete'] = am.angerHistoryComplete3
 
 	return fields
 
@@ -3970,6 +3973,7 @@ def grabAmFinal(am):
 	fields['changeLearn2'] = am.final.changeLearn2
 	fields['changeLearn3'] = am.final.changeLearn3
 	fields['whoLivesWithClient'] = am.demographic.whoLivesWithClient
+	fields['isComplete'] = am.finalComplete
 
 def grabAMViewForm(am):
 	no = None
