@@ -2809,37 +2809,19 @@ function initalize_am_worst(json_data) {
 }
 
 function initalize_am_target(json_data) {
-	var back = document.getElementById('back_btn');
+	checkBoolInit(json_data.angryPartner, grab('angryPartner'));
+	checkBoolInit(json_data.angryParents, grab('angryParents'));
+	checkBoolInit(json_data.angryChildren, grab('angryChildren'));
+	checkBoolInit(json_data.angryRelatives, grab('angryRelatives'));
+	checkBoolInit(json_data.angryEmployer, grab('angryEmployer'));
+	checkBoolInit(json_data.angryFriends, grab('angryFriends'));
+	checkBoolInit(json_data.angryOther, grab('angryOther'));
+	checkBoolInit(json_data.seldomUpset, grab('seldomUpset'));
 
-	var angryPartner = document.getElementById('angryPartner');
-	var angryParents = document.getElementById('angryParents');
-	var angryChildren = document.getElementById('angryChildren');
-	var angryRelatives = document.getElementById('angryRelatives');
-	var angryEmployer = document.getElementById('angryEmployer');
-	var angryFriends = document.getElementById('angryFriends');
-	var angryOther = document.getElementById('angryOther');
-	var otherWhom = document.getElementById('otherWhom');
-	var angryAbout = document.getElementById('angryAbout');
-	var seldomUpset = document.getElementById('seldomUpset');
+	blank_init(json_data.isComplete, grab('angryAbout'));
+	blank_init(json_data.isComplete, grab('otherWhom'));
 
-	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
-	initializeAllCheckBoxes(json_data.angryParents, angryParents);
-	initializeAllCheckBoxes(json_data.angryChildren, angryChildren);
-	initializeAllCheckBoxes(json_data.angryPartner, angryPartner);
-	initializeAllCheckBoxes(json_data.angryRelatives, angryRelatives);
-	initializeAllCheckBoxes(json_data.angryEmployer, angryEmployer);
-	initializeAllCheckBoxes(json_data.angryFriends, angryFriends);
-	initializeAllCheckBoxes(json_data.angryOther, angryOther);
-	initializeAllCheckBoxes(json_data.seldomUpset, seldomUpset);
-
-	amTargetOther();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('angryAbout'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('angryAbout'));
-	}
+	// amTargetOther();
 }
 
 
