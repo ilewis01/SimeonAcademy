@@ -3721,6 +3721,7 @@ def grabAmConnections(am):
 	fields['noConnection'] = am.connections.noConnection
 	fields['otherConnectionsUsing'] = am.connections.otherConnectionsUsing
 	fields['connectionExplain'] = am.connections.connectionExplain
+	fields['isComplete'] = am.connectionsComplete
 	return fields
 
 def grabAmControl(am):

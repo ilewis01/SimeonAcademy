@@ -2775,22 +2775,16 @@ function initialize_am_angerHistory3(json_data) {
 }
 
 function initalize_am_connections(json_data) {
-	var angerWorse = document.getElementById('angerWorse');
-	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
-	var lessAngry = document.getElementById('lessAngry');
-	var othersTellMe = document.getElementById('othersTellMe');
-	var noConnection = document.getElementById('noConnection');
-	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
-	var connectionExplain = document.getElementById('connectionExplain');
+	checkBoolInit(json_data.angerWorse, grab('angerWorse'));
+	checkBoolInit(json_data.troubleWhenUsing, grab('troubleWhenUsing'));
+	checkBoolInit(json_data.lessAngry, grab('lessAngry'));
+	checkBoolInit(json_data.othersTellMe, grab('othersTellMe'));
+	checkBoolInit(json_data.noConnection, grab('noConnection'));
+	checkBoolInit(json_data.otherConnectionsUsing, grab('otherConnectionsUsing'));
 
-	initializeAllCheckBoxes(json_data.angerWorse, angerWorse);
-	initializeAllCheckBoxes(json_data.troubleWhenUsing, troubleWhenUsing);
-	initializeAllCheckBoxes(json_data.lessAngry, lessAngry);
-	initializeAllCheckBoxes(json_data.othersTellMe, othersTellMe);
-	initializeAllCheckBoxes(json_data.noConnection, noConnection);
-	initializeAllCheckBoxes(json_data.otherConnectionsUsing, otherConnectionsUsing);
-
-	connectionCheck();
+	blank_init(json_data.isComplete, grab('medSuccessExplainRecentV'));
+	
+	// connectionCheck();
 }
 
 function initalize_am_worst(json_data) {
