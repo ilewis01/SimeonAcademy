@@ -147,7 +147,7 @@
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='whoWorst' id='whoWorst'></textarea></td>
+                        <td><textarea rows='3' cols='60' name='whoWorst' id='whoWorst' value=''>{{fields.whoWorst}}</textarea></td>
                       </tr>
                     </table>
 
@@ -159,7 +159,7 @@
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='happenedWorst' id='happenedWorst'></textarea></td>
+                        <td><textarea rows='3' cols='60' name='happenedWorst' id='happenedWorst'>{{fields.happenedWorst}}</textarea></td>
                       </tr>
                     </table>
 
@@ -171,7 +171,7 @@
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='wordThoughtWorst' id='wordThoughtWorst'></textarea></td>
+                        <td><textarea rows='3' cols='60' name='wordThoughtWorst' id='wordThoughtWorst'>{{fields.wordThoughtWorst}}</textarea></td>
                       </tr>
                     </table>
 
@@ -183,7 +183,7 @@
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='howStartWorst' id='howStartWorst'></textarea></td>
+                        <td><textarea rows='3' cols='60' name='howStartWorst' id='howStartWorst'>{{fields.howStartWorst}}</textarea></td>
                       </tr>
                     </table>
                   </div>
@@ -198,7 +198,7 @@
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='howEndWorst' id='howEndWorst'></textarea></td>
+                        <td><textarea rows='3' cols='60' name='howEndWorst' id='howEndWorst'>{{fields.howEndWorst}}</textarea></td>
                       </tr>
                     </table>
 
@@ -218,11 +218,11 @@
                         <td><div class='iml-sub-label-left'><li>Who was using?</li></div></td>
                         <td>
                           <div>
-                            <select name='' value=''>
+                            <select name='whoUsed' id='whoUsed' value=''>
                               <option value='None Selected'>Select</option>
-                              <option value='The client only'>The client only</option>
-                              <option value='The other party'>The other party</option>
-                              <option value='Everyone involved'>Everyone involved</option>
+                              <option value='Client Used Only'>The client only</option>
+                              <option value='The Other Party Used Only'>The other party</option>
+                              <option value='Everyone Involved'>Everyone involved</option>
                             </select>
                           </div>
                         </td>
@@ -315,7 +315,7 @@
                         <td></td>
                         <td>
                           <div class='iml-text-area'>
-                            <textarea rows='2' cols='56' name='otherWorstDescription' id='otherWorstDescription'></textarea>
+                            <textarea rows='2' cols='56' name='otherWorstDescription' id='otherWorstDescription'>{{fields.otherWorstDescription}}</textarea>
                           </div>
                         </td>
                       </tr>

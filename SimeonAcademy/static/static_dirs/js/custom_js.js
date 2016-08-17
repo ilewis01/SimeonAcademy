@@ -2783,56 +2783,29 @@ function initalize_am_connections(json_data) {
 	checkBoolInit(json_data.otherConnectionsUsing, grab('otherConnectionsUsing'));
 
 	blank_init(json_data.isComplete, grab('medSuccessExplainRecentV'));
-	
+
 	// connectionCheck();
 }
 
 function initalize_am_worst(json_data) {
-	var back = document.getElementById('back_btn');
+	grab('whoUsed').selectedIndex = Number(json_data.whoUsed);
 
-	var whoWorst = document.getElementById('whoWorst');
-	var happenedWorst = document.getElementById('happenedWorst');
-	var wordThoughtWorst = document.getElementById('wordThoughtWorst');
-	var howStartWorst = document.getElementById('howStartWorst');
-	var howEndWorst = document.getElementById('howEndWorst');
-	var whoDidItFight = document.getElementById('whoDidItFight');
-	var theyUsedWorst = document.getElementById('theyUsedWorst');
-	var physicalWorst = document.getElementById('physicalWorst');
-	var verbalWorst = document.getElementById('verbalWorst');
-	var threatsWorst = document.getElementById('threatsWorst');
-	var propertyWorst = document.getElementById('propertyWorst');
-	var otherWorst = document.getElementById('otherWorst');
-	var otherWorstDescription = document.getElementById('otherWorstDescription');
+	blank_init(json_data.isComplete, grab('whoWorst'));
+	blank_init(json_data.isComplete, grab('happenedWorst'));
+	blank_init(json_data.isComplete, grab('wordThoughtWorst'));
+	blank_init(json_data.isComplete, grab('howStartWorst'));
+	blank_init(json_data.isComplete, grab('howEndWorst'));
+	blank_init(json_data.isComplete, grab('otherWorstDescription'));
 
-	var hadDrugs = document.getElementById('hadDrugs');
-	var noDrugs = document.getElementById('noDrugs');
+	setRadioElement(json_data.useWorst, grab('yesDrugs'), grab('noDrugs'));
 
-	setRadioElement(json_data.useWorst, hadDrugs, noDrugs);
-	whoDidItFight.selectedIndex = json_data.whoDidItFight;
+	checkBoolInit(json_data.physicalWorst, grab('physicalWorst'));
+	checkBoolInit(json_data.verbalWorst, grab('verbalWorst'));
+	checkBoolInit(json_data.propertyWorst, grab('propertyWorst'));
+	checkBoolInit(json_data.otherWorst, grab('otherWorst'));
 
-	initializeAllCheckBoxes(json_data.physicalWorst, physicalWorst);
-	initializeAllCheckBoxes(json_data.verbalWorst, verbalWorst);
-	initializeAllCheckBoxes(json_data.threatsWorst, threatsWorst);
-	initializeAllCheckBoxes(json_data.propertyWorst, propertyWorst);
-	initializeAllCheckBoxes(json_data.otherWorst, otherWorst);
-
-	worstCheck();
-	activateWorstRadio();
-
-	if (String(back.value) === 'false') {
-		nullTextMustDie(document.getElementById('whoWorst'));
-		nullTextMustDie(document.getElementById('happenedWorst'));
-		nullTextMustDie(document.getElementById('wordThoughtWorst'));
-		nullTextMustDie(document.getElementById('howStartWorst'));
-		nullTextMustDie(document.getElementById('howEndWorst'));
-	}
-	else {
-		nullTextMustDie2(document.getElementById('whoWorst'));
-		nullTextMustDie2(document.getElementById('happenedWorst'));
-		nullTextMustDie2(document.getElementById('wordThoughtWorst'));
-		nullTextMustDie2(document.getElementById('howStartWorst'));
-		nullTextMustDie2(document.getElementById('howEndWorst'));
-	}
+	// worstCheck();
+	// activateWorstRadio();
 }
 
 function initalize_am_target(json_data) {

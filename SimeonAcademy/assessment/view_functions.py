@@ -3737,6 +3737,7 @@ def grabAmControl(am):
 	fields['selfHelpGroup'] = am.control.selfHelpGroup
 	fields['otherControlAnger'] = am.control.otherControlAnger
 	fields['doWhatOtherControl'] = am.control.doWhatOtherControl
+	fields['isComplete'] = am.controlComplete
 	return fields
 
 def grabAmCurrentProblems(am):
@@ -3752,6 +3753,7 @@ def grabAmCurrentProblems(am):
 	fields['currentlyOnMeds'] = am.currentProblems.currentlyOnMeds
 	fields['whichMeds'] = am.currentProblems.whichMeds
 	fields['describeIssue'] = am.currentProblems.describeIssue
+	fields['isComplete'] = am.currentProblemsComplete
 	return fields
 
 def grabAmFamilyOrigin(am):
@@ -3764,6 +3766,7 @@ def grabAmFamilyOrigin(am):
 	fields['suicideHistory'] = am.familyOrigin.suicideHistory
 	fields['hasLovingMother'] = am.familyOrigin.hasLovingMother
 	fields['hasLovingSiblings'] = am.familyOrigin.hasLovingSiblings
+	fields['isComplete'] = am.familyOriginComplete
 	return fields
 
 def grabAmWorstEpisodes(am):
@@ -3775,9 +3778,9 @@ def grabAmWorstEpisodes(am):
 	if selectBtn == None:
 		index = 0
 	else:
-		if str(selectBtn) == 'Client Used':
+		if str(selectBtn) == 'Client Used Only':
 			index = 1
-		elif str(selectBtn) == 'The Other Party Used':
+		elif str(selectBtn) == 'The Other Party Used Only':
 			index = 2
 		elif str(selectBtn) == 'Everyone Involved':
 			index = 3
@@ -3797,6 +3800,7 @@ def grabAmWorstEpisodes(am):
 	fields['propertyWorst'] = am.worstEpisode.propertyWorst
 	fields['otherWorst'] = am.worstEpisode.otherWorst
 	fields['otherWorstDescription'] = am.worstEpisode.otherWorstDescription
+	fields['isComplete'] = am.worstComplete
 	return fields
 
 def grabAmTarget(am):
@@ -3811,6 +3815,7 @@ def grabAmTarget(am):
 	fields['otherWhom'] = am.angerTarget.otherWhom
 	fields['angryAbout'] = am.angerTarget.angryAbout
 	fields['seldomUpset'] = am.angerTarget.seldomUpset
+	fields['isComplete'] = am.angerTargetComplete
 	return fields
 
 def getAMDemoFields(am):

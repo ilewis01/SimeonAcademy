@@ -501,7 +501,6 @@ class AM_WorstEpisode(models.Model):
 	whoUsed = models.CharField(max_length=50, default=None, blank=True, null=True)
 	physicalWorst = models.BooleanField(default=False, blank=True)
 	verbalWorst = models.BooleanField(default=False, blank=True)
-	threatsWorst = models.BooleanField(default=False, blank=True)
 	propertyWorst = models.BooleanField(default=False, blank=True)
 	otherWorst = models.BooleanField(default=False, blank=True)
 	otherWorstDescription = models.CharField(max_length=100, default=None, blank=True, null=True)
