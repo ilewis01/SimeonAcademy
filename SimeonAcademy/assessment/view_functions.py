@@ -2306,17 +2306,58 @@ def saveAMConnections(request, am):
 	form = am.connections
 	form.date_of_assessment = date
 
+	form.angerWorse = truePythonBool(request.POST.get('m_angerWorse'))
+	form.troubleWhenUsing = truePythonBool(request.POST.get('m_troubleWhenUsing'))
+	form.lessAngry = truePythonBool(request.POST.get('m_lessAngry'))
+	form.othersTellMe = truePythonBool(request.POST.get('m_othersTellMe'))
+	form.noConnection = truePythonBool(request.POST.get('m_noConnection'))
+	form.otherConnectionsUsing = truePythonBool(request.POST.get('m_otherConnectionsUsing'))
+	form.connectionExplain = truePythonBool(request.POST.get('m_connectionExplain'))
+
+	form.save()
+	am.save()
+
 def saveAMWorst(request, am):
 	date = datetime.now()
 	date = date.date()
 	form = am.worstEpisode
 	form.date_of_assessment = date
 
+	form.whoWorst = request.POST.get('whoWorst')
+	form.happenedWorst = request.POST.get('happenedWorst')
+	form.wordThoughtWorst = request.POST.get('wordThoughtWorst')
+	form.howStartWorst = request.POST.get('howStartWorst')
+	form.howEndWorst = request.POST.get('howEndWorst')
+
+	# form.whoUsed = request.POST.get('m_whoUsed')
+	# form.physicalWorst = request.POST.get('m_physicalWorst')
+	# form.verbalWorst = request.POST.get('m_verbalWorst')
+	# form.propertyWorst = request.POST.get('m_propertyWorst')
+	# form.otherWorst = request.POST.get('m_otherWorst')
+	# form.otherWorstDescription = request.POST.get('m_otherWorstDescription')
+
+	form.save()
+	am.save()
+
 def saveAMTarget(request, am):
 	date = datetime.now()
 	date = date.date()
 	form = am.angerTarget
 	form.date_of_assessment = date
+
+	form.angryPartner = truePythonBool(request.POST.get('m_angryPartner'))
+	form.angryParents = truePythonBool(request.POST.get('m_angryParents'))
+	form.angryChildren = truePythonBool(request.POST.get('m_angryChildren'))
+	form.angryRelatives = truePythonBool(request.POST.get('m_angryRelatives'))
+	form.angryEmployer = truePythonBool(request.POST.get('m_angryEmployer'))
+	form.angryFriends = truePythonBool(request.POST.get('m_angryFriends'))
+	form.angryOther = truePythonBool(request.POST.get('m_angryOther'))
+	form.seldomUpset = truePythonBool(request.POST.get('m_seldomUpset'))
+	form.otherWhom = request.POST.get('m_otherWhom')
+	form.angryAbout = request.POST.get('angryAbout')
+
+	form.save()
+	am.save()
 
 def saveAMFamily(request, am):
 	date = datetime.now()
@@ -2329,9 +2370,9 @@ def saveAMFamily(request, am):
 	form.kidSiblingAnger = request.POST.get('kidSiblingAnger')
 	form.kidOtherAnger = request.POST.get('kidOtherAnger')
 	form.learnFamilyAnger = request.POST.get('learnFamilyAnger')
-	# form.suicideHistory = request.POST.get('suicideHistory')
-	# form.hasLovingMother = request.POST.get('hasLovingMother')
-	# form.hasLovingSiblings = request.POST.get('hasLovingSiblings')
+	form.suicideHistory = truePythonBool(request.POST.get('suicideHistory'))
+	form.hasLovingMother = truePythonBool(request.POST.get('m_hasLovingMother'))
+	form.hasLovingSiblings = truePythonBool(request.POST.get('m_hasLovingSiblings'))
 
 	form.save()
 	am.save()
@@ -2353,6 +2394,14 @@ def saveAMFinal(request, am):
 	date = date.date()
 	form = am.final
 	form.date_of_assessment = date
+
+	form.anythingelse = request.POST.get('anythingelse')
+	form.changeLearn1 = request.POST.get('changeLearn1')
+	form.changeLearn2 = request.POST.get('changeLearn2')
+	form.changeLearn3 = request.POST.get('changeLearn3')
+
+	form.save()
+	am.save()
 
 def saveCompletedAmSection(request, section, am):
 	if section == '/am_demographic/':

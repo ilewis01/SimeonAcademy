@@ -1985,27 +1985,13 @@ function connectionCheck() {
 
 
 function post_dynamic_am_connections() {
-	var angerWorse = document.getElementById('angerWorse');
-	var troubleWhenUsing = document.getElementById('troubleWhenUsing');
-	var lessAngry = document.getElementById('lessAngry');
-	var othersTellMe = document.getElementById('othersTellMe');
-	var noConnection = document.getElementById('noConnection');
-	var otherConnectionsUsing = document.getElementById('otherConnectionsUsing');
-	var connectionExplain = document.getElementById('connectionExplain');
-
-	postCheckboxValue(angerWorse, m_angerWorse);
-	postCheckboxValue(troubleWhenUsing, m_troubleWhenUsing);
-	postCheckboxValue(lessAngry, m_lessAngry);
-	postCheckboxValue(othersTellMe, m_othersTellMe);
-	postCheckboxValue(noConnection, m_noConnection);
-	postCheckboxValue(otherConnectionsUsing, m_otherConnectionsUsing);
-
-	if (otherConnectionsUsing.checked === true) {
-		m_connectionExplain.value = connectionExplain.value;
-	}
-	else {
-		m_connectionExplain.value = 'N/A';
-	}
+	generalCheckSave(grab('angerWorse'), grab('m_angerWorse'));
+	generalCheckSave(grab('troubleWhenUsing'), grab('m_troubleWhenUsing'));
+	generalCheckSave(grab('lessAngry'), grab('m_lessAngry'));
+	generalCheckSave(grab('othersTellMe'), grab('m_othersTellMe'));
+	generalCheckSave(grab('noConnection'), grab('m_noConnection'));
+	generalCheckSave(grab('otherConnectionsUsing'), grab('m_otherConnectionsUsing'));
+	post(true, 'text', grab('connectionExplain'), grab('otherConnectionsUsing'), grab('m_connectionExplain'));
 }
 
 // AM WORST EPISODES FUNCTIONS
@@ -2032,59 +2018,25 @@ function worstCheck() {
 }
 
 function worstEndSet() {
-	if (grab('otherWorst').checked === true) {
-		grab('otherWorstDescription').disabled = false;
-		opacityHigh(grab('lab2'));
-		opacityHigh(grab('otherWorstDescription'));
-	}
-	else {		
-		opacityLow(grab('lab2'));
-		opacityLow(grab('otherWorstDescription'));
-		grab('otherWorstDescription').value = '';
-		grab('otherWorstDescription').disabled = true;
-	}
+	generalCheckClear('otherWorstDescription', 'otherWorst');
 }
 
 
 function post_dynamic_am_worst() {
-	//M_VALUE ELEMENTS
-	var m_useWorst = document.getElementById('m_useWorst');
-	var m_whoDidItFight = document.getElementById('m_whoDidItFight');
-	var m_physicalWorst = document.getElementById('m_physicalWorst');
-	var m_verbalWorst = document.getElementById('m_verbalWorst');
-	var m_threatsWorst = document.getElementById('m_threatsWorst');
-	var m_propertyWorst = document.getElementById('m_propertyWorst');
-	var m_otherWorst = document.getElementById('m_otherWorst');
-	var m_otherWorstDescription = document.getElementById('m_otherWorstDescription');
+	post(false, 'text', grab('whoWorst'), null, null);
+	post(false, 'text', grab('happenedWorst'), null, null);
+	post(false, 'text', grab('wordThoughtWorst'), null, null);
+	post(false, 'text', grab('howStartWorst'), null, null);
+	post(false, 'text', grab('howEndWorst'), null, null);
 
-	//TRIGGERS
-	var hadDrugs = document.getElementById('hadDrugs');
 
-	// CHECKBOXES
-	var physicalWorst = document.getElementById('physicalWorst');
-	var verbalWorst = document.getElementById('verbalWorst');
-	var threatsWorst = document.getElementById('threatsWorst');
-	var propertyWorst = document.getElementById('propertyWorst');
-	var otherWorst = document.getElementById('otherWorst');
+	// post(true, 'select', grab('whoUsed'), grab('yesDrugs'), grab('m_whoUsed'));
+	// post(true, 'text', grab('otherWorstDescription'), grab('otherWorst'), grab('m_otherWorstDescription'));
 
-	// DYNAMIC TEXT FIELDS
-	var whoDidItFight = document.getElementById('whoDidItFight');
-
-	postDynamicRadioButtons(hadDrugs, m_useWorst);
-	processDynamicTextPostValue(hadDrugs, whoDidItFight, m_whoDidItFight);
-
-	postCheckboxValue(physicalWorst, m_physicalWorst);
-	postCheckboxValue(verbalWorst, m_verbalWorst);
-	postCheckboxValue(threatsWorst, m_threatsWorst);
-	postCheckboxValue(propertyWorst, m_propertyWorst);
-	postCheckboxValue(otherWorst, m_otherWorst);
-
-	if (otherWorst.checked === true) {
-		m_otherWorstDescription.value = document.getElementById('otherWorstDescription').value;
-	}
-	else {
-		m_otherWorstDescription.value = 'N/A';
-	}
+	// generalCheckSave(grab('physicalWorst'), grab('m_physicalWorst'));
+	// generalCheckSave(grab('verbalWorst'), grab('m_verbalWorst'));
+	// generalCheckSave(grab('propertyWorst'), grab('m_propertyWorst'));
+	// generalCheckSave(grab('otherWorst'), grab('m_otherWorst'));
 }
 
 // AM TARGET FUNCTIONS
@@ -2101,55 +2053,24 @@ function amTargetOther() {
 }
 
 function post_dynamic_am_target() {
-	var angryPartner = document.getElementById('angryPartner');
-	var angryParents = document.getElementById('angryParents');
-	var angryChildren = document.getElementById('angryChildren');
-	var angryRelatives = document.getElementById('angryRelatives');
-	var angryEmployer = document.getElementById('angryEmployer');
-	var angryFriends = document.getElementById('angryFriends');
-	var angryOther = document.getElementById('angryOther');
-	var otherWhom = document.getElementById('otherWhom');
-	var angryAbout = document.getElementById('angryAbout');
-	var seldomUpset = document.getElementById('seldomUpset');
-
-	postCheckboxValue(angryPartner, document.getElementById('m_angryPartner'));
-	postCheckboxValue(angryParents, document.getElementById('m_angryParents'));
-	postCheckboxValue(angryChildren, document.getElementById('m_angryChildren'));
-	postCheckboxValue(angryRelatives, document.getElementById('m_angryRelatives'));
-	postCheckboxValue(angryEmployer, document.getElementById('m_angryEmployer'));
-	postCheckboxValue(angryFriends, document.getElementById('m_angryFriends'));
-	postCheckboxValue(angryOther, document.getElementById('m_angryOther'));
-	postCheckboxValue(seldomUpset, document.getElementById('m_seldomUpset'));
-
-	if (angryOther.checked === false) {
-		document.getElementById('m_otherWhom').value = 'N/A';
-	}
-	else {
-		document.getElementById('m_otherWhom').value = otherWhom.value;
-	}
-
-	if (angryAbout.value === '') {
-		angryAbout.value = 'N/A';
-	}
+	generalCheckSave(grab('angryPartner'), grab('m_angryPartner'));
+	generalCheckSave(grab('angryParents'), grab('m_angryParents'));
+	generalCheckSave(grab('angryChildren'), grab('m_angryChildren'));
+	generalCheckSave(grab('angryRelatives'), grab('m_angryRelatives'));
+	generalCheckSave(grab('angryEmployer'), grab('m_angryEmployer'));
+	generalCheckSave(grab('angryFriends'), grab('m_angryFriends'));
+	generalCheckSave(grab('angryOther'), grab('m_angryOther'));
+	generalCheckSave(grab('seldomUpset'), grab('m_seldomUpset'));
+	post(true, 'text', grab('otherWhom'), grab('angryOther'), grab('m_otherWhom'));
 }
 
 // AM FAMILY OF ORIGIN FUNCTIONS
 
 
 function post_dynamic_am_family() {
-	var m_hasLovingMother = document.getElementById('m_hasLovingMother');
-	var m_hasLovingSiblings = document.getElementById('m_hasLovingSiblings');
-	var m_suicideHistory = document.getElementById('m_suicideHistory');
-
-	var hasLovingMother = document.getElementById('hasLovingMother');
-	var hasLovingSiblings = document.getElementById('hasLovingSiblings');
-	var hasSuicide = document.getElementById('hasSuicide');
-
-	var hasSuicide = document.getElementById('hasSuicide');
-
-	postCheckboxValue(hasLovingMother, m_hasLovingMother);
-	postCheckboxValue(hasLovingSiblings, m_hasLovingSiblings);
-	postDynamicRadioButtons(hasSuicide, m_suicideHistory);
+	// Immanuel Lewis
+	generalCheckSave(grab('hasLovingMother'), grab('m_hasLovingMother'));
+	generalCheckSave(grab('hasLovingSiblings'), grab('m_hasLovingSiblings'));
 }
 
 //AM CURRENT PROBLEMS FUNCTIONS
@@ -2157,8 +2078,24 @@ function am_problems_check() {
 	generalCheckClear('otherWhom', 'otherSeriousIllness');
 }
 
+function generalCheckSave(checkbox, target) {
+	if (checkbox.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
+	}
+}
+
 function am_problems_radio() {
 	twoElementRadioSetup(grab('onMeds'), grab('lab2'), grab('whichMeds'));
+}
+
+function post_dynamic_am_final() {
+	post(false, 'text', grab('anythingelse'), null, null);
+	post(false, 'text', grab('changeLearn1'), null, null);
+	post(false, 'text', grab('changeLearn2'), null, null);
+	post(false, 'text', grab('changeLearn3'), null, null);
 }
 
 
@@ -2239,8 +2176,11 @@ function universal_am_dynamic_post(section) {
 	else if (section === '/am_problems/') {
 		post_dynamic_am_current();
 	}
-	else if (section === '/am_final/') {
+	else if (section === '/am_control/') {
 		post_dynamic_am_control();
+	}
+	else if (section === '/am_final/') {
+		post_dynamic_am_final();
 	}
 }
 
@@ -6286,6 +6226,15 @@ function postUniversalRadioText(trigger, textField, m_post) {
 	}
 }
 
+function postUniversalRadioSEL(trigger, textField, m_post) {
+	if (trigger.checked === true) {
+		m_post.value = textField.value;
+	}
+	else {
+		m_post.value = 'None Selected';
+	}
+}
+
 function postUniversalRadioText_asi(trigger, textField, m_post) {
 	if (trigger.checked === true) {
 		m_post.value = textField.value;
@@ -7896,7 +7845,7 @@ function uniDynamicFields(field_type, field, trigger, target) {
 		postUniversalRadioNumber(trigger, field, target);
 	}
 	else if (field_type === 'select') {
-		postUniversalRadioText(trigger, field, target);
+		postUniversalRadioSEL(trigger, field, target);
 	}
 	else if (field_type === 'checkbox') {
 		postUniversalRadioText(trigger, field, target);
