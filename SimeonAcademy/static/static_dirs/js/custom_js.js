@@ -2904,41 +2904,15 @@ function start_am_form() {
 }
 
 function processAMDemoData() {
-	//M_VALUES
-	var m_own = document.getElementById('m_own');
-	var m_drop_out = document.getElementById('m_drop_out');
-	var m_health_problem = document.getElementById('m_health_problem');
-	var m_medication = document.getElementById('m_medication');
-	var m_resasonDO = document.getElementById('m_resasonDO');
-	var m_health_exp = document.getElementById('m_health_exp');
-	var m_whatMedicine = document.getElementById('m_whatMedicine');
-
-	//TRIGGERS AND RADIOS
-	var doesOwn = document.getElementById('doesOwn');
-	var hs_drop = document.getElementById('hs_drop');
-	var not_healthy = document.getElementById('healthy');
-	var on_meds = document.getElementById('on_meds');
-
-	//DYNAMIC FIELDS
-	var resasonDO = document.getElementById('resasonDO');
-	var health_exp = document.getElementById('health_exp');
-	var whatMedicine = document.getElementById('whatMedicine');
-
-	postDynamicRadioButtons(doesOwn, m_own);
-	postDynamicRadioButtons(hs_drop, m_drop_out);
-	postDynamicRadioButtons(not_healthy, m_health_problem);
-
-	processDynamicTextPostValue(hs_drop, resasonDO, m_resasonDO);
-	processDynamicTextPostValue(not_healthy, health_exp, m_health_exp);
-
-	if (not_healthy.checked == true) {
-		postDynamicRadioButtons(on_meds, m_medication);
-		processDynamicTextPostValue(on_meds, whatMedicine, m_whatMedicine);
+	if (grab('DO').checked === false) {
+		grab('m_resasonDO').value = 'N/A';
 	}
 	else {
-		m_medication.value = 'False';
-		m_whatMedicine.value = 'N/A';
+		grab('m_resasonDO').value = grab('resasonDO').value;
 	}
+
+	post(true, 'text', grab('health_exp'), grab('not_healthy'), grab('m_health_exp'));
+	post(true, 'text', grab('whatMedicine'), grab('on_meds'), grab('m_whatMedicine'));
 }
 
 
@@ -3832,56 +3806,73 @@ function radioRightNoLower() {
 
 function processAM_DH_data() {
 	//HIDDEN FIELDS
-	var m_useType = document.getElementById('m_useType');
-	var m_amtPerWeek = document.getElementById('m_amtPerWeek');
-	var m_useAmt = document.getElementById('m_useAmt');
-	var m_monthsQuit = document.getElementById('m_monthsQuit');
-	var m_yearsQuit = document.getElementById('m_yearsQuit');
-	var m_reasonQuit = document.getElementById('m_reasonQuit');
-	var m_numDUI = document.getElementById('m_numDUI');
-	var m_BALevel = document.getElementById('m_BALevel');
-	var m_treatmentPlace = document.getElementById('m_treatmentPlace');
-	var m_dateTreated = document.getElementById('m_dateTreated');
-	var m_reasonNotFinishedTreatment = document.getElementById('m_reasonNotFinishedTreatment');
-	var m_relapseTrigger = document.getElementById('m_relapseTrigger');
+	post(false, 'text', grab('firstDrinkType'), null, null);
+	post(true, 'text', grab('amtPerWeek'), grab('yesDrink'), grab('m_amtPerWeek'));
+	post(true, 'text', grab('useAmt'), grab('yesDrink'), grab('m_useAmt'));
 
-	//TEXT FIELDS	
-	var what_you_use = document.getElementById('what-you-use');
-	var how_often_you_use = document.getElementById('how-often-you-use');
-	var how_much_you_use = document.getElementById('how-much-you-use');
-	var quitMos = document.getElementById('quitMos');
-	var quitYrs = document.getElementById('quitYrs');
-	var reason_quit = document.getElementById('reason_quit');
-	var dui_amount = document.getElementById('dui_amount');
-	var BAL = document.getElementById('BAL');
-	var when_treated = document.getElementById('when_treated');
-	var where_treated = document.getElementById('where_treated');
-	var no_treat_explain = document.getElementById('no_treat_explain');
-	var relapse_explain = document.getElementById('relapse_explain');
+	if (grab('noDrink').checked === true) {
+		if (grab('hasDrank').checked === true) {grab('m_everDrank').value = 'True';}
+		else {grab('m_everDrank').value = 'False';}
+		post(true, 'number', grab('yearsQuit'), grab('hasDrank'), grab('m_yearsQuit'));
+		post(true, 'number', grab('monthsQuit'), grab('hasDrank'), grab('m_monthsQuit'));
+		post(true, 'text', grab('reasonQuit'), grab('hasDrank'), grab('m_reasonQuit'));
+	}
+	else {
+		grab('m_everDrank').value = 'False';
+		grab('m_monthsQuit').value = '0';
+		grab('m_yearsQuit').value = '0';
+		grab('m_reasonQuit').value = 'N/A';
+	}
 
-	//DYNAMIC DATA TRIGGERS
-	var current_use = document.getElementById('current_use');
-	var has_used = document.getElementById('has_used');
-	var dui = document.getElementById('dui');
-	var had_treatment = document.getElementById('had_treatment');
-	var not_completed = document.getElementById('not_completed');
-	var not_abstinent = document.getElementById('not_abstinent');
+	if (grab('noDrink').checked === true) {
+		if (grab('hasDrank').checked === false) {
+			grab('m_DUI').value = 'False';
+			grab('m_numDUI').value = '0';
+			grab('m_BALevel').value = 'N/A';
+		}
+		else {
+			if (grab('hasDUI').checked === true) {grab('m_DUI').value = 'True';}
+			else {grab('m_DUI').value = 'False';}
+			post(true, 'number', grab('numDUI'), grab('hasDUI'), grab('m_numDUI'));
+			post(true, 'text', grab('BALevel'), grab('hasDUI'), grab('m_BALevel'));
+		}
+	}
 
-	//PROCESS AND POST DYNAMIC FIELD VALUES
-	postDynamicFields(current_use, what_you_use, m_useType);
-	postDynamicFields(current_use, how_often_you_use, m_amtPerWeek);
-	postDynamicFields(current_use, how_much_you_use, m_useAmt);
-	postDynamicFields(has_used, reason_quit, m_reasonQuit);
-	postDynamicFields(dui, dui_amount, m_numDUI);
-	postDynamicFields(dui, BAL, m_BALevel);
-	postDynamicFields(had_treatment, when_treated, m_dateTreated);
-	postDynamicFields(had_treatment, where_treated, m_treatmentPlace);
-	postDynamicFields(not_completed, no_treat_explain, m_reasonNotFinishedTreatment);
-	postDynamicFields(not_abstinent, relapse_explain, m_relapseTrigger);
+	post(true, 'text', grab('dateTreated'), grab('hadTreatment'), grab('m_dateTreated'));
+	post(true, 'text', grab('treatmentPlace'), grab('hadTreatment'), grab('m_treatmentPlace'));
+	subPost1('text', grab('hadTreatment'), grab('didFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
+	subPost1('text', grab('hadTreatment'), grab('isClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
+}
 
-	//PROCESS DYNAMIC NUMBER FIELDS
-	processDisabledNumberFields(quitMos, m_monthsQuit);
-	processDisabledNumberFields(quitYrs, m_yearsQuit);
+function subPost1(type, trigger1, trigger2, field, triggerTarget, fieldTarget) {
+	if (type === 'text') {
+		if (trigger1.checked === true) {
+			if (trigger2.checked === true) {triggerTarget.value = 'True';}
+			else {triggerTarget.value = 'False';}
+			post(true, 'text', field, trigger2, fieldTarget);
+		}
+		else {
+			triggerTarget.value = 'False';
+			fieldTarget.value = 'N/A';
+		}
+	}
+	else if (type === 'number') {
+		if (trigger1.checked === true) {
+			if (trigger2.checked === true) {triggerTarget.value = 'True';}
+			else {triggerTarget.value = 'False';}
+			triggerTarget.value = 'True';
+			post(true, 'number', field, trigger2, fieldTarget);
+		}
+		else {
+			triggerTarget.value = 'False';
+			fieldTarget.value = '0';
+		}
+	}
+}
+
+function subPost2(type1, type2, trigger1, trigger2, field1, field2, triggerTarget, ft1, ft2) {
+	subPost1(type1, trigger1, trigger2, field1, triggerTarget, ft1);
+	subPost1(type2, trigger1, trigger2, field2, triggerTarget, ft2);
 }
 
 

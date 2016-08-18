@@ -346,6 +346,7 @@ class AM_DrugHistory(models.Model):
 	everDrank = models.BooleanField(default=False, blank=True)
 	monthsQuit = models.IntegerField(default=0)
 	yearsQuit = models.IntegerField(default=0)
+	
 	reasonQuit = models.CharField(max_length=100, default=None, blank=True, null=True)
 	DUI = models.BooleanField(blank=True, default=False)
 	numDUI = models.IntegerField(default=0)

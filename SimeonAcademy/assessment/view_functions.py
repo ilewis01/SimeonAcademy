@@ -542,9 +542,11 @@ def convert_phone(phone):
 def phone_to_integer(phone):
 	result = ''
 
-	for p in phone:
-		if p=='0' or p=='1' or p=='2' or p=='3' or p=='4' or p=='5' or p=='6' or p=='7' or p=='8' or p=='9':
-			result += p
+	if phone != None and len(phone) >= 10:
+		if phone != '' and  phone != ' ':
+			for p in phone:
+				if p=='0' or p=='1' or p=='2' or p=='3' or p=='4' or p=='5' or p=='6' or p=='7' or p=='8' or p=='9':
+					result += p
 
 	return result
 
@@ -2167,652 +2169,251 @@ def findClientSAP(client):
 			break
 	return result
 
+
+# elif section == '/am_demographic/':
+# 		demo = am.demographic
+# 		dateTime = datetime.now()
+# 		date = dateTime.date()	
+
+# 		#NORMAL FIELDS
+# 		maritalStatus = request.POST.get('maritalStatus', '')
+# 		livingSituation = request.POST.get('livingSituation', '')
+
+# 		months_res = request.POST.get('months_res', '')
+# 		years_res = request.POST.get('years_res', '')
+# 		num_children = request.POST.get('num_children', '')
+# 		other_dependants = request.POST.get('other_dependants', '')
+# 		whoLivesWithClient = request.POST.get('whoLivesWithClient', '')
+# 		spouse_dep = request.POST.get('spouse_dep', '')
+# 		education = request.POST.get('education', '')
+# 		job_title = request.POST.get('job_title', '')
+# 		employee = request.POST.get('employee', '')
+# 		emp_address = request.POST.get('emp_address', '')
+# 		employer_phone = request.POST.get('employer_phone', '')
+# 		employed_months = request.POST.get('employed_months', '')
+# 		employed_years = request.POST.get('employed_years', '')
+
+# 		health_problem = truePythonBool(request.POST.get('health_problem'))
+# 		medication = truePythonBool(request.POST.get('medication'))
+# 		own = truePythonBool(request.POST.get('own'))
+
+# 		#DYNAMIC FIELDS
+# 		resasonDO = request.POST.get('m_resasonDO', '')
+# 		health_exp = request.POST.get('m_health_exp', '')
+# 		whatMedicine = request.POST.get('m_whatMedicine')
+
+# 		print "What medicine: " + str(whatMedicine)
+
+# 		employer_phone = phone_to_integer(employer_phone)
+
+# 		demo.whoLivesWithClient 	= whoLivesWithClient
+# 		demo.date_of_assessment 	= date
+# 		demo.maritalStatus 			= maritalStatus
+# 		demo.livingSituation 		= livingSituation
+# 		demo.own 					= own
+# 		demo.months_res 			= months_res
+# 		demo.years_res 				= years_res
+# 		demo.num_children 			= num_children
+# 		demo.other_dependants 		= other_dependants
+# 		demo.education 				= education
+# 		demo.resasonDO 				= resasonDO
+# 		demo.employee 				= employee
+# 		demo.job_title 				= job_title
+# 		demo.emp_address 			= emp_address
+# 		demo.employed_months 		= employed_months
+# 		demo.employed_years 		= employed_years
+# 		demo.employer_phone 		= employer_phone
+# 		demo.health_problem 		= health_problem
+# 		demo.medication 			= medication
+# 		demo.whatMedicine 			= whatMedicine
+# 		demo.health_exp 			= health_exp
+
+# 		demo.save()
+# 		am.save()
+
+def saveAMDemographic(request, am):
+	date = datetime.now()
+	date = date.date()
+	demo = am.demographic
+
+	demo.date_of_assessment = date
+	demo.maritalStatus = request.POST.get('maritalStatus')
+	demo.livingSituation = request.POST.get('livingSituation')
+	demo.own = truePythonBool(request.POST.get('own'))
+	demo.months_res = request.POST.get('months_res')
+	demo.years_res = request.POST.get('years_res')
+	demo.whoLivesWithClient = request.POST.get('whoLivesWithClient')
+
+	demo.num_children = request.POST.get('num_children')
+	demo.spouse_dep = request.POST.get('spouse_dep')
+	demo.other_dependants = request.POST.get('other_dependants')
+
+	demo.education = request.POST.get('education')
+	demo.resasonDO = request.POST.get('m_resasonDO')
+
+	demo.employee = request.POST.get('employee')
+	demo.job_title = request.POST.get('job_title')
+	demo.emp_address = request.POST.get('emp_address')
+	demo.employed_months = request.POST.get('employed_months')
+	demo.employed_years = request.POST.get('employed_years')
+	demo.employer_phone = phone_to_integer(request.POST.get('employer_phone'))
+
+	demo.health_problem = request.POST.get('health_problem')
+	demo.medication = request.POST.get('medication')
+	demo.whatMedicine = request.POST.get('m_whatMedicine')
+	demo.health_exp = request.POST.get('m_health_exp')
+
+	demo.save()
+	am.save()
+
+def saveAMDrugHistory(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.drugHistory
+	form.date_of_assessment = date
+
+	form.firstDrinkAge = request.POST.get('firstDrinkAge')
+	form.firstDrinkType = request.POST.get('firstDrinkType')
+	form.curUse = truePythonBool(request.POST.get('curUse'))
+	form.amtPerWeek = request.POST.get('m_amtPerWeek')
+	form.useAmt = request.POST.get('m_useAmt')
+
+	form.everDrank = request.POST.get('m_everDrank')
+	form.monthsQuit = request.POST.get('m_monthsQuit')
+	form.yearsQuit = request.POST.get('m_yearsQuit')
+	form.reasonQuit = request.POST.get('m_reasonQuit')
+
+	form.DUI = truePythonBool(request.POST.get('m_DUI'))
+	form.numDUI = request.POST.get('m_numDUI')
+	form.BALevel = request.POST.get('m_BALevel')
+
+	form.drugTreatment = truePythonBool(request.POST.get('drugTreatment'))
+	form.treatmentPlace = request.POST.get('m_treatmentPlace')
+	form.dateTreated = request.POST.get('m_dateTreated')
+
+	form.finishedTreatment = truePythonBool(request.POST.get('m_finishedTreatment'))
+	form.reasonNotFinishedTreatment = request.POST.get('m_reasonNotFinishedTreatment')
+	form.isClean = truePythonBool(request.POST.get('m_isClean'))
+	form.relapseTrigger = request.POST.get('m_relapseTrigger')
+
+	a = request.POST.get('m_finishedTreatment')
+	b = request.POST.get('m_isClean')
+
+	print "Finished Treatment: " + str(a)
+	print "Still Abstinent: " + str(b)
+
+	form.drinkLastEpisode = truePythonBool(request.POST.get('drinkLastEpisode'))
+	form.drinkRelationshipProblem = truePythonBool(request.POST.get('drinkRelationshipProblem'))
+	form.needHelpDrugs = truePythonBool(request.POST.get('needHelpDrugs'))
+
+	form.save()
+	am.save()
+
+def saveAMChildhood(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.childhood
+	form.date_of_assessment = date
+
+def saveAMAngerHistroy1(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.angerHistory
+	form.date_of_assessment = date
+
+def saveAMAngerHistroy2(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.angerHistory2
+	form.date_of_assessment = date
+
+def saveAMAngerHistroy3(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.angerHistory3
+	form.date_of_assessment = date
+
+def saveAMConnections(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.connections
+	form.date_of_assessment = date
+
+def saveAMWorst(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.worstEpisode
+	form.date_of_assessment = date
+
+def saveAMTarget(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.angerTarget
+	form.date_of_assessment = date
+
+def saveAMFamily(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.familyOrigin
+	form.date_of_assessment = date
+
+	form.kidMomAnger = request.POST.get('kidMomAnger')
+	form.kidDadAnger = request.POST.get('kidDadAnger')
+	form.kidSiblingAnger = request.POST.get('kidSiblingAnger')
+	form.kidOtherAnger = request.POST.get('kidOtherAnger')
+	form.learnFamilyAnger = request.POST.get('learnFamilyAnger')
+	# form.suicideHistory = request.POST.get('suicideHistory')
+	# form.hasLovingMother = request.POST.get('hasLovingMother')
+	# form.hasLovingSiblings = request.POST.get('hasLovingSiblings')
+
+	form.save()
+	am.save()
+
+def saveAMProblems(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.currentProblems
+	form.date_of_assessment = date
+
+def saveAMControl(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.control
+	form.date_of_assessment = date
+
+def saveAMFinal(request, am):
+	date = datetime.now()
+	date = date.date()
+	form = am.final
+	form.date_of_assessment = date
+
 def saveCompletedAmSection(request, section, am):
-	if section == '/am_childhood/':
-		momAlive = request.POST.get('momAlive', '')
-		dadAlive = request.POST.get('dadAlive', '')
-		childTrama = request.POST.get('childTrama', '')
-		siblingsClose = request.POST.get('siblingsClose', '')
-		dadClose = request.POST.get('dadClose', '')
-		momClose = request.POST.get('momClose', '')
-		wasAbused = request.POST.get('wasAbused', '')
-		childAnger = request.POST.get('childAnger', '')
-		otherChild = request.POST.get('otherChild', '')
-		parentViolence = request.POST.get('parentViolence', '')
-
-		#BOOLEAN FIELDS
-		momAlive = truePythonBool(momAlive)
-		dadAlive = truePythonBool(dadAlive)
-		childTrama = truePythonBool(childTrama)
-		siblingsClose = truePythonBool(siblingsClose)
-		dadClose = truePythonBool(dadClose)
-		momClose = truePythonBool(momClose)
-		wasAbused = truePythonBool(wasAbused)
-		childAnger = truePythonBool(childAnger)
-		otherChild = truePythonBool(otherChild)
-		parentViolence = truePythonBool(parentViolence)
-
-		#DYNAMIC FIELDS
-		traumaExplain = request.POST.get('m_traumaExplain', '')
-		howLeftHome = request.POST.get('m_howLeftHome', '')
-		abusedBy = request.POST.get('m_abusedBy', '')
-		abuseImpact = request.POST.get('m_abuseImpact', '')
-		childAngerExplain = request.POST.get('m_childAngerExplain', '')
-		otherChildExplain = request.POST.get('m_otherChildExplain', '')
-		parentViolenceExplain = request.POST.get('m_parentViolenceExplain', '')
-		parentViolenceImpact = request.POST.get('m_parentViolenceImpact', '')
-
-		#NORMAL FIELDS
-		raisedBy = request.POST.get('raisedBy', '')
-		howLeftHome = request.POST.get('howLeftHome', '')
-		num_siblings = request.POST.get('num_siblings', '')
-		siblingsRelationshipExplain = request.POST.get('siblingsRelationshipExplain', '')
-		dadCloseExplain = request.POST.get('dadCloseExplain', '')
-		momCloseExplain = request.POST.get('momCloseExplain', '')
-
-		raisedBy = blankMustDie(raisedBy)
-		howLeftHome = blankMustDie(howLeftHome)
-		siblingsRelationshipExplain = blankMustDie(siblingsRelationshipExplain)
-		dadCloseExplain = blankMustDie(dadCloseExplain)
-		momCloseExplain = blankMustDie(momCloseExplain)
-
-		childhood = am.childhood
-		date = datetime.now()
-		date = date.date()
-
-		childhood.date_of_assessment = date
-		childhood.raisedBy = raisedBy
-		childhood.momAlive = momAlive
-		childhood.dadAlive = dadAlive
-		childhood.childTrama = childTrama
-		childhood.traumaExplain = traumaExplain
-		childhood.howLeftHome = howLeftHome
-		childhood.num_siblings = num_siblings
-		childhood.siblingsClose = siblingsClose
-		childhood.siblingsRelationshipExplain = siblingsRelationshipExplain
-		childhood.dadClose = dadClose
-		childhood.dadCloseExplain = dadCloseExplain
-		childhood.momClose = momClose
-		childhood.momCloseExplain = momCloseExplain
-		childhood.wasAbused = wasAbused
-		childhood.abusedBy = abusedBy
-		childhood.abuseImpact = abuseImpact
-		childhood.childAnger = childAnger
-		childhood.childAngerExplain = childAngerExplain
-		childhood.otherChild = otherChild
-		childhood.otherChildExplain = otherChildExplain
-		childhood.parentViolence = parentViolence
-		childhood.parentViolenceExplain = parentViolenceExplain
-		childhood.parentViolenceImpact = parentViolenceImpact
-
-		childhood.save()
-		am.childhood = childhood
-		am.save()
-
-	elif section == '/am_angerHistory/':
-		ah1 = am.angerHistory
-
-		#DYNAMIC FIELDS
-		physicalRecentV = request.POST.get('m_physicalRecentV', '')
-		verbalRecentV = request.POST.get('m_verbalRecentV', '')
-		threatsRecentV = request.POST.get('m_threatsRecentV', '')
-		propertyRecentV = request.POST.get('m_propertyRecentV', '')
-		otherRecentV = request.POST.get('m_otherRecentV', '')
-		otherExplainRecentV = request.POST.get('m_otherExplainRecentV', '')
-		wasTense = request.POST.get('m_wasTense', '')
-		hadRush = request.POST.get('m_hadRush', '')
-		feltStrong = request.POST.get('m_feltStrong', '')
-		psychoRecentV = request.POST.get('m_psychoRecentV', '')
-		psychoWhyRecentV = request.POST.get('m_psychoWhyRecentV', '')
-		longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos', '')
-		longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs', '')
-		didCompleteTreatRecentV = request.POST.get('m_didCompleteTreatRecentV', '')
-		reasonNotCompleteRecentV = request.POST.get('m_reasonNotCompleteRecentV', '')
-
-		#NORMAL FIELDS
-		recentIncidentV = request.POST.get('recentIncidentV', '')
-		recentVDate = request.POST.get('recentVDate', '')
-		recentVlocation = request.POST.get('recentVlocation', '')
-		withWhomRecentV = request.POST.get('withWhomRecentV', '')
-		happenedRecentV = request.POST.get('happenedRecentV', '')
-		typeWordsRecentV = request.POST.get('typeWordsRecentV', '')
-
-		physicalRecentV = truePythonBool(physicalRecentV)
-		verbalRecentV = truePythonBool(verbalRecentV)
-		threatsRecentV = truePythonBool(threatsRecentV)
-		propertyRecentV = truePythonBool(propertyRecentV)
-		otherRecentV = truePythonBool(otherRecentV)
-		wasTense = truePythonBool(wasTense)
-		hadRush = truePythonBool(hadRush)
-		feltStrong = truePythonBool(feltStrong)
-		psychoRecentV = truePythonBool(psychoRecentV)
-		didCompleteTreatRecentV = truePythonBool(didCompleteTreatRecentV)
-
-		date = datetime.now()
-		date = date.date()
-
-		ah1.date_of_assessment = date
-		ah1.recentIncidentV = recentIncidentV				
-		ah1.recentVDate = recentVDate
-		ah1.recentVlocation = recentVlocation
-		ah1.withWhomRecentV = withWhomRecentV
-		ah1.happenedRecentV = happenedRecentV
-		ah1.physicalRecentV = physicalRecentV
-		ah1.verbalRecentV = verbalRecentV
-		ah1.threatsRecentV = threatsRecentV
-		ah1.propertyRecentV = propertyRecentV
-		ah1.otherRecentV = otherRecentV
-		ah1.otherExplainRecentV = otherExplainRecentV
-		ah1.typeWordsRecentV = typeWordsRecentV
-		ah1.wasTense = wasTense
-		ah1.hadRush = hadRush
-		ah1.feltStrong = feltStrong
-		ah1.psychoRecentV = psychoRecentV
-		ah1.psychoWhyRecentV = psychoWhyRecentV
-		ah1.longAgoTreatRecentVmos = longAgoTreatRecentVmos
-		ah1.longAgoTreatRecentVyrs = longAgoTreatRecentVyrs
-		ah1.didCompleteTreatRecentV = didCompleteTreatRecentV
-		ah1.reasonNotCompleteRecentV = reasonNotCompleteRecentV
-		ah1.save()
-		ah1 = am.angerHistory
-		am.save()
-
-	elif section == '/am_angerHistory2/':
-		depress30RecentV = request.POST.get('m_depress30RecentV', '')
-		depress30ExplainRecentV = request.POST.get('m_depress30ExplainRecentV', '')
-		anxietyRecentV = request.POST.get('m_anxietyRecentV', '')
-		anxietyExplainRecentV = request.POST.get('m_anxietyExplainRecentV', '')
-		hallucinationRecentV = request.POST.get('m_hallucinationRecentV', '')
-		hallucinationLastV = request.POST.get('m_hallucinationLastV', '')
-		understandingRecentV = request.POST.get('m_understandingRecentV', '')
-		understandingExplainRecentV = request.POST.get('m_understandingExplainRecentV', '')
-		troubleControlRecentV = request.POST.get('m_troubleControlRecentV', '')
-		lastTimeTroubleControl = request.POST.get('m_lastTimeTroubleControl', '')
-		controlTrigger = request.POST.get('m_controlTrigger', '')
-		suicide30RecentV = request.POST.get('m_suicide30RecentV', '')
-		suicide30ExplainRecentV = request.POST.get('m_suicide30ExplainRecentV', '')
-		suicideTodayRecentV = request.POST.get('m_suicideTodayRecentV', '')
-		suicideTodayPlanRecentV = request.POST.get('m_suicideTodayPlanRecentV', '')
-		suicideTodayExplainRecentV = request.POST.get('m_suicideTodayExplainRecentV', '')
-		hasAttemptedSuicide = request.POST.get('m_hasAttemptedSuicide', '')
-		hasAttemptedExplainRecentV = request.POST.get('m_hasAttemptedExplainRecentV', '')
-
-		#CONVERT THE BOOLEAN FIELDS
-		depress30RecentV = truePythonBool(depress30RecentV)
-		anxietyRecentV = truePythonBool(anxietyRecentV)
-		hallucinationRecentV = truePythonBool(hallucinationRecentV)
-		understandingRecentV = truePythonBool(understandingRecentV)
-		troubleControlRecentV = truePythonBool(troubleControlRecentV)
-		suicide30RecentV = truePythonBool(suicide30RecentV)
-		suicideTodayRecentV = truePythonBool(suicideTodayRecentV)
-		suicideTodayPlanRecentV = truePythonBool(suicideTodayPlanRecentV)
-		hasAttemptedSuicide = truePythonBool(hasAttemptedSuicide)
-
-		#UPDATE ANGER HISTORY 2...
-		date = datetime.now()
-		date = date.date()
-
-		ah2 = am.angerHistory2
-		ah2.date_of_assessment = date
-
-		ah2.depress30RecentV = depress30RecentV
-		ah2.depress30ExplainRecentV = depress30ExplainRecentV
-		ah2.anxietyRecentV = anxietyRecentV
-		ah2.anxietyExplainRecentV = anxietyExplainRecentV
-		ah2.hallucinationRecentV = hallucinationRecentV
-		ah2.hallucinationLastV = hallucinationLastV
-		ah2.understandingRecentV = understandingRecentV
-		ah2.understandingExplainRecentV = understandingExplainRecentV
-		ah2.troubleControlRecentV = troubleControlRecentV
-		ah2.lastTimeTroubleControl = lastTimeTroubleControl
-		ah2.controlTrigger = controlTrigger
-		ah2.suicide30RecentV = suicide30RecentV
-		ah2.suicide30ExplainRecentV = suicide30ExplainRecentV
-		ah2.suicideTodayRecentV = suicideTodayRecentV
-		ah2.suicideTodayPlanRecentV = suicideTodayPlanRecentV
-		ah2.suicideTodayExplainRecentV = suicideTodayExplainRecentV
-		ah2.hasAttemptedSuicide = hasAttemptedSuicide
-		ah2.hasAttemptedExplainRecentV = hasAttemptedExplainRecentV
-
-		ah2.save()
-		am.save()
-
-	elif section == '/am_worst/':
-		useWorst = request.POST.get('m_useWorst', '')
-		whoDidItFight = request.POST.get('m_whoDidItFight', '')
-		physicalWorst = request.POST.get('m_physicalWorst', '')
-		verbalWorst = request.POST.get('m_verbalWorst', '')
-		threatsWorst = request.POST.get('m_threatsWorst', '')
-		propertyWorst = request.POST.get('m_propertyWorst', '')
-		otherWorst = request.POST.get('m_otherWorst', '')
-		otherWorstDescription = request.POST.get('m_otherWorstDescription', '')
-
-		#GET NORMAL TEXT FIELDS
-		whoWorst = request.POST.get('whoWorst', '')
-		happenedWorst = request.POST.get('happenedWorst', '')
-		wordThoughtWorst = request.POST.get('wordThoughtWorst', '')
-		howStartWorst = request.POST.get('howStartWorst', '')
-		howEndWorst = request.POST.get('howEndWorst', '')
-
-		#PROCESS THE CHECKBOXES AND RADIO BUTTONS
-		useWorst = truePythonBool(useWorst)
-		physicalWorst = truePythonBool(physicalWorst)
-		verbalWorst = truePythonBool(verbalWorst)
-		threatsWorst = truePythonBool(threatsWorst)
-		propertyWorst = truePythonBool(propertyWorst)
-		otherWorst = truePythonBool(otherWorst)				
-
-		date = datetime.now()
-		date = date.date()
-
-		am.worstEpisode.date_of_assessment = date
-		am.worstEpisode.whoWorst = whoWorst
-		am.worstEpisode.happenedWorst = happenedWorst
-		am.worstEpisode.wordThoughtWorst = wordThoughtWorst
-		am.worstEpisode.howStartWorst = howStartWorst
-		am.worstEpisode.howEndWorst = howEndWorst
-		am.worstEpisode.useWorst = useWorst
-		am.worstEpisode.whoDidItFight = whoDidItFight
-		am.worstEpisode.physicalWorst = physicalWorst
-		am.worstEpisode.verbalWorst = verbalWorst
-		am.worstEpisode.threatsWorst = threatsWorst
-		am.worstEpisode.propertyWorst = propertyWorst
-		am.worstEpisode.otherWorst = otherWorst
-		am.worstEpisode.otherWorstDescription = otherWorstDescription
-
-		am.worstEpisode.save()
-		am.save()
-
+	if section == '/am_demographic/':
+		saveAMDemographic(request, am)
 	elif section == '/am_drugHistory/':
-		#PROCESS THE BOOLEAN FIELDS
-		curUse = request.POST.get('use_drugs', '')
-		everDrank = request.POST.get('ever_used', '')
-		DUI = request.POST.get('has_dui', '')
-		drugTreatment = request.POST.get('treatment', '')
-		finishedTreatment = request.POST.get('completed_treatment', '')
-		isClean = request.POST.get('still_abstinent', '')
-		drinkLastEpisode = request.POST.get('drinking_last', '')
-		drinkRelationshipProblem = request.POST.get('relationship_alc', '')
-		needHelpDrugs = request.POST.get('need_help', '')
-
-		everDrank = resolveBlankRadio(everDrank, 'False')
-		DUI = resolveBlankRadio(DUI, 'False')
-		finishedTreatment = resolveBlankRadio(finishedTreatment, 'True')
-		isClean = resolveBlankRadio(isClean, 'True')
-
-		curUse = truePythonBool(curUse)
-		everDrank = truePythonBool(everDrank)
-		DUI = truePythonBool(DUI)
-		drugTreatment = truePythonBool(drugTreatment)
-		finishedTreatment = truePythonBool(finishedTreatment)
-		isClean = truePythonBool(isClean)
-		drinkLastEpisode = truePythonBool(drinkLastEpisode)
-		drinkRelationshipProblem = truePythonBool(drinkRelationshipProblem)
-		needHelpDrugs = truePythonBool(needHelpDrugs)
-
-		#PROCESS THE TEXT AND INTEGER FIELDS
-		firstDrinkAge = request.POST.get('first_drink', '')
-		firstDrinkType = request.POST.get('first_use_type', '')
-		useType = request.POST.get('m_useType', '')
-		amtPerWeek = request.POST.get('m_amtPerWeek', '')
-		useAmt = request.POST.get('m_useAmt', '')
-		monthsQuit = request.POST.get('m_monthsQuit', '')
-		yearsQuit = request.POST.get('m_yearsQuit', '')
-		reasonQuit = request.POST.get('m_reasonQuit', '')
-		numDUI = request.POST.get('m_numDUI', '')
-		BALevel = request.POST.get('m_BALevel', '')
-		treatmentPlace = request.POST.get('m_treatmentPlace', '')
-		dateTreated = request.POST.get('m_dateTreated', '')
-		reasonNotFinishedTreatment = request.POST.get('m_reasonNotFinishedTreatment', '')
-		relapseTrigger = request.POST.get('m_relapseTrigger', '')
-
-		if curUse == True:
-			everDrank = True
-
-		date = datetime.now()
-		date = date.date()
-
-		#UPDATE DRUG HISTORY FORM
-		demo = am.drugHistory
-		demo.date_of_assessment = date
-		demo.firstDrinkAge = firstDrinkAge
-		demo.firstDrinkType = firstDrinkType
-		demo.curUse = curUse
-		demo.useType = useType
-		demo.amtPerWeek = amtPerWeek
-		demo.useAmt = useAmt
-		demo.everDrank = everDrank
-		demo.monthsQuit = monthsQuit
-		demo.yearsQuit = yearsQuit
-		demo.reasonQuit = reasonQuit
-		demo.DUI = DUI
-		demo.numDUI = numDUI
-		demo.BALevel = BALevel
-		demo.drugTreatment = drugTreatment
-		demo.finishedTreatment = finishedTreatment
-		demo.reasonNotFinishedTreatment = reasonNotFinishedTreatment
-		demo.isClean = isClean
-		demo.relapseTrigger = relapseTrigger
-		demo.drinkLastEpisode = drinkLastEpisode
-		demo.drinkRelationshipProblem = drinkRelationshipProblem
-		demo.needHelpDrugs = needHelpDrugs
-		demo.treatmentPlace = treatmentPlace
-		demo.dateTreated = dateTreated
-
-		demo.save()
-		am.save()
-
+		saveAMDrugHistory(request, am)
+	elif section == '/am_childhood/':
+		saveAMChildhood(request, am)
+	elif section == '/am_angerHistory/':
+		saveAMAngerHistroy1(request, am)
+	elif section == '/am_angerHistory2/':
+		saveAMAngerHistroy2(request, am)
 	elif section == '/am_angerHistory3/':
-		homicidal = request.POST.get('m_homicidal', '')
-		homicidalExplain = request.POST.get('m_homicidalExplain', '')
-		medRecentV = request.POST.get('m_medRecentV', '')
-		medRecentVExplain = request.POST.get('m_medRecentVExplain', '')
-		medSuccessRecentV = request.POST.get('m_medSuccessRecentV', '')
-		medSuccessExplainRecentV = request.POST.get('m_medSuccessExplainRecentV', '')
-		durationRecentV = request.POST.get('durationRecentV', '')
-		intensityRecentV = request.POST.get('intensityRecentV')
-		howOften = request.POST.get('howOften')
-
-		homicidal = truePythonBool(homicidal)
-		medRecentV = truePythonBool(medRecentV)
-		medSuccessRecentV = truePythonBool(medSuccessRecentV)
-
-		date = datetime.now()
-		date = date.date()
-
-		ah3 = am.angerHistory3
-		ah3.date_of_assessment = date
-
-		ah3.homicidal = homicidal
-		ah3.homicidalExplain = homicidalExplain
-		ah3.medRecentV = medRecentV
-		ah3.medRecentVExplain = medRecentVExplain
-		ah3.medSuccessRecentV = medSuccessRecentV
-		ah3.medSuccessExplainRecentV = medSuccessExplainRecentV
-		ah3.durationRecentV = durationRecentV
-		ah3.intensityRecentV = intensityRecentV
-		ah3.howOften = howOften
-
-		ah3.save()
-		am.save()
-
-	elif section == '/am_problems/':
-		date = datetime.now()
-		date = date.date()
-
-		brainInjury = request.POST.get('m_brainInjury', '')
-		stroke = request.POST.get('m_stroke', '')
-		epilepsy = request.POST.get('m_epilepsy', '')
-		attentionDD = request.POST.get('m_attentionDD', '')
-		pms = request.POST.get('m_pms', '')
-		depression = request.POST.get('m_depression', '')
-		ptsd = request.POST.get('m_ptsd', '')
-		otherSeriousIllness = request.POST.get('m_otherSeriousIllness', '')
-		currentlyOnMeds = request.POST.get('m_currentlyOnMeds', '')
-		whichMeds = request.POST.get('m_whichMeds', '')
-		describeIssue = request.POST.get('m_describeIssue', '')	
-
-		brainInjury = truePythonBool(brainInjury)
-		stroke = truePythonBool(stroke)
-		epilepsy = truePythonBool(epilepsy)
-		attentionDD = truePythonBool(attentionDD)
-		depression = truePythonBool(depression)
-		pms = truePythonBool(pms)
-		ptsd = truePythonBool(ptsd)
-		otherSeriousIllness = truePythonBool(otherSeriousIllness)
-		currentlyOnMeds = truePythonBool(currentlyOnMeds)		
-
-		#UPDATE CURRENT PROBLEMS DATABASE
-		current = am.currentProblems
-		current.date_of_assessment = date
-		current.brainInjury = brainInjury
-		current.stroke = stroke
-		current.epilepsy = epilepsy
-		current.attentionDD = attentionDD
-		current.pms = pms
-		current.depression = depression
-		current.ptsd = ptsd
-		current.otherSeriousIllness = otherSeriousIllness
-		current.currentlyOnMeds = currentlyOnMeds
-		current.whichMeds = whichMeds
-		current.describeIssue = describeIssue
-
-		am.currentProblems.save()
-		am.save()
-
-	elif section == '/am_familyOrigin/':
-		date = datetime.now()
-		date = date.date()
-
-		kidMomAnger = request.POST.get('kidMomAnger', '')
-		kidDadAnger = request.POST.get('kidDadAnger', '')
-		kidSiblingAnger = request.POST.get('kidSiblingAnger', '')
-		kidOtherAnger = request.POST.get('kidOtherAnger', '')
-		learnFamilyAnger = request.POST.get('learnFamilyAnger', '')
-		suicideHistory = request.POST.get('m_suicideHistory', '')
-		hasLovingMother = request.POST.get('m_hasLovingMother', '')
-		hasLovingSiblings = request.POST.get('m_hasLovingSiblings', '')
-
-		suicideHistory = truePythonBool(suicideHistory)
-		hasLovingMother = truePythonBool(hasLovingMother)
-		hasLovingSiblings = truePythonBool(hasLovingSiblings)
-
-		#UPDATE FAMILY OF ORGIN DATA
-		family = am.familyOrigin
-
-		family.date_of_assessment = date
-		family.kidMomAnger = kidMomAnger
-		family.kidDadAnger = kidDadAnger
-		family.kidSiblingAnger = kidSiblingAnger
-		family.kidOtherAnger = kidOtherAnger
-		family.learnFamilyAnger = learnFamilyAnger
-		family.suicideHistory = suicideHistory
-		family.hasLovingMother = hasLovingMother
-		family.hasLovingSiblings = hasLovingSiblings
-
-		am.familyOrigin.save()
-		am.save()
-
-	elif section == '/am_demographic/':
-		demo = am.demographic
-		dateTime = datetime.now()
-		date = dateTime.date()	
-
-		#NORMAL FIELDS
-		maritalStatus = request.POST.get('maritalStatus', '')
-		livingSituation = request.POST.get('livingSituation', '')
-		education = request.POST.get('education', '')
-
-		months_res = request.POST.get('months_res', '')
-		years_res = request.POST.get('years_res', '')
-		num_children = request.POST.get('num_children', '')
-		other_dependants = request.POST.get('other_dependants', '')
-		job_title = request.POST.get('job_title', '')
-		employee = request.POST.get('employee', '')
-		emp_address = request.POST.get('emp_address', '')
-		employer_phone = request.POST.get('employer_phone', '')
-		employed_months = request.POST.get('employed_months', '')
-		employed_years = request.POST.get('employed_years', '')
-
-		#DYNAMIC FIELDS
-		own = request.POST.get('m_own', '')
-		drop_out = request.POST.get('m_drop_out', '')
-		health_problem = request.POST.get('m_health_problem', '')
-		medication = request.POST.get('m_medication', '')
-		resasonDO = request.POST.get('m_resasonDO', '')
-		health_exp = request.POST.get('m_health_exp', '')
-		whatMedicine = request.POST.get('m_whatMedicine', '')
-
-		employer_phone = phone_to_integer(employer_phone)
-
-		#PROCESS THE RADIO BUTTONS
-		own = truePythonBool(own)
-		drop_out = truePythonBool(drop_out)
-		health_problem = truePythonBool(health_problem)
-		medication = truePythonBool(medication)
-
-		demo.date_of_assessment 	= date
-		demo.maritalStatus 			= maritalStatus
-		demo.livingSituation 		= livingSituation
-		demo.own 					= own
-		demo.months_res 			= months_res
-		demo.years_res 				= years_res
-		demo.num_children 			= num_children
-		demo.other_dependants 		= other_dependants
-		demo.education 				= education
-		demo.drop_out 				= drop_out
-		demo.resasonDO 				= resasonDO
-		demo.employee 				= employee
-		demo.job_title 				= job_title
-		demo.emp_address 			= emp_address
-		demo.employed_months 		= employed_months
-		demo.employed_years 		= employed_years
-		demo.employer_phone 		= employer_phone
-		demo.health_problem 		= health_problem
-		demo.medication 			= medication
-		demo.whatMedicine 			= whatMedicine
-		demo.health_exp 			= health_exp
-
-		demo.save()
-		am.save()
-
-	elif section == '/am_angerTarget/':
-		angryPartner = request.POST.get('m_angryPartner', '')
-		angryParents = request.POST.get('m_angryParents', '')
-		angryChildren = request.POST.get('m_angryChildren', '')
-		angryRelatives = request.POST.get('m_angryRelatives', '')
-		angryEmployer = request.POST.get('m_angryEmployer', '')
-		angryFriends = request.POST.get('m_angryFriends', '')
-		angryOther = request.POST.get('m_angryOther', '')
-		otherWhom = request.POST.get('m_otherWhom', '')
-		angryAbout = request.POST.get('angryAbout', '')
-		seldomUpset = request.POST.get('m_seldomUpset', '')
-
-		angryPartner = truePythonBool(angryPartner)
-		angryParents = truePythonBool(angryParents)
-		angryChildren = truePythonBool(angryChildren)
-		angryRelatives = truePythonBool(angryRelatives)
-		angryEmployer = truePythonBool(angryEmployer)
-		angryFriends = truePythonBool(angryFriends)
-		angryOther = truePythonBool(angryOther)
-		seldomUpset = truePythonBool(seldomUpset)
-
-		date = datetime.now()
-		date = date.date()
-
-		target = am.angerTarget
-
-		target.date_of_assessment = date
-		target.angryPartner = angryPartner
-		target.angryParents = angryParents
-		target.angryChildren = angryChildren
-		target.angryRelatives = angryRelatives
-		target.angryEmployer = angryEmployer
-		target.angryFriends = angryFriends
-		target.angryOther = angryOther
-		target.otherWhom = otherWhom
-		target.angryAbout = angryAbout
-		target.seldomUpset = seldomUpset
-
-		target.save()
-		am.save()
-
-	elif section == '/am_control/':
-		date = datetime.now()
-		date = date.date()
-
-		neverAttemptedControl 	= request.POST.get('m_neverAttemptedControl', '')
-		talkToMyself 			= request.POST.get('m_talkToMyself', '')
-		whatSayYou 				= request.POST.get('m_whatSayYou', '')
-		leaveScene 				= request.POST.get('m_leaveScene', '')
-		howLongLeaveScene 		= request.POST.get('m_howLongLeaveScene', '')
-		whatDoLeave 			= request.POST.get('m_whatDoLeave', '')
-		relax 					= request.POST.get('m_relax', '')
-		howRelax 				= request.POST.get('m_howRelax', '')
-		selfHelpGroup 			= request.POST.get('m_selfHelpGroup', '')
-		otherControlAnger 		= request.POST.get('m_otherControlAnger', '')
-		doWhatOtherControl 		= request.POST.get('m_doWhatOtherControl', '')
-
-		neverAttemptedControl 	= truePythonBool(neverAttemptedControl)
-		talkToMyself 			= truePythonBool(talkToMyself)
-		leaveScene 				= truePythonBool(leaveScene)
-		relax 					= truePythonBool(relax)
-		selfHelpGroup 			= truePythonBool(selfHelpGroup)
-		otherControlAnger 		= truePythonBool(otherControlAnger)
-
-		control = am.control
-		control.neverAttemptedControl = neverAttemptedControl
-		control.talkToMyself = talkToMyself
-		control.whatSayYou = whatSayYou
-		control.leaveScene = leaveScene
-		control.howLongLeaveScene = howLongLeaveScene
-		control.whatDoLeave = whatDoLeave
-		control.relax = relax
-		control.howRelax = howRelax
-		control.selfHelpGroup = selfHelpGroup
-		control.otherControlAnger = otherControlAnger
-		control.doWhatOtherControl = doWhatOtherControl
-		control.date_of_assessment = date
-
-		control.save()
-		am.save()
-
+		saveAMAngerHistroy3(request, am)
 	elif section == '/am_connections/':
-		angerWorse = request.POST.get('m_angerWorse', '')
-		troubleWhenUsing = request.POST.get('m_troubleWhenUsing', '')
-		lessAngry = request.POST.get('m_lessAngry', '')
-		othersTellMe = request.POST.get('m_othersTellMe', '')
-		noConnection = request.POST.get('m_noConnection', '')
-		otherConnectionsUsing = request.POST.get('m_otherConnectionsUsing', '')
-		connectionExplain = request.POST.get('m_connectionExplain', '')
-
-		angerWorse = truePythonBool(angerWorse)
-		troubleWhenUsing = truePythonBool(troubleWhenUsing)
-		lessAngry = truePythonBool(lessAngry)
-		othersTellMe = truePythonBool(othersTellMe)
-		noConnection = truePythonBool(noConnection)
-		otherConnectionsUsing = truePythonBool(otherConnectionsUsing)
-
-		date = datetime.now()
-		date = date.date()
-
-		am.connections.date_of_assessment = date
-		am.connections.angerWorse = angerWorse
-		am.connections.troubleWhenUsing = troubleWhenUsing
-		am.connections.lessAngry = lessAngry
-		am.connections.othersTellMe = othersTellMe
-		am.connections.noConnection = noConnection
-		am.connections.otherConnectionsUsing = otherConnectionsUsing
-		am.connections.connectionExplain = connectionExplain
-
-		am.connections.save()
-		am.save()
-
+		saveAMConnections(request, am)
+	elif section == '/am_worst/':
+		saveAMWorst(request, am)
+	elif section == '/am_angerTarget/':
+		saveAMTarget(request, am)
+	elif section == '/am_familyOrigin/':
+		saveAMFamily(request, am)
+	elif section == '/am_problems/':
+		saveAMProblems(request, am)
+	elif section == '/am_control/':
+		saveAMControl(request, am)
 	elif section == '/am_final/':
-		anythingelse = request.POST.get('anythingelse', '')
-		changeLearn1 = request.POST.get('changeLearn1', '')
-		changeLearn2 = request.POST.get('changeLearn2', '')
-		changeLearn3 = request.POST.get('changeLearn3', '')
-		whoLivesWithClient = request.POST.get('whoLivesWithClient', '')
-
-		date = datetime.now()
-		date = date.date()
-
-		final = am.final
-		demo = am.demographic
-
-		demo.whoLivesWithClient = whoLivesWithClient
-		demo.save()
-
-		final.date_of_assessment = date
-		final.anythingelse = anythingelse
-		final.changeLearn1 = changeLearn1
-		final.changeLearn2 = changeLearn2
-		final.changeLearn3 = changeLearn3
-
-		final.save()
-		am.save()
-
+		saveAMFinal(request, am)
 
 
 def deleteAM(am):

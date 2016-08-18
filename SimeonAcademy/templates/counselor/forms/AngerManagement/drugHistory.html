@@ -1,26 +1,34 @@
-<!-- AM DEMOGRAPHIC -->
+<!-- AM DRUG HISTORY -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
     <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
-      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+      <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
       <input type='hidden' name='save_this' id='save_this' value=''>
 
-      <input type='hidden' name='m_own' id='m_own'>
-      <input type='hidden' name='m_drop_out' id='m_drop_out'>
-      <input type='hidden' name='m_health_problem' id='m_health_problem'>
-      <input type='hidden' name='m_medication' id='m_medication'>
-      <input type='hidden' name='m_resasonDO' id='m_resasonDO'>
-      <input type='hidden' name='m_health_exp' id='m_health_exp'>
-      <input type='hidden' name='m_whatMedicine' id='m_whatMedicine'>
+      <input type='hidden' name='m_amtPerWeek' id='m_amtPerWeek' value=''>
+      <input type='hidden' name='m_useAmt' id='m_useAmt' value=''>
+      <input type='hidden' name='m_everDrank' id='m_everDrank' value=''>
+      <input type='hidden' name='m_yearsQuit' id='m_yearsQuit' value=''>
+      <input type='hidden' name='m_monthsQuit' id='m_monthsQuit' value=''>
+      <input type='hidden' name='m_reasonQuit' id='m_reasonQuit' value=''>
+      <input type='hidden' name='m_DUI' id='m_DUI' value=''>
+      <input type='hidden' name='m_numDUI' id='m_numDUI' value=''>
+      <input type='hidden' name='m_BALevel' id='m_BALevel' value=''>
+      <input type='hidden' name='m_treatmentPlace' id='m_treatmentPlace' value=''>
+      <input type='hidden' name='m_dateTreated' id='m_dateTreated' value=''>
+      <input type='hidden' name='m_finishedTreatment' id='m_finishedTreatment' value=''>
+      <input type='hidden' name='m_reasonNotFinishedTreatment' id='m_reasonNotFinishedTreatment' value=''>
+      <input type='hidden' name='m_isClean' id='m_isClean' value=''>
+      <input type='hidden' name='m_relapseTrigger' id='m_relapseTrigger' value=''>
 
     <div class='container'>
       <div class='row'>
