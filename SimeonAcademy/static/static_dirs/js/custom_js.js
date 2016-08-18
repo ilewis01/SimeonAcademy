@@ -2612,12 +2612,12 @@ function initialize_am_drug_history(json_data) {
 	setRadioElement(json_data.drinkRelationshipProblem, grab('yesProb'), grab('noProb'));
 	setRadioElement(json_data.needHelpDrugs, grab('needHelp'), grab('noHelp'));
 
-	// topLevelDH();
-	// dhRadio2();
-	// dhRadio3();
-	// dhLeftRadio1();
-	// dhLeftRadio2();
-	// dhLeftRadio3();
+	topLevelDH();
+	dhRadio2();
+	dhRadio3();
+	dhLeftRadio1();
+	dhLeftRadio2();
+	dhLeftRadio3();
 }
 
 function initialize_am_childhood(json_data) {
@@ -3675,256 +3675,116 @@ function evaluate_field(field, hidden, error_msg) {
 
 //DRUG HISTORY FUNCTIONS
 function dhRadio3() { //CUURENTLY DRINK OR USE ALCOHOL
-	var dui = document.getElementById('dui');
-
-	var dui_amount_label = document.getElementById('dui_amount_label');
-	var bal_label = document.getElementById('bal_label');
-	var bal_label2 = document.getElementById('bal_label2');
-
-	var BAL = document.getElementById('BAL');
-	var dui_amount = document.getElementById('dui_amount');
-
-	if (dui.checked == true) {
-		BAL.disabled = false;
-		dui_amount.disabled = false;
-
-		BAL.style.opacity = '1.0';
-		dui_amount.style.opacity = '1.0';
-		dui_amount_label.style.opacity = '1.0';
-		bal_label.style.opacity = '1.0';
-		bal_label2.style.opacity = '1.0';
-	}
-
-	else {
-		BAL.style.opacity = '0.3';
-		dui_amount.style.opacity = '0.3';
-		dui_amount_label.style.opacity = '0.3';
-		bal_label.style.opacity = '0.3';
-		bal_label2.style.opacity = '0.3';
-
-		BAL.value = '';
-		dui_amount.value = '0';
-
-		BAL.disabled = true;
-		dui_amount.disabled = true;
-	}
+	twoElementRadioSetup(grab('hasDUI'), grab('lab9'), grab('numDUI'));
+	twoElementRadioSetup(grab('hasDUI'), grab('lab10'), grab('BALevel'));
 }
 
 function dhRadio2() {
-	var has_used = document.getElementById('has_used');
+	twoElementRadioSetup(grab('hasDrank'), grab('lab4'), grab('yearsQuit'));
+	twoElementRadioSetup(grab('hasDrank'), grab('lab5'), grab('monthsQuit'));
+	twoElementRadioSetup(grab('hasDrank'), grab('lab6'), grab('reasonQuit'));
+	twoElementRadioSetup(grab('hasDrank'), grab('lab3'), grab('reasonQuit'));
+	dhRadioEFX();
+}
 
-	var quit_label = document.getElementById('quit-label');
-	var moLabel1 = document.getElementById('moLabel1');
-	var yrLabel1 = document.getElementById('yrLabel1');
-	var reason_quit_label = document.getElementById('reason-quit-label');
-	var got_dui_label = document.getElementById('got_dui_label');
-	var hasADui_label = document.getElementById('hasADui_label');
-	var no_dui_label = document.getElementById('no_dui_label');
-
-	var quitMos = document.getElementById('quitMos');
-	var quitYrs = document.getElementById('quitYrs');
-	var reason_quit = document.getElementById('reason_quit');
-	var no_dui = document.getElementById('no_dui');
-	var dui = document.getElementById('dui');
-
-	if (has_used.checked === true) {
-		quitMos.disabled = false;
-		quitYrs.disabled = false;
-		reason_quit.disabled = false;
-		no_dui.disabled = false;
-		dui.disabled = false;
-
-		quitMos.style.opacity = '1.0';
-		quitYrs.style.opacity = '1.0';
-		reason_quit.style.opacity = '1.0';
-		no_dui.style.opacity = '1.0';
-		dui.style.opacity = '1.0';
-		quit_label.style.opacity = '1.0';
-		moLabel1.style.opacity = '1.0';
-		yrLabel1.style.opacity = '1.0';
-		reason_quit_label.style.opacity = '1.0';
-		got_dui_label.style.opacity = '1.0';
-		hasADui_label.style.opacity = '1.0';
-		no_dui_label.style.opacity = '1.0';
-	}
-
-	else {
-		quitMos.style.opacity = '0.3';
-		quitYrs.style.opacity = '0.3';
-		reason_quit.style.opacity = '0.3';
-		no_dui.style.opacity = '0.3';
-		dui.style.opacity = '0.3';
-		quit_label.style.opacity = '0.3';
-		moLabel1.style.opacity = '0.3';
-		yrLabel1.style.opacity = '0.3';
-		reason_quit_label.style.opacity = '0.3';
-		got_dui_label.style.opacity = '0.3';
-		hasADui_label.style.opacity = '0.3';
-		no_dui_label.style.opacity = '0.3';
-
-		no_dui.checked = true;
-
-		quitMos.value = '0';
-		quitYrs.value = '0';
-		reason_quit.value = '';
-
-		quitMos.disabled = true;
-		quitYrs.disabled = true;
-		reason_quit.disabled = true;
-
+function dhRadioEFX() {
+	if (grab('noDrank').checked === true && grab('noDrink').checked === true) {
+		grab('noDui').checked = true;
 		dhRadio3();
+
+		opacityLow(grab('num_5'));
+		opacityLow(grab('num_5Lab'));
+		opacityLow(grab('lab7'));
+		opacityLow(grab('lab8'));
+		opacityLow(grab('hasDUI'));
+		opacityLow(grab('noDui'));
+		grab('hasDUI').disabled = true;
+		grab('noDui').disabled = true;
+	}
+	else {
+		grab('hasDUI').disabled = false;
+		grab('noDui').disabled = false;
+		opacityHigh(grab('num_5'));
+		opacityHigh(grab('num_5Lab'));
+		opacityHigh(grab('lab7'));
+		opacityHigh(grab('lab8'));
+		opacityHigh(grab('hasDUI'));
+		opacityHigh(grab('noDui'));
 	}
 }
 
 function dhLeftRadio3() {
-	var not_abstinent = document.getElementById('not_abstinent');
-	var is_abstinent = document.getElementById('is_abstinent');
-	var trigger_label = document.getElementById('trigger_label');
-	var relapse_explain = document.getElementById('relapse_explain');
-	// twoElementRadioSetup(not_abstinent, trigger_label, relapse_explain);
-	if (is_abstinent.checked === true) {
-		opacityLow(trigger_label);
-		opacityLow(relapse_explain);
-		relapse_explain.disabled = true;
-	}
-	else if (not_abstinent.checked === true) {
-		relapse_explain.disabled = false;
-		opacityHigh(trigger_label);
-		opacityHigh(relapse_explain);
-	}
+	twoElementRadioSetup(grab('isClean'), grab('lab17'), grab('relapseTrigger'));
 }
 
 function dhLeftRadio2() {
-	var not_completed = document.getElementById('not_completed');
-	var no_complete_explain_label = document.getElementById('no_complete_explain_label');
-	var no_treat_explain = document.getElementById('no_treat_explain');
+	twoElementRadioSetup(grab('didFinish'), grab('lab16'), grab('reasonNotFinishedTreatment'));
 
-	twoElementRadioSetup(not_completed, no_complete_explain_label, no_treat_explain);
-
-	var still_abstinent_label = document.getElementById('still_abstinent_label');
-	var is_abstinent_label = document.getElementById('is_abstinent_label');
-	var not_abstinent_label = document.getElementById('not_abstinent_label');
-	var is_abstinent = document.getElementById('is_abstinent');
-	var not_abstinent = document.getElementById('not_abstinent');
-
-	if (not_completed.checked === false) {
-		is_abstinent.checked = true;
+	if (grab('noFinish').checked === true) {
+		grab('notClean').checked = true;
 		dhLeftRadio3();
-		// is_abstinent.disabled = true;
-		// not_abstinent.disabled = true;
-	}
 
+		opacityLow(grab('num_8'));
+		opacityLow(grab('num_8Lab'));
+		opacityLow(grab('labe1'));
+		opacityLow(grab('labe2'));
+		opacityLow(grab('isClean'));
+		opacityLow(grab('notClean'));
+		grab('isClean').disabled = true;
+		grab('notClean').disabled = true;
+	}
 	else {
-		is_abstinent.disabled = false;
-		not_abstinent.disabled = false;		
-		dhRadio3();
+		opacityHigh(grab('num_8'));
+		opacityHigh(grab('num_8Lab'));
+		opacityHigh(grab('labe1'));
+		opacityHigh(grab('labe2'));
+		opacityHigh(grab('isClean'));
+		opacityHigh(grab('notClean'));
+		grab('isClean').disabled = false;
+		grab('notClean').disabled = false;
 	}
 }
 
 function dhLeftRadio1() {
-	var had_treatment = document.getElementById('had_treatment');
+	twoElementRadioSetup(grab('hadTreatment'), grab('lab11'), grab('dateTreated'));
+	twoElementRadioSetup(grab('hadTreatment'), grab('lab12'), grab('treatmentPlace'));
 
-	var when_treated_label = document.getElementById('when_treated_label');
-	var where_treated_label = document.getElementById('where_treated_label');
-	var completed_treatment_label = document.getElementById('completed_treatment_label');
-	var did_complete_label = document.getElementById('did_complete_label');
-	var not_completed_label = document.getElementById('not_completed_label');
+	if (grab('noTreatment').checked === true) {
+		grab('noFinish').checked = true;
+		dhLeftRadio2();
 
-	var when_treated = document.getElementById('when_treated');
-	var where_treated = document.getElementById('where_treated');
-	var did_complete = document.getElementById('did_complete');
-	var not_completed = document.getElementById('not_completed');
-
-	var still_abstinent_label = document.getElementById('still_abstinent_label');
-	var is_abstinent_label = document.getElementById('is_abstinent_label');
-	var not_abstinent_label = document.getElementById('not_abstinent_label');
-	var is_abstinent = document.getElementById('is_abstinent');
-	var not_abstinent = document.getElementById('not_abstinent');
-
-	if (had_treatment.checked === false) {
-		did_complete.checked = true;
-		opacityLow(still_abstinent_label);
-		opacityLow(is_abstinent_label);
-		opacityLow(not_abstinent_label);
-		opacityLow(is_abstinent);
-		opacityLow(not_abstinent);
-		is_abstinent.disabled = true;
-		not_abstinent.disabled = true;
-		when_treated.value = '';
-		where_treated.value = '';
+		opacityLow(grab('num_7'));
+		opacityLow(grab('lab13'));
+		opacityLow(grab('lab14'));
+		opacityLow(grab('lab15'));
+		opacityLow(grab('didFinish'));
+		opacityLow(grab('noFinish'));
+		grab('didFinish').disabled = true;
+		grab('noFinish').disabled = true;
 	}
 	else {
-		is_abstinent.disabled = false;
-		not_abstinent.disabled = false;
-		opacityHigh(still_abstinent_label);
-		opacityHigh(is_abstinent_label);
-		opacityHigh(not_abstinent_label);
-		opacityHigh(is_abstinent);
-		opacityHigh(not_abstinent);
+		opacityHigh(grab('num_7'));
+		opacityHigh(grab('lab13'));
+		opacityHigh(grab('lab14'));
+		opacityHigh(grab('lab15'));
+		opacityHigh(grab('didFinish'));
+		opacityHigh(grab('noFinish'));
+		grab('didFinish').disabled = false;
+		grab('noFinish').disabled = false;
 	}
-
-	fourElementRadioSetup(had_treatment, when_treated_label, where_treated_label, completed_treatment_label, did_complete_label, not_completed_label, when_treated, where_treated, did_complete, not_completed);
-	dhLeftRadio2();
 }
 
 function topLevelDH() {
-	var current_use = document.getElementById('current_use');
+	twoElementRadioSetup(grab('yesDrink'), grab('oftenLab'), grab('amtPerWeek'));
+	twoElementRadioSetup(grab('yesDrink'), grab('muchLab'), grab('useAmt'));
+	craxRadios(grab('yesDrink'), grab('num_4'), grab('num_4Lab'), grab('r1Lab'), grab('r2Lab'), grab('hasDrank'), grab('noDrank'));
 
-	var what_use_label = document.getElementById('what_use_label');
-	var how_often_label = document.getElementById('how_often_label');
-	var how_much_use_label = document.getElementById('how_much_use_label');
-
-	var what_you_use = document.getElementById('what-you-use');
-	var how_often_you_use = document.getElementById('how-often-you-use');
-	var how_much_you_use = document.getElementById('how-much-you-use');
-
-	var never_used = document.getElementById('never_used');
-	var has_used = document.getElementById('has_used');
-
-	var have_you_ever_label = document.getElementById('have_you_ever_label');
-	var never_used_label = document.getElementById('never_used_label');
-	var has_used_label = document.getElementById('has_used_label');
-
-	var no_dui = document.getElementById('no_dui');
-	var dui = document.getElementById('dui');
-	var got_dui_label = document.getElementById('got_dui_label');
-	var no_dui_label = document.getElementById('no_dui_label');
-	var hasADui_label = document.getElementById('hasADui_label');
-
-	threeElementRadioProcess(current_use, what_use_label, how_often_label, how_much_use_label, what_you_use, how_often_you_use, how_much_you_use);
-
-	if (current_use.checked === false) {
-		never_used.disabled = false;
-		has_used.disabled = false;
-		opacityHigh(have_you_ever_label);
-		opacityHigh(never_used_label);
-		opacityHigh(has_used_label);
-		opacityHigh(never_used);
-		opacityHigh(has_used);
-
-		dhRadio2();
+	if (grab('yesDrink').checked === true) {
+		grab('noDrank').checked = true;
 	}
-	else {
-		never_used.checked = true;
-		dhRadio2();
 
-		opacityLow(have_you_ever_label);
-		opacityLow(never_used_label);
-		opacityLow(has_used_label);
-		opacityLow(never_used);
-		opacityLow(has_used);
-
-		never_used.disabled = true;
-		has_used.disabled = true;
-
-		opacityHigh(got_dui_label);
-		opacityHigh(no_dui_label);
-		opacityHigh(hasADui_label);
-		opacityHigh(no_dui);
-		opacityHigh(dui);
-		no_dui.disabled = false;
-		dui.disabled = false;
-	}
+	dhRadio2();
+	dhRadioEFX();
 }
 
 function radioRightNoLower() {

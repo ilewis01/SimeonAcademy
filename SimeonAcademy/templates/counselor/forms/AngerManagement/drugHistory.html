@@ -157,72 +157,72 @@
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
                         <td><div class='iml-label'>Do you currently drink and/or use drugs?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='curUse' id='yesDrink' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='curUse' id='yesDrink' value='True' onClick='javascript: topLevelDH();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='curUse' id='noDrink' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='curUse' id='noDrink' value='False' onClick='javascript: topLevelDH();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>How often do you use?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='oftenLab'><li>How often do you use?</li></div></td>
                         <td><div><input type='text' name='amtPerWeek' id='amtPerWeek' value='{{fields.amtPerWeek}}'></div></td>
                       </tr>
 
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>How much do you use?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='muchLab'><li>How much do you use?</li></div></td>
                         <td><div><input type='text' name='useAmt' id='useAmt' value='{{fields.useAmt}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>4.</div></td>
-                        <td><div class='iml-label'>Have you ever drank or used drugs?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='hasDrank' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='noDrank' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-num-div' id='num_4'>4.</div></td>
+                        <td><div class='iml-label' id='num_4Lab'>Have you ever drank or used drugs?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='hasDrank' value='True' onClick='javascript: dhRadio2();'></div></td>
+                        <td><div class='iml-sub-label' id='r1Lab'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='everDrank' id='noDrank' value='False' onClick='javascript: dhRadio2();'></div></td>
+                        <td><div class='iml-sub-label' id='r2Lab'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>How long ago did you quit?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab3'><li>How long ago did you quit?</li></div></td>
                         <td><div class='iml-num'><input type='number' name='yearsQuit' id='yearsQuit' value='{{fields.yearsQuit}}'></div></td>
-                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div class='iml-sub-label' id='lab4'>years</div></td>
                         <td><div class='iml-num'><input type='number' name='monthsQuit' id='monthsQuit' value='{{fields.monthsQuit}}'></div></td>
-                        <td><div class='iml-sub-label'>months</div></td>
+                        <td><div class='iml-sub-label' id='lab5'>months</div></td>
                       </tr>
                     </table>
                     
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>For what reasons did you quit?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab6'><li>For what reasons did you quit?</li></div></td></tr>
                       <tr><td><div><textarea class='iml-text-area-sub' rows='4' cols='60' name='reasonQuit' id='reasonQuit' value=''>{{fields.reasonQuit}}</textarea></div></td></tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label'>Have you ever received a DUI?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='DUI' id='hasDUI' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='DUI' id='noDui' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-num-div' id='num_5'>5.</div></td>
+                        <td><div class='iml-label' id='num_5Lab'>Have you ever received a DUI?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='DUI' id='hasDUI' value='True' onClick='javascript: dhRadio3();'></div></td>
+                        <td><div class='iml-sub-label' id='lab7'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='DUI' id='noDui' value='False' onClick='javascript: dhRadio3();'></div></td>
+                        <td><div class='iml-sub-label' id='lab8'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>How many?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab9'><li>How many?</li></div></td>
                         <td><div class='iml-num'><input type='number' name='numDUI' id='numDUI' value='{{fields.numDUI}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>What was your BAL?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab10'><li>What was your BAL?</li></div></td>
                         <td><div class=''><input type='text' name='BALevel' id='BALevel' value='{{fields.BALevel}}'></div></td>
                       </tr>
                     </table>
@@ -236,54 +236,54 @@
                       <tr>
                         <td><div class='iml-num-div'>6.</div></td>
                         <td><div class='iml-label'>Have you ever received treatment for drug/alcohol abuse?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='hadTreatment' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='hadTreatment' value='True' onClick='javascript: dhLeftRadio1();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='noTreatment' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='drugTreatment' id='noTreatment' value='False' onClick='javascript: dhLeftRadio1();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>When did you receive treatment?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab11'><li>When did you receive treatment?</li></div></td>
                         <td><div class=''><input type='text' name='dateTreated' id='dateTreated' value='{{fields.dateTreated}}'></div></td>
                       </tr>
 
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>Where did you receive treatment?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab12'><li>Where did you receive treatment?</li></div></td>
                         <td><div class=''><input type='text' name='treatmentPlace' id='treatmentPlace' value='{{fields.treatmentPlace}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>7.</div></td>
-                        <td><div class='iml-label'>Did you successfully complete treatment?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='didFinish' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='noFinish' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-num-div' id='num_7'>7.</div></td>
+                        <td><div class='iml-label' id='lab13'>Did you successfully complete treatment?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='didFinish' value='True' onClick='javascript: dhLeftRadio2();'></div></td>
+                        <td><div class='iml-sub-label' id='lab14'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='finishedTreatment' id='noFinish' value='False' onClick='javascript: dhLeftRadio2();'></div></td>
+                        <td><div class='iml-sub-label' id='lab15'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Why was treatment terminated?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab16'><li>Why was treatment terminated?</li></div></td></tr>
                       <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='reasonNotFinishedTreatment' id='reasonNotFinishedTreatment' value=''>{{fields.reasonNotFinishedTreatment}}</textarea></div></td></tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>8.</div></td>
-                        <td><div class='iml-label'>Are you still abstinent?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='isClean' id='isClean' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='isClean' id='notClean' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-num-div' id='num_8'>8.</div></td>
+                        <td><div class='iml-label' id='num_8Lab'>Are you still abstinent?</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='isClean' id='isClean' value='True' onClick='javascript: dhLeftRadio3();'></div></td>
+                        <td><div class='iml-sub-label' id='labe1'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='isClean' id='notClean' value='False' onClick='javascript: dhLeftRadio3();'></div></td>
+                        <td><div class='iml-sub-label' id='labe2'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>What triggered your relapse?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab17'><li>What triggered your relapse?</li></div></td></tr>
                       <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='relapseTrigger' id='relapseTrigger' value=''>{{fields.relapseTrigger}}</textarea></div></td></tr>
                     </table>
 
