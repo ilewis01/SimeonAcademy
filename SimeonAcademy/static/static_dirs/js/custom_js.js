@@ -3844,6 +3844,76 @@ function processAM_DH_data() {
 	subPost1('text', grab('hadTreatment'), grab('isClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
 }
 
+function process_am_child_data() {	
+	post(true, 'text', grab('abusedBy'), grab('yesAbuse'), grab('m_abusedBy'));
+	post(true, 'text', grab('abuseImpact'), grab('yesAbuse'), grab('m_abuseImpact'));
+
+	post(false, 'text', grab('howLeftHome'), null, null);
+	post(false, 'text', grab('siblingsRelationshipExplain'), null, null);
+	post(false, 'text', grab('dadCloseExplain'), null, null);
+	post(false, 'text', grab('momCloseExplain'), null, null);
+	post(false, 'number', grab('num_siblings'), null, null);
+
+	post(false, 'text', grab('childAngerExplain'), null, null);
+	post(false, 'text', grab('otherChildExplain'), null, null);
+	post(false, 'text', grab('parentViolenceExplain'), null, null);
+	post(false, 'text', grab('parentViolenceImpact'), null, null);
+
+	post(true, 'text', grab('traumaExplain'), grab('yesTrauma'), grab('m_traumaExplain'));
+}
+
+function finishOffAmChildhood() {
+	var w = 560, h = 720;
+	openPopUp('auto', '/finishChildhood/', w, h);
+}
+
+function determineBool(trigger, target) {
+	if (trigger.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
+	}
+}
+
+function initializeFinishChildhood(data) {
+	setRadioElement(data.childAnger, grab('yesAnger'), grab('noAnger'));
+	setRadioElement(data.otherChild, grab('yesOther'), grab('noOther'));
+	setRadioElement(data.parentViolence, grab('yesViolence'), grab('noViolence'));
+
+	finChild1();
+	finChild2();
+	finChild3();
+}
+
+function finChild1() {
+	twoElementRadioSetup(grab('yesAnger'), grab('lab1'), grab('childAngerExplain'));
+}
+
+function finChild2() {
+	twoElementRadioSetup(grab('yesOther'), grab('lab2'), grab('otherChildExplain'));
+}
+
+function finChild3() {
+	twoElementRadioSetup(grab('yesViolence'), grab('lab3'), grab('parentViolenceExplain'));
+	twoElementRadioSetup(grab('yesViolence'), grab('num_4'), grab('parentViolenceImpact'));
+}
+
+function saveChildExtras() {
+	determineBool(grab('yesAnger'), getPopParent('childAnger'));
+	determineBool(grab('yesOther'), getPopParent('otherChild'));
+	determineBool(grab('yesViolence'), getPopParent('parentViolence'));
+
+	getPopParent('childAngerExplain').value = grab('childAngerExplain').value;
+	getPopParent('otherChildExplain').value = grab('otherChildExplain').value;
+	getPopParent('parentViolenceExplain').value = grab('parentViolenceExplain').value;
+	getPopParent('parentViolenceImpact').value = grab('parentViolenceImpact').value;
+
+	getPopParent('chBtnIML').className = 'pro-iml-btn';
+
+	window.close();
+}
+
 function subPost1(type, trigger1, trigger2, field, triggerTarget, fieldTarget) {
 	if (type === 'text') {
 		if (trigger1.checked === true) {
@@ -3911,44 +3981,6 @@ function parentsFoughtRadio() {
 
 	twoElementRadioSetup(sawViolence, parentViolenceExplain_label, parentViolenceExplain);
 	twoElementRadioSetup(sawViolence, parentViolenceImpact_label, parentViolenceImpact);
-}
-
-function process_am_child_data() {
-	//DYNAMIC TRIGGERS
-	var hadTramua = document.getElementById('hadTramua');
-	var childAbused = document.getElementById('childAbused');
-	var hadAngerChild = document.getElementById('hadAngerChild');
-	var haveOtherEvents = document.getElementById('haveOtherEvents');
-	var sawViolence = document.getElementById('sawViolence');
-
-	//DYNAMIC FIELDS
-	var traumaExplain = document.getElementById('traumaExplain');
-	var abusedBy = document.getElementById('abusedBy');
-	var abuseImpact = document.getElementById('abuseImpact');
-	var otherChildExplain = document.getElementById('otherChildExplain');
-	var childAngerExplain = document.getElementById('childAngerExplain');
-	var parentViolenceExplain = document.getElementById('parentViolenceExplain');
-	var parentViolenceImpact = document.getElementById('parentViolenceImpact');
-
-	//POST FIELDS
-	var m_traumaExplain = document.getElementById('m_traumaExplain');
-	var m_howLeftHome = document.getElementById('m_howLeftHome');
-	var m_abusedBy = document.getElementById('m_abusedBy');
-	var m_abuseImpact = document.getElementById('m_abuseImpact');
-	var m_childAngerExplain = document.getElementById('m_childAngerExplain');
-	var m_otherChildExplain = document.getElementById('m_otherChildExplain');
-	var m_parentViolenceExplain = document.getElementById('m_parentViolenceExplain');
-	var m_parentViolenceImpact = document.getElementById('m_parentViolenceImpact');
-
-
-	// //PROCESS DYNAMIC FIELDS
-	postDynamicFields(hadTramua, traumaExplain, m_traumaExplain);
-	postDynamicFields(childAbused, abusedBy, m_abusedBy);
-	postDynamicFields(childAbused, abuseImpact, m_abuseImpact);
-	postDynamicFields(hadAngerChild, childAngerExplain, m_childAngerExplain);
-	postDynamicFields(haveOtherEvents, otherChildExplain, m_otherChildExplain);
-	postDynamicFields(sawViolence, parentViolenceExplain, m_parentViolenceExplain);
-	postDynamicFields(sawViolence, parentViolenceImpact, m_parentViolenceImpact);
 }
 
 function continue_am_history1() {

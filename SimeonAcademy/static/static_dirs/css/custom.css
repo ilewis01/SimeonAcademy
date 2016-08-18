@@ -4923,7 +4923,73 @@ button:hover {
 	color:#506d70;
 }
 
+.iml-pop-head1 {
+	width: 99%;
+	margin: auto;
+	height: 40px;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/superGreen.png');
+	background-size: 100%;
+	text-align: center;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 18px;
+	color: #e3dcc8;
+	text-shadow: 1px 1px black;
+}
 
+.iml-pop-body1 {
+	width: 99%;
+	margin: auto;
+	height: 550px;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/iml_bkgnd.png');
+	background-size: 100%;
+}
+
+.iml-pop-foot1 {
+	width: 99%;
+	margin: auto;
+	height: 55px;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/superGreen.png');
+	background-size: 100%;
+}
+
+.iml-pop-foot1 button {
+	width: 120px;
+	height:28px;
+	font-size: 14px;
+	padding-bottom: 5px;
+}
+
+.iml-pop-sub-head1 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	color: #7A6264;
+}
+
+.iml-btn-container2 {
+	border: 1px solid black;
+	width:250px;
+	height:34px;
+	margin-top: 10px;
+	background-color: #e3dcc8;
+	margin-left: 265px;
+}
+
+.pro-iml-btn  button {
+	background-color: #D1CE26;
+}
+
+.pro-iml-btn  button:hover {
+	background-color: #35B539;
+}
 
 
 

@@ -45,7 +45,7 @@ fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDispl
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
-get_JSON_workSchedule
+get_JSON_workSchedule, processAMC
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -2090,6 +2090,53 @@ def am_problems(request):
 		else:
 			content = fetchContent(request, 'am', '/am_problems/')
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def saveChildhoodInit(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content = processAMC(request)
+			print content
+			return render_to_response('counselor/forms/AngerManagement/saveChildhoodInit.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def finishChildhood(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			data = {}
+			track = getTrack(user)
+			quickTrack('Session', track)
+			session = ClientSession.objects.get(id=(track.s_id))
+			data['isComplete'] = session.am.isComplete
+			data['childAnger'] = session.am.childhood.childAnger
+			data['otherChild'] = session.am.childhood.otherChild
+			data['parentViolence'] = session.am.childhood.parentViolence
+			json_data = json.dumps(data)
+			content['json_data'] = json_data
+			content['form'] = session.am.childhood
+			return render_to_response('counselor/forms/AngerManagement/finishChildhood.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def am_control(request):

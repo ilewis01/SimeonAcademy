@@ -2169,68 +2169,6 @@ def findClientSAP(client):
 			break
 	return result
 
-
-# elif section == '/am_demographic/':
-# 		demo = am.demographic
-# 		dateTime = datetime.now()
-# 		date = dateTime.date()	
-
-# 		#NORMAL FIELDS
-# 		maritalStatus = request.POST.get('maritalStatus', '')
-# 		livingSituation = request.POST.get('livingSituation', '')
-
-# 		months_res = request.POST.get('months_res', '')
-# 		years_res = request.POST.get('years_res', '')
-# 		num_children = request.POST.get('num_children', '')
-# 		other_dependants = request.POST.get('other_dependants', '')
-# 		whoLivesWithClient = request.POST.get('whoLivesWithClient', '')
-# 		spouse_dep = request.POST.get('spouse_dep', '')
-# 		education = request.POST.get('education', '')
-# 		job_title = request.POST.get('job_title', '')
-# 		employee = request.POST.get('employee', '')
-# 		emp_address = request.POST.get('emp_address', '')
-# 		employer_phone = request.POST.get('employer_phone', '')
-# 		employed_months = request.POST.get('employed_months', '')
-# 		employed_years = request.POST.get('employed_years', '')
-
-# 		health_problem = truePythonBool(request.POST.get('health_problem'))
-# 		medication = truePythonBool(request.POST.get('medication'))
-# 		own = truePythonBool(request.POST.get('own'))
-
-# 		#DYNAMIC FIELDS
-# 		resasonDO = request.POST.get('m_resasonDO', '')
-# 		health_exp = request.POST.get('m_health_exp', '')
-# 		whatMedicine = request.POST.get('m_whatMedicine')
-
-# 		print "What medicine: " + str(whatMedicine)
-
-# 		employer_phone = phone_to_integer(employer_phone)
-
-# 		demo.whoLivesWithClient 	= whoLivesWithClient
-# 		demo.date_of_assessment 	= date
-# 		demo.maritalStatus 			= maritalStatus
-# 		demo.livingSituation 		= livingSituation
-# 		demo.own 					= own
-# 		demo.months_res 			= months_res
-# 		demo.years_res 				= years_res
-# 		demo.num_children 			= num_children
-# 		demo.other_dependants 		= other_dependants
-# 		demo.education 				= education
-# 		demo.resasonDO 				= resasonDO
-# 		demo.employee 				= employee
-# 		demo.job_title 				= job_title
-# 		demo.emp_address 			= emp_address
-# 		demo.employed_months 		= employed_months
-# 		demo.employed_years 		= employed_years
-# 		demo.employer_phone 		= employer_phone
-# 		demo.health_problem 		= health_problem
-# 		demo.medication 			= medication
-# 		demo.whatMedicine 			= whatMedicine
-# 		demo.health_exp 			= health_exp
-
-# 		demo.save()
-# 		am.save()
-
 def saveAMDemographic(request, am):
 	date = datetime.now()
 	date = date.date()
@@ -2296,12 +2234,6 @@ def saveAMDrugHistory(request, am):
 	form.isClean = truePythonBool(request.POST.get('m_isClean'))
 	form.relapseTrigger = request.POST.get('m_relapseTrigger')
 
-	a = request.POST.get('m_finishedTreatment')
-	b = request.POST.get('m_isClean')
-
-	print "Finished Treatment: " + str(a)
-	print "Still Abstinent: " + str(b)
-
 	form.drinkLastEpisode = truePythonBool(request.POST.get('drinkLastEpisode'))
 	form.drinkRelationshipProblem = truePythonBool(request.POST.get('drinkRelationshipProblem'))
 	form.needHelpDrugs = truePythonBool(request.POST.get('needHelpDrugs'))
@@ -2314,6 +2246,41 @@ def saveAMChildhood(request, am):
 	date = date.date()
 	form = am.childhood
 	form.date_of_assessment = date
+
+	form.raisedBy = request.POST.get('raisedBy')
+	form.momAlive = truePythonBool(request.POST.get('momAlive'))
+	form.dadAlive = truePythonBool(request.POST.get('dadAlive'))
+	form.childTrama = truePythonBool(request.POST.get('childTrama'))
+	form.traumaExplain = request.POST.get('traumaExplain')
+
+	form.howLeftHome = request.POST.get('howLeftHome')
+	form.num_siblings = request.POST.get('num_siblings')
+	form.siblingsClose = truePythonBool(request.POST.get('siblingsClose'))
+	form.siblingsRelationshipExplain = request.POST.get('siblingsRelationshipExplain')
+	form.dadClose = truePythonBool(request.POST.get('dadClose'))
+	form.dadCloseExplain = request.POST.get('dadCloseExplain')
+	form.momClose = truePythonBool(request.POST.get('momClose'))
+	form.momCloseExplain = request.POST.get('momCloseExplain')
+	form.wasAbused = truePythonBool(request.POST.get('wasAbused'))
+	form.abusedBy = request.POST.get('m_abusedBy')
+	form.abuseImpact = request.POST.get('m_abuseImpact')
+
+	form.save()
+	am.save()
+
+def saveAMChild2(request, am):
+	form = am.childhood
+
+	form.childAnger 			= truePythonBool(request.POST.get('childAnger'))
+	form.childAngerExplain 		= request.POST.get('childAngerExplain')
+	form.otherChild 			= truePythonBool(request.POST.get('otherChild'))
+	form.otherChildExplain 		= request.POST.get('otherChildExplain')
+	form.parentViolence 		= truePythonBool(request.POST.get('parentViolence'))
+	form.parentViolenceExplain 	= request.POST.get('parentViolenceExplain')
+	form.parentViolenceImpact 	= request.POST.get('parentViolenceImpact')
+
+	form.save()
+	am.save()
 
 def saveAMAngerHistroy1(request, am):
 	date = datetime.now()
@@ -2393,7 +2360,7 @@ def saveCompletedAmSection(request, section, am):
 	elif section == '/am_drugHistory/':
 		saveAMDrugHistory(request, am)
 	elif section == '/am_childhood/':
-		saveAMChildhood(request, am)
+		saveAMChild2(request, am)
 	elif section == '/am_angerHistory/':
 		saveAMAngerHistroy1(request, am)
 	elif section == '/am_angerHistory2/':
@@ -4078,6 +4045,38 @@ def beginAM(request):
 		result['type_header'] = 'Anger Management'
 		result['next_section'] = next_section
 		result['save_section'] = next_section
+
+	return result
+
+def processAMC(request):
+	result = {}
+	session_id = request.POST.get('session_id', '')
+	am_id = request.POST.get('am_id', '')
+	save_this = request.POST.get('save_this', '')
+	section = request.POST.get('save_section', '')
+
+	session = ClientSession.objects.get(id=session_id)
+	am = AngerManagement.objects.get(id=am_id)
+	saveAMChildhood(request, am)
+	deprioritizeAM(am)
+	fields = getAMFields(am, '/am_childhood/')
+	json_data = json.dumps(fields)
+
+	next_url = nextAmPage(am, '/am_childhood/')
+	classes = grabAmClassesCSS(am, '/am_childhood/')
+	image = amSidebarImages(am, '/am_childhood/')
+	track = getTrack(request.user)
+
+	result['tracking'] = track.state.state
+	result['class'] = classes
+	result['image'] = image
+	result['next_url'] = next_url
+	result['session'] = session
+	result['AM'] = am
+	result['fields'] = fields
+	result['json_data'] = json_data
+	result['current_section'] = '/am_childhood/'
+	result['title'] = "Simeon Academy | Anger Management"
 
 	return result
 

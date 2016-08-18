@@ -102,6 +102,8 @@ urlpatterns = patterns('',
     url(r'^am_viewForm/$', 'assessment.views.am_viewForm'),
     url(r'^am_worst/$', 'assessment.views.am_worst'),
     url(r'^printAM/$', 'assessment.views.printAM'),
+    url(r'^finishChildhood/$', 'assessment.views.finishChildhood'),
+    url(r'^saveChildhoodInit/$', 'assessment.views.saveChildhoodInit'),
 
     ## Urine Test Views
     url(r'^ut_preliminary/$', 'assessment.views.ut_preliminary'),

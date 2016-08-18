@@ -4,8 +4,8 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <form action='/saveChildhoodInit/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
-      <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+      <input type='hidden' name='client_id' id='client_id' value='{{session.client.id}}'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
       <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
@@ -305,7 +305,11 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><div id='superBtn'><button onClick="javascript: process_am_child_data(); grab('am_demo').submit(); finishOffAmChildhood();" id='changeBtn'>Next Section</button></div></td>
+                  <td>
+                    <div id='chBtnIML'>
+                      <button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button>
+                    </div>
+                  </td>
                 </tr>
               </table>
             </div>
