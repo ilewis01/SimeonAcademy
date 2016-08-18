@@ -206,16 +206,16 @@
                       <tr>
                         <td><div class='iml-num-div'>6.</div></td>
                         <td><div class='iml-label'>Any drugs or alcohol by anyone involved?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='useWorst' id='yesDrugs' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='useWorst' id='yesDrugs' value='True' onClick='javascript: worstCheck();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='useWorst' id='noDrugs' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='useWorst' id='noDrugs' value='False' onClick='javascript: worstCheck();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>Who was using?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab1'><li>Who was using?</li></div></td>
                         <td>
                           <div>
                             <select name='whoUsed' id='whoUsed' value=''>
@@ -297,7 +297,7 @@
                             <tr>
                               <td>
                                 <div class='iml-checkbox'>
-                                  <input type='checkbox' name='otherWorst' id='otherWorst' value='Other'>
+                                  <input type='checkbox' name='otherWorst' id='otherWorst' value='Other' onClick='javascript: worstEndSet();'>
                                 </div>
                               </td>
                               <td><div class='iml-sub-label2'>Other</div></td>
@@ -308,7 +308,7 @@
 
                       <tr>
                         <td></td>
-                        <td><div class='iml-sub-label-left3'>Please explain:</div></td>
+                        <td><div class='iml-sub-label-left3' id='lab2'>Please explain:</div></td>
                       </tr>
 
                       <tr>

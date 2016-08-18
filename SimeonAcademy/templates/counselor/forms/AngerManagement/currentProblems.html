@@ -213,7 +213,7 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='otherSeriousIllness' id='otherSeriousIllness' value='Other Serious Illness'>
+                            <input type='checkbox' name='otherSeriousIllness' id='otherSeriousIllness' value='Other Serious Illness' onClick="javascript: am_problems_check('otherWhom', 'otherSeriousIllness');">
                           </div>
                         </td>
 
@@ -238,14 +238,14 @@
                     <table>
                       <tr>
                         <td><div class='iml-sub-label2'><li>Are you currenty taking any medications?</li></div></td>
-                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='onMeds' value='True'></div></td>
+                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='onMeds' value='True' onClick='javascript: am_problems_radio();'></div></td>
                         <td><div class='iml-sub-label2'>Yes</div></td>
-                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='noMeds' value='False'></div></td>
+                        <td><div class='iml-radio-low'><input type='radio' name='currentlyOnMeds' id='noMeds' value='False' onClick='javascript: am_problems_radio();'></div></td>
                         <td><div class='iml-sub-label2'>No</div></td>
                       </tr>
                     </table>
                     <table>
-                      <tr><td><div class='iml-sub-label2'><li>What are you taking?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label2' id='lab2'><li>What are you taking?</li></div></td></tr>
                       <tr>
                         <td>
                           <div class=''>

@@ -159,7 +159,7 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='talkToMyself' id='talkToMyself' value='Talk to myself'>
+                            <input type='checkbox' name='talkToMyself' id='talkToMyself' value='Talk to myself' onClick='javascript: talkMyself();'>
                           </div>
                         </td>
                         <td><div class='iml-sub-label2'>Talk to myself</div></td>
@@ -168,7 +168,7 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text'><li>What do you say to yourself to control your anger?</li></div></td>
+                        <td><div class='iml-control-text' id='lab1'><li>What do you say to yourself to control your anger?</li></div></td>
                       </tr>
                       <tr>
                         <td>
@@ -183,7 +183,7 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='leaveScene' id='leaveScene' value='Leave the scene'>
+                            <input type='checkbox' name='leaveScene' id='leaveScene' value='Leave the scene' onClick='javascript: leaveSceneCheckbox();'>
                           </div>
                         </td>
                         <td><div class='iml-sub-label2'>Leave the scene</div></td>
@@ -192,13 +192,13 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text'><li>How long?</li></div></td>
+                        <td><div class='iml-control-text' id='lab2'><li>How long?</li></div></td>
                         <td><div><input type='text' name='howLongLeaveScene' id='howLongLeaveScene' value='{{fields.howLongLeaveScene}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-control-text'><li>What do you do?</li></div></td></tr>
+                      <tr><td><div class='iml-control-text' id='lab3'><li>What do you do?</li></div></td></tr>
                       <tr>
                         <td>
                           <div class='iml-spec-ta2'>
@@ -214,7 +214,7 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='relax' id='relax' value='Try to relax'>
+                            <input type='checkbox' name='relax' id='relax' value='Try to relax' onClick='javascript: howRelaxCheckbox();'>
                           </div>
                         </td>
                         <td><div class='iml-sub-label2'>Try to relax</div></td>
@@ -223,7 +223,7 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text'>How do you relax?</div></td>
+                        <td><div class='iml-control-text' id='lab4'>How do you relax?</div></td>
                       </tr>
                     </table>
 
@@ -252,10 +252,10 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='otherControlAnger' id='otherControlAnger' value='Other types of anger control:'>
+                            <input type='checkbox' name='otherControlAnger' id='otherControlAnger' value='Other types of anger control:' onClick='javascript: otherControlCheckbox();'>
                           </div>
                         </td>
-                        <td><div class='iml-sub-label2'>Other <span>(What?)</span></div></td>
+                        <td><div class='iml-sub-label2'>Other <span id='lab5'>(What?)</span></div></td>
                       </tr>
 
                       <tr>

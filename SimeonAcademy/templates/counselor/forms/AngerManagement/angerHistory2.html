@@ -164,9 +164,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>lifetime?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='depress30RecentV' id='yesDepress' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='depress30RecentV' id='yesDepress' value='True' onClick='javascript: explainDep();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='depress30RecentV' id='noDepress' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='depress30RecentV' id='noDepress' value='False' onClick='javascript: explainDep();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -175,7 +175,7 @@
                     </table>
                     
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>Please explain:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='depress30ExplainRecentV' id='depress30ExplainRecentV'>{{fields.depress30ExplainRecentV}}</textarea></div></td></tr>
                     </table>
 
@@ -191,9 +191,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>unreasonable worried, or the inability to relax?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='anxietyRecentV' id='yesAnx' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='anxietyRecentV' id='yesAnx' value='True' onClick='javascript: tensionRadio();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='anxietyRecentV' id='noAnx' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='anxietyRecentV' id='noAnx' value='False' onClick='javascript: tensionRadio();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -202,7 +202,7 @@
                     </table>
                     
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>When was the last time and how often does this occur:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab2'><li>When was the last time and how often does this occur:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='anxietyExplainRecentV' id='anxietyExplainRecentV'>{{fields.anxietyExplainRecentV}}</textarea></div></td></tr>
                     </table>
 
@@ -219,9 +219,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>That were not there?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='hallucinationRecentV' id='yesHall' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='hallucinationRecentV' id='yesHall' value='True' onClick='javascript: halluRadio();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='hallucinationRecentV' id='noHall' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='hallucinationRecentV' id='noHall' value='False' onClick='javascript: halluRadio();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -230,7 +230,7 @@
                     </table>
                     
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>When was the last time you experienced hallucinations?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab3'><li>When was the last time you experienced hallucinations?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='1' cols='30' name='hallucinationLastV' id='hallucinationLastV'>{{fields.hallucinationLastV}}</textarea></div></td></tr>
                     </table>
                   </div>
@@ -249,9 +249,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>remembering?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='understandingRecentV' id='yesTrouble' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='understandingRecentV' id='yesTrouble' value='True' onClick='javascript: troubleRadioAH2();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='understandingRecentV' id='noTrouble' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='understandingRecentV' id='noTrouble' value='False' onClick='javascript: troubleRadioAH2();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -260,7 +260,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab4'><li>Please explain:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='understandingExplainRecentV' id='understandingExplainRecentV'>{{fields.understandingExplainRecentV}}</textarea></div></td></tr>
                     </table>
 
@@ -276,9 +276,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>episodes of rage or violence?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='troubleControlRecentV' id='yesControl' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='troubleControlRecentV' id='yesControl' value='True' onClick='javascript: troubleControlAH2();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='troubleControlRecentV' id='noControl' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='troubleControlRecentV' id='noControl' value='False' onClick='javascript: troubleControlAH2();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -288,13 +288,13 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>When was the last time this occured?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab5'><li>When was the last time this occured?</li></div></td>
                         <td><div><input type='text' name='lastTimeTroubleControl' id='lastTimeTroubleControl' style='width:140px;' value='{{fields.lastTimeTroubleControl}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>What usually triggers this behavior?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab6'><li>What usually triggers this behavior?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='controlTrigger' id='controlTrigger'>{{fields.controlTrigger}}</textarea></div></td></tr>
                     </table>
 
@@ -310,9 +310,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>in your lifetime?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='suicide30RecentV' id='yesSuicide' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='suicide30RecentV' id='yesSuicide' value='True' onClick='javascript: suicide30recent();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='suicide30RecentV' id='noSuicide' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='suicide30RecentV' id='noSuicide' value='False' onClick='javascript: suicide30recent();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -321,7 +321,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab7'><li>Please explain:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='suicide30ExplainRecentV' id='suicide30ExplainRecentV'>{{fields.suicide30ExplainRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>

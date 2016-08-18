@@ -156,15 +156,15 @@
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
                         <td><div class='iml-label'>Have you felt like hurting others or committing homicide?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='homicidal' id='yesHomicide' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='homicidal' id='yesHomicide' value='True' onClick='javascript: homicidalRadio();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='homicidal' id='noHomicode' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='homicidal' id='noHomicode' value='False' onClick='javascript: homicidalRadio();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Whom did you want to hurt and what were the reasons?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>Whom did you want to hurt and what were the reasons?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain'>{{fields.homicidalExplain}}</textarea></div></td></tr>
                     </table>
 
@@ -181,9 +181,9 @@
                           <table>
                             <tr>
                               <td><div class='iml-label'>emotional problems?</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='medRecentV' id='yesMed' value='True'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='medRecentV' id='yesMed' value='True' onClick='javascript: ah3number1();'></div></td>
                               <td><div class='iml-sub-label'>Yes</div></td>
-                              <td><div class='iml-radio'><input type='radio' name='medRecentV' id='noMed' value='False'></div></td>
+                              <td><div class='iml-radio'><input type='radio' name='medRecentV' id='noMed' value='False' onClick='javascript: ah3number1();'></div></td>
                               <td><div class='iml-sub-label'>No</div></td>
                             </tr>
                           </table>
@@ -192,22 +192,22 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>For what was the medication prescribed?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab2'><li>For what was the medication prescribed?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain'>{{fields.medRecentVExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>Was the treatment successful?</li></div></td>
-                        <td><div class='iml-radio'><input type='radio' name='medSuccessRecentV' id='yesSuccess' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='medSuccessRecentV' id='noSuccess' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-sub-label-left' id='lab5'><li>Was the treatment successful?</li></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medSuccessRecentV' id='yesSuccess' value='True' onClick='javascript: ah3number2();'></div></td>
+                        <td><div class='iml-sub-label' id='lab3'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='medSuccessRecentV' id='noSuccess' value='False' onClick='javascript: ah3number2();'></div></td>
+                        <td><div class='iml-sub-label' id='lab4'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab6'><li>Please explain:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'>{{fields.medSuccessExplainRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>

@@ -1980,21 +1980,7 @@ function clearNullTextArea(element) {
 
 // AM CONNECTIONS FUNCTIONS
 function connectionCheck() {
-	var explain = document.getElementById('connectionExplain');
-	var label = document.getElementById('explain_label');
-
-	if (document.getElementById('otherConnectionsUsing').checked === true) {
-		explain.disabled = false;
-		explain.style.opacity = "1.0";
-		label.style.opacity = "1.0";
-	}
-
-	else {
-		explain.disabled = true;
-		explain.style.opacity = "0.5";
-		label.style.opacity = "0.5";
-		explain.value = '';
-	}
+	twoElementRadioSetup(grab('otherConnectionsUsing'), grab('lab1'), grab('connectionExplain'));
 }
 
 
@@ -2023,37 +2009,42 @@ function post_dynamic_am_connections() {
 }
 
 // AM WORST EPISODES FUNCTIONS
-function worstCheck() {
-	var description = document.getElementById('otherWorstDescription');
+function generalCheckClear(fieldName, checkBox) {
+	fieldName = String(fieldName);
+	checkBox = String(checkBox);
 
-	if (document.getElementById('otherWorst').checked === true) {
-		description.style.opacity = "1.0";
-		description.disabled = false;
+	c = grab(checkBox);
+	f = grab(fieldName);
+
+	if (c.checked === true) {
+		f.disabled = false;
+		opacityHigh(f);
 	}
 	else {
-		description.value = '';
-		description.style.opacity = '0';
-		description.disabled = true;
+		opacityLow(f);
+		f.value = '';
+		f.disabled = true;
 	}
 }
 
-function activateWorstRadio() {
-	var selectBox = document.getElementById('whoDidItFight');
-	var label = document.getElementById('whoDidItFight_label');
+function worstCheck() {
+	twoElementRadioSetupSelect(grab('yesDrugs'), grab('lab1'), grab('whoUsed'));
+}
 
-	if (document.getElementById('hadDrugs').checked === true) {
-		label.style.opacity = '1.0';
-		selectBox.style.opacity = '1.0';
-		selectBox.disabled = false;
+function worstEndSet() {
+	if (grab('otherWorst').checked === true) {
+		grab('otherWorstDescription').disabled = false;
+		opacityHigh(grab('lab2'));
+		opacityHigh(grab('otherWorstDescription'));
 	}
-
-	if (document.getElementById('noDrugs').checked === true) {
-		selectBox.selectedIndex = 0;
-		label.style.opacity = '0.5';
-		selectBox.style.opacity = '0.5';
-		selectBox.disabled = true;
+	else {		
+		opacityLow(grab('lab2'));
+		opacityLow(grab('otherWorstDescription'));
+		grab('otherWorstDescription').value = '';
+		grab('otherWorstDescription').disabled = true;
 	}
 }
+
 
 function post_dynamic_am_worst() {
 	//M_VALUE ELEMENTS
@@ -2098,16 +2089,14 @@ function post_dynamic_am_worst() {
 
 // AM TARGET FUNCTIONS
 function amTargetOther() {
-	otherWhom = document.getElementById('otherWhom');
-
-	if(document.getElementById('angryOther').checked === true) {
-		otherWhom.disabled = false;
-		otherWhom.style.opacity = '1.0';
+	if (grab('angryOther').checked === true) {
+		grab('otherWhom').disabled = false;
+		opacityHigh(grab('otherWhom'));
 	}
 	else {
-		otherWhom.value = '';
-		otherWhom.style.opacity = '0';
-		otherWhom.disabled = true;
+		opacityLow(grab('otherWhom'));
+		grab('otherWhom').value = '';
+		grab('otherWhom').disabled = true;
 	}
 }
 
@@ -2165,38 +2154,11 @@ function post_dynamic_am_family() {
 
 //AM CURRENT PROBLEMS FUNCTIONS
 function am_problems_check() {
-	var label = document.getElementById('other_label');
-	var box = document.getElementById('describeIssue');
-
-	if (document.getElementById('otherSeriousIllness').checked === true) {
-		label.style.opacity = '1.0';
-		box.style.opacity = '1.0';
-		box.disabled = false;
-	}
-	else {
-		label.style.opacity = '0';
-		box.style.opacity = '0';
-		box.value = '';
-		box.disabled = true;
-	}
+	generalCheckClear('otherWhom', 'otherSeriousIllness');
 }
 
 function am_problems_radio() {
-	var label = document.getElementById('taking_meds_label');
-	var box = document.getElementById('whichMeds');
-
-	if (document.getElementById('onMeds').checked === true) {
-		label.style.opacity = '1.0';
-		box.style.opacity = '1.0';
-		box.disabled = false;
-	}
-
-	if (document.getElementById('noMeds').checked === true) {
-		label.style.opacity = '0.5';
-		box.style.opacity = '0.5';
-		box.value = '';
-		box.disabled = true;
-	}
+	twoElementRadioSetup(grab('onMeds'), grab('lab2'), grab('whichMeds'));
 }
 
 
@@ -2322,6 +2284,21 @@ function twoElementRadioSetupNumber(trigger, label, field) {
 		opacityLow(label);
 		opacityLow(field);
 		field.value = 0;
+		field.disabled = true;
+	}
+}
+
+function twoElementRadioSetupSelect(trigger, label, field) {
+	if (trigger.checked === true) {
+		field.disabled = false;
+		opacityHigh(label);
+		opacityHigh(field);
+	}
+
+	else {
+		opacityLow(label);
+		opacityLow(field);
+		field.selectedIndex = 0;
 		field.disabled = true;
 	}
 }
@@ -2693,12 +2670,12 @@ function initialize_am_angerHistory2(json_data) {
 	setRadioElement(json_data.troubleControlRecentV, grab('yesControl'), grab('noControl'));
 	setRadioElement(json_data.suicide30RecentV, grab('yesSuicide'), grab('noSuicide'));
 
-	// explainDep();
-	// tensionRadio();
-	// halluRadio();
-	// troubleRadioAH2();
-	// troubleControlAH2();
-	// suicide30recent();
+	explainDep();
+	tensionRadio();
+	halluRadio();
+	troubleRadioAH2();
+	troubleControlAH2();
+	suicide30recent();
 }
 
 function initialize_am_angerHistory3(json_data) {
@@ -2764,8 +2741,9 @@ function initialize_am_angerHistory3(json_data) {
 		grab('ho6').checked = true;
 	}
 
-	// homicidalRadio();
-	// ah3number2();
+	homicidalRadio();
+	ah3number1();
+	ah3number2();
 }
 
 function initalize_am_connections(json_data) {
@@ -2778,7 +2756,7 @@ function initalize_am_connections(json_data) {
 
 	blank_init(json_data.isComplete, grab('medSuccessExplainRecentV'));
 
-	// connectionCheck();
+	connectionCheck();
 }
 
 function initalize_am_worst(json_data) {
@@ -2798,8 +2776,8 @@ function initalize_am_worst(json_data) {
 	checkBoolInit(json_data.propertyWorst, grab('propertyWorst'));
 	checkBoolInit(json_data.otherWorst, grab('otherWorst'));
 
-	// worstCheck();
-	// activateWorstRadio();
+	worstCheck();
+	worstEndSet();
 }
 
 function initalize_am_target(json_data) {
@@ -2815,7 +2793,7 @@ function initalize_am_target(json_data) {
 	blank_init(json_data.isComplete, grab('angryAbout'));
 	blank_init(json_data.isComplete, grab('otherWhom'));
 
-	// amTargetOther();
+	amTargetOther();
 }
 
 
@@ -2844,8 +2822,8 @@ function initalize_am_problems(json_data) {
 
 	setRadioElement(json_data.currentlyOnMeds, grab('onMeds'), grab('noMeds'));
 
-	// am_problems_check();
-	// am_problems_radio();
+	am_problems_check();
+	am_problems_radio();
 }
 
 function initalize_am_control(json_data) {
@@ -2862,10 +2840,10 @@ function initalize_am_control(json_data) {
 	blank_init(json_data.isComplete, grab('doWhatOtherControl'));
 	blank_init(json_data.howLongLeaveScene, grab('howLongLeaveScene'));
 
-	// talkMyself();
-	// leaveSceneCheckbox();
-	// howRelaxCheckbox();
-	// otherControlCheckbox();
+	talkMyself();
+	leaveSceneCheckbox();
+	howRelaxCheckbox();
+	otherControlCheckbox();
 }
 
 function initalize_am_final() {
@@ -3996,83 +3974,20 @@ function continue_am_history1() {
 
 //CONTROL FUNCTIONS
 function talkMyself() {
-	var whatSayYou_label = document.getElementById('whatSayYou_label');
-	var whatSayYou = document.getElementById('whatSayYou');
-
-	if (document.getElementById('talkToMyself').checked === true) {
-		whatSayYou_label.style.opacity = '1.0';
-		whatSayYou.disabled = false;
-		whatSayYou.style.opacity = '1.0';
-	}
-	else {
-		whatSayYou_label.style.opacity = '0.3';
-		whatSayYou.style.opacity = '0.3';
-		whatSayYou.value = '';
-		whatSayYou.disabled = true;
-	}
+	twoElementRadioSetup(grab('talkToMyself'), grab('lab1'), grab('whatSayYou'));
 }
 
 function leaveSceneCheckbox() {
-	var leaveScene = document.getElementById('leaveScene');
-	var howLongLeaveScene = document.getElementById('howLongLeaveScene');
-	var whatDoLeave = document.getElementById('whatDoLeave');
-	var howLongLeaveScene_label = document.getElementById('howLongLeaveScene_label');
-	var whatDoLeave_label = document.getElementById('whatDoLeave_label');
-
-	if (leaveScene.checked === true) {
-		howLongLeaveScene.disabled = false;
-		whatDoLeave.disabled = false;
-		howLongLeaveScene_label.style.opacity = '1.0';
-		whatDoLeave_label.style.opacity = '1.0';
-		whatDoLeave.style.opacity = '1.0';
-		howLongLeaveScene.style.opacity = '1.0';
-	}
-	else {
-		whatDoLeave.style.opacity = '0.3';
-		howLongLeaveScene.style.opacity = '0.3';
-		howLongLeaveScene.value = '';
-		whatDoLeave.value = '';
-		howLongLeaveScene.disabled = true;
-		whatDoLeave.disabled = true;
-		howLongLeaveScene_label.style.opacity = '0.3';
-		whatDoLeave_label.style.opacity = '0.3';
-	}
+	twoElementRadioSetup(grab('leaveScene'), grab('lab2'), grab('howLongLeaveScene'));
+	twoElementRadioSetup(grab('leaveScene'), grab('lab3'), grab('whatDoLeave'));
 }
 
 function howRelaxCheckbox() {
-	var relax = document.getElementById('relax');
-	var howRelax_label = document.getElementById('howRelax_label');
-	var howRelax = document.getElementById('howRelax');
-
-	if (relax.checked === true) {
-		howRelax_label.style.opacity = '1.0';
-		howRelax.disabled = false;
-		howRelax.style.opacity = '1.0';
-	}
-	else {
-		howRelax_label.style.opacity = '0.3';
-		howRelax.style.opacity = '0.3';
-		howRelax.value = '';
-		howRelax.disabled = true;
-	}
+	twoElementRadioSetup(grab('relax'), grab('lab4'), grab('howRelax'));
 }
 
 function otherControlCheckbox() {
-	var otherControlAnger = document.getElementById('otherControlAnger');
-	var doWhatOtherControl_label = document.getElementById('doWhatOtherControl_label');
-	var doWhatOtherControl = document.getElementById('doWhatOtherControl');
-
-	if (otherControlAnger.checked === true) {
-		doWhatOtherControl_label.style.opacity = '1.0';
-		doWhatOtherControl.disabled = false;
-		doWhatOtherControl.style.opacity = '1.0';
-	}
-	else {
-		doWhatOtherControl_label.style.opacity = '0.3';
-		doWhatOtherControl.style.opacity = '0.3';
-		doWhatOtherControl.value = '';
-		doWhatOtherControl.disabled = true;
-	}
+	twoElementRadioSetup(grab('otherControlAnger'), grab('lab5'), grab('doWhatOtherControl'));
 }
 
 
@@ -4330,106 +4245,28 @@ function process_am_ah1_data() {
 
 //AM ANGER HISTORY SECTION II FUNCTIONS
 function explainDep() {
-	var hasExperience = document.getElementById('hasExperience');
-	var depress30ExplainRecentV = document.getElementById('depress30ExplainRecentV');
-	var depress30ExplainRecentV_label = document.getElementById('depress30ExplainRecentV_label');
-
-	if (hasExperience.checked === true) {
-		depress30ExplainRecentV.disabled = false;
-		depress30ExplainRecentV.style.opacity = '1.0';
-		depress30ExplainRecentV_label.style.opacity = '1.0';
-	}
-	else {
-		depress30ExplainRecentV_label.style.opacity = '0.3';
-		depress30ExplainRecentV.value = ''
-		depress30ExplainRecentV.style.opacity = '0.3';
-		depress30ExplainRecentV.disabled = true;
-	}
+	twoElementRadioSetup(grab('yesDepress'), grab('lab1'), grab('depress30ExplainRecentV'));
 }
 
 function tensionRadio() {
-	var hasTension = document.getElementById('hasTension');
-	var anxietyExplainRecentV = document.getElementById('anxietyExplainRecentV');
-	var anxietyExplainRecentV_label = document.getElementById('anxietyExplainRecentV_label');
-
-	if (hasTension.checked === true) {
-		anxietyExplainRecentV.disabled = false;
-		anxietyExplainRecentV.style.opacity = '1.0';
-		anxietyExplainRecentV_label.style.opacity = '1.0';
-	}
-	else {
-		anxietyExplainRecentV_label.style.opacity = '0.3';
-		anxietyExplainRecentV.value = ''
-		anxietyExplainRecentV.style.opacity = '0.3';
-		anxietyExplainRecentV.disabled = true;
-	}
+	twoElementRadioSetup(grab('yesAnx'), grab('lab2'), grab('anxietyExplainRecentV'));
 }
 
 function halluRadio() {
-	var hasHallu = document.getElementById('hasHallu');
-	var hallucinationLastV = document.getElementById('hallucinationLastV');
-	var hallucinationLastV_label = document.getElementById('hallucinationLastV_label');
-
-	if (hasHallu.checked === true) {
-		hallucinationLastV.disabled = false;
-		hallucinationLastV.style.opacity = '1.0';
-		hallucinationLastV.style.opacity = '1.0';
-	}
-	else {
-		hallucinationLastV_label.style.opacity = '0.3';
-		hallucinationLastV.value = ''
-		hallucinationLastV.style.opacity = '0.3';
-		hallucinationLastV.disabled = true;
-	}
+	twoElementRadioSetup(grab('yesHall'), grab('lab3'), grab('hallucinationLastV'));
 }
 
 function troubleRadioAH2() {
-	var hasTroubleAH2 = document.getElementById('hasTroubleAH2');
-	var understandingExplainRecentV_label = document.getElementById('understandingExplainRecentV_label');
-	var understandingExplainRecentV = document.getElementById('understandingExplainRecentV');
-
-	if (hasTroubleAH2.checked === true) {
-		understandingExplainRecentV.disabled = false;
-		understandingExplainRecentV.style.opacity = '1.0';
-		understandingExplainRecentV_label.style.opacity = '1.0';
-	}
-	else {
-		understandingExplainRecentV.value = '';
-		understandingExplainRecentV_label.style.opacity = '0.3'
-		understandingExplainRecentV.style.opacity = '0.3';
-		understandingExplainRecentV.disabled = true;
-	}
+	twoElementRadioSetup(grab('yesTrouble'), grab('lab4'), grab('understandingExplainRecentV'));
 }
 
 function troubleControlAH2() {
-	var canControl = document.getElementById('canControl');
-	var lastTimeTroubleControl_label = document.getElementById('lastTimeTroubleControl_label');
-	var controlTrigger_label = document.getElementById('controlTrigger_label');
-	var lastTimeTroubleControl = document.getElementById('lastTimeTroubleControl');
-	var controlTrigger = document.getElementById('controlTrigger');
+	twoElementRadioSetup(grab('yesControl'), grab('lab5'), grab('lastTimeTroubleControl'));
+	twoElementRadioSetup(grab('yesControl'), grab('lab6'), grab('controlTrigger'));
+}
 
-	if (canControl.checked === true) {
-		lastTimeTroubleControl.disabled = false;
-		controlTrigger.disabled = false;
-
-		lastTimeTroubleControl_label.style.opacity = '1.0';
-		controlTrigger_label.style.opacity = '1.0';
-		lastTimeTroubleControl.style.opacity = '1.0';
-		controlTrigger.style.opacity = '1.0';
-	}
-
-	else {
-		lastTimeTroubleControl_label.style.opacity = '0.3';
-		controlTrigger_label.style.opacity = '0.3';
-		lastTimeTroubleControl.style.opacity = '0.3';
-		controlTrigger.style.opacity = '0.3';
-
-		lastTimeTroubleControl.value = '';
-		controlTrigger.value = '';
-
-		lastTimeTroubleControl.disabled = true;
-		controlTrigger.disabled = true;
-	}
+function suicide30recent() { //top level radio button
+	twoElementRadioSetup(grab('yesSuicide'), grab('lab7'), grab('suicide30ExplainRecentV'));
 }
 
 
@@ -4518,83 +4355,6 @@ function midLevelSubAH2() {
 	}
 }
 
-function suicide30recent() { //top level radio button
-	var suicideThoughts = document.getElementById('suicideThoughts');
-
-	//labels
-	var suicide30ExplainRecentV_label = document.getElementById('suicide30ExplainRecentV_label');
-	var suicideTodayRecentV_label = document.getElementById('suicideTodayRecentV_label');
-	var isSuicidalToday_label = document.getElementById('isSuicidalToday_label');
-	var isNotSuicidalToday_label = document.getElementById('isNotSuicidalToday_label');
-
-	//fields
-	var suicide30ExplainRecentV = document.getElementById('suicide30ExplainRecentV');
-	var isSuicidalToday = document.getElementById('isSuicidalToday');
-	var isNotSuicidalToday = document.getElementById('isNotSuicidalToday');
-
-	var hasAttemptedSuicide_label = document.getElementById('hasAttemptedSuicide_label');
-	var haveAttempted_label = document.getElementById('haveAttempted_label');
-	var haveNotAttempted_label = document.getElementById('haveNotAttempted_label');
-	var haveAttempted = document.getElementById('haveAttempted');
-	var haveNotAttempted = document.getElementById('haveNotAttempted');
-
-
-	if (suicideThoughts.checked === true) {
-		suicide30ExplainRecentV.disabled = false;
-		isSuicidalToday.disabled = false;
-		isNotSuicidalToday.disabled = false;
-		haveAttempted.disabled = false;
-		haveNotAttempted.disabled = false;
-
-		suicide30ExplainRecentV_label.style.opacity = '1.0';
-		suicideTodayRecentV_label.style.opacity = '1.0';
-		isSuicidalToday_label.style.opacity = '1.0';
-		isNotSuicidalToday_label.style.opacity = '1.0';
-
-		suicide30ExplainRecentV.style.opacity = '1.0';
-		isSuicidalToday.style.opacity = '1.0';
-		isNotSuicidalToday.style.opacity = '1.0';
-
-		opacityHigh(hasAttemptedSuicide_label);
-		opacityHigh(haveAttempted_label);
-		opacityHigh(haveNotAttempted_label);
-		opacityHigh(haveAttempted);
-		opacityHigh(haveNotAttempted);
-	}
-
-	else {
-		isNotSuicidalToday.checked = true;
-		haveNotAttempted.checked = true;
-		midLevelSubAH2();
-		activateAH2SubSuicide();
-
-		opacityLow(hasAttemptedSuicide_label);
-		opacityLow(haveAttempted_label);
-		opacityLow(haveNotAttempted_label);
-		opacityLow(haveAttempted);
-		opacityLow(haveNotAttempted);
-
-		haveAttempted.disabled = true;
-		haveNotAttempted.disabled = true;
-
-		suicide30ExplainRecentV_label.style.opacity = '0.3';
-		suicideTodayRecentV_label.style.opacity = '0.3';
-		isSuicidalToday_label.style.opacity = '0.3';
-		isNotSuicidalToday_label.style.opacity = '0.3';
-
-		suicide30ExplainRecentV.style.opacity = '0.3';
-		isSuicidalToday.style.opacity = '0.3';
-		isNotSuicidalToday.style.opacity = '0.3';
-
-		suicide30ExplainRecentV.value = '';
-
-		suicide30ExplainRecentV.disabled = true;
-		isSuicidalToday.disabled = true;
-		isNotSuicidalToday.disabled = true;
-	}
-
-	activateAH2SubSuicide();
-}
 
 function post_am_dynamic2() {
 	//M_ELEMENTS
@@ -4696,63 +4456,25 @@ function post_am_dynamic2() {
 
 //AM ANGER HISTORY SECTION III FUNCTIONS
 function homicidalRadio() {
-	var isHomicidal = document.getElementById('isHomicidal');
-	var homicidalExplain_label = document.getElementById('homicidalExplain_label');
-	var homicidalExplain = document.getElementById('homicidalExplain');
+	twoElementRadioSetup(grab('yesHomicide'), grab('lab1'), grab('homicidalExplain'));
+}
 
-	twoElementRadioSetup(isHomicidal, homicidalExplain_label, homicidalExplain);
+function ah3number1() {
+	twoElementRadioSetup(grab('yesMed'), grab('lab2'), grab('medRecentVExplain'));
+	twoElementRadioSetup(grab('yesMed'), grab('lab3'), grab('yesSuccess'));
+	twoElementRadioSetup(grab('yesMed'), grab('lab4'), grab('noSuccess'));
+	twoElementRadioSetup(grab('yesMed'), grab('lab5'), grab('noSuccess'));
+	twoElementRadioSetup(grab('yesMed'), grab('lab4'), grab('noSuccess'));
+
+	if (grab('noMed').checked === true) {
+		grab('noSuccess').checked = true;
+	}
+
+	ah3number2();
 }
 
 function ah3number2() {
-	var hasMedRecent = document.getElementById('hasMedRecent');
-
-	//LABELS
-	var medRecentVExplain_label = document.getElementById('medRecentVExplain_label');
-	var medSuccessRecentV_label = document.getElementById('medSuccessRecentV_label');
-	var treatmentSuccess_label = document.getElementById('treatmentSuccess_label');
-	var noTreatmentSuccess_label = document.getElementById('noTreatmentSuccess_label');
-	var medSuccessExplainRecentV_label = document.getElementById('medSuccessExplainRecentV_label');
-
-	//FIELDS
-	var medRecentVExplain = document.getElementById('medRecentVExplain');
-	var medSuccessExplainRecentV = document.getElementById('medSuccessExplainRecentV');
-	var treatmentSuccess = document.getElementById('treatmentSuccess');
-	var noTreatmentSuccess = document.getElementById('noTreatmentSuccess');
-
-	if (hasMedRecent.checked === true) {
-		medRecentVExplain.disabled = false;
-		medSuccessExplainRecentV.disabled = false;
-		treatmentSuccess.disabled = false;
-		noTreatmentSuccess.disabled = false;
-
-		opacityHigh(medRecentVExplain);
-		opacityHigh(medSuccessExplainRecentV);
-
-		opacityHigh(medRecentVExplain_label);
-		opacityHigh(medSuccessRecentV_label);
-		opacityHigh(treatmentSuccess_label);
-		opacityHigh(noTreatmentSuccess_label);
-		opacityHigh(medSuccessExplainRecentV_label);
-	}
-
-	else {
-		medRecentVExplain.value = '';
-		medSuccessExplainRecentV.value = '';
-
-		opacityLow(medRecentVExplain_label);
-		opacityLow(medSuccessRecentV_label);
-		opacityLow(treatmentSuccess_label);
-		opacityLow(noTreatmentSuccess_label);
-		opacityLow(medSuccessExplainRecentV_label);
-
-		opacityLow(medRecentVExplain);
-		opacityLow(medSuccessExplainRecentV);
-
-		treatmentSuccess.disabled = true;
-		noTreatmentSuccess.disabled = true;
-		medRecentVExplain.disabled = true;
-		medSuccessExplainRecentV.disabled = true;
-	}
+	twoElementRadioSetup(grab('yesSuccess'), grab('lab6'), grab('medSuccessExplainRecentV'));
 }
 
 function post_dynamic_am_ah3() {

@@ -192,7 +192,7 @@
                       <tr>
                         <td>
                           <div class='iml-checkbox'>
-                            <input type='checkbox' name='otherConnectionsUsing' id='otherConnectionsUsing' value='anger worse'>
+                            <input type='checkbox' name='otherConnectionsUsing' id='otherConnectionsUsing' value='anger worse' onClick='javascript: connectionCheck();'>
                           </div>
                         </td>
                         <td><div class='iml-sub-label2'>Other alcohol/drug connections with anger/aggression</div></td>
@@ -200,7 +200,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left3'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left3' id='lab1'><li>Please explain:</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub2'><textarea rows='4' cols='60' name='connectionExplain' id='connectionExplain'>{{fields.connectionExplain}}</textarea></div></td></tr>
                     </table>
                   </div> 
