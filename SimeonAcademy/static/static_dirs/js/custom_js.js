@@ -2643,11 +2643,8 @@ function initialize_am_childhood(json_data) {
 	setRadioElement(json_data.momClose, grab('yesMom'), grab('noMom'));
 	setRadioElement(json_data.wasAbused, grab('yesAbuse'), grab('noAbuse'));
 
-	// childTraumaRadio();
-	// childAbusedRadio();
-	// hadChildAngerRadio();
-	// otherEventsHelpRadio();
-	// parentsFoughtRadio();
+	childTraumaRadio();
+	childAbusedRadio();
 }
 
 function initialize_am_angerHistory(json_data) {
@@ -2675,9 +2672,9 @@ function initialize_am_angerHistory(json_data) {
 	setRadioElement(json_data.psychoRecentV, grab('yesTreated'), grab('noTreated'));
 	setRadioElement(json_data.didCompleteTreatRecentV, grab('yesComplete'), grab('noComplete'));
 
-	// AHcompletedRadioActivate();
-	// turnOnAH1();
-	// psychoClick();
+	turnOnAH1();
+	turnOnAH2();
+	ahCk1init();
 }
 
 function initialize_am_angerHistory2(json_data) {
@@ -3675,13 +3672,13 @@ function evaluate_field(field, hidden, error_msg) {
 
 //DRUG HISTORY FUNCTIONS
 function dhRadio3() { //CUURENTLY DRINK OR USE ALCOHOL
-	twoElementRadioSetup(grab('hasDUI'), grab('lab9'), grab('numDUI'));
+	twoElementRadioSetupNumber(grab('hasDUI'), grab('lab9'), grab('numDUI'));
 	twoElementRadioSetup(grab('hasDUI'), grab('lab10'), grab('BALevel'));
 }
 
 function dhRadio2() {
-	twoElementRadioSetup(grab('hasDrank'), grab('lab4'), grab('yearsQuit'));
-	twoElementRadioSetup(grab('hasDrank'), grab('lab5'), grab('monthsQuit'));
+	twoElementRadioSetupNumber(grab('hasDrank'), grab('lab4'), grab('yearsQuit'));
+	twoElementRadioSetupNumber(grab('hasDrank'), grab('lab5'), grab('monthsQuit'));
 	twoElementRadioSetup(grab('hasDrank'), grab('lab6'), grab('reasonQuit'));
 	twoElementRadioSetup(grab('hasDrank'), grab('lab3'), grab('reasonQuit'));
 	dhRadioEFX();
@@ -3912,22 +3909,12 @@ function processAM_DH_data() {
 
 // AM CHILDHOOD FUNCTIONS
 function childTraumaRadio() {
-	var hadTramua = document.getElementById('hadTramua');
-	var traumaExplain_label = document.getElementById('traumaExplain_label');
-	var traumaExplain = document.getElementById('traumaExplain');
-
-	twoElementRadioSetup(hadTramua, traumaExplain_label, traumaExplain);
+	twoElementRadioSetup(grab('yesTrauma'), grab('lab1'), grab('traumaExplain'));
 }
 
 function childAbusedRadio() {
-	var childAbused = document.getElementById('childAbused');
-	var abusedBy_label = document.getElementById('abusedBy_label');
-	var abusedBy = document.getElementById('abusedBy');
-	var abuseImpact_label = document.getElementById('abuseImpact_label');
-	var abuseImpact = document.getElementById('abuseImpact');
-
-	twoElementRadioSetup(childAbused, abusedBy_label, abusedBy);
-	twoElementRadioSetup(childAbused, abuseImpact_label, abuseImpact);
+	twoElementRadioSetup(grab('yesAbuse'), grab('lab2'), grab('abusedBy'));
+	twoElementRadioSetup(grab('yesAbuse'), grab('lab3'), grab('abuseImpact'));
 }
 
 function hadChildAngerRadio() {
@@ -4144,39 +4131,45 @@ function initializeAllCheckBoxes(trigger, box) {
 
 //ANGER HISTORY FUNCTIONS
 function turnOnAH1() {
-	var otherRecentV = document.getElementById('otherRecentV');
-	var explain_Label = document.getElementById('explain_Label');
-	var otherExplainRecentV = document.getElementById('otherExplainRecentV');
+	twoElementRadioSetup(grab('yesTreated'), grab('lab1'), grab('psychoWhyRecentV'));
+	twoElementRadioSetup(grab('yesTreated'), grab('lab2'), grab('psychoWhyRecentV'));
+	twoElementRadioSetupNumber(grab('yesTreated'), grab('lab3'), grab('longAgoTreatRecentVyrs'));
+	twoElementRadioSetupNumber(grab('yesTreated'), grab('lab4'), grab('longAgoTreatRecentVmos'));
 
-	if (otherRecentV.checked === true) {
-		otherExplainRecentV.disabled = false;
-		otherExplainRecentV.style.opacity = '1.0';
-		explain_Label.style.opacity = '1.0';
+	if (grab('noTreated').checked === true) {
+		grab('noComplete').checked = true;
+		turnOnAH2();
+		opacityLow(grab('lab5'));
+		opacityLow(grab('lab6'));
+		opacityLow(grab('lab7'));
+		opacityLow(grab('yesComplete'));
+		opacityLow(grab('noComplete'));
+		grab('yesComplete').disabled = true;
+		grab('noComplete').disabled = true;
 	}
 	else {
-		otherExplainRecentV.value = '';
-		otherExplainRecentV.style.opacity = '0.3';
-		explain_Label.style.opacity = '0.3';
-		otherExplainRecentV.disabled = true;
+		opacityHigh(grab('lab5'));
+		opacityHigh(grab('lab6'));
+		opacityHigh(grab('lab7'));
+		opacityHigh(grab('yesComplete'));
+		opacityHigh(grab('noComplete'));
+		grab('yesComplete').disabled = false;
+		grab('noComplete').disabled = false;
 	}
 }
 
-function AHcompletedRadioActivate() {
-	var notCompleted = document.getElementById('notCompleted');
-	var reasonNotCompleteRecentV_label = document.getElementById('reasonNotCompleteRecentV_label');
-	var reasonNotCompleteRecentV = document.getElementById('reasonNotCompleteRecentV');
+function turnOnAH2() {
+	twoElementRadioSetup(grab('yesComplete'), grab('lab8'), grab('reasonNotCompleteRecentV'));
+}
 
-	if (notCompleted.checked === true) {
-		reasonNotCompleteRecentV.disabled = false;
-		reasonNotCompleteRecentV.style.opacity = '1.0';
-		reasonNotCompleteRecentV_label.style.opacity = '1.0';
+function ahCk1init() {
+	if (grab('otherRecentV').checked === true) {
+		opacityHigh(grab('otherExplainRecentV'));
+		grab('otherExplainRecentV').disabled = false;
 	}
-
 	else {
-		reasonNotCompleteRecentV.value = '';
-		reasonNotCompleteRecentV.style.opacity = '0.3';
-		reasonNotCompleteRecentV_label.style.opacity = '0.3';		
-		reasonNotCompleteRecentV.disabled = true;
+		grab('otherExplainRecentV').disabled = true;
+		opacityLow(grab('otherExplainRecentV'));
 	}
 }
 
@@ -4219,7 +4212,7 @@ function psychoClick() {
 		longAgoTreatRecentVmos.style.opacity = '1.0';	
 		longAgoTreatRecentVyrs.style.opacity = '1.0';	
 
-		AHcompletedRadioActivate();
+		
 	}
 
 	else {
@@ -4241,7 +4234,6 @@ function psychoClick() {
 		opacityLow(longAgoTreatRecentVmos);
 		opacityLow(longAgoTreatRecentVyrs);
 
-		AHcompletedRadioActivate();
 
 		psychoWhyRecentV.disabled = true;
 		longAgoTreatRecentVmos.disabled = true;

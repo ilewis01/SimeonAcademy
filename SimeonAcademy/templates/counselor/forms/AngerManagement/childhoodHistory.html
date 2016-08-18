@@ -185,15 +185,15 @@
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
                         <td><div class='iml-label'>Did you experience childhood trauma?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='yesTrauma' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='yesTrauma' value='True' onClick='javascript: childTraumaRadio();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='noTrauma' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='childTrama' id='noTrauma' value='False' onClick='javascript: childTraumaRadio();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain childhood trauma:</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>Please explain childhood trauma:</li></div></td></tr>
                       <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='traumaExplain' id='traumaExplain' value=''>{{fields.traumaExplain}}</textarea></div></td></tr>
                     </table>
 
@@ -271,22 +271,22 @@
                       <tr>
                         <td><div class='iml-num-div'>9.</div></td>
                         <td><div class='iml-label'>Were you or your siblings abused as children?</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='yesAbuse' value='True'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='yesAbuse' value='True' onClick='javascript: childAbusedRadio();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='noAbuse' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='wasAbused' id='noAbuse' value='False' onClick='javascript: childAbusedRadio();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>By whom?</li></div></td>
+                        <td><div class='iml-sub-label-left' id='lab2'><li>By whom?</li></div></td>
                         <td><div><input type='text' name='abusedBy' id='abusedBy' value='{{fields.abusedBy}}'></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>What was the impact?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab3'><li>What was the impact?</li></div></td></tr>
                       <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='abuseImpact' id='abuseImpact'>{{fields.abuseImpact}}</textarea></div></td></tr>
                       </tr>
                     </table>

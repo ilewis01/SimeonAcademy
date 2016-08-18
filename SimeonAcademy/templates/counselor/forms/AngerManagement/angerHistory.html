@@ -201,13 +201,23 @@
                         <td><div class='iml-sub-label'>Verbal Threats</div></td>
                         <td><div class='iml-checkbox'><input type='checkbox' name='propertyRecentV' id='propertyRecentV' value='Property Destruction'></div></td>
                         <td><div class='iml-sub-label'>Property Destruction</div></td>
-                        <td><div class='iml-checkbox'><input type='checkbox' name='otherRecentV' id='otherRecentV' value='Other'></div></td>
-                        <td><div class='iml-sub-label'>Other</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-text-area'><textarea rows='3' cols='60' name='otherExplainRecentV' id='otherExplainRecentV'>{{fields.otherExplainRecentV}}</textarea></div></td></tr>
+                      <tr>
+                        <td>
+                          <div class='iml-checkbox'>
+                            <input type='checkbox' name='otherRecentV' id='otherRecentV' value='Other' style='margin-left:22px;' onClick='ahCk1init();'>
+                          </div>
+                        </td>
+                        <td><div class='iml-sub-label' style='margin-bottom:5px;'>Other:</div></td>
+                        <td><div><input type='text' name='otherExplainRecentV' id='otherExplainRecentV' value='{{fields.otherExplainRecentV}}'></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <!-- <tr><td><div class='iml-text-area'><textarea rows='3' cols='60' name='otherExplainRecentV' id='otherExplainRecentV'>{{fields.otherExplainRecentV}}</textarea></div></td></tr> -->
                     </table>
 
                     <table>
@@ -252,43 +262,43 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-radio' style='margin-left:22px;'><input type='radio' name='psychoRecentV' id='yesTreated' value='True'></div></td>
+                        <td><div class='iml-radio' style='margin-left:22px;'><input type='radio' name='psychoRecentV' id='yesTreated' value='True' onClick='javascript: turnOnAH1();'></div></td>
                         <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='psychoRecentV' id='noTreated' value='False'></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='psychoRecentV' id='noTreated' value='False' onClick='javascript: turnOnAH1();'></div></td>
                         <td><div class='iml-sub-label'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>For what were you being treated?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>For what were you being treated?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='psychoWhyRecentV' id='psychoWhyRecentV'>{{fields.psychoWhyRecentV}}</textarea></div></td></tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>How long ago did you receive counseling or treatment?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left' id='lab2'><li>How long ago did you receive counseling or treatment?</li></div></td></tr>
                     </table>
                     
                     <table>
                       <tr>
                         <td><div class='iml-num' style='margin-left:34px;'><input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' value='{{fields.longAgoTreatRecentVyrs}}'></div></td>
-                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div class='iml-sub-label'  id='lab3'>years</div></td>
                         <td><div class='iml-num'><input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' value='{{fields.longAgoTreatRecentVmos}}'></div></td>
-                        <td><div class='iml-sub-label'>months</div></td>
+                        <td><div class='iml-sub-label'  id='lab4'>months</div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left'><li>Did you complete the program?</li></div></td>
-                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='yesComplete' value='True'></div></td>
-                        <td><div class='iml-sub-label'>Yes</div></td>
-                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='noComplete' value='False'></div></td>
-                        <td><div class='iml-sub-label'>No</div></td>
+                        <td><div class='iml-sub-label-left'  id='lab5'><li>Did you complete the program?</li></div></td>
+                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='yesComplete' value='True' onClick='javascript: turnOnAH2();'></div></td>
+                        <td><div class='iml-sub-label'  id='lab6'>Yes</div></td>
+                        <td><div class='iml-radio'><input type='radio' name='didCompleteTreatRecentV' id='noComplete' value='False' onClick='javascript: turnOnAH2();'></div></td>
+                        <td><div class='iml-sub-label'  id='lab7'>No</div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Why was treatment terminated?</li></div></td></tr>
+                      <tr><td><div class='iml-sub-label-left'  id='lab8'><li>Why was treatment terminated?</li></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'>{{fields.reasonNotCompleteRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>
