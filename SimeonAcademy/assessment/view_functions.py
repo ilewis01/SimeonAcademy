@@ -2329,12 +2329,15 @@ def saveAMWorst(request, am):
 	form.howStartWorst = request.POST.get('howStartWorst')
 	form.howEndWorst = request.POST.get('howEndWorst')
 
+	form.physicalWorst = truePythonBool(request.POST.get('m_physicalWorst'))
+	form.verbalWorst = truePythonBool(request.POST.get('m_verbalWorst'))
+	form.propertyWorst = truePythonBool(request.POST.get('m_propertyWorst'))
+	form.otherWorst = truePythonBool(request.POST.get('m_otherWorst'))
+	form.otherWorstDescription = request.POST.get('m_otherWorstDescription')
+
+	form.useWorst = truePythonBool(request.POST.get('useWorst'))
+
 	# form.whoUsed = request.POST.get('m_whoUsed')
-	# form.physicalWorst = request.POST.get('m_physicalWorst')
-	# form.verbalWorst = request.POST.get('m_verbalWorst')
-	# form.propertyWorst = request.POST.get('m_propertyWorst')
-	# form.otherWorst = request.POST.get('m_otherWorst')
-	# form.otherWorstDescription = request.POST.get('m_otherWorstDescription')
 
 	form.save()
 	am.save()

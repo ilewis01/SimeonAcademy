@@ -2029,14 +2029,13 @@ function post_dynamic_am_worst() {
 	post(false, 'text', grab('howStartWorst'), null, null);
 	post(false, 'text', grab('howEndWorst'), null, null);
 
+	generalCheckSave(grab('physicalWorst'), grab('m_physicalWorst'));
+	generalCheckSave(grab('verbalWorst'), grab('m_verbalWorst'));
+	generalCheckSave(grab('propertyWorst'), grab('m_propertyWorst'));
+	generalCheckSave(grab('otherWorst'), grab('m_otherWorst'));
 
-	// post(true, 'select', grab('whoUsed'), grab('yesDrugs'), grab('m_whoUsed'));
-	// post(true, 'text', grab('otherWorstDescription'), grab('otherWorst'), grab('m_otherWorstDescription'));
-
-	// generalCheckSave(grab('physicalWorst'), grab('m_physicalWorst'));
-	// generalCheckSave(grab('verbalWorst'), grab('m_verbalWorst'));
-	// generalCheckSave(grab('propertyWorst'), grab('m_propertyWorst'));
-	// generalCheckSave(grab('otherWorst'), grab('m_otherWorst'));
+	post(true, 'text', grab('otherWorstDescription'), grab('otherWorst'), grab('m_otherWorstDescription'));
+	post(true, 'select', grab('whoUsed'), grab('yesDrugs'), grab('m_whoUsed'));
 }
 
 // AM TARGET FUNCTIONS
