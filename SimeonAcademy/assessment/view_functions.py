@@ -2386,6 +2386,23 @@ def saveAMProblems(request, am):
 	form = am.currentProblems
 	form.date_of_assessment = date
 
+	form.describeIssue 		= request.POST.get('describeIssue')
+	form.currentlyOnMeds 	= truePythonBool(request.POST.get('currentlyOnMeds'))
+	form.whichMeds 			= request.POST.get('m_whichMeds')
+	form.otherWhom 			= request.POST.get('m_otherWhom')
+
+	form.brainInjury 			= truePythonBool(request.POST.get('m_brainInjury'))
+	form.stroke 				= truePythonBool(request.POST.get('m_stroke'))
+	form.epilepsy 				= truePythonBool(request.POST.get('m_epilepsy'))
+	form.attentionDD 			= truePythonBool(request.POST.get('m_attentionDD'))
+	form.pms 					= truePythonBool(request.POST.get('m_pms'))
+	form.depression 			= truePythonBool(request.POST.get('m_depression'))
+	form.ptsd 					= truePythonBool(request.POST.get('m_ptsd'))
+	form.otherSeriousIllness 	= truePythonBool(request.POST.get('m_otherSeriousIllness'))
+
+	form.save()
+	am.save()
+
 def saveAMControl(request, am):
 	date = datetime.now()
 	date = date.date()

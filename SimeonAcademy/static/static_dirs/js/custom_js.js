@@ -2099,44 +2099,17 @@ function post_dynamic_am_final() {
 
 
 function post_dynamic_am_current() {
-	//M_VALUES
-	var m_brainInjury = document.getElementById('m_brainInjury');
-	var m_stroke = document.getElementById('m_stroke');
-	var m_epilepsy = document.getElementById('m_epilepsy');
-	var m_attentionDD = document.getElementById('m_attentionDD');
-	var m_pms = document.getElementById('m_pms');
-	var m_depression = document.getElementById('m_depression');
-	var m_ptsd = document.getElementById('m_ptsd');
-	var m_otherSeriousIllness = document.getElementById('m_otherSeriousIllness');
-	var m_describeIssue = document.getElementById('m_describeIssue');
-	var m_currentlyOnMeds = document.getElementById('m_currentlyOnMeds');
-	var m_whichMeds = document.getElementById('m_whichMeds');
+	post(true, 'text', grab('whichMeds'), grab('onMeds'), grab('m_whichMeds'));
+	post(true, 'text', grab('otherWhom'), grab('otherSeriousIllness'), grab('m_otherWhom'));
 
-	//ALL ELEMENTS
-	var brainInjury = document.getElementById('brainInjury');
-	var stroke = document.getElementById('stroke');
-	var epilepsy = document.getElementById('epilepsy');
-	var attentionDD = document.getElementById('attentionDD');
-	var pms = document.getElementById('pms');
-	var depression = document.getElementById('depression');
-	var ptsd = document.getElementById('ptsd');
-	var otherSeriousIllness = document.getElementById('otherSeriousIllness');
-	var onMeds = document.getElementById('onMeds');
-	var whichMeds = document.getElementById('whichMeds');
-	var describeIssue = document.getElementById('describeIssue');
-
-	postCheckboxValue(brainInjury, m_brainInjury);
-	postCheckboxValue(depression, m_depression);
-	postCheckboxValue(stroke, m_stroke);
-	postCheckboxValue(epilepsy, m_epilepsy);
-	postCheckboxValue(attentionDD, m_attentionDD);
-	postCheckboxValue(pms, m_pms);
-	postCheckboxValue(ptsd, m_ptsd);
-	postCheckboxValue(otherSeriousIllness, m_otherSeriousIllness);
-
-	postDynamicRadioButtons(onMeds, m_currentlyOnMeds);
-	processDynamicTextPostValue(otherSeriousIllness, describeIssue, m_describeIssue);
-	processDynamicTextPostValue(onMeds, whichMeds, m_whichMeds);
+	generalCheckSave(grab('brainInjury'), grab('m_brainInjury'));
+	generalCheckSave(grab('stroke'), grab('m_stroke'));
+	generalCheckSave(grab('epilepsy'), grab('m_epilepsy'));
+	generalCheckSave(grab('attentionDD'), grab('m_attentionDD'));
+	generalCheckSave(grab('pms'), grab('m_pms'));
+	generalCheckSave(grab('depression'), grab('m_depression'));
+	generalCheckSave(grab('ptsd'), grab('m_ptsd'));
+	generalCheckSave(grab('otherSeriousIllness'), grab('m_otherSeriousIllness'));
 }
 
 function universal_am_dynamic_post(section) {
