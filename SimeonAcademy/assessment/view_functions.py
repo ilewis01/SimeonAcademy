@@ -2312,7 +2312,7 @@ def saveAMConnections(request, am):
 	form.othersTellMe = truePythonBool(request.POST.get('m_othersTellMe'))
 	form.noConnection = truePythonBool(request.POST.get('m_noConnection'))
 	form.otherConnectionsUsing = truePythonBool(request.POST.get('m_otherConnectionsUsing'))
-	form.connectionExplain = truePythonBool(request.POST.get('m_connectionExplain'))
+	form.connectionExplain = request.POST.get('m_connectionExplain')
 
 	form.save()
 	am.save()
@@ -2391,6 +2391,22 @@ def saveAMControl(request, am):
 	date = date.date()
 	form = am.control
 	form.date_of_assessment = date
+
+	form.neverAttemptedControl 	= truePythonBool(request.POST.get('m_neverAttemptedControl'));
+	form.talkToMyself 			= truePythonBool(request.POST.get('m_talkToMyself'));
+	form.leaveScene 			= truePythonBool(request.POST.get('m_leaveScene'));
+	form.relax 					= truePythonBool(request.POST.get('m_relax'));
+	form.selfHelpGroup 			= truePythonBool(request.POST.get('m_selfHelpGroup'));
+	form.otherControlAnger 		= truePythonBool(request.POST.get('m_otherControlAnger'));
+
+	form.whatSayYou 		= request.POST.get('m_whatSayYou')
+	form.howLongLeaveScene 	= request.POST.get('m_howLongLeaveScene')
+	form.whatDoLeave 		= request.POST.get('m_whatDoLeave')
+	form.howRelax 			= request.POST.get('m_howRelax')
+	form.doWhatOtherControl = request.POST.get('m_doWhatOtherControl')
+
+	form.save()
+	am.save()
 
 def saveAMFinal(request, am):
 	date = datetime.now()

@@ -3955,46 +3955,18 @@ function otherControlCheckbox() {
 
 
 function post_dynamic_am_control() {
-	//M_VALUES
-	var m_neverAttemptedControl = document.getElementById('m_neverAttemptedControl');
-	var m_talkToMyself = document.getElementById('m_talkToMyself');
-	var m_whatSayYou = document.getElementById('m_whatSayYou');
-	var m_leaveScene = document.getElementById('m_leaveScene');
-	var m_howLongLeaveScene = document.getElementById('m_howLongLeaveScene');
-	var m_whatDoLeave = document.getElementById('m_whatDoLeave');
-	var m_relax = document.getElementById('m_relax');
-	var m_howRelax = document.getElementById('m_howRelax');
-	var m_selfHelpGroup = document.getElementById('m_selfHelpGroup');
-	var m_otherControlAnger = document.getElementById('m_otherControlAnger');
-	var m_doWhatOtherControl = document.getElementById('m_doWhatOtherControl');
+	generalCheckSave(grab('neverAttemptedControl'), grab('m_neverAttemptedControl'));
+	generalCheckSave(grab('talkToMyself'), grab('m_talkToMyself'));
+	generalCheckSave(grab('leaveScene'), grab('m_leaveScene'));
+	generalCheckSave(grab('relax'), grab('m_relax'));
+	generalCheckSave(grab('selfHelpGroup'), grab('m_selfHelpGroup'));
+	generalCheckSave(grab('otherControlAnger'), grab('m_otherControlAnger'));
 
-	//CHECKBOXES
-	var neverAttemptedControl = document.getElementById('neverAttemptedControl');
-	var talkToMyself = document.getElementById('talkToMyself');
-	var leaveScene = document.getElementById('leaveScene');
-	var selfHelpGroup = document.getElementById('selfHelpGroup');
-	var relax = document.getElementById('relax');
-	var otherControlAnger = document.getElementById('otherControlAnger');
-
-	//DYNAMIC FIELDS
-	var whatSayYou = document.getElementById('whatSayYou');
-	var howLongLeaveScene = document.getElementById('howLongLeaveScene');
-	var whatDoLeave = document.getElementById('whatDoLeave');
-	var howRelax = document.getElementById('howRelax');
-	var doWhatOtherControl = document.getElementById('doWhatOtherControl');
-
-	postCheckboxValue(neverAttemptedControl, m_neverAttemptedControl);
-	postCheckboxValue(talkToMyself, m_talkToMyself);
-	postCheckboxValue(leaveScene, m_leaveScene);
-	postCheckboxValue(selfHelpGroup, m_selfHelpGroup);
-	postCheckboxValue(relax, m_relax);
-	postCheckboxValue(otherControlAnger, m_otherControlAnger);
-
-	processDynamicTextPostValue(talkToMyself, whatSayYou, m_whatSayYou);
-	processDynamicTextPostValue(leaveScene, howLongLeaveScene, m_howLongLeaveScene);
-	processDynamicTextPostValue(leaveScene, whatDoLeave, m_whatDoLeave);
-	processDynamicTextPostValue(relax, howRelax, m_howRelax);
-	processDynamicTextPostValue(otherControlAnger, doWhatOtherControl, m_doWhatOtherControl);
+	post(true, 'text', grab('whatSayYou'), grab('talkToMyself'), grab('m_whatSayYou'));
+	post(true, 'text', grab('howLongLeaveScene'), grab('leaveScene'), grab('m_howLongLeaveScene'));
+	post(true, 'text', grab('whatDoLeave'), grab('leaveScene'), grab('m_whatDoLeave'));
+	post(true, 'text', grab('howRelax'), grab('relax'), grab('m_howRelax'));
+	post(true, 'text', grab('doWhatOtherControl'), grab('otherControlAnger'), grab('m_doWhatOtherControl'));
 }
 
 function initializeAllCheckBoxes(trigger, box) {
