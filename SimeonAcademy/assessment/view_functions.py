@@ -2313,10 +2313,25 @@ def saveAMAngerHistroy2(request, am):
 	am.save()
 
 def saveAMAngerHistroy3(request, am):
-	date = datetime.now()
-	date = date.date()
-	form = am.angerHistory3
+	date 					= datetime.now()
+	date 					= date.date()
+	form 					= am.angerHistory3
 	form.date_of_assessment = date
+
+	form.homicidal 			= truePythonBool(request.POST.get('homicidal'))
+	form.medRecentV 		= truePythonBool(request.POST.get('medRecentV'))
+	form.durationRecentV 	= request.POST.get('durationRecentV')
+	form.intensityRecentV 	= request.POST.get('intensityRecentV')
+	form.howOften 			= request.POST.get('howOften')
+
+	form.homicidalExplain 	= request.POST.get('m_homicidalExplain')
+	form.medRecentVExplain 	= request.POST.get('m_medRecentVExplain')
+	form.medSuccessRecentV 	= truePythonBool(request.POST.get('m_medSuccessRecentV'))
+
+	form.medSuccessExplainRecentV = request.POST.get('m_medSuccessExplainRecentV')
+
+	form.save()
+	am.save()
 
 def saveAMConnections(request, am):
 	date = datetime.now()

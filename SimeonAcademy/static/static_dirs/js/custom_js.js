@@ -4298,37 +4298,10 @@ function ah3number2() {
 }
 
 function post_dynamic_am_ah3() {
-	//M_VALUE ELEMENTS
-	var m_homicidal = document.getElementById('m_homicidal');
-	var m_homicidalExplain = document.getElementById('m_homicidalExplain');
-	var m_medRecentV = document.getElementById('m_medRecentV');
-	var m_medRecentVExplain = document.getElementById('m_medRecentVExplain');
-	var m_medSuccessRecentV = document.getElementById('m_medSuccessRecentV');
-	var m_medSuccessExplainRecentV = document.getElementById('m_medSuccessExplainRecentV');
-
-	//TRIGGERS
-	var isHomicidal = document.getElementById('isHomicidal');
-	var hasMedRecent = document.getElementById('hasMedRecent');
-
-	//DYNAMIC TEXT FIELDS
-	var homicidalExplain = document.getElementById('homicidalExplain');
-	var medRecentVExplain = document.getElementById('medRecentVExplain');
-	var medSuccessExplainRecentV = document.getElementById('medSuccessExplainRecentV');
-
-	//PROCESS RADIO BUTTONS AND ASSOCIATED TEXT FIELDS
-	postDynamicRadioButtons(isHomicidal, m_homicidal);
-	postDynamicRadioButtons(hasMedRecent, m_medRecentV);
-
-	processDynamicTextPostValue(isHomicidal, homicidalExplain, m_homicidalExplain);
-	processDynamicTextPostValue(hasMedRecent, medRecentVExplain, m_medRecentVExplain);
-	processDynamicTextPostValue(hasMedRecent, medSuccessExplainRecentV, m_medSuccessExplainRecentV);
-
-	if (hasMedRecent.checked === true) {
-		postDynamicRadioButtons(document.getElementById('treatmentSuccess'), m_medSuccessRecentV);
-	}
-	else {
-		m_medSuccessRecentV.value = 'False';
-	}
+	post(true, 'text', grab('homicidalExplain'), grab('yesHomicide'), grab('m_homicidalExplain'));
+	post(true, 'text', grab('medRecentVExplain'), grab('yesMed'), grab('m_medRecentVExplain'));
+	subPost1('text', grab('yesMed'), grab('yesSuccess'), grab('medSuccessExplainRecentV'), grab('m_medSuccessRecentV'), grab('m_medSuccessExplainRecentV'));
+	// subPost1('text', grab('yesMed'), grab('yesSuccess'), grab('medSuccessExplainRecentV'), grab('medSuccessRecentV'), grab('m_medSuccessExplainRecentV'));
 }
 
 
