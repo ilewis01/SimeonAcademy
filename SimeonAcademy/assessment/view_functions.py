@@ -2294,6 +2294,24 @@ def saveAMAngerHistroy2(request, am):
 	form = am.angerHistory2
 	form.date_of_assessment = date
 
+	form.depress30RecentV 		= truePythonBool(request.POST.get('depress30RecentV'))
+	form.anxietyRecentV 		= truePythonBool(request.POST.get('anxietyRecentV'))
+	form.hallucinationRecentV 	= truePythonBool(request.POST.get('hallucinationRecentV'))
+	form.understandingRecentV 	= truePythonBool(request.POST.get('understandingRecentV'))
+	form.troubleControlRecentV 	= truePythonBool(request.POST.get('troubleControlRecentV'))
+	form.suicide30RecentV 		= truePythonBool(request.POST.get('suicide30RecentV'))
+
+	form.depress30ExplainRecentV 		= request.POST.get('m_depress30ExplainRecentV')
+	form.anxietyExplainRecentV 			= request.POST.get('m_anxietyExplainRecentV')
+	form.hallucinationLastV 			= request.POST.get('m_hallucinationLastV')
+	form.understandingExplainRecentV 	= request.POST.get('m_understandingExplainRecentV')
+	form.lastTimeTroubleControl 		= request.POST.get('m_lastTimeTroubleControl')
+	form.controlTrigger 				= request.POST.get('m_controlTrigger')
+	form.suicide30ExplainRecentV 		= request.POST.get('m_suicide30ExplainRecentV')
+
+	form.save()
+	am.save()
+
 def saveAMAngerHistroy3(request, am):
 	date = datetime.now()
 	date = date.date()
