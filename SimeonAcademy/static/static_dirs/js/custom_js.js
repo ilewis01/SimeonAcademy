@@ -4066,88 +4066,26 @@ function psychoClick() {
 }
 
 function process_am_ah1_data() {
-	//DYNAMIC POSTING FIELDS
-	var m_physicalRecentV = document.getElementById('m_physicalRecentV');
-	var m_verbalRecentV = document.getElementById('m_verbalRecentV');
-	var m_threatsRecentV = document.getElementById('m_threatsRecentV');
-	var m_propertyRecentV = document.getElementById('m_propertyRecentV');
-	var m_otherRecentV = document.getElementById('m_otherRecentV');
-	var m_otherExplainRecentV = document.getElementById('m_otherExplainRecentV');
-	var m_wasTense = document.getElementById('m_wasTense');
-	var m_hadRush = document.getElementById('m_hadRush');
-	var m_feltStrong = document.getElementById('m_feltStrong');
-	var m_psychoRecentV = document.getElementById('m_psychoRecentV');
-	var m_psychoWhyRecentV = document.getElementById('m_psychoWhyRecentV');
-	var m_longAgoTreatRecentVmos = document.getElementById('m_longAgoTreatRecentVmos');
-	var m_longAgoTreatRecentVyrs = document.getElementById('m_longAgoTreatRecentVyrs');
-	var m_didCompleteTreatRecentV = document.getElementById('m_didCompleteTreatRecentV');
-	var m_reasonNotCompleteRecentV = document.getElementById('m_reasonNotCompleteRecentV');
+	post(false, 'text', grab('recentIncidentV'), null, null);
+	post(false, 'text', grab('recentVDate'), null, null);
+	post(false, 'text', grab('recentVlocation'), null, null);
+	post(false, 'text', grab('withWhomRecentV'), null, null);
+	post(false, 'text', grab('happenedRecentV'), null, null);
+	post(false, 'text', grab('typeWordsRecentV'), null, null);
 
-	//CHECKBOXES
-	var physicalRecentV = document.getElementById('physicalRecentV');
-	var verbalRecentV = document.getElementById('verbalRecentV');
-	var threatsRecentV = document.getElementById('threatsRecentV');
-	var propertyRecentV = document.getElementById('propertyRecentV');
-	var otherRecentV = document.getElementById('otherRecentV');
-	var wasTense = document.getElementById('wasTense');
-	var hadRush = document.getElementById('hadRush');
-	var feltStrong = document.getElementById('feltStrong');
+	generalCheckSave(grab('physicalRecentV'), grab('m_physicalRecentV'));
+	generalCheckSave(grab('verbalRecentV'), grab('m_verbalRecentV'));
+	generalCheckSave(grab('propertyRecentV'), grab('m_propertyRecentV'));
+	generalCheckSave(grab('otherRecentV'), grab('m_otherRecentV'));	
+	generalCheckSave(grab('wasTense'), grab('m_wasTense'));
+	generalCheckSave(grab('hadRush'), grab('m_hadRush'));
+	generalCheckSave(grab('feltStrong'), grab('m_feltStrong'));
 
-	//TEXT FIELDS
-	var otherExplainRecentV = document.getElementById('otherExplainRecentV');
-	var psychoWhyRecentV = document.getElementById('psychoWhyRecentV');
-	var longAgoTreatRecentVmos = document.getElementById('longAgoTreatRecentVmos');
-	var longAgoTreatRecentVyrs = document.getElementById('longAgoTreatRecentVyrs');
-	var reasonNotCompleteRecentV = document.getElementById('reasonNotCompleteRecentV');
-
-	//DYNAMIC RADIOS
-	var didComplete = document.getElementById('didComplete');
-
-	//TRIGGERS
-	var wasTreated = document.getElementById('wasTreated');
-
-	//GET CHECKBOX VALUES AND SEND TO POST FIELDS
-	postCheckboxValue(physicalRecentV, m_physicalRecentV);
-	postCheckboxValue(verbalRecentV, m_verbalRecentV);
-	postCheckboxValue(threatsRecentV, m_threatsRecentV);
-	postCheckboxValue(propertyRecentV, m_propertyRecentV);
-	postCheckboxValue(otherRecentV, m_otherRecentV);
-	postCheckboxValue(wasTense, m_wasTense);
-	postCheckboxValue(hadRush, m_hadRush);
-	postCheckboxValue(feltStrong, m_feltStrong);
-
-	//PROCESS DYNAMIC RADIO FIELDS
-	if (otherRecentV.checked === true) {
-		m_otherExplainRecentV.value = otherExplainRecentV.value;
-	}
-	else {
-		m_otherExplainRecentV.value = 'N/A';
-	}
-
-
-	if (wasTreated.checked === true) {
-		m_psychoRecentV.value = 'True';
-		m_psychoWhyRecentV.value = psychoWhyRecentV.value;
-		m_longAgoTreatRecentVmos.value = longAgoTreatRecentVmos.value;
-		m_longAgoTreatRecentVyrs.value = longAgoTreatRecentVyrs.value;
-
-		if (didComplete.checked === true) {
-			m_didCompleteTreatRecentV.value = 'True';
-			m_reasonNotCompleteRecentV.value = 'N/A';
-		}
-		else {
-			m_didCompleteTreatRecentV.value = 'False';
-			m_reasonNotCompleteRecentV.value = reasonNotCompleteRecentV.value;
-		}
-	}
-	else {
-		m_psychoRecentV.value = 'False';
-		m_didCompleteTreatRecentV.value = 'False';
-		m_reasonNotCompleteRecentV.value = 'N/A';
-		m_psychoWhyRecentV.value = 'N/A';
-		m_longAgoTreatRecentVmos.value = '0';
-		m_longAgoTreatRecentVyrs.value = '0';
-	}
+	post(true, 'text', grab('otherExplainRecentV'), grab('otherRecentV'), grab('m_otherExplainRecentV'));
+	post(true, 'text', grab('psychoWhyRecentV'), grab('yesTreated'), grab('m_psychoWhyRecentV'));
+	post(true, 'text', grab('longAgoTreatRecentVyrs'), grab('yesTreated'), grab('m_longAgoTreatRecentVyrs'));
+	post(true, 'text', grab('longAgoTreatRecentVmos'), grab('yesTreated'), grab('m_longAgoTreatRecentVmos'));
+	subPost1('text', grab('yesTreated'), grab('yesComplete'), grab('reasonNotCompleteRecentV'), grab('m_didCompleteTreatRecentV'), grab('m_reasonNotCompleteRecentV'));
 }
 
 //AM ANGER HISTORY SECTION II FUNCTIONS
