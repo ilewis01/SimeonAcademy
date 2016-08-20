@@ -54,6 +54,16 @@ function validateNumber(value) {
 	return isNumber;
 }
 
+function validatePhone(value) {
+	var isGood = false;
+	var phone = numbersOnly(value);
+
+	if (val.length === 10) {
+		isGood = true;
+	}
+	return isGood;
+}
+
 function clearWhiteSpace(value) {
 	var result = "";
 	value = String(value);
@@ -83,17 +93,44 @@ function textErrorChecker(item) {
 		triggerName = String(triggerName);
 		var trigger = grab(triggerName);
 
-		fieldName = 'm_' + fieldName;
-		field = grab(fieldName);
-		val = field.value;
-		val = String(val);
-
 		if (trigger.checked === true) {
 			if (isBlankText(val) === true) {
 				setErrorDiv(item['div']);
 			}
 		}
 	}
+}
+
+function hasTextError(item) {
+	var numErrors = 0;
+	var hasErrors = false;
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+	val = String(val);
+
+	if (item['isDynamic'] === false) {
+		if (isBlankText(val) === true) {
+			numErrors += 1;
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (trigger.checked === true) {
+			if (isBlankText(val) === true) {
+				numErrors += 1;
+			}
+		}
+	}
+
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
 }
 
 function numberErrorChecker(item) {
@@ -112,17 +149,43 @@ function numberErrorChecker(item) {
 		triggerName = String(triggerName);
 		var trigger = grab(triggerName);
 
-		fieldName = 'm_' + fieldName;
-		field = grab(fieldName);
-		val = field.value;
-		val = String(val);
-
 		if (trigger.checked === true) {
 			if (validateNumber(val) === false || isBlankText(val) === true) {
 				setErrorDiv(item['div']);
 			}
 		}
 	}
+}
+
+function hasNumberErrors(item) {
+	var numErrors = 0;
+	var hasErrors = false;
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+
+	if (item['isDynamic'] === false) {
+		if (validateNumber(val) === false || isBlankText(val) === true) {
+			numErrors += 1;
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (trigger.checked === true) {
+			if (validateNumber(val) === false || isBlankText(val) === true) {
+				numErrors += 1;
+			}
+		}
+	}
+
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
 }
 
 function selectErrorChecker(item) {
@@ -140,11 +203,6 @@ function selectErrorChecker(item) {
 		triggerName = String(triggerName);
 		var trigger = grab(triggerName);
 
-		fieldName = 'm_' + fieldName;
-		field = grab(fieldName);
-		val = field.value;
-		val = String(val);
-
 		if (trigger.checked === true) {
 			if (String(field.value) === 'None Selected') {
 				setErrorDiv(item['div']);
@@ -153,33 +211,101 @@ function selectErrorChecker(item) {
 	}
 }
 
+function hasSelectErrors(item) {
+	var numErrors = 0;
+	var hasErrors = false;
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+
+	if (item['isDynamic'] === false) {
+		if (field.selectedIndex === 0) {
+			numErrors += 1;
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (trigger.checked === true) {
+			if (String(field.value) === 'None Selected') {
+				numErrors += 1;
+			}
+		}
+	}
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
 function phoneErrorChecker(item) {
-	
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+	val = numbersOnly(val);
+
+	if (item['isDynamic'] === false) {
+		if (val.length !== 10) {
+			setErrorDiv(item['div']);
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (val.length !== 10) {
+			setErrorDiv(item['div']);
+		}
+	}
+}
+
+function hasPhoneErrors(item) {
+	var numErrors = 0;
+	var hasErrors = false;
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+	val = numbersOnly(val);
+
+	if (item['isDynamic'] === false) {
+		if (val.length !== 10) {
+			numErrors += 1;
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (val.length !== 10) {
+			numErrors += 1;
+		}
+	}
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
 }
 
 function ssnErrorChecker(item) {
 	
 }
 
+function hasSsnErrors(item) {
+
+}
+
 function dateErrorChecker(item) {
 	
 }
 
-function errorTesting1() {
-	superErrorChecker('am', '/am_demographic/');
-
-	grab('testField1').value = 'The results have been calculated';
-}
-
-function validatePhone(field) {
-	var isGood = false;
-	var val = numbersOnly(field);
-	val = clearWhiteSpace(val);
-
-	if (val.length === 10) {
-		isGood = true;
-	}
-	return isGood;
+function hasDateErrors(item) {
+	
 }
 
 function validateSSN(field) {
@@ -269,78 +395,78 @@ function fetchAM1FieldNames() {
 	d5['isDynamic'] = false;
 	d5['trigger'] = null;
 	result.push(d5);
-	// d6['field'] = 'num_children';
-	// d6['type'] = 'number';
-	// d6['div'] = 'e6';
-	// d6['isDynamic'] = false;
-	// d6['trigger'] = null;
-	// result.push(d6);
-	// d7['field'] = 'spouse_dep';
-	// d7['type'] = 'number';
-	// d7['div'] = 'e7';
-	// d7['isDynamic'] = false;
-	// d7['trigger'] = null;
-	// result.push(d7);
-	// d8['field'] = 'other_dependants';
-	// d8['type'] = 'number';
-	// d8['div'] = 'e8';
-	// d8['isDynamic'] = false;
-	// d8['trigger'] = null;
-	// result.push(d8);
-	// d9['field'] = 'resasonDO';
-	// d9['type'] = 'text';
-	// d9['div'] = 'e9';
-	// d9['isDynamic'] = true;
-	// d9['trigger'] = 'DO';
-	// result.push(d9);
-	// d10['field'] = 'employee';
-	// d10['type'] = 'text';
-	// d10['div'] = 'e10';
-	// d10['isDynamic'] = false;
-	// d10['trigger'] = null;
-	// result.push(d10);
-	// d11['field'] = 'job_title';
-	// d11['type'] = 'text';
-	// d11['div'] = 'e11';
-	// d11['isDynamic'] = false;
-	// d11['trigger'] = null;
-	// result.push(d11);
-	// d12['field'] = 'emp_address';
-	// d12['type'] = 'text';
-	// d12['div'] = 'e12';
-	// d12['isDynamic'] = false;
-	// d12['trigger'] = null;
-	// result.push(d12);
-	// d13['field'] = 'employed_months';
-	// d13['type'] = 'number';
-	// d13['div'] = 'e13';
-	// d13['isDynamic'] = false;
-	// d13['trigger'] = null;
-	// result.push(d13);
-	// d14['field'] = 'employed_years';
-	// d14['type'] = 'number';
-	// d14['div'] = 'e14';
-	// d14['isDynamic'] = false;
-	// d14['trigger'] = null;
-	// result.push(d14);
-	// d15['field'] = 'employer_phone';
-	// d15['type'] = 'phone';
-	// d15['div'] = 'e15';
-	// d15['isDynamic'] = false;
-	// d15['trigger'] = null;
-	// result.push(d15);
-	// d16['field'] = 'whatMedicine';
-	// d16['type'] = 'text';
-	// d16['div'] = 'e16';
-	// d16['isDynamic'] = true;
-	// d16['trigger'] = 'on_meds';
-	// result.push(d16);
-	// d17['field'] = 'health_exp';
-	// d17['type'] = 'text';
-	// d17['div'] = 'e17';
-	// d17['isDynamic'] = true;
-	// d17['trigger'] = 'not_healthy';
-	// result.push(d17);
+	d6['field'] = 'num_children';
+	d6['type'] = 'number';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = false;
+	d6['trigger'] = null;
+	result.push(d6);
+	d7['field'] = 'spouse_dep';
+	d7['type'] = 'number';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = false;
+	d7['trigger'] = null;
+	result.push(d7);
+	d8['field'] = 'other_dependants';
+	d8['type'] = 'number';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = false;
+	d8['trigger'] = null;
+	result.push(d8);
+	d9['field'] = 'resasonDO';
+	d9['type'] = 'text';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'DO';
+	result.push(d9);
+	d10['field'] = 'employee';
+	d10['type'] = 'text';
+	d10['div'] = 'e10';
+	d10['isDynamic'] = false;
+	d10['trigger'] = null;
+	result.push(d10);
+	d11['field'] = 'job_title';
+	d11['type'] = 'text';
+	d11['div'] = 'e11';
+	d11['isDynamic'] = false;
+	d11['trigger'] = null;
+	result.push(d11);
+	d12['field'] = 'emp_address';
+	d12['type'] = 'text';
+	d12['div'] = 'e12';
+	d12['isDynamic'] = false;
+	d12['trigger'] = null;
+	result.push(d12);
+	d13['field'] = 'employed_months';
+	d13['type'] = 'number';
+	d13['div'] = 'e13';
+	d13['isDynamic'] = false;
+	d13['trigger'] = null;
+	result.push(d13);
+	d14['field'] = 'employed_years';
+	d14['type'] = 'number';
+	d14['div'] = 'e14';
+	d14['isDynamic'] = false;
+	d14['trigger'] = null;
+	result.push(d14);
+	d15['field'] = 'employer_phone';
+	d15['type'] = 'phone';
+	d15['div'] = 'e15';
+	d15['isDynamic'] = false;
+	d15['trigger'] = null;
+	result.push(d15);
+	d16['field'] = 'whatMedicine';
+	d16['type'] = 'text';
+	d16['div'] = 'e16';
+	d16['isDynamic'] = true;
+	d16['trigger'] = 'on_meds';
+	result.push(d16);
+	d17['field'] = 'health_exp';
+	d17['type'] = 'text';
+	d17['div'] = 'e17';
+	d17['isDynamic'] = true;
+	d17['trigger'] = 'not_healthy';
+	result.push(d17);
 
 	return result;
 }
@@ -463,6 +589,15 @@ function fetchFieldList_sap(section) {
 	
 }
 
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++ MAIN USE ERROR CHECKING FUNCTIONS +++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++ MAIN USE ERROR CHECKING FUNCTIONS +++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++ MAIN USE ERROR CHECKING FUNCTIONS +++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++ MAIN USE ERROR CHECKING FUNCTIONS +++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++ MAIN USE ERROR CHECKING FUNCTIONS +++++++++++++++++++++++++++++++++++++++++++++++//
+
 function fetchFieldList(type, section) {
 	var result = null;
 	type = String(type);
@@ -482,11 +617,39 @@ function fetchFieldList(type, section) {
 	return result;
 }
 
-function hasErrors(formType, section, fieldList) {
-	var noGood = true;
+function hasErrorsInForm(formType, section) {
+	var isGood = false;
+	var fieldList = null;
 	formType = String(formType);
 	section = String(section);
-	return noGood;
+	fieldList = fetchFieldList(formType, section);
+
+	for (var i = 0; i < fieldList.length; i++) {
+		if (fieldList[i]['type'] === 'text') {
+			isGood = hasTextError(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'number') {
+			isGood = hasNumberErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'select') {
+			isGood = hasSelectErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'ssn') {
+			isGood = hasSsnErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'phone') {
+			isGood = hasPhoneErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'date') {
+			isGood = hasDateErrors(fieldList[i]);
+		}
+
+		if (isGood === true) {
+			break;
+		}
+	}
+
+	return isGood;
 }
 
 function superErrorChecker(formType, section) {
@@ -2682,14 +2845,20 @@ function universal_am_dynamic_post(section) {
 }
 
 function continue_am_form(section) {
-	var proceed = true;
-	var next_url = document.getElementById('next_url');
-	var form = document.getElementById('am_demo');
+	var current_section = String(grab('save_section').value);
+	var hasErrors = hasErrorsInForm('am', section);
 
-	universal_am_dynamic_post(section);
+	if (hasErrors === true) {
+		superErrorChecker('am', current_section);
+		var w = 500, h = 500;
+		openPopUp('auto', '/generateErrors/', w, h);
+	}
 
-	if (proceed === true) {
-		document.getElementById('save_this').value = 'true';
+	else {
+		universal_am_dynamic_post(section);
+		var next_url = grab('next_url');
+		var form = grab('am_demo');
+		grab('save_this').value = 'true';
 		form.action = next_url.value;
 		form.submit();
 	}
@@ -7532,7 +7701,6 @@ function openPopUp(location, url, w, h) {
 		var lefts = Number((screen.width/2) - (w/2));
 		var tops = Number((screen.height/2) - (h/2));
 		var opWin = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
-		// var opWin = window.open('/hasExistingSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 	}
 }
 

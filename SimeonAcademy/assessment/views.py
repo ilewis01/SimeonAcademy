@@ -1894,6 +1894,23 @@ def am_preliminary(request):
 				return render_to_response('counselor/forms/AngerManagement/instructions.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def generateErrors(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/generateErrors.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def am_demographic(request):
 	user = request.user
 	if not user.is_authenticated():

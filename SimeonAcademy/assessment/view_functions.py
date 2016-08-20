@@ -3216,9 +3216,9 @@ def processCompletedClass(isComplete, isCompleteKeyWord, m_page, green, yellow, 
 def grabAmClassesCSS(am, m_page):
 	classes = {}
 	am = grabAmCompletedSections(am)
-	normal = 'sideBarMargin'
-	green = 'sideBarMarginChecked'
-	current = 'sideLinkSelected'
+	normal = 'iml-button-incomplete'
+	green = 'iml-button'
+	current = 'iml-button-current'
 
 	classes['AMdemo'] = processCompletedClass(am['demographicComplete'], '/am_demographic/', m_page, green, current, normal)
 	classes['AMdh'] = processCompletedClass(am['drugHistoryComplete'], '/am_drugHistory/', m_page, green, current, normal)

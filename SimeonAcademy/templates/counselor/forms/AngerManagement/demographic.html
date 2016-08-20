@@ -5,15 +5,15 @@
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
 
-  <input type='text' id='testField1' style='width:800px; margin-left:40px;'>
-  <button onClick='javascript: errorTesting1();'>Run Test</button>
+  <!-- <input type='text' id='testField1' style='width:800px; margin-left:40px;'>
+  <button onClick='javascript: errorTesting1();'>Run Test</button> -->
 
     <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
       <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
       <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
-      <input type='hidden' name='save_section' id='save_section' value='/am_demographic/'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
       <input type='hidden' name='save_this' id='save_this' value=''>
@@ -39,44 +39,44 @@
                       <table class='img-single-btn-table'>
                         <tr>
                           <td>
-                            <a href="#">
-                              <div  class='iml-button'>Demographics</div>
+                            <a href="javascript: amSideBtnSubmit('/am_demographic/');">
+                              <div  class='{{class.AMdemo}}'>Demographics</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_drugHistory/');">
-                              <div  class='iml-button'>Drug History</div>
+                              <div  class='{{class.AMdh}}'>Drug History</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_childhood/');">
-                              <div  class='iml-button'>Childhood History</div>
+                              <div  class='{{class.AMchild}}'>Childhood History</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_angerHistory/');">
-                              <div  class='iml-button'>Recent Episodes I</div>
+                              <div  class='{{class.AMah1}}'>Recent Episodes I</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_angerHistory2/');">
-                              <div  class='iml-button'>Recent Episodes II</div>
+                              <div  class='{{class.AMah2}}'>Recent Episodes II</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_angerHistory3/');">
-                              <div  class='iml-button'>Recent Episodes III</div>
+                              <div  class='{{class.AMah3}}'>Recent Episodes III</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_connections/');">
-                              <div  class='iml-button'>Abuse Connections</div>
+                              <div  class='{{class.AMconnect}}'>Abuse Connections</div>
                             </a>
                           </td>
                         </tr>
@@ -88,37 +88,37 @@
                         <tr>
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_worst/');">
-                              <div  class='iml-button'>Worst Episode</div>
+                              <div  class='{{class.AMworst}}'>Worst Episode</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_angerTarget/');">
-                              <div  class='iml-button'>Anger Targets</div>
+                              <div  class='{{class.AMtarget}}'>Anger Targets</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_familyOrigin/');">
-                              <div  class='iml-button'>Family of Origin</div>
+                              <div  class='{{class.AMfamily}}'>Family of Origin</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_problems/');">
-                              <div  class='iml-button'>Current Problems</div>
+                              <div  class='{{class.AMcurrent}}'>Current Problems</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_control/');">
-                              <div  class='iml-button'>Anger Control</div>
+                              <div  class='{{class.AMcontrol}}'>Anger Control</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: amSideBtnSubmit('/am_final/');">
-                              <div  class='iml-button'>Additional Info</div>
+                              <div  class='{{class.AMfinal}}'>Additional Info</div>
                             </a>
                           </td>
                         </tr>
@@ -217,13 +217,13 @@
                     <table>
                       <tr>
                         <td><div id='e6'><div class='iml-sub-label-l' style='margin-left:25px;'>Children:</div></div></td>
-                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value='{{fields.num_children}}'></div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value='{{fields.num_children}}' oninput="javascript: noErrorText('e6', 'num_children');"></div></td>
 
                         <td><div id='e7'><div class='iml-sub-label-l'>Spouse:</div></div></td>
-                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value='{{fields.spouse_dep}}'></div></td>
+                        <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value='{{fields.spouse_dep}}' oninput="javascript: noErrorText('e7', 'spouse_dep');"></div></td>
 
                         <td><div id='e8'><div class='iml-sub-label-l'>Other:</div></div></td>
-                        <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value='{{fields.other_dependants}}'></div></td>
+                        <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value='{{fields.other_dependants}}' oninput="javascript: noErrorText('e8', 'other_dependants');"></div></td>
                       </tr>
                     </table>
 
@@ -250,7 +250,7 @@
 
                     <table>
                       <tr><td><div id='e9'><div class='iml-sub-label-left' id='doReason_lab'><li>Reason for dropout:</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''>{{fields.resasonDO}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value='' oninput="javascript: noErrorText('e9', 'resasonDO');">{{fields.resasonDO}}</textarea></div></td></tr>
                     </table>
 
                   </div>
@@ -262,25 +262,25 @@
                       <tr>
                         <td><div class='iml-num-div'>8.</div></td>
                         <td><div id='e10'><div class='iml-label'>Current Employer:</div></div></td>
-                        <td><div><input type='text' name='employee' id='employee' value='{{fields.employee}}'></div></td>
+                        <td><div><input type='text' name='employee' id='employee' value='{{fields.employee}}' oninput="javascript: noErrorText('e10', 'employee');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>9.</div></td>
                         <td><div id='e15'><div class='iml-label'>Employer Phone:</div></div></td>
-                        <td><div><input type='text' name='employer_phone' id='employer_phone' value='{{fields.employer_phone}}'></div></td>
+                        <td><div><input type='text' name='employer_phone' id='employer_phone' value='{{fields.employer_phone}}' oninput="javascript: noErrorText('e15', 'employer_phone');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>10.</div></td>
                         <td><div id='e12'><div class='iml-label'>Employer Address:</div></div></td>
-                        <td><div><input type='text' name='emp_address' id='emp_address' value='{{fields.emp_address}}'></div></td>
+                        <td><div><input type='text' name='emp_address' id='emp_address' value='{{fields.emp_address}}' oninput="javascript: noErrorText('e12', 'emp_address');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>11.</div></td>
                         <td><div id='e11'><div class='iml-label'>Job title:</div></div></td>
-                        <td><div><input type='text' name='job_title' id='job_title' value='{{fields.job_title}}'></div></td>
+                        <td><div><input type='text' name='job_title' id='job_title' value='{{fields.job_title}}' oninput="javascript: noErrorText('e11', 'job_title');"></div></td>
                       </tr>
                     </table>
 
@@ -288,9 +288,9 @@
                       <tr>
                         <td><div class='iml-num-div'>12.</div></td>
                         <td><div class='iml-label'>Length of Employment:</div></td>
-                        <td><div class='iml-num'><input type='number' name='employed_years' id='employed_years' value='{{fields.employed_years}}'></div></td>
+                        <td><div class='iml-num'><input type='number' name='employed_years' id='employed_years' value='{{fields.employed_years}}' oninput="javascript: noErrorText('e14', 'employed_years');"></div></td>
                         <td><div id='e14'><div class='iml-sub-label'>years</div></div></td>
-                        <td><div class='iml-num'><input type='number' name='employed_months' id='employed_months' value='{{fields.employed_months}}'></div></td>
+                        <td><div class='iml-num'><input type='number' name='employed_months' id='employed_months' value='{{fields.employed_months}}' oninput="javascript: noErrorText('e13', 'employed_months');"></div></td>
                         <td><div id='e13'><div class='iml-sub-label'>months</div></div></td>
                     </table>
 
@@ -309,7 +309,7 @@
 
                     <table>
                       <tr><td><div id='e17'><div class='iml-sub-label-left' id='healthExp_label'><li>Please explain client health issues:</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'>{{fields.health_exp}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp' oninput="javascript: noErrorText('e17', 'health_exp');">{{fields.health_exp}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -325,7 +325,7 @@
 
                     <table>
                       <tr><td><div id='e16'><div class='iml-sub-label-left' id='meds_leb'><li>What are you taking?</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'>{{fields.whatMedicine}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine' oninput="javascript: noErrorText('e16', 'whatMedicine');">{{fields.whatMedicine}}</textarea></div></td></tr>
                     </table>
                   </div>
                 </div>
@@ -337,7 +337,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

@@ -4693,6 +4693,40 @@ button:hover {
 	box-shadow: 3px 3px 3px #888888;
 }
 
+.iml-button-incomplete {
+	width:145px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #A17C80;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-current {
+	width:145px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
 .iml-button:hover {
 	background-color: #6c7e7a;
 	color:#e3dcc8;
@@ -4950,6 +4984,16 @@ button:hover {
 	background-size: 100%;
 }
 
+.iml-pop-body-error {
+	width: 99%;
+	margin: auto;
+	height: 70%;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/iml_bkgnd.png');
+	background-size: 100%;
+}
+
 .iml-pop-foot1 {
 	width: 99%;
 	margin: auto;
@@ -4965,6 +5009,8 @@ button:hover {
 	height:28px;
 	font-size: 14px;
 	padding-bottom: 5px;
+	border-top: 1px solid black;
+	border-left: 2px solid #B5B5B3;
 }
 
 .iml-pop-sub-head1 {
@@ -4981,6 +5027,53 @@ button:hover {
 	margin-top: 10px;
 	background-color: #e3dcc8;
 	margin-left: 265px;
+}
+
+.iml-btn-container-single {
+	border: 1px solid black;
+	width:125px;
+	height:34px;
+	margin-top: 10px;
+	background-color: #e3dcc8;
+	margin-left: 70%;
+}
+
+.iml-warning-holder {
+	width:15%;
+	height:50px;
+	margin: auto;
+	margin-top: 6%;
+}
+
+.iml-error-m1 {
+	margin-top: 10%;
+	text-align: center;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: bold;
+	/*text-shadow: 1px 1px black;*/
+	color: #d06600;
+}
+
+.iml-error-m2 {
+	margin-top: 3%;
+	margin-left: 5%;
+	text-align: left;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.iml-error-m3 {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 8%;
+	color:red;
+	/*color: #6B6B6B;*/
+}
+
+.error-main-css-img {
+	width: 100%;
 }
 
 .pro-iml-btn  button {
