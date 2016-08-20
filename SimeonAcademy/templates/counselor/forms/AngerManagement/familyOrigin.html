@@ -140,28 +140,28 @@
                     <table>
                       <tr>
                         <td class='iml-num-div'>1.</td>
-                        <td><div class='iml-label'>Your father/step-father:</div></td>
+                        <td><div id='e1'><div class='iml-label'>Your father/step-father:</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div>
-                            <textarea rows='3' cols='60' name='kidDadAnger' id='kidDadAnger'>{{fields.kidDadAnger}}</textarea>
+                            <textarea rows='3' cols='60' name='kidDadAnger' id='kidDadAnger' oninput="javascript: noErrorText('e1', 'kidDadAnger');">{{fields.kidDadAnger}}</textarea>
                           </div>
                         </td>
                       </tr>
 
                       <tr>
                         <td class='iml-num-div'>2.</td>
-                        <td><div class='iml-label'>Your mother/step-mother:</div></td>
+                        <td><div id='e2'><div class='iml-label'>Your mother/step-mother:</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div>
-                            <textarea rows='3' cols='60' name='kidMomAnger' id='kidMomAnger'>{{fields.kidMomAnger}}</textarea>
+                            <textarea rows='3' cols='60' name='kidMomAnger' id='kidMomAnger' oninput="javascript: noErrorText('e2', 'kidMomAnger');">{{fields.kidMomAnger}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -188,14 +188,14 @@
 
                       <tr>
                         <td class='iml-num-div'>2.</td>
-                        <td><div class='iml-label'>Your brothers/sisters:</div></td>
+                        <td><div id='e3'><div class='iml-label'>Your brothers/sisters:</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div>
-                            <textarea rows='3' cols='60' name='kidSiblingAnger' id='kidSiblingAnger'>{{fields.kidSiblingAnger}}</textarea>
+                            <textarea rows='3' cols='60' name='kidSiblingAnger' id='kidSiblingAnger' oninput="javascript: noErrorText('e3', 'kidSiblingAnger');">{{fields.kidSiblingAnger}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -227,14 +227,14 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>4.</div></td>
-                        <td><div class='iml-label'>Other significant persons (grandparents, etc)</div></td>
+                        <td><div id='e4'><div class='iml-label'>Other significant persons (grandparents, etc)</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div>
-                            <textarea rows='3' cols='60' name='kidOtherAnger' id='kidOtherAnger'>{{fields.kidOtherAnger}}</textarea>
+                            <textarea rows='3' cols='60' name='kidOtherAnger' id='kidOtherAnger' oninput="javascript: noErrorText('e4', 'kidOtherAnger');">{{fields.kidOtherAnger}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -262,14 +262,14 @@
 
                       <tr>
                         <td><div class='iml-num-div'>6.</div></td>
-                        <td><div class='iml-label'>In general, what did you learn about anger from your family?</div></td>
+                        <td><div id='e5'><div class='iml-label'>In general, what did you learn about anger from your family?</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div>
-                            <textarea rows='6' cols='60' name='learnFamilyAnger' id='learnFamilyAnger'>{{fields.learnFamilyAnger}}</textarea>
+                            <textarea rows='6' cols='60' name='learnFamilyAnger' id='learnFamilyAnger' oninput="javascript: noErrorText('e5', 'learnFamilyAnger');">{{fields.learnFamilyAnger}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -285,7 +285,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

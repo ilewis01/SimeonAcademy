@@ -133,17 +133,17 @@
                       <tr>
                         <td>
                           <li>
-                            <div class='iml-final-text'>Is there anything else you can tell me that might help me understand your</div>
+                            <div id='e1'><div class='iml-final-text'>Is there anything else you can tell me that might help me understand your<br><span style='margin-left:12px;'>anger and how it affects you and others?</span></div></div>
                           </li>
                         </td>
                       </tr>
-                      <tr><td>
-                        <div style='margin-left:11px; margin-bottom:15px;' class='iml-final-text'>
+                      <!-- <tr><td>
+                        <div id='e1'><div style='margin-left:11px; margin-bottom:15px;' class='iml-final-text'>
                           anger and how it affects you and others?
-                        </div></td></tr>
-                      <tr>
+                        </div></div></td></tr>
+                      <tr> -->
                         <td>
-                          <textarea rows='12' cols='70' name='anythingelse' id='anythingelse' style='margin-left:11px;'>{{fields.anythingelse}}</textarea>
+                          <textarea rows='12' cols='70' name='anythingelse' id='anythingelse' style='margin-left:11px; margin-top:20px;' oninput="javascript: noErrorText('e1', 'anythingelse');">{{fields.anythingelse}}</textarea>
                         </td>
                       </tr>
                     </table>
@@ -164,42 +164,42 @@
 
                       <tr>
                         <td>
-                          <div id='iml-text-spec'>Recommendation 1:</div>
+                          <div id='e2'><div id='iml-text-spec'>Recommendation 1:</div></div>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
                           <div id='iml-spec-ta'>
-                            <textarea rows='4' cols='60' name='changeLearn1' id='changeLearn1'>{{fields.changeLearn1}}</textarea>
+                            <textarea rows='4' cols='60' name='changeLearn1' id='changeLearn1' oninput="javascript: noErrorText('e2', 'changeLearn1');">{{fields.changeLearn1}}</textarea>
                           </div>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
-                          <div id='iml-text-spec'>Recommendation 2:</div>
+                          <div id='e3'><div id='iml-text-spec'>Recommendation 2:</div></div>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
                           <div id='iml-spec-ta'>
-                            <textarea rows='4' cols='60' name='changeLearn2' id='changeLearn2'>{{fields.changeLearn2}}</textarea>
+                            <textarea rows='4' cols='60' name='changeLearn2' id='changeLearn2' oninput="javascript: noErrorText('e3', 'changeLearn2');">{{fields.changeLearn2}}</textarea>
                           </div>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
-                          <div id='iml-text-spec'>Recommendation 3:</div>
+                          <div id='e4'><div id='iml-text-spec'>Recommendation 3:</div><div>
                         </td>
                       </tr>
 
                       <tr>
                         <td>
                           <div id='iml-spec-ta'>
-                            <textarea rows='4' cols='60' name='changeLearn3' id='changeLearn3'>{{fields.changeLearn3}}</textarea>
+                            <textarea rows='4' cols='60' name='changeLearn3' id='changeLearn3' oninput="javascript: noErrorText('e4', 'changeLearn3');">{{fields.changeLearn3}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -215,7 +215,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

@@ -220,8 +220,8 @@
                         <td>
                           <table>
                             <tr>
-                              <td><div class='iml-sub-label2'>Other Serious Illness</div></td>
-                              <td><input type='text' name='otherWhom' id='otherWhom' value='{{fields.otherWhom}}'></td>
+                              <td><div id='e1'><div class='iml-sub-label2'>Other Serious Illness</div></div></td>
+                              <td><input type='text' name='otherWhom' id='otherWhom' value='{{fields.otherWhom}}' oninput="javascript: noErrorText('e1', 'otherWhom');"></td>
                             </tr>
                           </table>
                         </td>
@@ -230,9 +230,9 @@
                   </div> 
 
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:70px;'>
-                    <div class='iml-sub-label2'>Please describe:</div>
+                    <div id='e2'><div class='iml-sub-label2'>Please describe:</div></div>
                     <div>
-                      <textarea rows='3' cols='70' name='describeIssue' id='describeIssue'>{{fields.describeIssue}}</textarea>
+                      <textarea rows='3' cols='70' name='describeIssue' id='describeIssue' oninput="javascript: noErrorText('e2', 'describeIssue');">{{fields.describeIssue}}</textarea>
                     </div>
 
                     <table>
@@ -245,11 +245,11 @@
                       </tr>
                     </table>
                     <table>
-                      <tr><td><div class='iml-sub-label2' id='lab2'><li>What are you taking?</li></div></td></tr>
+                      <tr><td><div id='e3'><div class='iml-sub-label2' id='lab2'><li>What are you taking?</li></div></div></td></tr>
                       <tr>
                         <td>
                           <div class=''>
-                            <textarea cols='70' rows='3' name='whichMeds' id='whichMeds'>{{fields.whichMeds}}</textarea>
+                            <textarea cols='70' rows='3' name='whichMeds' id='whichMeds' oninput="javascript: noErrorText('e3', 'whichMeds');">{{fields.whichMeds}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -264,7 +264,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

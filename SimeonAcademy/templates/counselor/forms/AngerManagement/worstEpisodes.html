@@ -140,48 +140,48 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label'>When and with whom were involved?</div></td>
+                        <td><div id='e1'><div class='iml-label'>When and with whom were involved?</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='whoWorst' id='whoWorst' value=''>{{fields.whoWorst}}</textarea></td>
+                        <td><textarea rows='3' cols='60' name='whoWorst' id='whoWorst' value='' oninput="javascript: noErrorText('e1', 'whoWorst');">{{fields.whoWorst}}</textarea></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>2.</div></td>
-                        <td><div class='iml-label'>What happened?</div></td>
+                        <td><div id='e2'><div class='iml-label'>What happened?</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='happenedWorst' id='happenedWorst'>{{fields.happenedWorst}}</textarea></td>
+                        <td><textarea rows='3' cols='60' name='happenedWorst' id='happenedWorst' oninput="javascript: noErrorText('e2', 'happenedWorst');">{{fields.happenedWorst}}</textarea></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
-                        <td><div class='iml-label'>Main types of angry words during this episode:</div></td>
+                        <td><div id='e3'><div class='iml-label'>Main types of angry words during this episode:</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='wordThoughtWorst' id='wordThoughtWorst'>{{fields.wordThoughtWorst}}</textarea></td>
+                        <td><textarea rows='3' cols='60' name='wordThoughtWorst' id='wordThoughtWorst' oninput="javascript: noErrorText('e3', 'wordThoughtWorst');">{{fields.wordThoughtWorst}}</textarea></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>4.</div></td>
-                        <td><div class='iml-label'>How did this angry episode start?</div></td>
+                        <td><div id='e4'><div class='iml-label'>How did this angry episode start?</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='howStartWorst' id='howStartWorst'>{{fields.howStartWorst}}</textarea></td>
+                        <td><textarea rows='3' cols='60' name='howStartWorst' id='howStartWorst' oninput="javascript: noErrorText('e4', 'howStartWorst');">{{fields.howStartWorst}}</textarea></td>
                       </tr>
                     </table>
                   </div>
@@ -191,12 +191,12 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label'>How did this angry episode it end?</div></td>
+                        <td><div id='e5'><div class='iml-label'>How did this angry episode it end?</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
-                        <td><textarea rows='3' cols='60' name='howEndWorst' id='howEndWorst'>{{fields.howEndWorst}}</textarea></td>
+                        <td><textarea rows='3' cols='60' name='howEndWorst' id='howEndWorst' oninput="javascript: noErrorText('e5', 'howEndWorst');">{{fields.howEndWorst}}</textarea></td>
                       </tr>
                     </table>
 
@@ -213,10 +213,10 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab1'><li>Who was using?</li></div></td>
+                        <td><div id='e6'><div class='iml-sub-label-left' id='lab1'><li>Who was using?</li></div></div></td>
                         <td>
                           <div>
-                            <select name='whoUsed' id='whoUsed' value=''>
+                            <select name='whoUsed' id='whoUsed' value='' onChange="javascript: noErrorText('e6', 'whoUsed');">
                               <option value='None Selected'>Select</option>
                               <option value='Client Used Only'>The client only</option>
                               <option value='The Other Party Used Only'>The other party</option>
@@ -306,14 +306,14 @@
 
                       <tr>
                         <td></td>
-                        <td><div class='iml-sub-label-left3' id='lab2'>Please explain:</div></td>
+                        <td><div id='e7'><div class='iml-sub-label-left3' id='lab2'>Please explain:</div></div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div class='iml-text-area'>
-                            <textarea rows='2' cols='56' name='otherWorstDescription' id='otherWorstDescription'>{{fields.otherWorstDescription}}</textarea>
+                            <textarea rows='2' cols='56' name='otherWorstDescription' id='otherWorstDescription' oninput="javascript: noErrorText('e7', 'otherWorstDescription');">{{fields.otherWorstDescription}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -328,7 +328,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

@@ -823,31 +823,227 @@ function fetchAM7FieldNames() {
 
 function fetchAM8FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+
+	d1['field'] = 'whoWorst';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'happenedWorst';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'wordThoughtWorst';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'howStartWorst';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+	d5['field'] = 'howEndWorst';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
+	d6['field'] = 'whoUsed';
+	d6['type'] = 'select';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'yesDrugs';
+	result.push(d6);
+	d7['field'] = 'otherWorstDescription';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'otherWorst';
+	result.push(d7);
 	return result;
 }
 
 function fetchAM9FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+
+	d1['field'] = 'otherWhom';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'angryOther';
+	result.push(d1);
+	d2['field'] = 'angryAbout';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
 	return result;
 }
 
 function fetchAM10FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+
+	d1['field'] = 'kidDadAnger';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'kidMomAnger';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'kidSiblingAnger';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'kidOtherAnger';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+	d5['field'] = 'learnFamilyAnger';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
 	return result;
 }
 
 function fetchAM11FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+
+	d1['field'] = 'otherWhom';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'otherSeriousIllness';
+	result.push(d1);
+	d2['field'] = 'describeIssue';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'whichMeds';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'onMeds';
+	result.push(d3);
 	return result;
 }
 
 function fetchAM12FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+
+	d1['field'] = 'whatSayYou';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'talkToMyself';
+	result.push(d1);
+	d2['field'] = 'howLongLeaveScene';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'leaveScene';
+	result.push(d2);
+	d3['field'] = 'whatDoLeave';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'leaveScene';
+	result.push(d3);
+	d4['field'] = 'howRelax';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'relax';
+	result.push(d4);
+	d5['field'] = 'doWhatOtherControl';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'otherControlAnger';
+	result.push(d5);
+
 	return result;
 }
 
 function fetchAM13FieldNames() {
 	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+
+	d1['field'] = 'anythingelse';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'changeLearn1';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'changeLearn2';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'changeLearn3';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+
 	return result;
 }
 

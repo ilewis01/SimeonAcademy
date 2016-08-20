@@ -149,7 +149,7 @@
 
                     <table>
                       <tr><td><div id='e1'><div class='iml-sub-label-left' id='lab1'><li>Whom did you want to hurt and what were the reasons?</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain'>{{fields.homicidalExplain}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain' oninput="javascript: noErrorText('e1', 'homicidalExplain');">{{fields.homicidalExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -177,7 +177,7 @@
 
                     <table>
                       <tr><td><div id='e2'><div class='iml-sub-label-left' id='lab2'><li>For what was the medication prescribed?</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain'>{{fields.medRecentVExplain}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain' oninput="javascript: noErrorText('e2', 'medRecentVExplain');">{{fields.medRecentVExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -192,7 +192,7 @@
 
                     <table>
                       <tr><td><div id='e3'><div class='iml-sub-label-left' id='lab6'><li>Please explain:</li></div></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'>{{fields.medSuccessExplainRecentV}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV' oninput="javascript: noErrorText('e3', 'medSuccessExplainRecentV');">{{fields.medSuccessExplainRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>
 
@@ -211,7 +211,7 @@
                       <tr>
                         <td>
                           <div class='iml-text-area'>
-                            <textarea rows='2' cols='60' name='durationRecentV' id='durationRecentV' value='{{fields.durationRecentV}}'>{{fields.durationRecentV}}</textarea>
+                            <textarea rows='2' cols='60' name='durationRecentV' id='durationRecentV' value='{{fields.durationRecentV}}' oninput="javascript: noErrorText('e4', 'durationRecentV');">{{fields.durationRecentV}}</textarea>
                           </div>
                         </td>
                       </tr>

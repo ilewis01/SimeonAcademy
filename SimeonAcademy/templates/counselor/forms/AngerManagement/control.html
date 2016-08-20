@@ -168,12 +168,12 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text' id='lab1'><li>What do you say to yourself to control your anger?</li></div></td>
+                        <td><div id='e1'><div class='iml-control-text' id='lab1'><li>What do you say to yourself to control your anger?</li></div></div></td>
                       </tr>
                       <tr>
                         <td>
                           <div class='iml-spec-ta2'>
-                            <textarea rows='3' cols='60' name='whatSayYou' id='whatSayYou'>{{fields.whatSayYou}}</textarea>
+                            <textarea rows='3' cols='60' name='whatSayYou' id='whatSayYou' oninput="javascript: noErrorText('e1', 'whatSayYou');">{{fields.whatSayYou}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -192,17 +192,17 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text' id='lab2'><li>How long?</li></div></td>
-                        <td><div><input type='text' name='howLongLeaveScene' id='howLongLeaveScene' value='{{fields.howLongLeaveScene}}'></div></td>
+                        <td><div id='e2'><div class='iml-control-text' id='lab2'><li>How long?</li></div></div></td>
+                        <td><div><input type='text' name='howLongLeaveScene' id='howLongLeaveScene' value='{{fields.howLongLeaveScene}}' oninput="javascript: noErrorText('e2', 'howLongLeaveScene');"></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-control-text' id='lab3'><li>What do you do?</li></div></td></tr>
+                      <tr><td><div id='e3'><div class='iml-control-text' id='lab3'><li>What do you do?</li></div></div></td></tr>
                       <tr>
                         <td>
                           <div class='iml-spec-ta2'>
-                            <textarea rows='3' cols='60' name='whatDoLeave' id='whatDoLeave'>{{fields.whatDoLeave}}</textarea>
+                            <textarea rows='3' cols='60' name='whatDoLeave' id='whatDoLeave' oninput="javascript: noErrorText('e3', 'whatDoLeave');">{{fields.whatDoLeave}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -223,7 +223,7 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-control-text' id='lab4'>How do you relax?</div></td>
+                        <td><div id='e4'><div class='iml-control-text' id='lab4'>How do you relax?</div></div></td>
                       </tr>
                     </table>
 
@@ -231,7 +231,7 @@
                       <tr>
                         <td>
                           <div class='iml-spec-ta2'>
-                            <textarea rows='3' cols='60' name='howRelax' id='howRelax'>{{fields.howRelax}}</textarea>
+                            <textarea rows='3' cols='60' name='howRelax' id='howRelax' oninput="javascript: noErrorText('e4', 'howRelax');">{{fields.howRelax}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -255,14 +255,14 @@
                             <input type='checkbox' name='otherControlAnger' id='otherControlAnger' value='Other types of anger control:' onClick='javascript: otherControlCheckbox();'>
                           </div>
                         </td>
-                        <td><div class='iml-sub-label2'>Other <span id='lab5'>(What?)</span></div></td>
+                        <td><div id='e5'><div class='iml-sub-label2'>Other <span id='lab5'>(What?)</span></div><div></td>
                       </tr>
 
                       <tr>
                         <td></td>
                         <td>
                           <div class=''>
-                            <textarea rows='3' cols='60' name='doWhatOtherControl' id='doWhatOtherControl'>{{fields.doWhatOtherControl}}</textarea>
+                            <textarea rows='3' cols='60' name='doWhatOtherControl' id='doWhatOtherControl' oninput="javascript: noErrorText('e5', 'doWhatOtherControl');">{{fields.doWhatOtherControl}}</textarea>
                           </div>
                         </td>
                       </tr>
@@ -277,7 +277,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>
