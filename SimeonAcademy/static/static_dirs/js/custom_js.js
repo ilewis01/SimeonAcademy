@@ -1,3 +1,528 @@
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//******************************************************* ERROR CHECKER *************************************************************//
+//******************************************************* ERROR CHECKER *************************************************************//
+//******************************************************* ERROR CHECKER *************************************************************//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+
+function isBlankText(value) {
+	var isBlank = false;
+	value = String(value);	
+	if (value === "" || value === " " || value === null || value === 'None') {
+		isBlank = true;
+	}
+	return isBlank;
+}
+
+function isBlankSelect(field) {
+	var isBlank = false;
+	if (field.selectedIndex === 0) {
+		isBlank = true;
+	}
+	return isBlank;
+}
+
+function numbersOnly(value) {
+	var result = "";
+	d = String(value);
+
+	for (var i = 0; i < d.length; i++) {
+		if (d.charAt(i)==='1' || d.charAt(i)==='2' || d.charAt(i)==='3' || d.charAt(i)==='4' || d.charAt(i)==='5' || d.charAt(i)==='6' || d.charAt(i)==='7' || d.charAt(i)==='8' || d.charAt(i)==='9' || d.charAt(i)==='0') {
+			result += d.charAt(i);
+		}
+	}
+	return result;
+}
+
+function validateNumber(value) {
+	isNumber = null;
+	d = String(value);
+
+	for (var i = 0; i < d.length; i++) {
+		if (d.charAt(i)==='0' || d.charAt(i)==='1' || d.charAt(i)==='2' || d.charAt(i)==='3' || d.charAt(i)==='4' || d.charAt(i)==='5' || d.charAt(i)==='6' || d.charAt(i)==='7' || d.charAt(i)==='8' || d.charAt(i)==='9') {
+			isNumber = true;
+		}
+		else {
+			isNumber = false;
+			break;
+		}
+	}
+	
+	return isNumber;
+}
+
+function clearWhiteSpace(value) {
+	var result = "";
+	value = String(value);
+
+	for (var i = 0; i < value.length; i++) {
+		if (value.charAt(i) !== " ") {
+			result += value.charAt(i);
+		}
+	}
+	return result;
+}
+
+function textErrorChecker(item) {
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+	val = String(val);
+
+	if (item['isDynamic'] === false) {
+		if (isBlankText(val) === true) {
+			setErrorDiv(item['div']);
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		fieldName = 'm_' + fieldName;
+		field = grab(fieldName);
+		val = field.value;
+		val = String(val);
+
+		if (trigger.checked === true) {
+			if (isBlankText(val) === true) {
+				setErrorDiv(item['div']);
+			}
+		}
+	}
+}
+
+function numberErrorChecker(item) {
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+
+	if (item['isDynamic'] === false) {
+		if (validateNumber(val) === false || isBlankText(val) === true) {
+			setErrorDiv(item['div']);
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		fieldName = 'm_' + fieldName;
+		field = grab(fieldName);
+		val = field.value;
+		val = String(val);
+
+		if (trigger.checked === true) {
+			if (validateNumber(val) === false || isBlankText(val) === true) {
+				setErrorDiv(item['div']);
+			}
+		}
+	}
+}
+
+function selectErrorChecker(item) {
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+
+	if (item['isDynamic'] === false) {
+		if (field.selectedIndex === 0) {
+			setErrorDiv(item['div']);
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		fieldName = 'm_' + fieldName;
+		field = grab(fieldName);
+		val = field.value;
+		val = String(val);
+
+		if (trigger.checked === true) {
+			if (String(field.value) === 'None Selected') {
+				setErrorDiv(item['div']);
+			}
+		}
+	}
+}
+
+function phoneErrorChecker(item) {
+	
+}
+
+function ssnErrorChecker(item) {
+	
+}
+
+function dateErrorChecker(item) {
+	
+}
+
+function errorTesting1() {
+	superErrorChecker('am', '/am_demographic/');
+
+	grab('testField1').value = 'The results have been calculated';
+}
+
+function validatePhone(field) {
+	var isGood = false;
+	var val = numbersOnly(field);
+	val = clearWhiteSpace(val);
+
+	if (val.length === 10) {
+		isGood = true;
+	}
+	return isGood;
+}
+
+function validateSSN(field) {
+	var isGood = false;
+	var val = numbersOnly(field);
+	val = clearWhiteSpace(val);
+
+	if (val.length === 9) {
+		isGood = true;
+	}
+	return isGood;
+}
+
+function validateDate(field) {
+	var isGood = true;
+	return isGood;
+}
+
+function setErrorDiv(divName) {
+	divName = String(divName);
+	var div = grab(divName);
+	div.className = 'iml-error-set';
+}
+
+function noErrorText(divName, fieldName) {
+	divName = String(divName);
+	fieldName = String(fieldName);
+
+	var div = grab(divName);
+	var field = grab(fieldName);
+	var val = field.value;
+	val = String(val);
+
+	if (isBlankText(val) === false) {
+		div.className = '';
+	}
+}
+
+function fetchAM1FieldNames() {
+	var result = [];
+
+	var d1 = {}
+	var d2 = {}
+	var d3 = {}
+	var d4 = {}
+	var d5 = {}
+	var d6 = {}
+	var d7 = {}
+	var d8 = {}
+	var d9 = {}
+	var d10 = {}
+	var d11 = {}
+	var d12 = {}
+	var d13 = {}
+	var d14 = {}
+	var d15 = {}
+	var d16 = {}
+	var d17 = {}
+
+	d1['field'] = 'maritalStatus';
+	d1['type'] = 'select';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'livingSituation';
+	d2['type'] = 'select';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'months_res';
+	d3['type'] = 'number';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'years_res';
+	d4['type'] = 'number';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+	d5['field'] = 'whoLivesWithClient';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
+	// d6['field'] = 'num_children';
+	// d6['type'] = 'number';
+	// d6['div'] = 'e6';
+	// d6['isDynamic'] = false;
+	// d6['trigger'] = null;
+	// result.push(d6);
+	// d7['field'] = 'spouse_dep';
+	// d7['type'] = 'number';
+	// d7['div'] = 'e7';
+	// d7['isDynamic'] = false;
+	// d7['trigger'] = null;
+	// result.push(d7);
+	// d8['field'] = 'other_dependants';
+	// d8['type'] = 'number';
+	// d8['div'] = 'e8';
+	// d8['isDynamic'] = false;
+	// d8['trigger'] = null;
+	// result.push(d8);
+	// d9['field'] = 'resasonDO';
+	// d9['type'] = 'text';
+	// d9['div'] = 'e9';
+	// d9['isDynamic'] = true;
+	// d9['trigger'] = 'DO';
+	// result.push(d9);
+	// d10['field'] = 'employee';
+	// d10['type'] = 'text';
+	// d10['div'] = 'e10';
+	// d10['isDynamic'] = false;
+	// d10['trigger'] = null;
+	// result.push(d10);
+	// d11['field'] = 'job_title';
+	// d11['type'] = 'text';
+	// d11['div'] = 'e11';
+	// d11['isDynamic'] = false;
+	// d11['trigger'] = null;
+	// result.push(d11);
+	// d12['field'] = 'emp_address';
+	// d12['type'] = 'text';
+	// d12['div'] = 'e12';
+	// d12['isDynamic'] = false;
+	// d12['trigger'] = null;
+	// result.push(d12);
+	// d13['field'] = 'employed_months';
+	// d13['type'] = 'number';
+	// d13['div'] = 'e13';
+	// d13['isDynamic'] = false;
+	// d13['trigger'] = null;
+	// result.push(d13);
+	// d14['field'] = 'employed_years';
+	// d14['type'] = 'number';
+	// d14['div'] = 'e14';
+	// d14['isDynamic'] = false;
+	// d14['trigger'] = null;
+	// result.push(d14);
+	// d15['field'] = 'employer_phone';
+	// d15['type'] = 'phone';
+	// d15['div'] = 'e15';
+	// d15['isDynamic'] = false;
+	// d15['trigger'] = null;
+	// result.push(d15);
+	// d16['field'] = 'whatMedicine';
+	// d16['type'] = 'text';
+	// d16['div'] = 'e16';
+	// d16['isDynamic'] = true;
+	// d16['trigger'] = 'on_meds';
+	// result.push(d16);
+	// d17['field'] = 'health_exp';
+	// d17['type'] = 'text';
+	// d17['div'] = 'e17';
+	// d17['isDynamic'] = true;
+	// d17['trigger'] = 'not_healthy';
+	// result.push(d17);
+
+	return result;
+}
+
+function fetchAM2FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM3FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM4FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM5FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM6FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM7FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM8FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM9FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM10FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM11FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM12FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchAM13FieldNames() {
+	var result = [];
+	return result;
+}
+
+function fetchFieldList_am(section) {
+	var result = null;
+	section = String(section);
+
+	if (section === '/am_demographic/') {
+		result = fetchAM1FieldNames();
+	}
+	else if (section === '/am_drugHistory/') {
+		result = fetchAM2FieldNames();
+	}
+	else if (section === '/am_childhood/') {
+		result = fetchAM3FieldNames();
+	}
+	else if (section === '/am_angerHistory/') {
+		result = fetchAM4FieldNames();
+	}
+	else if (section === '/am_angerHistory2/') {
+		result = fetchAM5FieldNames();
+	}
+	else if (section === '/am_angerHistory3/') {
+		result = fetchAM6FieldNames();
+	}
+	else if (section === '/am_connections/') {
+		result = fetchAM7FieldNames();
+	}
+	else if (section === '/am_worst/') {
+		result = fetchAM8FieldNames();
+	}
+	else if (section === '/am_angerTarget/') {
+		result = fetchAM9FieldNames();
+	}
+	else if (section === '/am_familyOrigin/') {
+		result = fetchAM10FieldNames();
+	}
+	else if (section === '/am_problems/') {
+		result = fetchAM11FieldNames();
+	}
+	else if (section === '/am_control/') {
+		result = fetchAM12FieldNames();
+	}
+	else if (section === '/am_final/') {
+		result = fetchAM13FieldNames();
+	}
+	return result;
+}
+
+function fetchFieldList_mh(section) {
+
+}
+
+function fetchFieldList_asi(section) {
+	
+}
+
+function fetchFieldList_sap(section) {
+	
+}
+
+function fetchFieldList(type, section) {
+	var result = null;
+	type = String(type);
+
+	if (type === 'am') {
+		result = fetchFieldList_am(section);
+	}
+	else if (type === 'mh') {
+		result = fetchFieldList_mh(section);
+	}
+	else if (type === 'sap') {
+		result = fetchFieldList_sap(section);
+	}
+	else if (type === 'asi') {
+		result = fetchFieldList_asi(section);
+	}
+	return result;
+}
+
+function hasErrors(formType, section, fieldList) {
+	var noGood = true;
+	formType = String(formType);
+	section = String(section);
+	return noGood;
+}
+
+function superErrorChecker(formType, section) {
+	var fieldList = fetchFieldList(formType, section);
+
+	for (var i = 0; i < fieldList.length; i++) {
+		if (fieldList[i]['type'] === 'text') {
+			textErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'number') {
+			numberErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'select') {
+			selectErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'ssn') {
+			ssnErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'phone') {
+			phoneErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'date') {
+			dateErrorChecker(fieldList[i]);
+		}
+	}
+}
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//*************************************************** END ERROR CHECKER *************************************************************//
+//*************************************************** END ERROR CHECKER *************************************************************//
+//*************************************************** END ERROR CHECKER *************************************************************//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 function set_radio_buttons() {
 	var ss_num = document.getElementById('ss_num');
 	var fname = document.getElementById('fname');

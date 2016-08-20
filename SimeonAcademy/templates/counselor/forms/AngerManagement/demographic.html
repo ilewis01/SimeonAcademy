@@ -4,6 +4,10 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
+
+  <input type='text' id='testField1' style='width:800px; margin-left:40px;'>
+  <button onClick='javascript: errorTesting1();'>Run Test</button>
+
     <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
       <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
@@ -135,10 +139,10 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label'>Marital Status:</div></td>
+                        <td><div id='e1'><div class='iml-label'>Marital Status:</div></div></td>
                         <td>
                           <div>
-                            <select name='maritalStatus' id='maritalStatus'>
+                            <select name='maritalStatus' id='maritalStatus' onChange="javascript: noErrorText('e1', 'maritalStatus');">
                               <option value='None Selected'>Select</option>
                               <option value='Divorced'>Divorced</option>
                               <option value='Married'>Married</option>
@@ -153,10 +157,10 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>2.</div></td>
-                        <td><div class='iml-label'>Living Situation:</div></td>
+                        <td><div id='e2'><div class='iml-label'>Living Situation:</div></div></td>
                         <td>
                           <div>
-                            <select name='livingSituation' id='livingSituation'>
+                            <select name='livingSituation' id='livingSituation' onChange="javascript: noErrorText('e2', 'livingSituation');">
                               <option value='None Selected'>Select</option>
                               <option value='Live alone'>Live alone</option>
                               <option value='Live with family'>Live with family</option>
@@ -172,10 +176,10 @@
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
                         <td><div class='iml-label'>Time at Current Residence:</div></td>
-                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value='{{fields.years_res}}'></div></td>
-                        <td><div class='iml-sub-label'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value='{{fields.months_res}}'></div></td>
-                        <td><div class='iml-sub-label'>months</div></td>
+                        <td><div class='iml-num'><input type='number' name='years_res' id='years_res' value='{{fields.years_res}}' oninput="javascript: noErrorText('e4', 'years_res');"></div></td>
+                        <td><div id='e4'><div class='iml-sub-label'>years</div></div></td>
+                        <td><div class='iml-num'><input type='number' name='months_res' id='months_res' value='{{fields.months_res}}' oninput="javascript: noErrorText('e3', 'months_res');"></div></td>
+                        <td><div id='e3'><div class='iml-sub-label'>months</div></div></td>
                       </tr>
                     </table>
 
@@ -193,12 +197,14 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label'>Who lives with client at residence?</div></td>
+                        <td><div id='e5'>
+                          <div class='iml-label'>Who lives with client at residence?</div>
+                        </div></td>
                       </tr>
                     </table>
                     <table>
                       <tr><td><div class='iml-sub-label-left'><li>Include names, ages, and relationship</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient'>{{fields.whoLivesWithClient}}</textarea></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='whoLivesWithClient' id='whoLivesWithClient' oninput="javascript: noErrorText('e5', 'whoLivesWithClient');">{{fields.whoLivesWithClient}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -210,13 +216,13 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-l' style='margin-left:25px;'>Children:</div></td>
+                        <td><div id='e6'><div class='iml-sub-label-l' style='margin-left:25px;'>Children:</div></div></td>
                         <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='num_children' id='num_children' value='{{fields.num_children}}'></div></td>
 
-                        <td><div class='iml-sub-label-l'>Spouse:</div></td>
+                        <td><div id='e7'><div class='iml-sub-label-l'>Spouse:</div></div></td>
                         <td><div class='iml-num'><input style='margin-right:15px;' type='number' name='spouse_dep' id='spouse_dep' value='{{fields.spouse_dep}}'></div></td>
 
-                        <td><div class='iml-sub-label-l'>Other:</div></td>
+                        <td><div id='e8'><div class='iml-sub-label-l'>Other:</div></div></td>
                         <td><div class='iml-num'><input type='number' name='other_dependants' id='other_dependants' value='{{fields.other_dependants}}'></div></td>
                       </tr>
                     </table>
@@ -243,7 +249,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='doReason_lab'><li>Reason for dropout:</li></div></td></tr>
+                      <tr><td><div id='e9'><div class='iml-sub-label-left' id='doReason_lab'><li>Reason for dropout:</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='resasonDO' id='resasonDO' value=''>{{fields.resasonDO}}</textarea></div></td></tr>
                     </table>
 
@@ -255,25 +261,25 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>8.</div></td>
-                        <td><div class='iml-label'>Current Employer:</div></td>
+                        <td><div id='e10'><div class='iml-label'>Current Employer:</div></div></td>
                         <td><div><input type='text' name='employee' id='employee' value='{{fields.employee}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>9.</div></td>
-                        <td><div class='iml-label'>Employer Phone:</div></td>
+                        <td><div id='e15'><div class='iml-label'>Employer Phone:</div></div></td>
                         <td><div><input type='text' name='employer_phone' id='employer_phone' value='{{fields.employer_phone}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>10.</div></td>
-                        <td><div class='iml-label'>Employer Address:</div></td>
+                        <td><div id='e12'><div class='iml-label'>Employer Address:</div></div></td>
                         <td><div><input type='text' name='emp_address' id='emp_address' value='{{fields.emp_address}}'></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>11.</div></td>
-                        <td><div class='iml-label'>Job title:</div></td>
+                        <td><div id='e11'><div class='iml-label'>Job title:</div></div></td>
                         <td><div><input type='text' name='job_title' id='job_title' value='{{fields.job_title}}'></div></td>
                       </tr>
                     </table>
@@ -283,9 +289,9 @@
                         <td><div class='iml-num-div'>12.</div></td>
                         <td><div class='iml-label'>Length of Employment:</div></td>
                         <td><div class='iml-num'><input type='number' name='employed_years' id='employed_years' value='{{fields.employed_years}}'></div></td>
-                        <td><div class='iml-sub-label'>years</div></td>
+                        <td><div id='e14'><div class='iml-sub-label'>years</div></div></td>
                         <td><div class='iml-num'><input type='number' name='employed_months' id='employed_months' value='{{fields.employed_months}}'></div></td>
-                        <td><div class='iml-sub-label'>months</div></td>
+                        <td><div id='e13'><div class='iml-sub-label'>months</div></div></td>
                     </table>
 
                     <h4>Medical/Health</h4>
@@ -302,7 +308,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='healthExp_label'><li>Please explain client health issues:</li></div></td></tr>
+                      <tr><td><div id='e17'><div class='iml-sub-label-left' id='healthExp_label'><li>Please explain client health issues:</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='health_exp' id='health_exp'>{{fields.health_exp}}</textarea></div></td></tr>
                     </table>
 
@@ -318,7 +324,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='meds_leb'><li>What are you taking?</li></div></td></tr>
+                      <tr><td><div id='e16'><div class='iml-sub-label-left' id='meds_leb'><li>What are you taking?</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='2' cols='60' name='whatMedicine' id='whatMedicine'>{{fields.whatMedicine}}</textarea></div></td></tr>
                     </table>
                   </div>
