@@ -200,7 +200,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left3' id='lab1'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div id='e1'><div class='iml-sub-label-left3' id='lab1'><li>Please explain:</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub2'><textarea rows='4' cols='60' name='connectionExplain' id='connectionExplain'>{{fields.connectionExplain}}</textarea></div></td></tr>
                     </table>
                   </div> 
@@ -213,7 +213,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

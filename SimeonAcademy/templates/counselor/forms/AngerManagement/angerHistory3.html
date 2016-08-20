@@ -148,7 +148,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>Whom did you want to hurt and what were the reasons?</li></div></td></tr>
+                      <tr><td><div id='e1'><div class='iml-sub-label-left' id='lab1'><li>Whom did you want to hurt and what were the reasons?</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='homicidalExplain' id='homicidalExplain'>{{fields.homicidalExplain}}</textarea></div></td></tr>
                     </table>
 
@@ -176,7 +176,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab2'><li>For what was the medication prescribed?</li></div></td></tr>
+                      <tr><td><div id='e2'><div class='iml-sub-label-left' id='lab2'><li>For what was the medication prescribed?</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medRecentVExplain' id='medRecentVExplain'>{{fields.medRecentVExplain}}</textarea></div></td></tr>
                     </table>
 
@@ -191,7 +191,7 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab6'><li>Please explain:</li></div></td></tr>
+                      <tr><td><div id='e3'><div class='iml-sub-label-left' id='lab6'><li>Please explain:</li></div></div></td></tr>
                       <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='medSuccessExplainRecentV' id='medSuccessExplainRecentV'>{{fields.medSuccessExplainRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>
@@ -203,7 +203,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
-                        <td><div class='iml-label'>When you become angry, how long do you remain angry?</div></td>
+                        <td><div id='e4'><div class='iml-label'>When you become angry, how long do you remain angry?</div></div></td>
                       </tr>
                     </table>
 
@@ -324,7 +324,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

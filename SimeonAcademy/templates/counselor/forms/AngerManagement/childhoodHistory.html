@@ -143,10 +143,10 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label'>By whom were you raised?</div></td>
+                        <td><div id='e1'><div class='iml-label'>By whom were you raised?</div></div></td>
                         <td>
                           <div>
-                            <select name='raisedBy' id='raisedBy'>
+                            <select name='raisedBy' id='raisedBy' onChange="javascript: noErrorText('e1', 'raisedBy');">
                               <option value='None Selected'>Select</option>
                               <option value='Parents'>Parents</option>
                               <option value='Grandparents'>Grandparents</option>
@@ -197,26 +197,26 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>Please explain childhood trauma:</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='traumaExplain' id='traumaExplain' value=''>{{fields.traumaExplain}}</textarea></div></td></tr>
+                      <tr><td><div id='e2'><div class='iml-sub-label-left' id='lab1'><li>Please explain childhood trauma:</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='traumaExplain' id='traumaExplain' value='' oninput="javascript: noErrorText('e2', 'traumaExplain');">{{fields.traumaExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
-                      <tr>
+                      <tr> 
                         <td><div class='iml-num-div'>4.</div></td>
-                        <td><div class='iml-label'>Explain how you came to leave home:</div></td>
+                        <td><div id='e3'><div class='iml-label'>Explain how you came to leave home:</div></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='howLeftHome' id='howLeftHome' value=''>{{fields.howLeftHome}}</textarea></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='howLeftHome' id='howLeftHome' value='' oninput="javascript: noErrorText('e3', 'howLeftHome');">{{fields.howLeftHome}}</textarea></div></td></tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label'>Number of siblings:</div></td>
-                        <td><div class='iml-num'><input type='number' name='num_siblings' id='num_siblings' value='{{fields.num_siblings}}'></div></td>
+                        <td><div id='e4'><div class='iml-label'>Number of siblings:</div></div></td>
+                        <td><div class='iml-num'><input type='number' name='num_siblings' id='num_siblings' value='{{fields.num_siblings}}' oninput="javascript: noErrorText('e4', 'num_siblings');"></div></td>
                       </tr>
                     </table>
 
@@ -232,8 +232,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made sibling relationships close/distant:</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain' value=''>{{fields.siblingsRelationshipExplain}}</textarea></div></td></tr>
+                      <tr><td><div id='e5'><div class='iml-sub-label-left'><li>Please explain what made sibling relationships close/distant:</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='siblingsRelationshipExplain' id='siblingsRelationshipExplain' value='' oninput="javascript: noErrorText('e5', 'siblingsRelationshipExplain');">{{fields.siblingsRelationshipExplain}}</textarea></div></td></tr>
                     </table>
                   </div>
 
@@ -251,8 +251,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='dadCloseExplain' id='dadCloseExplain' value=''>{{fields.dadCloseExplain}}</textarea></div></td></tr>
+                      <tr><td><div id='e6'><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='dadCloseExplain' id='dadCloseExplain' value='' oninput="javascript: noErrorText('e6', 'dadCloseExplain');">{{fields.dadCloseExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -267,8 +267,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='momCloseExplain' id='momCloseExplain' value=''>{{fields.momCloseExplain}}</textarea></div></td></tr>
+                      <tr><td><div id='e7'><div class='iml-sub-label-left'><li>Please explain what made it close/distant:</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='2' cols='60' name='momCloseExplain' id='momCloseExplain' value='' oninput="javascript: noErrorText('e7', 'momCloseExplain');">{{fields.momCloseExplain}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -284,14 +284,14 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab2'><li>By whom?</li></div></td>
-                        <td><div><input type='text' name='abusedBy' id='abusedBy' value='{{fields.abusedBy}}'></div></td>
+                        <td><div id='e8'><div class='iml-sub-label-left' id='lab2'><li>By whom?</li></div></div></td>
+                        <td><div><input type='text' name='abusedBy' id='abusedBy' value='{{fields.abusedBy}}' oninput="javascript: noErrorText('e8', 'abusedBy');"></div></td>
                       </tr>
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab3'><li>What was the impact?</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='abuseImpact' id='abuseImpact'>{{fields.abuseImpact}}</textarea></div></td></tr>
+                      <tr><td><div id='e9'><div class='iml-sub-label-left' id='lab3'><li>What was the impact?</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='abuseImpact' id='abuseImpact' oninput="javascript: noErrorText('e9', 'abuseImpact');">{{fields.abuseImpact}}</textarea></div></td></tr>
                       </tr>
                     </table>
                   </div>

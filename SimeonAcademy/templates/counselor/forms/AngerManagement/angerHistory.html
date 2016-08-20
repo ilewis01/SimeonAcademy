@@ -148,41 +148,41 @@
                     <h4>Most Recent Anger Episode</h4>
                     <table>
                       <tr>
-                        <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label'>Please describe in detail your most recent anger incident:</div></td>
+                        <td><div class='iml-num-div'>1.</div></div></td>
+                        <td><div id='e1'><div class='iml-label'>Please describe in detail your most recent anger incident:</div></div></td>
                       </tr>
                     </table>
                     <table>
                       <tr>
-                        <td><div class='iml-text-area'><textarea cols='60' rows='3' name='recentIncidentV' id='recentIncidentV'>{{fields.recentIncidentV}}</textarea></div></td>
+                        <td><div class='iml-text-area'><textarea cols='60' rows='3' name='recentIncidentV' id='recentIncidentV' oninput="javascript: noErrorText('e1', 'recentIncidentV');">{{fields.recentIncidentV}}</textarea></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>2.</div></td>
-                        <td><div class='iml-label'>When did the anger episode occur?</div></td>
-                        <td><div><input type='text' name='recentVDate' id='recentVDate' value='{{fields.recentVDate}}'></div></td>
+                        <td><div id='e2'><div class='iml-label'>When did the anger episode occur?</div></div></td>
+                        <td><div><input type='text' name='recentVDate' id='recentVDate' value='{{fields.recentVDate}}' oninput="javascript: noErrorText('e2', 'recentVDate');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>3.</div></td>
-                        <td><div class='iml-label'>Where did the anger episode occur?</div></td>
-                        <td><div><input type='text' name='recentVlocation' id='recentVlocation' value='{{fields.recentVlocation}}'></div></td>
+                        <td><div id='e3'><div class='iml-label'>Where did the anger episode occur?</div></div></td>
+                        <td><div><input type='text' name='recentVlocation' id='recentVlocation' value='{{fields.recentVlocation}}' oninput="javascript: noErrorText('e3', 'recentVlocation');"></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>4.</div></td>
-                        <td><div class='iml-label'>With whom?</div></td>
-                        <td><div><input type='text' name='withWhomRecentV' id='withWhomRecentV' value='{{fields.withWhomRecentV}}'></div></td>
+                        <td><div id='e4'><div class='iml-label'>With whom?</div><div></td>
+                        <td><div><input type='text' name='withWhomRecentV' id='withWhomRecentV' value='{{fields.withWhomRecentV}}' oninput="javascript: noErrorText('e4', 'withWhomRecentV');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label'>What happened?</div></td>
-                        <td><div><input type='text' name='happenedRecentV' id='happenedRecentV' value='{{fields.happenedRecentV}}'></div></td>
+                        <td><div id='e5'><div class='iml-label'>What happened?</div></div></td>
+                        <td><div><input type='text' name='happenedRecentV' id='happenedRecentV' value='{{fields.happenedRecentV}}' oninput="javascript: noErrorText('e5', 'happenedRecentV');"></div></td>
                       </tr>
                     </table>
 
@@ -211,8 +211,8 @@
                             <input type='checkbox' name='otherRecentV' id='otherRecentV' value='Other' style='margin-left:22px;' onClick='ahCk1init();'>
                           </div>
                         </td>
-                        <td><div class='iml-sub-label' style='margin-bottom:5px;'>Other:</div></td>
-                        <td><div><input type='text' name='otherExplainRecentV' id='otherExplainRecentV' value='{{fields.otherExplainRecentV}}'></div></td>
+                        <td><div id='e6'><div class='iml-sub-label' style='margin-bottom:5px;'>Other:</div></div></td>
+                        <td><div><input type='text' name='otherExplainRecentV' id='otherExplainRecentV' value='{{fields.otherExplainRecentV}}' oninput="javascript: noErrorText('e6', 'otherExplainRecentV');"></div></td>
                       </tr>
                     </table>
 
@@ -223,12 +223,12 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>7.</div></td>
-                        <td><div class='iml-label'>Main types of angry words and thoughts during angry episode:</div></td>
+                        <td><div id='e7'><div class='iml-label'>Main types of angry words and thoughts during angry episode:</div></div></td>
                       </tr>
                     </table>
                     <table>
                       <tr>
-                        <td><div class='iml-text-area'><textarea cols='60' rows='2' name='typeWordsRecentV' id='typeWordsRecentV'>{{fields.typeWordsRecentV}}</textarea></div></td>
+                        <td><div class='iml-text-area'><textarea cols='60' rows='2' name='typeWordsRecentV' id='typeWordsRecentV' oninput="javascript: noErrorText('e7', 'typeWordsRecentV');">{{fields.typeWordsRecentV}}</textarea></div></td>
                       </tr>
                     </table>
                   </div>
@@ -270,8 +270,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab1'><li>For what were you being treated?</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='psychoWhyRecentV' id='psychoWhyRecentV'>{{fields.psychoWhyRecentV}}</textarea></div></td></tr>
+                      <tr><td><div id='e8'><div class='iml-sub-label-left' id='lab1'><li>For what were you being treated?</li></div></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='psychoWhyRecentV' id='psychoWhyRecentV' oninput="javascript: noErrorText('e8', 'psychoWhyRecentV');">{{fields.psychoWhyRecentV}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -280,10 +280,10 @@
                     
                     <table>
                       <tr>
-                        <td><div class='iml-num' style='margin-left:34px;'><input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' value='{{fields.longAgoTreatRecentVyrs}}'></div></td>
-                        <td><div class='iml-sub-label'  id='lab3'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' value='{{fields.longAgoTreatRecentVmos}}'></div></td>
-                        <td><div class='iml-sub-label'  id='lab4'>months</div></td>
+                        <td><div class='iml-num' style='margin-left:34px;'><input type='number' name='longAgoTreatRecentVyrs' id='longAgoTreatRecentVyrs' value='{{fields.longAgoTreatRecentVyrs}}' oninput="javascript: noErrorText('e9', 'longAgoTreatRecentVyrs');"></div></td>
+                        <td><div id='e9'><div class='iml-sub-label'  id='lab3'>years</div></div></td>
+                        <td><div class='iml-num'><input type='number' name='longAgoTreatRecentVmos' id='longAgoTreatRecentVmos' value='{{fields.longAgoTreatRecentVmos}}' oninput="javascript: noErrorText('e10', 'longAgoTreatRecentVmos');"></div></td>
+                        <td><div id='e10'><div class='iml-sub-label'  id='lab4'>months</div></div></td>
                       </tr>
                     </table>
 
@@ -298,8 +298,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left'  id='lab8'><li>Why was treatment terminated?</li></div></td></tr>
-                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV'>{{fields.reasonNotCompleteRecentV}}</textarea></div></td></tr>
+                      <tr><td><div id='e11'><div class='iml-sub-label-left'  id='lab8'><li>Why was treatment terminated?</li></div></div></td></tr>
+                      <tr><td><div class='iml-text-area-sub'><textarea rows='3' cols='60' name='reasonNotCompleteRecentV' id='reasonNotCompleteRecentV' oninput="javascript: noErrorText('e11', 'reasonNotCompleteRecentV');">{{fields.reasonNotCompleteRecentV}}</textarea></div></td></tr>
                     </table>
                   </div>
 
@@ -312,7 +312,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

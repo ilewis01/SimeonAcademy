@@ -148,16 +148,16 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label'>At what age did you have you first drink and/or drugs?</div></td>
-                        <td><div class='iml-num'><input type='number' name='firstDrinkAge' id='firstDrinkAge' value='{{fields.firstDrinkAge}}'></div></td>
+                        <td><div id='e1'><div class='iml-label'>At what age did you have you first drink and/or drugs?</div></div></td>
+                        <td><div class='iml-num'><input type='number' name='firstDrinkAge' id='firstDrinkAge' value='{{fields.firstDrinkAge}}' oninput="javascript: noErrorText('e1', 'firstDrinkAge');"></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>2.</div></td>
-                        <td><div class='iml-label'>What did you use?</div></td>
-                        <td><div class=''><input type='text' name='firstDrinkType' id='firstDrinkType' value='{{fields.firstDrinkType}}'></div></td>
+                        <td><div id='e2'><div class='iml-label'>What did you use?</div></div></td>
+                        <td><div class=''><input type='text' name='firstDrinkType' id='firstDrinkType' value='{{fields.firstDrinkType}}' oninput="javascript: noErrorText('e2', 'firstDrinkType');"></div></td>
                       </tr>
                     </table>
 
@@ -174,13 +174,13 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='oftenLab'><li>How often do you use?</li></div></td>
-                        <td><div><input type='text' name='amtPerWeek' id='amtPerWeek' value='{{fields.amtPerWeek}}'></div></td>
+                        <td><div id='e3'><div class='iml-sub-label-left' id='oftenLab'><li>How often do you use?</li></div></div></td>
+                        <td><div><input type='text' name='amtPerWeek' id='amtPerWeek' value='{{fields.amtPerWeek}}' oninput="javascript: noErrorText('e3', 'amtPerWeek');"></div></td>
                       </tr>
 
                       <tr>
-                        <td><div class='iml-sub-label-left' id='muchLab'><li>How much do you use?</li></div></td>
-                        <td><div><input type='text' name='useAmt' id='useAmt' value='{{fields.useAmt}}'></div></td>
+                        <td><div id='e4'><div class='iml-sub-label-left' id='muchLab'><li>How much do you use?</li></div></div></td>
+                        <td><div><input type='text' name='useAmt' id='useAmt' value='{{fields.useAmt}}' oninput="javascript: noErrorText('e4', 'useAmt');"></div></td>
                       </tr>
                     </table>
 
@@ -198,16 +198,16 @@
                     <table>
                       <tr>
                         <td><div class='iml-sub-label-left' id='lab3'><li>How long ago did you quit?</li></div></td>
-                        <td><div class='iml-num'><input type='number' name='yearsQuit' id='yearsQuit' value='{{fields.yearsQuit}}'></div></td>
-                        <td><div class='iml-sub-label' id='lab4'>years</div></td>
-                        <td><div class='iml-num'><input type='number' name='monthsQuit' id='monthsQuit' value='{{fields.monthsQuit}}'></div></td>
-                        <td><div class='iml-sub-label' id='lab5'>months</div></td>
+                        <td><div class='iml-num'><input type='number' name='yearsQuit' id='yearsQuit' value='{{fields.yearsQuit}}' oninput="javascript: noErrorText('e5', 'yearsQuit');"></div></td>
+                        <td><div id='e5'><div class='iml-sub-label' id='lab4'>years</div></div></td>
+                        <td><div class='iml-num'><input type='number' name='monthsQuit' id='monthsQuit' value='{{fields.monthsQuit}}' oninput="javascript: noErrorText('e6', 'monthsQuit');"></div></td>
+                        <td><div id='e6'><div class='iml-sub-label' id='lab5'>months</div></div></td>
                       </tr>
                     </table>
                     
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab6'><li>For what reasons did you quit?</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='4' cols='60' name='reasonQuit' id='reasonQuit' value=''>{{fields.reasonQuit}}</textarea></div></td></tr>
+                      <tr><td><div id='e7'><div class='iml-sub-label-left' id='lab6'><li>For what reasons did you quit?</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='4' cols='60' name='reasonQuit' id='reasonQuit' value='' oninput="javascript: noErrorText('e7', 'reasonQuit');">{{fields.reasonQuit}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -223,15 +223,15 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab9'><li>How many?</li></div></td>
-                        <td><div class='iml-num'><input type='number' name='numDUI' id='numDUI' value='{{fields.numDUI}}'></div></td>
+                        <td><div id='e8'><div class='iml-sub-label-left' id='lab9'><li>How many?</li></div></div></td>
+                        <td><div class='iml-num'><input type='number' name='numDUI' id='numDUI' value='{{fields.numDUI}}' oninput="javascript: noErrorText('e8', 'numDUI');"></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab10'><li>What was your BAL?</li></div></td>
-                        <td><div class=''><input type='text' name='BALevel' id='BALevel' value='{{fields.BALevel}}'></div></td>
+                        <td><div id='e9'><div class='iml-sub-label-left' id='lab10'><li>What was your BAL?</li></div></div></td>
+                        <td><div class=''><input type='text' name='BALevel' id='BALevel' value='{{fields.BALevel}}' oninput="javascript: noErrorText('e9', 'BALevel');"></div></td>
                       </tr>
                     </table>
                   </div>
@@ -253,13 +253,13 @@
 
                     <table>
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab11'><li>When did you receive treatment?</li></div></td>
-                        <td><div class=''><input type='text' name='dateTreated' id='dateTreated' value='{{fields.dateTreated}}'></div></td>
+                        <td><div id='e10'><div class='iml-sub-label-left' id='lab11'><li>When did you receive treatment?</li></div></div></td>
+                        <td><div class=''><input type='text' name='dateTreated' id='dateTreated' value='{{fields.dateTreated}}' oninput="javascript: noErrorText('e10', 'dateTreated');"></div></td>
                       </tr>
 
                       <tr>
-                        <td><div class='iml-sub-label-left' id='lab12'><li>Where did you receive treatment?</li></div></td>
-                        <td><div class=''><input type='text' name='treatmentPlace' id='treatmentPlace' value='{{fields.treatmentPlace}}'></div></td>
+                        <td><div id='e11'><div class='iml-sub-label-left' id='lab12'><li>Where did you receive treatment?</li></div></div></td>
+                        <td><div class=''><input type='text' name='treatmentPlace' id='treatmentPlace' value='{{fields.treatmentPlace}}' oninput="javascript: noErrorText('e11', 'treatmentPlace');"></div></td>
                       </tr>
                     </table>
 
@@ -275,8 +275,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab16'><li>Why was treatment terminated?</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='reasonNotFinishedTreatment' id='reasonNotFinishedTreatment' value=''>{{fields.reasonNotFinishedTreatment}}</textarea></div></td></tr>
+                      <tr><td><div id='e12'><div class='iml-sub-label-left' id='lab16'><li>Why was treatment terminated?</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='reasonNotFinishedTreatment' id='reasonNotFinishedTreatment' value='' oninput="javascript: noErrorText('e12', 'reasonNotFinishedTreatment');">{{fields.reasonNotFinishedTreatment}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -291,8 +291,8 @@
                     </table>
 
                     <table>
-                      <tr><td><div class='iml-sub-label-left' id='lab17'><li>What triggered your relapse?</li></div></td></tr>
-                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='relapseTrigger' id='relapseTrigger' value=''>{{fields.relapseTrigger}}</textarea></div></td></tr>
+                      <tr><td><div id='e13'><div class='iml-sub-label-left' id='lab17'><li>What triggered your relapse?</li></div></div></td></tr>
+                      <tr><td><div><textarea class='iml-text-area-sub' rows='3' cols='60' name='relapseTrigger' id='relapseTrigger' value='' oninput="javascript: noErrorText('e13', 'relapseTrigger');">{{fields.relapseTrigger}}</textarea></div></td></tr>
                     </table>
 
                     <table>
@@ -338,7 +338,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

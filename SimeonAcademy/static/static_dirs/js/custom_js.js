@@ -347,23 +347,23 @@ function noErrorText(divName, fieldName) {
 function fetchAM1FieldNames() {
 	var result = [];
 
-	var d1 = {}
-	var d2 = {}
-	var d3 = {}
-	var d4 = {}
-	var d5 = {}
-	var d6 = {}
-	var d7 = {}
-	var d8 = {}
-	var d9 = {}
-	var d10 = {}
-	var d11 = {}
-	var d12 = {}
-	var d13 = {}
-	var d14 = {}
-	var d15 = {}
-	var d16 = {}
-	var d17 = {}
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+	var d8 = {};
+	var d9 = {};
+	var d10 = {};
+	var d11 = {};
+	var d12 = {};
+	var d13 = {};
+	var d14 = {};
+	var d15 = {};
+	var d16 = {};
+	var d17 = {};
 
 	d1['field'] = 'maritalStatus';
 	d1['type'] = 'select';
@@ -473,31 +473,351 @@ function fetchAM1FieldNames() {
 
 function fetchAM2FieldNames() {
 	var result = [];
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+	var d8 = {};
+	var d9 = {};
+	var d10 = {};
+	var d11 = {};
+	var d12 = {};
+	var d13 = {};
+
+	d1['field'] = 'firstDrinkAge';
+	d1['type'] = 'number';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'firstDrinkType';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'amtPerWeek';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'yesDrink';
+	result.push(d3);
+	d4['field'] = 'useAmt';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'yesDrink';
+	result.push(d4);
+	d5['field'] = 'yearsQuit';
+	d5['type'] = 'number';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'hasDrank';
+	result.push(d5);
+	d6['field'] = 'monthsQuit';
+	d6['type'] = 'number';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'hasDrank';
+	result.push(d6);
+	d7['field'] = 'reasonQuit';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'hasDrank';;
+	result.push(d7);
+	d8['field'] = 'numDUI';
+	d8['type'] = 'number';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'hasDUI';
+	result.push(d8);
+	d9['field'] = 'BALevel';
+	d9['type'] = 'text';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'hasDUI';
+	result.push(d9);
+	d10['field'] = 'dateTreated';
+	d10['type'] = 'text';
+	d10['div'] = 'e10';
+	d10['isDynamic'] = true;
+	d10['trigger'] = 'hadTreatment';
+	result.push(d10);
+	d11['field'] = 'treatmentPlace';
+	d11['type'] = 'text';
+	d11['div'] = 'e11';
+	d11['isDynamic'] = true;
+	d11['trigger'] = 'hadTreatment';
+	result.push(d11);
+	d12['field'] = 'reasonNotFinishedTreatment';
+	d12['type'] = 'text';
+	d12['div'] = 'e12';
+	d12['isDynamic'] = true;
+	d12['trigger'] = 'noFinish';
+	result.push(d12);
+	d13['field'] = 'relapseTrigger';
+	d13['type'] = 'text';
+	d13['div'] = 'e13';
+	d13['isDynamic'] = true;
+	d13['trigger'] = 'notClean';
+	result.push(d13);
 	return result;
 }
 
 function fetchAM3FieldNames() {
 	var result = [];
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+	var d8 = {};
+	var d9 = {};
+
+	d1['field'] = 'raisedBy';
+	d1['type'] = 'select';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'traumaExplain';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesTrauma';
+	result.push(d2);
+	d3['field'] = 'howLeftHome';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'num_siblings';
+	d4['type'] = 'number';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+	d5['field'] = 'siblingsRelationshipExplain';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
+	d6['field'] = 'dadCloseExplain';
+	d6['type'] = 'text';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = false;
+	d6['trigger'] = null;
+	result.push(d6);
+	d7['field'] = 'momCloseExplain';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = false;
+	d7['trigger'] = null;;
+	result.push(d7);
+	d8['field'] = 'abusedBy';
+	d8['type'] = 'text';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'yesAbuse';
+	result.push(d8);
+	d9['field'] = 'abuseImpact';
+	d9['type'] = 'text';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'yesAbuse';
+	result.push(d9);
 	return result;
 }
 
 function fetchAM4FieldNames() {
 	var result = [];
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+	var d8 = {};
+	var d9 = {};
+	var d10 = {};
+	var d11 = {};
+
+	d1['field'] = 'recentIncidentV';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'recentVDate';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'recentVlocation';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'withWhomRecentV';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+	d5['field'] = 'happenedRecentV';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
+	d6['field'] = 'otherExplainRecentV';
+	d6['type'] = 'text';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'otherRecentV';
+	result.push(d6);
+	d7['field'] = 'typeWordsRecentV';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = false;
+	d7['trigger'] = null;;
+	result.push(d7);
+	d8['field'] = 'psychoWhyRecentV';
+	d8['type'] = 'text';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'yesTreated';
+	result.push(d8);
+	d9['field'] = 'longAgoTreatRecentVyrs';
+	d9['type'] = 'number';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'yesTreated';
+	result.push(d9);
+	d10['field'] = 'longAgoTreatRecentVmos';
+	d10['type'] = 'number';
+	d10['div'] = 'e10';
+	d10['isDynamic'] = true;
+	d10['trigger'] = 'yesTreated';
+	result.push(d10);
+	d11['field'] = 'reasonNotCompleteRecentV';
+	d11['type'] = 'text';
+	d11['div'] = 'e11';
+	d11['isDynamic'] = true;
+	d11['trigger'] = 'yesComplete';
+	result.push(d11);
 	return result;
 }
 
 function fetchAM5FieldNames() {
 	var result = [];
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+	var d5 = {};
+	var d6 = {};
+	var d7 = {};
+
+	d1['field'] = 'depress30ExplainRecentV';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'yesDepress';
+	result.push(d1);
+	d2['field'] = 'anxietyExplainRecentV';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesAnx';
+	result.push(d2);
+	d3['field'] = 'hallucinationLastV';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'yesHall';
+	result.push(d3);
+	d4['field'] = 'understandingExplainRecentV';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'yesTrouble';
+	result.push(d4);
+	d5['field'] = 'lastTimeTroubleControl';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'yesControl';
+	result.push(d5);
+	d6['field'] = 'controlTrigger';
+	d6['type'] = 'text';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'yesControl';
+	result.push(d6);
+	d7['field'] = 'suicide30ExplainRecentV';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'yesSuicide';;
+	result.push(d7);
 	return result;
 }
 
 function fetchAM6FieldNames() {
 	var result = [];
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+
+	d1['field'] = 'homicidalExplain';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'yesHomicide';
+	result.push(d1);
+	d2['field'] = 'medRecentVExplain';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesMed';
+	result.push(d2);
+	d3['field'] = 'medSuccessExplainRecentV';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'yesSuccess';
+	result.push(d3);
+	d4['field'] = 'durationRecentV';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
 	return result;
 }
 
 function fetchAM7FieldNames() {
 	var result = [];
+	var d1 = {};
+	d1['field'] = 'connectionExplain';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'otherConnectionsUsing';
+	result.push(d1);
 	return result;
 }
 
@@ -4269,14 +4589,14 @@ function dhRadioEFX() {
 }
 
 function dhLeftRadio3() {
-	twoElementRadioSetup(grab('isClean'), grab('lab17'), grab('relapseTrigger'));
+	twoElementRadioSetup(grab('notClean'), grab('lab17'), grab('relapseTrigger'));
 }
 
 function dhLeftRadio2() {
-	twoElementRadioSetup(grab('didFinish'), grab('lab16'), grab('reasonNotFinishedTreatment'));
+	twoElementRadioSetup(grab('noFinish'), grab('lab16'), grab('reasonNotFinishedTreatment'));
 
-	if (grab('noFinish').checked === true) {
-		grab('notClean').checked = true;
+	if (grab('didFinish').checked === true) {
+		grab('isClean').checked = true;
 		dhLeftRadio3();
 
 		opacityLow(grab('num_8'));
@@ -4446,8 +4766,8 @@ function processAM_DH_data() {
 
 	post(true, 'text', grab('dateTreated'), grab('hadTreatment'), grab('m_dateTreated'));
 	post(true, 'text', grab('treatmentPlace'), grab('hadTreatment'), grab('m_treatmentPlace'));
-	subPost1('text', grab('hadTreatment'), grab('didFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
-	subPost1('text', grab('hadTreatment'), grab('isClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
+	subPost1('text', grab('hadTreatment'), grab('noFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
+	subPost1('text', grab('hadTreatment'), grab('notClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
 }
 
 function process_am_child_data() {	
