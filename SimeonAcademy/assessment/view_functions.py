@@ -2196,8 +2196,8 @@ def saveAMDemographic(request, am):
 	demo.employed_years = request.POST.get('employed_years')
 	demo.employer_phone = phone_to_integer(request.POST.get('employer_phone'))
 
-	demo.health_problem = request.POST.get('health_problem')
-	demo.medication = request.POST.get('medication')
+	demo.health_problem = truePythonBool(request.POST.get('health_problem'))
+	demo.medication = truePythonBool(request.POST.get('m_medication'))
 	demo.whatMedicine = request.POST.get('m_whatMedicine')
 	demo.health_exp = request.POST.get('m_health_exp')
 
@@ -2301,8 +2301,8 @@ def saveAMAngerHistroy1(request, am):
 
 	form.psychoRecentV 			= truePythonBool(request.POST.get('psychoRecentV'))
 	form.psychoWhyRecentV 		= request.POST.get('m_psychoWhyRecentV')
-	form.longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos')
-	form.longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs')
+	# form.longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos')
+	# form.longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs')
 
 	form.didCompleteTreatRecentV = request.POST.get('m_didCompleteTreatRecentV')
 	form.reasonNotCompleteRecentV = request.POST.get('m_reasonNotCompleteRecentV')

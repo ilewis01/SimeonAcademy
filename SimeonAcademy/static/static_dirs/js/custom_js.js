@@ -4171,7 +4171,13 @@ function processAMDemoData() {
 		grab('m_whatMedicine').value = 'N/A';
 	}
 	else {
-		grab('m_medication').value = '';
+		post(true, 'text', grab('whatMedicine'), grab('on_meds'), grab('m_whatMedicine'));
+		if (grab('on_meds').checked === true) {
+			grab('m_medication').value = 'True';
+		}
+		else {
+			grab('m_medication').value = 'False';
+		}
 	}
 }
 
