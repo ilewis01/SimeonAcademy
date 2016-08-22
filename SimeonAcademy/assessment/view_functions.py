@@ -2332,6 +2332,12 @@ def saveAMAngerHistroy2(request, am):
 	form.controlTrigger 				= request.POST.get('m_controlTrigger')
 	form.suicide30ExplainRecentV 		= request.POST.get('m_suicide30ExplainRecentV')
 
+	form.suicideTodayRecentV 		= truePythonBool(request.POST.get('suicideTodayRecentV'))
+	form.suicideTodayPlanRecentV 	= truePythonBool(request.POST.get('suicideTodayPlanRecentV'))
+	form.hasAttemptedSuicide 		= truePythonBool(request.POST.get('hasAttemptedSuicide'))
+	form.suicideTodayExplainRecentV = request.POST.get('suicideTodayExplainRecentV')
+	form.hasAttemptedExplainRecentV = request.POST.get('hasAttemptedExplainRecentV')
+
 	form.save()
 	am.save()
 
