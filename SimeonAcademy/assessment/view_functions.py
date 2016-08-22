@@ -3911,6 +3911,16 @@ def qbool(trigger, yes, no, dictList):
 		dictList[yes] = unchecked
 		dictList[no] = checked
 
+def qCheck(trigger, fname, dictList):
+	checked = '/static/images/checked_checkbox.png'
+	unchecked = '/static/images/unchecked_checkbox.png'
+	fname = str(fname)
+
+	if trigger == True:
+		dictList[fname] = checked
+	else:
+		dictList[fname] = unchecked
+
 def fetchAmChecks(am):
 	images = {}
 	checked = '/static/images/checked_checkbox.png'
@@ -4031,6 +4041,49 @@ def fetchAmChecks(am):
 		images['raisedRelative'] = unchecked
 		images['raisedFosted'] = checked
 
+	if am.angerHistory3.howOften == 'This time only':
+		images['tto'] = checked
+		images['tmo'] = unchecked
+		images['lsm'] = unchecked
+		images['tsc'] = unchecked
+		images['tta'] = unchecked
+		images['oaa'] = unchecked
+	elif am.angerHistory3.howOften == 'This month only':
+		images['tto'] = unchecked
+		images['tmo'] = checked
+		images['lsm'] = unchecked
+		images['tsc'] = unchecked
+		images['tta'] = unchecked
+		images['oaa'] = unchecked
+	elif am.angerHistory3.howOften == 'Last six months':
+		images['tto'] = unchecked
+		images['tmo'] = unchecked
+		images['lsm'] = checked
+		images['tsc'] = unchecked
+		images['tta'] = unchecked
+		images['oaa'] = unchecked
+	elif am.angerHistory3.howOften == 'Since childhood':
+		images['tto'] = unchecked
+		images['tmo'] = unchecked
+		images['lsm'] = unchecked
+		images['tsc'] = checked
+		images['tta'] = unchecked
+		images['oaa'] = unchecked
+	elif am.angerHistory3.howOften == 'Adolecent':
+		images['tto'] = unchecked
+		images['tmo'] = unchecked
+		images['lsm'] = unchecked
+		images['tsc'] = unchecked
+		images['tta'] = checked
+		images['oaa'] = unchecked
+	elif am.angerHistory3.howOften == 'Only as an adult':
+		images['tto'] = unchecked
+		images['tmo'] = unchecked
+		images['lsm'] = unchecked
+		images['tsc'] = unchecked
+		images['tta'] = unchecked
+		images['oaa'] = checked
+
 	qbool(am.angerHistory2.depress30RecentV, 'yesSD', 'noSD', images)
 	qbool(am.angerHistory2.anxietyRecentV, 'yesSax', 'noSax', images)
 	qbool(am.angerHistory2.hallucinationRecentV, 'yesHall', 'noHall', images)
@@ -4062,6 +4115,57 @@ def fetchAmChecks(am):
 	qbool(am.childhood.childAnger, 'childAnger', 'nochildAnger', images)
 	qbool(am.childhood.parentViolence, 'parentViolence', 'noparentViolence', images)
 	qbool(am.childhood.otherChild, 'otherChild', 'nootherChild', images)
+	qbool(am.worstEpisode.useWorst, 'useWorst', 'nouseWorst', images)
+
+	qCheck(am.angerHistory.physicalRecentV, 'physicalRecentV', images)
+	qCheck(am.angerHistory.verbalRecentV, 'verbalRecentV', images)
+	qCheck(am.angerHistory.propertyRecentV, 'propertyRecentV', images)
+	qCheck(am.angerHistory.otherRecentV, 'otherRecentV', images)
+	qCheck(am.angerHistory.wasTense, 'wasTense', images)
+	qCheck(am.angerHistory.hadRush, 'hadRush', images)
+	qCheck(am.angerHistory.feltStrong, 'feltStrong', images)
+	qCheck(am.connections.angerWorse, 'angerWorse', images)
+	qCheck(am.connections.troubleWhenUsing, 'troubleWhenUsing', images)
+	qCheck(am.connections.lessAngry, 'lessAngry', images)
+	qCheck(am.connections.othersTellMe, 'othersTellMe', images)
+	qCheck(am.connections.noConnection, 'noConnection', images)
+	qCheck(am.connections.otherConnectionsUsing, 'otherConnectionsUsing', images)
+	qCheck(am.worstEpisode.physicalWorst, 'physicalWorst', images)
+	qCheck(am.worstEpisode.verbalWorst, 'verbalWorst', images)
+	qCheck(am.worstEpisode.propertyWorst, 'propertyWorst', images)
+	qCheck(am.worstEpisode.otherWorst, 'otherWorst', images)
+
+	qCheck(am.angerTarget.angryPartner, 'angryPartner', images)
+	qCheck(am.angerTarget.angryParents, 'angryParents', images)
+	qCheck(am.angerTarget.angryChildren, 'angryChildren', images)
+	qCheck(am.angerTarget.angryRelatives, 'angryRelatives', images)
+	qCheck(am.angerTarget.angryEmployer, 'angryEmployer', images)
+	qCheck(am.angerTarget.angryFriends, 'angryFriends', images)
+	qCheck(am.angerTarget.angryOther, 'angryOther', images)
+	qCheck(am.angerTarget.seldomUpset, 'seldomUpset', images)
+	qCheck(am.currentProblems.brainInjury, 'brainInjury', images)
+	qCheck(am.currentProblems.stroke, 'stroke', images)
+	qCheck(am.currentProblems.epilepsy, 'epilepsy', images)
+	qCheck(am.currentProblems.attentionDD, 'attentionDD', images)
+	qCheck(am.currentProblems.pms, 'pms', images)
+	qCheck(am.currentProblems.ptsd, 'ptsd', images)
+	qCheck(am.currentProblems.otherSeriousIllness, 'otherSeriousIllness', images)
+	qCheck(am.currentProblems.depression, 'depression', images)
+
+	qbool(am.currentProblems.currentlyOnMeds, 'currentlyOnMeds', 'nocurrentlyOnMeds', images)
+
+	qCheck(am.control.neverAttemptedControl, 'neverAttemptedControl', images)
+	qCheck(am.control.talkToMyself, 'talkToMyself', images)
+	qCheck(am.control.leaveScene, 'leaveScene', images)
+	qCheck(am.control.relax, 'relax', images)
+	qCheck(am.control.selfHelpGroup, 'selfHelpGroup', images)
+	qCheck(am.control.otherControlAnger, 'otherControlAnger', images)
+
+	if (am.familyOrigin.suicideHistory == True):
+		images['suicideHistory'] = 'Yes'
+	else:
+		images['suicideHistory'] = 'No'
+
 
 	return images
 

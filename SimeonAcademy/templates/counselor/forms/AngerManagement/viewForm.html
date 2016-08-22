@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
+<body class="gradient-white" onLoad="">
     <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
       <input type='hidden' value='{{AM.id}}' id='am_id' name='am_id'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
@@ -135,7 +135,7 @@
       <div class="row"> 
         <div class="col-md-12 col-sm-12">
           <h2><b>Anger Management Intake Form</b></h2>
-          <h4>Date of Assessment: <b>{{date_of_form}}</b></h4>
+          <h4>Date of Assessment: <b>{{AM.date_of_assessment}}</b></h4>
 
           <div id='header-margin-top'>
             <!-- ___________________________________DEMOGRAPHIC SECTION___________________________________ -->
@@ -2166,7 +2166,7 @@
                   </td>
                   
                   <td>
-                    <div id='viewAns'>{{description}}</div>
+                    <div id='viewAns'>{{fields.ah1.recentIncidentV}}</div>
                   </td>
                 </tr>
               </table>
@@ -2179,7 +2179,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{when}}</div>
+                      <div id='viewAns'>{{fields.ah1.recentVDate}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2193,7 +2193,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{where}}</div>
+                      <div id='viewAns'>{{fields.ah1.recentVlocation}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2207,7 +2207,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{whom}}</div>
+                      <div id='viewAns'>{{fields.ah1.withWhomRecentV}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2221,7 +2221,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{what_happened}}</div>
+                      <div id='viewAns'>{{fields.ah1.happenedRecentV}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2236,7 +2236,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.physicalRecentV}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2246,7 +2246,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.verbalRecentV}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2256,7 +2256,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.propertyRecentV}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2266,7 +2266,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.otherRecentV}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2275,7 +2275,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{other}}</div>
+                      <div id='viewAns'></div>
                     </td>
                   </tr>
                 </table>
@@ -2289,7 +2289,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'><em>{{explanation}}</em></div>
+                      <div id='viewAns'><em>{{fields.ah1.otherExplainRecentV}}</em></div>
                     </td>
                   </tr>
                 </table>
@@ -2303,7 +2303,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'></div>
+                      <div id='viewAns'>{{fields.ah1.typeWordsRecentV}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2318,7 +2318,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.wasTense}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2328,7 +2328,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.hadRush}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2338,7 +2338,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.feltStrong}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2348,7 +2348,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2357,7 +2357,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{other}}</div>
+                      <div id='viewAns'></div>
                     </td>
                   </tr>
                 </table>
@@ -2371,7 +2371,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{how}}</div>
+                      <div id='viewAns'>{{fields.worst.howEndWorst}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2386,7 +2386,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.useWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2396,7 +2396,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.nouseWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2415,7 +2415,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'><em>{{whom}}</em></div>
+                      <div id='viewAns'><em>{{AM.worstEpisode.whoUsed}}</em></div>
                     </td>
                   </tr>
                 </table>
@@ -2430,7 +2430,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2440,7 +2440,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2469,7 +2469,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{duration}}</div>
+                      <div id='viewAns'>{{AM.angerHistory3.durationRecentV}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2489,11 +2489,11 @@
                 <table>
                   <tr>
                     <td>
-                      <div id='viewLabel'>On a scale of 1 to 10, with one representing no anger and 10 representing explosive anger, rate the intensity of your anger during the angry episode. </div>
+                      <div id='viewLabel'>On a scale of 1 to 10, with one representing no anger and 10 representing explosive anger, rate the intensity of your anger during the angry episode. &nbsp&nbsp<em>{{AM.angerHistory3.intensityRecentV}}</em></div>
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{intensity}}</div>
+                      <div id='viewAns'></div>
                     </td>
                   </tr>
                 </table>
@@ -2524,7 +2524,7 @@
                   <tr>
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.tto}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2534,7 +2534,7 @@
                     
                     <td>
                       <div id='img_divLong' style='margin-left: 100px'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.tmo}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2544,7 +2544,7 @@
                     
                     <td>
                       <div id='img_divLong' style='margin-left: 100px'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.lsm}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2560,7 +2560,7 @@
                   <tr>
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.tsc}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2570,7 +2570,7 @@
                     
                     <td>
                       <div id='img_divLong' style='margin-left: 88px'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.tta}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2580,7 +2580,7 @@
                     
                     <td>
                       <div id='img_divLong' style='margin-left: 145px'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.oaa}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2604,7 +2604,7 @@
                 <tr>
                   <td>
                     <div id='img_div'>
-                      <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+                      <img src='{{fields.images.angerWorse}}' id='checkbox_img_size'>
                     </div>
                   </td>
                   
@@ -2619,7 +2619,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.troubleWhenUsing}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2635,7 +2635,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.lessAngry}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2651,7 +2651,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.othersTellMe}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2667,7 +2667,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.noConnection}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2683,7 +2683,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.otherConnectionsUsing}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2692,7 +2692,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{explanation}}</div>
+                      <div id='viewAns'>{{AM.connections.connectionExplain}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2714,7 +2714,7 @@
                   </td>
                   
                   <td>
-                    <div id='viewAns'>{{when}} {{whom}}</div>
+                    <div id='viewAns'>{{AM.worstEpisode.whoWorst}}</div>
                   </td>
                 </tr>
               </table>
@@ -2727,7 +2727,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{what}}</div>
+                      <div id='viewAns'>{{AM.worstEpisode.happenedWorst}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2741,7 +2741,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{types}}</div>
+                      <div id='viewAns'>{{AM.worstEpisode.wordThoughtWorst}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2755,7 +2755,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{how}}</div>
+                      <div id='viewAns'>{{AM.worstEpisode.howStartWorst}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2769,7 +2769,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{how}}</div>
+                      <div id='viewAns'>{{AM.worstEpisode.howEndWorst}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2784,7 +2784,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.useWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2794,7 +2794,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.nouseWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2813,7 +2813,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'><em>{{whom}}</em></div>
+                      <div id='viewAns'><em>{{AM.worstEpisode.whoUsed}}</em></div>
                     </td>
                   </tr>
                 </table>
@@ -2828,7 +2828,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.physicalWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2838,7 +2838,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.verbalWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2848,7 +2848,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.propertyWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2858,7 +2858,7 @@
                     
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.otherWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2881,7 +2881,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'><em>{{explanation}}</em></div>
+                      <div id='viewAns'><em>{{AM.worstEpisode.otherWorstDescription}}</em></div>
                     </td>
                   </tr>
                 </table>
@@ -2900,7 +2900,7 @@
                 <tr>
                   <td>
                     <div id='img_divLong'>
-                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                      <img src="{{fields.images.angryPartner}}" id='checkbox_img_size'>
                     </div>
                   </td>
 
@@ -2910,7 +2910,7 @@
 
                   <td>
                     <div id='img_divLong' style='margin-left:100px;'>
-                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                      <img src="{{fields.images.angryParents}}" id='checkbox_img_size'>
                     </div>
                   </td>
 
@@ -2920,7 +2920,7 @@
                   
                   <td>
                     <div id='img_divLong' style='margin-left:100px;'>
-                      <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                      <img src="{{fields.images.angryChildren}}" id='checkbox_img_size'>
                     </div>
                   </td>
 
@@ -2935,7 +2935,7 @@
                   <tr>
                     <td>
                       <div id='img_divLong'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.angryRelatives}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2945,7 +2945,7 @@
 
                     <td>
                       <div id='img_divLong' style='margin-left:90px;'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.angryEmployer}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2955,7 +2955,7 @@
                     
                      <td>
                       <div id='img_divLong' style='margin-left:90px;'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.otherWorst}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2965,7 +2965,7 @@
                     
                     <td>
                       <div id='img_divLong' style='margin-left:200px;'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.angryFriends}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -2974,7 +2974,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{whom}}</div>
+                      <div id='viewAns'>{{AM.angerTarget.otherWhom}}</div>
                     </td>
                   </tr>
                 </table>
@@ -2988,7 +2988,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{about}}</div>
+                      <div id='viewAns'>{{AM.angerTarget.angryAbout}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3020,7 +3020,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{describe}} </div>
+                      <div id='viewAns'>{{AM.familyOrigin.kidDadAnger}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3034,7 +3034,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{describe}} </div>
+                      <div id='viewAns'>{{AM.familyOrigin.kidMomAnger}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3048,7 +3048,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{describe}} </div>
+                      <div id='viewAns'>{{AM.familyOrigin.kidSiblingAnger}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3062,7 +3062,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{describe}} </div>
+                      <div id='viewAns'>{{AM.familyOrigin.kidOtherAnger}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3076,7 +3076,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{history}} </div>
+                      <div id='viewAns'>{{fields.images.suicideHistory}} </div>
                     </td>
                   </tr>
                 </table>
@@ -3090,7 +3090,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{what}} </div>
+                      <div id='viewAns'>{{AM.familyOrigin.learnFamilyAnger}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3112,7 +3112,7 @@
                   </td>
                   
                   <td>
-                    <div id='viewAns'>{{describe}}</div>
+                    <div id='viewAns'>{{AM.currentProblems.describeIssue}}</div>
                   </td>
                 </tr>
               </table>
@@ -3132,7 +3132,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.brainInjury}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3148,7 +3148,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.stroke}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3164,7 +3164,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.epilepsy}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3180,7 +3180,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.attentionDD}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3198,7 +3198,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.pms}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3214,7 +3214,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.depression}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3230,7 +3230,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.ptsd}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3246,7 +3246,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.otherSeriousIllness}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3266,7 +3266,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.currentlyOnMeds}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3276,7 +3276,7 @@
                     
                     <td>
                       <div id='img_div'>
-                        <img src="http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png" id='checkbox_img_size'>
+                        <img src="{{fields.images.nocurrentlyOnMeds}}" id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3295,7 +3295,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'><em>{{what}}</em></div>
+                      <div id='viewAns'><em>{{AM.currentProblems.whichMeds}}</em></div>
                     </td>
                   </tr>
                 </table>
@@ -3349,7 +3349,7 @@
                 <tr>
                   <td>
                     <div id='img_div'>
-                      <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/checked_checkbox_zpsigou7upg.png' id='checkbox_img_size'>
+                      <img src='{{fields.images.neverAttemptedControl}}' id='checkbox_img_size'>
                     </div>
                   </td>
 
@@ -3364,7 +3364,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.talkToMyself}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3373,7 +3373,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{what}}</div>
+                      <div id='viewAns'>{{AM.control.whatSayYou}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3384,7 +3384,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.leaveScene}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3393,7 +3393,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{how_long}}</div>
+                      <div id='viewAns'>{{AM.control.howLongLeaveScene}}</div>
                     </td>
                     
                     <td>
@@ -3401,7 +3401,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{what}}</div>
+                      <div id='viewAns'>{{AM.control.whatDoLeave}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3412,7 +3412,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.relax}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3421,7 +3421,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{how}}</div>
+                      <div id='viewAns'>{{AM.control.howRelax}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3434,7 +3434,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.selfHelpGroup}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3450,7 +3450,7 @@
                   <tr>
                     <td>
                       <div id='img_div'>
-                        <img src='http://i1104.photobucket.com/albums/h322/Isaias_Pomales/unchecked_checkbox_zpsqqwfnmb9.png' id='checkbox_img_size'>
+                        <img src='{{fields.images.otherControlAnger}}' id='checkbox_img_size'>
                       </div>
                     </td>
 
@@ -3459,7 +3459,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'></div>
+                      <div id='viewAns'>{{AM.control.doWhatOtherControl}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3473,7 +3473,7 @@
                     </td>
 
                     <td>
-                      <div id='viewAns'>{{anything_else}}</div>
+                      <div id='viewAns'>{{AM.final.anythingelse}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3507,7 +3507,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{1}}</div>
+                      <div id='viewAns'>{{AM.final.changeLearn1}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3521,7 +3521,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{2}}</div>
+                      <div id='viewAns'>{{AM.final.changeLearn2}}</div>
                     </td>
                   </tr>
                 </table>
@@ -3535,7 +3535,7 @@
                     </td>
                     
                     <td>
-                      <div id='viewAns'>{{3}}</div>
+                      <div id='viewAns'>{{AM.final.changeLearn3}}</div>
                     </td>
                   </tr>
                 </table>
