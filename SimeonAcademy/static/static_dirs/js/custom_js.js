@@ -3297,7 +3297,14 @@ function post_dynamic_am_worst() {
 	generalCheckSave(grab('otherWorst'), grab('m_otherWorst'));
 
 	post(true, 'text', grab('otherWorstDescription'), grab('otherWorst'), grab('m_otherWorstDescription'));
-	post(true, 'select', grab('whoUsed'), grab('yesDrugs'), grab('m_whoUsed'));
+
+	if (grab('yesDrugs').checked === true) {
+		grab('m_whoUsed').value = grab('whoUsed').value;
+	}
+	else {
+		grab('m_whoUsed').value = 'None Selected';
+	}
+	// post(true, 'select', grab('whoUsed'), grab('yesDrugs'), grab('m_whoUsed'));
 }
 
 // AM TARGET FUNCTIONS
@@ -4010,7 +4017,7 @@ function initalize_am_connections(json_data) {
 	checkBoolInit(json_data.noConnection, grab('noConnection'));
 	checkBoolInit(json_data.otherConnectionsUsing, grab('otherConnectionsUsing'));
 
-	blank_init(json_data.isComplete, grab('medSuccessExplainRecentV'));
+	blank_init(json_data.isComplete, grab('connectionExplain'));
 
 	connectionCheck();
 }
@@ -4077,6 +4084,8 @@ function initalize_am_problems(json_data) {
 	checkBoolInit(json_data.otherSeriousIllness, grab('otherSeriousIllness'));
 
 	setRadioElement(json_data.currentlyOnMeds, grab('onMeds'), grab('noMeds'));
+
+	blank_init(json_data.isComplete, grab('describeIssue'));
 
 	am_problems_check();
 	am_problems_radio();
@@ -5454,6 +5463,7 @@ function ahCk1init() {
 	else {
 		grab('otherExplainRecentV').disabled = true;
 		opacityLow(grab('otherExplainRecentV'));
+		grab('otherExplainRecentV').value = '';
 	}
 }
 

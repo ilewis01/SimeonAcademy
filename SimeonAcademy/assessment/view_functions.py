@@ -2216,7 +2216,7 @@ def saveAMDrugHistory(request, am):
 	form.amtPerWeek = request.POST.get('m_amtPerWeek')
 	form.useAmt = request.POST.get('m_useAmt')
 
-	form.everDrank = request.POST.get('m_everDrank')
+	form.everDrank = truePythonBool(request.POST.get('m_everDrank'))
 	form.monthsQuit = request.POST.get('m_monthsQuit')
 	form.yearsQuit = request.POST.get('m_yearsQuit')
 	form.reasonQuit = request.POST.get('m_reasonQuit')
@@ -2399,7 +2399,7 @@ def saveAMWorst(request, am):
 
 	form.useWorst = truePythonBool(request.POST.get('useWorst'))
 
-	# form.whoUsed = request.POST.get('m_whoUsed')
+	form.whoUsed = request.POST.get('m_whoUsed')
 
 	form.save()
 	am.save()
