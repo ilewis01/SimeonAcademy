@@ -3847,6 +3847,9 @@ function initialize_am_drug_history(json_data) {
 		grab('notClean').disabled = true;
 		grab('reasonNotFinishedTreatment').disabled = true;
 		grab('relapseTrigger').disabled = true;
+
+		grab('dateTreated').disabled = true;
+		grab('treatmentPlace').disabled = true;
 	}
 }
 
@@ -5136,6 +5139,18 @@ function processAM_DH_data() {
 			else {grab('m_DUI').value = 'False';}
 			post(true, 'number', grab('numDUI'), grab('hasDUI'), grab('m_numDUI'));
 			post(true, 'text', grab('BALevel'), grab('hasDUI'), grab('m_BALevel'));
+		}
+	}
+
+	if (grab('yesDrink').checked === true) {
+		post(true, 'number', grab('numDUI'), grab('hasDUI'), grab('m_numDUI'));
+		post(true, 'text', grab('BALevel'), grab('hasDUI'), grab('m_BALevel'));
+
+		if (grab('hasDUI').checked === true) {
+			grab('m_DUI').value = 'True';
+		}
+		else {
+			grab('m_DUI').value = 'False';
 		}
 	}
 
