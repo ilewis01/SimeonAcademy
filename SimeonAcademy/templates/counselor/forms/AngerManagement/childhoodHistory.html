@@ -4,11 +4,12 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
-    <form action='/saveChildhoodInit/' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
+    <!-- <form action='/saveChildhoodInit/' method='post' id='am_demo' name='am_demo'> {% csrf_token %} -->
+    <form action='' method='post' id='am_demo' name='am_demo'> {% csrf_token %}
       <input type='hidden' name='client_id' id='client_id' value='{{client.id}}'>
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='am_id' id='am_id' value='{{AM.id}}'>
-      <input type='hidden' name='next_section' id='next_section' value='{{next_section}}'>
+      <input type='hidden' name='next_section' id='next_section' value='{{next_url}}'>
       <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
@@ -305,7 +306,8 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><div id='superBtn'><button onClick="javascript: process_am_child_data(); grab('am_demo').submit(); finishOffAmChildhood();" id='changeBtn'>Next Section</button></div></td>
+                  <!-- <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td> -->
+                  <td><div id='superBtn'><button onClick="javascript:  finishOffAmChildhood(); return false;" id='changeBtn'>Next Section</button></div></td>
                 </tr>
               </table>
             </div>

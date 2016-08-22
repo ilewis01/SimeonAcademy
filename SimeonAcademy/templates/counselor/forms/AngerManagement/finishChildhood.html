@@ -6,6 +6,8 @@
 </head>
 
 <body class='session_exit_body' onLoad='javascript: initializeFinishChildhood({{json_data}});'>
+<!-- 	<textarea rows='10' cols='70' id='test1'></textarea>
+	<button onClick='javascript: runTestCheck();'>Run Test</button> -->
 
 	<div class='iml-pop-head1'>
 		Childhood History (Continued)
@@ -30,14 +32,14 @@
 
 				<tr>
 					<td>
-						<div class='iml-pop-sub-head1' id='lab1'>Please Explain:</div>
+						<div id='e1'><div class='iml-pop-sub-head1' id='lab1'>Please Explain:</div></div>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
 						<div>
-							<textarea rows='4' cols='60' name='childAngerExplain' id='childAngerExplain'>{{form.childAngerExplain}}</textarea>
+							<textarea rows='4' cols='60' name='childAngerExplain' id='childAngerExplain' oninput="javascript: noErrorText('e1', 'childAngerExplain');">{{form.childAngerExplain}}</textarea>
 						</div>
 					</td>
 				</tr>
@@ -60,14 +62,14 @@
 
 				<tr>
 					<td>
-						<div class='iml-pop-sub-head1' id='lab2'>Please Explain:</div>
+						<div id='e2'><div class='iml-pop-sub-head1' id='lab2'>Please Explain:</div></div>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
 						<div>
-							<textarea rows='4' cols='60' name='otherChildExplain' id='otherChildExplain'>{{form.otherChildExplain}}</textarea>
+							<textarea rows='4' cols='60' name='otherChildExplain' id='otherChildExplain' oninput="javascript: noErrorText('e2', 'otherChildExplain');">{{form.otherChildExplain}}</textarea>
 						</div>
 					</td>
 				</tr>
@@ -90,14 +92,14 @@
 
 				<tr>
 					<td>
-						<div class='iml-pop-sub-head1' id='lab3'>Please Explain:</div>
+						<div id='e3'><div class='iml-pop-sub-head1' id='lab3'>Please Explain:</div></div>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
 						<div>
-							<textarea rows='4' cols='60' name='parentViolenceExplain' id='parentViolenceExplain'>{{form.parentViolenceExplain}}</textarea>
+							<textarea rows='4' cols='60' name='parentViolenceExplain' id='parentViolenceExplain' oninput="javascript: noErrorText('e3', 'parentViolenceExplain');">{{form.parentViolenceExplain}}</textarea>
 						</div>
 					</td>
 				</tr>
@@ -106,18 +108,18 @@
 			<table>
 				<tr>
 					<td>
-						<div class='iml-sub-check' id='num_4'>
+						<div id='e4'><div class='iml-sub-check' id='num_4'>
 							<li>
 								What impact did seeing/hearing one of your parents abuse the other have on you emotionally, psychologically, or physically?
 							</li>
-						</div>
+						</div></div>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
 						<div>
-							<textarea rows='4' cols='60' name='parentViolenceImpact' id='parentViolenceImpact'>{{form.parentViolenceImpact}}</textarea>
+							<textarea rows='4' cols='60' name='parentViolenceImpact' id='parentViolenceImpact' oninput="javascript: noErrorText('e4', 'parentViolenceImpact');">{{form.parentViolenceImpact}}</textarea>
 						</div>
 					</td>
 				</tr>
@@ -130,7 +132,7 @@
 			<table>
 				<tr>
 					<td><button onClick='javascript: window.close();'>Close</button></td>
-					<td><button onClick='javascript: saveChildExtras();'>Continue</button></td>
+					<td><button onClick='javascript: saveChildExtras(); return false;'>Continue</button></td>
 				</tr>
 			</table>
 		</div>

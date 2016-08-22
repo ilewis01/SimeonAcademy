@@ -2265,12 +2265,6 @@ def saveAMChildhood(request, am):
 	form.abusedBy = request.POST.get('m_abusedBy')
 	form.abuseImpact = request.POST.get('m_abuseImpact')
 
-	form.save()
-	am.save()
-
-def saveAMChild2(request, am):
-	form = am.childhood
-
 	form.childAnger 			= truePythonBool(request.POST.get('childAnger'))
 	form.childAngerExplain 		= request.POST.get('childAngerExplain')
 	form.otherChild 			= truePythonBool(request.POST.get('otherChild'))
@@ -2507,7 +2501,7 @@ def saveCompletedAmSection(request, section, am):
 	elif section == '/am_drugHistory/':
 		saveAMDrugHistory(request, am)
 	elif section == '/am_childhood/':
-		saveAMChild2(request, am)
+		saveAMChildhood(request, am)
 	elif section == '/am_angerHistory/':
 		saveAMAngerHistroy1(request, am)
 	elif section == '/am_angerHistory2/':

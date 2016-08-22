@@ -1047,6 +1047,48 @@ function fetchAM13FieldNames() {
 	return result;
 }
 
+function fetchSpecial1_am() {
+	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+
+	d1['field'] = 'childAngerExplain';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'yesAnger';
+	result.push(d1);
+	d2['field'] = 'otherChildExplain';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesOther';
+	result.push(d2);
+	d3['field'] = 'parentViolenceExplain';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'yesViolence';
+	result.push(d3);
+	d4['field'] = 'parentViolenceImpact';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'yesViolence';
+	result.push(d4);
+
+	return result;
+
+}
+
+function fetchSpecial2_am() {
+
+	
+}
+
 function fetchFieldList_am(section) {
 	var result = null;
 	section = String(section);
@@ -4985,7 +5027,7 @@ function process_am_child_data() {
 }
 
 function finishOffAmChildhood() {
-	var w = 560, h = 720;
+	var w = 560, h = 740;
 	openPopUp('auto', '/finishChildhood/', w, h);
 }
 
@@ -5021,19 +5063,64 @@ function finChild3() {
 	twoElementRadioSetup(grab('yesViolence'), grab('num_4'), grab('parentViolenceImpact'));
 }
 
+function runTestCheck() {
+	var t = saveChildExtras()
+	
+	grab('test1').value = t;
+}
+
 function saveChildExtras() {
-	determineBool(grab('yesAnger'), getPopParent('childAnger'));
-	determineBool(grab('yesOther'), getPopParent('otherChild'));
-	determineBool(grab('yesViolence'), getPopParent('parentViolence'));
+	var hasErrors = null;
+	fields = fetchSpecial1_am();
+	
+	for (var i = 0; i < fields.length; i++) {
+		hasErrors = hasTextError(fields[i]);
 
-	getPopParent('childAngerExplain').value = grab('childAngerExplain').value;
-	getPopParent('otherChildExplain').value = grab('otherChildExplain').value;
-	getPopParent('parentViolenceExplain').value = grab('parentViolenceExplain').value;
-	getPopParent('parentViolenceImpact').value = grab('parentViolenceImpact').value;
+		if (hasErrors === true) {
+			break;
+		}
+	}
 
-	getPopParent('chBtnIML').className = 'pro-iml-btn';
+	if (hasErrors === true) {
+		for (var j = 0; j < fields.length; j++) {
+			textErrorChecker(fields[j]);
+		}
 
-	window.close();
+		var w = 500, h = 500;
+		openPopUp('auto', '/generateErrors/', w, h);
+	}
+	else {
+		determineBool(grab('yesAnger'), getPopParent('childAnger'));
+		determineBool(grab('yesOther'), getPopParent('otherChild'));
+		determineBool(grab('yesViolence'), getPopParent('parentViolence'));
+
+		postToWindowParent('yesAnger', 'childAngerExplain', 'childAngerExplain');
+		postToWindowParent('yesOther', 'otherChildExplain', 'otherChildExplain');
+		postToWindowParent('yesViolence', 'parentViolenceExplain', 'parentViolenceExplain');
+		postToWindowParent('yesViolence', 'parentViolenceImpact', 'parentViolenceImpact');
+
+		// getPopParent('superBtn').innerHTML = "<button onClick=\"javascript: continue_am_form('{{current_section}}');\">Save & Continue</button>";
+		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>"
+		getPopParent('superBtn').className = 'pro-iml-btn';
+		window.close();
+	}
+}
+
+function postToWindowParent(triggerName, fieldName, targetName) {
+	triggerName 	= String(triggerName);
+	fieldName 		= String(fieldName);
+	targetName 		= String(targetName);
+
+	var trigger 	= grab(triggerName);
+	var field 		= grab(fieldName);
+	var target 		= getPopParent(targetName);
+
+	if (trigger.checked === true) {
+		target.value = field.value;
+	}
+	else {
+		target.value = 'N/A';
+	}
 }
 
 function subPost1(type, trigger1, trigger2, field, triggerTarget, fieldTarget) {
