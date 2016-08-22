@@ -691,6 +691,7 @@ button:hover {
 .viewFormStyle {
 	text-align: center;
 	font-family: Times;
+	/*margin-right: 20px;*/
 }
 
 .align-form-center {
@@ -4756,6 +4757,34 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+.iml-data-entry-wrapper-fVerify {
+	width: 92%;
+	height: 59vh;
+	margin: auto;
+	margin-top: 2%;
+	border: 1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+	background-color: white;
+}
+
+.iml-cForm-wrapper {
+    width: 100%;
+    margin: auto;
+    margin-top: 15px;
+    height: 66vh;
+    background-color: white;
+    border: 2px solid #333333;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}
+
+.iml-move-it-left {
+	width: 99%;
+	margin: auto;
+	margin-right:30px;
+}
+
 .iml-num input{
 	width:40px;
 	margin-top: 3px;
@@ -4767,6 +4796,14 @@ button:hover {
 	padding: 2%;
 	border: 1px solid black;
 	margin-top: 15px;
+	margin-left: 69%;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-save-btn-viewform {
+	/*padding: 2%;*/
+	border: 1px solid black;
+	/*margin-top: 15px;*/
 	margin-left: 69%;
 	box-shadow: 5px 5px 10px #888888;
 }
