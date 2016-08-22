@@ -3772,22 +3772,81 @@ function initialize_am_drug_history(json_data) {
 	topLevelDH();
 	dhRadio2();
 	dhRadio3();
-	dhLeftRadio1();
-	dhLeftRadio2();
-	dhLeftRadio3();
 
-	if (grab('noTreatment').checked === true) {
+	if (grab('hadTreatment').checked === true) {
+		if (grab('didFinish').checked === true) {
+			if (grab('isClean').checked === true) {
+				opacityLow(grab('lab17'));
+				opacityLow(grab('relapseTrigger'));
+				grab('relapseTrigger').value = '';
+				grab('relapseTrigger').disabled = true;
+			}
+			else {
+				opacityHigh(grab('lab17'));
+				opacityHigh(grab('relapseTrigger'));
+			}
+
+			opacityLow(grab('lab16'));
+			opacityLow(grab('reasonNotFinishedTreatment'));
+			grab('reasonNotFinishedTreatment').value = '';
+			grab('reasonNotFinishedTreatment').disabled = true;
+		}
+		else {
+			opacityHigh(grab('lab16'));
+			opacityHigh(grab('reasonNotFinishedTreatment'));
+			grab('reasonNotFinishedTreatment').disabled = false;
+
+			opacityLow(grab('super_8_label'));
+			opacityLow(grab('num_8Lab'));
+			opacityLow(grab('labe1'));
+			opacityLow(grab('labe2'));
+			opacityLow(grab('isClean'));
+			opacityLow(grab('notClean'));
+
+			grab('notClean').checked = true;
+
+			grab('isClean').disabled = true;
+			grab('notClean').disabled = true;
+		}
+	}
+	else {
+		opacityLow(grab('lab11'));
+		opacityLow(grab('dateTreated'));
+		opacityLow(grab('lab12'));
+		opacityLow(grab('treatmentPlace'));
+
+		opacityLow(grab('num_7'));
+		opacityLow(grab('lab13'));
+		opacityLow(grab('didFinish'));
+		opacityLow(grab('noFinish'));
+		opacityLow(grab('lab14'));
+		opacityLow(grab('lab15'));
+		opacityLow(grab('lab16'));
+		opacityLow(grab('reasonNotFinishedTreatment'));
+
 		opacityLow(grab('super_8_label'));
 		opacityLow(grab('num_8Lab'));
 		opacityLow(grab('isClean'));
 		opacityLow(grab('notClean'));
 		opacityLow(grab('labe1'));
 		opacityLow(grab('labe2'));
+		opacityLow(grab('lab17'));
+		opacityLow(grab('relapseTrigger'));
 
+		grab('dateTreated').value = '';
+		grab('treatmentPlace').value = '';
+		grab('reasonNotFinishedTreatment').value = '';
+		grab('relapseTrigger').value = '';
+
+		grab('didFinish').checked = true;
 		grab('isClean').checked = true;
-		dhLeftRadio3();
+
+		grab('didFinish').disabled = true;
+		grab('noFinish').disabled = true;
 		grab('isClean').disabled = true;
 		grab('notClean').disabled = true;
+		grab('reasonNotFinishedTreatment').disabled = true;
+		grab('relapseTrigger').disabled = true;
 	}
 }
 
@@ -4878,6 +4937,7 @@ function dhLeftRadio2() {
 
 		grab('isClean').disabled = true;
 		grab('notClean').disabled = true;
+		grab('relapseTrigger').disabled = false;
 	}
 	else {
 		opacityHigh(grab('super_8_label'));
@@ -5068,22 +5128,26 @@ function processAM_DH_data() {
 
 	post(true, 'text', grab('dateTreated'), grab('hadTreatment'), grab('m_dateTreated'));
 	post(true, 'text', grab('treatmentPlace'), grab('hadTreatment'), grab('m_treatmentPlace'));
-	// subPost1('text', grab('hadTreatment'), grab('noFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
-	// subPost1('text', grab('hadTreatment'), grab('notClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
-	if (grab('noTreatment').checked === true) {
-		grab('m_finishedTreatment').value = 'True';
-		grab('m_reasonNotFinishedTreatment').value = 'N/A';
-		grab('m_isClean').value = 'True';
-		grab('m_relapseTrigger').value = 'N/A';
-	}
-	else {
-		post(true, 'text', grab('reasonNotFinishedTreatment'), grab('noFinish'), grab('m_reasonNotFinishedTreatment'));
-		
+	
+	if (grab('hadTreatment').checked === true) {
 		if (grab('didFinish').checked === true) {
-			post(true, 'text', grab('relapseTrigger'), grab('notClean'), grab('m_relapseTrigger'));
+			grab('m_finishedTreatment').value = 'True';
+			grab('m_reasonNotFinishedTreatment').value = 'N/A';
+
+			if (grab('isClean').checked === true) {
+				grab('m_isClean').value = 'True';
+				grab('m_relapseTrigger').value = 'N/A';
+			}
+			else if (grab('isClean').checked === false) {
+				grab('m_isClean').value = 'False';
+				grab('m_relapseTrigger').value = grab('relapseTrigger').value;
+			}
 		}
 		else {
-			m_relapseTrigger.value = relapseTrigger.value;
+			grab('m_finishedTreatment').value = 'False';
+			grab('m_reasonNotFinishedTreatment').value = grab('reasonNotFinishedTreatment').value;
+			grab('m_isClean').value = 'False';
+			grab('m_relapseTrigger').value = grab('relapseTrigger').value;
 		}
 	}
 }
