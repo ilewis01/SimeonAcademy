@@ -3898,6 +3898,19 @@ def grabAmFinal(am):
 
 	return fields
 
+def qbool(trigger, yes, no, dictList):
+	checked = '/static/images/checked_checkbox.png'
+	unchecked = '/static/images/unchecked_checkbox.png'
+	yes = str(yes)
+	no = str(no)
+
+	if trigger == True:
+		dictList[yes] = checked
+		dictList[no] = unchecked
+	else:
+		dictList[yes] = unchecked
+		dictList[no] = checked
+
 def fetchAmChecks(am):
 	images = {}
 	checked = '/static/images/checked_checkbox.png'
@@ -3982,6 +3995,73 @@ def fetchAmChecks(am):
 	else:
 		images['onMeds'] = unchecked
 		images['noMeds'] = checked
+
+	if am.angerHistory.psychoRecentV == True:
+		images['yesEmotional'] = checked
+		images['noEmotional'] = unchecked
+	else:
+		images['yesEmotional'] = unchecked
+		images['noEmotional'] = checked
+
+	if am.angerHistory.didCompleteTreatRecentV == True:
+		images['didComplete'] = checked
+		images['nopeComplete'] = unchecked
+	else:
+		images['nopeComplete'] = checked
+		images['didComplete'] = unchecked
+
+	if am.childhood.raisedBy == 'Parents':
+		images['raisedParent'] = checked
+		images['raisedGrand'] = unchecked
+		images['raisedRelative'] = unchecked
+		images['raisedFosted'] = unchecked
+	elif am.childhood.raisedBy == 'Grandparents':
+		images['raisedParent'] = unchecked
+		images['raisedGrand'] = checked
+		images['raisedRelative'] = unchecked
+		images['raisedFosted'] = unchecked
+	elif am.childhood.raisedBy == 'Relatives':
+		images['raisedParent'] = unchecked
+		images['raisedGrand'] = unchecked
+		images['raisedRelative'] = checked
+		images['raisedFosted'] = unchecked
+	elif am.childhood.raisedBy == 'Foster':
+		images['raisedParent'] = unchecked
+		images['raisedGrand'] = unchecked
+		images['raisedRelative'] = unchecked
+		images['raisedFosted'] = checked
+
+	qbool(am.angerHistory2.depress30RecentV, 'yesSD', 'noSD', images)
+	qbool(am.angerHistory2.anxietyRecentV, 'yesSax', 'noSax', images)
+	qbool(am.angerHistory2.hallucinationRecentV, 'yesHall', 'noHall', images)
+	qbool(am.angerHistory2.understandingRecentV, 'yesTU', 'noTU', images)
+	qbool(am.angerHistory2.troubleControlRecentV, 'yesVB', 'noVB', images)
+	qbool(am.angerHistory2.suicide30RecentV, 'yesThSU', 'noThSU', images)
+	qbool(am.angerHistory2.suicideTodayRecentV, 'yesStoday', 'noStoday', images)
+	qbool(am.angerHistory2.suicideTodayPlanRecentV, 'yesPlan', 'noPlan', images)
+	qbool(am.angerHistory2.hasAttemptedSuicide, 'yesAttSU', 'noAttSU', images)
+	qbool(am.angerHistory3.homicidal, 'yesHomicide', 'noHomicide', images)
+	qbool(am.angerHistory3.medRecentV, 'yesPrescr', 'noPrescr', images)
+	qbool(am.angerHistory3.medSuccessRecentV, 'yesSuccess', 'noSuccess', images)
+	qbool(am.drugHistory.curUse, 'yesCurUse', 'nocurUse', images)
+	qbool(am.drugHistory.everDrank, 'yeseverDrank', 'noeverDrank', images)
+	qbool(am.drugHistory.DUI, 'yesDUI', 'noDUI', images)
+	qbool(am.drugHistory.drugTreatment, 'yesdrugTreatment', 'nodrugTreatment', images)
+	qbool(am.drugHistory.finishedTreatment, 'yesfinishedTreatment', 'nofinishedTreatment', images)
+	qbool(am.drugHistory.isClean, 'yesisClean', 'noisClean', images)
+	qbool(am.drugHistory.drinkLastEpisode, 'yesdrinkLastEpisode', 'nodrinkLastEpisode', images)
+	qbool(am.drugHistory.drinkRelationshipProblem, 'yesdrinkRelationshipProblem', 'nodrinkRelationshipProblem', images)
+	qbool(am.drugHistory.needHelpDrugs, 'yesneedHelpDrugs', 'noneedHelpDrugs', images)
+	qbool(am.childhood.momAlive, 'momAlive', 'nomomAlive', images)
+	qbool(am.childhood.dadAlive, 'dadAlive', 'nodadAlive', images)
+	qbool(am.childhood.childTrama, 'childTrama', 'nochildTrama', images)
+	qbool(am.childhood.siblingsClose, 'siblingsClose', 'nosiblingsClose', images)
+	qbool(am.childhood.dadClose, 'dadClose', 'nodadClose', images)
+	qbool(am.childhood.momClose, 'momClose', 'nomomClose', images)
+	qbool(am.childhood.wasAbused, 'wasAbused', 'nowasAbused', images)
+	qbool(am.childhood.childAnger, 'childAnger', 'nochildAnger', images)
+	qbool(am.childhood.parentViolence, 'parentViolence', 'noparentViolence', images)
+	qbool(am.childhood.otherChild, 'otherChild', 'nootherChild', images)
 
 	return images
 
