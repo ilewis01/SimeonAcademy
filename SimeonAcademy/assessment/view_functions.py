@@ -2301,10 +2301,10 @@ def saveAMAngerHistroy1(request, am):
 
 	form.psychoRecentV 			= truePythonBool(request.POST.get('psychoRecentV'))
 	form.psychoWhyRecentV 		= request.POST.get('m_psychoWhyRecentV')
-	# form.longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos')
-	# form.longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs')
+	form.longAgoTreatRecentVmos = request.POST.get('m_longAgoTreatRecentVmos')
+	form.longAgoTreatRecentVyrs = request.POST.get('m_longAgoTreatRecentVyrs')
 
-	form.didCompleteTreatRecentV = request.POST.get('m_didCompleteTreatRecentV')
+	form.didCompleteTreatRecentV = truePythonBool(request.POST.get('m_didCompleteTreatRecentV'))
 	form.reasonNotCompleteRecentV = request.POST.get('m_reasonNotCompleteRecentV')
 
 	form.save()

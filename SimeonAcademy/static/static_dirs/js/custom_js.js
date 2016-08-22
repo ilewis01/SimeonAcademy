@@ -5545,9 +5545,23 @@ function process_am_ah1_data() {
 
 	post(true, 'text', grab('otherExplainRecentV'), grab('otherRecentV'), grab('m_otherExplainRecentV'));
 	post(true, 'text', grab('psychoWhyRecentV'), grab('yesTreated'), grab('m_psychoWhyRecentV'));
-	post(true, 'text', grab('longAgoTreatRecentVyrs'), grab('yesTreated'), grab('m_longAgoTreatRecentVyrs'));
-	post(true, 'text', grab('longAgoTreatRecentVmos'), grab('yesTreated'), grab('m_longAgoTreatRecentVmos'));
-	subPost1('text', grab('yesTreated'), grab('yesComplete'), grab('reasonNotCompleteRecentV'), grab('m_didCompleteTreatRecentV'), grab('m_reasonNotCompleteRecentV'));
+	post(true, 'number', grab('longAgoTreatRecentVyrs'), grab('yesTreated'), grab('m_longAgoTreatRecentVyrs'));
+	post(true, 'number', grab('longAgoTreatRecentVmos'), grab('yesTreated'), grab('m_longAgoTreatRecentVmos'));
+
+	if (grab('yesTreated').checked === true) {
+		if (grab('yesComplete').checked === true) {
+			grab('m_didCompleteTreatRecentV').value = 'True';
+		}
+		else {
+			grab('m_didCompleteTreatRecentV').value = 'False';
+		}
+		post(true, 'text', grab('reasonNotCompleteRecentV'), grab('yesComplete'), grab('m_reasonNotCompleteRecentV'));
+	}
+	else {
+		grab('m_didCompleteTreatRecentV').value = 'False';
+		grab('m_reasonNotCompleteRecentV').value = 'N/A';
+	}
+	// subPost1('text', grab('yesTreated'), grab('yesComplete'), grab('reasonNotCompleteRecentV'), grab('m_didCompleteTreatRecentV'), grab('m_reasonNotCompleteRecentV'));
 }
 
 //AM ANGER HISTORY SECTION II FUNCTIONS
