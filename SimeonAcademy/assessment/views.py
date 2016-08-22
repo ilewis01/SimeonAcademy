@@ -2220,8 +2220,9 @@ def am_viewForm(request):
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
-		else:			
-			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content)
+		else:
+			content = fetchContent(request, 'am', '/am_viewForm/')
+			return render_to_response('counselor/forms/AngerManagement/viewForm.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def printAM(request):

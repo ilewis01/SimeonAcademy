@@ -3425,6 +3425,13 @@ function universal_am_dynamic_post(section) {
 	}
 }
 
+function runSuperTest() {
+	var current_section = String(grab('save_section').value);
+	var next_url = grab('next_url');
+	var form = grab('am_demo');
+	grab('test1').value = next_url.value;
+}
+
 function continue_am_form(section) {
 	var current_section = String(grab('save_section').value);
 	var hasErrors = hasErrorsInForm('am', section);

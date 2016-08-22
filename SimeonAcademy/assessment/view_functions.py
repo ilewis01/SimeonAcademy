@@ -3899,6 +3899,19 @@ def grabAmFinal(am):
 
 def grabAMViewForm(am):
 	fields = {}
+	fields['demo'] = getAMDemoFields(am)
+	fields['dh'] = grabAmDhFields(am)
+	fields['child'] = grabAmChildhood(am)
+	fields['ah1'] = grabAmAngerHistory1(am)
+	fields['ah2'] = grabAmAngerHistory2(am)
+	fields['ah3'] = grabAmAngerHistory3(am)
+	fields['target'] = grabAmTarget(am)
+	fields['connect'] = grabAmConnections(am)
+	fields['control'] = grabAmControl(am)
+	fields['current'] = grabAmCurrentProblems(am)
+	fields['family'] = grabAmFamilyOrigin(am)
+	fields['worst'] = grabAmWorstEpisodes(am)
+	fields['final'] = grabAmFinal(am)
 
 	return fields
 
@@ -3932,8 +3945,8 @@ def getAMFields(am, location):
 		fields = grabAmWorstEpisodes(am)
 	elif location == '/am_final/':
 		fields = grabAmFinal(am)
-	# elif location == '/am_final/':
-	# 	fields = grabAMViewForm(am)
+	elif location == '/am_viewForm/':
+		fields = grabAMViewForm(am)
 
 	return fields
 
@@ -4430,13 +4443,13 @@ def processAMC(request):
 def processAMData(request, current_section):
 	result = {}
 
-	session_id = request.POST.get('session_id', '')
-	am_id = request.POST.get('am_id', '')
-	save_this = request.POST.get('save_this', '')
-	section = request.POST.get('save_section', '')
+	session_id = request.POST.get('session_id')
+	am_id = request.POST.get('am_id')
+	save_this = request.POST.get('save_this')
+	section = request.POST.get('save_section')
 
 	session = ClientSession.objects.get(id=session_id)
-	am = AngerManagement.objects.get(id=am_id)
+	am = AngerManagement.objects.get(id=(session.am.id))
 	deprioritizeAM(am)
 	fields = getAMFields(am, current_section)
 	json_data = json.dumps(fields)
