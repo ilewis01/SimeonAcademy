@@ -1081,12 +1081,28 @@ function fetchSpecial1_am() {
 	result.push(d4);
 
 	return result;
-
 }
 
 function fetchSpecial2_am() {
+	var result = [];
 
-	
+	var d1 = {};
+	var d2 = {};
+
+	d1['field'] = 'suicideTodayExplainRecentV';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'yesPlan';
+	result.push(d1);
+	d2['field'] = 'hasAttemptedExplainRecentV';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesAttempt';
+	result.push(d2);
+
+	return result;
 }
 
 function fetchFieldList_am(section) {
@@ -5104,12 +5120,6 @@ function finChild3() {
 	twoElementRadioSetup(grab('yesViolence'), grab('num_4'), grab('parentViolenceImpact'));
 }
 
-function runTestCheck() {
-	var t = saveChildExtras()
-	
-	grab('test1').value = t;
-}
-
 function saveChildExtras() {
 	var hasErrors = null;
 	fields = fetchSpecial1_am();
@@ -5141,7 +5151,7 @@ function saveChildExtras() {
 		postToWindowParent('yesViolence', 'parentViolenceImpact', 'parentViolenceImpact');
 
 		// getPopParent('superBtn').innerHTML = "<button onClick=\"javascript: continue_am_form('{{current_section}}');\">Save & Continue</button>";
-		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>"
+		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>";
 		getPopParent('superBtn').className = 'pro-iml-btn';
 		window.close();
 	}
@@ -5591,6 +5601,131 @@ function continue_AM_session() {
 	form.action = '/clientOptions/';
 	form.submit();
 }
+
+function am_suicide_pop() {
+	var w = 550, h = 500;
+	openPopUp('auto', '/am_angerHistory2_suicide/', w, h);
+}
+
+function initializeAmSuicide(data) {
+	setRadioElement(data.suicideTodayRecentV, grab('yesSuicide'), grab('noSuicide'));
+	setRadioElement(data.suicideTodayPlanRecentV, grab('yesPlan'), grab('noPlan'));
+	setRadioElement(data.hasAttemptedSuicide, grab('yesAttempt'), grab('noAttempt'));
+	blank_init(data.isComplete, grab('suicideTodayExplainRecentV'));
+	blank_init(data.isComplete, grab('hasAttemptedExplainRecentV'));
+
+	am_suicide_radio1();
+	am_suicide_radio2();
+	am_suicide_radio3();
+}
+
+function am_suicide_radio1() {
+	if (grab('yesSuicide').checked === true) {
+		opacityHigh(grab('yesPlan'));
+		opacityHigh(grab('noPlan'));
+		opacityHigh(grab('label1'));
+		opacityHigh(grab('subLab1'));
+		opacityHigh(grab('subLab2'));
+		grab('yesPlan').disabled = false;
+		grab('noPlan').disabled = false;
+	}
+	else {
+		grab('noPlan').checked = true;
+		opacityLow(grab('yesPlan'));
+		opacityLow(grab('noPlan'));
+		opacityLow(grab('label1'));
+		opacityLow(grab('subLab1'));
+		opacityLow(grab('subLab2'));
+		grab('yesPlan').disabled = true;
+		grab('noPlan').disabled = true;
+		am_suicide_radio2();
+	}
+}
+
+function am_suicide_radio2() {
+	twoElementRadioSetup(grab('yesPlan'), grab('lab2'), grab('suicideTodayExplainRecentV'));
+}
+
+function am_suicide_radio3() {
+	twoElementRadioSetup(grab('yesAttempt'), grab('lab3'), grab('hasAttemptedExplainRecentV'));
+}
+
+// var hasErrors = null;
+// 	fields = fetchSpecial1_am();
+	
+// 	for (var i = 0; i < fields.length; i++) {
+// 		hasErrors = hasTextError(fields[i]);
+
+// 		if (hasErrors === true) {
+// 			break;
+// 		}
+// 	}
+
+// 	if (hasErrors === true) {
+// 		for (var j = 0; j < fields.length; j++) {
+// 			textErrorChecker(fields[j]);
+// 		}
+
+// 		var w = 500, h = 500;
+// 		openPopUp('auto', '/generateErrors/', w, h);
+// 	}
+// 	else {
+// 		determineBool(grab('yesAnger'), getPopParent('childAnger'));
+// 		determineBool(grab('yesOther'), getPopParent('otherChild'));
+// 		determineBool(grab('yesViolence'), getPopParent('parentViolence'));
+
+// 		postToWindowParent('yesAnger', 'childAngerExplain', 'childAngerExplain');
+// 		postToWindowParent('yesOther', 'otherChildExplain', 'otherChildExplain');
+// 		postToWindowParent('yesViolence', 'parentViolenceExplain', 'parentViolenceExplain');
+// 		postToWindowParent('yesViolence', 'parentViolenceImpact', 'parentViolenceImpact');
+
+// 		// getPopParent('superBtn').innerHTML = "<button onClick=\"javascript: continue_am_form('{{current_section}}');\">Save & Continue</button>";
+// 		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>"
+// 		getPopParent('superBtn').className = 'pro-iml-btn';
+// 		window.close();
+// 	}
+
+function saveSuicideExtras() {
+	var fields = fetchSpecial2_am();
+	var hasErrors = null;
+
+	for (var i = 0; i < fields.length; i++) {
+		hasErrors = hasTextError(fields[i]);
+
+		if (hasErrors === true) {
+			break;
+		}
+	}
+
+	if (hasErrors === true) {
+		for (var j = 0; j < fields.length; j++) {
+			textErrorChecker(fields[j]);
+		}
+
+		var w = 500, h = 500;
+		openPopUp('auto', '/generateErrors/', w, h);
+	}
+	else {
+		determineBool(grab('yesSuicide'), getPopParent('suicideTodayRecentV'));
+		determineBool(grab('yesAttempt'), getPopParent('hasAttemptedSuicide'));
+
+		if (grab('yesSuicide').checked === true) {
+			determineBool(grab('yesPlan'), getPopParent('suicideTodayPlanRecentV'));
+			postToWindowParent('yesPlan', 'suicideTodayExplainRecentV', 'suicideTodayExplainRecentV');
+		}
+		else {
+			getPopParent('suicideTodayExplainRecentV').value = 'N/A';
+			getPopParent('suicideTodayPlanRecentV').value = 'False';
+		}
+
+		postToWindowParent('yesAttempt', 'hasAttemptedExplainRecentV', 'hasAttemptedExplainRecentV');
+
+		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_angerHistory2/\'); return false;\">Save & Continue</button>";
+		getPopParent('superBtn').className = 'pro-iml-btn';
+		window.close();
+	}
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -9321,6 +9456,11 @@ function c_exit_session() {
 	}
 }
 
+function generalSessionExitOptions() {
+	var w = 500;
+	openPopUp('auto', '/uni_exit_session/', w, w);
+}
+
 function chooseSessionExit(answer) {
 	answer = String(answer);
 	var nextUrl = grab('exit_to').value;
@@ -9341,10 +9481,7 @@ function chooseSessionExit(answer) {
 	var multiNav = grab('multiNav').value;
 
 	if (multiNav === 'True') {
-		if (nextUrl === 'home') {
-			form.action = '/adminHome/';
-		}
-		else if (nextUrl === 'bill') {
+		if (nextUrl === 'bill') {
 			form.action = '/billingMain/';
 		}
 		else if (nextUrl === 'admin') {
@@ -9355,6 +9492,9 @@ function chooseSessionExit(answer) {
 		}
 		else if (nextUrl === 'logout') {
 			form.action = '/logout/';
+		}
+		else {
+			form.action = '/adminHome/';
 		}
 	}
 	else {

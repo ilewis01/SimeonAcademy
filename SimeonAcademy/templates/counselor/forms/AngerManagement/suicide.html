@@ -1,0 +1,126 @@
+{% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='session_exit_body' onLoad='javascript: initializeAmSuicide({{json_data}});'>
+	<!-- <textarea rows='3' cols='70' id='test1'></textarea>
+	<button onClick='javascript: runTestCheck();'>Run Test</button> -->
+
+	<div class='iml-pop-head1'>
+		Suicide Attempts
+	</div>
+
+	<div class='iml-pop-body2'>
+		<table>
+			<tr>
+				<td>
+					<div>
+						<div class='iml-label'>1. Do you feel suicidal today?</div>
+					</div>
+				</td>
+				<td><div><input type='radio' name='suicideTodayRecentV' id='yesSuicide' value='True' onClick='javascript: am_suicide_radio1();'></div></td>
+				<td><div class='iml-sub-label'>Yes</div></td>
+
+				<td><div><input type='radio' name='suicideTodayRecentV' id='noSuicide' value='False' onClick='javascript: am_suicide_radio1();'></div></td>
+				<td><div class='iml-sub-label'>No</div></td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					<div class='iml-suicide-sub'>
+						<li>
+							<div class='iml-label' id='label1'>
+								Do you have a plan?
+							</div>
+						</li>
+					</div>
+				</td>
+				<td><div><input type='radio' name='suicideTodayPlanRecentV' id='yesPlan' value='True' onClick='javascript: am_suicide_radio2();'></div></td>
+				<td><div class='iml-sub-label' id='subLab1'>Yes</div></td>
+				<td><div><input type='radio' name='suicideTodayPlanRecentV' id='noPlan' value='False' onClick='javascript: am_suicide_radio2();'></div></td>
+				<td><div class='iml-sub-label' id='subLab2'>No</div></td>
+			</tr>
+
+			<tr>
+				<td>
+					<div id='e1'>
+						<div class='iml-sub-label-left4' id='lab2'>
+							Describe your plan:
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					<div class='iml-suicide-textArea'>
+						<textarea rows='5' cols='55' name='suicideTodayExplainRecentV' id='suicideTodayExplainRecentV' oninput="javascript: noErrorText('e1', 'suicideTodayExplainRecentV');">{{fields.suicideTodayExplainRecentV}}</textarea>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					<div>
+						<div class='iml-label'>2. Have you ever attempted suicide?</div>
+					</div>
+				</td>
+
+				<td><div><input type='radio' name='hasAttemptedSuicide' id='yesAttempt' value='True' onClick='javascript: am_suicide_radio3();'></div></td>
+				<td><div class='iml-sub-label'>Yes</div></td>
+				<td><div><input type='radio' name='hasAttemptedSuicide' id='noAttempt' value='False' onClick='javascript: am_suicide_radio3();'></div></td>
+				<td><div class='iml-sub-label'>No</div></td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					<div id='e2'>
+						<div class='iml-sub-label-left4' id='lab3'>Please explain:</div>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class='iml-suicide-textArea'>
+						<textarea rows='5' cols='55' name='hasAttemptedExplainRecentV' id='hasAttemptedExplainRecentV' oninput="javascript: noErrorText('e2', 'hasAttemptedExplainRecentV');">{{fields.hasAttemptedExplainRecentV}}</textarea>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class='iml-pop-foot1'>
+		<div class='iml-btn-container3'>
+			<table>
+				<tr>
+					<td><button onClick='javascript: window.close();'>Close</button></td>
+					<td><button onClick='javascript: saveSuicideExtras(); return false;'>Continue</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>
+
+
+
+
+
+
+
+
+
+

@@ -4838,6 +4838,15 @@ button:hover {
 	margin-right: 6px;
 }
 
+.iml-sub-label-left4 {
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 44px;
+	color: #7A6264;
+	margin-right: 6px;
+}
+
 .iml-sub-label-left2 {
 	font-size: 13px;
 	font-style: italic;
@@ -5002,6 +5011,18 @@ button:hover {
 	background-size: 100%;
 }
 
+.iml-pop-body2 {
+	width: 95%;
+	margin: auto;
+	padding-top: 3%;
+	padding-left: 4%;
+	height: 65%;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/iml_bkgnd.png');
+	background-size: 100%;
+}
+
 .iml-pop-body-error {
 	width: 99%;
 	margin: auto;
@@ -5010,6 +5031,15 @@ button:hover {
 	border-radius: 8px;
 	background: url('../images/iml_bkgnd.png');
 	background-size: 100%;
+}
+
+.iml-suicide-sub {
+	width: 150px;
+	margin-left: 30px;
+}
+
+.iml-suicide-textArea {
+	margin-left: 41px;
 }
 
 .iml-pop-foot1 {
@@ -5045,6 +5075,15 @@ button:hover {
 	margin-top: 10px;
 	background-color: #e3dcc8;
 	margin-left: 265px;
+}
+
+.iml-btn-container3 {
+	border: 1px solid black;
+	width:250px;
+	height:34px;
+	margin-top: 10px;
+	background-color: #e3dcc8;
+	margin-left: 50%;
 }
 
 .iml-btn-container-single {

@@ -26,6 +26,12 @@
       <input type='hidden' value='' name='m_controlTrigger' id='m_controlTrigger'>
       <input type='hidden' value='' name='m_suicide30ExplainRecentV' id='m_suicide30ExplainRecentV'>
 
+      <input type='hidden' value='' name='suicideTodayRecentV' id='suicideTodayRecentV'>
+      <input type='hidden' value='' name='suicideTodayPlanRecentV' id='suicideTodayPlanRecentV'>
+      <input type='hidden' value='' name='suicideTodayExplainRecentV' id='suicideTodayExplainRecentV'>
+      <input type='hidden' value='' name='hasAttemptedSuicide' id='hasAttemptedSuicide'>
+      <input type='hidden' value='' name='hasAttemptedExplainRecentV' id='hasAttemptedExplainRecentV'>
+
     <div class='container'>
       <div class='row'>
         <div class="col-md-12" style='width:100%; height:84vh;'>
@@ -326,7 +332,8 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                  <td><div id='superBtn'><button onClick="javascript: am_suicide_pop(); return false;">Save & Continue</button></div></td>
+                  <!-- <td><button onClick="javascript: continue_am_form('{{current_section}}'); return false;">Save & Continue</button></td> -->
                 </tr>
               </table>
             </div>

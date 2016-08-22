@@ -2003,6 +2003,38 @@ def am_angerHistory2(request):
 			return render_to_response('counselor/forms/AngerManagement/angerHistory2.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def am_angerHistory2_suicide(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			data = {}
+			track = getTrack(user)
+			quickTrack('Session', track)
+			session = ClientSession.objects.get(id=(track.s_id))
+
+			data['isComplete'] 					= session.am.angerHistoryComplete2
+			data['suicideTodayRecentV'] 		= session.am.angerHistory2.suicideTodayRecentV
+			data['suicideTodayPlanRecentV'] 	= session.am.angerHistory2.suicideTodayPlanRecentV
+			data['suicideTodayExplainRecentV'] 	= session.am.angerHistory2.suicideTodayExplainRecentV
+			data['hasAttemptedSuicide'] 		= session.am.angerHistory2.hasAttemptedSuicide
+			data['hasAttemptedExplainRecentV'] 	= session.am.angerHistory2.hasAttemptedExplainRecentV
+
+			json_data = json.dumps(data)
+			content['json_data'] = json_data
+			content['fields'] = data
+			return render_to_response('counselor/forms/AngerManagement/suicide.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def am_angerHistory3(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -2109,25 +2141,6 @@ def am_problems(request):
 		else:
 			content = fetchContent(request, 'am', '/am_problems/')
 			return render_to_response('counselor/forms/AngerManagement/currentProblems.html', content, context_instance=RequestContext(request))
-
-@login_required(login_url='/index')
-def saveChildhoodInit(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		content['user'] = user
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html', content)
-
-		else:
-			content = processAMC(request)
-			print content
-			return render_to_response('counselor/forms/AngerManagement/saveChildhoodInit.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def finishChildhood(request):

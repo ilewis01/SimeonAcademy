@@ -103,7 +103,7 @@ urlpatterns = patterns('',
     url(r'^am_worst/$', 'assessment.views.am_worst'),
     url(r'^printAM/$', 'assessment.views.printAM'),
     url(r'^finishChildhood/$', 'assessment.views.finishChildhood'),
-    url(r'^saveChildhoodInit/$', 'assessment.views.saveChildhoodInit'),
+    url(r'^am_angerHistory2_suicide/$', 'assessment.views.am_angerHistory2_suicide'),
     url(r'^generateErrors/$', 'assessment.views.generateErrors'),
 
     ## Urine Test Views
