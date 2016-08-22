@@ -5,6 +5,54 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
+<body class='session_exit_body' onLoad='javascript: initializeFinishChildhood({{json_data}});'>
+	<form action='/uni_exit_session/' method='post' id='s_form'> {% csrf_token %}
+		<input type='hidden' name='exit_type' id='exit_type' value='closed'>
+		<input type='hidden' name='multiNav' id='multiNav' value='{{multiNav}}'>
+		<input type='hidden' name='exit_to' id='exit_to' value='{{exit_to}}'>
+	</form>
+
+	<div class='iml-pop-head1-error'>
+		ERROR
+	</div>
+
+	<div class='iml-pop-body-error'>
+		<div class='iml-warning-holder2'><img src="{% static 'images/warning.png' %}" class='error-main-css-img'></div>
+
+		<div class='iml-error-m-sm2'>
+			Would You Like To Return To This Session At A Later Time?
+		</div>
+
+		<div class='iml-error-m3-low'>
+			Please Make A Selection
+		</div>
+	</div>
+
+	<div class='iml-pop-foot1'>
+		<div class='iml-btn-container-double'>
+			<table>
+				<tr>
+					<td><button onClick="javascript: chooseSessionExit('False');">Yes</button></td>
+					<td><button onClick="javascript: chooseSessionExit('True');">No</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>
+
+
+
+
+
+<!-- {% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
 <body class='session_exit_body'>
 	<div class='s_resolve_wrapper3'>
 
@@ -41,4 +89,4 @@
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
-</body>
+</body> -->

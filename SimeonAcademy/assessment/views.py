@@ -1432,9 +1432,11 @@ def uni_exit_session(request):
 
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
+			exit_to = request.POST.get('exit_to')
 			exit_type = request.POST.get('exit_type')
 			multiNav = request.POST.get('multiNav')
 			exit_type = str(exit_type)
+			content['exit_to'] = exit_to
 
 			if exit_type == 'close':				
 				if shouldDeleteSession(session) == False:

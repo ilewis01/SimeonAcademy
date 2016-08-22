@@ -4833,8 +4833,8 @@ function dhLeftRadio3() {
 function dhLeftRadio2() {
 	twoElementRadioSetup(grab('noFinish'), grab('lab16'), grab('reasonNotFinishedTreatment'));
 
-	if (grab('didFinish').checked === true) {
-		grab('isClean').checked = true;
+	if (grab('noFinish').checked === true) {
+		grab('notClean').checked = true;
 		dhLeftRadio3();
 
 		opacityLow(grab('num_8'));
@@ -4853,8 +4853,10 @@ function dhLeftRadio2() {
 		opacityHigh(grab('labe2'));
 		opacityHigh(grab('isClean'));
 		opacityHigh(grab('notClean'));
+		grab('isClean').checked = true;
 		grab('isClean').disabled = false;
 		grab('notClean').disabled = false;
+		dhLeftRadio3();
 	}
 }
 
@@ -4863,7 +4865,7 @@ function dhLeftRadio1() {
 	twoElementRadioSetup(grab('hadTreatment'), grab('lab12'), grab('treatmentPlace'));
 
 	if (grab('noTreatment').checked === true) {
-		grab('noFinish').checked = true;
+		grab('didFinish').checked = true;
 		dhLeftRadio2();
 
 		opacityLow(grab('num_7'));
@@ -4874,6 +4876,18 @@ function dhLeftRadio1() {
 		opacityLow(grab('noFinish'));
 		grab('didFinish').disabled = true;
 		grab('noFinish').disabled = true;
+
+		opacityLow(grab('num_8'));
+		opacityLow(grab('num_8Lab'));
+		opacityLow(grab('isClean'));
+		opacityLow(grab('notClean'));
+		opacityLow(grab('labe1'));
+		opacityLow(grab('labe2'));
+		grab('isClean').checked = true;
+		grab('isClean').disabled = true;
+		grab('notClean').disabled = true;
+
+		dhLeftRadio3();
 	}
 	else {
 		opacityHigh(grab('num_7'));
@@ -4884,6 +4898,17 @@ function dhLeftRadio1() {
 		opacityHigh(grab('noFinish'));
 		grab('didFinish').disabled = false;
 		grab('noFinish').disabled = false;
+
+		opacityHigh(grab('num_8'));
+		opacityHigh(grab('num_8Lab'));
+		opacityHigh(grab('isClean'));
+		opacityHigh(grab('notClean'));
+		opacityHigh(grab('labe1'));
+		opacityHigh(grab('labe2'));
+		grab('isClean').disabled = false;
+		grab('notClean').disabled = false;
+
+		dhLeftRadio3();
 	}
 }
 
@@ -5004,8 +5029,24 @@ function processAM_DH_data() {
 
 	post(true, 'text', grab('dateTreated'), grab('hadTreatment'), grab('m_dateTreated'));
 	post(true, 'text', grab('treatmentPlace'), grab('hadTreatment'), grab('m_treatmentPlace'));
-	subPost1('text', grab('hadTreatment'), grab('noFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
-	subPost1('text', grab('hadTreatment'), grab('notClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
+	// subPost1('text', grab('hadTreatment'), grab('noFinish'), grab('reasonNotFinishedTreatment'), grab('m_finishedTreatment'), grab('m_reasonNotFinishedTreatment'));
+	// subPost1('text', grab('hadTreatment'), grab('notClean'), grab('relapseTrigger'), grab('m_isClean'), grab('m_relapseTrigger'));
+	if (grab('noTreatment').checked === true) {
+		grab('m_finishedTreatment').value = 'True';
+		grab('m_reasonNotFinishedTreatment').value = 'N/A';
+		grab('m_isClean').value = 'True';
+		grab('m_relapseTrigger').value = 'N/A';
+	}
+	else {
+		post(true, 'text', grab('reasonNotFinishedTreatment'), grab('noFinish'), grab('m_reasonNotFinishedTreatment'));
+		
+		if (grab('didFinish').checked === true) {
+			post(true, 'text', grab('relapseTrigger'), grab('notClean'), grab('m_relapseTrigger'));
+		}
+		else {
+			m_relapseTrigger.value = relapseTrigger.value;
+		}
+	}
 }
 
 function process_am_child_data() {	
@@ -8387,14 +8428,19 @@ function e8Radio() {
 	additionalLabel(document.getElementById('e8yes'), document.getElementById('extra9'));
 }
 
+function init_main_nav_exit() {
+	grab('exit_to').value = getPopParent('exit_to').value;
+}
+
 function sessionChecking(btnType) {
 	var actionApp = grab('tracking').value;
 	actionApp = String(actionApp);
 	btn = String(btnType);
+	grab('exit_to').value = btn;
 
-	if (actionApp === 'Session') {		
-		var w = 550;
-		var h = 400;
+	if (actionApp === 'Session') {	
+		var w = 500;
+		var h = 500;
 		openPopUp('auto', '/session_open_error/', w, h);
 	}
 	else {
@@ -9277,8 +9323,8 @@ function c_exit_session() {
 
 function chooseSessionExit(answer) {
 	answer = String(answer);
-	// var nextUrl = getPopParent('nextUrl').value;
-	// nextUrl = String(nextUrl);
+	var nextUrl = grab('exit_to').value;
+	nextUrl = String(nextUrl);
 
 	if (answer === 'False') {
 		grab('s_form').action = '/sessionClosedAlt/';
@@ -9299,13 +9345,13 @@ function chooseSessionExit(answer) {
 			form.action = '/adminHome/';
 		}
 		else if (nextUrl === 'bill') {
-			form.action = '//';
+			form.action = '/billingMain/';
 		}
 		else if (nextUrl === 'admin') {
-			form.action = '//';
+			form.action = '/AdministrativeMain/';
 		}
 		else if (nextUrl === 'appt') {
-			form.action = '//';
+			form.action = '/appointmentMain/';
 		}
 		else if (nextUrl === 'logout') {
 			form.action = '/logout/';
