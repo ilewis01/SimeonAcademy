@@ -732,6 +732,7 @@ button:hover {
 #viewAnsIndent {
 	font-size: 19px;
 	text-align: left;
+	margin-left: 65px;
 }
 
 #viewMatchMargin {

@@ -3160,6 +3160,7 @@ def matchAmProgressIndex(index):
 
 	return result
 
+
 def grabAmCompletedSections(am):
 	results = {}
 
@@ -3897,6 +3898,94 @@ def grabAmFinal(am):
 
 	return fields
 
+def fetchAmChecks(am):
+	images = {}
+	checked = '/static/images/checked_checkbox.png'
+	unchecked = '/static/images/unchecked_checkbox.png'
+
+	if (am.demographic.maritalStatus == 'Divorced'):
+		images['divorced'] = checked
+		images['married'] = unchecked
+		images['single'] = unchecked
+		images['separated'] = unchecked
+	elif (am.demographic.maritalStatus == 'Married'):
+		images['divorced'] = unchecked
+		images['married'] = checked
+		images['single'] = unchecked
+		images['separated'] = unchecked
+	elif (am.demographic.maritalStatus == 'Separated'):
+		images['divorced'] = unchecked
+		images['married'] = unchecked
+		images['single'] = unchecked
+		images['separated'] = checked
+	elif (am.demographic.maritalStatus == 'Single'):
+		images['divorced'] = unchecked
+		images['married'] = unchecked
+		images['single'] = checked
+		images['separated'] = unchecked
+
+	if am.demographic.livingSituation == 'Live alone':
+		images['partner'] = unchecked
+		images['alone'] = checked
+		images['family'] = unchecked
+		images['friend'] = unchecked
+	elif am.demographic.livingSituation == 'Live with family':
+		images['partner'] = unchecked
+		images['alone'] = unchecked
+		images['family'] = checked
+		images['friend'] = unchecked
+	elif am.demographic.livingSituation == 'Live with friend':
+		images['partner'] = unchecked
+		images['alone'] = unchecked
+		images['family'] = unchecked
+		images['friend'] = checked
+	elif am.demographic.livingSituation == 'Live with partner':
+		images['partner'] = checked
+		images['alone'] = unchecked
+		images['family'] = unchecked
+		images['friend'] = unchecked
+
+	if am.demographic.own == True:
+		images['rent'] = unchecked
+		images['own'] = checked
+	else:
+		images['rent'] = checked
+		images['own'] = unchecked
+
+	if am.demographic.education == 'HS':
+		images['ged'] = unchecked
+		images['hs'] = checked
+		images['college'] = unchecked
+	elif am.demographic.education == 'GED':
+		images['ged'] = checked
+		images['hs'] = unchecked
+		images['college'] = unchecked
+	elif am.demographic.education == 'College':
+		images['ged'] = unchecked
+		images['hs'] = unchecked
+		images['college'] = checked
+	elif am.demographic.education == 'Drop out':
+		images['ged'] = unchecked
+		images['hs'] = unchecked
+		images['college'] = unchecked
+
+	if am.demographic.health_problem == False:
+		images['goodHealth'] = unchecked
+		images['badHealth'] = checked
+	else:
+		images['goodHealth'] = checked
+		images['badHealth'] = unchecked
+
+	if am.demographic.medication == True:
+		images['onMeds'] = checked
+		images['noMeds'] = unchecked
+	else:
+		images['onMeds'] = unchecked
+		images['noMeds'] = checked
+
+	return images
+
+
 def grabAMViewForm(am):
 	fields = {}
 	fields['demo'] = getAMDemoFields(am)
@@ -3912,6 +4001,8 @@ def grabAMViewForm(am):
 	fields['family'] = grabAmFamilyOrigin(am)
 	fields['worst'] = grabAmWorstEpisodes(am)
 	fields['final'] = grabAmFinal(am)
+	fields['images'] = fetchAmChecks(am)
+	fields['emp_phone'] = fetchClientPhoneDisplay(am.demographic.employer_phone)
 
 	return fields
 
