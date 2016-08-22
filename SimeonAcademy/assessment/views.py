@@ -2161,7 +2161,7 @@ def finishChildhood(request):
 			track = getTrack(user)
 			quickTrack('Session', track)
 			session = ClientSession.objects.get(id=(track.s_id))
-			data['isComplete'] = session.am.isComplete
+			data['isComplete'] = session.am.childhoodComplete
 			data['childAnger'] = session.am.childhood.childAnger
 			data['otherChild'] = session.am.childhood.otherChild
 			data['parentViolence'] = session.am.childhood.parentViolence

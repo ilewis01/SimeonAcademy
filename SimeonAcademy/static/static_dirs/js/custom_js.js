@@ -3775,6 +3775,20 @@ function initialize_am_drug_history(json_data) {
 	dhLeftRadio1();
 	dhLeftRadio2();
 	dhLeftRadio3();
+
+	if (grab('noTreatment').checked === true) {
+		opacityLow(grab('super_8_label'));
+		opacityLow(grab('num_8Lab'));
+		opacityLow(grab('isClean'));
+		opacityLow(grab('notClean'));
+		opacityLow(grab('labe1'));
+		opacityLow(grab('labe2'));
+
+		grab('isClean').checked = true;
+		dhLeftRadio3();
+		grab('isClean').disabled = true;
+		grab('notClean').disabled = true;
+	}
 }
 
 function initialize_am_childhood(json_data) {
@@ -4850,29 +4864,34 @@ function dhLeftRadio2() {
 	twoElementRadioSetup(grab('noFinish'), grab('lab16'), grab('reasonNotFinishedTreatment'));
 
 	if (grab('noFinish').checked === true) {
-		grab('notClean').checked = true;
-		dhLeftRadio3();
-
-		opacityLow(grab('num_8'));
+		opacityLow(grab('super_8_label'));
 		opacityLow(grab('num_8Lab'));
-		opacityLow(grab('labe1'));
-		opacityLow(grab('labe2'));
 		opacityLow(grab('isClean'));
 		opacityLow(grab('notClean'));
+		opacityLow(grab('labe1'));
+		opacityLow(grab('labe2'));
+
+		opacityHigh(grab('lab17'));
+		opacityHigh(grab('relapseTrigger'));
+
+		grab('notClean').checked = true;
+
 		grab('isClean').disabled = true;
 		grab('notClean').disabled = true;
 	}
 	else {
-		opacityHigh(grab('num_8'));
+		opacityHigh(grab('super_8_label'));
 		opacityHigh(grab('num_8Lab'));
-		opacityHigh(grab('labe1'));
-		opacityHigh(grab('labe2'));
 		opacityHigh(grab('isClean'));
 		opacityHigh(grab('notClean'));
+		opacityHigh(grab('labe1'));
+		opacityHigh(grab('labe2'));
+
 		grab('isClean').checked = true;
+		dhLeftRadio3();
+
 		grab('isClean').disabled = false;
 		grab('notClean').disabled = false;
-		dhLeftRadio3();
 	}
 }
 
@@ -4881,50 +4900,54 @@ function dhLeftRadio1() {
 	twoElementRadioSetup(grab('hadTreatment'), grab('lab12'), grab('treatmentPlace'));
 
 	if (grab('noTreatment').checked === true) {
-		grab('didFinish').checked = true;
-		dhLeftRadio2();
-
 		opacityLow(grab('num_7'));
+		opacityLow(grab('super_8_label'));
+
 		opacityLow(grab('lab13'));
-		opacityLow(grab('lab14'));
-		opacityLow(grab('lab15'));
+		opacityLow(grab('num_8Lab'));
+
 		opacityLow(grab('didFinish'));
 		opacityLow(grab('noFinish'));
-		grab('didFinish').disabled = true;
-		grab('noFinish').disabled = true;
-
-		opacityLow(grab('num_8'));
-		opacityLow(grab('num_8Lab'));
 		opacityLow(grab('isClean'));
 		opacityLow(grab('notClean'));
+
+		opacityLow(grab('lab14'));
+		opacityLow(grab('lab15'));
 		opacityLow(grab('labe1'));
 		opacityLow(grab('labe2'));
+
+		grab('didFinish').checked = true;
 		grab('isClean').checked = true;
+
+		dhLeftRadio2();
+		dhLeftRadio3();
+
+		grab('didFinish').disabled = true;
+		grab('noFinish').disabled = true;
 		grab('isClean').disabled = true;
 		grab('notClean').disabled = true;
-
-		dhLeftRadio3();
 	}
 	else {
 		opacityHigh(grab('num_7'));
+		opacityHigh(grab('super_8_label'));
+
 		opacityHigh(grab('lab13'));
-		opacityHigh(grab('lab14'));
-		opacityHigh(grab('lab15'));
+		opacityHigh(grab('num_8Lab'));
+
 		opacityHigh(grab('didFinish'));
 		opacityHigh(grab('noFinish'));
-		grab('didFinish').disabled = false;
-		grab('noFinish').disabled = false;
-
-		opacityHigh(grab('num_8'));
-		opacityHigh(grab('num_8Lab'));
 		opacityHigh(grab('isClean'));
 		opacityHigh(grab('notClean'));
+
+		opacityHigh(grab('lab14'));
+		opacityHigh(grab('lab15'));
 		opacityHigh(grab('labe1'));
 		opacityHigh(grab('labe2'));
+
+		grab('didFinish').disabled = false;
+		grab('noFinish').disabled = false;
 		grab('isClean').disabled = false;
 		grab('notClean').disabled = false;
-
-		dhLeftRadio3();
 	}
 }
 
@@ -5150,7 +5173,6 @@ function saveChildExtras() {
 		postToWindowParent('yesViolence', 'parentViolenceExplain', 'parentViolenceExplain');
 		postToWindowParent('yesViolence', 'parentViolenceImpact', 'parentViolenceImpact');
 
-		// getPopParent('superBtn').innerHTML = "<button onClick=\"javascript: continue_am_form('{{current_section}}');\">Save & Continue</button>";
 		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>";
 		getPopParent('superBtn').className = 'pro-iml-btn';
 		window.close();
@@ -5650,40 +5672,6 @@ function am_suicide_radio3() {
 	twoElementRadioSetup(grab('yesAttempt'), grab('lab3'), grab('hasAttemptedExplainRecentV'));
 }
 
-// var hasErrors = null;
-// 	fields = fetchSpecial1_am();
-	
-// 	for (var i = 0; i < fields.length; i++) {
-// 		hasErrors = hasTextError(fields[i]);
-
-// 		if (hasErrors === true) {
-// 			break;
-// 		}
-// 	}
-
-// 	if (hasErrors === true) {
-// 		for (var j = 0; j < fields.length; j++) {
-// 			textErrorChecker(fields[j]);
-// 		}
-
-// 		var w = 500, h = 500;
-// 		openPopUp('auto', '/generateErrors/', w, h);
-// 	}
-// 	else {
-// 		determineBool(grab('yesAnger'), getPopParent('childAnger'));
-// 		determineBool(grab('yesOther'), getPopParent('otherChild'));
-// 		determineBool(grab('yesViolence'), getPopParent('parentViolence'));
-
-// 		postToWindowParent('yesAnger', 'childAngerExplain', 'childAngerExplain');
-// 		postToWindowParent('yesOther', 'otherChildExplain', 'otherChildExplain');
-// 		postToWindowParent('yesViolence', 'parentViolenceExplain', 'parentViolenceExplain');
-// 		postToWindowParent('yesViolence', 'parentViolenceImpact', 'parentViolenceImpact');
-
-// 		// getPopParent('superBtn').innerHTML = "<button onClick=\"javascript: continue_am_form('{{current_section}}');\">Save & Continue</button>";
-// 		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: continue_am_form(\'/am_childhood/\'); return false;\">Save & Continue</button>"
-// 		getPopParent('superBtn').className = 'pro-iml-btn';
-// 		window.close();
-// 	}
 
 function saveSuicideExtras() {
 	var fields = fetchSpecial2_am();
