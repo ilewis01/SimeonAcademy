@@ -4165,7 +4165,14 @@ function processAMDemoData() {
 	}
 
 	post(true, 'text', grab('health_exp'), grab('not_healthy'), grab('m_health_exp'));
-	post(true, 'text', grab('whatMedicine'), grab('on_meds'), grab('m_whatMedicine'));
+
+	if (grab('healthy').checked === true) {
+		grab('m_medication').value = 'False';
+		grab('m_whatMedicine').value = 'N/A';
+	}
+	else {
+		grab('m_medication').value = '';
+	}
 }
 
 
@@ -9601,10 +9608,10 @@ function genericEndSession() {
 }
 
 function goToGenericURL() {
-	var form = document.getElementById('resolve_form');
-	var location = document.getElementById('save_section');
-	var c1 = document.getElementById('c1');
-	var c2 = document.getElementById('c2');
+	var form = grab('resolve_form');
+	var location = grab('save_section');
+	var c1 = grab('c1');
+	var c2 = grab('c2');
 
 	if (c1.checked === true) {
 		form.action = location.value;
@@ -9636,7 +9643,7 @@ function initialize_refresh_popup() {
 }
 
 function refreshForm() {
-	var form = document.getElementById('refresh_form');
+	var form = grab('refresh_form');
 	form.submit();
 }
 

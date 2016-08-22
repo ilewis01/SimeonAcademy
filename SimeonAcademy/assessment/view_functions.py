@@ -3236,137 +3236,337 @@ def grabAmClassesCSS(am, m_page):
 
 	return classes
 
+def refresh_am1(demo):
+	date = datetime.now()
+	date = date.date()
+	demo.date_of_assessment = date
+	demo.maritalStatus = None
+	demo.livingSituation = None
+	demo.own = False
+	demo.months_res = 0
+	demo.years_res = 0
+	demo.whoLivesWithClient = None
+	demo.num_children = 0
+	demo.spouse_dep = 0
+	demo.other_dependants = 0
+	demo.education = None
+	demo.resasonDO = None
+	demo.employee = None
+	demo.job_title = None
+	demo.emp_address = None
+	demo.employed_months = 0
+	demo.employed_years = 0
+	demo.employer_phone = None
+	demo.health_problem = False
+	demo.medication = False
+	demo.whatMedicine = None
+	demo.health_exp = None
+
+	demo.save()
+
+def refresh_am2(dh):
+	date = datetime.now()
+	date = date.date()
+	dh.date_of_assessment = date
+	dh.firstDrinkAge = 0
+	dh.firstDrinkType = None
+	dh.curUse = False
+	dh.useType = None
+	dh.amtPerWeek = None
+	dh.useAmt = None
+	dh.everDrank = False
+	dh.monthsQuit = 0
+	dh.yearsQuit = 0
+	dh.reasonQuit = None
+	dh.DUI = False
+	dh.numDUI = 0
+	dh.BALevel = None
+	dh.drugTreatment = False
+	dh.treatmentPlace = None
+	dh.dateTreated = None
+	dh.finishedTreatment = False
+	dh.reasonNotFinishedTreatment = None
+	dh.isClean = False
+	dh.relapseTrigger = None
+	dh.drinkLastEpisode = False
+	dh.drinkRelationshipProblem = False
+	dh.needHelpDrugs = False
+
+	dh.save()
+
+def refresh_am3(child):
+	date = datetime.now()
+	date = date.date()
+	child.date_of_assessment = date
+
+	child.raisedBy = None
+	child.momAlive = True
+	child.dadAlive = True
+	child.childTrama = False
+	child.traumaExplain = None
+	child.howLeftHome = None
+	child.num_siblings = 0
+	child.siblingsClose = True
+	child.siblingsRelationshipExplain = None
+	child.dadClose = False
+	child.dadCloseExplain = None
+	child.momClose = False
+	child.momCloseExplain = None
+	child.wasAbused = False
+	child.abusedBy = None
+	child.abuseImpact = None
+	child.childAnger = False
+	child.childAngerExplain = None
+	child.otherChild = False
+	child.otherChildExplain = None
+	child.parentViolence = False
+	child.parentViolenceExplain = None
+	child.parentViolenceImpact = None
+
+	child.save()
+
+def refresh_am4(ah1):
+	date = datetime.now()
+	date = date.date()
+	ah1.date_of_assessment = date
+
+	ah1.recentIncidentV = None
+	ah1.recentVDate = None
+	ah1.recentVlocation = None
+	ah1.withWhomRecentV = None
+	ah1.happenedRecentV = None
+	ah1.physicalRecentV = False
+	ah1.verbalRecentV = False
+	ah1.threatsRecentV = False
+	ah1.propertyRecentV = False
+	ah1.otherRecentV = False
+	ah1.otherExplainRecentV = None
+	ah1.typeWordsRecentV = None
+	ah1.wasTense = False
+	ah1.hadRush = False
+	ah1.feltStrong = False
+	ah1.psychoRecentV = False
+	ah1.psychoWhyRecentV = None
+	ah1.longAgoTreatRecentVmos = 0
+	ah1.longAgoTreatRecentVyrs = 0
+	ah1.didCompleteTreatRecentV = False
+	ah1.reasonNotCompleteRecentV = None
+
+	ah1.save()
+
+def refresh_am5(ah2):
+	date = datetime.now()
+	date = date.date()
+	ah2.date_of_assessment = date
+
+	ah2.depress30RecentV = False
+	ah2.depress30ExplainRecentV = None
+	ah2.anxietyRecentV = False
+	ah2.anxietyExplainRecentV = None
+	ah2.hallucinationRecentV = False
+	ah2.hallucinationLastV = None
+	ah2.understandingRecentV = False
+	ah2.understandingExplainRecentV = None
+	ah2.troubleControlRecentV = False
+	ah2.lastTimeTroubleControl = None
+	ah2.controlTrigger = None
+	ah2.suicide30RecentV = False
+	ah2.suicide30ExplainRecentV = None
+	ah2.suicideTodayRecentV = False
+	ah2.suicideTodayPlanRecentV = False
+	ah2.suicideTodayExplainRecentV = None
+	ah2.hasAttemptedSuicide = False
+	ah2.hasAttemptedExplainRecentV = None
+
+	ah2.save()
+
+def refresh_am6(ah3):
+	date = datetime.now()
+	date = date.date()
+	ah3.date_of_assessment = date
+
+	ah3.homicidal = False
+	ah3.homicidalExplain = None
+	ah3.medRecentV = False
+	ah3.medRecentVExplain = None
+	ah3.medSuccessRecentV = False
+	ah3.medSuccessExplainRecentV = None
+	ah3.durationRecentV = None
+	ah3.intensityRecentV = 0
+	ah3.howOften = None
+
+	ah3.save()
+
+def refresh_am7(connect):
+	date = datetime.now()
+	date = date.date()
+	connect.date_of_assessment = date
+
+	connect.angerWorse = False
+	connect.troubleWhenUsing = False
+	connect.lessAngry = False
+	connect.othersTellMe = False
+	connect.noConnection = False
+	connect.otherConnectionsUsing = False
+	connect.connectionExplain = None
+
+	connect.save()
+
+def refresh_am8(worst):
+	date = datetime.now()
+	date = date.date()
+	worst.date_of_assessment = date
+
+	worst.whoWorst = None
+	worst.happenedWorst = None
+	worst.wordThoughtWorst = None
+	worst.howStartWorst = None
+	worst.howEndWorst = None
+	worst.useWorst = False
+	worst.whoUsed = None
+	worst.physicalWorst = False
+	worst.verbalWorst = False
+	worst.propertyWorst = False
+	worst.otherWorst = False
+	worst.otherWorstDescription = None
+
+	worst.save()
+
+def refresh_am9(target):
+	date = datetime.now()
+	date = date.date()
+	target.date_of_assessment = date
+
+	target.angryPartner = False
+	target.angryParents = False
+	target.angryChildren = False
+	target.angryRelatives = False
+	target.angryEmployer = False
+	target.angryFriends = False
+	target.angryOther = False
+	target.otherWhom = None
+	target.angryAbout = None
+	target.seldomUpset = False
+
+	target.save()
+
+def refresh_am10(family):
+	date = datetime.now()
+	date = date.date()
+	family.date_of_assessment = date
+
+	family.kidMomAnger = None
+	family.kidDadAnger = None
+	family.kidSiblingAnger = None
+	family.kidOtherAnger = None
+	family.learnFamilyAnger = None
+	family.suicideHistory = False
+	family.hasLovingMother = False
+	family.hasLovingSiblings = False
+
+	family.save()
+
+def refresh_am11(current):
+	date = datetime.now()
+	date = date.date()
+	current.date_of_assessment = date
+
+	current.brainInjury = False
+	current.stroke = False
+	current.epilepsy = False
+	current.attentionDD = False
+	current.pms = False
+	current.depression = False
+	current.ptsd = False
+	current.otherSeriousIllness = False
+	current.otherWhom = None
+	current.currentlyOnMeds = False
+	current.whichMeds = None
+	current.describeIssue = None
+
+	current.save()
+
+def refresh_am12(control):
+	date = datetime.now()
+	date = date.date()
+	control.date_of_assessment = date
+
+	control.neverAttemptedControl = False
+	control.talkToMyself = False
+	control.whatSayYou = None
+	control.leaveScene = False
+	control.howLongLeaveScene = None
+	control.whatDoLeave = None
+	control.relax = False
+	control.howRelax = None
+	control.selfHelpGroup = False
+	control.otherControlAnger = False
+	control.doWhatOtherControl = None
+
+	control.save()
+
+def refresh_am13(final):
+	date = datetime.now()
+	date = date.date()
+	final.date_of_assessment = date
+
+	final.anythingelse = None
+	final.changeLearn1 = None
+	final.changeLearn2 = None
+	final.changeLearn3 = None
+
+	final.save()
+
 def refreshAM(am):
-	if am.demographicComplete == True:
-		date = datetime.now()
-		date = date.date()
-		demo = AM_Demographic(client_id=am.client.clientID, date_of_assessment=date)
-		demo.save()
-		temp = am.demographic
-		am.demographic = demo
-		am.demographicComplete = False
-		temp.delete()
-		am.save()
+	date = datetime.now()
+	date = date.date()
 
-	if am.drugHistoryComplete == True:
-		am.drugHistory.delete()
-		drugHistory = AM_DrugHistory(client_id=am.client.clientID, finishedTreatment=True)
-		drugHistory.save()
-		temp = am.drugHistory
-		am.drugHistory = drugHistory
-		am.drugHistoryComplete = False
-		temp.delete()
-		am.save()
+	am.date_of_assessment = date
 
-	if am.childhoodComplete == True:
-		am.childhood.delete()
-		childhood = AM_ChildhoodHistory(client_id=am.client.clientID)
-		childhood.save()
-		temp = am.childhood
-		am.childhood = childhood
-		am.childhoodComplete = False
-		temp.delete()
-		am.save()
+	refresh_am1(am.demographic)
+	refresh_am2(am.drugHistory)
+	refresh_am3(am.childhood)
+	refresh_am4(am.angerHistory)
+	refresh_am5(am.angerHistory2)
+	refresh_am6(am.angerHistory3)
+	refresh_am7(am.connections)
+	refresh_am8(am.worstEpisode)
+	refresh_am9(am.angerTarget)
+	refresh_am10(am.familyOrigin)
+	refresh_am11(am.currentProblems)
+	refresh_am12(am.control)
+	refresh_am13(am.final)
 
-	if am.angerHistoryComplete == True:
-		am.angerHistory.delete()
-		angerHistory = AM_AngerHistory(client_id=am.client.clientID)
-		angerHistory.save()
-		temp = am.angerHistory
-		am.angerHistory = angerHistory
-		am.angerHistoryComplete = False
-		temp.delete()
-		am.save()
+	am.demographicComplete = False
+	am.drugHistoryComplete = False
+	am.childhoodComplete = False
+	am.angerHistoryComplete = False
+	am.angerHistoryComplete2 = False
+	am.angerHistoryComplete3 = False
+	am.connectionsComplete = False
+	am.worstComplete = False
+	am.angerTargetComplete = False
+	am.familyOriginComplete = False
+	am.currentProblemsComplete = False
+	am.controlComplete = False
+	am.finalComplete = False
 
-	if am.angerHistoryComplete2 == True:
-		am.angerHistory2.delete()
-		angerHistory2 = AM_AngerHistory2(client_id=am.client.clientID)
-		angerHistory2.save()
-		temp = am.angerHistory2
-		am.angerHistory2 = angerHistory2
-		am.angerHistoryComplete2 = False
-		temp.delete()
-		am.save()
+	am.demoPriority = False
+	am.dhPriority = False
+	am.childPriority = False
+	am.ah1Priority = False
+	am.ah2Priority = False
+	am.ah3Priority = False
+	am.connectPriority = False
+	am.worstPriority = False
+	am.targetPriority = False
+	am.familyPriority = False
+	am.currentPriority = False
+	am.controlPriority = False
+	am.finalPriority = False
 
-	if am.angerHistoryComplete3 == True:
-		am.angerHistory3.delete()
-		angerHistory3 = AM_AngerHistory3(client_id=am.client.clientID)
-		angerHistory3.save()
-		temp = am.angerHistory3
-		am.angerHistory3 = angerHistory3
-		am.angerHistoryComplete3 = False
-		temp.delete()
-		am.save()
-
-	if am.connectionsComplete == True:
-		am.connections.delete()
-		connections = AM_Connections(client_id=am.client.clientID)
-		connections.save()
-		temp = am.connections
-		am.connections = connections
-		am.connectionsComplete = False
-		temp.delete()
-		am.save()
-
-	if am.worstComplete == True:
-		am.worstEpisode.delete()
-		worstEpisode = AM_WorstEpisode(client_id=am.client.clientID)
-		worstEpisode.save()
-		temp = am.worstEpisode
-		am.worstEpisode = worstEpisode
-		am.worstComplete = False
-		temp.delete()
-		am.save()
-
-	if am.angerTargetComplete == True:
-		am.angerTarget.delete()
-		angerTarget = AM_AngerTarget(client_id=am.client.clientID)
-		angerTarget.save()
-		temp = am.angerTarget
-		am.angerTarget = angerTarget
-		am.angerTargetComplete = False
-		temp.delete()
-		am.save()
-
-	if am.familyOriginComplete == True:
-		am.familyOrigin.delete()
-		familyOrigin = AM_FamilyOrigin(client_id=am.client.clientID)
-		familyOrigin.save()
-		temp = am.familyOrigin
-		am.familyOrigin = familyOrigin
-		am.familyOriginComplete = False
-		temp.delete()
-		am.save()
-
-	if am.currentProblemsComplete == True:
-		am.currentProblems.delete()
-		currentProblems = AM_CurrentProblem(client_id=am.client.clientID)
-		currentProblems.save()
-		temp = am.currentProblems
-		am.currentProblems = currentProblems
-		am.currentProblemsComplete = False
-		temp.delete()
-		am.save()
-
-	if am.controlComplete == True:
-		am.control.delete()
-		control = AM_Control(client_id=am.client.clientID)
-		control.save()
-		temp = am.control
-		am.control = control
-		am.controlComplete = False
-		temp.delete()
-		am.save()
-
-	if am.finalComplete == True:
-		am.final.delete()
-		final = AM_Final(client_id=am.client.clientID)
-		final.save()
-		temp = am.final
-		am.final = final
-		am.finalComplete = False
-		temp.delete()
-		am.save()
+	am.isComplete = False
+	am.save()
 
 	return am
 
