@@ -5,6 +5,70 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
+<body class='session_exit_body' onLoad='javascript: initialize_saveForm();'> 
+	<form action='/form_saved/' method='post' id='s_form'> {% csrf_token %}
+		<input type='hidden' name='form_type' id='form_type' value=''>
+	</form>
+
+	<div class='iml-pop-head1'>
+		Save Document
+	</div>
+
+	<div class='iml-pop-body-error'>
+		<div class='iml-warning-holder2'><img src="{% static 'images/warning.png' %}" class='error-main-css-img'></div>
+
+		<div class='iml-error-m1-mid'>
+			Are you sure you want to save this document?
+		</div>
+
+		<div class='iml-error-m4'>
+			Once saved, this document can no longer be edited.
+		</div>
+	</div>
+
+	<div class='iml-pop-foot1'>
+		<div class='iml-btn-container4'>
+			<table>
+				<tr>
+					<td><button onClick='javascript: finalizeAllForms();'>Proceed</button></td>
+					<td><button onClick='javascript: window.close();'>Cancel</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- {% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
 <body class='session_exit_body'>
 	<div class='s_resolve_wrapper3'>
 		<div id='crazySpaceLite'></div>
@@ -46,4 +110,4 @@
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
-</body>
+</body> -->

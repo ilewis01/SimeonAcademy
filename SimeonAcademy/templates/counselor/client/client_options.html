@@ -50,7 +50,7 @@
                                         <button onClick="javascript: editClientInformation();">Edit Client Profile</button>
                                         <button onClick="javascript: updateClientStats();">Update Client Status</button>
                                         <button onClick="javascript: ">Notes</button>
-                                        <button onClick="javascript: generalSessionExitOptions();">Close Session</button>
+                                        <button onClick="javascript: generic_exit_home();">Close Session</button>
 
                                         <!-- referral source, payment type, type of service(indiv, couple), client status, attendance -->
                                     </div>
@@ -119,7 +119,7 @@
 
                                                                             <div class='iml-history-div'>
                                                                                 <span>{{h.name}}</span>
-                                                                                {{h.startTime}}
+                                                                                - {{h.session.startTime}}
                                                                             </div>
                                                                         </a>
                                                                     </li>

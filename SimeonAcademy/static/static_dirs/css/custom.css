@@ -4554,6 +4554,18 @@ button:hover {
 	margin-bottom: 1%;
 }
 
+.superDuperTable {
+	width:100%;
+
+}
+
+#iml-info-head2 button {
+	font-size: 14px;
+	color:black;
+	width: 120px;
+	border-radius: 12px;
+}
+
 .inl-nav-btn-cont {
 	width:100%;
 	/*height:57vh;*/
@@ -4758,6 +4770,16 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+.iml-data-entry-wrapper-sap {
+	width: 92%;
+	height: 63vh;
+	margin: auto;
+	margin-top: 2%;
+	border: 1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
 .iml-data-entry-wrapper-fVerify {
 	width: 92%;
 	height: 59vh;
@@ -4778,6 +4800,31 @@ button:hover {
     border: 2px solid #333333;
     overflow-y: scroll;
     overflow-x:hidden;
+}
+
+.top-split {
+	width:91%;
+	margin-top: 7%;
+	height:20%;
+	padding:2%;
+	text-align: justify;
+	font-size: 13px;
+}
+
+.iml-sap-header {
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 18px;
+	color:#445451;
+}
+
+.iml-sap-lg-textArea {
+	margin-top: 5%;
+}
+
+.top-split span {
+	font-weight: bold;
+	text-decoration: underline;;
 }
 
 .iml-move-it-left {
@@ -5124,6 +5171,25 @@ button:hover {
 	margin-left: 50%;
 }
 
+.end_save_sequence {
+	width: 80px;
+	margin: auto;
+	margin-top: 15%;
+}
+
+.end_save_sequence button {
+	width: 80px;
+}
+
+.iml-btn-container4 {
+	border: 1px solid black;
+	width:250px;
+	height:34px;
+	margin-top: 10px;
+	background-color: #e3dcc8;
+	margin-left: 45%;
+}
+
 .iml-btn-container-single {
 	border: 1px solid black;
 	width:125px;
@@ -5167,6 +5233,16 @@ button:hover {
 	color: #d06600;
 }
 
+.iml-error-m1-mid {
+	margin-top: 15%;
+	text-align: center;
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+	/*text-shadow: 1px 1px black;*/
+	color: #d06600;
+}
+
 .iml-error-m-sm {
 	margin-top: 15%;
 	text-align: center;
@@ -5202,6 +5278,14 @@ button:hover {
 	margin-top: 8%;
 	color:red;
 	/*color: #6B6B6B;*/
+}
+
+.iml-error-m4 {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 8%;
+	color: #445451;
 }
 
 .iml-error-m3-low {

@@ -5,6 +5,111 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
+<body class='session_exit_body' onLoad='javascript: initializeFinishChildhood({{json_data}});'>
+	<form action='/uni_exit_session/' method='post' id='s_form'> {% csrf_token %}
+		<input type='hidden' name='exit_type' id='exit_type' value='close'>
+		<input type='hidden' name='multiNav' id='multiNav' value='False'>
+		<input type='hidden' name='exit_to' id='exit_to' value='{{exit_to}}'>
+		<input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
+
+		<!-- <input type='hidden' name='exit_type' id='exit_type' value='close'> -->
+			<!-- <input type='hidden' name='shouldDelete' id='shouldDelete' value='{{shouldDelete}}'>
+			<input type='hidden' name='multiNav' id='multiNav' value='False'> -->
+	</form>
+
+	<div class='iml-pop-head1-error'>
+		END SESSION
+	</div>
+
+	<div class='iml-pop-body-error'>
+		<div class='iml-warning-holder2'><img src="{% static 'images/warning.png' %}" class='error-main-css-img'></div>
+
+		<div class='iml-error-m-sm2'>
+			Are you sure you want to end this session?
+		</div>
+
+		<div class='iml-error-m3-low'>
+			Please Make A Selection
+		</div>
+	</div>
+
+	<div class='iml-pop-foot1'>
+		<div class='iml-btn-container-double'>
+			<table>
+				<tr>
+					<td><button onClick="javascript: c_exit_session();">Yes</button></td>
+					<td><button onClick="javascript: window.close();">No</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>
+
+
+
+
+
+<!-- {% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='session_exit_body'>
+	<div class='s_resolve_wrapper3'>
+
+		<div id='crazySpaceLite'></div>
+
+		<form action='/sessionClosedAlt/' method='post' name='s_form' id='s_form'> {% csrf_token %}
+			<input type='hidden' name='exit_type' id='exit_type' value='closed'>
+			<input type='hidden' name='multiNav' id='multiNav' value='{{multiNav}}'>
+		</form>
+
+		<div id='s_img_div_resolve'>
+			<img src="{% static 'images/warning.png' %}" alt="session_warning" class='session_warning'>
+		</div>
+
+		<div id='close_error_head_sm'>
+			<span>Would you like to come back to this session at a later time?</span>
+		</div>
+
+		<div id='crazySpace'></div>
+
+		<div>
+			<table>
+				<tr>
+					<td>
+						<button type='button' onClick="javascript: chooseSessionExit('False');">Yes</button>
+					</td>
+
+					<td>
+						<button type='button' onClick="javascript: chooseSessionExit('True');">No</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body> -->
+
+
+
+
+
+
+
+
+<!-- {% load staticfiles %}
+
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
 <body class='session_exit_body'>
 	<div class='s_resolve_wrapper3'>
 
@@ -42,7 +147,7 @@
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
-</body>
+</body> -->
 
 
 

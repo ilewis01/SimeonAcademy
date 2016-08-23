@@ -1589,16 +1589,21 @@ def form_saved(request):
 
 		else:
 			session = ClientSession.objects.get(id=(getSessionID(user)))
-			form_type = request.POST.get('exit_type')
+			form_type = str(request.POST.get('form_type'))
+			form = None
 
 			if form_type == 'mh':
 				form = session.mh
+				content['formHead'] = 'Mental Health'
 			elif form_type == 'am':
 				form = session.am
+				content['formHead'] = 'Anger Management'
 			elif form_type == 'sap':
 				form = session.sap
+				content['formHead'] = 'S.A.P'
 			elif form_type == 'asi':
 				form = session.asi
+				content['formHead'] = 'Addiction Severity Index'
 
 			deprioritizeURL(form_type, form)
 			form.isOpen = False

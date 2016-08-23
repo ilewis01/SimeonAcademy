@@ -3425,11 +3425,31 @@ function universal_am_dynamic_post(section) {
 	}
 }
 
-function runSuperTest() {
-	var current_section = String(grab('save_section').value);
-	var next_url = grab('next_url');
-	var form = grab('am_demo');
-	grab('test1').value = next_url.value;
+// function runSuperTest() {
+// 	var current_section = String(grab('save_section').value);
+// 	var next_url = grab('next_url');
+// 	var form = grab('am_demo');
+// 	grab('test1').value = next_url.value;
+// }
+
+function leaveAMViewForm() {
+	grab('am_demo').action = '/clientOptions/';
+	grab('am_demo').submit();
+}
+
+function initialize_saveForm() {
+	grab('form_type').value = getPopParent('exit_type').value;
+}
+
+function finishSaveAMFinal() {
+	var w = 500;
+	openPopUp('auto', '/form_complete/', w, w);
+}
+
+function finalizeAllForms() {
+	grab('s_form').submit();
+	getPopParent('am_demo').action = '/clientOptions/'
+	getPopParent('am_demo').submit();
 }
 
 function continue_am_form(section) {
@@ -9617,7 +9637,7 @@ function chooseSessionExit(answer) {
 }
 
 function generic_exit_home() {
-	var w = 500, h = 250;
+	var w = 500, h = 500;
 	var lefts = Number((screen.width/2) - (w/2));
 	var tops = Number((screen.height/2) - (h/2));
 	var opWin = window.open('/closeSession/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
