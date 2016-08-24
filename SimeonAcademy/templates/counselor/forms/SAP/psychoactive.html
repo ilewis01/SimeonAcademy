@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_am({{current_section}}, {{json_data}});">
+<body class="gradient-white" onLoad="javascript: initialize_sap({{current_section}}, {{json_data}});">
     <form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='sap_id' id='sap_id' value='{{session.sap.id}}'>
@@ -21,7 +21,7 @@
           <div class='iml-body-wrapper2'>
 
             <div id='iml-info-head2'>
-              <div style='margin-left:3%;'>S.A.P Clinical Assessment</div>
+              <div style='margin-left:3%;'>S.A.P Psychoactive Substance Use History I</div>
             </div>
 
             <div class='iml-form-nav'>
@@ -109,227 +109,227 @@
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Alcohol</div></td>
+                          <td><div class='iml-psy-hor' id='e1'>Alcohol</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='alcoholAge' id='alcoholAge' style='width:100px;' value='{{fields.alcoholAge}}' oninput="javascript: noErrorText('e1', 'alcoholAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='alcoholFrequency' id='alcoholFrequency' style='width:205px;' value='{{fields.alcoholFrequency}}' oninput="javascript: noErrorText('e1', 'alcoholFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='alcoholQuantity' id='alcoholQuantity' style='width:285px;' value='{{fields.alcoholQuantity}}' oninput="javascript: noErrorText('e1', 'alcoholQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='alcoholLast' id='alcoholLast' style='width:120px;' value='{{fields.alcoholLast}}' oninput="javascript: noErrorText('e1', 'alcoholLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td><div class='iml-psy-hor'>Amphetamine</div></td>
-                          <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='alcoholHow' id='alcoholHow' style='width:80px;' value='{{fields.alcoholHow}}' oninput="javascript: noErrorText('e1', 'alcoholHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Caffine</div></td>
+                          <td><div class='iml-psy-hor' id='e2'>Amphetamine</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='amphAge' id='amphAge' style='width:100px;' value='{{fields.amphAge}}' oninput="javascript: noErrorText('e2', 'amphAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='amphFrequency' id='amphFrequency' style='width:205px;' value='{{fields.amphFrequency}}' oninput="javascript: noErrorText('e2', 'amphFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='amphQuantity' id='amphQuantity' style='width:285px;' value='{{fields.amphQuantity}}' oninput="javascript: noErrorText('e2', 'amphQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='amphLast' id='amphLast' style='width:120px;' value='{{fields.amphLast}}' oninput="javascript: noErrorText('e2', 'amphLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
-                          </td>
-                        </tr>
-
-                        <td><div class='iml-psy-hor'>Cannabis</div></td>
-                          <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='amphHow' id='amphHow' style='width:80px;' value='{{fields.amphHow}}' oninput="javascript: noErrorText('e2', 'amphHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Cocaine</div></td>
+                          <td><div class='iml-psy-hor' id='e3'>Caffine</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='caffineAge' id='caffineAge' style='width:100px;' value='{{fields.caffineAge}}' oninput="javascript: noErrorText('e3', 'caffineAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='caffineFrequency' id='caffineFrequency' style='width:205px;' value='{{fields.caffineFrequency}}' oninput="javascript: noErrorText('e3', 'caffineFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='caffineQuantity' id='caffineQuantity' style='width:285px;' value='{{fields.caffineQuantity}}' oninput="javascript: noErrorText('e3', 'caffineQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='caffineLast' id='caffineLast' style='width:120px;' value='{{fields.caffineLast}}' oninput="javascript: noErrorText('e3', 'caffineLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='caffineHow' id='caffineHow' style='width:80px;' value='{{fields.caffineHow}}' oninput="javascript: noErrorText('e3', 'caffineHow');"></div>
+                          </td>
+                        </tr>
+
+                        <td><div class='iml-psy-hor' id='e4'>Cannabis</div></td>
+                          <td>
+                            <div><input type='number' name='weedAge' id='weedAge' style='width:100px;' value='{{fields.weedAge}}' oninput="javascript: noErrorText('e4', 'weedAge');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='weedFrequency' id='weedFrequency' style='width:205px;' value='{{fields.weedFrequency}}' oninput="javascript: noErrorText('e4', 'weedFrequency');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='weedQuantity' id='weedQuantity' style='width:285px;' value='{{fields.weedQuantity}}' oninput="javascript: noErrorText('e4', 'weedQuantity');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='weedLast' id='weedLast' style='width:120px;' value='{{fields.weedLast}}' oninput="javascript: noErrorText('e4', 'weedLast');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='weedHow' id='weedHow' style='width:80px;' value='{{fields.weedHow}}' oninput="javascript: noErrorText('e4', 'weedHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Hallucinogen</div></td>
+                          <td><div class='iml-psy-hor' id='e5'>Cocaine</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='cokeAge' id='cokeAge' style='width:100px;' value='{{fields.cokeAge}}' oninput="javascript: noErrorText('e5', 'cokeAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='cokeFrequency' id='cokeFrequency' style='width:205px;' value='{{fields.cokeFrequency}}' oninput="javascript: noErrorText('e5', 'cokeFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='cokeQuantity' id='cokeQuantity' style='width:285px;' value='{{fields.cokeQuantity}}' oninput="javascript: noErrorText('e5', 'cokeQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='cokeLast' id='cokeLast' style='width:120px;' value='{{fields.cokeLast}}' oninput="javascript: noErrorText('e5', 'cokeLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
-                          </td>
-                        </tr>
-
-                        <td><div class='iml-psy-hor'>Inhalant</div></td>
-                          <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='cokeHow' id='cokeHow' style='width:80px;' value='{{fields.cokeHow}}' oninput="javascript: noErrorText('e5', 'cokeHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Nicotine</div></td>
+                          <td><div class='iml-psy-hor' id='e6'>Hallucinogen</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='hallAge' id='hallAge' style='width:100px;' value='{{fields.hallAge}}' oninput="javascript: noErrorText('e6', 'hallAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='hallFrequency' id='hallFrequency' style='width:205px;' value='{{fields.hallFrequency}}' oninput="javascript: noErrorText('e6', 'hallFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='hallQuantity' id='hallQuantity' style='width:285px;' value='{{fields.hallQuantity}}' oninput="javascript: noErrorText('e6', 'hallQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='hallLast' id='hallLast' style='width:120px;' value='{{fields.hallLast}}' oninput="javascript: noErrorText('e6', 'hallLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='hallHow' id='hallHow' style='width:80px;' value='{{fields.hallHow}}' oninput="javascript: noErrorText('e6', 'hallHow');"></div>
+                          </td>
+                        </tr>
+
+                        <td><div class='iml-psy-hor' id='e7'>Inhalant</div></td>
+                          <td>
+                            <div><input type='number' name='inhaleAge' id='inhaleAge' style='width:100px;' value='{{fields.inhaleAge}}' oninput="javascript: noErrorText('e7', 'inhaleAge');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='inhaleFrequency' id='inhaleFrequency' style='width:205px;' value='{{fields.inhaleFrequency}}' oninput="javascript: noErrorText('e7', 'inhaleFrequency');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='inhaleQuantity' id='inhaleQuantity' style='width:285px;' value='{{fields.inhaleQuantity}}' oninput="javascript: noErrorText('e7', 'inhaleQuantity');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='inhaleLast' id='inhaleLast' style='width:120px;' value='{{fields.inhaleLast}}' oninput="javascript: noErrorText('e7', 'inhaleLast');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='inhaleHow' id='inhaleHow' style='width:80px;' value='{{fields.inhaleHow}}' oninput="javascript: noErrorText('e7', 'inhaleHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Opioid</div></td>
+                          <td><div class='iml-psy-hor' id='e8'>Nicotine</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='smokeAge' id='smokeAge' style='width:100px;' value='{{fields.smokeAge}}' oninput="javascript: noErrorText('e8', 'smokeAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='smokeFrequency' id='smokeFrequency' style='width:205px;' value='{{fields.smokeFrequency}}' oninput="javascript: noErrorText('e8', 'smokeFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='smokeQuantity' id='smokeQuantity' style='width:285px;' value='{{fields.smokeQuantity}}' oninput="javascript: noErrorText('e8', 'smokeQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='smokeLast' id='smokeLast' style='width:120px;' value='{{fields.smokeLast}}' oninput="javascript: noErrorText('e8', 'smokeLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
-                          </td>
-                        </tr>
-
-                        <td><div class='iml-psy-hor'>PCP</div></td>
-                          <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
-                          </td>
-                          <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='smokeHow' id='smokeHow' style='width:80px;' value='{{fields.smokeHow}}' oninput="javascript: noErrorText('e8', 'smokeHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Sedative Hypnotic</div></td>
+                          <td><div class='iml-psy-hor' id='e9'>Opioid</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='opAge' id='opAge' style='width:100px;' value='{{fields.opAge}}' oninput="javascript: noErrorText('e9', 'opAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='opFrequency' id='opFrequency' style='width:205px;' value='{{fields.opFrequency}}' oninput="javascript: noErrorText('e9', 'opFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='opQuantity' id='opQuantity' style='width:285px;' value='{{fields.opQuantity}}' oninput="javascript: noErrorText('e9', 'opQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='opLast' id='opLast' style='width:120px;' value='{{fields.opLast}}' oninput="javascript: noErrorText('e9', 'opLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='opHow' id='opHow' style='width:80px;' value='{{fields.opHow}}' oninput="javascript: noErrorText('e9', 'opHow');"></div>
+                          </td>
+                        </tr>
+
+                        <td><div class='iml-psy-hor' id='e10'>PCP</div></td>
+                          <td>
+                            <div><input type='number' name='pcpAge' id='pcpAge' style='width:100px;' value='{{fields.pcpAge}}' oninput="javascript: noErrorText('e10', 'pcpAge');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='pcpFrequency' id='pcpFrequency' style='width:205px;' value='{{fields.pcpFrequency}}' oninput="javascript: noErrorText('e10', 'pcpFrequency');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='pcpQuantity' id='pcpQuantity' style='width:285px;' value='{{fields.pcpQuantity}}' oninput="javascript: noErrorText('e10', 'pcpQuantity');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='pcpLast' id='pcpLast' style='width:120px;' value='{{fields.pcpLast}}' oninput="javascript: noErrorText('e10', 'pcpLast');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='pcpHow' id='pcpHow' style='width:80px;' value='{{fields.pcpHow}}' oninput="javascript: noErrorText('e10', 'pcpHow');"></div>
                           </td>
                         </tr>
 
                         <tr>
-                          <td><div class='iml-psy-hor'>Other</div></td>
+                          <td><div class='iml-psy-hor' id='e11'>Sedative Hypnotic</div></td>
                           <td>
-                            <div><input type='number' name='Age' id='Age' style='width:100px;' value='{{fields.}}'></div>
+                            <div><input type='number' name='sedAge' id='sedAge' style='width:100px;' value='{{fields.sedAge}}' oninput="javascript: noErrorText('e11', 'sedAge');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Frequency' id='Frequency' style='width:205px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='sedFrequency' id='sedFrequency' style='width:205px;' value='{{fields.sedFrequency}}' oninput="javascript: noErrorText('e11', 'sedFrequency');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Quantity' id='Quantity' style='width:285px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='sedQuantity' id='sedQuantity' style='width:285px;' value='{{fields.sedQuantity}}' oninput="javascript: noErrorText('e11', 'sedQuantity');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='Last' id='Last' style='width:120px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='sedLast' id='sedLast' style='width:120px;' value='{{fields.sedLast}}' oninput="javascript: noErrorText('e11', 'sedLast');"></div>
                           </td>
                           <td>
-                            <div><input type='text' name='How' id='How' style='width:80px;' value='{{fields.}}'></div>
+                            <div><input type='text' name='sedHow' id='sedHow' style='width:80px;' value='{{fields.sedHow}}' oninput="javascript: noErrorText('e11', 'sedHow');"></div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='iml-psy-hor' id='e12'>Other</div></td>
+                          <td>
+                            <div><input type='number' name='otherAge' id='otherAge' style='width:100px;' value='{{fields.otherAge}}' oninput="javascript: noErrorText('e12', 'otherAge');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='otherFrequency' id='otherFrequency' style='width:205px;' value='{{fields.otherFrequency}}' oninput="javascript: noErrorText('e12', 'otherFrequency');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='otherQuantity' id='otherQuantity' style='width:285px;' value='{{fields.otherQuantity}}' oninput="javascript: noErrorText('e12', 'otherQuantity');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='otherLast' id='otherLast' style='width:120px;' value='{{fields.otherLast}}' oninput="javascript: noErrorText('e12', 'otherLast');"></div>
+                          </td>
+                          <td>
+                            <div><input type='text' name='otherHow' id='otherHow' style='width:80px;' value='{{fields.otherHow}}' oninput="javascript: noErrorText('e12', 'otherHow');"></div>
                           </td>
                         </tr>
                       </table>
@@ -343,8 +343,8 @@
             <div>
               <table class='iml-save-btn'>
                 <tr>
-                  <td><button onClick="javascript: universal_generic_exit('am', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: continue_am_form('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: universal_generic_exit('sap', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}');">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

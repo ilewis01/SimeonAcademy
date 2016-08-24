@@ -1,371 +1,180 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_sap('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white" onLoad="javascript: initialize_sap({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='sap_id' id='sap_id' value='{{session.sap.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='sap'>
+      <input type='hidden' name='form_name' id='form_name' value='am_demo'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
 
-    <div id="wrapper" class='shift-rr'>
+      <input type='hidden' name='m_isChild' id='m_isChild' value=''>
+      <input type='hidden' name='m_isSenior' id='m_isSenior' value=''>
+      <input type='hidden' name='m_isDual' id='m_isDual' value=''>
+      <input type='hidden' name='m_isOther' id='m_isOther' value=''>
+      <input type='hidden' name='m_isNone' id='m_isNone' value=''>
+      <input type='hidden' name='m_special' id='m_special' value=''>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
 
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>{{session.s_type}}</h4>
-                </div>
-              </td>
-            </tr>
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>S.A.P Special Populations</div>
+            </div>
 
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{sap.client.fname}} {{sap.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{sap.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
-
-            <tr>
-              <td>
-                <div class='{{class.clinic}}'>
-                  <img src="{{image.demo_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapClinic');" name='clinicalBtn' id='clinicalBtn'>
-                    Clinical Assessment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.social}}'>
-                  <img src="{{image.social_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapSocial');" name='socialBtn' id='socialBtn'>
-                    Social Interaction
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.psycho1}}'>
-                  <img src="{{image.psycho1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapPsycho1');" name='psychoBtn' id='psychoBtn'>
-                    Psychoactive Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.psycho2}}'>
-                  <img src="{{image.psycho2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapPsycho2');" name='psycho2Btn' id='psycho2Btn'>
-                    Psychoactive Use II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.special}}'>
-                  <img src="{{image.special_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='specialBtn' id='specialBtn'>
-                    Special Populations
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.other}}'>
-                  <img src="{{image.other_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapOther');" name='otherBtn' id='otherBtn'>
-                    Other
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.source}}'>
-                  <img src="{{image.source_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarOption('sapSource');" name='sourceBtn' id='sourceBtn'>
-                    Sources
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('sap', '/sap_special/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <h3 id='am-h2'>S.A.P: Special Populations</h3>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-12 col-sm-12">
-                  			<div>
-                  				<form action='/sap_other/' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                  					<input type='hidden' name='sap_id' id='sap_id' value='{{sap.id}}'>
-                  					<input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='/sap_special/'> 
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='sap'>
-
-                            <input type='hidden' name='m_isChild' id='m_isChild' value=''>
-                            <input type='hidden' name='m_isSenior' id='m_isSenior' value=''>
-                            <input type='hidden' name='m_isDual' id='m_isDual' value=''>
-                            <input type='hidden' name='m_isOther' id='m_isOther' value=''>
-                            <input type='hidden' name='m_isNone' id='m_isNone' value=''>
-                            <input type='hidden' name='m_special' id='m_special' value=''>
-				                
-				            </div>
-
-				            <table>
-				            	<tr>
-				            		<td>
-				            			<span class='sap_label'>
-				            			    Client is a member of the following special population group:
-				            		    </span>
-				            		</td>
-				            	</tr>
-
-				            	<tr>
-				            		<td>
-				            			<em>(Check all that apply)</em>
-				            		</td>
-				            	</tr>
-				            </table>
-
-				            <table>
-				            	<tr>
-				            		<td>
-				            			<div id='align_checkbox_label'>
-				            				<input type='checkbox' name='isChild' id='isChild'>
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<div id='give_label_right_space_high'>
-				            				<label id='child_label'>
-				            				    Child/Adolescent
-				            			    </label>
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<table>
-				            				<tr>
-				            					<td>
-				            						<div id='align_checkbox_label'>
-				            							<input type='checkbox' name='isSenior' id='isSenior'>
-				            						</div>
-				            					</td>
-
-				            					<td>
-				            						<label id='senior_label'>
-				            							Senior
-				            						</label>
-				            					</td>
-
-				            					<td><div style='margin-left:135px;'></div></td>
-
-
-				            					<td>
-				            						<div id='align_checkbox_label'>
-				            							<input type='checkbox' name='isDual' id='isDual'>
-				            						</div>
-				            					</td>
-
-				            					<td>
-				            						<label id='dual_label'>
-				            							Dual Diagnosis
-				            						</label>
-				            					</td>
-				            				</tr>
-				            			</table>
-				            		</td>
-				            	</tr>
-				            </table>
-
-                            <table>
-				            	<tr>
-				            		<td>
-				            			<div id='align_checkbox_label'>
-				            				<input type='checkbox' name='isOther' id='isOther'>
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<div id='give_label_right_space'>
-				            				<label id='other_label'>
-				            				    Other coexisting disabilities/disorders
-				            			    </label>
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<div id='align_checkbox_label'>
-				            				<input type='checkbox' name='isNone' id='isNone' onClick='javascript: disable_sap_special();'>
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<label>
-				            				None of the above <span>(Continue to next section)</span>
-				            			</label>
-				            		</td>
-				            	</tr>
-				            </table>
-                            
-
-				            <table>
-				            	<tr><td><div style='margin-top:30px;'></div></td></tr>
-				            	<tr>
-				            		<td>
-				            			<span class='sap_label'>
-				            			    Special Populations:
-				            		    </span>
-				            		</td>
-				            	</tr>
-				            </table>
-
-				            <table>
-				            	<tr>
-				            		<td>
-				            			<div>
-				            				<div class='FA_INFO5'>
-				            					<i class="fa fa-info-circle" aria-hidden="true"></i>
-				            				</div>
-				            				<!-- <img src="{% static 'images/lightbulb.png' %}" alt="" class='light_bulb_large'> -->
-				            			</div>
-				            		</td>
-
-				            		<td>
-				            			<div id='justify_div'>
-				            				<span id='sap_sub_label'>
-				            				    <div id='text_label'>
-				            				    	Assessment for children/adolescents must include motor development and functioning; speech, hearing and language functioning; immunization status; evaluation of developmental age factors, learning ability and intellectual functioning. Assessment for seniors must include motor, speech, hearing, language and cognitive functioning. Assessment for persons with coexisting psychiatric disabilities and other coexisting disabilities/disorders must include (if appropiate or applicable) history of previous mental health services, previous medical history, pharmacotherapy, hospitalization, use of community programs, differential diagnosis, mental status, all prescription and non-prescription medications at time of admission and at least the previous six months, past and current medication efficacy, medication allergies and/or adverse medication reactions, and adjustment to disability/disorder.
-				            				    </div>
-				            			    </span>
-				            			</div>
-				            		</td>
-				            	</tr>
-				            </table>
-				            <table>
-				            	<tr>
-				            		<td>
-				            			<div id='Above_5'>
-				            				<textarea rows='20' cols='103' name='special' id='special'>{{fields.special}}</textarea>
-				            			</div>
-				            		</td>
-				            	</tr>
-				            </table>
-                    </form>
-				        </div>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarOption('sapClinic');">
+                              <!-- class='{{class.clinic}}' -->
+                              <div  class='iml-button'>Clinical Assessment</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarOption('sapSocial');">
+                              <!-- class='{{class.social}}' -->
+                              <div  class='iml-button'>Social Interaction</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: uni_sap_proceed('{{current_section}}');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarOption('sapPsycho1');">
+                              <!-- class='{{class.psycho1}}' -->
+                              <div  class='iml-button'>Psychoactive Use</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarOption('sapPsycho2');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='iml-button'>Psychoactive Use II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarOption('sapSpecial');">
+                              <!-- class='{{class.special}}' -->
+                              <div  class='iml-button'>Special Populations</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarOption('sapOther');">
+                              <!-- class='{{class.other}}' -->
+                              <div  class='iml-button'>Additional Details</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarOption('sapSource');">
+                             <!--  class='{{class.source}}' -->
+                              <div  class='iml-button'>Data Sources</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper-sap'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    <table>
+                      <tr>
+                        <td>
+                          <div class='top-split'>
+                            <div class='iml-sap-header'>Special Populations:</div>
+                            <em>
+                            Assessment for children/adolescents must include motor development and functioning; speech, hearing and language functioning; immunization status; evaluation of developmental age factors, learning ability and intellectual functioning. Assessment for seniors must include motor, speech, hearing, language and cognitive functioning. Assessment for persons with coexisting psychiatric disabilities and other coexisting disabilities/disorders must include (if appropiate or applicable) history of previous mental health services, previous medical history, pharmacotherapy, hospitalization, use of community programs, differential diagnosis, mental status, all prescription and non-prescription medications at time of admission and at least the previous six months, past and current medication efficacy, medication allergies and/or adverse medication reactions, and adjustment to disability/disorder.
+                          </em>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <div class='iml-sap-all-sub-head'>Client is a memeber of the following special population group(s):</div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <div style='margin-left:10px;'>
+                      <table>
+                        <tr>
+                          <td><input class='inl-sap-sline-check' type='checkbox' name='isChild' id='isChild'></td>
+                          <td><div class='iml-sap-sline-label'>Child/Adolescent</div></td>
+
+                          <td><input class='inl-sap-sline-check' type='checkbox' name='isSenior' id='isSenior'></td>
+                          <td><div class='iml-sap-sline-label'>Seniors</div></td>
+                        </tr>
+
+                        <tr>
+                          <td><input class='inl-sap-sline-check' type='checkbox' name='isDual' id='isDual'></td>
+                          <td><div class='iml-sap-sline-label'>Dual Diagnosis</div></td>
+
+                          <td><input class='inl-sap-sline-check' type='checkbox' name='isOther' id='isOther'></td>
+                          <td><div class='iml-sap-sline-label'>Other Coexisting Disabilities/Disorders</div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><input class='inl-sap-sline-check' type='checkbox' name='isNone' id='isNone' onClick='javascript: disable_sap_special();'></td>
+                          <td><div class='iml-sap-sline-label'>None of the above <span style='color:#ab8d8f'>(Proceed to next section)</span></div></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:px;'>
+                    <div class='non-header-top-split'>
+                      If applicable, please provide documentation/notes for special populations below:
+                    </div>
+                    <div class='double-side-textarea'>
+                      <textarea name='special' id='special'>{{fields.special}}</textarea>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('sap', '{{current_section}}');">Exit Form</button></td>
+                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}');">Save & Continue</button></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
