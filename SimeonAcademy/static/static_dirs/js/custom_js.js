@@ -1669,25 +1669,7 @@ function runFunctionTest() {
 	// grab('health').value = 'Errors in form? ' + hasErrors;
 }
 
-function uni_sap_proceed(section) {
-	section = String(section);
-	var hasErrors 	= superDuperSapHasErrors(section);
 
-	if (hasErrors === true) {
-		var w = 500;
-		superDuperSapChecker(section);
-		openPopUp('auto', '/generateErrors/', w, w);
-	}
-	else {
-		postSapFields(section);
-		var form 		= grab('sap_form');
-		var next_url 	= grab('next_url');
-
-		grab('save_this').value = 'true';
-		form.action 			= next_url.value;
-		form.submit();
-	}
-}
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -6478,6 +6460,26 @@ function postSapFields(page) {
 	}
 }
 
+function uni_sap_proceed(section) {
+	section = String(section);
+	var hasErrors 	= superDuperSapHasErrors(section);
+
+	if (hasErrors === true) {
+		var w = 500;
+		superDuperSapChecker(section);
+		openPopUp('auto', '/generateErrors/', w, w);
+	}
+	else {
+		postSapFields(section);
+		var form 		= grab('sap_form');
+		var next_url 	= grab('next_url');
+
+		grab('save_this').value = 'true';
+		form.action 			= next_url.value;
+		form.submit();
+	}
+}
+
 // function post(isDynamic, field_type, field, trigger, target)
 
 function postSapDemo() {
@@ -6600,70 +6602,40 @@ function postSapViewForm() {
 	
 }
 
-function disable_sap_special() {
-	//TRIGGER
-	var isNone = document.getElementById('isNone');
-
-	//LABELS
-	var other_label = document.getElementById('other_label');
-	var dual_label = document.getElementById('dual_label');
-	var senior_label = document.getElementById('senior_label');
-	var child_label = document.getElementById('child_label');
-	var text_label = document.getElementById('text_label');
-
-	//FIELDS
-	var isChild = document.getElementById('isChild');
-	var isSenior = document.getElementById('isSenior');
-	var isDual = document.getElementById('isDual');
-	var isOther = document.getElementById('isOther');
-	var special = document.getElementById('special');
-
-	if (isNone.checked === true) {
-		opacityLow(other_label);
-		opacityLow(dual_label);
-		opacityLow(senior_label);
-		opacityLow(child_label);
-		opacityLow(text_label);
-
-		opacityLow(isChild);
-		opacityLow(isSenior);
-		opacityLow(isDual);
-		opacityLow(isOther);
-		opacityLow(special);
-
-		special.value = '';
-
-		isChild.checked = false;
-		isSenior.checked = false;
-		isDual.checked = false;
-		isOther.checked = false;
-
-		isChild.disabled = true;
-		isSenior.disabled = true;
-		isDual.disabled = true;
-		isOther.disabled = true;
-		special.disabled = true;
+function reverseCheckBox(trigger, label, field) {
+	if (trigger.checked === true) {
+		opacityLow(label);
+		opacityLow(field);
+		field.checked = false;
+		field.disabled = true;
 	}
-
 	else {
-		isChild.disabled = false;
-		isSenior.disabled = false;
-		isDual.disabled = false;
-		isOther.disabled = false;
-		special.disabled = false;
-
-		opacityHigh(other_label);
-		opacityHigh(dual_label);
-		opacityHigh(senior_label);
-		opacityHigh(child_label);
-		opacityHigh(text_label);
-
-		opacityHigh(isChild);
-		opacityHigh(isSenior);
-		opacityHigh(isDual);
-		opacityHigh(isOther);
-		opacityHigh(special);
+		opacityHigh(label);
+		opacityHigh(field);
+		field.disabled = false;
 	}
+}
+
+function killCheckboxSubText(trigger, label, textarea) {
+	if (trigger.checked === true) {
+		opacityLow(label);
+		opacityLow(textarea);
+		textarea.value = '';
+		textarea.disabled = true;
+	}
+	else {
+		opacityHigh(label);
+		opacityHigh(textarea);
+		textarea.disabled = false;
+	}
+}
+
+function disable_sap_special() {
+	reverseCheckBox(grab('isNone'), grab('label1'), grab('isChild'));
+	reverseCheckBox(grab('isNone'), grab('label2'), grab('isSenior'));
+	reverseCheckBox(grab('isNone'), grab('label3'), grab('isDual'));
+	reverseCheckBox(grab('isNone'), grab('label4'), grab('isOther'));
+	killCheckboxSubText(grab('isNone'), grab('label5'), grab('special'));
 }
 
 function continue_to_sap_form() {
