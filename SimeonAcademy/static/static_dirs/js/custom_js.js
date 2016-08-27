@@ -1528,21 +1528,6 @@ function noErrorText2(groupNumber) {
 	}
 }
 
-function runFunctionTest() {
-	// for (var i = 0; i < 12; i++) {
-	// 	var group = get_sap_pgroupFields(i);
-	// }
-	var group = get_sap_pgroupFields(2);
-	var proceed = proceedWithPsychoactiveCheck(group);
-	var hasError = sap_p_hasErrors(group);
-	var allErrors = checkAllPsyFieldsForErrors_sap();
-	var debunk = noErrorText2(4);
-
-	if (allErrors === true) {
-		checkAllSapPsych1Fields();
-	}
-	grab('alcoholQuantity').value = debunk;
-}
 
 function superSap_PsychErrors(groupNumber) {
 	var groupList = get_sap_pgroupFields(groupNumber);
@@ -1684,6 +1669,20 @@ function superErrorChecker(formType, section) {
 				dateErrorChecker(fieldList[i]);
 			}
 		}
+	}
+}
+
+function uni_sap_proceed(section) {
+	var proceed 	= true;
+	var form 		= grab('sap_form');
+	var next_url 	= grab('next_url');
+
+	postSapFields(section);
+
+	if (proceed === true) {
+		grab('save_this').value = 'true';
+		form.action 			= next_url.value;
+		form.submit();
 	}
 }
 
@@ -6596,20 +6595,6 @@ function postSapSources() {
 
 function postSapViewForm() {
 	
-}
-
-function uni_sap_proceed(section) {
-	var proceed 	= true;
-	var form 		= grab('sap_form');
-	var next_url 	= grab('next_url');
-
-	postSapFields(section);
-
-	if (proceed === true) {
-		grab('save_this').value = 'true';
-		form.action 			= next_url.value;
-		form.submit();
-	}
 }
 
 function disable_sap_special() {

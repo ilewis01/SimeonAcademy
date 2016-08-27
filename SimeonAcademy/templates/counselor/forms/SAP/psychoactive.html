@@ -4,7 +4,6 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_sap({{current_section}}, {{json_data}});">
-  <td><button onClick="javascript: runFunctionTest();">Run Test</button></td>
     <form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='sap_id' id='sap_id' value='{{session.sap.id}}'>
