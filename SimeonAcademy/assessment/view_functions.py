@@ -5162,9 +5162,9 @@ def beginSAP(request):
 def grabSapClassesCSS(sap, m_page):
 	classes = {}
 	sap = grabSapCompletedSections(sap)
-	normal = 'sideBarMargin'
-	green = 'sideBarMarginChecked'
-	current = 'sideLinkSelected'
+	normal = 'iml-button-incomplete'
+	green = 'iml-button'
+	current = 'iml-button-current'
 
 	classes['clinic'] = processCompletedClass(sap['clinicalComplete'], '/sap_demographic/', m_page, green, current, normal)
 	classes['social'] = processCompletedClass(sap['socialComplete'], '/sap_social/', m_page, green, current, normal)
@@ -6132,10 +6132,12 @@ def processSapData(request, current_section):
 	next_url = nextSAPage(sap, current_section)
 	image = grabSapImages(sap, current_section)
 	classes = grabSapClassesCSS(sap, current_section)
+	track = getTrack(request.user)
 
 	if current_section == '/sap_viewForm/':
 		result['s_date'] = sap.date_of_assessment
 
+	result['tracking'] = track.state.state
 	result['current_section'] = current_section
 	result['class'] = classes
 	result['image'] = image

@@ -330,6 +330,12 @@ function setErrorDiv(divName) {
 	div.className = 'iml-error-set';
 }
 
+function setErrorDivPsy(divName) {
+	divName = String(divName);
+	var div = grab(divName);
+	div.className = 'iml-psy-hor-psy';
+}
+
 function noErrorText(divName, fieldName) {
 	divName = String(divName);
 	fieldName = String(fieldName);
@@ -343,6 +349,7 @@ function noErrorText(divName, fieldName) {
 		div.className = '';
 	}
 }
+
 
 function fetchAM1FieldNames() {
 	var result = [];
@@ -1159,9 +1166,414 @@ function fetchFieldList_asi(section) {
 	
 }
 
-function fetchFieldList_sap(section) {
-	
+function fetch_demoFields_sap() {
+	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+
+	d1['field'] = 'problem';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'health';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+
+	return result;
 }
+
+function fetch_socialFields_sap() {
+	var result = [];
+	var d1 = {};
+
+	d1['field'] = 'family';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+
+	return result;
+}
+
+function fetch_psych1Fields_sap() {
+	var result = [];
+	var names = [];
+	var group = 1;
+	names.push('alcohol');
+	names.push('amph');
+	names.push('caffine');
+	names.push('weed');
+	names.push('coke');
+	names.push('hall');
+	names.push('inhale');
+	names.push('smoke');
+	names.push('op');
+	names.push('pcp');
+	names.push('sed');
+	names.push('other');
+
+	var t = '';
+
+	for (var i = 0; i < names.length; i++) {
+		var d1 = {};
+		var d2 = {};
+		var d3 = {};
+		var d4 = {};
+		var d5 = {};
+
+		var theDiv = 'e' + String(group);
+
+		d1['field'] = String(names[i]) + 'Age';
+		d2['field'] = String(names[i]) + 'Frequency';
+		d3['field'] = String(names[i]) + 'Quantity';
+		d4['field'] = String(names[i]) + 'Last';
+		d5['field'] = String(names[i]) + 'How';
+
+		d1['sub'] = 'Age';
+		d2['sub'] = 'Frequency';
+		d3['sub'] = 'Quantity';
+		d4['sub'] = 'Last';
+		d5['sub'] = 'How';
+
+		d1['group'] = String(group);
+		d2['group'] = String(group);
+		d3['group'] = String(group);
+		d4['group'] = String(group);
+		d5['group'] = String(group);
+
+		d1['type'] = 'text';
+		d2['type'] = 'text';
+		d3['type'] = 'text';
+		d4['type'] = 'text';
+		d5['type'] = 'text';
+
+		d1['isDynamic'] = false;
+		d2['isDynamic'] = false;
+		d3['isDynamic'] = false;
+		d4['isDynamic'] = false;
+		d5['isDynamic'] = false;
+
+		d1['div'] = theDiv;
+		d2['div'] = theDiv;
+		d3['div'] = theDiv;
+		d4['div'] = theDiv;
+		d5['div'] = theDiv;
+
+		d1['trigger'] = null;
+		d2['trigger'] = null;
+		d3['trigger'] = null;
+		d4['trigger'] = null;
+		d5['trigger'] = null;
+
+		result.push(d1);
+		result.push(d2);
+		result.push(d3);
+		result.push(d4);
+		result.push(d5);
+
+		group += 1;
+	}
+
+	return result;
+}
+
+function fetch_psych2Fields_sap() {
+	var result = [];
+	var d1 = {};
+
+	d1['field'] = 'psychoactive';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+
+	return result;
+}
+
+function fetch_additionalFields_sap() {
+	var result = [];
+
+	var d1 = {};
+	var d2 = {};
+	var d3 = {};
+	var d4 = {};
+
+	d1['field'] = 'psychological';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+	d2['field'] = 'gambling';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+	d3['field'] = 'abilities';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+	d4['field'] = 'other';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+
+	return result;
+}
+
+function fetchFieldList_sap(section) {
+	var fields = [];
+	section = String(section);
+
+	if (section === '/sap_demographic/') {
+		fields = fetch_demoFields_sap();
+	}
+	else if (section === '/sap_social/') {
+		fields = fetch_socialFields_sap();
+	}
+	else if (section === '/sap_psychoactive2/') {
+		fields = fetch_psych2Fields_sap();
+	}
+	else if (section === '/sap_other/') {
+		fields = fetch_additionalFields_sap();
+	}
+	return fields;
+}
+
+function get_sap_pgroupFields(groupNumber) {
+	var plist = fetch_psych1Fields_sap();
+	var result = [];
+
+	groupNumber = Number(groupNumber);
+
+	if (groupNumber === 1) {
+		result.push(plist[0]);
+		result.push(plist[1]);
+		result.push(plist[2]);
+		result.push(plist[3]);
+		result.push(plist[4]);
+	}
+	else if (groupNumber === 2) {
+		result.push(plist[5]);
+		result.push(plist[6]);
+		result.push(plist[7]);
+		result.push(plist[8]);
+		result.push(plist[9]);
+	}
+	else if (groupNumber === 3) {
+		result.push(plist[10]);
+		result.push(plist[11]);
+		result.push(plist[12]);
+		result.push(plist[13]);
+		result.push(plist[14]);
+	}
+	else if (groupNumber === 4) {
+		result.push(plist[15]);
+		result.push(plist[16]);
+		result.push(plist[17]);
+		result.push(plist[18]);
+		result.push(plist[19]);
+	}
+	else if (groupNumber === 5) {
+		result.push(plist[20]);
+		result.push(plist[21]);
+		result.push(plist[22]);
+		result.push(plist[23]);
+		result.push(plist[24]);
+	}
+	else if (groupNumber === 6) {
+		result.push(plist[25]);
+		result.push(plist[26]);
+		result.push(plist[27]);
+		result.push(plist[28]);
+		result.push(plist[29]);
+	}
+	else if (groupNumber === 7) {
+		result.push(plist[30]);
+		result.push(plist[31]);
+		result.push(plist[32]);
+		result.push(plist[33]);
+		result.push(plist[34]);
+	}
+	else if (groupNumber === 8) {
+		result.push(plist[35]);
+		result.push(plist[36]);
+		result.push(plist[37]);
+		result.push(plist[38]);
+		result.push(plist[39]);
+	}
+	else if (groupNumber === 9) {
+		result.push(plist[40]);
+		result.push(plist[41]);
+		result.push(plist[42]);
+		result.push(plist[43]);
+		result.push(plist[44]);
+	}
+	else if (groupNumber === 10) {
+		result.push(plist[45]);
+		result.push(plist[46]);
+		result.push(plist[47]);
+		result.push(plist[48]);
+		result.push(plist[49]);
+	}
+	else if (groupNumber === 11) {
+		result.push(plist[50]);
+		result.push(plist[51]);
+		result.push(plist[52]);
+		result.push(plist[53]);
+		result.push(plist[54]);
+	}
+	else if (groupNumber === 12) {
+		result.push(plist[55]);
+		result.push(plist[56]);
+		result.push(plist[57]);
+		result.push(plist[58]);
+		result.push(plist[59]);
+	}
+
+	return result;
+}
+
+function sap_p_hasErrors(groupList) {
+	var hasErrors = false;
+
+	for (var i = 0; i < groupList.length; i++) {
+		var sub = String(groupList[i]['sub']);
+
+		if (sub === 'Age') {
+			hasErrors = hasNumberErrors(groupList[i]);
+		}
+		else {
+			hasErrors = hasTextError(groupList[i]);
+		}
+
+		if (hasErrors === true) {
+			break;
+		}
+	}
+
+	return hasErrors;
+}
+
+function checkAllPsyFieldsForErrors_sap() {
+	var hasErrors = false;
+
+	for (var i = 1; i <= 12; i++) {
+		var group = get_sap_pgroupFields(i);
+		hasErrors = sap_p_hasErrors(group);
+
+		if (hasErrors === true) {
+			break;
+		}
+	}
+	return hasErrors;
+}
+
+function proceedWithPsychoactiveCheck(group) {
+	proceed = false;
+	continueSearch = true;
+
+	var ageItem = null;
+	var items = [];
+
+	for (var i = 0; i < group.length; i++) {
+		if (String(group[i]['sub']) === 'Age') {
+			ageItem = group[i];
+		}
+		else {
+			items.push(group[i]);
+		}
+	}
+
+	var ageField = grab(String(ageItem['field']));
+	if (String(ageField.value) !== '0') {
+		continueSearch = false;
+		proceed = true;
+	}
+
+	if (continueSearch === true) {
+		for (var j = 0; j < items.length; j++) {
+			var field = grab(String(items[j]['field']));
+			if (isBlankText(field.value) === false) {
+				proceed = true;
+				break;
+			} 
+		}
+	}
+
+	return proceed;
+}
+
+function noErrorText2(groupNumber) {
+	var group = get_sap_pgroupFields(groupNumber);
+	var hasErrors = sap_p_hasErrors(group);
+	
+	if (hasErrors === false) {
+		var divName = String(group[0]['div']);
+		var div = grab(divName);
+		div.className = 'iml-psy-hor';
+	}
+}
+
+function runFunctionTest() {
+	// for (var i = 0; i < 12; i++) {
+	// 	var group = get_sap_pgroupFields(i);
+	// }
+	var group = get_sap_pgroupFields(2);
+	var proceed = proceedWithPsychoactiveCheck(group);
+	var hasError = sap_p_hasErrors(group);
+	var allErrors = checkAllPsyFieldsForErrors_sap();
+	var debunk = noErrorText2(4);
+
+	if (allErrors === true) {
+		checkAllSapPsych1Fields();
+	}
+	grab('alcoholQuantity').value = debunk;
+}
+
+function superSap_PsychErrors(groupNumber) {
+	var groupList = get_sap_pgroupFields(groupNumber);
+	var checkForErrors = proceedWithPsychoactiveCheck(groupList);
+	var hasErrors = sap_p_hasErrors(groupList);
+
+	if (hasErrors === true && checkForErrors === true) {
+		var errorDivName = groupList[0]['div'];
+		setErrorDivPsy(errorDivName);
+	}
+}
+
+function checkAllSapPsych1Fields() {
+	for (var i = 1; i <= 12; i++) {
+		superSap_PsychErrors(i);
+	}
+}
+
+function superDuperSapHasErrors(section) {
+	section = String(section);
+	var hasErrors = false;
+
+	if (section === '/sap_psychoactive/') {
+		hasErrors = checkAllPsyFieldsForErrors_sap();
+	}
+	else {
+		hasErrors = hasErrorsInForm('sap', section);
+	}
+	return hasErrors;
+}
+
 
 
 
@@ -1198,55 +1610,79 @@ function hasErrorsInForm(formType, section) {
 	section = String(section);
 	fieldList = fetchFieldList(formType, section);
 
-	for (var i = 0; i < fieldList.length; i++) {
-		if (fieldList[i]['type'] === 'text') {
-			isGood = hasTextError(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'number') {
-			isGood = hasNumberErrors(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'select') {
-			isGood = hasSelectErrors(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'ssn') {
-			isGood = hasSsnErrors(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'phone') {
-			isGood = hasPhoneErrors(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'date') {
-			isGood = hasDateErrors(fieldList[i]);
-		}
+	if (formType === 'sap') {
+		isGood = superDuperSapHasErrors(section);
+	}
 
-		if (isGood === true) {
-			break;
+	else {
+		for (var i = 0; i < fieldList.length; i++) {
+			if (fieldList[i]['type'] === 'text') {
+				isGood = hasTextError(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'number') {
+				isGood = hasNumberErrors(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'select') {
+				isGood = hasSelectErrors(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'ssn') {
+				isGood = hasSsnErrors(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'phone') {
+				isGood = hasPhoneErrors(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'date') {
+				isGood = hasDateErrors(fieldList[i]);
+			}
+
+			if (isGood === true) {
+				break;
+			}
 		}
 	}
 
 	return isGood;
 }
 
+function superDuperSapChecker(section) {
+	section = String(section);
+
+	if (section === '/sap_psychoactive/') {
+		checkAllSapPsych1Fields();
+	}
+	else {
+		superErrorChecker('sap', section);
+	}
+}
+
 function superErrorChecker(formType, section) {
+	var formType = String(formType);
 	var fieldList = fetchFieldList(formType, section);
 
-	for (var i = 0; i < fieldList.length; i++) {
-		if (fieldList[i]['type'] === 'text') {
-			textErrorChecker(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'number') {
-			numberErrorChecker(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'select') {
-			selectErrorChecker(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'ssn') {
-			ssnErrorChecker(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'phone') {
-			phoneErrorChecker(fieldList[i]);
-		}
-		else if (fieldList[i]['type'] === 'date') {
-			dateErrorChecker(fieldList[i]);
+	if (formType === 'sap') {
+		superDuperSapChecker(section);
+	}
+
+	else {
+		for (var i = 0; i < fieldList.length; i++) {
+			if (fieldList[i]['type'] === 'text') {
+				textErrorChecker(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'number') {
+				numberErrorChecker(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'select') {
+				selectErrorChecker(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'ssn') {
+				ssnErrorChecker(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'phone') {
+				phoneErrorChecker(fieldList[i]);
+			}
+			else if (fieldList[i]['type'] === 'date') {
+				dateErrorChecker(fieldList[i]);
+			}
 		}
 	}
 }

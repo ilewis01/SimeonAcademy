@@ -948,6 +948,9 @@ def clientOptions(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			track = getTrack(user)
+			quickTrack('Session', track)
+			content['tracking'] = track.state.state
 			page = 1
 			content = beginSession(request)
 			session = ClientSession.objects.get(id=(getSessionID(user)))

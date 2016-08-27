@@ -4888,6 +4888,15 @@ button:hover {
 	/*background-color: #C7C69B;*/
 }
 
+.iml-psy-hor-psy {
+	width: 168px;
+	padding-left: 10px;
+	font-style: italic;
+	font-weight: bold;
+	background-color:#E3E68C;
+	/*background-color: #E3E68C;*/
+}
+
 .iml-long-wrap-head {
 	width:90%;
 	margin:auto;
