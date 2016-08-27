@@ -86,8 +86,8 @@
                   <div class='col-md-12' style='width:86%; height:100%; margin-left:19px;'>
 
                     <div class='iml-long-wrap-head'>
-                      <div class='iml-sap-header' id='e1'>Psychoactive Substance Use:</div>
-                      <em>Include other relevant substance use factors such as the loss of control,
+                      <div class='iml-sap-header'>Psychoactive Substance Use:</div>
+                      <em id='e1'>Include other relevant substance use factors such as the loss of control,
                       tolerance, treatment history, patterns of use and problems related to use.
                       Include data to differentiate between use, abuse and history.</em>
                     </div>
@@ -105,7 +105,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('sap', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>

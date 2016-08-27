@@ -1595,34 +1595,28 @@ function hasErrorsInForm(formType, section) {
 	section = String(section);
 	fieldList = fetchFieldList(formType, section);
 
-	if (formType === 'sap') {
-		isGood = superDuperSapHasErrors(section);
-	}
+	for (var i = 0; i < fieldList.length; i++) {
+		if (fieldList[i]['type'] === 'text') {
+			isGood = hasTextError(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'number') {
+			isGood = hasNumberErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'select') {
+			isGood = hasSelectErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'ssn') {
+			isGood = hasSsnErrors(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'phone') {
+			isGood = hasPhoneErrors(fieldList[i]);
+			}
+		else if (fieldList[i]['type'] === 'date') {
+			isGood = hasDateErrors(fieldList[i]);
+		}
 
-	else {
-		for (var i = 0; i < fieldList.length; i++) {
-			if (fieldList[i]['type'] === 'text') {
-				isGood = hasTextError(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'number') {
-				isGood = hasNumberErrors(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'select') {
-				isGood = hasSelectErrors(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'ssn') {
-				isGood = hasSsnErrors(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'phone') {
-				isGood = hasPhoneErrors(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'date') {
-				isGood = hasDateErrors(fieldList[i]);
-			}
-
-			if (isGood === true) {
-				break;
-			}
+		if (isGood === true) {
+			break;
 		}
 	}
 
@@ -1644,42 +1638,51 @@ function superErrorChecker(formType, section) {
 	var formType = String(formType);
 	var fieldList = fetchFieldList(formType, section);
 
-	if (formType === 'sap') {
-		superDuperSapChecker(section);
-	}
-
-	else {
-		for (var i = 0; i < fieldList.length; i++) {
-			if (fieldList[i]['type'] === 'text') {
-				textErrorChecker(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'number') {
-				numberErrorChecker(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'select') {
-				selectErrorChecker(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'ssn') {
-				ssnErrorChecker(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'phone') {
-				phoneErrorChecker(fieldList[i]);
-			}
-			else if (fieldList[i]['type'] === 'date') {
-				dateErrorChecker(fieldList[i]);
-			}
+	for (var i = 0; i < fieldList.length; i++) {
+		if (fieldList[i]['type'] === 'text') {
+			textErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'number') {
+			numberErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'select') {
+			selectErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'ssn') {
+			ssnErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'phone') {
+			phoneErrorChecker(fieldList[i]);
+		}
+		else if (fieldList[i]['type'] === 'date') {
+			dateErrorChecker(fieldList[i]);
 		}
 	}
 }
 
+function runFunctionTest() {
+	var section = grab('save_section').value;
+	var hasErrors = superDuperSapHasErrors(section);
+	if (hasErrors === true) {
+		superDuperSapChecker(section);
+	}
+	// grab('health').value = 'Errors in form? ' + hasErrors;
+}
+
 function uni_sap_proceed(section) {
-	var proceed 	= true;
-	var form 		= grab('sap_form');
-	var next_url 	= grab('next_url');
+	section = String(section);
+	var hasErrors 	= superDuperSapHasErrors(section);
 
-	postSapFields(section);
+	if (hasErrors === true) {
+		var w = 500;
+		superDuperSapChecker(section);
+		openPopUp('auto', '/generateErrors/', w, w);
+	}
+	else {
+		postSapFields(section);
+		var form 		= grab('sap_form');
+		var next_url 	= grab('next_url');
 
-	if (proceed === true) {
 		grab('save_this').value = 'true';
 		form.action 			= next_url.value;
 		form.submit();

@@ -4,6 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_sap({{current_section}}, {{json_data}});">
+  <!-- <button onClick='javascript: runFunctionTest();'>Run Test</button> -->
     <form action='' method='post' id='sap_form' name='sap_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='sap_id' id='sap_id' value='{{session.sap.id}}'>
@@ -337,7 +338,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('sap', '{{current_section}}');">Exit Form</button></td>
-                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}');">Save & Continue</button></td>
+                  <td><button onClick="javascript: uni_sap_proceed('{{current_section}}'); return false;">Save & Continue</button></td>
                 </tr>
               </table>
             </div>
