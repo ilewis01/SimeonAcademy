@@ -6422,9 +6422,9 @@ def beginMH(request):
 def grabMhClassesCSS(mh, m_page):
 	classes = {}
 	mh = grabOrderedMh(mh)
-	normal = 'sideBarMargin'
-	green = 'sideBarMarginChecked'
-	current = 'sideLinkSelected'
+	normal = 'iml-button-incomplete'
+	green = 'iml-button'
+	current = 'iml-button-current'
 
 	classes['mhHistory'] = processCompletedClass(mh[0]['complete'], mh[0]['url'], m_page, green, current, normal)
 	classes['mhEducation'] = processCompletedClass(mh[1]['complete'], mh[1]['url'], m_page, green, current, normal)
@@ -8580,7 +8580,9 @@ def processMhData(request, current_section):
 	next_url = nextMhPage(mh, current_section)
 	image = grabMhSideImages(mh, current_section)
 	classes = grabMhClassesCSS(mh, current_section)
+	track = getTrack(request.user)
 
+	result['tracking'] = track.state.state
 	result['current_section'] = current_section
 	result['class'] = classes
 	result['image'] = image
