@@ -6422,9 +6422,9 @@ def beginMH(request):
 def grabMhClassesCSS(mh, m_page):
 	classes = {}
 	mh = grabOrderedMh(mh)
-	normal = 'iml-button-incomplete'
-	green = 'iml-button'
-	current = 'iml-button-current'
+	normal = 'iml-button-incomplete-sm'
+	green = 'iml-button-sm'
+	current = 'iml-button-current-sm'
 
 	classes['mhHistory'] = processCompletedClass(mh[0]['complete'], mh[0]['url'], m_page, green, current, normal)
 	classes['mhEducation'] = processCompletedClass(mh[1]['complete'], mh[1]['url'], m_page, green, current, normal)

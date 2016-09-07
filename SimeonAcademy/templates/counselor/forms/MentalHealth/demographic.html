@@ -52,7 +52,7 @@
                           <td>
                             <a href="javascript: sideBarMh('/mh_demographic/');">
                               <!-- class='{{class.clinic}}' -->
-                              <div  class='{{class.mhHistory}}'>General History</div>
+                              <div  class='{{class.mhHistory}}'>General</div>
                             </a>
                           </td>
 
@@ -76,31 +76,31 @@
                               <div  class='{{class.mhStress}}'>Stressors</div>
                             </a>
                           </td>
-                        </tr>
+                        <!-- </tr>
                       </table>
 
                       <div style='margin-bottom: 6px;'></div>
 
                       <table class='img-single-btn-table'>
-                        <tr>
+                        <tr> -->
                           <td>
                             <a href="javascript: sideBarMh('/mh_familyHistory/');">
                               <!-- class='{{class.special}}' -->
-                              <div  class='{{class.mhFamily}}'>Family History</div>
+                              <div  class='{{class.mhFamily}}'>Family</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarMh('/mh_legal/');">
                               <!-- class='{{class.other}}' -->
-                              <div  class='{{class.mhLegal}}'>Legal History</div>
+                              <div  class='{{class.mhLegal}}'>Legal</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarMh('/mh_psych/');">
                              <!--  class='{{class.source}}' -->
-                              <div  class='{{class.mhPsych}}'>Psychiatric History</div>
+                              <div  class='{{class.mhPsych}}'>Psychiatric</div>
                             </a>
                           </td>
 
@@ -117,7 +117,7 @@
               </div>
             </div>
 
-            <div class='iml-data-entry-wrapper'>
+            <div class='iml-data-entry-wrapper-sap'>
               <div class='container'>
                 <div class='row'>
 
@@ -186,7 +186,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>7.</div></td>
-                        <td><div class='iml-label'>Time at Job:</div></td>
+                        <td><div class='iml-label'>Length of Employment:</div></td>
                         <td><div><input type='number' name='employedYrs' id='employedYrs' value='{{fields.employedYrs}}' style='width:40px' oninput="javascript: noErrorText('e7', 'employedYrs');";></div></td>
                         <td><div id='e7'>Years</div></td>
                         <td><div><input type='number' name='employedMo' id='employedMo' value='{{fields.employedMo}}' style='width:40px' oninput="javascript: noErrorText('e8', 'employedMo');";></div></td>
@@ -223,10 +223,83 @@
                         </td>
                       </tr>
                     </table>
+
+                    <h4>Spouse Information:</h4>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>10.</div></td>
+                        <td><div class='iml-label' id='e11'>Age:</div></td>
+                        <td><div><input style='width:40px' type='number' name='spouseAge' id='spouseAge' value='{{fields.spouseAge}}' oninput="javascript: noErrorText('e11', 'spouseAge');"></div></td>
+                        <td><div class='iml-num-div' style='margin-left:40px;'>11.</div></td>
+                        <td><div class='iml-label' id='e12'>Occupation:</div></td>
+                        <td><div><input type='text' name='spouseOccupation' id='spouseOccupation' value='{{fields.spouseOccupation}}' oninput="javascript: noErrorText('e12', 'spouseOccupation');"></div></td>
+                      </tr>
+                    </table>
+
+                    <table style='margin-top:5px;'>
+                      <tr>
+                        <td><div class='iml-num-div'>12.</div></td>
+                        <td><div class='iml-label' id='e13'>Employer:</div></td>
+                        <td><div><input type='text' name='spouseEmployer' id='spouseEmployer' value='{{fields.spouseEmployer}}' oninput="javascript: noErrorText('e13', 'spouseEmployer');"></div></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>13.</div></td>
+                        <td><div class='iml-label'>Length of Employment:</div></td>
+                        <td><div><input type='number' name='spouseWorkYrs' id='spouseWorkYrs' value='{{fields.spouseWorkYrs}}' style='width:40px' oninput="javascript: noErrorText('e14', 'spouseWorkYrs');";></div></td>
+                        <td><div id='e14'>Years</div></td>
+                        <td><div><input type='number' name='spouseWorkMos' id='spouseWorkMos' value='{{fields.spouseWorkMos}}' style='width:40px' oninput="javascript: noErrorText('e15', 'spouseWorkMos');";></div></td>
+                        <td><div id='e15'>Months</div></td>
+                      </tr>
+                    </table>
                   </div>
 
                   <!-- RIGHT SIDE -->
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>14.</div></td>
+                        <td><div class='iml-label'>Do You Have Children?</div></td>
+                        <td><div><input type='radio' name='haveChildren' id='yesChild' value='True'></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='haveChildren' id='noChild' value='False'></div></td>
+                        <td><div>No</div></td>
+                        <td><div class='iml-label' id='e16'>How Many?</div></td>
+                        <td><div><input type='number' style='width:40px;' name='numChildren' id='numChildren' value='{{fields.numChildren}}' oninput="javascript: noErrorText('e16', 'numChildren');"></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>15.</div></td>
+                        <td><div class='iml-label'>Do You Have Sisters?</div></td>
+                        <td><div><input type='radio' name='haveSisters' id='yesSister' value='True'></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='haveSisters' id='noSister' value='False'></div></td>
+                        <td><div>No</div></td>
+                        <td><div class='iml-label' id='e17'>How Many?</div></td>
+                        <td><div><input type='number' style='width:40px;' name='numSisters' id='numSisters' value='{{fields.numSisters}}' oninput="javascript: noErrorText('e17', 'numSisters');"></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>16.</div></td>
+                        <td><div class='iml-label'>Do You Have Brothers?</div></td>
+                        <td><div><input type='radio' name='haveBrothers' id='yesBrother' value='True'></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='haveBrothers' id='noBrother' value='False'></div></td>
+                        <td><div>No</div></td>
+                        <td><div class='iml-label' id='e18'>How Many?</div></td>
+                        <td><div><input type='number' style='width:40px;' name='numBrothers' id='numBrothers' value='{{fields.numBrothers}}' oninput="javascript: noErrorText('e18', 'numBrothers');"></div></td>
+                      </tr>
+                    </table>
+
+                    <!-- <table>
+                      <tr>
+                        <td></td>
+                        <td><div class='iml-label' id='e16'><li>How Many?</li></div></td>
+                        <td><div><input type='number' style='width:40px;' name='numChildren' id='numChildren' value='{{fields.numChildren}}' oninput="javascript: noErrorText('e16', 'numChildren');"></div></td>
+                      </tr>
+                    </table> -->
                   </div>
 
                 </div>
