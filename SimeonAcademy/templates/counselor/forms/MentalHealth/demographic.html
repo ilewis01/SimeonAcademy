@@ -123,6 +123,7 @@
 
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    <h4>Personal Information:</h4>
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
@@ -224,6 +225,33 @@
                       </tr>
                     </table>
 
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>15.</div></td>
+                        <td><div class='iml-label'>Do You Have Sisters?</div></td>
+                        <td><div><input type='radio' name='haveSisters' id='yesSister' value='True'></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='haveSisters' id='noSister' value='False'></div></td>
+                        <td><div>No</div></td>
+                        <td><div class='iml-label' id='e17'>How Many?</div></td>
+                        <td><div><input type='number' style='width:40px;' name='numSisters' id='numSisters' value='{{fields.numSisters}}' oninput="javascript: noErrorText('e17', 'numSisters');"></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>16.</div></td>
+                        <td><div class='iml-label'>Do You Have Brothers?</div></td>
+                        <td><div><input type='radio' name='haveBrothers' id='yesBrother' value='True'></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='haveBrothers' id='noBrother' value='False'></div></td>
+                        <td><div>No</div></td>
+                        <td><div class='iml-label' id='e18'>How Many?</div></td>
+                        <td><div><input type='number' style='width:40px;' name='numBrothers' id='numBrothers' value='{{fields.numBrothers}}' oninput="javascript: noErrorText('e18', 'numBrothers');"></div></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
                     <h4>Spouse Information:</h4>
                     <table>
                       <tr>
@@ -254,10 +282,7 @@
                         <td><div id='e15'>Months</div></td>
                       </tr>
                     </table>
-                  </div>
 
-                  <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>14.</div></td>
@@ -269,37 +294,89 @@
                         <td><div class='iml-label' id='e16'>How Many?</div></td>
                         <td><div><input type='number' style='width:40px;' name='numChildren' id='numChildren' value='{{fields.numChildren}}' oninput="javascript: noErrorText('e16', 'numChildren');"></div></td>
                       </tr>
+                    </table>
 
-                      <tr>
-                        <td><div class='iml-num-div'>15.</div></td>
-                        <td><div class='iml-label'>Do You Have Sisters?</div></td>
-                        <td><div><input type='radio' name='haveSisters' id='yesSister' value='True'></div></td>
-                        <td><div>Yes</div></td>
-                        <td><div><input type='radio' name='haveSisters' id='noSister' value='False'></div></td>
-                        <td><div>No</div></td>
-                        <td><div class='iml-label' id='e17'>How Many?</div></td>
-                        <td><div><input type='number' style='width:40px;' name='numSisters' id='numSisters' value='{{fields.numSisters}}' oninput="javascript: noErrorText('e17', 'numSisters');"></div></td>
-                      </tr>
+                    <h4>Mother:</h4>
 
+                    <table>
                       <tr>
-                        <td><div class='iml-num-div'>16.</div></td>
-                        <td><div class='iml-label'>Do You Have Brothers?</div></td>
-                        <td><div><input type='radio' name='haveBrothers' id='yesBrother' value='True'></div></td>
+                        <td><div class='iml-num-div'>17.</div></td>
+                        <td><div class='iml-label'>Is your mother living?</div></td>
+                        <td><div><input type='radio' name='motherLiving' id='momIsLiving' value='True' checked onClick="javascript: eval_parent('momIsLiving', 'mom_age_type');"></div></td>
                         <td><div>Yes</div></td>
-                        <td><div><input type='radio' name='haveBrothers' id='noBrother' value='False'></div></td>
+                        <td><div><input type='radio' name='motherLiving' id='momNotLiving' value='False' onClick="javascript: eval_parent('momIsLiving', 'mom_age_type');"></div></td>
                         <td><div>No</div></td>
-                        <td><div class='iml-label' id='e18'>How Many?</div></td>
-                        <td><div><input type='number' style='width:40px;' name='numBrothers' id='numBrothers' value='{{fields.numBrothers}}' oninput="javascript: noErrorText('e18', 'numBrothers');"></div></td>
+                        <td><div id='e19'><div class='' id='mom_age_type'>Age:</div></div></td>
+                        <td><div><input type='number' style='width:40px;' name='motherAge' id='motherAge' value='{{fields.motherAge}}' oninput="javascript: noErrorText('e19', 'motherAge');"></div></td>
+                        <td></td>
                       </tr>
                     </table>
 
-                    <!-- <table>
+                    <table>
                       <tr>
-                        <td></td>
-                        <td><div class='iml-label' id='e16'><li>How Many?</li></div></td>
-                        <td><div><input type='number' style='width:40px;' name='numChildren' id='numChildren' value='{{fields.numChildren}}' oninput="javascript: noErrorText('e16', 'numChildren');"></div></td>
+                        <td><div class='iml-num-div'>18.</div></td>
+                        <td><div class='iml-label' id='e20'>Occupation:</div></td>
+                        <td><div><input type='text' name='motherOccupation' id='motherOccupation' value='{{fields.motherOccupation}}' oninput="javascript: noErrorText('e20', 'motherOccupation');"></div></td>
                       </tr>
-                    </table> -->
+
+                      <tr>
+                        <td><div class='iml-num-div'>19.</div></td>
+                        <td><div class='iml-label' id='e21'>City:</div></td>
+                        <td><div><input type='text' name='motherCity' id='motherCity' value='{{fields.motherCity}}' oninput="javascript: noErrorText('e21', 'motherCity');"></div></td>
+                        <td><div class='iml-label'>State:</div></td>
+
+                        <td>
+                          <select name='motherState' id='motherState'>
+                            <option value='None Selected'>Select</option>
+
+                            {% for s in states %}
+                              <option value='{{s.state}}'>{{s.state}}</option>
+                            {% endfor %}
+                          </select>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <h4>Father:</h4>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>20.</div></td>
+                        <td><div class='iml-label'>Is your father living?</div></td>
+                        <td><div><input type='radio' name='fatherLiving' id='dadIsLiving' value='True' checked onClick="javascript: eval_parent('dadIsLiving', 'dad_age_type');"></div></td>
+                        <td><div>Yes</div></td>
+                        <td><div><input type='radio' name='fatherLiving' id='dadNotLiving' value='False' onClick="javascript: eval_parent('dadIsLiving', 'dad_age_type');"></div></td>
+                        <td><div>No</div></td>
+                        <td><div id='e22'><div class='' id='dad_age_type'>Age:</div></div></td>
+                        <td><div><input type='number' style='width:40px;' name='fatherAge' id='fatherAge' value='{{fields.fatherAge}}' oninput="javascript: noErrorText('e22', 'fatherAge');"></div></td>
+                        <td></td>
+                      </tr>
+                    </table>
+
+                    <table>
+                      <tr>
+                        <td><div class='iml-num-div'>21.</div></td>
+                        <td><div class='iml-label' id='e23'>Occupation:</div></td>
+                        <td><div><input type='text' name='fatherOccupation' id='fatherOccupation' value='{{fields.fatherOccupation}}' oninput="javascript: noErrorText('e23', 'fatherOccupation');"></div></td>
+                      </tr>
+
+                      <tr>
+                        <td><div class='iml-num-div'>22.</div></td>
+                        <td><div class='iml-label' id='e24'>City:</div></td>
+                        <td><div><input type='text' name='fatherCity' id='fatherCity' value='{{fields.fatherCity}}' oninput="javascript: noErrorText('e24', 'fatherCity');"></div></td>
+                        <td><div class='iml-label'>State:</div></td>
+
+                        <td>
+                          <select name='fatherState' id='fatherState'>
+                            <option value='None Selected'>Select</option>
+
+                            {% for s in states %}
+                              <option value='{{s.state}}'>{{s.state}}</option>
+                            {% endfor %}
+                          </select>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
 
                 </div>

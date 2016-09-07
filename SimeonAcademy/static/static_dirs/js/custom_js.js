@@ -6679,6 +6679,18 @@ function mh_initialize(section, json_data) {
 	}
 }
 
+function eval_parent(yesName, typeName) {
+	var yesRadio = grab(yesName);
+	var element = grab(typeName);
+
+	if (yesRadio.checked === true) {
+		element.innerHTML = 'Age:';
+	}
+	else {
+		element.innerHTML = 'Age at Death:';
+	}
+}
+
 function d_init_mh_demo(json_data) {
 	blank_init(json_data.isComplete, grab('birthplace'));
 	blank_init(json_data.isComplete, grab('raised'));
