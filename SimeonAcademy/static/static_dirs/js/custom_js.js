@@ -3906,9 +3906,38 @@ function twoElementRadioSetup(trigger, label, field) {
 		field.disabled = true;
 	}
 }
+function twoElementRadioSetup_no(trigger, label, field) {
+	if (trigger.checked === false) {
+		field.disabled = false;
+		opacityHigh(label);
+		opacityHigh(field);
+	}
+
+	else {
+		opacityLow(label);
+		opacityLow(field);
+		field.value = '';
+		field.disabled = true;
+	}
+}
 
 function twoElementRadioSetupNumber(trigger, label, field) {
 	if (trigger.checked === true) {
+		field.disabled = false;
+		opacityHigh(label);
+		opacityHigh(field);
+	}
+
+	else {
+		opacityLow(label);
+		opacityLow(field);
+		field.value = 0;
+		field.disabled = true;
+	}
+}
+
+function twoElementRadioSetupNumber_no(trigger, label, field) {
+	if (trigger.checked === false) {
 		field.disabled = false;
 		opacityHigh(label);
 		opacityHigh(field);
@@ -7605,86 +7634,118 @@ function proceed_mh_useTable() {
 //******************************** MH SUPPORT FUNCTIONS ************************************************
 //******************************** MH SUPPORT FUNCTIONS ************************************************
 
-function mhSpouse() {
-	//TRIGGERS
-	var divorced = document.getElementById('divorced');
-	var married = document.getElementById('married');
-	var widowed = document.getElementById('widowed');
-	var seperated = document.getElementById('seperated');
-
-	//LABELS
-	var spouseAge_label = document.getElementById('spouseAge_label');
-	var spouseOccupation_label = document.getElementById('spouseOccupation_label');
-	var spouseEmployer_label = document.getElementById('spouseEmployer_label');
-	var spouseWorkMos_label = document.getElementById('spouseWorkMos_label');
-	var numMarriages_label = document.getElementById('numMarriages_label')
-	var syears_label = document.getElementById('syears_label');
-	var smonths = document.getElementById('smonths');
-	var syears = document.getElementById('syears');
-
-	//FIELDS
-	var spouseAge = document.getElementById('spouseAge');
-	var spouseOccupation = document.getElementById('spouseOccupation');
-	var spouseEmployer = document.getElementById('spouseEmployer');
-	var spouseWorkMos = document.getElementById('spouseWorkMos');
-	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
-	var numMarriages = document.getElementById('numMarriages');
-
-	if (divorced.checked == true || married.checked == true || widowed.checked == true || seperated.checked == true) {
-		spouseAge.disabled = false;
-		spouseOccupation.disabled = false;
-		spouseEmployer.disabled = false;
-		spouseWorkMos.disabled = false;
-		spouseWorkYrs.disabled = false;
-		numMarriages.disabled = false;
-
-		opacityHigh(spouseAge_label);
-		opacityHigh(spouseOccupation_label);
-		opacityHigh(spouseEmployer_label);
-		opacityHigh(spouseWorkMos_label);
-		opacityHigh(syears_label);
-		opacityHigh(smonths);
-		opacityHigh(syears);
-		opacityHigh(numMarriages_label);
-
-		opacityHigh(spouseAge);
-		opacityHigh(spouseOccupation);
-		opacityHigh(spouseEmployer);
-		opacityHigh(spouseWorkMos);
-		opacityHigh(spouseWorkYrs);
-		opacityHigh(numMarriages);
+function killLabel_no(trigger, label) {
+	if (trigger.checked === false) {
+		opacityHigh(label);
 	}
-
 	else {
-		opacityLow(spouseAge_label);
-		opacityLow(spouseOccupation_label);
-		opacityLow(spouseEmployer_label);
-		opacityLow(spouseWorkMos_label);
-		opacityLow(syears_label);
-		opacityLow(smonths);
-		opacityLow(syears);
-		opacityLow(numMarriages_label);
+		opacityLow(label);
+	}
+}
 
-		opacityLow(spouseAge);
-		opacityLow(spouseOccupation);
-		opacityLow(spouseEmployer);
-		opacityLow(spouseWorkMos);
-		opacityLow(spouseWorkYrs);
-		opacityLow(numMarriages);
+function killLabel(trigger, label) {
+	if (trigger.checked === true) {
+		opacityHigh(label);
+	}
+	else {
+		opacityLow(label);
+	}
+}
 
-		spouseAge.value = '0';
-		spouseOccupation.value = '';
-		spouseEmployer.value = '';
-		spouseWorkMos.value = '0';
-		spouseWorkYrs.value = '0';
-		numMarriages.value = '0';
+function mhSinglePlay() {
+	twoElementRadioSetupNumber_no(grab('single'), grab('numMarriages_label'), grab('numMarriages'));
+	twoElementRadioSetupNumber_no(grab('single'), grab('spouseAge_label'), grab('spouseAge'));
+	twoElementRadioSetupNumber_no(grab('single'), grab('syears'), grab('spouseWorkYrs'));
+	twoElementRadioSetupNumber_no(grab('single'), grab('smonths'), grab('spouseWorkMos'));
+	twoElementRadioSetup_no(grab('single'), grab('spouseEmployer_label'), grab('spouseEmployer'));
+	twoElementRadioSetup_no(grab('single'), grab('spouseOccupation_label'), grab('spouseOccupation'));
+	killLabel_no(grab('single'), grab('num12'));
+	killLabel_no(grab('single'), grab('num13'));
+	killLabel_no(grab('single'), grab('num14'));
+	killLabel_no(grab('single'), grab('num15'));
+	killLabel_no(grab('single'), grab('spouseWorkMos_label'));
+	killLabel_no(grab('single'), grab('num4'));
+}
 
-		spouseAge.disabled = true;
-		spouseOccupation.disabled = true;
-		spouseEmployer.disabled = true;
-		spouseWorkMos.disabled = true;
-		spouseWorkYrs.disabled = true;
-		numMarriages.disabled = true;
+function mhMarriedPlay() {
+	twoElementRadioSetupNumber(grab('married'), grab('numMarriages_label'), grab('numMarriages'));
+	twoElementRadioSetupNumber(grab('married'), grab('spouseAge_label'), grab('spouseAge'));
+	twoElementRadioSetupNumber(grab('married'), grab('syears'), grab('spouseWorkYrs'));
+	twoElementRadioSetupNumber(grab('married'), grab('smonths'), grab('spouseWorkMos'));
+	twoElementRadioSetup(grab('married'), grab('spouseEmployer_label'), grab('spouseEmployer'));
+	twoElementRadioSetup(grab('married'), grab('spouseOccupation_label'), grab('spouseOccupation'));
+	killLabel(grab('married'), grab('num4'));
+	killLabel(grab('married'), grab('num12'));
+	killLabel(grab('married'), grab('num13'));
+	killLabel(grab('married'), grab('num14'));
+	killLabel(grab('married'), grab('num15'));
+	killLabel(grab('married'), grab('spouseWorkMos_label'));
+}
+
+function mhBreakPlay() {
+	twoElementRadioSetupNumber(grab('seperated'), grab('numMarriages_label'), grab('numMarriages'));
+	twoElementRadioSetupNumber(grab('seperated'), grab('spouseAge_label'), grab('spouseAge'));
+	twoElementRadioSetupNumber(grab('seperated'), grab('syears'), grab('spouseWorkYrs'));
+	twoElementRadioSetupNumber(grab('seperated'), grab('smonths'), grab('spouseWorkMos'));
+	twoElementRadioSetup(grab('seperated'), grab('spouseEmployer_label'), grab('spouseEmployer'));
+	twoElementRadioSetup(grab('seperated'), grab('spouseOccupation_label'), grab('spouseOccupation'));
+	killLabel(grab('seperated'), grab('num4'));
+	killLabel(grab('seperated'), grab('num12'));
+	killLabel(grab('seperated'), grab('num13'));
+	killLabel(grab('seperated'), grab('num14'));
+	killLabel(grab('seperated'), grab('num15'));
+	killLabel(grab('seperated'), grab('spouseWorkMos_label'));
+}
+
+function mhDivorcePlay() {
+	twoElementRadioSetupNumber(grab('divorced'), grab('numMarriages_label'), grab('numMarriages'));
+	killLabel(grab('divorced'), grab('num4'));
+
+	twoElementRadioSetupNumber_no(grab('divorced'), grab('spouseAge_label'), grab('spouseAge'));
+	twoElementRadioSetupNumber_no(grab('divorced'), grab('syears'), grab('spouseWorkYrs'));
+	twoElementRadioSetupNumber_no(grab('divorced'), grab('smonths'), grab('spouseWorkMos'));
+	twoElementRadioSetup_no(grab('divorced'), grab('spouseEmployer_label'), grab('spouseEmployer'));
+	twoElementRadioSetup_no(grab('divorced'), grab('spouseOccupation_label'), grab('spouseOccupation'));
+
+	killLabel_no(grab('divorced'), grab('num12'));
+	killLabel_no(grab('divorced'), grab('num13'));
+	killLabel_no(grab('divorced'), grab('num14'));
+	killLabel_no(grab('divorced'), grab('num15'));
+	killLabel_no(grab('divorced'), grab('spouseWorkMos_label'));
+}
+
+function mhWidowPlay() {
+	twoElementRadioSetupNumber(grab('widowed'), grab('numMarriages_label'), grab('numMarriages'));
+	killLabel(grab('widowed'), grab('num4'));
+
+	twoElementRadioSetupNumber_no(grab('widowed'), grab('spouseAge_label'), grab('spouseAge'));
+	twoElementRadioSetupNumber_no(grab('widowed'), grab('syears'), grab('spouseWorkYrs'));
+	twoElementRadioSetupNumber_no(grab('widowed'), grab('smonths'), grab('spouseWorkMos'));
+	twoElementRadioSetup_no(grab('widowed'), grab('spouseEmployer_label'), grab('spouseEmployer'));
+	twoElementRadioSetup_no(grab('widowed'), grab('spouseOccupation_label'), grab('spouseOccupation'));
+
+	killLabel_no(grab('widowed'), grab('num12'));
+	killLabel_no(grab('widowed'), grab('num13'));
+	killLabel_no(grab('widowed'), grab('num14'));
+	killLabel_no(grab('widowed'), grab('num15'));
+	killLabel_no(grab('widowed'), grab('spouseWorkMos_label'));
+}
+
+function mhSpouse() {
+	if (grab('single').checked === true) {
+		mhSinglePlay();
+	}
+	else if (grab('married').checked === true) {
+		mhMarriedPlay();
+	}
+	else if (grab('seperated').checked === true) {
+		mhBreakPlay();
+	}
+	else if (grab('divorced').checked === true) {
+		mhDivorcePlay();
+	}
+	else {
+		mhWidowPlay();
 	}
 }
 
