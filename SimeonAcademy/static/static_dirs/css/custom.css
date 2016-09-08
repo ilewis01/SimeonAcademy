@@ -2851,6 +2851,46 @@ button:hover {
 	margin-bottom: 5%;
 }
 
+.iml-mh-radio-label {
+	font-style: italic;
+	font-size: 13px;
+	margin-left: 3px;
+	margin-right: 15px;
+	font-weight: bold;
+	margin-bottom:1px;
+	color:#79454c;
+}
+
+.iml-mh-number-label {
+	margin-left: 3px;
+	margin-right: 15px;
+	font-size: 13px;
+	font-style: italic;
+	color:#5c5f5e;
+	/*font-weight: bold;*/
+	/*color:#576763;*/
+}
+
+.iml-mh-select-label {
+	margin-left: 15px;
+	font-size: 13px;
+	margin-right: 3px;
+}
+
+.iml-mh-select {
+	margin-bottom:2px;
+}
+
+
+.iml-mh-radBooster {
+	margin-bottom: 4px;
+}
+
+.iml-mh-radio-margin {
+	margin-left: 25px;
+	margin-bottom: 4px;
+}
+
 /*#crazySpaceLite {
 	margin-bottom: 5%;
 }*/
@@ -4829,6 +4869,20 @@ button:hover {
 	border: 1px solid black;
 	border-radius: 8px;
 	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-data-entry-wrapper-mh {
+	width: 92%;
+	height: 63vh;
+	margin: auto;
+	margin-top: 2%;
+	border: 1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-data-entry-wrapper-mh td {
+	padding-bottom: 2px;
 }
 
 .iml-data-entry-wrapper-fVerify {
