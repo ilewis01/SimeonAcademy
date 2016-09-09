@@ -1648,6 +1648,219 @@ function set_mh_op_errors(errorName) {
 	}
 }
 
+function encodeOpMale() {
+	var result = '';
+	var numKids = grab('numKids').value;
+	numKids = Number(numKids);
+
+	for (var i = 1; i <= numKids; i++) {
+		var radioTag = 'male_' + String(i);
+		var radio = grab(radioTag);
+
+		if (radio.checked === true) {
+			var ageTag = 'age_' + String(i);
+			var cityTag = 'city_' + String(i);
+			var stateTag = 'state_' + String(i);
+
+			var age = String(grab(ageTag).value);
+			var city = String(grab(cityTag).value);
+			var state = String(grab(stateTag).value);
+
+			result += age;
+			result += '/';
+			result += city;
+			result += ', ';
+			result += state;
+			result += '~';
+		}
+	}
+
+	return result;
+}
+
+function encodeOpFemale() {
+	var result = '';
+	var numKids = grab('numKids').value;
+	numKids = Number(numKids);
+
+	for (var i = 1; i <= numKids; i++) {
+		var radioTag = 'female_' + String(i);
+		var radio = grab(radioTag);
+
+		if (radio.checked === true) {
+			var ageTag = 'age_' + String(i);
+			var cityTag = 'city_' + String(i);
+			var stateTag = 'state_' + String(i);
+
+			var age = String(grab(ageTag).value);
+			var city = String(grab(cityTag).value);
+			var state = String(grab(stateTag).value);
+
+			result += age;
+			result += '/';
+			result += city;
+			result += ', ';
+			result += state;
+			result += '~';
+		}
+	}
+
+	return result;
+}
+
+function encodeOpSisters() {
+	var result = '';
+	var numKids = grab('numKids').value;
+	var numSisters = grab('numSisters').value;
+	var tagNumber = Number(numKids) + 1;
+
+	numSisters = Number(numSisters);
+
+	for (var i = 0; i < numSisters; i++) {
+		var ageTag = 'age_' + String(tagNumber);
+		var cityTag = 'city_' + String(tagNumber);
+		var stateTag = 'state_' + String(tagNumber);
+
+		var age = String(grab(ageTag).value);
+		var city = String(grab(cityTag).value);
+		var state = String(grab(stateTag).value);
+
+		result += age;
+		result += '/';
+		result += city;
+		result += ', ';
+		result += state;
+		result += '~';
+
+		tagNumber += 1;
+	}
+	return result;
+}
+
+function encodeOpBrothers() {
+	var result = '';
+	var numKids = grab('numKids').value;
+	var numSisters = grab('numSisters').value;
+	var numBrothers = grab('numBrothers').value;
+	numSisters = Number(numSisters);
+	numBrothers = Number(numBrothers);
+	var tagNumber = Number(numKids) + numSisters + 1;
+	
+
+	for (var i = 0; i < numBrothers; i++) {
+		var ageTag = 'age_' + String(tagNumber);
+		var cityTag = 'city_' + String(tagNumber);
+		var stateTag = 'state_' + String(tagNumber);
+
+		var age = String(grab(ageTag).value);
+		var city = String(grab(cityTag).value);
+		var state = String(grab(stateTag).value);
+
+		result += age;
+		result += '/';
+		result += city;
+		result += ', ';
+		result += state;
+		result += '~';
+
+		tagNumber += 1;
+	}
+	return result;
+}
+
+function encode_mh_op_Results(m_type, gender) {
+	var result = '';
+	m_type = String(m_type);
+	gender = String(gender);
+
+	if (m_type === 'child') {
+		if (gender === 'male') {
+			result = encodeOpMale();
+		}
+		else if (gender === 'female') {
+			result = encodeOpFemale();
+		}
+	}
+	else if (m_type === 'sister') {
+		result = encodeOpSisters();
+	}
+	else if (m_type === 'brother') {
+		result = encodeOpBrothers();
+	}
+
+	return result;
+}
+
+function opHasMaleChild() {
+	var hasMale = false;
+	var numKids = grab('numKids').value;
+	numKids = Number(numKids);
+
+	for (var i = 1; i <= numKids; i++) {
+		var yesTag = 'male_' + String(i);
+		var radio = grab(yesTag);
+
+		if (radio.checked === true) {
+			hasMale = true;
+			break;
+		}
+	}
+	return hasMale;
+}
+
+function opHasFemaleChild() {
+	var hasFemale = false;
+	var numKids = grab('numKids').value;
+	numKids = Number(numKids);
+
+	for (var i = 1; i <= numKids; i++) {
+		var yesTag = 'female_' + String(i);
+		var radio = grab(yesTag);
+
+		if (radio.checked === true) {
+			hasFemale = true;
+			break;
+		}
+	}
+	return hasFemale;
+}
+
+function postMhOpgirls() {
+	if (opHasFemaleChild() === true && getPopParent('yesChild').checked === true) {
+		getPopParent('childrenFemale').value = encodeOpFemale();
+	}
+	else {
+		getPopParent('childrenFemale').value = 'N/A';
+	}
+}
+
+function postMhOpboys() {
+	if (opHasMaleChild() === true && getPopParent('yesChild').checked === true) {
+		getPopParent('childrenMale').value = encodeOpMale();
+	}
+	else {
+		getPopParent('childrenMale').value = 'N/A';
+	}
+}
+
+function postMhOpSisters() {
+	if (getPopParent('yesSister').checked === true) {
+		getPopParent('m_sistersFinal').value = encodeOpSisters();
+	}
+	else {
+		getPopParent('m_sistersFinal').value = 'N/A';
+	}
+}
+
+function postMhOpBrothers() {
+	if (getPopParent('yesBrother').checked === true) {
+		getPopParent('m_brothersFinal').value = encodeOpBrothers();
+	}
+	else {
+		getPopParent('m_brothersFinal').value = 'N/A';
+	}
+}
+
 function verify_mh_op() {
 	var hasErrors = hasErrorsInForm('mh', '/mhDemoOpPage/');
 
@@ -1660,8 +1873,12 @@ function verify_mh_op() {
 			set_mh_op_errors(divName);
 		}
 	}
-
-	grab('test1').value = t;
+	else {
+		postMhOpgirls();
+		postMhOpboys();
+		postMhOpSisters();
+		postMhOpBrothers();
+	}
 }
 
 function checkAllPsyFieldsForErrors_sap() {
