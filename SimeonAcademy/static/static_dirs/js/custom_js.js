@@ -1878,6 +1878,13 @@ function verify_mh_op() {
 		postMhOpboys();
 		postMhOpSisters();
 		postMhOpBrothers();
+
+		//change the parent button to perform mh save function
+		getPopParent('superBtn').innerHTML = '';
+		getPopParent('superBtn').innerHTML = " <button onClick=\"javascript: post_mh_data(\'/mh_demographic/\'); return false;\">Save & Continue</button>";
+		getPopParent('superBtn').className = 'pro-iml-btn';
+
+		window.close();
 	}
 }
 
@@ -7977,15 +7984,7 @@ function mh_continue_demographic() {
 	postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
 
 	postMhNoMarriages(single, numMarriages, m_numMarriages);
-	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);	
-
-	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
-		var w = 750, h = 600;
-		var lefts = Number((screen.width/2) - (w/2));
-		var tops = Number((screen.height/2) - (h/2));
-		var opWin = window.open('/mhDemoOpPage/', '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
-	}	
-
+	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
 }
 
 function proceed_mh_background() {
