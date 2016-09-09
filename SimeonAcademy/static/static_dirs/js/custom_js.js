@@ -350,6 +350,28 @@ function noErrorText(divName, fieldName) {
 	}
 }
 
+function noErrorText2(groupNumber) {
+	var group = get_sap_pgroupFields(groupNumber);
+	var hasErrors = sap_p_hasErrors(group);
+	
+	if (hasErrors === false) {
+		var divName = String(group[0]['div']);
+		var div = grab(divName);
+		div.className = 'iml-psy-hor';
+	}
+}
+
+function noErrorTextMH1(divName, fieldName) {
+	divName = String(divName);
+	fieldName = String(fieldName);
+
+	var div = grab(divName);
+	var field = grab(fieldName);
+	var ageClear = false;
+	var cityClear = false;
+	var stateClear = false;
+}
+
 
 function fetchAM1FieldNames() {
 	var result = [];
@@ -1158,8 +1180,123 @@ function fetchFieldList_am(section) {
 	return result;
 }
 
-function fetchFieldList_mh(section) {
+function fetchMhDemoFieldNames() {
+	var result = [];
 
+	return result;
+}
+
+function fetchMhOpsFieldNames() {
+	var result = [];
+	var numKids = Number(grab('numKids').value);
+	var numSisters = Number(grab('numSisters').value);
+	var numBrothers = Number(grab('numBrothers').value);
+	var totalFields = numKids + numSisters + numBrothers;
+
+	for (var i = 1; i <= totalFields; i++) {
+		dataAge = {};
+		dataAge['field'] = 'age_' + String(i);
+		dataAge['type'] = 'number';
+		dataAge['div'] = 'e' + String(i);
+		dataAge['isDynamic'] = false;
+		dataAge['trigger'] = null;
+		result.push(dataAge);
+
+		dataCity = {};
+		dataCity['field'] = 'city_' + String(i);
+		dataCity['type'] = 'text';
+		dataCity['div'] = 'e' + String(i);
+		dataCity['isDynamic'] = false;
+		dataCity['trigger'] = null;
+		result.push(dataCity);
+
+		dataState = {};
+		dataState['field'] = 'state_' + String(i);
+		dataState['type'] = 'select';
+		dataState['div'] = 'e' + String(i);
+		dataState['isDynamic'] = false;
+		dataState['trigger'] = null;
+		result.push(dataState);
+	}
+
+	return result;
+}
+
+function fetchMhEDUFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhMoneyFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhStressFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhFamilyFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhLegalFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhPsychFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchMhUseFieldNames() {
+	var result = [];
+
+	return result;
+}
+
+function fetchFieldList_mh(section) {
+	var result = null;
+	section = String(section);
+
+	if (section === '/mh_demographic/') {
+		result = fetchMhDemoFieldNames();
+	}
+	else if (section === '/mhDemoOpPage/') {
+		result = fetchMhOpsFieldNames();
+	}
+	else if (section === '/mh_education/') {
+		result = fetchMhEDUFieldNames();
+	}
+	else if (section === '/mh_background/') {
+		result = fetchMhMoneyFieldNames();
+	}
+	else if (section === '/mh_stress/') {
+		result = fetchMhStressFieldNames();
+	}
+	else if (section === '/mh_familyHistory/') {
+		result = fetchMhFamilyFieldNames();
+	}
+	else if (section === '/mh_legal/') {
+		result = fetchMhLegalFieldNames();
+	}
+	else if (section === '/mh_psych/') {
+		result = fetchMhPsychFieldNames();
+	}
+	else if (section === '/mh_useTable/') {
+		result = fetchMhUseFieldNames();
+	}
+
+	return result;
 }
 
 function fetchFieldList_asi(section) {
@@ -1468,6 +1605,66 @@ function sap_p_hasErrors(groupList) {
 	return hasErrors;
 }
 
+function getSpecialMhLine(errorName) {
+	var result = [];
+	var allOpsFields = fetchFieldList_mh('/mhDemoOpPage/');
+	errorName = String(errorName);
+
+	for (var i = 0; i < allOpsFields.length; i++) {
+		if (String(allOpsFields[i]['div']) === errorName) {
+			result.push(allOpsFields[i]);
+		}
+	}
+
+	return result;
+}
+
+function mh_opLine_hasErrors(errorName) {
+	var hasErrors = false;
+	var elements = getSpecialMhLine(errorName);
+
+	for (var i = 0; i < elements.length; i++) {
+		if (elements[i]['type'] === 'text') {
+			hasErrors = hasTextError(elements[i]);
+		}
+		else if (elements[i]['type'] === 'number') {
+			hasErrors = hasNumberErrors(elements[i]);
+		}
+		else if (elements[i]['type'] === 'select') {
+			hasErrors = hasSelectErrors(elements[i]);
+		}
+
+		if (hasErrors === true) {
+			break;
+		}
+	}
+	return hasErrors;
+}
+
+function set_mh_op_errors(errorName) {
+	var hasError = mh_opLine_hasErrors(errorName);
+
+	if (hasError === true) {
+		setErrorDiv(errorName);
+	}
+}
+
+function verify_mh_op() {
+	var hasErrors = hasErrorsInForm('mh', '/mhDemoOpPage/');
+
+	if (hasErrors === true) {
+		var fields = fetchMhOpsFieldNames();
+		var numToCheck = Number(fields.length) / 3;
+
+		for (var i = 1; i <= numToCheck; i++) {
+			var divName = 'e' + String(i);
+			set_mh_op_errors(divName);
+		}
+	}
+
+	grab('test1').value = t;
+}
+
 function checkAllPsyFieldsForErrors_sap() {
 	var hasErrors = false;
 
@@ -1515,17 +1712,6 @@ function proceedWithPsychoactiveCheck(group) {
 	}
 
 	return proceed;
-}
-
-function noErrorText2(groupNumber) {
-	var group = get_sap_pgroupFields(groupNumber);
-	var hasErrors = sap_p_hasErrors(group);
-	
-	if (hasErrors === false) {
-		var divName = String(group[0]['div']);
-		var div = grab(divName);
-		div.className = 'iml-psy-hor';
-	}
 }
 
 
@@ -6805,6 +6991,200 @@ function d_init_mh_demo(json_data) {
 	eval_parent('dadIsLiving', 'dad_age_type');
 }
 
+function kidsRock() {
+	var kids = false;
+	var sisters = false;
+	var brothers = false;
+
+	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
+		var w = 750, h = 620;
+		openPopUp('auto', '/mhDemoOpPage/', w, h);
+	}
+	else {
+		//SET HIDDEN VALUES AND CHANGE SAVE BUTTON TO PROCEED
+	}
+}
+
+function buildChildHeader(header, divName, numEntries, errorList) {
+	divName = String(divName);
+	header = String(header);
+	var html = getChildElementHtml(numEntries, errorList);
+	var table = header + '_table';
+
+	var div = grab(divName);
+
+	div.innerHTML = "<div class=\'clHeadMh\'>" + header + "</div>\
+	<div class=\'clbodyMh\'>\
+	<table id=\'" + table + "\'>\
+	<tr>\
+	<th><div style=\'width:80px;\'></div></th>\
+	<th><div style=\'width:60px;\'>Age</div></th>\
+	<th><div style=\'width:80px;\'>Gender</div></th>\
+	<th><div style=\'width:120px;\'>City</div></th>\
+	<th><div style=\'width:70px;\'>State</div></th>\
+	</tr>" + html + "\
+	</table>\
+	</div>";
+}
+
+function buildSiblingHeader(header, divName, numEntries, sibType) {
+	divName = String(divName);
+	header = String(header);
+	var html = getSiblingElementHtml(numEntries, sibType);
+	var table = header + '_table';
+
+	var div = grab(divName);
+
+	div.innerHTML = "<div class=\'clHeadMh\'>" + header + "</div>\
+	<div class=\'clbodyMh\'>\
+	<table id=\'" + table + "\'>\
+	<tr>\
+	<th><div></div></th>\
+	<th><div>Age</div></th>\
+	<th><div>City</div></th>\
+	<th><div>State</div></th>\
+	</tr>" + html + "\
+	</table>\
+	</div>";
+}
+
+function singleEntryChildHtml(e_id, errorTag) {
+	e_id = String(e_id);
+	errorTag = String(errorTag);
+	var head = 'Child ' + e_id;
+	var genderName = 'gender_' + e_id;
+	var male = 'male_' + e_id;
+	var female = 'female_' + e_id;
+	var age = 'age_' + e_id;
+	var city = 'city_' + e_id;
+	var state = 'state_' + e_id;
+
+	var html = "<tr>\
+	<td><div id=\'" + errorTag + "\'><div class=\'mhpopyo\'>" + head + "</div></div></td>\
+	<td><div><input type=\'number\' style=\'width:60px;\' name=\'" + age + "\' id=\'" + age + "\' value=\'0\' \
+	oninput=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + age + "\');\"></div></td>\
+	<td>\
+	<table>\
+	<tr>\
+	<td><input type=\'radio\' name=\'" + genderName + "\' id=\'" + male + "\' checked value=\'Male\'><td>\
+	<td><div class='mhOprad'>Male</div></td>\
+	<td><input type=\'radio\' name=\'" + genderName + "\' id=\'" + female + "\' value=\'Female\'><td>\
+	<td><div class='mhOprad'>Female</div></td>\
+	</tr>\
+	</table>\
+	</td>\
+	<td><div><input type=\'text\' name=\'" + city + "\' id=\'" + city + "\' style=\'width:120px;\' oninput=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + city + "\');\"></div></td>\
+	<td>\
+	<div>\
+	<select name=\'" + state + "\' id=\'" + state + "\' style=\'width:70px;\' onChange=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + state + "\');\">\
+	<option value=\'None Selected\'>Select</option>\
+	</select>\
+	</div>\
+	</td>\
+	</tr>";
+
+	return html;
+}
+
+function singleEntrySiblingHtml(e_id, siblingType) {
+	e_id = String(e_id);
+	siblingType = String(siblingType);
+	var head =  siblingType + ' ' + e_id;
+	var age = 'age_' + e_id;
+	var city = 'city_' + e_id;
+	var state = 'state_' + e_id;
+
+	var html = "<tr>\
+	<td><div>" + head + "</div></td>\
+	<td><div><input type=\'number\' style=\'width:60px;\' name=\'" + age + "\' id=\'" + age + "\'></div></td>\
+	<td><div><input type=\'text\' name=\'" + city + "\' id=\'" + city + "\'></div></td>\
+	<td>\
+	<div>\
+	<select name=\'" + state + "\' id=\'" + state + "\'>\
+	<option value=\'None Selected\'>Select</option>\
+	</select>\
+	</div>\
+	</td>\
+	</tr>";
+
+	return html;
+}
+
+function getChildElementHtml(numEntries, errorList) {
+	numEntries = Number(numEntries);
+	var html = '';
+
+	for (var i = 1; i <= numEntries; i++) {
+		var errorIndex = Number(i) - 1;
+		html += singleEntryChildHtml(i, errorList[errorIndex]);
+	}
+	return html;
+}
+
+function getSiblingElementHtml(numEntries, sibType) {
+	numEntries = Number(numEntries);
+	var html = '';
+
+	for (var i = 1; i <= numEntries; i++) {
+		html += singleEntrySiblingHtml(i, sibType);
+	}
+	return html;
+}
+
+function buildChildList(numEntries, errorList) {
+	buildChildHeader('Children', 'childBuilder', numEntries, errorList);
+}
+
+function buildSisterList(numEntries) {
+	var div = grab('sisterBuilder');
+	buildSiblingHeader('Sisters', 'sisterBuilder', numEntries, 'Sister');
+}
+
+function buildBrotherList(numEntries) {
+	var div = grab('brotherBuilder');
+	buildSiblingHeader('Brothers', 'brotherBuilder', numEntries, 'Brother');
+}
+
+function initialize_mhDemoOps() {
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSisters = getPopParent('yesSister').checked;
+	var hasBrothers = getPopParent('yesBrother').checked;
+	var numChildren = getPopParent('numChildren').value;
+	var numSisters = getPopParent('numSisters').value;
+	var numBrothers = getPopParent('numBrothers').value;
+	var totalErrorDivs = Number(numChildren) + Number(numSisters) + Number(numBrothers);
+
+	var errorList = creatErrorDivsMhOp(totalErrorDivs);
+
+	grab('numKids').value = numChildren;
+	grab('numSisters').value = numSisters;
+	grab('numBrothers').value = numBrothers;
+
+
+	if (hasChildren === true) {		
+		buildChildList(numChildren, errorList);
+	}
+
+	if (hasSisters === true) {		
+		buildSisterList(numSisters);
+	}
+
+	if (hasBrothers === true) {		
+		buildBrotherList(numBrothers);
+	}
+}
+
+function creatErrorDivsMhOp(numberDivs) {
+	var results = [];
+	numberDivs = Number(numberDivs);
+
+	for (var i = 1; i <= numberDivs; i++) {
+		results.push('e' + String(i));
+	}
+	return results;
+}
+
+
 function initialize_mh_education(json_data) {
 	//AVERAGE GRADES
 	var a = document.getElementById('k6a');
@@ -7933,9 +8313,6 @@ function postMhEducationFriendNumber(f1, f2, f3, f4, moreTrigger, moreElement, m
 	}
 }
 
-function verify_mh_op() {
-	document.getElementById('mhOpForm').submit();
-}
 
 function proceed_opWin() {
 	var form = window.opener.document.getElementById('mh_form');

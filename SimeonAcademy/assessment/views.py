@@ -2528,80 +2528,80 @@ def mhDemoOpPage(request):
 			mh = MentalHealth.objects.get(id=mh_id)
 			states = State.objects.all().order_by('state')
 
-			children = (mh.demographics.numChildren)
-			sisters = (mh.demographics.numSisters)
-			brothers = (mh.demographics.numBrothers)
+			# children = (mh.demographics.numChildren)
+			# sisters = (mh.demographics.numSisters)
+			# brothers = (mh.demographics.numBrothers)
 
-			content['no_child'] = children
-			content['no_sister'] = sisters
-			content['no_brother'] = brothers
+			# content['no_child'] = children
+			# content['no_sister'] = sisters
+			# content['no_brother'] = brothers
 
-			the_class = None
-			cols = 0
+			# the_class = None
+			# cols = 0
 
-			if children > 0:
-				content['childHead'] = 'Children'
-				cols = cols + 1
+			# if children > 0:
+			# 	content['childHead'] = 'Children'
+			# 	cols = cols + 1
 
-				children_list = []
-				for c in range(children):
-					f = {}
-					age = 'c_age'
-					gender = 'c_gender'
-					male = 'male'
-					female = 'female'
-					city = 'c_city'
-					state = 'c_state'
-					f['ageID'] = age + str(c + 1)
-					f['genderName'] = gender + str(c + 1)
-					f['maleID'] = male + str(c + 1)
-					f['femaleID'] = female + str(c + 1)
-					f['cityID'] = city + str(c + 1)
-					f['stateID'] = state + str(c + 1)
-					children_list.append(f)
-				content['children']  = children_list
+			# 	children_list = []
+			# 	for c in range(children):
+			# 		f = {}
+			# 		age = 'c_age'
+			# 		gender = 'c_gender'
+			# 		male = 'male'
+			# 		female = 'female'
+			# 		city = 'c_city'
+			# 		state = 'c_state'
+			# 		f['ageID'] = age + str(c + 1)
+			# 		f['genderName'] = gender + str(c + 1)
+			# 		f['maleID'] = male + str(c + 1)
+			# 		f['femaleID'] = female + str(c + 1)
+			# 		f['cityID'] = city + str(c + 1)
+			# 		f['stateID'] = state + str(c + 1)
+			# 		children_list.append(f)
+			# 	content['children']  = children_list
 
-			if sisters > 0:
-				content['sisterHead'] = 'Sisters'
-				cols = cols + 1
+			# if sisters > 0:
+			# 	content['sisterHead'] = 'Sisters'
+			# 	cols = cols + 1
 
-				sister_list = []
-				for s in range(sisters):
-					f2 = {}
-					age = 's_age'
-					city = 's_city'
-					state = 's_state'
-					f2['age'] = age + str(s + 1)
-					f2['city'] = city + str(s + 1)
-					f2['state'] = state + str(s + 1)
-					sister_list.append(f2)
-				content['sisters']  = sister_list
+			# 	sister_list = []
+			# 	for s in range(sisters):
+			# 		f2 = {}
+			# 		age = 's_age'
+			# 		city = 's_city'
+			# 		state = 's_state'
+			# 		f2['age'] = age + str(s + 1)
+			# 		f2['city'] = city + str(s + 1)
+			# 		f2['state'] = state + str(s + 1)
+			# 		sister_list.append(f2)
+			# 	content['sisters']  = sister_list
 
-			if brothers > 0:
-				content['brotherHead'] = 'Brothers'
-				cols = cols + 1
+			# if brothers > 0:
+			# 	content['brotherHead'] = 'Brothers'
+			# 	cols = cols + 1
 
-				brother_list = []
-				for b in range(brothers):
-					f3 = {}
-					age = 'b_age'
-					city = 'b_city'
-					state = 'b_state'
-					f3['age'] = age + str(b + 1)
-					f3['city'] = city + str(b + 1)
-					f3['state'] = state + str(b + 1)
-					brother_list.append(f3)
-				content['brothers']  = brother_list
+			# 	brother_list = []
+			# 	for b in range(brothers):
+			# 		f3 = {}
+			# 		age = 'b_age'
+			# 		city = 'b_city'
+			# 		state = 'b_state'
+			# 		f3['age'] = age + str(b + 1)
+			# 		f3['city'] = city + str(b + 1)
+			# 		f3['state'] = state + str(b + 1)
+			# 		brother_list.append(f3)
+			# 	content['brothers']  = brother_list
 
-			if cols == 1:
-				the_class = 'mh_op_table1'
-			elif cols == 2:
-				the_class = 'mh_op_table2'
-			elif cols == 3:
-				the_class = 'mh_op_table3'
+			# if cols == 1:
+			# 	the_class = 'mh_op_table1'
+			# elif cols == 2:
+			# 	the_class = 'mh_op_table2'
+			# elif cols == 3:
+			# 	the_class = 'mh_op_table3'
 
 			content['mh'] = mh		
-			content['col_class'] = the_class
+			# content['col_class'] = the_class
 			content['states'] = states
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/mhDemoOpPage.html', content)
