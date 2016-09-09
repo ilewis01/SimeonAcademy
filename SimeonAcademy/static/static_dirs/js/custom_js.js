@@ -6744,41 +6744,65 @@ function d_init_mh_demo(json_data) {
 	number_init(json_data.isComplete, grab('numSisters'));
 	number_init(json_data.isComplete, grab('numBrothers'));
 	number_init(json_data.isComplete, grab('motherAge'));
-	number_init(json_data.isComplete, grab('motherAgeDeath'));
 	number_init(json_data.isComplete, grab('fatherAge'));
-	number_init(json_data.isComplete, grab('fatherAgeDeath'));
 
 	motherState.selectedIndex = json_data.motherState;
 	fatherState.selectedIndex = json_data.fatherState;
 
-	if (json_data.maritalStatus === 'Married') {
+	if (String(json_data.maritalStatus) === 'Married') {
 		grab('married').checked = true;
 	}
-	else if (json_data.maritalStatus === 'Single') {
-		grab('single').checked = true;
-	}
-	else if (json_data.maritalStatus === 'Divorced') {
+	else if (String(json_data.maritalStatus) === 'Divorced') {
 		grab('divorced').checked = true;
 	}
-	else if (json_data.maritalStatus === 'Widowed') {
+	else if (String(json_data.maritalStatus) === 'Widowed') {
 		grab('widowed').checked = true;
 	}
-	else if (json_data.maritalStatus === 'Seperated') {
+	else if (String(json_data.maritalStatus) === 'Seperated') {
 		grab('seperated').checked = true;
 	}
+	else {
+		grab('single').checked = true;
+	}
 
-	setRadioElement(json_data.haveChildren, grab('yesChild'), grab('noChild'));
-	setRadioElement(json_data.haveSisters, grab('yesSister'), grab('noSister'));
-	setRadioElement(json_data.haveBrothers, grab('yesBrother'), grab('noBrother'));
+	var sisters = grab('numSisters').value;
+	var brothers = grab('numBrothers').value;
+	var children = grab('numChildren').value;
+
+	sisters = String(sisters);
+	brothers = String(brothers);
+	children = String(children);
+
+	if (sisters !== '0') {
+		grab('yesSister').checked = true;
+	}
+	else {
+		grab('noSister').checked = true;
+	}
+
+	if (brothers !== '0') {
+		grab('yesBrother').checked = true;
+	}
+	else {
+		grab('noBrother').checked = true;
+	}
+
+	if (children !== '0') {
+		grab('yesChild').checked = true;
+	}
+	else {
+		grab('noChild').checked = true;
+	}
+
 	setRadioElement(json_data.motherLiving, grab('momIsLiving'), grab('momNotLiving'));
 	setRadioElement(json_data.fatherLiving, grab('dadIsLiving'), grab('dadNotLiving'));
 
 	mhSpouse();
-	motherShift();
-	fatherShift();
 	mhChildren();
 	mhSister();
 	mhBrother();
+	eval_parent('momIsLiving', 'mom_age_type');
+	eval_parent('dadIsLiving', 'dad_age_type');
 }
 
 function initialize_mh_education(json_data) {
@@ -7744,7 +7768,7 @@ function mhSpouse() {
 	else if (grab('divorced').checked === true) {
 		mhDivorcePlay();
 	}
-	else {
+	else if (grab('widowed').checked === true){
 		mhWidowPlay();
 	}
 }
