@@ -363,13 +363,12 @@ function noErrorText2(groupNumber) {
 
 function noErrorTextMH1(divName, fieldName) {
 	divName = String(divName);
-	fieldName = String(fieldName);
 
-	var div = grab(divName);
-	var field = grab(fieldName);
-	var ageClear = false;
-	var cityClear = false;
-	var stateClear = false;
+	var hasError = mh_opLine_hasErrors(divName);
+
+	if (hasError === false) {
+		grab(divName).className = '';
+	}
 }
 
 
@@ -7039,10 +7038,10 @@ function buildSiblingHeader(header, divName, numEntries, sibType) {
 	<div class=\'clbodyMh\'>\
 	<table id=\'" + table + "\'>\
 	<tr>\
-	<th><div></div></th>\
-	<th><div>Age</div></th>\
-	<th><div>City</div></th>\
-	<th><div>State</div></th>\
+	<th><div style=\'width:80px;\'></div></th>\
+	<th><div style=\'width:60px;\'>Age</div></th>\
+	<th><div style=\'width:120px;\'>City</div></th>\
+	<th><div style=\'width:70px;\'>State</div></th>\
 	</tr>" + html + "\
 	</table>\
 	</div>";
@@ -7078,6 +7077,7 @@ function singleEntryChildHtml(e_id, errorTag) {
 	<div>\
 	<select name=\'" + state + "\' id=\'" + state + "\' style=\'width:70px;\' onChange=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + state + "\');\">\
 	<option value=\'None Selected\'>Select</option>\
+	<option value=\'Test\'>Test</option>\
 	</select>\
 	</div>\
 	</td>\
@@ -7086,22 +7086,32 @@ function singleEntryChildHtml(e_id, errorTag) {
 	return html;
 }
 
-function singleEntrySiblingHtml(e_id, siblingType) {
+function singleEntrySiblingHtml(e_id, siblingType, errorTag) {
 	e_id = String(e_id);
+	errorTag = String(errorTag);
 	siblingType = String(siblingType);
+	var tagNumber = '';
 	var head =  siblingType + ' ' + e_id;
-	var age = 'age_' + e_id;
-	var city = 'city_' + e_id;
-	var state = 'state_' + e_id;
+
+	for (var j = 1; j < errorTag.length; j++) {
+		tagNumber += errorTag.charAt(j);
+	}
+
+	var age = 'age_' + tagNumber;
+	var city = 'city_' + tagNumber;
+	var state = 'state_' + tagNumber;
 
 	var html = "<tr>\
-	<td><div>" + head + "</div></td>\
-	<td><div><input type=\'number\' style=\'width:60px;\' name=\'" + age + "\' id=\'" + age + "\'></div></td>\
-	<td><div><input type=\'text\' name=\'" + city + "\' id=\'" + city + "\'></div></td>\
+	<td><div id=\'" + errorTag + "\'><div class=\'mhpopyo\'>" + head + "</div></div></td>\
+	<td><div><input type=\'number\' style=\'width:60px;\' name=\'" + age + "\' id=\'" + age + "\' value=\'0\' \
+	oninput=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + age + "\');\"></div></td>\
+	<td><div><input type=\'text\' name=\'" + city + "\' id=\'" + city + "\' style=\'width:120px;\' \
+	oninput=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + city + "\');\"></div></td>\
 	<td>\
 	<div>\
-	<select name=\'" + state + "\' id=\'" + state + "\'>\
+	<select name=\'" + state + "\' id=\'" + state + "\' onChange=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + state + "\');\">\
 	<option value=\'None Selected\'>Select</option>\
+	<option value=\'Test\'>Test</option>\
 	</select>\
 	</div>\
 	</td>\
@@ -7124,9 +7134,27 @@ function getChildElementHtml(numEntries, errorList) {
 function getSiblingElementHtml(numEntries, sibType) {
 	numEntries = Number(numEntries);
 	var html = '';
+	var errorNumber = 0;
+	sibType = String(sibType);
+
+	if (sibType === 'Sister') {
+		var numKids = getPopParent('numChildren').value;
+		numKids = Number(numKids);
+		errorNumber = numKids + 1;
+	}
+	else if (sibType === 'Brother') {
+		var numKids = getPopParent('numChildren').value;
+		var numSisters = getPopParent('numSisters').value;
+
+		numKids = Number(numKids);
+		numSisters = Number(numSisters);
+		errorNumber = numKids + numSisters + 1;
+	}
 
 	for (var i = 1; i <= numEntries; i++) {
-		html += singleEntrySiblingHtml(i, sibType);
+		var errorName = 'e' + String(errorNumber);
+		html += singleEntrySiblingHtml(i, sibType, errorName);
+		errorNumber += 1;
 	}
 	return html;
 }
