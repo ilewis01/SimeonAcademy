@@ -1364,6 +1364,77 @@ function getOpDataFields() {
 	return result;
 }
 
+function getDynamoErrorFields_mh() {
+	var result = [];
+
+	if (grab('married').checked === true || grab('seperated').checked === true) {
+		var d1 = {}, d2 = {}, d3 = {}, d4 = {}, d5 = {}, d6 = {};
+		d1['field'] = 'numMarriages';
+		d1['type'] = 'number';
+		d1['div'] = 'e4';
+		d1['isDynamic'] = false;
+		d1['trigger'] = null;
+		result.push(d1);
+
+		d2['field'] = 'spouseAge';
+		d2['type'] = 'number';
+		d2['div'] = 'e11';
+		d2['isDynamic'] = false;
+		d2['trigger'] = null;
+		result.push(d2);
+
+		d3['field'] = 'spouseOccupation';
+		d3['type'] = 'text';
+		d3['div'] = 'e12';
+		d3['isDynamic'] = false;
+		d3['trigger'] = null;
+		result.push(d3);
+
+		d4['field'] = 'spouseEmployer';
+		d4['type'] = 'text';
+		d4['div'] = 'e13';
+		d4['isDynamic'] = false;
+		d4['trigger'] = null;
+		result.push(d4);
+
+		d5['field'] = 'spouseWorkYrs';
+		d5['type'] = 'number';
+		d5['div'] = 'e14';
+		d5['isDynamic'] = false;
+		d5['trigger'] = null;
+		result.push(d5);
+
+		d6['field'] = 'spouseWorkMos';
+		d6['type'] = 'number';
+		d6['div'] = 'e15';
+		d6['isDynamic'] = false;
+		d6['trigger'] = null;
+		result.push(d6);
+
+	}
+	else if (grab('divorced').checked === true || grab('widowed').checked === true) {
+		var d_num = {};
+		d_num['field'] = 'numMarriages';
+		d_num['type'] = 'number';
+		d_num['div'] = 'e4';
+		d_num['isDynamic'] = false;
+		d_num['trigger'] = null;
+		result.push(d_num);
+	}
+
+	return result;
+}
+
+function mh_dynamo_has_errors() {
+	var fields = getDynamoErrorFields_mh();
+	return specialHasErrorCheck_m(fields);
+}
+
+function superDynamoChecker() {
+	var fields = getDynamoErrorFields_mh();
+	SpecialSuperErrorChecker(fields);
+}
+
 function opHasError_mh(fields) {
 	var hasError = false;
 
@@ -2233,6 +2304,7 @@ function specialHasErrorCheck_m(fieldList) {
 			break;
 		}
 	}
+	return isGood;
 }
 
 function superDuperSapChecker(section) {
@@ -8164,21 +8236,44 @@ function postMhFields(section) {
 
 function post_mh_data(section) {
 	section = String(section);
-	hasErrors = hasErrorsInForm('mh', section);
 
-	if (hasErrors === true) {
-		superErrorChecker('mh', section);
-		var w = 500, h = 500;
-		openPopUp('auto', '/generateErrors/', w, h);
+	if (section === '/mh_demographic/') {
+		var hasErrorsMain = hasErrorsInForm('mh', section);
+		var hasErrorsDynamo = mh_dynamo_has_errors();
+
+		if (hasErrorsMain === true || hasErrorsDynamo === true) {
+			superErrorChecker('mh', section);
+			superDynamoChecker();
+
+			var w = 500, h = 500;
+			openPopUp('auto', '/generateErrors/', w, h);
+		}
+		else {
+			postMhFields(section);
+			var next_url = grab('next_url');
+			var form = grab('mh_form');
+			grab('save_this').value = 'true';
+			form.action = next_url.value;
+			form.submit();
+		}
 	}
-	// else {
-	// 	postMhFields(section);
-	// 	var next_url = grab('next_url');
-	// 	var form = grab('mh_form');
-	// 	grab('save_this').value = 'true';
-	// 	form.action = next_url.value;
-	// 	form.submit();
-	// }
+
+	else {
+		if (hasErrorsInForm('mh', section) === true) {
+			superErrorChecker('mh', section);
+			var w = 500, h = 500;
+			openPopUp('auto', '/generateErrors/', w, h);
+		}
+		else {
+			postMhFields(section);
+			var next_url = grab('next_url');
+			var form = grab('mh_form');
+			grab('save_this').value = 'true';
+			form.action = next_url.value;
+			form.submit();
+		}
+
+	}
 }
 
 function mh_continue_demographic() {
