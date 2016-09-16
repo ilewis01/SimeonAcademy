@@ -7513,14 +7513,23 @@ function d_init_mh_demo(json_data) {
 	eval_parent('dadIsLiving', 'dad_age_type');
 }
 
-function kidsRock() {
-	var kids = false;
-	var sisters = false;
-	var brothers = false;
+function set_ya_or_nay_mh(radio, data, target) {
+	if (radio.checked === true) {
+		target.value = data;
+	}
+	else {
+		target.value = '0';
+	}
+}
 
+
+function kidsRock() {
 	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
 		var fields = getOpDataFields();
 		var errors = opHasError_mh(fields);
+		set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
+		set_ya_or_nay_mh(grab('yesSister'), grab('numSisters').value, grab('m_numSisters'));
+		set_ya_or_nay_mh(grab('yesBrother'), grab('numBrothers').value, grab('m_numBrothers'));
 
 		if (errors === true) {
 			var w1 = 500;
@@ -7533,7 +7542,6 @@ function kidsRock() {
 		}		
 	}
 	else {
-		//SET HIDDEN VALUES, ERROR CHECK THE FIELDS (IF NO ERRORS SAVE AND PROCEED TO NEXT SECTION)
 		post_mh_data(grab('save_section').value);
 	}
 }
@@ -8249,12 +8257,26 @@ function post_mh_data(section) {
 			openPopUp('auto', '/generateErrors/', w, h);
 		}
 		else {
-			postMhFields(section);
-			var next_url = grab('next_url');
-			var form = grab('mh_form');
-			grab('save_this').value = 'true';
-			form.action = next_url.value;
-			form.submit();
+			var nk_m = Number(grab('m_numChildren').value);
+			var ns_m = Number(grab('m_numSisters').value);
+			var nb_m = Number(grab('m_numBrothers').value);
+			var nk = Number(grab('numChildren').value);
+			var ns = Number(grab('numSisters').value);
+			var nb = Number(grab('numBrothers').value);
+
+			if (nk_m !== nk || nk_s !== ns || nk_b !== nb) {
+				var wk = 500;
+				openPopUp('auto', '/mh_to_op_errors/', wk, wk);
+			}
+			else {
+				postMhFields(section);
+				var next_url = grab('next_url');
+				var form = grab('mh_form');
+				grab('save_this').value = 'true';
+				form.action = next_url.value;
+				form.submit();
+
+			}
 		}
 	}
 
