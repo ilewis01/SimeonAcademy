@@ -4,6 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
+  <input type='text' id='test1'>
     <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
@@ -132,7 +133,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>1.</div></td>
-                        <td><div class='iml-label' id='e1'>Birthplace:</div></td>
+                        <td><div id='e1'><div class='iml-label'>Birthplace:</div></div></td>
                         <td><div><input type='text' name='birthplace' id='birthplace' value='{{fields.birthplace}}' oninput="javascript: noErrorText('e1', 'birthplace');"></div></td>
                       </tr>
                     </table>
@@ -140,7 +141,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>2.</div></td>
-                        <td><div class='iml-label' id='e2'>Raised By:</div></td>
+                        <td><div id='e2'><div class='iml-label'>Raised By:</div></div></td>
                         <td><div><input type='text' name='raised' id='raised' value='{{fields.raised}}' oninput="javascript: noErrorText('e2', 'raised');"></div></td>
                       </tr>
                     </table>
@@ -178,7 +179,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>5.</div></td>
-                        <td><div class='iml-label' id='e5'>Occupation:</div></td>
+                        <td><div id='e5'><div class='iml-label'>Occupation:</div></div></td>
                         <td><div><input type='text' name='occupation' id='occupation' value='{{fields.occupation}}' oninput="javascript: noErrorText('e5', 'occupation');";></div></td>
                       </tr>
                     </table>
@@ -186,7 +187,7 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>6.</div></td>
-                        <td><div class='iml-label' id='e6'>Current Employment:</div></td>
+                        <td><div id='e6'><div class='iml-label'>Current Employment:</div></div></td>
                         <td><div><input type='text' name='employer' id='employer' value='{{fields.employer}}' oninput="javascript: noErrorText('e6', 'employer');";></div></td>
                       </tr>
                     </table>
@@ -196,16 +197,16 @@
                         <td><div class='iml-num-div'>7.</div></td>
                         <td><div class='iml-label'>Length of Employment:</div></td>
                         <td><div><input type='number' name='employedYrs' id='employedYrs' value='{{fields.employedYrs}}' style='width:40px' oninput="javascript: noErrorText('e7', 'employedYrs');";></div></td>
-                        <td><div id='e7' class='iml-mh-number-label'>Years</div></td>
+                        <td><div id='e7'><div class='iml-mh-number-label'>Years</div></div></td>
                         <td><div><input type='number' name='employedMo' id='employedMo' value='{{fields.employedMo}}' style='width:40px' oninput="javascript: noErrorText('e8', 'employedMo');";></div></td>
-                        <td><div id='e8' class='iml-mh-number-label'>Months</div></td>
+                        <td><div id='e8'><div class='iml-mh-number-label'>Months</div></div></td>
                       </tr>
                     </table>
 
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>8.</div></td>
-                        <td><div class='iml-label' id='e9'>Past Jobs or Line of Work (Last 5 Years):</div></td>
+                        <td><div id='e9'><div class='iml-label'>Past Jobs or Line of Work (Last 5 Years):</div></div></td>
                       </tr>
                       <tr>
                         <td></td>
@@ -322,19 +323,19 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>18.</div></td>
-                        <td><div class='iml-label' id='e20'>Occupation:</div></td>
+                        <td><div id='e20'><div class='iml-label'>Occupation:</div><div></td>
                         <td><div><input type='text' name='motherOccupation' id='motherOccupation' value='{{fields.motherOccupation}}' oninput="javascript: noErrorText('e20', 'motherOccupation');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>19.</div></td>
-                        <td><div class='iml-label' id='e21'>City:</div></td>
+                        <td><div id='e21'><div class='iml-label'>City:</div></div></td>
                         <td><div><input type='text' name='motherCity' id='motherCity' value='{{fields.motherCity}}' oninput="javascript: noErrorText('e21', 'motherCity');"></div></td>
-                        <td><div class='iml-mh-select-label'>State:</div></td>
+                        <td><div id='e100'><div class='iml-mh-select-label'>State:</div><div></td>
 
                         <td>
                           <div class='iml-mh-select'>
-                            <select name='motherState' id='motherState'>
+                            <select name='motherState' id='motherState' onChange="javascript: noErrorText('e100', 'motherState');">
                               <option value='None Selected'>Select</option>
 
                               {% for s in states %}
@@ -365,19 +366,19 @@
                     <table>
                       <tr>
                         <td><div class='iml-num-div'>21.</div></td>
-                        <td><div class='iml-label' id='e23'>Occupation:</div></td>
+                        <td><div id='e23'><div class='iml-label'>Occupation:</div></div></td>
                         <td><div><input type='text' name='fatherOccupation' id='fatherOccupation' value='{{fields.fatherOccupation}}' oninput="javascript: noErrorText('e23', 'fatherOccupation');"></div></td>
                       </tr>
 
                       <tr>
                         <td><div class='iml-num-div'>22.</div></td>
-                        <td><div class='iml-label' id='e24'>City:</div></td>
+                        <td><div id='e24'><div class='iml-label'>City:</div></div></td>
                         <td><div><input type='text' name='fatherCity' id='fatherCity' value='{{fields.fatherCity}}' oninput="javascript: noErrorText('e24', 'fatherCity');"></div></td>
-                        <td><div class='iml-mh-select-label'>State:</div></td>
+                        <td><div id='e101'><div class='iml-mh-select-label'>State:</div><div></td>
 
                         <td>
                           <div class='iml-mh-select'>
-                            <select name='fatherState' id='fatherState'>
+                            <select name='fatherState' id='fatherState' onChange="javascript: noErrorText('e101', 'fatherState');">
                               <option value='None Selected'>Select</option>
 
                               {% for s in states %}
