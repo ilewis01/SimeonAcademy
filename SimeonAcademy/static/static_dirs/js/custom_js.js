@@ -7795,8 +7795,7 @@ function generateStateHtml(states) {
 	var html = '';
 
 	for (var i = 0; i < states.length; i++) {
-		var val = Number(i) + 1;
-		html += "<option value=\'" + String(val) + "\'>" + String(states[i]) + "</option>";
+		html += "<option value=\'" + String(states[i]) + "\'>" + String(states[i]) + "</option>";
 	}
 
 	return html;
