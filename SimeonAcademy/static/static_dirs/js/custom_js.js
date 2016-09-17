@@ -7524,12 +7524,13 @@ function set_ya_or_nay_mh(radio, data, target) {
 
 
 function kidsRock() {
+	set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
+	set_ya_or_nay_mh(grab('yesSister'), grab('numSisters').value, grab('m_numSisters'));
+	set_ya_or_nay_mh(grab('yesBrother'), grab('numBrothers').value, grab('m_numBrothers'));
+
 	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
 		var fields = getOpDataFields();
 		var errors = opHasError_mh(fields);
-		set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
-		set_ya_or_nay_mh(grab('yesSister'), grab('numSisters').value, grab('m_numSisters'));
-		set_ya_or_nay_mh(grab('yesBrother'), grab('numBrothers').value, grab('m_numBrothers'));
 
 		if (errors === true) {
 			var w1 = 500;
@@ -7716,32 +7717,89 @@ function buildBrotherList(numEntries) {
 }
 
 function initialize_mhDemoOps() {
-	var hasChildren = getPopParent('yesChild').checked;
-	var hasSisters = getPopParent('yesSister').checked;
-	var hasBrothers = getPopParent('yesBrother').checked;
-	var numChildren = getPopParent('numChildren').value;
-	var numSisters = getPopParent('numSisters').value;
-	var numBrothers = getPopParent('numBrothers').value;
-	var totalErrorDivs = Number(numChildren) + Number(numSisters) + Number(numBrothers);
+	var reconstruct = String(getPopParent('reconstruct').value);
 
-	var errorList = creatErrorDivsMhOp(totalErrorDivs);
+	if (reconstruct === 'false') {
+		var hasChildren = getPopParent('yesChild').checked;
+		var hasSisters = getPopParent('yesSister').checked;
+		var hasBrothers = getPopParent('yesBrother').checked;
+		var numChildren = getPopParent('numChildren').value;
+		var numSisters = getPopParent('numSisters').value;
+		var numBrothers = getPopParent('numBrothers').value;
+		var totalErrorDivs = Number(numChildren) + Number(numSisters) + Number(numBrothers);
 
-	grab('numKids').value = numChildren;
-	grab('numSisters').value = numSisters;
-	grab('numBrothers').value = numBrothers;
+		var errorList = creatErrorDivsMhOp(totalErrorDivs);
+
+		grab('numKids').value = numChildren;
+		grab('numSisters').value = numSisters;
+		grab('numBrothers').value = numBrothers;
 
 
-	if (hasChildren === true) {		
+		if (hasChildren === true) {		
+			buildChildList(numChildren, errorList);
+		}
+
+		if (hasSisters === true) {		
+			buildSisterList(numSisters);
+		}
+
+		if (hasBrothers === true) {		
+			buildBrotherList(numBrothers);
+		}
+	}
+	else {
+		resonstruct_mhOpPage();
+	}
+		
+}
+
+function resonstruct_mhOpPage() {
+	var changeKids = shouldReconstruct_childWindow_mh('yesChild');
+	var changeSisters = shouldReconstruct_childWindow_mh('yesSister');
+	var changeBrothers = shouldReconstruct_childWindow_mh('yesBrother');
+	
+	if (changeKids === true) {
+		var numChildren = Number(getPopParent('numChildren').value);
+		var totalErrorDivs = fetch_num_reconstuct_errorDivs(changeKids, changeSisters, changeBrothers);
+		var errorList = creatErrorDivsMhOp(totalErrorDivs);
+		getPopParent('m_numChildren').value = numChildren;
 		buildChildList(numChildren, errorList);
 	}
 
-	if (hasSisters === true) {		
+	if (changeSisters === true) {
+		var numSisters = Number(getPopParent('numSisters').value);
+		getPopParent('m_numChildren').value = numSisters;
 		buildSisterList(numSisters);
 	}
 
-	if (hasBrothers === true) {		
+	if (changeBrothers === true) {
+		var numBrothers = Number(getPopParent('numBrothers').value);
+		getPopParent('m_numChildren').value = numBrothers;
 		buildBrotherList(numBrothers);
 	}
+}
+
+function fetch_num_reconstuct_errorDivs(newChild, newSister, newBrother) {
+	var numChildren = 0;
+	var numSisters = 0;
+	var numBrothers = 0;
+	var result = 0;
+
+	if (newChild === true) {
+		numChildren = Number(getPopParent('numChildren').value);
+	}
+
+	if (newSister === true) {
+		numSisters = Number(getPopParent('numSisters').value);
+	}
+
+	if (newBrother === true) {
+		numBrothers = Number(getPopParent('numBrothers').value);
+	}
+
+	result = numChildren + numSisters + numBrothers;
+
+	return result;
 }
 
 function creatErrorDivsMhOp(numberDivs) {
@@ -8242,6 +8300,27 @@ function postMhFields(section) {
 	}
 }
 
+function shouldReconstruct_childWindow_mh(fieldName) {
+	fieldName = String(fieldName);
+	var field = getPopParent(fieldName);
+	var reconstruct = false;
+
+	if (field.checked === true) {
+		reconstruct = true;
+	}
+	return reconstruct;
+}
+
+function discard_mh_changes() {
+
+}
+
+function keep_mh_changes() {
+	getPopParent('reconstruct').value = true;
+	grab('s_form').submit();
+}
+
+
 function post_mh_data(section) {
 	section = String(section);
 
@@ -8264,18 +8343,17 @@ function post_mh_data(section) {
 			var ns = Number(grab('numSisters').value);
 			var nb = Number(grab('numBrothers').value);
 
-			if (nk_m !== nk || nk_s !== ns || nk_b !== nb) {
-				var wk = 500;
-				openPopUp('auto', '/mh_to_op_errors/', wk, wk);
-			}
-			else {
+			if (nk_m === nk && ns_m === ns && nb_m === nb) {
 				postMhFields(section);
 				var next_url = grab('next_url');
 				var form = grab('mh_form');
 				grab('save_this').value = 'true';
 				form.action = next_url.value;
 				form.submit();
-
+			}
+			else {
+				var wk = 750, hk = 620;
+				openPopUp('auto', '/mh_to_op_errors/', wk, hk);
 			}
 		}
 	}
