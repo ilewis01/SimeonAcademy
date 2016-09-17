@@ -7841,13 +7841,13 @@ function resonstruct_mhOpPage() {
 
 	if (changeSisters === true) {
 		var numSisters = Number(getPopParent('numSisters').value);
-		getPopParent('m_numChildren').value = numSisters;
+		getPopParent('m_numSisters').value = numSisters;
 		buildSisterList(numSisters);
 	}
 
 	if (changeBrothers === true) {
 		var numBrothers = Number(getPopParent('numBrothers').value);
-		getPopParent('m_numChildren').value = numBrothers;
+		getPopParent('m_numBrothers').value = numBrothers;
 		buildBrotherList(numBrothers);
 	}
 }
