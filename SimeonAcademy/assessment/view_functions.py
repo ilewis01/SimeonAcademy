@@ -7887,6 +7887,10 @@ def saveMhDemo(request, mh):
 	mh.demographics.fatherAge = request.POST.get('m_fatherAge');
 	mh.demographics.fatherAgeDeath = request.POST.get('m_fatherAgeDeath');
 	mh.demographics.maritalStatus = request.POST.get('maritalStatus');
+	mh.demographics.numChildren = request.POST.get('m_numChildren');
+	mh.demographics.numSisters = request.POST.get('m_numSisters');
+	mh.demographics.numBrothers = request.POST.get('m_numBrothers')
+
 	mh.demographics.motherLiving = truePythonBool(request.POST.get('motherLiving'));
 	mh.demographics.fatherLiving = truePythonBool(request.POST.get('fatherLiving'));
 

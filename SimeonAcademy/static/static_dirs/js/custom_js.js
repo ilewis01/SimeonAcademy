@@ -7537,33 +7537,29 @@ function d_init_mh_demo(json_data) {
 		grab('single').checked = true;
 	}
 
-	var sisters = grab('numSisters').value;
-	var brothers = grab('numBrothers').value;
-	var children = grab('numChildren').value;
+	var sisters = Number(json_data.numSisters);
+	var brothers = Number(json_data.numBrothers);
+	var children = Number(json_data.numChildren);
 
-	sisters = String(sisters);
-	brothers = String(brothers);
-	children = String(children);
-
-	if (sisters !== '0') {
-		grab('yesSister').checked = true;
-	}
-	else {
+	if (sisters === 0) {
 		grab('noSister').checked = true;
 	}
-
-	if (brothers !== '0') {
-		grab('yesBrother').checked = true;
-	}
 	else {
+		grab('yesSister').checked = true;
+	}
+
+	if (brothers === 0) {
 		grab('noBrother').checked = true;
 	}
+	else {
+		grab('yesBrother').checked = true;
+	}
 
-	if (children !== '0') {
-		grab('yesChild').checked = true;
+	if (children === 0) {
+		grab('noChild').checked = true;
 	}
 	else {
-		grab('noChild').checked = true;
+		grab('yesChild').checked = true;
 	}
 
 	setRadioElement(json_data.motherLiving, grab('momIsLiving'), grab('momNotLiving'));
@@ -8457,11 +8453,14 @@ function post_mh_data(section) {
 	}
 }
 
-function post_demo_kidValues_mh(targetName) {
-	targetName = String(targetName);
-	var target = String(grab(targetName).value);
 
-	if (isBlankText(target) === true) {
+function set_op_value_null(triggerName, targetName) {
+	targetName = String(targetName);
+	triggerName = String(triggerName);
+	var target = grab(targetName);
+	var trigger = grab(triggerName);
+
+	if (trigger.checked === true) {
 		target.value = 'N/A';
 	}
 }
@@ -8504,10 +8503,10 @@ function mh_continue_demographic() {
 	post(false, 'number', grab('employedYrs'), null, null);
 
 	//POST DYNAMIC FAMILY DATA
-	post_demo_kidValues_mh('childrenMale');
-	post_demo_kidValues_mh('childrenFemale');
-	post_demo_kidValues_mh('m_sistersFinal');
-	post_demo_kidValues_mh('m_brothersFinal');
+	set_op_value_null('noChild', 'childrenMale');
+	set_op_value_null('noChild', 'childrenFemale');
+	set_op_value_null('noSister', 'm_sistersFinal');
+	set_op_value_null('noBrother', 'm_brothersFinal');
 
 	//POST DYNAMIC PARENT AGES
 	run_parentAge_validation('momIsLiving', grab('motherAge').value, 'm_motherAge', 'm_motherAgeDeath');
