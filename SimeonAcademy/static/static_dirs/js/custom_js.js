@@ -8466,6 +8466,26 @@ function post_demo_kidValues_mh(targetName) {
 	}
 }
 
+function run_parentAge_validation(liveRadioName, value, targetLifeName, targetDeathName) {
+	value = Number(value);
+	liveRadioName = String(liveRadioName);
+	targetLifeName = String(targetLifeName);
+	targetDeathName = String(targetDeathName);
+
+	var liveRadio = grab(liveRadioName);
+	var target_life = grab(targetLifeName);
+	var target_death = grab(targetDeathName);
+
+	if (liveRadio.checked === true) {
+		target_life.value = value;
+		target_death.value = 0;
+	}
+	else {
+		target_life.value = 0;
+		target_death.value = value;
+	}
+}
+
 function mh_continue_demographic() {
 	//POST NON-DYNAMIC TEXT FIELDS
 	post(false, 'text', grab('birthplace'), null, null);
@@ -8488,6 +8508,13 @@ function mh_continue_demographic() {
 	post_demo_kidValues_mh('childrenFemale');
 	post_demo_kidValues_mh('m_sistersFinal');
 	post_demo_kidValues_mh('m_brothersFinal');
+
+	//POST DYNAMIC PARENT AGES
+	run_parentAge_validation('momIsLiving', grab('motherAge').value, 'm_motherAge', 'm_motherAgeDeath');
+	run_parentAge_validation('dadIsLiving', grab('motherAge').value, 'm_fatherAge', 'm_fatherAgeDeath');
+
+	//POST RADIO BUTTONS
+
 
 	// postMhFamily(yesChild, numChildren, m_numChildren);
 	// postMhFamily(yesSister, numSisters, m_numSisters);
