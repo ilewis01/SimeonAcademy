@@ -7565,6 +7565,14 @@ function d_init_mh_demo(json_data) {
 	setRadioElement(json_data.motherLiving, grab('momIsLiving'), grab('momNotLiving'));
 	setRadioElement(json_data.fatherLiving, grab('dadIsLiving'), grab('dadNotLiving'));
 
+	if (String(json_data.motherAge) === '0') {
+		grab('motherAge').value = String(json_data.motherAgeDeath);
+	}
+
+	if (String(json_data.fatherAge) === '0') {
+		grab('fatherAge').value = String(json_data.fatherAgeDeath);
+	}
+
 	mhSpouse();
 	mhChildren();
 	mhSister();
@@ -8485,6 +8493,35 @@ function run_parentAge_validation(liveRadioName, value, targetLifeName, targetDe
 	}
 }
 
+function run_marriage_validation_mh() {
+	if (grab('divorced').checked === true || grab('widowed').checked === true) {
+		grab('m_numMarriages').value = grab('numMarriages').value;
+		grab('m_spouseOccupation').value = 'N/A';
+		grab('m_spouseEmployer').value = 'N/A';
+		grab('m_spouseAge').value = '0';
+		grab('m_spouseWorkMos').value = '0';
+		grab('m_spouseWorkYrs').value = '0';
+	}
+
+	else if (grab('married').checked === true || grab('seperated').checked === true) {
+		grab('m_numMarriages').value = grab('numMarriages').value;
+		grab('m_spouseOccupation').value = grab('spouseOccupation').value;
+		grab('m_spouseEmployer').value = grab('spouseEmployer').value;
+		grab('m_spouseAge').value = grab('spouseAge').value;
+		grab('m_spouseWorkMos').value = grab('spouseWorkMos').value;
+		grab('m_spouseWorkYrs').value = grab('spouseWorkYrs').value;
+	}
+
+	else {
+		grab('m_numMarriages').value = '0';
+		grab('m_spouseOccupation').value = 'N/A';
+		grab('m_spouseEmployer').value = 'N/A';
+		grab('m_spouseAge').value = '0';
+		grab('m_spouseWorkMos').value = '0';
+		grab('m_spouseWorkYrs').value = '0';
+	}
+}
+
 function mh_continue_demographic() {
 	//POST NON-DYNAMIC TEXT FIELDS
 	post(false, 'text', grab('birthplace'), null, null);
@@ -8508,22 +8545,11 @@ function mh_continue_demographic() {
 	set_op_value_null('noSister', 'm_sistersFinal');
 	set_op_value_null('noBrother', 'm_brothersFinal');
 
-	//POST DYNAMIC PARENT AGES
-	run_parentAge_validation('momIsLiving', grab('motherAge').value, 'm_motherAge', 'm_motherAgeDeath');
-	run_parentAge_validation('dadIsLiving', grab('motherAge').value, 'm_fatherAge', 'm_fatherAgeDeath');
-
 	//POST RADIO BUTTONS
+	run_parentAge_validation('momIsLiving', grab('motherAge').value, 'm_motherAge', 'm_motherAgeDeath');
+	run_parentAge_validation('dadIsLiving', grab('fatherAge').value, 'm_fatherAge', 'm_fatherAgeDeath');
 
-
-	// postMhFamily(yesChild, numChildren, m_numChildren);
-	// postMhFamily(yesSister, numSisters, m_numSisters);
-	// postMhFamily(yesBrother, numBrothers, m_numBrothers);
-
-	// postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
-	// postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
-
-	// postMhNoMarriages(single, numMarriages, m_numMarriages);
-	// postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
+	run_marriage_validation_mh();
 }
 
 function proceed_mh_background() {

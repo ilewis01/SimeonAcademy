@@ -7866,33 +7866,38 @@ def grabMhViewImages(mh):
 
 
 def saveMhDemo(request, mh):
-	mh.demographics.birthplace = request.POST.get('birthplace');
-	mh.demographics.raised = request.POST.get('raised');
-	mh.demographics.occupation = request.POST.get('occupation');
-	mh.demographics.employer = request.POST.get('employer');
-	mh.demographics.pastJobs = request.POST.get('pastJobs');
-	mh.demographics.recentMove = request.POST.get('recentMove');
-	mh.demographics.motherOccupation = request.POST.get('motherOccupation');
-	mh.demographics.motherCity = request.POST.get('motherCity');
-	mh.demographics.fatherOccupation = request.POST.get('fatherOccupation');
-	mh.demographics.fatherCity = request.POST.get('fatherCity');
-	mh.demographics.employedMo = request.POST.get('employedMo');
-	mh.demographics.employedYrs = request.POST.get('employedYrs');
-	mh.demographics.childrenMale = request.POST.get('childrenMale');
-	mh.demographics.childrenFemale = request.POST.get('childrenFemale');
-	mh.demographics.bothers = request.POST.get('m_brothersFinal');
-	mh.demographics.sisters = request.POST.get('m_sistersFinal');
-	mh.demographics.motherAge = request.POST.get('m_motherAge');
-	mh.demographics.motherAgeDeath = request.POST.get('m_motherAgeDeath');
-	mh.demographics.fatherAge = request.POST.get('m_fatherAge');
-	mh.demographics.fatherAgeDeath = request.POST.get('m_fatherAgeDeath');
-	mh.demographics.maritalStatus = request.POST.get('maritalStatus');
-	mh.demographics.numChildren = request.POST.get('m_numChildren');
-	mh.demographics.numSisters = request.POST.get('m_numSisters');
-	mh.demographics.numBrothers = request.POST.get('m_numBrothers')
-
-	mh.demographics.motherLiving = truePythonBool(request.POST.get('motherLiving'));
-	mh.demographics.fatherLiving = truePythonBool(request.POST.get('fatherLiving'));
+	mh.demographics.birthplace 			= request.POST.get('birthplace');
+	mh.demographics.raised 				= request.POST.get('raised');
+	mh.demographics.occupation 			= request.POST.get('occupation');
+	mh.demographics.employer 			= request.POST.get('employer');
+	mh.demographics.pastJobs 			= request.POST.get('pastJobs');
+	mh.demographics.recentMove 			= request.POST.get('recentMove');
+	mh.demographics.motherOccupation 	= request.POST.get('motherOccupation');
+	mh.demographics.motherCity 			= request.POST.get('motherCity');
+	mh.demographics.fatherOccupation 	= request.POST.get('fatherOccupation');
+	mh.demographics.fatherCity 			= request.POST.get('fatherCity');
+	mh.demographics.employedMo 			= request.POST.get('employedMo');
+	mh.demographics.employedYrs 		= request.POST.get('employedYrs');
+	mh.demographics.childrenMale 		= request.POST.get('childrenMale');
+	mh.demographics.childrenFemale 		= request.POST.get('childrenFemale');
+	mh.demographics.bothers 			= request.POST.get('m_brothersFinal');
+	mh.demographics.sisters 			= request.POST.get('m_sistersFinal');
+	mh.demographics.motherAge 			= request.POST.get('m_motherAge');
+	mh.demographics.motherAgeDeath 		= request.POST.get('m_motherAgeDeath');
+	mh.demographics.fatherAge 			= request.POST.get('m_fatherAge');
+	mh.demographics.fatherAgeDeath 		= request.POST.get('m_fatherAgeDeath');
+	mh.demographics.maritalStatus 		= request.POST.get('maritalStatus');
+	mh.demographics.numChildren 		= request.POST.get('m_numChildren');
+	mh.demographics.numSisters 			= request.POST.get('m_numSisters');
+	mh.demographics.numBrothers 		= request.POST.get('m_numBrothers')
+	mh.demographics.numMarriages 		= request.POST.get('m_numMarriages')
+	mh.demographics.spouseAge 			= request.POST.get('m_spouseAge')
+	mh.demographics.spouseOccupation 	= request.POST.get('m_spouseOccupation')
+	mh.demographics.spouseEmployer 		= request.POST.get('m_spouseEmployer')
+	mh.demographics.spouseWorkMos 		= request.POST.get('m_spouseWorkMos')
+	mh.demographics.spouseWorkYrs 		= request.POST.get('m_spouseWorkYrs')
+	mh.demographics.motherLiving 		= truePythonBool(request.POST.get('motherLiving'));
+	mh.demographics.fatherLiving 		= truePythonBool(request.POST.get('fatherLiving'));
 
 	mh.demographics.save()
 
