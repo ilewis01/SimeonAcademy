@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
-  <input type='text' id='test1' style='width: 500px;'>
+  <!-- <input type='text' id='test1' style='width: 500px;'> -->
     <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>

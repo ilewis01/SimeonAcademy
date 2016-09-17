@@ -5706,6 +5706,143 @@ button:hover {
 
 }
 
+.new-iml-op-body {
+	width: 95%;
+	margin:auto;
+	height:65vh;
+	border:1px solid black;
+	border-radius: 8px;
+	margin-top: 2%;
+	background: url('/static/images/iml_bkgnd.png');
+    background-size: 100%;
+}
+
+.new-iml-block-left {
+	width: 35%;
+	height:100%;
+	float:left;
+}
+
+/*.new-iml-block-left table{
+	width: 90%;
+	height:55vh;
+	margin: auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}*/
+
+.new-iml-block-middle {
+	width: 20%;
+	height:100%;
+	float:left;
+}
+
+.new-iml-block1-right {
+	width: 45%;
+	height:100%;
+	float: left;
+}
+
+.iml-add-remove-container {
+	width: 80%;
+	height: 15vh;
+	margin:auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.iml-add-remove-container table {
+	width:100%;
+	height:100%;
+}
+
+.iml-add-remove-container button {
+	width:100%;
+	margin: auto;
+	border-radius: 12px;
+	box-shadow:3px 3px 12px black;
+	font-weight: bold;
+}
+
+.iml-data-scroller {
+	width:85%;
+	height:55vh;
+	margin:auto;
+	background-color: white;
+	border:1px solid black;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.new_op-question-wrapper {
+	width:90%;
+	height:25vh;
+	margin:auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	margin-left: 10%;
+  	padding-top: 20px;
+  	padding-bottom: 20px;
+  	border-top: 1px solid #6a7d79;
+  	border-bottom: 1px solid #6a7d79;
+}
+
+.iml-new-op-head {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.iml-new-op-head-sm {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.iml-new-op-head-fixed {
+	font-size: 12px;
+	font-weight: bold;
+	width:90px;
+}
+
+
+.iml-new-radio-wrapper {
+	width:100%;
+}
+
+.new_radio_iml_label {
+	font-size: 13px;
+	font-style: italic;
+	margin-right: 8px;
+}
+
+.opPosition1 {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.opPosition2 span {
+	font-size: 12px;
+	font-style: italic;
+	color:#793942;
+	font-weight: bold;
+}
+
+.opPosition2 {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.selected_op_iml {
+	background-color: #b3f0ff;
+}
+
+
+
+
 
 
 

@@ -2536,6 +2536,7 @@ def mhDemoOpPage(request):
 
 			content['mh'] = mh		
 			content['states'] = states
+			content['state_list'] = state_list
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/mhDemoOpPage.html', content)
 

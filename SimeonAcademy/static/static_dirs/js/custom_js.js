@@ -4617,13 +4617,6 @@ function universal_am_dynamic_post(section) {
 	}
 }
 
-// function runSuperTest() {
-// 	var current_section = String(grab('save_section').value);
-// 	var next_url = grab('next_url');
-// 	var form = grab('am_demo');
-// 	grab('test1').value = next_url.value;
-// }
-
 function leaveAMViewForm() {
 	grab('am_demo').action = '/clientOptions/';
 	grab('am_demo').submit();
@@ -7597,6 +7590,153 @@ function run_mh_op_open_errorCheck() {
 	if (errors === true) {
 		opErrorChecker_mh(fields);
 	}
+}
+
+function build_op_radio(relative, title, radioDivName, labelDivName) {
+	radioDivName 	= String(radioDivName);
+	labelDivName 	= String(labelDivName);	
+	relative 		= String(relative);	
+	title 			= String(title);	
+
+	var radio_div = grab(radioDivName);
+	var label_div = grab(labelDivName);
+
+	var label_Html = "<div class=\'new_radio_iml_label\'>" + title + "</div>";
+
+	var radio_Html = "<div><input type=\'radio\' name=\'relationship\' id=\'" + relative + "\' value=\'" + relative + "\' \
+	onClick=\"javascript: change_relative_radio(\'" + relative + "\');\"></div>";
+
+	label_div.innerHTML = label_Html;
+	radio_div.innerHTML = radio_Html;
+}
+
+function set_op_relativeRadio() {
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSisters = getPopParent('yesSister').checked;
+	var hasBrothers = getPopParent('yesBrother').checked;
+	var radios = [];
+
+	if (hasChildren === true) {
+		var data1 = {}
+		data1['field'] = grab('child');
+		data1['value'] = 'child';
+		radios.push(data1);
+	}
+
+	if (hasSisters === true) {
+		var data2 = {}
+		data2['field'] = grab('sister');
+		data2['value'] = 'sister';
+		radios.push(data2);
+	}
+
+	if (hasBrothers === true) {
+		var data3 = {}
+		data3['field'] = grab('brother');
+		data3['value'] = 'brother';
+		radios.push(data3);
+	}
+
+	radios[0]['field'].checked = true;
+	change_relative_radio(radios[0]['value']);
+	set_m_op_gender();
+}
+
+function set_m_op_gender() {
+	if(grab('male').checked === true) {
+		grab('m_gender').value = 'Male';
+	}
+	else {
+		grab('m_gender').value = 'Female';
+	}
+}
+
+function initialize_mhDemoOps_compact() {
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSisters = getPopParent('yesSister').checked;
+	var hasBrothers = getPopParent('yesBrother').checked;
+
+	if (hasBrothers === true) {
+		build_op_radio('brother', 'Brother', 'brother_builder', 'brother_header');
+	}
+
+	if (hasSisters === true) {
+		build_op_radio('sister', 'Sister', 'sister_builder', 'sister_header');
+	}
+
+	if (hasChildren === true) {
+		build_op_radio('child', 'Child', 'child_builder', 'child_header');
+	}
+
+	set_op_relativeRadio();
+}
+
+function change_relative_radio(selectedName) {
+	name = String(selectedName);
+	var age_label = grab('age_label');
+	
+	if (name === 'child') {
+		age_label.innerHTML = "Child\'s Age:";
+		grab('gender_div_iml').style.opacity = '1.0';
+		grab('selectedRel').value = 'Child';
+	}
+	else if (name === 'sister') {
+		age_label.innerHTML = "Sister\'s Age:";
+		grab('gender_div_iml').style.opacity = '0.0';
+		grab('selectedRel').value = 'Sister';
+	}
+	else if (name === 'brother') {
+		age_label.innerHTML = "Brother\'s Age:";
+		grab('gender_div_iml').style.opacity = '0.0';
+		grab('selectedRel').value = 'Brother';
+	}
+}
+
+function snag_indexed_item_mhOp() {
+
+}
+
+function build_op_item_list() {
+	var m_gender = '';
+	var selectedRel = String(grab('selectedRel').value);
+	var age = String(grab('age').value);
+	var city = String(grab('city').value);
+	var state = String(grab('state').value);
+	var old_html = String(grab('item_builder').innerHTML);
+	var index = Number(grab('num_items').value);
+	var num_items = index + 1;
+	grab('num_items').value = num_items;
+	index = String(index);
+	var new_id = 'item_' + String(num_items);
+
+	if (selectedRel === 'Child') {
+		m_gender = String(grab('m_gender').value);
+	}
+
+	var html = "<div class=\'selected_op_iml\' id=\'" + new_id + "\'>\
+	<a href=\"javascript: snag_indexed_item_mhOp(\'" + index + "\');\">\
+	<table>\
+	<tr>\
+	<td><div class=\'opPosition1\'>" + m_gender + "</div></td>\
+	<td><div class=\'opPosition1\'>" + selectedRel + "</div></td>\
+	<td><div class=\'opPosition2\' style=\'margin-left:10px;\'><span>Age:" + age + "</span></div></td>\
+	<td><div class=\'opPosition2\' style=\'margin-left:10px;\'>" + city + ", </div></td>\
+	<td><div class=\'opPosition2\'>" + state + "</div></td>\
+	</tr>\
+	</table>\
+	</a>\
+	</div>";
+
+	var new_html = html + old_html;
+	grab('item_builder').innerHTML = new_html;
+}
+
+function add_new_op_item() {
+	build_op_item_list();
+}
+
+function delete_op_item() {
+
 }
 
 
