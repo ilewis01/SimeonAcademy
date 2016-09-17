@@ -2526,7 +2526,13 @@ def mhDemoOpPage(request):
 		else:
 			mh_id = getGlobalID(user)
 			mh = MentalHealth.objects.get(id=mh_id)
-			states = State.objects.all().order_by('state')
+			state_list_init = State.objects.all().order_by('state')
+			state_list = []
+
+			for s in state_list_init:
+				state_list.append(s.state)
+
+			states = json.dumps(state_list);
 
 			content['mh'] = mh		
 			content['states'] = states

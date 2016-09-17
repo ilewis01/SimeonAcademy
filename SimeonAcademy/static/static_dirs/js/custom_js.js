@@ -7624,10 +7624,10 @@ function kidsRock() {
 	}
 }
 
-function buildChildHeader(header, divName, numEntries, errorList) {
+function buildChildHeader(header, divName, numEntries, errorList, state_html) {
 	divName = String(divName);
 	header = String(header);
-	var html = getChildElementHtml(numEntries, errorList);
+	var html = getChildElementHtml(numEntries, errorList, state_html);
 	var table = header + '_table';
 
 	var div = grab(divName);
@@ -7646,10 +7646,10 @@ function buildChildHeader(header, divName, numEntries, errorList) {
 	</div>";
 }
 
-function buildSiblingHeader(header, divName, numEntries, sibType) {
+function buildSiblingHeader(header, divName, numEntries, sibType, state_html) {
 	divName = String(divName);
 	header = String(header);
-	var html = getSiblingElementHtml(numEntries, sibType);
+	var html = getSiblingElementHtml(numEntries, sibType, state_html);
 	var table = header + '_table';
 
 	var div = grab(divName);
@@ -7667,7 +7667,7 @@ function buildSiblingHeader(header, divName, numEntries, sibType) {
 	</div>";
 }
 
-function singleEntryChildHtml(e_id, errorTag) {
+function singleEntryChildHtml(e_id, errorTag, state_html) {
 	e_id = String(e_id);
 	errorTag = String(errorTag);
 	var head = 'Child ' + e_id;
@@ -7696,8 +7696,7 @@ function singleEntryChildHtml(e_id, errorTag) {
 	<td>\
 	<div>\
 	<select name=\'" + state + "\' id=\'" + state + "\' style=\'width:70px;\' onChange=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + state + "\');\">\
-	<option value=\'None Selected\'>Select</option>\
-	<option value=\'Test\'>Test</option>\
+	<option value=\'None Selected\'>Select</option>" + state_html + "\
 	</select>\
 	</div>\
 	</td>\
@@ -7706,7 +7705,7 @@ function singleEntryChildHtml(e_id, errorTag) {
 	return html;
 }
 
-function singleEntrySiblingHtml(e_id, siblingType, errorTag) {
+function singleEntrySiblingHtml(e_id, siblingType, errorTag, state_html) {
 	e_id = String(e_id);
 	errorTag = String(errorTag);
 	siblingType = String(siblingType);
@@ -7730,8 +7729,7 @@ function singleEntrySiblingHtml(e_id, siblingType, errorTag) {
 	<td>\
 	<div>\
 	<select name=\'" + state + "\' id=\'" + state + "\' onChange=\"javascript: noErrorTextMH1(\'" + errorTag + "\', \'" + state + "\');\">\
-	<option value=\'None Selected\'>Select</option>\
-	<option value=\'Test\'>Test</option>\
+	<option value=\'None Selected\'>Select</option>" + state_html +"\
 	</select>\
 	</div>\
 	</td>\
@@ -7740,18 +7738,18 @@ function singleEntrySiblingHtml(e_id, siblingType, errorTag) {
 	return html;
 }
 
-function getChildElementHtml(numEntries, errorList) {
+function getChildElementHtml(numEntries, errorList, state_html) {
 	numEntries = Number(numEntries);
 	var html = '';
 
 	for (var i = 1; i <= numEntries; i++) {
 		var errorIndex = Number(i) - 1;
-		html += singleEntryChildHtml(i, errorList[errorIndex]);
+		html += singleEntryChildHtml(i, errorList[errorIndex], state_html);
 	}
 	return html;
 }
 
-function getSiblingElementHtml(numEntries, sibType) {
+function getSiblingElementHtml(numEntries, sibType, state_html) {
 	numEntries = Number(numEntries);
 	var html = '';
 	var errorNumber = 0;
@@ -7773,28 +7771,40 @@ function getSiblingElementHtml(numEntries, sibType) {
 
 	for (var i = 1; i <= numEntries; i++) {
 		var errorName = 'e' + String(errorNumber);
-		html += singleEntrySiblingHtml(i, sibType, errorName);
+		html += singleEntrySiblingHtml(i, sibType, errorName, state_html);
 		errorNumber += 1;
 	}
 	return html;
 }
 
-function buildChildList(numEntries, errorList) {
-	buildChildHeader('Children', 'childBuilder', numEntries, errorList);
+function buildChildList(numEntries, errorList, state_html) {
+	buildChildHeader('Children', 'childBuilder', numEntries, errorList, state_html);
 }
 
-function buildSisterList(numEntries) {
+function buildSisterList(numEntries, state_html) {
 	var div = grab('sisterBuilder');
-	buildSiblingHeader('Sisters', 'sisterBuilder', numEntries, 'Sister');
+	buildSiblingHeader('Sisters', 'sisterBuilder', numEntries, 'Sister', state_html);
 }
 
-function buildBrotherList(numEntries) {
+function buildBrotherList(numEntries, stateList) {
 	var div = grab('brotherBuilder');
-	buildSiblingHeader('Brothers', 'brotherBuilder', numEntries, 'Brother');
+	buildSiblingHeader('Brothers', 'brotherBuilder', numEntries, 'Brother', stateList);
 }
 
-function initialize_mhDemoOps() {
+function generateStateHtml(states) {
+	var html = '';
+
+	for (var i = 0; i < states.length; i++) {
+		var val = Number(i) + 1;
+		html += "<option value=\'" + String(val) + "\'>" + String(states[i]) + "</option>";
+	}
+
+	return html;
+}
+
+function initialize_mhDemoOps(states) {
 	var reconstruct = String(getPopParent('reconstruct').value);
+	var state_html = generateStateHtml(states);
 
 	if (reconstruct === 'false') {
 		var hasChildren = getPopParent('yesChild').checked;
@@ -7813,24 +7823,24 @@ function initialize_mhDemoOps() {
 
 
 		if (hasChildren === true) {		
-			buildChildList(numChildren, errorList);
+			buildChildList(numChildren, errorList, state_html);
 		}
 
 		if (hasSisters === true) {		
-			buildSisterList(numSisters);
+			buildSisterList(numSisters, state_html);
 		}
 
 		if (hasBrothers === true) {		
-			buildBrotherList(numBrothers);
+			buildBrotherList(numBrothers, state_html);
 		}
 	}
 	else {
-		resonstruct_mhOpPage();
+		resonstruct_mhOpPage(state_html);
 	}
 		
 }
 
-function resonstruct_mhOpPage() {
+function resonstruct_mhOpPage(state_html) {
 	var changeKids = shouldReconstruct_childWindow_mh('yesChild', 'numChildren', 'm_numChildren');
 	var changeSisters = shouldReconstruct_childWindow_mh('yesSister', 'numSisters', 'm_numSisters');
 	var changeBrothers = shouldReconstruct_childWindow_mh('yesBrother', 'numBrothers', 'm_numBrothers');
@@ -7840,19 +7850,19 @@ function resonstruct_mhOpPage() {
 		var totalErrorDivs = fetch_num_reconstuct_errorDivs(changeKids, changeSisters, changeBrothers);
 		var errorList = creatErrorDivsMhOp(totalErrorDivs);
 		getPopParent('m_numChildren').value = numChildren;
-		buildChildList(numChildren, errorList);
+		buildChildList(numChildren, errorList, state_html);
 	}
 
 	if (changeSisters === true) {
 		var numSisters = Number(getPopParent('numSisters').value);
 		getPopParent('m_numSisters').value = numSisters;
-		buildSisterList(numSisters);
+		buildSisterList(numSisters, m_states);
 	}
 
 	if (changeBrothers === true) {
 		var numBrothers = Number(getPopParent('numBrothers').value);
 		getPopParent('m_numBrothers').value = numBrothers;
-		buildBrotherList(numBrothers);
+		buildBrotherList(numBrothers, m_states);
 	}
 }
 

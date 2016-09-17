@@ -4,7 +4,7 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 <!-- <input type='text' id='test1'> -->
-<body class="gradient-white" onLoad='initialize_mhDemoOps();'>
+<body class="gradient-white" onLoad='initialize_mhDemoOps({{states}});'>
 	<div class='sub_body_mh'>
 		<form action='/verify_mhOp/' method='post' id='mhOpForm'> {% csrf_token %}
 			<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
