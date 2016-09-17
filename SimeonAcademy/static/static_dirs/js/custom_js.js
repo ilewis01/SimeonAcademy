@@ -157,6 +157,30 @@ function numberErrorChecker(item) {
 	}
 }
 
+function numberErrorChecker_noZero(item) {
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+
+	if (item['isDynamic'] === false) {
+		if (validateNumber(val) === false || isBlankText(val) === true || String(val) === '0') {
+			setErrorDiv(item['div']);
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (trigger.checked === true) {
+			if (validateNumber(val) === false || isBlankText(val) === true || String(val) === '0') {
+				setErrorDiv(item['div']);
+			}
+		}
+	}
+}
+
 function hasNumberErrors(item) {
 	var numErrors = 0;
 	var hasErrors = false;
@@ -177,6 +201,37 @@ function hasNumberErrors(item) {
 
 		if (trigger.checked === true) {
 			if (validateNumber(val) === false || isBlankText(val) === true) {
+				numErrors += 1;
+			}
+		}
+	}
+
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
+function hasNumberErrors_noZero(item) {
+	var numErrors = 0;
+	var hasErrors = false;
+	var fieldName = item['field'];
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+	var val = field.value;
+
+	if (item['isDynamic'] === false) {
+		if (validateNumber(val) === false || isBlankText(val) === true || String(val) === '0') {
+			numErrors += 1;
+		}
+	}
+	else {
+		var triggerName = item['trigger'];
+		triggerName = String(triggerName);
+		var trigger = grab(triggerName);
+
+		if (trigger.checked === true) {
+			if (validateNumber(val) === false || isBlankText(val) === true || String(val) === '0') {
 				numErrors += 1;
 			}
 		}
@@ -1181,8 +1236,7 @@ function fetchFieldList_am(section) {
 
 function fetchMhDemoFieldNames() {
 	var result = [];
-	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={}, d11={}, d12={};
-	var d13={}, d14={}, d15={}, d16={}, d17={}, d18={}, d19={}, d20={}, d21={}, d22={}, d23={};
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={}, d11={}, d12={}, d13={}, d14={}, d15={};
 
 	d1['field'] = 'birthplace';
 	d1['type'] = 'text';
@@ -1427,12 +1481,12 @@ function getDynamoErrorFields_mh() {
 
 function mh_dynamo_has_errors() {
 	var fields = getDynamoErrorFields_mh();
-	return specialHasErrorCheck_m(fields);
+	return specialHasErrorCheck_m(fields, true);
 }
 
 function superDynamoChecker() {
 	var fields = getDynamoErrorFields_mh();
-	SpecialSuperErrorChecker(fields);
+	SpecialSuperErrorChecker(fields, true);
 }
 
 function opHasError_mh(fields) {
@@ -2277,7 +2331,7 @@ function hasErrorsInForm(formType, section) {
 	return isGood;
 }
 
-function specialHasErrorCheck_m(fieldList) {
+function specialHasErrorCheck_m(fieldList, numberOption) {
 	var isGood = false;
 
 	for (var i = 0; i < fieldList.length; i++) {
@@ -2285,7 +2339,12 @@ function specialHasErrorCheck_m(fieldList) {
 			isGood = hasTextError(fieldList[i]);
 		}
 		else if (fieldList[i]['type'] === 'number') {
-			isGood = hasNumberErrors(fieldList[i]);
+			if (numberOption === true) {
+				isGood = hasNumberErrors_noZero(fieldList[i]);
+			}
+			else {
+				isGood = hasNumberErrors(fieldList[i]);
+			}			
 		}
 		else if (fieldList[i]['type'] === 'select') {
 			isGood = hasSelectErrors(fieldList[i]);
@@ -2344,14 +2403,19 @@ function superErrorChecker(formType, section) {
 	}
 }
 
-function SpecialSuperErrorChecker(fieldList) {
+function SpecialSuperErrorChecker(fieldList, numberOption) {
 
 	for (var i = 0; i < fieldList.length; i++) {
 		if (fieldList[i]['type'] === 'text') {
 			textErrorChecker(fieldList[i]);
 		}
 		else if (fieldList[i]['type'] === 'number') {
-			numberErrorChecker(fieldList[i]);
+			if (numberOption === true) {
+				numberErrorChecker_noZero(fieldList[i]);
+			}
+			else {
+				numberErrorChecker(fieldList[i]);
+			}
 		}
 		else if (fieldList[i]['type'] === 'select') {
 			selectErrorChecker(fieldList[i]);
@@ -7522,6 +7586,15 @@ function set_ya_or_nay_mh(radio, data, target) {
 	}
 }
 
+function run_mh_op_open_errorCheck() {
+	var fields = getOpDataFields();
+	var errors = opHasError_mh(fields);
+
+	if (errors === true) {
+		opErrorChecker_mh(fields);
+	}
+}
+
 
 function kidsRock() {
 	set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
@@ -7754,9 +7827,9 @@ function initialize_mhDemoOps() {
 }
 
 function resonstruct_mhOpPage() {
-	var changeKids = shouldReconstruct_childWindow_mh('yesChild');
-	var changeSisters = shouldReconstruct_childWindow_mh('yesSister');
-	var changeBrothers = shouldReconstruct_childWindow_mh('yesBrother');
+	var changeKids = shouldReconstruct_childWindow_mh('yesChild', 'numChildren', 'm_numChildren');
+	var changeSisters = shouldReconstruct_childWindow_mh('yesSister', 'numSisters', 'm_numSisters');
+	var changeBrothers = shouldReconstruct_childWindow_mh('yesBrother', 'numBrothers', 'm_numBrothers');
 	
 	if (changeKids === true) {
 		var numChildren = Number(getPopParent('numChildren').value);
@@ -8300,14 +8373,19 @@ function postMhFields(section) {
 	}
 }
 
-function shouldReconstruct_childWindow_mh(fieldName) {
-	fieldName = String(fieldName);
-	var field = getPopParent(fieldName);
-	var reconstruct = false;
+function shouldReconstruct_childWindow_mh(radioName, valName, targetName) {
+	radioName = String(radioName);
+	valName = String(valName);
+	targetName = String(targetName);
+	var radio = getPopParent(radioName);
+	var target = String(getPopParent(targetName).value);
+	var data = String(getPopParent(valName).value);
+	var reconstruct = true;
 
-	if (field.checked === true) {
-		reconstruct = true;
+	if (target === data) {
+		reconstruct = false;
 	}
+
 	return reconstruct;
 }
 
@@ -8325,12 +8403,15 @@ function post_mh_data(section) {
 	section = String(section);
 
 	if (section === '/mh_demographic/') {
+		var opFields = getOpDataFields();
 		var hasErrorsMain = hasErrorsInForm('mh', section);
 		var hasErrorsDynamo = mh_dynamo_has_errors();
+		var has_preOpErrors = opHasError_mh(opFields);
 
-		if (hasErrorsMain === true || hasErrorsDynamo === true) {
+		if (hasErrorsMain === true || hasErrorsDynamo === true || has_preOpErrors === true) {
 			superErrorChecker('mh', section);
 			superDynamoChecker();
+			opErrorChecker_mh(opFields);
 
 			var w = 500, h = 500;
 			openPopUp('auto', '/generateErrors/', w, h);
@@ -8376,53 +8457,47 @@ function post_mh_data(section) {
 	}
 }
 
+function post_demo_kidValues_mh(targetName) {
+	targetName = String(targetName);
+	var target = String(grab(targetName).value);
+
+	if (isBlankText(target) === true) {
+		target.value = 'N/A';
+	}
+}
+
 function mh_continue_demographic() {
-	var yesChild = document.getElementById('yesChild');
-	var yesSister = document.getElementById('yesSister');
-	var yesBrother = document.getElementById('yesBrother');
-	var momIsLiving = document.getElementById('momIsLiving');	
-	var dadIsLiving = document.getElementById('dadIsLiving');
-	var single = document.getElementById('single');
+	//POST NON-DYNAMIC TEXT FIELDS
+	post(false, 'text', grab('birthplace'), null, null);
+	post(false, 'text', grab('raised'), null, null);
+	post(false, 'text', grab('occupation'), null, null);
+	post(false, 'text', grab('employer'), null, null);
+	post(false, 'text', grab('pastJobs'), null, null);
+	post(false, 'text', grab('recentMove'), null, null);
+	post(false, 'text', grab('motherOccupation'), null, null);
+	post(false, 'text', grab('motherCity'), null, null);
+	post(false, 'text', grab('fatherOccupation'), null, null);
+	post(false, 'text', grab('fatherCity'), null, null);
 
-	//M DATA
-	var m_motherAge = document.getElementById('m_motherAge');
-	var m_motherAgeDeath = document.getElementById('m_motherAgeDeath');
-	var m_fatherAge = document.getElementById('m_fatherAge');
-	var m_fatherAgeDeath = document.getElementById('m_fatherAgeDeath');
-	var m_numChildren = document.getElementById('m_numChildren');
-	var m_numSisters = document.getElementById('m_numSisters');
-	var m_numBrothers = document.getElementById('m_numBrothers');
-	var m_numMarriages = document.getElementById('m_numMarriages');
-	var m_spouseOccupation = document.getElementById('m_spouseOccupation');
-	var m_spouseEmployer = document.getElementById('m_spouseEmployer');
-	var m_spouseAge = document.getElementById('m_spouseAge');
-	var m_spouseWorkMos = document.getElementById('m_spouseWorkMos');
-	var m_spouseWorkYrs = document.getElementById('m_spouseWorkYrs');
+	//POST NON-DYNAMIC NUMBER FIELDS
+	post(false, 'number', grab('employedMo'), null, null);
+	post(false, 'number', grab('employedYrs'), null, null);
 
-	//DYNAMIC FIELDS
-	var motherAge = document.getElementById('motherAge');
-	var motherAgeDeath = document.getElementById('motherAgeDeath');
-	var fatherAge = document.getElementById('fatherAge');
-	var fatherAgeDeath = document.getElementById('fatherAgeDeath');
-	var numChildren = document.getElementById('numChildren');
-	var numSisters = document.getElementById('numSisters');
-	var numBrothers = document.getElementById('numBrothers');
-	var numMarriages = document.getElementById('numMarriages');
-	var spouseOccupation = document.getElementById('spouseOccupation');
-	var spouseEmployer = document.getElementById('spouseEmployer');
-	var spouseAge = document.getElementById('spouseAge');
-	var spouseWorkMos = document.getElementById('spouseWorkMos');
-	var spouseWorkYrs = document.getElementById('spouseWorkYrs');
+	//POST DYNAMIC FAMILY DATA
+	post_demo_kidValues_mh('childrenMale');
+	post_demo_kidValues_mh('childrenFemale');
+	post_demo_kidValues_mh('m_sistersFinal');
+	post_demo_kidValues_mh('m_brothersFinal');
 
-	postMhFamily(yesChild, numChildren, m_numChildren);
-	postMhFamily(yesSister, numSisters, m_numSisters);
-	postMhFamily(yesBrother, numBrothers, m_numBrothers);
+	// postMhFamily(yesChild, numChildren, m_numChildren);
+	// postMhFamily(yesSister, numSisters, m_numSisters);
+	// postMhFamily(yesBrother, numBrothers, m_numBrothers);
 
-	postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
-	postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
+	// postMhParents(momIsLiving, motherAge, motherAgeDeath, m_motherAge, m_motherAgeDeath);
+	// postMhParents(dadIsLiving, fatherAge, fatherAgeDeath, m_fatherAge, m_fatherAgeDeath);
 
-	postMhNoMarriages(single, numMarriages, m_numMarriages);
-	postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
+	// postMhNoMarriages(single, numMarriages, m_numMarriages);
+	// postMhSpouse(single, spouseAge, spouseWorkMos, spouseWorkYrs, spouseOccupation, spouseEmployer, m_spouseAge, m_spouseWorkMos, m_spouseWorkYrs, m_spouseOccupation, m_spouseEmployer);
 }
 
 function proceed_mh_background() {
