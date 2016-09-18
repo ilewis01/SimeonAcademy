@@ -7695,9 +7695,10 @@ function grab_selected_opElement(index) {
 }
 
 function highlightOpSelection_m(index) {
-	ClearAllOpFields_data();
 	var element = grab_selected_opElement(index);
+	ClearAllOpFields_data();
 	element.className = 'selected_op_iml';
+	grab('currently_selected').value = index;
 }
 
 
@@ -7706,7 +7707,7 @@ function ClearAllOpFields_data() {
 
 	for (var i = 0; i < listSize; i++) {
 		var element = grab_selected_opElement(i);
-		element.className = '';
+		element.className = 'iml_normal_nonOp';
 	}
 }
 
@@ -7717,27 +7718,117 @@ function fetchSelectedOpElement_mh(index) {
 	return e_list[index];
 }
 
-function supremeOpListBuilder(eList) {
+function remove_commas(text) {
+	var result = '';
+	text = String(text);
+
+	for (var i = 0; i < text.length; i++) {
+		if (text.charAt(i) !== ',') {
+			result += text.charAt(i);
+		}
+	}
+
+	return result;
+}
+
+function getSingleOpData(index) {
+	index = Number(index);
+	spec = String(index + 1);
+	var div_id = 'item_' + spec;
+	var div = grab(div_id);
+	var city_id = 'city_' + spec;
+	var city_div = grab(city_id);
+	var state_id = 'state_' + spec;
+	var state_div = grab(state_id);
+	var age_id = 'age_' + spec;
+	var age_div = grab(age_id);
+	var type_id = 'type_' + spec;
+	var type_div = grab(type_id);
+
+	var city = remove_commas(city_div.innerHTML);
+	var state = state_div.innerHTML;
+	var type = type_div.innerHTML;
+	var age = numbersOnly(age_div.innerHTML);
+
+	data = {};
+	data['age'] = age;
+	data['g_type'] = type;
+	data['city'] = city;
+	data['state'] = state;
+
+	return data;
+}
+
+function getOpBuilderArray() {
+	var result = [];
+	var size = Number(grab('num_items').value);
+	var start = size - 1;
+	var spec = size;
+
+	for (var i = 0; i < size; i++) {
+		var item = getSingleOpData(start);
+		result.push(item);
+		start = start - 1;
+		spec = spec - 1;
+	}
+	return result;
+}
+
+function reset_opItem_ids(new_list) {
+	var size = new_list.length;
+	var spec = size;
+	var index = size - 1;
+
+	for (var i = 0; i < size; i ++) {
+		new_list[i]['age_id'] = 'age_' + String(spec);
+		new_list[i]['type_id'] = 'type_' + String(spec);
+		new_list[i]['city_id'] = 'city_' + String(spec);
+		new_list[i]['state_id'] = 'state_' + String(spec);
+		new_list[i]['item_id'] = 'item_' + String(spec);
+		new_list[i]['index'] = index;
+		spec -= 1;
+		index -= 1;
+	}
+
+	return new_list;
+}
+
+function supremeOpListBuilder(eList, isInitial) {
 	var html = '';
 	var heading = "<table>";
 	var tail = "</table>";
+	var size = eList.length;
+	var highlight = size - 1;
 
-	for (var i = 0; i < eList.length; i++) {
-		html += singleOpElementBuilder(eList[i]);
+	grab('num_items').value = size;
+
+	if (isInitial === true) {
+		for (var i = 0; i < eList.length; i++) {
+			html += singleOpElementBuilder(eList[i]);
+		}
+
+		var render = heading + html + tail;
+
+		grab('item_builder').innerHTML = render;
+		highlightOpSelection_m(highlight);
 	}
 
-	var render = heading + html + tail;
+	else {
+		for (var j = 0; j < eList.length; j++) {
+			html += singleOpElementBuilder(eList[j]);
+		}
 
-	grab('item_builder').innerHTML = render;
-	highlightOpSelection_m(eList.length - 1);
-	// snag_indexed_item_mhOp((e_list.length) - 1);
+		var render2 = heading + html + tail;
+		grab('item_builder').innerHTML = render2;
+		highlightOpSelection_m(highlight);
+	}
 }
 
 function singleOpElementBuilder(item) {
 	var html = "<tr>\
 	<td>\
 	<a href=\"javascript: highlightOpSelection_m(\'" + item['index'] + "\');\">\
-	<div id=\"" + item['item_id'] + "\" class=\"\">\
+	<div id=\"" + item['item_id'] + "\" class=\"iml_normal_nonOp\">\
 	<table>\
 	<tr>\
 	<td>\
@@ -7755,6 +7846,7 @@ function singleOpElementBuilder(item) {
 
 	return html;
 }
+
 
 function build_op_item_list() {
 	var m_gender = '';
@@ -7824,7 +7916,7 @@ function initialize_mhDemoOps_compact(json_data) {
 	//HERE BREAK UP EXISTING PARTS AND CREATE LIST
 	var eList = preliminaryOpBuilder_mh(json_data);
 	grab('num_items').value = String(eList.length);
-	supremeOpListBuilder(eList);
+	supremeOpListBuilder(eList, true);
 
 }
 
@@ -7850,11 +7942,8 @@ function decodeAndBuild_mh(text) {
 	var result = [];
 	var dList = seperateOpText_mh(text);
 
-	// grab('test1').value = String(dList.length);
-
 	for (var i = 0; i < dList.length; i++) {
 		m_text = dList[i];
-		m_text = clearWhiteSpace(m_text);
 		var data = {};
 		var i_city = 0;
 		var i_state = 0;
@@ -8036,9 +8125,38 @@ function add_new_op_item() {
 }
 
 function delete_op_item() {
+	var numElements = Number(grab('num_items').value);
 
+	if (numElements > 1) {
+		index = Number(grab('currently_selected').value);
+		var data = getOpBuilderArray();
+		var new_list = kill_unwanted_opElement(index, data);
+		var process_this = reset_opItem_ids(new_list);
+		grab('item_builder').innerHTML = '';
+		supremeOpListBuilder(process_this, false);
+	}
+	else {
+		grab('num_items').value = 0;
+		grab('item_builder').innerHTML = '';
+	}
 }
 
+function kill_unwanted_opElement(index, old_list) {
+	var result = [];
+	var back = old_list.length - 1;
+	index = Number(index);
+
+	for (var j = 0; j < index; j++) {
+		back = back - 1;
+	}
+
+	for (var i = 0; i < old_list.length; i++) {
+		if (back !== i) {
+			result.push(old_list[i]);
+		}
+	}
+	return result;
+}
 
 function kidsRock() {
 	set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
