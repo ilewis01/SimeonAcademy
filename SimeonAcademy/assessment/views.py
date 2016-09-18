@@ -2528,15 +2528,21 @@ def mhDemoOpPage(request):
 			mh = MentalHealth.objects.get(id=mh_id)
 			state_list_init = State.objects.all().order_by('state')
 			state_list = []
+			data = {}
 
 			for s in state_list_init:
 				state_list.append(s.state)
 
-			states = json.dumps(state_list);
+			data['male'] = mh.demographics.childrenMale
+			data['female'] = mh.demographics.childrenFemale
+			data['brother'] = mh.demographics.bothers
+			data['sister'] = mh.demographics.sisters
+			json_data = json.dumps(data);
 
 			content['mh'] = mh		
-			content['states'] = states
+			# content['states'] = states
 			content['state_list'] = state_list
+			content['json_data'] = json_data
 			content['title'] = "Simeon Academy | Mental Health Assessment"
 			return render_to_response('counselor/forms/MentalHealth/mhDemoOpPage.html', content)
 

@@ -7651,25 +7651,6 @@ function set_m_op_gender() {
 	}
 }
 
-function initialize_mhDemoOps_compact() {
-	var hasChildren = getPopParent('yesChild').checked;
-	var hasSisters = getPopParent('yesSister').checked;
-	var hasBrothers = getPopParent('yesBrother').checked;
-
-	if (hasBrothers === true) {
-		build_op_radio('brother', 'Brother', 'brother_builder', 'brother_header');
-	}
-
-	if (hasSisters === true) {
-		build_op_radio('sister', 'Sister', 'sister_builder', 'sister_header');
-	}
-
-	if (hasChildren === true) {
-		build_op_radio('child', 'Child', 'child_builder', 'child_header');
-	}
-
-	set_op_relativeRadio();
-}
 
 function change_relative_radio(selectedName) {
 	name = String(selectedName);
@@ -7692,8 +7673,87 @@ function change_relative_radio(selectedName) {
 	}
 }
 
-function snag_indexed_item_mhOp() {
+function snag_indexed_item_mhOp(index) {
+	var select = fetchSelectedOpElement_mh(index);
+	clear_op_selected_mh();
+	select['div'].className = 'selected_op_iml';
+}
 
+function clear_selected_opElement(index) {
+	var select = fetchSelectedOpElement_mh(index);
+	clear_op_selected_mh();
+	select['div'].className = 'selected_op_iml';
+}
+
+function grab_selected_opElement(index) {
+	index = Number(index);
+	var loc = index + 1;
+	var divName = 'item_' + String(loc);
+	var div = grab(divName);
+	grab('currently_selected').value = index;
+	return div;
+}
+
+function highlightOpSelection_m(index) {
+	ClearAllOpFields_data();
+	var element = grab_selected_opElement(index);
+	element.className = 'selected_op_iml';
+}
+
+
+function ClearAllOpFields_data() {
+	var listSize = Number(grab('num_items').value); 
+
+	for (var i = 0; i < listSize; i++) {
+		var element = grab_selected_opElement(i);
+		element.className = '';
+	}
+}
+
+function fetchSelectedOpElement_mh(index) {
+	var e_list = fetch_opBuilder_elements();
+	index = Number(index);
+	grab('currently_selected').value = index;
+	return e_list[index];
+}
+
+function supremeOpListBuilder(eList) {
+	var html = '';
+	var heading = "<table>";
+	var tail = "</table>";
+
+	for (var i = 0; i < eList.length; i++) {
+		html += singleOpElementBuilder(eList[i]);
+	}
+
+	var render = heading + html + tail;
+
+	grab('item_builder').innerHTML = render;
+	highlightOpSelection_m(eList.length - 1);
+	// snag_indexed_item_mhOp((e_list.length) - 1);
+}
+
+function singleOpElementBuilder(item) {
+	var html = "<tr>\
+	<td>\
+	<a href=\"javascript: highlightOpSelection_m(\'" + item['index'] + "\');\">\
+	<div id=\"" + item['item_id'] + "\" class=\"\">\
+	<table>\
+	<tr>\
+	<td>\
+	<div class=\"opPosition1\" name=\"" + item['type_id']  + "\" id=\"" + item['type_id'] + "\" value=\'" + item['g_type'] + "\'>" + item['g_type'] + "</div>\
+	</td>\
+	<td><div class=\"opPosition2\" name=\"" + item['age_id'] + "\" id=\"" + item['age_id'] + "\" value=\'" + item['age'] + "\'><span>Age:" + item['age'] + "</span></div><td>\
+	<td><div class=\'opPosition2\' name=\'" + item['city_id'] + "\' id=\'" + item['city_id'] + "\' value=\'" + item['city'] + "\'>" + item['city'] + ", </div></td>\
+	<td><div class=\'opPosition2\' name=\'" + item['state_id'] + "\' id=\'" + item['state_id'] + "\' value=\'" + item['state'] + "\'>" + item['state'] + "</div></td>\
+	</tr>\
+	</table>\
+	</div>\
+	</a>\
+	</td>\
+	</tr>"
+
+	return html;
 }
 
 function build_op_item_list() {
@@ -7708,6 +7768,12 @@ function build_op_item_list() {
 	grab('num_items').value = num_items;
 	index = String(index);
 	var new_id = 'item_' + String(num_items);
+	var age_id = 'age_' + String(num_items);
+	var type_id = 'type_' + String(num_items);
+	var city_id = 'city_' + String(num_items);
+	var state_id = 'state_' + String(num_items);
+	var gender_id = 'gender_' + String(num_items);
+	grab('currently_selected').value = index;
 
 	if (selectedRel === 'Child') {
 		m_gender = String(grab('m_gender').value);
@@ -7715,6 +7781,11 @@ function build_op_item_list() {
 
 	var html = "<div class=\'selected_op_iml\' id=\'" + new_id + "\'>\
 	<a href=\"javascript: snag_indexed_item_mhOp(\'" + index + "\');\">\
+	<input type=\'hidden\' name=\'" + age_id + "\' id=\'" + age_id + "\' value=\'" + age + "\'>\
+	<input type=\'hidden\' name=\'" + type_id + "\' id=\'" + type_id + "\' value=\'" + selectedRel + "\'>\
+	<input type=\'hidden\' name=\'" + city_id + "\' id=\'" + city_id + "\' value=\'" + city + "\'>\
+	<input type=\'hidden\' name=\'" + state_id + "\' id=\'" + state_id + "\' value=\'" + state + "\'>\
+	<input type=\'hidden\' name=\'" + gender_id + "\' id=\'" + gender_id + "\' value=\'" + m_gender + "\'>\
 	<table>\
 	<tr>\
 	<td><div class=\'opPosition1\'>" + m_gender + "</div></td>\
@@ -7731,7 +7802,236 @@ function build_op_item_list() {
 	grab('item_builder').innerHTML = new_html;
 }
 
+function initialize_mhDemoOps_compact(json_data) {
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSisters = getPopParent('yesSister').checked;
+	var hasBrothers = getPopParent('yesBrother').checked;
+
+	if (hasBrothers === true) {
+		build_op_radio('brother', 'Brother', 'brother_builder', 'brother_header');
+	}
+
+	if (hasSisters === true) {
+		build_op_radio('sister', 'Sister', 'sister_builder', 'sister_header');
+	}
+
+	if (hasChildren === true) {
+		build_op_radio('child', 'Child', 'child_builder', 'child_header');
+	}
+
+	set_op_relativeRadio();
+
+	//HERE BREAK UP EXISTING PARTS AND CREATE LIST
+	var eList = preliminaryOpBuilder_mh(json_data);
+	grab('num_items').value = String(eList.length);
+	supremeOpListBuilder(eList);
+
+}
+
+function seperateOpText_mh(text) {
+	result = [];
+	var t = '';
+	text = String(text);
+
+	for (var i = 0; i < text.length; i++) {
+		if (text.charAt(i) === '~') {
+			result.push(t);
+			t = '';
+		}
+		else {
+			t += text.charAt(i);
+		}
+	}
+
+	return result;
+}
+
+function decodeAndBuild_mh(text) {
+	var result = [];
+	var dList = seperateOpText_mh(text);
+
+	// grab('test1').value = String(dList.length);
+
+	for (var i = 0; i < dList.length; i++) {
+		m_text = dList[i];
+		m_text = clearWhiteSpace(m_text);
+		var data = {};
+		var i_city = 0;
+		var i_state = 0;
+		var type = m_text.charAt(0);
+		var age = '';
+		var city = '';
+		var state = '';
+		var g_type = null;
+
+		for (var j = 1; j < m_text.length; j++) {
+			if (m_text.charAt(j) === '/') {
+				i_city = j + 1;
+				break;
+			}
+			else {
+				age += m_text.charAt(j);
+			}
+		}
+
+		for(var k = i_city; k < m_text.length; k++) {
+			if (m_text.charAt(k) === ',') {
+				i_state = k + 1;
+				break;
+			}
+			else {
+				city += m_text.charAt(k);
+			}
+		}
+
+		for (var l = i_state; l < m_text.length; l++) {
+			state += m_text.charAt(l);
+		}
+
+		if (type === 'f') {
+			g_type = 'Female Child';
+		}
+		else if (type === 'm') {
+			g_type = 'Male Child';
+		}
+		else if (type === 's') {
+			g_type = 'Sister';
+		}
+		else if (type === 'b') {
+			g_type = 'Brother';
+		}
+
+		data['g_type'] = g_type;
+		data['type'] = type;
+		data['age'] = age;
+		data['city'] = city;
+		data['state'] = state;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function fetch_itemized_opElement(text) {
+	var eList = decodeAndDestroy_mh(text);
+
+	for (var i = 0; i < eList.length; i++) {
+		var v_curr = i + 1;
+		eList[i]['age_id'] = 'age_' + String(v_curr);
+		eList[i]['city_id'] = 'city_' + String(v_curr);
+		eList[i]['type_id'] = 'type_' + String(v_curr);
+		eList[i]['item_id'] = 'item_' + String(v_curr);
+		eList[i]['state_id'] = 'state_' + String(v_curr);
+		eList[i]['index'] = 0;
+	}
+
+	return eList;
+}
+
+function preliminaryOpBuilder_mh(json_data) {
+	var result = [];
+	var m = decodeAndBuild_mh(String(json_data.male));
+	var f = decodeAndBuild_mh(String(json_data.female));
+	var s = decodeAndBuild_mh(String(json_data.sister));
+	var b = decodeAndBuild_mh(String(json_data.brother));
+	
+	for (var i = 0; i < m.length; i++) {
+		result.push(m[i]);
+	}
+	for (var j = 0; j < f.length; j++) {
+		result.push(f[j]);
+	}
+	for (var k = 0; k < s.length; k++) {
+		result.push(s[k]);
+	}
+	for (var l = 0; l < b.length; l++) {
+		result.push(b[l]);
+	}
+
+	var v_curr = Number(result.length);
+
+	for (var n = 0; n < result.length; n++) {
+		var age_id = 'age_' + String(v_curr);
+		var type_id = 'type_' + String(v_curr);
+		var city_id = 'city_' + String(v_curr);
+		var state_id = 'state_' + String(v_curr);
+		var item_id = 'item_' + String(v_curr);
+		var gender_id = 'gender_' + String(v_curr);
+
+		result[n]['gender_id'] = gender_id;
+		result[n]['age_id'] = age_id;
+		result[n]['type_id'] = type_id;
+		result[n]['city_id'] = city_id;
+		result[n]['state_id'] = state_id;
+		result[n]['item_id'] = item_id;
+		result[n]['index'] = String(v_curr - 1);
+
+		v_curr = v_curr - 1;
+	}
+
+	return result;
+}
+
+
+function fetch_opBuilder_elements() {
+	var result = [];
+	var numElements = Number(grab('num_items').value);
+
+	for (var i = 0; i < numElements; i++) {
+		var index = i + 1;
+		var data = {};
+		var entry = '';
+		var age_id = 'age_' + String(index);
+		var type_id = 'type_' + String(index);
+		var city_id = 'city_' + String(index);
+		var state_id = 'state_' + String(index);
+		var gender_id = 'gender_' + String(index);
+		var div_id = 'item_' + String(index);
+
+		var g_type = null;
+
+		var age = String(grab(age_id).value);
+		var type = String(grab(type_id).value);
+		var city = String(grab(city_id).value);
+		var state = String(grab(state_id).value);
+		var gender = String(grab(gender_id).value);
+		var div = grab(div_id);
+
+		if (gender === 'Male') {
+			g_type = 'm';
+		}
+		else if (gender === 'Female') {
+			g_type = 'f';
+		}
+
+		if (type === 'Sister') {
+			g_type = 's';
+		}
+		else if (type === 'Brother') {
+			g_type = 'b';
+		}
+
+		entry = age + '/' + city + ', ' + state;
+
+		data['item'] = entry;
+		data['type'] = g_type;
+		data['div'] = div;
+		result.push(data);
+	}
+
+	return result;
+}
+
+function clear_op_selected_mh() {
+	var elements = fetch_opBuilder_elements();
+
+	for (var i = 0; i < elements.length; i++) {
+		elements[i]['div'].className = '';
+	}
+}
+ 
 function add_new_op_item() {
+	clear_op_selected_mh();
 	build_op_item_list();
 }
 
