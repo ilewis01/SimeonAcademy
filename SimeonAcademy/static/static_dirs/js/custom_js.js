@@ -7793,6 +7793,7 @@ function reset_opItem_ids(new_list) {
 	return new_list;
 }
 
+
 function supremeOpListBuilder(eList, isInitial) {
 	var html = '';
 	var heading = "<table>";
@@ -7818,9 +7819,20 @@ function supremeOpListBuilder(eList, isInitial) {
 			html += singleOpElementBuilder(eList[j]);
 		}
 
+		var new_index = Number(grab('currently_selected').value);
 		var render2 = heading + html + tail;
 		grab('item_builder').innerHTML = render2;
-		highlightOpSelection_m(highlight);
+
+		if (grab('math_type').value === 'add') {
+			new_index = Number(eList[0]['index']);
+		}
+		else {
+			if (new_index !== 0) {
+				new_index -= 1;
+			}
+		}
+
+		highlightOpSelection_m(new_index);
 	}
 }
 
@@ -8120,12 +8132,36 @@ function clear_op_selected_mh() {
 }
  
 function add_new_op_item() {
-	clear_op_selected_mh();
-	build_op_item_list();
+	var age = grab('age').value;
+	var city = grab('city').value;
+	var state = grab('state').value;
+	var g_type = find_op_gType();
+	var index = grab('num_items').value;
+	var spec = Number(index) + 1;
+	var item = create_op_item_single_mh(age, city, state, g_type, index, spec);
+	var eList = get_existing_op_items();
+	var new_list = [];
+
+	grab('math_type').value = 'add';
+	new_list.push(item);
+
+	for (var j = 0; j < eList.length; j++) {
+		new_list.push(eList[j]);
+	}
+
+	supremeOpListBuilder(new_list, false);
 }
+
+function get_existing_op_items() {
+	var data = getOpBuilderArray();
+	var result = reset_opItem_ids(data);
+	return result;
+}
+
 
 function delete_op_item() {
 	var numElements = Number(grab('num_items').value);
+	grab('math_type').value = 'delete';
 
 	if (numElements > 1) {
 		index = Number(grab('currently_selected').value);
@@ -8139,6 +8175,62 @@ function delete_op_item() {
 		grab('num_items').value = 0;
 		grab('item_builder').innerHTML = '';
 	}
+}
+
+function create_op_item_single_mh(age, city, state, g_type, index, spec) {
+	var data = {};
+	data['age'] = age;
+	data['city'] = city;
+	data['state'] = state;
+	data['g_type'] = g_type;
+	data['index'] = index;
+	data['type_id'] = 'type_' + spec;
+	data['age_id'] = 'age_' + spec;
+	data['city_id'] = 'city_' + spec;
+	data['state_id'] = 'state_' + spec;
+	data['item_id'] = 'item_' + spec;
+	return data;
+}
+
+function find_op_gType() {
+	var type = null;
+	var isChild = grab('child').checked;
+	var isSister = grab('sister').checked;
+	var isMale = grab('male').checked;
+
+	if (isChild === true) {
+		if (isMale === true) {
+			type = 'Male Child';
+		}
+		else {
+			type = 'Female Child';
+		}
+	}
+
+	else if (isSister === true) {
+		type = 'Sister';
+	}
+
+	else {
+		type = 'Brother';
+	}
+
+	return type;
+}
+
+function prepare_op_html(html) {
+	html = clearWhiteSpace(html);
+	
+	var result = '';
+	var end = (html.length) - 16;
+
+	if (html.length > 30 && isBlankText(html) === false) {
+		for (var i = 14; i < end; i++) {
+			result += html.charAt(i);
+		}
+	}
+
+	return result;
 }
 
 function kill_unwanted_opElement(index, old_list) {
