@@ -8095,8 +8095,6 @@ function add_new_op_item() {
 	var new_list = [];
 	var initialize_list = determine_opList_initialization(g_type);
 
-	grab('test1').value = String(initialize_list);
-
 	grab('math_type').value = 'add';
 	new_list.push(item);
 
@@ -8187,7 +8185,7 @@ function encode_g_type_mh(g_type) {
 		result = 's';
 	}
 	else if (g_type === 'Brother') {
-		result = 'm';
+		result = 'b';
 	}
 
 	return result;
@@ -8250,6 +8248,7 @@ function find_op_gType() {
 
 	var isChild = false;
 	var isSister = false;
+	var isBrother = false;
 	var isMale = false;
 
 	if (getPopParent('yesChild').checked === true) {
@@ -8259,6 +8258,10 @@ function find_op_gType() {
 
 	if (getPopParent('yesSister').checked === true) {
 		isSister = grab('sister').checked;
+	}
+
+	if (getPopParent('yesBrother').checked === true) {
+		isBrother = grab('brother').checked;
 	}
 
 	// var isChild = grab('child').checked;
@@ -8278,7 +8281,7 @@ function find_op_gType() {
 		type = 'Sister';
 	}
 
-	else {
+	else if (isBrother === true){
 		type = 'Brother';
 	}
 
