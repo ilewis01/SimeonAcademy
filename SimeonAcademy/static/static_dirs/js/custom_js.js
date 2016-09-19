@@ -7506,15 +7506,28 @@ function d_init_mh_demo(json_data) {
 }
 
 function build_op_radio(relative, title, radioDivName, labelDivName) {
+	var error = '';
 	radioDivName 	= String(radioDivName);
 	labelDivName 	= String(labelDivName);	
 	relative 		= String(relative);	
-	title 			= String(title);	
+	title 			= String(title);
+
+	if (relative === 'child') {
+		error = 'e_c';
+	}
+
+	else if (relative === 'brother') {
+		error = 'e_b';
+	}
+
+	else if (relative === 'sister') {
+		error = 'e_s';
+	}
 
 	var radio_div = grab(radioDivName);
 	var label_div = grab(labelDivName);
 
-	var label_Html = "<div class=\'new_radio_iml_label\'>" + title + "</div>";
+	var label_Html = "<div id=\"" + error + "\"><div class=\'new_radio_iml_label\'>" + title + "</div></div>";
 
 	var radio_Html = "<div><input type=\'radio\' name=\'relationship\' id=\'" + relative + "\' value=\'" + relative + "\' \
 	onClick=\"javascript: change_relative_radio(\'" + relative + "\');\"></div>";
@@ -7843,6 +7856,8 @@ function initialize_mhDemoOps_compact(json_data) {
 	grab('num_items').value = String(eList.length);
 	supremeOpListBuilder(eList, true);
 
+	set_op_relative_values();
+
 }
 
 function seperateOpText_mh(text) {
@@ -8082,28 +8097,172 @@ function determine_opList_initialization(g_type) {
 
 	return initialize;
 }
+
+function set_op_relative_values() {
+	var e = seperateElemental_op_mh();
+
+	var m = e['m'].length;
+	var f = e['f'].length;
+	var s = e['s'].length;
+	var b = e['b'].length;
+
+	var num_kids = m + s;
+
+	grab('numSisters').value = s;
+	grab('numBrothers').value = b;
+	grab('numKids').value = num_kids;
+}
  
-function add_new_op_item() {
-	var age = grab('age').value;
-	var city = grab('city').value;
-	var state = grab('state').value;
-	var g_type = find_op_gType();
-	var index = grab('num_items').value;
-	var spec = Number(index) + 1;
-	var item = create_op_item_single_mh(age, city, state, g_type, index, spec);
-	var eList = get_existing_op_items();
-	var new_list = [];
-	var initialize_list = determine_opList_initialization(g_type);
 
-	grab('math_type').value = 'add';
-	new_list.push(item);
+function post_op_data_mh() {
+	var data = seperateElemental_op_mh();
+	var maleKids = final_mh_op_encoder(data['m']);
+	var femaleKids = final_mh_op_encoder(data['f']);
+	var sisters = final_mh_op_encoder(data['s']);
+	var brothers = final_mh_op_encoder(data['b']);
 
-	for (var j = 0; j < eList.length; j++) {
-		new_list.push(eList[j]);
+	getPopParent('childrenMale').value = maleKids;
+	getPopParent('childrenFemale').value = femaleKids;
+	getPopParent('m_sistersFinal').value = sisters;
+	getPopParent('m_brothersFinal').value = brothers;
+}
+
+function isValidNumber_no_zero_allowed(value) {
+	var isValid = true;
+	var test =  Number(value);
+
+	if (test === 0) {
+		isValid = false;
+	}
+	return isValid;
+}
+
+function op1_hasInputError() {
+	var hasError = false;
+	var cityBlank = isBlankText(grab('city').value);
+	var state = Number(grab('state').selectedIndex);
+	var age = String(grab('age').value);
+	var validAge = isValidNumber_no_zero_allowed(age);
+
+	if (state === 0 || cityBlank === true || validAge === false) {
+		hasError = true;
 	}
 
-	supremeOpListBuilder(new_list, initialize_list);
-	post_op_data_mh();
+	return hasError;
+}
+
+function has_single_op_value_error(trigger, num_elements) {
+	var hasError = false;
+	num_elements = Number(num_elements);
+
+	if (trigger === true && num_elements === 0) {
+		hasError = true;
+	}
+
+	return hasError;
+}
+
+function op1_hasTypeError() {
+	var hasError = false;
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSister = getPopParent('yesSister').checked;
+	var hasBrother = getPopParent('yesBrother').checked;
+	var num_kids = grab('numKids').value;
+	var num_sisters = grab('numSisters').value;
+	var num_brothers = grab('numBrothers').value;
+
+	var ek = has_single_op_value_error(hasChildren, num_kids);
+	var es = has_single_op_value_error(hasSister, num_sisters);
+	var eb = has_single_op_value_error(hasBrother, num_brothers);
+
+	if (ek === true || es === true || eb === true) {
+		hasError = true;
+	}
+
+	return hasError;
+}
+
+function op1_input_errorChecker() {
+	var cityError = isBlankText(grab('city').value);
+	var stateError = false;
+	var ageError = false;
+
+	if (Number(grab('state').selectedIndex) === 0) {
+		stateError = true;
+	}
+
+	if (isValidNumber_no_zero_allowed(grab('age').value) === false) {
+		ageError = true;
+	}
+
+	if (cityError === true) {
+		setErrorDiv('e_city');
+	}
+
+	if (stateError === true) {
+		setErrorDiv('e_state');
+	}
+
+	if (ageError === true) {
+		setErrorDiv('e_age');
+	}
+}
+
+function op1_type_errorChecker() {
+	var errorList = [];
+	var hasChildren = getPopParent('yesChild').checked;
+	var hasSister = getPopParent('yesSister').checked;
+	var hasBrother = getPopParent('yesBrother').checked;
+	var num_kids = grab('numKids').value;
+	var num_sisters = grab('numSisters').value;
+	var num_brothers = grab('numBrothers').value;
+
+	var ek = has_single_op_value_error(hasChildren, num_kids);
+	var es = has_single_op_value_error(hasSister, num_sisters);
+	var eb = has_single_op_value_error(hasBrother, num_brothers);
+
+	if (ek === true) {
+		setErrorDiv('e_c');
+	}
+
+	if (es === true) {
+		setErrorDiv('e_s');
+	}
+
+	if (eb === true) {
+		setErrorDiv('e_b');
+	}
+}
+
+function add_new_op_item() {
+	if (op1_hasInputError() === true) {
+		op1_input_errorChecker();
+		openPopUp('auto', '/op_input_error/', 500, 150);
+	}
+
+	else {
+		var age = grab('age').value;
+		var city = grab('city').value;
+		var state = grab('state').value;
+		var g_type = find_op_gType();
+		var index = grab('num_items').value;
+		var spec = Number(index) + 1;
+		var item = create_op_item_single_mh(age, city, state, g_type, index, spec);
+		var eList = get_existing_op_items();
+		var new_list = [];
+		var initialize_list = determine_opList_initialization(g_type);
+
+		grab('math_type').value = 'add';
+		new_list.push(item);
+
+		for (var j = 0; j < eList.length; j++) {
+			new_list.push(eList[j]);
+		}
+
+		supremeOpListBuilder(new_list, initialize_list);
+		set_op_relative_values();
+		post_op_data_mh();
+	}
 }
 
 
@@ -8124,33 +8283,28 @@ function delete_op_item() {
 		grab('item_builder').innerHTML = '';
 	}
 
+	set_op_relative_values();
 	post_op_data_mh();
-}
-
-function post_op_data_mh() {
-	var data = seperateElemental_op_mh();
-	var maleKids = final_mh_op_encoder(data['m']);
-	var femaleKids = final_mh_op_encoder(data['f']);
-	var sisters = final_mh_op_encoder(data['s']);
-	var brothers = final_mh_op_encoder(data['b']);
-
-	getPopParent('childrenMale').value = maleKids;
-	getPopParent('childrenFemale').value = femaleKids;
-	getPopParent('m_sistersFinal').value = sisters;
-	getPopParent('m_brothersFinal').value = brothers;
 }
 
 function final_save_mh_op() {
 	post_op_data_mh();
 
-	var next_url = getPopParent('next_url');
-	var form = getPopParent('mh_form');
-	getPopParent('save_this').value = 'true';
-	form.action = next_url.value;
-	form.submit();
+	if (op1_hasTypeError() === true) {
+		op1_type_errorChecker();
+		// openPopUp('auto', '/op_type_error/', 400, 400);
+	}
 
-	window.close();
+	else {
+		var next_url = getPopParent('next_url');
+		var form = getPopParent('mh_form');
+		getPopParent('save_this').value = 'true';
+		form.action = next_url.value;
+		form.submit();
+		window.close();
+	}
 }
+
 
 function final_mh_op_encoder(sep_list) {
 	result = '';
@@ -8520,7 +8674,7 @@ function generateStateHtml(states) {
 	return html;
 }
 
-function initialize_mhDemoOps(states) {
+function initialize_mhDemoOps() {
 	var reconstruct = String(getPopParent('reconstruct').value);
 	var state_html = generateStateHtml(states);
 
@@ -8555,7 +8709,6 @@ function initialize_mhDemoOps(states) {
 	else {
 		resonstruct_mhOpPage(state_html);
 	}
-		
 }
 
 function resonstruct_mhOpPage(state_html) {

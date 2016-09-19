@@ -5,7 +5,7 @@
 </head>
 
 <body class="gradient-white" onLoad='javascript: initialize_mhDemoOps_compact({{json_data}});'>
-	<!-- <input type='text' id='test1' style='width:700px;'> -->
+	<input type='text' id='test1' style='width:700px;'>
 	<div class='sub_body_mh'>
 		<form action='' method='post' id='s_form'> {% csrf_token %}
 			<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
@@ -48,8 +48,8 @@
 						<div>							
 							<table>
 								<tr>
-									<td><div class='iml-new-op-head-fixed' id='age_label'></div></td>
-									<td><input style='width:40px;' type='number' name='age' id='age' value='0'></td>
+									<td><div id='e_age'><div class='iml-new-op-head-fixed' id='age_label'></div></div></td>
+									<td><input style='width:40px;' type='number' name='age' id='age' value='0' oninput="javascript: noErrorText('e_age', 'age');"></td>
 								</tr>
 							</table>
 						</div>
@@ -57,8 +57,8 @@
 						<div>							
 							<table>
 								<tr>
-									<td><div class='iml-new-op-head-sm'>City:</div></td>
-									<td><input type='text' name='city' id='city' value=''></td>
+									<td><div id='e_city'><div class='iml-new-op-head-sm'>City:</div></div></td>
+									<td><input type='text' name='city' id='city' value='' oninput="javascript: noErrorText('e_city', 'city');"></td>
 								</tr>
 							</table>
 						</div>
@@ -66,9 +66,9 @@
 						<div>							
 							<table>
 								<tr>
-									<td><div class='iml-new-op-head-sm'>State:</div></td>
+									<td><div id='e_state'><div class='iml-new-op-head-sm'>State:</div></div></td>
 									<td>
-										<select name='state' id='state'>
+										<select name='state' id='state' onChange="javascript: noErrorText('e_state', 'state');">
 											<option value='None Selected'>Select</option>
 											{% for s in state_list %}
 												<option value='{{s}}'>{{s}}</option>
@@ -92,9 +92,9 @@
 								</table>
 							</div>
 						</div>
-
 					</div>
 				</div>
+
 
 				<div class='new-iml-block-middle'>
 					<div class='iml-add-remove-container'>

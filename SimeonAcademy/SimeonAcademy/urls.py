@@ -73,6 +73,8 @@ urlpatterns = patterns('',
     url(r'^mh_viewForm/$', 'assessment.views.mh_viewForm'),
     url(r'^mh_to_op_errors/$', 'assessment.views.mh_to_op_errors'),
     url(r'^printMH/$', 'assessment.views.printMH'),
+    url(r'^op_type_error/$', 'assessment.views.op_type_error'),
+    url(r'^op_input_error/$', 'assessment.views.op_input_error'),
 
     ## SAP Views
     url(r'^sap_preliminary/$', 'assessment.views.sap_preliminary'),
