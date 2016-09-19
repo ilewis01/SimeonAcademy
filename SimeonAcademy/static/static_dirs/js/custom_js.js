@@ -1382,42 +1382,6 @@ function fetchMhOpsFieldNames() {
 	return result;
 }
 
-
-function getOpDataFields() {
-	var result = [];
-
-	if (grab('yesChild').checked === true) {
-		var d3 = {};
-		d3['field'] = 'numChildren';
-		d3['type'] = 'number';
-		d3['div'] = 'e16';
-		d3['isDynamic'] = true;
-		d3['trigger'] = 'yesChild';
-		result.push(d3);
-	}
-
-	if (grab('yesSister').checked === true) {
-		var d1 = {};
-		d1['field'] = 'numSisters';
-		d1['type'] = 'number';
-		d1['div'] = 'e17';
-		d1['isDynamic'] = true;
-		d1['trigger'] = 'yesSister';
-		result.push(d1);
-	}
-	if (grab('yesBrother').checked === true) {
-		var d2 = {};
-		d2['field'] = 'numBrothers';
-		d2['type'] = 'number';
-		d2['div'] = 'e18';
-		d2['isDynamic'] = true;
-		d2['trigger'] = 'yesBrother';
-		result.push(d2);
-	}
-
-	return result;
-}
-
 function getDynamoErrorFields_mh() {
 	var result = [];
 
@@ -1488,36 +1452,6 @@ function superDynamoChecker() {
 	var fields = getDynamoErrorFields_mh();
 	SpecialSuperErrorChecker(fields, true);
 }
-
-function opHasError_mh(fields) {
-	var hasError = false;
-
-	for (var i = 0; i < fields.length; i++) {
-		var field = grab(fields[i]['field']);
-		var val = String(field.value);
-
-		if (val === '0' || isBlankText(val) === true || validateNumber(val) === false) {
-			hasError = true;
-		}
-
-		if (hasError === true) {
-			break;
-		}
-	}
-	return hasError;
-}
-
-function opErrorChecker_mh(fields) {
-	for (var i = 0; i < fields.length; i++) {
-		var field = grab(fields[i]['field']);
-		var val = String(field.value);
-
-		if (val === '0' || isBlankText(val) === true || validateNumber(val) === false) {
-			setErrorDiv(fields[i]['div']);
-		}
-	}
-}
-
 
 function fetchMhEDUFieldNames() {
 	var result = [];
@@ -7530,26 +7464,26 @@ function d_init_mh_demo(json_data) {
 		grab('single').checked = true;
 	}
 
-	var sisters = Number(json_data.numSisters);
-	var brothers = Number(json_data.numBrothers);
-	var children = Number(json_data.numChildren);
-
-	if (sisters === 0) {
+	if (isBlankText(json_data.sisters) === true || String(json_data.sisters) === 'N/A') {
 		grab('noSister').checked = true;
+		grab('m_sistersFinal').value = 'N/A';
 	}
 	else {
 		grab('yesSister').checked = true;
 	}
 
-	if (brothers === 0) {
+	if (isBlankText(json_data.bothers) === true || String(json_data.bothers) === 'N/A') {
 		grab('noBrother').checked = true;
+		grab('m_brothersFinal').value = 'N/A';
 	}
 	else {
 		grab('yesBrother').checked = true;
 	}
 
-	if (children === 0) {
+	if ((isBlankText(json_data.childrenMale) === true && isBlankText(json_data.childrenFemale) === true) || (String(json_data.childrenMale) === 'N/A' && String(json_data.childrenFemale) === 'N/A')) {
 		grab('noChild').checked = true;
+		grab('childrenFemale').value = 'N/A';
+		grab('childrenMale').value = 'N/A';
 	}
 	else {
 		grab('yesChild').checked = true;
@@ -7567,29 +7501,8 @@ function d_init_mh_demo(json_data) {
 	}
 
 	mhSpouse();
-	mhChildren();
-	mhSister();
-	mhBrother();
 	eval_parent('momIsLiving', 'mom_age_type');
 	eval_parent('dadIsLiving', 'dad_age_type');
-}
-
-function set_ya_or_nay_mh(radio, data, target) {
-	if (radio.checked === true) {
-		target.value = data;
-	}
-	else {
-		target.value = '0';
-	}
-}
-
-function run_mh_op_open_errorCheck() {
-	var fields = getOpDataFields();
-	var errors = opHasError_mh(fields);
-
-	if (errors === true) {
-		opErrorChecker_mh(fields);
-	}
 }
 
 function build_op_radio(relative, title, radioDivName, labelDivName) {
@@ -8150,6 +8063,7 @@ function add_new_op_item() {
 	}
 
 	supremeOpListBuilder(new_list, false);
+	post_op_data_mh();
 }
 
 
@@ -8169,9 +8083,11 @@ function delete_op_item() {
 		grab('num_items').value = 0;
 		grab('item_builder').innerHTML = '';
 	}
+
+	post_op_data_mh();
 }
 
-function final_save_mh_op() {
+function post_op_data_mh() {
 	var data = seperateElemental_op_mh();
 	var maleKids = final_mh_op_encoder(data['m']);
 	var femaleKids = final_mh_op_encoder(data['f']);
@@ -8182,6 +8098,16 @@ function final_save_mh_op() {
 	getPopParent('childrenFemale').value = femaleKids;
 	getPopParent('m_sistersFinal').value = sisters;
 	getPopParent('m_brothersFinal').value = brothers;
+}
+
+function final_save_mh_op() {
+	post_op_data_mh();
+
+	var next_url = getPopParent('next_url');
+	var form = getPopParent('mh_form');
+	getPopParent('save_this').value = 'true';
+	form.action = next_url.value;
+	form.submit();
 
 	window.close();
 }
@@ -8336,22 +8262,21 @@ function kill_unwanted_opElement(index, old_list) {
 }
 
 function kidsRock() {
-	set_ya_or_nay_mh(grab('yesChild'), grab('numChildren').value, grab('m_numChildren'));
-	set_ya_or_nay_mh(grab('yesSister'), grab('numSisters').value, grab('m_numSisters'));
-	set_ya_or_nay_mh(grab('yesBrother'), grab('numBrothers').value, grab('m_numBrothers'));
 
 	if (grab('yesChild').checked === true || grab('yesSister').checked === true || grab('yesBrother').checked === true) {
-		var fields = getOpDataFields();
-		var errors = opHasError_mh(fields);
+		//DO COMPLETE ERROR CHECK HERE...
+		var section = grab('save_section').value;
 
-		if (errors === true) {
-			var w1 = 500;
-			opErrorChecker_mh(fields);
-			openPopUp('auto', '/generateErrors/', w1, w1);
+		if (hasErrorsInForm('mh', section) === true || mh_dynamo_has_errors() === true) {
+			superErrorChecker('mh', section);
+			superDynamoChecker();
+			var w = 500, h = 500;
+			openPopUp('auto', '/generateErrors/', w, h);
 		}
 		else {
-			var w = 750, h = 620;
-			openPopUp('auto', '/mhDemoOpPage/', w, h);
+			postMhFields(section);
+			var wk = 750, hk = 620;
+			openPopUp('auto', '/mhDemoOpPage/', wk, hk);
 		}		
 	}
 	else {
@@ -9151,40 +9076,12 @@ function post_mh_data(section) {
 	section = String(section);
 
 	if (section === '/mh_demographic/') {
-		var opFields = getOpDataFields();
-		var hasErrorsMain = hasErrorsInForm('mh', section);
-		var hasErrorsDynamo = mh_dynamo_has_errors();
-		var has_preOpErrors = opHasError_mh(opFields);
-
-		if (hasErrorsMain === true || hasErrorsDynamo === true || has_preOpErrors === true) {
-			superErrorChecker('mh', section);
-			superDynamoChecker();
-			opErrorChecker_mh(opFields);
-
-			var w = 500, h = 500;
-			openPopUp('auto', '/generateErrors/', w, h);
-		}
-		else {
-			var nk_m = Number(grab('m_numChildren').value);
-			var ns_m = Number(grab('m_numSisters').value);
-			var nb_m = Number(grab('m_numBrothers').value);
-			var nk = Number(grab('numChildren').value);
-			var ns = Number(grab('numSisters').value);
-			var nb = Number(grab('numBrothers').value);
-
-			if (nk_m === nk && ns_m === ns && nb_m === nb) {
-				postMhFields(section);
-				var next_url = grab('next_url');
-				var form = grab('mh_form');
-				grab('save_this').value = 'true';
-				form.action = next_url.value;
-				form.submit();
-			}
-			else {
-				var wk = 750, hk = 620;
-				openPopUp('auto', '/mh_to_op_errors/', wk, hk);
-			}
-		}
+		postMhFields(section);
+		var next_url = grab('next_url');
+		var form = grab('mh_form');
+		grab('save_this').value = 'true';
+		form.action = next_url.value;
+		form.submit();
 	}
 
 	else {
@@ -9283,15 +9180,12 @@ function mh_continue_demographic() {
 	post(false, 'number', grab('employedMo'), null, null);
 	post(false, 'number', grab('employedYrs'), null, null);
 
-	//POST DYNAMIC FAMILY DATA
-	set_op_value_null('noChild', 'childrenMale');
-	set_op_value_null('noChild', 'childrenFemale');
-	set_op_value_null('noSister', 'm_sistersFinal');
-	set_op_value_null('noBrother', 'm_brothersFinal');
-
 	//POST RADIO BUTTONS
 	run_parentAge_validation('momIsLiving', grab('motherAge').value, 'm_motherAge', 'm_motherAgeDeath');
 	run_parentAge_validation('dadIsLiving', grab('fatherAge').value, 'm_fatherAge', 'm_fatherAgeDeath');
+
+	grab('d_mom_state').value = grab('motherState').value;
+	grab('d_dad_state').value = grab('fatherState').value;
 
 	run_marriage_validation_mh();
 }
@@ -9707,27 +9601,44 @@ function mhSpouse() {
 }
 
 function mhChildren() {
-	var yesChild = document.getElementById('yesChild');
-	var numChildren_label = document.getElementById('numChildren_label');
-	var numChildren = document.getElementById('numChildren');
+	if (grab('yesChild').checked === true) {
+		grab('childrenMale').value = grab('m_holder').value;
+		grab('childrenFemale').value = grab('f_holder').value;
+		grab('m_holder').value = 'N/A';
+		grab('f_holder').value = 'N/A';
+	}
+	else if (grab('noChild').checked === true) {
+		grab('m_holder').value = grab('childrenMale').value;
+		grab('f_holder').value = grab('childrenFemale').value;
+		grab('childrenMale').value = 'N/A';
+		grab('childrenFemale').value = 'N/A';
+	}
 
-	twoElementRadioSetupNumber(yesChild, numChildren_label, numChildren);
+	grab('test1').value = "Son saved value: " + String(grab('childrenMale').value) + " --- Daughter saved Value: " + String(grab('childrenFemale').value);
 }
 
 function mhSister() {
-	var yesSister = document.getElementById('yesSister');
-	var numSisters_label = document.getElementById('numSisters_label');
-	var numSisters = document.getElementById('numSisters');
+	if (grab('yesSister').checked === true) {
+		grab('m_sistersFinal').value = grab('s_holder').value;
+	}
+	else if (grab('noSister').checked === true) {
+		grab('s_holder').value = grab('m_sistersFinal').value;
+		grab('m_sistersFinal').value = 'N/A';
+	}
 
-	twoElementRadioSetupNumber(yesSister, numSisters_label, numSisters);
+	grab('test1').value = "Sister saved value: " + String(grab('m_sistersFinal').value);
 }
 
 function mhBrother() {
-	var yesBrother = document.getElementById('yesBrother');
-	var numBrothers_label = document.getElementById('numBrothers_label');
-	var numBrothers = document.getElementById('numBrothers');
+	if (grab('yesBrother').checked === true) {
+		grab('m_brothersFinal').value = grab('b_holder').value;
+	}
+	else if (grab('noBrother').checked === true) {
+		grab('b_holder').value = grab('m_brothersFinal').value;
+		grab('m_brothersFinal').value = 'N/A';
+	}
 
-	twoElementRadioSetupNumber(yesBrother, numBrothers_label, numBrothers);
+	grab('test1').value = "Brother saved value: " + String(grab('m_brothersFinal').value);
 }
 
 function motherShift() {

@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
-  <!-- <input type='text' id='test1' style='width: 500px;'> -->
+<!--   <input type='text' id='test1' style='width: 700px;'> -->
     <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
@@ -15,18 +15,14 @@
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='form_name' id='form_name' value='mh_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
-      <input type='hidden' name='reconstruct' id='reconstruct' value='false'>
 
-      <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-      <input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'>
+      <input type='hidden' name='d_mom_state' id='d_mom_state' value=''>
+      <input type='hidden' name='d_dad_state' id='d_dad_state' value=''>
 
       <input type='hidden' name='m_motherAge' id='m_motherAge' value=''>
       <input type='hidden' name='m_motherAgeDeath' id='m_motherAgeDeath' value=''>
       <input type='hidden' name='m_fatherAge' id='m_fatherAge' value=''>
       <input type='hidden' name='m_fatherAgeDeath' id='m_fatherAgeDeath' value=''>
-      <input type='hidden' name='m_numChildren' id='m_numChildren' value=''>
-      <input type='hidden' name='m_numSisters' id='m_numSisters' value=''>
-      <input type='hidden' name='m_numBrothers' id='m_numBrothers' value=''>
 
       <input type='hidden' name='m_numMarriages' id='m_numMarriages' value=''>
       <input type='hidden' name='m_spouseOccupation' id='m_spouseOccupation' value=''>
@@ -35,10 +31,15 @@
       <input type='hidden' name='m_spouseWorkMos' id='m_spouseWorkMos' value=''>
       <input type='hidden' name='m_spouseWorkYrs' id='m_spouseWorkYrs' value=''>
 
-      <input type='hidden' name='childrenMale' id='childrenMale' value='N/A'>
-      <input type='hidden' name='childrenFemale' id='childrenFemale' value='N/A'>
-      <input type='hidden' name='m_brothersFinal' id='m_brothersFinal' value='N/A'>
-      <input type='hidden' name='m_sistersFinal' id='m_sistersFinal' value='N/A'>
+      <input type='hidden' name='childrenMale' id='childrenMale' value='{{fields.childrenMale}}'>
+      <input type='hidden' name='childrenFemale' id='childrenFemale' value='{{fields.childrenFemale}}'>
+      <input type='hidden' name='m_brothersFinal' id='m_brothersFinal' value='{{fields.bothers}}'>
+      <input type='hidden' name='m_sistersFinal' id='m_sistersFinal' value='{{fields.sisters}}'>
+
+      <input type='hidden' name='s_holder' id='s_holder' value='N/A'>
+      <input type='hidden' name='b_holder' id='b_holder' value='N/A'>
+      <input type='hidden' name='m_holder' id='m_holder' value='N/A'>
+      <input type='hidden' name='f_holder' id='f_holder' value='N/A'>
 
     <div class='container'>
       <div class='row'>
@@ -242,8 +243,6 @@
                         <td><div class='iml-mh-radio-label'>Yes</div></td>
                         <td><div class='iml-mh-radBooster'><input type='radio' name='haveSisters' id='noSister' value='False' onClick='javascript: mhSister();'></div></td>
                         <td><div class='iml-mh-radio-label'>No</div></td>
-                        <td><div id='e17'><div  class='iml-mh-number-label' id='numSisters_label'>How Many?</div></div></td>
-                        <td><div><input type='number' style='width:40px;' name='numSisters' id='numSisters' value='{{fields.numSisters}}' oninput="javascript: noErrorText('e17', 'numSisters');"></div></td>
                       </tr>
 
                       <tr>
@@ -253,8 +252,6 @@
                         <td><div class='iml-mh-radio-label'>Yes</div></td>
                         <td><div class='iml-mh-radBooster'><input type='radio' name='haveBrothers' id='noBrother' value='False' onClick='javascript: mhBrother();'></div></td>
                         <td><div class='iml-mh-radio-label'>No</div></td>
-                        <td><div id='e18'><div class='iml-mh-number-label' id='numBrothers_label'>How Many?</div></div></td>
-                        <td><div><input type='number' style='width:40px;' name='numBrothers' id='numBrothers' value='{{fields.numBrothers}}' oninput="javascript: noErrorText('e18', 'numBrothers');"></div></td>
                       </tr>
                     </table>
                   </div>
@@ -300,8 +297,6 @@
                         <td><div class='iml-mh-radio-label'>Yes</div></td>
                         <td><div class='iml-mh-radBooster'><input type='radio' name='haveChildren' id='noChild' value='False' onClick='javascript: mhChildren();'></div></td>
                         <td><div class='iml-mh-radio-label'>No</div></td>
-                        <td><div id='e16'><div class='iml-mh-number-label' id='numChildren_label'>How Many?</div></div></td>
-                        <td><div><input type='number' style='width:40px;' name='numChildren' id='numChildren' value='{{fields.numChildren}}' oninput="javascript: noErrorText('e16', 'numChildren');"></div></td>
                       </tr>
                     </table>
 
