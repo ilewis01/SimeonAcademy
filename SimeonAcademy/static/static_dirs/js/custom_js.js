@@ -8043,6 +8043,45 @@ function clear_op_selected_mh() {
 		elements[i]['div'].className = '';
 	}
 }
+
+function determine_opList_initialization(g_type) {
+	var initialize = false;
+	g_type = String(g_type);
+
+	if (g_type === 'Male Child') {
+		var blank_m = String(getPopParent('childrenMale').value);
+
+		if (blank_m === 'N/A') {
+			initialize = true;
+		}
+	}
+
+	else if (g_type === 'Female Child') {
+		var blank_f = String(getPopParent('childrenFemale').value);
+
+		if (blank_f === 'N/A') {
+			initialize = true;
+		}
+	}
+
+	else if (g_type === 'Sister') {
+		var blank_s = String(getPopParent('m_sistersFinal').value);
+
+		if (blank_s === 'N/A') {
+			initialize = true;
+		}
+	}
+
+	else if (g_type === 'Brother') {
+		var blank_b = String(getPopParent('m_brothersFinal').value);
+
+		if (blank_b === 'N/A') {
+			initialize = true;
+		}
+	}
+
+	return initialize;
+}
  
 function add_new_op_item() {
 	var age = grab('age').value;
@@ -8054,6 +8093,9 @@ function add_new_op_item() {
 	var item = create_op_item_single_mh(age, city, state, g_type, index, spec);
 	var eList = get_existing_op_items();
 	var new_list = [];
+	var initialize_list = determine_opList_initialization(g_type);
+
+	grab('test1').value = String(initialize_list);
 
 	grab('math_type').value = 'add';
 	new_list.push(item);
@@ -8062,7 +8104,7 @@ function add_new_op_item() {
 		new_list.push(eList[j]);
 	}
 
-	supremeOpListBuilder(new_list, false);
+	supremeOpListBuilder(new_list, initialize_list);
 	post_op_data_mh();
 }
 
@@ -8205,9 +8247,23 @@ function create_op_item_single_mh(age, city, state, g_type, index, spec) {
 
 function find_op_gType() {
 	var type = null;
-	var isChild = grab('child').checked;
-	var isSister = grab('sister').checked;
-	var isMale = grab('male').checked;
+
+	var isChild = false;
+	var isSister = false;
+	var isMale = false;
+
+	if (getPopParent('yesChild').checked === true) {
+		isChild = grab('child').checked;
+		isMale = grab('male').checked;
+	}
+
+	if (getPopParent('yesSister').checked === true) {
+		isSister = grab('sister').checked;
+	}
+
+	// var isChild = grab('child').checked;
+	// var isSister = grab('sister').checked;
+	// var isMale = grab('male').checked;
 
 	if (isChild === true) {
 		if (isMale === true) {
