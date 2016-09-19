@@ -8152,12 +8152,6 @@ function add_new_op_item() {
 	supremeOpListBuilder(new_list, false);
 }
 
-function get_existing_op_items() {
-	var data = getOpBuilderArray();
-	var result = reset_opItem_ids(data);
-	return result;
-}
-
 
 function delete_op_item() {
 	var numElements = Number(grab('num_items').value);
@@ -8175,6 +8169,97 @@ function delete_op_item() {
 		grab('num_items').value = 0;
 		grab('item_builder').innerHTML = '';
 	}
+}
+
+function final_save_mh_op() {
+	var data = seperateElemental_op_mh();
+	var maleKids = final_mh_op_encoder(data['m']);
+	var femaleKids = final_mh_op_encoder(data['f']);
+	var sisters = final_mh_op_encoder(data['s']);
+	var brothers = final_mh_op_encoder(data['b']);
+
+	getPopParent('childrenMale').value = maleKids;
+	getPopParent('childrenFemale').value = femaleKids;
+	getPopParent('m_sistersFinal').value = sisters;
+	getPopParent('m_brothersFinal').value = brothers;
+
+	window.close();
+}
+
+function final_mh_op_encoder(sep_list) {
+	result = '';
+
+	for (var i = 0; i < sep_list.length; i++) {
+		var g_type = sep_list[i]['g_type'];
+		g_type = encode_g_type_mh(g_type);
+
+		result += g_type;
+		result += sep_list[i]['age'];
+		result += '/';
+		result += sep_list[i]['city'];
+		result += ',';
+		result += sep_list[i]['state'];
+		result += '~';
+	}
+	result = clearWhiteSpace(result);
+	return result;
+}
+
+function encode_g_type_mh(g_type) {
+	var result = null;
+	g_type = String(g_type);
+
+	if (g_type === 'Male Child') {
+		result = 'm';
+	}
+	else if (g_type === 'Female Child') {
+		result = 'f';
+	}
+	else if (g_type === 'Sister') {
+		result = 's';
+	}
+	else if (g_type === 'Brother') {
+		result = 'm';
+	}
+
+	return result;
+}
+
+function seperateElemental_op_mh() {
+	var data = {};
+	var m = [];
+	var f = [];
+	var s = [];
+	var b = [];
+	var e = get_existing_op_items();
+
+	for (var i = 0; i < e.length; i++) {
+		if (e[i]['g_type'] === 'Male Child') {
+			m.push(e[i]);
+		}
+		else if (e[i]['g_type'] === 'Female Child') {
+			f.push(e[i]);
+		}
+		else if (e[i]['g_type'] === 'Brother') {
+			b.push(e[i]);
+		}
+		else if (e[i]['g_type'] === 'Sister') {
+			s.push(e[i]);
+		}
+	}
+
+	data['m'] = m;
+	data['f'] = f;
+	data['b'] = b;
+	data['s'] = s;
+
+	return data;
+}
+
+function get_existing_op_items() {
+	var data = getOpBuilderArray();
+	var result = reset_opItem_ids(data);
+	return result;
 }
 
 function create_op_item_single_mh(age, city, state, g_type, index, spec) {

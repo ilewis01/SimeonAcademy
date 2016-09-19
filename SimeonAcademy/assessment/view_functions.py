@@ -6662,6 +6662,11 @@ def getMhDemoFields(mh):
 	results['numSisters'] = mh.demographics.numSisters
 	results['numBrothers'] = mh.demographics.numBrothers
 
+	results['childrenMale'] = mh.demographics.childrenMale
+	results['childrenFemale'] = mh.demographics.childrenFemale
+	results['bothers'] = mh.demographics.bothers
+	results['sisters'] = mh.demographics.sisters
+
 	results['isComplete'] = mh.demographicsComplete
 
 	return results
