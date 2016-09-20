@@ -8271,6 +8271,35 @@ function op1_type_errorChecker() {
 	return html;
 }
 
+function prepare_op_duplicate(text) {
+	text = clearWhiteSpace(text);
+	text = text.toLowerCase();
+	return text;
+}
+
+function isDuplicateOpItem(item, list) {
+	var isDuplicate = false;
+
+	var age 	= prepare_op_duplicate(item['age']);
+	var city 	= prepare_op_duplicate(item['city']);
+	var state 	= prepare_op_duplicate(item['state']);
+	var g_type 	= prepare_op_duplicate(item['g_type']);
+
+	for (var i = 0; i < list.length; i++) {
+		var a = prepare_op_duplicate(list[i]['age']);
+		var c = prepare_op_duplicate(list[i]['city']);
+		var s = prepare_op_duplicate(list[i]['state']);
+		var g = prepare_op_duplicate(list[i]['g_type']);
+
+		if (a === age && c === city && s === state && g === g_type) {
+			isDuplicate = true;
+			break;
+		}
+	}
+
+	return isDuplicate;
+}
+
 
 function add_new_op_item() {
 	if (op1_hasInputError() === true) {
@@ -8297,10 +8326,20 @@ function add_new_op_item() {
 			new_list.push(eList[j]);
 		}
 
-		supremeOpListBuilder(new_list, initialize_list);
-		set_op_relative_values();
-		post_op_data_mh();
+		var isDuplicate = isDuplicateOpItem(item, eList);
+
+		if (isDuplicate === true) {
+			openPopUp('auto', '/op_item_exist/', 500, 150);
+		}
+		else {
+			supremeOpListBuilder(new_list, initialize_list);
+			set_op_relative_values();
+			post_op_data_mh();
+		}		
 	}
+	grab('city').value = '';
+	grab('state').selectedIndex = 0;
+	grab('age').value = 0;
 }
 
 

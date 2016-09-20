@@ -2583,6 +2583,24 @@ def op_type_error(request):
 			return render_to_response('counselor/forms/MentalHealth/op_type_error.html', content)
 
 @login_required(login_url='/index')
+def op_item_exist(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:	
+			content['title'] = "Simeon Academy | Mental Health Assessment"
+			return render_to_response('counselor/forms/MentalHealth/op_item_exist.html', content)
+
+@login_required(login_url='/index')
 def mh_to_op_errors(request):
 	user = request.user
 	if not user.is_authenticated():
