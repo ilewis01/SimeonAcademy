@@ -5912,6 +5912,43 @@ button:hover {
 	width:80px;
 }
 
+.s_op_pic {
+	width:100%;
+}
+
+.single_op_warning {
+	width:50px;
+	margin-left: 40px;
+}
+
+.single_op_text {
+	font-family: arial;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.single_op_button {
+	width: 90px;
+	height: 30px;
+	background-color: #adad89;
+	margin:auto;
+	border: 1px solid gray;
+}
+
+.single_op_button button {
+	width:80px;
+
+}
+
+.op_btn_div_iml {
+	width:80px;
+	margin: auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
 
 
 

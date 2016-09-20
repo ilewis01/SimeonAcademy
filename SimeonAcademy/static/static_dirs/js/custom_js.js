@@ -7,6 +7,11 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+function quote(value) {
+	value = String(value);
+	return " + " + value  + " + ";
+}
+
 
 function isBlankText(value) {
 	var isBlank = false;
@@ -8111,6 +8116,16 @@ function set_op_relative_values() {
 	grab('numSisters').value = s;
 	grab('numBrothers').value = b;
 	grab('numKids').value = num_kids;
+
+	if (num_kids > 0) {
+		grab('e_c').className = '';
+	}
+	if (s > 0) {
+		grab('e_s').className = '';
+	}
+	if (b > 0) {
+		grab('e_b').className = '';
+	}
 }
  
 
@@ -9840,8 +9855,6 @@ function mhChildren() {
 		grab('childrenMale').value = 'N/A';
 		grab('childrenFemale').value = 'N/A';
 	}
-
-	grab('test1').value = "Son saved value: " + String(grab('childrenMale').value) + " --- Daughter saved Value: " + String(grab('childrenFemale').value);
 }
 
 function mhSister() {
@@ -9852,8 +9865,6 @@ function mhSister() {
 		grab('s_holder').value = grab('m_sistersFinal').value;
 		grab('m_sistersFinal').value = 'N/A';
 	}
-
-	grab('test1').value = "Sister saved value: " + String(grab('m_sistersFinal').value);
 }
 
 function mhBrother() {
@@ -9864,8 +9875,6 @@ function mhBrother() {
 		grab('b_holder').value = grab('m_brothersFinal').value;
 		grab('m_brothersFinal').value = 'N/A';
 	}
-
-	grab('test1').value = "Brother saved value: " + String(grab('m_brothersFinal').value);
 }
 
 function motherShift() {
