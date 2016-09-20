@@ -1,266 +1,128 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}})">
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
+ <!--  <input type='text' id='test1' style='width: 700px;'> -->
+    <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='form_name' id='form_name' value='mh_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
 
-    <div id="wrapper" class='shift-rr'>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Mental Health: Psychiatric History</div>
+            </div>
 
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Mental Health Profile</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{mh.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
-
-            <tr>
-              <td>
-                <div class='{{class.mhHistory}}'>
-                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_demographic/');" name='mhHistoryBtn' id='mhHistoryBtn'>
-                    History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhEducation}}'>
-                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_education/');" name='mhEducationBtn' id='mhEducationBtn'>
-                     Education
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhBackground}}'>
-                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_background/');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
-                    Finance & Background
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhStress}}'>
-                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
-                    Stressors
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhFamily}}'>
-                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_familyHistory/');" name='mhFamilyBtn' id='mhFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhLegal}}'>
-                  <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
-                    Legal History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhPsych}}'>
-                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='mhPsychBtn' id='mhPsychBtn'>
-                    Psychiatric History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhUse}}'>
-                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_useTable/');" name='mhUseBtn' id='mhUseBtn'>
-                    Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('mh', '{{current_section}}');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Mental Health: Psychiatric History</h3>
-                </div>
-
-                <div class="container">
-              		<div class="row">                   
-                    		<div class="col-md-12 col-sm-12">
-                    			<div>
-                    				<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                    					<!-- <input type='hidden' name='back' id='back' value='{{back}}'>
-                              <input type='hidden' name='goToNext' id='goToNext' value='true'>
-                              <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                              <input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'> -->
-
-                              <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                              <input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-                              <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                              <input type='hidden' name='save_section' id='save_section' value='/mh_psych/'> 
-                              <input type='hidden' name='new_form' id='new_form' value='false'>
-                              <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                              <input type='hidden' name='save_this' id='save_this' value=''>
-
-                              <div id='sub_background_header'>
-                                Past Psychiatric History and/or Past Mental Health Counseling
-
-                                <div class='subSubHeadText'>
-                                  Please include doctor/counselor names. diasnosis, dates of treatment/counseling, any medications with dosage.
-                                </div>
-                              </div>
-
-                              <div style='margin-top:20px;'>
-                                <textarea rows='15' cols='120' name='psychiatricHistory' id='psychiatricHistory'>{{mh.stressors.psychiatricHistory}}</textarea>
-                              </div>
-
-                              <table class='single_table_center'>
-                              </table>
-                            </form>
-                          </div>
-                        </div><!--  END OF LEFT SIDE -->
-  				        </div> <!-- END ROW -->
-				        </div>
-            </div> <!-- EMPTY DIV -->
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_demographic/');">
+                              <!-- class='{{class.clinic}}' -->
+                              <div  class='{{class.mhHistory}}'>General</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_education/');">
+                              <!-- class='{{class.social}}' -->
+                              <div  class='{{class.mhEducation}}'>Education</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: post_mh_data({{current_section}});">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_background/');">
+                              <!-- class='{{class.psycho1}}' -->
+                              <div  class='{{class.mhBackground}}'>Financial</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_stress/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhStress}}'>Stressors</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_familyHistory/');">
+                              <!-- class='{{class.special}}' -->
+                              <div  class='{{class.mhFamily}}'>Family</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_legal/');">
+                              <!-- class='{{class.other}}' -->
+                              <div  class='{{class.mhLegal}}'>Legal</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_psych/');">
+                             <!--  class='{{class.source}}' -->
+                              <div  class='{{class.mhPsych}}'>Psychiatric</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_useTable/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhUse}}'>Drug Use</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper-mh'>
+              <div class='place_center_vertical'>
+                <div class='mh_psy_op1'>Past Psychiatric History and/or Past Mental Health Counseling</div>
+                <div id='e1' style='width:80%; margin:auto;';>
+                  <div class='mh_psy_op2'>Please include doctor/counselor names. diasnosis, dates of treatment/counseling, any medications with dosage.</div>
+                </div>
+                <div class='mh_psy_op3'>
+                  <textarea name='psychiatricHistory' id='psychiatricHistory'>{{mh.stressors.psychiatricHistory}}</textarea>
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
+                  <!-- <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td> -->
+                  <td><button onClick="javascript: post_mh_data('{{current_section}}'); return false;">Save & Continue</button></td>
+                  <!-- <td><button onClick="javascript: fakeShitERRRRR(); return false;">Fake</button></td> -->
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

@@ -19,12 +19,12 @@
 			<input type='hidden' name='math_type' id='math_type' value=''>
 			<input type='hidden' name='currently_selected' id='currently_selected' value='0'>
 
-			<div id='header-text2'>
+			<div id='header-text2-op-mh'>
 				Family Details
 			</div>
 
 			<div id='sub_head_text_mh_pop_demo'>
-				Please complete each field to proceed. Scroll to view additional forms.
+				For each relative, begin by selecting your relationship. All fields must be complete to add a new entry.
 			</div>
 
 			<div class='new-iml-op-body'>
@@ -124,22 +124,24 @@
 		</form>
 	</div>
 
-	<div id='mh_verify_btns'>
-		<table>
-			<tr>
-				<td>
-					<a href="#">
-						<button onClick='javascript: window.close();' class='mhOpBtn'>Cancel</button>
-					</a>
-				</td>
+	<div class='mh_op_main_btns'>
+		<div class='mn_hold_button'>
+			<table>
+				<tr>
+					<td>
+						<a href="#">
+							<button onClick='javascript: window.close();' class='mhOpBtn'>Cancel</button>
+						</a>
+					</td>
 
-				<td>
-					<a href="#">
-						<button onClick='javascript: final_save_mh_op();' class='mhOpBtn'>Continue</button>
-					</a>
-				</td>
-			</tr>
-		</table>
+					<td>
+						<a href="#">
+							<button onClick='javascript: final_save_mh_op();' class='mhOpBtn'>Continue</button>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

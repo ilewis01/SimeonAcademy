@@ -1490,6 +1490,14 @@ function fetchMhLegalFieldNames() {
 
 function fetchMhPsychFieldNames() {
 	var result = [];
+	var d1 = {}
+
+	d1['field'] = 'psychiatricHistory';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
 
 	return result;
 }
@@ -9340,7 +9348,6 @@ function post_mh_data(section) {
 			form.action = next_url.value;
 			form.submit();
 		}
-
 	}
 }
 
