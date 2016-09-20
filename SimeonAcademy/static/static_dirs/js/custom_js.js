@@ -7610,6 +7610,14 @@ function change_relative_radio(selectedName) {
 		grab('gender_div_iml').style.opacity = '0.0';
 		grab('selectedRel').value = 'Brother';
 	}
+
+	grab('e_city').className = '';
+	grab('e_state').className = '';
+	grab('e_age').className = '';
+
+	grab('age').value = 0;
+	grab('city').value = '';
+	grab('state').selectedIndex = 0;
 }
 
 function snag_indexed_item_mhOp(index) {
