@@ -7985,17 +7985,28 @@ function preliminaryOpBuilder_mh(json_data) {
 	var s = decodeAndBuild_mh(String(json_data.sister));
 	var b = decodeAndBuild_mh(String(json_data.brother));
 	
-	for (var i = 0; i < m.length; i++) {
-		result.push(m[i]);
+	if (getPopParent('yesChild').checked === true) {
+		for (var i = 0; i < m.length; i++) {
+			result.push(m[i]);
+		}
 	}
-	for (var j = 0; j < f.length; j++) {
-		result.push(f[j]);
+
+	if (getPopParent('yesChild').checked === true) {
+		for (var j = 0; j < f.length; j++) {
+			result.push(f[j]);
+		}
 	}
-	for (var k = 0; k < s.length; k++) {
-		result.push(s[k]);
+
+	if (getPopParent('yesSister').checked === true) {
+		for (var k = 0; k < s.length; k++) {
+			result.push(s[k]);
+		}
 	}
-	for (var l = 0; l < b.length; l++) {
-		result.push(b[l]);
+
+	if (getPopParent('yesBrother').checked === true) {
+		for (var l = 0; l < b.length; l++) {
+			result.push(b[l]);
+		}
 	}
 
 	var v_curr = Number(result.length);
