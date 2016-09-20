@@ -2618,6 +2618,18 @@ button:hover {
 	font-family: Arial;
 }
 
+#paid_page_stuff2 {
+	width:90%;
+	margin: auto;
+	padding-top: 13%;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color:#6b6b47;
+	font-family: Arial;
+}
+
 .accept_btn {
 	width:67px;
 	margin: auto;
@@ -5548,6 +5560,13 @@ button:hover {
 	padding-bottom: 5%;
 }
 
+.iml-warning-holder3 {
+	width:20%;
+	height:50px;
+	margin: auto;
+	margin-top: 11%;
+}
+
 .iml-error-m1 {
 	margin-top: 10%;
 	text-align: center;
@@ -5846,6 +5865,51 @@ button:hover {
 
 .iml_normal_nonOp {
 	background-color: white;
+}
+
+.op_er1 {
+	width:100%;
+	text-align: center;
+	font-family: arial;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 20px;
+	color:#d26700;
+}
+
+.op_er2 {
+	width: 60%;
+	margin: auto;
+	text-align: left;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: arial;
+}
+
+.op_er3 {
+	width:100%;
+	font-family: arial;
+	text-align: center;
+	font-size: 13px;
+	margin-top:20px;
+	font-style: italic;
+}
+
+#t_op_mh1 {
+	width:100%;
+	margin: auto:;
+	height:10vh;
+}
+
+.op_er4 {
+	width:80px;
+	margin:auto;
+	margin-top: 20px;
+}
+
+.op_er4 button {
+	width:80px;
 }
 
 

@@ -8210,6 +8210,7 @@ function op1_input_errorChecker() {
 
 function op1_type_errorChecker() {
 	var errorList = [];
+	var html = '';
 	var hasChildren = getPopParent('yesChild').checked;
 	var hasSister = getPopParent('yesSister').checked;
 	var hasBrother = getPopParent('yesBrother').checked;
@@ -8223,16 +8224,22 @@ function op1_type_errorChecker() {
 
 	if (ek === true) {
 		setErrorDiv('e_c');
+		html += "<li>You must add at least one child.</li>"
 	}
 
 	if (es === true) {
 		setErrorDiv('e_s');
+		html += "<li>You must add at least one sister.</li>"
 	}
 
 	if (eb === true) {
 		setErrorDiv('e_b');
+		html += "<li>You must add at least one brother.</li>"
 	}
+
+	return html;
 }
+
 
 function add_new_op_item() {
 	if (op1_hasInputError() === true) {
@@ -8288,11 +8295,14 @@ function delete_op_item() {
 }
 
 function final_save_mh_op() {
+	grab('e_city').className = '';
+	grab('e_state').className = '';
+	grab('e_age').className = '';
 	post_op_data_mh();
 
 	if (op1_hasTypeError() === true) {
-		op1_type_errorChecker();
-		// openPopUp('auto', '/op_type_error/', 400, 400);
+		grab('type_errors').value = op1_type_errorChecker();
+		openPopUp('auto', '/op_type_error/', 400, 400);
 	}
 
 	else {
@@ -8303,6 +8313,11 @@ function final_save_mh_op() {
 		form.submit();
 		window.close();
 	}
+}
+
+function initialize_op_type_errors() {
+	var messages = String(getPopParent('type_errors').value);
+	grab('errors').innerHTML = messages;
 }
 
 
