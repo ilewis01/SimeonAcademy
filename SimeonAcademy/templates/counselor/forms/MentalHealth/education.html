@@ -16,31 +16,6 @@
       <input type='hidden' name='form_name' id='form_name' value='mh_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
 
-      <input type='hidden' name='d_mom_state' id='d_mom_state' value=''>
-      <input type='hidden' name='d_dad_state' id='d_dad_state' value=''>
-
-      <input type='hidden' name='m_motherAge' id='m_motherAge' value=''>
-      <input type='hidden' name='m_motherAgeDeath' id='m_motherAgeDeath' value=''>
-      <input type='hidden' name='m_fatherAge' id='m_fatherAge' value=''>
-      <input type='hidden' name='m_fatherAgeDeath' id='m_fatherAgeDeath' value=''>
-
-      <input type='hidden' name='m_numMarriages' id='m_numMarriages' value=''>
-      <input type='hidden' name='m_spouseOccupation' id='m_spouseOccupation' value=''>
-      <input type='hidden' name='m_spouseEmployer' id='m_spouseEmployer' value=''>
-      <input type='hidden' name='m_spouseAge' id='m_spouseAge' value=''>
-      <input type='hidden' name='m_spouseWorkMos' id='m_spouseWorkMos' value=''>
-      <input type='hidden' name='m_spouseWorkYrs' id='m_spouseWorkYrs' value=''>
-
-      <input type='hidden' name='childrenMale' id='childrenMale' value='{{fields.childrenMale}}'>
-      <input type='hidden' name='childrenFemale' id='childrenFemale' value='{{fields.childrenFemale}}'>
-      <input type='hidden' name='m_brothersFinal' id='m_brothersFinal' value='{{fields.bothers}}'>
-      <input type='hidden' name='m_sistersFinal' id='m_sistersFinal' value='{{fields.sisters}}'>
-
-      <input type='hidden' name='s_holder' id='s_holder' value='N/A'>
-      <input type='hidden' name='b_holder' id='b_holder' value='N/A'>
-      <input type='hidden' name='m_holder' id='m_holder' value='N/A'>
-      <input type='hidden' name='f_holder' id='f_holder' value='N/A'>
-
     <div class='container'>
       <div class='row'>
         <div class="col-md-12" style='width:100%; height:84vh;'>
@@ -131,7 +106,212 @@
 
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
-                    
+                    <h4>Grades K-6:</h4>
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Average Grades:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6a' value='A'><span>A</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6b' value='B'><span>B</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6c' value='C'><span>C</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6d' value='D'><span>D</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6e' value='E'><span>E</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6f' value='F'><span>F</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Behavioral Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='behaved' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='notBehaved' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Academic Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='yesAcademic' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='noAcademic' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend1' value='1' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>1</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend2' value='2' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>2</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend3' value='3' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>3</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend4' value='4' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>4</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friendMore' value='' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>More</span>
+                            </div>
+                          </td>
+
+                          <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
+                          <td><div><input style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
+                        </tr>
+                      </table>
+                    </ul>
+
+                    <h4>Grades 7-9:</h4>
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Average Grades:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6a' value='A'><span>A</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6b' value='B'><span>B</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6c' value='C'><span>C</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6d' value='D'><span>D</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6e' value='E'><span>E</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6f' value='F'><span>F</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Behavioral Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='behaved' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='notBehaved' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Academic Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='yesAcademic' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='noAcademic' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend1' value='1' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>1</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend2' value='2' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>2</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend3' value='3' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>3</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend4' value='4' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>4</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friendMore' value='' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>More</span>
+                            </div>
+                          </td>
+
+                          <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
+                          <td><div><input style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
+                        </tr>
+                      </table>
+                    </ul>
+
+                    <h4>Grades 10-12:</h4>
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Average Grades:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6a' value='A'><span>A</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6b' value='B'><span>B</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6c' value='C'><span>C</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6d' value='D'><span>D</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6e' value='E'><span>E</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='GradesKto6' id='k6f' value='F'><span>F</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Behavioral Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='behaved' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='BehaviorProblemsKto6' id='notBehaved' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Academic Problems:</li></div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='yesAcademic' value='True'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='AcademicProblemsKto6' id='noAcademic' value='False'><span>No</span></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend1' value='1' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>1</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend2' value='2' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>2</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend3' value='3' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>3</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friend4' value='4' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>4</span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class='iml-mh-radio-label2'>
+                              <input type='radio' name='FriendshipsKto6' id='friendMore' value='' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>More</span>
+                            </div>
+                          </td>
+
+                          <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
+                          <td><div><input style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
+                        </tr>
+                      </table>
+                    </ul>
                   </div>
 
                   <!-- RIGHT SIDE -->
@@ -148,7 +328,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
-                  <td><div id='superBtn'><button onClick="javascript: kidsRock(); return false;">Save & Continue</button></div></td>
+                  <td><div id='superBtn'><button onClick="post_mh_data({{current_section}}); return false;">Save & Continue</button></div></td>
                   <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
                 </tr>
               </table>

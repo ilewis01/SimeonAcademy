@@ -2887,6 +2887,26 @@ button:hover {
 	color:#79454c;
 }
 
+.iml-mh-radio-label2 {
+	/*font-style: italic;
+	font-size: 13px;
+	margin-left: 3px;
+	margin-right: 10px;
+	font-weight: bold;
+	margin-bottom:1px;
+	color:#79454c;*/
+}
+
+.iml-mh-radio-label2 span {
+	font-style: italic;
+	font-size: 13px;
+	margin-left: 3px;
+	margin-right: 13px;
+	font-weight: bold;
+	margin-bottom:1px;
+	color:#79454c;
+}
+
 .iml-mh-number-label {
 	margin-left: 3px;
 	margin-right: 15px;
@@ -2895,6 +2915,14 @@ button:hover {
 	color:#5c5f5e;
 	/*font-weight: bold;*/
 	/*color:#576763;*/
+}
+
+.iml-mh-number-label2 {
+	font-size: 13px;
+	font-style: italic;
+	margin-top: 5px;
+	margin-right: 5px;
+	color:#5c5f5e;
 }
 
 .iml-mh-select-label {
@@ -5748,6 +5776,7 @@ button:hover {
 	margin-top: 2%;
 	background: url('/static/images/iml_bkgnd.png');
     background-size: 100%;
+    box-shadow: 2px 2px 9px black;
 }
 
 .new-iml-block-left {
@@ -5899,6 +5928,7 @@ button:hover {
 	font-size: 13px;
 	font-weight: bold;
 	font-family: arial;
+	/*margin-left:50px;*/
 }
 
 .op_er3 {
@@ -6016,6 +6046,15 @@ button:hover {
 	position: relative;
   	top: 50%;
   	transform: translateY(-50%);
+}
+
+.error_border_main {
+	width:95%;
+	margin: auto;
+	margin-top:10px;
+	padding-bottom: 15px;
+	border: 1px solid black;
+	border-radius: 8px;
 }
 
 

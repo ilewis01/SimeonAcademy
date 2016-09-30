@@ -49,6 +49,15 @@ class TrackApp(models.Model):
 	def __unicode__(self):
 		return str(self.counselor)
 
+class Note(models.Model):
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+	date = models.DateField(default=None, blank=True, null=True)
+	title = models.CharField(max_length=50, default=None, blank=True, null=True)
+	note = models.CharField(max_length=5000, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.date) + '/' + str(self.title)
+
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)
 

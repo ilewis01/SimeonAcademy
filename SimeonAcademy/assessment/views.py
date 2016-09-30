@@ -26,7 +26,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, TrackApp, WorkSchedule
+SolidState, TrackApp, WorkSchedule, Note
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \

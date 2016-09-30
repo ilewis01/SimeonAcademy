@@ -8346,11 +8346,11 @@ function add_new_op_item() {
 			supremeOpListBuilder(new_list, initialize_list);
 			set_op_relative_values();
 			post_op_data_mh();
+			grab('city').value = '';
+			grab('state').selectedIndex = 0;
+			grab('age').value = 0;
 		}		
-	}
-	grab('city').value = '';
-	grab('state').selectedIndex = 0;
-	grab('age').value = 0;
+	}	
 }
 
 

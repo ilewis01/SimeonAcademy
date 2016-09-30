@@ -5,27 +5,21 @@
 </head>
 
 <body class="gradient-white" onLoad='javascript: initialize_op_type_errors();'>
-	<div class='iml-warning-holder3'><img src="{% static 'images/warning.png' %}" class='error-main-css-img'></div>
-	<div id='paid_page_stuff2'>
-		Error
-	</div>
 
-	<div class='op_er1'>THE FOLLOWING ERRORS HAVE BEEN DETECTED:</div>
-	<div id='t_op_mh1'>
-		<div>
-			<ul>
-				<div id='errors' class='op_er2'></div>
-			</ul>
+	<!-- <div class='error_border_main'> -->
+		<div class='iml-warning-holder3'><img src="{% static 'images/warning.png' %}" class='error-main-css-img'></div>
+		<div id='paid_page_stuff2'>Error</div>
+		<div class='op_er1'>THE FOLLOWING ERRORS HAVE BEEN DETECTED:</div>
+		<div id='t_op_mh1'>
+			<div>
+				<ul>
+					<div id='errors' class='op_er2'></div>
+				</ul>
+			</div>
 		</div>
-	</div>
-
-	<div class='op_er3'>You must resolve these errors to proceed</div>
-
-	<div class='op_er4'>
-		<a href="javascript: window.close();">
-			<button>Continue</button>
-		</a>
-	</div>
+		<div class='op_er3'>You must resolve these errors to proceed</div>
+		<div class='op_er4'><a href="javascript: window.close();"><button>Continue</button></a></div>
+<!-- 	</div> -->
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
 </body>
