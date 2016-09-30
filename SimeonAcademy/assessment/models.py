@@ -728,7 +728,7 @@ class MHEducation(models.Model):
 	AcademicProblems10to12 = models.BooleanField(default=False, blank=True)
 	Friendships10to12 = models.IntegerField(default=0)
 	collegeYears = models.IntegerField(default=0)
-	collegeDegree = models.BooleanField(default=False, blank=True)
+	collegeDegree = models.CharField(max_length=50, default=None, blank=True, null=True)
 	collegeMajor = models.CharField(max_length=25, blank=True, null=True, default=None)
 	advanceDegree = models.BooleanField(blank=True, default=False)
 	tradeSch = models.BooleanField(blank=True, default=False)

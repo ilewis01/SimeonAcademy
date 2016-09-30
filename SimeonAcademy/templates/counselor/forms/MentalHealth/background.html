@@ -1,1023 +1,402 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<!-- <body class="gradient-white" onLoad="javascript: initialize_mh_background({{json_data}});"> -->
-<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}})">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Mental Health Profile</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{mh.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
-
-            <tr>
-              <td>
-                <div class='{{class.mhHistory}}'>
-                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_demographic/');" name='mhHistoryBtn' id='mhHistoryBtn'>
-                    History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhEducation}}'>
-                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_education/');" name='mhEducationBtn' id='mhEducationBtn'>
-                     Education
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhBackground}}'>
-                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='mhBackgroundBtn' id='mhBackgroundBtn'>
-                    Finance & Background
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhStress}}'>
-                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
-                    Stressors
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhFamily}}'>
-                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_familyHistory/');" name='mhFamilyBtn' id='mhFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhLegal}}'>
-                  <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
-                    Legal History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhPsych}}'>
-                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_psych/');" name='mhPsychBtn' id='mhPsychBtn'>
-                    Psychiatric History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhUse}}'>
-                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_useTable/');" name='mhUseBtn' id='mhUseBtn'>
-                    Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('mh', 'none');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Mental Health: Finances & Background</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                  					<!-- <input type='hidden' name='back' id='back' value='{{back}}'>
-				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'> -->
-
-                            		<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            		<input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/mh_background/'>	
-				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            		<input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                            		<input type='hidden' name='save_this' id='save_this' value=''>
-
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<div id='sub_background_header'>
-				            					Financial Status:
-				            				</div>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Residence:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='residence' id='residence'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Rent'>Rent</option>
-					            						<option value='Own Home'>Own Home</option>
-					            						<option value='Subsidized Housing'>Subsidized Housing</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Income:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='income' id='income'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Low'>Low</option>
-					            						<option value='Medium'>Medium</option>
-					            						<option value='High'>High</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Debt:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='debt' id='debt'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Low'>Low</option>
-					            						<option value='Medium'>Medium</option>
-					            						<option value='High'>High</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Credit:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='credit' id='credit'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Poor'>Poor</option>
-					            						<option value='Fair'>Fair</option>
-					            						<option value='Good'>Good</option>
-					            						<option value='Bankruptcy'>Bankruptcy</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Health Care:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='healthCare' id='healthCare'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Company Health Benefits'>Company Health Benefits</option>
-					            						<option value='Private Insurance'>Private Insurance</option>
-					            						<option value='Medicaid'>Medicaid</option>
-					            						<option value='Medicare'>Medicare</option>
-					            						<option value='Self-Pay'>Self-Pay</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Other Income:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_select'>
-					            					<select name='otherIncome' id='otherIncome'>
-					            						<option value='None Selected'>Select</option>
-					            						<option value='Alimony'>Alimony</option>
-					            						<option value='Child Support'>Child Support</option>
-					            						<option value='Aid to Dependant Children'>Aid to Dependant Children</option>
-					            						<option value='SSI'>SSI</option>
-					            						<option value='Retired'>Retired</option>
-					            						<option value='Support from Relatives'>Support from Relatives</option>
-					            					</select>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-					            </ul>
-
-
-					            <table>
-				            		<tr>
-				            			<td>
-				            				<div id='sub_background_header'>
-				            					Relationships:
-				            				</div>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Spouse:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='spouseRelationship' id='isPoorSpouse' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='spouseRelationship' id='isAvgSpouse' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='spouseRelationship' id='isGoodSpouse' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Parents:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='parentsRelationship' id='isPoorParents' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='parentsRelationship' id='isAvgParents' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='parentsRelationship' id='isGoodParents' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Brothers:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='brothersRelationship' id='isPoorBro' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='brothersRelationship' id='isAvgBro' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='brothersRelationship' id='isGoodBro' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Sisters:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='sistersRelationship' id='isPoorSis' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='sistersRelationship' id='isAvgSis' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='sistersRelationship' id='isGoodSis' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Children:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='childrenRelationship' id='isPoorKids' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='childrenRelationship' id='isAvgKids' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='childrenRelationship' id='isGoodKids' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<div id='mhRelate_width'>
-					            						<label>Ex-Spouse:</label>
-					            					</div>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='exRelationship' id='isPoorEx' value='Poor'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Poor</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='exRelationship' id='isAvgEx' value='Average'>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Average</label>
-					            			</td>
-
-					            			<td>
-					            				<div id='fix_my_radio'>
-					            					<input type='radio' name='exRelationship' id='isGoodEx' value='Good' checked>
-					            				</div>
-					            			</td>
-
-					            			<td>
-					            				<label>Good</label>
-					            			</td>
-					            		</tr>
-					            	</table>
-					            </ul>
-
-					            <ul>
-						            <table>
-						            	<tr>
-						            		<td>
-						            			<label>
-						            			    <li>
-						            			    	Close friends that I can call on if in trouble:
-						            			    </li>
-						            		    </label>
-						            		</td>
-						            	</tr>
-						            </table>
-
-						            <ul>
-							            <table>
-							            	<tr>
-							            		<td>
-							            			<li>
-							            				<label>Number:</label>
-							            			</li>
-							            		</td>
-							            		<td>
-							            			<div id='mh_numFix'>
-							            				<input type='number' style='width:40px;' name='closeFriendNumber' id='closeFriendNumber' value='{{fields.closeFriendNumber}}'>
-							            			</div>
-							            		</td>
-							            	</tr>
-
-							            	<tr>
-							            		<td>
-							            			<li>
-							            				<label>Visit Times:</label>
-							            			</li>
-							            		</td>
-
-							            		<td>
-							            			<div id='fix_my_select'>
-							            				<select name='closeFriendVisit' id='closeFriendVisit'>
-							            					<option value='None Selected'>Select</option>
-							            					<option value='Weekly'>Weekly</option>
-							            					<option value='Monthly'>Monthly</option>
-							            					<option value='Yearly'>Yearly</option>
-							            				</select>
-							            			</div>
-							            		</td>
-							            	</tr>
-							            </table>
-							        </ul>
-						        </ul>
-
-						        <ul>
-						            <table>
-						            	<tr>
-						            		<td>
-						            			<label>
-						            			    <li>
-						            			    	Acquaintances that I can call on if in trouble:
-						            			    </li>
-						            		    </label>
-						            		</td>
-						            	</tr>
-						            </table>
-
-						            <ul>
-							            <table>
-							            	<tr>
-							            		<td>
-							            			<li>
-							            				<label>Number:</label>
-							            			</li>
-							            		</td>
-							            		<td>
-							            			<div id='mh_numFix'>
-							            				<input type='number' style='width:40px;' name='acqNumber' id='acqNumber' value='{{fields.acqNumber}}'>
-							            			</div>
-							            		</td>
-							            	</tr>
-
-							            	<tr>
-							            		<td>
-							            			<li>
-							            				<label>Visit Times:</label>
-							            			</li>
-							            		</td>
-
-							            		<td>
-							            			<div id='fix_my_select'>
-							            				<select name='acqVisit' id='acqVisit'>
-							            					<option value='None Selected'>Select</option>
-							            					<option value='Weekly'>Weekly</option>
-							            					<option value='Monthly'>Monthly</option>
-							            					<option value='Yearly'>Yearly</option>
-							            				</select>
-							            			</div>
-							            		</td>
-							            	</tr>
-							            </table>
-							        </ul>
-						        </ul>        
-				            </div>
-				        </div><!--  END OF LEFT SIDE -->
-
-				        <div class="col-md-6 col-sm-6">
-				        	<table>
-				            	<tr>
-				            		<td>
-				            			<div id='sub_background_header'>
-				            				Activities:
-				            			</div>
-				            		</td>
-				            	</tr>
-				            </table>
-
-				            <ul>
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<li>
-				            					<label>Interest (fishing, sewing, reading, etc.)</label>
-				            				</li>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Activity:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='text' name='interest' id='interest' value='{{fields.interest}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Week:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='interestWeek' id='interestWeek' value='{{fields.interestWeek}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Month:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='interestMonth' id='interestMonth' value='{{fields.interestMonth}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-					            </ul>
-				            </ul>
-
-				            <ul>
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<li>
-				            					<label>Activities With Friends</label>
-				            				</li>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Activity:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='text' name='friendAct' id='friendAct' value='{{fields.friendAct}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Week:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='friendActWeek' id='friendActWeek' value='{{fields.friendActWeek}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Month:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='friendActMonth' id='friendActMonth' value='{{fields.friendActMonth}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-					            </ul>
-				            </ul>
-
-
-				            <ul>
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<li>
-				            					<label>Activities at Work</label>
-				            				</li>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Activity:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='text' name='workAct' id='workAct' value='{{fields.workAct}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-
-					            	<table>
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Week:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='workActWeek' id='workActWeek' value='{{fields.workActWeek}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-
-					            		<tr>
-					            			<td>
-					            				<li>
-					            					<label>Times Per Month:</label>
-					            				</li>
-					            			</td>
-
-					            			<td>
-					            				<div id='mh_numFix'>
-					            					<input type='number' style='width:40px;' name='workActMonth' id='workActMonth' value='{{fields.workActMonth}}'>
-					            				</div>
-					            			</td>
-					            		</tr>
-					            	</table>
-					            </ul>
-				            </ul>
-
-				            <ul>
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<li>
-				            					<label>Church Affiliation:</label>
-				            				</li>
-				            			</td>
-
-				            			<td>
-				            				<div id='mh_numFix'>
-				            					<input type='text' name='churchAffiliation' id='churchAffiliation' value='{{fields.churchAffiliation}}'>
-				            				</div>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<table>
-				            		<tr>
-				            			<td>
-				            				<label>Number of Times I Attend:</label>
-				            			</td>
-				            		</tr>
-				            	</table>
-
-				            	<ul>
-				            		<table>
-				            			<tr>
-				            				<td>
-				            					<li>
-				            						<label>Weekly:</label>
-				            					</li>
-				            				</td>
-				            				<td>
-				            					<div id='mh_numFix'>
-				            						<input type='number' style='40px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'>
-				            					</div>
-				            				</td>
-				            			</tr>
-
-				            			<tr>
-				            				<td>
-				            					<li>
-				            						<label>Monthly:</label>
-				            					</li>
-				            				</td>
-				            				<td>
-				            					<div id='mh_numFix'>
-				            						<input type='number' style='40px;' name='churchMonth' id='churchMonth' value='{{fields.churchMonth}}'>
-				            					</div>
-				            				</td>
-				            			</tr>
-
-				            			<tr>
-				            				<td>
-				            					<li>
-				            						<label>Yearly:</label>
-				            					</li>
-				            				</td>
-				            				<td>
-				            					<div id='mh_numFix'>
-				            						<input type='number' style='40px;' name='churchYear' id='churchYear' value='{{fields.churchYear}}'>
-				            					</div>
-				            				</td>
-				            			</tr>
-				            		</table>
-				            	</ul>
-				            </ul>		        	
-				        </div>
-				    </form>
-
-				        </div>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
+<!--   <input type='text' id='test1' style='width: 700px;'> -->
+    <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='form_name' id='form_name' value='mh_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Mental Health: Finances and Relationship Background</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_demographic/');">
+                              <!-- class='{{class.clinic}}' -->
+                              <div  class='{{class.mhHistory}}'>General</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_education/');">
+                              <!-- class='{{class.social}}' -->
+                              <div  class='{{class.mhEducation}}'>Education</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: post_mh_data({{current_section}});">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_background/');">
+                              <!-- class='{{class.psycho1}}' -->
+                              <div  class='{{class.mhBackground}}'>Financial</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_stress/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhStress}}'>Stressors</div>
+                            </a>
+                          </td>
+                        <!-- </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr> -->
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_familyHistory/');">
+                              <!-- class='{{class.special}}' -->
+                              <div  class='{{class.mhFamily}}'>Family</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_legal/');">
+                              <!-- class='{{class.other}}' -->
+                              <div  class='{{class.mhLegal}}'>Legal</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_psych/');">
+                             <!--  class='{{class.source}}' -->
+                              <div  class='{{class.mhPsych}}'>Psychiatric</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_useTable/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhUse}}'>Drug Use</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper-mh'>
+              <div class='container'>
+                <div class='row' style='margin-top:15px;'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:45px;'>
+                    <h4>Financial Status</h4>
+                    <ol>
+                      <table>
+                        <tr>
+                          <td><div id='e1'><div class='iml-label'><li>Residence:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='residence' id='residence' onChange="javascript: noErrorText('e1', 'residence');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Rent'>Rent</option>
+                                <option value='Own Home'>Own Home</option>
+                                <option value='Subsidized Housing'>Subsidized Housing</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='e2'><div class='iml-label'><li>Income:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='income' id='income' onChange="javascript: noErrorText('e2', 'income');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Low'>Low</option>
+                                <option value='Medium'>Medium</option>
+                                <option value='High'>High</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='e3'><div class='iml-label'><li>Debt:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='debt' id='debt' onChange="javascript: noErrorText('e3', 'debt');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Low'>Low</option>
+                                <option value='Medium'>Medium</option>
+                                <option value='High'>High</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='e4'><div class='iml-label'><li>Credit:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='credit' id='credit' onChange="javascript: noErrorText('e4', 'credit');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Poor'>Poor</option>
+                                <option value='Fair'>Fair</option>
+                                <option value='Good'>Good</option>
+                                <option value='Bankruptcy'>Bankruptcy</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='e5'><div class='iml-label'><li>Health Care:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='healthCare' id='healthCare' onChange="javascript: noErrorText('e5', 'healthCare');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Company Health Benefits'>Company Health Benefits</option>
+                                <option value='Private Insurance'>Private Insurance</option>
+                                <option value='Medicaid'>Medicaid</option>
+                                <option value='Medicare'>Medicare</option>
+                                <option value='Self-Pay'>Self-Pay</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div id='e6'><div class='iml-label'><li>Other Income:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='otherIncome' id='otherIncome' onChange="javascript: noErrorText('e6', 'otherIncome');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Alimony'>Alimony</option>
+                                <option value='Child Support'>Child Support</option>
+                                <option value='Aid to Dependant Children'>Aid to Dependant Children</option>
+                                <option value='SSI'>SSI</option>
+                                <option value='Retired'>Retired</option>
+                                <option value='Support from Relatives'>Support from Relatives</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </ol>
+
+                    <h4>Family Relationships</h4>
+                    <ol>
+                      <table>
+                        <tr>
+                          <td><div class='iml-label'><li>Spouse:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='spouseRelationship' id='isPoorSpouse' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='spouseRelationship' id='isAvgSpouse' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='spouseRelationship' id='isGoodSpouse' value='Good'><span>Good</span></div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='iml-label'><li>Parents:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='parentsRelationship' id='isPoorParents' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='parentsRelationship' id='isAvgParents' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='parentsRelationship' id='isGoodParents' value='Good'><span>Good</span></div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='iml-label'><li>Brothers:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='brothersRelationship' id='isPoorBro' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='brothersRelationship' id='isAvgBro' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='brothersRelationship' id='isGoodBro' value='Good'><span>Good</span></div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='iml-label'><li>Sisters:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='sistersRelationship' id='isPoorSis' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='sistersRelationship' id='isAvgSis' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='sistersRelationship' id='isGoodSis' value='Good'><span>Good</span></div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='iml-label'><li>Children:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='childrenRelationship' id='isPoorKids' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='childrenRelationship' id='isAvgKids' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='childrenRelationship' id='isGoodKids' value='Good'><span>Good</span></div></td>
+
+                          <tr>
+                          <td><div class='iml-label'><li>Ex-Spouse:</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='exRelationship' id='isPoorEx' value='Poor'><span>Poor</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='exRelationship' id='isAvgEx' value='Average'><span>Average</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='exRelationship' id='isGoodEx' value='Good'><span>Good</span></div></td>
+                        </tr>
+                        </tr>
+                      </table>
+                    </ol>
+
+                    <h4>Church Affiliation</h4>
+                    <ul>
+                      <table>
+                        <tr>
+                          <td><div class='iml-label'><li>Church:</li></div></td>
+                          <td><input type='text' name='churchAffiliation' id='churchAffiliation' value='{{fields.churchAffiliation}}'></td>
+                        </tr>
+                      </table>
+
+                      <table><tr><td><div class='iml-label'><li>Number of times I attend:</li></div></td></tr><table>
+
+                      <table>  
+                          <td><div class='iml-mh-number-label2'><li>Weekly:</li></div></td>
+                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+
+                          <td><div class='iml-mh-number-label2'>Monthly:</div></td>
+                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+
+                          <td><div class='iml-mh-number-label2'>Yearly:</div></td>
+                          <td><div><input type='number' style='width:40px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+                        </tr>
+                      </table>
+                    </ul>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                    <h4>Close Friends and Aquaintances</h4>
+                    <ol>
+                      <table>
+                        <tr>
+                          <td><div id='e7'><div class='iml-label'><li>Close friends I can call on if in trouble:</li></div></div></td>
+                          <td><div><input type='number' style='width:40px;' name='closeFriendNumber' id='closeFriendNumber' value='{{fields.closeFriendNumber}}' oninput="javascript: noErrorText('e7', 'closeFriendNumber');"></div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><div id='e8'><div class='iml-label'><li>Visit Times:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='closeFriendVisit' id='closeFriendVisit' onChange="javascript: noErrorText('e8', 'closeFriendVisit');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Weekly'>Weekly</option>
+                                <option value='Monthly'>Monthly</option>
+                                <option value='Yearly'>Yearly</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div id='e9'><div class='iml-label'><li>Aquaintances I can call on if in trouble:</li></div></div></td>
+                          <td><div><input type='number' style='width:40px;' name='acqNumber' id='acqNumber' value='{{fields.acqNumber}}' oninput="javascript: noErrorText('e9', 'acqNumber');"></div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><div id='e10'><div class='iml-label'><li>Visit Times:</li></div></div></td>
+                          <td>
+                            <div>
+                              <select name='acqVisit' id='acqVisit' onChange="javascript: noErrorText('e10', 'acqVisit');">
+                                <option value='None Selected'>Select</option>
+                                <option value='Weekly'>Weekly</option>
+                                <option value='Monthly'>Monthly</option>
+                                <option value='Yearly'>Yearly</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </ol>
+
+                    <h4>Activities</h4>
+                    <ol>
+                      <table><tr><td><div class='iml-label'><li>Interest (fishing, sewing, reading, etc.)</li></div></td></tr></table>
+                      <table>
+                        <tr>
+                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><div><input type='text' name='interest' id='interest' value='{{fields.interest}}'></div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='interestWeek' id='interestWeek' value='{{fields.interestWeek}}'></div></td>
+
+                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='interestMonth' id='interestMonth' value='{{fields.interestMonth}}'></div></td>
+                        </tr>
+                      </table>
+
+                      <table><tr><td><div class='iml-label'><li>Activities with friends:</li></div></td></tr></table>
+                      <table>
+                        <tr>
+                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><div><input type='text' name='friendAct' id='friendAct' value='{{fields.friendAct}}'></div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='friendActWeek' id='friendActWeek' value='{{fields.friendActWeek}}'></div></td>
+
+                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='friendActMonth' id='friendActMonth' value='{{fields.friendActMonth}}'></div></td>
+                        </tr>
+                      </table>
+
+                      <table><tr><td><div class='iml-label'><li>Activities at work:</li></div></td></tr></table>
+                      <table>
+                        <tr>
+                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><div><input type='text' name='workAct' id='workAct' value='{{fields.workAct}}'></div></td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='workActWeek' id='workActWeek' value='{{fields.workActWeek}}'></div></td>
+
+                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='workActMonth' id='workActMonth' value='{{fields.workActMonth}}'></div></td>
+                        </tr>
+                      </table>
+                    </ol>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
+                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td>
+                  <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
