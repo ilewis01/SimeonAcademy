@@ -104,7 +104,7 @@
               <div class='container'>
                 <div class='row' style='margin-top:15px;'>
                   <div class='col-md-12' style='width:100%;'>
-                    <div id='top_of_info_iml'>Have there been any major changes in your life or your family? If so, please describe in the space provided below.</div>
+                    <div id='top_of_info_iml'>Have there been any major changes in your life or your family? If so, please describe in the space provided below the question.</div>
                   </div>
 
                   <!-- LEFT SIDE -->
@@ -113,9 +113,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Death of a friend or family member?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='deathStress' id='yesDeath' value='True' onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='deathStress' id='yesDeath' value='True' onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp', 'b1');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='deathStress' id='noDeath' value='False' onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='deathStress' id='noDeath' value='False' onClick="javascript: mhStressRadio('yesDeath', 'deathStressExp', 'b1');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -123,7 +123,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='deathStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea>{{fields.deathStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b1'><textarea name='deathStressExp' id='deathStressExp'>{{fields.deathStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -131,9 +131,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Divorce?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='divorceStress' id='yesDivorce' value='True' onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='divorceStress' id='yesDivorce' value='True' onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp', 'b2');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='divorceStress' id='noDivorce' value='False' onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='divorceStress' id='noDivorce' value='False' onClick="javascript: mhStressRadio('yesDivorce', 'divorceStressExp', 'b2');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -141,7 +141,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='divorceStressExp' id='divorceStressExp'>{{fields.divorceStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b2'><textarea name='divorceStressExp' id='divorceStressExp'>{{fields.divorceStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -149,9 +149,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Moves?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='moveStress' id='yesMove' value='True' onClick="javascript: mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='moveStress' id='yesMove' value='True' onClick="javascript: mhStressRadio('yesMove', 'moveStressExp', 'b3');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='moveStress' id='noMove' value='False' onClick="javascript: mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='moveStress' id='noMove' value='False' onClick="javascript: mhStressRadio('yesMove', 'moveStressExp', 'b3');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -159,7 +159,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='moveStressExp' id='moveStressExp'>{{fields.moveStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b3'><textarea name='moveStressExp' id='moveStressExp'>{{fields.moveStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -167,9 +167,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Significant Medical Problems?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='medicalStress' id='yesMedical' value='True' onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='medicalStress' id='yesMedical' value='True' onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp', 'b4');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='medicalStress' id='noMedical' value='False' onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='medicalStress' id='noMedical' value='False' onClick="javascript: mhStressRadio('yesMedical', 'medicalStressExp', 'b4');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -177,7 +177,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='medicalStressExp' id='medicalStressExp'>{{fields.medicalStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b4'><textarea name='medicalStressExp' id='medicalStressExp'>{{fields.medicalStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -185,9 +185,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Ill health of a family member?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='familyHealthStress' id='yesFamily' value='True' onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='familyHealthStress' id='yesFamily' value='True' onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp', 'b5');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='familyHealthStress' id='noFamily' value='False' onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='familyHealthStress' id='noFamily' value='False' onClick="javascript: mhStressRadio('yesFamily', 'familyHealthStressExp', 'b5');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -195,7 +195,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='familyHealthStressExp' id='familyHealthStressExp'>{{fields.familyHealthStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b5'><textarea name='familyHealthStressExp' id='familyHealthStressExp'>{{fields.familyHealthStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -209,9 +209,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Financial Problems?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='financialStress' id='yesMoney' value='True' onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='financialStress' id='yesMoney' value='True' onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp', 'b6');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='financialStress' id='noMoney' value='False' onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='financialStress' id='noMoney' value='False' onClick="javascript: mhStressRadio('yesMoney', 'financialStressExp', 'b6');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -219,7 +219,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='deathStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='financialStressExp' id='financialStressExp'>{{fields.financialStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b6'><textarea name='financialStressExp' id='financialStressExp'>{{fields.financialStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -227,9 +227,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Abuse in family?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='abuseStress' id='yesAbuse' value='True' onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='abuseStress' id='yesAbuse' value='True' onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp', 'b7');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='abuseStress' id='noAbuse' value='False' onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='abuseStress' id='noAbuse' value='False' onClick="javascript: mhStressRadio('yesAbuse', 'abuseStressExp', 'b7');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -237,7 +237,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='abuseStressExp' id='abuseStressExp'>{{fields.abuseStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b7'><textarea name='abuseStressExp' id='abuseStressExp'>{{fields.abuseStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -245,9 +245,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Addiction in family?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='addictionFamilyStress' id='yesAddiction' value='True' onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='addictionFamilyStress' id='yesAddiction' value='True' onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp', 'b8');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='addictionFamilyStress' id='noAddiction' value='False' onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='addictionFamilyStress' id='noAddiction' value='False' onClick="javascript: mhStressRadio('yesAddiction', 'addictionFamilyStressExp', 'b8');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -255,7 +255,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='addictionFamilyStressExp' id='addictionFamilyStressExp'>{{fields.addictionFamilyStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b8'><textarea name='addictionFamilyStressExp' id='addictionFamilyStressExp'>{{fields.addictionFamilyStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -263,9 +263,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Violence in Family?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='violenceFamilyStress' id='yesViolence' value='True' onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='violenceFamilyStress' id='yesViolence' value='True' onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp', 'b9');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='violenceFamilyStress' id='noViolence' value='False' onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='violenceFamilyStress' id='noViolence' value='False' onClick="javascript: mhStressRadio('yesViolence', 'violenceFamilyStressExp', 'b9');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -273,7 +273,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='violenceFamilyStressExp' id='violenceFamilyStressExp'>{{fields.violenceFamilyStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b9'><textarea name='violenceFamilyStressExp' id='violenceFamilyStressExp'>{{fields.violenceFamilyStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>
@@ -281,9 +281,9 @@
                       <table>
                         <tr>
                           <td><div id='e1'><div class='iml-label'><li>Other Stressors?</li></div></div></td>
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='otherStress' id='yesOther' value='True' onClick="javascript: mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='otherStress' id='yesOther' value='True' onClick="javascript: mhStressRadio('yesOther', 'otherStressExp', 'b10');"><span>Yes</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='otherStress' id='noOther' value='False' onClick="javascript: mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');"><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input  type='radio' name='otherStress' id='noOther' value='False' onClick="javascript: mhStressRadio('yesOther', 'otherStressExp', 'b10');"><span>No</span></div></td>
                         </tr>
                       </table>
 
@@ -291,7 +291,7 @@
                         <!-- <tr><td><div id='e1'><div class='iml-mh-number-label234' id='divorceStressExp_lab'><span><em></em></span></div></div></td></tr> -->
                         <tr>
                           <td>
-                            <div class='sm_txt_area_iml2'><textarea name='otherStressExp' id='otherStressExp'>{{fields.otherStressExp}}</textarea></div>
+                            <div class='sm_txt_area_iml2' id='b10'><textarea name='otherStressExp' id='otherStressExp'>{{fields.otherStressExp}}</textarea></div>
                           </td>
                         </tr>
                       </table>

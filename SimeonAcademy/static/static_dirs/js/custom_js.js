@@ -10413,12 +10413,31 @@ function processDynamicMhLegal() {
 	postUniversalRadioNumber(yesBank, dateBenkrupcy, m_dateBenkrupcy);
 }
 
-function mhStressRadio(trigger_id, label_id, element_id) {
-	var trigger = document.getElementById(trigger_id);
-	var label = document.getElementById(label_id);
-	var element = document.getElementById(element_id);
+function opacityZero(element) {
+	element.style.opacity = '0.0';
+}
 
-	twoElementRadioSetup(trigger, label, element);
+
+function mhStressRadio(triggerName, elementName, borderName) {
+	triggerName = String(triggerName);
+	elementName = String(elementName);
+	borderName = String(borderName);
+
+	var trigger = grab(triggerName);
+	var element = grab(elementName);
+	var border = grab(borderName);
+
+	if (trigger.checked === true) {
+		element.disabled = false;
+		opacityHigh(element);
+		border.style.borderColor = 'green';
+	}
+	else {
+		opacityLow(element);
+		element.value = '';
+		element.disabled = true;
+		border.style.borderColor = 'red';
+	}
 }
 
 function mhFamilyRadio(trigger_id, label1_id, label2_id, sel1_id, sel2_id) {
