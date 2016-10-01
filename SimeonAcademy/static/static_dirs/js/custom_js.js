@@ -9379,6 +9379,75 @@ function keep_mh_changes() {
 	grab('s_form').submit();
 }
 
+function rock_checkboxes1(option) {
+	option = String(option);
+
+	if (option === 'clear') {
+		grab('isdepressed').checked = false;
+		grab('isadd').checked = false;
+		grab('isbedWetting').checked = false;
+		grab('isbipolar').checked = false;
+		grab('issuicideAttempt').checked = false;
+		grab('isphysicalAbuse').checked = false;
+		grab('islaw').checked = false;
+		grab('isld').checked = false;
+		grab('istic').checked = false;
+		grab('isthyroid').checked = false;
+		grab('isheart').checked = false;
+		grab('isoverweight').checked = false;
+		grab('ismood').checked = false;
+		grab('isalcohol').checked = false;
+		grab('isdrugs').checked = false;
+		grab('isschizo').checked = false;
+		grab('isseizures').checked = false;
+		grab('iscompletedSuicide').checked = false;
+		grab('issexAbuse').checked = false;
+		grab('ispanic').checked = false;
+		grab('isanxiety').checked = false;
+		grab('isOCD').checked = false;
+		grab('isdiabetes').checked = false;
+		grab('iscancer').checked = false;
+		grab('ishighBloodPressure').checked = false;
+		grab('isanger').checked = false;
+		grab('checkAll').checked = false;
+	}
+
+	else if (option === 'check') {
+		grab('isdepressed').checked = true;
+		grab('isadd').checked = true;
+		grab('isbedWetting').checked = true;
+		grab('isbipolar').checked = true;
+		grab('issuicideAttempt').checked = true;
+		grab('isphysicalAbuse').checked = true;
+		grab('islaw').checked = true;
+		grab('isld').checked = true;
+		grab('istic').checked = true;
+		grab('isthyroid').checked = true;
+		grab('isheart').checked = true;
+		grab('isoverweight').checked = true;
+		grab('ismood').checked = true;
+		grab('isalcohol').checked = true;
+		grab('isdrugs').checked = true;
+		grab('isschizo').checked = true;
+		grab('isseizures').checked = true;
+		grab('iscompletedSuicide').checked = true;
+		grab('issexAbuse').checked = true;
+		grab('ispanic').checked = true;
+		grab('isanxiety').checked = true;
+		grab('isOCD').checked = true;
+		grab('isdiabetes').checked = true;
+		grab('iscancer').checked = true;
+		grab('ishighBloodPressure').checked = true;
+		grab('isanger').checked = true;
+		grab('clearAll').checked = false;
+	}
+}
+
+function flick_family_switch() {
+	grab('clearAll').checked = false;
+	grab('checkAll').checked = false;
+}
+
 
 function post_mh_data(section) {
 	section = String(section);

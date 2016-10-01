@@ -1,2357 +1,297 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}})">
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
+<!--   <input type='text' id='test1' style='width: 700px;'> -->
+    <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='form_name' id='form_name' value='mh_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
 
-    <div id="wrapper" class='shift-rr'>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Mental Health: Family History</div>
+            </div>
 
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Mental Health Profile</h4>
-                </div>
-              </td>
-            </tr>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_demographic/');">
+                              <!-- class='{{class.clinic}}' -->
+                              <div  class='{{class.mhHistory}}'>General</div>
+                            </a>
+                          </td>
 
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_education/');">
+                              <!-- class='{{class.social}}' -->
+                              <div  class='{{class.mhEducation}}'>Education</div>
+                            </a>
+                          </td>
 
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{mh.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_background/');">
+                              <!-- class='{{class.psycho1}}' -->
+                              <div  class='{{class.mhBackground}}'>Financial</div>
+                            </a>
+                          </td>
 
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_stress/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhStress}}'>Stressors</div>
+                            </a>
+                          </td>
+                        <!-- </tr>
+                      </table>
 
+                      <div style='margin-bottom: 6px;'></div>
 
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
+                      <table class='img-single-btn-table'>
+                        <tr> -->
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_familyHistory/');">
+                              <!-- class='{{class.special}}' -->
+                              <div  class='{{class.mhFamily}}'>Family</div>
+                            </a>
+                          </td>
 
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_legal/');">
+                              <!-- class='{{class.other}}' -->
+                              <div  class='{{class.mhLegal}}'>Legal</div>
+                            </a>
+                          </td>
 
-            <tr>
-              <td>
-                <div class='{{class.mhHistory}}'>
-                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_demographic/');" name='mhHistoryBtn' id='mhHistoryBtn'>
-                    History
-                  </a>
-                </div>
-              </td>
-            </tr>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_psych/');">
+                             <!--  class='{{class.source}}' -->
+                              <div  class='{{class.mhPsych}}'>Psychiatric</div>
+                            </a>
+                          </td>
 
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhEducation}}'>
-                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_education/');" name='mhEducationBtn' id='mhEducationBtn'>
-                     Education
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhBackground}}'>
-                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_background/');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
-                    Finance & Background
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhStress}}'>
-                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
-                    Stressors
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhFamily}}'>
-                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='mhFamilyBtn' id='mhFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhLegal}}'>
-                  <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
-                    Legal History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhPsych}}'>
-                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_psych/');" name='mhPsychBtn' id='mhPsychBtn'>
-                    Psychiatric History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhUse}}'>
-                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_useTable/');" name='mhUseBtn' id='mhUseBtn'>
-                    Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('mh', '{{current_section}}');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Mental Health: Family History</h3>
-
-                  <div id='sub_paragraph_header'>
-                    <p>
-                      Have any of your <u>biological</u> relatives (mother, father, sisters, brothers, children, aunts, uncles, grandparents) suffered from any of the following conditions? Please specify which family member and whether it is paternal (father's side) or maternal (mother's side) relative. For example: "Maternal Grandmother" or "Paternal Uncle".
-                    </p>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_useTable/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhUse}}'>Drug Use</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-3 col-sm-3">
-                  			<div>
-                  				<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
-                  					<!-- <input type='hidden' name='back' id='back' value='{{back}}'>
-                            <input type='hidden' name='goToNext' id='goToNext' value='true'>
-                            <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                            <input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'> -->
+            <div class='iml-data-entry-wrapper-mh'>
+              <div class='container'>
+                <div class='row' style='margin-top:15px;'>
 
-                            <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='/mh_familyHistory/'> 
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
+                  <!-- Centered -->
+                  <div class='col-md-12' style='width:100%; height:100%;'>
+                    <div class='center_this_inside'>
 
-                            <input type='hidden' name='depressed' id='depressed' value=''>
-                            <input type='hidden' name='add' id='add' value=''>
-                            <input type='hidden' name='bedWetting' id='bedWetting' value=''>
-                            <input type='hidden' name='bipolar' id='bipolar' value=''>
-                            <input type='hidden' name='suicideAttempt' id='suicideAttempt' value=''>
-                            <input type='hidden' name='physicalAbuse' id='physicalAbuse' value=''>
-                            <input type='hidden' name='law' id='law' value=''>
-                            <input type='hidden' name='ld' id='ld' value=''>
-                            <input type='hidden' name='tic' id='tic' value=''>
-                            <input type='hidden' name='thyroid' id='thyroid' value=''>
-                            <input type='hidden' name='heart' id='heart' value=''>
-                            <input type='hidden' name='overweight' id='overweight' value=''>
-                            <input type='hidden' name='mood' id='mood' value=''>
-                            <input type='hidden' name='alcohol' id='alcohol' value=''>
-                            <input type='hidden' name='drugs' id='drugs' value=''>
-                            <input type='hidden' name='schizo' id='schizo' value=''>
-                            <input type='hidden' name='seizures' id='seizures' value=''>
-                            <input type='hidden' name='completedSuicide' id='completedSuicide' value=''>
-                            <input type='hidden' name='sexAbuse' id='sexAbuse' value=''>
-                            <input type='hidden' name='panic' id='panic' value=''>
-                            <input type='hidden' name='anxiety' id='anxiety' value=''>
-                            <input type='hidden' name='OCD' id='OCD' value=''>
-                            <input type='hidden' name='diabetes' id='diabetes' value=''>
-                            <input type='hidden' name='cancer' id='cancer' value=''>
-                            <input type='hidden' name='highBloodPressure' id='highBloodPressure' value=''>
-                            <input type='hidden' name='anger' id='anger' value=''>
-
-				            	<div class=''>       
-                        <table>
-                          <tr>
-                            <td>
-                              <label>1. Depression:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdepressed' id='yesDepress' value='True' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdepressed' id='noDepress' value='False' onClick="javascript: mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='depSide'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='depressSide' id='depressSide'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='depMem'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='depressMember' id='depressMember'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
+                      <div class='family_mh_instructions_p1'>
+                        Have any of your <u>biological</u> relatives (mother, father, sisters, brothers, children, aunts, uncles, grandparents) suffered from any of the following conditions? Check all that apply.
                       </div>
 
-                      <table>
-                        <tr>
-                          <td>
-                            <label>2. Hyperactivity (ADD):</label>
-                          </td>
+                      <div class='family_biz_container'>
+                        <div class='container' style='width:100%'>
+                          <div class='row'>
+                            <!-- LEFT SIDE -->
+                            <div class='col-md-6' style='width:60%;'>
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isdepressed' id='isdepressed' value='depression' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Depression</div></td>
+                                </tr>
 
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isadd' id='yesADD' value='True' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');">
+                                <tr>
+                                  <td><div><input type='checkbox' name='isadd' id='isadd' value='Hyperactivity' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Hyperactivity (A.D.D)</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isbedWetting' id='isbedWetting' value='Bed Wetting' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Bed Wetting</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isbipolar' id='isbipolar' value='Bipolar Disorder' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Bipolar Disorder (Manic Depression)</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='issuicideAttempt' id='issuicideAttempt' value='Suicide Attempt' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Attempted Suicide</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isphysicalAbuse' id='isphysicalAbuse' value='Physical Abuse' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Physical Abuse</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='islaw' id='islaw' value='Legal Problems' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Problems With The Law</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isld' id='isld' value='Learning Disability' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Learning Disability</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='istic' id='istic' value='Tic Disorder' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Tic Disorder</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isthyroid' id='isthyroid' value='Thyroid Disorder' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Thyroid Disorder</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isheart' id='isheart' value='Heart Disease' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Heart Disease</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isoverweight' id='isoverweight' value='Overweight' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Overweight</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='ismood' id='ismood' value='Mood Swings' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Mood Swings</div></td>
+                                </tr>
+                              </table>
                             </div>
-                          </td>
 
-                          <td>
-                            <label>Yes</label>
-                          </td>
+                            <!-- RIGHT SIDE -->
+                            <div class='col-md-6' style='width:40%;'>
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isalcohol' id='isalcohol' value='Alcohol Problems' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Alcohol Problems</div></td>
+                                </tr>
 
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isadd' id='noADD' value='False' onClick="javascript: mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');" checked>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isdrugs' id='isdrugs' value='Drug Problems' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Drug Problems</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isschizo' id='isschizo' value='Schizophrenia' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Schizophrenia</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isseizures' id='isseizures' value='Seizures' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Seizures</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='iscompletedSuicide' id='iscompletedSuicide' value='Completed Suicide' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Completed Suicide</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='issexAbuse' id='issexAbuse' value='Sexual Abuse' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Sexual Abuse</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='ispanic' id='ispanic' value='Panick Attacks' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Panic Attacks</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isanxiety' id='isanxiety' value='Anxiety' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Anxiety</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isOCD' id='isOCD' value='Obsessive Compulsive Behavior' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Obsessive Compulsive Behavior</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isdiabetes' id='isdiabetes' value='Diabetes' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Diabetes</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='iscancer' id='iscancer' value='Cancer' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Cancer</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='ishighBloodPressure' id='ishighBloodPressure' value='High Blood Pressure' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>High Blood Pressure</div></td>
+                                </tr>
+
+                                <tr>
+                                  <td><div><input type='checkbox' name='isanger' id='isanger' value='Anger Problems' onClick="javascript: flick_family_switch();"></div></td>
+                                  <td><div class='font_class_13'>Anger Problems</div></td>
+                                </tr>
+                              </table>
                             </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sideADD_lab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sideADD' id='sideADD'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memADD_lab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memADD' id='memADD'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-
-
-                      <table>
-                        <tr>
-                          <td>
-                            <label>3. Bed Wetting:</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isbedWetting' id='yesBed' value='True' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');">
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>Yes</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isbedWetting' id='noBed' value='False' onClick="javascript: mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');" checked>
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sideBedLab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sideBed' id='sideBed'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memBedLab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memBed' id='memBed'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-
-                      <table>
-                        <tr>
-                          <td>
-                            <label>4. Bipolar Disorder:</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isbipolar' id='yesBi' value='True' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');">
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>Yes</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isbipolar' id='noBi' value='False' onClick="javascript: mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');" checked>
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sideBiLab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sideBi' id='sideBi'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memBiLab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memBi' id='memBi'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-
-
-
-                      <table>
-                        <tr>
-                          <td>
-                            <label>5. Attempted Suicide:</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='issuicideAttempt' id='yesATT' value='True' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');">
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>Yes</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='issuicideAttempt' id='noATT' value='False' onClick="javascript: mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');" checked>
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sideATTLab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sideATT' id='sideATT'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memATTLab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memATT' id='memATT'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-
-
-                      <table>
-                        <tr>
-                          <td>
-                            <label>6. Physical Abuse:</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isphysicalAbuse' id='yesPA' value='True' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');">
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>Yes</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='isphysicalAbuse' id='noPA' value='False' onClick="javascript: mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');" checked>
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sidePALab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sidePA' id='sidePA'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memPALab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memPA' id='memPA'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-
-
-                      <table>
-                        <tr>
-                          <td>
-                            <label>7. Legal Problems:</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='islaw' id='yesLaw' value='True' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');">
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>Yes</label>
-                          </td>
-
-                          <td>
-                            <div id='fix_my_radio'>
-                              <input type='radio' name='islaw' id='noLaw' value='False' onClick="javascript: mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');" checked>
-                            </div>
-                          </td>
-
-                          <td>
-                            <label>No</label>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <ul>
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='sideLawLab'>Side of family:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='sideLaw' id='sideLaw'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Maternal'>Maternal</option>
-                                  <option value='Paternal'>Paternal</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>
-                              <li>
-                                <label id='memLawLab'>Family member:</label>
-                              </li>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_select'>
-                                <select name='memLaw' id='memLaw'>
-                                  <option value='None Selected'>Select</option>
-                                  <option value='Mother'>Mother</option>
-                                  <option value='Father'>Father</option>
-                                  <option value='Sister'>Sister</option>
-                                  <option value='Brother'>Brother</option>
-                                  <option value='Child'>Child</option>
-                                  <option value='Aunt'>Aunt</option>
-                                  <option value='Uncle'>Uncle</option>
-                                  <option value='Grandmother'>Grandmother</option>
-                                  <option value='Grandfather'>Grandfather</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </ul>
-				            </div>
-				        </div><!--  END OF COLUMN 1 -->
-
-				        <div class="col-md-3 col-sm-3"> <!-- COLUMN 2 -->	
-                  <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>8. Learning Disability:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isld' id='yesLD' value='True' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isld' id='noLD' value='False' onClick="javascript: mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideLDLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideLD' id='sideLD'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memLDLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memLD' id='memLD'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
+                          </div>
+                        </div>
                       </div>
 
-
-
-                      <div>
-                    <table>
+                      <div class='family_biz_bottom_container'>
+                        <table>
                           <tr>
-                            <td>
-                              <label>9. Tic Disorder:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='istic' id='yesTic' value='True' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='istic' id='noTic' value='False' onClick="javascript: mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
+                            <td><input type='checkbox' id='clearAll' onClick="javascript: rock_checkboxes1('clear');"></td>
+                            <td><div class='clr_sel_check_labels'>Clear All</div></td>
+                            <td><div style='width:30px;'></div></td>
+                            <td><input type='checkbox' id='checkAll' onClick="javascript: rock_checkboxes1('check');"></td>
+                            <td><div class='clr_sel_check_labels'>Select All</div></td>
                           </tr>
                         </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideTicLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideTic' id='sideTic'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memTicLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memTic' id='memTic'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
                       </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
+                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td>
+                  <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
 
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>10. Thyroid Disorder:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isthyroid' id='yesThy' value='True' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isthyroid' id='noThy' value='False' onClick="javascript: mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideThyLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideThy' id='sideThy'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memThyLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memThy' id='memThy'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>11. Heart Disease:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isheart' id='yesHeart' value='True' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isheart' id='noHeart' value='False' onClick="javascript: mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideHeartLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideHeart' id='sideHeart'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memHeartLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memHeart' id='memHeart'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>12. Overweight:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isoverweight' id='yesOW' value='True' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isoverweight' id='noOW' value='False' onClick="javascript: mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideOWLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideOW' id='sideOW'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memOWLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memOW' id='memOW'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>13. Mood Swings:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ismood' id='yesMood' value='True' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ismood' id='noMood' value='False' onClick="javascript: mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideMoodLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideMood' id='sideMood'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memMoodLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memMood' id='memMood'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>14. Alcohol Problems:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isalcohol' id='yesAlc' value='True' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isalcohol' id='noAlc' value='False' onClick="javascript: mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideAlcLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideAlc' id='sideAlc'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memAlcLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memAlc' id='memAlc'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-				        </div><!-- END OF COLUMN 2  --> 
-
-                <div class="col-md-3 col-sm-3"><!-- COLUMN 3 -->   
-                  <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>15. Drug Problems:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdrugs' id='yesDrug' value='True' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdrugs' id='noDrug' value='False' onClick="javascript: mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideDrugLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideDrug' id='sideDrug'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memDrugLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memDrug' id='memDrug'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>16. Schizophrenia:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isschizo' id='yesSch' value='True' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isschizo' id='noSch' value='False' onClick="javascript: mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideSchLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideSch' id='sideSch'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memSchLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memSch' id='memSch'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>17. Seizures:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isseizures' id='YesSe' value='True' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isseizures' id='noSe' value='False' onClick="javascript: mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideSeLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideSe' id='sideSe'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memSeLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memSe' id='memSe'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>18. Completed Suicide:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='iscompletedSuicide' id='yesCS' value='True' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='iscompletedSuicide' id='noCS' value='False' onClick="javascript: mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideCSLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideCS' id='sideCS'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memCSLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memCS' id='memCS'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>19. Sexual Abuse:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='issexAbuse' id='yesSex' value='True' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='issexAbuse' id='noSex' value='False' onClick="javascript: mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideSexLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideSex' id='sideSex'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memSexLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memSex' id='memSex'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>20. Panick Attacks:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ispanic' id='yesPanick' value='True' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ispanic' id='noPanick' value='False' onClick="javascript: mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sidePanickLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sidePanick' id='sidePanick'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memPanickLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memPanick' id='memPanick'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>21. Anxiety:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isanxiety' id='yesAnx' value='True' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isanxiety' id='noAnx' value='False' onClick="javascript: mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideAnxLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideAnx' id='sideAnx'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memAnxLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memAnx' id='memAnx'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>                 
-                </div><!-- END OF COLUMN 3  -->
-
-                <div class="col-md-3 col-sm-3"><!-- COLUMN 4 -->
-                  <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>22. OCD:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isOCD' id='yesOCD' value='True' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isOCD' id='noOCD' value='False' onClick="javascript: mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideOCDLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideOCD' id='sideOCD'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memOCDLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memOCD' id='memOCD'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>23. Diabetes:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdiabetes' id='yesSugar' value='True' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isdiabetes' id='noSudar' value='False' onClick="javascript: mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideSugarLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideSugar' id='sideSugar'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memSugarLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memSugar' id='memSugar'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>24. Cancer:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='iscancer' id='yesCancer' value='True' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='iscancer' id='noCancer' value='False' onClick="javascript: mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideCancerLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideCancer' id='sideCancer'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memCancerLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memCancer' id='memCancer'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div> 
-
-
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>25. High Blood Pressure:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ishighBloodPressure' id='yesBlood' value='True' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='ishighBloodPressure' id='noBlood' value='False' onClick="javascript: mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideBloodLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideBlood' id='sideBlood'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memBloodLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memBlood' id='memBlood'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>  
-
-
-
-                      <div>
-                    <table>
-                          <tr>
-                            <td>
-                              <label>26. Anger Problems:</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isanger' id='yesAngry' value='True' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');">
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>Yes</label>
-                            </td>
-
-                            <td>
-                              <div id='fix_my_radio'>
-                                <input type='radio' name='isanger' id='noAngry' value='False' onClick="javascript: mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');" checked>
-                              </div>
-                            </td>
-
-                            <td>
-                              <label>No</label>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <ul>
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='sideAngryLab'>Side of family:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='sideAngry' id='sideAngry'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Maternal'>Maternal</option>
-                                    <option value='Paternal'>Paternal</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table>
-                            <tr>
-                              <td>
-                                <li>
-                                  <label id='memAngryLab'>Family member:</label>
-                                </li>
-                              </td>
-
-                              <td>
-                                <div id='fix_my_select'>
-                                  <select name='memAngry' id='memAngry'>
-                                    <option value='None Selected'>Select</option>
-                                    <option value='Mother'>Mother</option>
-                                    <option value='Father'>Father</option>
-                                    <option value='Sister'>Sister</option>
-                                    <option value='Brother'>Brother</option>
-                                    <option value='Child'>Child</option>
-                                    <option value='Aunt'>Aunt</option>
-                                    <option value='Uncle'>Uncle</option>
-                                    <option value='Grandmother'>Grandmother</option>
-                                    <option value='Grandfather'>Grandfather</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </ul>
-                      </div>                       
-                </div><!-- END OF COLUMN 4  -->
-				    </form>
-
-				        </div>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
-                        <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
-
-			                <td><div style='margin-right:5px;'></div></td>
-
-			                <td>
-			                	<div>
-			                		<a href="javascript: post_mh_data({{current_section}});">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

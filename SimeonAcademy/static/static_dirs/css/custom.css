@@ -2913,8 +2913,6 @@ button:hover {
 	font-size: 13px;
 	font-style: italic;
 	color:#5c5f5e;
-	/*font-weight: bold;*/
-	/*color:#576763;*/
 }
 
 .iml-mh-number-label2 {
@@ -2925,10 +2923,38 @@ button:hover {
 	color:#5c5f5e;
 }
 
+.iml-mh-number-label234 {
+	font-size: 13px;
+	font-style: italic;
+	margin-top: 5px;
+	margin-right: 5px;
+	color:#586764;
+}
+
+.sm_txt_area_iml2 {
+	width:400px;
+	height:57px;
+	border:1px solid gray;
+	margin-bottom: 5px;
+}
+
+.sm_txt_area_iml2 textarea {
+	width: 100%;
+	height:100%;
+	font-size: 12px;
+}
+
 .iml-mh-select-label {
 	margin-left: 15px;
 	font-size: 13px;
 	margin-right: 3px;
+}
+
+#top_of_info_iml {
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-left: 20px;
 }
 
 .iml-mh-select {
@@ -4935,6 +4961,10 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+.iml-data-entry-wrapper-mh textarea {
+	font-size: 12px;
+}
+
 .iml-data-entry-wrapper-mh td {
 	padding-bottom: 2px;
 }
@@ -5242,6 +5272,13 @@ button:hover {
 .iml-label {
 	margin-right: 6px;
 	font-size: 13px;
+}
+
+.iml-label-drop {
+	margin-right: 6px;
+	font-size: 13px;
+	margin-top: 3px;
+	font-style: italic;
 }
 
 .iml-num-div {
@@ -6055,6 +6092,71 @@ button:hover {
 	padding-bottom: 15px;
 	border: 1px solid black;
 	border-radius: 8px;
+}
+
+.center_this_inside {
+	width:89%;
+	height: 59vh;
+}
+
+.family_biz_container {
+	width:60%;
+	margin: auto;
+	/*border: 1px solid black;*/
+}
+
+.family_mh_instructions_p1 {
+	width:57%;
+	margin: auto;
+	text-align: justify;
+	font-style: italic;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 16px;
+	margin-top: 16px;
+	color:#6c7f7b;
+}
+
+.family_biz_container tr {
+	/*border:1px solid black;*/
+}
+
+.font_class_13 {
+	font-size: 13px;
+	margin-top: 3px;
+	margin-left: 5px;
+}
+
+.family_biz_bottom_container {
+	width:18%;
+	height: 30px;
+	position: absolute;
+    right: 31%;
+    margin-top: 17px;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding-left: 20px;
+    padding-top: 2px;
+    background-color: #d5d4d4;
+    box-shadow: 3px 3px 9px #888888;
+}
+
+.clr_sel_check_labels {
+	font-weight: bold;
+	font-style: italic;
+	margin-left: 4px;
+	margin-top: 3px;
+	font-size: 12px;
+}
+
+.mh-these-positve-ans {
+	width:370px;
+	height:200px;
+}
+
+.mh-these-positve-ans textarea {
+	width: 100%;
+	height: 100%;
 }
 
 
