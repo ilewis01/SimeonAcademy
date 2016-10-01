@@ -10430,7 +10430,7 @@ function mhStressRadio(triggerName, elementName, borderName) {
 	if (trigger.checked === true) {
 		element.disabled = false;
 		opacityHigh(element);
-		border.style.borderColor = 'green';
+		border.style.borderColor = '#5cd65c';
 	}
 	else {
 		opacityLow(element);
@@ -10469,80 +10469,65 @@ function mhFamilyRadio(trigger_id, label1_id, label2_id, sel1_id, sel2_id) {
 }
 
 function mhProbation() {
-	//TRIGGERS
-	var yesPresent = document.getElementById('yesPresent');
-	var yesPast = document.getElementById('yesPast');
+	twoElementRadioSetup(grab('haveBeen'), grab('p2'), grab('yesCurrentProb'));
+	twoElementRadioSetup(grab('haveBeen'), grab('p3'), grab('noCurrentProb'));
+	twoElementRadioSetup(grab('haveBeen'), grab('p4'), grab('probationOfficer'));
+	twoElementRadioSetup(grab('haveBeen'), grab('p5'), grab('probationOffense'));
 
-	//LABELS
-	var probLab = document.getElementById('probLab');
-	var probOffLab = document.getElementById('probOffLab');
-
-	//ELEMENTS
-	var probationOfficer = document.getElementById('probationOfficer');
-	var probationOffense = document.getElementById('probationOffense');
-
-	if (yesPresent.checked === true || yesPast.checked === true) {
-		probationOfficer.disabled = false;
-		probationOffense.disabled = false;
-		opacityHigh(probLab);
-		opacityHigh(probOffLab);
-		opacityHigh(probationOfficer);
-		opacityHigh(probationOffense);
+	if (grab('haveBeen').checked === true) {
+		opacityHigh(grab('p1'));
 	}
+	else {
+		opacityLow(grab('p1'));
+	}
+}
 
-	else if (yesPresent.checked === false || yesPast.checked === false) {
-		opacityLow(probLab);
-		opacityLow(probOffLab);
-		opacityLow(probationOfficer);
-		opacityLow(probationOffense);
-		probationOfficer.value = '';
-		probationOffense.value = '';
-		probationOfficer.disabled = true;
-		probationOffense.disabled = true;
+function mhSuspension1() {
+	twoElementRadioSetup(grab('yesSuspended'), grab('s1'), grab('num_suspended'));
+	twoElementRadioSetup(grab('yesSuspended'), grab('s3'), grab('yesCurrentSus'));
+	twoElementRadioSetup(grab('yesSuspended'), grab('s4'), grab('noCurrentSus'));
+
+	if (grab('yesSuspended').checked === true) {
+		opacityHigh(grab('s2'));
+	}
+	else {
+		opacityLow(grab('s2'));
 	}
 }
 
 function mhLawsuits() {
-	//TRIGGER
-	var yesSuit = document.getElementById('yesSuit');
+	twoElementRadioSetup(grab('yesSuit'), grab('ls1'), grab('yesStress'));
+	twoElementRadioSetup(grab('yesSuit'), grab('ls2'), grab('noStress'));
 
-	//LABELS
-	var mhFamStressLab = document.getElementById('mhFamStressLab');
-	var yesStressLab = document.getElementById('yesStressLab');
-	var noStressLab = document.getElementById('noStressLab');
-
-	//ELEMENTS
-	var yesStress = document.getElementById('yesStress');
-	var noStress = document.getElementById('noStress');
-
-	if (yesSuit.checked === true) {
-		yesStress.disabled = false;
-		noStress.disabled = false;
-		opacityHigh(mhFamStressLab);
-		opacityHigh(yesStressLab);
-		opacityHigh(noStressLab);
-		opacityHigh(yesStress);
-		opacityHigh(noStress);
+	if (grab('yesSuit').checked === true) {
+		opacityHigh(grab('ls3'));
 	}
-
 	else {
-		opacityLow(mhFamStressLab);
-		opacityLow(yesStressLab);
-		opacityLow(noStressLab);
-		opacityLow(yesStress);
-		opacityLow(noStress);
-		noStress.checked = true;
-		yesStress.disabled = true;
-		noStress.disabled = true;
+		opacityLow(grab('ls3'));
 	}
 }
 
 function mhBank() {
-	var yesBank = document.getElementById('yesBank');
-	var bankLab = document.getElementById('bankLab');
-	var dateBenkrupcy = document.getElementById('dateBenkrupcy');
+	twoElementRadioSetup(grab('yesBank'), grab('blab1'), grab('dateBenkrupcy'));
+}
 
-	twoElementRadioSetup(yesBank, bankLab, dateBenkrupcy);
+function p_answer1_mh() {
+	var t1 = grab('yesSuit').checked;
+	var t2 = grab('yesDivPro').checked;
+	var t3 = grab('yesChildDis').checked;
+	var t4 = grab('yesBank').checked;
+
+	if (t1===true || t2===true || t3===true || t4===true) {
+		grab('explainPositiveAnswers').disabled = false;
+		opacityHigh(grab('epa1'));
+		opacityHigh(grab('explainPositiveAnswers'));
+	}
+	else if (t1===false && t2===false && t3===false && t4===false) {
+		opacityLow(grab('epa1'));
+		opacityLow(grab('explainPositiveAnswers'));
+		grab('explainPositiveAnswers').value = '';
+		grab('explainPositiveAnswers').disabled = true;
+	}
 }
 
 //=====================================================================================================================//

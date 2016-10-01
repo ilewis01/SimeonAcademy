@@ -158,28 +158,28 @@
                       <table>
                         <tr>
                           <td><div class='iml-label'><li>Have you ever been on probation?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPast' id='haveBeen' value='True' onClick='javascript: mhProbation1();'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPast' id='haveNotBeen' value='False' onClick='javascript: mhProbation1();'><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPast' id='haveBeen' value='True' onClick='javascript: mhProbation();'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPast' id='haveNotBeen' value='False' onClick='javascript: mhProbation();'><span>No</span></div></td>
                         </tr>
                       </table>
 
                       <ul>
                         <table>
                           <tr>
-                            <td><div class='iml-label'><li>Are you currently on probation?</li></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPresent' id='yesCurrentProb' value='True' onClick='javascript: mhProbation2();'><span>Yes</span></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPresent' id='noCurrentProb' value='False' onClick='javascript: mhProbation2();'><span>No</span></div></td>
+                            <td><div class='iml-label' id='p1'><li>Are you currently on probation?</li></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPresent' id='yesCurrentProb' value='True' onClick='javascript: mhProbation2();'><span id='p2'>Yes</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='probationPresent' id='noCurrentProb' value='False' onClick='javascript: mhProbation2();'><span id='p3'>No</span></div></td>
                           </tr>
                         </table>
 
                         <table>
                           <tr>
-                            <td><div id='e7'><div class='iml-label'><li>Probation officer:</li></div></div></td>
+                            <td><div id='e7'><div class='iml-label' id='p4'><li>Probation officer:</li></div></div></td>
                             <td><input name='probationOfficer' id='probationOfficer' value='{{fields.probationOfficer}}'></td>
                           </tr>
 
                           <tr>
-                            <td><div id='e7'><div class='iml-label'><li>What offenses?</li></div></div></td>
+                            <td><div id='e7'><div class='iml-label' id='p5'><li>What offenses?</li></div></div></td>
                             <td><input name='probationOffense' id='probationOffense' value='{{fields.probationOffense}}'></td>
                           </tr>
                         </table>
@@ -196,16 +196,16 @@
                       <ul>
                         <table>
                           <tr>
-                            <td><div id='e7'><div class='iml-label'><li>Number of suspensions:</li></div></div></td>
+                            <td><div id='e7'><div class='iml-label' id='s1'><li>Number of suspensions:</li></div></div></td>
                             <td><input style='width:40px; text-align:center;' type='number' name='num_suspended' id='num_suspended' value='{{fields.num_suspended}}' oninput="javascript: noErrorText('e7', 'num_suspended');"></td>
                           </tr>
                         </table>
 
                         <table>
                           <tr>
-                            <td><div id='e8'><div class='iml-label'><li>Is your licence currently suspended?</li></div></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='suspendedDrivePresent' id='yesCurrentSus' value='True' onClick='javascript: mhProbation2();'><span>Yes</span></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='suspendedDrivePresent' id='noCurrentSus' value='False' onClick='javascript: mhProbation2();'><span>No</span></div></td>
+                            <td><div id='e8'><div class='iml-label' id='s2'><li>Is your licence currently suspended?</li></div></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='suspendedDrivePresent' id='yesCurrentSus' value='True' ><span id='s3'>Yes</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='suspendedDrivePresent' id='noCurrentSus' value='False'><span id='s4'>No</span></div></td>
                           </tr>
                         </table>
                       </ul>
@@ -219,17 +219,17 @@
                       <table>
                         <tr>
                           <td><div class='iml-label'><li>Are you a party to any lawsuits?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasLawsuit' id='yesSuit' value='True' onClick='javascript: mhLawsuits();'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasLawsuit' id='noSuit' value='False' onClick='javascript: mhLawsuits();'><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasLawsuit' id='yesSuit' value='True' onClick='javascript: mhLawsuits(); p_answer1_mh();'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasLawsuit' id='noSuit' value='False' onClick='javascript: mhLawsuits(); p_answer1_mh();'><span>No</span></div></td>
                         </tr>
                       </table>
 
                       <ul>
                         <table>
                           <tr>
-                            <td><div id='e8'><div class='iml-label'><li>Is this causing stress for you?</li></div></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='lawsuitStress' id='yesStress' value='True'><span>Yes</span></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='lawsuitStress' id='noStress' value='False'><span>No</span></div></td>
+                            <td><div id='e8'><div class='iml-label'><li id='ls3'>Is this causing stress for you?</li></div></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='lawsuitStress' id='yesStress' value='True'><span id='ls1'>Yes</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='lawsuitStress' id='noStress' value='False'><span id='ls2'>No</span></div></td>
                           </tr>
                         </table>
                       </ul>
@@ -244,14 +244,14 @@
                         <table>
                           <tr>
                             <td><div class='iml-label'><li>Divorce proceedings:</li></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='inDivorce' id='yesDivPro' value='True'><span>Yes</span></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='inDivorce' id='noDivPro' value='False'><span>No</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='inDivorce' id='yesDivPro' value='True' onClick='Javascript:  p_answer1_mh();'><span>Yes</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='inDivorce' id='noDivPro' value='False' onClick='javascript:  p_answer1_mh();'><span>No</span></div></td>
                           </tr>
 
                           <tr>
                             <td><div class='iml-label'><li>Child custody dispute:</li></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='childCustody' id='yesChildDis' value='True'><span>Yes</span></div></td>
-                            <td><div class='iml-mh-radio-label2'><input type='radio' name='childCustody' id='noChildDis' value='False'><span>No</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='childCustody' id='yesChildDis' value='True' onClick='javascript:  p_answer1_mh();'><span>Yes</span></div></td>
+                            <td><div class='iml-mh-radio-label2'><input type='radio' name='childCustody' id='noChildDis' value='False' onClick='javascript:  p_answer1_mh();'><span>No</span></div></td>
                           </tr>
                         </table>
                       </ul>
@@ -263,16 +263,16 @@
                       </table>
                       <table>
                         <tr>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasBankrupcy' id='yesBank' value='True' onClick='javascript: mhLawsuits();'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasBankrupcy' id='noBank' value='False' onClick='javascript: mhLawsuits();'><span>No</span></div></td>
-                          <td><div id='e9'><div class='iml-label-drop'>When?</div></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasBankrupcy' id='yesBank' value='True' onClick='javascript: mhBank(); p_answer1_mh();'><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='hasBankrupcy' id='noBank' value='False' onClick='javascript: mhBank(); p_answer1_mh();'><span>No</span></div></td>
+                          <td><div id='e9'><div class='iml-label-drop' id='blab1'>When?</div></div></td>
                           <td><input type='text' name='dateBenkrupcy' id='dateBenkrupcy' value='{{fields.dateBenkrupcy}}' oninput="javascript: noErrorText('e9', 'dateBenkrupcy');"></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e10'><div class='iml-label'><li>Please explain any positive answers below:</li></div></div></td>
+                          <td><div id='e10'><div class='iml-label'><li id='epa1'>For questions 9-11, please explain any positive answers below:</li></div></div></td>
                         </tr>
 
                         <tr>
