@@ -170,7 +170,7 @@
                           </td>
 
                           <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -239,7 +239,7 @@
                           </td>
 
                           <td><div id='e2'><div id='numMore_labelg7' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}'></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -308,7 +308,7 @@
                           </td>
 
                           <td><div id='e3'><div id='numMore_labelg10' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}'></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -322,91 +322,101 @@
                         <tr>
                           <td><div class='iml-label'><li>Years Completed: </li></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college1' value='1'><span>1</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college1' value='1' onClick="javascript: mhCollegeRadio();"><span>1</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college2' value='2'><span>2</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college2' value='2' onClick="javascript: mhCollegeRadio();"><span>2</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college3' value='3'><span>3</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college3' value='3' onClick="javascript: mhCollegeRadio();"><span>3</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college4' value='4'><span>4</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college4' value='4' onClick="javascript: mhCollegeRadio();"><span>4</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='collegeNone' value='0'><span>None</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='collegeNone' value='0' onClick="javascript: mhCollegeRadio();"><span>None</span></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e4'><div class='iml-label'><li>Graduated Degree:</li></div></div></td>
+                          <td><div id='e4'><div class='iml-label' id='colGradLab1'><li>Graduated Degree:</li></div></div></td>
                           <td><div><input type='text' name='collegeDegree' id='collegeDegree' value='{{fields.collegeDegree}}' oninput="javascript: noErrorText('e4', 'collegeDegree');"></div></td>
                         </tr>
 
                         <tr>
-                          <td><div id='e5'><div class='iml-label'><li>Major:</li></div></div></td>
+                          <td><div id='e5'><div class='iml-label' id='colMaj1'><li>Major:</li></div></div></td>
                           <td><div><input type='text' name='collegeMajor' id='collegeMajor' value='{{fields.collegeMajor}}' oninput="javascript: noErrorText('e5', 'collegeMajor');"></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div class='iml-label'><li>Do You Have An Advanced Degree?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='advanceDegree' id='yesAdvanced' value='True'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='advanceDegree' id='noAdvanced' value='False'><span>Yes</span></div></td>
+                          <td><div class='iml-label' id='advDeg1'><li>Do You Have An Advanced Degree?</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='advanceDegree' id='yesAdvanced' value='True'><span id='labM1'>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='advanceDegree' id='noAdvanced' value='False'><span id='labM2'>No</span></div></td>
                         </tr>
                       </table>
                     </ul>
 
-                    <h4>Trade/Technical School</h4>
+                    <h4>Technical School</h4>
                     <ul>
                       <table>
                         <tr>
                           <td><div class='iml-label'><li>Did You Attend Trade/Technical School?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='tradeSch' id='yesTrade' value='True'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='tradeSch' id='noTrade' value='False'><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='tradeSch' id='yesTrade' value='True' onClick="javascript: mhTrade();"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='tradeSch' id='noTrade' value='False' onClick="javascript: mhTrade();"><span>No</span></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e6'><div class='iml-label'><li>Area(s) of Training:</li></div></div></td>
+                          <td><div id='e20'><div class='iml-label' id='ts2'><li>School:</li></div></div></td>
+                          <td><div><input type='text' name='tradeSchool' id='tradeSchool' value='{{fields.tradeSchool}}' oninput="javascript: noErrorText('e20', 'tradeSchool');"></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div id='e6'><div class='iml-label' id='ts1'><li>Area(s) of Training:</li></div></div></td>
                           <td><div><input type='text' name='tradeAreaStudy' id='tradeAreaStudy' value='{{fields.tradeAreaStudy}}' oninput="javascript: noErrorText('e6', 'tradeAreaStudy');"></div></td>
                         </tr>
                       </table>
+                    </ul>
 
+                    <h4>Millitary Service</h4>
+                    <ul>
                       <table>
                         <tr>
                           <td><div class='iml-label'><li>Have You Ever Been In The Millitary?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='military' id='yesMillitary' value='True'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='military' id='noMillitary' value='False'><span>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='military' id='yesMillitary' value='True' onClick="javascript: mhMilitary();"><span>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='military' id='noMillitary' value='False' onClick="javascript: mhMilitary();"><span>No</span></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e7'><div class='iml-label'><li>Millitary Service Branch:</li></div></div></td>
+                          <td><div id='e7'><div class='iml-label' id='mt1'><li>Millitary Service Branch:</li></div></div></td>
                           <td><div><input type='text' name='militaryBranch' id='militaryBranch' value='{{fields.militaryBranch}}' oninput="javascript: noErrorText('e7', 'militaryBranch');"></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e8'><div class='iml-label'><li>Time In Millitary:</li></div></div></td>
+                          <td><div id='e8'><div class='iml-label' id='mt2'><li>Time In Millitary:</li></div></div></td>
                           <td><div><input style='width:40px' name='militaryYears' id='militaryYears' value='{{fields.militaryYears}}' oninput="javascript: noErrorText('e8', 'militaryYears');"></div></td>
-                          <td><div class='iml-mh-number-label2'><span style='margin-left:5px;'>Years</span></div></td>
+                          <td><div class='iml-mh-number-label2'><span style='margin-left:5px;' id='mt7'>Years</span></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div id='e9'><div class='iml-label'><li>Highest Rank:</li></div></div></td>
+                          <td><div id='e9'><div class='iml-label' id='mt3'><li>Highest Rank:</li></div></div></td>
                           <td><div><input type='text' name='militaryRank' id='militaryRank' value='{{fields.militaryRank}}' oninput="javascript: noErrorText('e9', 'militaryRank');"></div></td>
                         </tr>
                       </table>
 
                       <table>
                         <tr>
-                          <td><div class='iml-label'><li>Honorable Discharge?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='yesHonor' value='True'><span>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='noHonor' value='False'><span>No</span></div></td>
+                          <td><div class='iml-label' id='mt4'><li>Honorable Discharge?</li></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='yesHonor' value='True'><span id='mt5'>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='noHonor' value='False'><span id='mt6'>No</span></div></td>
                         </tr>
                       </table>
                     </ul>

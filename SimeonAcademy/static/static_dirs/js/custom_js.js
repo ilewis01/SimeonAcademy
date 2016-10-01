@@ -1461,6 +1461,29 @@ function superDynamoChecker() {
 function fetchMhEDUFieldNames() {
 	var result = [];
 
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={};
+
+	d1['field'] = 'numMore';
+	d1['type'] = 'number';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'friendMore';
+	result.push(d1);
+
+	d2['field'] = 'numMoreg7';
+	d2['type'] = 'number';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'friendMoreg7';
+	result.push(d2);
+
+	d3['field'] = 'numMoreg10';
+	d3['type'] = 'number';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'friendMoreg10';
+	result.push(d3);
+
 	return result;
 }
 
@@ -10173,63 +10196,69 @@ function moreFriends(trigger_id, label_id, field_id) {
 }
 
 function mhCollegeRadio() {
-	//TRIGGER
-	var yesGrad = document.getElementById('yesGrad');
+	var yr1 = grab('college1');
+	var yr2 = grab('college2');
+	var yr3 = grab('college3');
+	var yr4 = grab('college4');
 
-	//LABELS
-	var collegeMajor_label = document.getElementById('collegeMajor_label');
-	var advanceDegree_label = document.getElementById('advanceDegree_label');
-	var hasAdvanced_label = document.getElementById('hasAdvanced_label');
-	var noAdvanced_label = document.getElementById('noAdvanced_label');
+	if (yr1.checked===true || yr2.checked===true || yr3.checked===true || yr4.checked===true) {
+		grab('collegeDegree').disabled = false;
+		grab('collegeMajor').disabled = false;
+		grab('yesAdvanced').disabled = false;
+		grab('noAdvanced').disabled = false;
 
-	// //ELEMENTS
-	var collegeMajor = document.getElementById('collegeMajor');
-	var hasAdvanced = document.getElementById('hasAdvanced');
-	var noAdvanced = document.getElementById('noAdvanced');
-	
-	twoElementRadioSetup(yesGrad, collegeMajor_label, collegeMajor);
-	threeElementRadioSetup(yesGrad, advanceDegree_label, hasAdvanced_label, noAdvanced_label, hasAdvanced, noAdvanced);
+		opacityHigh(grab('colGradLab1'));
+		opacityHigh(grab('colMaj1'));
+		opacityHigh(grab('advDeg1'));
+		opacityHigh(grab('collegeDegree'));
+		opacityHigh(grab('collegeMajor'));
+		opacityHigh(grab('yesAdvanced'));
+		opacityHigh(grab('noAdvanced'));
+		opacityHigh(grab('labM1'));
+		opacityHigh(grab('labM2'));
+	}
+	else {
+		grab('collegeDegree').value = '';
+		grab('collegeMajor').value = '';
+		grab('noAdvanced').checked = true;
+
+		grab('collegeDegree').disabled = true;
+		grab('collegeMajor').disabled = true;
+		grab('yesAdvanced').disabled = true;
+		grab('noAdvanced').disabled = true;
+
+		opacityLow(grab('colGradLab1'));
+		opacityLow(grab('colMaj1'));
+		opacityLow(grab('advDeg1'));
+		opacityLow(grab('collegeDegree'));
+		opacityLow(grab('collegeMajor'));
+		opacityLow(grab('yesAdvanced'));
+		opacityLow(grab('noAdvanced'));
+		opacityLow(grab('labM1'));
+		opacityLow(grab('labM2'));
+	}
 }
 
 function mhTrade() {
-	//TRIGGER
-	var yesTrade = document.getElementById('yesTrade');
-
-	//LABELS
-	var tradeSchool_label = document.getElementById('tradeSchool_label');
-	var tradeAreaStudy_label = document.getElementById('tradeAreaStudy_label');
-
-	//ELEMENTS
-	var tradeSchool = document.getElementById('tradeSchool');
-	var tradeAreaStudy = document.getElementById('tradeAreaStudy');
-
-	twoElementRadioSetup(yesTrade, tradeSchool_label, tradeSchool);
-	twoElementRadioSetup(yesTrade, tradeAreaStudy_label, tradeAreaStudy);
+	twoElementRadioSetup(grab('yesTrade'), grab('ts1'), grab('tradeAreaStudy'));
+	twoElementRadioSetup(grab('yesTrade'), grab('ts2'), grab('tradeSchool'));
 }
 
 function mhMilitary() {
-	//TRIGGER
-	var isMilitary = document.getElementById('isMilitary');
+	twoElementRadioSetup(grab('yesMillitary'), grab('mt1'), grab('militaryBranch'));
+	twoElementRadioSetup(grab('yesMillitary'), grab('mt2'), grab('militaryYears'));
+	twoElementRadioSetup(grab('yesMillitary'), grab('mt3'), grab('militaryRank'));
+	twoElementRadioSetup(grab('yesMillitary'), grab('mt5'), grab('yesHonor'));
+	twoElementRadioSetup(grab('yesMillitary'), grab('mt6'), grab('noHonor'));
 
-	//LABELS
-	var militaryBranch_label = document.getElementById('militaryBranch_label');
-	var militaryYears_label = document.getElementById('militaryYears_label');
-	var militaryRank_label = document.getElementById('militaryRank_label');
-	var honorableDischarge_label = document.getElementById('honorableDischarge_label');
-	var isHonor_label = document.getElementById('isHonor_label');
-	var notHonor_label = document.getElementById('notHonor_label');
-
-	//FIELDS
-	var militaryBranch = document.getElementById('militaryBranch');
-	var militaryYears = document.getElementById('militaryYears');
-	var militaryRank = document.getElementById('militaryRank');
-	var isHonor = document.getElementById('isHonor');
-	var notHonor = document.getElementById('notHonor');
-
-	twoElementRadioSetup(isMilitary, militaryBranch_label, militaryBranch);
-	twoElementRadioSetup(isMilitary, militaryRank_label, militaryRank);
-	twoElementRadioSetupNumber(isMilitary, militaryYears_label, militaryYears);
-	threeElementRadioSetup(isMilitary, honorableDischarge_label, isHonor_label, notHonor_label, isHonor, notHonor);
+	if (grab('yesMillitary').checked === true) {
+		opacityHigh(grab('mt4'));
+		opacityHigh(grab('mt7'));
+	}
+	else {
+		opacityLow(grab('mt4'));
+		opacityLow(grab('mt7'));
+	}
 }
 
 function grabGradeRadio(grade, r1, r2, r3, r4, r5, r6) {
