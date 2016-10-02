@@ -431,6 +431,16 @@ function noErrorTextMH1(divName, fieldName) {
 	}
 }
 
+function noError_2gr(divName, sel1Name, sel2Name) {
+	var div = grab(divName);
+	var sel1 = Number(grab(sel1Name).selectedIndex);
+	var sel2 = Number(grab(sel2Name).selectedIndex);
+
+	if (sel1 > 0 && sel2 > 0) {
+		div.className = '';
+	}
+}
+
 
 function fetchAM1FieldNames() {
 	var result = [];
@@ -9402,6 +9412,35 @@ function keep_mh_changes() {
 	grab('s_form').submit();
 }
 
+function do_all_rocks() {
+	kill_selects_mh('isdepressed', 'depressSide', 'depressMember', 'e1');
+	kill_selects_mh('isadd', 'sideADD', 'memADD', 'e2');
+	kill_selects_mh('isbedWetting', 'sideBed', 'memBed', 'e3');
+	kill_selects_mh('isbipolar', 'sideBi', 'memBi', 'e4');
+	kill_selects_mh('issuicideAttempt', 'sideATT', 'memATT', 'e5');
+	kill_selects_mh('isphysicalAbuse', 'sidePA', 'memPA', 'e6');
+	kill_selects_mh('islaw', 'sideLaw', 'memLaw', 'e7');
+	kill_selects_mh('isld', 'sideLD', 'memLD', 'e8');
+	kill_selects_mh('istic', 'sideTic', 'memTic', 'e9');
+	kill_selects_mh('isthyroid', 'sideThy', 'memThy', 'e10');
+	kill_selects_mh('isheart', 'sideHeart', 'memHeart', 'e11');
+	kill_selects_mh('isoverweight', 'sideOW', 'memOW', 'e12');
+	kill_selects_mh('ismood', 'sideMood', 'memMood', 'e13');
+	kill_selects_mh('isalcohol', 'sideAlc', 'memAlc', 'e14');
+	kill_selects_mh('isdrugs', 'sideDrug', 'memDrug', 'e15');
+	kill_selects_mh('isschizo', 'sideSch', 'memSch', 'e16');
+	kill_selects_mh('isseizures', 'sideSe', 'memSe', 'e17');
+	kill_selects_mh('iscompletedSuicide', 'sideCS', 'memCS', 'e18');
+	kill_selects_mh('issexAbuse', 'sideSex', 'memSex', 'e19');
+	kill_selects_mh('ispanic', 'sidePanick', 'memPanick', 'e20');
+	kill_selects_mh('isanxiety', 'sideAnx', 'memAnx', 'e21');
+	kill_selects_mh('isOCD', 'sideOCD', 'memOCD', 'e22');
+	kill_selects_mh('isdiabetes', 'sideSugar', 'memSugar', 'e23');
+	kill_selects_mh('iscancer', 'sideCancer', 'memCancer', 'e24');
+	kill_selects_mh('ishighBloodPressure', 'sideBlood', 'memBlood', 'e25');
+	kill_selects_mh('isanger', 'sideAngry', 'memAngry', 'e26');
+}
+
 function rock_checkboxes1(option) {
 	option = String(option);
 
@@ -9464,6 +9503,8 @@ function rock_checkboxes1(option) {
 		grab('isanger').checked = true;
 		grab('clearAll').checked = false;
 	}
+
+	do_all_rocks();
 }
 
 function flick_family_switch() {
@@ -10527,6 +10568,29 @@ function p_answer1_mh() {
 		opacityLow(grab('explainPositiveAnswers'));
 		grab('explainPositiveAnswers').value = '';
 		grab('explainPositiveAnswers').disabled = true;
+	}
+}
+
+function kill_selects_mh(triggerName, sel1Name, sel2Name, errorName) {
+	var trigger = grab(triggerName);
+	var sel1 	= grab(sel1Name);
+	var sel2 	= grab(sel2Name);
+	var erDiv 	= grab(errorName);
+
+	if (trigger.checked === true) {
+		sel1.disabled = false;
+		sel2.disabled = false;
+		opacityHigh(sel1);
+		opacityHigh(sel2);
+	}
+	else {
+		opacityZero(sel1);
+		opacityZero(sel2);
+		sel1.selectedIndex = 0;
+		sel2.selectedIndex = 0;
+		sel1.disabled = true;
+		sel2.disabled = true;
+		erDiv.className = '';
 	}
 }
 

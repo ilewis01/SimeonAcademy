@@ -109,149 +109,873 @@
                     <div class='center_this_inside'>
 
                       <div class='family_mh_instructions_p1'>
-                        Have any of your <u>biological</u> relatives (mother, father, sisters, brothers, children, aunts, uncles, grandparents) suffered from any of the following conditions? Check all that apply.
+                        Have any of your <u>biological</u> relatives (mother, father, sisters, brothers, children, aunts, uncles, grandparents) suffered from any of the following conditions? Please specify which family member and whether it is paternal (father's side) or maternal (mother's side) relative. For example: "Maternal Grandmother" or "Paternal Uncle". Check all that apply.
                       </div>
 
                       <div class='family_biz_container'>
                         <div class='container' style='width:100%'>
                           <div class='row'>
                             <!-- LEFT SIDE -->
-                            <div class='col-md-6' style='width:60%;'>
+                            <div class='col-md-6' style='width:50%;'>
                               <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='isdepressed' id='isdepressed' value='depression' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Depression</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='isdepressed' id='isdepressed' value='depression' onClick="javascript: flick_family_switch(); kill_selects_mh('isdepressed', 'depressSide', 'depressMember', 'e1');"></div></td>
+                                  <td><div id='e1'><div class='font_class_13'>Depression</div></div></td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isadd' id='isadd' value='Hyperactivity' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Hyperactivity (A.D.D)</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='depressSide' id='depressSide' onChange="javascript: noError_2gr('e1', 'depressSide', 'depressMember');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isbedWetting' id='isbedWetting' value='Bed Wetting' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Bed Wetting</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isbipolar' id='isbipolar' value='Bipolar Disorder' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Bipolar Disorder (Manic Depression)</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='issuicideAttempt' id='issuicideAttempt' value='Suicide Attempt' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Attempted Suicide</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isphysicalAbuse' id='isphysicalAbuse' value='Physical Abuse' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Physical Abuse</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='islaw' id='islaw' value='Legal Problems' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Problems With The Law</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isld' id='isld' value='Learning Disability' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Learning Disability</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='istic' id='istic' value='Tic Disorder' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Tic Disorder</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isthyroid' id='isthyroid' value='Thyroid Disorder' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Thyroid Disorder</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isheart' id='isheart' value='Heart Disease' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Heart Disease</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='isoverweight' id='isoverweight' value='Overweight' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Overweight</div></td>
-                                </tr>
-
-                                <tr>
-                                  <td><div><input type='checkbox' name='ismood' id='ismood' value='Mood Swings' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Mood Swings</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='depressMember' id='depressMember' onChange="javascript: noError_2gr('e1', 'depressSide', 'depressMember');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
                               </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isadd' id='isadd' value='Hyperactivity' onClick="javascript: flick_family_switch(); kill_selects_mh('isadd', 'sideADD', 'memADD', 'e2');"></div></td>
+                                  <td><div id='e2'><div class='font_class_13'>Hyperactivity (ADD)</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideADD' id='sideADD' onChange="javascript: noError_2gr('e2', 'sideADD', 'memADD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memADD' id='memADD' onChange="javascript: noError_2gr('e2', 'sideADD', 'memADD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isbedWetting' id='isbedWetting' value='Bed Wetting' onClick="javascript: flick_family_switch(); kill_selects_mh('isbedWetting', 'sideBed', 'memBed', 'e3');"></div></td>
+                                  <td><div id='e3'><div class='font_class_13'>Bed Wetting</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideBed' id='sideBed' onChange="javascript: noError_2gr('e3', 'sideBed', 'memBed');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memBed' id='memBed' onChange="javascript: noError_2gr('e3', 'sideBed', 'memBed');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isbipolar' id='isbipolar' value='Bipolar Disorder' onClick="javascript: flick_family_switch(); kill_selects_mh('isbipolar', 'sideBi', 'memBi', 'e4');"></div></td>
+                                  <td><div id='e4'><div class='font_class_13'>Bipolar Disorder</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideBi' id='sideBi' onChange="javascript: noError_2gr('e4', 'sideBi', 'memBi');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memBi' id='memBi' onChange="javascript: noError_2gr('e4, 'sideBi', 'memBi');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='issuicideAttempt' id='issuicideAttempt' value='Attempted Suicide' onClick="javascript: flick_family_switch(); kill_selects_mh('issuicideAttempt', 'sideATT', 'memATT', 'e5');"></div></td>
+                                  <td><div id='e5'><div class='font_class_13'>Attempted Suicide</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideATT' id='sideATT' onChange="javascript: noError_2gr('e5', 'sideATT', 'memATT');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memATT' id='memATT' onChange="javascript: noError_2gr('e5', 'sideATT', 'memATT');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isphysicalAbuse' id='isphysicalAbuse' value='Physical Abuse' onClick="javascript: flick_family_switch(); kill_selects_mh('isphysicalAbuse', 'sidePA', 'memPA', 'e6');"></div></td>
+                                  <td><div id='e6'><div class='font_class_13'>Physical Abuse</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sidePA' id='sidePA' onChange="javascript: noError_2gr('e6', 'sidePA', 'memPA');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memPA' id='memPA' onChange="javascript: noError_2gr('e6', 'sidePA', 'memPA');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='islaw' id='islaw' value='Legal Problems' onClick="javascript: flick_family_switch(); kill_selects_mh('islaw', 'sideLaw', 'memLaw', 'e7');"></div></td>
+                                  <td><div id='e7'><div class='font_class_13'>Legal Problems</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideLaw' id='sideLaw' onChange="javascript: noError_2gr('e7', 'sideLaw', 'memLaw');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memLaw' id='memLaw' onChange="javascript: noError_2gr('e7', 'sideLaw', 'memLaw');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isld' id='isld' value='Learning Disability' onClick="javascript: flick_family_switch(); kill_selects_mh('isld', 'sideLD', 'memLD', 'e8');"></div></td>
+                                  <td><div id='e8'><div class='font_class_13'>Learning Disability</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideLD' id='sideLD' onChange="javascript: noError_2gr('e8', 'sideLD', 'memLD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memLD' id='memLD' onChange="javascript: noError_2gr('e8', 'sideLD', 'memLD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='istic' id='istic' value='Tic Disorder' onClick="javascript: flick_family_switch(); kill_selects_mh('istic', 'sideTic', 'memTic', 'e9');"></div></td>
+                                  <td><div id='e9'><div class='font_class_13'>Tic Disorder</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideTic' id='sideTic' onChange="javascript: noError_2gr('e9', 'sideTic', 'memTic');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memTic' id='memTic' onChange="javascript: noError_2gr('e9', 'sideTic', 'memTic');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isthyroid' id='isthyroid' value='Thyroid Disorder' onClick="javascript: flick_family_switch(); kill_selects_mh('isthyroid', 'sideThy', 'memThy', 'e10');"></div></td>
+                                  <td><div id='e10'><div class='font_class_13'>Thyroid Disorder</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideThy' id='sideThy' onChange="javascript: noError_2gr('e10', 'sideThy', 'memThy');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memThy' id='memThy' onChange="javascript: noError_2gr('e10', 'sideThy', 'memThy');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isheart' id='isheart' value='Heart Disease' onClick="javascript: flick_family_switch(); kill_selects_mh('isheart', 'sideHeart', 'memHeart', 'e11');"></div></td>
+                                  <td><div id='e11'><div class='font_class_13'>Heart Disease</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideHeart' id='sideHeart' onChange="javascript: noError_2gr('e11', 'sideHeart', 'memHeart');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memHeart' id='memHeart' onChange="javascript: noError_2gr('e11', 'sideHeart', 'memHeart');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table> 
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isoverweight' id='isoverweight' value='Overweight' onClick="javascript: flick_family_switch(); kill_selects_mh('isoverweight', 'sideOW', 'memOW', 'e12');"></div></td>
+                                  <td><div id='e12'><div class='font_class_13'>Overweight</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideOW' id='sideOW' onChange="javascript: noError_2gr('e12', 'sideOW', 'memOW');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memOW' id='memOW' onChange="javascript: noError_2gr('e12', 'sideOW', 'memOW');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='ismood' id='ismood' value='Mood Swings' onClick="javascript: flick_family_switch(); kill_selects_mh('ismood', 'sideMood', 'memMood', 'e13');"></div></td>
+                                  <td><div id='e13'><div class='font_class_13'>Mood Swings</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideMood' id='sideMood' onChange="javascript: noError_2gr('e13', 'sideMood', 'memMood');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memMood' id='memMood' onChange="javascript: noError_2gr('e13', 'sideMood', 'memMood');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>                    
                             </div>
 
                             <!-- RIGHT SIDE -->
-                            <div class='col-md-6' style='width:40%;'>
+                            <div class='col-md-6' style='width:50%;'>
                               <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='isalcohol' id='isalcohol' value='Alcohol Problems' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Alcohol Problems</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='isalcohol' id='isalcohol' value='Alcohol Problems' onClick="javascript: flick_family_switch(); kill_selects_mh('isalcohol', 'sideAlc', 'memAlc', 'e14');"></div></td>
+                                  <td><div id='e14'><div class='font_class_13'>Alcohol Problems</div></div></td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isdrugs' id='isdrugs' value='Drug Problems' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Drug Problems</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideAlc' id='sideAlc' onChange="javascript: noError_2gr('e14', 'sideAlc', 'memAlc');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isschizo' id='isschizo' value='Schizophrenia' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Schizophrenia</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memAlc' id='memAlc' onChange="javascript: noError_2gr('e14', 'sideAlc', 'memAlc');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
 
+                              <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='isseizures' id='isseizures' value='Seizures' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Seizures</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='isdrugs' id='isdrugs' value='Drug Problems' onClick="javascript: flick_family_switch(); kill_selects_mh('isdrugs', 'sideDrug', 'memDrug', 'e15');"></div></td>
+                                  <td><div id='e15'><div class='font_class_13'>Drug Problems</div></div></td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='iscompletedSuicide' id='iscompletedSuicide' value='Completed Suicide' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Completed Suicide</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideDrug' id='sideDrug' onChange="javascript: noError_2gr('e15', 'sideDrug', 'memDrug');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='issexAbuse' id='issexAbuse' value='Sexual Abuse' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Sexual Abuse</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memDrug' id='memDrug' onChange="javascript: noError_2gr('e15', 'sideDrug', 'memDrug');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
 
+                              <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='ispanic' id='ispanic' value='Panick Attacks' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Panic Attacks</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='isschizo' id='isschizo' value='Schizophrenia' onClick="javascript: flick_family_switch(); kill_selects_mh('isschizo', 'sideSch', 'memSch', 'e16');"></div></td>
+                                  <td><div id='e16'><div class='font_class_13'>Schizophrenia</div></div></td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isanxiety' id='isanxiety' value='Anxiety' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Anxiety</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideSch' id='sideSch' onChange="javascript: noError_2gr('e16', 'sideSch', 'memSch');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='isOCD' id='isOCD' value='Obsessive Compulsive Behavior' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Obsessive Compulsive Behavior</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memSch' id='memSch' onChange="javascript: noError_2gr('e16', 'sideSch', 'memSch');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
 
+                              <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='isdiabetes' id='isdiabetes' value='Diabetes' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Diabetes</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='isseizures' id='isseizures' value='Seizures' onClick="javascript: flick_family_switch(); kill_selects_mh('isseizures', 'sideSe', 'memSe', 'e17');"></div></td>
+                                  <td><div id='e17'><div class='font_class_13'>Seizures</div></div></td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='iscancer' id='iscancer' value='Cancer' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Cancer</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideSe' id='sideSe' onChange="javascript: noError_2gr('e17', 'sideSe', 'memSe');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
 
-                                <tr>
-                                  <td><div><input type='checkbox' name='ishighBloodPressure' id='ishighBloodPressure' value='High Blood Pressure' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>High Blood Pressure</div></td>
-                                </tr>
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memSe' id='memSe' onChange="javascript: noError_2gr('e17', 'sideSe', 'memSe');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
 
+                              <table>
                                 <tr>
-                                  <td><div><input type='checkbox' name='isanger' id='isanger' value='Anger Problems' onClick="javascript: flick_family_switch();"></div></td>
-                                  <td><div class='font_class_13'>Anger Problems</div></td>
-                                </tr>
+                                  <td><div><input type='checkbox' name='iscompletedSuicide' id='iscompletedSuicide' value='Completed Suicide' onClick="javascript: flick_family_switch(); kill_selects_mh('iscompletedSuicide', 'sideCS', 'memCS', 'e18');"></div></td>
+                                  <td><div id='e18'><div class='font_class_13'>Completed Suicide</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideCS' id='sideCS' onChange="javascript: noError_2gr('e18', 'sideCS', 'memCS');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memCS' id='memCS' onChange="javascript: noError_2gr('e18', 'sideCS', 'memCS');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='issexAbuse' id='issexAbuse' value='Sexual Abuse' onClick="javascript: flick_family_switch(); kill_selects_mh('issexAbuse', 'sideSex', 'memSex', 'e19');"></div></td>
+                                  <td><div id='e19'><div class='font_class_13'>Sexual Abuse</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideSex' id='sideSex' onChange="javascript: noError_2gr('e19', 'sideSex', 'memSex');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memSex' id='memSex' onChange="javascript: noError_2gr('e19', 'sideSex', 'memSex');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='ispanic' id='ispanic' value='Panic Attacks' onClick="javascript: flick_family_switch(); kill_selects_mh('ispanic', 'sidePanick', 'memPanick', 'e20');"></div></td>
+                                  <td><div id='e20'><div class='font_class_13'>Panic Attacks</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sidePanick' id='sidePanick' onChange="javascript: noError_2gr('e20', 'sidePanick', 'memPanick');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memPanick' id='memPanick' onChange="javascript: noError_2gr('e20', 'sidePanick', 'memPanick');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isanxiety' id='isanxiety' value='Anxiety' onClick="javascript: flick_family_switch(); kill_selects_mh('isanxiety', 'sideAnx', 'memAnx', 'e21');"></div></td>
+                                  <td><div id='e21'><div class='font_class_13'>Anxiety</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideAnx' id='sideAnx' onChange="javascript: noError_2gr('e21', 'sideAnx', 'memAnx');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memAnx' id='memAnx' onChange="javascript: noError_2gr('e21', 'sideAnx', 'memAnx');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isOCD' id='isOCD' value='Obsessive Compulsive Behavior' onClick="javascript: flick_family_switch(); kill_selects_mh('isOCD', 'sideOCD', 'memOCD', 'e22');"></div></td>
+                                  <td><div id='e22'><div class='font_class_13'>Obsessive Compulsive Behavior</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideOCD' id='sideOCD' onChange="javascript: noError_2gr('e22', 'sideOCD', 'memOCD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memOCD' id='memOCD' onChange="javascript: noError_2gr('e22', 'sideOCD', 'memOCD');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isdiabetes' id='isdiabetes' value='Diabetes' onClick="javascript: flick_family_switch(); kill_selects_mh('isdiabetes', 'sideSugar', 'memSugar', 'e23');"></div></td>
+                                  <td><div id='e23'><div class='font_class_13'>Diabetes</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideSugar' id='sideSugar' onChange="javascript: noError_2gr('e23', 'sideSugar', 'memSugar');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memSugar' id='memSugar' onChange="javascript: noError_2gr('e23', 'sideOW', 'memSugar');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='iscancer' id='iscancer' value='Cancer' onClick="javascript: flick_family_switch(); kill_selects_mh('iscancer', 'sideCancer', 'memCancer', 'e24');"></div></td>
+                                  <td><div id='e24'><div class='font_class_13'>Cancer</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideCancer' id='sideCancer' onChange="javascript: noError_2gr('e24', 'sideCancer', 'memCancer');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memCancer' id='memCancer' onChange="javascript: noError_2gr('e24', 'sideCancer', 'memCancer');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='ishighBloodPressure' id='ishighBloodPressure' value='High Blood Pressure' onClick="javascript: flick_family_switch(); kill_selects_mh('ishighBloodPressure', 'sideBlood', 'memBlood', 'e25');"></div></td>
+                                  <td><div id='e25'><div class='font_class_13'>High Blood Pressure</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideBlood' id='sideBlood' onChange="javascript: noError_2gr('e25', 'sideBlood', 'memBlood');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memBlood' id='memBlood' onChange="javascript: noError_2gr('e25', 'sideBlood', 'memBlood');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
+                              </table>
+
+                              <table>
+                                <tr>
+                                  <td><div><input type='checkbox' name='isanger' id='isanger' value='Anger Problems' onClick="javascript: flick_family_switch(); kill_selects_mh('isanger', 'sideAngry', 'memAngry', 'e26');"></div></td>
+                                  <td><div id='e26'><div class='font_class_13'>Anger Problems</div></div></td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='sideAngry' id='sideAngry' onChange="javascript: noError_2gr('e26', 'sideAngry', 'memAngry');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Maternal'>Maternal</option>
+                                        <option value='Paternal'>Paternal</option>
+                                      </select>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='mhFam_sel1'>
+                                      <select name='memAngry' id='memAngry' onChange="javascript: noError_2gr('e26', 'sideOW', 'memAngry');">
+                                        <option value='None Selected'>Select</option>
+                                        <option value='Mother'>Mother</option>
+                                        <option value='Father'>Father</option>
+                                        <option value='Sister'>Sister</option>
+                                        <option value='Brother'>Brother</option>
+                                        <option value='Child'>Child</option>
+                                        <option value='Aunt'>Aunt</option>
+                                        <option value='Uncle'>Uncle</option>
+                                        <option value='Grandmother'>Grandmother</option>
+                                        <option value='Grandfather'>Grandfather</option>
+                                      </select>
+                                    </div>
+                                  </td>
                               </table>
                             </div>
                           </div>

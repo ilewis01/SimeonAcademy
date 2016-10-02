@@ -6100,21 +6100,21 @@ button:hover {
 }
 
 .family_biz_container {
-	width:60%;
+	width:90%;
 	margin: auto;
 	/*border: 1px solid black;*/
 }
 
 .family_mh_instructions_p1 {
-	width:57%;
+	width:86%;
 	margin: auto;
 	text-align: justify;
 	font-style: italic;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: bold;
 	margin-bottom: 16px;
 	margin-top: 16px;
-	color:#6c7f7b;
+	/*color:#6c7f7b;*/
 }
 
 .family_biz_container tr {
@@ -6131,7 +6131,7 @@ button:hover {
 	width:18%;
 	height: 30px;
 	position: absolute;
-    right: 31%;
+    right: 17%;
     margin-top: 17px;
     border: 1px solid black;
     border-radius: 8px;
@@ -6157,6 +6157,10 @@ button:hover {
 .mh-these-positve-ans textarea {
 	width: 100%;
 	height: 100%;
+}
+
+.mhFam_sel1 {
+	margin-left: 10px;
 }
 
 
