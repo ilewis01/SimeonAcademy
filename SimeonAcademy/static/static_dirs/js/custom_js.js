@@ -1471,7 +1471,15 @@ function superDynamoChecker() {
 function fetchMhEDUFieldNames() {
 	var result = [];
 
-	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={};
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={}, d11={};
+	var d12={}, d13={}, d14={}, d15={}, d16={};
+
+	var college_val = String(grab('m_college_trigger').value);
+	var college_trigger = false;
+
+	if (college_val === 'true') {
+		college_trigger = true;
+	}
 
 	d1['field'] = 'numMore';
 	d1['type'] = 'number';
@@ -1494,17 +1502,302 @@ function fetchMhEDUFieldNames() {
 	d3['trigger'] = 'friendMoreg10';
 	result.push(d3);
 
+	d4['field'] = 'collegeDegree';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'college1';
+	result.push(d4);
+
+	d5['field'] = 'collegeMajor';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'college1';
+	result.push(d5);
+
+	d6['field'] = 'collegeDegree';
+	d6['type'] = 'text';
+	d6['div'] = 'e4';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'college2';
+	result.push(d6);
+
+	d7['field'] = 'collegeMajor';
+	d7['type'] = 'text';
+	d7['div'] = 'e5';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'college2';
+	result.push(d7);
+
+	d8['field'] = 'collegeDegree';
+	d8['type'] = 'text';
+	d8['div'] = 'e4';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'college3';
+	result.push(d8);
+
+	d9['field'] = 'collegeMajor';
+	d9['type'] = 'text';
+	d9['div'] = 'e5';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'college3';
+	result.push(d9);
+
+	d10['field'] = 'collegeDegree';
+	d10['type'] = 'text';
+	d10['div'] = 'e4';
+	d10['isDynamic'] = true;
+	d10['trigger'] = 'college4';
+	result.push(d10);
+
+	d11['field'] = 'collegeMajor';
+	d11['type'] = 'text';
+	d11['div'] = 'e5';
+	d11['isDynamic'] = true;
+	d11['trigger'] = 'college4';
+	result.push(d11);
+
+	d12['field'] = 'tradeSchool';
+	d12['type'] = 'text';
+	d12['div'] = 'e20';
+	d12['isDynamic'] = true;
+	d12['trigger'] = 'yesTrade';
+	result.push(d12);
+
+	d13['field'] = 'tradeAreaStudy';
+	d13['type'] = 'text';
+	d13['div'] = 'e6';
+	d13['isDynamic'] = true;
+	d13['trigger'] = 'yesTrade';
+	result.push(d13);
+
+	d14['field'] = 'militaryBranch';
+	d14['type'] = 'text';
+	d14['div'] = 'e7';
+	d14['isDynamic'] = true;
+	d14['trigger'] = 'yesMillitary';
+	result.push(d14);
+
+	d15['field'] = 'militaryYears';
+	d15['type'] = 'number';
+	d15['div'] = 'e8';
+	d15['isDynamic'] = true;
+	d15['trigger'] = 'yesMillitary';
+	result.push(d15);
+
+	d16['field'] = 'militaryRank';
+	d16['type'] = 'text';
+	d16['div'] = 'e9';
+	d16['isDynamic'] = true;
+	d16['trigger'] = 'yesMillitary';
+	result.push(d16);
+
 	return result;
 }
 
 function fetchMhMoneyFieldNames() {
 	var result = [];
 
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={}, d11={};
+	var d12={}, d13={}, d14={}, d15={}, d16={}, d17={};
+
+	d1['field'] = 'residence';
+	d1['type'] = 'select';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+
+	d2['field'] = 'income';
+	d2['type'] = 'select';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+
+	d3['field'] = 'debt';
+	d3['type'] = 'select';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+
+	d4['field'] = 'credit';
+	d4['type'] = 'select';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+
+	d5['field'] = 'healthCare';
+	d5['type'] = 'select';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = false;
+	d5['trigger'] = null;
+	result.push(d5);
+
+	d6['field'] = 'otherIncome';
+	d6['type'] = 'select';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = false;
+	d6['trigger'] = null;
+	result.push(d6);
+
+	d7['field'] = 'churchWeek';
+	d7['type'] = 'number';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = false;
+	d7['trigger'] = null;
+	result.push(d7);
+
+	d8['field'] = 'churchMonth';
+	d8['type'] = 'number';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = false;
+	d8['trigger'] = null;
+	result.push(d8);
+
+	d9['field'] = 'churchYear';
+	d9['type'] = 'number';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = false;
+	d9['trigger'] = null;
+	result.push(d9);
+
+	d10['field'] = 'closeFriendNumber';
+	d10['type'] = 'number';
+	d10['div'] = 'e10';
+	d10['isDynamic'] = false;
+	d10['trigger'] = null;
+	result.push(d10);
+
+	d11['field'] = 'acqNumber';
+	d11['type'] = 'number';
+	d11['div'] = 'e11';
+	d11['isDynamic'] = false;
+	d11['trigger'] = null;
+	result.push(d11);
+
+	d12['field'] = 'interestWeek';
+	d12['type'] = 'number';
+	d12['div'] = 'e12';
+	d12['isDynamic'] = false;
+	d12['trigger'] = null;
+	result.push(d12);
+
+	d13['field'] = 'interestMonth';
+	d13['type'] = 'number';
+	d13['div'] = 'e13';
+	d13['isDynamic'] = false;
+	d13['trigger'] = null;
+	result.push(d13);
+
+	d14['field'] = 'friendActWeek';
+	d14['type'] = 'number';
+	d14['div'] = 'e14';
+	d14['isDynamic'] = false;
+	d14['trigger'] = null;
+	result.push(d14);
+
+	d15['field'] = 'friendActMonth';
+	d15['type'] = 'number';
+	d15['div'] = 'e15';
+	d15['isDynamic'] = false;
+	d15['trigger'] = null;
+	result.push(d15);
+
+	d16['field'] = 'workActWeek';
+	d16['type'] = 'number';
+	d16['div'] = 'e16';
+	d16['isDynamic'] = false;
+	d16['trigger'] = null;
+	result.push(d16);
+
+	d17['field'] = 'workActMonth';
+	d17['type'] = 'number';
+	d17['div'] = 'e17';
+	d17['isDynamic'] = false;
+	d17['trigger'] = null;
+	result.push(d17);
+
 	return result;
 }
 
 function fetchMhStressFieldNames() {
 	var result = [];
+
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={};
+
+	d1['field'] = 'deathStressExp';
+	d1['type'] = 'text';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = true;
+	d1['trigger'] = 'yesDeath';
+	result.push(d1);
+
+	d2['field'] = 'divorceStressExp';
+	d2['type'] = 'text';
+	d2['div'] = 'e2';
+	d2['isDynamic'] = true;
+	d2['trigger'] = 'yesDivorce';
+	result.push(d2);
+
+	d3['field'] = 'moveStressExp';
+	d3['type'] = 'text';
+	d3['div'] = 'e3';
+	d3['isDynamic'] = true;
+	d3['trigger'] = 'yesMove';
+	result.push(d3);
+
+	d4['field'] = 'medicalStressExp';
+	d4['type'] = 'text';
+	d4['div'] = 'e4';
+	d4['isDynamic'] = true;
+	d4['trigger'] = 'yesMedical';
+	result.push(d4);
+
+	d5['field'] = 'familyHealthStressExp';
+	d5['type'] = 'text';
+	d5['div'] = 'e5';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'yesFamily';
+	result.push(d5);
+
+	d6['field'] = 'financialStressExp';
+	d6['type'] = 'text';
+	d6['div'] = 'e6';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'yesMoney';
+	result.push(d6);
+
+	d7['field'] = 'abuseStressExp';
+	d7['type'] = 'text';
+	d7['div'] = 'e7';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'yesAbuse';
+	result.push(d7);
+
+	d8['field'] = 'addictionFamilyStressExp';
+	d8['type'] = 'text';
+	d8['div'] = 'e8';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'yesAddiction';
+	result.push(d8);
+
+	d9['field'] = 'violenceFamilyStressExp';
+	d9['type'] = 'text';
+	d9['div'] = 'e9';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'yesViolence';
+	result.push(d9);
+
+	d10['field'] = 'otherStressExp';
+	d10['type'] = 'text';
+	d10['div'] = 'e10';
+	d10['isDynamic'] = true;
+	d10['trigger'] = 'yesOther';
+	result.push(d10);
 
 	return result;
 }
@@ -10236,6 +10529,15 @@ function moreFriends(trigger_id, label_id, field_id) {
 	twoElementRadioSetupNumber(trigger, label, field)
 }
 
+function set_college_stats_mh() {
+	if (grab('collegeNone').checked === true) {
+		grab('m_college_trigger').value = 'false';
+	}
+	else {
+		grab('m_college_trigger').value = 'true';
+	}
+}
+
 function mhCollegeRadio() {
 	var yr1 = grab('college1');
 	var yr2 = grab('college2');
@@ -10278,6 +10580,8 @@ function mhCollegeRadio() {
 		opacityLow(grab('labM1'));
 		opacityLow(grab('labM2'));
 	}
+
+	set_college_stats_mh();
 }
 
 function mhTrade() {

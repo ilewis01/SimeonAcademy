@@ -260,14 +260,14 @@
                       <table><tr><td><div class='iml-label'><li>Number of times I attend:</li></div></td></tr><table>
 
                       <table>  
-                          <td><div class='iml-mh-number-label2'><li>Weekly:</li></div></td>
-                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+                          <td><div id='e7'><div class='iml-mh-number-label2'><li>Weekly:</li></div></div></td>
+                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}' oninput="javascript: noErrorText('e7', 'churchWeek');"></div></td>
 
-                          <td><div class='iml-mh-number-label2'>Monthly:</div></td>
-                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+                          <td><div id='e8'><div class='iml-mh-number-label2'>Monthly:</div></div></td>
+                          <td><div><input type='number' style='width:40px; margin-right:20px;' name='churchMonth' id='churchMonth' value='{{fields.churchMonth}}' oninput="javascript: noErrorText('e8', 'churchMonth');"></div></td>
 
-                          <td><div class='iml-mh-number-label2'>Yearly:</div></td>
-                          <td><div><input type='number' style='width:40px;' name='churchWeek' id='churchWeek' value='{{fields.churchWeek}}'></div></td>
+                          <td><div id='e9'><div class='iml-mh-number-label2'>Yearly:</div></div></td>
+                          <td><div><input type='number' style='width:40px;' name='churchYear' id='churchYear' value='{{fields.churchYear}}' oninput="javascript: noErrorText('e9', 'churchYear');"></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -279,8 +279,8 @@
                     <ol>
                       <table>
                         <tr>
-                          <td><div id='e7'><div class='iml-label'><li>Close friends I can call on if in trouble:</li></div></div></td>
-                          <td><div><input type='number' style='width:40px;' name='closeFriendNumber' id='closeFriendNumber' value='{{fields.closeFriendNumber}}' oninput="javascript: noErrorText('e7', 'closeFriendNumber');"></div></td>
+                          <td><div id='e10'><div class='iml-label'><li>Close friends I can call on if in trouble:</li></div></div></td>
+                          <td><div><input type='number' style='width:40px;' name='closeFriendNumber' id='closeFriendNumber' value='{{fields.closeFriendNumber}}' oninput="javascript: noErrorText('e10', 'closeFriendNumber');"></div></td>
                         </tr>
                       </table>
                       <table>
@@ -288,7 +288,7 @@
                           <td><div id='e8'><div class='iml-label'><li>Visit Times:</li></div></div></td>
                           <td>
                             <div>
-                              <select name='closeFriendVisit' id='closeFriendVisit' onChange="javascript: noErrorText('e8', 'closeFriendVisit');">
+                              <select name='closeFriendVisit' id='closeFriendVisit'>
                                 <option value='None Selected'>Select</option>
                                 <option value='Weekly'>Weekly</option>
                                 <option value='Monthly'>Monthly</option>
@@ -301,16 +301,16 @@
 
                       <table>
                         <tr>
-                          <td><div id='e9'><div class='iml-label'><li>Aquaintances I can call on if in trouble:</li></div></div></td>
-                          <td><div><input type='number' style='width:40px;' name='acqNumber' id='acqNumber' value='{{fields.acqNumber}}' oninput="javascript: noErrorText('e9', 'acqNumber');"></div></td>
+                          <td><div id='e11'><div class='iml-label'><li>Aquaintances I can call on if in trouble:</li></div></div></td>
+                          <td><div><input type='number' style='width:40px;' name='acqNumber' id='acqNumber' value='{{fields.acqNumber}}' oninput="javascript: noErrorText('e11', 'acqNumber');"></div></td>
                         </tr>
                       </table>
                       <table>
                         <tr>
-                          <td><div id='e10'><div class='iml-label'><li>Visit Times:</li></div></div></td>
+                          <td><div id=''><div class='iml-label'><li>Visit Times:</li></div></div></td>
                           <td>
                             <div>
-                              <select name='acqVisit' id='acqVisit' onChange="javascript: noErrorText('e10', 'acqVisit');">
+                              <select name='acqVisit' id='acqVisit'>
                                 <option value='None Selected'>Select</option>
                                 <option value='Weekly'>Weekly</option>
                                 <option value='Monthly'>Monthly</option>
@@ -327,51 +327,51 @@
                       <table><tr><td><div class='iml-label'><li>Interest (fishing, sewing, reading, etc.)</li></div></td></tr></table>
                       <table>
                         <tr>
-                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><ul><div id=''><div class='iml-label'><li>Activity:</li></div></div></ul></td>
                           <td><div><input type='text' name='interest' id='interest' value='{{fields.interest}}'></div></td>
                         </tr>
                       </table>
                       <table>
                         <tr>
-                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='interestWeek' id='interestWeek' value='{{fields.interestWeek}}'></div></td>
+                          <td><ul><div id='e12'><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='interestWeek' id='interestWeek' value='{{fields.interestWeek}}' oninput="javascript: noErrorText('e12', 'interestWeek');"></div></td>
 
-                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='interestMonth' id='interestMonth' value='{{fields.interestMonth}}'></div></td>
+                          <td><ul><div id='e13'><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='interestMonth' id='interestMonth' value='{{fields.interestMonth}}' oninput="javascript: noErrorText('e13', 'interestMonth');"></div></td>
                         </tr>
                       </table>
 
                       <table><tr><td><div class='iml-label'><li>Activities with friends:</li></div></td></tr></table>
                       <table>
                         <tr>
-                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><ul><div id=''><div class='iml-label'><li>Activity:</li></div></div></ul></td>
                           <td><div><input type='text' name='friendAct' id='friendAct' value='{{fields.friendAct}}'></div></td>
                         </tr>
                       </table>
                       <table>
                         <tr>
-                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='friendActWeek' id='friendActWeek' value='{{fields.friendActWeek}}'></div></td>
+                          <td><ul><div id='e14'><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='friendActWeek' id='friendActWeek' value='{{fields.friendActWeek}}' oninput="javascript: noErrorText('e14', 'friendActWeek');"></div></td>
 
-                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='friendActMonth' id='friendActMonth' value='{{fields.friendActMonth}}'></div></td>
+                          <td><ul><div id='e15'><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='friendActMonth' id='friendActMonth' value='{{fields.friendActMonth}}' oninput="javascript: noErrorText('e15', 'friendActMonth');"></div></td>
                         </tr>
                       </table>
 
                       <table><tr><td><div class='iml-label'><li>Activities at work:</li></div></td></tr></table>
                       <table>
                         <tr>
-                          <td><ul><div id='e11'><div class='iml-label'><li>Activity:</li></div></div></ul></td>
+                          <td><ul><div id=''><div class='iml-label'><li>Activity:</li></div></div></ul></td>
                           <td><div><input type='text' name='workAct' id='workAct' value='{{fields.workAct}}'></div></td>
                         </tr>
                       </table>
                       <table>
                         <tr>
-                          <td><ul><div><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='workActWeek' id='workActWeek' value='{{fields.workActWeek}}'></div></td>
+                          <td><ul><div id='e16'><div class='iml-label'><li>Times per week:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='workActWeek' id='workActWeek' value='{{fields.workActWeek}}' oninput="javascript: noErrorText('e16', 'workActWeek');"></div></td>
 
-                          <td><ul><div><div class='iml-label'><li>Per month:</li></div></div></ul></td>
-                          <td><div><input style='width:40px;' type='number' name='workActMonth' id='workActMonth' value='{{fields.workActMonth}}'></div></td>
+                          <td><ul><div id='e17'><div class='iml-label'><li>Per month:</li></div></div></ul></td>
+                          <td><div><input style='width:40px;' type='number' name='workActMonth' id='workActMonth' value='{{fields.workActMonth}}' oninput="javascript: noErrorText('e17', 'workActMonth');"></div></td>
                         </tr>
                       </table>
                     </ol>
@@ -386,7 +386,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
-                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td>
+                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}}); return false;">Save & Continue</button></div></td>
                   <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
                 </tr>
               </table>

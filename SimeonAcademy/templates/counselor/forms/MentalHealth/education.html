@@ -16,6 +16,8 @@
       <input type='hidden' name='form_name' id='form_name' value='mh_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
 
+      <input type='hidden' name='m_college_trigger' id='m_college_trigger' value='false'>
+
     <div class='container'>
       <div class='row'>
         <div class="col-md-12" style='width:100%; height:84vh;'>
@@ -170,7 +172,7 @@
                           </td>
 
                           <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}' oninput="javascript: noErrorText('e1', 'numMore');"></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -239,7 +241,7 @@
                           </td>
 
                           <td><div id='e2'><div id='numMore_labelg7' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}' oninput="javascript: noErrorText('e2', 'numMoreg7');"></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -308,7 +310,7 @@
                           </td>
 
                           <td><div id='e3'><div id='numMore_labelg10' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}'></div></td>
+                          <td><div><input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}' oninput="javascript: noErrorText('e3', 'numMoreg10');"></div></td>
                         </tr>
                       </table>
                     </ul>
