@@ -7988,11 +7988,10 @@ def saveMhEducation(request, mh):
 	mh.education.militaryBranch 		= request.POST.get('m_militaryBranch')
 	mh.education.militaryRank 			= request.POST.get('m_militaryRank')
 	mh.education.militaryYears 			= request.POST.get('m_militaryYears')
-
-	# mh.education.collegeDegree 			= request.POST.get('m_collegeDegree')
-	# mh.education.collegeMajor 			= request.POST.get('m_collegeMajor')
-	# mh.education.advanceDegree 			= truePythonBool(request.POST.get('m_advanceDegree'))	
-	# mh.education.honorableDischarge 	= truePythonBool(request.POST.get('m_honorableDischarge'))
+	mh.education.honorableDischarge 	= truePythonBool(request.POST.get('m_honorableDischarge'))
+	mh.education.collegeDegree 			= request.POST.get('m_collegeDegree')
+	mh.education.collegeMajor 			= request.POST.get('m_collegeMajor')
+	mh.education.advanceDegree 			= truePythonBool(request.POST.get('m_advanceDegree'))	
 
 	mh.education.save()
 

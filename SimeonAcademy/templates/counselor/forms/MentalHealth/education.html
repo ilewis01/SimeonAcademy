@@ -32,7 +32,7 @@
       <input type='hidden' name='m_militaryBranch' id='m_militaryBranch' value=''>
       <input type='hidden' name='m_militaryYears' id='m_militaryYears' value=''>
       <input type='hidden' name='m_militaryRank' id='m_militaryRank' value=''>
-      <input type='hidden' name='m_honorableDischarge' id='m_honorableDischarge' value=''>
+      <input type='hidden' name='m_honorableDischarge' id='m_honorableDischarge' value='False'>
 
     <div class='container'>
       <div class='row'>
@@ -340,15 +340,15 @@
                         <tr>
                           <td><div class='iml-label'><li>Years Completed: </li></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college1' value='1' onClick="javascript: mhCollegeRadio();"><span>1</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college1' value='1' onClick="javascript: mhCollegeRadio(); set_college_m_data();"><span>1</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college2' value='2' onClick="javascript: mhCollegeRadio();"><span>2</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college2' value='2' onClick="javascript: mhCollegeRadio(); set_college_m_data();"><span>2</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college3' value='3' onClick="javascript: mhCollegeRadio();"><span>3</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college3' value='3' onClick="javascript: mhCollegeRadio(); set_college_m_data();"><span>3</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college4' value='4' onClick="javascript: mhCollegeRadio();"><span>4</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='college4' value='4' onClick="javascript: mhCollegeRadio(); set_college_m_data();"><span>4</span></div></td>
 
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='collegeNone' value='0' onClick="javascript: mhCollegeRadio();"><span>None</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='collegeYears' id='collegeNone' value='0' onClick="javascript: mhCollegeRadio(); set_college_m_data();"><span>None</span></div></td>
                         </tr>
                       </table>
 
@@ -433,8 +433,8 @@
                       <table>
                         <tr>
                           <td><div class='iml-label' id='mt4'><li>Honorable Discharge?</li></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='yesHonor' value='True'><span id='mt5'>Yes</span></div></td>
-                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='noHonor' value='False'><span id='mt6'>No</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='yesHonor' value='True' onClick='javascript: set_m_honorable();'><span id='mt5'>Yes</span></div></td>
+                          <td><div class='iml-mh-radio-label2'><input type='radio' name='honorableDischarge' id='noHonor' value='False' onClick='javascript: set_m_honorable();'><span id='mt6'>No</span></div></td>
                         </tr>
                       </table>
                     </ul>

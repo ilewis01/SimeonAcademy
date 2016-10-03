@@ -9998,6 +9998,24 @@ function post_operation_has_erZero() {
 	return hasError;
 }
 
+function set_m_honorable() {
+	if (grab('yesHonor').checked === true) {
+		grab('m_honorableDischarge').value = 'True';
+	}
+	else {
+		grab('m_honorableDischarge').value = 'False';
+	}
+}
+
+function set_college_m_data() {
+	if (grab('collegeNone').checked === true) {
+		grab('m_college_trigger').value = 'false';
+	}
+	else {
+		grab('m_college_trigger').value = 'true';
+	}
+}
+
 function proceed_mh_education() {
 	var fk1 = document.getElementById('friend1');
 	var fk2 = document.getElementById('friend2');
@@ -10030,39 +10048,24 @@ function proceed_mh_education() {
 	post(true, 'text', grab('militaryBranch'), grab('yesMillitary'), grab('m_militaryBranch'));
 	post(true, 'number', grab('militaryYears'), grab('yesMillitary'), grab('m_militaryYears'));
 	post(true, 'text', grab('militaryRank'), grab('yesMillitary'), grab('m_militaryRank'));
+	post(true, 'text', grab('militaryRank'), grab('yesMillitary'), grab('m_militaryRank'));
 
-	// var yesGrad = document.getElementById('yesGrad');
-	// var collegeMajor = document.getElementById('collegeMajor');	
-	// var m_collegeMajor = document.getElementById('m_collegeMajor');
-	// var hasAdvanced = document.getElementById('hasAdvanced');
-	// var m_advanceDegree = document.getElementById('m_advanceDegree');
-
-	// var yesTrade = document.getElementById('yesTrade');
-	// var tradeSchool = document.getElementById('tradeSchool');
-	// var tradeAreaStudy = document.getElementById('tradeAreaStudy');
-	// var m_tradeSchool = document.getElementById('m_tradeSchool');
-	// var m_tradeAreaStudy = document.getElementById('m_tradeAreaStudy');
-
-	// var isMilitary = document.getElementById('isMilitary');
-	// var militaryBranch = document.getElementById('militaryBranch');
-	// var militaryRank = document.getElementById('militaryRank');
-	// var militaryYears = document.getElementById('militaryYears');
-	// var isHonor = document.getElementById('isHonor');
-	// var m_militaryBranch = document.getElementById('m_militaryBranch');
-	// var m_militaryRank = document.getElementById('m_militaryRank');
-	// var m_militaryYears = document.getElementById('m_militaryYears');
-	// var m_honorableDischarge = document.getElementById('m_honorableDischarge');
-
-	// postUniversalRadioText(yesGrad, collegeMajor, m_collegeMajor);	
-	// postUniversalRadioText(yesTrade, tradeSchool, m_tradeSchool);
-	// postUniversalRadioText(yesTrade, tradeAreaStudy, m_tradeAreaStudy);
-	// postUniversalRadioText(isMilitary, militaryBranch, m_militaryBranch);
-	// postUniversalRadioText(isMilitary, militaryRank, m_militaryRank);
-
-	// postUniversalRadioNumber(isMilitary, militaryYears, m_militaryYears);
-
-	// postUniversalRadioRadio(yesGrad, hasAdvanced, m_advanceDegree);
-	// postUniversalRadioRadio(isMilitary, isHonor, m_honorableDischarge);	
+	if (String(grab('m_college_trigger').value) === 'true') {
+		grab('m_collegeDegree').value = grab('collegeDegree').value;
+		grab('m_collegeMajor').value = grab('collegeMajor').value;
+		
+		if (grab('yesAdvanced').checked === true) {
+			grab('m_advanceDegree').value = 'True';
+		}
+		else {
+			grab('m_advanceDegree').value = 'False';
+		}
+	}
+	else {
+		grab('m_collegeDegree').value = 'N/A';
+		grab('m_collegeMajor').value = 'N/A';
+		grab('m_advanceDegree').value = 'False';
+	}
 }
 
 function proceed_mh_stress() {
