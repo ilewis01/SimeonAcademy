@@ -165,5 +165,6 @@ urlpatterns = patterns('',
     url(r'^printForm/$', 'assessment.views.printForm'),
     url(r'^printLoaded/$', 'assessment.views.printLoaded'),
     url(r'^underConstruction/$', 'assessment.views.underConstruction'),
+    url(r'^error_zero/$', 'assessment.views.error_zero'),
     url(r'^dataTemplate/$', 'assessment.views.dataTemplate'),
 )
