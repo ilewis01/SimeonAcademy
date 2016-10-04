@@ -1803,9 +1803,326 @@ function fetchMhStressFieldNames() {
 }
 
 function fetchMhFamilyFieldNames() {
-	var result = [];
+	var d = [];
 
-	return result;
+	for (var i = 0; i < 52; i++) {
+		var data = {};
+		d.push(data);
+	}
+
+	d[0]['field'] = 'depressSide';
+	d[0]['type'] = 'select';
+	d[0]['div'] = 'e1';
+	d[0]['isDynamic'] = true;
+	d[0]['trigger'] = 'isdepressed';
+
+	d[1]['field'] = 'depressMember';
+	d[1]['type'] = 'select';
+	d[1]['div'] = 'e1';
+	d[1]['isDynamic'] = true;
+	d[1]['trigger'] = 'isdepressed';
+
+	d[2]['field'] = 'sideADD';
+	d[2]['type'] = 'select';
+	d[2]['div'] = 'e2';
+	d[2]['isDynamic'] = true;
+	d[2]['trigger'] = 'isadd';
+
+	d[3]['field'] = 'memADD';
+	d[3]['type'] = 'select';
+	d[3]['div'] = 'e2';
+	d[3]['isDynamic'] = true;
+	d[3]['trigger'] = 'isadd';
+
+	d[4]['field'] = 'sideBed';
+	d[4]['type'] = 'select';
+	d[4]['div'] = 'e3';
+	d[4]['isDynamic'] = true;
+	d[4]['trigger'] = 'isbedWetting';
+
+	d[5]['field'] = 'memBed';
+	d[5]['type'] = 'select';
+	d[5]['div'] = 'e3';
+	d[5]['isDynamic'] = true;
+	d[5]['trigger'] = 'isbedWetting';
+
+	d[6]['field'] = 'sideBi';
+	d[6]['type'] = 'select';
+	d[6]['div'] = 'e4';
+	d[6]['isDynamic'] = true;
+	d[6]['trigger'] = 'isbipolar';
+
+	d[7]['field'] = 'memBi';
+	d[7]['type'] = 'select';
+	d[7]['div'] = 'e4';
+	d[7]['isDynamic'] = true;
+	d[7]['trigger'] = 'isbipolar';
+
+	d[8]['field'] = 'sideATT';
+	d[8]['type'] = 'select';
+	d[8]['div'] = 'e5';
+	d[8]['isDynamic'] = true;
+	d[8]['trigger'] = 'issuicideAttempt';
+
+	d[9]['field'] = 'memATT';
+	d[9]['type'] = 'select';
+	d[9]['div'] = 'e5';
+	d[9]['isDynamic'] = true;
+	d[9]['trigger'] = 'issuicideAttempt';
+
+	d[10]['field'] = 'sidePA';
+	d[10]['type'] = 'select';
+	d[10]['div'] = 'e6';
+	d[10]['isDynamic'] = true;
+	d[10]['trigger'] = 'isphysicalAbuse';
+
+	d[11]['field'] = 'memPA';
+	d[11]['type'] = 'select';
+	d[11]['div'] = 'e6';
+	d[11]['isDynamic'] = true;
+	d[11]['trigger'] = 'isphysicalAbuse';
+
+	d[12]['field'] = 'sideLaw';
+	d[12]['type'] = 'select';
+	d[12]['div'] = 'e7';
+	d[12]['isDynamic'] = true;
+	d[12]['trigger'] = 'islaw';
+
+	d[13]['field'] = 'memLaw';
+	d[13]['type'] = 'select';
+	d[13]['div'] = 'e7';
+	d[13]['isDynamic'] = true;
+	d[13]['trigger'] = 'islaw';
+
+	d[14]['field'] = 'sideLD';
+	d[14]['type'] = 'select';
+	d[14]['div'] = 'e8';
+	d[14]['isDynamic'] = true;
+	d[14]['trigger'] = 'isld';
+
+	d[15]['field'] = 'memLD';
+	d[15]['type'] = 'select';
+	d[15]['div'] = 'e8';
+	d[15]['isDynamic'] = true;
+	d[15]['trigger'] = 'isld';
+
+	d[16]['field'] = 'sideTic';
+	d[16]['type'] = 'select';
+	d[16]['div'] = 'e9';
+	d[16]['isDynamic'] = true;
+	d[16]['trigger'] = 'istic';
+
+	d[17]['field'] = 'memTic';
+	d[17]['type'] = 'select';
+	d[17]['div'] = 'e9';
+	d[17]['isDynamic'] = true;
+	d[17]['trigger'] = 'istic';
+
+	d[18]['field'] = 'sideThy';
+	d[18]['type'] = 'select';
+	d[18]['div'] = 'e10';
+	d[18]['isDynamic'] = true;
+	d[18]['trigger'] = 'isthyroid';
+
+	d[19]['field'] = 'memThy';
+	d[19]['type'] = 'select';
+	d[19]['div'] = 'e10';
+	d[19]['isDynamic'] = true;
+	d[19]['trigger'] = 'isthyroid';
+
+	d[20]['field'] = 'sideHeart';
+	d[20]['type'] = 'select';
+	d[20]['div'] = 'e11';
+	d[20]['isDynamic'] = true;
+	d[20]['trigger'] = 'isheart';
+
+	d[21]['field'] = 'memHeart';
+	d[21]['type'] = 'select';
+	d[21]['div'] = 'e11';
+	d[21]['isDynamic'] = true;
+	d[21]['trigger'] = 'isheart';
+
+	d[22]['field'] = 'sideOW';
+	d[22]['type'] = 'select';
+	d[22]['div'] = 'e12';
+	d[22]['isDynamic'] = true;
+	d[22]['trigger'] = 'isoverweight';
+
+	d[23]['field'] = 'memOW';
+	d[23]['type'] = 'select';
+	d[23]['div'] = 'e12';
+	d[23]['isDynamic'] = true;
+	d[23]['trigger'] = 'isoverweight';
+
+	d[24]['field'] = 'sideMood';
+	d[24]['type'] = 'select';
+	d[24]['div'] = 'e13';
+	d[24]['isDynamic'] = true;
+	d[24]['trigger'] = 'ismood';
+
+	d[25]['field'] = 'memMood';
+	d[25]['type'] = 'select';
+	d[25]['div'] = 'e13';
+	d[25]['isDynamic'] = true;
+	d[25]['trigger'] = 'ismood';
+
+	d[26]['field'] = 'sideAlc';
+	d[26]['type'] = 'select';
+	d[26]['div'] = 'e14';
+	d[26]['isDynamic'] = true;
+	d[26]['trigger'] = 'isalcohol';
+
+	d[27]['field'] = 'memAlc';
+	d[27]['type'] = 'select';
+	d[27]['div'] = 'e14';
+	d[27]['isDynamic'] = true;
+	d[27]['trigger'] = 'isalcohol';
+
+	d[28]['field'] = 'sideDrug';
+	d[28]['type'] = 'select';
+	d[28]['div'] = 'e15';
+	d[28]['isDynamic'] = true;
+	d[28]['trigger'] = 'isdrugs';
+
+	d[29]['field'] = 'memDrug';
+	d[29]['type'] = 'select';
+	d[29]['div'] = 'e15';
+	d[29]['isDynamic'] = true;
+	d[29]['trigger'] = 'isdrugs';
+
+	d[30]['field'] = 'sideSch';
+	d[30]['type'] = 'select';
+	d[30]['div'] = 'e16';
+	d[30]['isDynamic'] = true;
+	d[30]['trigger'] = 'isschizo';
+
+	d[31]['field'] = 'memSch';
+	d[31]['type'] = 'select';
+	d[31]['div'] = 'e16';
+	d[31]['isDynamic'] = true;
+	d[31]['trigger'] = 'isschizo';
+
+	d[32]['field'] = 'sideSe';
+	d[32]['type'] = 'select';
+	d[32]['div'] = 'e17';
+	d[32]['isDynamic'] = true;
+	d[32]['trigger'] = 'isseizures';
+
+	d[33]['field'] = 'memSe';
+	d[33]['type'] = 'select';
+	d[33]['div'] = 'e17';
+	d[33]['isDynamic'] = true;
+	d[33]['trigger'] = 'isseizures';
+
+	d[34]['field'] = 'sideCS';
+	d[34]['type'] = 'select';
+	d[34]['div'] = 'e18';
+	d[34]['isDynamic'] = true;
+	d[34]['trigger'] = 'iscompletedSuicide';
+
+	d[35]['field'] = 'memCS';
+	d[35]['type'] = 'select';
+	d[35]['div'] = 'e18';
+	d[35]['isDynamic'] = true;
+	d[35]['trigger'] = 'iscompletedSuicide';
+
+	d[36]['field'] = 'sideSex';
+	d[36]['type'] = 'select';
+	d[36]['div'] = 'e19';
+	d[36]['isDynamic'] = true;
+	d[36]['trigger'] = 'issexAbuse';
+
+	d[37]['field'] = 'memSex';
+	d[37]['type'] = 'select';
+	d[37]['div'] = 'e19';
+	d[37]['isDynamic'] = true;
+	d[37]['trigger'] = 'issexAbuse';
+
+	d[38]['field'] = 'sidePanick';
+	d[38]['type'] = 'select';
+	d[38]['div'] = 'e20';
+	d[38]['isDynamic'] = true;
+	d[38]['trigger'] = 'ispanic';
+
+	d[39]['field'] = 'memPanick';
+	d[39]['type'] = 'select';
+	d[39]['div'] = 'e20';
+	d[39]['isDynamic'] = true;
+	d[39]['trigger'] = 'ispanic';
+
+	d[40]['field'] = 'sideAnx';
+	d[40]['type'] = 'select';
+	d[40]['div'] = 'e21';
+	d[40]['isDynamic'] = true;
+	d[40]['trigger'] = 'isanxiety';
+
+	d[41]['field'] = 'memAnx';
+	d[41]['type'] = 'select';
+	d[41]['div'] = 'e21';
+	d[41]['isDynamic'] = true;
+	d[41]['trigger'] = 'isanxiety';
+
+	d[42]['field'] = 'sideOCD';
+	d[42]['type'] = 'select';
+	d[42]['div'] = 'e22';
+	d[42]['isDynamic'] = true;
+	d[42]['trigger'] = 'isOCD';
+
+	d[43]['field'] = 'memOCD';
+	d[43]['type'] = 'select';
+	d[43]['div'] = 'e22';
+	d[43]['isDynamic'] = true;
+	d[43]['trigger'] = 'isOCD';
+
+	d[44]['field'] = 'sideSugar';
+	d[44]['type'] = 'select';
+	d[44]['div'] = 'e23';
+	d[44]['isDynamic'] = true;
+	d[44]['trigger'] = 'isdiabetes';
+
+	d[45]['field'] = 'memSugar';
+	d[45]['type'] = 'select';
+	d[45]['div'] = 'e23';
+	d[45]['isDynamic'] = true;
+	d[45]['trigger'] = 'isdiabetes';
+
+	d[46]['field'] = 'sideCancer';
+	d[46]['type'] = 'select';
+	d[46]['div'] = 'e24';
+	d[46]['isDynamic'] = true;
+	d[46]['trigger'] = 'iscancer';
+
+	d[47]['field'] = 'memCancer';
+	d[47]['type'] = 'select';
+	d[47]['div'] = 'e24';
+	d[47]['isDynamic'] = true;
+	d[47]['trigger'] = 'iscancer';
+
+	d[48]['field'] = 'sideBlood';
+	d[48]['type'] = 'select';
+	d[48]['div'] = 'e25';
+	d[48]['isDynamic'] = true;
+	d[48]['trigger'] = 'ishighBloodPressure';
+
+	d[49]['field'] = 'memBlood';
+	d[49]['type'] = 'select';
+	d[49]['div'] = 'e25';
+	d[49]['isDynamic'] = true;
+	d[49]['trigger'] = 'ishighBloodPressure';
+
+	d[50]['field'] = 'sideAngry';
+	d[50]['type'] = 'select';
+	d[50]['div'] = 'e26';
+	d[50]['isDynamic'] = true;
+	d[50]['trigger'] = 'isanger';
+
+	d[51]['field'] = 'memAngry';
+	d[51]['type'] = 'select';
+	d[51]['div'] = 'e26';
+	d[51]['isDynamic'] = true;
+	d[51]['trigger'] = 'isanger';
+
+	return d;
 }
 
 function fetchMhLegalFieldNames() {
@@ -2566,6 +2883,7 @@ function fetchFieldList(type, section) {
 	else if (type === 'asi') {
 		result = fetchFieldList_asi(section);
 	}
+
 	return result;
 }
 
@@ -9825,8 +10143,10 @@ function post_mh_data(section) {
 			openPopUp('auto', '/generateErrors/', w, h);
 		}
 		else {
-			if (post_operation_has_erZero() === true) {
-				kill_mh_ed_zeros();
+			if (section === '/mh_education/') {
+				if (post_operation_has_erZero() === true) {
+					kill_mh_ed_zeros();
+				}				
 			}
 			else {
 				postMhFields(section);
@@ -10082,34 +10402,32 @@ function proceed_mh_stress() {
 }
 
 function proceed_mh_familyHistory() {
-	combineFamilyValues(document.getElementById('yesDepress'), document.getElementById('depressSide'), document.getElementById('depressMember'), document.getElementById('depressed'));
-	combineFamilyValues(document.getElementById('yesADD'), document.getElementById('sideADD'), document.getElementById('memADD'), document.getElementById('add'));
-	combineFamilyValues(document.getElementById('yesBed'), document.getElementById('sideBed'), document.getElementById('memBed'), document.getElementById('bedWetting'));
-	combineFamilyValues(document.getElementById('yesBi'), document.getElementById('sideBi'), document.getElementById('memBi'), document.getElementById('bipolar'));
-	combineFamilyValues(document.getElementById('yesATT'), document.getElementById('sideATT'), document.getElementById('memATT'), document.getElementById('suicideAttempt'));
-	combineFamilyValues(document.getElementById('yesPA'), document.getElementById('sidePA'), document.getElementById('memPA'), document.getElementById('physicalAbuse'));
-	combineFamilyValues(document.getElementById('yesLaw'), document.getElementById('sideLaw'), document.getElementById('memLaw'), document.getElementById('law'));
-	combineFamilyValues(document.getElementById('yesLD'), document.getElementById('sideLD'), document.getElementById('memLD'), document.getElementById('ld'));
-	combineFamilyValues(document.getElementById('yesTic'), document.getElementById('sideTic'), document.getElementById('memTic'), document.getElementById('tic'));
-	combineFamilyValues(document.getElementById('yesThy'), document.getElementById('sideThy'), document.getElementById('memThy'), document.getElementById('thyroid'));
-	combineFamilyValues(document.getElementById('yesHeart'), document.getElementById('sideHeart'), document.getElementById('memHeart'), document.getElementById('heart'));
-	combineFamilyValues(document.getElementById('yesOW'), document.getElementById('sideOW'), document.getElementById('memOW'), document.getElementById('overweight'));
-	combineFamilyValues(document.getElementById('yesMood'), document.getElementById('sideMood'), document.getElementById('memMood'), document.getElementById('mood'));
-	combineFamilyValues(document.getElementById('yesAlc'), document.getElementById('sideAlc'), document.getElementById('memAlc'), document.getElementById('alcohol'));
-
-	combineFamilyValues(document.getElementById('yesDrug'), document.getElementById('sideDrug'), document.getElementById('memDrug'), document.getElementById('drugs'));
-	combineFamilyValues(document.getElementById('yesSch'), document.getElementById('sideSch'), document.getElementById('memSch'), document.getElementById('schizo'));
-	combineFamilyValues(document.getElementById('YesSe'), document.getElementById('sideSe'), document.getElementById('memSe'), document.getElementById('seizures'));
-	combineFamilyValues(document.getElementById('yesCS'), document.getElementById('sideCS'), document.getElementById('memCS'), document.getElementById('completedSuicide'));
-	combineFamilyValues(document.getElementById('yesSex'), document.getElementById('sideSex'), document.getElementById('memSex'), document.getElementById('sexAbuse'));
-	combineFamilyValues(document.getElementById('yesPanick'), document.getElementById('sidePanick'), document.getElementById('memPanick'), document.getElementById('panic'));
-	combineFamilyValues(document.getElementById('yesAnx'), document.getElementById('sideAnx'), document.getElementById('memAnx'), document.getElementById('anxiety'));
-
-	combineFamilyValues(document.getElementById('yesOCD'), document.getElementById('sideOCD'), document.getElementById('memOCD'), document.getElementById('OCD'));
-	combineFamilyValues(document.getElementById('yesSugar'), document.getElementById('sideSugar'), document.getElementById('memSugar'), document.getElementById('diabetes'));
-	combineFamilyValues(document.getElementById('yesCancer'), document.getElementById('sideCancer'), document.getElementById('memCancer'), document.getElementById('cancer'));
-	combineFamilyValues(document.getElementById('yesBlood'), document.getElementById('sideBlood'), document.getElementById('memBlood'), document.getElementById('highBloodPressure'));
-	combineFamilyValues(document.getElementById('yesAngry'), document.getElementById('sideAngry'), document.getElementById('memAngry'), document.getElementById('anger'));
+	combineFamilyValues(grab('isdepressed'), grab('depressSide'), grab('depressMember'), grab('depressed'));
+	combineFamilyValues(grab('isadd'), grab('sideADD'), grab('memADD'), grab('add'));
+	combineFamilyValues(grab('isbedWetting'), grab('sideBed'), grab('memBed'), grab('bedWetting'));
+	combineFamilyValues(grab('isbipolar'), grab('sideBi'), grab('memBi'), grab('bipolar'));
+	combineFamilyValues(grab('issuicideAttempt'), grab('sideATT'), grab('memATT'), grab('suicideAttempt'));
+	combineFamilyValues(grab('isphysicalAbuse'), grab('sidePA'), grab('memPA'), grab('physicalAbuse'));
+	combineFamilyValues(grab('islaw'), grab('sideLaw'), grab('memLaw'), grab('law'));
+	combineFamilyValues(grab('isld'), grab('sideLD'), grab('memLD'), grab('ld'));
+	combineFamilyValues(grab('istic'), grab('sideTic'), grab('memTic'), grab('tic'));
+	combineFamilyValues(grab('isthyroid'), grab('sideThy'), grab('memThy'), grab('thyroid'));
+	combineFamilyValues(grab('isheart'), grab('sideHeart'), grab('memHeart'), grab('heart'));
+	combineFamilyValues(grab('isoverweight'), grab('sideOW'), grab('memOW'), grab('overweight'));
+	combineFamilyValues(grab('ismood'), grab('sideMood'), grab('memMood'), grab('mood'));
+	combineFamilyValues(grab('isalcohol'), grab('sideAlc'), grab('memAlc'), grab('alcohol'));
+	combineFamilyValues(grab('isdrugs'), grab('sideDrug'), grab('memDrug'), grab('drugs'));
+	combineFamilyValues(grab('isschizo'), grab('sideSch'), grab('memSch'), grab('schizo'));
+	combineFamilyValues(grab('isseizures'), grab('sideSe'), grab('memSe'), grab('seizures'));
+	combineFamilyValues(grab('iscompletedSuicide'), grab('sideCS'), grab('memCS'), grab('completedSuicide'));
+	combineFamilyValues(grab('issexAbuse'), grab('sideSex'), grab('memSex'), grab('sexAbuse'));
+	combineFamilyValues(grab('ispanic'), grab('sidePanick'), grab('memPanick'), grab('panic'));
+	combineFamilyValues(grab('isanxiety'), grab('sideAnx'), grab('memAnx'), grab('anxiety'));
+	combineFamilyValues(grab('isOCD'), grab('sideOCD'), grab('memOCD'), grab('OCD'));
+	combineFamilyValues(grab('isdiabetes'), grab('sideSugar'), grab('memSugar'), grab('diabetes'));
+	combineFamilyValues(grab('iscancer'), grab('sideCancer'), grab('memCancer'), grab('cancer'));
+	combineFamilyValues(grab('ishighBloodPressure'), grab('sideBlood'), grab('memBlood'), grab('highBloodPressure'));
+	combineFamilyValues(grab('isanger'), grab('sideAngry'), grab('memAngry'), grab('anger'));
 }
 
 function proceed_mh_legalHistory() {

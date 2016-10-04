@@ -4,7 +4,8 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
-<!--   <input type='text' id='test1' style='width: 700px;'> -->
+  <!-- <input type='text' id='test1' style='width: 700px;'> -->
+  <button onClick="javascript: post_mh_data('{{current_section}}');">Test 1</button>
     <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
@@ -15,6 +16,33 @@
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='form_name' id='form_name' value='mh_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+      <input type='hidden' name='depressed' id='depressed' value=''>
+      <input type='hidden' name='add' id='add' value=''>
+      <input type='hidden' name='bedWetting' id='bedWetting' value=''>
+      <input type='hidden' name='bipolar' id='bipolar' value=''>
+      <input type='hidden' name='suicideAttempt' id='suicideAttempt' value=''>
+      <input type='hidden' name='physicalAbuse' id='physicalAbuse' value=''>
+      <input type='hidden' name='law' id='law' value=''>
+      <input type='hidden' name='ld' id='ld' value=''>
+      <input type='hidden' name='tic' id='tic' value=''>
+      <input type='hidden' name='thyroid' id='thyroid' value=''>
+      <input type='hidden' name='heart' id='heart' value=''>
+      <input type='hidden' name='overweight' id='overweight' value=''>
+      <input type='hidden' name='mood' id='mood' value=''>
+      <input type='hidden' name='alcohol' id='alcohol' value=''>
+      <input type='hidden' name='drugs' id='drugs' value=''>
+      <input type='hidden' name='schizo' id='schizo' value=''>
+      <input type='hidden' name='seizures' id='seizures' value=''>
+      <input type='hidden' name='completedSuicide' id='completedSuicide' value=''>
+      <input type='hidden' name='sexAbuse' id='sexAbuse' value=''>
+      <input type='hidden' name='panic' id='panic' value=''>
+      <input type='hidden' name='anxiety' id='anxiety' value=''>
+      <input type='hidden' name='OCD' id='OCD' value=''>
+      <input type='hidden' name='diabetes' id='diabetes' value=''>
+      <input type='hidden' name='cancer' id='cancer' value=''>
+      <input type='hidden' name='highBloodPressure' id='highBloodPressure' value=''>
+      <input type='hidden' name='anger' id='anger' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -1005,7 +1033,7 @@
               <table class='iml-save-btn'>
                 <tr>
                   <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
-                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td>
+                  <td><div id='superBtn'><button onClick="javascript: post_mh_data('{{current_section}}'); return false;">Save & Continue</button></div></td>
                   <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
                 </tr>
               </table>
