@@ -9583,45 +9583,70 @@ function initialize_mh_education(json_data) {
 	mhMilitary();
 }
 
-function set_single_bool_val(data, triggerName) {
-	data = String(data);
+function set_single_bool_val_wData(data, triggerName, s1, s2, i1, i2) {
+	data 		= String(data);
 	triggerName = String(triggerName);
 
 	var trigger = grab(triggerName);
 	trigger.checked = false;
 
 	if (data === 'true') {
+		s1 = String(s1);
+		s2 = String(s2);
+		i1 = Number(i1);
+		i2 = Number(i2);
+
+		var select_1 = grab(s1);
+		var select_2 = grab(s2);
+
 		trigger.checked = true;
+		select_1.selectedIndex = i1;
+		select_2.selectedIndex = i2;
+	}
+}
+
+function m_dataMHF(checkName, targetName) {
+	checkName 	= String(checkName);
+	targetName 	= String(targetName);
+
+	var checkBox 	= grab(checkName);
+	var target 		= grab(targetName);
+
+	if (checkBox.checked === true) {
+		target.value = 'True';
+	}
+	else {
+		target.value = 'False';
 	}
 }
 
 function initialize_mh_family(json_data) {
-	set_single_bool_val(json_data.isdepressed, 'isdepressed');
-	set_single_bool_val(json_data.isadd, 'isadd');
-	set_single_bool_val(json_data.isbedWetting, 'isbedWetting');
-	set_single_bool_val(json_data.isbipolar, 'isbipolar');
-	set_single_bool_val(json_data.issuicideAttempt, 'issuicideAttempt');
-	set_single_bool_val(json_data.isphysicalAbuse, 'isphysicalAbuse');
-	set_single_bool_val(json_data.islaw, 'islaw');
-	set_single_bool_val(json_data.isld, 'isld');
-	set_single_bool_val(json_data.istic, 'istic');
-	set_single_bool_val(json_data.isthyroid, 'isthyroid');
-	set_single_bool_val(json_data.isheart, 'isheart');
-	set_single_bool_val(json_data.isoverweight, 'isoverweight');
-	set_single_bool_val(json_data.ismood, 'ismood');
-	set_single_bool_val(json_data.isalcohol, 'isalcohol');
-	set_single_bool_val(json_data.isdrugs, 'isdrugs');
-	set_single_bool_val(json_data.isschizo, 'isschizo');
-	set_single_bool_val(json_data.isseizures, 'isseizures');
-	set_single_bool_val(json_data.iscompletedSuicide, 'iscompletedSuicide');
-	set_single_bool_val(json_data.issexAbuse, 'issexAbuse');
-	set_single_bool_val(json_data.ispanic, 'ispanic');
-	set_single_bool_val(json_data.isanxiety, 'isanxiety');
-	set_single_bool_val(json_data.isOCD, 'isOCD');
-	set_single_bool_val(json_data.isdiabetes, 'isdiabetes');
-	set_single_bool_val(json_data.iscancer, 'iscancer');
-	set_single_bool_val(json_data.ishighBloodPressure, 'ishighBloodPressure');
-	set_single_bool_val(json_data.isanger, 'isanger');
+	set_single_bool_val_wData(json_data.isdepressed, 'isdepressed', 'depressSide', 'depressMember', json_data.depressedS, json_data.depressedM);
+	set_single_bool_val_wData(json_data.isadd, 'isadd', 'sideADD', 'memADD', json_data.addS, json_data.addM);
+	set_single_bool_val_wData(json_data.isbedWetting, 'isbedWetting', 'sideBed', 'memBed', json_data.bedWettingS, json_data.bedWettingM);
+	set_single_bool_val_wData(json_data.isbipolar, 'isbipolar', 'sideBi', 'memBi', json_data.bipolarS, json_data.bipolarM);
+	set_single_bool_val_wData(json_data.issuicideAttempt, 'issuicideAttempt', 'sideATT', 'memATT', json_data.suicideAttemptS, json_data.suicideAttemptM);
+	set_single_bool_val_wData(json_data.isphysicalAbuse, 'isphysicalAbuse', 'sidePA', 'memPA', json_data.physicalAbuseS, json_data.physicalAbuseM);
+	set_single_bool_val_wData(json_data.islaw, 'islaw', 'sideLaw', 'memLaw', json_data.lawS, json_data.lawM);
+	set_single_bool_val_wData(json_data.isld, 'isld', 'sideLD', 'memLD', json_data.ldS, json_data.ldM);
+	set_single_bool_val_wData(json_data.istic, 'istic', 'sideTic', 'memTic', json_data.ticS, json_data.ticM);
+	set_single_bool_val_wData(json_data.isthyroid, 'isthyroid', 'sideThy', 'memThy', json_data.thyroidS, json_data.thyroidM);
+	set_single_bool_val_wData(json_data.isheart, 'isheart', 'sideHeart', 'memHeart', json_data.heartS, json_data.heartM);
+	set_single_bool_val_wData(json_data.isoverweight, 'isoverweight', 'sideOW', 'memOW', json_data.overweightS, json_data.overweightM);
+	set_single_bool_val_wData(json_data.ismood, 'ismood', 'sideMood', 'memMood', json_data.moodS, json_data.moodM);
+	set_single_bool_val_wData(json_data.isalcohol, 'isalcohol', 'sideAlc', 'memAlc', json_data.alcoholS, json_data.alcoholM);
+	set_single_bool_val_wData(json_data.isdrugs, 'isdrugs', 'sideDrug', 'memDrug', json_data.drugsS, json_data.drugsM);
+	set_single_bool_val_wData(json_data.isschizo, 'isschizo', 'sideSch', 'memSch', json_data.schizoS, json_data.schizoM);
+	set_single_bool_val_wData(json_data.isseizures, 'isseizures', 'sideSe', 'memSe', json_data.seizuresS, json_data.seizuresM);
+	set_single_bool_val_wData(json_data.iscompletedSuicide, 'iscompletedSuicide', 'sideCS', 'memCS', json_data.completedSuicideS, json_data.completedSuicideM);
+	set_single_bool_val_wData(json_data.issexAbuse, 'issexAbuse', 'sideSex', 'memSex', json_data.sexAbuseS, json_data.sexAbuseM);
+	set_single_bool_val_wData(json_data.ispanic, 'ispanic', 'sidePanick', 'memPanick', json_data.panicS, json_data.panicM);
+	set_single_bool_val_wData(json_data.isanxiety, 'isanxiety', 'sideAnx', 'memAnx', json_data.anxietyS, json_data.anxietyM);
+	set_single_bool_val_wData(json_data.isOCD, 'isOCD', 'sideOCD', 'memOCD', json_data.OCDS, json_data.OCDM);
+	set_single_bool_val_wData(json_data.isdiabetes, 'isdiabetes', 'sideSugar', 'memSugar', json_data.diabetesS, json_data.diabetesM);
+	set_single_bool_val_wData(json_data.iscancer, 'iscancer', 'sideCancer', 'memCancer', json_data.cancerS, json_data.cancerM);
+	set_single_bool_val_wData(json_data.ishighBloodPressure, 'ishighBloodPressure', 'sideBlood', 'memBlood', json_data.highBloodPressureS, json_data.highBloodPressureM);
+	set_single_bool_val_wData(json_data.isanger, 'isanger', 'sideAngry', 'memAngry', json_data.angerS, json_data.angerM);
 
 	kill_selects_mh('isdepressed', 'depressSide', 'depressMember', 'e1');
 	kill_selects_mh('isadd', 'sideADD', 'memADD', 'e2');
@@ -9973,6 +9998,7 @@ function do_all_rocks() {
 }
 
 function rock_checkboxes1(option) {
+	var newVal = null;
 	option = String(option);
 
 	if (option === 'clear') {
@@ -10003,6 +10029,7 @@ function rock_checkboxes1(option) {
 		grab('ishighBloodPressure').checked = false;
 		grab('isanger').checked = false;
 		grab('checkAll').checked = false;
+		newVal = 'False';
 	}
 
 	else if (option === 'check') {
@@ -10033,6 +10060,12 @@ function rock_checkboxes1(option) {
 		grab('ishighBloodPressure').checked = true;
 		grab('isanger').checked = true;
 		grab('clearAll').checked = false;
+		newVal = 'True';
+	}
+
+	for (var i = 1; i < 27; i++) {
+		var name = 'check' + String(i);
+		grab(name).value = newVal;
 	}
 
 	do_all_rocks();
