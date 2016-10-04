@@ -9532,84 +9532,47 @@ function initialize_mh_education(json_data) {
 	var g10e = document.getElementById('g10_12e');
 	var g10f = document.getElementById('g10_12f');
 
-	//RADIO ELEMENTS
-	var behaved 		= document.getElementById('behaved');
-	var notBehaved 		= document.getElementById('notBehaved');
-	var yesAcademic 	= document.getElementById('yesAcademic');
-	var noAcademic 		= document.getElementById('noAcademic');
-	var behaved2 		= document.getElementById('behaved2');
-	var notBehaved2 	= document.getElementById('notBehaved2');
-	var yesAcademic2 	= document.getElementById('yesAcademic2');
-	var noAcademic2 	= document.getElementById('noAcademic2');
-	var behaved3 		= document.getElementById('behaved3');
-	var notBehaved3 	= document.getElementById('notBehaved3');
-	var yesAcademic3 	= document.getElementById('yesAcademic3');
-	var noAcademic3 	= document.getElementById('noAcademic3');
-
-	var yesGrad 		= document.getElementById('yesGrad');
-	var noGrad 			= document.getElementById('noGrad');
-	var hasAdvanced 	= document.getElementById('hasAdvanced');
-	var noAdvanced 		= document.getElementById('noAdvanced');
-	var yesTrade 		= document.getElementById('yesTrade');
-	var noTrade 		= document.getElementById('noTrade');
-	var isMilitary 		= document.getElementById('isMilitary');
-	var notMilitary 	= document.getElementById('notMilitary');
-	var isHonor 		= document.getElementById('isHonor');
-	var notHonor 		= document.getElementById('notHonor');
-
-	//FRIENDSHIP RADIOS
-	var kf1 = document.getElementById('friend1');
-	var kf2 = document.getElementById('friend2');
-	var kf3 = document.getElementById('friend3');
-	var kf4 = document.getElementById('friend4');
-	var kfm = document.getElementById('friendMore');
-	var g7f1 = document.getElementById('friend1g7');
-	var g7f2 = document.getElementById('friend2g7');
-	var g7f3 = document.getElementById('friend3g7');
-	var g7f4 = document.getElementById('friend4g7');
-	var g7fm = document.getElementById('friendMoreg7');
-	var g10f1 = document.getElementById('friend1g10');
-	var g10f2 = document.getElementById('friend2g10');
-	var g10f3 = document.getElementById('friend3g10');
-	var g10f4 = document.getElementById('friend4g10');
-	var g10fm = document.getElementById('friendMoreg10');
-
 	//SET THE GRADE RADIO FIELDS
 	grabGradeRadio(json_data.GradesKto6, a, b, c, d, e, f);
 	grabGradeRadio(json_data.Grades7to9, g7a, g7b, g7c, g7d, g7e, g7f);
 	grabGradeRadio(json_data.Grades10to12, g10a, g10b, g10c, g10d, g10e, g10f);
 
-	//INITIALIZE THE RADIO BUTTONS
-	setRadioElement(json_data.BehaviorProblemsKto6, behaved, notBehaved);
-	setRadioElement(json_data.AcademicProblemsKto6, yesAcademic, noAcademic);
-	setRadioElement(json_data.BehaviorProblems7to9, behaved2, notBehaved2);
-	setRadioElement(json_data.AcademicProblems7to9, yesAcademic2, noAcademic2);
-	setRadioElement(json_data.BehaviorProblems10to12, behaved3, notBehaved3);
-	setRadioElement(json_data.AcademicProblems10to12, yesAcademic3, noAcademic3);
-	setRadioElement(json_data.collegeDegree, yesGrad, noGrad);
-	setRadioElement(json_data.advanceDegree, hasAdvanced, noAdvanced);
-	setRadioElement(json_data.tradeSch, yesTrade, noTrade);
-	setRadioElement(json_data.military, isMilitary, notMilitary);
-	setRadioElement(json_data.honorableDischarge, isHonor, notHonor);
+	if (String(json_data.FriendshipsKto6) === '1') {grab('friend1').checked = true;}
+	else if (String(json_data.FriendshipsKto6) === '2') {grab('friend2').checked = true;}
+	else if (String(json_data.FriendshipsKto6) === '3') {grab('friend3').checked = true;}
+	else if (String(json_data.FriendshipsKto6) === '4') {grab('friend4').checked = true;}
+	else {grab('friendMore').checked = true;}
 
-	//SET THE NUMBER OF FRIENDSHIP RADIOS AND NUMBER FIELDS
-	grabFriendRadio(json_data.FriendshipsKto6, kf1, kf2, kf3, kf4, kfm);
-	grabFriendRadio(json_data.Friendships7to9, g7f1, g7f2, g7f3, g7f4, g7fm);
-	grabFriendRadio(json_data.Friendships10to12, g10f1, g10f2, g10f3, g10f4, g10fm);
+	if (String(json_data.Friendships7to9) === '1') {grab('friend1g7').checked = true;}
+	else if (String(json_data.Friendships7to9) === '2') {grab('friend2g7').checked = true;}
+	else if (String(json_data.Friendships7to9) === '3') {grab('friend3g7').checked = true;}
+	else if (String(json_data.Friendships7to9) === '4') {grab('friend4g7').checked = true;}
+	else {grab('friendMoreg7').checked = true;}
 
-	//SET THE NUMBER OF COLLEGE YEARS RADIO RUTTONS
-	if (String(json_data.collegeYears) === '1') {
-		document.getElementById('college1').checked = true;
-	}
-	else if (String(json_data.collegeYears) === '2') {
-		document.getElementById('college2').checked = true;
-	}
-	else if (String(json_data.collegeYears) === '3') {
-		document.getElementById('college3').checked = true;
-	}
-	else {
-		document.getElementById('college4').checked = true;
-	}
+	if (String(json_data.Friendships10to12) === '1') {grab('friend1g10').checked = true;}
+	else if (String(json_data.Friendships10to12) === '2') {grab('friend2g10').checked = true;}
+	else if (String(json_data.Friendships10to12) === '3') {grab('friend3g10').checked = true;}
+	else if (String(json_data.Friendships10to12) === '4') {grab('friend4g10').checked = true;}
+	else {grab('friendMoreg10').checked = true;}
+
+	if (String(json_data.collegeYears) === '1') {grab('college1').checked = true;}
+	else if (String(json_data.collegeYears) === '2') {grab('college2').checked = true;}
+	else if (String(json_data.collegeYears) === '3') {grab('college3').checked = true;}
+	else if (String(json_data.collegeYears) === '4') {grab('college4').checked = true;}
+	else {grab('collegeNone').checked = true;}
+
+	setRadioElement(json_data.BehaviorProblemsKto6, grab('behaved'), grab('notBehaved'));
+	setRadioElement(json_data.AcademicProblemsKto6, grab('yesAcademic'), grab('noAcademic'));
+	setRadioElement(json_data.BehaviorProblems7to9, grab('behaved2'), grab('notBehaved2'));
+	setRadioElement(json_data.AcademicProblems7to9, grab('yesAcademic2'), grab('noAcademic2'));
+	setRadioElement(json_data.BehaviorProblems10to12, grab('behaved3'), grab('notBehaved3'));
+	setRadioElement(json_data.AcademicProblems10to12, grab('yesAcademic3'), grab('noAcademic3'));
+
+	setRadioElement(json_data.advanceDegree, grab('yesAdvanced'), grab('noAdvanced'));
+	setRadioElement(json_data.tradeSch, grab('yesTrade'), grab('noTrade'));
+	setRadioElement(json_data.military, grab('yesMillitary'), grab('noMillitary'));
+	setRadioElement(json_data.honorableDischarge, grab('yesHonor'), grab('noHonor'));
+
 
 	//SET DYNAMIC FIELD RADIO BUTTONS
 	moreFriends('friendMore', 'numMore_label', 'numMore');
@@ -9620,115 +9583,72 @@ function initialize_mh_education(json_data) {
 	mhMilitary();
 }
 
+function set_single_bool_val(data, triggerName) {
+	data = String(data);
+	triggerName = String(triggerName);
+
+	var trigger = grab(triggerName);
+	trigger.checked = false;
+
+	if (data === 'true') {
+		trigger.checked = true;
+	}
+}
+
 function initialize_mh_family(json_data) {
-	setRadioElement(json_data.isdepressed, grab('yesDepress'), grab('noDepress'));
-	setRadioElement(json_data.isadd, grab('yesADD'), grab('noADD'));
-	setRadioElement(json_data.isbedWetting, grab('yesBed'), grab('noBed'));
-	setRadioElement(json_data.isbipolar, grab('yesBi'), grab('noBi'));
-	setRadioElement(json_data.issuicideAttempt, grab('yesATT'), grab('noATT'));
-	setRadioElement(json_data.isphysicalAbuse, grab('yesPA'), grab('noPA'));
-	setRadioElement(json_data.islaw, grab('yesLaw'), grab('noLaw'));
-	setRadioElement(json_data.isld, grab('yesLD'), grab('noLD'));
-	setRadioElement(json_data.istic, grab('yesTic'), grab('noTic'));
-	setRadioElement(json_data.isthyroid, grab('yesThy'), grab('noThy'));
-	setRadioElement(json_data.isheart, grab('yesHeart'), grab('noHeart'));
-	setRadioElement(json_data.isoverweight, grab('yesOW'), grab('noOW'));
-	setRadioElement(json_data.ismood, grab('yesMood'), grab('noMood'));
-	setRadioElement(json_data.isalcohol, grab('yesAlc'), grab('noAlc'));
-	setRadioElement(json_data.isdrugs, grab('yesDrug'), grab('noDrug'));
-	setRadioElement(json_data.isschizo, grab('yesSch'), grab('noSch'));	
-	setRadioElement(json_data.isseizures, grab('YesSe'), grab('noCS'));
-	setRadioElement(json_data.iscompletedSuicide, grab('yesCS'), grab('noCS'));
-	setRadioElement(json_data.issexAbuse, grab('yesSex'), grab('noSex'));
-	setRadioElement(json_data.ispanic, grab('yesPanick'), grab('noPanick'));
-	setRadioElement(json_data.isanxiety, grab('yesAnx'), grab('noAnx'));
-	setRadioElement(json_data.isOCD, grab('yesSugar'), grab('noSudar'));
-	setRadioElement(json_data.iscancer, grab('yesCancer'), grab('noCancer'));
-	setRadioElement(json_data.ishighBloodPressure, grab('yesBlood'), grab('noBlood'));
-	setRadioElement(json_data.isanger, grab('yesAngry'), grab('noAngry'));
+	set_single_bool_val(json_data.isdepressed, 'isdepressed');
+	set_single_bool_val(json_data.isadd, 'isadd');
+	set_single_bool_val(json_data.isbedWetting, 'isbedWetting');
+	set_single_bool_val(json_data.isbipolar, 'isbipolar');
+	set_single_bool_val(json_data.issuicideAttempt, 'issuicideAttempt');
+	set_single_bool_val(json_data.isphysicalAbuse, 'isphysicalAbuse');
+	set_single_bool_val(json_data.islaw, 'islaw');
+	set_single_bool_val(json_data.isld, 'isld');
+	set_single_bool_val(json_data.istic, 'istic');
+	set_single_bool_val(json_data.isthyroid, 'isthyroid');
+	set_single_bool_val(json_data.isheart, 'isheart');
+	set_single_bool_val(json_data.isoverweight, 'isoverweight');
+	set_single_bool_val(json_data.ismood, 'ismood');
+	set_single_bool_val(json_data.isalcohol, 'isalcohol');
+	set_single_bool_val(json_data.isdrugs, 'isdrugs');
+	set_single_bool_val(json_data.isschizo, 'isschizo');
+	set_single_bool_val(json_data.isseizures, 'isseizures');
+	set_single_bool_val(json_data.iscompletedSuicide, 'iscompletedSuicide');
+	set_single_bool_val(json_data.issexAbuse, 'issexAbuse');
+	set_single_bool_val(json_data.ispanic, 'ispanic');
+	set_single_bool_val(json_data.isanxiety, 'isanxiety');
+	set_single_bool_val(json_data.isOCD, 'isOCD');
+	set_single_bool_val(json_data.isdiabetes, 'isdiabetes');
+	set_single_bool_val(json_data.iscancer, 'iscancer');
+	set_single_bool_val(json_data.ishighBloodPressure, 'ishighBloodPressure');
+	set_single_bool_val(json_data.isanger, 'isanger');
 
-	//FAMILY SIDE SELECT OPTIONS
-	grab('depressSide').selectedIndex 	= json_data.depressedS
-	grab('sideADD').selectedIndex 		= json_data.addS
-	grab('sideBed').selectedIndex		= json_data.bedWettingS
-	grab('sideBi').selectedIndex 		= json_data.bipolarS
-	grab('sideATT').selectedIndex 		= json_data.suicideAttemptS
-	grab('sidePA').selectedIndex 		= json_data.physicalAbuseS
-	grab('sideLaw').selectedIndex 		= json_data.lawS
-	grab('sideLD').selectedIndex 		= json_data.ldS
-	grab('sideTic').selectedIndex 		= json_data.ticS
-	grab('sideThy').selectedIndex 		= json_data.thyroidS
-	grab('sideHeart').selectedIndex 	= json_data.heartS
-	grab('sideOW').selectedIndex 		= json_data.overweightS
-	grab('sideMood').selectedIndex 		= json_data.moodS
-	grab('sideAlc').selectedIndex 		= json_data.alcoholS
-	grab('sideDrug').selectedIndex 		= json_data.drugsS
-	grab('sideSch').selectedIndex 		= json_data.schizoS
-	grab('sideSe').selectedIndex 		= json_data.seizuresS
-	grab('sideCS').selectedIndex 		= json_data.completedSuicideS
-	grab('sideSex').selectedIndex 		= json_data.sexAbuseS
-	grab('sidePanick').selectedIndex 	= json_data.panicS
-	grab('sideAnx').selectedIndex 		= json_data.anxietyS
-	grab('sideOCD').selectedIndex 		= json_data.OCDS
-	grab('sideSugar').selectedIndex 	= json_data.diabetesS
-	grab('sideCancer').selectedIndex 	= json_data.cancerS
-	grab('sideBlood').selectedIndex 	= json_data.highBloodPressureS
-	grab('sideAngry').selectedIndex 	= json_data.angerS
-
-	//FAMILY MEMBER SELECT OPTIONS
-	grab('depressMember').selectedIndex 	= json_data.depressedM
-	grab('memADD').selectedIndex 			= json_data.addM
-	grab('memBed').selectedIndex			= json_data.bedWettingM
-	grab('memBi').selectedIndex 			= json_data.bipolarM
-	grab('memATT').selectedIndex 			= json_data.suicideAttemptM
-	grab('memPA').selectedIndex 			= json_data.physicalAbuseM
-	grab('memLaw').selectedIndex 			= json_data.lawM
-	grab('memLD').selectedIndex 			= json_data.ldM
-	grab('memTic').selectedIndex 			= json_data.ticM
-	grab('memThy').selectedIndex 			= json_data.thyroidM
-	grab('memHeart').selectedIndex 			= json_data.heartM
-	grab('memOW').selectedIndex 			= json_data.overweightM
-	grab('memMood').selectedIndex 			= json_data.moodM
-	grab('memAlc').selectedIndex 			= json_data.alcoholM
-	grab('memDrug').selectedIndex 			= json_data.drugsM
-	grab('memSch').selectedIndex 			= json_data.schizoM
-	grab('memSe').selectedIndex 			= json_data.seizuresM
-	grab('memCS').selectedIndex 			= json_data.completedSuicideM
-	grab('memSex').selectedIndex 			= json_data.sexAbuseM
-	grab('memPanick').selectedIndex 		= json_data.panicM
-	grab('memAnx').selectedIndex 			= json_data.anxietyM
-	grab('memOCD').selectedIndex 			= json_data.OCDM
-	grab('memSugar').selectedIndex 			= json_data.diabetesM
-	grab('memCancer').selectedIndex 		= json_data.cancerM
-	grab('memBlood').selectedIndex 			= json_data.highBloodPressureM
-	grab('memAngry').selectedIndex 			= json_data.angerM
-
-	mhFamilyRadio('yesDepress', 'depSide', 'depMem', 'depressSide', 'depressMember');
-	mhFamilyRadio('yesADD', 'sideADD_lab', 'memADD_lab', 'sideADD', 'memADD');
-	mhFamilyRadio('yesBed', 'sideBedLab', 'memBedLab', 'sideBed', 'memBed');
-	mhFamilyRadio('yesBi', 'sideBiLab', 'memBiLab', 'sideBi', 'memBi');
-	mhFamilyRadio('yesATT', 'sideATTLab', 'memATTLab', 'sideATT', 'memATT');
-	mhFamilyRadio('yesPA', 'sidePALab', 'memPALab', 'sidePA', 'memPA');
-	mhFamilyRadio('yesLaw', 'sideLawLab', 'memLawLab', 'sideLaw', 'memLaw');
-	mhFamilyRadio('yesLD', 'sideLDLab', 'memLDLab', 'sideLD', 'memLD');
-	mhFamilyRadio('yesTic', 'sideTicLab', 'memTicLab', 'sideTic', 'memTic');
-	mhFamilyRadio('yesThy', 'sideThyLab', 'memThyLab', 'sideThy', 'memThy');
-	mhFamilyRadio('yesHeart', 'sideHeartLab', 'memHeartLab', 'sideHeart', 'memHeart');
-	mhFamilyRadio('yesOW', 'sideOWLab', 'memOWLab', 'sideOW', 'memOW');
-	mhFamilyRadio('yesMood', 'sideMoodLab', 'memMoodLab', 'sideMood', 'memMood');
-	mhFamilyRadio('yesAlc', 'sideAlcLab', 'memAlcLab', 'sideAlc', 'memAlc');
-	mhFamilyRadio('yesDrug', 'sideDrugLab', 'memDrugLab', 'sideDrug', 'memDrug');
-	mhFamilyRadio('yesSch', 'sideSchLab', 'memSchLab', 'sideSch', 'memSch');
-	mhFamilyRadio('YesSe', 'sideSeLab', 'memSeLab', 'sideSe', 'memSe');
-	mhFamilyRadio('yesCS', 'sideCSLab', 'memCSLab', 'sideCS', 'memCS');
-	mhFamilyRadio('yesSex', 'sideSexLab', 'memSexLab', 'sideSex', 'memSex');
-	mhFamilyRadio('yesPanick', 'sidePanickLab', 'memPanickLab', 'sidePanick', 'memPanick');
-	mhFamilyRadio('yesAnx', 'sideAnxLab', 'memAnxLab', 'sideAnx', 'memAnx');
-	mhFamilyRadio('yesOCD', 'sideOCDLab', 'memOCDLab', 'sideOCD', 'memOCD');
-	mhFamilyRadio('yesSugar', 'sideSugarLab', 'memSugarLab', 'sideSugar', 'memSugar');
-	mhFamilyRadio('yesCancer', 'sideCancerLab', 'memCancerLab', 'sideCancer', 'memCancer');
-	mhFamilyRadio('yesBlood', 'sideBloodLab', 'memBloodLab', 'sideBlood', 'memBlood');
-	mhFamilyRadio('yesAngry', 'sideAngryLab', 'memAngryLab', 'sideAngry', 'memAngry');
+	kill_selects_mh('isdepressed', 'depressSide', 'depressMember', 'e1');
+	kill_selects_mh('isadd', 'sideADD', 'memADD', 'e2');
+	kill_selects_mh('isbedWetting', 'sideBed', 'memBed', 'e3');
+	kill_selects_mh('isbipolar', 'sideBi', 'memBi', 'e4');
+	kill_selects_mh('issuicideAttempt', 'sideATT', 'memATT', 'e5');
+	kill_selects_mh('isphysicalAbuse', 'sidePA', 'memPA', 'e6');
+	kill_selects_mh('islaw', 'sideLaw', 'memLaw', 'e7');
+	kill_selects_mh('isld', 'sideLD', 'memLD', 'e8');
+	kill_selects_mh('istic', 'sideTic', 'memTic', 'e9');
+	kill_selects_mh('isthyroid', 'sideThy', 'memThy', 'e10');
+	kill_selects_mh('isheart', 'sideHeart', 'memHeart', 'e11');
+	kill_selects_mh('isoverweight', 'sideOW', 'memOW', 'e12');
+	kill_selects_mh('ismood', 'sideMood', 'memMood', 'e13');
+	kill_selects_mh('isalcohol', 'sideAlc', 'memAlc', 'e14');
+	kill_selects_mh('isdrugs', 'sideDrug', 'memDrug', 'e15');
+	kill_selects_mh('isschizo', 'sideSch', 'memSch', 'e16');
+	kill_selects_mh('isseizures', 'sideSe', 'memSe', 'e17');
+	kill_selects_mh('iscompletedSuicide', 'sideCS', 'memCS', 'e18');
+	kill_selects_mh('issexAbuse', 'sideSex', 'memSex', 'e19');
+	kill_selects_mh('ispanic', 'sidePanick', 'memPanick', 'e20');
+	kill_selects_mh('isanxiety', 'sideAnx', 'memAnx', 'e21');
+	kill_selects_mh('isOCD', 'sideOCD', 'memOCD', 'e22');
+	kill_selects_mh('isdiabetes', 'sideSugar', 'memSugar', 'e23');
+	kill_selects_mh('iscancer', 'sideCancer', 'memCancer', 'e24');
+	kill_selects_mh('ishighBloodPressure', 'sideBlood', 'memBlood', 'e25');
+	kill_selects_mh('isanger', 'sideAngry', 'memAngry', 'e26');
 }
 
 function initialize_mh_background(json_data) {
@@ -9790,16 +9710,16 @@ function initialize_mh_stress(json_data) {
 	blank_init(json_data.isComplete, grab('otherStressExp'));
 
 
-	mhStressRadio('yesDeath', 'deathStressExp_lab', 'deathStressExp');
-	mhStressRadio('yesDivorce', 'divorceStressExp_lab', 'divorceStressExp');
-	mhStressRadio('yesMove', 'moveStressExp_lab', 'moveStressExp');
-	mhStressRadio('yesMedical', 'medicalStressExp_lab', 'medicalStressExp');
-	mhStressRadio('yesFamily', 'familyHealthStressExp_lab', 'familyHealthStressExp');
-	mhStressRadio('yesMoney', 'financialStressExp_lab', 'financialStressExp');
-	mhStressRadio('yesAbuse', 'abuseStressExp_lab', 'abuseStressExp');
-	mhStressRadio('yesAddiction', 'addictionFamilyStressExp_lab', 'addictionFamilyStressExp');
-	mhStressRadio('yesViolence', 'violenceFamilyStressExp_lab', 'violenceFamilyStressExp');
-	mhStressRadio('yesOther', 'otherStressExp_lab', 'otherStressExp');
+	mhStressRadio('yesDeath', 'deathStressExp', 'b1');
+	mhStressRadio('yesDivorce', 'divorceStressExp', 'b2');
+	mhStressRadio('yesMove', 'moveStressExp', 'b3');
+	mhStressRadio('yesMedical', 'medicalStressExp', 'b4');
+	mhStressRadio('yesFamily', 'familyHealthStressExp', 'b5');
+	mhStressRadio('yesMoney', 'financialStressExp', 'b6');
+	mhStressRadio('yesAbuse', 'abuseStressExp', 'b7');
+	mhStressRadio('yesAddiction', 'addictionFamilyStressExp', 'b8');
+	mhStressRadio('yesViolence', 'violenceFamilyStressExp', 'b9');
+	mhStressRadio('yesOther', 'otherStressExp', 'b10');
 }
 
 
@@ -10146,6 +10066,14 @@ function post_mh_data(section) {
 			if (section === '/mh_education/') {
 				if (post_operation_has_erZero() === true) {
 					kill_mh_ed_zeros();
+				}
+				else {
+					postMhFields(section);
+					var next_url = grab('next_url');
+					var form = grab('mh_form');
+					grab('save_this').value = 'true';
+					form.action = next_url.value;
+					form.submit();
 				}				
 			}
 			else {
