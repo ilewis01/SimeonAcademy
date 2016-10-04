@@ -2127,6 +2127,91 @@ function fetchMhFamilyFieldNames() {
 
 function fetchMhLegalFieldNames() {
 	var result = [];
+	var d1={}, d2={}, d3={}, d4={}, d5={}, d6={}, d7={}, d8={}, d9={}, d10={}, d11={}, d12={};
+
+	d1['field'] = 'num_arrest';
+	d1['type'] = 'number';
+	d1['div'] = 'e1';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
+	result.push(d1);
+
+	d2['field'] = 'num_convictions';
+	d2['type'] = 'number';
+	d2['div'] = 'e3';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
+	result.push(d2);
+
+	d3['field'] = 'num_DUI_charges';
+	d3['type'] = 'number';
+	d3['div'] = 'e5';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
+	result.push(d3);
+
+	d4['field'] = 'num_DUI_convictions';
+	d4['type'] = 'number';
+	d4['div'] = 'e6';
+	d4['isDynamic'] = false;
+	d4['trigger'] = null;
+	result.push(d4);
+
+	d5['field'] = 'probationOfficer';
+	d5['type'] = 'text';
+	d5['div'] = 'e30';
+	d5['isDynamic'] = true;
+	d5['trigger'] = 'haveBeen';
+	result.push(d5);
+
+	d6['field'] = 'probationOffense';
+	d6['type'] = 'text';
+	d6['div'] = 'e31';
+	d6['isDynamic'] = true;
+	d6['trigger'] = 'haveBeen';
+	result.push(d6);
+
+	d7['field'] = 'num_suspended';
+	d7['type'] = 'number';
+	d7['div'] = 'e32';
+	d7['isDynamic'] = true;
+	d7['trigger'] = 'yesSuspended';
+	result.push(d7);
+
+	d8['field'] = 'dateBenkrupcy';
+	d8['type'] = 'text';
+	d8['div'] = 'e33';
+	d8['isDynamic'] = true;
+	d8['trigger'] = 'yesBank';
+	result.push(d8);
+
+	d9['field'] = 'explainPositiveAnswers';
+	d9['type'] = 'text';
+	d9['div'] = 'e34';
+	d9['isDynamic'] = true;
+	d9['trigger'] = 'yesSuit';
+	result.push(d9);
+
+	d10['field'] = 'explainPositiveAnswers';
+	d10['type'] = 'text';
+	d10['div'] = 'e34';
+	d10['isDynamic'] = true;
+	d10['trigger'] = 'yesDivPro';
+	result.push(d10);
+
+	d11['field'] = 'explainPositiveAnswers';
+	d11['type'] = 'text';
+	d11['div'] = 'e34';
+	d11['isDynamic'] = true;
+	d11['trigger'] = 'yesChildDis';
+	result.push(d11);
+
+	d12['field'] = 'explainPositiveAnswers';
+	d12['type'] = 'text';
+	d12['div'] = 'e34';
+	d12['isDynamic'] = true;
+	d12['trigger'] = 'yesBank';
+	result.push(d12);
 
 	return result;
 }
@@ -8096,9 +8181,6 @@ function d_init_mh_demo(json_data) {
 	number_init(json_data.isComplete, grab('spouseAge'));
 	number_init(json_data.isComplete, grab('spouseWorkMos'));
 	number_init(json_data.isComplete, grab('spouseWorkYrs'));
-	number_init(json_data.isComplete, grab('numChildren'));
-	number_init(json_data.isComplete, grab('numSisters'));
-	number_init(json_data.isComplete, grab('numBrothers'));
 	number_init(json_data.isComplete, grab('motherAge'));
 	number_init(json_data.isComplete, grab('fatherAge'));
 
@@ -9537,23 +9619,23 @@ function initialize_mh_education(json_data) {
 	grabGradeRadio(json_data.Grades7to9, g7a, g7b, g7c, g7d, g7e, g7f);
 	grabGradeRadio(json_data.Grades10to12, g10a, g10b, g10c, g10d, g10e, g10f);
 
-	if (String(json_data.FriendshipsKto6) === '1') {grab('friend1').checked = true;}
+	if (String(json_data.FriendshipsKto6) === '') {grab('friendMore').checked = true;}
 	else if (String(json_data.FriendshipsKto6) === '2') {grab('friend2').checked = true;}
 	else if (String(json_data.FriendshipsKto6) === '3') {grab('friend3').checked = true;}
 	else if (String(json_data.FriendshipsKto6) === '4') {grab('friend4').checked = true;}
-	else {grab('friendMore').checked = true;}
+	else {grab('friend1').checked = true;}
 
-	if (String(json_data.Friendships7to9) === '1') {grab('friend1g7').checked = true;}
+	if (String(json_data.Friendships7to9) === '') {grab('friendMoreg7').checked = true;}
 	else if (String(json_data.Friendships7to9) === '2') {grab('friend2g7').checked = true;}
 	else if (String(json_data.Friendships7to9) === '3') {grab('friend3g7').checked = true;}
 	else if (String(json_data.Friendships7to9) === '4') {grab('friend4g7').checked = true;}
-	else {grab('friendMoreg7').checked = true;}
+	else {grab('friend1g7').checked = true;}
 
-	if (String(json_data.Friendships10to12) === '1') {grab('friend1g10').checked = true;}
+	if (String(json_data.Friendships10to12) === '') {grab('friendMoreg10').checked = true;}
 	else if (String(json_data.Friendships10to12) === '2') {grab('friend2g10').checked = true;}
 	else if (String(json_data.Friendships10to12) === '3') {grab('friend3g10').checked = true;}
 	else if (String(json_data.Friendships10to12) === '4') {grab('friend4g10').checked = true;}
-	else {grab('friendMoreg10').checked = true;}
+	else {grab('friend1g10').checked = true;}
 
 	if (String(json_data.collegeYears) === '1') {grab('college1').checked = true;}
 	else if (String(json_data.collegeYears) === '2') {grab('college2').checked = true;}
@@ -9778,29 +9860,34 @@ function initialize_mh_stress(json_data) {
 function initialize_mh_legal(json_data) {
 	blank_init(json_data.isComplete, grab('arrestCharges'));
 	blank_init(json_data.isComplete, grab('convictionCharges'));
-	blank_init(json_data.isComplete, grab('probationOfficer'));
-	blank_init(json_data.isComplete, grab('probationOffense'));
-	blank_init(json_data.isComplete, grab('dateBenkrupcy'));
-	blank_init(json_data.isComplete, grab('explainPositiveAnswers'));
 
 	number_init(json_data.isComplete, grab('num_arrest'));
 	number_init(json_data.isComplete, grab('num_convictions'));
-	number_init(json_data.isComplete, grab('num_suspended'));
 	number_init(json_data.isComplete, grab('num_DUI_charges'));
 	number_init(json_data.isComplete, grab('num_DUI_convictions'));
 
-	setRadioElement(json_data.probationPresent, grab('yesPresent'), grab('noPresent'));
-	setRadioElement(json_data.probationPast, grab('yesPast'), grab('noPast'));
-	setRadioElement(json_data.suspendedDrivePresent, grab('isSuspended'), grab('notSuspended'));
+	setRadioElement(json_data.probationPast, grab('haveBeen'), grab('haveNotBeen'));
+	setRadioElement(json_data.everSuspended, grab('yesSuspended'), grab('noSuspended'));
 	setRadioElement(json_data.hasLawsuit, grab('yesSuit'), grab('noSuit'));
-	setRadioElement(json_data.lawsuitStress, grab('yesStress'), grab('noStress'));
 	setRadioElement(json_data.inDivorce, grab('yesDivPro'), grab('noDivPro'));
 	setRadioElement(json_data.childCustody, grab('yesChildDis'), grab('noChildDis'));
 	setRadioElement(json_data.hasBankrupcy, grab('yesBank'), grab('noBank'));
 
+	if (grab('yesCurrentProb').checked === true) {
+		setRadioElement(json_data.probationPresent, grab('yesCurrentProb'), grab('noCurrentProb'));
+	}
+	if (grab('yesSuspended').checked === true) {
+		setRadioElement(json_data.suspendedDrivePresent, grab('yesCurrentSus'), grab('noCurrentSus'));
+	}
+	if (grab('yesSuit').checked === true) {
+		setRadioElement(json_data.lawsuitStress, grab('yesStress'), grab('noStress'));
+	}
+
 	mhProbation();
+	mhSuspension1();
 	mhLawsuits();
 	mhBank();
+	p_answer1_mh();
 }
 
 function d_init_mh_psych(json_data) {
@@ -10122,6 +10209,7 @@ function post_mh_data(section) {
 			var w = 500, h = 500;
 			openPopUp('auto', '/generateErrors/', w, h);
 		}
+
 		else {
 			if (section === '/mh_education/') {
 				if (post_operation_has_erZero() === true) {
@@ -10419,26 +10507,41 @@ function proceed_mh_familyHistory() {
 }
 
 function proceed_mh_legalHistory() {
-	post(false, 'number', grab('num_arrest'), null, null);
-	post(false, 'number', grab('num_convictions'), null, null);
-	post(false, 'number', grab('num_suspended'), null, null);
-	post(false, 'number', grab('num_DUI_charges'), null, null);
-	post(false, 'number', grab('num_DUI_convictions'), null, null);
-
 	post(false, 'text', grab('arrestCharges'), null, null);
 	post(false, 'text', grab('convictionCharges'), null, null);
-	post(false, 'text', grab('explainPositiveAnswers'), null, null);
 
+	post(true, 'text', grab('probationOfficer'), grab('haveBeen'), grab('m_probationOfficer'));
+	post(true, 'text', grab('probationOffense'), grab('haveBeen'), grab('m_probationOffense'));
 	post(true, 'text', grab('dateBenkrupcy'), grab('yesBank'), grab('m_dateBenkrupcy'));
 
-	if (grab('noPresent').checked === true && grab('noPast').checked === true) {
-		grab('m_probationOfficer').value = 'N/A';
-		grab('m_probationOffense').value = 'N/A';
+	post(true, 'number', grab('num_suspended'), grab('yesSuspended'), grab('m_num_suspended'));
+
+	if (grab('yesSuit').checked===true || grab('yesDivPro').checked===true || grab('yesChildDis').checked===true || grab('yesBank').checked === true) {
+		grab('m_positive').value = grab('explainPositiveAnswers').value;
 	}
-	else if (grab('yesPresent').checked === true || grab('yesPast').checked === true) {
-		grab('m_probationOfficer').value = grab('probationOfficer').value;
-		grab('m_probationOffense').value = grab('probationOffense').value;
+	else {
+		grab('m_positive').value = 'N/A';
 	}
+
+	if (grab('haveBeen').checked === true) {
+		if (grab('yesCurrentProb').checked === true) {
+			grab('m_nowProb').value = 'True';
+		}
+		else {
+			grab('m_nowProb').value = 'False';
+		}
+	}
+	else {grab('m_nowProb').value = 'False';}
+	
+	if (grab('yesSuspended').checked === true) {
+		if (grab('yesCurrentSus').checked === true) {
+			grab('m_currSus').value = 'True';
+		}
+		else {
+			grab('m_currSus').value = 'False';
+		}
+	}
+	else {grab('m_currSus').value = 'False';}
 
 	if (grab('yesSuit').checked === true) {
 		if (grab('yesStress').checked === true) {
@@ -10448,9 +10551,7 @@ function proceed_mh_legalHistory() {
 			grab('m_lawsuitStress').value = 'False';
 		}
 	}
-	else {
-		grab('m_lawsuitStress').value = 'False';
-	}
+	else {grab('m_lawsuitStress').value = 'False';}
 }
 
 function proceed_mh_psychHistory() {
@@ -10899,6 +11000,21 @@ function moreFriends(trigger_id, label_id, field_id) {
 	var field = document.getElementById(field_id);
 
 	twoElementRadioSetupNumber(trigger, label, field)
+
+	if (grab('friendMore').checked === false) {
+		opacityZero(grab('numMore_label'));
+		opacityZero(grab('numMore'));
+	}
+
+	if (grab('friendMoreg7').checked === false) {
+		opacityZero(grab('numMore_labelg7'));
+		opacityZero(grab('numMoreg7'));
+	}
+
+	if (grab('friendMoreg10').checked === false) {
+		opacityZero(grab('numMore_labelg10'));
+		opacityZero(grab('numMoreg10'));
+	}
 }
 
 function set_college_stats_mh() {
@@ -10951,6 +11067,8 @@ function mhCollegeRadio() {
 		opacityLow(grab('noAdvanced'));
 		opacityLow(grab('labM1'));
 		opacityLow(grab('labM2'));
+
+		grab('noAdvanced').checked = true;
 	}
 
 	set_college_stats_mh();
@@ -10963,7 +11081,7 @@ function mhTrade() {
 
 function mhMilitary() {
 	twoElementRadioSetup(grab('yesMillitary'), grab('mt1'), grab('militaryBranch'));
-	twoElementRadioSetup(grab('yesMillitary'), grab('mt2'), grab('militaryYears'));
+	twoElementRadioSetupNumber(grab('yesMillitary'), grab('mt2'), grab('militaryYears'));
 	twoElementRadioSetup(grab('yesMillitary'), grab('mt3'), grab('militaryRank'));
 	twoElementRadioSetup(grab('yesMillitary'), grab('mt5'), grab('yesHonor'));
 	twoElementRadioSetup(grab('yesMillitary'), grab('mt6'), grab('noHonor'));
@@ -10975,14 +11093,15 @@ function mhMilitary() {
 	else {
 		opacityLow(grab('mt4'));
 		opacityLow(grab('mt7'));
+		grab('noHonor').checked = true;
 	}
 }
 
 function grabGradeRadio(grade, r1, r2, r3, r4, r5, r6) {
 	grade = String(grade);
 
-	if (grade === 'A') {
-		r1.checked = true;
+	if (grade === 'F') {
+		r6.checked = true;
 	}
 	else if (grade === 'B') {
 		r2.checked = true;
@@ -10997,7 +11116,7 @@ function grabGradeRadio(grade, r1, r2, r3, r4, r5, r6) {
 		r5.checked = true;
 	}
 	else {
-		r6.checked = true;
+		r1.checked = true;
 	}
 }
 
@@ -11034,7 +11153,7 @@ function grabMhRelationshipRadios(rating, r1, r2, r3) {
 	else if (rating === 'Average') {
 		r2.checked = true;
 	}
-	if (rating === 'Good') {
+	else {
 		r3.checked = true;
 	}
 }
@@ -11196,11 +11315,12 @@ function mhProbation() {
 	}
 	else {
 		opacityLow(grab('p1'));
+		grab('noCurrentProb').checked = true;
 	}
 }
 
 function mhSuspension1() {
-	twoElementRadioSetup(grab('yesSuspended'), grab('s1'), grab('num_suspended'));
+	twoElementRadioSetupNumber(grab('yesSuspended'), grab('s1'), grab('num_suspended'));
 	twoElementRadioSetup(grab('yesSuspended'), grab('s3'), grab('yesCurrentSus'));
 	twoElementRadioSetup(grab('yesSuspended'), grab('s4'), grab('noCurrentSus'));
 
@@ -11209,6 +11329,7 @@ function mhSuspension1() {
 	}
 	else {
 		opacityLow(grab('s2'));
+		grab('noCurrentSus').checked = true;
 	}
 }
 
@@ -11221,6 +11342,7 @@ function mhLawsuits() {
 	}
 	else {
 		opacityLow(grab('ls3'));
+		grab('noStress').checked = true;
 	}
 }
 

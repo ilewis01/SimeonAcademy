@@ -1,1261 +1,139 @@
-hn   mnhhn  vccb     nn{% extends "base.html" %}
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}})">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Mental Health Profile</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{mh.client.fname}} {{mh.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{mh.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <!-- PROGRESS -->
-<!-- 
-            <tr>
-              <td>
-                <div id='sideProgress'>
-                  <span style='color:#5daf0d'>{{progress.completed}}&nbsp&nbsp</span>of&nbsp&nbsp<span style='color:#5daf0d'>{{progress.total}}</span>&nbsp&nbspComplete
-                </div>
-              </td>
-            </tr> -->
-
-            <tr>
-              <td>
-                <div class='{{class.mhHistory}}'>
-                  <img src="{{image.mhHistory_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_demographic/');" name='mhHistoryBtn' id='mhHistoryBtn'>
-                    History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhEducation}}'>
-                  <img src="{{image.mhEducation_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_education/');" name='mhEducationBtn' id='mhEducationBtn'>
-                     Education
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhBackground}}'>
-                  <img src="{{image.mhBackground_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_background/');" name='mhBackgroundBtn' id='mhBackgroundBtn'>
-                    Finance & Background
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhStress}}'>
-                  <img src="{{image.mhStress_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_stress/');" name='mhStressBtn' id='mhStressBtn'>
-                    Stressors
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhFamily}}'>
-                  <img src="{{image.mhFamily_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_familyHistory/');" name='mhFamilyBtn' id='mhFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhLegal}}'>
-                  <img src="{{image.mhLegal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_legal/');" name='mhLegalBtn' id='mhLegalBtn'>
-                    Legal History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhPsych}}'>
-                  <img src="{{image.mhPsych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarMh('/mh_psych/');" name='mhPsychBtn' id='mhPsychBtn'>
-                    Psychiatric History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.mhUse}}'>
-                  <img src="{{image.mhUse_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='mhUseBtn' id='mhUseBtn'>
-                    Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('mh', '{{current_section}}');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Mental Health: Alcohol and Drug Use</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-12 col-sm-12">
-                  			<div>
-                  				<form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}                  					
-                  					<!-- <input type='hidden' name='back' id='back' value='{{back}}'>
-				                    <input type='hidden' name='goToNext' id='goToNext' value='true'>
-				                    <input type='hidden' name='d_mom_state' id='d_mom_state' value='{{mom_state}}'>
-                  					<input type='hidden' name='d_dad_state' id='d_dad_state' value='{{dad_state}}'> -->
-
-                            <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='mh_id' id='mh_id' value='{{mh.id}}'>
-				                    <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-				                    <input type='hidden' name='save_section' id='save_section' value='/mh_useTable/'>	
-				                    <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='mh'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-
-                            <div class='useBorder'>
-                              <table class='useTable'>
-                                <tr>
-                                  <th>
-                                    <div id='useHeader'>
-                                      Substance
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div id='useHeader'>
-                                      How Much I Use
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div id='useHeader'>
-                                      How Often I Use
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div id='useHeader'>
-                                      How Long I Have Used
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div id='useHeader'>
-                                      Age When I Started
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div id='useHeader'>
-                                      When I Last Used
-                                    </div>
-                                  </th>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Cigarettes/Chew
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch1' id='howMuch1' class='innerTextUse' value='{{fields.howMuch1}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften1' id='howOften1' class='innerTextUse' value='{{fields.howOften1}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong1' id='howLong1' class='innerTextUse' value='{{fields.howLong1}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld1' id='howOld1' class='innerTextUse' value='{{fields.howOld1}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime1' id='lastTime1' class='innerTextUse' value='{{fields.lastTime1}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Caffine
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch2' id='howMuch2' class='innerTextUse' value='{{fields.howMuch2}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften2' id='howOften2' class='innerTextUse' value='{{fields.howOften2}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong2' id='howLong2' class='innerTextUse' value='{{fields.howLong2}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld2' id='howOld2' class='innerTextUse' value='{{fields.howOld2}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime2' id='lastTime2' class='innerTextUse' value='{{fields.lastTime2}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Alcohol
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch3' id='howMuch3' class='innerTextUse' value='{{fields.howMuch3}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften3' id='howOften3' class='innerTextUse' value='{{fields.howOften3}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong3' id='howLong3' class='innerTextUse' value='{{fields.howLong3}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld3' id='howOld3' class='innerTextUse' value='{{fields.howOld3}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime3' id='lastTime3' class='innerTextUse' value='{{fields.lastTime3}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Marijuana
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch4' id='howMuch4' class='innerTextUse' value='{{fields.howMuch4}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften4' id='howOften4' class='innerTextUse' value='{{fields.howOften4}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong4' id='howLong4' class='innerTextUse' value='{{fields.howLong4}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld4' id='howOld4' class='innerTextUse' value='{{fields.howOld4}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime4' id='lastTime4' class='innerTextUse' value='{{fields.lastTime4}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              LSD
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch5' id='howMuch5' class='innerTextUse' value='{{fields.howMuch5}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften5' id='howOften5' class='innerTextUse' value='{{fields.howOften5}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong5' id='howLong5' class='innerTextUse' value='{{fields.howLong5}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld5' id='howOld5' class='innerTextUse' value='{{fields.howOld5}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime5' id='lastTime5' class='innerTextUse' value='{{fields.lastTime5}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              PCP
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch6' id='howMuch6' class='innerTextUse' value='{{fields.howMuch6}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften6' id='howOften6' class='innerTextUse' value='{{fields.howOften6}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong6' id='howLong6' class='innerTextUse' value='{{fields.howLong6}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld6' id='howOld6' class='innerTextUse' value='{{fields.howOld6}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime6' id='lastTime6' class='innerTextUse' value='{{fields.lastTime6}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Cocaine
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch7' id='howMuch7' class='innerTextUse' value='{{fields.howMuch7}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften7' id='howOften7' class='innerTextUse' value='{{fields.howOften7}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong7' id='howLong7' class='innerTextUse' value='{{fields.howLong7}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld7' id='howOld7' class='innerTextUse' value='{{fields.howOld7}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime7' id='lastTime7' class='innerTextUse' value='{{fields.lastTime7}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Crack
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch8' id='howMuch8' class='innerTextUse' value='{{fields.howMuch8}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften8' id='howOften8' class='innerTextUse' value='{{fields.howOften8}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong8' id='howLong8' class='innerTextUse' value='{{fields.howLong8}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld8' id='howOld8' class='innerTextUse' value='{{fields.howOld8}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime8' id='lastTime8' class='innerTextUse' value='{{fields.lastTime8}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Speed
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch9' id='howMuch9' class='innerTextUse' value='{{fields.howMuch9}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften9' id='howOften9' class='innerTextUse' value='{{fields.howOften9}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong9' id='howLong9' class='innerTextUse' value='{{fields.howLong9}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld9' id='howOld9' class='innerTextUse' value='{{fields.howOld9}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime9' id='lastTime9' class='innerTextUse' value='{{fields.lastTime9}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Crystal Meth
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch10' id='howMuch10' class='innerTextUse' value='{{fields.howMuch10}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften10' id='howOften10' class='innerTextUse' value='{{fields.howOften10}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong10' id='howLong10' class='innerTextUse' value='{{fields.howLong10}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld10' id='howOld10' class='innerTextUse' value='{{fields.howOld10}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime10' id='lastTime10' class='innerTextUse' value='{{fields.lastTime10}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Heroin
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch11' id='howMuch11' class='innerTextUse' value='{{fields.howMuch11}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften11' id='howOften11' class='innerTextUse' value='{{fields.howOften11}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong11' id='howLong11' class='innerTextUse' value='{{fields.howLong11}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld11' id='howOld11' class='innerTextUse' value='{{fields.howOld11}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime11' id='lastTime11' class='innerTextUse' value='{{fields.lastTime11}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Gasoline
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch12' id='howMuch12' class='innerTextUse' value='{{fields.howMuch12}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften12' id='howOften12' class='innerTextUse' value='{{fields.howOften12}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong12' id='howLong12' class='innerTextUse' value='{{fields.howLong12}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld12' id='howOld12' class='innerTextUse' value='{{fields.howOld12}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime12' id='lastTime12' class='innerTextUse' value='{{fields.lastTime12}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Visine Eye Drops
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch13' id='howMuch13' class='innerTextUse' value='{{fields.howMuch13}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften13' id='howOften13' class='innerTextUse' value='{{fields.howOften13}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong13' id='howLong13' class='innerTextUse' value='{{fields.howLong13}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld13' id='howOld13' class='innerTextUse' value='{{fields.howOld13}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime13' id='lastTime13' class='innerTextUse' value='{{fields.lastTime13}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Over-The-Counter Drugs
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch14' id='howMuch14' class='innerTextUse' value='{{fields.howMuch14}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften14' id='howOften14' class='innerTextUse' value='{{fields.howOften14}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong14' id='howLong14' class='innerTextUse' value='{{fields.howLong14}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld14' id='howOld14' class='innerTextUse' value='{{fields.howOld14}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime14' id='lastTime14' class='innerTextUse' value='{{fields.lastTime14}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Mescaline
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch15' id='howMuch15' class='innerTextUse' value='{{fields.howMuch15}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften15' id='howOften15' class='innerTextUse' value='{{fields.howOften15}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong15' id='howLong15' class='innerTextUse' value='{{fields.howLong15}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld15' id='howOld15' class='innerTextUse' value='{{fields.howOld15}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime15' id='lastTime15' class='innerTextUse' value='{{fields.lastTime15}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Ecstasy
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch16' id='howMuch16' class='innerTextUse' value='{{fields.howMuch16}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften16' id='howOften16' class='innerTextUse' value='{{fields.howOften16}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong16' id='howLong16' class='innerTextUse' value='{{fields.howLong16}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld16' id='howOld16' class='innerTextUse' value='{{fields.howOld16}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime16' id='lastTime16' class='innerTextUse' value='{{fields.lastTime16}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Narcotic Pain Medicine
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch17' id='howMuch17' class='innerTextUse' value='{{fields.howMuch17}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften17' id='howOften17' class='innerTextUse' value='{{fields.howOften17}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong17' id='howLong17' class='innerTextUse' value='{{fields.howLong17}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld17' id='howOld17' class='innerTextUse' value='{{fields.howOld17}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime17' id='lastTime17' class='innerTextUse' value='{{fields.lastTime17}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Glue/Paint Thinner
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch18' id='howMuch18' class='innerTextUse' value='{{fields.howMuch18}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften18' id='howOften18' class='innerTextUse' value='{{fields.howOften18}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong18' id='howLong18' class='innerTextUse' value='{{fields.howLong18}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld18' id='howOld18' class='innerTextUse' value='{{fields.howOld18}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime18' id='lastTime18' class='innerTextUse' value='{{fields.lastTime18}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Dramamine
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch19' id='howMuch19' class='innerTextUse' value='{{fields.howMuch19}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften19' id='howOften19' class='innerTextUse' value='{{fields.howOften19}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong19' id='howLong19' class='innerTextUse' value='{{fields.howLong19}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld19' id='howOld19' class='innerTextUse' value='{{fields.howOld19}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime19' id='lastTime19' class='innerTextUse' value='{{fields.lastTime19}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Prescription Medication
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch20' id='howMuch20' class='innerTextUse' value='{{fields.howMuch20}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften20' id='howOften20' class='innerTextUse' value='{{fields.howOften20}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong20' id='howLong20' class='innerTextUse' value='{{fields.howLong20}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld20' id='howOld20' class='innerTextUse' value='{{fields.howOld20}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime20' id='lastTime20' class='innerTextUse' value='{{fields.lastTime20}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div>
-                                      <table class='InnerTableUse'>
-                                        <tr>
-                                          <td>
-                                            <div>
-                                              Other Substances
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howMuch21' id='howMuch21' class='innerTextUse' value='{{fields.howMuch21}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOften21' id='howOften21' class='innerTextUse' value='{{fields.howOften21}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howLong21' id='howLong21' class='innerTextUse' value='{{fields.howLong21}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='howOld21' id='howOld21' class='innerTextUse' value='{{fields.howOld21}}'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div>
-                                      <input type='text' name='lastTime21' id='lastTime21' class='innerTextUse' value='{{fields.lastTime21}}'>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
-
-				            	       
-				            </div>
-				        </div><!--  END OF LEFT SIDE -->
-				    </form>
-
-				        </div>
-				    </div>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+<body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
+<!--   <input type='text' id='test1' style='width: 700px;'> -->
+    <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='mh'>
+      <input type='hidden' name='form_name' id='form_name' value='mh_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Mental Health: Substance Use</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_demographic/');">
+                              <!-- class='{{class.clinic}}' -->
+                              <div  class='{{class.mhHistory}}'>General</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_education/');">
+                              <!-- class='{{class.social}}' -->
+                              <div  class='{{class.mhEducation}}'>Education</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: post_mh_data({{current_section}});">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_background/');">
+                              <!-- class='{{class.psycho1}}' -->
+                              <div  class='{{class.mhBackground}}'>Financial</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_stress/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhStress}}'>Stressors</div>
+                            </a>
+                          </td>
+                        <!-- </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr> -->
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_familyHistory/');">
+                              <!-- class='{{class.special}}' -->
+                              <div  class='{{class.mhFamily}}'>Family</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_legal/');">
+                              <!-- class='{{class.other}}' -->
+                              <div  class='{{class.mhLegal}}'>Legal</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_psych/');">
+                             <!--  class='{{class.source}}' -->
+                              <div  class='{{class.mhPsych}}'>Psychiatric</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarMh('/mh_useTable/');">
+                             <!--  class='{{class.psycho2}}' -->
+                              <div  class='{{class.mhUse}}'>Drug Use</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper-mh'>
+              <div class='container'>
+                <div class='row' style='margin-top:15px;'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
+                    
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div>
+              <table class='iml-save-btn'>
+                <tr>
+                  <td><button onClick="javascript: universal_generic_exit('mh', '{{current_section}}');">Exit Form</button></td>
+                  <td><div id='superBtn'><button onClick="javascript: post_mh_data({{current_section}});">Save & Continue</button></div></td>
+                  <!-- <td><button onClick="javascript: post_mh_data('{{current_section}}');">Save & Continue</button></td> -->
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
