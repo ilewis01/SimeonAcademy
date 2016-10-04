@@ -9674,6 +9674,33 @@ function initialize_mh_family(json_data) {
 	kill_selects_mh('iscancer', 'sideCancer', 'memCancer', 'e24');
 	kill_selects_mh('ishighBloodPressure', 'sideBlood', 'memBlood', 'e25');
 	kill_selects_mh('isanger', 'sideAngry', 'memAngry', 'e26');
+
+	m_dataMHF('isdepressed', 'check1');
+	m_dataMHF('isadd', 'check2');
+	m_dataMHF('isbedWetting', 'check3');
+	m_dataMHF('isbipolar', 'check4');
+	m_dataMHF('issuicideAttempt', 'check5');
+	m_dataMHF('isphysicalAbuse', 'check6');
+	m_dataMHF('islaw', 'check7');
+	m_dataMHF('isld', 'check8');
+	m_dataMHF('istic', 'check9');
+	m_dataMHF('isthyroid', 'check10');
+	m_dataMHF('isheart', 'check11');
+	m_dataMHF('isoverweight', 'check12');
+	m_dataMHF('ismood', 'check13');
+	m_dataMHF('isalcohol', 'check14');
+	m_dataMHF('isdrugs', 'check15');
+	m_dataMHF('isschizo', 'check16');
+	m_dataMHF('isseizures', 'check17');
+	m_dataMHF('iscompletedSuicide', 'check18');
+	m_dataMHF('issexAbuse', 'check19');
+	m_dataMHF('ispanic', 'check20');
+	m_dataMHF('isanxiety', 'check21');
+	m_dataMHF('isOCD', 'check22');
+	m_dataMHF('isdiabetes', 'check23');
+	m_dataMHF('iscancer', 'check24');
+	m_dataMHF('ishighBloodPressure', 'check25');
+	m_dataMHF('isanger', 'check26');
 }
 
 function initialize_mh_background(json_data) {
