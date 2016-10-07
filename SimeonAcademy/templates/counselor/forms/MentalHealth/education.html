@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: mh_initialize({{current_section}}, {{json_data}});">
-<!--   <input type='text' id='test1' style='width: 700px;'> -->
+    <!-- <input type='text' id='test1' style='width: 700px;'> -->
     <form action='' method='post' id='mh_form' name='mh_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='mh_id' id='mh_id' value='{{session.mh.id}}'>
@@ -15,6 +15,7 @@
       <input type='hidden' name='exit_type' id='exit_type' value='mh'>
       <input type='hidden' name='form_name' id='form_name' value='mh_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='min_checker' id='min_checker' value='false'>
 
       <input type='hidden' name='m_college_trigger' id='m_college_trigger' value='false'>
 
@@ -156,39 +157,9 @@
 
                       <table>
                         <tr>
-                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='FriendshipsKto6' id='friend1' value='1' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>1</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='FriendshipsKto6' id='friend2' value='2' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>2</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='FriendshipsKto6' id='friend3' value='3' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>3</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='FriendshipsKto6' id='friend4' value='4' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>4</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='FriendshipsKto6' id='friendMore' value='' onClick="javascript: moreFriends('friendMore', 'numMore_label', 'numMore');"><span>More</span>
-                            </div>
-                          </td>
-
-                          <td><div id='e1'><div id='numMore_label' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMore' id='numMore' value='{{fields.FriendshipsKto6}}' oninput="javascript: noErrorText('e1', 'numMore');"></div></td>
+                          <td><div><div class='iml-label'><li>Number of Good Friendships:</li></div></div></td>
+                          
+                          <td><div><input type='number' style='width:40px; text-align:center;' name='FriendshipsKto6' id='FriendshipsKto6' value='{{fields.FriendshipsKto6}}' oninput="javascript: noErrorText('e1', 'FriendshipsKto6');"></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -225,39 +196,9 @@
 
                       <table>
                         <tr>
-                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships7to9' id='friend1g7' value='1' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');"><span>1</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships7to9' id='friend2g7' value='2' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');"><span>2</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships7to9' id='friend3g7' value='3' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');"><span>3</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships7to9' id='friend4g7' value='4' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');"><span>4</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships7to9' id='friendMoreg7' value='' onClick="javascript: moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');"><span>More</span>
-                            </div>
-                          </td>
-
-                          <td><div id='e2'><div id='numMore_labelg7' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMoreg7' id='numMoreg7' value='{{fields.Friendships7to9}}' oninput="javascript: noErrorText('e2', 'numMoreg7');"></div></td>
+                          <td><div><div class='iml-label'><li>Number of Good Friendships:</li></div></div></td>
+                          
+                          <td><div><input type='number' style='width:40px; text-align:center;' name='Friendships7to9' id='Friendships7to9' value='{{fields.Friendships7to9}}' oninput="javascript: noErrorText('e2', 'Friendships7to9');"></div></td>
                         </tr>
                       </table>
                     </ul>
@@ -294,39 +235,9 @@
 
                       <table>
                         <tr>
-                          <td><div><div class='iml-label'><li>Good Friendships:</li></div></div></td>
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships10to12' id='friend1g10' value='1' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');"><span>1</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships10to12' id='friend2g10' value='2' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');"><span>2</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships10to12' id='friend3g10' value='3' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');"><span>3</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships10to12' id='friend4g10' value='4' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');"><span>4</span>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div class='iml-mh-radio-label2'>
-                              <input type='radio' name='Friendships10to12' id='friendMoreg10' value='' onClick="javascript: moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');"><span>More</span>
-                            </div>
-                          </td>
-
-                          <td><div id='e3'><div id='numMore_labelg10' class='iml-mh-number-label2'>How Many?</div></div></td>
-                          <td><div><input type='number' style='width:40px' name='numMoreg10' id='numMoreg10' value='{{fields.Friendships10to12}}' oninput="javascript: noErrorText('e3', 'numMoreg10');"></div></td>
+                          <td><div><div class='iml-label'><li>Number of Good Friendships:</li></div></div></td>
+                          
+                          <td><div><input type='number' style='width:40px; text-align:center;' name='Friendships10to12' id='Friendships10to12' value='{{fields.Friendships10to12}}' oninput="javascript: noErrorText('e3', 'Friendships10to12');"></div></td>
                         </tr>
                       </table>
                     </ul>

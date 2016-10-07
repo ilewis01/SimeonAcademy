@@ -12,7 +12,6 @@ function quote(value) {
 	return " + " + value  + " + ";
 }
 
-
 function isBlankText(value) {
 	var isBlank = false;
 	value = String(value);	
@@ -1481,25 +1480,25 @@ function fetchMhEDUFieldNames() {
 		college_trigger = true;
 	}
 
-	d1['field'] = 'numMore';
+	d1['field'] = 'FriendshipsKto6';
 	d1['type'] = 'number';
 	d1['div'] = 'e1';
-	d1['isDynamic'] = true;
-	d1['trigger'] = 'friendMore';
+	d1['isDynamic'] = false;
+	d1['trigger'] = null;
 	result.push(d1);
 
-	d2['field'] = 'numMoreg7';
+	d2['field'] = 'Friendships7to9';
 	d2['type'] = 'number';
 	d2['div'] = 'e2';
-	d2['isDynamic'] = true;
-	d2['trigger'] = 'friendMoreg7';
+	d2['isDynamic'] = false;
+	d2['trigger'] = null;
 	result.push(d2);
 
-	d3['field'] = 'numMoreg10';
+	d3['field'] = 'Friendships10to12';
 	d3['type'] = 'number';
 	d3['div'] = 'e3';
-	d3['isDynamic'] = true;
-	d3['trigger'] = 'friendMoreg10';
+	d3['isDynamic'] = false;
+	d3['trigger'] = null;
 	result.push(d3);
 
 	d4['field'] = 'collegeDegree';
@@ -9619,24 +9618,6 @@ function initialize_mh_education(json_data) {
 	grabGradeRadio(json_data.Grades7to9, g7a, g7b, g7c, g7d, g7e, g7f);
 	grabGradeRadio(json_data.Grades10to12, g10a, g10b, g10c, g10d, g10e, g10f);
 
-	if (String(json_data.FriendshipsKto6) === '') {grab('friendMore').checked = true;}
-	else if (String(json_data.FriendshipsKto6) === '2') {grab('friend2').checked = true;}
-	else if (String(json_data.FriendshipsKto6) === '3') {grab('friend3').checked = true;}
-	else if (String(json_data.FriendshipsKto6) === '4') {grab('friend4').checked = true;}
-	else {grab('friend1').checked = true;}
-
-	if (String(json_data.Friendships7to9) === '') {grab('friendMoreg7').checked = true;}
-	else if (String(json_data.Friendships7to9) === '2') {grab('friend2g7').checked = true;}
-	else if (String(json_data.Friendships7to9) === '3') {grab('friend3g7').checked = true;}
-	else if (String(json_data.Friendships7to9) === '4') {grab('friend4g7').checked = true;}
-	else {grab('friend1g7').checked = true;}
-
-	if (String(json_data.Friendships10to12) === '') {grab('friendMoreg10').checked = true;}
-	else if (String(json_data.Friendships10to12) === '2') {grab('friend2g10').checked = true;}
-	else if (String(json_data.Friendships10to12) === '3') {grab('friend3g10').checked = true;}
-	else if (String(json_data.Friendships10to12) === '4') {grab('friend4g10').checked = true;}
-	else {grab('friend1g10').checked = true;}
-
 	if (String(json_data.collegeYears) === '1') {grab('college1').checked = true;}
 	else if (String(json_data.collegeYears) === '2') {grab('college2').checked = true;}
 	else if (String(json_data.collegeYears) === '3') {grab('college3').checked = true;}
@@ -9655,11 +9636,6 @@ function initialize_mh_education(json_data) {
 	setRadioElement(json_data.military, grab('yesMillitary'), grab('noMillitary'));
 	setRadioElement(json_data.honorableDischarge, grab('yesHonor'), grab('noHonor'));
 
-
-	//SET DYNAMIC FIELD RADIO BUTTONS
-	moreFriends('friendMore', 'numMore_label', 'numMore');
-	moreFriends('friendMoreg7', 'numMore_labelg7', 'numMoreg7');
-	moreFriends('friendMoreg10', 'numMore_labelg10', 'numMoreg10');
 	mhCollegeRadio();
 	mhTrade();
 	mhMilitary();
@@ -9872,6 +9848,13 @@ function initialize_mh_legal(json_data) {
 	setRadioElement(json_data.inDivorce, grab('yesDivPro'), grab('noDivPro'));
 	setRadioElement(json_data.childCustody, grab('yesChildDis'), grab('noChildDis'));
 	setRadioElement(json_data.hasBankrupcy, grab('yesBank'), grab('noBank'));
+
+	if (Number(json_data.num_suspended) > 0) {
+		grab('yesSuspended').checked = true;
+	}
+	else {
+		grab('noSuspended').checked = true;
+	}
 
 	if (grab('yesCurrentProb').checked === true) {
 		setRadioElement(json_data.probationPresent, grab('yesCurrentProb'), grab('noCurrentProb'));
@@ -10190,6 +10173,205 @@ function flick_family_switch() {
 	grab('checkAll').checked = false;
 }
 
+function number_min_error(minimum, data) {
+	var hasError = false;
+	data = Number(data);
+	minimum = Number(minimum);
+
+	if (data <= minimum) {
+		hasError = true;
+	}
+
+	return hasError;
+}
+
+function grab_mh_demo_zeros() {
+	var result = [];
+
+	var d1 = {};
+	d1['value'] = Number(grab('numMarriages').value);
+	d1['minVal'] = 1;
+	d1['isDynamic'] = true;
+	di['trigger'] = grab('married').checked;
+	d2['div'] = 'e4';
+	result.push(d1);
+
+	var d2 = {};
+	d2['value'] = Number(grab('numMarriages').value);
+	d2['minVal'] = 1;
+	d2['isDynamic'] = true;
+	d2['trigger'] = grab('divorced').checked;
+	d2['div'] = 'e4';
+	result.push(d2);
+
+	var d3 = {};
+	d3['value'] = Number(grab('numMarriages').value);
+	d3['minVal'] = 1;
+	d3['isDynamic'] = true;
+	d3['trigger'] = grab('widowed').checked;
+	d3['div'] = 'e4';
+	result.push(d3);
+
+	var d4 = {};
+	d4['value'] = Number(grab('numMarriages').value);
+	d4['minVal'] = 1;
+	d4['isDynamic'] = true;
+	d4['trigger'] = grab('seperated').checked;
+	d4['div'] = 'e4';
+	result.push(d4);
+
+	var d5 = {};
+	d5['value'] = Number(grab('spouseAge').value);
+	d5['minVal'] = 12;
+	d5['isDynamic'] = true;
+	d5['trigger'] = grab('married').checked;
+	d5['div'] = 'e11';
+	result.push(d5);
+
+	var d6 = {};
+	d6['value'] = Number(grab('spouseAge').value);
+	d6['minVal'] = 12;
+	d6['isDynamic'] = true;
+	d6['trigger'] = grab('seperated').checked;
+	d6['div'] = 'e11';
+	result.push(d6);
+
+	return result;
+}
+
+function grab_mh_edu_zeros() {
+	var result = [];
+	var d1 = {}, d2 = {}, d3 = {};
+
+	d1['value'] = Number(grab('numMore').value);
+	d1['minVal'] = 5;
+	d1['isDynamic'] = true;
+	d1['trigger'] = grab('friendMore').checked;
+	d1['div'] = 'e1';
+	result.push(d1);
+
+	d2['value'] = Number(grab('numMoreg7').value);
+	d2['minVal'] = 5;
+	d2['isDynamic'] = true;
+	d2['trigger'] = grab('friendMoreg7').checked;
+	d2['div'] = 'e2';
+	result.push(d2);
+
+	d3['value'] = Number(grab('numMoreg10').value);
+	d3['minVal'] = 5;
+	d3['isDynamic'] = true;
+	d3['trigger'] = grab('friendMoreg10').checked;
+	d3['div'] = 'e3';
+	result.push(d3);
+
+	return result;
+}
+
+function grab_mh_legal_zeros() {
+	var result = [];
+
+	var d1 = {};
+	d1['value'] = Number(grab('num_suspended').value);
+	d1['minVal'] = 1;
+	d1['isDynamic'] = true;
+	d1['trigger'] = grab('yesSuspended').checked;
+	d1['div'] = 'e32';
+	result.push(d1);
+
+	return result;
+}
+
+function grab_mh_use_zeros() {
+	var result = [];
+
+	return result;
+}
+
+function fetch_min_zero_fields_mh(section) {
+	var result = [];
+	section = String(section);
+
+	if (section === '/mh_demographic/') {
+		result = grab_mh_demo_zeros();
+	}
+	else if (section === '/mh_education/') {
+		result = grab_mh_edu_zeros();
+	}
+	else if (section === '/mh_legal/') {
+		result = grab_mh_legal_zeros();
+	}
+	else if (section === '/mh_useTable/') {
+		result = grab_mh_use_zeros();
+	}
+
+	return result;
+}
+
+function snag_min_fields_uni(fType, section) {
+	var result = [];
+	section = String(section);
+	fType = String(fType);
+
+	if (fType === 'mh') {
+		result = fetch_min_zero_fields_mh(section);
+	}
+	else if (fType === 'asi') {
+
+	}
+	else if (fType === 'am') {
+
+	}
+	else if (fType === 'sap') {
+
+	}
+
+	return result;
+}
+
+function openMinErrorWindow(fList) {
+	var openWindow = false;
+	
+	for (var i = 0; i < fList.length; i++) {
+		if (fList[i]['isDynamic'] === true && fList[i]['trigger'] === true) {
+			if (fList[i]['value'] < fList[i]['minVal']) {
+				openWindow = true;
+				break;
+			}
+			else {
+				if (fList[i]['value'] < fList['minVal']) {
+					openWindow = true;
+					break;
+				}
+			}
+		}
+	}
+
+	return openWindow;
+}
+
+function set_min_val_errors(item) {
+	if (item['isDynamic'] === true && item['trigger'] === true) {
+		if (Number(item['value']) < Number(item['minVal'])) {
+			setErrorDiv(item['div']);
+		}
+	}
+	// else {
+	// 	if (Number(item['value']) < Number(item['minVal'])) {
+	// 		setErrorDiv(item['div']);
+	// 	}
+	// }
+}
+
+function run_min_val_check(fType, section) {
+	fType = String(fType);
+	section = String(section);
+	var fList = snag_min_fields_uni(fType, section);
+
+	for (var i = 0; i < fList.length; i++) {
+		set_min_val_errors(fList[i]);
+	}
+}
+
 
 function post_mh_data(section) {
 	section = String(section);
@@ -10211,9 +10393,11 @@ function post_mh_data(section) {
 		}
 
 		else {
-			if (section === '/mh_education/') {
-				if (post_operation_has_erZero() === true) {
-					kill_mh_ed_zeros();
+			if (String(grab('min_checker').value) === 'true') {
+				var fList = snag_min_fields_uni('mh', section);
+				if (openMinErrorWindow(fList) === true) {
+					run_min_val_check('mh', section);
+					openPopUp('auto', '/generateErrors/', 500, 500);
 				}
 				else {
 					postMhFields(section);
@@ -10222,8 +10406,10 @@ function post_mh_data(section) {
 					grab('save_this').value = 'true';
 					form.action = next_url.value;
 					form.submit();
-				}				
+				}
+				
 			}
+
 			else {
 				postMhFields(section);
 				var next_url = grab('next_url');
@@ -10413,31 +10599,31 @@ function set_college_m_data() {
 }
 
 function proceed_mh_education() {
-	var fk1 = document.getElementById('friend1');
-	var fk2 = document.getElementById('friend2');
-	var fk3 = document.getElementById('friend3');
-	var fk4 = document.getElementById('friend4');
-	var fkm = document.getElementById('friendMore');
-	var numMore = document.getElementById('numMore');
-	var m_FriendshipsKto6 = document.getElementById('m_FriendshipsKto6');
-	var f7g1 = document.getElementById('friend1g7');
-	var f7g2 = document.getElementById('friend2g7');
-	var f7g3 = document.getElementById('friend3g7');
-	var f7g4 = document.getElementById('friend4g7');
-	var f7gm = document.getElementById('friendMoreg7');
-	var numMoreg7 = document.getElementById('numMoreg7');
-	var m_Friendships7to9 = document.getElementById('m_Friendships7to9');
-	var f10g1 = document.getElementById('friend1g10');
-	var f10g2 = document.getElementById('friend2g10');
-	var f10g3 = document.getElementById('friend3g10');
-	var f10g4 = document.getElementById('friend4g10');
-	var f10gm = document.getElementById('friendMoreg10');
-	var numMoreg10 = document.getElementById('numMoreg10');
-	var Friendships10to12 = document.getElementById('m_Friendships10to12');	
+	// var fk1 = document.getElementById('friend1');
+	// var fk2 = document.getElementById('friend2');
+	// var fk3 = document.getElementById('friend3');
+	// var fk4 = document.getElementById('friend4');
+	// var fkm = document.getElementById('friendMore');
+	// var numMore = document.getElementById('numMore');
+	// var m_FriendshipsKto6 = document.getElementById('m_FriendshipsKto6');
+	// var f7g1 = document.getElementById('friend1g7');
+	// var f7g2 = document.getElementById('friend2g7');
+	// var f7g3 = document.getElementById('friend3g7');
+	// var f7g4 = document.getElementById('friend4g7');
+	// var f7gm = document.getElementById('friendMoreg7');
+	// var numMoreg7 = document.getElementById('numMoreg7');
+	// var m_Friendships7to9 = document.getElementById('m_Friendships7to9');
+	// var f10g1 = document.getElementById('friend1g10');
+	// var f10g2 = document.getElementById('friend2g10');
+	// var f10g3 = document.getElementById('friend3g10');
+	// var f10g4 = document.getElementById('friend4g10');
+	// var f10gm = document.getElementById('friendMoreg10');
+	// var numMoreg10 = document.getElementById('numMoreg10');
+	// var Friendships10to12 = document.getElementById('m_Friendships10to12');	
 
-	postMhEducationFriendNumber(fk1, fk2, fk3, fk4, fkm, numMore, m_FriendshipsKto6);
-	postMhEducationFriendNumber(f7g1, f7g2, f7g3, f7g4, f7gm, numMoreg7, m_Friendships7to9);
-	postMhEducationFriendNumber(f10g1, f10g2, f10g3, f10g4, f10gm, numMoreg10, Friendships10to12);
+	// postMhEducationFriendNumber(fk1, fk2, fk3, fk4, fkm, numMore, m_FriendshipsKto6);
+	// postMhEducationFriendNumber(f7g1, f7g2, f7g3, f7g4, f7gm, numMoreg7, m_Friendships7to9);
+	// postMhEducationFriendNumber(f10g1, f10g2, f10g3, f10g4, f10gm, numMoreg10, Friendships10to12);
 
 	post(true, 'text', grab('tradeSchool'), grab('yesTrade'), grab('m_tradeSchool'));
 	post(true, 'text', grab('tradeAreaStudy'), grab('yesTrade'), grab('m_tradeAreaStudy'));
@@ -11004,16 +11190,19 @@ function moreFriends(trigger_id, label_id, field_id) {
 	if (grab('friendMore').checked === false) {
 		opacityZero(grab('numMore_label'));
 		opacityZero(grab('numMore'));
+		grab('e1').className = '';
 	}
 
 	if (grab('friendMoreg7').checked === false) {
 		opacityZero(grab('numMore_labelg7'));
 		opacityZero(grab('numMoreg7'));
+		grab('e2').className = '';
 	}
 
 	if (grab('friendMoreg10').checked === false) {
 		opacityZero(grab('numMore_labelg10'));
 		opacityZero(grab('numMoreg10'));
+		grab('e3').className = '';
 	}
 }
 
