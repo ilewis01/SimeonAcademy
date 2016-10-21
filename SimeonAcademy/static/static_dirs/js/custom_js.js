@@ -9318,6 +9318,62 @@ function kidsRock() {
 	}
 }
 
+function ut_choice_check(val) {
+	val = String(val);
+	var fieldName = 'u' + val;
+	var targetName = 'm' + val;
+	var field = grab(fieldName);
+	var target = grab(targetName);
+
+	if (field.checked === true) {
+		target.value = 'true';
+	}
+	else {
+		target.value = 'false';
+	}
+
+	grab('clear_all').checked = false;
+}
+
+function turn_on_ut_text() {
+	var field = grab('u21');
+	var text = grab('useOther');
+
+	if (field.checked === true) {
+		text.disabled = false;
+		opacityHigh(text);
+	}
+	else {
+		opacityZero(text);
+		text.value = '';
+		text.disabled = true;
+	}
+}
+
+function shouldCreateUTTable() {
+	var shouldCreate = false;
+
+	for (var i = 1; i <= 21; i++) {
+		var name = 'u' + String(i);
+		var field = grab(name);
+
+		if (field.checked === true) {
+			shouldCreate = true;
+			break;
+		}
+	}
+
+	return shouldCreate;
+}
+
+function clear_ut_checks() {
+	for (var i = 1; i <= 21; i++) {
+		var name = 'u' + String(i);
+		var field = grab(name);
+		field.checked = false;
+	}
+}
+
 function buildChildHeader(header, divName, numEntries, errorList, state_html) {
 	divName = String(divName);
 	header = String(header);

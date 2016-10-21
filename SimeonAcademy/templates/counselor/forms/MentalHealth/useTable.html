@@ -17,6 +17,28 @@
       <input type='hidden' name='exit_to' id='exit_to' value=''>
       <input type='hidden' name='min_checker' id='min_checker' value='true'>
 
+      <input type='hidden' name='m1' id='m1' value='false'>
+      <input type='hidden' name='m2' id='m2' value='false'>
+      <input type='hidden' name='m3' id='m3' value='false'>
+      <input type='hidden' name='m4' id='m4' value='false'>
+      <input type='hidden' name='m5' id='m5' value='false'>
+      <input type='hidden' name='m6' id='m6' value='false'>
+      <input type='hidden' name='m7' id='m7' value='false'>
+      <input type='hidden' name='m8' id='m8' value='false'>
+      <input type='hidden' name='m9' id='m9' value='false'>
+      <input type='hidden' name='m10' id='m10' value='false'>
+      <input type='hidden' name='m11' id='m11' value='false'>
+      <input type='hidden' name='m12' id='m12' value='false'>
+      <input type='hidden' name='m13' id='m13' value='false'>
+      <input type='hidden' name='m14' id='m14' value='false'>
+      <input type='hidden' name='m15' id='m15' value='false'>
+      <input type='hidden' name='m16' id='m16' value='false'>
+      <input type='hidden' name='m17' id='m17' value='false'>
+      <input type='hidden' name='m18' id='m18' value='false'>
+      <input type='hidden' name='m19' id='m19' value='false'>
+      <input type='hidden' name='m20' id='m20' value='false'>
+      <input type='hidden' name='m21' id='m21' value='false'>
+
     <div class='container'>
       <div class='row'>
         <div class="col-md-12" style='width:100%; height:84vh;'>
@@ -105,14 +127,147 @@
               <div class='container'>
                 <div class='row' style='margin-top:15px;'>
 
-                  <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:100%; margin-left:20px;'>
-                    
-                  </div>
+                  <!-- CENTERED -->
+                  <div class='col-md-12' style='width:100%; height:100%;'>
+                    <div class='center_this_inside'>
 
-                  <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:100%; margin-left:30px;'>
-                    
+                      <div id='use_preTitle'>Please indicate the substances that your client currently uses. Check all that apply.</div>
+
+                      <div class='family_biz_container'>
+                        <div class='container' style='width:100%'>
+                          <div class='row'>
+                            <!-- LEFT SIDE -->
+                            <div class='col-md-6' style='width:50%;'>
+                              <div>
+                                <table class='useT_table'>
+                                  <tr>
+                                    <td><input type='checkbox' name='u1' id='u1' onClick="javascript: ut_choice_check('1');"></td>
+                                    <td><div class='useTLabel'>Cigarettes/Chew</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u2' id='u2' onClick="javascript: ut_choice_check('2');"></td>
+                                    <td><div class='useTLabel'>Caffine</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u3' id='u3' onClick="javascript: ut_choice_check('3');"></td>
+                                    <td><div class='useTLabel'>Alcohol</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u4' id='u4' onClick="javascript: ut_choice_check('4');"></td>
+                                    <td><div class='useTLabel'>Marijuana (Pot)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u5' id='u5' onClick="javascript: ut_choice_check('5');"></td>
+                                    <td><div class='useTLabel'>PCP (Angel Dust, Special K)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u6' id='u6' onClick="javascript: ut_choice_check('6');"></td>
+                                    <td><div class='useTLabel'>LSD (Acid, Fry)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u7' id='u7' onClick="javascript: ut_choice_check('7');"></td>
+                                    <td><div class='useTLabel'>Cocaine (Coke)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u8' id='u8' onClick="javascript: ut_choice_check('8');"></td>
+                                    <td><div class='useTLabel'>Crack</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u9' id='u9' onClick="javascript: ut_choice_check('9');"></td>
+                                    <td><div class='useTLabel'>Speed (Crank)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u10' id='u10' onClick="javascript: ut_choice_check('10');"></td>
+                                    <td><div class='useTLabel'>Crystal Meth</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u11' id='u11' onClick="javascript: ut_choice_check('11');"></td>
+                                    <td><div class='useTLabel'>Heroin</div></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+
+                            <!-- RIGHT SIDE -->
+                            <div class='col-md-6' style='width:50%;'>
+                              <div>
+                                <table class='useT_table'>
+                                  <tr>
+                                    <td><input type='checkbox' name='u12' id='u12' onClick="javascript: ut_choice_check('12');"></td>
+                                    <td><div class='useTLabel'>Gasoline</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u13' id='u13' onClick="javascript: ut_choice_check('13');"></td>
+                                    <td><div class='useTLabel'>Visine Eye Drops (To hide use of Marijuana)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u14' id='u14' onClick="javascript: ut_choice_check('14');"></td>
+                                    <td><div class='useTLabel'>Abuse of Cough Syrup/Over-the-counter Drugs</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u15' id='u15' onClick="javascript: ut_choice_check('15');"></td>
+                                    <td><div class='useTLabel'>Mescaline (Shrooms)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u16' id='u16' onClick="javascript: ut_choice_check('16');"></td>
+                                    <td><div class='useTLabel'>Ecstasy</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u17' id='u17' onClick="javascript: ut_choice_check('17');"></td>
+                                    <td><div class='useTLabel'>OxyCotin/Narcotic Pain Medicine/Morphine</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u18' id='u18' onClick="javascript: ut_choice_check('18');"></td>
+                                    <td><div class='useTLabel'>Glue, Paint Thinner, Spray Paint (Huffing)</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u19' id='u19' onClick="javascript: ut_choice_check('19');"></td>
+                                    <td><div class='useTLabel'>Dramamine</div></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='u20' id='u20' onClick="javascript: ut_choice_check('20');"></td>
+                                    <td><div class='useTLabel'>Abuse of Prescribed Medicines</div></td>
+                                  </tr>
+                                </table>
+
+                                <table class='useT_table'>
+                                  <tr>
+                                    <td><input type='checkbox' name='u21' id='u21' onClick="javascript: ut_choice_check('21'); turn_on_ut_text();"></td>
+                                    <td><div class='useTLabel' style='margin-right:5px;'>Other Substances</div></td>
+                                    <td><input type='text' name='useOther' id='useOther'></td>
+                                  </tr>
+
+                                  <tr>
+                                    <td><input type='checkbox' name='clear_all' id='clear_all' onClick='javascript: clear_ut_checks();'></td>
+                                    <td><div class='useTLabel'>Clear All</div></td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
 
                 </div>

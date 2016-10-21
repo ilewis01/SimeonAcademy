@@ -6163,6 +6163,69 @@ button:hover {
 	margin-left: 10px;
 }
 
+.iml-use_table-final {
+	width:1000px;
+	height:100%;
+	margin: auto;
+}
+
+.iml-use_table-final th {
+	text-align: center;
+	border: 1px solid black;
+}
+
+.iml-use_table-final td {
+	border: 1px solid black;
+}
+
+.iml-use_table-final input {
+	border: 1px solid gray;
+}
+
+.iml_use_th_long {
+	width:200px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	/*background-color: red;*/
+}
+
+.iml_use_th_short {
+	width:160px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	/*background-color: red;*/
+}
+
+.iml-use-tag_label {
+	margin-left: 10px;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.useTLabel {
+	margin-top: 2px;
+	margin-left: 6px;
+}
+
+.useT_table {
+	margin-left: 50px;
+}
+
+.useT_table tr {
+	height:28px;
+}
+
+#use_preTitle {
+	margin-left: 115px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 15px;
+}
+
 
 
 
