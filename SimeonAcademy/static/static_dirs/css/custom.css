@@ -6287,6 +6287,7 @@ button:hover {
 
 .session_exit_body_iml_image {
 	background: url('/static/images/iml_bkgnd.png');
+	/*background: url('../images/greenBk1.png');*/
 	font-family: Arial;
 	padding: 2%;
 }

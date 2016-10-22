@@ -1014,6 +1014,8 @@ class MHUseTable(models.Model):
 	howOld21 = models.CharField(max_length=15, default=None, blank=True, null=True)
 	lastTime21 = models.CharField(max_length=15, default=None, blank=True, null=True)
 
+	name21 = models.CharField(max_length=45, default=None, blank=True, null=True)
+
 	def __unicode__(self):
 		return str(self.clientID)
 

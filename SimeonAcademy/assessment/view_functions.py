@@ -7099,6 +7099,7 @@ def getMhUseFields(mh):
 	result['howLong21'] = mh.useTable.howLong21
 	result['howOld21'] = mh.useTable.howOld21
 	result['lastTime21'] = mh.useTable.lastTime21
+	result['name21'] = mh.useTable.name21
 
 	result['isComplete'] = mh.useComplete
 

@@ -9383,6 +9383,11 @@ function fetch_dynamo_ut_data() {
 			data['f3'] = 'howLong' + String(i);
 			data['f4'] = 'howOld' + String(i);
 			data['f5'] = 'lastTime' + String(i);
+			data['a1'] = 'fields.howMuch' + String(i);
+			data['a2'] = 'fields.howOften' + String(i);
+			data['a3'] = 'fields.howLong' + String(i);
+			data['a4'] = 'fields.howOld' + String(i);
+			data['a5'] = 'fields.lastTime' + String(i);
 			poz_answers.push(data);
 		}
 	}
@@ -9395,6 +9400,11 @@ function fetch_dynamo_ut_data() {
 		data1['f3'] = 'howLong21';
 		data1['f4'] = 'howOld21';
 		data1['f5'] = 'lastTime21';
+		data1['a1'] = 'fields.howMuch21';
+		data1['a2'] = 'fields.howOften21';
+		data1['a3'] = 'fields.howLong21';
+		data1['a4'] = 'fields.howOld21';
+		data1['a5'] = 'fields.lastTime21';
 		poz_answers.push(data1);
 	}
 
@@ -9404,11 +9414,11 @@ function fetch_dynamo_ut_data() {
 function create_ut_single_cell(field) {
 	var html = "<tr>\
 	<td><div class=\'ut_field_title\'>" + field['title'] + "</div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\"></div></td>\
-	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\" value=\"{{" + field['a1'] + "}}\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\" value=\"{{" + field['a2'] + "}}\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\" value=\"{{" + field['a3'] + "}}\"></div></td>\
+	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\" value=\"{{" + field['a4'] + "}}\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\" value=\"{{" + field['a5'] + "}}\"></div></td>\
 	</tr>";
 
 	return html;
@@ -10063,132 +10073,187 @@ function d_init_mh_psych(json_data) {
 	blank_init(json_data.isComplete, grab('psychiatricHistory'));
 }
 
+function setUp_use_hidden() {
+	var div = grab('c_fields');
+	var html = '';
+
+	for (var i = 1; i <= 21; i++) {
+		var n1 = 'm_howMuch' + String(i);
+		var n2 = 'm_howOften' + String(i);
+		var n3 = 'm_howLong' + String(i);
+		var n4 = 'm_howOld' + String(i);
+		var n5 = 'm_lastTime' + String(i);
+
+		var line = "<input type=\'hidden\' name=\'" + n1 + "\' id=\'" + n1 + "\' value=\"\">\
+		<input type=\'hidden\' name=\'" + n2 + "\' id=\'" + n2 + "\' value=\"\">\
+		<input type=\'hidden\' name=\'" + n3 + "\' id=\'" + n3 + "\' value=\"\">\
+		<input type=\'hidden\' name=\'" + n4 + "\' id=\'" + n4 + "\' value=\"\">\
+		<input type=\'hidden\' name=\'" + n5 + "\' id=\'" + n5 + "\' value=\"\">\
+		";
+		html += line;
+	}
+
+	div.innerHTML = html;
+}
+
+function set_hidden_useTable_data(data) {
+	grab('m_howMuch1').value = data.howMuch1;
+	grab('m_howMuch2').value = data.howMuch2;
+	grab('m_howMuch3').value = data.howMuch3;
+	grab('m_howMuch4').value = data.howMuch4;
+	grab('m_howMuch5').value = data.howMuch5;
+	grab('m_howMuch6').value = data.howMuch6;
+	grab('m_howMuch7').value = data.howMuch7;
+	grab('m_howMuch8').value = data.howMuch8;
+	grab('m_howMuch9').value = data.howMuch9;
+	grab('m_howMuch10').value = data.howMuch10;
+	grab('m_howMuch11').value = data.howMuch11;
+	grab('m_howMuch12').value = data.howMuch12;
+	grab('m_howMuch13').value = data.howMuch13;
+	grab('m_howMuch14').value = data.howMuch14;
+	grab('m_howMuch15').value = data.howMuch15;
+	grab('m_howMuch16').value = data.howMuch16;
+	grab('m_howMuch17').value = data.howMuch17;
+	grab('m_howMuch18').value = data.howMuch18;
+	grab('m_howMuch19').value = data.howMuch19;
+	grab('m_howMuch20').value = data.howMuch20;
+	grab('m_howMuch21').value = data.howMuch21;
+
+	grab('m_howOften1').value = data.howOften1;
+	grab('m_howOften2').value = data.howOften2;
+	grab('m_howOften3').value = data.howOften3;
+	grab('m_howOften4').value = data.howOften4;
+	grab('m_howOften5').value = data.howOften5;
+	grab('m_howOften6').value = data.howOften6;
+	grab('m_howOften7').value = data.howOften7;
+	grab('m_howOften8').value = data.howOften8;
+	grab('m_howOften9').value = data.howOften9;
+	grab('m_howOften10').value = data.howOften10;
+	grab('m_howOften11').value = data.howOften11;
+	grab('m_howOften12').value = data.howOften12;
+	grab('m_howOften13').value = data.howOften13;
+	grab('m_howOften14').value = data.howOften14;
+	grab('m_howOften15').value = data.howOften15;
+	grab('m_howOften16').value = data.howOften16;
+	grab('m_howOften17').value = data.howOften17;
+	grab('m_howOften18').value = data.howOften18;
+	grab('m_howOften19').value = data.howOften19;
+	grab('m_howOften20').value = data.howOften20;
+	grab('m_howOften21').value = data.howOften21;
+
+	grab('m_howLong1').value = data.howLong1;
+	grab('m_howLong2').value = data.howLong2;
+	grab('m_howLong3').value = data.howLong3;
+	grab('m_howLong4').value = data.howLong4;
+	grab('m_howLong5').value = data.howLong5;
+	grab('m_howLong6').value = data.howLong6;
+	grab('m_howLong7').value = data.howLong7;
+	grab('m_howLong8').value = data.howLong8;
+	grab('m_howLong9').value = data.howLong9;
+	grab('m_howLong10').value = data.howLong10;
+	grab('m_howLong11').value = data.howLong11;
+	grab('m_howLong12').value = data.howLong12;
+	grab('m_howLong13').value = data.howLong13;
+	grab('m_howLong14').value = data.howLong14;
+	grab('m_howLong15').value = data.howLong15;
+	grab('m_howLong16').value = data.howLong16;
+	grab('m_howLong17').value = data.howLong17;
+	grab('m_howLong18').value = data.howLong18;
+	grab('m_howLong19').value = data.howLong19;
+	grab('m_howLong20').value = data.howLong20;
+	grab('m_howLong21').value = data.howLong21;
+
+	grab('m_howOld1').value = data.howOld1;
+	grab('m_howOld2').value = data.howOld2;
+	grab('m_howOld3').value = data.howOld3;
+	grab('m_howOld4').value = data.howOld4;
+	grab('m_howOld5').value = data.howOld5;
+	grab('m_howOld6').value = data.howOld6;
+	grab('m_howOld7').value = data.howOld7;
+	grab('m_howOld8').value = data.howOld8;
+	grab('m_howOld9').value = data.howOld9;
+	grab('m_howOld10').value = data.howOld10;
+	grab('m_howOld11').value = data.howOld11;
+	grab('m_howOld12').value = data.howOld12;
+	grab('m_howOld13').value = data.howOld13;
+	grab('m_howOld14').value = data.howOld14;
+	grab('m_howOld15').value = data.howOld15;
+	grab('m_howOld16').value = data.howOld16;
+	grab('m_howOld17').value = data.howOld17;
+	grab('m_howOld18').value = data.howOld18;
+	grab('m_howOld19').value = data.howOld19;
+	grab('m_howOld20').value = data.howOld20;
+	grab('m_howOld21').value = data.howOld21;
+
+	grab('m_lastTime1').value = data.lastTime1;
+	grab('m_lastTime2').value = data.lastTime2;
+	grab('m_lastTime3').value = data.lastTime3;
+	grab('m_lastTime4').value = data.lastTime4;
+	grab('m_lastTime5').value = data.lastTime5;
+	grab('m_lastTime6').value = data.lastTime6;
+	grab('m_lastTime7').value = data.lastTime7;
+	grab('m_lastTime8').value = data.lastTime8;
+	grab('m_lastTime9').value = data.lastTime9;
+	grab('m_lastTime10').value = data.lastTime10;
+	grab('m_lastTime11').value = data.lastTime11;
+	grab('m_lastTime12').value = data.lastTime12;
+	grab('m_lastTime13').value = data.lastTime13;
+	grab('m_lastTime14').value = data.lastTime14;
+	grab('m_lastTime15').value = data.lastTime15;
+	grab('m_lastTime16').value = data.lastTime16;
+	grab('m_lastTime17').value = data.lastTime17;
+	grab('m_lastTime18').value = data.lastTime18;
+	grab('m_lastTime19').value = data.lastTime19;
+	grab('m_lastTime20').value = data.lastTime20;
+	grab('m_lastTime21').value = data.lastTime21;
+}
+
+function set_init_useTable_checkboxes(fieldName, boxName) {
+	fieldName = String(fieldName);
+	boxName = String(boxName);
+
+	var field = grab(fieldName);
+	var box = grab(boxName);
+
+	if (isBlankText(field.value) === false && field.value !== null) {
+		box.checked = true;
+	}
+	else {
+		box.checked = false;
+		field.value = 'N/A';
+	}
+}
+
+
 function initialize_mh_use(json_data) {
-	blank_init(json_data.isComplete, grab('howMuch1'));
-	blank_init(json_data.isComplete, grab('howOften1'));
-	blank_init(json_data.isComplete, grab('howLong1'));
-	blank_init(json_data.isComplete, grab('howOld1'));
-	blank_init(json_data.isComplete, grab('lastTime1'));
+	setUp_use_hidden();
+	set_hidden_useTable_data(json_data);
 
-	blank_init(json_data.isComplete, grab('howMuch2'));
-	blank_init(json_data.isComplete, grab('howOften2'));
-	blank_init(json_data.isComplete, grab('howLong2'));
-	blank_init(json_data.isComplete, grab('howOld2'));
-	blank_init(json_data.isComplete, grab('lastTime2'));
+	set_init_useTable_checkboxes('m_howMuch1', 'u1');
+	set_init_useTable_checkboxes('m_howMuch2', 'u2');
+	set_init_useTable_checkboxes('m_howMuch3', 'u3');
+	set_init_useTable_checkboxes('m_howMuch4', 'u4');
+	set_init_useTable_checkboxes('m_howMuch5', 'u5');
+	set_init_useTable_checkboxes('m_howMuch6', 'u6');
+	set_init_useTable_checkboxes('m_howMuch7', 'u7');
+	set_init_useTable_checkboxes('m_howMuch8', 'u8');
+	set_init_useTable_checkboxes('m_howMuch9', 'u9');
+	set_init_useTable_checkboxes('m_howMuch10', 'u10');
+	set_init_useTable_checkboxes('m_howMuch11', 'u11');
+	set_init_useTable_checkboxes('m_howMuch12', 'u12');
+	set_init_useTable_checkboxes('m_howMuch13', 'u13');
+	set_init_useTable_checkboxes('m_howMuch14', 'u14');
+	set_init_useTable_checkboxes('m_howMuch15', 'u15');
+	set_init_useTable_checkboxes('m_howMuch16', 'u16');
+	set_init_useTable_checkboxes('m_howMuch17', 'u17');
+	set_init_useTable_checkboxes('m_howMuch18', 'u18');
+	set_init_useTable_checkboxes('m_howMuch19', 'u19');
+	set_init_useTable_checkboxes('m_howMuch20', 'u20');
+	set_init_useTable_checkboxes('m_howMuch21', 'u21');
 
-	blank_init(json_data.isComplete, grab('howMuch3'));
-	blank_init(json_data.isComplete, grab('howOften3'));
-	blank_init(json_data.isComplete, grab('howLong3'));
-	blank_init(json_data.isComplete, grab('howOld3'));
-	blank_init(json_data.isComplete, grab('lastTime3'));
-
-	blank_init(json_data.isComplete, grab('howMuch4'));
-	blank_init(json_data.isComplete, grab('howOften4'));
-	blank_init(json_data.isComplete, grab('howLong4'));
-	blank_init(json_data.isComplete, grab('howOld4'));
-	blank_init(json_data.isComplete, grab('lastTime4'));
-
-	blank_init(json_data.isComplete, grab('howMuch5'));
-	blank_init(json_data.isComplete, grab('howOften5'));
-	blank_init(json_data.isComplete, grab('howLong5'));
-	blank_init(json_data.isComplete, grab('howOld5'));
-	blank_init(json_data.isComplete, grab('lastTime5'));
-
-	blank_init(json_data.isComplete, grab('howMuch6'));
-	blank_init(json_data.isComplete, grab('howOften6'));
-	blank_init(json_data.isComplete, grab('howLong6'));
-	blank_init(json_data.isComplete, grab('howOld6'));
-	blank_init(json_data.isComplete, grab('lastTime6'));
-
-	blank_init(json_data.isComplete, grab('howMuch7'));
-	blank_init(json_data.isComplete, grab('howOften7'));
-	blank_init(json_data.isComplete, grab('howLong7'));
-	blank_init(json_data.isComplete, grab('howOld7'));
-	blank_init(json_data.isComplete, grab('lastTime7'));
-
-	blank_init(json_data.isComplete, grab('howMuch8'));
-	blank_init(json_data.isComplete, grab('howOften8'));
-	blank_init(json_data.isComplete, grab('howLong8'));
-	blank_init(json_data.isComplete, grab('howOld8'));
-	blank_init(json_data.isComplete, grab('lastTime8'));
-
-	blank_init(json_data.isComplete, grab('howMuch9'));
-	blank_init(json_data.isComplete, grab('howOften9'));
-	blank_init(json_data.isComplete, grab('howLong9'));
-	blank_init(json_data.isComplete, grab('howOld9'));
-	blank_init(json_data.isComplete, grab('lastTime9'));
-
-	blank_init(json_data.isComplete, grab('howMuch10'));
-	blank_init(json_data.isComplete, grab('howOften10'));
-	blank_init(json_data.isComplete, grab('howLong10'));
-	blank_init(json_data.isComplete, grab('howOld10'));
-	blank_init(json_data.isComplete, grab('lastTime10'));
-
-	blank_init(json_data.isComplete, grab('howMuch11'));
-	blank_init(json_data.isComplete, grab('howOften11'));
-	blank_init(json_data.isComplete, grab('howLong11'));
-	blank_init(json_data.isComplete, grab('howOld11'));
-	blank_init(json_data.isComplete, grab('lastTime11'));
-
-	blank_init(json_data.isComplete, grab('howMuch12'));
-	blank_init(json_data.isComplete, grab('howOften12'));
-	blank_init(json_data.isComplete, grab('howLong12'));
-	blank_init(json_data.isComplete, grab('howOld12'));
-	blank_init(json_data.isComplete, grab('lastTime12'));
-
-	blank_init(json_data.isComplete, grab('howMuch13'));
-	blank_init(json_data.isComplete, grab('howOften13'));
-	blank_init(json_data.isComplete, grab('howLong13'));
-	blank_init(json_data.isComplete, grab('howOld13'));
-	blank_init(json_data.isComplete, grab('lastTime13'));
-
-	blank_init(json_data.isComplete, grab('howMuch14'));
-	blank_init(json_data.isComplete, grab('howOften14'));
-	blank_init(json_data.isComplete, grab('howLong14'));
-	blank_init(json_data.isComplete, grab('howOld14'));
-	blank_init(json_data.isComplete, grab('lastTime14'));
-
-	blank_init(json_data.isComplete, grab('howMuch15'));
-	blank_init(json_data.isComplete, grab('howOften15'));
-	blank_init(json_data.isComplete, grab('howLong15'));
-	blank_init(json_data.isComplete, grab('howOld15'));
-	blank_init(json_data.isComplete, grab('lastTime15'));
-
-	blank_init(json_data.isComplete, grab('howMuch16'));
-	blank_init(json_data.isComplete, grab('howOften16'));
-	blank_init(json_data.isComplete, grab('howLong16'));
-	blank_init(json_data.isComplete, grab('howOld16'));
-	blank_init(json_data.isComplete, grab('lastTime16'));
-
-	blank_init(json_data.isComplete, grab('howMuch17'));
-	blank_init(json_data.isComplete, grab('howOften17'));
-	blank_init(json_data.isComplete, grab('howLong17'));
-	blank_init(json_data.isComplete, grab('howOld17'));
-	blank_init(json_data.isComplete, grab('lastTime17'));
-
-	blank_init(json_data.isComplete, grab('howMuch18'));
-	blank_init(json_data.isComplete, grab('howOften18'));
-	blank_init(json_data.isComplete, grab('howLong18'));
-	blank_init(json_data.isComplete, grab('howOld18'));
-	blank_init(json_data.isComplete, grab('lastTime18'));
-
-	blank_init(json_data.isComplete, grab('howMuch19'));
-	blank_init(json_data.isComplete, grab('howOften19'));
-	blank_init(json_data.isComplete, grab('howLong19'));
-	blank_init(json_data.isComplete, grab('howOld19'));
-	blank_init(json_data.isComplete, grab('lastTime19'));
-
-	blank_init(json_data.isComplete, grab('howMuch20'));
-	blank_init(json_data.isComplete, grab('howOften20'));
-	blank_init(json_data.isComplete, grab('howLong20'));
-	blank_init(json_data.isComplete, grab('howOld20'));
-	blank_init(json_data.isComplete, grab('lastTime20'));
-
-	blank_init(json_data.isComplete, grab('howMuch21'));
-	blank_init(json_data.isComplete, grab('howOften21'));
-	blank_init(json_data.isComplete, grab('howLong21'));
-	blank_init(json_data.isComplete, grab('howOld21'));
-	blank_init(json_data.isComplete, grab('lastTime21'));
+	if (grab('u21').checked === true) {
+		grab('useOther').value = json_data.name21;
+	}
 }
 
 
