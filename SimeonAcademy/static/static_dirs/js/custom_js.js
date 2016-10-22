@@ -9569,18 +9569,33 @@ function setParentUt(parentName, value_Name) {
 function set_use_table_existing_values() {
 	var data = fetch_ut_post_values();
 
-	for (var i = 0; i <= data.length; i++) {
-		var n1 = 'howMuch' + data[i]['number'];
-		var n2 = 'howOften' + data[i]['number'];
-		var n3 = 'howLong' + data[i]['number'];
-		var n4 = 'howOld' + data[i]['number'];
-		var n5 = 'lastTime' + data[i]['number'];
+	for (var i = 0; i < data.length; i++) {
+		var n1 = 'howMuch' + String(data[i]['number']);
+		var n2 = 'howOften' + String(data[i]['number']);
+		var n3 = 'howLong' + String(data[i]['number']);
+		var n4 = 'howOld' + String(data[i]['number']);
+		var n5 = 'lastTime' + String(data[i]['number']);
 
-		grab(n1).value = data[i]['a1'];
-		grab(n2).value = data[i]['a2'];
-		grab(n3).value = data[i]['a3'];
-		grab(n4).value = data[i]['a4'];
-		grab(n5).value = data[i]['a5'];
+		var m1 = 'm_' + n1;
+		var m2 = 'm_' + n2;
+		var m3 = 'm_' + n3;
+		var m4 = 'm_' + n4;
+		var m5 = 'm_' + n5;
+
+		grab(n1).value = getPopParent(m1).value;
+		grab(n2).value = getPopParent(m2).value;
+		grab(n3).value = getPopParent(m3).value;
+		grab(n4).value = getPopParent(m4).value;
+		grab(n5).value = getPopParent(m5).value;
+	}
+}
+
+function ut_text_init(fieldName) {
+	fieldName = String(fieldName);
+	var field = grab(fieldName);
+
+	if (String(field.value) === 'N/A') {
+		field.value = '';
 	}
 }
 
@@ -9588,6 +9603,13 @@ function initialize_dynamo_ut() {
 	var fields = fetch_dynamo_ut_data();
 	useTableBuilder(fields);
 	set_use_table_existing_values();
+
+	for (var i = 0; i < fields.length; i++) {
+		ut_text_init(fields[i]['f1']);
+		ut_text_init(fields[i]['f2']);
+		ut_text_init(fields[i]['f3']);
+		ut_text_init(fields[i]['f5']);
+	}
 }
 
 
@@ -9627,6 +9649,7 @@ function use_table_setup() {
 		}
 	}
 	else {
+		grab('save_this').value = 'true';
 		grab('mh_form').action = grab('next_url').value;
 		grab('mh_form').submit();
 	}
@@ -9640,6 +9663,7 @@ function setNewUTData() {
 		openPopUp('auto', '/generateErrors/', 500, 500);
 	}
 	else {
+		getPopParent('save_this').value = 'true';
 		getPopParent('mh_form').action = getPopParent('next_url').value;
 		getPopParent('mh_form').submit();
 		window.close();
@@ -10378,7 +10402,7 @@ function set_init_useTable_checkboxes(f1, f2, f3, f4, f5, boxName) {
 	var field5 = grab(f5);
 	var box = grab(boxName);
 
-	if (isBlankText(field1.value) === false && field1.value !== null) {
+	if (isBlankText(field1.value) === false && field1.value !== null && field1.value !== 'N/A') {
 		box.checked = true;
 	}
 	else {

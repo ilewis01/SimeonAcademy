@@ -8622,6 +8622,8 @@ def finishMhSection(mh, section):
 def processMhData(request, current_section):
 	result = {}
 
+	print current_section
+
 	session_id = request.POST.get('session_id', '')
 	mh_id = request.POST.get('mh_id', '')
 	save_this = request.POST.get('save_this', '')
