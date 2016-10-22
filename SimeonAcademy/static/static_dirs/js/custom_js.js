@@ -9411,14 +9411,15 @@ function fetch_dynamo_ut_data() {
 	return poz_answers;
 }
 
+
 function create_ut_single_cell(field) {
 	var html = "<tr>\
 	<td><div class=\'ut_field_title\'>" + field['title'] + "</div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\" value=\"{{" + field['a1'] + "}}\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\" value=\"{{" + field['a2'] + "}}\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\" value=\"{{" + field['a3'] + "}}\"></div></td>\
-	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\" value=\"{{" + field['a4'] + "}}\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\" value=\"{{" + field['a5'] + "}}\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\" value=\"\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\" value=\"\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\" value=\"\"></div></td>\
+	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\" value=\"\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\" value=\"\"></div></td>\
 	</tr>";
 
 	return html;
@@ -9446,9 +9447,59 @@ function useTableBuilder(fields) {
 	grab('ut_builder').innerHTML = html;
 }
 
+function fetch_ut_post_values() {
+	var result = [];
+
+	for (var i = 1; i <= 21; i++) {
+		var boxName = 'u' + String(i);
+		var box = getPopParent(boxName);
+
+		if (box.checked === true) {
+			var data = {};
+
+			var data = {};
+			var n1 = 'm_howMuch' + String(i);
+			var n2 = 'm_howOften' + String(i);
+			var n3 = 'm_howLong' + String(i);
+			var n4 = 'm_howOld' + String(i);
+			var n5 = 'm_lastTime' + String(i);
+
+			data['a1'] = String(getPopParent(n1).value);
+			data['a2'] = String(getPopParent(n2).value);
+			data['a3'] = String(getPopParent(n3).value);
+			data['a4'] = String(getPopParent(n4).value);
+			data['a5'] = String(getPopParent(n5).value);
+			data['number'] = String(i);
+
+			result.push(data);
+		}
+	}
+
+	return result;
+}
+
+function set_use_table_existing_values() {
+	var data = fetch_ut_post_values();
+
+	for (var i = 0; i <= data.length; i++) {
+		var n1 = 'howMuch' + data[i]['number'];
+		var n2 = 'howOften' + data[i]['number'];
+		var n3 = 'howLong' + data[i]['number'];
+		var n4 = 'howOld' + data[i]['number'];
+		var n5 = 'lastTime' + data[i]['number'];
+
+		grab(n1).value = data[i]['a1'];
+		grab(n2).value = data[i]['a2'];
+		grab(n3).value = data[i]['a3'];
+		grab(n4).value = data[i]['a4'];
+		grab(n5).value = data[i]['a5'];
+	}
+}
+
 function initialize_dynamo_ut() {
 	var fields = fetch_dynamo_ut_data();
 	useTableBuilder(fields);
+	set_use_table_existing_values();
 }
 
 
@@ -10224,6 +10275,21 @@ function set_init_useTable_checkboxes(fieldName, boxName) {
 	}
 }
 
+function initialize_m_field(boxName, targetName) {
+	boxName = String(boxName);
+	targetName = String(targetName);
+
+	var box = grab(boxName);
+	var target = grab(targetName);
+
+	if (box.checked === true) {
+		target.value = 'true';
+	}
+	else {
+		target.value = 'false';
+	}
+}
+
 
 function initialize_mh_use(json_data) {
 	setUp_use_hidden();
@@ -10254,6 +10320,15 @@ function initialize_mh_use(json_data) {
 	if (grab('u21').checked === true) {
 		grab('useOther').value = json_data.name21;
 	}
+
+	for (var i = 1; i <= 21; i++) {
+		var boxName = 'u' + String(i);
+		var targetName = 'm' + String(i);
+
+		initialize_m_field(boxName, targetName);
+	}
+
+	turn_on_ut_text();
 }
 
 
