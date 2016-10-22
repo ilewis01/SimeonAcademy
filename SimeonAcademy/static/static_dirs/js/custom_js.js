@@ -9347,6 +9347,7 @@ function turn_on_ut_text() {
 		opacityZero(text);
 		text.value = '';
 		text.disabled = true;
+		grab('e1').className = '';
 	}
 }
 
@@ -9366,12 +9367,141 @@ function shouldCreateUTTable() {
 	return shouldCreate;
 }
 
+function fetch_dynamo_ut_data() {
+	var poz_answers = [];
+
+	for (var i = 1; i <= 20; i++) {
+		var name = 'm' + String(i);
+		var field = getPopParent(name);
+
+		if (String(field.value) === 'true') {
+			var data = {};
+			var targetName = 'l' + String(i);
+			data['title'] = String(getPopParent(targetName).innerHTML);
+			data['f1'] = 'howMuch' + String(i);
+			data['f2'] = 'howOften' + String(i);
+			data['f3'] = 'howLong' + String(i);
+			data['f4'] = 'howOld' + String(i);
+			data['f5'] = 'lastTime' + String(i);
+			poz_answers.push(data);
+		}
+	}
+
+	if (getPopParent('u21').checked === true) {
+		var data1 = {};
+		data1['title'] = String(getPopParent('useOther').value);
+		data1['f1'] = 'howMuch21';
+		data1['f2'] = 'howOften21';
+		data1['f3'] = 'howLong21';
+		data1['f4'] = 'howOld21';
+		data1['f5'] = 'lastTime21';
+		poz_answers.push(data1);
+	}
+
+	return poz_answers;
+}
+
+function create_ut_single_cell(field) {
+	var html = "<tr>\
+	<td><div class=\'ut_field_title\'>" + field['title'] + "</div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\"></div></td>\
+	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\"></div></td>\
+	</tr>";
+
+	return html;
+}
+
+function useTableBuilder(fields) {
+	var inner = '';
+	var top = "<table class=\"dynamo_useTable_table\">\
+	<tr>\
+	<th><div class=\"use_th1\">Substance</div></th>\
+	<th><div class=\"use_th2\">How Much I Use</div></th>\
+	<th><div class=\"use_th2\">How Often I Use</div></th>\
+	<th><div class=\"use_th2\">How Long I have Used</div></th>\
+	<th><div class=\"use_th2\">Age Started</div></th>\
+	<th><div class=\"use_th2\">When I Last Used</div></th>\
+	</tr>";
+	var bottom = "</table>";
+
+	for (var i = 0; i < fields.length; i++) {
+		inner += create_ut_single_cell(fields[i]);
+	}
+
+	var html = top + inner + bottom;
+
+	grab('ut_builder').innerHTML = html;
+}
+
+function initialize_dynamo_ut() {
+	var fields = fetch_dynamo_ut_data();
+	useTableBuilder(fields);
+}
+
+
+function use_table_setup() {
+	var proceed = true;
+
+	if (shouldCreateUTTable() === true) {
+		var main_height = 198;
+		var table_height = 0;
+		var total_height = 0;
+
+		if (grab('u21').checked === true) {
+			var other = grab('useOther');
+
+			if (isBlankText(other.value) === true) {
+				proceed = false;
+				setErrorDiv('e1');
+				openPopUp('auto', '/generateErrors/', 500, 500);
+			}
+		}
+
+		if (proceed === true) {
+			var numPositives = 0;
+
+			for (var i = 1; i <= 21; i++) {
+				var name = 'm' + String(i);
+				var target = grab(name);
+
+				if (String(target.value) === 'true') {
+					numPositives += 1;
+				}
+			}
+
+			table_height = (27 * numPositives);
+			total_height = main_height + table_height;
+			openPopUp('auto', '/dynamic_useTable/', 1000, total_height);
+		}
+	}
+	else {
+		//SET ALL FIELDS IN USE TABLE MODEL TO N/A AND SAVE...PROCEED TO NEXT PAGE
+	}
+}
+
 function clear_ut_checks() {
 	for (var i = 1; i <= 21; i++) {
 		var name = 'u' + String(i);
 		var field = grab(name);
 		field.checked = false;
+		ut_choice_check(i);
 	}
+	grab('e1').className = '';
+	grab('select_all').checked = false;
+	turn_on_ut_text();
+}
+
+function sel_all_ut_checks() {
+	for (var i = 1; i <= 21; i++) {
+		var name = 'u' + String(i);
+		grab(name).checked = true;
+		ut_choice_check(i);
+	}
+	grab('clear_all').checked = false;
+	turn_on_ut_text();
 }
 
 function buildChildHeader(header, divName, numEntries, errorList, state_html) {

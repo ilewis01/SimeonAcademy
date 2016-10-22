@@ -6226,6 +6226,88 @@ button:hover {
 	font-size: 15px;
 }
 
+#dynamo_ut_title {
+	text-align: center;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #6c7f7b;
+	font-style: italic;
+}
+
+.dynamo_use_container {
+	width:900px;
+	background-color: #e9e7e9;
+	/*border: 1px solid black;*/
+	box-shadow: 3px 3px 9px #888888;
+	margin: auto;
+}
+
+.dynamo_useTable_table {
+	width:100%;
+	border-spacing: 0px;
+    border-collapse: separate;
+}
+
+.dynamo_useTable_table input {
+	width: 100%;
+	text-align: center;
+}
+
+.dynamo_useTable_table th {
+	border: 1px solid black;
+}
+
+.dynamo_useTable_table td {
+	border: 1px solid black;
+	height:20px;
+}
+
+.use_th1 {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	padding:5px;
+	width:290px;
+}
+
+.use_th2 {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	padding:5px;
+	width: 100px;
+}
+
+.ut_field_title {
+	font-size: 12px;
+	font-style: italic;
+	margin-left: 10px;
+}
+
+.session_exit_body_iml_image {
+	background: url('/static/images/iml_bkgnd.png');
+	font-family: Arial;
+	padding: 2%;
+}
+
+.use_table_btn_main_box {
+	margin-left: 755px;
+}
+
+.use_table_btn_main_box button {
+	width:80px;
+	height: 25px;
+}
+
+.use_table_btn_inner {
+	border: 1px solid black;
+	padding: 3px;
+	width:166;
+	box-shadow: 3px 3px 9px #888888;
+	background-color: #6c7f7b;
+}
+
 
 
 
