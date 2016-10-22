@@ -10259,19 +10259,32 @@ function set_hidden_useTable_data(data) {
 	grab('m_lastTime21').value = data.lastTime21;
 }
 
-function set_init_useTable_checkboxes(fieldName, boxName) {
-	fieldName = String(fieldName);
+function set_init_useTable_checkboxes(f1, f2, f3, f4, f5, boxName) {
+	// fieldName = String(fieldName);
+	f1 = String(f1);
+	f2 = String(f2);
+	f3 = String(f3);
+	f4 = String(f4);
+	f5 = String(f5);
 	boxName = String(boxName);
 
-	var field = grab(fieldName);
+	var field1 = grab(f1);
+	var field2 = grab(f2);
+	var field3 = grab(f3);
+	var field4 = grab(f4);
+	var field5 = grab(f5);
 	var box = grab(boxName);
 
-	if (isBlankText(field.value) === false && field.value !== null) {
+	if (isBlankText(field1.value) === false && field1.value !== null) {
 		box.checked = true;
 	}
 	else {
 		box.checked = false;
-		field.value = 'N/A';
+		field1.value = 'N/A';
+		field2.value = 'N/A';
+		field3.value = 'N/A';
+		field4.value = 0;
+		field5.value = 'N/A';
 	}
 }
 
@@ -10295,27 +10308,27 @@ function initialize_mh_use(json_data) {
 	setUp_use_hidden();
 	set_hidden_useTable_data(json_data);
 
-	set_init_useTable_checkboxes('m_howMuch1', 'u1');
-	set_init_useTable_checkboxes('m_howMuch2', 'u2');
-	set_init_useTable_checkboxes('m_howMuch3', 'u3');
-	set_init_useTable_checkboxes('m_howMuch4', 'u4');
-	set_init_useTable_checkboxes('m_howMuch5', 'u5');
-	set_init_useTable_checkboxes('m_howMuch6', 'u6');
-	set_init_useTable_checkboxes('m_howMuch7', 'u7');
-	set_init_useTable_checkboxes('m_howMuch8', 'u8');
-	set_init_useTable_checkboxes('m_howMuch9', 'u9');
-	set_init_useTable_checkboxes('m_howMuch10', 'u10');
-	set_init_useTable_checkboxes('m_howMuch11', 'u11');
-	set_init_useTable_checkboxes('m_howMuch12', 'u12');
-	set_init_useTable_checkboxes('m_howMuch13', 'u13');
-	set_init_useTable_checkboxes('m_howMuch14', 'u14');
-	set_init_useTable_checkboxes('m_howMuch15', 'u15');
-	set_init_useTable_checkboxes('m_howMuch16', 'u16');
-	set_init_useTable_checkboxes('m_howMuch17', 'u17');
-	set_init_useTable_checkboxes('m_howMuch18', 'u18');
-	set_init_useTable_checkboxes('m_howMuch19', 'u19');
-	set_init_useTable_checkboxes('m_howMuch20', 'u20');
-	set_init_useTable_checkboxes('m_howMuch21', 'u21');
+	set_init_useTable_checkboxes('m_howMuch1','m_howOften1', 'm_howLong1', 'm_howOld1', 'm_lastTime1', 'u1');
+	set_init_useTable_checkboxes('m_howMuch2','m_howOften2', 'm_howLong2', 'm_howOld2', 'm_lastTime2', 'u2');
+	set_init_useTable_checkboxes('m_howMuch3','m_howOften3', 'm_howLong3', 'm_howOld3', 'm_lastTime3', 'u3');
+	set_init_useTable_checkboxes('m_howMuch4','m_howOften4', 'm_howLong4', 'm_howOld4', 'm_lastTime4', 'u4');
+	set_init_useTable_checkboxes('m_howMuch5','m_howOften5', 'm_howLong5', 'm_howOld5', 'm_lastTime5', 'u5');
+	set_init_useTable_checkboxes('m_howMuch6','m_howOften6', 'm_howLong6', 'm_howOld6', 'm_lastTime6', 'u6');
+	set_init_useTable_checkboxes('m_howMuch7','m_howOften7', 'm_howLong7', 'm_howOld7', 'm_lastTime7', 'u7');
+	set_init_useTable_checkboxes('m_howMuch8','m_howOften8', 'm_howLong8', 'm_howOld8', 'm_lastTime8', 'u8');
+	set_init_useTable_checkboxes('m_howMuch9','m_howOften9', 'm_howLong9', 'm_howOld9', 'm_lastTime9', 'u9');
+	set_init_useTable_checkboxes('m_howMuch10','m_howOften10', 'm_howLong10', 'm_howOld10', 'm_lastTime10', 'u10');
+	set_init_useTable_checkboxes('m_howMuch11','m_howOften11', 'm_howLong11', 'm_howOld11', 'm_lastTime11', 'u11');
+	set_init_useTable_checkboxes('m_howMuch12','m_howOften12', 'm_howLong12', 'm_howOld12', 'm_lastTime12', 'u12');
+	set_init_useTable_checkboxes('m_howMuch13','m_howOften13', 'm_howLong13', 'm_howOld13', 'm_lastTime13', 'u13');
+	set_init_useTable_checkboxes('m_howMuch14','m_howOften14', 'm_howLong14', 'm_howOld14', 'm_lastTime14', 'u14');
+	set_init_useTable_checkboxes('m_howMuch15','m_howOften15', 'm_howLong15', 'm_howOld15', 'm_lastTime15', 'u15');
+	set_init_useTable_checkboxes('m_howMuch16','m_howOften16', 'm_howLong16', 'm_howOld16', 'm_lastTime16', 'u16');
+	set_init_useTable_checkboxes('m_howMuch17','m_howOften17', 'm_howLong17', 'm_howOld17', 'm_lastTime17', 'u17');
+	set_init_useTable_checkboxes('m_howMuch18','m_howOften18', 'm_howLong18', 'm_howOld18', 'm_lastTime18', 'u18');
+	set_init_useTable_checkboxes('m_howMuch19','m_howOften19', 'm_howLong19', 'm_howOld19', 'm_lastTime19', 'u19');
+	set_init_useTable_checkboxes('m_howMuch20','m_howOften20', 'm_howLong20', 'm_howOld20', 'm_lastTime20', 'u20');
+	set_init_useTable_checkboxes('m_howMuch21','m_howOften21', 'm_howLong21', 'm_howOld12', 'm_lastTime12', 'u21');
 
 	if (grab('u21').checked === true) {
 		grab('useOther').value = json_data.name21;
