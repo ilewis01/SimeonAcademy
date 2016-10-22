@@ -9388,6 +9388,13 @@ function fetch_dynamo_ut_data() {
 			data['a3'] = 'fields.howLong' + String(i);
 			data['a4'] = 'fields.howOld' + String(i);
 			data['a5'] = 'fields.lastTime' + String(i);
+			data['p1'] = 'm_howMuch' + String(i);
+			data['p2'] = 'm_howOften' + String(i);
+			data['p3'] = 'm_howLong' + String(i);
+			data['p4'] = 'm_howOld' + String(i);
+			data['p5'] = 'm_lastTime' + String(i);
+			data['errorDiv'] = 'e' + String(i);
+			data['number'] = String(i);
 			poz_answers.push(data);
 		}
 	}
@@ -9405,6 +9412,13 @@ function fetch_dynamo_ut_data() {
 		data1['a3'] = 'fields.howLong21';
 		data1['a4'] = 'fields.howOld21';
 		data1['a5'] = 'fields.lastTime21';
+		data1['p1'] = 'm_howMuch21';
+		data1['p2'] = 'm_howOften21';
+		data1['p3'] = 'm_howLong21';
+		data1['p4'] = 'm_howOld21';
+		data1['p5'] = 'm_lastTime21';
+		data1['errorDiv'] = 'e21';
+		data1['number'] = '21';
 		poz_answers.push(data1);
 	}
 
@@ -9414,12 +9428,12 @@ function fetch_dynamo_ut_data() {
 
 function create_ut_single_cell(field) {
 	var html = "<tr>\
-	<td><div class=\'ut_field_title\'>" + field['title'] + "</div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\" value=\"\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\" value=\"\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\" value=\"\"></div></td>\
-	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\" value=\"\"></div></td>\
-	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\" value=\"\"></div></td>\
+	<td><div id=\'" + field['errorDiv'] + "\'><div class=\'ut_field_title\'>" + field['title'] + "</div></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f1'] + "\" id=\"" + field['f1'] + "\" value=\"\" oninput=\"javascript: setParentUt(\'" + field['p1']+ "\', \'" + field['f1'] + "\'); runUTErrors(\'" + field['number'] + "\');\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f2'] + "\" id=\"" + field['f2'] + "\" value=\"\" oninput=\"javascript: setParentUt(\'" + field['p2']+ "\', \'" + field['f2'] + "\'); runUTErrors(\'" + field['number'] + "\');\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f3'] + "\" id=\"" + field['f3'] + "\" value=\"\" oninput=\"javascript: setParentUt(\'" + field['p3']+ "\', \'" + field['f3'] + "\'); runUTErrors(\'" + field['number'] + "\');\"></div></td>\
+	<td><div><input type=\"number\" name=\"" + field['f4'] + "\" id=\"" + field['f4'] + "\" value=\"\" oninput=\"javascript: setParentUt(\'" + field['p4']+ "\', \'" + field['f4'] + "\'); runUTErrors(\'" + field['number'] + "\');\"></div></td>\
+	<td><div><input type=\"text\" name=\"" + field['f5'] + "\" id=\"" + field['f5'] + "\" value=\"\" oninput=\"javascript: setParentUt(\'" + field['p5']+ "\', \'" + field['f5'] + "\'); runUTErrors(\'" + field['number'] + "\');\"></div></td>\
 	</tr>";
 
 	return html;
@@ -9476,6 +9490,69 @@ function fetch_ut_post_values() {
 	}
 
 	return result;
+}
+
+function runUTErrors(itemNumber) {
+
+}
+
+function hasUtLineError(field) {
+	var hasError = false;
+
+	for (var i = 1; i <= 5; i++) {
+		var name = 'f' + String(i);
+		var element = grab(field[name]);
+
+		if (isBlankText(element.value) === true || element.value === null) {
+			hasError = true;
+			break;
+		}
+	}
+
+	if (hasError === false) {
+		var age = Number(grab(field['f4']).value);
+
+		if (age < 1) {
+			hasError = true;
+		}
+	}
+
+	return hasError;
+}
+
+function set_ut_error_div_single(field) {
+	if (hasUtLineError(field) === true) {
+		setErrorDiv(field['errorDiv']);
+	}
+}
+
+function calculate_ut_line_errors() {
+	var fields = fetch_dynamo_ut_data();
+
+	for (var i = 0; i < fields.length; i++) {
+		set_ut_error_div_single(fields[i]);
+	}
+}
+
+function utLineHasErrors() {
+	var hasError = false;
+	var fields = fetch_dynamo_ut_data();
+
+	for (var i = 0; i < fields.length; i++) {
+		if (hasUtLineError(fields[i]) === true) {
+			hasError = true;
+			break;
+		}
+	}
+
+	return hasError;
+}
+
+function setParentUt(parentName, value_Name) {
+	parentName = String(parentName);
+	value_Name = String(value_Name);
+
+	getPopParent(parentName).value = grab(value_Name).value;
 }
 
 function set_use_table_existing_values() {
@@ -9539,7 +9616,20 @@ function use_table_setup() {
 		}
 	}
 	else {
-		//SET ALL FIELDS IN USE TABLE MODEL TO N/A AND SAVE...PROCEED TO NEXT PAGE
+		grab('mh_form').submit();
+	}
+}
+
+function setNewUTData() {
+	var hasErrors = utLineHasErrors();
+
+	if (hasErrors === true) {
+		calculate_ut_line_errors();
+		openPopUp('auto', '/generateErrors/', 500, 500);
+	}
+	else {
+		getPopParent('mh_form').submit();
+		window.close();
 	}
 }
 
