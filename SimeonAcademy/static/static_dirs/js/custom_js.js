@@ -9492,10 +9492,6 @@ function fetch_ut_post_values() {
 	return result;
 }
 
-function runUTErrors(itemNumber) {
-
-}
-
 function hasUtLineError(field) {
 	var hasError = false;
 
@@ -9531,6 +9527,21 @@ function calculate_ut_line_errors() {
 
 	for (var i = 0; i < fields.length; i++) {
 		set_ut_error_div_single(fields[i]);
+	}
+}
+
+function runUTErrors(itemNumber) {
+	itemNumber = String(itemNumber);
+	var data = {};
+	data['f1'] = 'howMuch' + itemNumber;
+	data['f2'] = 'howOften' + itemNumber;
+	data['f3'] = 'howLong' + itemNumber;
+	data['f4'] = 'howMuch' + itemNumber;
+	data['f5'] = 'howMuch' + itemNumber;
+	error = 'e' + itemNumber;
+
+	if (hasUtLineError(data) === false) {
+		grab(error).className = '';
 	}
 }
 
@@ -9616,6 +9627,7 @@ function use_table_setup() {
 		}
 	}
 	else {
+		grab('mh_form').action = grab('next_url').value;
 		grab('mh_form').submit();
 	}
 }
@@ -9628,6 +9640,7 @@ function setNewUTData() {
 		openPopUp('auto', '/generateErrors/', 500, 500);
 	}
 	else {
+		getPopParent('mh_form').action = getPopParent('next_url').value;
 		getPopParent('mh_form').submit();
 		window.close();
 	}
