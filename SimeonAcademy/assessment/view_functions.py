@@ -8622,8 +8622,6 @@ def finishMhSection(mh, section):
 def processMhData(request, current_section):
 	result = {}
 
-	print current_section
-
 	session_id = request.POST.get('session_id', '')
 	mh_id = request.POST.get('mh_id', '')
 	save_this = request.POST.get('save_this', '')
@@ -9110,9 +9108,9 @@ def grabASIClassesCSS(asi, m_page):
 #Returns dictionary list of the CSS class for the specified button
 	classes = {}
 	asi = get_asi_parameters(asi)
-	normal = 'sideBarMargin'
-	green = 'sideBarMarginChecked'
-	current = 'sideLinkSelected'
+	normal = 'iml-button-incomplete-xl'
+	green = 'iml-button-xl'
+	current = 'iml-button-current-xl'
 
 	classes['asiAdmin'] = processCompletedClass(asi[0]['complete'], asi[0]['url'], m_page, green, current, normal)
 	classes['asiGeneral'] = processCompletedClass(asi[1]['complete'], asi[1]['url'], m_page, green, current, normal)

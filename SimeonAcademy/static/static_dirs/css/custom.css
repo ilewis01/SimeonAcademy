@@ -1957,14 +1957,14 @@ button:hover {
 	width: 90%;
 	text-align: justify;
 	font-style: italic;
-	font-size: 13px;
-	margin-top: 8%;
-	margin-bottom: 8%;
+	font-size: 12px;
+	/*margin-top: 8%;
+	margin-bottom: 8%;*/
 }
 
 .sev_desc_text span {
 	font-weight: bold;
-	color: #59B9D9;
+	color: #A17C80;
 }
 
 #years_months {
@@ -4827,6 +4827,23 @@ button:hover {
 	box-shadow: 3px 3px 3px #888888;
 }
 
+.iml-button-xl {
+	width:190px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #a4c2ba;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
 .iml-button-incomplete {
 	width:145px;
 	margin:auto;
@@ -4834,6 +4851,60 @@ button:hover {
 	border: 1px solid black;
 	border-radius: 6px;
 	background-color: #A17C80;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-incomplete-xl {
+	width:190px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #a4c2ba;
+	/*background-color: #A17C80;*/
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-incomplete:hover {
+	width:145px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	/*background-color: #A17C80;*/
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-incomplete-xl:hover {
+	width:190px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	/*background-color: #A17C80;*/
 	text-align: center;
 	font-size: 13px;
 	font-weight: bold;
@@ -4861,6 +4932,23 @@ button:hover {
 	box-shadow: 3px 3px 3px #888888;
 }
 
+.iml-button-current-xl {
+	width:190px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
 .iml-button-sm {
 	width:120px;
 	margin:auto;
@@ -4868,6 +4956,24 @@ button:hover {
 	border: 1px solid black;
 	border-radius: 6px;
 	background-color: #a4c2ba;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-sm:hover {
+	width:120px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	/*background-color: #a4c2ba;*/
 	text-align: center;
 	font-size: 13px;
 	font-weight: bold;
@@ -4913,7 +5019,8 @@ button:hover {
 }
 
 .iml-button:hover {
-	background-color: #6c7e7a;
+	background-color: #e3dcc8;
+	/*background-color: #6c7e7a;*/
 	color:#e3dcc8;
 }
 
@@ -4994,6 +5101,15 @@ button:hover {
 .top-split {
 	width:91%;
 	margin-top: 7%;
+	height:20%;
+	padding:2%;
+	text-align: justify;
+	font-size: 13px;
+}
+
+.top-split2 {
+	width:91%;
+	margin-top: 3%;
 	height:20%;
 	padding:2%;
 	text-align: justify;
@@ -6308,6 +6424,81 @@ button:hover {
 	box-shadow: 3px 3px 9px #888888;
 	background-color: #6c7f7b;
 }
+
+.asi_index_container1 {
+	width: 380px;
+	border: 1px solid black;
+	margin-top: 20px;
+}
+
+.asi_index_tbl1 {
+	width:100%;
+	background-color:#e9e7e9;
+}
+
+.asi_index_tbl1 th {
+	border:1px solid black;
+}
+
+.asi_index_tbl1 td {
+	border:1px solid black;
+}
+
+.asi_tbl_head_iml1 {
+	text-align: center;
+}
+
+.asi_tbl_head_iml2 {
+	text-align: center;
+}
+
+.iml-tbl-radio {
+	width:12px;
+	margin:auto;
+}
+
+.iml-tbl-lab1 {
+	margin-left: 8px;
+	font-style: italic;
+	padding-top:1px;
+	font-size: 12px;
+	/*A17C80*/
+}
+
+.iml-asi-wide-table tr{
+	height:35px;
+}
+
+.iml-asi-wide-table input{
+	margin-left: 5px;
+}
+
+.iml-asi-wide-table select{
+	margin-left: 5px;
+}
+
+.asi_number_iml {
+	width: 25px;
+	text-align: left;
+	color:#614427;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.iml_asi_rad_fix {
+	margin-bottom: 3px;
+	margin-right: 4px;
+}
+
+.iml-radio-label-asi {
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 3px;
+	margin-right: 15px;
+	color:#4f605c;
+}
+
+
 
 
 
