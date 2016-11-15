@@ -11939,7 +11939,43 @@ function kill_selects_mh(triggerName, sel1Name, sel2Name, errorName) {
 //*********************************************** ASI INITIALIZATIONS *************************************************//
 
 function add_asi_comments() {
-	openPopUp('auto', '/new_comment/', 500, 500);
+	openPopUp('auto', '/new_comment/', 600, 400);
+}
+
+function fetch_asi_comment_title() {
+	var page = String(getPopParent('save_section').value);
+	var title = null;
+
+	if (page === '/asi_medical/') {
+		title = 'ASI: Medical Status Comments';
+	}
+	else if (page === '/asi_employment/') {
+		title = 'ASI: Employment/Support Status Comments';
+	}
+	else if (page === '/asi_drug1/') {
+		title = 'ASI: Drug/Alcohol Use Comments';
+	}
+	else if (page === '/asi_legal/') {
+		title = 'ASI: Legal Status Comments';
+	}
+	else if (page === '/asi_social1/' || page === '/asi_social2/') {
+		title = 'ASI: Family/Social Relationships Comments';
+	}
+	else if (page === '/asi_psych/') {
+		title = 'ASI: Psychiatric Status Comments';
+	}
+
+	return title;
+}
+
+function initialize_asi_comment_popup() {
+	grab('comment_title').innerHTML = fetch_asi_comment_title();
+	grab('asi_comment').innerHTML = String(getPopParent('comments').value);
+}
+
+function save_asi_comment() {
+	getPopParent('comments').value = grab('asi_comment').value;
+	window.close();
 }
 
 function initialize_asi(section, json_data) {
