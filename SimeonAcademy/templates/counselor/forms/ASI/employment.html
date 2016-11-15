@@ -1,932 +1,147 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Addiction Severity Index</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{asi.client.fname}} {{asi.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{asi.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiAdmin}}'>
-                  <img src="{{image.asi_admin_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_admin/');" name='asiAdminBtn' id='asiAdminBtn'>
-                    Administrative
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiGeneral}}'>
-                  <img src="{{image.asi_general_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_general/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     General Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiMedical}}'>
-                  <img src="{{image.asi_medical_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_medical/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Medical Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiEmployment}}'>
-                  <img src="{{image.asi_employment_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Employment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiDrug1}}'>
-                  <img src="{{image.asi_drug1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_drug1/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Drugs & Alcohol Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiLegal}}'>
-                  <img src="{{image.asi_legal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_legal/');" name='asiLegalBtn' id='asiLegalBtn'>
-                    Legal Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiFamily}}'>
-                  <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_family/');" name='asiFamilyBtn' id='asiFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial1}}'>
-                  <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
-                    Social
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial2}}'>
-                  <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social2/');" name='asiSocial2Btn' id='asiSocial2Btn'>
-                    Social II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiPsych}}'>
-                  <img src="{{image.asi_psych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_psych/');" name='asiPsychBtn' id='asiPsychBtn'>
-                    Psychiatric Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_employment/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:50px;'>
-                	<h3 id='am-h2'>Addiction Severity Index: Employment/Support Status</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-
-                            <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
-                            <input type='hidden' name='m_e5' id='m_e5' value=''>
-                            <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
-                            <input type='hidden' name='m_e9' id='m_e9' value=''>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E1.</div></td>
-
-                                <td>
-                                  <label>
-                                    Education completed:
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' name='e1yrs' id='e1yrs' value='{{fields.e1yrs}}'>
-                                  </div>
-                                </td>
-
-                                <td><div id='years_months'>years</div></td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' name='e1mth' id='e1mth' value='{{fields.e1mth}}'>
-                                  </div>
-                                </td>
-
-                                <td><div id='years_months'>months</div></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E2.</div></td>
-
-                                <td>
-                                  <label>
-                                    Training or technical training completed:
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' name='e2' id='e2' value='{{fields.e2}}'>
-                                  </div>
-                                </td>
-
-                                <td><div id='years_months'>months</div></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E3.</div></td>
-
-                                <td>
-                                  <label>
-                                    Do you have a professional trade or skill?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e3' id='e3yes' value='1' onClick='javascript: e3Radio();'>
-                                  </div>
-                                </td>
-
-                                <td><label>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e3' id='e3no' value='0' onClick='javascript: e3Radio();' checked>
-                                  </div>
-                                </td>
-
-                                <td><label>No</label></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td>
-                                  <div id='asi_2nd_line_indent'>
-                                    <label id='e3Exp_lab'>Please specify:</label>
-                                  </div>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <div id='asi_2nd_line_indent'>
-                                    <input type='text' style='width:200px;' name='e3Exp' id='e3Exp' value='{{fields.e3Exp}}'>
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E4.</div></td>
-
-                                <td>
-                                  <label>
-                                    Do you have a valid driver's license?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e4' id='e4yes' value='1' onClick='javascript: e4Radio();'>
-                                  </div>
-                                </td>
-
-                                <td><label>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e4' id='e4no' value='0' onClick='javascript: e4Radio();' checked>
-                                  </div>
-                                </td>
-
-                                <td><label>No</label></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'><div id='extra5'>E5.</div></div></td>
-
-                                <td>
-                                  <label id='e5_lab'>
-                                    Do you have an automobile available for use?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e5' id='e5yes' value='1'>
-                                  </div>
-                                </td>
-
-                                <td><label id='e5yes_lab'>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e5' id='e5no' value='0' checked>
-                                  </div>
-                                </td>
-
-                                <td><label id='e5no_lab'>No</label></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E6.</div></td>
-
-                                <td>
-                                  <label>
-                                    Time at longest full-time job:
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' name='e6yrs' id='e6yrs' value='{{fields.e6yrs}}'>
-                                  </div>
-                                </td>
-
-                                <td><div id='years_months'>years</div></td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' name='e6mth' id='e6mth' value='{{fields.e6mth}}'>
-                                  </div>
-                                </td>
-
-                                <td><div id='years_months'>months</div></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E7.</div></td>
-
-                                <td>
-                                  <label>
-                                    Usual (or last) occupation?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e7' id='e7yes' value='1' onClick='javascript: e7Radio();'>
-                                  </div>
-                                </td>
-
-                                <td><label>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e7' id='e7no' value='0' onClick='javascript: e7Radio();' checked>
-                                  </div>
-                                </td>
-
-                                <td><label>No</label></td>
-                              </tr>
-                            </tabel>
-
-                            <table>
-                                <td>
-                                  <div id='asi_2nd_line_indent'>
-                                    <label id='e7Exp_lab'>Specify in detail:</label>
-                                  </div>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}' style='width:300px;'>
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E8.</div></td>
-
-                                <td>
-                                  <label>
-                                    Does anyone contribute to your support in any way?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e8' id='e8yes' value='1' onClick='javascript: e8Radio();'>
-                                  </div>
-                                </td>
-
-                                <td><label>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e8' id='e8no' value='0' onClick='javascript: e8Radio();' checked>
-                                  </div>
-                                </td>
-
-                                <td><label>No</label></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'><div id='extra9'>E9.</div></div></td>
-
-                                <td>
-                                  <label id='e9_lab'>
-                                    Does this constitue the majority of your support?
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e9' id='e9yes' value='1'>
-                                  </div>
-                                </td>
-
-                                <td><label id='e9yes_lab'>Yes</label></td>
-
-                                <td>
-                                  <div id='fix_my_radio'>
-                                    <input type='radio' name='e9' id='e9no' value='0' checked>
-                                  </div>
-                                </td>
-
-                                <td><label id='e9no_lab'>No</label></td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E10.</div></td>
-
-                                <td>
-                                  <label>
-                                    Unusual employment pattern, last 3 years:
-                                  </label>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_select'>
-                                    <select name='e10' id='e10'>
-                                      <option value='0'>Select</option>
-                                      <option value='1'>Full-time (40 hrs/wk</option>
-                                      <option value='2'>Part-time (reg. hrs.)</option>
-                                      <option value='3'>Part-time (irreg, daywork)</option>
-                                      <option value='4'>Student</option>
-                                      <option value='5'>Service</option>
-                                      <option value='6'>Retired/Disability</option>
-                                      <option value='7'>Unemployed</option>
-                                      <option value='8'>In controlled environment</option>
-                                    </select>
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td><div id='asiNumber'>E11.</div></td>
-
-                                <td>
-                                  <label>
-                                    How many times were you paid for work in the last 30 days?
-                                  </label>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td>
-                                  <div style='margin-left:34px;'>
-                                    <label>Please include undercover work:</label>
-                                  </div>
-                                </td>
-
-                                <td>
-                                  <div id='fix_my_text'>
-                                    <input type='number' id='e11' name='e11' value='{{fields.e11}}'>
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <table>
-                              <tr>
-                                <td>
-                                  <div style='margin-top:30px;'><label>Comments:</label></div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <textarea rows='7' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea>
-                                </td>
-                              </tr>
-                            </table>
-				           				            
-				        </div><!--  END OF LEFT SIDE -->
-
-
-
-				    			
-				    </div>
-            <div class="col-md-6 col-sm-6">
-              <table>
-                <tr>
-                  <td>
-                    <div id='ital_sub_head_small2'>
-                      How much money did you receive from the following<br>sources in the past 30 days?
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E12.</div></td>
-                  
-                    <td><label>Employment (Net income):</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e12' id='e12' value='{{fields.e12}}'>
-                      </div>
-                    </td>
-                  </tr>
-                
-                  <tr>
-                    <td><div id='asiNumber'>E13.</div></td>
-                  
-                    <td><label>Unemployment Compensation:</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e13' id='e13' value='{{fields.e13}}'>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td><div id='asiNumber'>E14.</div></td>
-                  
-                    <td><label>DPA:</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e14' id='e14' value='{{fields.e14}}'>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td><div id='asiNumber'>E15.</div></td>
-                  
-                    <td><label>Pension, Benefits, or SSI:</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e15' id='e15' value='{{fields.e15}}'>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td><div id='asiNumber'>E16.</div></td>
-                  
-                    <td><label>Mate, Family, and/or Friends:</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e16' id='e16' value='{{fields.e16}}'>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td><div id='asiNumber'>E17.</div></td>
-                  
-                    <td><label>Illegal:</label></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        $
-                        <input type='number' name='e17' id='e17' value='{{fields.e17}}'>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E18.</div></td>
-
-                    <td>
-                      <label>How many people depend on you for financial support?</label>
-                    </td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        <input type='number' name='e18' id='e18' value='{{fields.e18}}'>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E19.</div></td>
-
-                    <td>                      
-                      <label>How many days have you experienced employment problems</label>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asi_2nd_line_indent_db'><label>in the past month?</label></div></td>
-
-                    <td>
-                      <div id='fix_my_text'>
-                        <input type='number' name='e19' id='e19' value='{{fields.e19}}'>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td>
-                      <div id='ital_sub_head_small'>
-                        For questions E20 & E21, please use the <b>Patient's Rating Scale</b>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E20.</div></td>
-
-                    <td>
-                      <label>How troubleed or bothered have you been by these employment</label>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td>
-                      <div id='asi_2nd_line_indent_db'>
-                        <label>problems in the past month?</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div id='fix_my_select'>
-                        <select name='e20' id='e20'>
-                          <option value='Select'>Select</option>
-                          <option value='0'>Not at all</option>
-                          <option value='1'>Slightly</option>
-                          <option value='2'>Moderately</option>
-                          <option value='3'>Considerably</option>
-                          <option value='4'>Extremely</option>
-                          <option value='N'>Question not applicable</option>
-                          <option value='X'>Question not answered</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E21.</div></td>
-
-                    <td>
-                      <label>How important to you now is counseling for these employment</label>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asi_2nd_line_indent_db'><label>problems?</label></div></td>
-
-                    <td>
-                      <div id='fix_my_select'>
-                        <select name='e21' id='e21'>
-                          <option value='Select'>Select</option>
-                          <option value='0'>Not at all</option>
-                          <option value='1'>Slightly</option>
-                          <option value='2'>Moderately</option>
-                          <option value='3'>Considerably</option>
-                          <option value='4'>Extremely</option>
-                          <option value='N'>Question not applicable</option>
-                          <option value='X'>Question not answered</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td>
-                      <div id='ital_sub_head_small'>
-                        For question E21, please use the Interviewer's Rating Scale
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E22.</div></td>
-
-                    <td>
-                      <label>How would you rate the patient's need for employment counseling?</label>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td>
-                      <div id='asi_2nd_line_indent_db_sel'>
-                        <div id='fix_my_select'>
-                          <select name='e22' id='e22'>
-                            <option value='Select'>Select</option>
-                            <option value='0'>0</option>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
-                            <option value='6'>6</option>
-                            <option value='7'>7</option>
-                            <option value='8'>8</option>
-                            <option value='9'>9</option>
-                          </select>
-                        </div>
-                      </div>  
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td>
-                      <div id='ital_sub_head_small'>
-                        Is the above information significantly distorted by:
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E23.</div></td>
-
-                    <td>
-                      <label>Patient's misrepresentation?</label>
-                    </td>
-
-                    <td>
-                      <div id='fix_my_radio'>
-                        <input type='radio' name='e23' id='e23yes' value='1'>
-                      </div>
-                    </td>
-
-                    <td><label>Yes</label></td>
-
-                    <td>
-                      <div id='fix_my_radio'>
-                        <input type='radio' name='e23' id='e23no' value='0' checked>
-                      </div>
-                    </td>
-
-                    <td><label>No</label></td>
-                  </tr>
-                </table>
-
-                <table>
-                  <tr>
-                    <td><div id='asiNumber'>E24.</div></td>
-
-                    <td>
-                      <label>Patient's inability to understand?</label>
-                    </td>
-
-                    <td>
-                      <div id='fix_my_radio'>
-                        <input type='radio' name='e24' id='e24yes' value='1'>
-                      </div>
-                    </td>
-
-                    <td><label>Yes</label></td>
-
-                    <td>
-                      <div id='fix_my_radio'>
-                        <input type='radio' name='e24' id='e24no' value='0' checked>
-                      </div>
-                    </td>
-
-                    <td><label>No</label></td>
-                  </tr>
-                </table>
-
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Addiction Severity Index: Employment/Support Status</div>
             </div>
 
-            </form>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'>Administrative</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'>General Info</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: continue_asi_form('/asi_employment/');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'>Medical Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'>Employment</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'>Legal Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'>Family History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:43%; height:100%; margin-left:20px;'>
+                    <div class='top-split'>
+                      
+                    </div>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
+                    <div class='top-split'>
+                      
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
+                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

@@ -108,7 +108,7 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:43%; height:100%; margin-left:20px;'>
+                  <div class='col-md-6' style='width:40%; height:100%; margin-left:60px;'>
                     <div class='top-split'>
                       <table class='iml-asi-medical-table'>
                         <tr>
@@ -118,7 +118,7 @@
 
                         <tr>
                           <td></td>
-                          <td><div><div style='margin-bottom:7px;'>medical problems? <input type='number' name='m1' id='m1' value='{{fields.m1}}' style='width:50px; text-align:center;'></div></div></td>
+                          <td><div><div style='margin-bottom:15px;'>medical problems? <input type='number' name='m1' id='m1' value='{{fields.m1}}' style='width:50px; text-align:center;'></div></div></td>
                         </tr>
 
                         <tr>
@@ -129,7 +129,7 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:7px;'>
+                            <div style='margin-bottom:15px;'>
                               problem?
                               <input type='number' name='m2yrs' id='m2yrs' value='{{fields.m2yrs}}' style='width:50px; text-align:center;'>
                               <span>years</span>
@@ -147,7 +147,7 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:7px;'>
+                            <div style='margin-bottom:15px;'>
                               interfere with your life?
                               <select name='m3' id='m3'>
                                 <option value='None Selected'>Select</option>
@@ -167,7 +167,7 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:7px;'>
+                            <div style='margin-bottom:15px;'>
                               for a physical problem?
                               <select name='m4' id='m4'>
                                 <option value='None Selected'>Select</option>
@@ -200,7 +200,7 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:7px;'>
+                            <div style='margin-bottom:15px;'>
                               <li>
                                 <em>Specify:</em>
                                 <input type='text' name='m5Exp' id='m5Exp' value='{{fields.m5Exp}}'>
@@ -217,7 +217,7 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:7px;'>
+                            <div style='margin-bottom:15px;'>
                               the last 30 days?
                               <select name='m6' id='m6'>
                                 <option value='None Selected'>Select</option>
@@ -256,7 +256,14 @@
                             </div>
                           </td>
                         </tr>
+                      </table>
+                    </div>
+                  </div>
 
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
+                    <div class='top-split'>
+                      <table>
                         <tr>
                           <td><div class='asi_number_iml'>M7.</div></td>
                           <td>How troubled or bothered have you been by these medical</td>
@@ -265,25 +272,102 @@
                         <tr>
                           <td></td>
                           <td>
-                            problems in the past 30 days?
-                            <select name='m7' id='m7'>
-                              <option value='None Selected'>Select</option>
-                              <option value='0'>Not At All</option>
-                              <option value='1'>Slightly</option>
-                              <option value='2'>Moderately</option>
-                              <option value='3'>Considerably</option>
-                              <option value='4'>Extremely</option>
-                            </select>
+                            <div style='margin-bottom:15px;'>
+                              problems in the past 30 days?
+                              <select name='m7' id='m7'>
+                                <option value='None Selected'>Select</option>
+                                <option value='0'>Not At All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>M8.</div></td>
+                          <td><div><div>How important to you now is treatment for these medical</div></div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>
+                            <div style='margin-bottom:15px;'>
+                              problems?
+                              <select name='m8' id='m8'>
+                                <option value='None Selected'>Select</option>
+                                <option value='0'>Not At All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>M9.</div></td>
+                          <td><div><div>How would you rate the patient's need for medical</div></div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>
+                            <div style='margin-bottom:15px;'>
+                              treatment?
+                              <select name='m9' id='m9'>
+                                <option value='None Selected'>Select</option>
+                                <option value='0'>0</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                              </select>
+                            </div>
                           </td>
                         </tr>
                       </table>
-                    </div>
-                  </div>
 
-                  <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
-                    <div class='top-split'>
-                      
+                      <table>
+                        <tr>
+                          <td>
+                            <div class='distorted_label'>Is the information entered significantly distorted by:</div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>M10.</div></td>
+                          <td><div><div>Patient's misrepresentation?</div></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m10' id='yesMis' value='True'></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m10' id='noMis' value='False' checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>M11.</div></td>
+                          <td><div><div>Patient's inability to understand?</div></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m11' id='yesUnd' value='True'></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m11' id='noUnd' value='False' checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                        </tr>
+                      </table>
+
+                      <div class='medical_comment_wrapper'>
+                        <button onClick="javascript: add_asi_comments('medial'); return false;">Add Additional Comments</button>
+                      </div>
                     </div>
                   </div>
 

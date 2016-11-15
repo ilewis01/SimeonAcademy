@@ -6504,7 +6504,7 @@ button:hover {
 }
 
 .asi_number_iml2 {
-	width: 32px;
+	width: 35px;
 	text-align: left;
 	color:#614427;
 	font-weight: bold;
@@ -6555,12 +6555,28 @@ button:hover {
 	font-style: italic;
 	color:#666666;
 	text-decoration: none;
-	margin-right: 20px;
-	margin-left: 3px;
+	margin-right: 12px;
+	margin-left: 2px;
 }
 
-.iml-asi-medical-table td {
-	height: 20px;
+.distorted_label {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 14px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	color:#637370;
+}
+
+.medical_comment_wrapper {
+	margin-top: 20px;
+	/*margin-left: 170px;*/
+	border: 2px solid black;
+	width: 203px;
+}
+
+.medical_comment_wrapper button {
+	width:200px;
 }
 
 
