@@ -6551,6 +6551,18 @@ button:hover {
 	height: 35px;
 }
 
+.iml-asi-medical-table span {
+	font-style: italic;
+	color:#666666;
+	text-decoration: none;
+	margin-right: 20px;
+	margin-left: 3px;
+}
+
+.iml-asi-medical-table td {
+	height: 20px;
+}
+
 
 
 
