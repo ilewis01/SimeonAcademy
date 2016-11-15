@@ -140,6 +140,7 @@ urlpatterns = patterns('',
     url(r'^asi_social2/$', 'assessment.views.asi_social2'),
     url(r'^asi_psych/$', 'assessment.views.asi_psych'),
     url(r'^asi_viewForm/$', 'assessment.views.asi_viewForm'),
+    url(r'^new_comment/$', 'assessment.views.new_comment'),
     url(r'^printASI/$', 'assessment.views.printASI'),
 
     ##Global Views

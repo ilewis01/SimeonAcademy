@@ -11938,6 +11938,10 @@ function kill_selects_mh(triggerName, sel1Name, sel2Name, errorName) {
 
 //*********************************************** ASI INITIALIZATIONS *************************************************//
 
+function add_asi_comments() {
+	openPopUp('auto', '/new_comment/', 500, 500);
+}
+
 function initialize_asi(section, json_data) {
 	section = String(section);
 
