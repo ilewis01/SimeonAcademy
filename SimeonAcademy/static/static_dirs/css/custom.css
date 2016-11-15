@@ -4867,8 +4867,8 @@ button:hover {
 	height: 23px;
 	border: 1px solid black;
 	border-radius: 6px;
-	background-color: #a4c2ba;
-	/*background-color: #A17C80;*/
+	/*background-color: #a4c2ba;*/
+	background-color: #A17C80;
 	text-align: center;
 	font-size: 13px;
 	font-weight: bold;
@@ -4934,6 +4934,24 @@ button:hover {
 
 .iml-button-current-xl {
 	width:190px;
+	margin:auto;
+	height: 23px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #e3dcc8;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.iml-button-current-xl:hover {
+	width:190px;
+	color:#666666;
 	margin:auto;
 	height: 23px;
 	border: 1px solid black;
@@ -6485,6 +6503,14 @@ button:hover {
 	margin-bottom: 3px;
 }
 
+.asi_number_iml2 {
+	width: 32px;
+	text-align: left;
+	color:#614427;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
 .iml_asi_rad_fix {
 	margin-bottom: 3px;
 	margin-right: 4px;
@@ -6496,6 +6522,33 @@ button:hover {
 	margin-bottom: 3px;
 	margin-right: 15px;
 	color:#4f605c;
+}
+
+.iml-radio-label-asi2 {
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 1px;
+	margin-right: 20px;
+	color:#4f605c;
+}
+
+.years_months_iml {
+	font-style: italic;
+	margin-left: 5px;
+	margin-right: 15px;
+	color:#666666;
+}
+
+.asi-admin-table input {
+	margin-left: 5px;
+}
+
+.asi-admin-table tr {
+	height: 35px;
+}
+
+.asi-admin-table2 tr {
+	height: 35px;
 }
 
 

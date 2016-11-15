@@ -1,1160 +1,306 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
 
-    <div id="wrapper" class='shift-rr'>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Addiction Severity Index: General Information</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'>Administrative</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="#">
+                              <div  class='{{class.asiGeneral}}'>General Info</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'>Medical Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'>Employment</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'>Legal Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'>Family History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-              </td>
-            </tr>
+              </div>
+            </div>
 
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Addiction Severity Index</h4>
-                </div>
-              </td>
-            </tr>
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
 
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{asi.client.fname}} {{asi.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
+                    <div class='top-split'>
+                      <h4>Demographic Information</h4>
 
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{asi.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G13.</div></td>
+                          <td><div><div class='asi_iml_label'>Geographic Code:</div></div></td>
+                          <td><div><input type='text' name='g13' id='g13' value='{{fields.g13}}'></div></td>
+                        </tr>
+                      </table>
 
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G14.</div></td>
+                          <td><div><div class='asi_iml_label'>Time at Residence:</div></div></td>
+                          <td><div><input type='number' name='g14yrs' id='g14yrs' value='{{fields.g14yrs}}' style='width:40px; text-align:center;'></div></td>
+                          <td><div><div class='years_months_iml'>years</div></div></td>
+                          <td><div><input type='number' name='g14mos' id='g14mos' value='{{fields.g14mos}}' style='width:40px; text-align:center;'></div></td>
+                          <td><div><div class='years_months_iml'>months</div></div></td>
+                        </tr>
+                      </table>
 
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G15.</div></td>
+                          <td><div><div class='asi_iml_label'>Is This Residence Owned By Your Family?</div></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='yesRent' value='1' onClick="javascript: asi_g_r1();"></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='noRent' value='0' onClick="javascript: asi_g_r1();" checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                        </tr>
+                      </table>
 
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G17.</div></td>
+                          <td><div><div class='asi_iml_label'>Race:</div></div></td>
+                          <td>
+                            <div>
+                              <select name='g17' id='g17'>
+                                <option value='0'>Select</option>
+                                <option value='1'>White (Not of Hispanic Origin)</option>
+                                <option value='2'>Black (Not of Hispanic Origin)</option>
+                                <option value='3'>American Indian</option>
+                                <option value='4'>Alaskan Native</option>
+                                <option value='5'>Asian or Pacific Islander</option>
+                                <option value='6'>Hispanic - Mexican</option>
+                                <option value='7'>Hispanic - Puerto Rican</option>
+                                <option value='8'>Hispanic - Cuban</option>
+                                <option value='9'>Other Hispanic</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
 
-            <tr>
-              <td>
-                <div class='{{class.asiAdmin}}'>
-                  <img src="{{image.asi_admin_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_admin/');" name='asiAdminBtn' id='asiAdminBtn'>
-                    Administrative
-                  </a>
-                </div>
-              </td>
-            </tr>
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G18.</div></td>
+                          <td><div><div class='asi_iml_label'>Religious Prefrence:</div></div></td>
+                          <td>
+                            <div>
+                              <select name='g18' id='g18'>
+                                <option value='0'>Select</option>
+                                <option value='1'>Protestant</option>
+                                <option value='2'>Catholic</option>
+                                <option value='3'>Jewish</option>
+                                <option value='4'>Islamic</option>
+                                <option value='5'>Other</option>
+                                <option value='6'>None</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
 
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiGeneral}}'>
-                  <img src="{{image.asi_general_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     General Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiMedical}}'>
-                  <img src="{{image.asi_medical_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_medical/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Medical Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiEmployment}}'>
-                  <img src="{{image.asi_employment_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_employment/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Employment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiDrug1}}'>
-                  <img src="{{image.asi_drug1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_drug1/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Drugs & Alcohol Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiLegal}}'>
-                  <img src="{{image.asi_legal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_legal/');" name='asiLegalBtn' id='asiLegalBtn'>
-                    Legal Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiFamily}}'>
-                  <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_family/');" name='asiFamilyBtn' id='asiFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial1}}'>
-                  <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
-                    Social
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial2}}'>
-                  <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social2/');" name='asiSocial2Btn' id='asiSocial2Btn'>
-                    Social II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiPsych}}'>
-                  <img src="{{image.asi_psych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_psych/');" name='asiPsychBtn' id='asiPsychBtn'>
-                    Psychiatric Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_general/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:10px;'>
-                	<h3 id='am-h2'>Addiction Severity Index: General Information II</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>  
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-
-				           				  <table>
+                      <table class='asi-admin-table'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G19.</div></td>
+                          <td><div><div class='asi_iml_label'>Have you been in a controlled environment in the</div></div></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <table>
                               <tr>
-                                <td>
-                                  <div id='ital_sub_head'>
-                                    Severity Profile
-                                  </div>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <div class='sev_desc_text'>
-                                    <p>
-                                      The severity ratings are interviewer estimates of the patient's need for additional treatment in each area. The scales range from <span>0</span> (no treatment necessary) to <span>9</span> (treatment needed to intervene in a life-threatening situation).
-                                    </p>
-
-                                    <p>
-                                      Each rating is based upon the patient's history of problem symptoms, present condition and subjective assessmentof his/her treatment needs in a given area. For a detailed description of severity ratings' derivation procedures and conventions, see manual. <b>Note:</b> These severity ratings are optional. 
-                                    </p>
-                                  </div>
-                                </td>
+                                <td><div class='asi_iml_label'>past 30 days?</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='yesRent' value='1' onClick="javascript: asi_g_r1();"></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='noRent' value='0' onClick="javascript: asi_g_r1();" checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
                               </tr>
                             </table>
-
-                            <div class='sev_container'>
-                              <table class='sev_table'>
-                                <tr>
-                                  <th>
-                                    <div>
-                                      Problems
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      0
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      1
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      2
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      3
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      4
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      5
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      6
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      7
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      8
-                                    </div>
-                                  </th>
-
-                                  <th>
-                                    <div>
-                                      9
-                                    </div>
-                                  </th>
-                                </tr>
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Medical
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='medical' id='m9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Employ/Support
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='employ' id='e9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Alcohol
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='alcohol' id='a9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Drug
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='m0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='drug' id='d9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Legal
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='legal' id='l9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Family/Social
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='family' id='f9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-
-
-                                <tr>
-                                  <td>
-                                    <div id='vert_sev_head'>
-                                      Psychiatric
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p0' value='0' checked>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p1' value='1'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p2' value='2'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p3' value='3'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p4' value='4'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p5' value='5'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p6' value='6'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p7' value='7'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p8' value='8'>
-                                    </div>
-                                  </td>
-
-                                  <td>
-                                    <div id='inside_table_radio'>
-                                      <input type='radio' name='psych' id='p9' value='9'>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
-				                </div>
-				              </div><!--  END OF LEFT SIDE -->
-
-            <div class="col-md-6 col-sm-6">
-                  <table>
-                    <tr>
-                      <td>
-                        <div id='ital_sub_head'>
-                          Demographic Information
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table  style='margin-top: 5%;'>
-                    <tr>
-                      <td>
-                        <div id='asiNumber'>
-                          G13.
-                        </div>
-                      </td>
-
-                      <td>
-                        <div>
-                          <label>Geographic Code:</label>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g13' id='g13' value='{{fields.g13}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div id='asiNumber'>
-                          G14.
-                        </div>
-                      </td>
-
-                      <td>
-                        <div>
-                          <label>Time at Residence:</label>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='number' name='g14yrs' id='g14yrs' value='{{fields.g14yrs}}'>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div id='years_months'>years</div>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='number' name='g14mos' id='g14mos' value='{{fields.g14mos}}'>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div id='years_months'>months</div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td>
-                        <div id='asiNumber'>
-                          G15.
-                        </div>
-                      </td>
-
-                      <td>
-                        <label>Is This Residence Owned By Your Family?</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_radio'>
-                          <input type='radio' name='g15' id='yesRent' value='1' onClick="javascript: asi_g_r1();">
-                        </div>
-                      </td>
-
-                      <td><label>Yes</label></td>
-
-                      <td>
-                        <div id='fix_my_radio'>
-                          <input type='radio' name='g15' id='noRent' value='0' onClick="javascript: asi_g_r1();" checked>
-                        </div>
-                      </td>
-
-                      <td><label>No</label></td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td><div id='asiNumber'>G17.</div></td>
-
-                      <td><label>Race:</label></td>
-
-                      <td>
-                        <div id='fix_my_select'>
-                          <select name='g17' id='g17'>
-                            <option value='0'>Select</option>
-                            <option value='1'>White (Not of Hispanic Origin)</option>
-                            <option value='2'>Black (Not of Hispanic Origin)</option>
-                            <option value='3'>American Indian</option>
-                            <option value='4'>Alaskan Native</option>
-                            <option value='5'>Asian or Pacific Islander</option>
-                            <option value='6'>Hispanic - Mexican</option>
-                            <option value='7'>Hispanic - Puerto Rican</option>
-                            <option value='8'>Hispanic - Cuban</option>
-                            <option value='9'>Other Hispanic</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td><div id='asiNumber'>G18.</div></td>
-
-                      <td><label>Religious Prefrence:</label></td>
-
-                      <td>
-                        <div id='fix_my_select'>
-                          <select name='g18' id='g18'>
-                            <option value='0'>Select</option>
-                            <option value='1'>Protestant</option>
-                            <option value='2'>Catholic</option>
-                            <option value='3'>Jewish</option>
-                            <option value='4'>Islamic</option>
-                            <option value='5'>Other</option>
-                            <option value='6'>None</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td><div id='asiNumber'>G19.</div></td>
-
-                      <td><label>Have you been in a controlled environment in the past 30 days?</label></td>
-                    </tr>
-                  </table>
-                  <table>
-                    <tr>
-                      <td>
-                        <div id='double_sel'>
-                          <select name='g19' id='g19'>
-                            <option value='0'>Select</option>
-                            <option value='1'>No</option>
-                            <option value='2'>Jail</option>
-                            <option value='3'>Alcohol or Drug Treatment</option>
-                            <option value='4'>Medical Treatment</option>
-                            <option value='5'>Psychiatric Treatment</option>
-                            <option value='6'>Other</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table style='margin-bottom: 3%;'>
-                    <tr>
-                      <td>
-                        <div id='asiNumber'>G20.</div>
-                      </td>
-
-                      <td><label>How Many Days?</label></td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='number' name='g20' id='g20' value='{{fields.g20}}'>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-
-                  <table>
-                    <tr>
-                      <td>
-                        <div id='ital_sub_head'>
-                          Additional Test Results
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table  style='margin-top: 2%;'>
-                    <tr>
-                      <td><div id='asiNumber'>G21.</div></td>
-
-                      <td>
-                        <label>Shipley C.Q:</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g21' id='g21' value='{{fields.g21}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G22.</div></td>
-
-                      <td>
-                        <label>Shipley I.Q:</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g22' id='g22' value='{{fields.g22}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G23.</div></td>
-
-                      <td>
-                        <label>Beck Total Score:</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g23' id='g23' value='{{fields.g23}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G24.</div></td>
-
-                      <td>
-                        <label>SCL-90 Total:</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g24' id='g24' value='{{fields.g24}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G25.</div></td>
-
-                      <td>
-                        <label>MAST:</label>
-                      </td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g25' id='g25' value='{{fields.g25}}'>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td><div id='asiNumber'>G26.</div></td>
-
-                      <td>
-                        <div id='fix_my_text'><input style='width:160px;' type='text' name='test1' id='test1' value='{{fields.test1}}'></div>
-                      </td>
-
-                      <td><div style="margin-right:10px; margin-left:5px;">:</div></td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g26' id='g26' value='{{fields.g26}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G27.</div></td>
-
-                      <td>
-                        <div id='fix_my_text'><input style='width:160px;' type='text' name='test2' id='test2' value='{{fields.test2}}'></div>
-                      </td>
-
-                      <td><div style="margin-right:10px; margin-left:5px;">:</div></td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g27' id='g27' value='{{fields.g27}}'>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><div id='asiNumber'>G28.</div></td>
-
-                      <td>
-                        <div id='fix_my_text'><input style='width:160px;' type='text' name='test3' id='test3' value='{{fields.test3}}'></div>
-                      </td>
-
-                      <td><div style="margin-right:10px; margin-left:5px;">:</div></td>
-
-                      <td>
-                        <div id='fix_my_text'>
-                          <input type='text' name='g28' id='g28' value='{{fields.g28}}'>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-            </div>
-            </form>
-				</div> <!-- END PAGE CONTAINER -->
-
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table class='asi-admin-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td><div class='asi_number_iml2'>G20.</div></td>
+                          <td><div><div class='asi_iml_label'>How Many Days?</div></div></td>
+                          <td><div><input type='number' name='g20' id='g20' value='{{fields.g20}}' style='width:40px; text-align:center;'></div></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
+                    <div class='top-split'>
+                      <h4>Additional Test Results</h4>
+                      <table class='asi-admin-table2'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G21.</div></td>
+                          <td><div><div class='asi_iml_label' style='margin-right:30px;'>Shipley C.Q.:</div></div></td>
+                          <td><input type="text" name='g21' id='g21' value='{{fields.g21}}' style='width:50px; text-align:center;'></td>
+                        </tr>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: continue_asi_form('/asi_general/');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G22.</div></td>
+                          <td><div><div class='asi_iml_label'>Shipley I.Q.:</div></div></td>
+                          <td><input type="text" name='g22' id='g22' value='{{fields.g22}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>G23.</div></td>
+                          <td><div><div class='asi_iml_label'>Beck Total Score:</div></div></td>
+                          <td><input type="text" name='g23' id='g23' value='{{fields.g23}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>G24.</div></td>
+                          <td><div><div class='asi_iml_label'>SCL-90 Total:</div></div></td>
+                          <td><input type="text" name='g24' id='g24' value='{{fields.g24}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>G25.</div></td>
+                          <td><div><div class='asi_iml_label'>MAST:</div></div></td>
+                          <td><input type="text" name='g25' id='g25' value='{{fields.g25}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table class='asi-admin-table2'>
+                        <tr>
+                          <td><div class='asi_number_iml2'>G26.</div></td>
+                          <td><div><div class='asi_iml_label' style='margin-right:5px;'>Test Name:</div></div></td>
+                          <td><input type='text' name='test1' id='test1' value='{{fields.test1}}'></td>
+                          <td><div><div class='asi_iml_label' style='margin-right:5px; margin-left:20px;'>Score:</div></div></td>
+                          <td><input type="text" name='g26' id='g26' value='{{fields.g26}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>G27.</div></td>
+                          <td><div><div class='asi_iml_label'>Test Name:</div></div></td>
+                          <td><input type='text' name='test2' id='test2' value='{{fields.test2}}'></td>
+                          <td><div><div class='asi_iml_label' style='margin-left:20px;'>Score:</div></div></td>
+                          <td><input type="text" name='g27' id='g27' value='{{fields.g27}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>G28.</div></td>
+                          <td><div><div class='asi_iml_label'>Test Name:</div></div></td>
+                          <td><input type='text' name='test3' id='test3' value='{{fields.test3}}'></td>
+                          <td><div><div class='asi_iml_label' style='margin-left:20px;'>Score:</div></div></td>
+                          <td><input type="text" name='g28' id='g28' value='{{fields.g28}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
+                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
