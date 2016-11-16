@@ -110,7 +110,161 @@
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:43%; height:100%; margin-left:20px;'>
                     <div class='top-split'>
-                      
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E1.</div></td>
+                          <td><div>Education completed:</div></td>
+                          <td><input type='number' name='e1yrs' id='e1yrs' value='{{fields.e1yrs}}' style='width:50px; text-align:center;'></td>
+                          <td><div>years</div></td>
+                          <td><input type='number' name='e1mth' id='e1mth' value='{{fields.e1mth}}' style='width:50px; text-align:center;'></td>
+                          <td><div>months</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E2.</div></td>
+                          <td><div>Training/Technical school completed:</div></td>
+                          <td><input type='number' name='e2' id='e2' value='{{fields.e2}}' style='width:50px; text-align:center;'></td>
+                          <td><div>months</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E3.</div></td>
+                          <td><div>Do you have a profession, trade or skill?</div></td>
+                          <td><input type='radio' name='e3' id='yesE3' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e3' id='noE3' value='False' checked></td>
+                          <td><div>No</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td><div><li>Specify:<input type='text' name='e3Exp' id='e3Exp' value='{{fields.e3Exp}}'></li></div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E4.</div></td>
+                          <td><div>Do you have a valid driver's license?</div></td>
+                          <td><input type='radio' name='e4' id='yesE4' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e4' id='noE4' value='False' checked></td>
+                          <td><div>No</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E5.</div></td>
+                          <td><div>Do you have an automobile for use?</div></td>
+                          <td><input type='radio' name='e5' id='yesE5' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e5' id='noE5' value='False' checked></td>
+                          <td><div>No</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E6.</div></td>
+                          <td><div>Longest full-time employment:</div></td>
+                          <td><input type='number' name='e6yrs' id='e6yrs' value='{{fields.e6yrs}}' style='width:50px; text-align:center;'></td>
+                          <td><div>years</div></td>
+                          <td><input type='number' name='e6mth' id='e6mth' value='{{fields.e6mth}}' style='width:50px; text-align:center;'></td>
+                          <td><div>months</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E7.</div></td>
+                          <td><div>Usual (or last) occupation?</div></td>
+                          <td><input type='radio' name='e7' id='yesE7' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e7' id='noE7' value='False' checked></td>
+                          <td><div>No</div></td>
+
+                          <tr>
+                          <td></td>
+                          <td><div><li>Specify:<input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}'></li></div></td>
+                        </tr>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E8.</div></td>
+                          <td><div>Does anyone contribute to your support?</div></td>
+                          <td><input type='radio' name='e8' id='yesE8' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e8' id='noE8' value='False' checked></td>
+                          <td><div>No</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E9.</div></td>
+                          <td><div>Is this the majority of your support?</div></td>
+                          <td><input type='radio' name='e9' id='yesE9' value='True'></td>
+                          <td><div>Yes</div></td>
+                          <td><input type='radio' name='e9' id='noE9' value='False' checked></td>
+                          <td><div>No</div></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E10.</div></td>
+                          <td><div>Usual employment pattern:</div></td>
+                          <td>
+                            <select name='e10' id='e10'>
+                              <option value='None Selected'>Select</option>
+                              <option value='1'>Full Time (40 hrs/wk)</option>
+                              <option value='2'>Part Time (reg. hrs)</option>
+                              <option value='3'>Part Time (irreg., daywork)</option>
+                              <option value='4'>Student</option>
+                              <option value='5'>Service</option>
+                              <option value='6'>Retired/Disability</option>
+                              <option value='7'>Unemployed</option>
+                              <option value='8'>In Controlled Environment</option>
+                              <option value='X'>Not Answered</option>
+                              <option value='N'>Not Applicable</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E11.</div></td>
+                          <td><div>How many days were you paid for working in the past</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>30 days? <input type='number' name='e11' id='e11' value='{{fields.e11}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E12.</div></td>
+                          <td><div>How many people depend on you for the majority of their</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>
+                            food, shelter, etc.?
+                            <input type='number' name='e18' id='e18' value='{{fields.e18}}' style='width:50px; text-align:center;'>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
 
