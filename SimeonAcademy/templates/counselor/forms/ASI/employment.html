@@ -14,6 +14,7 @@
       <input type='hidden' name='exit_type' id='exit_type' value='asi'>
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='comments' id='comments' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -109,7 +110,7 @@
 
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:43%; height:100%; margin-left:20px;'>
-                    <div class='top-split'>
+                    <div class='top-split3'>
                       <table>
                         <tr>
                           <td><div class='asi_number_iml2'>E1.</div></td>
@@ -265,13 +266,180 @@
                           </td>
                         </tr>
                       </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E13.</div></td>
+                          <td><div><div>How would you rate the patient's need for employment</div></div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>
+                            <div style='margin-bottom:15px;'>
+                              counseling?
+                              <select name='e22' id='e22'>
+                                <option value='None Selected'>Select</option>
+                                <option value='0'>0</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
 
                   <!-- RIGHT SIDE -->
                   <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
-                    <div class='top-split'>
-                      
+                    <div class='top-split3'>
+                      <div>How much money did you receive from the following sources in the past 30 days? (Include "Under the table" work.)</div>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E14.</div></td>
+                          <td><div>Employment (net income):</div></td>
+                          <td><input type='number' name='e12' id='e12' value='{{fields.e12}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E15.</div></td>
+                          <td><div>Unemployment compensation:</div></td>
+                          <td><input type='number' name='e13' id='e13' value='{{fields.e13}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E16.</div></td>
+                          <td><div>DPA:</div></td>
+                          <td><input type='number' name='e14' id='e14' value='{{fields.e14}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E17.</div></td>
+                          <td><div>Pension, benefits, or social security:</div></td>
+                          <td><input type='number' name='e15' id='e15' value='{{fields.e15}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E18.</div></td>
+                          <td><div>Mate, family, or friends (Personal expenses):</div></td>
+                          <td><input type='number' name='e16' id='e16' value='{{fields.e16}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E19.</div></td>
+                          <td><div>Illegal:</div></td>
+                          <td><input type='number' name='e17' id='e17' value='{{fields.e17}}' style='width:70px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E20.</div></td>
+                          <td><div>How many days have you experienced employment problems</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>in the past 30 days? <input type='number' name='e19' id='e19' value='{{fields.e19}}' style='width:50px; text-align:center;'></td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E21.</div></td>
+                          <td><div>How troubled have you been by these employment problems</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>in the past 30 days? 
+                            <select name='e20' id='e20'>
+                              <option value='None Selected'>Select</option>
+                              <option value='0'>Not At All</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerable</option>
+                              <option value='4'>Extremely</option>
+                              <option value='X'>Not Answered</option>
+                              <option value='N'>Not Applicable</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E22.</div></td>
+                          <td><div>How important to you now is counseling for these</div></td>
+                        </tr>
+
+                        <tr>
+                          <td></td>
+                          <td>employment problems? 
+                            <select name='e21' id='e21'>
+                              <option value='None Selected'>Select</option>
+                              <option value='0'>Not At All</option>
+                              <option value='1'>Slightly</option>
+                              <option value='2'>Moderately</option>
+                              <option value='3'>Considerable</option>
+                              <option value='4'>Extremely</option>
+                              <option value='X'>Not Answered</option>
+                              <option value='N'>Not Applicable</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td>
+                            <div class='distorted_label'>Is the information entered significantly distorted by:</div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table>
+                        <tr>
+                          <td><div class='asi_number_iml2'>E23.</div></td>
+                          <td><div><div>Patient's misrepresentation?</div></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='e23' id='yesMis' value='True'></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e23' id='noMis' value='False' checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                        </tr>
+
+                        <tr>
+                          <td><div class='asi_number_iml2'>E24.</div></td>
+                          <td><div><div>Patient's inability to understand?</div></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='e24' id='yesUnd' value='True'></div></td>
+                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e24' id='noUnd' value='False' checked></div></td>
+                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                        </tr>
+                      </table>
+
+                      <div class='medical_comment_wrapper'>
+                        <button onClick="javascript: add_asi_comments(); return false;">Add Additional Comments</button>
+                      </div>
                     </div>
                   </div>
 

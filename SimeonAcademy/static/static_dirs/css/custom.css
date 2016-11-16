@@ -5141,6 +5141,15 @@ button:hover {
 	font-size: 13px;
 }
 
+.top-split3 {
+	width:91%;
+	margin-top: 3%;
+	height:20%;
+	/*padding:2%;*/
+	text-align: justify;
+	font-size: 13px;
+}
+
 .iml-sap-header {
 	font-weight: bold;
 	text-decoration: underline;
