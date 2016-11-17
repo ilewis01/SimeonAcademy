@@ -3880,6 +3880,26 @@ def roommate_win(request):
 			return render_to_response('global/roommate_win.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def roommate_view_application(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			current = request.POST.get('current')
+			applicant = Application.objects.get(id=current)
+			content['applicant'] = applicant
+			return render_to_response('global/roommate_view_application.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def roommate_profile(request):
 	user = request.user
 	if not user.is_authenticated():

@@ -12108,6 +12108,51 @@ function rm_verify_check(boxName) {
 	}
 }
 
+function rm_image_over() {
+	var image = grab('a_photo');
+	image.style.opacity = '0.5';
+}
+
+function rm_image_off() {
+	var image = grab('a_photo');
+	image.style.opacity = '1.0';
+}
+
+function view_rm_application() {
+	grab('r_form').action = '/roommate_view_application/';
+	grab('r_form').submit();
+}
+
+function clear_ratings() {
+	for (var i = 1; i <=5; i++) {
+		var imageName = 'f' + String(i);
+		var divName = 'd' + String(i);
+
+		var image = grab(imageName);
+		var div = grab(divName);
+
+		image.className = 'fa fa-star-o';
+		div.className = 'rate_rm1';
+	}
+}
+
+function rate_rm(rating) {
+	rating = Number(rating);
+	grab('rating').value = rating;
+	clear_ratings();
+
+	for (var i = 1; i <= rating; i++) {
+		var imageName = 'f' + String(i);
+		var divName = 'd' + String(i);
+
+		var image = grab(imageName);
+		var div = grab(divName);
+
+		image.className = 'fa fa-star';
+		div.className = 'rate_rm2';
+	}
+}
+
 
 
 function add_asi_comments() {

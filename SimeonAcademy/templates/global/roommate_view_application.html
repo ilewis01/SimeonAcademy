@@ -26,6 +26,7 @@
       <input type='hidden' name='pNality' id='pNality' value='{{pNality}}'>
       <input type='hidden' name='candidate' id='candidate' value='{{candidate}}'>
       <input type='hidden' name='d_notes' id='d_notes' value='{{notes}}'>
+      <input type='hidden' name='rating' id='rating' value='{{rating}}'>
 
     <div class='container'>
       <div class='row'>
@@ -88,117 +89,81 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:35%; height:100%; margin-left:130px;'>
+                  <div class='col-md-6' style='width:40%; height:100%; margin-left:140px;'>
                     <div class='top-split5'>
-                    	<table>
-                    		<tr><td><div class='applicant_name'>{{eval.application.firstName}} {{eval.application.lastName}}</div></td></tr>
+                    	<table style='width:100%; margin:auto; text-align:center;'>
+                    		<tr><td><div class='applicant_name2' style='color:#576461'>{{applicant.firstName}} {{applicant.lastName}}</div></td></tr>
                     		<tr>
                     			<td>
                     				<div id='a_photo_wrapper' class='' >
-                    					<img src="/static/media/{{eval.application.photo}}" alt="search_img" class='applicant_photo2' id='{{val.application.id}}'>
+                    					<img src="/static/media/{{applicant.photo}}" alt="search_img" class='applicant_photo3' id='{{val.application.id}}'>
                     				</div>
                     			</td>
                     		</tr>
                     	</table>
 
                     	<div style='height:20px;'></div>
+                    	<div class='rm_description_quote'>"{{applicant.description}}"</div>
 
-                    	<table>
-                    		<tr>
-                    			<td><div class='eval_rm_label'>Phone: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.phone}}</div></td>
-                    		</tr>
-
-                    		<tr>
-                    			<td><div class='eval_rm_label'>Email: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.email}}</div></td>
-                    		</tr>
-
-                    		<tr>
-                    			<td><div class='eval_rm_label'>DOB: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.dob}}</div></td>
-                    		</tr>
-
-                    		<tr>
-                    			<td><div class='eval_rm_label'>SSN: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.ssn}}</div></td>
-                    		</tr>
-
-                    		<tr>
-                    			<td><div class='eval_rm_label' style='width:53px;'>Gender: </div></td>
-                    			<td><div class='eval_rm_ans'>{{gender}}</div></td>
-                    		</tr>
-
-                    	</table>
-
-                    	<table>
-                    		<tr>
-                    			<td><div style='width:70px' class='eval_rm_label'>Employer: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.employer}}</div></td>
-                    		</tr>
-                    	</table>
-
-                    	<table>
-                    		<tr>
-                    			<td><div style='width:85px' class='eval_rm_label'>Occupation: </div></td>
-                    			<td><div class='eval_rm_ans'>{{eval.application.occupation}}</div></td>
-                    		</tr>
-                    	</table>
                     </div>
                   </div>
 
                   <!-- RIGHT SIDE -->
                   <div class='col-md-6' style='width:44%; height:10%; margin-left:0px;'>
                     <div class='top-split5'>
-                      	<h4>Verifications</h4>
+                      	<h4 style='margin-top:50px;'>Contact Information</h4>
 
-                      	<table class='eval_roommate_table'>
-                      		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='hasCheckstubs' id='hasCheckstubs' value='False' onClick="javascript: rm_verify_check('hasCheckstubs');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'>Checkstubs Verified</div></td>
-                      		</tr>
+                      	<table>
+                      		<tr><td><div style='color:#3796cd; font-size:15px;'><em>{{applicant.email}}</em></div></td></tr>
+                      		<tr><td><div>{{applicant.phone}}</div></td></tr>
+                      	</table>
 
-                      		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='hasCredit' id='hasCredit' value='False' onClick="javascript: rm_verify_check('hasCredit');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'>Credit Verified</div></td>
-                      		</tr>
+                      	<h4 style='margin-top:30px;'>Applicant Details</h4>
 
+                      	<table>
                       		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='hasId' id='hasId' value='False' onClick="javascript: rm_verify_check('hasId');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'>Id Verified</div></td>
-                      		</tr>
-
-                      		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='work_verified' id='work_verified' value='False' onClick="javascript: rm_verify_check('work_verified');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'>Employment Verified &nbsp&nbsp<span>{{eval.application.work_phone}}</span></div></td>
-                      		</tr>
-
-                      		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='personality' id='personality' value='False' onClick="javascript: rm_verify_check('personality');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'>Personality</div></td>
+                      			<td><div class='eval_rm_label'>Gender: </div></td>
+                      			<td><div class='eval_rm_ans2'>{{applicant.dob}}</div></td>
                       		</tr>
                       	</table>
 
-                      	<h4 style='margin-top:10px;'>References</h4>
-                      	<table class='eval_roommate_table'>
+                      	<table>
                       		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='ref1_verified' id='ref1_verified' value='False' onClick="javascript: rm_verify_check('ref1_verified');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'><b>{{eval.application.ref1}}</b> &nbsp&nbsp <span>{{eval.application.ref1_phone}}</span></div></td>
+                      			<td><div class='eval_rm_label'>DOB: </div></td>
+                      			<td><div class='eval_rm_ans2'>{{applicant.dob}}</div></td>
                       		</tr>
 
                       		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='ref2_verified' id='ref2_verified' value='False' onClick="javascript: rm_verify_check('ref2_verified');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'><b>{{eval.application.ref2}}</b> &nbsp&nbsp <span>{{eval.application.ref2_phone}}</span></div></td>
-                      		</tr>
-
-                      		<tr>
-                      			<td><div class='rmmate-tb-cell'><input type='checkbox' name='ref3_verified' id='ref3_verified' value='False' onClick="javascript: rm_verify_check('ref3_verified');"></div></td>
-                      			<td><div class='rmmate-tb-cell2'><b>{{eval.application.ref3}}</b> &nbsp&nbsp <span>{{eval.application.ref3_phone}}</span></div></td>
+                      			<td><div class='eval_rm_label'>SSN: </div></td>
+                      			<td><div class='eval_rm_ans2'>{{applicant.ssn}}</div></td>
                       		</tr>
                       	</table>
 
-                        <h4 style='margin-top:10px;'>Notes</h4>
-                        <textarea rows='5' cols='60' name='notes' id='notes'>{{notes}}</textarea>
+                      	<table>
+                      		<tr>
+                      			<td><div class='eval_rm_label'>Occupation: </div></td>
+                      			<td><div class='eval_rm_ans2'>{{applicant.occupation}}</div></td>
+                      		</tr>
+                      	</table>
+
+                      	<table>
+                      		<tr>
+                      			<td><div class='eval_rm_label'>Employer: </div></td>
+                      			<td><div class='eval_rm_ans2'>{{applicant.employer}}</div></td>
+                      		</tr>
+                      	</table>
+
+                      	<h4 style='margin-top:30px;'>Rate This Applicant</h4>
+
+                      	<table>
+                      		<tr>
+                      			<td><a href="javascript: rate_rm('1');"><div class='rate_rm1' id='d1'><i id='f1' class="fa fa-star-o" aria-hidden="true"></i></div></a></td>
+                      			<td><a href="javascript: rate_rm('2');"><div class='rate_rm1' id='d2'><i id='f2' class="fa fa-star-o" aria-hidden="true"></i></div></a></td>
+                      			<td><a href="javascript: rate_rm('3');"><div class='rate_rm1' id='d3'><i id='f3' class="fa fa-star-o" aria-hidden="true"></i></div></a></td>
+                      			<td><a href="javascript: rate_rm('4');"><div class='rate_rm1' id='d4'><i id='f4' class="fa fa-star-o" aria-hidden="true"></i></div></a></td>
+                      			<td><a href="javascript: rate_rm('5');"><div class='rate_rm1' id='d5'><i id='f5' class="fa fa-star-o" aria-hidden="true"></i></div></a></td>
+                      		</tr>
+                      	</table>
 
                       	<div style='margin-top:0px;'>
                       		<table>

@@ -58,7 +58,7 @@
 
                           <td>
                             <a href="javascript: roommate_win()">
-                              <div  class='iml-button-incomplete-xl'>View Applications</div>
+                              <div  class='iml-button-incomplete-xl'>View Applicants</div>
                             </a>
                           </td>
                         </tr>
@@ -115,10 +115,12 @@
                   <!-- RIGHT SIDE -->
                   <div class='col-md-6' style='width:44%; height:10%; margin-left:;'>
                     <div class='top-split4'>
-                    	<div id='a_name'></div>
-                      	<div id='a_photo_wrapper' class=''>
-                      		<img src="" id='a_photo' style='width:100%; height:100%;'>
-                      	</div>
+                        <a href='javascript: continue_app_eval();' class='big_rm_text_tag'>
+                      	  <div id='a_name'></div>
+                        	<div id='a_photo_wrapper'>
+                        		<img src="" id='a_photo' style='width:100%; height:100%;' onmouseover='javascript: rm_image_over();' onmouseout='javascript: rm_image_off();'>
+                        	</div>
+                        </a>
                     </div>
                   </div>
 
@@ -132,7 +134,7 @@
                 <table class='iml-save-btn'>
                   <tr>
                     <td><button onClick="javascript: continue_app_eval(); return false;">Continue</button></td>
-                    <td><button onClick="javascript: exit_roommate_sub();">Cancel</button></td>
+                    <td><button onClick="javascript: exit_roommate_sub();">Exit</button></td>
                   </tr>
                 </table>
               </div>

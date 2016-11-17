@@ -6700,6 +6700,14 @@ button:hover {
 	height:40px;
 }
 
+.applicant_name2 {
+	font-size: 20px;
+	text-align: center;
+	font-style: italic;
+	font-weight: bold;
+	height:40px;
+}
+
 .applicant_photo {
 	width: 300px;
 	height:300px;
@@ -6710,6 +6718,13 @@ button:hover {
 .applicant_photo2 {
 	width: 200px;
 	height:200px;
+	margin:auto;
+	border:3px solid gray;
+}
+
+.applicant_photo3 {
+	width: 250px;
+	height:250px;
 	margin:auto;
 	border:3px solid gray;
 }
@@ -6745,6 +6760,12 @@ button:hover {
 	font-style: italic;
 }
 
+.eval_rm_ans2 {
+	color:#611a15;
+	font-style: italic;
+	margin-left: 5px;
+}
+
 .applicant_container {
 	margin-top: 23px;
 	border: 3px solid gray;
@@ -6757,7 +6778,45 @@ button:hover {
 
 .rm_to_top {
 	vertical-align:top
+}
+
+.a_tag_image_hover:hover {
+	opacity: '0.5';
+}
+
+.big_rm_text_tag {
+	color: #884e5d;
+}
+
+.big_rm_text_tag:hover {
+	text-decoration: none;
+}
+
+.rm_description_quote {
+	font-style: italic;
+	font-size: 11px;
+	width:100%;
+	height:60px;
+	overflow-y: auto;
+	color:#576461;
 }	
+
+.rate_rm1 {
+	font-size: 22px;
+	margin-right: 10px;
+}
+
+.rate_rm2 {
+	font-size: 22px;
+	margin-right: 10px;
+	color:#b1ab51;
+}
+
+.rate_rm2:hover {
+	font-size: 22px;
+	margin-right: 10px;
+	color:#4270a9;
+}
 
 
 
