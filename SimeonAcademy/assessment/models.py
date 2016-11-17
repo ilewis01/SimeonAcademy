@@ -1707,6 +1707,7 @@ class Application(models.Model):
 	isEvaluated 	= models.BooleanField(default=False, blank=True)
 	isCandidate 	= models.BooleanField(default=False, blank=True)
 	rating 			= models.IntegerField(default=0)
+	isRated 		= models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return str(self.lastName) + ', ' + str(self.firstName)
