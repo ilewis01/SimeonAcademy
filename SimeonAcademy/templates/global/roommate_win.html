@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+<body class="gradient-white" onLoad="javascript: initialize_evaluation({{data}});">
     <form action='' method='post' id='r_form' name='r_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
@@ -14,6 +14,7 @@
       <input type='hidden' name='exit_type' id='exit_type' value='asi'>
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='current' id='current' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -21,7 +22,7 @@
           <div class='iml-body-wrapper2'>
 
             <div id='iml-info-head2'>
-              <div style='margin-left:3%;'>Successful Candidates</div>
+              <div style='margin-left:3%;'>Evaluate Candidates</div>
             </div>
 
             <div class='iml-form-nav'>
@@ -45,7 +46,7 @@
 
                           <td>
                             <a href="javascript: roommate_eval();">
-                              <div  class='iml-button-incomplete-xl'>Evaluation</div>
+                              <div  class='iml-button-current-xl'>Evaluation</div>
                             </a>
                           </td>
 
@@ -57,7 +58,7 @@
 
                           <td>
                             <a href="javascript: roommate_win()">
-                              <div  class='iml-button-current-xl'>View Applications</div>
+                              <div  class='iml-button-incomplete-xl'>View Applications</div>
                             </a>
                           </td>
                         </tr>
@@ -76,16 +77,48 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:43%; height:100%; margin-left:20px;'>
-                    <div class='top-split'>
-                      
+                  <div class='col-md-6' style='width:45%; height:100%; margin-left:20px;'>
+                    <div class='top-split4'>
+                    	<h4>{{message}}</h4>
+
+                      <div class='applicant_container'>
+                        <table>
+                          <tr>
+                            <td style='width:650px;'>
+                              <ul>
+                                  {% for e in col1 %}
+                                    <a href="javascript: choose_applicant('{{e.firstName}}', '{{e.lastName}}', '{{e.photo}}', {{e.id}});">
+                                      <li><img src="/static/media/{{e.photo}}" alt="search_img" class='client_search_img' id='{{e.photo}}'> {{e.firstName}} {{e.lastName}}</li>
+                                    </a>
+                                    <div style='height:10px;'></div>
+                                  {% endfor %}
+                              </ul>
+                            </td>
+
+                            <td style='width:650px;' class='rm_to_top'>
+                              <ul>
+                                  {% for e in col2 %}
+                                    <a href="javascript: choose_applicant('{{e.firstName}}', '{{e.lastName}}', '{{e.photo}}', {{e.id}});">
+                                      <li><img src="/static/media/{{e.photo}}" alt="search_img" class='client_search_img' id='{{e.photo}}'> {{e.firstName}} {{e.lastName}}</li>
+                                    </a>
+                                    <div style='height:10px;'></div>
+                                  {% endfor %}
+                              </ul>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+
                     </div>
                   </div>
 
                   <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
-                    <div class='top-split'>
-                      
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:;'>
+                    <div class='top-split4'>
+                    	<div id='a_name'></div>
+                      	<div id='a_photo_wrapper' class=''>
+                      		<img src="" id='a_photo' style='width:100%; height:100%;'>
+                      	</div>
                     </div>
                   </div>
 
@@ -98,8 +131,8 @@
               <div class='col-md-12' style='width:100%'>
                 <table class='iml-save-btn'>
                   <tr>
-                    <td><button onClick="javascript: exit_roommate_page();">Exit</button></td>
-                    <td><button onClick="javascript: exit_roommate_page();">Exit</button></td>
+                    <td><button onClick="javascript: view_rm_application(); return false;">View Application</button></td>
+                    <td><button onClick="javascript: exit_roommate_sub();">Exit</button></td>
                   </tr>
                 </table>
               </div>

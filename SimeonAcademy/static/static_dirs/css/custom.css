@@ -6743,6 +6743,20 @@ button:hover {
 .eval_rm_ans {
 	color:#15159c;
 	font-style: italic;
+}
+
+.applicant_container {
+	margin-top: 23px;
+	border: 3px solid gray;
+	padding-top: 10px;
+	background-color: white;
+	width:100%;
+	height:300px;
+	overflow-y: auto;
+}
+
+.rm_to_top {
+	vertical-align:top
 }	
 
 

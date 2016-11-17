@@ -77,21 +77,43 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:35%; height:100%; margin-left:60px;'>
+                  <div class='col-md-6' style='width:45%; height:100%; margin-left:20px;'>
                     <div class='top-split4'>
                     	<h4>Select An Applicant To Evaluate</h4>
-	                    <ul>
-	                      	{% for e in e_list %}
-	                      		<a href="javascript: choose_applicant('{{e.firstName}}', '{{e.lastName}}', '{{e.photo}}', {{e.id}});">
-	                      			<li><img src="/static/media/{{e.photo}}" alt="search_img" class='client_search_img' id='{{e.photo}}'> {{e.lastName}}, {{e.firstName}}</li>
-	                      		</a>
-	                        {% endfor %}
-	                    </ul>
+
+                      <div class='applicant_container'>
+                        <table>
+                          <tr>
+                            <td style='width:650px;'>
+                              <ul>
+                                  {% for e in col1 %}
+                                    <a href="javascript: choose_applicant('{{e.firstName}}', '{{e.lastName}}', '{{e.photo}}', {{e.id}});">
+                                      <li><img src="/static/media/{{e.photo}}" alt="search_img" class='client_search_img' id='{{e.photo}}'> {{e.firstName}} {{e.lastName}}</li>
+                                    </a>
+                                    <div style='height:10px;'></div>
+                                  {% endfor %}
+                              </ul>
+                            </td>
+
+                            <td style='width:650px;' class='rm_to_top'>
+                              <ul>
+                                  {% for e in col2 %}
+                                    <a href="javascript: choose_applicant('{{e.firstName}}', '{{e.lastName}}', '{{e.photo}}', {{e.id}});">
+                                      <li><img src="/static/media/{{e.photo}}" alt="search_img" class='client_search_img' id='{{e.photo}}'> {{e.firstName}} {{e.lastName}}</li>
+                                    </a>
+                                    <div style='height:10px;'></div>
+                                  {% endfor %}
+                              </ul>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+
                     </div>
                   </div>
 
                   <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:;'>
                     <div class='top-split4'>
                     	<div id='a_name'></div>
                       	<div id='a_photo_wrapper' class=''>

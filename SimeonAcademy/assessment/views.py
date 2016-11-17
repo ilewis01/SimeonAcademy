@@ -3635,6 +3635,7 @@ def roommate_page(request):
 				ref1_phone = str(request.POST.get('ref1_phone'))
 				ref2_phone = str(request.POST.get('ref2_phone'))
 				ref3_phone = str(request.POST.get('ref3_phone'))
+				description = str(request.POST.get('description'))
 
 				isMale = str(request.POST.get('isMale'))
 				isAuthorized = str(request.POST.get('isAuthorized'))
@@ -3662,6 +3663,7 @@ def roommate_page(request):
 				app.ref3_phone = ref3_phone
 				app.isMale = isMale
 				app.isAuthorized = isAuthorized
+				app.description = description
 				app.save()
 			elif proceed == 'save_evaluation':
 				eval_id = int(request.POST.get('eval_id'))
@@ -3754,14 +3756,24 @@ def roommate_eval(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			app_list = Application.objects.all()
+			app_list = Application.objects.all().order_by('firstName')
+			col1 = []
+			col2 = []
 			eval_list = []
 
 			for a in app_list:
 				if a.isEvaluated == False:
 					eval_list.append(a)
 
+			for i in range(len(eval_list)):
+				if i % 2 == 0:
+					col1.append(eval_list[i])
+				else:
+					col2.append(eval_list[i])
+
 			content['e_list'] = eval_list
+			content['col1'] = col1
+			content['col2'] = col2
 			return render_to_response('global/roommate_eval.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -3843,6 +3855,28 @@ def roommate_win(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			app_list = Application.objects.all().order_by('firstName')
+			eval_list = []
+
+			for a in app_list:
+				if a.isEvaluated == True:
+					eval_list.append(a)
+
+			if len(eval_list) == 0:
+				content['message'] = "There are no completed applications."
+			else:
+				content['message'] = "Select An Applicant"
+				col1 = []
+				col2 = []
+				for i in range(len(eval_list)):
+					if i % 2 == 0:
+						col1.append(eval_list[i])
+					else:
+						col2.append(eval_list[i])
+				content['col1'] = col1
+				content['col2'] = col2
+
+			content['e_list'] = eval_list
 			return render_to_response('global/roommate_win.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
