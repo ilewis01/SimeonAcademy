@@ -3896,9 +3896,21 @@ def roommate_win(request):
 		else:
 			app_list = Application.objects.all().order_by('firstName')
 			eval_list = []
+			proceed = str(request.POST.get('save_this'))
+
+			if proceed == 'rate_applicant':
+				rating = str(request.POST.get('rating')) 
+				isCandidate = truePythonBool(request.POST.get('isCandidate')) 
+				a_id = str(request.POST.get('app_id'))
+				applicant = Application.objects.get(id=a_id)
+
+				applicant.rating = rating
+				applicant.isCandidate = isCandidate
+				applicant.isRated = True
+				applicant.save()
 
 			for a in app_list:
-				if a.isEvaluated == True:
+				if a.isEvaluated == True and a.isRated == False:
 					eval_list.append(a)
 
 			if len(eval_list) == 0:

@@ -12270,7 +12270,7 @@ function reload_rm_all() {
 function rate_applicant_return() {
 	var form = grab('r_form');
 	grab('save_this').value = 'rate_applicant';
-	form.action = '/roommate_page/';
+	form.action = '/roommate_win/';
 	form.submit();
 }
 
