@@ -15,6 +15,19 @@
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
 
+      <input type='hidden' name='re1' id='re1' value='empty'>
+      <input type='hidden' name='re2' id='re2' value='empty'>
+      <input type='hidden' name='re3' id='re3' value='empty'>
+      <input type='hidden' name='re4' id='re4' value='empty'>
+      <input type='hidden' name='re5' id='re5' value='empty'>
+      <input type='hidden' name='re6' id='re6' value='empty'>
+      <input type='hidden' name='re7' id='re7' value='empty'>
+      <input type='hidden' name='re8' id='re8' value='empty'>
+      <input type='hidden' name='re9' id='re9' value='empty'>
+      <input type='hidden' name='re10' id='re10' value='empty'>
+      <input type='hidden' name='re11' id='re11' value='empty'>
+      <input type='hidden' name='re12' id='re12' value='empty'>
+
     <div class='container'>
       <div class='row'>
         <div class="col-md-12" style='width:100%; height:84vh;'>
@@ -82,29 +95,24 @@
                       		{% for c in col1 %}
                       		<table>
                       			<tr>
-                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b><span id='{{c.name_id}}'>{{c.applicant.name}}</span></b></li></div></td>
                       			</tr>
                       		</table>
                       		<table>
-                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
-                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.applicant.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.applicant.phone}}</div></td></tr>
                       		</table>
-                      		<!-- <table>
-                      			<tr>
-                      				<td><div class='eval_rm_label'>Male:</div></td>
-                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
-                      			</tr>
-                      		</table> -->
+
                       		<table>
                       			<tr>
                       				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
-                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.applicant.viewDate}}</div></td>
                       			</tr>
                       		</table>
-                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.applicant.notes}}</em></div>
                       		<table>
                       			<tr>
-                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div><input type='checkbox' name='{{c.num}}' id='{{c.num}}' value='{{c.applicant.id}}' onClick="javascript: set_re_val('{{c.num}}', '{{c.applicant.id}}');"></div></td>
                       				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
                       			</tr>
                       		</table>
@@ -121,29 +129,24 @@
                       		{% for c in col2 %}
                       		<table>
                       			<tr>
-                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b><span id='{{c.name_id}}'>{{c.applicant.name}}</span></b></li></div></td>
                       			</tr>
                       		</table>
                       		<table>
-                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
-                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.applicant.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.applicant.phone}}</div></td></tr>
                       		</table>
-                      		<!-- <table>
-                      			<tr>
-                      				<td><div class='eval_rm_label'>Male:</div></td>
-                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
-                      			</tr>
-                      		</table> -->
+
                       		<table>
                       			<tr>
                       				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
-                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.applicant.viewDate}}</div></td>
                       			</tr>
                       		</table>
-                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.applicant.notes}}</em></div>
                       		<table>
                       			<tr>
-                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div><input type='checkbox' name='{{c.num}}' id='{{c.num}}' value='{{c.applicant.id}}' onClick="javascript:  set_re_val('{{c.num}}', '{{c.applicant.id}}');"></div></td>
                       				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
                       			</tr>
                       		</table>
@@ -160,29 +163,24 @@
                       		{% for c in col3 %}
                       		<table>
                       			<tr>
-                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b><span id='{{c.name_id}}'>{{c.applicant.name}}</span></b></li></div></td>
                       			</tr>
                       		</table>
                       		<table>
-                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
-                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.applicant.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.applicant.phone}}</div></td></tr>
                       		</table>
-                      		<!-- <table>
-                      			<tr>
-                      				<td><div class='eval_rm_label'>Male:</div></td>
-                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
-                      			</tr>
-                      		</table> -->
+                      		
                       		<table>
                       			<tr>
                       				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
-                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.applicant.viewDate}}</div></td>
                       			</tr>
                       		</table>
-                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.applicant.notes}}</em></div>
                       		<table>
                       			<tr>
-                      				<td><div><input type='checkbox' name='{{c.id}}' id='{{c.id}}' value='False' onClick="javascript: rm_verify_check('{{c.id}}');"></div></td>
+                      				<td><div><input type='checkbox' name='{{c.num}}' id='{{c.num}}' value='False' onClick="javascript: set_re_val('{{c.num}}', '{{c.applicant.id}}');"></div></td>
                       				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
                       			</tr>
                       		</table>
@@ -199,19 +197,14 @@
                       		{% for c in col4 %}
                       		<table>
                       			<tr>
-                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b><span id='{{c.name_id}}'>{{c.name}}</span></b></li></div></td>
                       			</tr>
                       		</table>
                       		<table>
                       			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
                       			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
                       		</table>
-                      		<!-- <table>
-                      			<tr>
-                      				<td><div class='eval_rm_label'>Male:</div></td>
-                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
-                      			</tr>
-                      		</table> -->
+                      		
                       		<table>
                       			<tr>
                       				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
@@ -221,7 +214,7 @@
                       		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
                       		<table>
                       			<tr>
-                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div><input type='checkbox' name='{{c.num}}' id='{{c.num}}' value='False' onClick="javascript: set_re_val('{{c.num}}', '{{c.applicant.id}}');"></div></td>
                       				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
                       			</tr>
                       		</table>
@@ -240,7 +233,7 @@
               <div class='col-md-12' style='width:100%'>
                 <table class='iml-save-btn'>
                   <tr>
-                    <td><button onClick="javascript: remove_candidates(); return false;">Delete Selected</button></td>
+                    <td><button onClick="javascript: remove_candidates(); return false;">Continue</button></td>
                     <td><button onClick="javascript: exit_roommate_sub();">Exit</button></td>
                   </tr>
                 </table>

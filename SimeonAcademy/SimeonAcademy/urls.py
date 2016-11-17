@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^roommate_win/$', 'assessment.views.roommate_win'),
     url(r'^roommate_profile/$', 'assessment.views.roommate_profile'),
     url(r'^roommate_view_application/$', 'assessment.views.roommate_view_application'),
+    url(r'^verify_rm_delete/$', 'assessment.views.verify_rm_delete'),
+    url(r'^complete_rm_removal/$', 'assessment.views.complete_rm_removal'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'assessment.views.index'), 

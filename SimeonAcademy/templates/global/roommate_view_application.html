@@ -14,7 +14,7 @@
       <input type='hidden' name='exit_type' id='exit_type' value='asi'>
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
-      <input type='hidden' name='eval_id' id='eval_id' value='{{eval.id}}'>
+      <input type='hidden' name='app_id' id='app_id' value='{{applicant.id}}'>
 
       <input type='hidden' name='stub' id='stub' value='{{stub}}'>
       <input type='hidden' name='credit' id='credit' value='{{credit}}'>
@@ -185,8 +185,8 @@
               <div class='col-md-12' style='width:100%'>
                 <table class='iml-save-btn'>
                   <tr>
-                    <td><button onClick="javascript: save_rm_evaluation2(); return false;">Submit</button></td>
-                    <td><button onClick="javascript: exit_roommate_sub();">Exit</button></td>
+                    <td><button onClick="javascript: rate_applicant_return(); return false;">Rate</button></td>
+                    <td><button onClick="javascript: exit_roommate_sub();">Home</button></td>
                   </tr>
                 </table>
               </div>

@@ -3704,6 +3704,15 @@ def roommate_page(request):
 				evaluation.isCandidate 		= isCandidate
 				evaluation.notes 			= notes
 				evaluation.save()
+			elif proceed == 'rate_applicant':
+				rating = str(request.POST.get('rating')) 
+				isCandidate = truePythonBool(request.POST.get('isCandidate')) 
+				a_id = str(request.POST.get('app_id'))
+				applicant = Application.objects.get(id=a_id)
+
+				applicant.rating = rating
+				applicant.isCandidate = isCandidate
+				applicant.save()
 
 			return render_to_response('global/roommate_page.html', content, context_instance=RequestContext(request))
 
@@ -3796,7 +3805,12 @@ def roommate_all(request):
 			col3 = []
 			col4 = []
 			c_list = []
-			candidates = Roommate.objects.all()
+			start1 = 1
+			start2 = 4
+			start3 = 7
+			start4 = 10
+			index = 2
+			candidates = Roommate.objects.all().order_by('name')
 
 			for r in range(12):
 				c_list.append(None)
@@ -3804,32 +3818,57 @@ def roommate_all(request):
 			for i in range(len(candidates)):
 				c_list[i] = candidates[i]
 
-			col1.append(c_list[0])
-			col1.append(c_list[1])
-			col1.append(c_list[2])
+			for w in range(3):
+				data1 = {}
+				data2 = {}
+				data3 = {}
+				data4 = {}
 
-			col2.append(c_list[3])
-			col2.append(c_list[4])
-			col2.append(c_list[5])
+				data1['num'] = start1
+				data2['num'] = start2
+				data3['num'] = start3
+				data4['num'] = start4
 
-			col3.append(c_list[6])
-			col3.append(c_list[7])
-			col3.append(c_list[8])
+				data1['name_id'] = 'nm_id' + str(start1)
+				data2['name_id'] = 'nm_id' + str(start2)
+				data3['name_id'] = 'nm_id' + str(start3)
+				data4['name_id'] = 'nm_id' + str(start4)
 
-			col4.append(c_list[9])
-			col4.append(c_list[10])
-			col4.append(c_list[11])
+				col1.append(data1)
+				col2.append(data2)
+				col3.append(data3)
+				col4.append(data4)
 
-			index = 2
+				start1 += 1
+				start2 += 1
+				start3 += 1
+				start4 += 1
+
+			col1[0]['applicant'] = c_list[0]
+			col1[1]['applicant'] = c_list[1]
+			col1[2]['applicant'] = c_list[2]
+
+			col2[0]['applicant'] = c_list[3]
+			col2[1]['applicant'] = c_list[4]
+			col2[2]['applicant'] = c_list[5]
+
+			col3[0]['applicant'] = c_list[6]
+			col3[1]['applicant'] = c_list[7]
+			col3[2]['applicant'] = c_list[8]
+
+			col4[0]['applicant'] = c_list[9]
+			col4[1]['applicant'] = c_list[10]
+			col4[2]['applicant'] = c_list[11]
+
 
 			for i in range(3):
-				if col1[index] == None:
+				if col1[index]['applicant'] == None:
 					col1.pop(index)
-				if col2[index] == None:
+				if col2[index]['applicant'] == None:
 					col2.pop(index)
-				if col3[index] == None:
+				if col3[index]['applicant'] == None:
 					col3.pop(index)
-				if col4[index] == None:
+				if col4[index]['applicant'] == None:
 					col4.pop(index)
 
 				index = index - 1
@@ -3878,6 +3917,61 @@ def roommate_win(request):
 
 			content['e_list'] = eval_list
 			return render_to_response('global/roommate_win.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def verify_rm_delete(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/roommate_verify_rm_delete.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def complete_rm_removal(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			r_list = []
+			i_list = []
+
+			r_list.append(request.POST.get('re1'))
+			r_list.append(request.POST.get('re2'))
+			r_list.append(request.POST.get('re3'))
+			r_list.append(request.POST.get('re4'))
+			r_list.append(request.POST.get('re5'))
+			r_list.append(request.POST.get('re6'))
+			r_list.append(request.POST.get('re7'))
+			r_list.append(request.POST.get('re8'))
+			r_list.append(request.POST.get('re9'))
+			r_list.append(request.POST.get('re10'))
+			r_list.append(request.POST.get('re11'))
+			r_list.append(request.POST.get('re12'))
+
+			for r in r_list:
+				if str(r) != 'empty':
+					item = Roommate.objects.get(id=r)
+					item.delete()
+
+			return render_to_response('global/complete_rm_removal.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def roommate_view_application(request):

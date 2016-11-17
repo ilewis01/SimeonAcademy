@@ -12153,6 +12153,114 @@ function rate_rm(rating) {
 	}
 }
 
+function set_re_val(position, applicant_id) {
+	position = String(position);
+	applicant_id = String(applicant_id);
+	var divName = 're' + position;
+	var div = grab(divName);
+
+	if (grab(position).checked === true) {
+		div.value = applicant_id;
+	}
+	else {
+		div.value = 'empty';
+	}
+}
+
+function remove_candidates() {
+	var willRemove = false;
+
+	for (var i = 1; i <= 12; i++) {
+		var name = 're' + String(i);
+		var div = grab(name);
+		var value = String(div.value);
+
+		if (value !== 'empty') {
+			willRemove = true;
+			break;
+		}
+	}
+
+	if (willRemove === true) {
+		openPopUp('auto', '/verify_rm_delete/', 400, 400);
+	}
+	else {
+		grab('save_this').value = '';
+		var form = grab('r_form');
+		form.action = '/roommate_page/';
+		form.submit();
+	}
+}
+
+function initialize_rm_delete_page() {
+	var mainDiv = grab('remove_list');
+	var mainDivRight = grab('remove_list2');
+
+	var r_list = [];
+	var html_left = '';
+	var html_right = '';
+
+	for (var i = 1; i <= 12; i++) {
+		var name = 're' + String(i);
+		var value = String(getPopParent(name).value);
+
+		if (value !== 'empty') {
+			var name_id = 'nm_id' + String(i);
+			var nameDiv = getPopParent(name_id);
+			var nameVal = String(nameDiv.innerHTML);
+			r_list.push(nameVal);
+		}
+	}
+
+	var left_length = r_list.length;
+	var fill_right = false;
+
+	if (left_length > 6) {
+		left_length = 6;
+		fill_right = true;
+	}
+
+	for (var j = 0; j < left_length; j++) {
+		html_left += "<li>" + r_list[j] + "</li>"
+	}
+
+	if (fill_right === true) {
+		for (var k = 6; k < r_list.length; k++) {
+			html_right += "<li>" + r_list[k] + "</li>"
+		}
+	}
+
+	mainDiv.innerHTML = html_left;
+	mainDivRight.innerHTML = html_right;
+}
+
+function complete_candidate_removal() {
+	var r_list = [];
+
+	for (var i = 1; i <= 12; i++) {
+		var name = 're' + String(i);
+		var value = String(getPopParent(name).value);
+
+		if (value !== 'empty') {
+			var div = grab(name);
+			div.value = value;
+		}
+	}
+
+	grab('r_form').submit();
+}
+
+function reload_rm_all() {
+	window.parent.opener.location.reload();
+	window.close();
+}
+
+function rate_applicant_return() {
+	var form = grab('r_form');
+	grab('save_this').value = 'rate_applicant';
+	form.action = '/roommate_page/';
+	form.submit();
+}
 
 
 function add_asi_comments() {

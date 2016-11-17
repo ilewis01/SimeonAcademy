@@ -1703,9 +1703,10 @@ class Application(models.Model):
 	ref3 = models.CharField(max_length=50, default=None, blank=True, null=True)
 	ref3_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
 
-	isAuthorized = models.BooleanField(default=False, blank=True)
-	isEvaluated = models.BooleanField(default=False, blank=True)
-	rating 		= models.IntegerField(default=0)
+	isAuthorized 	= models.BooleanField(default=False, blank=True)
+	isEvaluated 	= models.BooleanField(default=False, blank=True)
+	isCandidate 	= models.BooleanField(default=False, blank=True)
+	rating 			= models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return str(self.lastName) + ', ' + str(self.firstName)

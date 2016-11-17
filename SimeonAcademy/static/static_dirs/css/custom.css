@@ -2651,6 +2651,18 @@ button:hover {
 	font-family: Arial;
 }
 
+#paid_page_stuff3 {
+	width:90%;
+	margin: auto;
+	padding-top: 2%;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color:#6b6b47;
+	font-family: Arial;
+}
+
 .accept_btn {
 	width:67px;
 	margin: auto;
@@ -5766,7 +5778,16 @@ button:hover {
 	margin-top: 15%;
 }
 
+.end_save_sequence2 {
+	width: 164px;
+	margin: auto;
+}
+
 .end_save_sequence button {
+	width: 80px;
+}
+
+.end_save_sequence2 button {
 	width: 80px;
 }
 
@@ -6804,6 +6825,13 @@ button:hover {
 .rate_rm1 {
 	font-size: 22px;
 	margin-right: 10px;
+	color:#9c1531;
+}
+
+.rate_rm1:hover {
+	font-size: 22px;
+	margin-right: 10px;
+	color:#b1ab51;
 }
 
 .rate_rm2 {
@@ -6815,7 +6843,18 @@ button:hover {
 .rate_rm2:hover {
 	font-size: 22px;
 	margin-right: 10px;
-	color:#4270a9;
+	color:#9c1531;
+}
+
+.remove_list {
+	font-size: 13px;
+	color:black;
+	font-family: Arial;
+}
+
+.remove_rm_pop_container {
+	height:150px;
+	margin-left: 20px;
 }
 
 
