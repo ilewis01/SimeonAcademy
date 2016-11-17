@@ -12234,6 +12234,18 @@ function initialize_rm_delete_page() {
 	mainDivRight.innerHTML = html_right;
 }
 
+function initialize_rm_application(rating, isCandidate) {
+	isCandidate = String(isCandidate);
+	rate_rm(rating);
+
+	if (isCandidate === 'True') {
+		grab('isCandidate').checked = true;
+	}
+	else {
+		grab('isCandidate').checked = false;
+	}
+}
+
 function complete_candidate_removal() {
 	var r_list = [];
 
@@ -12261,6 +12273,16 @@ function rate_applicant_return() {
 	form.action = '/roommate_page/';
 	form.submit();
 }
+
+function rm_home_buttons(next_page) {
+	next_page = String(next_page);
+	var form = grab('r_form');
+	form.action = next_page;
+	form.submit();
+}
+
+
+
 
 
 function add_asi_comments() {

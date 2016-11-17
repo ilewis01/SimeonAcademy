@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_rm_profile();">
+<body class="gradient-white" onLoad="javascript: initialize_rm_application({{rating}}, '{{isCandidate}}');">
     <form action='' method='post' id='r_form' name='r_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>

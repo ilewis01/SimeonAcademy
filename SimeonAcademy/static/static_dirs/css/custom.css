@@ -6857,6 +6857,50 @@ button:hover {
 	margin-left: 20px;
 }
 
+.home_rm_div {
+	height: 200px;
+	width:100%;
+	margin:auto;
+}
+
+.home_rm_image_wrapper {
+	width:100%;
+	height:160px;
+	margin: auto;
+	/*border:1px solid green;*/
+	text-align: center;
+}
+
+.home_rm_text_wrapper {
+	width:100%;
+	height:40px;
+	margin: auto;
+	/*border:1px solid orange;*/
+	text-align: center;
+	padding-top: 8px;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 15px;
+	color:#5d6d6a;
+}
+
+.home_rm_text_wrapper:hover{
+	width:100%;
+	height:40px;
+	margin: auto;
+	/*border:1px solid orange;*/
+	text-align: center;
+	padding-top: 8px;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 15px;
+	color:#864650;
+}
+
+.home_a_tag:hover {
+	text-decoration: none;
+}
+
 
 
 

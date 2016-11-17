@@ -3991,6 +3991,8 @@ def roommate_view_application(request):
 			current = request.POST.get('current')
 			applicant = Application.objects.get(id=current)
 			content['applicant'] = applicant
+			content['rating'] = applicant.rating
+			content['isCandidate'] = applicant.isCandidate
 			return render_to_response('global/roommate_view_application.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -4043,6 +4045,76 @@ def roommate_profile(request):
 			content['gender'] = gender
 			content['eval'] = evaluation
 			return render_to_response('global/roommate_profile.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def rm_edit_app(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/rm_edit_app.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def rm_delete_app(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/rm_delete_app.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def rm_top_apps(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/rm_top_apps.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def rm_new_lease(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/rm_new_lease.html', content, context_instance=RequestContext(request))
+
+
 
 
 
