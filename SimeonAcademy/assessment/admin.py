@@ -10,7 +10,7 @@ MHStressor, MHLegalHistory, SType, Invoice, AM_AngerHistory3, TrackApp,\
 A_Time, Appointment, ClientSession, AIS_Admin, AIS_General, AIS_Medical, \
 AIS_Employment, AIS_Drug1, AIS_Legal, AIS_Family, AIS_Social1, \
 AIS_Social2, AIS_Psych, ASI, UtPaid, SolidState, PrintableForms, WorkSchedule, \
-Note
+Note, Roommate, Application, RoommateEvaluation
 
 admin.site.register(account)
 admin.site.register(State)
@@ -26,6 +26,10 @@ admin.site.register(TrackApp)
 admin.site.register(PrintableForms)
 admin.site.register(WorkSchedule)
 admin.site.register(Note)
+
+admin.site.register(Roommate)
+admin.site.register(Application)
+admin.site.register(RoommateEvaluation)
 
 ##AIS REGISTERS
 admin.site.register(AIS_Admin)

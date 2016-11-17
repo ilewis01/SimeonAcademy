@@ -1,0 +1,257 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='r_form' name='r_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>View All Candidates</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: roommate_new();">
+                              <div  class='iml-button-incomplete-xl'>New Candidate</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_ref();">
+                              <div  class='iml-button-incomplete-xl'>New Application</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_eval();">
+                              <div  class='iml-button-incomplete-xl'>Evaluation</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_all();">
+                              <div  class='iml-button-current-xl'>View Candidates</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_win()">
+                              <div  class='iml-button-incomplete-xl'>View Applications</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- COLUMN 1 -->
+                  <div class='col-md-4' style='width:20%; height:100%; margin-left:20px;'>
+                    <div class='top-split6'>
+                      	<ol>
+                      		{% for c in col1 %}
+                      		<table>
+                      			<tr>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      			</tr>
+                      		</table>
+                      		<table>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      		</table>
+                      		<!-- <table>
+                      			<tr>
+                      				<td><div class='eval_rm_label'>Male:</div></td>
+                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
+                      			</tr>
+                      		</table> -->
+                      		<table>
+                      			<tr>
+                      				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<table>
+                      			<tr>
+                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='margin-bottom:20px;'></div>
+                      		{% endfor %}
+                      	</ol>
+                    </div>
+                  </div>
+
+                  <!-- COLUMN 2 -->
+                  <div class='col-md-4' style='width:20%; height:100%; margin-left:20px;'>
+                    <div class='top-split6'>
+                      	<ol start='4'>
+                      		{% for c in col2 %}
+                      		<table>
+                      			<tr>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      			</tr>
+                      		</table>
+                      		<table>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      		</table>
+                      		<!-- <table>
+                      			<tr>
+                      				<td><div class='eval_rm_label'>Male:</div></td>
+                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
+                      			</tr>
+                      		</table> -->
+                      		<table>
+                      			<tr>
+                      				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<table>
+                      			<tr>
+                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='margin-bottom:20px;'></div>
+                      		{% endfor %}
+                      	</ol>
+                    </div>
+                  </div>
+
+                  <!-- COLUMN 3 -->
+                  <div class='col-md-4' style='width:20%; height:100%; margin-left:20px;'>
+                    <div class='top-split6'>
+                      	<ol start='7'>
+                      		{% for c in col3 %}
+                      		<table>
+                      			<tr>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      			</tr>
+                      		</table>
+                      		<table>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      		</table>
+                      		<!-- <table>
+                      			<tr>
+                      				<td><div class='eval_rm_label'>Male:</div></td>
+                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
+                      			</tr>
+                      		</table> -->
+                      		<table>
+                      			<tr>
+                      				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<table>
+                      			<tr>
+                      				<td><div><input type='checkbox' name='{{c.id}}' id='{{c.id}}' value='False' onClick="javascript: rm_verify_check('{{c.id}}');"></div></td>
+                      				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='margin-bottom:20px;'></div>
+                      		{% endfor %}
+                      	</ol>
+                    </div>
+                  </div>
+
+                  <!-- COLUMN 4 -->
+                  <div class='col-md-4' style='width:20%; height:100%; margin-left:20px;'>
+                    <div class='top-split6'>
+                      	<ol start='10'>
+                      		{% for c in col4 %}
+                      		<table>
+                      			<tr>
+                      				<td><div style='font-size:14px; color:#63242d;'><li><b>{{c.name}}</b></li></div></td>
+                      			</tr>
+                      		</table>
+                      		<table>
+                      			<tr><td><div style='color:#3e4d84;'><em>{{c.email}}</em></div></td></tr>
+                      			<tr><td><div style='color:#cc0000;'>{{c.phone}}</div></td></tr>
+                      		</table>
+                      		<!-- <table>
+                      			<tr>
+                      				<td><div class='eval_rm_label'>Male:</div></td>
+                      				<td><div style='margin-left:5px;'>{{c.isMale}}</div></td>
+                      			</tr>
+                      		</table> -->
+                      		<table>
+                      			<tr>
+                      				<td><div class='eval_rm_label' style='width:118px;'>Appointment Date:</div></td>
+                      				<td><div style='margin-left:5px; width:100px;'>{{c.viewDate}}</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='width:400px; text-align:justify;'><em>{{c.notes}}</em></div>
+                      		<table>
+                      			<tr>
+                      				<td><div><input type='checkbox' name='isCandidate' id='isCandidate' value='False' onClick="javascript: rm_verify_check('isCandidate');"></div></td>
+                      				<td><div style='margin-top:2px; margin-left:3px;'>I am not interested</div></td>
+                      			</tr>
+                      		</table>
+                      		<div style='margin-bottom:20px;'></div>
+                      		{% endfor %}
+                      	</ol>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: remove_candidates(); return false;">Delete Selected</button></td>
+                    <td><button onClick="javascript: exit_roommate_sub();">Exit</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
+
+{% endblock %}

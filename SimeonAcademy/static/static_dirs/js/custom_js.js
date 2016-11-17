@@ -11938,6 +11938,178 @@ function kill_selects_mh(triggerName, sel1Name, sel2Name, errorName) {
 
 //*********************************************** ASI INITIALIZATIONS *************************************************//
 
+function roommate_search() {
+	var form = grab('c_form');
+	form.action = '/roommate_page/';
+	form.submit();
+}
+
+function exit_roommate_page() {
+	var form = grab('r_form');
+	form.action = '/adminHome/';
+	form.submit();
+}
+
+function exit_roommate_sub() {
+	var form = grab('r_form');
+	form.action = '/roommate_page/';
+	form.submit();
+}
+
+function roommate_new() {
+	var form = grab('r_form');
+	form.action = '/roommate_new/';
+	form.submit();
+}
+
+function roommate_ref() {
+	var form = grab('r_form');
+	form.action = '/roommate_ref/';
+	form.submit();
+}
+
+function roommate_eval() {
+	var form = grab('r_form');
+	form.action = '/roommate_eval/';
+	form.submit();
+}
+
+function roommate_all() {
+	var form = grab('r_form');
+	form.action = '/roommate_all/';
+	form.submit();
+}
+
+function roommate_win() {
+	var form = grab('r_form');
+	form.action = '/roommate_win/';
+	form.submit();
+}
+
+function setCandidiate() {
+	var box = grab('isCandidate');
+
+	if (box.checked === true) {
+		box.value = 'True';
+	}
+	else {
+		box.value = 'False';
+	}
+}
+
+function auth_creditCheck() {
+	var box = grab('isAuthorized');
+
+	if (box.checked === true) {
+		box.value = 'True';
+	}
+	else {
+		box.value = 'False';
+	}
+}
+
+function choose_applicant(fname, lname, photoName, a_id) {
+	fname = String(fname);
+	lname = String(lname);
+	photoName = String(photoName);
+	var name = fname + ' ' + lname;
+	grab('a_name').innerHTML = name;
+	grab('a_name').className = 'applicant_name';
+	grab('a_photo_wrapper').className = 'applicant_photo';
+	grab('a_photo').src = '/static/media/' + photoName;
+	grab('current').value = a_id;
+}
+
+function save_new_candidate() {
+	grab('save_this').value = 'new_roommate';
+	grab('r_form').action = '/roommate_page/';
+	grab('r_form').submit();
+}
+
+function save_application() {
+	grab('save_this').value = 'new_application';
+	grab('r_form').action = '/roommate_page/';
+	grab('r_form').submit();
+}
+
+function continue_app_eval() {
+	if (String(grab('current').value) !== '') {
+		grab('r_form').action = '/roommate_profile/';
+		grab('r_form').submit();
+	}	
+}
+
+function save_rm_evaluation2() {
+	grab('save_this').value = 'save_evaluation';
+	grab('r_form').action = '/roommate_page/';
+	grab('r_form').submit();
+}
+
+function set_rm_checkBox(divName, checked) {
+	checked = String(checked);
+	divName = String(divName);
+
+	box = grab(divName);
+
+	if (checked === 'True') {
+		box.checked = true;
+	}
+	else {
+		box.checked = false;
+	}
+}
+
+function initialize_rm_profile() {
+	stub = String(grab('stub').value);
+	credit = String(grab('credit').value);
+	d_id = String(grab('d_id').value);
+	ref1 = String(grab('ref1').value);
+	ref2 = String(grab('ref2').value);
+	ref3 = String(grab('ref3').value);
+	work = String(grab('work').value);
+	pNality = String(grab('pNality').value);
+	candidate = String(grab('candidate').value);
+	notes = String(grab('d_notes').value);
+
+	set_rm_checkBox('hasCheckstubs', stub);
+	set_rm_checkBox('hasCredit', credit);
+	set_rm_checkBox('hasId', d_id);
+	set_rm_checkBox('ref1_verified', ref1);
+	set_rm_checkBox('ref2_verified', ref2);
+	set_rm_checkBox('ref3_verified', ref3);
+	set_rm_checkBox('work_verified', work);
+	set_rm_checkBox('personality', pNality);
+	set_rm_checkBox('isCandidate', candidate);
+
+	rm_verify_check('hasCheckstubs');
+	rm_verify_check('hasCredit');
+	rm_verify_check('hasId');
+	rm_verify_check('ref1_verified');
+	rm_verify_check('ref2_verified');
+	rm_verify_check('ref3_verified');
+	rm_verify_check('work_verified');
+	rm_verify_check('personality');
+	rm_verify_check('isCandidate');
+
+	if (notes === 'None' || notes === null) {
+		grab('notes').innerHTML = '';
+	}
+}
+
+function rm_verify_check(boxName) {
+	boxName = String(boxName);
+	var box = grab(boxName);
+
+	if (box.checked === true) {
+		box.value = 'True';
+	}
+	else {
+		box.value = 'False';
+	}
+}
+
+
+
 function add_asi_comments() {
 	openPopUp('auto', '/new_comment/', 600, 400);
 }

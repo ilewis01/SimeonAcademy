@@ -1663,6 +1663,73 @@ class Session(models.Model):
 
 
 
+class Roommate(models.Model):
+	name = models.CharField(max_length=50, default=None, blank=True, null=True)
+	phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+	email = models.CharField(max_length=50, default=None, blank=True, null=True)
+	viewDate = models.DateField(default=None, blank=True, null=True)
+	isMale = models.BooleanField(default=False, blank=True)
+	notes = models.CharField(max_length=400, default=None, blank=True, null=True)
+	photo = models.ImageField(upload_to='./profile/', default='/static/images/defaultAvatar.jpg', blank=True, null=True)
+
+	isCandidate = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return str(self.name)
+
+
+class Application(models.Model):
+	firstName = models.CharField(max_length=50, default=None, blank=True, null=True)
+	lastName = models.CharField(max_length=50, default=None, blank=True, null=True)
+	phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+	ssn = models.CharField(max_length=11, default=None, blank=True, null=True)
+	email = models.CharField(max_length=50, default=None, blank=True, null=True)
+	dob = models.CharField(max_length=50, default=None, blank=True, null=True)
+	employer = models.CharField(max_length=50, default=None, blank=True, null=True)
+	work_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+	occupation = models.CharField(max_length=50, default=None, blank=True, null=True)
+	emergency_contact = models.CharField(max_length=50, default=None, blank=True, null=True)
+	emergency_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+	photo = models.ImageField(upload_to='./profile/', default='/static/images/defaultAvatar.jpg', blank=True, null=True)
+	isMale = models.BooleanField(default=False, blank=True)
+	description = models.CharField(max_length=500, default=None, blank=True, null=True)
+
+	ref1 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	ref1_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+
+	ref2 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	ref2_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+
+	ref3 = models.CharField(max_length=50, default=None, blank=True, null=True)
+	ref3_phone = models.CharField(max_length=50, default=None, blank=True, null=True)
+
+	isAuthorized = models.BooleanField(default=False, blank=True)
+	isEvaluated = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return str(self.lastName) + ', ' + str(self.firstName)
+
+class RoommateEvaluation(models.Model):
+	application 	= models.ForeignKey(Application, default=None, blank=True, null=True)
+	hasCheckstubs 	= models.BooleanField(default=False, blank=True)
+	hasCredit 		= models.BooleanField(default=False, blank=True)
+	hasId 			= models.BooleanField(default=False, blank=True)
+	ref1_verified 	= models.BooleanField(default=False, blank=True)
+	ref2_verified 	= models.BooleanField(default=False, blank=True)
+	ref3_verified 	= models.BooleanField(default=False, blank=True)
+	work_verified 	= models.BooleanField(default=False, blank=True)
+	personality 	= models.BooleanField(default=False, blank=True)
+	isCandidate 	= models.BooleanField(default=False, blank=True)
+	isComplete 		= models.BooleanField(default=False, blank=True)
+	notes 			= models.CharField(max_length=500, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.application.lastName) + ', ' + str(self.application.firstName)
+
+
+
+
+
 
 
 

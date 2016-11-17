@@ -1,0 +1,253 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='r_form' name='r_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Roommate Application</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: roommate_new();">
+                              <div  class='iml-button-incomplete-xl'>New Candidate</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_ref();">
+                              <div  class='iml-button-current-xl'>New Application</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_eval();">
+                              <div  class='iml-button-incomplete-xl'>Evaluation</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_all();">
+                              <div  class='iml-button-incomplete-xl'>View Candidates</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: roommate_win()">
+                              <div  class='iml-button-incomplete-xl'>View Applications</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:40%; height:100%; margin-left:40px;'>
+                    <div class='top-split4'>
+                    	<h4>General Information</h4>
+                    	<ol>
+                    		<table>
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>First Name: </li></div></td>
+                    				<td><div><input type='text' name='firstName' id='firstName' style='margin-left:5px; margin-bottom:7px; width:188px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Last Name: </li></div></td>
+                    				<td><div><input type='text' name='lastName' id='lastName' style='margin-left:5px; margin-bottom:7px; width:188px;'></div></td>
+                    			</tr>
+                    		</table>
+
+                            <table>
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Phone: </li></div></td>
+                    				<td><div><input type='text' name='phone' id='phone' style='margin-left:5px; margin-bottom:7px; width:214px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Email: </li></div></td>
+                    				<td><div><input type='text' name='email' id='email' style='margin-left:5px; margin-bottom:7px; width:214px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>SSN#: </li></div></td>
+                    				<td><div><input type='text' name='ssn' id='ssn' style='margin-left:5px; margin-bottom:7px; width:214px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>DOB: </li></div></td>
+                    				<td><div><input type='text' name='dob' id='dob' style='margin-left:5px; margin-bottom:7px; width:214px;'></div></td>
+                    			</tr>
+                    		</table>
+
+                            <table>
+                    			<tr>
+                    				<td><div><li>Gender: </li></div></td>
+                    				<td><div style='margin-left:10px;'><input type='radio' name='isMale' id='male' value='True'></div></td>
+                    				<td><div style='margin-top:2px; margin-left:3px;'>Male</div></td>
+                    				<td><div style='margin-left:15px;'><input type='radio' name='isMale' id='female' value='False' checked></div></td>
+                    				<td><div style='margin-top:2px; margin-left:3px;'>Female</div></td>
+                    			</tr>
+                    		</table>
+                    	</ol>
+
+                    	<h4>Employment</h4>
+                    	<ol start='8'>
+                    		<table>
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Occupation: </li></div></td>
+                    				<td><div><input type='text' name='occupation' id='occupation' style='margin-left:5px; margin-bottom:7px; width:184px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Employer: </li></div></td>
+                    				<td><div><input type='text' name='employer' id='employer' style='margin-left:5px; margin-bottom:7px; width:184px;'></div></td>
+                    			</tr>
+
+                    			<tr>
+                    				<td><div style='margin-bottom:7px;'><li>Phone: </li></div></td>
+                    				<td><div><input type='text' name='work_phone' id='work_phone' style='margin-left:5px; margin-bottom:7px; width:184px;'></div></td>
+                    			</tr>
+                    		</table>
+                    	</ol>
+                    </div>
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:0px;'>
+                    <div class='top-split4'>
+                      <h4>References</h4>
+
+                      <ul>
+                      	<table>
+                      		<tr style='height:30px;'>
+                      			<td><div><li>Name: </li></div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref1' id='ref1'></div></td>
+                      			<td><div style='margin-left: 20px;'>Phone: </div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref1_phone' id='ref1_phone' style='width:120px;'></div></td>
+                      		</tr>
+
+                      		<tr style='height:30px;'>
+                      			<td><div><li>Name: </li></div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref2' id='ref2'></div></td>
+                      			<td><div style='margin-left: 20px;'>Phone: </div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref2_phone' id='ref2_phone' style='width:120px;'></div></td>
+                      		</tr>
+
+                      		<tr style='height:30px;'>
+                      			<td><div><li>Name: </li></div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref3' id='ref3'></div></td>
+                      			<td><div style='margin-left: 20px;'>Phone: </div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='ref3_phone' id='ref3_phone' style='width:120px;'></div></td>
+                      		</tr>
+                      	</table>
+                      </ul>
+
+                      <h4>Emergency Contact</h4>
+
+                      <ul>
+                      	<table>
+                      		<tr style='height:30px;'>
+                      			<td><div><li>Name: </li></div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='emergency_contact' id='emergency_contact'></div></td>
+                      			<td><div style='margin-left: 20px;'>Phone: </div></td>
+                      			<td><div style='margin-left:3px;'><input type='text' name='emergency_phone' id='emergency_phone' style='width:120px;'></div></td>
+                      		</tr>
+                      	</table>
+                      </ul>
+
+                      <!-- <div style='height:120px;'></div> -->
+
+                      <div>
+                        <table>
+                          <tr><td><div style='margin-top:10px; margin-bottom:10px;'>Briefly describe yourself:</div></td></tr>
+                          <tr><td><textarea rows='4' cols='67' name='description' id='description'>{{description}}</textarea></td></tr>
+                        </table>
+                      </div>
+
+                      <table>
+                      	<tr>
+                      		<td><div style='margin-bottom:3px; margin-right:5px;'>
+                      			<input type='checkbox' name='isAuthorized' id='isAuthorized' value='False' onClick='javascript: auth_creditCheck();'>
+                      		</div></td>
+                      		<td>
+                      			<div>
+                      				<em>
+                      					Authorization is hereby granted to obtain a standard credit report for
+                      				</em>
+                      			</div>
+                      		</td>
+                      	</tr>
+
+                      	<tr>
+                      		<td></td>
+                      		<td>
+                      			<div>
+                      				<em>
+                      					the purposes of obtaining an apartment at 9 Pell Street Unit 3A.
+                      				</em>
+                      			</div>
+                      		</td>
+                      	</tr>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: save_application();">Submit</button></td>
+                    <td><button onClick="javascript: exit_roommate_sub();">Cancel</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
+
+{% endblock %}

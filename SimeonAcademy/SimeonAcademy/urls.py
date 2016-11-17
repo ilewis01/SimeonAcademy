@@ -3,6 +3,14 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
 
+    url(r'^roommate_page/$', 'assessment.views.roommate_page'),
+    url(r'^roommate_new/$', 'assessment.views.roommate_new'),
+    url(r'^roommate_ref/$', 'assessment.views.roommate_ref'),
+    url(r'^roommate_eval/$', 'assessment.views.roommate_eval'),
+    url(r'^roommate_all/$', 'assessment.views.roommate_all'),
+    url(r'^roommate_win/$', 'assessment.views.roommate_win'),
+    url(r'^roommate_profile/$', 'assessment.views.roommate_profile'),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'assessment.views.index'), 
     url(r'^login/$', 'assessment.views.login'),   

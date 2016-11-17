@@ -26,7 +26,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, TrackApp, WorkSchedule, Note
+SolidState, TrackApp, WorkSchedule, Note, Roommate, Application, RoommateEvaluation
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -45,7 +45,7 @@ fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDispl
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
-get_JSON_workSchedule, processAMC
+get_JSON_workSchedule, processAMC, truePythonBool
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -3564,6 +3564,337 @@ def process_discharge(request):
 		else:
 			fetchContent(request, 'discharge', None)
 			return render_to_response('counselor/home.html', content, context_instance=RequestContext(request))
+
+
+
+
+@login_required(login_url='/index')
+def roommate_page(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			proceed = str(request.POST.get('save_this'))
+
+			if proceed == 'new_roommate':
+				name = str(request.POST.get('name'))
+				phone = str(request.POST.get('phone'))
+				email = str(request.POST.get('email'))
+				notes = str(request.POST.get('notes'))
+				date = str(request.POST.get('viewDate'))
+				isMale = str(request.POST.get('isMale'))
+				isCandidate = str(request.POST.get('isCandidate'))
+				mm = date[0]
+				mm += date[1]
+				dd = date[3]
+				dd += date[4]
+				yy = date[6]
+				yy += date[7]
+				yy += date[8]
+				yy += date[9]
+				mm = int(mm)
+				dd = int(dd)
+				yy = int(yy)
+				date = datetime(yy, mm, dd)
+				date = date.date()
+				if isMale == 'False':
+					isMale = False
+				elif isMale == 'True':
+					isMale = True
+				if isCandidate == 'False':
+					isCandidate = False
+				elif isCandidate == 'True':
+					isCandidate = True
+				candidate = Roommate(name=name, phone=phone, email=email, viewDate=date, isMale=isMale, notes=notes, isCandidate=isCandidate)
+				candidate.save()
+
+			elif proceed == 'new_application':
+				firstName = str(request.POST.get('firstName'))
+				lastName = str(request.POST.get('lastName'))
+				phone = str(request.POST.get('phone'))
+				ssn = str(request.POST.get('ssn'))
+				email = str(request.POST.get('email'))
+				dob = str(request.POST.get('dob'))
+				employer = str(request.POST.get('employer'))
+				work_phone = str(request.POST.get('work_phone'))
+				occupation = str(request.POST.get('occupation'))
+				emergency_contact = str(request.POST.get('emergency_contact'))
+				emergency_phone = str(request.POST.get('emergency_phone'))
+				ref1 = str(request.POST.get('ref1'))
+				ref2 = str(request.POST.get('ref2'))
+				ref3 = str(request.POST.get('ref3'))
+				ref1_phone = str(request.POST.get('ref1_phone'))
+				ref2_phone = str(request.POST.get('ref2_phone'))
+				ref3_phone = str(request.POST.get('ref3_phone'))
+
+				isMale = str(request.POST.get('isMale'))
+				isAuthorized = str(request.POST.get('isAuthorized'))
+
+				if isMale == 'True':
+					isMale = True
+				elif isMale == 'False':
+					isMale = False
+				if isAuthorized == 'True':
+					isAuthorized = True
+				elif isAuthorized == 'False':
+					isAuthorized = False
+
+				app = Application(firstName=firstName, lastName=lastName, phone=phone, ssn=ssn, email=email, dob=dob)
+				app.employer = employer
+				app.work_phone = work_phone
+				app.occupation =occupation
+				app.emergency_contact = emergency_contact
+				app.emergency_phone = emergency_phone
+				app.ref1 = ref1
+				app.ref2 = ref2
+				app.ref3 = ref3
+				app.ref1_phone = ref1_phone
+				app.ref2_phone = ref2_phone
+				app.ref3_phone = ref3_phone
+				app.isMale = isMale
+				app.isAuthorized = isAuthorized
+				app.save()
+			elif proceed == 'save_evaluation':
+				eval_id = int(request.POST.get('eval_id'))
+				evaluation = RoommateEvaluation.objects.get(id=eval_id)
+
+				hasCheckstubs 	= truePythonBool(request.POST.get('hasCheckstubs'))
+				hasCredit 		= truePythonBool(request.POST.get('hasCredit'))
+				hasId 			= truePythonBool(request.POST.get('hasId'))
+				ref1_verified 	= truePythonBool(request.POST.get('ref1_verified'))
+				ref2_verified 	= truePythonBool(request.POST.get('ref2_verified'))
+				ref3_verified 	= truePythonBool(request.POST.get('ref3_verified'))
+				work_verified 	= truePythonBool(request.POST.get('work_verified'))
+				personality 	= truePythonBool(request.POST.get('personality'))
+				isCandidate 	= truePythonBool(request.POST.get('isCandidate'))
+				notes 			= request.POST.get('notes')
+
+				if hasCheckstubs == True:
+					if hasCredit == True:
+						if hasId == True:
+							if ref1_verified == True:
+								if ref2_verified == True:
+									if ref3_verified == True:
+										if work_verified == True:
+											if personality == True:
+												evaluation.application.isEvaluated = True
+												evaluation.isComplete = True
+												evaluation.application.save()
+												evaluation.save()
+
+				evaluation.hasCheckstubs 	= hasCheckstubs
+				evaluation.hasCredit 		= hasCredit
+				evaluation.hasId 			= hasId
+				evaluation.ref1_verified 	= ref1_verified
+				evaluation.ref2_verified 	= ref2_verified
+				evaluation.ref3_verified 	= ref3_verified
+				evaluation.work_verified 	= work_verified
+				evaluation.personality 		= personality
+				evaluation.isCandidate 		= isCandidate
+				evaluation.notes 			= notes
+				evaluation.save()
+
+			return render_to_response('global/roommate_page.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_new(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/roommate_new.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_ref(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/roommate_ref.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_eval(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			app_list = Application.objects.all()
+			eval_list = []
+
+			for a in app_list:
+				if a.isEvaluated == False:
+					eval_list.append(a)
+
+			content['e_list'] = eval_list
+			return render_to_response('global/roommate_eval.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_all(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			col1 = []
+			col2 = []
+			col3 = []
+			col4 = []
+			c_list = []
+			candidates = Roommate.objects.all()
+
+			for r in range(12):
+				c_list.append(None)
+
+			for i in range(len(candidates)):
+				c_list[i] = candidates[i]
+
+			col1.append(c_list[0])
+			col1.append(c_list[1])
+			col1.append(c_list[2])
+
+			col2.append(c_list[3])
+			col2.append(c_list[4])
+			col2.append(c_list[5])
+
+			col3.append(c_list[6])
+			col3.append(c_list[7])
+			col3.append(c_list[8])
+
+			col4.append(c_list[9])
+			col4.append(c_list[10])
+			col4.append(c_list[11])
+
+			index = 2
+
+			for i in range(3):
+				if col1[index] == None:
+					col1.pop(index)
+				if col2[index] == None:
+					col2.pop(index)
+				if col3[index] == None:
+					col3.pop(index)
+				if col4[index] == None:
+					col4.pop(index)
+
+				index = index - 1
+
+			content['col1'] = col1
+			content['col2'] = col2
+			content['col3'] = col3
+			content['col4'] = col4
+			return render_to_response('global/roommate_all.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_win(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/roommate_win.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def roommate_profile(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			evaluation = None
+			match = False
+			gender = None
+			current = request.POST.get('current')
+			applicant = Application.objects.get(id=current)
+
+			if applicant.isMale == True:
+				gender = 'Male'
+			else:
+				gender = 'Female'
+			
+			eval_list = RoommateEvaluation.objects.all()
+			for e in eval_list:
+				if e.application == applicant and e.application.isEvaluated == False:
+					evaluation = e
+					match = True
+					break
+
+			if match == False:
+				evaluation = RoommateEvaluation(application=applicant)
+				evaluation.save()
+
+			content['stub'] = evaluation.hasCheckstubs
+			content['credit'] = evaluation.hasCredit
+			content['d_id'] = evaluation.hasId
+			content['ref1'] = evaluation.ref1_verified
+			content['ref2'] = evaluation.ref2_verified
+			content['ref3'] = evaluation.ref3_verified
+			content['work'] = evaluation.work_verified
+			content['pNality'] = evaluation.personality
+			content['candidate'] = evaluation.isCandidate
+			content['notes'] = evaluation.notes
+			content['gender'] = gender
+			content['eval'] = evaluation
+			return render_to_response('global/roommate_profile.html', content, context_instance=RequestContext(request))
 
 
 
