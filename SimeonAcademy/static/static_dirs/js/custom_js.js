@@ -3116,6 +3116,57 @@ function runFunctionTest() {
 	// grab('health').value = 'Errors in form? ' + hasErrors;
 }
 
+function rock_new_note() {
+	openPopUp('auto', "/new_note_pad/", 450, 450);
+}
+
+function saveNotePadItem() {
+	getPopParent('note_subject').value = String(grab('subject').value);
+	getPopParent('note_body').value = String(grab('body').value);
+	grab('nnform').submit();
+}
+
+function deleteNotePad() {
+	getPopParent('edit_enabled').value = 'false';
+	getPopParent('note_subject').value = '';
+	getPopParent('note_body').value = '';
+	getPopParent('note_id').value = '';
+	grab('nnform').action = "/notePadDeleted/";
+	grab('nnform').submit();
+}
+
+function editNotePad() {
+	var form = grab('nnform');
+	getPopParent('edit_enabled').value = 'true';
+	getPopParent('note_id').value = grab('note_id').value;
+	form.action = '/new_note_pad/';
+	form.submit();
+}
+
+function saveNotePadChanges() {
+	getPopParent('edit_enabled').value = 'false';
+	getPopParent('note_subject').value = '';
+	getPopParent('note_body').value = '';
+	getPopParent('note_id').value = '';
+	window.close();
+}
+
+function initializeNotePadOptions() {
+	getPopParent('note_id').value = grab('note_id').value;
+}
+
+function initializeNotePad() {
+	var edit_enabled = String(getPopParent('edit_enabled').value);
+	grab('note_id').value = getPopParent('note_id').value;
+	grab('edit_enabled').value = edit_enabled;
+
+	if (edit_enabled === 'true') {
+		grab('subject').value = getPopParent('note_subject').value;
+		grab('body').value = getPopParent('note_body').value;
+		grab('addNoteBtn').innerHTML = 'Save Changes';
+	}
+}
+
 
 
 
@@ -12026,6 +12077,11 @@ function save_new_candidate() {
 	grab('r_form').submit();
 }
 
+function initialize_new_save_rm(saveType) {
+	saveType = String(saveType);
+	grab('header_type').innerHTML = saveType;
+}
+
 function save_application() {
 	grab('save_this').value = 'new_application';
 	grab('r_form').action = '/roommate_page/';
@@ -12041,7 +12097,7 @@ function continue_app_eval() {
 
 function save_rm_evaluation2() {
 	grab('save_this').value = 'save_evaluation';
-	grab('r_form').action = '/roommate_page/';
+	grab('r_form').action = '/roommate_eval/';
 	grab('r_form').submit();
 }
 

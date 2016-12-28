@@ -2338,6 +2338,108 @@ button:hover {
 	padding: 2%;
 }
 
+.new_note_body {
+	background: url('/static/images/iml_bkgnd.png');
+	background-size: 100%;
+	font-family: Arial;
+	padding: 2%;
+}
+
+.new_note_body_options {
+	background: url('/static/images/iml_bkgnd.png');
+	background-size: 100%;
+	font-family: Arial;
+	font-size: 13px;
+	padding: 5%;
+}
+
+.padOptions1 {
+	width:100%;
+	margin: auto;
+}
+
+.notePadBodyScroll {
+	height: 200px;
+    width: 91%;
+    overflow: auto;
+    float: left;
+    position: relative;
+    margin-left: -5px;
+    background-color: #cccccc;
+    border: 1px solid gray;
+    /*border-radius: 5px;*/
+    padding: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-style: italic;
+    text-align: justify;
+}
+
+.notePadBtn3 {
+	width:260px;
+	margin: auto;
+	text-align: center;
+}
+
+.notePadBtn3 button {
+	width: 80px;
+	height: 25px;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.notePadTitle {
+	width: 100%;
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid black;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	background-color: #6c7f7c;
+	color: #e3dcca;
+	text-shadow:1px 1px black;
+}
+
+.notePadLabel {
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.notePadInput {
+	width:370px;
+	height:20px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding-left: 5px;
+}
+
+.notePadTextArea textarea {
+	border: 1px solid gray;
+	border-radius: 5px;
+	width:427px;
+	padding: 5px;
+	height:60vh;
+	margin-top: 5px;
+}
+
+.notePadButton {
+	margin-top: 15px;
+	margin-left: 50%;
+	padding-left: 6px;
+	padding-top: 1px;
+	border: 1px solid gray;
+	background-color: #6c7f7c;
+}
+
+.notePadButton button {
+	width: 100px;
+}
+
 .asi_comment_body {
 	background-color: #e9e7e9;
 	background: url('/static/images/iml_bkgnd.png');

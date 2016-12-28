@@ -21,6 +21,11 @@
         <input type='hidden' name='completeUT' id='completeUT' value='{{completeUT}}'>
         <input type='hidden' name='completeASI' id='completeASI' value='{{completeASI}}'>
         <input type='hidden' name='completeSAP' id='completeSAP' value='{{completeSAP}}'>
+
+        <input type='hidden' name='edit_enabled' id='edit_enabled' value='false'>
+        <input type='hidden' name='note_subject' id='note_subject' value=''>
+        <input type='hidden' name='note_body' id='note_body' value=''>
+        <input type='hidden' name='note_id' id='note_id' value=''>
     </form>
 
     <div class="container">
@@ -39,19 +44,19 @@
                                     <div id='iml-nav-header'>Session Options</div>
 
                                     <div class='inl-nav-btn-cont'>
-                                        <button onClick="javascript: new_asi();">Addiction Severity Index</button>
-                                        <button onClick="javascript: new_am();">Anger Management</button>
-                                        <button onClick="javascript: appointmentsClientProfile();">Appointment Manager</button>
-                                        <button onClick="javascript: appointmentsClientProfile();">Couple Counseling</button>
-                                        <button onClick="javascript: updateClientStats();">Discharge Client</button>
-                                        <button onClick="javascript: new_mh();">Mental Health</button>
-                                        <button onClick="javascript: new_sap();">S.A.P Profile</button>
+                                        <button onClick="javascript: new_asi(); return false;">Addiction Severity Index</button>
+                                        <button onClick="javascript: new_am(); return false;">Anger Management</button>
+                                        <button onClick="javascript: appointmentsClientProfile(); return false;">Appointment Manager</button>
+                                        <button onClick="javascript: appointmentsClientProfile(); return false;">Couple Counseling</button>
+                                        <button onClick="javascript: updateClientStats(); return false;">Discharge Client</button>
+                                        <button onClick="javascript: new_mh(); return false;">Mental Health</button>
+                                        <button onClick="javascript: new_sap(); return false;">S.A.P Profile</button>
                                         <!-- <button onClick="javascript: updateClientStats();">Student Evaluation</button> -->
-                                        <button onClick="javascript: roommate_search();">Roommate Search</button>
-                                        <button onClick="javascript: viewClientFiles('history');">Uploads/Attachments</button>
-                                        <button onClick="javascript: new_ut();">Urine Analysis</button>
-                                        <button onClick="javascript: ">View/Add Notes</button>
-                                        <button onClick="javascript: generic_exit_home();">End Session</button>
+                                        <button onClick="javascript: roommate_search(); return false;">Roommate Search</button>
+                                        <button onClick="javascript: viewClientFiles('history'); return false;">Uploads/Attachments</button>
+                                        <button onClick="javascript: new_ut(); return false;">Urine Analysis</button>
+                                        <button onClick="javascript: rock_new_note(); return false;">Add New Notes</button>
+                                        <button onClick="javascript: generic_exit_home(); return false;">End Session</button>
                                         <!-- <button onClick="javascript: editClientInformation();">Edit Client Profile</button> -->
 
                                         <!-- referral source, payment type, type of service(indiv, couple), client status, attendance -->

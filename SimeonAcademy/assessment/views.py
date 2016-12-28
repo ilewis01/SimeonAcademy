@@ -45,7 +45,7 @@ fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDispl
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
-get_JSON_workSchedule, processAMC, truePythonBool
+get_JSON_workSchedule, processAMC, truePythonBool, create_note
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -514,6 +514,99 @@ def clientCreated(request):
 			else:
 				content['title'] = 'ERROR: CLIENT EXIST'
 				return render_to_response('counselor/client/client_exist.html', content)
+
+@login_required(login_url='/index')
+def new_note_pad(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/newNotePad.html', content)
+
+@login_required(login_url='/index')
+def notePadAdded(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			edit_enabled = str(request.POST.get('edit_enabled'))
+			subject = str(request.POST.get('subject'))
+			body 	= str(request.POST.get('body'))
+			note_id = None
+			note = None
+
+			if edit_enabled == 'false':
+				note_id = create_note(track.client_id, subject)
+				note = Note.objects.get(id=note_id)
+				note.note = body
+			elif edit_enabled == 'true':
+				note_id = request.POST.get('note_id')
+				note = Note.objects.get(id=note_id)
+				note.title = subject
+				note.note = body
+
+			note.save()
+
+			content['note'] = note
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/notePadAdded.html', content)
+
+@login_required(login_url='/index')
+def notePadDeleted(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			note = Note.objects.get(id=(request.POST.get('note_id')))
+			note.delete()
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/notePadDeleted.html', content)
 
 @login_required(login_url='/index')
 def searchClients(request):
@@ -3765,10 +3858,51 @@ def roommate_eval(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			proceed = str(request.POST.get('save_this'))
 			app_list = Application.objects.all().order_by('firstName')
 			col1 = []
 			col2 = []
 			eval_list = []
+
+			if proceed == 'save_evaluation':
+				eval_id = int(request.POST.get('eval_id'))
+				evaluation = RoommateEvaluation.objects.get(id=eval_id)
+
+				hasCheckstubs 	= truePythonBool(request.POST.get('hasCheckstubs'))
+				hasCredit 		= truePythonBool(request.POST.get('hasCredit'))
+				hasId 			= truePythonBool(request.POST.get('hasId'))
+				ref1_verified 	= truePythonBool(request.POST.get('ref1_verified'))
+				ref2_verified 	= truePythonBool(request.POST.get('ref2_verified'))
+				ref3_verified 	= truePythonBool(request.POST.get('ref3_verified'))
+				work_verified 	= truePythonBool(request.POST.get('work_verified'))
+				personality 	= truePythonBool(request.POST.get('personality'))
+				isCandidate 	= truePythonBool(request.POST.get('isCandidate'))
+				notes 			= request.POST.get('notes')
+
+				if hasCheckstubs == True:
+					if hasCredit == True:
+						if hasId == True:
+							if ref1_verified == True:
+								if ref2_verified == True:
+									if ref3_verified == True:
+										if work_verified == True:
+											if personality == True:
+												evaluation.application.isEvaluated = True
+												evaluation.isComplete = True
+												evaluation.application.save()
+												evaluation.save()
+
+				evaluation.hasCheckstubs 	= hasCheckstubs
+				evaluation.hasCredit 		= hasCredit
+				evaluation.hasId 			= hasId
+				evaluation.ref1_verified 	= ref1_verified
+				evaluation.ref2_verified 	= ref2_verified
+				evaluation.ref3_verified 	= ref3_verified
+				evaluation.work_verified 	= work_verified
+				evaluation.personality 		= personality
+				evaluation.isCandidate 		= isCandidate
+				evaluation.notes 			= notes
+				evaluation.save()
 
 			for a in app_list:
 				if a.isEvaluated == False:
