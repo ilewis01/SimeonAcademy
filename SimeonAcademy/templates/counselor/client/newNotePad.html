@@ -11,6 +11,8 @@
 		<input type='hidden' name='m_subject' id='m_subject' value='{{note.title}}'>
 		<input type='hidden' name='m_body' id='m_body' value='{{note.note}}'>
 		<input type='hidden' name='edit_enabled' id='edit_enabled' value='false'>
+		<input type='hidden' name='error1' id='error1' value='false'>
+        <input type='hidden' name='error2' id='error2' value='false'>
 		<div class='notePadTitle'>New Note</div>
 		<div class='notePadBody'>
 			<table>
@@ -26,9 +28,11 @@
 			</table>
 		</div>
 
+		<!-- <input type='text' id='test1'> -->
+
 		<div class='notePadButton'>
-			<button onClick='javascript: saveNotePadItem();' id='addNoteBtn'>Add Note</button>
-			<button onClick='javascript: saveNotePadChanges();' id='cancelNoteBtn'>Cancel</button>		
+			<button onClick='javascript: saveNotePadItem(); return false;' id='addNoteBtn'>Add Note</button>
+			<button onClick='javascript: saveNotePadChanges(); return false;' id='cancelNoteBtn'>Cancel</button>		
 		</div>
 	</form>
 

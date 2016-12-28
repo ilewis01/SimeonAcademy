@@ -3135,10 +3135,66 @@ function rock_new_note() {
 	openPopUp('auto', "/new_note_pad/", 450, 450);
 }
 
+function hasNoteErrors(subError, bodyError) {
+	var hasError = false;
+
+	if (subError === true) {hasError = true;}
+	if (bodyError === true) {hasError = true;}
+
+	return hasError;
+}
+
+function getNoteErrors(subError, bodyError) {
+	var errors = [];
+	if (subError === true) {
+		grab('error1').value = 'true';
+	}
+	else {
+		grab('error1').value = 'false';
+	}
+	if (bodyError === true) {
+		grab('error2').value = 'true';
+	}
+	else {
+		grab('error2').value = 'false';
+	}
+}
+
+function initialize_notePad_errors() {
+	var div = grab('error_population');
+	var error1 = String(getPopParent('error1').value);
+	var error2 = String(getPopParent('error2').value);
+	var msg1 = "";
+	var msg2 = "";
+
+	if (error1 === 'true') {
+		msg1 = "<li>You must provide a subject</li>";
+	}
+	if (error2 === 'true') {
+		msg2 = "<li>You must include note content</li>";
+	}
+
+	var html = "<ul>" + msg1 + msg2 + "</ul>";
+	div.innerHTML = html;
+}
+
 function saveNotePadItem() {
-	getPopParent('note_subject').value = String(grab('subject').value);
-	getPopParent('note_body').value = String(grab('body').value);
-	grab('nnform').submit();
+	var subject = String(grab('subject').value);
+	var body = String(grab('body').value);
+
+	var subj_error = isBlankText(subject);
+	var body_error = isBlankText(body);
+	var hasErrors  = hasNoteErrors(subj_error, body_error);
+
+	if (hasErrors === true) {
+		var errors = getNoteErrors(subj_error, body_error);
+		openPopUp('auto', '/notePadErrorPage/', 350, 350);
+	}
+	else {
+		getPopParent('note_subject').value = subject;
+		getPopParent('note_body').value = body;
+		grab('nnform').submit();
+	}
 }
 
 function deleteNotePad() {

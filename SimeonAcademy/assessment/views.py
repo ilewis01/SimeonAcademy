@@ -611,6 +611,30 @@ def notePadDeleted(request):
 			return render_to_response('counselor/client/notePadDeleted.html', content)
 
 @login_required(login_url='/index')
+def notePadErrorPage(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/notePadErrorPage.html', content)
+
+@login_required(login_url='/index')
 def searchClients(request):
 	user = request.user
 	if not user.is_authenticated():
