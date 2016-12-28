@@ -2359,7 +2359,7 @@ button:hover {
 }
 
 .notePadBodyScroll {
-	height: 200px;
+	height: 190px;
     width: 91%;
     overflow: auto;
     float: left;
@@ -2379,6 +2379,10 @@ button:hover {
 	width:260px;
 	margin: auto;
 	text-align: center;
+}
+
+.notePadBtn3 tr {
+	background-color: #6c7f7c;
 }
 
 .notePadBtn3 button {

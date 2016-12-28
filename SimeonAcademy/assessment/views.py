@@ -577,7 +577,9 @@ def notePadAdded(request):
 				note.note = body
 
 			note.save()
+			client = Client.objects.get(id=track.client_id)
 
+			content['client'] = client
 			content['note'] = note
 			content['title'] = "New Note | Simeon Academy"
 			return render_to_response('counselor/client/notePadAdded.html', content)
