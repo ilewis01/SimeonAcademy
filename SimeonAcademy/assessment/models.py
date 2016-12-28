@@ -88,6 +88,7 @@ class Attachment(models.Model):
 	date = models.DateTimeField(auto_now_add=True, default=None)
 	title = models.CharField(max_length=50, default=None, blank=True, null=True)
 	document = models.FileField(upload_to='documents/', default=None)
+	isCouple = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return str(self.date.date()) + " " + str(self.title)
