@@ -3127,7 +3127,7 @@ function runFunctionTest() {
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//*****************************************  NOTES ******************************************************************
+//*****************************************  NOTES AND UPLOADS ******************************************************
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -3235,6 +3235,25 @@ function initializeNotePad() {
 		grab('subject').value = getPopParent('note_subject').value;
 		grab('body').value = getPopParent('note_body').value;
 		grab('addNoteBtn').innerHTML = 'Save Changes';
+	}
+}
+
+function simpleUpload() {
+	openPopUp('auto', '/simpleUpload/', 400, 200);
+}
+
+function verify_uploadTitle() {
+	var title = grab('title');
+	var value = String(title.value);
+	var isBlank = isBlankText(value);
+	var file = String(grab('upload').value);
+	var noFile = isBlankText(file);
+
+	if (isBlank === true || noFile === true) {
+		openPopUp('auto', '/uploadError/', 350, 160);
+	}
+	else {
+		grab('upload_form').submit();
 	}
 }
 

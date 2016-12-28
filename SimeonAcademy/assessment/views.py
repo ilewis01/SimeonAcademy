@@ -26,7 +26,8 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, TrackApp, WorkSchedule, Note, Roommate, Application, RoommateEvaluation
+SolidState, TrackApp, WorkSchedule, Note, Roommate, Application, RoommateEvaluation, \
+Attachment
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -633,6 +634,83 @@ def notePadErrorPage(request):
 		else:
 			content['title'] = "New Note | Simeon Academy"
 			return render_to_response('counselor/client/notePadErrorPage.html', content)
+
+@login_required(login_url='/index')
+def simpleUpload(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/simpleUpload.html', content)
+
+@login_required(login_url='/index')
+def uploadSuccess(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client = Client.objects.get(id=track.client_id)
+			title = request.POST.get('title')
+			doc = request.FILES['upload']
+			attach = Attachment(clientID=client.clientID, title=title, document=doc)
+			attach.save()
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/uploadSuccess.html', content)
+
+@login_required(login_url='/index')
+def uploadError(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/uploadError.html', content)
 
 @login_required(login_url='/index')
 def searchClients(request):

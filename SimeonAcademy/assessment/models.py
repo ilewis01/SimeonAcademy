@@ -54,6 +54,7 @@ class Note(models.Model):
 	date = models.DateField(default=None, blank=True, null=True)
 	title = models.CharField(max_length=50, default=None, blank=True, null=True)
 	note = models.CharField(max_length=5000, default=None, blank=True, null=True)
+	isCouple = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
 		return str(self.date) + '/' + str(self.title)
@@ -81,6 +82,15 @@ class Drug(models.Model):
 
 	def __unicode__(self):
 		return self.drug
+
+class Attachment(models.Model):
+	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+	date = models.DateTimeField(auto_now_add=True, default=None)
+	title = models.CharField(max_length=50, default=None, blank=True, null=True)
+	document = models.FileField(upload_to='documents/', default=None)
+
+	def __unicode__(self):
+		return str(self.date.date()) + " " + str(self.title)
 
 class Client(models.Model):
 	fname = models.CharField(max_length=20, default=None, blank=True, null=True)
@@ -113,6 +123,13 @@ class Client(models.Model):
 
 	def __unicode__(self):
 		return str(self.lname) + ", " + str(self.fname) + " " + str(self.dob)
+
+class Couple(models.Model):
+	id1 = models.CharField(max_length=30, default=None, blank=True, null=True)
+	id2 = models.CharField(max_length=30, default=None, blank=True, null=True)
+
+	def __unicode__(self):
+		return str(self.id1) + " " + str(self.id2)
 
 class UtPaid(models.Model):
 	client = models.ForeignKey(Client, default=None, blank=True, null=True)

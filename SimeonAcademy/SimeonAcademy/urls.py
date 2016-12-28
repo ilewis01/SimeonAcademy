@@ -75,6 +75,9 @@ urlpatterns = patterns('',
     url(r'^notePadAdded/$', 'assessment.views.notePadAdded'),
     url(r'^notePadDeleted/$', 'assessment.views.notePadDeleted'),
     url(r'^notePadErrorPage/$', 'assessment.views.notePadErrorPage'),
+    url(r'^simpleUpload/$', 'assessment.views.simpleUpload'),
+    url(r'^uploadSuccess/$', 'assessment.views.uploadSuccess'),
+    url(r'^uploadError/$', 'assessment.views.uploadError'),
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),
