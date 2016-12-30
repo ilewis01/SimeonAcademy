@@ -1,0 +1,136 @@
+{% load staticfiles %}
+
+<head>
+	<title>{{title}}</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class='body500'>
+    <div class='head300'>New Client</div>
+
+    <div class='general90'>
+        <form action='' method='post' id='m_form'> {% csrf_token %}
+            <table>
+                <tr>
+                    <td><input type='text' name='fname' id='fname' placeholder='First Name' style='width:180px;'></td>
+                    <td><input type='text' name='mi' id='mi' placeholder='MI' style='width:30px;'></td>
+                    <td><input type='text' name='lname' id='lname' placeholder='Last Name' style='width:180px;'></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><input type='text' name='street_no' id='street_no' placeholder='Street No.' style='width:90px;'></td>
+                    <td><input type='text' name='street_name' id='street_name' placeholder='Street Name'  style='width:160px;'></td>
+                    <td><input type='text' name='apartment_no' id='apartment_no' placeholder='APT' style='width:45px;'></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><input type='text' name='city' id='city' placeholder='City' style='width:180px;'></td>
+
+                    <td>
+                        <select name='state' id='state'>
+                            <option value='None Selected'>State</option>
+                        </select>
+                    </td>
+        
+                    <td><input type='text' name='zip_code' id='zip_code' placeholder='Zip Code' style='width:90px;'></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><input type='text' name='ss_num' id='ss_num' placeholder="Social Security No." style='width:120px;'></td>
+                    <td><div style='width:60px;'></div></td>
+                    <td><div class='newCliLabel1'>Gender:</div></td>
+                    <td><div class='cli_radN'><input type='radio' name='isMale' id='male' value='True' checked></div></td>
+                    <td><div class='newCliRadLab'>Male</div></td>
+                    <td><div class='cli_radN'><input type='radio' name='isMale' id='female' value='False'></div></td>
+                    <td><div class='newCliRadLab'>Female</div></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div class='newCliLabel1'>Date of Birth:</div></td>
+                    <td>
+                        <select name='month' id='month'>
+                            <option value='0'>Month</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select name='month' id='month'>
+                            <option value='0'>Day</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select name='year' id='year'>
+                            <option value='0'>Year</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><input type='text' name='phone' id='phone' placeholder='Phone' style='width:120px;'></td>
+                    <td><input type='text' name='email' id='email' placeholder='Email Address' style='width:200px;'></td>
+                </tr>
+
+                <tr>
+                    <td><input type='text' name='work_phone' id='work_phone' placeholder='Work Phone' style='width:120px;'></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div class='newCliLabel1'>Reason for Referral:</div></td>
+                    <td>
+                        <select name='reason_ref' id='reason_ref'>
+                            <option value='None Selected'>Select</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <div class='newCliHeader'>Probation Information:</div>
+            <table>
+                <tr>
+                    <td><input type='text' name='probationOfficer' id='probationOfficer' placeholder='Probation Officer' style='width:200px;'></td>
+                    <td><input type='text' name='probation_phone' id='probation_phone' placeholder='Phone' style='width:120px;'></td>
+                </tr>
+            </table>
+
+            <div class='newCliHeader'>Emergency Contact:</div>
+            <table>
+                <tr>
+                    <td><input type='text' name='emer_contact_name' id='emer_contact_name' placeholder='Name' style='width:200px;'></td>
+                    <td><input type='text' name='emer_phone' id='emer_phone' placeholder='Phone' style='width:120px;'></td>
+                </tr>
+            </table>
+
+            <div style='height:15px;'></div>
+
+            <table>
+                <tr>
+                    <td><div>Upload Image: </div></td>
+                    <td><input type="file" name="photo" id='photo'></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div style='height:20px;'></div>
+
+    <div class='half-length-single-btn'>
+        <button onClick='Javascript: window.close(); return false;'>Submit</button>
+        <button onClick='Javascript: window.close(); return false;'>Cancel</button>
+    </div>
+
+    <script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+</body>

@@ -7179,11 +7179,60 @@ button:hover {
 	margin:auto;
 }
 
+.half-length-single-btn {
+	width:90%;
+	margin:auto;
+}
 
 .full-length-single-btn button {
 	width:100%;
 }
 
+.half-length-single-btn button {
+	width:49%;
+}
+
+
+.body500 {
+	width:99%;
+	margin:auto;
+	font-family: Arial;
+	margin-top: 10px;
+	background: url('../images/greenBk1.png');
+	font-size: 12px;
+}
+
+.general90 {
+	width:91%;
+	margin: auto;
+}
+
+.newCliLabel1 {
+	font-size: 12px;
+	font-weight: bold;
+	padding-top: 3px;
+	padding-left: 1px;
+}
+
+.newCliHeader {
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	padding-left: 5px;
+	color: #666666;
+	margin-top: 15px;
+}
+
+.newCliRadLab {
+	font-size: 12px;
+	font-style: italic;
+	padding-top: 3px;
+	padding-right: 12px;
+}
+
+.cli_radN {
+	padding-top: 3px;
+}
 
 
 

@@ -3275,9 +3275,13 @@ function setCouplePair(client2_id) {
 }
 
 function selectNewCouple() {
-	var form = grab('c_form')
+	var form = grab('m_form')
 	form.action = '/chooseNewPair/';
 	form.submit();
+}
+
+function newClientBaseless() {
+	openPopUp('auto', '/newClientBaseless/', 500, 560);
 }
 
 

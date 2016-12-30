@@ -7,16 +7,22 @@
 
 <body class='body300'>
     <div class='head300'>Couple's Counseling</div>
+    <input type='hidden' name='cSearch' id='cSearch' value=''>
+    <input type='hidden' name='client_id' id='client_id' value=''>
+    <input type='hidden' name='session_id' id='session_id' value=''>
+    <input type='hidden' name='hasExisting' id='hasExisting' value=''>
+
+    <div style='height:20px;'></div>
 
     <div class='coupleBox1'>
         Make A Selection
         <div style='height:10px;'></div>
-        <div class='centerLongBtn'><button onClick="Javascript: newClientPopup(); return false;">Create New Client</button></div>
+        <div class='centerLongBtn'><button onClick="Javascript: newClientBaseless();">Create New Client</button></div>
         <div class='big_or'>OR</div>
-        <div class='centerLongBtn'><button onClick="Javascript: ">Choose From Existing Clients</button></div>
+        <div class='centerLongBtn'><button onClick="Javascript: uniClientSearchF('general');">Choose From Existing Clients</button></div>
     </div>
 
-    <div style='height:30px;'></div>
+    <div style='height:20px;'></div>
 
     <div class='full-length-single-btn'><button onClick='Javascript: window.close(); return false;'>Cancel</button></div>
 
