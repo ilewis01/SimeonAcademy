@@ -3263,7 +3263,22 @@ function verify_uploadTitle() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+function startCoupleSession() {
+	openPopUp('auto', '/startCoupleSession/', 350, 370);
+}
 
+function setCouplePair(client2_id) {
+	getPopParent('c2_id').value = String(client2_id);
+	getPopParent('c_form').action = '/coupleSession/';
+	getPopParent('c_form').submit();
+	window.close();
+}
+
+function selectNewCouple() {
+	var form = grab('c_form')
+	form.action = '/chooseNewPair/';
+	form.submit();
+}
 
 
 

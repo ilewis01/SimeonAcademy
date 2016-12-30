@@ -78,6 +78,9 @@ urlpatterns = patterns('',
     url(r'^simpleUpload/$', 'assessment.views.simpleUpload'),
     url(r'^uploadSuccess/$', 'assessment.views.uploadSuccess'),
     url(r'^uploadError/$', 'assessment.views.uploadError'),
+    url(r'^startCoupleSession/$', 'assessment.views.startCoupleSession'),
+    url(r'^coupleSession/$', 'assessment.views.coupleSession'),
+    url(r'^chooseNewPair/$', 'assessment.views.chooseNewPair'),
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),

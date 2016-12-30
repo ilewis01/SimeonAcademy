@@ -23,7 +23,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, PrintableForms, WorkSchedule, Note
+SolidState, PrintableForms, WorkSchedule, Note, Couple
 
 def isCompleteWeek(day):
 	complete = False
@@ -380,6 +380,167 @@ def clientEqual(c1, c2):
 		isEqual = True
 	return isEqual
 
+def clientSuperMatch(c1, c2):
+	isEqual = False
+	if str(c1.dob) == str(c2.dob) and str(c1.ss_num) == str(c2.ss_num) and str(c1.fname) == str(c2.fname) and str(c1.lname) == str(c2.lname):
+		isEqual = True
+	return isEqual
+
+def clientExistSuperSearch(client):
+	exist = False
+	c_list = Client.objects.all()
+
+	for c in c_list:
+		if clientSuperMatch(c, client) == True:
+			exist = True
+			break
+	return exist
+
+
+# ID ALGORITHM...fname = abcdefg lname = hijklmn dob=1234-56-78
+# Random generator: a number is chosen fomr 0-100. If the number is odd a new rand num (0-9) is chosen
+# if number is even, a new uppercase char is chosen....this process is repeated 10 times. random = RRRRRRRRRR
+# FINAL ID FORMAT: abc hijklmn RRRRRRRRRR-5678
+# This will make it very unlikely that two clients will share the same ID
+def Super_ID_generator(fname, lname, dob):
+	fname = str(fname)
+	lname = str(lname)
+	dob = str(dob)
+	newId = ""
+
+	if len(fname) > 0:
+		newId += fname[0]
+	if len(fname) > 1:
+		newId += fname[1]
+	if len(fname) > 2:
+		newId += fname[2]
+
+	newId += lname
+
+	for i in range(10):
+		randNum = random.randint(0,100)
+		modResult = randNum % 2
+
+		if modResult == 0:
+			newId += str(random.randint(0,9))
+		else:
+			newId += random.choice(string.ascii_uppercase)
+
+	newId += '-'
+	newId += dob[5]
+	newId += dob[6]
+	newId += dob[8]
+	newId += dob[9]
+	return newId
+
+
+# This function will first check to see if a client exist with matching ss, dob, fname and lname.
+# If no client exist matching criteria, a new client will be created, assigned a client ID, and initialized
+# A dict list will be returned with a client (either pre-existing or new) and a boolean that is true if the client is newly created
+def trueClientInitialize(fname, lname, dob, ss_num):
+	result 	= {}
+	c_list 	= Client.objects.all()
+	fname 	= str(fname)
+	lname 	= str(lname)
+	ss_num 	= str(ss_num)
+	dob 	= str(dob)
+	proceed = True
+	client 	= None
+
+	for c in c_list:
+		if dob == str(c.dob) and fname == str(c.fname) and lname == str(c.lname) and ss_num == str(c.ss_num):
+			client = c
+			proceed = False
+			break
+
+	if proceed == True:
+		date = datetime.now()
+		date = date.date()
+
+		client = Client(fname=fname, lname=lname, dob=dob, ss_num=ss_num)
+		client.intake_date = date
+		client.clientID = Super_ID_generator(fname, lname, dob)
+		client.isDischarged = False
+		client.hasFiles = False
+		client.isRemoved = False
+		client.save()
+	result['client'] = client
+	result['new'] = proceed
+	return result
+
+def superDuperFetchClientID_track(track):
+	s_id = track.s_id
+	session = ClientSession.objects.get(id=s_id)
+	return session.client.id
+
+
+def isExistingCouple(clientID):
+	isCouple = False
+	clientID = str(clientID)
+	couples = Couple.objects.all()
+
+	for c in couples:
+		if clientID == str(c.id1) or clientID == str(c.id2):
+			isCouple = True
+			break
+	return isCouple
+
+def fetchExisitingCouples(client1):
+	results = []
+	couples = Couple.objects.all()
+	id1 = str(client1.clientID)
+
+	for c in couples:
+		temp = fetchOtherCoupleClient(id1, c)
+		if temp != None:
+			results.append(temp)
+	return results
+
+def fetchOtherCoupleClient(c_id, couple):
+	result = None
+	id1 = str(c_id)
+	id2 = None
+	
+	if id1 == str(couple.id1):
+		id2 = str(couple.id2)
+	elif id1 == str(couple.id2):
+		id2 = str(couple.id1)	
+
+	if id2 != None:
+		c_list = Client.objects.all().order_by('fname')
+
+		for c in c_list:
+			if str(c.clientID) == id2:
+				result = c
+				break
+	return result
+
+
+def getCoupleClients(id1, id2):
+	clients = {}
+	count = 0
+	c_list = Client.objects.all()
+
+	for c in c_list:
+		if str(c.clientID) == id1:
+			count += 1
+			clients['client1'] = c
+		elif str(c.clientID) == id2:
+			count += 1
+			clients['client2'] = c
+
+		if count == 2:
+			break
+	return clients
+
+def getCoupleNotes(c1):
+	result = []
+	n_list = Note.objects.all()
+
+	for n in n_list:
+		if str(c1.clientID) == str(n.clientID) and n.isCouple == True:
+			result.append(n)
+	return result
 
 def onTrue_offFalse(data):
 	if data == 'on':

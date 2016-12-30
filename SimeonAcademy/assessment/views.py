@@ -46,7 +46,8 @@ fetchResultTags, fetchClientSSDisplay, fetchClientPhoneDisplay, fetchGenderDispl
 fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedStateIndex, \
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
-get_JSON_workSchedule, processAMC, truePythonBool, create_note
+get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
+fetchExisitingCouples, superDuperFetchClientID_track
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -578,7 +579,7 @@ def notePadAdded(request):
 				note.note = body
 
 			note.save()
-			client = Client.objects.get(id=track.client_id)
+			client = Client.objects.get(id=superDuperFetchClientID_track(track))
 
 			content['client'] = client
 			content['note'] = note
@@ -608,7 +609,7 @@ def notePadDeleted(request):
 		else:
 			note = Note.objects.get(id=(request.POST.get('note_id')))
 			note.delete()
-			content['title'] = "New Note | Simeon Academy"
+			content['title'] = "Note Deleted | Simeon Academy"
 			return render_to_response('counselor/client/notePadDeleted.html', content)
 
 @login_required(login_url='/index')
@@ -632,7 +633,7 @@ def notePadErrorPage(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			content['title'] = "New Note | Simeon Academy"
+			content['title'] = "Note Pad Error | Simeon Academy"
 			return render_to_response('counselor/client/notePadErrorPage.html', content)
 
 @login_required(login_url='/index')
@@ -656,7 +657,7 @@ def simpleUpload(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			content['title'] = "New Note | Simeon Academy"
+			content['title'] = "Upload Documents | Simeon Academy"
 			return render_to_response('counselor/client/simpleUpload.html', content)
 
 @login_required(login_url='/index')
@@ -680,12 +681,12 @@ def uploadSuccess(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			client = Client.objects.get(id=track.client_id)
+			client = Client.objects.get(id=superDuperFetchClientID_track(track))
 			title = request.POST.get('title')
 			doc = request.FILES['upload']
 			attach = Attachment(clientID=client.clientID, title=title, document=doc)
 			attach.save()
-			content['title'] = "New Note | Simeon Academy"
+			content['title'] = "Upload Documents | Simeon Academy"
 			return render_to_response('counselor/client/uploadSuccess.html', content)
 
 @login_required(login_url='/index')
@@ -709,8 +710,92 @@ def uploadError(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			content['title'] = "Client Search | Simeon Academy"
+			content['title'] = "Upload Error | Simeon Academy"
 			return render_to_response('counselor/client/uploadError.html', content)
+
+@login_required(login_url='/index')
+def startCoupleSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			c1 = Client.objects.get(id=(superDuperFetchClientID_track(track)))
+			content['title'] = "Couple's Therapy | Simeon Academy"
+			content['c1'] = c1
+
+			if isExistingCouple(c1.clientID) == True:
+				content['couples'] = fetchExisitingCouples(c1)
+				return render_to_response('counselor/client/existingCouples.html', content)
+			else:
+				return render_to_response('counselor/client/startCoupleSession.html', content)
+
+@login_required(login_url='/index')
+def chooseNewPair(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/startCoupleSession.html', content)
+
+
+@login_required(login_url='/index')
+def coupleSession(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			c1 = Client.objects.get(id=(superDuperFetchClientID_track(track)))
+			c2 = Client.objects.get(id=(request.POST.get('c2_id')))
+			content['c1'] = c1
+			content['c2'] = c2
+			content['title'] = "New Note | Simeon Academy"
+			return render_to_response('counselor/client/coupleSession.html', content)
 
 @login_required(login_url='/index')
 def searchClients(request):
