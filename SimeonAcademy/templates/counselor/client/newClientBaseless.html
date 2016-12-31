@@ -12,37 +12,40 @@
         <form action='' method='post' id='m_form'> {% csrf_token %}
             <table>
                 <tr>
-                    <td><input type='text' name='fname' id='fname' placeholder='First Name' style='width:180px;'></td>
+                    <td><input type='text' name='fname' id='fname' placeholder='First Name' style='width:180px;' oninput="Javascript: clearNC('fname');"></td>
                     <td><input type='text' name='mi' id='mi' placeholder='MI' style='width:30px;'></td>
-                    <td><input type='text' name='lname' id='lname' placeholder='Last Name' style='width:180px;'></td>
+                    <td><input type='text' name='lname' id='lname' placeholder='Last Name' style='width:180px;' oninput="Javascript: clearNC('lname');"></td>
                 </tr>
             </table>
 
             <table>
                 <tr>
-                    <td><input type='text' name='street_no' id='street_no' placeholder='Street No.' style='width:90px;'></td>
-                    <td><input type='text' name='street_name' id='street_name' placeholder='Street Name'  style='width:160px;'></td>
+                    <td><input type='text' name='street_no' id='street_no' placeholder='Street No.' style='width:90px;' oninput="Javascript: clearNC('street_no');"></td>
+                    <td><input type='text' name='street_name' id='street_name' placeholder='Street Name'  style='width:160px;' oninput="Javascript: clearNC('street_name');"></td>
                     <td><input type='text' name='apartment_no' id='apartment_no' placeholder='APT' style='width:45px;'></td>
                 </tr>
             </table>
 
             <table>
                 <tr>
-                    <td><input type='text' name='city' id='city' placeholder='City' style='width:180px;'></td>
+                    <td><input type='text' name='city' id='city' placeholder='City' style='width:180px;' oninput="Javascript: clearNC('city');"></td>
 
                     <td>
-                        <select name='state' id='state'>
+                        <select name='state' id='state' onChange="Javascript: clearNCS('state');">
                             <option value='None Selected'>State</option>
+                            {% for s in states %}
+                            <option value="{{s}}">{{s}}</option>
+                            {% endfor %}
                         </select>
                     </td>
         
-                    <td><input type='text' name='zip_code' id='zip_code' placeholder='Zip Code' style='width:90px;'></td>
+                    <td><input type='text' name='zip_code' id='zip_code' placeholder='Zip Code' style='width:90px;' oninput="Javascript: clearNC('zip_code');"></td>
                 </tr>
             </table>
 
             <table>
                 <tr>
-                    <td><input type='text' name='ss_num' id='ss_num' placeholder="Social Security No." style='width:120px;'></td>
+                    <td><input type='text' name='ss_num' id='ss_num' placeholder="Social Security No." style='width:120px;' oninput="Javascript: clearNC('ss_num');"></td>
                     <td><div style='width:60px;'></div></td>
                     <td><div class='newCliLabel1'>Gender:</div></td>
                     <td><div class='cli_radN'><input type='radio' name='isMale' id='male' value='True' checked></div></td>
@@ -56,20 +59,37 @@
                 <tr>
                     <td><div class='newCliLabel1'>Date of Birth:</div></td>
                     <td>
-                        <select name='month' id='month'>
+                        <select name='month' id='month'  onChange="Javascript: populateDropDownDay('month');">
                             <option value='0'>Month</option>
+                            <option value='1'>January</option>
+                            <option value='2'>February</option>
+                            <option value='3'>March</option>
+                            <option value='4'>April</option>
+                            <option value='5'>May</option>
+                            <option value='6'>June</option>
+                            <option value='7'>July</option>
+                            <option value='8'>August</option>
+                            <option value='9'>September</option>
+                            <option value='10'>October</option>
+                            <option value='11'>November</option>
+                            <option value='12'>December</option>
                         </select>
                     </td>
 
                     <td>
-                        <select name='month' id='month'>
-                            <option value='0'>Day</option>
-                        </select>
+                            <select name='day' id='day' onChange="Javascript: populateDropDownDay('day');">
+                                <option value='0'>Day</option>
+                            </select>
+
+                           <!--  <div id='dayBuilder'></div> -->
                     </td>
 
                     <td>
-                        <select name='year' id='year'>
+                        <select name='year' id='year' onChange="Javascript: populateDropDownDay('year');">
                             <option value='0'>Year</option>
+                            {% for y in years %}
+                            <option value="{{y}}">{{y}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                 </tr>
@@ -77,7 +97,7 @@
 
             <table>
                 <tr>
-                    <td><input type='text' name='phone' id='phone' placeholder='Phone' style='width:120px;'></td>
+                    <td><input type='text' name='phone' id='phone' placeholder='Phone' style='width:120px;' oninput="Javascript: clearNC('phone');"></td>
                     <td><input type='text' name='email' id='email' placeholder='Email Address' style='width:200px;'></td>
                 </tr>
 
@@ -91,8 +111,12 @@
                 <tr>
                     <td><div class='newCliLabel1'>Reason for Referral:</div></td>
                     <td>
-                        <select name='reason_ref' id='reason_ref'>
+                        <select name='reason_ref' id='reason_ref' onChange="Javascript: clearNCS('reason_ref');">
                             <option value='None Selected'>Select</option>
+
+                            {% for r in refs %}
+                            <option value='{{r}}'>{{r}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                 </tr>
@@ -109,8 +133,8 @@
             <div class='newCliHeader'>Emergency Contact:</div>
             <table>
                 <tr>
-                    <td><input type='text' name='emer_contact_name' id='emer_contact_name' placeholder='Name' style='width:200px;'></td>
-                    <td><input type='text' name='emer_phone' id='emer_phone' placeholder='Phone' style='width:120px;'></td>
+                    <td><input type='text' name='emer_contact_name' id='emer_contact_name' placeholder='Name' style='width:200px;' oninput="Javascript: clearNC('emer_contact_name');"></td>
+                    <td><input type='text' name='emer_phone' id='emer_phone' placeholder='Phone' style='width:120px;' oninput="Javascript: clearNC('emer_phone');"></td>
                 </tr>
             </table>
 
@@ -128,7 +152,7 @@
     <div style='height:20px;'></div>
 
     <div class='half-length-single-btn'>
-        <button onClick='Javascript: window.close(); return false;'>Submit</button>
+        <button onClick='Javascript: saveBaselessClient(); return false;'>Submit</button>
         <button onClick='Javascript: window.close(); return false;'>Cancel</button>
     </div>
 

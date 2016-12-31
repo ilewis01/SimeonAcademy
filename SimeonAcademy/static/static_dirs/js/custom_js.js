@@ -3284,7 +3284,182 @@ function newClientBaseless() {
 	openPopUp('auto', '/newClientBaseless/', 500, 560);
 }
 
+function saveBaselessClient() {
+	if (newClient_hasErrors() === true) {
+		newClient_fetchTextErrors();
+		newClient_fetchSelectErrors();
+	}
+	else {
+		//Continue to save the form
+	}
+}
 
+function buildDropDayList(numDays) {
+	numDays = Number(numDays);
+	var currentIndex = grab('day').selectedIndex;
+	var currentValue = Number(grab('day').value);
+	var html = "<option value=\"0\">Day</option>";
+
+	for (var i = 1; i <= numDays; i++) {
+		html += "<option value=\"" + String(i) + "\">" + String(i) + "</option>";
+	}
+
+	grab('day').innerHTML = html;
+
+	if (currentValue > numDays) {
+		grab('day').selectedIndex = 0;
+	}
+	else {
+		grab('day').selectedIndex = currentIndex;
+	}
+}
+
+function populateDropDownDay(sType) {
+	sType = String(sType);
+
+	if (sType === 'month') {grab('month').style.border = '';}
+	else if (sType === 'day') {grab('day').style.border = '';}
+	else {grab('year').style.border = '';}
+
+	var mm = String(grab('month').value);
+	var dd = grab('')
+	var html = '';
+	
+	if (mm === '4' || mm === '6' || mm === '9' || mm === '11') {
+		buildDropDayList(30);
+	}
+	else if (mm !== '2') {
+		buildDropDayList(31);
+	}
+	else {
+		var yy = Number(grab('year').value);
+
+		if (grab('year').selectedIndex !== 0) {
+			if (yy % 4 == 0) {
+				buildDropDayList(29);
+			}
+			else {
+				buildDropDayList(28);
+			}
+		}
+	}
+
+	dd.innerHTML = html;
+}
+
+function newClient_hasErrors() {
+	var hasErrors = false;
+	var textError = newClient_hasTextError();
+	var sError = newClient_hasSelectErrors();
+
+	if (textError === true || sError === true) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
+function clearNC(divname) {
+	divName = String(divname);
+	var div = grab(divName);
+	div.style.border = '';
+}
+
+function clearNCS(divName) {
+	divName = String(divName);
+	var div = grab(divName);
+	div.style.border = '';
+}
+
+
+function newClient_hasTextError() {
+	var textList = [];
+	var hasErrors = false;
+
+	textList.push(grab('fname').value);
+	textList.push(grab('lname').value);
+	textList.push(grab('street_no').value);
+	textList.push(grab('street_name').value);
+	textList.push(grab('city').value);
+	textList.push(grab('zip_code').value);
+	textList.push(grab('ss_num').value);
+	textList.push(grab('phone').value);
+	textList.push(grab('emer_contact_name').value);
+	textList.push(grab('emer_phone').value);
+	// textList.push(grab('photo').value);
+
+	for (var i = 0; i < textList.length; i++) {
+		var temp = clearWhiteSpace(textList[i]);
+
+		if (isBlankText(temp) === true) {
+			hasErrors = true;
+			break;
+		}
+	}
+
+	return hasErrors;
+}
+
+function newClient_hasSelectErrors() {
+	var s_list = [];
+	var hasErrors = false;
+
+	s_list.push(String(grab('state').selectedIndex));
+	s_list.push(String(grab('month').selectedIndex));
+	s_list.push(String(grab('day').selectedIndex));
+	s_list.push(String(grab('year').selectedIndex));
+	s_list.push(String(grab('reason_ref').selectedIndex));
+
+	for (var i = 0; i < s_list.length; i++) {
+		if (s_list[i] === '0') {
+			hasErrors = true;
+			break;
+		}
+	}
+
+	return hasErrors;
+}
+
+
+function newClient_fetchTextErrors() {
+	var textList = [];
+
+	textList.push(grab('fname'));
+	textList.push(grab('lname'));
+	textList.push(grab('street_no'));
+	textList.push(grab('street_name'));
+	textList.push(grab('city'));
+	textList.push(grab('zip_code'));
+	textList.push(grab('ss_num'));
+	textList.push(grab('phone'));
+	textList.push(grab('emer_contact_name'));
+	textList.push(grab('emer_phone'));
+
+	for (var i = 0; i < textList.length; i++) {
+		var temp = clearWhiteSpace(textList[i].value);
+
+		if (isBlankText(temp) === true) {
+			textList[i].style.border = "2px solid red";
+		}
+	}
+}
+
+function newClient_fetchSelectErrors() {
+	var sList = [];
+
+	sList.push(grab('state'));
+	sList.push(grab('month'));
+	sList.push(grab('day'));
+	sList.push(grab('year'));
+	sList.push(grab('reason_ref'));
+
+	for (var i = 0; i < sList.length; i++) {
+		index = Number(sList[i].selectedIndex);
+
+		if (index === 0) {
+			sList[i].style.border = "1px solid orange";
+		}
+	}
+}
 
 function set_radio_buttons() {
 	var ss_num = document.getElementById('ss_num');

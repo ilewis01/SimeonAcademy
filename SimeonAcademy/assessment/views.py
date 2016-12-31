@@ -47,7 +47,7 @@ fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedS
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
-fetchExisitingCouples, superDuperFetchClientID_track
+fetchExisitingCouples, superDuperFetchClientID_track, getStates
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -381,7 +381,31 @@ def newClientBaseless(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = "New Client | Simeon Academy"
+			date = datetime.now()
+			yy = date.year
+			backwards = []
+			years = []
+
+			for i in range((yy - 90), (yy)):
+				backwards.append(i)
+				years.append('')
+
+			reverse = len(backwards)
+			index = reverse - 1
+
+			for j in range(reverse):
+				years[j] = backwards[index]
+				index -= 1
+
+			ref_list = RefReason.objects.all().order_by('reason')
+			refs = []
+			for r in ref_list:
+				refs.append(str(r.reason))
+
+			content['refs'] 	= refs
+			content['years'] 	= years
+			content['states'] 	= getStates()
+			content['title'] 	= "New Client | Simeon Academy"
 			return render_to_response('counselor/client/newClientBaseless.html', content)
 
 @login_required(login_url='/index')

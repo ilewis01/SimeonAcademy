@@ -584,7 +584,7 @@ def getStates():
 	results = []
 	states = State.objects.all().order_by('state')
 	for s in states:
-		results.append(s)
+		results.append(str(s.state))
 	return results
 
 def fetchStateID(state):
