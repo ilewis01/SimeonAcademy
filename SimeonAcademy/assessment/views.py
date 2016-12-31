@@ -47,7 +47,7 @@ fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedS
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
-fetchExisitingCouples, superDuperFetchClientID_track, getStates
+fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -363,6 +363,89 @@ def newClient(request):
 			return render_to_response('counselor/client/new_client.html', content)
 
 @login_required(login_url='/index')
+def errorLegend(request):
+	user = request.user
+	
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = "New Client | Simeon Academy"
+			return render_to_response('counselor/client/errorLegend.html', content)
+
+@login_required(login_url='/index')
+def clientCreatedBaseless(request):
+	user = request.user
+	
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Admin', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			fname 	= request.POST.get('fname')
+			lname 	= request.POST.get('lname')
+			mm 		= int(request.POST.get('month'))
+			dd 		= int(request.POST.get('day'))
+			yy 		= int(request.POST.get('year'))
+			ss_num 	= request.POST.get('ss_num')
+			dob = datetime(yy, mm, dd)
+			dob = dob.date()
+			new_c 	= trueClientInitialize(fname, lname, dob, ss_num)
+			content['title'] = "New Client | Simeon Academy"
+			content['client'] = new_c['client']
+			
+			if new_c['new'] == True:
+				new_c['client'].middleInit 			= request.POST.get('mi')
+				new_c['client'].street_no 			= request.POST.get('street_no')
+				new_c['client'].street_name 		= request.POST.get('street_name')
+				new_c['client'].apartment_no 		= request.POST.get('apartment_no')
+				new_c['client'].city 				= request.POST.get('city')
+				new_c['client'].state 				= State.objects.get(id=(request.POST.get('state')))
+				new_c['client'].zip_code 			= request.POST.get('zip_code')
+				new_c['client'].phone 				= request.POST.get('phone')
+				new_c['client'].emer_phone 			= request.POST.get('emer_phone')
+				new_c['client'].work_phone 			= request.POST.get('work_phone')
+				new_c['client'].probation_phone 	= request.POST.get('probation_phone')
+				new_c['client'].email 				= request.POST.get('email')
+				new_c['client'].probationOfficer 	= request.POST.get('probationOfficer')
+				new_c['client'].emer_contact_name 	= request.POST.get('emer_contact_name')
+				new_c['client'].isMale 				= truePythonBool(request.POST.get('isMale'))
+				new_c['client'].reason_ref 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+
+				photo = request.FILES['photo']
+
+				if photo != None:
+					new_c['client'].photo = photo
+
+				new_c['client'].save()
+
+				return render_to_response('counselor/client/clientCreatedBaseless.html', content)				
+			else:
+				return render_to_response('counselor/client/existingResolveNewClient.html', content)
+			
+
+@login_required(login_url='/index')
 def newClientBaseless(request):
 	user = request.user
 	
@@ -402,9 +485,9 @@ def newClientBaseless(request):
 			for r in ref_list:
 				refs.append(str(r.reason))
 
-			content['refs'] 	= refs
+			content['refs'] 	= ref_list
 			content['years'] 	= years
-			content['states'] 	= getStates()
+			content['states'] 	= State.objects.all().order_by('state')
 			content['title'] 	= "New Client | Simeon Academy"
 			return render_to_response('counselor/client/newClientBaseless.html', content)
 

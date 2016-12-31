@@ -431,6 +431,14 @@ def Super_ID_generator(fname, lname, dob):
 	newId += dob[6]
 	newId += dob[8]
 	newId += dob[9]
+
+	c_list = Client.objects.all()
+
+	for c in c_list:
+		if str(c.clientID) == newId:
+			Super_ID_generator(fname, lname, dob)
+			break
+			
 	return newId
 
 

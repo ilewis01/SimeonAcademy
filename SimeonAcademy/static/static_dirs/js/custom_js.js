@@ -3285,13 +3285,19 @@ function newClientBaseless() {
 }
 
 function saveBaselessClient() {
-	if (newClient_hasErrors() === true) {
-		newClient_fetchTextErrors();
-		newClient_fetchSelectErrors();
-	}
-	else {
-		//Continue to save the form
-	}
+	var form = grab('m_form');
+	form.action = '/clientCreatedBaseless/';
+	form.submit();
+	// if (newClient_hasErrors() === true) {
+	// 	newClient_fetchTextErrors();
+	// 	newClient_fetchSelectErrors();
+	// 	openPopUp('auto', '/errorLegend/', 300, 300);
+	// }
+	// else {
+	// 	var form = grab('m_form');
+	// 	form.action = '/clientCreatedBaseless/';
+	// 	form.submit()
+	// }
 }
 
 function buildDropDayList(numDays) {
