@@ -432,6 +432,7 @@ def clientCreatedBaseless(request):
 				new_c['client'].emer_contact_name 	= request.POST.get('emer_contact_name')
 				new_c['client'].isMale 				= truePythonBool(request.POST.get('isMale'))
 				new_c['client'].reason_ref 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+				new_c['client'].isPending 			= False
 
 				photo = request.FILES['photo']
 
@@ -440,9 +441,82 @@ def clientCreatedBaseless(request):
 
 				new_c['client'].save()
 
+				if new_c['client'].isMale == True:
+					content['gender'] = "Male"
+				else:
+					content['gender'] = "Female"
+
+				if new_c['client'].work_phone == None or new_c['client'].work_phone == "":
+					content['work'] = "N/A"
+				else:
+					content['work'] = new_c['client'].work_phone
+
+				if new_c['client'].probationOfficer==None or new_c['client'].probationOfficer=="" or new_c['client'].probation_phone==None or new_c['client'].probation_phone=="":
+					content['probation'] = "N/A"
+				else:
+					content['probation'] = str(new_c['client'].probationOfficer) + " " + str(new_c['client'].probation_phone)
+
+				track.c2_id = new_c['client'].id
+				track.save()
+
 				return render_to_response('counselor/client/clientCreatedBaseless.html', content)				
 			else:
 				return render_to_response('counselor/client/existingResolveNewClient.html', content)
+
+@login_required(login_url='/index')
+def viewProfile(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client = Client.objects.get(id=(superDuperFetchClientID_track(track)))
+			gender = None
+			work = None
+			probation = None
+			emergency = None
+
+			if client.isMale == True:
+				gender = "Male"
+			else:
+				gender = "Female"
+
+			if client.work_phone == None or client.work_phone == "":
+				work = "N/A"
+			else:
+				work = client.work_phone
+
+			if client.probationOfficer==None or client.probationOfficer=='' or client.probation_phone==None or client.probation_phone=='':
+				probation = "N/A"
+			else:
+				probation = str(client.probationOfficer) + " " + str(client.probation_phone)
+
+			if client.emer_contact_name==None or client.emer_contact_name=='' or client.emer_phone==None or client.emer_phone=='':
+				emergency = "N/A"
+			else:
+				emergency = str(client.emer_contact_name) + " " + str(client.emer_phone)
+
+			content['emergency'] = emergency
+			content['probation'] = probation
+			content['work'] = work
+			content['gender'] = gender
+			content['client'] = client
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/viewProfile.html', content)
 			
 
 @login_required(login_url='/index')
@@ -920,7 +994,7 @@ def coupleSession(request):
 
 		else:
 			c1 = Client.objects.get(id=(superDuperFetchClientID_track(track)))
-			c2 = Client.objects.get(id=(request.POST.get('c2_id')))
+			c2 = Client.objects.get(id=(track.c2_id))
 			content['c1'] = c1
 			content['c2'] = c2
 			content['title'] = "New Note | Simeon Academy"

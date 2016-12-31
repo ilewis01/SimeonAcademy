@@ -42,6 +42,7 @@ class TrackApp(models.Model):
 	c_id 		= models.IntegerField(default=0)
 	f_id 		= models.IntegerField(default=0)
 	s_id 		= models.IntegerField(default=0)
+	c2_id 		= models.IntegerField(default=0)
 	client_id	= models.IntegerField(default=0)
 	state 		= models.ForeignKey(SolidState, default=None, blank=True, null=True)
 	printable 	= models.ForeignKey(PrintableForms, default=None, blank=True, null=True)

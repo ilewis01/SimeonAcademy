@@ -66,6 +66,7 @@ urlpatterns = patterns('',
     url(r'^newClientBaseless/$', 'assessment.views.newClientBaseless'),
     url(r'^errorLegend/$', 'assessment.views.errorLegend'),
     url(r'^clientCreatedBaseless/$', 'assessment.views.clientCreatedBaseless'),
+    url(r'^viewProfile/$', 'assessment.views.viewProfile'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

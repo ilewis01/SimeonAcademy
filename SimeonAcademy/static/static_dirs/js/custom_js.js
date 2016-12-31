@@ -7,6 +7,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+
 function quote(value) {
 	value = String(value);
 	return " + " + value  + " + ";
@@ -3284,20 +3285,61 @@ function newClientBaseless() {
 	openPopUp('auto', '/newClientBaseless/', 500, 560);
 }
 
+function testFunction() {
+	openPopUp('auto', '/viewProfile', 500, 560);
+}
+
 function saveBaselessClient() {
-	var form = grab('m_form');
-	form.action = '/clientCreatedBaseless/';
+	if (newClient_hasErrors() === true) {
+		newClient_fetchTextErrors();
+		newClient_fetchSelectErrors();
+		openPopUp('auto', '/errorLegend/', 300, 300);
+	}
+	else {
+		var form = grab('m_form');
+		form.action = '/clientCreatedBaseless/';
+		form.submit()
+	}
+}
+
+function autoFillTest() {
+	grab('fname').value = "Truly";
+	grab('mi').value = "M";
+	grab('lname').value = "Fucked";
+	grab('street_no').value = "123";
+	grab('street_name').value = "Shit Creek";
+	grab('apartment_no').value = "4A";
+	grab('city').value = "Cow Nuts";
+	grab('state').selectedIndex = 12;
+	grab('zip_code').value = "12345";
+	grab('ss_num').value = "111111111";
+	grab('month').selectedIndex = 5;
+	grab('year').selectedIndex = 45;
+	grab('phone').value = "8107852166";
+	grab('work_phone').value = "2129802323";
+	grab('email').value = "email@email.com";
+	grab('probationOfficer').value = "Dumb Bitch";
+	grab('probation_phone').value = "6789679090";
+	grab('emer_contact_name').value = "Random Hooker";
+	grab('emer_phone').value = "6578979090";
+	grab('reason_ref').selectedIndex = 4;
+	buildDropDayList(30);
+	grab('day').selectedIndex = 22;
+}
+
+function goToCoupleNewClient() {
+	var form = getPopParent('c_form');
+	form.action = "/coupleSession/";
 	form.submit();
-	// if (newClient_hasErrors() === true) {
-	// 	newClient_fetchTextErrors();
-	// 	newClient_fetchSelectErrors();
-	// 	openPopUp('auto', '/errorLegend/', 300, 300);
-	// }
-	// else {
-	// 	var form = grab('m_form');
-	// 	form.action = '/clientCreatedBaseless/';
-	// 	form.submit()
-	// }
+	window.close();
+}
+
+function editNewClientData() {
+	
+}
+
+function deleteNewClient() {
+	
 }
 
 function buildDropDayList(numDays) {
