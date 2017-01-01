@@ -3289,16 +3289,266 @@ function testFunction() {
 	openPopUp('auto', '/viewProfile', 500, 560);
 }
 
+function isRawNumber(num) {
+	isNumber = true;
+	num = String(num);
+
+	for (var i = 0; i < num.length; i++) {
+		var c = num.charAt(i);
+
+		if (c!=='0' && c!=='1' && c!=='2' && c!=='3' && c!=='4' && c!=='5' && c!=='6' && c!=='7' && c!=='8' && c!=='9') {
+			isNumber = false;
+			break;
+		}
+	}
+
+	return isNumber;
+}
+
+function isRawSSN(num) {
+	isNumber = true;
+	num = clearWhiteSpace(num);
+	num = String(num);
+
+	for (var i = 0; i < num.length; i++) {
+		var c = num.charAt(i);
+
+		if (i === 3 || i ===6) {
+			if (c !== "-") {
+				isNumber = false;
+				break;
+			}
+		}
+		else {
+			if (isRawNumber(c) === false) {
+				isNumber = false;
+				break;
+			}
+		}
+	}
+
+	return isNumber;
+}
+
+function isRawPhone(num) {
+	isNumber = true;
+	num = clearWhiteSpace(num);
+	num = String(num);
+
+	for (var i = 0; i < num.length; i++) {
+		var c = num.charAt(i);
+
+		if (i === 0) {
+			if (c !== "(") {
+				isNumber = false;
+				break;
+			}
+		}
+		if (i === 4) {
+			if (c !== ")") {
+				isNumber = false;
+				break;
+			}
+		}
+		if (i === 8) {
+			if (c !== "-") {
+				isNumber = false;
+				break;
+			}
+		}
+		if (i!==0 && i!==4 && i!==8) {
+			if (isRawNumber(c) === false) {
+				isNumber = false;
+				break;
+			}
+		}
+	}
+
+	return isNumber;
+}
+
+function getRawNumber(num) {
+	var modified = "";
+	num = String(num);
+	num = clearWhiteSpace(num);
+
+	for (var i = 0; i < num.length; i++) {
+		var c = num.charAt(i);
+
+		if (c==='0' || c==='1' || c==='2' || c==='3' || c==='4' || c==='5' || c==='6' || c==='7' || c==='8' || c==='9') {
+			modified += c;
+		}
+	}
+
+	return modified;
+}
+
+function getRawSSN(ssn) {
+	var modified = "";
+	ssn = String(ssn);
+	ssn = clearWhiteSpace(ssn);
+
+	for (var i = 0; i < ssn.length; i++) {
+		var c = ssn.charAt(i);
+
+		if (c==='0' || c==='1' || c==='2' || c==='3' || c==='4' || c==='5' || c==='6' || c==='7' || c==='8' || c==='9' || c==='-') {
+			modified += c;
+		}
+	}
+
+	return modified;
+}
+
+function getRawPhone(ph) {
+	var modified = "";
+	ph = String(ph);
+	ph = clearWhiteSpace(ph);
+
+	for (var i = 0; i < ph.length; i++) {
+		var c = ph.charAt(i);
+
+		if (c==='0' || c==='1' || c==='2' || c==='3' || c==='4' || c==='5' || c==='6' || c==='7' || c==='8' || c==='9' || c==='-' || c==='(' || c===')' || c==='-') {
+			modified += c;
+		}
+	}
+
+	return modified;
+}
+
+function specialNumberError(value, numChars, ElementType, blankAllowed) {
+	var hasError = false;
+	var raw = null;
+	var proceed = true;
+	value = String(value);
+	numChars = Number(numChars);
+	ElementType = String(ElementType);
+
+	if (ElementType === 'phone') {
+		if (value.length > 10) {
+			if (isRawPhone(value) === false) {
+				proceed = false;
+				hasError = true;
+			}
+			else {
+				raw = getRawPhone(value);
+				numChars = 13;
+			}			
+		}
+		else {
+			raw = getRawNumber(value);
+		}
+	}
+
+	else if (ElementType === 'ssn') {
+		if (value.length > 9) {
+			if (isRawSSN(value) === false) {
+				proceed = false;
+				hasError = true;
+			}
+			else {
+				raw = getRawSSN(value);
+				numChars = 11;
+			}
+		}
+		else {
+			raw = getRawNumber(value);
+		}
+	}
+
+	else if (ElementType === 'zip') {
+		raw = getRawNumber(value);
+	}
+
+	if (proceed === true) {
+		if (blankAllowed === false) {
+			if (raw.length !== numChars || isBlankText(raw) === true || raw === null || raw === "") {
+				hasError = true;
+			}
+		}
+		else {
+			if (raw.length !== numChars) {
+				hasError = true;
+			}
+		}
+	}
+
+	return hasError;
+}
+
+
+function newClient_specialErrors() {
+	var verified 	= true;
+	var zip_code 	= grab('zip_code');
+	var ssn 		= grab('ss_num');
+	var phone 		= grab('phone');
+	var emer_phone 	= grab('emer_phone');
+	var work_phone 	= grab('work_phone');
+	var prob_phone 	= grab('probation_phone');
+
+	if (specialNumberError(ssn.value, 9, 'ssn', false) === true) {
+		verified = false;
+		ssn.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(zip_code.value, 5, 'zip', false) === true || isRawNumber(zip_code.value) === false) {
+		verified = false;
+		zip_code.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(phone.value, 10, 'phone', false) === true) {
+		verified = false;
+		phone.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(emer_phone.value, 10, 'phone', false) === true) {
+		verified = false;
+		emer_phone.style.border = "2px solid red";
+	}
+
+	if (isBlankText(work_phone.value) === false) {
+		if (specialNumberError(work_phone.value, 10, 'phone', true) === true) {
+			verified = false;
+			work_phone.style.border = "2px solid red";
+		}
+	}
+
+	if (isBlankText(prob_phone.value) === false) {
+		if (specialNumberError(prob_phone.value, 10, 'phone', true) === true) {
+			verified = false;
+			prob_phone.style.border = "2px solid red";
+		}
+	}
+
+	return verified;
+}
+
+function newClient_fullErrorChecker() {
+	var hasErrors = false;
+	var blankErrors = newClient_hasTextError();
+	var formatVerified = newClient_specialErrors();
+	var selectErrors = newClient_hasSelectErrors();
+
+	if (blankErrors === true || formatVerified === false || selectErrors === true) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
 function saveBaselessClient() {
-	if (newClient_hasErrors() === true) {
-		newClient_fetchTextErrors();
-		newClient_fetchSelectErrors();
+	if (newClient_fullErrorChecker() === true) {
 		openPopUp('auto', '/errorLegend/', 300, 300);
 	}
 	else {
+		//HANDLE NULL IMAGES
+		// var photo = grab('photo');
+
+		// if (photo.value === null || photo.value === '') {
+		// 	photo.value = "/static/images/defaultAvatar.jpg";
+		// }
 		var form = grab('m_form');
 		form.action = '/clientCreatedBaseless/';
-		form.submit()
+		form.submit();
 	}
 }
 
@@ -3325,6 +3575,8 @@ function autoFillTest() {
 	grab('reason_ref').selectedIndex = 4;
 	buildDropDayList(30);
 	grab('day').selectedIndex = 22;
+	// grab('photo').value = '/static/images/defaultAvatar.jpg';
+	// grab('probationOfficer').value = "File saved";
 }
 
 function goToCoupleNewClient() {
@@ -3423,24 +3675,19 @@ function newClient_hasTextError() {
 	var textList = [];
 	var hasErrors = false;
 
-	textList.push(grab('fname').value);
-	textList.push(grab('lname').value);
-	textList.push(grab('street_no').value);
-	textList.push(grab('street_name').value);
-	textList.push(grab('city').value);
-	textList.push(grab('zip_code').value);
-	textList.push(grab('ss_num').value);
-	textList.push(grab('phone').value);
-	textList.push(grab('emer_contact_name').value);
-	textList.push(grab('emer_phone').value);
-	// textList.push(grab('photo').value);
+	textList.push(grab('fname'));
+	textList.push(grab('lname'));
+	textList.push(grab('street_no'));
+	textList.push(grab('street_name'));
+	textList.push(grab('city'));
+	textList.push(grab('emer_contact_name'));
 
 	for (var i = 0; i < textList.length; i++) {
-		var temp = clearWhiteSpace(textList[i]);
+		var temp = clearWhiteSpace(textList[i].value);
 
 		if (isBlankText(temp) === true) {
 			hasErrors = true;
-			break;
+			textList[i].style.border = "2px solid red";
 		}
 	}
 
@@ -3451,16 +3698,16 @@ function newClient_hasSelectErrors() {
 	var s_list = [];
 	var hasErrors = false;
 
-	s_list.push(String(grab('state').selectedIndex));
-	s_list.push(String(grab('month').selectedIndex));
-	s_list.push(String(grab('day').selectedIndex));
-	s_list.push(String(grab('year').selectedIndex));
-	s_list.push(String(grab('reason_ref').selectedIndex));
+	s_list.push(grab('state'));
+	s_list.push(grab('month'));
+	s_list.push(grab('day'));
+	s_list.push(grab('year'));
+	s_list.push(grab('reason_ref'));
 
 	for (var i = 0; i < s_list.length; i++) {
-		if (s_list[i] === '0') {
+		if (s_list[i].selectedIndex === 0) {
 			hasErrors = true;
-			break;
+			s_list[i].style.border = "1px solid orange";
 		}
 	}
 

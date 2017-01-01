@@ -102,7 +102,7 @@
                 </tr>
 
                 <tr>
-                    <td><input type='text' name='work_phone' id='work_phone' placeholder='Work Phone' style='width:120px;'></td>
+                    <td><input type='text' name='work_phone' id='work_phone' placeholder='Work Phone' style='width:120px;'  oninput="Javascript: clearNC('work_phone');"></td>
                     <td></td>
                 </tr>
             </table>
@@ -126,7 +126,7 @@
             <table>
                 <tr>
                     <td><input type='text' name='probationOfficer' id='probationOfficer' placeholder='Probation Officer' style='width:200px;'></td>
-                    <td><input type='text' name='probation_phone' id='probation_phone' placeholder='Phone' style='width:120px;'></td>
+                    <td><input type='text' name='probation_phone' id='probation_phone' placeholder='Phone' style='width:120px;'  oninput="Javascript: clearNC('probation_phone');"></td>
                 </tr>
             </table>
 
@@ -143,7 +143,7 @@
             <table>
                 <tr>
                     <td><div>Upload Image: </div></td>
-                    <td><input type="file" name="photo" id='photo'></td>
+                    <td><input type="file" name="photo" id='photo' value="/nothing/"></td>
                     <td><button onClick="Javascript: autoFillTest(); return false;">Fill</button></td>
                 </tr>
             </table>

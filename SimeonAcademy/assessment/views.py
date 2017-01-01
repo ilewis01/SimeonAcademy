@@ -434,10 +434,14 @@ def clientCreatedBaseless(request):
 				new_c['client'].reason_ref 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
 				new_c['client'].isPending 			= False
 
-				photo = request.FILES['photo']
+				# if photo != None or photo != "" or photo != ' ':
+				# 	photo = request.FILES['photo']
+				# 	new_c['client'].photo = photo
 
-				if photo != None:
-					new_c['client'].photo = photo
+				# photo = request.FILES['photo']
+
+				# if photo != None:
+				# 	new_c['client'].photo = photo
 
 				new_c['client'].save()
 
