@@ -434,14 +434,11 @@ def clientCreatedBaseless(request):
 				new_c['client'].reason_ref 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
 				new_c['client'].isPending 			= False
 
-				# if photo != None or photo != "" or photo != ' ':
-				# 	photo = request.FILES['photo']
-				# 	new_c['client'].photo = photo
+				hasImage = truePythonBool(request.POST.get('hasImage'))
 
-				# photo = request.FILES['photo']
-
-				# if photo != None:
-				# 	new_c['client'].photo = photo
+				if hasImage == True:
+					photo = request.FILES['photo']
+					new_c['client'].photo = photo
 
 				new_c['client'].save()
 
@@ -466,6 +463,32 @@ def clientCreatedBaseless(request):
 				return render_to_response('counselor/client/clientCreatedBaseless.html', content)				
 			else:
 				return render_to_response('counselor/client/existingResolveNewClient.html', content)
+
+@login_required(login_url='/index')
+def newClientAborted(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client = Client.objects.get(id=(track.c2_id))
+			client.delete()
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/newClientAborted.html', content)
 
 @login_required(login_url='/index')
 def viewProfile(request):
@@ -997,8 +1020,18 @@ def coupleSession(request):
 			return render_to_response('global/restricted.html')
 
 		else:
+			c2_id = None
+			c2_type = str(request.POST.get('c2Type'))
 			c1 = Client.objects.get(id=(superDuperFetchClientID_track(track)))
-			c2 = Client.objects.get(id=(track.c2_id))
+
+			if c2_type == "existing":
+				c2_id = request.POST.get('c2_id')
+				track.c2_id = c2_id
+				track.save()
+			elif c2_type == "new":
+				c2_id = track.c2_id
+
+			c2 = Client.objects.get(id=c2_id)
 			content['c1'] = c1
 			content['c2'] = c2
 			content['title'] = "New Note | Simeon Academy"

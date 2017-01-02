@@ -3270,6 +3270,7 @@ function startCoupleSession() {
 
 function setCouplePair(client2_id) {
 	getPopParent('c2_id').value = String(client2_id);
+	getPopParent('c2Type').value = "existing";
 	getPopParent('c_form').action = '/coupleSession/';
 	getPopParent('c_form').submit();
 	window.close();
@@ -3282,7 +3283,17 @@ function selectNewCouple() {
 }
 
 function newClientBaseless() {
-	openPopUp('auto', '/newClientBaseless/', 500, 560);
+	getPopParent('c2Type').value = 'new';
+	var form = grab('c_form');
+	form.action = '/newClientBaseless/';
+	form.submit();
+
+	var w = 500, h = 580;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
 }
 
 function testFunction() {
@@ -3475,6 +3486,52 @@ function specialNumberError(value, numChars, ElementType, blankAllowed) {
 	return hasError;
 }
 
+function parent_newClient_specialErrors() {
+	var verified 	= true;
+	var zip_code 	= getPopParent('zip_code');
+	var ssn 		= getPopParent('ss_num');
+	var phone 		= getPopParent('phone');
+	var emer_phone 	= getPopParent('emer_phone');
+	var work_phone 	= getPopParent('work_phone');
+	var prob_phone 	= getPopParent('probation_phone');
+
+	if (specialNumberError(ssn.value, 9, 'ssn', false) === true) {
+		verified = false;
+		ssn.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(zip_code.value, 5, 'zip', false) === true || isRawNumber(zip_code.value) === false) {
+		verified = false;
+		zip_code.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(phone.value, 10, 'phone', false) === true) {
+		verified = false;
+		phone.style.border = "2px solid red";
+	}
+
+	if (specialNumberError(emer_phone.value, 10, 'phone', false) === true) {
+		verified = false;
+		emer_phone.style.border = "2px solid red";
+	}
+
+	if (isBlankText(work_phone.value) === false) {
+		if (specialNumberError(work_phone.value, 10, 'phone', true) === true) {
+			verified = false;
+			work_phone.style.border = "2px solid red";
+		}
+	}
+
+	if (isBlankText(prob_phone.value) === false) {
+		if (specialNumberError(prob_phone.value, 10, 'phone', true) === true) {
+			verified = false;
+			prob_phone.style.border = "2px solid red";
+		}
+	}
+
+	return verified;
+}
+
 
 function newClient_specialErrors() {
 	var verified 	= true;
@@ -3523,33 +3580,53 @@ function newClient_specialErrors() {
 }
 
 function newClient_fullErrorChecker() {
-	var hasErrors = false;
-	var blankErrors = newClient_hasTextError();
-	var formatVerified = newClient_specialErrors();
-	var selectErrors = newClient_hasSelectErrors();
+	var results 		= {};
+	var hasErrors 		= false;
+	var blankErrors 	= newClient_hasTextError();
+	var formatVerified 	= newClient_specialErrors();
+	var selectErrors 	= newClient_hasSelectErrors();
+	var e1 = '';
+	var e2 = '';
 
-	if (blankErrors === true || formatVerified === false || selectErrors === true) {
+	if (blankErrors === true || formatVerified === false) {
 		hasErrors = true;
+		e1 = "<li><div class=\"redErrorField\">Fields that are highlighted with <span>RED</span> cannot be blank or are not in the correct format (SSN: xxx-xx-xxxx)</div></li>";
 	}
 
-	return hasErrors;
+	if (selectErrors === true) {
+		hasErrors = true;
+		e2 = "<li><div class=\"orangeErrorField\">You must make a selection from the fields highlighted with <span>ORANGE</span></div></li>"
+	}
+
+	var html = "<ul>" + e1 + e2 + "</ul>";
+
+	results['hasErrors'] = hasErrors;
+	results['html'] = html;
+
+	return results;
+
 }
 
+
 function saveBaselessClient() {
-	if (newClient_fullErrorChecker() === true) {
-		openPopUp('auto', '/errorLegend/', 300, 300);
+	var report = newClient_fullErrorChecker();
+	var boolText = String(report['hasErrors']);
+
+	if (boolText === 'true') {
+		var errorWindow = openPopUp('auto', '/errorLegend/', 300, 300);
 	}
 	else {
-		//HANDLE NULL IMAGES
-		// var photo = grab('photo');
-
-		// if (photo.value === null || photo.value === '') {
-		// 	photo.value = "/static/images/defaultAvatar.jpg";
-		// }
+		if (grab('photo').value.length > 0) {
+			grab('hasImage').value = "True";
+		}
 		var form = grab('m_form');
 		form.action = '/clientCreatedBaseless/';
 		form.submit();
 	}
+}
+
+function initialize_newClientErrors() {
+	
 }
 
 function autoFillTest() {
@@ -3562,26 +3639,24 @@ function autoFillTest() {
 	grab('city').value = "Cow Nuts";
 	grab('state').selectedIndex = 12;
 	grab('zip_code').value = "12345";
-	grab('ss_num').value = "111111111";
+	grab('ss_num').value = "111-11-1111";
 	grab('month').selectedIndex = 5;
 	grab('year').selectedIndex = 45;
-	grab('phone').value = "8107852166";
-	grab('work_phone').value = "2129802323";
+	grab('phone').value = "(810) 785-2166";
+	grab('work_phone').value = "(212) 980-2323";
 	grab('email').value = "email@email.com";
 	grab('probationOfficer').value = "Dumb Bitch";
-	grab('probation_phone').value = "6789679090";
+	grab('probation_phone').value = "(678) 967-9090";
 	grab('emer_contact_name').value = "Random Hooker";
 	grab('emer_phone').value = "6578979090";
 	grab('reason_ref').selectedIndex = 4;
 	buildDropDayList(30);
 	grab('day').selectedIndex = 22;
-	// grab('photo').value = '/static/images/defaultAvatar.jpg';
-	// grab('probationOfficer').value = "File saved";
 }
 
 function goToCoupleNewClient() {
 	var form = getPopParent('c_form');
-	form.action = "/coupleSession/";
+	form.action = '/coupleSession/';
 	form.submit();
 	window.close();
 }
@@ -3590,8 +3665,12 @@ function editNewClientData() {
 	
 }
 
-function deleteNewClient() {
-	
+function newClientAborted() {
+	var wins = [];
+	wins.push(window);
+	wins.push(openPopUp('auto', '/newClientAborted/', 250, 150));
+	wins[0].close();
+	wins[1].focus();
 }
 
 function buildDropDayList(numDays) {

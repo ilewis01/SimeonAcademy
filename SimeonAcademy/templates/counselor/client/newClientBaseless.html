@@ -10,6 +10,7 @@
 
     <div class='general90'>
         <form action='' method='post' id='m_form' enctype="multipart/form-data"> {% csrf_token %}
+            <input type='hidden' name='hasImage' id='hasImage' value='False'>
             <table>
                 <tr>
                     <td><input type='text' name='fname' id='fname' placeholder='First Name' style='width:180px;' oninput="Javascript: clearNC('fname');"></td>
@@ -153,7 +154,7 @@
     <div style='height:20px;'></div>
 
     <div class='half-length-single-btn'>
-        <button onClick='Javascript: saveBaselessClient(); return false;'>Submit</button>
+        <button onClick='Javascript: saveBaselessClient();'>Submit</button>
         <button onClick='Javascript: window.close(); return false;'>Cancel</button>
     </div>
 

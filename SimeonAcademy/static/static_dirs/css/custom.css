@@ -7058,6 +7058,14 @@ button:hover {
 	background: url('../images/greenBk1.png');
 }
 
+.body3002 {
+	width:99%;
+	margin:auto;
+	font-family: Arial;
+	margin-top: 10px;
+	background: url('../images/iml_bkgnd.png');
+}
+
 .body300 a {
 	text-decoration: none;
 }
@@ -7271,6 +7279,22 @@ button:hover {
 .button3Long_newClient button {
 	width:32%;
 	height:25px;
+}
+
+.redErrorField {
+
+}
+
+.orangeErrorField {
+
+}
+
+.redErrorField span {
+
+}
+
+.orangeErrorField span {
+
 }
 
 
