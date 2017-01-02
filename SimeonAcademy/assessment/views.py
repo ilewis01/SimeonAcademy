@@ -491,6 +491,92 @@ def newClientAborted(request):
 			return render_to_response('counselor/client/newClientAborted.html', content)
 
 @login_required(login_url='/index')
+def wowSearch(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			date = datetime.now()
+			yy = date.year
+			backwards = []
+			years = []
+
+			for i in range((yy - 90), (yy)):
+				backwards.append(i)
+				years.append('')
+
+			reverse = len(backwards)
+			index = reverse - 1
+
+			for j in range(reverse):
+				years[j] = backwards[index]
+				index -= 1
+
+			ref_list = RefReason.objects.all().order_by('reason')
+
+			content['years'] = years
+			content['refs'] = ref_list
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/wowSearch.html', content)
+
+@login_required(login_url='/index')
+def wowSearchResults(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			searches = str(request.POST.get('searches'))
+			s_list = []
+			c = ''
+
+			for s in searches:
+				if s != '~':
+					c += s
+				else:
+					s_list.append(c)
+					c = ''
+
+			if len(s_list) > 0:
+				for e in s_list:
+					print "SEARCHING: " + e
+			else:
+				print "THERE IS NO SEARCH CRITERIA"
+
+
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/wowSearchResults.html', content)
+
+@login_required(login_url='/index')
 def viewProfile(request):
 	user = request.user
 	if not user.is_authenticated():

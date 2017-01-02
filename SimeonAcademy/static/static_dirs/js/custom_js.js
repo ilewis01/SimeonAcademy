@@ -3673,6 +3673,58 @@ function newClientAborted() {
 	wins[1].focus();
 }
 
+function searchLikeWow() {
+	var form = grab('c_form');
+	form.action = '/wowSearch/';
+	form.submit();
+	var w = 315, h = 500;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+}
+
+function searchClient_shouldSearchText(value) {
+	value = String(value);
+	value = clearWhiteSpace(value);
+	var isBlank = isBlankText(value)
+	var shouldSearch = true;
+
+	if (isBlank === true) {
+		shouldSearch = false;
+	}
+	return shouldSearch;
+}
+
+function initializeWowSearch() {
+	var searchVals 			= '';
+	var fname 				= grab('fname').value;
+	var lname 				= grab('lname').value;
+	var ssn 				= grab('ssn').value;
+	var phone 				= grab('phone').value;
+	var email 				= grab('email').value;
+	var probationOfficer 	= grab('probationOfficer').value;
+	var month 				= Number(grab('month').selectedIndex);
+	var day 				= Number(grab('day').selectedIndex);
+	var year 				= Number(grab('year').selectedIndex);
+	var ref 				= Number(grab('ref').selectedIndex);
+
+	if (searchClient_shouldSearchText(fname) === true) {searchVals += 'fname~';}
+	if (searchClient_shouldSearchText(lname) === true) {searchVals += 'lname~';}
+	if (searchClient_shouldSearchText(ssn) === true) {searchVals += 'ssn~';}
+	if (searchClient_shouldSearchText(phone) === true) {searchVals += 'phone~';}
+	if (searchClient_shouldSearchText(email) === true) {searchVals += 'email~';}
+	if (searchClient_shouldSearchText(probationOfficer) === true) {searchVals += 'probationOfficer~';}
+	if (month > 0) {searchVals += 'month~';}
+	if (day > 0) {searchVals += 'day~';}
+	if (year > 0) {searchVals += 'year~';}
+	if (ref > 0) {searchVals += 'ref~';}
+
+	grab('searches').value = searchVals;
+	grab('c_form').submit();
+}
+
 function buildDropDayList(numDays) {
 	numDays = Number(numDays);
 	var currentIndex = grab('day').selectedIndex;
