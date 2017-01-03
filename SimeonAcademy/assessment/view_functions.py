@@ -1255,26 +1255,83 @@ def processWowDates(searchDict, getFullDOB):
 
 	return searchDict
 
-def wowSearch_matchSingleClient(searchDict, client, getFullDOB):
-	field = None
+def wowTrueDataMatch(clientValue, searchValue):
+	clientValue = str(clientValue)
+	searchValue = str(searchValue)
+	foundMatch = True
+	searchSize = len(searchValue)
+	index = 0
 
-	for s in searchDict:
-		field = getWowSearchField(s['type'], s['modelName'], s['isNumber'], client, getFullDOB)
-		s['modelValue'] = field
+	return foundMatch
+
+def wowSearch_matchSingleClient(searchDict, client, getFullDOB):
+	foundMatch = False
+	checkPoints = len(searchDict)
+	numMatches = 0
+
+	for i in range(len(searchDict)):
+		clientValue = getWowSearchField(searchDict[i]['type'], searchDict[i]['modelName'], searchDict[i]['isNumber'], client, getFullDOB)
+		searchValue = searchDict[i]['searchField']
+
+		if processDataMatch('text', searchValue, clientValue) == True:
+			numMatches += 1
+
+	if numMatches == checkPoints:
+		foundMatch = True
+
+	return foundMatch
 
 
 def superWowSearcher(searchDict, getFullDOB, clientList):
 	results = []
 	searchDict = processWowDates(searchDict, getFullDOB)
 
-	for c in clientList:
-		wowSearch_matchSingleClient(searchDict, c, getFullDOB)
+	if len(searchDict) == 0:
+		results = clientList
+	else:
+		for c in clientList:
+			if wowSearch_matchSingleClient(searchDict, c, getFullDOB) == True:
+				results.append(c)
+	return results
 
 
 
 def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB):
 	clientList = getWowClientList(includeDischarged, includePending)
-	superWowSearcher(searchDict, getFullDOB, clientList)
+	return superWowSearcher(searchDict, getFullDOB, clientList)
+
+def breakToPages(elementList, numPerPage):
+	result = {}
+	numPerPage = int(numPerPage)
+	numResults = len(elementList)
+	mod = numResults % numPerPage
+	numPages = (numResults - mod)/numPerPage
+
+	if mod != 0:
+		numPages += 1
+
+	for n in range(numPages):
+		title = 'page_' + str(n + 1)
+		result[title] = []
+
+	count = numPerPage
+	currentPage = 1
+	arrayTitle = None
+
+	for i in range(numResults):
+		if count == numPerPage:
+			arrayTitle = 'page_' + str(currentPage)
+			result[arrayTitle].append(elementList[i])
+			count = 1
+			currentPage = currentPage + 1
+		else:
+			result[arrayTitle].append(elementList[i])
+			count = count + 1
+
+	print "\nPAGE 1..."
+	print result['page_1']
+	print "\nPAGE 2..."
+	print result['page_2']
 
 
 def clientSort(includeDischarge, sortBy):

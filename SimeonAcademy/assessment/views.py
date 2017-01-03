@@ -48,7 +48,7 @@ getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDat
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
-wowClientMatch, processWowSearchData
+wowClientMatch, processWowSearchData, breakToPages
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -574,14 +574,14 @@ def wowSearchResults(request):
 				if m == 'fname':
 					d = {}
 					d['modelName'] = 'fname'
-					d['value'] = processWowSearchData(request.POST.get('fname'), False)
+					d['searchField'] = processWowSearchData(request.POST.get('fname'), False)
 					d['type']  = 'text'
 					d['isNumber'] = False
 					data.append(d)
 				elif m == 'lname':
 					d = {}
 					d['modelName'] = 'lname'
-					d['value'] = processWowSearchData(request.POST.get('lname'), False)
+					d['searchField'] = processWowSearchData(request.POST.get('lname'), False)
 					d['type']  = 'text'
 					d['isNumber'] = False
 					data.append(d)
@@ -648,7 +648,10 @@ def wowSearchResults(request):
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
 			matches = wowClientMatch(data, discharged, pending, getFullDOB)
+			pages = breakToPages(matches, 8)
 
+			content['matches'] = matches
+			content['numMatches'] = len(matches)
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearchResults.html', content)
 
