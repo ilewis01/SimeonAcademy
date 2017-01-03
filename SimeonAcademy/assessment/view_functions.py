@@ -1321,11 +1321,17 @@ def breakToPages(elementList, numPerPage):
 	for i in range(numResults):
 		if count == numPerPage:
 			arrayTitle = 'page_' + str(currentPage)
-			result[arrayTitle].append(elementList[i])
+			data = {}
+			data['number'] = (i + 1)
+			data['client'] = elementList[i]
+			result[arrayTitle].append(data)
 			count = 1
 			currentPage = currentPage + 1
 		else:
-			result[arrayTitle].append(elementList[i])
+			data = {}
+			data['number'] = (i + 1)
+			data['client'] = elementList[i]
+			result[arrayTitle].append(data)
 			count = count + 1
 
 	print "\nPAGE 1..."
