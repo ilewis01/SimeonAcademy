@@ -1129,6 +1129,154 @@ def universal_client_match(request, client):
 		isMatch = True
 	return isMatch
 
+def getWowClientList(includeDischarged, includePending):
+	result = []
+	clients = Client.objects.all().order_by('lname')
+
+	if includeDischarged == True and includePending == True:
+		for c1 in clients:
+			result.append(c1)
+
+	elif includeDischarged == True and includePending == False:
+		for c2 in clients:
+			if c2.isPending != True:
+				result.append(c2)
+
+	elif includeDischarged == False and includePending == True:
+		for c3 in clients:
+			if c3.isDischarged != True:
+				result.append(c3)
+
+	elif includeDischarged == False and includePending == False:
+		for c4 in clients:
+			if c4.isDischarged != True and c4.isPending != True:
+				result.append(c4)
+
+	return result
+
+def wowClearWhiteSpace(value):
+	value = str(value)
+	result = ''
+
+	for v in value:
+		if v != ' ':
+			result += v
+	return result
+
+def wowRawNumber(value):
+	result = ''
+	value = str(value)
+
+	for v in value:
+		if v=='0' or v=='1' or v=='2' or v=='3' or v=='4' or v=='5' or v=='6' or v=='7' or v=='8' or v=='9':
+			result += v
+
+	return result
+
+
+def processWowSearchData(value, isNumber):
+	result = None
+
+	if isNumber == False:
+		result = wowClearWhiteSpace(value)
+	else:
+		result = wowRawNumber(value)
+
+	return result
+
+def getWowSearchField(searchType, modelName, isNumber, client, getFullDOB):
+	result = None
+
+	if searchType == 'text':
+		if modelName == 'fname':
+			result = processWowSearchData(client.fname, isNumber)
+		elif modelName == 'lname':
+			result = processWowSearchData(client.lname, isNumber)
+		elif modelName == 'ss_num':
+			result = processWowSearchData(client.ss_num, isNumber)
+		elif modelName == 'phone':
+			result = processWowSearchData(client.phone, isNumber)
+		elif modelName == 'email':
+			result = processWowSearchData(client.email, isNumber)
+		elif modelName == 'probationOfficer':
+			result = processWowSearchData(client.probationOfficer, isNumber)
+	elif searchType == 'date':
+		if getFullDOB == True:
+			result = processWowSearchData(client.dob, isNumber)
+		else:
+			if modelName == 'month':
+				result = str(client.dob.month)
+			elif modelName == 'day':
+				result = str(client.dob.day)
+			elif modelName == 'year':
+				result = str(client.dob.year)
+	elif searchType == 'id':
+		if modelName == 'reason_ref':
+			result = str(client.reason_ref.id)
+
+	return str(result)
+
+def processWowDates(searchDict, getFullDOB):
+	if getFullDOB == True:
+		mm = 0
+		dd = 0
+		yy = 0
+
+		for i in range(len(searchDict)):
+			if searchDict[i]['modelName'] == 'month':
+				mm = int(searchDict[i]['searchField'])
+				
+			elif searchDict[i]['modelName'] == 'day':
+				dd = int(searchDict[i]['searchField'])
+				
+			elif searchDict[i]['modelName'] == 'year':
+				yy = int(searchDict[i]['searchField'])
+
+
+		for j in range(len(searchDict)):
+			if searchDict[j]['modelName'] == 'month':
+				searchDict.pop(j)
+				break
+
+		for k in range(len(searchDict)):
+			if searchDict[k]['modelName'] == 'day':
+				searchDict.pop(k)
+				break
+
+		date = datetime(yy, mm, dd)
+		date = processWowSearchData(date.date(), True)
+
+		for l in range(len(searchDict)):
+			if searchDict[l]['modelName'] == 'year':
+				searchDict[l]['modelName'] = 'dob'
+				searchDict[l]['searchField'] = date
+				searchDict[l]['isNumber'] = True
+				searchDict[l]['type'] = 'date'
+
+	return searchDict
+
+def wowSearch_matchSingleClient(searchDict, client, getFullDOB):
+	field = None
+
+	for s in searchDict:
+		field = getWowSearchField(s['type'], s['modelName'], s['isNumber'], client, getFullDOB)
+		s['modelValue'] = field
+
+
+def superWowSearcher(searchDict, getFullDOB, clientList):
+	results = []
+	searchDict = processWowDates(searchDict, getFullDOB)
+
+	for c in clientList:
+		wowSearch_matchSingleClient(searchDict, c, getFullDOB)
+
+
+
+def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB):
+	clientList = getWowClientList(includeDischarged, includePending)
+	superWowSearcher(searchDict, getFullDOB, clientList)
+
+
 def clientSort(includeDischarge, sortBy):
 	result = []
 

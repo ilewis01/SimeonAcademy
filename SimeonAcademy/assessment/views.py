@@ -27,7 +27,7 @@ MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
 SolidState, TrackApp, WorkSchedule, Note, Roommate, Application, RoommateEvaluation, \
-Attachment
+Attachment, Couple
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -47,7 +47,8 @@ fetchStatusDisplay, setGlobalClientID, getGlobalClientID, getStates, getOrderedS
 getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDate, \
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
-fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize
+fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
+wowClientMatch, processWowSearchData
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -557,6 +558,7 @@ def wowSearchResults(request):
 		else:
 			searches = str(request.POST.get('searches'))
 			s_list = []
+			data = []
 			c = ''
 
 			for s in searches:
@@ -566,12 +568,86 @@ def wowSearchResults(request):
 					s_list.append(c)
 					c = ''
 
-			if len(s_list) > 0:
-				for e in s_list:
-					print "SEARCHING: " + e
-			else:
-				print "THERE IS NO SEARCH CRITERIA"
+			num = len(s_list)
 
+			for m in s_list:
+				if m == 'fname':
+					d = {}
+					d['modelName'] = 'fname'
+					d['value'] = processWowSearchData(request.POST.get('fname'), False)
+					d['type']  = 'text'
+					d['isNumber'] = False
+					data.append(d)
+				elif m == 'lname':
+					d = {}
+					d['modelName'] = 'lname'
+					d['value'] = processWowSearchData(request.POST.get('lname'), False)
+					d['type']  = 'text'
+					d['isNumber'] = False
+					data.append(d)
+				elif m == 'ssn':
+					d = {}
+					d['modelName'] = 'ss_num'
+					d['searchField'] = processWowSearchData(request.POST.get('ss_num'), True)
+					d['type']  = 'text'
+					d['isNumber'] = True
+					data.append(d)
+				elif m == 'phone':
+					d = {}
+					d['modelName'] = 'phone'
+					d['searchField'] = processWowSearchData(request.POST.get('phone'), True)
+					d['type']  = 'text'
+					d['isNumber'] = True
+					data.append(d)
+				elif m == 'email':
+					d = {}
+					d['modelName'] = 'email'
+					d['searchField'] = processWowSearchData(request.POST.get('email'), False)
+					d['type']  = 'text'
+					d['isNumber'] = False
+					data.append(d)
+				elif m == 'probationOfficer':
+					d = {}
+					d['modelName'] = 'probationOfficer'
+					d['searchField'] = processWowSearchData(request.POST.get('probationOfficer'), False)
+					d['type']  = 'text'
+					d['isNumber'] = False
+					data.append(d)
+
+				elif m == 'month':
+					d = {}
+					d['modelName'] = 'month'
+					d['searchField'] = request.POST.get('month')
+					d['type']  = 'date'
+					d['isNumber'] = True
+					data.append(d)
+				elif m == 'day':
+					d = {}
+					d['modelName'] = 'day'
+					d['searchField'] = request.POST.get('day')
+					d['type']  = 'date'
+					d['isNumber'] = True
+					data.append(d)
+				elif m == 'year':
+					d = {}
+					d['modelName'] = 'year'
+					d['searchField'] = request.POST.get('year')
+					d['type']  = 'date'
+					d['isNumber'] = True
+					data.append(d)
+				elif m == 'ref':
+					d = {}
+					d['searchField'] = request.POST.get('ref')
+					d['modelName'] = 'reason_ref'
+					d['type']  = 'id'
+					d['isNumber'] = True
+					
+					data.append(d)
+
+			discharged = truePythonBool(request.POST.get('m_discharged'))
+			pending = truePythonBool(request.POST.get('m_pending'))
+			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
+			matches = wowClientMatch(data, discharged, pending, getFullDOB)
 
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearchResults.html', content)
@@ -1118,6 +1194,8 @@ def coupleSession(request):
 				c2_id = track.c2_id
 
 			c2 = Client.objects.get(id=c2_id)
+			couple = Couple(id1=c1.clientID, id2=c2.clientID)
+			couple.save()
 			content['c1'] = c1
 			content['c2'] = c2
 			content['title'] = "New Note | Simeon Academy"

@@ -3697,11 +3697,25 @@ function searchClient_shouldSearchText(value) {
 	return shouldSearch;
 }
 
+function setWowCheck(elementName) {
+	elementName = String(elementName);
+	var targetName = "m_" + elementName;
+	var div = grab(elementName);
+	var target = grab(targetName);
+
+	if (div.checked === true) {
+		target.value = "True";
+	}
+	else {
+		target.value = "False";
+	}
+}
+
 function initializeWowSearch() {
 	var searchVals 			= '';
 	var fname 				= grab('fname').value;
 	var lname 				= grab('lname').value;
-	var ssn 				= grab('ssn').value;
+	var ssn 				= grab('ss_num').value;
 	var phone 				= grab('phone').value;
 	var email 				= grab('email').value;
 	var probationOfficer 	= grab('probationOfficer').value;
@@ -3721,6 +3735,15 @@ function initializeWowSearch() {
 	if (year > 0) {searchVals += 'year~';}
 	if (ref > 0) {searchVals += 'ref~';}
 
+	if (month > 0 && day > 0 && year > 0) {
+		grab('fullDOB').value = 'True';
+	}
+	else {
+		grab('fullDOB').value = 'False';
+	}
+
+	var form = grab('c_form');
+	form.action = "/wowSearchResults/";
 	grab('searches').value = searchVals;
 	grab('c_form').submit();
 }
@@ -3763,15 +3786,11 @@ function populateDropDownDay(sType) {
 		buildDropDayList(31);
 	}
 	else {
-		var yy = Number(grab('year').value);
+		buildDropDayList(28);
+		var yy = grab('year');
 
-		if (grab('year').selectedIndex !== 0) {
-			if (yy % 4 == 0) {
-				buildDropDayList(29);
-			}
-			else {
-				buildDropDayList(28);
-			}
+		if (Number(yy.value) % 4 == 0 && yy.selectedIndex !== 0) {
+			buildDropDayList(29)
 		}
 	}
 

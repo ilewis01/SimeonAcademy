@@ -6,19 +6,22 @@
 </head>
 
 <body class='body300'>
-    <form action='/wowSearchResults/' method='post' id='c_form'> {% csrf_token %}
+    <form action='' method='post' id='c_form'> {% csrf_token %}
     	<input type='hidden' name='searches' id='searches' value=''>
+    	<input type='hidden' name='m_discharged' id='m_discharged' value=''>
+    	<input type='hidden' name='m_pending' id='m_pending' value=''>
+    	<input type='hidden' name='fullDOB' id='fullDOB' value='False'>
         <div class='head300'>Client Search</div>
 
         <div class='newClient_searchText_sm'>Enter Search Criteria Below</div>
 
         <div class='newClient_searchInput'>
 	        <input name='fname' id='fname' placeholder="First Name">
-	        <input name='fname' id='lname' placeholder="Last Name">
-	        <input name='fname' id='ssn' placeholder="Social Security No.">
-	        <input name='fname' id='phone' placeholder="Phone">
-	        <input name='fname' id='email' placeholder="Email">
-	        <input name='fname' id='probationOfficer' placeholder="Probation Officer">
+	        <input name='lname' id='lname' placeholder="Last Name">
+	        <input name='ss_num' id='ss_num' placeholder="Social Security No.">
+	        <input name='phone' id='phone' placeholder="Phone">
+	        <input name='email' id='email' placeholder="Email">
+	        <input name='probationOfficer' id='probationOfficer' placeholder="Probation Officer">
 
 	        <div class='newClient_selectHolder'>
 	        	<span>DOB:</span>
@@ -41,6 +44,37 @@
 
                 <select name='day' id='day' onChange="Javascript: populateDropDownDay('day');">
                     <option value='0'>Day</option>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                    <option value='7'>7</option>
+                    <option value='8'>8</option>
+                    <option value='9'>9</option>
+                    <option value='10'>10</option>
+                    <option value='11'>11</option>
+                    <option value='12'>12</option>
+                    <option value='13'>13</option>
+                    <option value='14'>14</option>
+                    <option value='15'>15</option>
+                    <option value='16'>16</option>
+                    <option value='17'>17</option>
+                    <option value='18'>18</option>
+                    <option value='19'>19</option>
+                    <option value='20'>20</option>
+                    <option value='21'>21</option>
+                    <option value='22'>22</option>
+                    <option value='23'>23</option>
+                    <option value='24'>24</option>
+                    <option value='25'>25</option>
+                    <option value='26'>26</option>
+                    <option value='27'>27</option>
+                    <option value='28'>28</option>
+                    <option value='29'>29</option>
+                    <option value='30'>30</option>
+                    <option value='31'>31</option>
                 </select>
 
 
@@ -64,8 +98,8 @@
 	    </div>
 
 	    <div style='height:15px;'></div>
-	    <div class='newClient_checkClass'><input type='checkbox' name='discharged' id='discharged'> <span>Include discharged clients</span></div>
-	    <div class='newClient_checkClass'><input type='checkbox' name='pending' id='pending'> <span>Include pending clients</span></div>
+	    <div class='newClient_checkClass'><input type='checkbox' name='discharged' id='discharged' onClick="Javascript: setWowCheck('discharged');"> <span>Include discharged clients</span></div>
+	    <div class='newClient_checkClass'><input type='checkbox' name='pending' id='pending' onClick="Javascript: setWowCheck('pending');"> <span>Include pending clients</span></div>
 	    <div style='height:10px;'></div>
 
 
