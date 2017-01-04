@@ -48,7 +48,7 @@ getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDat
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
-wowClientMatch, processWowSearchData, breakToPages
+wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -649,11 +649,15 @@ def wowSearchResults(request):
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
 			matches = wowClientMatch(data, discharged, pending, getFullDOB)
 			pages = breakToPages(matches, 8)
+			json_data = json.dumps(pages)
 
-			content['matches'] = matches
+			content['json_data'] = json_data
+			content['numPages'] = len(pages)
 			content['numMatches'] = len(matches)
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearchResults.html', content)
+
+
 
 @login_required(login_url='/index')
 def viewProfile(request):
@@ -695,16 +699,18 @@ def viewProfile(request):
 			if client.probationOfficer==None or client.probationOfficer=='' or client.probation_phone==None or client.probation_phone=='':
 				probation = "N/A"
 			else:
-				probation = str(client.probationOfficer) + " " + str(client.probation_phone)
+				probation = str(client.probationOfficer) + " " + str(fetchClientPhoneDisplay(client.probation_phone))
 
 			if client.emer_contact_name==None or client.emer_contact_name=='' or client.emer_phone==None or client.emer_phone=='':
 				emergency = "N/A"
 			else:
-				emergency = str(client.emer_contact_name) + " " + str(client.emer_phone)
+				emergency = str(client.emer_contact_name) + " " + str(fetchClientPhoneDisplay(client.emer_phone))
 
 			content['emergency'] = emergency
 			content['probation'] = probation
-			content['work'] = work
+			content['phone'] = fetchClientPhoneDisplay(client.phone)
+			content['ss'] =fetchClientSSDisplay(client.ss_num)
+			content['work'] = fetchClientPhoneDisplay(client.work_phone)
 			content['gender'] = gender
 			content['client'] = client
 			content['title'] = "Client Search | Simeon Academy"

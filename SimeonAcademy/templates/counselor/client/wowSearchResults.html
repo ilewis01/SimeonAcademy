@@ -5,16 +5,252 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='body300'>
+<body class='body400' onLoad="Javascript: InitializeSuperWowResults({{json_data}});">
     <form action='' method='post' id='c_form'> {% csrf_token %}
-    	<input type='hidden' name='searches' id='searches' value=''>
-    	<input type='hidden' name='m_discharged' id='m_discharged' value=''>
-    	<input type='hidden' name='m_pending' id='m_pending' value=''>
-    	<input type='hidden' name='fullDOB' id='fullDOB' value='False'>
-        <div class='head300'>Search Results</div>
+    	<input type='hidden' name='current_page' id='current_page' value='1'>
+    	<input type='hidden' name='search_type' id='search_type' value=''>
+
+        <div class='head400'>Search Results</div>
+        <div class='nav400'>
+            <table>
+                <tr>
+                    <td>
+                        <div class='wowHeadL'>
+                            <span>{{numMatches}}</span> Results Found
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class='wowHeadC'>
+                            <a href="">Sort Descending</a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class='wowHeadR'>
+                            <div class='wowHeadRow'>
+                                <div class='wowNavBtnLeft'>&#171</i></div>
+                                <div class='wowCenterNav'>Page <span id='currentPage'>1</span> of <span id='totalPages'>{{numPages}}</span></div>
+                                <div class='wowNavBtnRight'>&#187</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- LEFT SIDE -->
+
+        <div class='body400Content'>
+            <div class='wowHalfL'>
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m1_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m1_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m1_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m1_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m1_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m1_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m2_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m2_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m2_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m2_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m2_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m2_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m3_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m3_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m3_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m3_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m3_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m3_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m4_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m4_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m4_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m4_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m4_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m4_ref'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class='wowHalfR'>
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m5_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m5_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m5_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m5_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m5_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m5_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m6_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m6_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m6_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m6_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m6_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m6_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m7_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m7_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m7_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m7_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m7_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m7_ref'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='wowQuarterHeight'>
+                    <div class='wowNumberDiv' id='m8_number'></div>
+                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m8_photo' class='wow-avatar-img'></div>
+                    <div class='wowDataDiv'>
+                        <div class='wow_rowName'>
+                            <div class='wowMainName' id='m8_name'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainAnswer' id='m8_clientID'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainAnswer' id='m8_dob'></div>
+                        </div>
+
+                        <div class='wow_row'>
+                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainAnswer' id='m8_ref'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
 
-        <div style='font-size:12px;'>
+       <!--  <div style='font-size:12px;'>
             Number of matches: {{numMatches}}
 
             <ul>
@@ -22,10 +258,10 @@
                 <li>{{m}}</li>
                 {% endfor %}
             </ul>
-        </div>
+        </div> -->
 
-        <div class='half-length-single-btn'>
-        	<button onClick='Javascript: initializeWowSearch(); return false;'>Search</button>
+        <div class='double-btn-400'>
+        	<button onClick='Javascript: initializeWowSearch(); return false;'>New Search</button>
         	<button onClick='Javascript: window.close(); return false;'>Cancel</button>
         </div>
     </form>

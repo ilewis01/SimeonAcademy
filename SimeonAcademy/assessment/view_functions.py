@@ -1294,11 +1294,110 @@ def superWowSearcher(searchDict, getFullDOB, clientList):
 				results.append(c)
 	return results
 
+def getRandomSelectNum(numInts):
+	numInts = int(numInts)
+	ss = ""
+	for i in range(numInts):
+		ss += str(random.randint(0,9))
+	return ss
+
+def PoBitches():
+	poList = []
+	poList.append('Dumb Bitch')
+	poList.append('Stupid Bitch')
+	poList.append('Crazy Bitch')
+	poList.append('Weird Bitch')
+	poList.append('Retarded Bitch')
+	poList.append('Ghetto Bitch')
+	poList.append('Fake Bitch')
+	poList.append('Fat Bitch')
+	poList.append('Ugly Bitch')
+	poList.append('Monkey Bitch')
+	return poList
+
+
+def fixCurrentClients():
+	c_list = Client.objects.all()
+
+	for c in c_list:
+		if len(c.ss_num) != 9 or c.ss_num == None:
+			c.ss_num = getRandomSelectNum(9)
+			c.save()
+
+		if len(c.phone) != 10 or c.phone == None:
+			c.phone = getRandomSelectNum(10)
+			c.save()
+
+		if len(c.emer_phone) != 10 or c.emer_phone == None:
+			c.emer_phone = getRandomSelectNum(10)
+			c.save()
+
+		if c.work_phone == None or len(c.work_phone) != 10:
+			c.work_phone = str(getRandomSelectNum(10))
+			c.save()
+
+		if len(c.probationOfficer) == 0 or c.probationOfficer == None:
+			randPro = getRandomSelectNum(1)
+			randPro = int(randPro)
+			bitches = PoBitches()
+			officer = bitches[randPro]
+			number = getRandomSelectNum(10)
+			c.probationOfficer = officer
+			c.probation_phone = number
+			c.save()
+
+		if len(c.emer_contact_name) == 0 or c.emer_contact_name == None:
+			randPro = int(getRandomSelectNum(1))
+			bitches = PoBitches()
+			officer = bitches[randPro]
+			c.emer_contact_name = officer
+			c.save()
+
+		if len(c.email) == 0:
+			c.email = 'email@email.com'
+			c.save()
+
+		c.clientID = Super_ID_generator(c.fname, c.lname, c.dob)
+		c.save()
+
+
 
 
 def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB):
 	clientList = getWowClientList(includeDischarged, includePending)
 	return superWowSearcher(searchDict, getFullDOB, clientList)
+
+def wowDateDisplay(date_object):
+	mm = int(date_object.month)
+	yy = str(date_object.year)
+	dd = str(date_object.day)
+
+	if mm == 1:
+		mm = 'January'
+	elif mm == 2:
+		mm = 'February'
+	elif mm == 3:
+		mm = 'March'
+	elif mm == 4:
+		mm = 'April'
+	elif mm == 5:
+		mm = 'May'
+	elif mm == 6:
+		mm = 'June'
+	elif mm == 7:
+		mm = 'July'
+	elif mm == 8:
+		mm = 'August'
+	elif mm == 9:
+		mm = 'September'
+	elif mm == 10:
+		mm = 'October'
+	elif mm == 11:
+		mm = 'November'
+	else:
+		mm = 'December'
+
+	return mm + ' ' + dd + ', ' + yy
 
 def breakToPages(elementList, numPerPage):
 	result = {}
@@ -1323,21 +1422,30 @@ def breakToPages(elementList, numPerPage):
 			arrayTitle = 'page_' + str(currentPage)
 			data = {}
 			data['number'] = (i + 1)
-			data['client'] = elementList[i]
+			data['fname'] = elementList[i].fname
+			data['lname'] = elementList[i].lname
+			data['clientID'] = elementList[i].clientID
+			data['id'] = elementList[i].id
+			data['dob'] = wowDateDisplay(elementList[i].dob)
+			data['ref'] = elementList[i].reason_ref.reason
+			data['photo'] = str(elementList[i].photo)
 			result[arrayTitle].append(data)
 			count = 1
 			currentPage = currentPage + 1
 		else:
 			data = {}
 			data['number'] = (i + 1)
-			data['client'] = elementList[i]
+			data['fname'] = elementList[i].fname
+			data['lname'] = elementList[i].lname
+			data['clientID'] = elementList[i].clientID
+			data['id'] = elementList[i].id
+			data['dob'] = wowDateDisplay(elementList[i].dob)
+			data['ref'] = elementList[i].reason_ref.reason
+			data['photo'] = str(elementList[i].photo)
 			result[arrayTitle].append(data)
 			count = count + 1
 
-	print "\nPAGE 1..."
-	print result['page_1']
-	print "\nPAGE 2..."
-	print result['page_2']
+	return result
 
 
 def clientSort(includeDischarge, sortBy):

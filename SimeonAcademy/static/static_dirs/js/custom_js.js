@@ -3711,6 +3711,142 @@ function setWowCheck(elementName) {
 	}
 }
 
+function getWowJsonArray(page, json_data) {
+	page == Number(page);
+	var data = null;
+
+	if (page === 1) {data = json_data.page_1;}
+	else if (page === 2) {data = json_data.page_2;}
+	else if (page === 3) {data = json_data.page_3;}
+	else if (page === 4) {data = json_data.page_4;}
+	else if (page === 5) {data = json_data.page_5;}
+	else if (page === 6) {data = json_data.page_6;}
+	else if (page === 7) {data = json_data.page_7;}
+	else if (page === 8) {data = json_data.page_8;}
+	else if (page === 9) {data = json_data.page_9;}
+	else if (page === 10) {data = json_data.page_10;}
+	else if (page === 11) {data = json_data.page_11;}
+	else if (page === 12) {data = json_data.page_12;}
+	else if (page === 13) {data = json_data.page_13;}
+	else if (page === 14) {data = json_data.page_14;}
+	else if (page === 15) {data = json_data.page_15;}
+	else if (page === 16) {data = json_data.page_16;}
+	else if (page === 17) {data = json_data.page_17;}
+	else if (page === 18) {data = json_data.page_18;}
+	else if (page === 19) {data = json_data.page_19;}
+	else if (page === 20) {data = json_data.page_20;}
+	else if (page === 21) {data = json_data.page_21;}
+	else if (page === 22) {data = json_data.page_22;}
+	else if (page === 23) {data = json_data.page_23;}
+	else if (page === 24) {data = json_data.page_24;}
+	else if (page === 25) {data = json_data.page_25;}
+	else if (page === 26) {data = json_data.page_26;}
+	else if (page === 27) {data = json_data.page_27;}
+	else if (page === 28) {data = json_data.page_28;}
+	else if (page === 29) {data = json_data.page_29;}
+	else if (page === 30) {data = json_data.page_30;}
+	else if (page === 31) {data = json_data.page_31;}
+	else if (page === 32) {data = json_data.page_32;}
+	else if (page === 33) {data = json_data.page_33;}
+	else if (page === 34) {data = json_data.page_34;}
+	else if (page === 35) {data = json_data.page_35;}
+	else if (page === 36) {data = json_data.page_36;}
+	else if (page === 37) {data = json_data.page_37;}
+	else if (page === 38) {data = json_data.page_38;}
+	else if (page === 39) {data = json_data.page_39;}
+	else if (page === 40) {data = json_data.page_40;}
+	else if (page === 41) {data = json_data.page_41;}
+	else if (page === 42) {data = json_data.page_42;}
+	else if (page === 43) {data = json_data.page_43;}
+	else if (page === 44) {data = json_data.page_44;}
+	else if (page === 45) {data = json_data.page_45;}
+	else if (page === 46) {data = json_data.page_46;}
+	else if (page === 47) {data = json_data.page_47;}
+	else if (page === 48) {data = json_data.page_48;}
+	else if (page === 49) {data = json_data.page_49;}
+	else if (page === 50) {data = json_data.page_50;}
+	else if (page === 51) {data = json_data.page_51;}
+	else if (page === 52) {data = json_data.page_52;}
+	else if (page === 53) {data = json_data.page_53;}
+	else if (page === 54) {data = json_data.page_54;}
+	else if (page === 55) {data = json_data.page_55;}
+	else if (page === 56) {data = json_data.page_56;}
+	else if (page === 57) {data = json_data.page_57;}
+	else if (page === 58) {data = json_data.page_58;}
+	else if (page === 59) {data = json_data.page_59;}
+	else if (page === 60) {data = json_data.page_60;}
+	else if (page === 61) {data = json_data.page_61;}
+	else if (page === 62) {data = json_data.page_62;}
+	else if (page === 63) {data = json_data.page_63;}
+	else if (page === 64) {data = json_data.page_64;}
+	else if (page === 65) {data = json_data.page_65;}
+	else if (page === 66) {data = json_data.page_66;}
+	else if (page === 67) {data = json_data.page_67;}
+	else if (page === 68) {data = json_data.page_68;}
+	else if (page === 69) {data = json_data.page_69;}
+	else if (page === 70) {data = json_data.page_70;}
+	else if (page === 71) {data = json_data.page_71;}
+	else if (page === 72) {data = json_data.page_72;}
+	else if (page === 73) {data = json_data.page_73;}
+	else if (page === 74) {data = json_data.page_74;}
+	else if (page === 75) {data = json_data.page_75;}
+	else if (page === 76) {data = json_data.page_76;}
+	else if (page === 77) {data = json_data.page_77;}
+	else if (page === 78) {data = json_data.page_78;}
+	else if (page === 79) {data = json_data.page_79;}
+	else if (page === 80) {data = json_data.page_80;}
+	else if (page === 81) {data = json_data.page_81;}
+	else if (page === 82) {data = json_data.page_82;}
+	else if (page === 83) {data = json_data.page_83;}
+	else if (page === 84) {data = json_data.page_84;}
+	else if (page === 85) {data = json_data.page_85;}
+	else if (page === 86) {data = json_data.page_86;}
+	else if (page === 87) {data = json_data.page_87;}
+	else if (page === 88) {data = json_data.page_88;}
+	else if (page === 89) {data = json_data.page_89;}
+	else if (page === 90) {data = json_data.page_90;}
+	else if (page === 91) {data = json_data.page_91;}
+	else if (page === 92) {data = json_data.page_92;}
+	else if (page === 93) {data = json_data.page_93;}
+	else if (page === 94) {data = json_data.page_94;}
+	else if (page === 95) {data = json_data.page_95;}
+	else if (page === 96) {data = json_data.page_96;}
+	else if (page === 97) {data = json_data.page_97;}
+	else if (page === 98) {data = json_data.page_98;}
+	else if (page === 99) {data = json_data.page_99;}
+	else if (page === 100) {data = json_data.page_100;}
+
+	return data;
+}
+
+function loadWowResults(page, json_data) {
+	var page = getWowJsonArray(page, json_data);
+	var numElements = page.length;
+	var t = '';
+
+	for (var i = 0; i < numElements; i++) {
+		var vari = String(i + 1);
+		var number_id = 'm' + vari + '_number';
+		var name_id = 'm' + vari + '_name';
+		var clientID = 'm' + vari + '_clientID';
+		var dob_id = 'm' + vari + '_dob';
+		var photo_id = 'm' + vari + '_photo';
+		var ref_id = 'm' + vari + '_ref';
+
+		grab(number_id).innerHTML = page[i]['number'];
+		grab(photo_id).src = "/static/media/" + String(page[i]['photo']);
+		grab(name_id).innerHTML = String(page[i]['lname']) + ', ' + String(page[i]['fname']);
+		grab(clientID).innerHTML = page[i]['clientID'];
+		grab(dob_id).innerHTML = page[i]['dob'];
+		grab(ref_id).innerHTML = page[i]['ref'];
+	}
+}
+
+function InitializeSuperWowResults(json_data) {
+	var page1 = json_data.page_1;
+	loadWowResults(1, json_data);
+}
+
 function initializeWowSearch() {
 	var searchVals 			= '';
 	var fname 				= grab('fname').value;
@@ -3746,6 +3882,13 @@ function initializeWowSearch() {
 	form.action = "/wowSearchResults/";
 	grab('searches').value = searchVals;
 	grab('c_form').submit();
+
+	var w = 800, h = 700;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
 }
 
 function buildDropDayList(numDays) {
