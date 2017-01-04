@@ -3917,8 +3917,6 @@ function loadWowResults(page, json_data) {
 	var page = getWowJsonArray(page, json_data);
 	var numElements = page.length;
 
-	clearUnusedWowFields(numElements, 8);
-
 	for (var i = 0; i < numElements; i++) {
 		var vari = String(i + 1);
 		var number_id = 'm' + vari + '_number';
@@ -3937,6 +3935,8 @@ function loadWowResults(page, json_data) {
 		grab(ref_id).innerHTML = page[i]['ref'];
 		grab(aTag).href = "Javascript: wowSelectSearchItem(\"" + String(page[i]['id']) + "\");";
 	}
+	
+	clearUnusedWowFields(numElements, 8);
 	setWowLabels(numElements);
 }
 

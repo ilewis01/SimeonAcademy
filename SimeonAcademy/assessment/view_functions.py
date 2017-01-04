@@ -1131,7 +1131,7 @@ def universal_client_match(request, client):
 
 def getWowClientList(includeDischarged, includePending):
 	result = []
-	clients = Client.objects.all().order_by('lname')
+	clients = Client.objects.all().order_by('lname', 'fname')
 
 	if includeDischarged == True and includePending == True:
 		for c1 in clients:
