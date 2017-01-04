@@ -3819,10 +3819,43 @@ function getWowJsonArray(page, json_data) {
 	return data;
 }
 
+function clearUnusedWowFields(numResults, numPerPage) {
+	startIndex = Number(numResults);
+	numPerPage = Number(numPerPage);
+
+	if (startIndex < numPerPage) {
+		for (var i = startIndex; i < numPerPage; i++) {
+			var vari = String(i + 1);
+			var number_id = 'm' + vari + '_number';
+			var name_id = 'm' + vari + '_name';
+			var clientID = 'm' + vari + '_clientID';
+			var dob_id = 'm' + vari + '_dob';
+			var photo_id = 'm' + vari + '_photo';
+			var ref_id = 'm' + vari + '_ref';
+			var l1 = 'clientLab' + vari;
+			var l2 = 'dobLab' + vari;
+			var l3 = 'refLab' + vari;
+			var p = 'p' + vari;
+
+			grab(number_id).innerHTML = '';
+			grab(photo_id).src = '';
+			grab(name_id).innerHTML = '';
+			grab(clientID).innerHTML = '';
+			grab(dob_id).innerHTML = '';
+			grab(ref_id).innerHTML = '';
+			grab(l1).innerHTML = '';
+			grab(l2).innerHTML = '';
+			grab(l3).innerHTML = '';
+			grab(p).innerHTML = '';
+		}
+	}
+}
+
 function loadWowResults(page, json_data) {
 	var page = getWowJsonArray(page, json_data);
 	var numElements = page.length;
-	var t = '';
+
+	clearUnusedWowFields(numElements, 8);
 
 	for (var i = 0; i < numElements; i++) {
 		var vari = String(i + 1);
@@ -3840,11 +3873,80 @@ function loadWowResults(page, json_data) {
 		grab(dob_id).innerHTML = page[i]['dob'];
 		grab(ref_id).innerHTML = page[i]['ref'];
 	}
+	setWowLabels(numElements);
 }
+
+function clearWowLabels() {
+	for (var i = 1; i <= 8; i++) {
+		var index = String(i);
+		var l1 = 'clientLab' + index;
+		var l2 = 'dobLab' + index;
+		var l3 = 'refLab' + index;
+
+		grab(l1).innerHTML = "";
+		grab(l2).innerHTML = "";
+		grab(l3).innerHTML = "";
+	}
+}
+
+function setWowLabels(numResults) {
+	numResults = Number(numResults);
+
+	for (var i = 1; i <= numResults; i++) {
+		var index = String(i);
+		var l1 = 'clientLab' + index;
+		var l2 = 'dobLab' + index;
+		var l3 = 'refLab' + index;
+
+		grab(l1).innerHTML = "Client ID:";
+		grab(l2).innerHTML = "Date of Birth:";
+		grab(l3).innerHTML = "Reason for Referral:";
+	}
+}
+
+function buildTheWowImageDivs() {
+	var html1 = "<img src=\"\" alt=\"client_img\" id=\"";
+	var html2 = "\" class=\"wow-avatar-img\">";
+
+	grab('p2').innerHTML = html1 + 'm2_photo' + html2;
+	grab('p3').innerHTML = html1 + 'm3_photo' + html2;
+	grab('p4').innerHTML = html1 + 'm4_photo' + html2;
+	grab('p5').innerHTML = html1 + 'm5_photo' + html2;
+	grab('p6').innerHTML = html1 + 'm6_photo' + html2;
+	grab('p7').innerHTML = html1 + 'm7_photo' + html2;
+	grab('p8').innerHTML = html1 + 'm8_photo' + html2;
+	setWowLabels(8);
+}
+
+function prevWowPageResults(json_data) {
+	var page = grab('current_page');
+
+	if (Number(page.value) > 1) {
+		buildTheWowImageDivs();
+		var newPage = Number(page.value) - 1;
+		page.value = newPage;
+		loadWowResults(newPage, json_data);
+		grab('currentPageDisp').innerHTML = newPage;
+	}
+}
+
+function nextWowPageResults(json_data) {
+	var numPages = Number(grab('m_numPages').value);
+	var page = grab('current_page');
+
+	if (Number(page.value) < numPages) {
+		var newPage = Number(page.value) + 1;
+		page.value = newPage;
+		loadWowResults(newPage, json_data);
+		grab('currentPageDisp').innerHTML = newPage;
+	}
+}
+
 
 function InitializeSuperWowResults(json_data) {
 	var page1 = json_data.page_1;
 	loadWowResults(1, json_data);
+	grab('currentPageDisp').innerHTML = 1;
 }
 
 function initializeWowSearch() {

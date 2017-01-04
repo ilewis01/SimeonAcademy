@@ -3,11 +3,13 @@
 <head>
 	<title>{{title}}</title>
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body class='body400' onLoad="Javascript: InitializeSuperWowResults({{json_data}});">
     <form action='' method='post' id='c_form'> {% csrf_token %}
     	<input type='hidden' name='current_page' id='current_page' value='1'>
+        <input type='hidden' name='m_numPages' id='m_numPages' value='{{numPages}}'>
     	<input type='hidden' name='search_type' id='search_type' value=''>
 
         <div class='head400'>Search Results</div>
@@ -16,22 +18,36 @@
                 <tr>
                     <td>
                         <div class='wowHeadL'>
-                            <span>{{numMatches}}</span> Results Found
+                            <div class='wowHeadRow'>
+                                <span>{{numMatches}}</span> Results Found
+                            </div>
                         </div>
                     </td>
 
                     <td>
                         <div class='wowHeadC'>
-                            <a href="">Sort Descending</a>
+                            <div class='wowHeadRow' id='testing1'>
+                                <a href="">Sort Descending</a>
+                            </div>
                         </div>
                     </td>
 
                     <td>
                         <div class='wowHeadR'>
                             <div class='wowHeadRow'>
-                                <div class='wowNavBtnLeft'>&#171</i></div>
-                                <div class='wowCenterNav'>Page <span id='currentPage'>1</span> of <span id='totalPages'>{{numPages}}</span></div>
-                                <div class='wowNavBtnRight'>&#187</div>
+                                <a href="Javascript: prevWowPageResults({{json_data}});" id='aTag1'>
+                                    <div class='wowNavBtnLeft' id='aTag1'>
+                                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+
+                                <div class='wowCenterNav'>Page <b id='currentPageDisp'></b> of <b id='totalPages'>{{numPages}}</b></div>
+
+                                <a href="Javascript: nextWowPageResults({{json_data}});">
+                                    <div class='wowNavBtnRight' >
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </td>
@@ -45,24 +61,24 @@
             <div class='wowHalfL'>
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m1_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m1_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv' id='p1'><img src="" alt="client_img" id='m1_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m1_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel' id='clientLab1'></div>
                             <div class='wowMainAnswer' id='m1_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab1'></div>
                             <div class='wowMainAnswer' id='m1_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab1'></div>
                             <div class='wowMainAnswer' id='m1_ref'></div>
                         </div>
                     </div>
@@ -70,24 +86,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m2_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m2_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv' id='p2'><img src="" alt="client_img" id='m2_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m2_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel' id='clientLab2'></div>
                             <div class='wowMainAnswer' id='m2_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab2'></div>
                             <div class='wowMainAnswer' id='m2_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab2'></div>
                             <div class='wowMainAnswer' id='m2_ref'></div>
                         </div>
                     </div>
@@ -95,24 +111,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m3_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m3_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv' id='p3'><img src="" alt="client_img" id='m3_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m3_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab3'></div>
                             <div class='wowMainAnswer' id='m3_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab3'></div>
                             <div class='wowMainAnswer' id='m3_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab3'></div>
                             <div class='wowMainAnswer' id='m3_ref'></div>
                         </div>
                     </div>
@@ -120,24 +136,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m4_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m4_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv' id='p4'><img src="" alt="client_img" id='m4_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m4_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab4'></div>
                             <div class='wowMainAnswer' id='m4_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab4'></div>
                             <div class='wowMainAnswer' id='m4_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab4'></div>
                             <div class='wowMainAnswer' id='m4_ref'></div>
                         </div>
                     </div>
@@ -149,24 +165,24 @@
             <div class='wowHalfR'>
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m5_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m5_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv'  id='p5'><img src="" alt="client_img" id='m5_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m5_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab5'></div>
                             <div class='wowMainAnswer' id='m5_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab5'></div>
                             <div class='wowMainAnswer' id='m5_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab5'></div>
                             <div class='wowMainAnswer' id='m5_ref'></div>
                         </div>
                     </div>
@@ -174,24 +190,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m6_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m6_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv'  id='p6'><img src="" alt="client_img" id='m6_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m6_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab6'></div>
                             <div class='wowMainAnswer' id='m6_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab6'></div>
                             <div class='wowMainAnswer' id='m6_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab6'></div>
                             <div class='wowMainAnswer' id='m6_ref'></div>
                         </div>
                     </div>
@@ -199,24 +215,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m7_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m7_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv'  id='p7'><img src="" alt="client_img" id='m7_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m7_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab7'></div>
                             <div class='wowMainAnswer' id='m7_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab7'></div>
                             <div class='wowMainAnswer' id='m7_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab7'></div>
                             <div class='wowMainAnswer' id='m7_ref'></div>
                         </div>
                     </div>
@@ -224,24 +240,24 @@
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m8_number'></div>
-                    <div class='wowPhotoDiv'><img src="" alt="client_img" id='m8_photo' class='wow-avatar-img'></div>
+                    <div class='wowPhotoDiv'  id='p8'><img src="" alt="client_img" id='m8_photo' class='wow-avatar-img'></div>
                     <div class='wowDataDiv'>
                         <div class='wow_rowName'>
                             <div class='wowMainName' id='m8_name'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Client ID:</div>
+                            <div class='wowMainLabel'  id='clientLab8'></div>
                             <div class='wowMainAnswer' id='m8_clientID'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Date of Birth:</div>
+                            <div class='wowMainLabel' id='dobLab8'></div>
                             <div class='wowMainAnswer' id='m8_dob'></div>
                         </div>
 
                         <div class='wow_row'>
-                            <div class='wowMainLabel'>Reason for Referral:</div>
+                            <div class='wowMainLabel' id='refLab8'></div>
                             <div class='wowMainAnswer' id='m8_ref'></div>
                         </div>
                     </div>

@@ -7260,6 +7260,11 @@ button:hover {
 	float:left;
 	margin-left: 5px;
 	margin-right: 5px;
+	font-size: 12px;
+}
+
+.centerWowIcon {
+	margin-bottom: 10px;
 }
 
 .wowNavBtnLeft {
@@ -7272,6 +7277,11 @@ button:hover {
 	background-size: 100%;
 	float:left;
 	text-align: center;
+}
+
+.SuperblanketFixer {
+	width:500px;
+	border: 2px solid black;
 }
 
 .wowNavBtnRight {
