@@ -7187,12 +7187,21 @@ button:hover {
 	text-align: center;
 }
 
+.wowQuarterHeight a {
+	color:black;
+}
+
+.wowQuarterHeight a:hover{
+	color:#77b4c8;
+}
+
 .wowNumberDiv {
 	width:5%;
 	height:100%;
 	text-align: center;
 	float:left;
 	font-size: 12px;
+	line-height: 60px;
 }
 
 .wowPhotoDiv {
@@ -7223,8 +7232,11 @@ button:hover {
 	height:100%;
 	font-size: 16px;
 	font-weight: bold;
+	font-style: italic;
 	text-align: left;
 	float: left;
+	color:#824951;
+	/*color:#a07628;*/
 }
 
 .wowMainLabel {
@@ -7249,6 +7261,9 @@ button:hover {
 	width:80%;
 	border: 2px solid gray;
 	border-radius: 3px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .wowHeadRow {
@@ -7261,6 +7276,20 @@ button:hover {
 	margin-left: 5px;
 	margin-right: 5px;
 	font-size: 12px;
+}
+
+.wowSuperVerticalAlign {
+	height:70px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.wowSuperVerticalAlign1 {
+	/*height:20px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);*/
 }
 
 .centerWowIcon {

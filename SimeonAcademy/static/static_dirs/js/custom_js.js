@@ -3674,6 +3674,7 @@ function newClientAborted() {
 }
 
 function searchLikeWow() {
+	getPopParent('searchType').value = grab('searchType').value;
 	var form = grab('c_form');
 	form.action = '/wowSearch/';
 	form.submit();
@@ -3851,9 +3852,20 @@ function clearUnusedWowFields(numResults, numPerPage) {
 	}
 }
 
+function reversePageElements(json_data) {
+	var result = [];
+	//you must get all of the json data and resort it then reload the page
+	return result;
+}
+
 function loadWowResults(page, json_data) {
 	var page = getWowJsonArray(page, json_data);
 	var numElements = page.length;
+	var sorted = String(grab('sorted').value);
+
+	if (sorted === 'DEC') {
+		// page = reversePageElements(json_data);
+	}
 
 	clearUnusedWowFields(numElements, 8);
 
@@ -3865,13 +3877,15 @@ function loadWowResults(page, json_data) {
 		var dob_id = 'm' + vari + '_dob';
 		var photo_id = 'm' + vari + '_photo';
 		var ref_id = 'm' + vari + '_ref';
+		var aTag = 'a' + vari;
 
-		grab(number_id).innerHTML = page[i]['number'];
+		// grab(number_id).innerHTML = String(page[i]['number']) + '.';
 		grab(photo_id).src = "/static/media/" + String(page[i]['photo']);
 		grab(name_id).innerHTML = String(page[i]['lname']) + ', ' + String(page[i]['fname']);
 		grab(clientID).innerHTML = page[i]['clientID'];
 		grab(dob_id).innerHTML = page[i]['dob'];
 		grab(ref_id).innerHTML = page[i]['ref'];
+		grab(aTag).href = "Javascript: wowSelectSearchItem(\"" + String(page[i]['id']) + "\");";
 	}
 	setWowLabels(numElements);
 }
@@ -3947,6 +3961,53 @@ function InitializeSuperWowResults(json_data) {
 	var page1 = json_data.page_1;
 	loadWowResults(1, json_data);
 	grab('currentPageDisp').innerHTML = 1;
+}
+
+function wowSort(json_data) {
+	var sorted = grab('sorted');
+
+	if (String(sorted.value) === "ASC") {
+		grab('sortOption').innerHTML = 'Sort Ascending'
+		sorted.value = "DEC";
+	}
+	else if (String(sorted.value) === "DEC") {
+		grab('sortOption').innerHTML = 'Sort Descending'
+		sorted.value = "ASC";
+	}
+
+	// loadWowResults(1, json_data);
+}
+
+function opacitizeImg(vari) {
+	vari = String(vari);
+	var imgName = 'm' + vari + '_photo';
+	var titleName = 'm' + vari + '_name';
+	var img = grab(imgName);
+	var title = grab(titleName);
+
+	img.style.opacity = '0.5';
+	title.style.color = '#505cd8';
+}
+
+function depacitizeImg(vari) {
+	vari = String(vari);
+	var imgName = 'm' + vari + '_photo';
+	var titleName = 'm' + vari + '_name';
+	var img = grab(imgName);
+	var title = grab(titleName);
+
+	img.style.opacity = '1.0';
+	title.style.color = '#824951';
+}
+
+function wowSelectSearchItem(clientID) {
+	getPopParent('c2_id').value = clientID;
+	getPopParent('c2Type').value = 'existing';
+	var searchType = getPopParent('wowSelectSearchItem');
+	var form = getPopParent('c_form');
+	form.action = '/coupleSession/';
+	form.submit();
+	window.close();
 }
 
 function initializeWowSearch() {

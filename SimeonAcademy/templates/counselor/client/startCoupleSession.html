@@ -8,10 +8,7 @@
 <body class='body300'>
     <form action='' method='post' id='c_form'> {% csrf_token %}
         <div class='head300'>Couple's Counseling</div>
-        <input type='hidden' name='cSearch' id='cSearch' value=''>
-        <input type='hidden' name='client_id' id='client_id' value=''>
-        <input type='hidden' name='session_id' id='session_id' value=''>
-        <input type='hidden' name='hasExisting' id='hasExisting' value=''>
+        <input type='hidden' name='searchType' id='searchType' value='{{searchType}}'>
 
         <div style='height:20px;'></div>
 

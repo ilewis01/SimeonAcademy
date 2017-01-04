@@ -11,6 +11,7 @@
     	<input type='hidden' name='current_page' id='current_page' value='1'>
         <input type='hidden' name='m_numPages' id='m_numPages' value='{{numPages}}'>
     	<input type='hidden' name='search_type' id='search_type' value=''>
+        <input type='hidden' name='sorted' id='sorted' value='ASC'>
 
         <div class='head400'>Search Results</div>
         <div class='nav400'>
@@ -19,7 +20,7 @@
                     <td>
                         <div class='wowHeadL'>
                             <div class='wowHeadRow'>
-                                <span>{{numMatches}}</span> Results Found
+                                Returned <b>{{numMatches}}</b> {{phrase1}}
                             </div>
                         </div>
                     </td>
@@ -27,7 +28,7 @@
                     <td>
                         <div class='wowHeadC'>
                             <div class='wowHeadRow' id='testing1'>
-                                <a href="">Sort Descending</a>
+                                <a href="Javascript: wowSort({{json_data}});" id='sortOption'>Sort Descending</a>
                             </div>
                         </div>
                     </td>
@@ -61,102 +62,118 @@
             <div class='wowHalfL'>
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m1_number'></div>
-                    <div class='wowPhotoDiv' id='p1'><img src="" alt="client_img" id='m1_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m1_name'></div>
-                        </div>
+                    <a href="" id='a1' onmouseover="Javascript: opacitizeImg('1');" onmouseout="Javascript: depacitizeImg('1');">
+                        <div class='wowPhotoDiv' id='p1'><img src="" alt="client_img" id='m1_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m1_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='clientLab1'></div>
-                            <div class='wowMainAnswer' id='m1_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='clientLab1'></div>
+                                    <div class='wowMainAnswer' id='m1_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab1'></div>
-                            <div class='wowMainAnswer' id='m1_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab1'></div>
+                                    <div class='wowMainAnswer' id='m1_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab1'></div>
-                            <div class='wowMainAnswer' id='m1_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab1'></div>
+                                    <div class='wowMainAnswer' id='m1_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m2_number'></div>
-                    <div class='wowPhotoDiv' id='p2'><img src="" alt="client_img" id='m2_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m2_name'></div>
-                        </div>
+                    <a href="" id='a2' onmouseover="Javascript: opacitizeImg('2');" onmouseout="Javascript: depacitizeImg('2');">
+                        <div class='wowPhotoDiv' id='p2'><img src="" alt="client_img" id='m2_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m2_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='clientLab2'></div>
-                            <div class='wowMainAnswer' id='m2_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='clientLab2'></div>
+                                    <div class='wowMainAnswer' id='m2_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab2'></div>
-                            <div class='wowMainAnswer' id='m2_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab2'></div>
+                                    <div class='wowMainAnswer' id='m2_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab2'></div>
-                            <div class='wowMainAnswer' id='m2_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab2'></div>
+                                    <div class='wowMainAnswer' id='m2_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m3_number'></div>
-                    <div class='wowPhotoDiv' id='p3'><img src="" alt="client_img" id='m3_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m3_name'></div>
-                        </div>
+                    <a href="" id='a3' onmouseover="Javascript: opacitizeImg('3');" onmouseout="Javascript: depacitizeImg('3');">
+                        <div class='wowPhotoDiv' id='p3'><img src="" alt="client_img" id='m3_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m3_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab3'></div>
-                            <div class='wowMainAnswer' id='m3_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab3'></div>
+                                    <div class='wowMainAnswer' id='m3_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab3'></div>
-                            <div class='wowMainAnswer' id='m3_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab3'></div>
+                                    <div class='wowMainAnswer' id='m3_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab3'></div>
-                            <div class='wowMainAnswer' id='m3_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab3'></div>
+                                    <div class='wowMainAnswer' id='m3_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
                     <div class='wowNumberDiv' id='m4_number'></div>
-                    <div class='wowPhotoDiv' id='p4'><img src="" alt="client_img" id='m4_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m4_name'></div>
-                        </div>
+                    <a href="" id='a4' onmouseover="Javascript: opacitizeImg('4');" onmouseout="Javascript: depacitizeImg('4');">
+                        <div class='wowPhotoDiv' id='p4'><img src="" alt="client_img" id='m4_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m4_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab4'></div>
-                            <div class='wowMainAnswer' id='m4_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab4'></div>
+                                    <div class='wowMainAnswer' id='m4_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab4'></div>
-                            <div class='wowMainAnswer' id='m4_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab4'></div>
+                                    <div class='wowMainAnswer' id='m4_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab4'></div>
-                            <div class='wowMainAnswer' id='m4_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab4'></div>
+                                    <div class='wowMainAnswer' id='m4_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -164,103 +181,119 @@
 
             <div class='wowHalfR'>
                 <div class='wowQuarterHeight'>
-                    <div class='wowNumberDiv' id='m5_number'></div>
-                    <div class='wowPhotoDiv'  id='p5'><img src="" alt="client_img" id='m5_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m5_name'></div>
-                        </div>
+                    <div class='wowSuperVerticalAlign1'><div class='wowNumberDiv' id='m5_number'></div></div>
+                    <a href=""  id='a5' onmouseover="Javascript: opacitizeImg('5');" onmouseout="Javascript: depacitizeImg('5');">
+                        <div class='wowPhotoDiv'  id='p5'><img src="" alt="client_img" id='m5_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m5_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab5'></div>
-                            <div class='wowMainAnswer' id='m5_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab5'></div>
+                                    <div class='wowMainAnswer' id='m5_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab5'></div>
-                            <div class='wowMainAnswer' id='m5_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab5'></div>
+                                    <div class='wowMainAnswer' id='m5_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab5'></div>
-                            <div class='wowMainAnswer' id='m5_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab5'></div>
+                                    <div class='wowMainAnswer' id='m5_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
-                    <div class='wowNumberDiv' id='m6_number'></div>
-                    <div class='wowPhotoDiv'  id='p6'><img src="" alt="client_img" id='m6_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m6_name'></div>
-                        </div>
+                    <div class='wowSuperVerticalAlign1'><div class='wowNumberDiv' id='m6_number'></div></div>
+                    <a href=""  id='a6' onmouseover="Javascript: opacitizeImg('6');" onmouseout="Javascript: depacitizeImg('6');">
+                        <div class='wowPhotoDiv'  id='p6'><img src="" alt="client_img" id='m6_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m6_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab6'></div>
-                            <div class='wowMainAnswer' id='m6_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab6'></div>
+                                    <div class='wowMainAnswer' id='m6_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab6'></div>
-                            <div class='wowMainAnswer' id='m6_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab6'></div>
+                                    <div class='wowMainAnswer' id='m6_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab6'></div>
-                            <div class='wowMainAnswer' id='m6_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab6'></div>
+                                    <div class='wowMainAnswer' id='m6_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
-                    <div class='wowNumberDiv' id='m7_number'></div>
-                    <div class='wowPhotoDiv'  id='p7'><img src="" alt="client_img" id='m7_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m7_name'></div>
-                        </div>
+                    <div class='wowSuperVerticalAlign1'><div class='wowNumberDiv' id='m7_number'></div></div>
+                    <a href="" id='a7' onmouseover="Javascript: opacitizeImg('7');" onmouseout="Javascript: depacitizeImg('7');">
+                        <div class='wowPhotoDiv'  id='p7'><img src="" alt="client_img" id='m7_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m7_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab7'></div>
-                            <div class='wowMainAnswer' id='m7_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab7'></div>
+                                    <div class='wowMainAnswer' id='m7_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab7'></div>
-                            <div class='wowMainAnswer' id='m7_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab7'></div>
+                                    <div class='wowMainAnswer' id='m7_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab7'></div>
-                            <div class='wowMainAnswer' id='m7_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab7'></div>
+                                    <div class='wowMainAnswer' id='m7_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class='wowQuarterHeight'>
-                    <div class='wowNumberDiv' id='m8_number'></div>
-                    <div class='wowPhotoDiv'  id='p8'><img src="" alt="client_img" id='m8_photo' class='wow-avatar-img'></div>
-                    <div class='wowDataDiv'>
-                        <div class='wow_rowName'>
-                            <div class='wowMainName' id='m8_name'></div>
-                        </div>
+                    <div class='wowSuperVerticalAlign1'><div class='wowNumberDiv' id='m8_number'></div></div>
+                    <a href=""  id='a8' onmouseover="Javascript: opacitizeImg('8');" onmouseout="Javascript: depacitizeImg('8');">
+                        <div class='wowPhotoDiv'  id='p8'><img src="" alt="client_img" id='m8_photo' class='wow-avatar-img'></div>
+                        <div class='wowDataDiv'>
+                            <div class='wowSuperVerticalAlign'>
+                                <div class='wow_rowName'>
+                                    <div class='wowMainName' id='m8_name'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel'  id='clientLab8'></div>
-                            <div class='wowMainAnswer' id='m8_clientID'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel'  id='clientLab8'></div>
+                                    <div class='wowMainAnswer' id='m8_clientID'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='dobLab8'></div>
-                            <div class='wowMainAnswer' id='m8_dob'></div>
-                        </div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='dobLab8'></div>
+                                    <div class='wowMainAnswer' id='m8_dob'></div>
+                                </div>
 
-                        <div class='wow_row'>
-                            <div class='wowMainLabel' id='refLab8'></div>
-                            <div class='wowMainAnswer' id='m8_ref'></div>
+                                <div class='wow_row'>
+                                    <div class='wowMainLabel' id='refLab8'></div>
+                                    <div class='wowMainAnswer' id='m8_ref'></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

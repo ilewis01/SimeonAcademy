@@ -550,6 +550,7 @@ def wowSearchResults(request):
 		content['user'] = user
 		track = getTrack(user)
 		quickTrack('Search', track)
+		phrase1 = None
 
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -650,10 +651,17 @@ def wowSearchResults(request):
 			matches = wowClientMatch(data, discharged, pending, getFullDOB)
 			pages = breakToPages(matches, 8)
 			json_data = json.dumps(pages)
+			numMatches = len(matches)
 
+			if numMatches == 1:
+				phrase1 = 'Result'
+			else:
+				phrase1 = 'Results'
+
+			content['phrase1'] = phrase1
 			content['json_data'] = json_data
 			content['numPages'] = len(pages)
-			content['numMatches'] = len(matches)
+			content['numMatches'] = numMatches
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearchResults.html', content)
 
@@ -1166,6 +1174,7 @@ def chooseNewPair(request):
 			return render_to_response('global/restricted.html')
 
 		else:
+			content['searchType'] = 'couple'
 			content['title'] = "New Note | Simeon Academy"
 			return render_to_response('counselor/client/startCoupleSession.html', content)
 
