@@ -1969,12 +1969,12 @@ def wowSSNumberDisplayConverterHidden(ss):
 	ss = str(ss)
 
 	if len(ss) == 9:
-		result += 'x'
-		result += 'x'
-		result += 'x'
+		result += 'X'
+		result += 'X'
+		result += 'X'
 		result += '-'
-		result += 'x'
-		result += 'x'
+		result += 'X'
+		result += 'X'
 		result += '-'
 		result += ss[5]
 		result += ss[6]

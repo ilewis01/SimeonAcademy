@@ -4129,6 +4129,22 @@ function buildDropDayList(numDays) {
 	}
 }
 
+function addCoupleNote() {
+
+}
+
+function couple_to_optionsSTUFF() {
+	var form = grab('c_form');
+	form.action = "/clientOptions/";
+	form.submit();
+}
+
+function exit_to_home_CoupleSession() {
+	var form = grab('c_form');
+	form.action = "/adminHome/";
+	form.submit();
+}
+
 function populateDropDownDay(sType) {
 	sType = String(sType);
 
