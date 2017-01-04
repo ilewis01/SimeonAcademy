@@ -1154,6 +1154,31 @@ def getWowClientList(includeDischarged, includePending):
 
 	return result
 
+def getWowClientListFname(includeDischarged, includePending):
+	result = []
+	clients = Client.objects.all().order_by('fname', 'lname')
+
+	if includeDischarged == True and includePending == True:
+		for c1 in clients:
+			result.append(c1)
+
+	elif includeDischarged == True and includePending == False:
+		for c2 in clients:
+			if c2.isPending != True:
+				result.append(c2)
+
+	elif includeDischarged == False and includePending == True:
+		for c3 in clients:
+			if c3.isDischarged != True:
+				result.append(c3)
+
+	elif includeDischarged == False and includePending == False:
+		for c4 in clients:
+			if c4.isDischarged != True and c4.isPending != True:
+				result.append(c4)
+
+	return result
+
 def wowClearWhiteSpace(value):
 	value = str(value)
 	result = ''
@@ -1360,7 +1385,9 @@ def fixCurrentClients():
 		c.clientID = Super_ID_generator(c.fname, c.lname, c.dob)
 		c.save()
 
-
+def wowClientMatchFname(searchDict, includeDischarged, includePending, getFullDOB):
+	clientList = getWowClientListFname(includeDischarged, includePending)
+	return superWowSearcher(searchDict, getFullDOB, clientList)
 
 
 def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB):
@@ -1904,6 +1931,87 @@ def getClientByName(fname, lname):
 #****************************************************** SESSION FUNCTIONS *******************************************************#
 #--------------------------------------------------------------------------------------------------------------------------------#
 ##################################################################################################################################
+
+def wowPhoneNumberDisplayConverter(phone):
+	result = ''
+	phone = str(phone)
+
+	if len(phone) == 10:
+		result += ("(" + phone[0] + phone[1] + phone[2] + " ) ")
+		result += (phone[3] + phone[4] + phone[5] + "-")
+		result += phone[6]
+		result += phone[7]
+		result += phone[8]
+		result += phone[9]
+	return result
+
+def wowSSNumberDisplayConverter(ss):
+	result = ''
+	ss = str(ss)
+
+	if len(ss) == 9:
+		result += ss[0]
+		result += ss[1]
+		result += ss[2]
+		result += '-'
+		result += ss[3]
+		result += ss[4]
+		result += '-'
+		result += ss[5]
+		result += ss[6]
+		result += ss[7]
+		result += ss[8]
+
+	return result
+
+def wowSSNumberDisplayConverterHidden(ss):
+	result = ''
+	ss = str(ss)
+
+	if len(ss) == 9:
+		result += 'x'
+		result += 'x'
+		result += 'x'
+		result += '-'
+		result += 'x'
+		result += 'x'
+		result += '-'
+		result += ss[5]
+		result += ss[6]
+		result += ss[7]
+		result += ss[8]
+
+	return result
+
+def superCoupleStarter(c1_clientID, c2_clientID):
+	proceed = True
+	result = {}
+	couple_list = Couple.objects.all()
+	c1_clientID = str(c1_clientID)
+	c2_clientID = str(c2_clientID)
+
+	if len(couple_list) == 0:
+		newCouple = Couple(id1=c1_clientID, id2=c2_clientID)
+		newCouple.save()
+		result['couple'] = newCouple
+		result['new'] = True
+		proceed = False
+
+	if proceed == True:
+		for c in couple_list:
+			if (str(c.id1)==c1_clientID or str(c.id2)==c1_clientID) and (str(c.id1)==c2_clientID or str(c.id2)==c2_clientID):
+				result['couple'] = c
+				result['new'] = False
+				proceed = False
+				break
+
+	if proceed == True:
+		newCouple = Couple(id1=c1_clientID, id2=c2_clientID)
+		newCouple.save()
+		result['couple'] = newCouple
+		result['new'] = True
+
+	return result
 
 def sessionEqual(s1, s2):
 	isEqual = False

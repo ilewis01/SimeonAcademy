@@ -3852,6 +3852,27 @@ function clearUnusedWowFields(numResults, numPerPage) {
 	}
 }
 
+function wowNameSort() {
+	var j_data = grab('dataList');
+	var aTag1 = grab('aTag1');
+	var aTag2 = grab('aTag2');
+	var sortOption = grab('sortOption');
+	var sortOption2 = grab('sortOption2');
+
+	if (String(j_data.value) === 'json_data') {
+		j_data.value = 'json_fname';
+		aTag1.href = "Javascript: prevWowPageResults({{json_fname}});";
+		aTag2.href = "Javascript: nextWowPageResults({{json_fname}});";
+		sortOption.href = "Javascript: wowSort({{json_fname}});";
+	}
+	else if (String(j_data.value) === 'json_fname') {
+		j_data.value = 'json_data';
+		aTag1.href = "Javascript: prevWowPageResults({{json_data}});";
+		aTag2.href = "Javascript: nextWowPageResults({{json_data}});";
+		sortOption.href = "Javascript: wowSort({{json_data}});";
+	}
+}
+
 function wowSort(json_data) {
 	var sorted = grab('sorted');
 	var currentPage = Number(grab('current_page').value);
@@ -3935,7 +3956,7 @@ function loadWowResults(page, json_data) {
 		grab(ref_id).innerHTML = page[i]['ref'];
 		grab(aTag).href = "Javascript: wowSelectSearchItem(\"" + String(page[i]['id']) + "\");";
 	}
-	
+
 	clearUnusedWowFields(numElements, 8);
 	setWowLabels(numElements);
 }
@@ -4008,7 +4029,6 @@ function nextWowPageResults(json_data) {
 
 
 function InitializeSuperWowResults(json_data) {
-	var page1 = json_data.page_1;
 	loadWowResults(1, json_data);
 	grab('currentPageDisp').innerHTML = 1;
 }

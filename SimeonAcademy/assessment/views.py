@@ -48,7 +48,9 @@ getRefReasons, getOrderedRefIndex, updateClientAccount, snagYearIndex, decodeDat
 fetchClientUpdatedFields, fetchCalendarData, decodeCalendarData, newWorkSchedule, \
 get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple, \
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
-wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients
+wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
+superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
+wowSSNumberDisplayConverterHidden
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -649,8 +651,11 @@ def wowSearchResults(request):
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
 			matches = wowClientMatch(data, discharged, pending, getFullDOB)
+			matchFname = wowClientMatchFname(data, discharged, pending, getFullDOB)
 			pages = breakToPages(matches, 8)
+			pagesFname = breakToPages(matchFname, 8)
 			json_data = json.dumps(pages)
+			json_fname = json.dumps(pagesFname)
 			numMatches = len(matches)
 
 			if numMatches == 1:
@@ -660,6 +665,7 @@ def wowSearchResults(request):
 
 			content['phrase1'] = phrase1
 			content['json_data'] = json_data
+			content['json_fname'] = json_fname
 			content['numPages'] = len(pages)
 			content['numMatches'] = numMatches
 			content['title'] = "Client Search | Simeon Academy"
@@ -1212,11 +1218,15 @@ def coupleSession(request):
 				c2_id = track.c2_id
 
 			c2 = Client.objects.get(id=c2_id)
+			couple = superCoupleStarter(c1.clientID, c2.clientID)
 			couple = Couple(id1=c1.clientID, id2=c2.clientID)
-			couple.save()
 			content['c1'] = c1
 			content['c2'] = c2
-			content['title'] = "New Note | Simeon Academy"
+			content['c1phone'] 	= wowPhoneNumberDisplayConverter(c1.phone)
+			content['c2phone'] 	= wowPhoneNumberDisplayConverter(c2.phone)
+			content['c1ss'] 	= wowSSNumberDisplayConverterHidden(c1.ss_num)
+			content['c2ss'] 	= wowSSNumberDisplayConverterHidden(c2.ss_num)
+			content['title'] 	= "New Note | Simeon Academy"
 			return render_to_response('counselor/client/coupleSession.html', content)
 
 @login_required(login_url='/index')

@@ -13,6 +13,8 @@
         <input type='hidden' name='m_numMatches' id='m_numMatches' value='{{numMatches}}'>
     	<input type='hidden' name='search_type' id='search_type' value=''>
         <input type='hidden' name='sorted' id='sorted' value='ASC'>
+        <input type='hidden' name='dataList' id='dataList' value='json_data'>
+        <input type='hidden' name='useFname' id='useFname' value='true'>
 
         <div class='head400'>Search Results</div>
         <div class='nav400'>
@@ -29,6 +31,7 @@
                     <td>
                         <div class='wowHeadC'>
                             <div class='wowHeadRow' id='testing1'>
+                                <!-- <a href="Javascript: wowNameSort();" id='sortOption2'>Sort By First Name</a> -->
                                 <a href="Javascript: wowSort({{json_data}});" id='sortOption'>Sort Descending</a>
                             </div>
                         </div>
@@ -45,7 +48,7 @@
 
                                 <div class='wowCenterNav'>Page <b id='currentPageDisp'></b> of <b id='totalPages'>{{numPages}}</b></div>
 
-                                <a href="Javascript: nextWowPageResults({{json_data}});">
+                                <a href="Javascript: nextWowPageResults({{json_data}});" id='aTag2'>
                                     <div class='wowNavBtnRight' >
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                     </div>

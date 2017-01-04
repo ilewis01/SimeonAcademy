@@ -4901,6 +4901,10 @@ button:hover {
 	border: 3px solid #545350;
 }
 
+.wow-pic-container-couple {
+	border: 3px solid #545350;
+}
+
 .iml-avatar-img {
 	width:100%;
 	height:100%;
@@ -4924,6 +4928,55 @@ button:hover {
 	font-style: italic;
 	font-weight: bold;
 	color:#988974;
+}
+
+#wow-session-name {
+	font-size: 18px;
+	font-weight: bold;
+	color:#7b3f1a;
+}
+
+#wow-session-id {
+	height:28px;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	color:#988974;
+}
+
+#wow-session-email {
+	height:28px;
+	font-size: 13px;
+	color: #4b74ab;
+}
+
+#wow-session-email span {
+	color:black;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#wow-session-phone {
+	font-size: 13px;
+}
+
+#wow-session-numInfo {
+	color: #666666;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#wow-session-numInfo span {
+	color: black;
+	font-style: italic;
+}
+
+.wow-couple-client-superhead {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 23px;
+	color:#5b6e6a;
+	/*text-shadow:1px 1px black;*/
 }
 
 #iml-head-lg {
@@ -5227,6 +5280,16 @@ button:hover {
 .iml-data-entry-wrapper {
 	width: 92%;
 	height: 59vh;
+	margin: auto;
+	margin-top: 2%;
+	border: 1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.wow-data-entry-wrapper {
+	width: 92%;
+	height: 67vh;
 	margin: auto;
 	margin-top: 2%;
 	border: 1px solid black;
@@ -7154,12 +7217,23 @@ button:hover {
 	text-align: center;
 }
 
+.sorterTitle {
+	font-size: 12px;
+	/*width:100px;*/
+}
+
+.sortOptionWow {
+	font-size: 12px;
+	/*width:130px;*/
+}
+
 .wowHeadL {
 	text-align: left;
 	font-size: 13px;
 }
 
 .wowHeadC {
+	/*width: 280px;*/
 	text-align: center;
 	font-size: 13px;
 }
@@ -7167,6 +7241,7 @@ button:hover {
 .wowHeadR {
 	text-align: right;
 	font-size: 13px;
+	margin-left: 35%;
 }
 
 .wowHalfL {
@@ -7255,6 +7330,7 @@ button:hover {
 	font-style: italic;
 	text-align: left;
 	float:left;
+	margin-left: 5px;
 }
 
 .wow-avatar-img {
@@ -7306,6 +7382,18 @@ button:hover {
 	background-size: 100%;
 	float:left;
 	text-align: center;
+}
+
+.wowNavBtnLeft:hover{
+	background: url('../images/iml_bkgnd_hover.png');
+	background-size: 100%;
+	color:white;
+}
+
+.wowNavBtnRight:hover{
+	background: url('../images/iml_bkgnd_hover.png');
+	background-size: 100%;
+	color:white;
 }
 
 .SuperblanketFixer {
@@ -7586,6 +7674,18 @@ button:hover {
 	font-size: 11px;
 	margin-left: 28px;
 	font-style: italic;
+}
+
+.c_client_info_wow {
+	margin-top: 7%;
+	width:40%;
+	height:100%;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 5%;
+	box-shadow: 5px 5px 5px #888888;
+	background-color: #c0c9c7;
+	float:left;
 }
 
 .redErrorField {
