@@ -10,6 +10,7 @@
     <form action='' method='post' id='c_form'> {% csrf_token %}
     	<input type='hidden' name='current_page' id='current_page' value='1'>
         <input type='hidden' name='m_numPages' id='m_numPages' value='{{numPages}}'>
+        <input type='hidden' name='m_numMatches' id='m_numMatches' value='{{numMatches}}'>
     	<input type='hidden' name='search_type' id='search_type' value=''>
         <input type='hidden' name='sorted' id='sorted' value='ASC'>
 
@@ -19,7 +20,7 @@
                 <tr>
                     <td>
                         <div class='wowHeadL'>
-                            <div class='wowHeadRow'>
+                            <div class='wowHeadRow' id='testing'>
                                 Returned <b>{{numMatches}}</b> {{phrase1}}
                             </div>
                         </div>

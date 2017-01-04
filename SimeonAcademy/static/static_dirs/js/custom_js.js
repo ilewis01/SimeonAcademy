@@ -3852,20 +3852,70 @@ function clearUnusedWowFields(numResults, numPerPage) {
 	}
 }
 
+function wowSort(json_data) {
+	var sorted = grab('sorted');
+	var currentPage = Number(grab('current_page').value);
+
+	if (String(sorted.value) === "ASC") {
+		grab('sortOption').innerHTML = 'Sort Ascending'
+		sorted.value = "DEC";
+	}
+	else if (String(sorted.value) === "DEC") {
+		grab('sortOption').innerHTML = 'Sort Descending'
+		sorted.value = "ASC";
+	}
+
+	loadWowResults(currentPage, json_data);
+}
+
 function reversePageElements(json_data) {
-	var result = [];
-	//you must get all of the json data and resort it then reload the page
+	var result = {};
+	var forward = [];
+	var backward = [];
+	var numPages = Number(grab('m_numPages').value);
+	var numMatches = Number(grab('m_numMatches').value);
+	var reverseIndex = numMatches - 1;
+	var forwardIndex = 0;
+	var t = 0;
+
+	for (var i = 1; i <= numPages; i++) {
+		var p = getWowJsonArray(i, json_data);
+
+		for (var j = 0; j < p.length; j++) {
+			forward.push(p[j]);
+		}
+	}
+
+	for (var d = 0; d < numMatches; d++) {
+		backward.push(forward[reverseIndex]);
+		reverseIndex = reverseIndex - 1;
+	}
+
+	for (var k = 1; k <= numPages; k++) {
+		var n = getWowJsonArray(k, json_data);
+		var len = n.length;
+		var title = 'page_' + String(k);
+		var temp = [];
+
+		for (var l = 0; l < len; l++) {
+			temp.push(backward[forwardIndex]);
+			forwardIndex = forwardIndex + 1;
+		}
+		result[title] = temp;
+	}
+
 	return result;
 }
 
 function loadWowResults(page, json_data) {
-	var page = getWowJsonArray(page, json_data);
-	var numElements = page.length;
 	var sorted = String(grab('sorted').value);
 
 	if (sorted === 'DEC') {
-		// page = reversePageElements(json_data);
+		json_data = reversePageElements(json_data);
 	}
+
+	var page = getWowJsonArray(page, json_data);
+	var numElements = page.length;
 
 	clearUnusedWowFields(numElements, 8);
 
@@ -3961,21 +4011,6 @@ function InitializeSuperWowResults(json_data) {
 	var page1 = json_data.page_1;
 	loadWowResults(1, json_data);
 	grab('currentPageDisp').innerHTML = 1;
-}
-
-function wowSort(json_data) {
-	var sorted = grab('sorted');
-
-	if (String(sorted.value) === "ASC") {
-		grab('sortOption').innerHTML = 'Sort Ascending'
-		sorted.value = "DEC";
-	}
-	else if (String(sorted.value) === "DEC") {
-		grab('sortOption').innerHTML = 'Sort Descending'
-		sorted.value = "ASC";
-	}
-
-	// loadWowResults(1, json_data);
 }
 
 function opacitizeImg(vari) {
