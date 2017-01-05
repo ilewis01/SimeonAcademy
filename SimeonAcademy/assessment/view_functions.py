@@ -1129,53 +1129,90 @@ def universal_client_match(request, client):
 		isMatch = True
 	return isMatch
 
-def getWowClientList(includeDischarged, includePending):
+def getWowClientList(includeDischarged, includePending, session):
 	result = []
 	clients = Client.objects.all().order_by('lname', 'fname')
+	sessionOpen = session.isOpen
+	client = session.client
 
 	if includeDischarged == True and includePending == True:
 		for c1 in clients:
-			result.append(c1)
+			if sessionOpen == False:
+				result.append(c1)
+			else:
+				if clientSuperMatch(client, c1) == False:
+					result.append(c1)
 
 	elif includeDischarged == True and includePending == False:
 		for c2 in clients:
-			if c2.isPending != True:
-				result.append(c2)
+			if sessionOpen == False:
+				if c2.isPending != True:
+					result.append(c2)
+			else:
+				if c2.isPending != True and clientSuperMatch(client, c2) == False:
+					result.append(c2)
 
 	elif includeDischarged == False and includePending == True:
 		for c3 in clients:
-			if c3.isDischarged != True:
-				result.append(c3)
+			if sessionOpen == False:
+				if c3.isDischarged != True:
+					result.append(c3)
+			else:
+				if c3.isDischarged != True and clientSuperMatch(client, c3) == False:
+					result.append(c3)
 
 	elif includeDischarged == False and includePending == False:
 		for c4 in clients:
 			if c4.isDischarged != True and c4.isPending != True:
-				result.append(c4)
+				if sessionOpen == False:
+					result.append(c4)
+				else:
+					if c4.isDischarged != True and c4.isPending != True and clientSuperMatch(client, c4) == False:
+						result.append(c4)
 
 	return result
 
-def getWowClientListFname(includeDischarged, includePending):
+def getWowClientListFname(includeDischarged, includePending, session):
 	result = []
 	clients = Client.objects.all().order_by('fname', 'lname')
+	sessionOpen = session.isOpen
+	client = session.client
 
 	if includeDischarged == True and includePending == True:
 		for c1 in clients:
-			result.append(c1)
+			if sessionOpen == False:
+				result.append(c1)
+			else:
+				client = session.client
+				if clientSuperMatch(client, c1) == False:
+					result.append(c1)
 
 	elif includeDischarged == True and includePending == False:
 		for c2 in clients:
-			if c2.isPending != True:
-				result.append(c2)
+			if sessionOpen == False:
+				if c2.isPending != True:
+					result.append(c2)
+			else:
+				if c2.isPending != True and clientSuperMatch(client, c2) == False:
+					result.append(c2)
 
 	elif includeDischarged == False and includePending == True:
 		for c3 in clients:
-			if c3.isDischarged != True:
-				result.append(c3)
+			if sessionOpen == False:
+				if c3.isDischarged != True:
+					result.append(c3)
+			else:
+				if c3.isDischarged != True and clientSuperMatch(client, c3) == False:
+					result.append(c3)
 
 	elif includeDischarged == False and includePending == False:
 		for c4 in clients:
 			if c4.isDischarged != True and c4.isPending != True:
-				result.append(c4)
+				if sessionOpen == False:
+					result.append(c4)
+				else:
+					if c4.isDischarged != True and c4.isPending != True and clientSuperMatch(client, c4) == False:
+						result.append(c4)
 
 	return result
 
@@ -1385,13 +1422,13 @@ def fixCurrentClients():
 		c.clientID = Super_ID_generator(c.fname, c.lname, c.dob)
 		c.save()
 
-def wowClientMatchFname(searchDict, includeDischarged, includePending, getFullDOB):
-	clientList = getWowClientListFname(includeDischarged, includePending)
+def wowClientMatchFname(searchDict, includeDischarged, includePending, getFullDOB, currSession_id):
+	clientList = getWowClientListFname(includeDischarged, includePending, currSession_id)
 	return superWowSearcher(searchDict, getFullDOB, clientList)
 
 
-def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB):
-	clientList = getWowClientList(includeDischarged, includePending)
+def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB, currSession_id):
+	clientList = getWowClientList(includeDischarged, includePending, currSession_id)
 	return superWowSearcher(searchDict, getFullDOB, clientList)
 
 def wowDateDisplay(date_object):

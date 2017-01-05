@@ -647,11 +647,13 @@ def wowSearchResults(request):
 					
 					data.append(d)
 
+			session = ClientSession.objects.get(id=(getSessionID(user)))
+
 			discharged = truePythonBool(request.POST.get('m_discharged'))
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
-			matches = wowClientMatch(data, discharged, pending, getFullDOB)
-			matchFname = wowClientMatchFname(data, discharged, pending, getFullDOB)
+			matches = wowClientMatch(data, discharged, pending, getFullDOB, session)
+			matchFname = wowClientMatchFname(data, discharged, pending, getFullDOB, session)
 			pages = breakToPages(matches, 8)
 			pagesFname = breakToPages(matchFname, 8)
 			json_data = json.dumps(pages)
