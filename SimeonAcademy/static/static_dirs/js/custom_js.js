@@ -4133,6 +4133,131 @@ function addCoupleNote() {
 	openPopUp('auto', '/coupleNoteDual/', 600, 410);
 }
 
+function getNewNoteList() {
+	var newSubject 		= grab('subject');
+	var newBody 		= grab('c_body');
+	var numNotes 		= getPopParent('numNewNotes');
+	var numAdded 		= getPopParent('numberAdded');
+	var notes 			= [];
+
+	var created = Number(numAdded.value);
+	created = created + 1;
+	numAdded.value = created;
+
+	for (var i = 1; i <= Number(numNotes.value); i++) {
+		var subjName 	= "nnSubj_" + String(i);
+		var bodyName 	= "nnBody_" + String(i);
+		var data 		= {}
+
+		data['subject'] = String(getPopParent(subjName).value);
+		data['body'] 	= String(getPopParent(bodyName).value);
+		notes.push(data);
+	}
+
+	var updatedNumNotes = (Number(numNotes.value) + 1);
+	numNotes.value 		= updatedNumNotes;
+	var newData 		= {}
+	newData['subject'] 	= "Today: " + String(newSubject.value);
+	newData['body'] 	= newBody.value;
+	notes.push(newData);
+
+	return notes;
+}
+
+function generateNoteHTML_couple(subject, body, noteInstance) {
+	var result 		= {};
+	subject 		= String(subject);
+	body 			= String(body);
+	noteInstance 	= String(noteInstance);
+
+	var subjId = "nnSubj_" + noteInstance;
+	var bodyId = "nnBody_" + noteInstance;
+
+	var subInput = "<input type=\"hidden\" name=\"" + subjId + "\" ";
+	subInput += "id=\"" + subjId + "\" value=\"" + subject + "\">";
+
+	var bodInput = "<input type=\"hidden\" name=\"" + bodyId + "\" ";
+	bodInput += "id=\"" + bodyId + "\" value=\"" + body + "\">";
+
+	result['subjectHtml'] = subInput;
+	result['bodyyHtml'] = bodInput;
+
+	return result;
+}
+
+function cleanCoupleNoteTitle(title) {
+	title = String(title);
+	var result = '';
+	var len = title.length;
+
+	if (30 <= len) {
+		for (var i = 0; i < 37; i++) {
+			result += title.charAt(i);
+		}
+	}
+	else {
+		result = title;
+	}
+	return result;
+}
+
+function getCoupleSelectListTitles() {
+	var numNotes = Number(getPopParent('numNewNotes').value);
+	var results = [];
+	var pre = 'nnSubj_';
+
+	for (var i = 1; i <= numNotes; i++) {
+		var subjId = pre + String(i);
+		var subject = String(getPopParent(subjId).value);
+		var processed = cleanCoupleNoteTitle(subject);
+		results.push(processed);
+	}
+
+	return results;
+}
+
+function generate_couple_display_select_html(subject, value) {
+	var name = 'list_' + String(value);
+	subject = String(subject);
+
+	var html = "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
+	html += subject;
+	html += "</div>";
+
+	return html;
+}
+
+function superCoupleSelectDisplayBuilder() {
+	var titles = getCoupleSelectListTitles();
+	var builder = getPopParent('selectListBuilder_c');
+	var html = "";
+
+	for (var i = 0; i < titles.length; i++) {
+		var instance = i + 1;
+		html += generate_couple_display_select_html(titles[i], instance);
+	}
+	builder.innerHTML = html;
+}
+
+function softSaveNote() {
+	var html 		= "";
+	var builder 	= getPopParent('newNoteBuilder');
+	var newNotes 	= getNewNoteList();
+	var t = '';
+	var len = Number(newNotes.length);
+
+	for (var i = 0; i < len; i++) {
+		var instance = i + 1;
+		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], instance);
+		html += data['subjectHtml'];
+		html += data['bodyyHtml'];
+	}
+
+	builder.innerHTML = html;
+	superCoupleSelectDisplayBuilder();
+	window.close();
+}
+
 function couple_to_optionsSTUFF() {
 	var form = grab('c_form');
 	form.action = "/clientOptions/";

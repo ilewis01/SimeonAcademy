@@ -6922,6 +6922,21 @@ button:hover {
 	padding: 10px;
 }
 
+.noteListHolder_couple {
+	width:100%;
+}
+
+.noteItem_couple {
+	border-bottom :1px solid gray;
+	font-size: 12px;
+	height:22px;
+	line-height: 22px;
+}
+
+.noteItem_couple:hover {
+	background-color: #a8c2bf;
+}
+
 .asi_comment_button_wrapper {
 	width:205px;
 	border: 1px solid gray;
