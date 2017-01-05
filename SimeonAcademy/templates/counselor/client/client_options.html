@@ -81,8 +81,11 @@
                                             <div class='row' style='width:100%; height:175px; margin:auto;'>
                                                 <div class='col-md-3' style='width:30%; height:100%;'>
                                                     <div class='iml-pic-container'> <!-- CLIENT IMAGE -->
-                                                        <img src="/static/media/{{session.client.photo}}" alt="client_img" class='iml-avatar-img'>
+                                                        <a href="Javascript: viewClient1Profile_couple();">
+                                                            <div id='cliImgSes'><img src="/static/media/{{session.client.photo}}" alt="client_img" class='iml-avatar-img'></div>
+                                                        </a>
                                                     </div>
+                                                    <div style='font-size:10px; width:100%; text-align:center;'>Click image for additional details</div>
                                                 </div>
 
                                                 <div class='col-md-9' style='width:67%; height:100%;'> <!-- CLIENT INFO -->
@@ -91,10 +94,10 @@
                                                             <td><div id='iml-session-name'>{{session.client.fname}} {{session.client.lname}}</div></td>
                                                         </tr>
 
-                                                        <tr><td><div id='iml-session-id'>{{session.client.clientID}}</div></td></tr>
+                                                        <tr><td><div id='iml-session-id'>{{session.client.reason_ref.reason}}</div></td></tr>
                                                         <tr><td><div id='iml-head-md'>Contact Information:</div></td></tr>
                                                         <tr><td><div id='iml-session-email'>{{session.client.email}}</div></td></tr>
-                                                        <tr><td><div id='iml-session-phone'>{{session.client.phone}}</div></td></tr>
+                                                        <tr><td><div id='iml-session-phone'>{{phone}}</div></td></tr>
                                                         <tr><td><div id='iml-head-sm'>Address:</div></td></tr>
                                                         <tr>
                                                             <td>

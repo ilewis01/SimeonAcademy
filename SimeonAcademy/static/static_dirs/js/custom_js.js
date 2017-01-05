@@ -4147,10 +4147,12 @@ function getNewNoteList() {
 	for (var i = 1; i <= Number(numNotes.value); i++) {
 		var subjName 	= "nnSubj_" + String(i);
 		var bodyName 	= "nnBody_" + String(i);
+		var saveName 	= "saveNote_" + String(i);
 		var data 		= {}
 
 		data['subject'] = String(getPopParent(subjName).value);
 		data['body'] 	= String(getPopParent(bodyName).value);
+		data['flag'] 	= String(getPopParent(saveName).value);
 		notes.push(data);
 	}
 
@@ -4159,19 +4161,22 @@ function getNewNoteList() {
 	var newData 		= {}
 	newData['subject'] 	= "Today: " + String(newSubject.value);
 	newData['body'] 	= newBody.value;
+	newData['flag'] 	= "True";
 	notes.push(newData);
 
 	return notes;
 }
 
-function generateNoteHTML_couple(subject, body, noteInstance) {
+function generateNoteHTML_couple(subject, body, flag, noteInstance) {
 	var result 		= {};
 	subject 		= String(subject);
 	body 			= String(body);
+	flag 			= String(flag);
 	noteInstance 	= String(noteInstance);
 
 	var subjId = "nnSubj_" + noteInstance;
 	var bodyId = "nnBody_" + noteInstance;
+	var saveId = "saveNote_" + noteInstance;
 
 	var subInput = "<input type=\"hidden\" name=\"" + subjId + "\" ";
 	subInput += "id=\"" + subjId + "\" value=\"" + subject + "\">";
@@ -4179,8 +4184,12 @@ function generateNoteHTML_couple(subject, body, noteInstance) {
 	var bodInput = "<input type=\"hidden\" name=\"" + bodyId + "\" ";
 	bodInput += "id=\"" + bodyId + "\" value=\"" + body + "\">";
 
+	var saveFlag = "<input type=\"hidden\" name=\"" + saveId + "\" ";
+	saveFlag += "id=\"" + saveId + "\" value=\"" + flag + "\">";
+
 	result['subjectHtml'] = subInput;
 	result['bodyyHtml'] = bodInput;
+	result['saveFlag'] = saveFlag;
 
 	return result;
 }
@@ -4205,12 +4214,18 @@ function getCoupleSelectListTitles() {
 	var numNotes = Number(getPopParent('numNewNotes').value);
 	var results = [];
 	var pre = 'nnSubj_';
+	var savedPre = 'saveNote_';
 
 	for (var i = 1; i <= numNotes; i++) {
-		var subjId = pre + String(i);
-		var subject = String(getPopParent(subjId).value);
-		var processed = cleanCoupleNoteTitle(subject);
-		results.push(processed);
+		var flagjId = savedPre + String(i);
+		var flag = String(getPopParent(flagjId).value);
+
+		if (flag === "True") {
+			var subjId = pre + String(i);
+			var subject = String(getPopParent(subjId).value);
+			var processed = cleanCoupleNoteTitle(subject);
+			results.push(processed);
+		}
 	}
 
 	return results;
@@ -4220,9 +4235,10 @@ function generate_couple_display_select_html(subject, value) {
 	var name = 'list_' + String(value);
 	var realSubName = 'nnSubj_' + String(value);
 	var realBodName = 'nnBody_' + String(value);
+	var realSavName = 'saveNote_' + String(value);
 	subject = String(subject);
 
-	var html = "<a href=\"Javascript: retrieveNoteDynamically_couple(\'" + realSubName + "\', \'" + realBodName + "\');\">";
+	var html = "<a href=\"Javascript: retrieveNoteDynamically_couple(\'" + realSubName + "\', \'" + realBodName + "\' , \'" + realSavName + "\');\">";
 	html += "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
 	html += subject;
 	html += "</div></a>";
@@ -4242,17 +4258,21 @@ function superCoupleSelectDisplayBuilder() {
 	builder.innerHTML = html;
 }
 
-function retrieveNoteDynamically_couple(subjectDivName, bodyDivName) {
+function retrieveNoteDynamically_couple(subjectDivName, bodyDivName, flagDivName) {
 	subjectDivName = String(subjectDivName);
 	bodyDivName = String(bodyDivName);
+	flagDivName = String(flagDivName);
 
 	var subject = grab(subjectDivName).value;
 	var body = grab(bodyDivName).value;
+	var flag = grab(flagDivName).value;
 
 	grab('newNoteSubject').value = subject;
 	grab('newNoteBody').value = body;
+	grab('newNoteFlag').value = flag;
 	grab('selectedSubject').value = subjectDivName;
 	grab('selectedBody').value = bodyDivName;
+	grab('selectedFlag').value = flagDivName;
 
 	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
 }
@@ -4270,10 +4290,43 @@ function LoadTheDamnNoteData() {
 function superCoupleSaveEditor() {
 	var SubName = String(getPopParent('selectedSubject').value);
 	var BodName = String(getPopParent('selectedBody').value);
+	var SavName = String(getPopParent('selectedFlag').value);
 
 	getPopParent(SubName).value = grab('subject').value;
 	getPopParent(BodName).value = grab('c_body').value;
+	getPopParent(SavName).value = "True";
 
+	window.close();
+}
+
+function fetchTheDivLeadingNumber(SavName) {
+	SavName = String(SavName);
+	result = '';
+
+	for (var i = 0; i < SavName.length; i++) {
+		var c = SavName.charAt(i);
+
+		if (c==='0' || c==='1' || c==='2' || c==='3' || c==='4' || c==='5' || c==='6' || c==='7' || c==='8' || c==='9') {
+			result += c;
+		}
+	}
+	return Number(result);
+}
+
+function coupleNoteErase() {
+	var flagName = String(getPopParent('selectedFlag').value);
+	getPopParent(flagName).value = "False";
+	//Handle the number added if needed
+	var numberLoadedNotes = Number(getPopParent('numberLoadedNotes').value);
+	var leadingNumber = fetchTheDivLeadingNumber(flagName);
+
+	if (leadingNumber > numberLoadedNotes) {
+		var addedDiv = getPopParent('numberAdded');
+		var newAdded = Number(addedDiv.value) - 1;
+		addedDiv.value = newAdded;
+	}
+
+	superCoupleSelectDisplayBuilder();
 	window.close();
 }
 
@@ -4286,14 +4339,29 @@ function softSaveNote() {
 
 	for (var i = 0; i < len; i++) {
 		var instance = i + 1;
-		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], instance);
+		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], instance);
 		html += data['subjectHtml'];
 		html += data['bodyyHtml'];
+		html += data['saveFlag'];
 	}
 
 	builder.innerHTML = html;
 	superCoupleSelectDisplayBuilder();
 	window.close();
+}
+
+function a_imgOpacLo(divName, opacityLevel) {
+	divname = String(divname);
+	opacityLevel = String(opacityLevel);
+	var div = grab(divname);
+	div.style.opacity = opacityLevel;
+}
+
+function a_imgOpacHi(divName) {
+	divname = String(divname);
+	var div = grab(divname);
+	div.innerHTML = "";
+	// div.style.opacity = '1.0';
 }
 
 function couple_to_optionsSTUFF() {

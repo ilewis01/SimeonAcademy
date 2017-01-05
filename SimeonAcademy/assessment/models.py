@@ -52,6 +52,7 @@ class TrackApp(models.Model):
 
 class Note(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+	clientID_2 = models.CharField(max_length=30, default=None, blank=True, null=True)
 	date = models.DateField(default=None, blank=True, null=True)
 	title = models.CharField(max_length=50, default=None, blank=True, null=True)
 	note = models.CharField(max_length=5000, default=None, blank=True, null=True)

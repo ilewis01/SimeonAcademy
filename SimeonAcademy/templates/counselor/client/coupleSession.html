@@ -9,10 +9,13 @@
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
       <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
       <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
+      <input type='hidden' id='newNoteFlag' name='newNoteFlag'value=''>
       <input type='hidden' id='numNewNotes' name='numNewNotes'value='0'> <!-- REMEMBER TO CHANGE THIS TO VARIABLE -->
       <input type='hidden' id='numberAdded' name='numberAdded'value='0'>
+      <input type='hidden' id='numberLoadedNotes' name='numberLoadedNotes'value='{{numLoadedNotes}}'>
       <input type='hidden' id='selectedSubject' name='selectedSubject'value='0'>
       <input type='hidden' id='selectedBody' name='selectedBody'value='0'>
+      <input type='hidden' id='selectedFlag' name='selectedFlag'value='0'>
 
 
   		<div id="newNoteBuilder"></div>
@@ -118,7 +121,7 @@
             <div>
               <table class='iml-save-btn'>
                 <tr>
-                	<td><button onClick="javascript: exit_to_home_CoupleSession(); return false;">Save All</button></td>
+                	<td><button onClick="javascript: exit_to_home_CoupleSession(); return false;">Save & Exit</button></td>
                   <td><button onClick="javascript: couple_to_optionsSTUFF(); return false;">Session Options</button></td>
                 </tr>
               </table>

@@ -1873,7 +1873,7 @@ def clientOptions(request):
 			matches = len(allHistory)
 			pages = calculateHistoryPages(matches)
 
-			content['phone'] = fetchClientPhoneDisplay(session.client.phone)
+			content['phone'] = wowPhoneNumberDisplayConverter(session.client.phone)
 			content['ssn'] =fetchClientSSDisplay(session.client.ss_num)
 			content['history'] = history
 			content['pages'] = pages
