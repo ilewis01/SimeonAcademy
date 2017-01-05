@@ -73,6 +73,8 @@ urlpatterns = patterns('',
     url(r'^viewFullProfile_primary/$', 'assessment.views.viewFullProfile_primary'),
     url(r'^viewFullProfile_secondary/$', 'assessment.views.viewFullProfile_secondary'),
     url(r'^coupleNoteDual/$', 'assessment.views.coupleNoteDual'),
+    url(r'^superNoteDisplyer/$', 'assessment.views.superNoteDisplyer'),
+    url(r'^editableCoupleNote/$', 'assessment.views.editableCoupleNote'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

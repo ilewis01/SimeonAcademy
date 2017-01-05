@@ -674,6 +674,55 @@ def wowSearchResults(request):
 			return render_to_response('counselor/client/wowSearchResults.html', content)
 
 @login_required(login_url='/index')
+def superNoteDisplyer(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/superNoteDisplyer.html', content)
+
+@login_required(login_url='/index')
+def editableCoupleNote(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/editableCoupleNote.html', content)
+
+
+@login_required(login_url='/index')
 def coupleNoteDual(request):
 	user = request.user
 	if not user.is_authenticated():

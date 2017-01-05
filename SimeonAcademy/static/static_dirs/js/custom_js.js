@@ -4218,11 +4218,14 @@ function getCoupleSelectListTitles() {
 
 function generate_couple_display_select_html(subject, value) {
 	var name = 'list_' + String(value);
+	var realSubName = 'nnSubj_' + String(value);
+	var realBodName = 'nnBody_' + String(value);
 	subject = String(subject);
 
-	var html = "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
+	var html = "<a href=\"Javascript: retrieveNoteDynamically_couple(\'" + realSubName + "\', \'" + realBodName + "\');\">";
+	html += "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
 	html += subject;
-	html += "</div>";
+	html += "</div></a>";
 
 	return html;
 }
@@ -4237,6 +4240,41 @@ function superCoupleSelectDisplayBuilder() {
 		html += generate_couple_display_select_html(titles[i], instance);
 	}
 	builder.innerHTML = html;
+}
+
+function retrieveNoteDynamically_couple(subjectDivName, bodyDivName) {
+	subjectDivName = String(subjectDivName);
+	bodyDivName = String(bodyDivName);
+
+	var subject = grab(subjectDivName).value;
+	var body = grab(bodyDivName).value;
+
+	grab('newNoteSubject').value = subject;
+	grab('newNoteBody').value = body;
+	grab('selectedSubject').value = subjectDivName;
+	grab('selectedBody').value = bodyDivName;
+
+	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
+}
+
+function initializeCoupleNoteEditor() {
+	grab('the_subject').innerHTML = getPopParent('newNoteSubject').value;
+	grab('the_body').innerHTML = getPopParent('newNoteBody').value;
+}
+
+function LoadTheDamnNoteData() {
+	grab('subject').value = getPopParent('newNoteSubject').value;
+	grab('c_body').innerHTML = getPopParent('newNoteBody').value;
+}
+
+function superCoupleSaveEditor() {
+	var SubName = String(getPopParent('selectedSubject').value);
+	var BodName = String(getPopParent('selectedBody').value);
+
+	getPopParent(SubName).value = grab('subject').value;
+	getPopParent(BodName).value = grab('c_body').value;
+
+	window.close();
 }
 
 function softSaveNote() {

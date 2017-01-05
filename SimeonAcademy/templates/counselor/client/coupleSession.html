@@ -4,12 +4,15 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: ">
+	<input type='text' id='superTest'>
     <form action='' method='post' id='c_form' name='c_form'> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
       <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
       <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
       <input type='hidden' id='numNewNotes' name='numNewNotes'value='0'> <!-- REMEMBER TO CHANGE THIS TO VARIABLE -->
       <input type='hidden' id='numberAdded' name='numberAdded'value='0'>
+      <input type='hidden' id='selectedSubject' name='selectedSubject'value='0'>
+      <input type='hidden' id='selectedBody' name='selectedBody'value='0'>
 
 
   		<div id="newNoteBuilder"></div>
@@ -75,9 +78,6 @@
 				                    		<div class='wow-couple-all-out-head'>Notes</div>
 				                    		<div class='wow-couple-info-btn-wrap' id='noteLister'>
 				                    			<div class='noteListHolder_couple' id='selectListBuilder_c'>
-				                    				<!-- <div class='noteItem_couple'>&nbsp&nbsp&nbsp123456789012345678901234567890</div>
-				                    				<div class='noteItem_couple'>&nbsp&nbsp&nbspItem 2</div>
-				                    				<div class='noteItem_couple'>&nbsp&nbsp&nbspItem 2</div> -->
 				                    			</div>
 				                    		</div>
 
@@ -109,28 +109,7 @@
 				                </table>
 	                    	</div>
 	                    </div>
-
-                  </div> 
-
-
-
-                  <!-- RIGHT SIDE -->
-                  <!-- <div class='col-md-6' style='width:35%; height:100%; margin-left:px;'>
-                    	<div class='right-wow-couple-wrapper'>
-                    		<div class='wow-couple-all-out-head'>Notes</div>
-                    		<div class='wow-couple-info-btn-wrap'>
-                    		</div>
-
-                    		<div style='margin-bottom:40px;'>
-	                    		<div class='wow-couple-info-bottom-wrap'>
-	                    			<div class='hold-my-button'>
-	                    				<button onClick="Javascript: addCoupleNote(); return false;">New Note</button>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</div>
-                  </div> -->
-
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,8 +118,8 @@
             <div>
               <table class='iml-save-btn'>
                 <tr>
+                	<td><button onClick="javascript: exit_to_home_CoupleSession(); return false;">Save All</button></td>
                   <td><button onClick="javascript: couple_to_optionsSTUFF(); return false;">Session Options</button></td>
-                  <td><button onClick="javascript: exit_to_home_CoupleSession(); return false;">End Session</button></td>
                 </tr>
               </table>
             </div>
