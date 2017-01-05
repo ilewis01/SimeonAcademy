@@ -70,6 +70,9 @@ urlpatterns = patterns('',
     url(r'^newClientAborted/$', 'assessment.views.newClientAborted'),
     url(r'^wowSearch/$', 'assessment.views.wowSearch'),
     url(r'^wowSearchResults/$', 'assessment.views.wowSearchResults'),
+    url(r'^viewFullProfile_primary/$', 'assessment.views.viewFullProfile_primary'),
+    url(r'^viewFullProfile_secondary/$', 'assessment.views.viewFullProfile_secondary'),
+    url(r'^coupleNoteDual/$', 'assessment.views.coupleNoteDual'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

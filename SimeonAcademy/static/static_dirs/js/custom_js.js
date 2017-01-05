@@ -4130,7 +4130,7 @@ function buildDropDayList(numDays) {
 }
 
 function addCoupleNote() {
-
+	openPopUp('auto', '/coupleNoteDual/', 600, 410);
 }
 
 function couple_to_optionsSTUFF() {
@@ -4143,6 +4143,50 @@ function exit_to_home_CoupleSession() {
 	var form = grab('c_form');
 	form.action = "/adminHome/";
 	form.submit();
+}
+
+function viewClient1Profile_couple() {
+	openPopUp('auto', '/viewFullProfile_primary/', 500, 560);
+}
+
+function viewClient2Profile_couple() {
+	openPopUp('auto', '/viewFullProfile_secondary/', 500, 560);
+}
+
+function cp_hoverA(clientOption) {
+	var img = null;
+	var bkg = null;
+	clientOption = String(clientOption);
+
+	if (clientOption === 'p') {
+		img = grab('imgP');
+		bkg = grab('bkgP');
+	}
+	else if (clientOption === 's') {
+		img = grab('imgS');
+		bkg = grab('bkgS');
+	}
+
+	img.style.opacity = '0.5';
+	bkg.style.backgroundColor = '#c0bfc0';
+}
+
+function cp_hoverB(clientOption) {
+	var img = null;
+	var bkg = null;
+	clientOption = String(clientOption);
+
+	if (clientOption === 'p') {
+		img = grab('imgP');
+		bkg = grab('bkgP');
+	}
+	else if (clientOption === 's') {
+		img = grab('imgS');
+		bkg = grab('bkgS');
+	}
+
+	img.style.opacity = '1.0';
+	bkg.style.backgroundColor = '#c0c9c7';
 }
 
 function populateDropDownDay(sType) {

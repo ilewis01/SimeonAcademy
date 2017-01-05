@@ -671,6 +671,30 @@ def wowSearchResults(request):
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearchResults.html', content)
 
+@login_required(login_url='/index')
+def coupleNoteDual(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/coupleNoteDual.html', content)
+
 
 
 @login_required(login_url='/index')
@@ -729,6 +753,120 @@ def viewProfile(request):
 			content['client'] = client
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/viewProfile.html', content)
+
+@login_required(login_url='/index')
+def viewFullProfile_primary(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client = Client.objects.get(id=(superDuperFetchClientID_track(track)))
+			gender = None
+			work = None
+			probation = None
+			emergency = None
+
+			if client.isMale == True:
+				gender = "Male"
+			else:
+				gender = "Female"
+
+			if client.work_phone == None or client.work_phone == "":
+				work = "N/A"
+			else:
+				work = client.work_phone
+
+			if client.probationOfficer==None or client.probationOfficer=='' or client.probation_phone==None or client.probation_phone=='':
+				probation = "N/A"
+			else:
+				probation = str(client.probationOfficer) + " " + str(fetchClientPhoneDisplay(client.probation_phone))
+
+			if client.emer_contact_name==None or client.emer_contact_name=='' or client.emer_phone==None or client.emer_phone=='':
+				emergency = "N/A"
+			else:
+				emergency = str(client.emer_contact_name) + " " + str(fetchClientPhoneDisplay(client.emer_phone))
+
+			content['emergency'] = emergency
+			content['probation'] = probation
+			content['phone'] = fetchClientPhoneDisplay(client.phone)
+			content['ss'] =fetchClientSSDisplay(client.ss_num)
+			content['work'] = fetchClientPhoneDisplay(client.work_phone)
+			content['gender'] = gender
+			content['client'] = client
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/viewFullProfileMin.html', content)
+
+@login_required(login_url='/index')
+def viewFullProfile_secondary(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			client = Client.objects.get(id=(track.c2_id))
+			gender = None
+			work = None
+			probation = None
+			emergency = None
+
+			if client.isMale == True:
+				gender = "Male"
+			else:
+				gender = "Female"
+
+			if client.work_phone == None or client.work_phone == "":
+				work = "N/A"
+			else:
+				work = client.work_phone
+
+			if client.probationOfficer==None or client.probationOfficer=='' or client.probation_phone==None or client.probation_phone=='':
+				probation = "N/A"
+			else:
+				probation = str(client.probationOfficer) + " " + str(fetchClientPhoneDisplay(client.probation_phone))
+
+			if client.emer_contact_name==None or client.emer_contact_name=='' or client.emer_phone==None or client.emer_phone=='':
+				emergency = "N/A"
+			else:
+				emergency = str(client.emer_contact_name) + " " + str(fetchClientPhoneDisplay(client.emer_phone))
+
+			content['emergency'] = emergency
+			content['probation'] = probation
+			content['phone'] = fetchClientPhoneDisplay(client.phone)
+			content['ss'] =fetchClientSSDisplay(client.ss_num)
+			content['work'] = fetchClientPhoneDisplay(client.work_phone)
+			content['gender'] = gender
+			content['client'] = client
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/viewFullProfileMin.html', content)
 			
 
 @login_required(login_url='/index')

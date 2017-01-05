@@ -23,38 +23,42 @@
 
                   <!-- LEFT SIDE -->
                   <div class='col-md-6' style='width:90%; height:100%; margin-left:10px;'>                 		
-                      	<div class='c_client_info_wow'>
-                      		<div class='wow-couple-client-superhead'>Client 1</div>
-                      		<div class='wow-pic-container-couple'> <!-- CLIENT IMAGE -->
-                        		<img src="/static/media/{{c1.photo}}" alt="client_img" class='iml-avatar-img'>
-                    		</div>
+                      	<div class='c_client_info_wow' id='bkgP'>
+                      		<a href="Javascript: viewClient1Profile_couple();" onmouseover="javascript: cp_hoverA('p');" onmouseout="javascript: cp_hoverB('p');">
+	                      		<div class='wow-couple-client-superhead'>Client 1</div>
+	                      		<div class='wow-pic-container-couple'> <!-- CLIENT IMAGE -->
+	                        		<img src="/static/media/{{c1.photo}}" alt="client_img" class='iml-avatar-img' id='imgP'>
+	                    		</div>
 
-                    		<div style='height:10px;'></div>
+	                    		<div style='height:10px;'></div>
 
-                    		<div id='wow-session-name'><em>{{c1.fname}} {{c1.middleInit}}. {{c1.lname}}</em></div>
-                    		<div id='wow-session-id'>{{c1.clientID}}</div>
-                    		<div style='height:10px;'></div>
-                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c1.dob}}</em></div>
-                    		<div id='wow-session-numInfo'><span>SSN:</span> <em>{{c1ss}}</em></div>
-                    		<div id='wow-session-numInfo'><span>Phone:</span> <em>{{c1phone}}</em></div>
-                    		<div id='wow-session-email'><em>{{c1.email}}</em></div>
+	                    		<div id='wow-session-name'><em>{{c1.fname}} {{c1.middleInit}}. {{c1.lname}}</em></div>
+	                    		<div id='wow-session-id'></div>
+	                    		<div style='height:10px;'></div>
+	                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c1.dob}}</em></div>
+	                    		<div id='wow-session-numInfo'><span>SSN:</span> <em>{{c1ss}}</em></div>
+	                    		<div id='wow-session-numInfo'><span>Phone:</span> <em>{{c1phone}}</em></div>
+	                    		<div id='wow-session-email'><em>{{c1.email}}</em></div>
+	                    	</a>
                       	</div>
 
-                      	<div class='c_client_info_wow' style='margin-left:20px;'>
-                      		<div class='wow-couple-client-superhead'>Client 2</div>
-                      		<div class='wow-pic-container-couple'> <!-- CLIENT IMAGE -->
-                        		<img src="/static/media/{{c2.photo}}" alt="client_img" class='iml-avatar-img'>
-                    		</div>
+                      	<div class='c_client_info_wow' style='margin-left:20px;' onmouseover="javascript: cp_hoverA('s');" onmouseout="javascript: cp_hoverB('s');"  id='bkgS'>
+                      		<a href="Javascript: viewClient2Profile_couple();">
+	                      		<div class='wow-couple-client-superhead'>Client 2</div>
+	                      		<div class='wow-pic-container-couple'> <!-- CLIENT IMAGE -->
+	                        		<img src="/static/media/{{c2.photo}}" alt="client_img" class='iml-avatar-img' id='imgS'>
+	                    		</div>
 
-                    		<div style='height:10px;'></div>
+	                    		<div style='height:10px;'></div>
 
-                    		<div id='wow-session-name'><em>{{c2.fname}} {{c2.middleInit}}. {{c2.lname}}</em></div>
-                    		<div id='wow-session-id'>{{c2.clientID}}</div>
-                    		<div style='height:10px;'></div>
-                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c2.dob}}</em></div>
-                    		<div id='wow-session-numInfo'><span>SSN:</span> <em>{{c2ss}}</em></div>
-                    		<div id='wow-session-numInfo'><span>Phone:</span> <em>{{c2phone}}</em></div>
-                    		<div id='wow-session-email'><em>{{c2.email}}</em></div>
+	                    		<div id='wow-session-name'><em>{{c2.fname}} {{c2.middleInit}}. {{c2.lname}}</em></div>
+	                    		<div id='wow-session-id'></div>
+	                    		<div style='height:10px;'></div>
+	                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c2.dob}}</em></div>
+	                    		<div id='wow-session-numInfo'><span>SSN:</span> <em>{{c2ss}}</em></div>
+	                    		<div id='wow-session-numInfo'><span>Phone:</span> <em>{{c2phone}}</em></div>
+	                    		<div id='wow-session-email'><em>{{c2.email}}</em></div>
+	                    	</a>
                       	</div>
 
                       	<div class='muyDataWow'>
