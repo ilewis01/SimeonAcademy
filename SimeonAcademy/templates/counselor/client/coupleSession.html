@@ -5,7 +5,7 @@
 
 <body class="gradient-white" onLoad="javascript: initiateListBuilder({{json_data}});">
 	<input type='text' id='superTest'>
-    <form action='' method='post' id='c_form' name='c_form'> {% csrf_token %}
+    <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
       <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
       <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
@@ -54,6 +54,7 @@
 	                    		<div style='height:10px;'></div>
 
 	                    		<div id='wow-session-name'><em>{{c1.fname}} {{c1.middleInit}}. {{c1.lname}}</em></div>
+	                    		<div class='divider_gradient'></div>
 	                    		<div id='wow-session-id'></div>
 	                    		<div style='height:10px;'></div>
 	                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c1.dob}}</em></div>
@@ -73,6 +74,7 @@
 	                    		<div style='height:10px;'></div>
 
 	                    		<div id='wow-session-name'><em>{{c2.fname}} {{c2.middleInit}}. {{c2.lname}}</em></div>
+	                    		<div class='divider_gradient'></div>
 	                    		<div id='wow-session-id'></div>
 	                    		<div style='height:10px;'></div>
 	                    		<div id='wow-session-numInfo'><span>DOB:</span> <em>{{c2.dob}}</em></div>
@@ -82,50 +84,27 @@
 	                    	</a>
                       	</div>
 
-                      	<div class='muyDataWow'>
-	                      	<div class='right-wow-couple-wrapper'>
-	                      		<table style="width:100%;">
-	                      			<tr>
-	                      				<td style="width:49%">
-				                    		<div class='wow-couple-all-out-head'>Notes</div>
-				                    		<div class='wow-couple-info-btn-wrap' id='noteLister'>
-				                    			<div class='noteListHolder_couple' id='selectListBuilder_c'>
-				                    			</div>
-				                    		</div>
+                      	<div class='damnedWrapperLol'>
+                      		<div class='new-wow-damned_inner'>
+                      			<div class='damnLeft'>
+                      				<div class='innerDamn'>
+                      					<iframe src="/noteLoader/" class="uploadIframe"></iframe>
+                      				</div>
+                      			</div>
 
-				                    		<div style='margin-bottom:40px;'>
-					                    		<div class='wow-couple-info-bottom-wrap'>
-					                    			<div class='hold-my-button'>
-					                    				<button onClick="Javascript: addCoupleNote(); return false;">New Note</button>
-					                    			</div>
-					                    		</div>
-					                    	</div>
-					                    </td>
-
-					                    <td><div style='width:10px;'></div></td>
-
-					                    <td>
-				                    		<div class='wow-couple-all-out-head2'>Documents</div>
-				                    		<div class='wow-couple-info-btn-wrap2'>
-				                    		</div>
-
-				                    		<div style='margin-bottom:40px;'>
-					                    		<div class='wow-couple-info-bottom-wrap2'>
-					                    			<div class='hold-my-button'>
-					                    				<button onClick="Javascript: addCoupleNote(); return false;">Upload</button>
-					                    			</div>
-					                    		</div>
-					                    	</div>
-					                    </td>
-				                    </tr>
-				                </table>
-	                    	</div>
+                      			<div class='damnRight'>
+                      				<div class='innerDamn'>
+                      					<iframe src="/documentLoader/" class="uploadIframe"></iframe>
+                      				</div>
+                      			</div>
+                      		</div>
 	                    </div>
                   </div>
                 </div>
               </div>
             </div>
-    </form>        
+    </form> 
+    <!-- <iframe src="/documentLoader/" style='width:100%; height:100%;'></iframe> -->       
 
             <div>
               <table class='iml-save-btn'>
@@ -144,3 +123,68 @@
 </body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+<!-- <div class='right-wow-couple-wrapper'> -->
+	                      		<!-- <div class="new-wow-iframe-double"></div> -->
+	                      		<!-- <table style="width:100%;">
+	                      			<tr>
+	                      				<td style="width:49%">
+				                    		<div class='wow-couple-all-out-head'>Notes <span id='enterNumber'></span></div>
+				                    		<div style='height:15px;'></div>
+				                    		<div class='wow-couple-info-btn-wrap' id='noteLister'>
+				                    			
+				                    			<div class='gimmeAHeadDiv1'></div>
+				                    			<div class='noteListHolder_couple' id='selectListBuilder_c'>
+				                    			</div>
+				                    			<div class='gimmeAHeadDiv2'></div>
+				                    		</div>
+
+				                    		<div style='margin-bottom:40px;'>
+					                    		<div class='wow-couple-info-bottom-wrap'>
+					                    			<div class='hold-my-button'>
+					                    				<button onClick="Javascript: addCoupleNote(); return false;">New Note</button>
+					                    			</div>
+					                    		</div>
+					                    	</div>
+					                    </td>
+
+					                    <td><div style='width:10px;'></div></td>
+
+					                    <td>
+				                    		<div class='wow-couple-all-out-head2'>Documents</div>
+				                    		<div style='height:15px;'></div>
+				                    		<div class='wow-couple-info-btn-wrap-doc'>
+				                    			<div class='document_holder_couple_madCrazy'>
+
+				                    				<div class='document-form-couple-wrap'>
+				                    					<table>
+				                    						<tr><td><div class='upload_couple_diver'>Upload New Documents:</div></td></tr>
+				                    						<tr><td><input type='file' name='upload' id='upload'></td></tr>
+				                    					</table>
+				                    					<table>
+				                    						<tr><td><div class='upload_couple_diver'>Upload New Documents:</div></td></tr>
+				                    						<tr><td><input type='file' name="upload" id="upload"></td></tr>
+				                    					</table>
+				                    				</div>
+				                    			</div>
+				                    		</div>
+
+				                    		<div style='margin-bottom:40px;'>
+					                    		<div class='wow-couple-info-bottom-wrap2'>
+					                    			<div class='hold-my-button'>
+					                    				<button onClick="Javascript: addCoupleNote(); return false;">Upload</button>
+					                    			</div>
+					                    		</div>
+					                    	</div>
+					                    </td>
+				                    </tr>
+				                </table> -->
+	                    	<!-- </div> -->

@@ -4964,6 +4964,7 @@ button:hover {
 	font-size: 18px;
 	font-weight: bold;
 	color:#7b3f1a;
+	text-align: center;
 }
 
 #wow-session-id {
@@ -4978,6 +4979,8 @@ button:hover {
 	height:28px;
 	font-size: 13px;
 	color: #4b74ab;
+	text-align: right;
+
 }
 
 #wow-session-email span {
@@ -4994,6 +4997,7 @@ button:hover {
 	color: #666666;
 	font-size: 15px;
 	font-weight: bold;
+	text-align: right;
 }
 
 #wow-session-numInfo span {
@@ -6965,16 +6969,24 @@ button:hover {
 	width:100%;
 }
 
+.noteListHolder_couple a {
+	color: #315477;
+}
+
 .noteListHolder_couple a:hover {
 	text-decoration: none;
 	color: #7b3f1a;
 }
 
 .noteItem_couple {
-	border-bottom :1px solid gray;
+	background-color: #f5f5f4;
+	background-size: 100%;
+	border-bottom :2px solid #888888;
 	font-size: 12px;
-	height:22px;
-	line-height: 22px;
+	height:28px;
+	line-height: 29px;
+	border-left: 1px solid #888888;
+	border-right: 1px solid #888888;
 }
 
 .noteItem_couple:hover {
@@ -7840,7 +7852,7 @@ button:hover {
 }
 
 .c_client_info_wow {
-	margin-top: 5%;
+	margin-top: 4%;
 	width:22%;
 	height:100%;
 	border: 1px solid gray;
@@ -7889,6 +7901,12 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	margin-top: 30px;
+	position: relative;
+	/*margin-bottom: 15px;*/
+}
+
+.wow-couple-all-out-head span {
+	color:#666666;
 }
 
 .wow-couple-all-out-head2 {
@@ -7899,36 +7917,94 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	margin-top: 30px;
+	/*margin-bottom: 15px;*/
 }
 
 .wow-couple-info-btn-wrap {
-	background-color: white;
+	/*background-color: #eeece7;
 	border: 1px solid black;
-	border-radius: 5px;
+	border-radius: 5px;*/
 	height:300px;
 	width:100%;
 	margin-left: 5%;
-	/*margin-top: 15%;*/
 	margin-bottom: 15px;
-	/*position: relative;
-  	top: 50%;*/
-  	/*transform: translateY(-50%);*/
+  	overflow-y: scroll;
+    overflow-x:hidden;
+    background-size: 100%;
+    box-shadow: 2px 2px 2px #888888;
+    /*background: url('../images/small_spaces.jpg');*/
+}
+
+.wow-couple-info-btn-wrap-doc {
+	height:300px;
+	width:90%;
+	margin-left: 5%;
+	margin-bottom: 15px;
   	overflow-y: scroll;
     overflow-x:hidden;
 }
 
+.document_holder_couple_madCrazy {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.gimmeAHeadDiv1 {
+	height:20px; 
+	width:100%; 
+	background-color:#c0c9c7; 
+	border-bottom:2px solid black;
+}
+
+.gimmeAHeadDiv2 {
+	height:20px; 
+	width:100%; 
+	background-color:#c0c9c7; 
+	border-top:2px solid black;
+	height:100%;
+	/*bottom:0;*/
+	/*position: absolute;*/
+}
+
+.document-form-couple-wrap {
+	width:100%;
+	height: 20%;
+	position: absolute;
+	bottom: 0;
+	border: 1px solid gray;
+	border-radius: 8px;
+	background-color: #c0c9c7;
+	margin: auto;
+	padding-top: 4%;
+	padding-bottom: 3%;
+}
+
+.document-form-couple-wrap  table {
+	width: 100%;
+	text-align: center;
+}
+
+.document-form-couple-wrap input {
+	font-size: 12px;
+	text-align: center;
+	width: 86%;
+	margin: auto;
+}
+
+.upload_couple_diver {
+	width:100%;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
 .wow-couple-info-btn-wrap2 {
-	/*background-color: white;
-	border: 1px solid black;
-	border-radius: 5px;*/
 	height:300px;
 	width:90%;
 	margin-left: 5%;
-	/*margin-top: 15%;*/
 	margin-bottom: 15px;
-	/*position: relative;
-  	top: 50%;*/
-  	/*transform: translateY(-50%);*/
   	overflow-y: scroll;
     overflow-x:hidden;
 }
@@ -7941,8 +8017,6 @@ button:hover {
 	padding-bottom:3px;
 	border-radius: 7px;
 	border:1px solid gray;
-	/*border-top-left-radius: 5px; 
-	border-bottom-left-radius: 5px;*/ 
 }
 
 .wow-couple-info-bottom-wrap2 {
@@ -7953,8 +8027,6 @@ button:hover {
 	padding-bottom:3px;
 	border-radius: 7px;
 	border:1px solid gray;
-	/*border-top-left-radius: 5px; 
-	border-bottom-left-radius: 5px;*/ 
 }
 
 .hold-my-button {
@@ -7980,20 +8052,63 @@ button:hover {
 	/*margin-left: 5%;*/
 }
 
-.redErrorField {
-
+.new-wow-iframe-double {
+	width:100%;
+	height:50ox;
+	background-color: yellow;
 }
 
-.orangeErrorField {
-
+.damnedWrapperLol {
+	width:54%;
+	height:67vh;
+	float:left;
+	padding-left: 10px;
 }
 
-.redErrorField span {
-
+.new-wow-damned_inner {
+	width:90%;
+	height: 75%;
+	margin: auto;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid gray;
+	border-radius: 8px;
+	padding: 2%;
+	background: url('../images/iml_bkgnd.png');
+	background-size: 100%;
+    box-shadow: 5px 5px 5px #888888;
 }
 
-.orangeErrorField span {
+.damnLeft {
+	width:50%;
+	height:100%;
+	position: relative;
+	float:left;
+}
 
+.damnRight {
+	width:50%;
+	height:100%;
+	position: relative;
+	float:right;
+}
+
+.innerDamn {
+	width:95%;
+	height:95%;
+	margin:auto;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    /*border: 1px solid purple;*/
+}
+
+.uploadIframe {
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	background-color: white;
 }
 
 

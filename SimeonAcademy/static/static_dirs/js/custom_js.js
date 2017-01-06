@@ -4163,6 +4163,7 @@ function initiateListBuilder(json_data) {
 	}
 
 	grab('selectListBuilder_c').innerHTML = html;
+	grab('enterNumber').innerHTML = "(" + String(grab('totalNotes').value) + ")";
 
 	// openPopUp('auto', '/errorLegend/', 400, 160);
 	// createErrorWarning();
@@ -4606,8 +4607,9 @@ function cp_hoverA(clientOption) {
 		bkg = grab('bkgS');
 	}
 
-	img.style.opacity = '0.5';
-	bkg.style.backgroundColor = '#c0bfc0';
+	img.style.opacity = '0.7';
+	bkg.style.backgroundColor = '#d3cfc3';
+	// bkg.style.backgroundColor = '#c0bfc0';
 }
 
 function cp_hoverB(clientOption) {

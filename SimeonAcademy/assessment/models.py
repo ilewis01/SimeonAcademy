@@ -87,6 +87,7 @@ class Drug(models.Model):
 
 class Attachment(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
+	clientID2 = models.CharField(max_length=30, default=None, blank=True, null=True)
 	date = models.DateTimeField(auto_now_add=True, default=None)
 	title = models.CharField(max_length=50, default=None, blank=True, null=True)
 	document = models.FileField(upload_to='documents/', default=None)

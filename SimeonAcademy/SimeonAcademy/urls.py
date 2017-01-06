@@ -76,6 +76,8 @@ urlpatterns = patterns('',
     url(r'^superNoteDisplyer/$', 'assessment.views.superNoteDisplyer'),
     url(r'^editableCoupleNote/$', 'assessment.views.editableCoupleNote'),
     url(r'^blankOnlyErrorHighlighted/$', 'assessment.views.blankOnlyErrorHighlighted'),
+    url(r'^documentLoader/$', 'assessment.views.documentLoader'),
+    url(r'^noteLoader/$', 'assessment.views.noteLoader'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),
