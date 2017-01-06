@@ -4161,6 +4161,15 @@ function initiateListBuilder(json_data) {
 	}
 
 	grab('selectListBuilder_c').innerHTML = html;
+
+	openPopUp('auto', '/errorLegend/', 400, 160);
+	createErrorWarning();
+}
+
+function createErrorWarning() {
+	grab('paid_page_stuff_er').innerHTML = "WARNING";
+	grab('errorBuilderMessage').innerHTML = "Do not refresh this page!";
+	grab('cancelBtn').innerHTML = 'OK';
 }
 
 
@@ -4283,6 +4292,32 @@ function fetchTheDivLeadingNumber(SavName) {
 	return Number(result);
 }
 
+function theOnlyNoteErrorChecker() {
+	hasErrors = false;
+	var subjectDiv = grab('subject');
+	var bodyDiv = grab('c_body');
+	var subVal = String(subjectDiv.value);
+	var bodVal = String(bodyDiv.value);
+
+	if (subVal.length === 0) {
+		hasErrors = true;
+		subjectDiv.style.border = '1px solid red';
+	}
+
+	if (bodVal.length === 0) {
+		hasErrors = true;
+		bodyDiv.style.border = '1px solid red';
+	}
+
+	return hasErrors;
+}
+
+function superBorderToGray(divName) {	
+	divname = String(divname);
+	var div = grab(divname);
+	div.innerHTML = "This is a test";
+}
+
 function coupleNoteErase() {
 	var flagName = String(getPopParent('selectedFlag').value);
 	getPopParent(flagName).value = "False";
@@ -4371,24 +4406,35 @@ function generateNoteHTML_couple(subject, body, flag, load, noteInstance) {
 	return result;
 }
 
+function buildNoteErrorMessages1() {
+	grab('paid_page_stuff_er').innerHTML = "Error";
+	grab('errorBuilderMessage').innerHTML = "The highlighted field(s) cannot be blank";
+	grab('cancelBtn').innerHTML = "OK";
+}
+
 function softSaveNote() {
-	var html 		= "";
-	var builder 	= getPopParent('newNoteBuilder');
-	var newNotes 	= getNewNoteList();
-	var len = Number(newNotes.length);
-
-	for (var i = 0; i < len; i++) {
-		var instance = i + 1;
-		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], newNotes[i]['load'], instance);
-		html += data['subjectHtml'];
-		html += data['bodyyHtml'];
-		html += data['saveFlag'];
-		html += data['load'];
+	if (theOnlyNoteErrorChecker() === true) {
+		openPopUp('auto', '/blankOnlyErrorHighlighted/', 400, 160);
 	}
+	else {
+		var html 		= "";
+		var builder 	= getPopParent('newNoteBuilder');
+		var newNotes 	= getNewNoteList();
+		var len = Number(newNotes.length);
 
-	builder.innerHTML = html;
-	superCoupleSelectDisplayBuilder();
-	window.close();
+		for (var i = 0; i < len; i++) {
+			var instance = i + 1;
+			var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], newNotes[i]['load'], instance);
+			html += data['subjectHtml'];
+			html += data['bodyyHtml'];
+			html += data['saveFlag'];
+			html += data['load'];
+		}
+
+		builder.innerHTML = html;
+		superCoupleSelectDisplayBuilder();
+		window.close();
+	}
 }
 
 function a_imgOpacLo(divName, opacityLevel) {

@@ -26,8 +26,12 @@ side_option_headbody {
 }
 
 .gradient-white {
-	/*background: url('../images/grey1.jpg');*/
 	background: url('../images/greenBk1.png');
+}
+
+.gradient-white-er-sm {
+	background: url('../images/greenBk1.png');
+	background-size: 100%;
 }
 
 .gradient-white-form {
@@ -2788,6 +2792,18 @@ button:hover {
 	font-family: Arial;
 }
 
+#paid_page_stuff_er {
+	width:90%;
+	margin: auto;
+	padding-top: 5%;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color:#6b6b47;
+	font-family: Arial;
+}
+
 #paid_page_stuff2 {
 	width:90%;
 	margin: auto;
@@ -4907,6 +4923,17 @@ button:hover {
 	border-radius: 5px;
 }
 
+.theMainMessageErrors {
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+	color:#824951;
+	font-family: Arial;
+	margin-top: 10px;
+}
+
 .iml-avatar-img {
 	width:100%;
 	height:100%;
@@ -5991,6 +6018,16 @@ button:hover {
 	width: 80px;
 	margin: auto;
 	margin-top: 15%;
+}
+
+.end_save_sequence_er {
+	width: 80px;
+	margin: auto;
+	/*margin-top: 20px;*/
+}
+
+.end_save_sequence_er button{
+	width:80px;
 }
 
 .end_save_sequence2 {
