@@ -4260,12 +4260,92 @@ function retrieveNoteDynamically_couple(subjectDivName, bodyDivName, flagDivName
 }
 
 function initializeCoupleNoteEditor() {
-	grab('the_subject').innerHTML = getPopParent('newNoteSubject').value;
+	var processed = getPopParent('newNoteSubject').value;
+	var subject = fetchTrueSubject(processed);
+	var date = fetchTrueNoteDate(processed);
+	grab('the_subject').innerHTML = date;
 	grab('the_body').innerHTML = getPopParent('newNoteBody').value;
 }
 
+function fetchTrueSubject(subject) {
+	subject = String(subject);
+	trueSubject = '';
+	index = 0;
+
+	for (var i = 0; i < subject.length; i++) {
+		if (subject.charAt(i) === ' ') {
+			index = i;
+			break;
+		}
+	}
+
+	index += 1;
+
+	for (var j = index; j < subject.length; j++) {
+		trueSubject += subject.charAt(j);
+	}
+
+	return trueSubject;
+}
+
+function fetchTrueNoteDate(subject) {
+	subject = String(subject);
+	var trueDate = null;
+	var index = 0;
+	var mm = '';
+	var dd = '';
+	var yy = '';
+
+	for (var i = 0; i < subject.length; i++) {
+		if (subject.charAt(i) !== "/") {
+			mm += subject.charAt(i);
+		}
+		else {
+			index = i + 1;
+			break;
+		}
+	}
+
+	for (var j = index; j < subject.length; j++) {
+		if (subject.charAt(j) !== "/") {
+			dd += subject.charAt(j);
+		}
+		else {
+			index = j + 1;
+			break;
+		}
+	}
+
+	for (var k = index; k < index + 4; k++) {
+		if (subject.charAt(j) !== ":") {
+			yy += subject.charAt(k);
+		}
+	}
+
+	mm = Number(mm);
+
+	if (mm === 1) {mm = 'January';}
+	else if (mm === 2) {mm = 'February';}
+	else if (mm === 3) {mm = 'March';}
+	else if (mm === 4) {mm = 'April';}
+	else if (mm === 5) {mm = 'May';}
+	else if (mm === 6) {mm = 'June';}
+	else if (mm === 7) {mm = 'July';}
+	else if (mm === 8) {mm = 'August';}
+	else if (mm === 9) {mm = 'September';}
+	else if (mm === 10) {mm = 'October';}
+	else if (mm === 11) {mm = 'November';}
+	else {mm = 'December';}
+
+	dd = String(dd);
+	yy = String(yy);
+	return mm + ' ' + dd + ', ' + yy;
+}
+
 function LoadTheDamnNoteData() {
-	grab('subject').value = getPopParent('newNoteSubject').value;
+	var processedSubject = String(getPopParent('newNoteSubject').value);
+
+	grab('subject').value = processedSubject;
 	grab('c_body').innerHTML = getPopParent('newNoteBody').value;
 }
 

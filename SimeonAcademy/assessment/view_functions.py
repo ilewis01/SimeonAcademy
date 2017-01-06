@@ -2153,9 +2153,9 @@ def saveCoupleNotes(request):
 			for wow in wowNotes:
 				if str(wow.id) == note_id:
 					wow.note = body
+					wow.title = subject
 					wow.save()
 					break
-					#write function to correct the subject name
 				else:
 					newNote = Note(clientID=c1, clientID_2=c2, date=date, title=title, note=body, isCouple=True)
 					newNote.save()
