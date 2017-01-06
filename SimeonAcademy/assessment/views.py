@@ -50,7 +50,7 @@ get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
-wowSSNumberDisplayConverterHidden
+wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -1397,7 +1397,6 @@ def coupleSession(request):
 		else:
 			c2_id = None
 			c2_type = str(request.POST.get('c2Type'))
-			c1 = Client.objects.get(id=(superDuperFetchClientID_track(track)))
 
 			if c2_type == "existing":
 				c2_id = request.POST.get('c2_id')
@@ -1406,16 +1405,23 @@ def coupleSession(request):
 			elif c2_type == "new":
 				c2_id = track.c2_id
 
-			c2 = Client.objects.get(id=c2_id)
-			couple = superCoupleStarter(c1.clientID, c2.clientID)
-			couple = Couple(id1=c1.clientID, id2=c2.clientID)
-			content['c1'] = c1
-			content['c2'] = c2
-			content['c1phone'] 	= wowPhoneNumberDisplayConverter(c1.phone)
-			content['c2phone'] 	= wowPhoneNumberDisplayConverter(c2.phone)
-			content['c1ss'] 	= wowSSNumberDisplayConverterHidden(c1.ss_num)
-			content['c2ss'] 	= wowSSNumberDisplayConverterHidden(c2.ss_num)
-			content['title'] 	= "New Note | Simeon Academy"
+			c1 			= Client.objects.get(id=(superDuperFetchClientID_track(track)))
+			c2 			= Client.objects.get(id=c2_id)
+			build 		= superCoupleStarter(c1.clientID, c2.clientID)
+			notes 		= getCoupleNotesWowBuilder(c1.clientID, c2.clientID)
+			couple 		= build['couple']
+			json_data 	= json.dumps(notes)
+
+
+			content['c1'] 		 = c1
+			content['c2'] 		 = c2
+			content['json_data'] = json_data
+			content['c1phone'] 	 = wowPhoneNumberDisplayConverter(c1.phone)
+			content['c2phone'] 	 = wowPhoneNumberDisplayConverter(c2.phone)
+			content['c1ss'] 	 = wowSSNumberDisplayConverterHidden(c1.ss_num)
+			content['c2ss'] 	 = wowSSNumberDisplayConverterHidden(c2.ss_num)
+			content['title'] 	 = "Couple's Therapy | Simeon Academy"
+			content['loadedNotes'] = len(notes)
 			return render_to_response('counselor/client/coupleSession.html', content)
 
 @login_required(login_url='/index')

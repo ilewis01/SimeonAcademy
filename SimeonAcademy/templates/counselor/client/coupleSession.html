@@ -3,16 +3,16 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: ">
+<body class="gradient-white" onLoad="javascript: initiateListBuilder({{json_data}});">
 	<input type='text' id='superTest'>
     <form action='' method='post' id='c_form' name='c_form'> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
       <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
       <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
       <input type='hidden' id='newNoteFlag' name='newNoteFlag'value=''>
-      <input type='hidden' id='numNewNotes' name='numNewNotes'value='0'> <!-- REMEMBER TO CHANGE THIS TO VARIABLE -->
+      <input type='hidden' id='totalNotes' name='totalNotes'value='0'>
       <input type='hidden' id='numberAdded' name='numberAdded'value='0'>
-      <input type='hidden' id='numberLoadedNotes' name='numberLoadedNotes'value='{{numLoadedNotes}}'>
+      <input type='hidden' id='numberLoadedNotes' name='numberLoadedNotes'value='{{loadedNotes}}'>
       <input type='hidden' id='selectedSubject' name='selectedSubject'value='0'>
       <input type='hidden' id='selectedBody' name='selectedBody'value='0'>
       <input type='hidden' id='selectedFlag' name='selectedFlag'value='0'>

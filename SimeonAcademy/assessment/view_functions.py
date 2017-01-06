@@ -2050,6 +2050,51 @@ def superCoupleStarter(c1_clientID, c2_clientID):
 
 	return result
 
+def singleClientNoteMatch(note, clientID):
+	isMatch = False
+	clientID = str(clientID)
+
+	if str(note.clientID) == clientID or str(note.clientID_2) == clientID:
+		isMatch = True
+	return isMatch
+
+
+def doubleClientsNoteMatch(clientID1, clientID2, note):
+	isMatch = False
+	match1 = singleClientNoteMatch(note, clientID1)
+	match2 = singleClientNoteMatch(note, clientID2)
+
+	if match1 == True and match2 == True:
+		isMatch = True
+
+	return isMatch
+
+def noteSerializer(noteList):
+	finalList = []
+
+	for n in noteList:
+		data 			 = {}
+		data['subject']  = n.title
+		data['bodyData'] = n.note
+		data['flag'] 	 = 'False'
+		data['load'] 	 = 'True'
+		finalList.append(data)
+
+	return finalList
+
+
+def getCoupleNotesWowBuilder(clientID1, clientID2):
+	newList 	= []
+	finalList 	= []
+	noteList 	= Note.objects.all().order_by('-date')
+
+	for n in noteList:
+		if n.isCouple == True and doubleClientsNoteMatch(clientID1, clientID2, n) == True:
+			newList.append(n)
+
+	finalList = noteSerializer(newList)
+	return finalList
+
 def sessionEqual(s1, s2):
 	isEqual = False
 	if str(s1.id) == str(s2.id) and clientEqual(s1.client, s2.client):

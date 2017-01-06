@@ -4133,65 +4133,50 @@ function addCoupleNote() {
 	openPopUp('auto', '/coupleNoteDual/', 600, 410);
 }
 
-function getNewNoteList() {
-	var newSubject 		= grab('subject');
-	var newBody 		= grab('c_body');
-	var numNotes 		= getPopParent('numNewNotes');
-	var numAdded 		= getPopParent('numberAdded');
-	var notes 			= [];
 
-	var created = Number(numAdded.value);
-	created = created + 1;
-	numAdded.value = created;
+function initiateListBuilder(json_data) {
+	var html = '';
+	grab('totalNotes').value = json_data.length;
 
-	for (var i = 1; i <= Number(numNotes.value); i++) {
-		var subjName 	= "nnSubj_" + String(i);
-		var bodyName 	= "nnBody_" + String(i);
-		var saveName 	= "saveNote_" + String(i);
-		var data 		= {}
-
-		data['subject'] = String(getPopParent(subjName).value);
-		data['body'] 	= String(getPopParent(bodyName).value);
-		data['flag'] 	= String(getPopParent(saveName).value);
-		notes.push(data);
+	for (var i = 0; i < json_data.length; i++) {
+		var instance = Number(i + 1);
+		var body = json_data[i]['bodyData'];
+		var subject = json_data[i]['subject'];
+		var flag = json_data[i]['flag'];
+		var load = json_data[i]['load'];
+		var hd = generateNoteHTML_couple(subject, body, flag, load, instance);
+		html += String(hd['subjectHtml']);
+		html += String(hd['bodyyHtml']);
+		html += String(hd['saveFlag']);
+		html += String(hd['load']);
 	}
 
-	var updatedNumNotes = (Number(numNotes.value) + 1);
-	numNotes.value 		= updatedNumNotes;
-	var newData 		= {}
-	newData['subject'] 	= "Today: " + String(newSubject.value);
-	newData['body'] 	= newBody.value;
-	newData['flag'] 	= "True";
-	notes.push(newData);
+	grab('newNoteBuilder').innerHTML = html;
+	html = '';
 
-	return notes;
+	for (var j = 0; j < json_data.length; j++) {
+		var label = cleanCoupleNoteTitle(json_data[j]['subject']);
+		var inst2 = Number(j + 1);
+		html += String(generate_couple_display_select_html(label, inst2));
+	}
+
+	grab('selectListBuilder_c').innerHTML = html;
 }
 
-function generateNoteHTML_couple(subject, body, flag, noteInstance) {
-	var result 		= {};
-	subject 		= String(subject);
-	body 			= String(body);
-	flag 			= String(flag);
-	noteInstance 	= String(noteInstance);
 
-	var subjId = "nnSubj_" + noteInstance;
-	var bodyId = "nnBody_" + noteInstance;
-	var saveId = "saveNote_" + noteInstance;
+function generate_couple_display_select_html(subject, value) {
+	var name = 'list_' + String(value);
+	var realSubName = 'nnSubj_' + String(value);
+	var realBodName = 'nnBody_' + String(value);
+	var realSavName = 'saveNote_' + String(value);
+	subject = String(subject);
 
-	var subInput = "<input type=\"hidden\" name=\"" + subjId + "\" ";
-	subInput += "id=\"" + subjId + "\" value=\"" + subject + "\">";
+	var html = "<a href=\"Javascript: retrieveNoteDynamically_couple(\'" + realSubName + "\', \'" + realBodName + "\' , \'" + realSavName + "\');\">";
+	html += "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
+	html += subject;
+	html += "</div></a>";
 
-	var bodInput = "<input type=\"hidden\" name=\"" + bodyId + "\" ";
-	bodInput += "id=\"" + bodyId + "\" value=\"" + body + "\">";
-
-	var saveFlag = "<input type=\"hidden\" name=\"" + saveId + "\" ";
-	saveFlag += "id=\"" + saveId + "\" value=\"" + flag + "\">";
-
-	result['subjectHtml'] = subInput;
-	result['bodyyHtml'] = bodInput;
-	result['saveFlag'] = saveFlag;
-
-	return result;
+	return html;
 }
 
 function cleanCoupleNoteTitle(title) {
@@ -4211,16 +4196,16 @@ function cleanCoupleNoteTitle(title) {
 }
 
 function getCoupleSelectListTitles() {
-	var numNotes = Number(getPopParent('numNewNotes').value);
+	var totalNotes = Number(getPopParent('totalNotes').value);
 	var results = [];
 	var pre = 'nnSubj_';
-	var savedPre = 'saveNote_';
+	var loadPre = 'load_';
 
-	for (var i = 1; i <= numNotes; i++) {
-		var flagjId = savedPre + String(i);
-		var flag = String(getPopParent(flagjId).value);
+	for (var i = 1; i <= totalNotes; i++) {
+		var loadID = loadPre + String(i);
+		var load = String(getPopParent(loadID).value);
 
-		if (flag === "True") {
+		if (load === "True") {
 			var subjId = pre + String(i);
 			var subject = String(getPopParent(subjId).value);
 			var processed = cleanCoupleNoteTitle(subject);
@@ -4229,21 +4214,6 @@ function getCoupleSelectListTitles() {
 	}
 
 	return results;
-}
-
-function generate_couple_display_select_html(subject, value) {
-	var name = 'list_' + String(value);
-	var realSubName = 'nnSubj_' + String(value);
-	var realBodName = 'nnBody_' + String(value);
-	var realSavName = 'saveNote_' + String(value);
-	subject = String(subject);
-
-	var html = "<a href=\"Javascript: retrieveNoteDynamically_couple(\'" + realSubName + "\', \'" + realBodName + "\' , \'" + realSavName + "\');\">";
-	html += "<div class=\"noteItem_couple\" id=\"" + name + "\">&nbsp&nbsp&nbsp";
-	html += subject;
-	html += "</div></a>";
-
-	return html;
 }
 
 function superCoupleSelectDisplayBuilder() {
@@ -4319,6 +4289,8 @@ function coupleNoteErase() {
 	//Handle the number added if needed
 	var numberLoadedNotes = Number(getPopParent('numberLoadedNotes').value);
 	var leadingNumber = fetchTheDivLeadingNumber(flagName);
+	var loadName = "load_" + String(leadingNumber);
+	getPopParent(loadName).value = "False";
 
 	if (leadingNumber > numberLoadedNotes) {
 		var addedDiv = getPopParent('numberAdded');
@@ -4330,19 +4302,88 @@ function coupleNoteErase() {
 	window.close();
 }
 
+function getNewNoteList() {
+	var newSubject 		= grab('subject');
+	var newBody 		= grab('c_body');
+	var numAdded 		= getPopParent('numberAdded');
+	var totalNotes 		= Number(getPopParent('totalNotes').value);
+	var notes 			= [];
+
+	var newData 		= {}
+	newData['subject'] 	= "Today: " + String(newSubject.value);
+	newData['body'] 	= newBody.value;
+	newData['flag'] 	= "True";
+	newData['load'] 	= "True";
+	notes.push(newData);
+
+	for (var i = 1; i <= totalNotes; i++) {
+		var subjName 	= "nnSubj_" + String(i);
+		var bodyName 	= "nnBody_" + String(i);
+		var saveName 	= "saveNote_" + String(i);
+		var loadName 	= "load_" + String(i);
+		var data 		= {}
+
+		data['subject'] = String(getPopParent(subjName).value);
+		data['body'] 	= String(getPopParent(bodyName).value);
+		data['flag'] 	= String(getPopParent(saveName).value);
+		data['load'] 	= String(getPopParent(loadName).value);
+
+		notes.push(data);
+	}
+
+	var created = Number(numAdded.value);
+	created = created + 1;
+	numAdded.value = created;
+	getPopParent('totalNotes').value = notes.length;
+	return notes;
+}
+
+function generateNoteHTML_couple(subject, body, flag, load, noteInstance) {
+	var result 		= {};
+	subject 		= String(subject);
+	body 			= String(body);
+	flag 			= String(flag);
+	load 			= String(load);
+	noteInstance 	= String(noteInstance);
+
+	var subjId = "nnSubj_" + noteInstance;
+	var bodyId = "nnBody_" + noteInstance;
+	var saveId = "saveNote_" + noteInstance;
+	var loadId = "load_" + noteInstance;
+
+	var subInput = "<input type=\"hidden\" name=\"" + subjId + "\" ";
+	subInput += "id=\"" + subjId + "\" value=\"" + subject + "\">";
+
+	var bodInput = "<input type=\"hidden\" name=\"" + bodyId + "\" ";
+	bodInput += "id=\"" + bodyId + "\" value=\"" + body + "\">";
+
+	var saveFlag = "<input type=\"hidden\" name=\"" + saveId + "\" ";
+	saveFlag += "id=\"" + saveId + "\" value=\"" + flag + "\">";
+
+	var loadFlag = "<input type=\"hidden\" name=\"" + loadId + "\" ";
+	loadFlag += "id=\"" + loadId + "\" value=\"" + load + "\">";
+
+	result['subjectHtml'] = subInput;
+	result['bodyyHtml'] = bodInput;
+	result['saveFlag'] = saveFlag;
+	result['load'] = loadFlag;
+
+	return result;
+}
+
 function softSaveNote() {
 	var html 		= "";
 	var builder 	= getPopParent('newNoteBuilder');
 	var newNotes 	= getNewNoteList();
-	var t = '';
 	var len = Number(newNotes.length);
 
 	for (var i = 0; i < len; i++) {
 		var instance = i + 1;
-		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], instance);
+		var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], newNotes[i]['load'], instance);
 		html += data['subjectHtml'];
 		html += data['bodyyHtml'];
 		html += data['saveFlag'];
+		html += data['load'];
 	}
 
 	builder.innerHTML = html;
