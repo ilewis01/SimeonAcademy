@@ -4195,10 +4195,11 @@ function cleanCoupleNoteTitle(title) {
 	var result = '';
 	var len = title.length;
 
-	if (30 <= len) {
-		for (var i = 0; i < 37; i++) {
+	if (25 <= len) {
+		for (var i = 0; i < 25; i++) {
 			result += title.charAt(i);
 		}
+		result += '...';
 	}
 	else {
 		result = title;

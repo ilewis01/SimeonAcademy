@@ -2142,15 +2142,27 @@ def saveCoupleNotes(request):
 		body 			= request.POST.get(body_name)
 		shouldSave 		= truePythonBool(request.POST.get(save_name))
 
+		wowNotes = nonSerializedNoteList(c1, c2)
+
 		if shouldSave == True:
 			d_title = str(date.month) + '/' + str(date.day) + '/' + str(date.year)
+			the_IDNAME = 'theId_' + index
+			note_id = str(request.POST.get(the_IDNAME))
 			title = prepareNoteTitle(d_title, subject)
-			newNote = Note(clientID=c1, clientID_2=c2, date=date, title=title, note=body, isCouple=True)
-			newNote.save()
+
+			for wow in wowNotes:
+				if str(wow.id) == note_id:
+					wow.note = body
+					wow.save()
+					break
+					#write function to correct the subject name
+				else:
+					newNote = Note(clientID=c1, clientID_2=c2, date=date, title=title, note=body, isCouple=True)
+					newNote.save()
+					break
 
 		if len(deleteIds) > 0:
 			flagged_ids = getFlaggedIdList(deleteIds)			
-			wowNotes = nonSerializedNoteList(c1, c2)
 			
 			for f in flagged_ids:
 				for w in wowNotes:
