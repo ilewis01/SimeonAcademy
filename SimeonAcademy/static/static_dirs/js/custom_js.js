@@ -4293,34 +4293,49 @@ function fetchTrueSubject(subject) {
 function fetchTrueNoteDate(subject) {
 	subject = String(subject);
 	var trueDate = null;
+	var test = '';
 	var index = 0;
 	var mm = '';
 	var dd = '';
 	var yy = '';
 
-	for (var i = 0; i < subject.length; i++) {
-		if (subject.charAt(i) !== "/") {
-			mm += subject.charAt(i);
-		}
-		else {
-			index = i + 1;
-			break;
-		}
+	for (var apple = 0; apple < 5; apple++) {
+		test += subject.charAt(apple);
 	}
 
-	for (var j = index; j < subject.length; j++) {
-		if (subject.charAt(j) !== "/") {
-			dd += subject.charAt(j);
-		}
-		else {
-			index = j + 1;
-			break;
-		}
+	if (test === 'Today') {
+		var today = new Date()
+		// mm = today.getMonth();
+		// dd = today.getDay();
+		mm = today.getMonth + 1;
+		dd = today.getDay() + 1;
+		yy = today.getFullYear();
 	}
+	else {
+		for (var i = 0; i < subject.length; i++) {
+			if (subject.charAt(i) !== "/") {
+				mm += subject.charAt(i);
+			}
+			else {
+				index = i + 1;
+				break;
+			}
+		}
 
-	for (var k = index; k < index + 4; k++) {
-		if (subject.charAt(j) !== ":") {
-			yy += subject.charAt(k);
+		for (var j = index; j < subject.length; j++) {
+			if (subject.charAt(j) !== "/") {
+				dd += subject.charAt(j);
+			}
+			else {
+				index = j + 1;
+				break;
+			}
+		}
+
+		for (var k = index; k < index + 4; k++) {
+			if (subject.charAt(j) !== ":") {
+				yy += subject.charAt(k);
+			}
 		}
 	}
 
