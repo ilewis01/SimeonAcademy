@@ -1420,6 +1420,8 @@ def coupleSession(request):
 			content['c2phone'] 	 = wowPhoneNumberDisplayConverter(c2.phone)
 			content['c1ss'] 	 = wowSSNumberDisplayConverterHidden(c1.ss_num)
 			content['c2ss'] 	 = wowSSNumberDisplayConverterHidden(c2.ss_num)
+			content['couple_id'] = couple.id
+			content['session_id'] = track.s_id
 			content['title'] 	 = "Couple's Therapy | Simeon Academy"
 			content['loadedNotes'] = len(notes)
 			return render_to_response('counselor/client/coupleSession.html', content)
@@ -2105,6 +2107,11 @@ def uni_generic_exit(request):
 				ut_id = request.POST.get('ut_id', '')
 				form = UrineResults.objects.get(id=ut_id)
 				type_header = 'Urine Test'
+
+			elif str(form_type) == 'couple':
+				couple_id = request.POST.get('couple_id', '')
+				form = Couple.objects.get(id=couple_id)
+				type_header = "Couple's Therapy"
 
 			saveForm(request, form_type, last_section, form)
 			force_URL_priority(form_type, last_section, form)

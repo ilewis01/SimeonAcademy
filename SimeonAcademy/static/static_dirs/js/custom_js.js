@@ -4139,16 +4139,18 @@ function initiateListBuilder(json_data) {
 	grab('totalNotes').value = json_data.length;
 
 	for (var i = 0; i < json_data.length; i++) {
-		var instance = Number(i + 1);
-		var body = json_data[i]['bodyData'];
-		var subject = json_data[i]['subject'];
-		var flag = json_data[i]['flag'];
-		var load = json_data[i]['load'];
-		var hd = generateNoteHTML_couple(subject, body, flag, load, instance);
+		var instance 	= Number(i + 1);
+		var body 		= json_data[i]['bodyData'];
+		var subject 	= json_data[i]['subject'];
+		var flag 		= json_data[i]['flag'];
+		var load 		= json_data[i]['load'];
+		var the_id 		= json_data[i]['id']
+		var hd = generateNoteHTML_couple(subject, body, flag, load, the_id, instance);
 		html += String(hd['subjectHtml']);
 		html += String(hd['bodyyHtml']);
 		html += String(hd['saveFlag']);
 		html += String(hd['load']);
+		html += String(hd['id']);
 	}
 
 	grab('newNoteBuilder').innerHTML = html;
@@ -4162,8 +4164,8 @@ function initiateListBuilder(json_data) {
 
 	grab('selectListBuilder_c').innerHTML = html;
 
-	openPopUp('auto', '/errorLegend/', 400, 160);
-	createErrorWarning();
+	// openPopUp('auto', '/errorLegend/', 400, 160);
+	// createErrorWarning();
 }
 
 function createErrorWarning() {
@@ -4266,17 +4268,7 @@ function LoadTheDamnNoteData() {
 	grab('c_body').innerHTML = getPopParent('newNoteBody').value;
 }
 
-function superCoupleSaveEditor() {
-	var SubName = String(getPopParent('selectedSubject').value);
-	var BodName = String(getPopParent('selectedBody').value);
-	var SavName = String(getPopParent('selectedFlag').value);
 
-	getPopParent(SubName).value = grab('subject').value;
-	getPopParent(BodName).value = grab('c_body').value;
-	getPopParent(SavName).value = "True";
-
-	window.close();
-}
 
 function fetchTheDivLeadingNumber(SavName) {
 	SavName = String(SavName);
@@ -4315,7 +4307,6 @@ function theOnlyNoteErrorChecker() {
 function superBorderToGray(divName) {	
 	divname = String(divname);
 	var div = grab(divname);
-	div.innerHTML = "This is a test";
 }
 
 function coupleNoteErase() {
@@ -4326,6 +4317,12 @@ function coupleNoteErase() {
 	var leadingNumber = fetchTheDivLeadingNumber(flagName);
 	var loadName = "load_" + String(leadingNumber);
 	getPopParent(loadName).value = "False";
+
+	var currentDeletes = String(getPopParent('delete_ids').value);
+	var del_id = "theId_" + String(leadingNumber);
+	var addToDeleteList = String(getPopParent(del_id).value);
+	var newDelList = currentDeletes + addToDeleteList + '~';
+	getPopParent('delete_ids').value = newDelList;
 
 	if (leadingNumber > numberLoadedNotes) {
 		var addedDiv = getPopParent('numberAdded');
@@ -4349,6 +4346,7 @@ function getNewNoteList() {
 	newData['body'] 	= newBody.value;
 	newData['flag'] 	= "True";
 	newData['load'] 	= "True";
+	newData['id'] 		= "no_id";
 	notes.push(newData);
 
 	for (var i = 1; i <= totalNotes; i++) {
@@ -4356,12 +4354,14 @@ function getNewNoteList() {
 		var bodyName 	= "nnBody_" + String(i);
 		var saveName 	= "saveNote_" + String(i);
 		var loadName 	= "load_" + String(i);
+		var noteID 		= "theId_" + String(i);
 		var data 		= {}
 
 		data['subject'] = String(getPopParent(subjName).value);
 		data['body'] 	= String(getPopParent(bodyName).value);
 		data['flag'] 	= String(getPopParent(saveName).value);
 		data['load'] 	= String(getPopParent(loadName).value);
+		data['id'] 		= String(getPopParent(noteID).value);
 
 		notes.push(data);
 	}
@@ -4373,18 +4373,20 @@ function getNewNoteList() {
 	return notes;
 }
 
-function generateNoteHTML_couple(subject, body, flag, load, noteInstance) {
+function generateNoteHTML_couple(subject, body, flag, load, the_id, noteInstance) {
 	var result 		= {};
 	subject 		= String(subject);
 	body 			= String(body);
 	flag 			= String(flag);
 	load 			= String(load);
+	the_id 			= String(the_id)
 	noteInstance 	= String(noteInstance);
 
 	var subjId = "nnSubj_" + noteInstance;
 	var bodyId = "nnBody_" + noteInstance;
 	var saveId = "saveNote_" + noteInstance;
 	var loadId = "load_" + noteInstance;
+	var noteId = "theId_" + noteInstance;
 
 	var subInput = "<input type=\"hidden\" name=\"" + subjId + "\" ";
 	subInput += "id=\"" + subjId + "\" value=\"" + subject + "\">";
@@ -4398,18 +4400,16 @@ function generateNoteHTML_couple(subject, body, flag, load, noteInstance) {
 	var loadFlag = "<input type=\"hidden\" name=\"" + loadId + "\" ";
 	loadFlag += "id=\"" + loadId + "\" value=\"" + load + "\">";
 
-	result['subjectHtml'] = subInput;
-	result['bodyyHtml'] = bodInput;
-	result['saveFlag'] = saveFlag;
-	result['load'] = loadFlag;
+	var id_input = "<input type=\"hidden\" name=\"" + noteId + "\" ";
+	id_input += "id=\"" + noteId + "\" value=\"" + the_id + "\">";
+
+	result['subjectHtml'] 	= subInput;
+	result['bodyyHtml'] 	= bodInput;
+	result['saveFlag'] 		= saveFlag;
+	result['load'] 			= loadFlag;
+	result['id'] 			= id_input;
 
 	return result;
-}
-
-function buildNoteErrorMessages1() {
-	grab('paid_page_stuff_er').innerHTML = "Error";
-	grab('errorBuilderMessage').innerHTML = "The highlighted field(s) cannot be blank";
-	grab('cancelBtn').innerHTML = "OK";
 }
 
 function softSaveNote() {
@@ -4424,15 +4424,38 @@ function softSaveNote() {
 
 		for (var i = 0; i < len; i++) {
 			var instance = i + 1;
-			var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], newNotes[i]['load'], instance);
+			var data = generateNoteHTML_couple(newNotes[i]['subject'], newNotes[i]['body'], newNotes[i]['flag'], newNotes[i]['load'], newNotes[i]['id'], instance);
 			html += data['subjectHtml'];
 			html += data['bodyyHtml'];
 			html += data['saveFlag'];
 			html += data['load'];
+			html += data['id'];
 		}
 
 		builder.innerHTML = html;
 		superCoupleSelectDisplayBuilder();
+		window.close();
+	}
+}
+
+function clearRedErrorBorders(divname) {
+	divname = String(divname);
+	grab(divname).style.border = '1px solid gray';
+}
+
+function superCoupleSaveEditor() {
+	if (theOnlyNoteErrorChecker() === true) {
+		openPopUp('auto', '/blankOnlyErrorHighlighted/', 400, 160);
+	}
+	else {
+		var SubName = String(getPopParent('selectedSubject').value);
+		var BodName = String(getPopParent('selectedBody').value);
+		var SavName = String(getPopParent('selectedFlag').value);
+
+		getPopParent(SubName).value = grab('subject').value;
+		getPopParent(BodName).value = grab('c_body').value;
+		getPopParent(SavName).value = "True";
+
 		window.close();
 	}
 }
@@ -4453,13 +4476,13 @@ function a_imgOpacHi(divName) {
 
 function couple_to_optionsSTUFF() {
 	var form = grab('c_form');
-	form.action = "/clientOptions/";
+	form.action = "/uni_generic_exit/";
 	form.submit();
 }
 
 function exit_to_home_CoupleSession() {
 	var form = grab('c_form');
-	form.action = "/adminHome/";
+	form.action = "/clientOptions/";
 	form.submit();
 }
 

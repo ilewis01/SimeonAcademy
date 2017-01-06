@@ -2076,6 +2076,7 @@ def noteSerializer(noteList):
 		data 			 = {}
 		data['subject']  = n.title
 		data['bodyData'] = n.note
+		data['id'] 		 = n.id
 		data['flag'] 	 = 'False'
 		data['load'] 	 = 'True'
 		finalList.append(data)
@@ -2094,6 +2095,68 @@ def getCoupleNotesWowBuilder(clientID1, clientID2):
 
 	finalList = noteSerializer(newList)
 	return finalList
+
+def nonSerializedNoteList(clientID1, clientID2):
+	newList 	= []
+	noteList 	= Note.objects.all().order_by('-date')
+
+	for n in noteList:
+		if n.isCouple == True and doubleClientsNoteMatch(clientID1, clientID2, n) == True:
+			newList.append(n)
+
+	return newList
+
+def getFlaggedIdList(flist):
+	flist = str(flist)
+	the_ids = []
+	temp = ''
+
+	for f in flist:
+		if str(f) != '~':
+			temp += str(f)
+		else:
+			the_ids.append(temp)
+			temp = ''
+
+	return the_ids
+
+def saveCoupleNotes(request):
+	numberNotes = int(request.POST.get('totalNotes'))
+	c1 = request.POST.get('c1_tag')
+	c2 = request.POST.get('c2_tag')
+	deleteIds = str(request.POST.get('delete_ids'))
+	subj_id = 'nnSubj_'
+	body_id = 'nnBody_'
+	save_id = 'saveNote_'
+	noteList = []
+	date = datetime.now()
+	date = date.date()
+	shouldDelete = False
+
+	for i in range(numberNotes):
+		index = str(i + 1)
+		subject_name 	= subj_id + index
+		body_name 		= body_id + index
+		save_name 		= save_id + index
+		subject 		= request.POST.get(subject_name)
+		body 			= request.POST.get(body_name)
+		shouldSave 		= truePythonBool(request.POST.get(save_name))
+
+		if shouldSave == True:
+			d_title = str(date.month) + '/' + str(date.day) + '/' + str(date.year)
+			title = prepareNoteTitle(d_title, subject)
+			newNote = Note(clientID=c1, clientID_2=c2, date=date, title=title, note=body, isCouple=True)
+			newNote.save()
+
+		if len(deleteIds) > 0:
+			flagged_ids = getFlaggedIdList(deleteIds)			
+			wowNotes = nonSerializedNoteList(c1, c2)
+			
+			for f in flagged_ids:
+				for w in wowNotes:
+					if str(f) == str(w.id):
+						w.delete()
+
 
 def sessionEqual(s1, s2):
 	isEqual = False
@@ -12480,6 +12543,21 @@ def openForm(form_type, form, client):
 				u.isOpen = False
 				u.save()
 
+def prepareNoteTitle(newPre, title):
+	newTitle = ''
+	ending = ''
+	newPre = str(newPre)
+
+	for i in range(7, len(title)):
+		ending += title[i]
+
+	newTitle = newPre + ": " + ending
+	return newTitle
+
+
+
+
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 ############################################################## END OPEN/CLOSE #############################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
@@ -12943,6 +13021,8 @@ def saveForm(request, form_type, section, form):
 		saveUT(request, form)
 	elif form_type == 'discharge':
 		saveDischarge(request, discharge)
+	elif form_type == 'couple':
+		saveCoupleNotes(request)
 
 def saveAndFinish(request, form_type, section, form):
 	if form_type == 'am':

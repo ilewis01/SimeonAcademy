@@ -59,7 +59,7 @@ class Note(models.Model):
 	isCouple = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return str(self.date) + '/' + str(self.title)
+		return self.title
 
 class State(models.Model):
 	state = models.CharField(max_length=2, default=None, blank=True, null=True)
