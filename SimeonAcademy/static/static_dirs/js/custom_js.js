@@ -4263,7 +4263,9 @@ function initializeCoupleNoteEditor() {
 	var processed = getPopParent('newNoteSubject').value;
 	var subject = fetchTrueSubject(processed);
 	var date = fetchTrueNoteDate(processed);
-	grab('the_subject').innerHTML = date;
+	var html = "<div><b>Date created: </b><em><span>" + date + "</span></em></div>";
+	grab('editableDateDiv').innerHTML = html;
+	grab('the_subject').innerHTML = subject;
 	grab('the_body').innerHTML = getPopParent('newNoteBody').value;
 }
 
@@ -4344,8 +4346,8 @@ function fetchTrueNoteDate(subject) {
 
 function LoadTheDamnNoteData() {
 	var processedSubject = String(getPopParent('newNoteSubject').value);
-
-	grab('subject').value = processedSubject;
+	var subject = fetchTrueSubject(processedSubject);
+	grab('subject').value = subject;
 	grab('c_body').innerHTML = getPopParent('newNoteBody').value;
 }
 

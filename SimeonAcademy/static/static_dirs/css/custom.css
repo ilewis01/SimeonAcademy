@@ -7001,8 +7001,23 @@ button:hover {
 	width:95%;
 	height: 23px;
 	margin: auto;
-	margin-top: 12px;
+	margin-top: 7px;
 	margin-bottom: 4px;
+	color:#495382;
+}
+
+#editableDateDiv {
+	text-align: left;
+	font-size: 11px;
+	width:80%;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#editableDateDiv span {
+	color:#745632;
+	/*color: #824951;*/
 }
 
 .comment_page_body_edit {
@@ -7010,7 +7025,7 @@ button:hover {
 	font-size: 12px;
 	font-style:italic;
 	width:80%;
-	height:50%;
+	height:47%;
 	margin: auto;
 	margin-bottom: 1%;
 	overflow-y: scroll;
