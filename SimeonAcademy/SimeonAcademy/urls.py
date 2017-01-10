@@ -79,6 +79,7 @@ urlpatterns = patterns('',
     url(r'^documentLoader/$', 'assessment.views.documentLoader'),
     url(r'^noteLoader/$', 'assessment.views.noteLoader'),
     url(r'^updateExistingBaseless/$', 'assessment.views.updateExistingBaseless'),
+    url(r'^baselessUpdated/$', 'assessment.views.baselessUpdated'),
 
     ## Admin client option pages
     url(r'^newClient/$', 'assessment.views.newClient'),

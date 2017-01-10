@@ -50,7 +50,8 @@ get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
-wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates
+wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
+changeAndUpdateExistingClient
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -518,13 +519,82 @@ def updateExistingBaseless(request):
 			data['probationOfficer']	= request.POST.get('probationOfficer')
 			data['emer_contact_name'] 	= request.POST.get('emer_contact_name')
 			data['state'] 				= State.objects.get(id=(request.POST.get('state')))
-			data['ref_id'] 				= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+			data['reason_ref'] 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
 			client 		 				= Client.objects.get(id=(request.POST.get('client_id')))
 			updates 					= fetchExistingClientUpdates(data, client)
 
+			content['street_no'] 			= data['street_no']
+			content['street_name'] 			= data['street_name']
+			content['apartment_no'] 		= data['apartment_no']
+			content['city'] 				= data['city']
+			content['zip_code'] 			= data['zip_code']
+			content['phone'] 				= data['phone']
+			content['emer_phone'] 			= data['emer_phone']
+			content['work_phone'] 			= data['work_phone']
+			content['probation_phone']	 	= data['probation_phone']
+			content['email'] 				= data['email']
+			content['probationOfficer'] 	= data['probationOfficer']
+			content['emer_contact_name'] 	= data['emer_contact_name']
+			content['state'] 				= data['state']
+			content['reason_ref'] 			= data['reason_ref']
+
 			content['updates'] 			= updates
+			content['client'] 			= client
 			content['title'] 			= "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/updateExistingBaseless.html', content)
+
+@login_required(login_url='/index')
+def baselessUpdated(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			street_no 			= request.POST.get('street_no')
+			street_name			= request.POST.get('street_name')
+			apartment_no		= request.POST.get('apartment_no')
+			city 				= request.POST.get('city')				
+			zip_code 			= request.POST.get('zip_code')
+			phone 				= request.POST.get('phone')
+			emer_phone 			= request.POST.get('emer_phone')
+			work_phone			= request.POST.get('work_phone')
+			probation_phone 	= request.POST.get('probation_phone')
+			email				= request.POST.get('email')
+			probationOfficer	= request.POST.get('probationOfficer')
+			emer_contact_name 	= request.POST.get('emer_contact_name')
+			state 				= State.objects.get(id=(request.POST.get('state')))
+			client 				= Client.objects.get(id=(request.POST.get('client_id')))
+
+			changeAndUpdateExistingClient(street_no, client.street_no, 'street_no', client)
+			changeAndUpdateExistingClient(street_name, client.street_name, 'street_name', client)
+			changeAndUpdateExistingClient(apartment_no, client.apartment_no, 'apartment_no', client)
+			changeAndUpdateExistingClient(city, client.city, 'city', client)
+			changeAndUpdateExistingClient(zip_code, client.zip_code, 'zip_code', client)
+			changeAndUpdateExistingClient(phone, client.phone, 'phone', client)
+			changeAndUpdateExistingClient(emer_phone, client.emer_phone, 'emer_phone', client)
+			changeAndUpdateExistingClient(work_phone, client.work_phone, 'work_phone', client)
+			changeAndUpdateExistingClient(probation_phone, client.probation_phone, 'probation_phone', client)
+			changeAndUpdateExistingClient(email, client.email, 'email', client)
+			changeAndUpdateExistingClient(probationOfficer, client.probationOfficer, 'probationOfficer', client)
+			changeAndUpdateExistingClient(emer_contact_name, client.emer_contact_name, 'emer_contact_name', client)
+			changeAndUpdateExistingClient(state, client.state, 'state', client)
+
+			content['title'] 	= "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/baselessUpdated.html', content)
 
 @login_required(login_url='/index')
 def newClientAborted(request):

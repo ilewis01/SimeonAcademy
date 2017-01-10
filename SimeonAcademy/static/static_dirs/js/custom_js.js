@@ -3268,6 +3268,18 @@ function startCoupleSession() {
 	openPopUp('auto', '/startCoupleSession/', 350, 370);
 }
 
+function startCoupleSession_refresh() {
+	var form = grab('c_form');
+	form.action = '/startCoupleSession/';
+	form.submit();
+	var w = 350, h = 390;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+}
+
 function setCouplePair(client2_id) {
 	getPopParent('c2_id').value = String(client2_id);
 	getPopParent('c2Type').value = "existing";
@@ -3607,6 +3619,41 @@ function newClient_fullErrorChecker() {
 
 }
 
+
+
+function chooseAsIsCouple2() {
+	var form = getPopParent('c_form');
+	getPopParent('c2Type').value = 'existing';
+	getPopParent('c2_id').value = grab('client_id').value;
+	form.action = '/coupleSession/';
+	form.submit();
+	window.close();
+}
+
+function saveBaselessUpdates() {
+	var form1 = getPopParent('c_form');
+	var form2 = grab('c_form');
+	var w = 250, h = 250;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+
+	getPopParent('c2Type').value = 'existing';
+	getPopParent('c2_id').value = grab('client_id').value;
+
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+
+	form1.action = '/coupleSession/';
+	form2.action = '/baselessUpdated/';
+	form1.submit();
+	form2.submit();
+}
+
+function forwardToUpdateCouple2() {
+	grab('c_form').submit();
+}
+
 function processNewClientFinalNumbers(div) {
 	result = null;
 	value = String(div.value);
@@ -3618,24 +3665,8 @@ function processNewClientFinalNumbers(div) {
 	div.value = result;
 }
 
-function chooseAsIsCouple2() {
-	var form = getPopParent('c_form');
-	getPopParent('c2Type').value = 'existing';
-	getPopParent('c2_id').value = grab('client_id').value;
-	form.action = '/coupleSession/';
-	form.submit();
-	window.close();
-}
-
-function forwardToUpdateCouple2() {
-	grab('c_form').submit();
-}
-
 
 function saveBaselessClient() {
-	var newssn		  = grab('ss_num').value;
-	processNewClientFinalNumbers(newssn);
-
 	var report = newClient_fullErrorChecker();
 	var boolText = String(report['hasErrors']);
 
@@ -3645,12 +3676,14 @@ function saveBaselessClient() {
 	else {
 		if (grab('photo').value.length > 0) {
 			grab('hasImage').value = "True";
-			processNewClientFinalNumbers(grab('ss_num'));
-			processNewClientFinalNumbers(grab('phone'));
-			processNewClientFinalNumbers(grab('work_phone'));
-			processNewClientFinalNumbers(grab('probation_phone'));
-			processNewClientFinalNumbers(grab('emer_phone'));
 		}
+
+		processNewClientFinalNumbers(grab('ss_num'));
+		processNewClientFinalNumbers(grab('phone'));
+		processNewClientFinalNumbers(grab('work_phone'));
+		processNewClientFinalNumbers(grab('probation_phone'));
+		processNewClientFinalNumbers(grab('emer_phone'));
+
 		var form = grab('m_form');
 		form.action = '/clientCreatedBaseless/';
 		form.submit();

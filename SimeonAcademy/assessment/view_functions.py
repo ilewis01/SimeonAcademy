@@ -2843,39 +2843,69 @@ def fetchExistingClientUpdates(data, client):
 
 	return result
 
+def trueRawNumber(value):
+	number = ''
+	value = str(value)
 
-def changeAndUpdateExistingClient(originalValue, newValue, modelField, client):
-	originalValue 	= str(originalValue)
-	newValue 		= str(newValue)
+	for v in value:
+		if v=='0' or v=='1' or v=='2' or v=='3' or v=='4' or v=='5' or v=='6' or v=='7' or v=='8' or v=='9':
+			number += v
+
+	return number
+
+
+def changeAndUpdateExistingClient(newValue, originalValue, modelField, client):
 	modelField 		= str(modelField)
 
-	if (originalValue != newValue):
-		if modelField == 'street_no':
-			client.street_no = newValue
-		elif modelField == 'street_name':
-			client.street_name = newValue
-		elif modelField == 'apartment_no':
-			client.apartment_no = newValue
-		elif modelField == 'city':
-			client.city = newValue
-		elif modelField == 'zip_code':
-			client.zip_code = newValue
-		elif modelField == 'phone':
-			client.phone = newValue
-		elif modelField == 'emer_contact_name':
-			client.emer_contact_name = newValue
-		elif modelField == 'emer_phone':
-			client.emer_phone = newValue
-		elif modelField == 'probationOfficer':
-			client.probationOfficer = newValue
-		elif modelField == 'probation_phone':
-			client.probation_phone = newValue
-		elif modelField == 'work_phone':
-			client.work_phone = newValue
-		elif modelField == 'email':
-			client.email = newValue
+	if modelField == 'state':
+		s_old = str(client.state)
+		s_new = str(newValue.state)
 
-		client.save()
+		if s_old != s_new:
+			client.state = newValue;
+			client.save()
+
+	else:
+		originalValue 	= str(originalValue)
+		newValue 		= str(newValue)
+
+		if (originalValue != newValue):
+			print "FOUND CHANGE..." + newValue
+			if modelField == 'street_no':
+				client.street_no = newValue
+			elif modelField == 'street_name':
+				client.street_name = newValue
+			elif modelField == 'apartment_no':
+				client.apartment_no = newValue
+			elif modelField == 'city':
+				client.city = newValue
+			elif modelField == 'zip_code':
+				client.zip_code = trueRawNumber(newValue)
+			elif modelField == 'phone':
+				client.phone = trueRawNumber(newValue)
+			elif modelField == 'emer_contact_name':
+				client.emer_contact_name = newValue
+			elif modelField == 'emer_phone':
+				client.emer_phone = trueRawNumber(newValue)
+			elif modelField == 'probationOfficer':
+				client.probationOfficer = newValue
+			elif modelField == 'probation_phone':
+				client.probation_phone = trueRawNumber(newValue)
+			elif modelField == 'work_phone':
+				client.work_phone = trueRawNumber(newValue)
+			elif modelField == 'email':
+				client.email = newValue
+
+			client.save()
+
+
+	refs = RefReason.objects.all()
+
+	for r in refs:
+		if str(r.reason) == "Couple Counseling":
+			client.reason_ref = r
+			client.save()
+			break
 
 
 ##################################################################################################################################

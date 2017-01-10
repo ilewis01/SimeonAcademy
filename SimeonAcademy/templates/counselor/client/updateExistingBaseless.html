@@ -6,8 +6,23 @@
 </head>
 
 <body class='body500'>
-    <form action='/updateExistingBaseless/' method='post' id='c_form'> {% csrf_token %}
+    <form action='' method='post' id='c_form'> {% csrf_token %}
         <input type='hidden' name='client_id' id='client_id' value="{{client.id}}">
+
+        <input type='hidden' name='street_no' id='street_no' value="{{street_no}}">
+        <input type='hidden' name='street_name' id='street_name' value="{{street_name}}">
+        <input type='hidden' name='apartment_no' id='apartment_no' value="{{apartment_no}}">
+        <input type='hidden' name='city' id='city' value="{{city}}">
+        <input type='hidden' name='zip_code' id='zip_code' value="{{zip_code}}">
+        <input type='hidden' name='phone' id='phone' value="{{phone}}">
+        <input type='hidden' name='emer_phone' id='emer_phone' value="{{emer_phone}}">
+        <input type='hidden' name='work_phone' id='work_phone' value="{{work_phone}}">
+        <input type='hidden' name='probation_phone' id='probation_phone' value="{{probation_phone}}">
+        <input type='hidden' name='email' id='email' value="{{email}}">
+        <input type='hidden' name='probationOfficer' id='probationOfficer' value="{{probationOfficer}}">
+        <input type='hidden' name='emer_contact_name' id='emer_contact_name' value="{{emer_contact_name}}">
+        <input type='hidden' name='state' id='state' value="{{state.id}}">
+        <input type='hidden' name='reason_ref' id='reason_ref' value="{{reason_ref.id}}">
 
         <div class='head300'>UPDATE CLIENT</div>
 
@@ -33,9 +48,9 @@
             <div style='height:10px;'></div>
 
             <div class='button3Long_newClient'>
-                <button onClick="Javascript: chooseAsIsCouple2();">Save Changes</button>
-                <button onClick="Javascript: forwardToUpdateCouple2();">Discard Changes</button>
-                <button onClick="Javascript: window.close();">New Search</button>
+                <button onClick="Javascript: saveBaselessUpdates();">Save Changes</button>
+                <button onClick="Javascript: chooseAsIsCouple2();">Discard Changes</button>
+                <button onClick="Javascript: startCoupleSession_refresh();">New Search</button>
             </div>
         </div>
     </form>
