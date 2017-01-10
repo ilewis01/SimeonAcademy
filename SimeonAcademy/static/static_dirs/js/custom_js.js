@@ -3607,8 +3607,35 @@ function newClient_fullErrorChecker() {
 
 }
 
+function processNewClientFinalNumbers(div) {
+	result = null;
+	value = String(div.value);
+
+	if (value.length > 0) {
+		result = getRawNumber(value);
+	}
+
+	div.value = result;
+}
+
+function chooseAsIsCouple2() {
+	var form = getPopParent('c_form');
+	getPopParent('c2Type').value = 'existing';
+	getPopParent('c2_id').value = grab('client_id').value;
+	form.action = '/coupleSession/';
+	form.submit();
+	window.close();
+}
+
+function forwardToUpdateCouple2() {
+	grab('c_form').submit();
+}
+
 
 function saveBaselessClient() {
+	var newssn		  = grab('ss_num').value;
+	processNewClientFinalNumbers(newssn);
+
 	var report = newClient_fullErrorChecker();
 	var boolText = String(report['hasErrors']);
 
@@ -3618,6 +3645,11 @@ function saveBaselessClient() {
 	else {
 		if (grab('photo').value.length > 0) {
 			grab('hasImage').value = "True";
+			processNewClientFinalNumbers(grab('ss_num'));
+			processNewClientFinalNumbers(grab('phone'));
+			processNewClientFinalNumbers(grab('work_phone'));
+			processNewClientFinalNumbers(grab('probation_phone'));
+			processNewClientFinalNumbers(grab('emer_phone'));
 		}
 		var form = grab('m_form');
 		form.action = '/clientCreatedBaseless/';
@@ -3630,16 +3662,16 @@ function initialize_newClientErrors() {
 }
 
 function autoFillTest() {
-	grab('fname').value = "Truly";
+	grab('fname').value = "Da";
 	grab('mi').value = "M";
-	grab('lname').value = "Fucked";
+	grab('lname').value = "Fuck";
 	grab('street_no').value = "123";
 	grab('street_name').value = "Shit Creek";
 	grab('apartment_no').value = "4A";
 	grab('city').value = "Cow Nuts";
 	grab('state').selectedIndex = 12;
 	grab('zip_code').value = "12345";
-	grab('ss_num').value = "111-11-1111";
+	grab('ss_num').value = "123-45-6789";
 	grab('month').selectedIndex = 5;
 	grab('year').selectedIndex = 45;
 	grab('phone').value = "(810) 785-2166";
@@ -4628,6 +4660,18 @@ function cp_hoverB(clientOption) {
 
 	img.style.opacity = '1.0';
 	bkg.style.backgroundColor = '#c0c9c7';
+}
+
+
+function superNoteInit() {
+	// var frame = grab('noteFrame');
+	// var json_data = json_decode(grab('allNotes'));
+
+	var arrFrames = String(parent.grab("allNotes").value);
+	getDictStringThing(arrFrames);
+
+	// grab('noteList').innerHTML = l1;
+
 }
 
 function populateDropDownDay(sType) {

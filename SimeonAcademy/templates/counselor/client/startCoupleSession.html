@@ -14,15 +14,21 @@
 
         <div class='coupleBox1'>
             Make A Selection
+
+            <div style='height:35px;'></div>
+            <div class='divider_gradient'></div>
+            <div style='height:5px;'></div>
+
+            <div class='full-length-single-btn-wow2'>
+                <button onClick="Javascript: newClientBaseless();">New Client</button>
+                <button onClick="Javascript: searchLikeWow();">Choose From Existing Clients</button>
+                <button onClick='Javascript: window.close(); return false;'>Cancel</button>
+            </div>
+
             <div style='height:10px;'></div>
-            <div class='centerLongBtn'><button onClick="Javascript: newClientBaseless();">Create New Client</button></div>
-            <div class='big_or'>OR</div>
-            <div class='centerLongBtn'><button onClick="Javascript: searchLikeWow();">Choose From Existing Clients</button></div>
+            <div class='divider_gradient'></div>
+            <div style='height:20px;'></div>
         </div>
-
-        <div style='height:20px;'></div>
-
-        <div class='full-length-single-btn'><button onClick='Javascript: window.close(); return false;'>Cancel</button></div>
     </form>
 
     <script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

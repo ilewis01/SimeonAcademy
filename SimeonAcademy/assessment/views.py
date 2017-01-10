@@ -50,7 +50,7 @@ get_JSON_workSchedule, processAMC, truePythonBool, create_note, isExistingCouple
 fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientInitialize, \
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
-wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder
+wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -462,10 +462,69 @@ def clientCreatedBaseless(request):
 
 				track.c2_id = new_c['client'].id
 				track.save()
+				content['processed_em_phone'] = wowPhoneNumberDisplayConverter(new_c['client'].emer_phone)
 
 				return render_to_response('counselor/client/clientCreatedBaseless.html', content)				
 			else:
+				content['street_no'] 			= request.POST.get('street_no')
+				content['street_name'] 			= request.POST.get('street_name')
+				content['apartment_no'] 		= request.POST.get('apartment_no')
+				content['city'] 				= request.POST.get('city')				
+				content['zip_code'] 			= request.POST.get('zip_code')
+				content['phone'] 				= request.POST.get('phone')
+				content['emer_phone'] 			= request.POST.get('emer_phone')
+				content['work_phone'] 			= request.POST.get('work_phone')
+				content['probation_phone'] 		= request.POST.get('probation_phone')
+				content['email'] 				= request.POST.get('email')
+				content['probationOfficer']		= request.POST.get('probationOfficer')
+				content['emer_contact_name'] 	= request.POST.get('emer_contact_name')
+				content['state'] 				= State.objects.get(id=(request.POST.get('state')))
+				content['reason_ref'] 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+
 				return render_to_response('counselor/client/existingResolveNewClient.html', content)
+
+@login_required(login_url='/index')
+def updateExistingBaseless(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			data 						= {}
+			data['street_no' ]			= request.POST.get('street_no')
+			data['street_name']			= request.POST.get('street_name')
+			data['apartment_no'] 		= request.POST.get('apartment_no')
+			data['city']				= request.POST.get('city')				
+			data['zip_code'] 			= request.POST.get('zip_code')
+			data['phone']				= request.POST.get('phone')
+			data['emer_phone']			= request.POST.get('emer_phone')
+			data['work_phone']			= request.POST.get('work_phone')
+			data['probation_phone'] 	= request.POST.get('probation_phone')
+			data['email']				= request.POST.get('email')
+			data['probationOfficer']	= request.POST.get('probationOfficer')
+			data['emer_contact_name'] 	= request.POST.get('emer_contact_name')
+			data['state'] 				= State.objects.get(id=(request.POST.get('state')))
+			data['ref_id'] 				= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+			client 		 				= Client.objects.get(id=(request.POST.get('client_id')))
+			updates 					= fetchExistingClientUpdates(data, client)
+
+			content['updates'] 			= updates
+			content['title'] 			= "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/updateExistingBaseless.html', content)
 
 @login_required(login_url='/index')
 def newClientAborted(request):
@@ -674,30 +733,6 @@ def wowSearchResults(request):
 			return render_to_response('counselor/client/wowSearchResults.html', content)
 
 @login_required(login_url='/index')
-def superNoteDisplyer(request):
-	user = request.user
-	if not user.is_authenticated():
-		render_to_response('global/index.html')
-
-	else:
-		content = {}
-		content.update(csrf(request))
-		track = getTrack(user)
-		quickTrack('Search', track)
-		content['tracking'] = track.state.state
-		content['user'] = user
-		track = getTrack(user)
-		quickTrack('Search', track)
-
-		if user.account.is_counselor == False:
-			content['title'] = 'Restricted Access'
-			return render_to_response('global/restricted.html')
-
-		else:
-			content['title'] = "Client Search | Simeon Academy"
-			return render_to_response('counselor/client/superNoteDisplyer.html', content)
-
-@login_required(login_url='/index')
 def documentLoader(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -744,6 +779,32 @@ def noteLoader(request):
 		else:
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
+
+@login_required(login_url='/index')
+def superNoteDisplyer(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/superNoteDisplyer.html', content)
+
+
 
 @login_required(login_url='/index')
 def editableCoupleNote(request):

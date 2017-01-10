@@ -2787,6 +2787,96 @@ def get_all_client_notes(client):
 
 	return results
 
+def fetchExistingClientUpdates(data, client):
+	result = []
+	s = ' '
+
+	if str(client.street_no) != str(data['street_no']) or str(client.street_name) != str(data['street_name']) or str(client.apartment_no) != str(data['apartment_no']) or str(client.city) != str(data['city']) or  str(client.state.state) != str(data['state'].state) or str(client.zip_code) != str(data['zip_code']):
+		newAddress1 = str(data['street_no']) + s + str(data['street_name']) + s +str(data['apartment_no'])
+		newAddress2 = str(data['city']) + ", " + str(data['state'].state) + s + str(data['zip_code'])
+		c1 = {}
+		c2 = {}
+		c1['type'] = "Address: "
+		c1['value'] = newAddress1
+		c2['type'] = ' '
+		c2['value'] = newAddress2
+		result.append(c1)
+		result.append(c2)
+
+	if str(data['phone']) != str(client.phone):
+		c3 = {}
+		c3['type'] = "Phone: "
+		c3['value'] = str(data['phone'])
+		result.append(c3)
+
+	if str(data['work_phone']) != str(client.work_phone):
+		c4 = {}
+		c4['type'] = "Work Phone: "
+		c4['value'] = str(data['work_phone'])
+		result.append(c4)
+
+	if str(data['email']) != str(client.email):
+		c5 = {}
+		c5['type'] = "Email: "
+		c5['value'] = str(data['email'])
+		result.append(c5)
+
+	if str(data['probationOfficer']) != str(client.probationOfficer) or str(data['probation_phone']) != str(client.probation_phone):
+		c6 = {}
+		c7 = {}
+		c6['type'] = "Probation Officer: "
+		c6['value'] = str(data['probationOfficer'])
+		c7['type'] = "Probation Officer Phone: "
+		c7['value'] = str(data['probation_phone'])
+		result.append(c6)
+		result.append(c7)
+
+	if str(data['emer_contact_name']) != str(client.emer_contact_name) or str(data['emer_phone']) != str(client.emer_phone):
+		c8 = {}
+		c9 = {}
+		c8['type'] = "Emergency Contact: "
+		c8['value'] = str(data['emer_contact_name'])
+		c9['type'] = "Emergency Contact Phone: "
+		c9['value'] = str(data['emer_phone'])
+		result.append(c8)
+		result.append(c9)
+
+	return result
+
+
+def changeAndUpdateExistingClient(originalValue, newValue, modelField, client):
+	originalValue 	= str(originalValue)
+	newValue 		= str(newValue)
+	modelField 		= str(modelField)
+
+	if (originalValue != newValue):
+		if modelField == 'street_no':
+			client.street_no = newValue
+		elif modelField == 'street_name':
+			client.street_name = newValue
+		elif modelField == 'apartment_no':
+			client.apartment_no = newValue
+		elif modelField == 'city':
+			client.city = newValue
+		elif modelField == 'zip_code':
+			client.zip_code = newValue
+		elif modelField == 'phone':
+			client.phone = newValue
+		elif modelField == 'emer_contact_name':
+			client.emer_contact_name = newValue
+		elif modelField == 'emer_phone':
+			client.emer_phone = newValue
+		elif modelField == 'probationOfficer':
+			client.probationOfficer = newValue
+		elif modelField == 'probation_phone':
+			client.probation_phone = newValue
+		elif modelField == 'work_phone':
+			client.work_phone = newValue
+		elif modelField == 'email':
+			client.email = newValue
+
+		client.save()
+
 
 ##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#

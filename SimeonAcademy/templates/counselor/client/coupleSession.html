@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initiateListBuilder({{json_data}});">
+<body class="gradient-white" onLoad="javascript: newCoupleSessionInit({{json_data}});">
 	<input type='text' id='superTest'>
     <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
@@ -26,6 +26,9 @@
       <input type='hidden' id='session_id' name='session_id' value='{{session_id}}'>
       <input type='hidden' id='couple_id' name='couple_id' value='{{couple_id}}'>
 
+      <input type='hidden' name='allNotes' id='allNotes' value='{{json_data}}'>
+      <input type='hidden' name='allDocs' id='allDocs' value='{{json_docs}}'>
+
 
   		<div id="newNoteBuilder"></div>
 
@@ -35,7 +38,7 @@
           <div class='iml-body-wrapper2'>
 
             <div id='iml-info-head2'>
-              <div style='margin-left:3%;'>Couple's Therapy Session</div>
+              <div style='margin-left:3%;'>Couple Therapy</div>
             </div>
 
             <div class='wow-data-entry-wrapper'>
@@ -52,7 +55,6 @@
 	                    		</div>
 
 	                    		<div style='height:10px;'></div>
-
 	                    		<div id='wow-session-name'><em>{{c1.fname}} {{c1.middleInit}}. {{c1.lname}}</em></div>
 	                    		<div class='divider_gradient'></div>
 	                    		<div id='wow-session-id'></div>
@@ -85,19 +87,23 @@
                       	</div>
 
                       	<div class='damnedWrapperLol'>
-                      		<div class='new-wow-damned_inner'>
-                      			<div class='damnLeft'>
-                      				<div class='innerDamn'>
-                      					<iframe src="/noteLoader/" class="uploadIframe"></iframe>
-                      				</div>
-                      			</div>
+                      		<div class='RollUpIframe'>
+	                      		<div class='iFrameDualHeader'>Options</div>
+	                      		<div class='divider_gradient' style='margin-bottom:2.8%;'></div>
+	                      		<div class='new-wow-damned_inner'>
+	                      			<div class='damnLeft'>
+	                      				<div class='innerDamn'>
+	                      					<iframe src="/noteLoader/" class="uploadIframe" name='noteFrame' id='noteFrame'></iframe>
+	                      				</div>
+	                      			</div>
 
-                      			<div class='damnRight'>
-                      				<div class='innerDamn'>
-                      					<iframe src="/documentLoader/" class="uploadIframe"></iframe>
-                      				</div>
-                      			</div>
-                      		</div>
+	                      			<div class='damnRight'>
+	                      				<div class='innerDamn'>
+	                      					<iframe src="/documentLoader/" class="uploadIframe" name='docFrame' id='docFrame'></iframe>
+	                      				</div>
+	                      			</div>
+	                      		</div>
+	                      	</div>
 	                    </div>
                   </div>
                 </div>

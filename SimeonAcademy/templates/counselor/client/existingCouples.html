@@ -18,16 +18,29 @@
             <tr><td><b>DOB: </b>{{c1.dob}}</td></tr>
         </table>
 
-        <div class='coupleWarning1'>This client has had previous couple's therapy sessions with the following client(s):</div>       
+        <div class='coupleWarning1'>This client has had previous couple's therapy sessions with the following client(s):</div> 
 
-        <div class='couplePairList'>
-            {% for c in couples %}
-            <a href="javascript: setCouplePair('{{c.id}}');">{{c.fname}} {{c.lname}}</a><br>
-            {% endfor %}
-        </div>
+        <div class='Scroll-wow-holdit'>
+            <div class='couplePairList_wowIt'>
+                {% for c in couples %}
+                <a href="javascript: setCouplePair('{{c.id}}');">{{c.fname}} {{c.lname}}</a><br>
+                {% endfor %}
+            </div>
+        </div>     
+
+        <!-- <div style=''>
+            <div class='couplePairList'>
+                {% for c in couples %}
+                <a href="javascript: setCouplePair('{{c.id}}');">{{c.fname}} {{c.lname}}</a><br>
+                {% endfor %}
+            </div>
+        </div> -->
 
         <div class='coupleWarning2'>Choose from the list above to begin a session <br><br><span>OR</span></div>
-        <div class='centerLongBtn'><button onClick="Javascript: selectNewCouple();">Choose A Different Client</button></div>
+        <div class='centerLongBtn_next'>
+            <button onClick="Javascript: selectNewCouple();">Choose A Different Client</button>
+            <button onClick="Javascript: window.close();">Cancel</button>
+        </div>
     </form>
 
     <script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

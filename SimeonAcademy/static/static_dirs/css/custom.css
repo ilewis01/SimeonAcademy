@@ -7658,6 +7658,20 @@ button:hover {
 	margin-top: 12px;
 }
 
+.centerLongBtn_next {
+	width:90%;
+	margin: auto;
+	margin-top: 12px;
+}
+
+.centerLongBtn_next  button {
+	height: 25px;
+	font-size: 10px;
+	/*border-radius: 15px;*/
+	width: 48%;
+	font-weight: bold;
+}
+
 .centerLongBtn  button {
 	height: 30px;
 	font-size: 13px;
@@ -7666,11 +7680,34 @@ button:hover {
 	font-weight: bold;
 }
 
+.Scroll-wow-holdit {
+	width: 100%;
+	height:50px;
+	position: relative;
+}
+
+.couplePairList_wowIt {
+	height: 35px;
+    width: 60%;
+    margin: auto;
+	text-align: center;
+	font-size: 13px;
+    overflow-y: scroll;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    /*float: left;
+    position: relative;
+    margin-left: -5px;*/
+    background-color: white;
+    border: 1px solid gray;
+}
+
 .couplePairList {
 	text-align: center;
 	font-size: 13px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	/*padding-top: 10px;*/
+	/*padding-bottom: 10px;*/
 	height: 20px;
     width: 100%;
     margin: auto;
@@ -7678,6 +7715,8 @@ button:hover {
     float: left;
     position: relative;
     margin-left: -5px;
+    background-color: white;
+    border: 1px solid gray;
 }
 
 .big_or {
@@ -7704,6 +7743,11 @@ button:hover {
 	background-size: 100%;
 }
 
+.full-length-single-btn-wow2 {
+	width:90%;
+	margin:auto;
+}
+
 .full-length-single-btn {
 	width:90%;
 	margin:auto;
@@ -7712,6 +7756,14 @@ button:hover {
 .half-length-single-btn {
 	width:90%;
 	margin:auto;
+}
+
+.full-length-single-btn-wow2 button {
+	width:100%;
+	height:30px;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 5px;
 }
 
 .full-length-single-btn button {
@@ -7787,7 +7839,7 @@ button:hover {
 	text-align: center;
 	font-weight: bold;
 	font-size: 20px;
-	padding-top: 15px;
+	padding-top: 8px;
 	font-style: italic;
 	color:#824951;
 }
@@ -7795,7 +7847,7 @@ button:hover {
 .button3Long_newClient {
 	width:100%;
 	margin:auto;
-	padding-top: 15px;
+	padding-top: 8px;
 }
 
 .button3Long_newClient button {
@@ -7852,7 +7904,7 @@ button:hover {
 }
 
 .c_client_info_wow {
-	margin-top: 4%;
+	margin-top: 3.5%;
 	width:22%;
 	height:100%;
 	border: 1px solid gray;
@@ -8065,13 +8117,16 @@ button:hover {
 	padding-left: 10px;
 }
 
+.RollUpIframe {
+	width:100%;
+	height: 95%;
+	margin-top: 6.7%;
+}
+
 .new-wow-damned_inner {
 	width:90%;
 	height: 75%;
 	margin: auto;
-	position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     border: 1px solid gray;
 	border-radius: 8px;
 	padding: 2%;
@@ -8109,6 +8164,85 @@ button:hover {
 	height: 100%;
 	border-radius: 8px;
 	background-color: white;
+}
+
+.iFrameDualHeader {
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	margin-bottom: 2%;
+	border: 1px solid gray;
+	width:90%;
+	margin: auto;
+	border-radius: 8px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.iFrameDocNoteBody {
+	font-size: 12px;
+	font-family: Arial; 
+	overflow-y: scroll;
+	/*background: url('../images/iFrame1.jpg');*/
+	background-size: 100%;
+/*	   -right: 1px solid black;
+	border-radius: 5px;*/
+}
+
+.outerIframe {
+	width: 100%;
+	height:100%;
+	position: relative;
+}
+
+.iDocHeader {
+	width: 100%;
+	text-align: center;
+
+	/*background: url('../images/superGreen.png');
+	background-size: 100%;
+	background-color: brown;
+	border-bottom: 1px solid black;
+	height:40px;*/
+}
+
+.iDocFooter {
+	/*width: 100%;
+	height:40px;
+	position: absolute;
+	bottom:0;*/
+}
+
+.ifBtnHold1 {
+	width: 100%;
+	height:40px;
+}
+
+.ifBtnHold1 button {
+	width: 100%;
+	height:25px;
+}
+
+.existGen300_wow {
+	width:100%;
+	font-size: 22px;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	color:#e17a18;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	text-shadow:1px 1px black;
+}
+
+.existGen300_imagewrapper {
+	width:20%;
+	margin:auto;
+}
+
+.existGen300_imagewrapper img {
+	width: 100%;
 }
 
 
