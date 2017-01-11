@@ -3290,11 +3290,16 @@ function compare_i_u(elementName) {
 	var initial 	= grab(initialName);
 	var input 		= grab(inputName);
 
-	if (String(initial.value) !== String(input.value)) {
-		input.style.color = 'red';
-	}
-	else {
-		input.style.color = 'black';
+	for (var i = 0; i < input.value.length; i++) {
+		if (input.value.charAt(i) !== initial.value.charAt(i)) {
+			input.style.color = '#983341';
+			input.style.border = '1px solid red';
+			break;
+		}
+		else {
+			input.style.color = 'black';
+			input.style.border = '1px solid gray';
+		}
 	}
 }
 

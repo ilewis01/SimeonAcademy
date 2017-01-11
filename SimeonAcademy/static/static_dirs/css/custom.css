@@ -3417,9 +3417,18 @@ button:hover {
 
 .divider_gradient {
 	width:95%;
-	padding-top: 10px;
+	padding-bottom: 10px;
 	margin: auto;
 	background: url('../images/divider_gradient.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.divider_gradient_up {
+	width:95%;
+	padding-top: 10px;
+	margin: auto;
+	background: url('../images/divider_gradient_up.png');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
@@ -8266,11 +8275,11 @@ button:hover {
 
 .loKey-pic-container img {
 	width:100%;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 
 #loKey-session-name {
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 	color:#7b3f1a;
 }
@@ -8285,6 +8294,29 @@ button:hover {
 #loKey-session-number {
 	font-size: 12px;
 	font-style: italic;
+}
+
+.super-lokey-container {
+	width:92%;
+	padding:3%;
+	margin:auto;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: url('../images/iml_bkgnd.png');
+	background-size: 100%;
+}
+
+.super-lokey-container input {
+	border: 1px solid gray;
+	border-radius: 4px;
+	padding-left: 5px;
+}
+
+.lokey-entry-header {
+	width:98%;
+	margin: auto;
+	font-weight: bold;
+	margin-top: 15px;
 }
 
 
