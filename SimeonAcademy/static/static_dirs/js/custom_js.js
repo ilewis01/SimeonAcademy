@@ -3283,6 +3283,31 @@ function fetchUpdatableCoupleFields() {
 	return updates;
 }
 
+function singlefinalizeUpdatedCoupleField(elementName) {
+	elementName 	= String(elementName);
+	var initialName = 'i_' + elementName;
+	var inputName 	= 'input_' + elementName;
+	var initial 	= grab(initialName);
+	var input 		= grab(inputName);
+
+	if (String(initial.value) !== String(input.value)) {
+		input.style.color = '#983341';
+		input.style.border = '1px solid red';
+	}
+	else {
+		input.style.color = 'black';
+		input.style.border = '1px solid gray';
+	}
+}
+
+function finalizeUpdatedCoupleField() {
+	var fields = fetchUpdatableCoupleFields();
+
+	for (var i = 0; i < fields.length; i++) {
+		singlefinalizeUpdatedCoupleField(fields[i]);
+	}
+}
+
 function compare_i_u(elementName) {
 	elementName 	= String(elementName);
 	var initialName = 'i_' + elementName;
@@ -3327,8 +3352,6 @@ function buildUpdateFieldValue(elementName) {
 
 function initializeUpdateCoupleFields() {
 	var fields = fetchUpdatableCoupleFields();
-
-	buildUpdateFieldValue(fields[0]);
 
 	for (var i = 0; i < fields.length; i++) {
 		buildUpdateFieldValue(fields[i]);
