@@ -481,6 +481,7 @@ def clientCreatedBaseless(request):
 				content['emer_contact_name'] 	= request.POST.get('emer_contact_name')
 				content['state'] 				= State.objects.get(id=(request.POST.get('state')))
 				content['reason_ref'] 			= RefReason.objects.get(id=(request.POST.get('reason_ref')))
+				content['displayPhone'] 		= wowPhoneNumberDisplayConverter(request.POST.get('phone'))
 
 				return render_to_response('counselor/client/existingResolveNewClient.html', content)
 
@@ -2188,6 +2189,7 @@ def existingResolve(request):
 			s_head = request.POST.get('s_option')
 			session = ClientSession.objects.get(id=(request.POST.get('session_id')))
 			setGlobalSession(session.id, user)
+			content['displayPhone'] = wowPhoneNumberDisplayConverter(session.client.phone)
 			content['s_head'] = s_head
 			content['title'] = 'Simeon Academy'
 			return render_to_response('counselor/session/existingResolve.html', content, context_instance=RequestContext(request))

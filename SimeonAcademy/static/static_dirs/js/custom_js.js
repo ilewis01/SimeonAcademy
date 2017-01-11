@@ -3264,6 +3264,72 @@ function verify_uploadTitle() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+function fetchUpdatableCoupleFields() {
+	updates = [];
+
+	updates.push('street_no');
+	updates.push('street_name');
+	updates.push('apartment_no');
+	updates.push('city');
+	updates.push('zip_code');
+	updates.push('emer_contact_name');
+	updates.push('emer_phone');
+	updates.push('probationOfficer');
+	updates.push('probation_phone');
+	updates.push('phone');
+	updates.push('email');
+	updates.push('work_phone');
+
+	return updates;
+}
+
+function compare_i_u(elementName) {
+	elementName 	= String(elementName);
+	var initialName = 'i_' + elementName;
+	var inputName 	= 'input_' + elementName;
+	var initial 	= grab(initialName);
+	var input 		= grab(inputName);
+
+	if (String(initial.value) !== String(input.value)) {
+		input.style.color = 'red';
+	}
+	else {
+		input.style.color = 'black';
+	}
+}
+
+function buildUpdateFieldValue(elementName) {
+	elementName 	= String(elementName);
+	var initialName = 'i_' + elementName;
+	var updatedName = 'u_' + elementName;
+	var inputName 	= 'input_' + elementName;
+
+	var initialDiv 	= grab(initialName);
+	var updatedDiv 	= grab(updatedName);
+	var inputDiv 	= grab(inputName);
+
+	var initialValue = String(initialDiv.value);
+	var updatedValue = String(updatedDiv.value);
+
+	if (isBlankText(updatedValue) === false && initialValue !== updatedValue) {
+		inputDiv.value = updatedValue;
+	}
+	else {
+		inputDiv.value = initialValue;
+	}
+	compare_i_u(elementName);
+}
+
+function initializeUpdateCoupleFields() {
+	var fields = fetchUpdatableCoupleFields();
+
+	buildUpdateFieldValue(fields[0]);
+
+	for (var i = 0; i < fields.length; i++) {
+		buildUpdateFieldValue(fields[i]);
+	}
+}
+
 function startCoupleSession() {
 	openPopUp('auto', '/startCoupleSession/', 350, 370);
 }

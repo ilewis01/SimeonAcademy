@@ -8245,6 +8245,48 @@ button:hover {
 	width: 100%;
 }
 
+.existGen300_wow_loKey {
+	width:100%;
+	font-size: 11px;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	color:red;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.loKey-pic-container {
+	width:50px;
+	height:50px;
+	margin:auto;
+	border: 2px solid #545350;
+	border-radius: 5px;
+}
+
+.loKey-pic-container img {
+	width:100%;
+	border-radius: 5px;
+}
+
+#loKey-session-name {
+	font-size: 16px;
+	font-weight: bold;
+	color:#7b3f1a;
+}
+
+#loKey-session-id {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:#988974;
+}
+
+#loKey-session-number {
+	font-size: 12px;
+	font-style: italic;
+}
+
 
 
 

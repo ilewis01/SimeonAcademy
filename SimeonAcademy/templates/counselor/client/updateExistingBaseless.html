@@ -5,43 +5,102 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='body500'>
+<body class='body500' onLoad='Javascript: initializeUpdateCoupleFields();'>
+    <input type='text' id='test4' style='width:300px;'>
     <form action='' method='post' id='c_form'> {% csrf_token %}
         <input type='hidden' name='client_id' id='client_id' value="{{client.id}}">
 
-        <input type='hidden' name='street_no' id='street_no' value="{{street_no}}">
-        <input type='hidden' name='street_name' id='street_name' value="{{street_name}}">
-        <input type='hidden' name='apartment_no' id='apartment_no' value="{{apartment_no}}">
-        <input type='hidden' name='city' id='city' value="{{city}}">
-        <input type='hidden' name='zip_code' id='zip_code' value="{{zip_code}}">
-        <input type='hidden' name='phone' id='phone' value="{{phone}}">
-        <input type='hidden' name='emer_phone' id='emer_phone' value="{{emer_phone}}">
-        <input type='hidden' name='work_phone' id='work_phone' value="{{work_phone}}">
-        <input type='hidden' name='probation_phone' id='probation_phone' value="{{probation_phone}}">
-        <input type='hidden' name='email' id='email' value="{{email}}">
-        <input type='hidden' name='probationOfficer' id='probationOfficer' value="{{probationOfficer}}">
-        <input type='hidden' name='emer_contact_name' id='emer_contact_name' value="{{emer_contact_name}}">
+        <input type='hidden' name='u_street_no' id='u_street_no' value="{{street_no}}">
+        <input type='hidden' name='u_street_name' id='u_street_name' value="{{street_name}}">
+        <input type='hidden' name='u_apartment_no' id='u_apartment_no' value="{{apartment_no}}">
+        <input type='hidden' name='u_city' id='u_city' value="{{city}}">
+        <input type='hidden' name='u_zip_code' id='u_zip_code' value="{{zip_code}}">
+        <input type='hidden' name='u_phone' id='u_phone' value="{{phone}}">
+        <input type='hidden' name='u_emer_phone' id='u_emer_phone' value="{{emer_phone}}">
+        <input type='hidden' name='u_work_phone' id='u_work_phone' value="{{work_phone}}">
+        <input type='hidden' name='u_probation_phone' id='u_probation_phone' value="{{probation_phone}}">
+        <input type='hidden' name='u_email' id='u_email' value="{{email}}">
+        <input type='hidden' name='u_probationOfficer' id='u_probationOfficer' value="{{probationOfficer}}">
+        <input type='hidden' name='u_emer_contact_name' id='u_emer_contact_name' value="{{emer_contact_name}}">
         <input type='hidden' name='state' id='state' value="{{state.id}}">
-        <input type='hidden' name='reason_ref' id='reason_ref' value="{{reason_ref.id}}">
+
+        <input type='hidden' name='i_street_no' id='i_street_no' value="{{client.street_no}}">
+        <input type='hidden' name='i_street_name' id='i_street_name' value="{{client.street_name}}">
+        <input type='hidden' name='i_apartment_no' id='i_apartment_no' value="{{client.apartment_no}}">
+        <input type='hidden' name='i_city' id='i_city' value="{{client.city}}">
+        <input type='hidden' name='i_zip_code' id='i_zip_code' value="{{client.zip_code}}">
+        <input type='hidden' name='i_phone' id='i_phone' value="{{client.phone}}">
+        <input type='hidden' name='i_emer_phone' id='i_emer_phone' value="{{client.emer_phone}}">
+        <input type='hidden' name='i_work_phone' id='i_work_phone' value="{{client.work_phone}}">
+        <input type='hidden' name='i_probation_phone' id='i_probation_phone' value="{{client.probation_phone}}">
+        <input type='hidden' name='i_email' id='i_email' value="{{client.email}}">
+        <input type='hidden' name='i_probationOfficer' id='i_probationOfficer' value="{{client.probationOfficer}}">
+        <input type='hidden' name='i_emer_contact_name' id='i_emer_contact_name' value="{{client.emer_contact_name}}">
+        <input type='hidden' name='state' id='state' value="{{state.id}}">
 
         <div class='head300'>UPDATE CLIENT</div>
 
         <div class='general300Profile'>
-            <!-- <div class='existGen300_imagewrapper'>
-                <img src="/static/images/warning.png" alt="client_img">
-            </div> -->
-            <div class='existGen300_wow'>THE FOLLOWING CHANGES WILL BE MADE!</div>
+            <div class='divider_gradient' style=''></div>
 
-            <ul>
-                {% for u in updates %}
-                <li>{{u.type}} {{u.value}}</li>
-                {% endfor %}
-            </ul>
+            <table>
+                <tr>
+                    <td>
+                        <div class='loKey-pic-container'> <!-- CLIENT IMAGE -->
+                            <img src="/static/media/{{client.photo}}" alt="client_img" class=''>
+                        </div>
+                    </td>
 
-            <div class='divider_gradient' style='margin-bottom:5px;'></div>
+                    <td>
+                        <table>
+                            <tr><td><div id='loKey-session-name'><em>{{client.fname}} {{client.middleInit}}. {{client.lname}}</em></div></td></tr>
+                            <tr><td><div id='loKey-session-id'>{{client.clientID}}</div></td></tr>
+                            <tr><td><div id='loKey-session-number'><b>DOB: </b>{{client.dob}}</div></td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
 
+            <div class='divider_gradient' style=''></div>
 
-            <div class='divider_gradient' style='margin-top:5px;'></div>
+            <div class='existGen300_wow_loKey'>Fields in red indicate changes that will be made to the client's profile</div>
+
+            <table>
+                <tr>
+                    <td><div><input type='text' name='input_street_no' id='input_street_no' placeholder='Street no.' oninput="javascript: compare_i_u('street_no');"></div></td>
+                    <td><div><input type='text' name='input_street_name' id='input_street_name' placeholder='Street name' oninput="javascript: compare_i_u('street_name');"></div></td>
+                    <td><div><input type='text' name='input_apartment_no' id='input_apartment_no' placeholder='Apt' oninput="javascript: compare_i_u('apartment_no');"></div></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div><input type='text' name='input_city' id='input_city' placeholder='City' oninput="javascript: compare_i_u('city');"></div></td>
+                    <td><div><input type='text' name='input_zip_code' id='input_zip_code' placeholder='Zip Code' oninput="javascript: compare_i_u('zip_code');"></div></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div><input type='text' name='input_phone' id='input_phone' placeholder='Phone' oninput="javascript: compare_i_u('phone');"></div></td>
+                    <td><div><input type='text' name='input_email' id='input_email' placeholder='Email' oninput="javascript: compare_i_u('email');"></div></td>
+                    <td><div><input type='text' name='input_work_phone' id='input_work_phone' placeholder='Work Phone' oninput="javascript: compare_i_u('work_phone');"></div></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div><input type='text' name='input_probationOfficer' id='input_probationOfficer' placeholder='Probation Officer' oninput="javascript: compare_i_u('probationOfficer');"></div></td>
+                    <td><div><input type='text' name='input_probation_phone' id='input_probation_phone' placeholder='Probation Officer Phone' oninput="javascript: compare_i_u('probation_phone');"></div></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td><div><input type='text' name='input_emer_contact_name' id='input_emer_contact_name' placeholder='Emergency Contact' oninput="javascript: compare_i_u('emer_contact_name');"></div></td>
+                    <td><div><input type='text' name='input_emer_phone' id='input_emer_phone' placeholder='Emergency Contact Phone' oninput="javascript: compare_i_u('emer_phone');"></div></td>
+                </tr>
+            </table>
 
             <div style='height:10px;'></div>
             <div class='newSelectionText'>Options</div>

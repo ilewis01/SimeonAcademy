@@ -34,40 +34,47 @@
 
             <div class='divider_gradient' style='margin-bottom:5px;'></div>
 
-            <table>
-                <tr>
-                    <td>
-                        <div class='iml-pic-container'> <!-- CLIENT IMAGE -->
-                            <img src="/static/media/{{client.photo}}" alt="client_img" class='iml-avatar-img'>
-                        </div>
-                    </td>
+            <a href="javascript: viewClient2Profile_couple();">
+                <table>
+                    <tr>
+                        <td>
+                            <div class='iml-pic-container'> <!-- CLIENT IMAGE -->
+                                <img src="/static/media/{{client.photo}}" alt="client_img" class='iml-avatar-img'>
+                            </div>
+                            <div style='font-size:10px; width:100%; text-align:center;'>Click image for additional details</div>
+                        </td>
 
-                    <td>
-                        <table>
-                            <tr><td><div id='iml-session-name'><em>{{client.fname}} {{client.middleInit}}. {{client.lname}}</em></div></td></tr>
-                            <tr><td><div id='iml-session-id'>{{client.clientID}}</div></td></tr>
-                            <tr><td><div id='iml-head-md'>Contact Information:</div></td></tr>
-                            <tr><td><div id='iml-session-email'>{{client.email}}</div></td></tr>
-                            <tr><td><div id='iml-session-phone'>{{client.phone}}</div></td></tr>
-                            <tr><td><div id='iml-head-sm'>Address:</div></td></tr>
-                            <tr>
-                                <td>
-                                    <div id='iml-session-address'>
-                                        {{client.street_no}} {{client.street_name}} {{client.apartment_no}}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div id='iml-session-address'>
-                                        {{client.city}}, {{client.state}} {{client.zip_code}}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div id='iml-session-name'><em>{{client.fname}} {{client.middleInit}}. {{client.lname}}</em></div>
+                                    </td>
+                                </tr>
+                                <tr><td><div id='iml-session-id'>{{client.clientID}}</div></td></tr>
+                                <tr><td><div id='iml-head-md'>Contact Information:</div></td></tr>
+                                <tr><td><div id='iml-session-email'>{{client.email}}</div></td></tr>
+                                <tr><td><div id='iml-session-phone'>{{displayPhone}}</div></td></tr>
+                                <tr><td><div id='iml-head-sm'>Address:</div></td></tr>
+                                <tr>
+                                    <td>
+                                        <div id='iml-session-address'>
+                                            {{client.street_no}} {{client.street_name}} {{client.apartment_no}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id='iml-session-address'>
+                                            {{client.city}}, {{client.state}} {{client.zip_code}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </a>
 
             <div class='divider_gradient' style='margin-top:5px;'></div>
 
