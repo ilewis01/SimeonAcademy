@@ -1305,15 +1305,21 @@ def processWowDates(searchDict, getFullDOB):
 				searchDict.pop(k)
 				break
 
-		date = datetime(yy, mm, dd)
-		date = processWowSearchData(date.date(), True)
+		for m in range(len(searchDict)):
+			if searchDict[m]['modelName'] == 'year':
+				searchDict.pop(m)
+				break
 
-		for l in range(len(searchDict)):
-			if searchDict[l]['modelName'] == 'year':
-				searchDict[l]['modelName'] = 'dob'
-				searchDict[l]['searchField'] = date
-				searchDict[l]['isNumber'] = True
-				searchDict[l]['type'] = 'date'
+		date = datetime(yy, mm, dd)
+		date = date.date()
+		date = processWowSearchData(date, True)
+
+		newDict = {}
+		newDict['modelName'] = 'dob'
+		newDict['searchField'] = date
+		newDict['isNumber'] = True
+		newDict['type'] = 'date'
+		searchDict.append(newDict)
 
 	return searchDict
 
@@ -1346,13 +1352,13 @@ def wowSearch_matchSingleClient(searchDict, client, getFullDOB):
 
 def superWowSearcher(searchDict, getFullDOB, clientList):
 	results = []
-	searchDict = processWowDates(searchDict, getFullDOB)
+	processedDict = processWowDates(searchDict, getFullDOB)
 
-	if len(searchDict) == 0:
+	if len(processedDict) == 0:
 		results = clientList
 	else:
 		for c in clientList:
-			if wowSearch_matchSingleClient(searchDict, c, getFullDOB) == True:
+			if wowSearch_matchSingleClient(processedDict, c, getFullDOB) == True:
 				results.append(c)
 	return results
 
@@ -1465,49 +1471,51 @@ def wowDateDisplay(date_object):
 
 def breakToPages(elementList, numPerPage):
 	result = {}
-	numPerPage = int(numPerPage)
-	numResults = len(elementList)
-	mod = numResults % numPerPage
-	numPages = (numResults - mod)/numPerPage
 
-	if mod != 0:
-		numPages += 1
+	if len(elementList) > 0:
+		numPerPage = int(numPerPage)
+		numResults = len(elementList)
+		mod = numResults % numPerPage
+		numPages = (numResults - mod)/numPerPage
 
-	for n in range(numPages):
-		title = 'page_' + str(n + 1)
-		result[title] = []
+		if mod != 0:
+			numPages += 1
 
-	count = numPerPage
-	currentPage = 1
-	arrayTitle = None
+		for n in range(numPages):
+			title = 'page_' + str(n + 1)
+			result[title] = []
 
-	for i in range(numResults):
-		if count == numPerPage:
-			arrayTitle = 'page_' + str(currentPage)
-			data = {}
-			data['number'] = (i + 1)
-			data['fname'] = elementList[i].fname
-			data['lname'] = elementList[i].lname
-			data['clientID'] = elementList[i].clientID
-			data['id'] = elementList[i].id
-			data['dob'] = wowDateDisplay(elementList[i].dob)
-			data['ref'] = elementList[i].reason_ref.reason
-			data['photo'] = str(elementList[i].photo)
-			result[arrayTitle].append(data)
-			count = 1
-			currentPage = currentPage + 1
-		else:
-			data = {}
-			data['number'] = (i + 1)
-			data['fname'] = elementList[i].fname
-			data['lname'] = elementList[i].lname
-			data['clientID'] = elementList[i].clientID
-			data['id'] = elementList[i].id
-			data['dob'] = wowDateDisplay(elementList[i].dob)
-			data['ref'] = elementList[i].reason_ref.reason
-			data['photo'] = str(elementList[i].photo)
-			result[arrayTitle].append(data)
-			count = count + 1
+		count = numPerPage
+		currentPage = 1
+		arrayTitle = None
+
+		for i in range(numResults):
+			if count == numPerPage:
+				arrayTitle = 'page_' + str(currentPage)
+				data = {}
+				data['number'] = (i + 1)
+				data['fname'] = elementList[i].fname
+				data['lname'] = elementList[i].lname
+				data['clientID'] = elementList[i].clientID
+				data['id'] = elementList[i].id
+				data['dob'] = wowDateDisplay(elementList[i].dob)
+				data['ref'] = elementList[i].reason_ref.reason
+				data['photo'] = str(elementList[i].photo)
+				result[arrayTitle].append(data)
+				count = 1
+				currentPage = currentPage + 1
+			else:
+				data = {}
+				data['number'] = (i + 1)
+				data['fname'] = elementList[i].fname
+				data['lname'] = elementList[i].lname
+				data['clientID'] = elementList[i].clientID
+				data['id'] = elementList[i].id
+				data['dob'] = wowDateDisplay(elementList[i].dob)
+				data['ref'] = elementList[i].reason_ref.reason
+				data['photo'] = str(elementList[i].photo)
+				result[arrayTitle].append(data)
+				count = count + 1
 
 	return result
 

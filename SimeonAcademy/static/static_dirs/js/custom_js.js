@@ -4011,6 +4011,16 @@ function clearUnusedWowFields(numResults, numPerPage) {
 	}
 }
 
+function setEmptyImageFrame() {
+	grab('test5').value = "In the empty frame function";
+	// var numberResults = Number(grab('m_numMatches').value);
+
+	// if (numberResults === 0) {
+	// 	var div = grab('superWOWOverallMajorWrapper');
+	// 	div.innerHTML = "Your search returned <span>0</span> matches"
+	// }
+}
+
 function wowNameSort() {
 	var j_data = grab('dataList');
 	var aTag1 = grab('aTag1');
@@ -4188,8 +4198,21 @@ function nextWowPageResults(json_data) {
 
 
 function InitializeSuperWowResults(json_data) {
-	loadWowResults(1, json_data);
-	grab('currentPageDisp').innerHTML = 1;
+	var numberResults = String(grab('m_numMatches').value);
+
+	if (numberResults === '0') {
+		var div = grab('superWOWOverallMajorWrapperID');
+		div.innerHTML = "<div class='fixThisInnerAlignWow'>Your search returned <span>0</span> results</div>"
+		div.style.width = '95%';
+		div.style.height = '70%';
+		div.style.border = '1px solid gray';
+		div.style.borderRadius = '5px';
+		div.style.backgroundColor = "white";
+	}
+	else {
+		loadWowResults(1, json_data);
+		grab('currentPageDisp').innerHTML = 1;
+	}	
 }
 
 function opacitizeImg(vari) {

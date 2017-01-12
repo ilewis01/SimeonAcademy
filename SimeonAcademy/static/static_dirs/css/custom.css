@@ -7602,9 +7602,10 @@ button:hover {
 	margin: auto;
 	height: 70%;
 	border: 1px solid gray;
-	border-radius: 5px; 
+	border-radius: 8px; 
 	background-color: #e6e6e6;
 	background: url('../images/wowBkg_lg.jpg');
+	/*background-size: 50%;*/
 }
 
 .body400Content table {
@@ -8317,6 +8318,28 @@ button:hover {
 	margin: auto;
 	font-weight: bold;
 	margin-top: 15px;
+}
+
+.superWOWOverallMajorWrapper {
+	text-align: center;
+	width:100%;
+	margin: auto;
+}
+
+.fixThisInnerAlignWow {
+	width:80%;
+	margin:auto;
+	text-align: center;
+	height: 20px;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-style: italic;
+    font-weight: bold;
+}
+
+.fixThisInnerAlignWow span {
+	color: orange;
 }
 
 

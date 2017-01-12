@@ -467,6 +467,8 @@ def clientCreatedBaseless(request):
 
 				return render_to_response('counselor/client/clientCreatedBaseless.html', content)				
 			else:
+				track.c2_id = new_c['client'].id
+				track.save()
 				content['street_no'] 			= request.POST.get('street_no')
 				content['street_name'] 			= request.POST.get('street_name')
 				content['apartment_no'] 		= request.POST.get('apartment_no')
@@ -773,8 +775,7 @@ def wowSearchResults(request):
 					d['searchField'] = request.POST.get('ref')
 					d['modelName'] = 'reason_ref'
 					d['type']  = 'id'
-					d['isNumber'] = True
-					
+					d['isNumber'] = True					
 					data.append(d)
 
 			session = ClientSession.objects.get(id=(getSessionID(user)))
@@ -782,13 +783,13 @@ def wowSearchResults(request):
 			discharged = truePythonBool(request.POST.get('m_discharged'))
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
-			matches = wowClientMatch(data, discharged, pending, getFullDOB, session)
-			matchFname = wowClientMatchFname(data, discharged, pending, getFullDOB, session)
-			pages = breakToPages(matches, 8)
-			pagesFname = breakToPages(matchFname, 8)
+			l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, session)
+			# f_NameList = wowClientMatchFname(data, discharged, pending, getFullDOB, session)
+			pages = breakToPages(l_NameList, 8)
+			# pagesFname = breakToPages(matchFname, 8)
 			json_data = json.dumps(pages)
-			json_fname = json.dumps(pagesFname)
-			numMatches = len(matches)
+			# json_fname = json.dumps(pagesFname)
+			numMatches = len(l_NameList)
 
 			if numMatches == 1:
 				phrase1 = 'Result'
@@ -797,7 +798,7 @@ def wowSearchResults(request):
 
 			content['phrase1'] = phrase1
 			content['json_data'] = json_data
-			content['json_fname'] = json_fname
+			# content['json_fname'] = json_fname
 			content['numPages'] = len(pages)
 			content['numMatches'] = numMatches
 			content['title'] = "Client Search | Simeon Academy"
