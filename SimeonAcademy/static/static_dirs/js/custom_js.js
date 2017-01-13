@@ -4313,53 +4313,118 @@ function nextWowPageResults(json_data) {
 	}
 }
 
+function processThePhoneStuff(val) {
+	var result 	= '';
+	val 		= String(val);
+	var len 	= val.length;
+
+	if (len === 1) {
+		result = "(";
+		result += val.charAt(0);
+	}
+	else if (len === 2) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+	}
+	else if (len === 3) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+	}
+	else if (len === 4) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+	}
+	else if (len === 5) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+	}
+	else if (len === 6) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+		result += val.charAt(5);
+	}
+	else if (len === 7) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+		result += val.charAt(5);
+		result += "-";
+		result += val.charAt(6);
+	}
+	else if (len === 8) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+		result += val.charAt(5);
+		result += "-";
+		result += val.charAt(6);
+		result += val.charAt(7);
+	}
+	else if (len === 9) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+		result += val.charAt(5);
+		result += "-";
+		result += val.charAt(6);
+		result += val.charAt(7);
+		result += val.charAt(8);
+	}
+	else if (len > 9) {
+		result = "(";
+		result += val.charAt(0);
+		result += val.charAt(1);
+		result += val.charAt(2);
+		result += ") ";
+		result += val.charAt(3);
+		result += val.charAt(4);
+		result += val.charAt(5);
+		result += "-";
+		result += val.charAt(6);
+		result += val.charAt(7);
+		result += val.charAt(8);
+		result += val.charAt(9);
+	}
+
+	return result;
+}
+
 function phoneBuilderWow(divName) {
 	divName 		= 'input_' + String(divName);
 	var div 		= grab(divName);
-	var val 		= String(div.value);
-	var len 		= val.length;
-	var lastChar 	= val.charAt(len - 1);
-	var t 			= '';
+	var val 		= getRawNumber(div.value);
 
-	if (len <= 10) {
-		for (var i = 0; i < len; i++) {
-			if (isRawNumber(val.charAt(i)) === true) {
-				t += val.charAt(i);
-			}
-		}
-	}
-	else {
-		for (var j = 0; j < 10; j++) {
-			t += val.charAt(j);
-		}
-	}
-
-	div.value = t;
-
-	// if (isRawNumber(lastChar) === true) {
-	// 	if (len === 1) {
-	// 		var current = "(" + String(div.value);
-	// 			div.value = current;
-	// 	}
-
-	// 	else if (len === 4) {
-	// 		var current2 = String(div.value) + ") ";
-	// 		div.value = current2;
-	//  	}
-
-	// 	else if (len === 9) {
-	// 		var current3 = String(div.value) + "-";
-	// 			div.value = current3;
-	// 	}
-	// 	else if (len > 14) {
-	// 		var t = '';
-
-	// 		for (var i = 0; i < 14; i++) {
-	// 			t += String(div.value).charAt(i);
-	// 		}
-	// 		div.value = t;
-	// 	}
-	// }
+	finalA = processThePhoneStuff(val);
+	div.value = finalA;
 }
 
 
