@@ -3273,11 +3273,18 @@ function fetchUpdatableCoupleFields() {
 	updates.push('city');
 	updates.push('zip_code');
 	updates.push('emer_contact_name');
-	updates.push('emer_phone');
 	updates.push('probationOfficer');
+	updates.push('email');
+
+	return updates;
+}
+
+function fetchUpdatableCoupleFieldsNum() {
+	updates = [];
+
+	updates.push('emer_phone');
 	updates.push('probation_phone');
 	updates.push('phone');
-	updates.push('email');
 	updates.push('work_phone');
 
 	return updates;
@@ -3300,11 +3307,42 @@ function singlefinalizeUpdatedCoupleField(elementName) {
 	}
 }
 
+function singlefinalizeUpdatedCoupleFieldNum(elementName) {
+	elementName 	= String(elementName);
+	var initialName = 'i_' + elementName;
+	var inputName 	= 'input_' + elementName;
+	var initial 	= grab(initialName);
+	var input 		= grab(inputName);
+	var raw 		= getRawNumber(input.value);
+
+	if (String(initial.value) !== String(raw)) {
+		input.style.color = '#983341';
+		input.style.border = '1px solid red';
+	}
+	else {
+		input.style.color = 'black';
+		input.style.border = '1px solid gray';
+	}
+}
+
+function finalizeAllUpdatedCoupleFields() {
+	finalizeUpdatedCoupleField();
+	finalizeUpdatedCoupleFieldNum();
+}
+
 function finalizeUpdatedCoupleField() {
 	var fields = fetchUpdatableCoupleFields();
 
 	for (var i = 0; i < fields.length; i++) {
 		singlefinalizeUpdatedCoupleField(fields[i]);
+	}
+}
+
+function finalizeUpdatedCoupleFieldNum() {
+	var fields = fetchUpdatableCoupleFieldsNum();
+
+	for (var i = 0; i < fields.length; i++) {
+		singlefinalizeUpdatedCoupleFieldNum(fields[i]);
 	}
 }
 
@@ -3317,6 +3355,28 @@ function compare_i_u(elementName) {
 
 	for (var i = 0; i < input.value.length; i++) {
 		if (input.value.charAt(i) !== initial.value.charAt(i)) {
+			input.style.color = '#983341';
+			input.style.border = '1px solid red';
+			break;
+		}
+		else {
+			input.style.color = 'black';
+			input.style.border = '1px solid gray';
+		}
+	}
+}
+
+function compare_i_u_num(elementName) {
+	elementName 	= String(elementName);
+
+	var initialName = 'i_' + elementName;
+	var inputName 	= 'input_' + elementName;
+	var initial 	= grab(initialName);
+	var input 		= grab(inputName);
+	var raw 		= getRawNumber(input.value);
+
+	for (var i = 0; i < raw.length; i++) {
+		if (initial.value.charAt(i) !== raw.charAt(i)) {
 			input.style.color = '#983341';
 			input.style.border = '1px solid red';
 			break;
@@ -3350,11 +3410,68 @@ function buildUpdateFieldValue(elementName) {
 	compare_i_u(elementName);
 }
 
+function buildUpdateFieldValueNum(elementName) {
+	elementName 	= String(elementName);
+	var initialName = 'i_' + elementName;
+	var updatedName = 'u_' + elementName;
+	var inputName 	= 'input_' + elementName;
+
+	var initialDiv 	= grab(initialName);
+	var updatedDiv 	= grab(updatedName);
+	var inputDiv 	= grab(inputName);
+
+	var initialValue = String(initialDiv.value);
+	var updatedValue = String(updatedDiv.value);
+
+	if (isBlankText(updatedValue) === false) {
+		if (initialValue !== updatedValue) {
+			inputDiv.value = properPhoneFormatDisplay(updatedValue);
+		}
+		else {
+			inputDiv.value = properPhoneFormatDisplay(initialValue);
+		}
+	}
+	else {
+		inputDiv.value = properPhoneFormatDisplay(initialValue);
+	}
+
+	compare_i_u_num(elementName);
+}
+
+function properPhoneFormatDisplay(value) {
+	var areaCode 	= '';
+	var preNCode 	= '';
+	var postCode 	= '';
+	var proper 		= '';
+	value 			= String(value);
+
+	if (value.length === 10) {
+		areaCode += value.charAt(0);
+		areaCode += value.charAt(1);
+		areaCode += value.charAt(2);
+		preNCode += value.charAt(3);
+		preNCode += value.charAt(4);
+		preNCode += value.charAt(5);
+		postCode += value.charAt(6);
+		postCode += value.charAt(7);
+		postCode += value.charAt(8);
+		postCode += value.charAt(9);
+
+		proper = "(" + areaCode + ") " + preNCode + "-" + postCode;
+	}
+	return proper;
+}
+
 function initializeUpdateCoupleFields() {
 	var fields = fetchUpdatableCoupleFields();
+	var phones = fetchUpdatableCoupleFieldsNum();
 
 	for (var i = 0; i < fields.length; i++) {
 		buildUpdateFieldValue(fields[i]);
+	}
+
+	for (var j = 0; j < phones.length; j++) {
+		buildUpdateFieldValueNum(phones[j]);
 	}
 }
 
@@ -4193,6 +4310,26 @@ function nextWowPageResults(json_data) {
 		page.value = newPage;
 		loadWowResults(newPage, json_data);
 		grab('currentPageDisp').innerHTML = newPage;
+	}
+}
+
+function phoneBuilderWow(divName) {
+	divName = 'input_' + String(divName);
+	var div = grab(divName);
+
+	if (String(div.value).length === 1 && String(div.value.charAt(0)) !== "(") {
+		var current = "(" + String(div.value);
+			div.value = current;
+	}
+
+	if (String(div.value).length === 4) {
+		var current2 = String(div.value) + ") ";
+			div.value = current2;
+	}
+
+	if (String(div.value).length === 9) {
+		var current3 = String(div.value) + "-";
+			div.value = current3;
 	}
 }
 

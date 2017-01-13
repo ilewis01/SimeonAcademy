@@ -71,16 +71,16 @@
 
             <table>
                 <tr>
-                    <td><div><input type='text' style='width:80px' name='input_street_no' id='input_street_no' placeholder='Street no.' oninput="javascript: compare_i_u('street_no');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:200px' name='input_street_name' id='input_street_name' placeholder='Street name' oninput="javascript: compare_i_u('street_name');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:50px' name='input_apartment_no' id='input_apartment_no' placeholder='Apt' oninput="javascript: compare_i_u('apartment_no');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
+                    <td><div><input type='text' style='width:80px' name='input_street_no' id='input_street_no' placeholder='Street no.' oninput="javascript: compare_i_u('street_no');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:200px' name='input_street_name' id='input_street_name' placeholder='Street name' oninput="javascript: compare_i_u('street_name');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:50px' name='input_apartment_no' id='input_apartment_no' placeholder='Apt' oninput="javascript: compare_i_u('apartment_no');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
 
             <table>
                 <tr>
-                    <td><div><input type='text' style='width:165px' name='input_city' id='input_city' placeholder='City' oninput="javascript: compare_i_u('city');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:80px' name='input_zip_code' id='input_zip_code' placeholder='Zip Code' oninput="javascript: compare_i_u('zip_code');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
+                    <td><div><input type='text' style='width:165px' name='input_city' id='input_city' placeholder='City' oninput="javascript: compare_i_u('city');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:80px' name='input_zip_code' id='input_zip_code' placeholder='Zip Code' oninput="javascript: compare_i_u('zip_code');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
 
@@ -88,9 +88,9 @@
 
             <table>
                 <tr>
-                    <td><div><input type='text' style='width:100px' name='input_phone' id='input_phone' placeholder='Phone' oninput="javascript: compare_i_u('phone');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_work_phone' id='input_work_phone' placeholder='Work Phone' oninput="javascript: compare_i_u('work_phone');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:180px' name='input_email' id='input_email' placeholder='Email' oninput="javascript: compare_i_u('email');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>                   
+                    <td><div><input type='text' style='width:100px' name='input_phone' id='input_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('phone'); phoneBuilderWow('phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_work_phone' id='input_work_phone' placeholder='Work Phone' oninput="javascript: compare_i_u_num('work_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:180px' name='input_email' id='input_email' placeholder='Email' oninput="javascript: compare_i_u('email');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>                   
                 </tr>
             </table>
 
@@ -98,8 +98,8 @@
 
             <table>
                 <tr>
-                    <td><div><input type='text' style='width:170px' name='input_probationOfficer' id='input_probationOfficer' placeholder='Name' oninput="javascript: compare_i_u('probationOfficer');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_probation_phone' id='input_probation_phone' placeholder='Probation Officer Phone' oninput="javascript: compare_i_u('probation_phone');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
+                    <td><div><input type='text' style='width:170px' name='input_probationOfficer' id='input_probationOfficer' placeholder='Name' oninput="javascript: compare_i_u('probationOfficer');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_probation_phone' id='input_probation_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('probation_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
 
@@ -107,8 +107,8 @@
 
             <table>
                 <tr>
-                    <td><div><input type='text' style='width:170px' name='input_emer_contact_name' id='input_emer_contact_name' placeholder='Name' oninput="javascript: compare_i_u('emer_contact_name');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_emer_phone' id='input_emer_phone' placeholder='Emergency Contact Phone' oninput="javascript: compare_i_u('emer_phone');" onClick="javascript: finalizeUpdatedCoupleField();"></div></td>
+                    <td><div><input type='text' style='width:170px' name='input_emer_contact_name' id='input_emer_contact_name' placeholder='Name' oninput="javascript: compare_i_u('emer_contact_name');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_emer_phone' id='input_emer_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('emer_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
         </div>

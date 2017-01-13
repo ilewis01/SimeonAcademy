@@ -7697,7 +7697,7 @@ button:hover {
 }
 
 .couplePairList_wowIt {
-	height: 35px;
+	height: 38px;
     width: 60%;
     margin: auto;
 	text-align: center;
@@ -7711,6 +7711,8 @@ button:hover {
     margin-left: -5px;*/
     background-color: white;
     border: 1px solid gray;
+    border-radius: 5px;
+    padding-top: 4px;
 }
 
 .couplePairList {
@@ -8261,7 +8263,7 @@ button:hover {
 	text-align: center;
 	font-weight: bold;
 	font-style: italic;
-	color:red;
+	color:#983341;
 	padding-top: 5px;
 	padding-bottom: 10px;
 }

@@ -664,9 +664,9 @@ def wowSearch(request):
 
 			ref_list = RefReason.objects.all().order_by('reason')
 
-			content['years'] = years
-			content['refs'] = ref_list
-			content['title'] = "Client Search | Simeon Academy"
+			content['years'] 	= years
+			content['refs'] 	= ref_list
+			content['title'] 	= "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/wowSearch.html', content)
 
 @login_required(login_url='/index')
