@@ -4314,23 +4314,52 @@ function nextWowPageResults(json_data) {
 }
 
 function phoneBuilderWow(divName) {
-	divName = 'input_' + String(divName);
-	var div = grab(divName);
+	divName 		= 'input_' + String(divName);
+	var div 		= grab(divName);
+	var val 		= String(div.value);
+	var len 		= val.length;
+	var lastChar 	= val.charAt(len - 1);
+	var t 			= '';
 
-	if (String(div.value).length === 1 && String(div.value.charAt(0)) !== "(") {
-		var current = "(" + String(div.value);
-			div.value = current;
+	if (len <= 10) {
+		for (var i = 0; i < len; i++) {
+			if (isRawNumber(val.charAt(i)) === true) {
+				t += val.charAt(i);
+			}
+		}
+	}
+	else {
+		for (var j = 0; j < 10; j++) {
+			t += val.charAt(j);
+		}
 	}
 
-	if (String(div.value).length === 4) {
-		var current2 = String(div.value) + ") ";
-			div.value = current2;
-	}
+	div.value = t;
 
-	if (String(div.value).length === 9) {
-		var current3 = String(div.value) + "-";
-			div.value = current3;
-	}
+	// if (isRawNumber(lastChar) === true) {
+	// 	if (len === 1) {
+	// 		var current = "(" + String(div.value);
+	// 			div.value = current;
+	// 	}
+
+	// 	else if (len === 4) {
+	// 		var current2 = String(div.value) + ") ";
+	// 		div.value = current2;
+	//  	}
+
+	// 	else if (len === 9) {
+	// 		var current3 = String(div.value) + "-";
+	// 			div.value = current3;
+	// 	}
+	// 	else if (len > 14) {
+	// 		var t = '';
+
+	// 		for (var i = 0; i < 14; i++) {
+	// 			t += String(div.value).charAt(i);
+	// 		}
+	// 		div.value = t;
+	// 	}
+	// }
 }
 
 
