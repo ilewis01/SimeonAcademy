@@ -3841,26 +3841,6 @@ function chooseAsIsCouple2() {
 	window.close();
 }
 
-function saveBaselessUpdates() {
-	var form1 = getPopParent('c_form');
-	var form2 = grab('c_form');
-	var w = 250, h = 250;
-	var l = Number((screen.width/2) - (w/2));
-	var t = Number((screen.height/2) - (h/2));
-
-	getPopParent('c2Type').value = 'existing';
-	getPopParent('c2_id').value = grab('client_id').value;
-
-	window.resizeTo(w, h);
-	window.moveTo(l, t);
-	window.focus();
-
-	form1.action = '/coupleSession/';
-	form2.action = '/baselessUpdated/';
-	form1.submit();
-	form2.submit();
-}
-
 function forwardToUpdateCouple2() {
 	grab('c_form').submit();
 }
@@ -4466,6 +4446,78 @@ function depacitizeImg(vari) {
 
 	img.style.opacity = '1.0';
 	title.style.color = '#824951';
+}
+
+function runUpdateClientErrorChecker() {
+	var hasErrors 	= false;
+	var blankCheck 	= [];
+	var zipDiv 		= (grab('input_zip_code'));
+	var phones 		= fetchUpdatableCoupleFieldsNum();
+	var selection 	= null;
+	var diverName 	= null;
+	var diver 		= null;
+	var val 		= null;
+
+	blankCheck.push(grab('input_street_no'));
+	blankCheck.push(grab('input_street_name'));
+	blankCheck.push(grab('input_apartment_no'));
+	blankCheck.push(grab('input_city'));
+	blankCheck.push(grab('input_emer_contact_name'));
+	blankCheck.push(grab('input_phone'));
+	blankCheck.push(grab('input_emer_phone'));
+
+	for (var i = 0; i < blankCheck.length; i++) {
+		if (isBlankText(blankCheck[i].value) === true) {
+			hasErrors = true;
+			blankCheck[i].style.border = '1px solid blue';
+		}
+	}
+
+	if (isBlankText(zipDiv.value) === true || isRawNumber(zipDiv.value) === false || String(zipDiv.value).length < 5) {
+		hasErrors = true;
+		zipDiv.style.border = '1px solid blue';
+	}
+
+	var t = '';
+
+	for (var j = 0; j < phones.length; j++) {
+		selection 	= String(phones[j]);
+		diverName 	= 'input_' + selection;
+		diver 		= grab(diverName);
+		val 		= String(diver.value);
+
+		if (isBlankText(val) === false) {
+			if (val.length < 14) {
+				hasErrors = true;
+				diver.style.border = '1px solid blue';
+			}
+		}
+	}
+
+	return hasErrors;
+}
+
+function saveBaselessUpdates() {
+	var form1 = getPopParent('c_form');
+	var form2 = grab('c_form');
+	var w = 250, h = 250;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+
+	if (runUpdateClientErrorChecker() === true) {
+		openPopUp('auto', '/errorLegend/', w, h);
+	}
+	else {
+		form2.action = '/baselessUpdated/';
+		form1.action = '/coupleSession/';
+		getPopParent('c2Type').value = 'update';
+		getPopParent('c2_id').value = grab('client_id').value;
+		form1.submit();
+		form2.submit();
+		window.resizeTo(w, h);
+		window.moveTo(l, t);
+		window.focus();
+	}
 }
 
 function wowSelectSearchItem(clientID) {

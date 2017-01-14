@@ -6,7 +6,7 @@
 </head>
 
 <body class='body500' onLoad='Javascript: initializeUpdateCoupleFields();'>
-    <!-- <input type='text' id='test4' style='width:300px;'> -->
+    <input type='text' id='test4' style='width:300px;'>
     <form action='' method='post' id='c_form'> {% csrf_token %}
         <input type='hidden' name='client_id' id='client_id' value="{{client.id}}">
 
@@ -89,7 +89,7 @@
             <table>
                 <tr>
                     <td><div><input type='text' style='width:100px' name='input_phone' id='input_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('phone'); phoneBuilderWow('phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_work_phone' id='input_work_phone' placeholder='Work Phone' oninput="javascript: compare_i_u_num('work_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_work_phone' id='input_work_phone' placeholder='Work Phone' oninput="javascript: compare_i_u_num('work_phone'); phoneBuilderWow('work_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                     <td><div><input type='text' style='width:180px' name='input_email' id='input_email' placeholder='Email' oninput="javascript: compare_i_u('email');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>                   
                 </tr>
             </table>
@@ -99,7 +99,7 @@
             <table>
                 <tr>
                     <td><div><input type='text' style='width:170px' name='input_probationOfficer' id='input_probationOfficer' placeholder='Name' oninput="javascript: compare_i_u('probationOfficer');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_probation_phone' id='input_probation_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('probation_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_probation_phone' id='input_probation_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('probation_phone'); phoneBuilderWow('probation_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
 
@@ -108,7 +108,7 @@
             <table>
                 <tr>
                     <td><div><input type='text' style='width:170px' name='input_emer_contact_name' id='input_emer_contact_name' placeholder='Name' oninput="javascript: compare_i_u('emer_contact_name');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
-                    <td><div><input type='text' style='width:100px' name='input_emer_phone' id='input_emer_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('emer_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+                    <td><div><input type='text' style='width:100px' name='input_emer_phone' id='input_emer_phone' placeholder='Phone' oninput="javascript: compare_i_u_num('emer_phone'); phoneBuilderWow('emer_phone');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>
         </div>
@@ -119,7 +119,7 @@
             <div style='height:10px;'></div> -->
 
             <div class='button3Long_newClient'>
-                <button onClick="Javascript: saveBaselessUpdates();">Save Changes</button>
+                <button onClick="Javascript: saveBaselessUpdates(); return false;">Save Changes</button>
                 <button onClick="Javascript: chooseAsIsCouple2();">Discard Changes</button>
                 <button onClick="Javascript: startCoupleSession_refresh();">New Search</button>
             </div>
