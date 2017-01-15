@@ -5148,15 +5148,9 @@ function cp_hoverB(clientOption) {
 }
 
 
-function superNoteInit() {
-	// var frame = grab('noteFrame');
-	// var json_data = json_decode(grab('allNotes'));
-
-	var arrFrames = String(parent.grab("allNotes").value);
-	getDictStringThing(arrFrames);
-
-	// grab('noteList').innerHTML = l1;
-
+function superNoteInit(json_data) {
+	var div = grab('noteList');
+	div.innerHTML = "Number of notes: " + String(json_data.length);
 }
 
 function populateDropDownDay(sType) {

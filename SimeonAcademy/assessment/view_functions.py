@@ -2164,6 +2164,10 @@ def noteSerializer(noteList):
 
 	return finalList
 
+def coupleDocumentFetch(clientID1, clientID2):
+	newList 	= []
+	finalList 	= []
+
 
 def getCoupleNotesWowBuilder(clientID1, clientID2):
 	newList 	= []

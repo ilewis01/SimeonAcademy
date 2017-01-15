@@ -51,7 +51,7 @@ fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientIniti
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
-changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason
+changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -799,6 +799,10 @@ def documentLoader(request):
 			return render_to_response('global/restricted.html')
 
 		else:
+			session = ClientSession.objects.get(id=(track.s_id))
+			c1_clientID = session.client.clientID
+			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
+			docs = coupleDocumentFetch(c1_clientID, c2_clientID)
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/documentLoader.html', content)
 
@@ -823,7 +827,13 @@ def noteLoader(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			content['title'] = "Client Search | Simeon Academy"
+			session = ClientSession.objects.get(id=(track.s_id))
+			c1_clientID = session.client.clientID
+			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
+			notes = getCoupleNotesWowBuilder(c1_clientID, c2_clientID)
+			json_data = json.dumps(notes)
+			content['json_data'] = json_data
+			content['title'] = "Couple Counseling | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
 
 @login_required(login_url='/index')

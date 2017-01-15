@@ -7,7 +7,7 @@
 	<link href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class="iFrameDocNoteBody" onLoad='superNoteInit();'>
+<body class="iFrameDocNoteBody" onLoad="superNoteInit({{json_data}});">
 	<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
 	<div class='outerIframe'>
 		<div class='iDocHeader'>Notes</div>
