@@ -3462,6 +3462,46 @@ function properPhoneFormatDisplay(value) {
 	return proper;
 }
 
+function selectStateIndexById() {
+	var state_id = String(grab('u_state').value);
+	var selectBox = grab('input_state');
+	
+	for (var i = 0; i < selectBox.length; i++) {
+		var currVal = String(selectBox[i].value); 
+
+		if (state_id === currVal) {
+			selectBox.selectedIndex = i;
+			break;
+		}
+	}
+}
+
+function superDuperSelectBoxErrorCreator() {
+	var original 	= String(grab('i_state').value);
+	var updated 	= String(grab('u_state').value);
+	var input 		= grab('input_state');
+
+	if (original !== updated) {
+		input.style.border = '1px solid red';
+	}
+	else {
+		input.style.border = '1px solid gray';
+	}
+}
+
+function u_i_selectFoo() {
+	var original 	= String(grab('i_state').value);
+	var input 		= grab('input_state');
+	var val 		= String(input.value);
+
+	if (original === val) {
+		input.style.border = '1px solid gray';
+	}
+	else {
+		input.style.border = '1px solid red';
+	}
+}
+
 function initializeUpdateCoupleFields() {
 	var fields = fetchUpdatableCoupleFields();
 	var phones = fetchUpdatableCoupleFieldsNum();
@@ -3473,6 +3513,9 @@ function initializeUpdateCoupleFields() {
 	for (var j = 0; j < phones.length; j++) {
 		buildUpdateFieldValueNum(phones[j]);
 	}
+
+	selectStateIndexById();
+	superDuperSelectBoxErrorCreator();
 }
 
 function startCoupleSession() {
@@ -4510,7 +4553,7 @@ function saveBaselessUpdates() {
 	else {
 		form2.action = '/baselessUpdated/';
 		form1.action = '/coupleSession/';
-		getPopParent('c2Type').value = 'update';
+		getPopParent('c2Type').value = 'existing';
 		getPopParent('c2_id').value = grab('client_id').value;
 		form1.submit();
 		form2.submit();

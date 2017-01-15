@@ -6,7 +6,7 @@
 </head>
 
 <body class='body500' onLoad='Javascript: initializeUpdateCoupleFields();'>
-    <input type='text' id='test4' style='width:300px;'>
+    <!-- <input type='text' id='test4' style='width:300px;'> -->
     <form action='' method='post' id='c_form'> {% csrf_token %}
         <input type='hidden' name='client_id' id='client_id' value="{{client.id}}">
 
@@ -22,7 +22,7 @@
         <input type='hidden' name='u_email' id='u_email' value="{{email}}">
         <input type='hidden' name='u_probationOfficer' id='u_probationOfficer' value="{{probationOfficer}}">
         <input type='hidden' name='u_emer_contact_name' id='u_emer_contact_name' value="{{emer_contact_name}}">
-        <input type='hidden' name='state' id='state' value="{{state.id}}">
+        <input type='hidden' name='u_state' id='u_state' value="{{state.id}}">
 
         <input type='hidden' name='i_street_no' id='i_street_no' value="{{client.street_no}}">
         <input type='hidden' name='i_street_name' id='i_street_name' value="{{client.street_name}}">
@@ -36,7 +36,7 @@
         <input type='hidden' name='i_email' id='i_email' value="{{client.email}}">
         <input type='hidden' name='i_probationOfficer' id='i_probationOfficer' value="{{client.probationOfficer}}">
         <input type='hidden' name='i_emer_contact_name' id='i_emer_contact_name' value="{{client.emer_contact_name}}">
-        <input type='hidden' name='state' id='state' value="{{state.id}}">
+        <input type='hidden' name='i_state' id='i_state' value="{{client.state.id}}">
 
         <div class='head300'>UPDATE CLIENT</div>
 
@@ -80,6 +80,17 @@
             <table>
                 <tr>
                     <td><div><input type='text' style='width:165px' name='input_city' id='input_city' placeholder='City' oninput="javascript: compare_i_u('city');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
+
+                    <td>
+                        <div>
+                            <select name='input_state' id='input_state' onChange="javascript: u_i_selectFoo();">
+                                {% for s in stateList %}
+                                <option value="{{s.id}}">{{s.state}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </td>
+
                     <td><div><input type='text' style='width:80px' name='input_zip_code' id='input_zip_code' placeholder='Zip Code' oninput="javascript: compare_i_u('zip_code');" onClick="javascript: finalizeAllUpdatedCoupleFields();"></div></td>
                 </tr>
             </table>

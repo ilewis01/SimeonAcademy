@@ -1519,6 +1519,79 @@ def breakToPages(elementList, numPerPage):
 
 	return result
 
+def isolateAndExecuteClientUpdatableFeild(maj_name, new_value, client):
+	maj_name = str(maj_name)
+	new_value = str(new_value)
+
+	if maj_name == 'street_no':
+		client.street_no = new_value
+	elif maj_name == 'street_name':
+		client.street_name = new_value
+	elif maj_name == 'apartment_no':
+		client.apartment_no = new_value
+	elif maj_name == 'city':
+		client.city = new_value
+	elif maj_name == 'zip_code':
+		client.zip_code = new_value
+	elif maj_name == 'phone':
+		client.phone = wowRawNumber(new_value)
+	elif maj_name == 'work_phone':
+		client.work_phone = wowRawNumber(new_value)
+	elif maj_name == 'email':
+		client.email = new_value
+	elif maj_name == 'probationOfficer':
+		client.probationOfficer = new_value
+	elif maj_name == 'probation_phone':
+		client.probation_phone = wowRawNumber(new_value)
+	elif maj_name == 'emer_contact_name':
+		client.emer_contact_name = new_value
+	elif maj_name == 'emer_phone':
+		client.emer_phone = wowRawNumber(new_value)
+	elif maj_name == 'state':
+		client.state = State.objects.get(id=new_value)
+
+	client.save()
+
+def fetchUpdatableNewClientFieldNames():
+	names = []
+	names.append('street_no')
+	names.append('street_name')
+	names.append('apartment_no')
+	names.append('city')
+	names.append('state')
+	names.append('zip_code')
+	names.append('phone')
+	names.append('work_phone')
+	names.append('email')
+	names.append('probationOfficer')
+	names.append('probation_phone')
+	names.append('emer_contact_name')
+	names.append('emer_phone')
+	names.append('state')
+	return names
+
+def executeClientUpdate(request, client):
+	maj_names = fetchUpdatableNewClientFieldNames()
+
+	for m in maj_names:
+		original_req_name = 'i_' + str(m)
+		updated_req_name = 'input_' + str(m)
+		original_value = request.POST.get(original_req_name)
+		updated_value = request.POST.get(updated_req_name)
+
+		if str(original_value) != str(updated_value):
+			isolateAndExecuteClientUpdatableFeild(m, updated_value, client)
+
+def setNewRefReason(reason, client):
+	refs 	= RefReason.objects.all()
+	reason 	= str(reason)
+
+	for r in refs:
+		if str(r.reason) == reason:
+			client.reason_ref = r
+			client.save()
+			break
+
 
 def clientSort(includeDischarge, sortBy):
 	result = []

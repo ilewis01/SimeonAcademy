@@ -51,7 +51,7 @@ fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientIniti
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
-changeAndUpdateExistingClient
+changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -540,10 +540,10 @@ def updateExistingBaseless(request):
 			content['emer_contact_name'] 	= data['emer_contact_name']
 			content['state'] 				= data['state']
 			content['reason_ref'] 			= data['reason_ref']
-
-			content['updates'] 			= updates
-			content['client'] 			= client
-			content['title'] 			= "Client Search | Simeon Academy"
+			content['stateList'] 			= State.objects.all().order_by('state')
+			content['updates'] 				= updates
+			content['client'] 				= client
+			content['title'] 				= "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/updateExistingBaseless.html', content)
 
 @login_required(login_url='/index')
@@ -567,35 +567,9 @@ def baselessUpdated(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			street_no 			= request.POST.get('street_no')
-			street_name			= request.POST.get('street_name')
-			apartment_no		= request.POST.get('apartment_no')
-			city 				= request.POST.get('city')				
-			zip_code 			= request.POST.get('zip_code')
-			phone 				= request.POST.get('phone')
-			emer_phone 			= request.POST.get('emer_phone')
-			work_phone			= request.POST.get('work_phone')
-			probation_phone 	= request.POST.get('probation_phone')
-			email				= request.POST.get('email')
-			probationOfficer	= request.POST.get('probationOfficer')
-			emer_contact_name 	= request.POST.get('emer_contact_name')
-			state 				= State.objects.get(id=(request.POST.get('state')))
-			client 				= Client.objects.get(id=(request.POST.get('client_id')))
-
-			changeAndUpdateExistingClient(street_no, client.street_no, 'street_no', client)
-			changeAndUpdateExistingClient(street_name, client.street_name, 'street_name', client)
-			changeAndUpdateExistingClient(apartment_no, client.apartment_no, 'apartment_no', client)
-			changeAndUpdateExistingClient(city, client.city, 'city', client)
-			changeAndUpdateExistingClient(zip_code, client.zip_code, 'zip_code', client)
-			changeAndUpdateExistingClient(phone, client.phone, 'phone', client)
-			changeAndUpdateExistingClient(emer_phone, client.emer_phone, 'emer_phone', client)
-			changeAndUpdateExistingClient(work_phone, client.work_phone, 'work_phone', client)
-			changeAndUpdateExistingClient(probation_phone, client.probation_phone, 'probation_phone', client)
-			changeAndUpdateExistingClient(email, client.email, 'email', client)
-			changeAndUpdateExistingClient(probationOfficer, client.probationOfficer, 'probationOfficer', client)
-			changeAndUpdateExistingClient(emer_contact_name, client.emer_contact_name, 'emer_contact_name', client)
-			changeAndUpdateExistingClient(state, client.state, 'state', client)
-
+			client = Client.objects.get(id=(request.POST.get('client_id')))
+			executeClientUpdate(request, client)
+			setNewRefReason('Couple Counseling', client)
 			content['title'] 	= "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/baselessUpdated.html', content)
 
@@ -1585,6 +1559,7 @@ def coupleSession(request):
 				track.save()
 			elif c2_type == "new":
 				c2_id = track.c2_id
+
 
 			c1 			= Client.objects.get(id=(superDuperFetchClientID_track(track)))
 			c2 			= Client.objects.get(id=c2_id)
