@@ -4450,6 +4450,15 @@ function phoneBuilderWow(divName) {
 	div.value = finalA;
 }
 
+function phoneBuilderWow_Uni(divName) {
+	divName 		= String(divName);
+	var div 		= grab(divName);
+	var val 		= getRawNumber(div.value);
+
+	finalA = processThePhoneStuff(val);
+	div.value = finalA;
+}
+
 
 function InitializeSuperWowResults(json_data) {
 	var numberResults = String(grab('m_numMatches').value);
@@ -15548,6 +15557,24 @@ function ut_payment_accepted() {
 	form.submit();
 }
 
+function selectAllUrineTestDrugs() {
+	var isChecked = grab('selAll').checked;
+
+	if (isChecked === true) {
+		grab('ut1').checked = true;
+		grab('ut2').checked = true;
+		grab('ut3').checked = true;
+		grab('ut4').checked = true;
+		grab('ut5').checked = true;
+		grab('ut6').checked = true;
+		grab('ut7').checked = true;
+		grab('ut8').checked = true;
+		grab('ut9').checked = true;
+		grab('ut10').checked = true;
+		grab('ut11').checked = true;
+	}
+}
+
 function reset_ut() {
 	grab('ut1').checked = false;
 	grab('ut2').checked = false;
@@ -15560,7 +15587,20 @@ function reset_ut() {
 	grab('ut9').checked = false;
 	grab('ut10').checked = false;
 	grab('ut11').checked = false;
-	grab('popupDatepicker').value = '';
+	grab('selAll').checked = false;
+}
+
+function grabDiv(divName) {
+	divName = String(divName);
+	return grab(divName);
+}
+
+function utChecksUpdateAll(divName) {
+	var box = grabDiv(divName);
+
+	if (box.checked === false) {
+		grab('selAll').checked = false;
+	}
 }
 
 function cancel_ut() {
@@ -15569,22 +15609,29 @@ function cancel_ut() {
 }
 
 function continue_ut() {
-	post_ut_check(grab('ut1'), grab('m_ut1'));
-	post_ut_check(grab('ut2'), grab('m_ut2'));
-	post_ut_check(grab('ut3'), grab('m_ut3'));
-	post_ut_check(grab('ut4'), grab('m_ut4'));
-	post_ut_check(grab('ut5'), grab('m_ut5'));
-	post_ut_check(grab('ut6'), grab('m_ut6'));
-	post_ut_check(grab('ut7'), grab('m_ut7'));
-	post_ut_check(grab('ut8'), grab('m_ut8'));
-	post_ut_check(grab('ut9'), grab('m_ut9'));
-	post_ut_check(grab('ut10'), grab('m_ut10'));
-	post_ut_check(grab('ut11'), grab('m_ut11'));
-	grab('m_date').value = grab('popupDatepicker').value;
+	var theDate = grab('popupDatepicker').value;
 
-	grab('save_this').value = 'true';
-	grab('ut_form').action = '/ut_viewForm/';
-	grab('ut_form').submit();
+	if (isBlankText(theDate) === true) {
+		openPopUp('auto', '/errorLegend/', 250, 250);
+	}
+	else {
+		post_ut_check(grab('ut1'), grab('m_ut1'));
+		post_ut_check(grab('ut2'), grab('m_ut2'));
+		post_ut_check(grab('ut3'), grab('m_ut3'));
+		post_ut_check(grab('ut4'), grab('m_ut4'));
+		post_ut_check(grab('ut5'), grab('m_ut5'));
+		post_ut_check(grab('ut6'), grab('m_ut6'));
+		post_ut_check(grab('ut7'), grab('m_ut7'));
+		post_ut_check(grab('ut8'), grab('m_ut8'));
+		post_ut_check(grab('ut9'), grab('m_ut9'));
+		post_ut_check(grab('ut10'), grab('m_ut10'));
+		post_ut_check(grab('ut11'), grab('m_ut11'));
+		grab('m_date').value = grab('popupDatepicker').value;
+
+		grab('save_this').value = 'true';
+		grab('ut_form').action = '/ut_viewForm/';
+		grab('ut_form').submit();
+	}
 }
 
 //#####################################################################################################################//
@@ -16180,6 +16227,7 @@ function getGenericFormID(form_type) {
 function universal_generic_exit(form_type, page) {
 	page = String(page);
 	form_type = String(form_type);
+	var utBlank = null;
 
 	var exit_type = document.getElementById('exit_type');
 	var form = getFormElement(form_type);
@@ -16191,6 +16239,7 @@ function universal_generic_exit(form_type, page) {
 		processAsiFields(page);
 	}
 	else if (form_type === 'ut') {
+		utBlank = isBlankText(grab('popupDatepicker').value);
 		continue_ut();
 	}
 	else if (form_type === 'mh') {
@@ -16200,9 +16249,18 @@ function universal_generic_exit(form_type, page) {
 		postSapFields(page);
 	}
 
-	form.action = '/uni_generic_exit/';
-	exit_type.value = String(form_type);
-	form.submit();
+	if (form_type !== 'ut') {
+		form.action = '/uni_generic_exit/';
+		exit_type.value = String(form_type);
+		form.submit();
+	}
+	else {
+		if (utBlank === false) {
+			form.action = '/uni_generic_exit/';
+			exit_type.value = String(form_type);
+			form.submit();
+		}
+	}
 }
 
 

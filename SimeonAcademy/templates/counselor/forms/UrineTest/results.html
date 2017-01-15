@@ -78,50 +78,50 @@
 
             			<table class='ut_result_table'>
             				<tr>
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut1' id='ut1'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut1' id='ut1' onClick="javascript: utChecksUpdateAll('ut1');"></div></td>
             					<td><div id='inner_ut_M'><label>Cannibus</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut2' id='ut2'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut2' id='ut2' onClick="javascript: utChecksUpdateAll('ut2');"></div></td>
             					<td><div id='inner_ut_M'><label>Amphetamine</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut3' id='ut3'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut3' id='ut3' onClick="javascript: utChecksUpdateAll('ut3');"></div></td>
             					<td><div id='inner_ut_M'><label>Cocaine</label></div></td>
             				</tr>
 
 
             				<tr>
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut4' id='ut4'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut4' id='ut4' onClick="javascript: utChecksUpdateAll('ut4');"></div></td>
             					<td><div id='inner_ut_M'><label>Opiate</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut5' id='ut5'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut5' id='ut5' onClick="javascript: utChecksUpdateAll('ut5');"></div></td>
             					<td><div id='inner_ut_M'><label>Benodiazepine</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut6' id='ut6'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut6' id='ut6' onClick="javascript: utChecksUpdateAll('ut6');"></div></td>
             					<td><div id='inner_ut_M'><label>Barbiturates</label></div></td>
             				</tr>
 
 
             				<tr>
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut7' id='ut7'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut7' id='ut7' onClick="javascript: utChecksUpdateAll('ut7');"></div></td>
             					<td><div id='inner_ut_M'><label>PCP</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut8' id='ut8'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut8' id='ut8' onClick="javascript: utChecksUpdateAll('ut8');"></div></td>
             					<td><div id='inner_ut_M'><label>OxyContin</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut9' id='ut9'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut9' id='ut9' onClick="javascript: utChecksUpdateAll('ut9');"></div></td>
             					<td><div id='inner_ut_M'><label>Methamphetamine</label></div></td>
             				</tr>
 
 
             				<tr>
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut10' id='ut10'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut10' id='ut10' onClick="javascript: utChecksUpdateAll('ut10');"></div></td>
             					<td><div id='inner_ut_M'><label>Morphine</label></div></td>
 
-            					<td><div id='fix_my_box'><input type='checkbox' name='ut11' id='ut11'></div></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='ut11' id='ut11' onClick="javascript: utChecksUpdateAll('ut11');"></div></td>
             					<td><div id='inner_ut_M'><label>Methadone</label></div></td>
 
-            					<td></td>
-            					<td></td>
+            					<td><div id='fix_my_box'><input type='checkbox' name='selAll' id='selAll' onClick="javascript: selectAllUrineTestDrugs();"></div></td>
+            					<td><div id='inner_ut_M' style='color:gray;'><label><em>Select All</em></label></div></td>
             				</tr>
             			</table>
 
@@ -135,13 +135,13 @@
             				<tr>
                                           <td>
                                                 <div>
-                                                      <button type='button' onClick="javascript: universal_generic_exit('ut', '/ut_preliminary/');">Exit</button>
+                                                      <button type='button' onClick="javascript: universal_generic_exit('ut', '/ut_preliminary/'); return false;">Exit</button>
                                                 </div>
                                           </td>
 
                                           <td>
                                                 <div>
-                                                      <button type='button' onClick='javascript: continue_ut();'>Continue</button>
+                                                      <button type='button' onClick='javascript: continue_ut(); return false;'>Continue</button>
                                                 </div>
                                           </td>
             				</tr>

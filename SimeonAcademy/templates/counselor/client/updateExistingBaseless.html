@@ -42,24 +42,25 @@
 
         <div class='general300Profile'>
            <!--  <div class='divider_gradient' style=''></div> -->
+            <a href="Javascript: viewClient2Profile_couple();" onmouseover="javascript: " onmouseout="javascript:">
+                <table>
+                    <tr>
+                        <td>
+                            <div class='loKey-pic-container'> <!-- CLIENT IMAGE -->
+                                <img src="/static/media/{{client.photo}}" alt="client_img" class=''>
+                            </div>
+                        </td>
 
-            <table>
-                <tr>
-                    <td>
-                        <div class='loKey-pic-container'> <!-- CLIENT IMAGE -->
-                            <img src="/static/media/{{client.photo}}" alt="client_img" class=''>
-                        </div>
-                    </td>
-
-                    <td>
-                        <table>
-                            <tr><td><div id='loKey-session-name'><em>{{client.fname}} {{client.middleInit}}. {{client.lname}}</em></div></td></tr>
-                            <tr><td><div id='loKey-session-id'>{{client.clientID}}</div></td></tr>
-                            <tr><td><div id='loKey-session-number'><b>DOB: </b>{{client.dob}}</div></td></tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
+                        <td>
+                            <table>
+                                <tr><td><div id='loKey-session-name'><em>{{client.fname}} {{client.middleInit}}. {{client.lname}}</em></div></td></tr>
+                                <tr><td><div id='loKey-session-id'>{{client.clientID}}</div></td></tr>
+                                <tr><td><div id='loKey-session-number'><b>DOB: </b>{{client.dob}}</div></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </a>
 
             <div class='divider_gradient_up' style='margin-bottom:px;'></div>
 

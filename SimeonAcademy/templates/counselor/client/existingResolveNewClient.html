@@ -5,7 +5,7 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='body500'>
+<body class='body500orange'>
     <form action='/updateExistingBaseless/' method='post' id='c_form'> {% csrf_token %}
         <input type='hidden' name='client_id' id='client_id' value="{{client.id}}">
 
@@ -24,7 +24,7 @@
         <input type='hidden' name='state' id='state' value="{{state.id}}">
         <input type='hidden' name='reason_ref' id='reason_ref' value="{{reason_ref.id}}">
 
-        <div class='head300'>WARNING</div>
+        <div class='head300orange'>WARNING</div>
 
         <div class='general300Profile'>
             <div class='existGen300_imagewrapper'>
@@ -84,7 +84,7 @@
 
             <div class='button3Long_newClient'>
                 <button onClick="Javascript: chooseAsIsCouple2();">Proceed to Session</button>
-                <button onClick="Javascript: forwardToUpdateCouple2();">Update Client</button>
+                <button onClick="Javascript: forwardToUpdateCouple2();">Update Client Info</button>
                 <button onClick="Javascript: window.close();">Cancel</button>
             </div>
         </div>

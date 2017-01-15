@@ -12377,6 +12377,7 @@ def beginUT(request):
 		setGlobalID(paid.id, request.user)
 		result['url'] = 'counselor/forms/UrineTest/instructions.html'
 
+	result['date'] = session.ut.date_of_assessment
 	return result
 
 def processUtData(request):

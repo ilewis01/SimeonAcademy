@@ -4974,6 +4974,7 @@ button:hover {
 	font-weight: bold;
 	color:#7b3f1a;
 	text-align: center;
+	height:50px;
 }
 
 #wow-session-id {
@@ -7305,6 +7306,39 @@ button:hover {
 	background: url('../images/greenBk1.png');
 }
 
+.body300orange {
+	width:99%;
+	margin:auto;
+	font-family: Arial;
+	margin-top: 10px;
+	background: url('../images/orangeBk1.png');
+}
+
+.body300orange a {
+	text-decoration: none;
+}
+
+.body300orange a:hover {
+	/*color: red;*/
+	color: #968662;
+	text-decoration: underline;
+}
+
+.body300orange table {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	font-style: italic;
+	width:90%;
+	margin: auto;
+}
+
+.body300orange th {
+	font-size: 16px;
+	text-align: left;
+	color:#824951;
+}
+
 .body3002 {
 	width:99%;
 	margin:auto;
@@ -7338,10 +7372,28 @@ button:hover {
 	color:#824951;
 }
 
+
+
 .head300 {
 	padding: 2%;
 	color: #e3dcca;
 	background: url('../images/superGreen.png');
+	background-size: 100%;
+	text-shadow: 1px 1px black;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 24px;
+	text-align: center;
+	width: 88%;
+	margin: auto;
+	border-radius: 8px;
+	border: 1px solid gray;
+}
+
+.head300orange {
+	padding: 2%;
+	color: #9b162f;
+	background: url('../images/orageRadial.png');
 	background-size: 100%;
 	text-shadow: 1px 1px black;
 	font-weight: bold;
@@ -7793,6 +7845,15 @@ button:hover {
 	font-family: Arial;
 	margin-top: 10px;
 	background: url('../images/greenBk1.png');
+	font-size: 12px;
+}
+
+.body500orange {
+	width:99%;
+	margin:auto;
+	font-family: Arial;
+	margin-top: 10px;
+	background: url('../images/orangeBk1.jpg');
 	font-size: 12px;
 }
 
