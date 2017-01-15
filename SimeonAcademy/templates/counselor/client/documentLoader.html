@@ -7,13 +7,27 @@
 	<link href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class="iFrameDocNoteBody">
+<body class="iFrameDocNoteBody" onLoad="superDocInit({{json_data}});">
 	<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
-	<div class='outerIframe'>
-		<div class='iDocHeader'></div>
+		<input type='hidden' name='selectedDoc' id='selectedDoc' value=''>
 
-		<div class='iDocFooter'><div class='ifBtnHold1'><button>Upload</button></div></div>
-	</div>
+		<div class='outerIframe'>
+			<div class='iDocHeader'>Documents <span>({{numDocs}})</span></div>
+
+			<div id='docList' class='marginizeZeroTolerance'>
+				<ol>
+					{% for d in docList %}
+					<li>
+						<a href="javascript: loadThisDocument_instant('{{d.id}}')">
+							{{d.date}}: {{d.title}}
+						</a>
+					</li>
+					{% endfor %}
+				</ol>
+			</div>
+
+			<div class='iDocFooter'><div class='ifBtnHold1'><button>Upload</button></div></div>
+		</div>
 	</form>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

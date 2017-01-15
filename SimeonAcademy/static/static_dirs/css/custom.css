@@ -8269,15 +8269,23 @@ button:hover {
 	position: relative;
 }
 
+.marginizeZeroTolerance ol {
+	margin:0px;
+	padding:22px;
+}
+
+.marginizeZeroTolerance li {
+	margin-bottom: 8px;
+}
+
 .iDocHeader {
 	width: 100%;
 	text-align: center;
-
-	/*background: url('../images/superGreen.png');
-	background-size: 100%;
-	background-color: brown;
-	border-bottom: 1px solid black;
-	height:40px;*/
+	margin:auto;
+	font-size: 20px;
+	margin-top: 10px;
+	font-weight: bold;
+	font-style: italic;
 }
 
 .iDocFooter {

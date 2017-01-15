@@ -88,13 +88,13 @@ class Drug(models.Model):
 class Attachment(models.Model):
 	clientID = models.CharField(max_length=30, default=None, blank=True, null=True)
 	clientID2 = models.CharField(max_length=30, default=None, blank=True, null=True)
-	date = models.DateTimeField(auto_now_add=True, default=None)
+	date = models.DateField(auto_now_add=True, default=None)
 	title = models.CharField(max_length=50, default=None, blank=True, null=True)
 	document = models.FileField(upload_to='documents/', default=None)
 	isCouple = models.BooleanField(default=False, blank=True)
 
 	def __unicode__(self):
-		return str(self.date.date()) + " " + str(self.title)
+		return str(self.date) + " " + str(self.title)
 
 class Client(models.Model):
 	fname = models.CharField(max_length=20, default=None, blank=True, null=True)

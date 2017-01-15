@@ -23,7 +23,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, PrintableForms, WorkSchedule, Note, Couple
+SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment
 
 def isCompleteWeek(day):
 	complete = False
@@ -2139,11 +2139,29 @@ def singleClientNoteMatch(note, clientID):
 		isMatch = True
 	return isMatch
 
+def singleClientDocMatch(document, clientID):
+	isMatch = False
+	clientID = str(clientID)
+
+	if str(document.clientID) == clientID or str(document.clientID2) == clientID:
+		isMatch = True
+	return isMatch
+
 
 def doubleClientsNoteMatch(clientID1, clientID2, note):
 	isMatch = False
 	match1 = singleClientNoteMatch(note, clientID1)
 	match2 = singleClientNoteMatch(note, clientID2)
+
+	if match1 == True and match2 == True:
+		isMatch = True
+
+	return isMatch
+
+def doubleClientsDocMatch(clientID1, clientID2, document):
+	isMatch = False
+	match1 = singleClientDocMatch(document, clientID1)
+	match2 = singleClientDocMatch(document, clientID2)
 
 	if match1 == True and match2 == True:
 		isMatch = True
@@ -2164,22 +2182,40 @@ def noteSerializer(noteList):
 
 	return finalList
 
+def documentSerializer(docList):
+	finalList = []
+
+	for d in docList:
+		data 			 = {}
+		data['title'] 	 = d.title
+		data['document'] = str(d.document)
+		data['id'] 		 = d.id
+		data['flag'] 	 = 'False'
+		data['load'] 	 = 'True'
+		finalList.append(data)
+
+	return finalList
+
 def coupleDocumentFetch(clientID1, clientID2):
 	newList 	= []
-	finalList 	= []
+	docList 	= Attachment.objects.all().order_by('-date')
+
+	for d in docList:
+		if d.isCouple == True and doubleClientsDocMatch(clientID1, clientID2, d) == True:
+			newList.append(d)
+
+	return newList
 
 
 def getCoupleNotesWowBuilder(clientID1, clientID2):
 	newList 	= []
-	finalList 	= []
 	noteList 	= Note.objects.all().order_by('-date')
 
 	for n in noteList:
 		if n.isCouple == True and doubleClientsNoteMatch(clientID1, clientID2, n) == True:
 			newList.append(n)
 
-	finalList = noteSerializer(newList)
-	return finalList
+	return newList
 
 def nonSerializedNoteList(clientID1, clientID2):
 	newList 	= []

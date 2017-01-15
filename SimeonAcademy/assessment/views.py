@@ -51,7 +51,8 @@ fetchExisitingCouples, superDuperFetchClientID_track, getStates, trueClientIniti
 wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClientMatchFname, \
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
-changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch
+changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
+documentSerializer, noteSerializer
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -803,6 +804,9 @@ def documentLoader(request):
 			c1_clientID = session.client.clientID
 			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
 			docs = coupleDocumentFetch(c1_clientID, c2_clientID)
+
+			content['numDocs'] = len(docs)
+			content['docList'] = docs
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/documentLoader.html', content)
 
@@ -831,8 +835,9 @@ def noteLoader(request):
 			c1_clientID = session.client.clientID
 			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
 			notes = getCoupleNotesWowBuilder(c1_clientID, c2_clientID)
-			json_data = json.dumps(notes)
-			content['json_data'] = json_data
+
+			content['numNotes'] = len(notes)
+			content['noteList'] = notes
 			content['title'] = "Couple Counseling | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
 
@@ -1574,14 +1579,14 @@ def coupleSession(request):
 			c1 			= Client.objects.get(id=(superDuperFetchClientID_track(track)))
 			c2 			= Client.objects.get(id=c2_id)
 			build 		= superCoupleStarter(c1.clientID, c2.clientID)
-			notes 		= getCoupleNotesWowBuilder(c1.clientID, c2.clientID)
+			# notes 		= getCoupleNotesWowBuilder(c1.clientID, c2.clientID)
 			couple 		= build['couple']
-			json_data 	= json.dumps(notes)
+			# json_data 	= json.dumps(noteSerializer(notes))
 
 
 			content['c1'] 		 = c1
 			content['c2'] 		 = c2
-			content['json_data'] = json_data
+			# content['json_data'] = json_data
 			content['c1phone'] 	 = wowPhoneNumberDisplayConverter(c1.phone)
 			content['c2phone'] 	 = wowPhoneNumberDisplayConverter(c2.phone)
 			content['c1ss'] 	 = wowSSNumberDisplayConverterHidden(c1.ss_num)
@@ -1589,7 +1594,7 @@ def coupleSession(request):
 			content['couple_id'] = couple.id
 			content['session_id'] = track.s_id
 			content['title'] 	 = "Couple's Therapy | Simeon Academy"
-			content['loadedNotes'] = len(notes)
+			# content['loadedNotes'] = len(notes)
 			return render_to_response('counselor/client/coupleSession.html', content)
 
 @login_required(login_url='/index')

@@ -9,12 +9,25 @@
 
 <body class="iFrameDocNoteBody" onLoad="superNoteInit({{json_data}});">
 	<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
-	<div class='outerIframe'>
-		<div class='iDocHeader'>Notes</div>
-		<div id='noteList'></div>
+		<input type='hidden' name='selectedNote' id='selectedNote' value=''>
 
-		<div class='iDocFooter'><div class='ifBtnHold1'><button>New Note</button></div></div>
-	</div>
+		<div class='outerIframe'>
+			<div class='iDocHeader'>Notes <span>({{numNotes}})</span></div>
+
+			<div id='noteList' class='marginizeZeroTolerance'>
+				<ol>
+					{% for n in noteList %}
+					<li>
+						<a href="javascript: loadThisNote_instant('{{n.id}}')">
+							{{n.date}}: {{n.title}}
+						</a>
+					</li>
+					{% endfor %}
+				</ol>
+			</div>
+
+			<div class='iDocFooter'><div class='ifBtnHold1'><button>New Note</button></div></div>
+		</div>
 	</form>
 
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>

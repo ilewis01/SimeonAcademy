@@ -5147,10 +5147,23 @@ function cp_hoverB(clientOption) {
 	bkg.style.backgroundColor = '#c0c9c7';
 }
 
+function loadThisNote_instant(note_id) {
+	parent.grab('superTest').value = "Loading Note ID: " + String(note_id)
+}
+
+function loadThisDocument_instant(doc_id) {
+	parent.grab('superTest').value = "Loading Document ID: " + String(doc_id)
+}
+
 
 function superNoteInit(json_data) {
-	var div = grab('noteList');
-	div.innerHTML = "Number of notes: " + String(json_data.length);
+	// var div = grab('noteList');
+	// div.innerHTML = "Number of notes: " + String(json_data.length);
+}
+
+function superDocInit(json_data) {
+	// var div = grab('docList');
+	// div.innerHTML = "Number of documents: " + String(json_data.length);
 }
 
 function populateDropDownDay(sType) {
