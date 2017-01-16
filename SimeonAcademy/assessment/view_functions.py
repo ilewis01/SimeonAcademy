@@ -2175,7 +2175,8 @@ def noteSerializer(noteList):
 		data 			 = {}
 		data['subject']  = n.title
 		data['bodyData'] = n.note
-		data['id'] 		 = n.id
+		data['note_id']  = n.id
+		data['date']  	 = str(n.date)
 		data['flag'] 	 = 'False'
 		data['load'] 	 = 'True'
 		finalList.append(data)

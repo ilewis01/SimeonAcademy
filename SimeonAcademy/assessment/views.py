@@ -835,7 +835,10 @@ def noteLoader(request):
 			c1_clientID = session.client.clientID
 			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
 			notes = getCoupleNotesWowBuilder(c1_clientID, c2_clientID)
+			serializedNotes = noteSerializer(notes)
+			json_data = json.dumps(serializedNotes)
 
+			content['json_data'] = json_data
 			content['numNotes'] = len(notes)
 			content['noteList'] = notes
 			content['title'] = "Couple Counseling | Simeon Academy"

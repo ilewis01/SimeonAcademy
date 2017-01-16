@@ -8251,14 +8251,22 @@ button:hover {
 	border-radius: 8px;
 	padding-top: 1%;
 	padding-bottom: 1%;
+	background: url('../images/super_head_bk4.png');
+	background-size: 100%;
+	color:#e3dcc8;
+	text-shadow:1px 1px black;
 }
 
 .iFrameDocNoteBody {
 	font-size: 12px;
-	font-family: Arial; 
-	overflow-y: scroll;
+	font-family: Arial;
+	background-color: #c0c9c7;
+	/*background-color: #d3cfc4;*/
+	/*background: url('../images/iFrame1.jpg');
+	background-size: 100%;*/
+	/*overflow-y: scroll;*/
 	/*background: url('../images/iFrame1.jpg');*/
-	background-size: 100%;
+	/*background-size: 100%;*/
 /*	   -right: 1px solid black;
 	border-radius: 5px;*/
 }
@@ -8267,6 +8275,21 @@ button:hover {
 	width: 100%;
 	height:100%;
 	position: relative;
+}
+
+.marginizeZeroTolerance {
+	width: 90%;
+	margin: auto;
+	height:60%;
+	border: 1px solid black;
+	border-radius: 8px;
+	/*background-color: #c0c9c7;*/
+	background-color: #e8e7e7;
+	/*background-color: white;*/
+	overflow-y: scroll;
+	margin-top: 5%;
+	margin-bottom: 10%;
+	box-shadow: 3px 3px 3px #515252;
 }
 
 .marginizeZeroTolerance ol {
@@ -8278,31 +8301,62 @@ button:hover {
 	margin-bottom: 8px;
 }
 
+.marginizeZeroTolerance a {
+	text-decoration: none;
+	font-style: italic;
+}
+
+.marginizeZeroTolerance a:hover {
+	text-decoration: underline;
+	color:#7c3e20;
+}
+
 .iDocHeader {
 	width: 100%;
 	text-align: center;
 	margin:auto;
 	font-size: 20px;
-	margin-top: 10px;
+	margin-top: 15px;
 	font-weight: bold;
 	font-style: italic;
+	color:white;
+	text-shadow:1px 1px black;
+}
+
+.iDocHeader span {
+	/*color:cyan;*/
 }
 
 .iDocFooter {
-	/*width: 100%;
-	height:40px;
+	width: 90%;
+	height:25px;
+	margin: auto;
+	/*background: url('../images/superGreen.png');*/
+	/*background-color: #e8e7e7;*/
+	/*background-color: #c0c9c7;*/
+	background-size: 100%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	/*border: 1px solid gray;
+	border-radius: 5px;*/
+	/*height:40px;
 	position: absolute;
 	bottom:0;*/
 }
 
 .ifBtnHold1 {
+	/*width: 90%;*/
 	width: 100%;
-	height:40px;
+	height:100%;
+	margin: auto;
 }
 
 .ifBtnHold1 button {
 	width: 100%;
 	height:25px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px #515252;
 }
 
 .existGen300_wow {

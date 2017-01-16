@@ -4777,16 +4777,6 @@ function retrieveNoteDynamically_couple(subjectDivName, bodyDivName, flagDivName
 	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
 }
 
-function initializeCoupleNoteEditor() {
-	var processed = getPopParent('newNoteSubject').value;
-	var subject = fetchTrueSubject(processed);
-	var date = fetchTrueNoteDate(processed);
-	var html = "<div><b>Date created: </b><em><span>" + date + "</span></em></div>";
-	grab('editableDateDiv').innerHTML = html;
-	grab('the_subject').innerHTML = subject;
-	grab('the_body').innerHTML = getPopParent('newNoteBody').value;
-}
-
 function fetchTrueSubject(subject) {
 	subject = String(subject);
 	trueSubject = '';
@@ -5147,8 +5137,68 @@ function cp_hoverB(clientOption) {
 	bkg.style.backgroundColor = '#c0c9c7';
 }
 
-function loadThisNote_instant(note_id) {
-	parent.grab('superTest').value = "Loading Note ID: " + String(note_id)
+function translatePythonDate(date) {
+	date = String(date);
+	var nd = '';
+	var mm = '';
+	var dd = '';
+	var yy = '';
+
+	yy += date[0];
+	yy += date[1];
+	yy += date[2];
+	yy += date[3];
+
+	mm += date[5];
+	mm += date[6];
+
+	dd += date[8];
+	dd += date[9];
+
+	mm = Number(mm);
+
+	if (mm === 1) {nd = "January";}
+	else if (mm === 2) {nd = "February";}
+	else if (mm === 3) {nd = "March";}
+	else if (mm === 4) {nd = "April";}
+	else if (mm === 5) {nd = "May";}
+	else if (mm === 6) {nd = "June";}
+	else if (mm === 7) {nd = "July";}
+	else if (mm === 8) {nd = "August";}
+	else if (mm === 9) {nd = "September";}
+	else if (mm === 10) {nd = "October";}
+	else if (mm === 11) {nd = "November";}
+	else if (mm === 12) {nd = "December";}
+
+	return nd + " " + dd + ", " + yy;
+}
+
+function initializeCoupleNoteEditor() {
+	var subject = getPopParent('selectedNoteSubject').value;
+	var body = getPopParent('selectedNoteBody').value;
+	var date = getPopParent('selectedNoteDate').value;
+	grab('the_subject').innerHTML = subject;
+	grab('the_body').innerHTML = body;
+	grab('editableDateDiv').innerHTML = translatePythonDate(date);
+}
+
+function loadThisNote_instant(note_id, json_data) {
+	var note_id = String(note_id);
+	var curr_id = '';
+
+	for (var i = 0; i < json_data.length; i++) {
+		curr_id = String(json_data[i].note_id);
+		
+		if (curr_id === note_id) {
+			grab('selectedNoteId').value = json_data[i].note_id;
+			grab('selectedNoteSubject').value = json_data[i].subject;
+			grab('selectedNoteBody').value = json_data[i].bodyData;
+			grab('selectedNoteDate').value = json_data[i].date;
+			break;
+		}
+	}
+
+	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
 }
 
 function loadThisDocument_instant(doc_id) {

@@ -7,9 +7,12 @@
 	<link href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class="iFrameDocNoteBody" onLoad="superNoteInit({{json_data}});">
+<body class="iFrameDocNoteBody" onLoad="superNoteInit();">
 	<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
-		<input type='hidden' name='selectedNote' id='selectedNote' value=''>
+		<input type='hidden' name='selectedNoteId' id='selectedNoteId' value=''>
+		<input type='hidden' name='selectedNoteSubject' id='selectedNoteSubject' value=''>
+		<input type='hidden' name='selectedNoteBody' id='selectedNoteBody' value=''>
+		<input type='hidden' name='selectedNoteDate' id='selectedNoteDate' value=''>
 
 		<div class='outerIframe'>
 			<div class='iDocHeader'>Notes <span>({{numNotes}})</span></div>
@@ -18,7 +21,7 @@
 				<ol>
 					{% for n in noteList %}
 					<li>
-						<a href="javascript: loadThisNote_instant('{{n.id}}')">
+						<a href="javascript: loadThisNote_instant('{{n.id}}', {{json_data}});">
 							{{n.date}}: {{n.title}}
 						</a>
 					</li>
@@ -26,7 +29,7 @@
 				</ol>
 			</div>
 
-			<div class='iDocFooter'><div class='ifBtnHold1'><button>New Note</button></div></div>
+			<div class='iDocFooter'><div class='ifBtnHold1'><button onClick="javascript: addCoupleNote(); return false;">New Note</button></div></div>
 		</div>
 	</form>
 
