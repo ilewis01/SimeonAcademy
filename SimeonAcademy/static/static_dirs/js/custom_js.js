@@ -5178,7 +5178,7 @@ function loadThisNote_instant(note_id, json_data) {
 function noteAction(action) {
 	action = String(action);
 
-	if (action === 'save') {
+	if (action === 'save' || action === 'new') {
 		getPopParent('selectedNoteSubject').value 	= grab('subject').value;
 		getPopParent('selectedNoteBody').value 		= grab('c_body').value;
 	}

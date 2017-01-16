@@ -839,9 +839,11 @@ def noteLoader(request):
 			json_data = json.dumps(serializedNotes)
 
 			content['json_data'] = json_data
-			content['numNotes'] = len(notes)
-			content['noteList'] = notes
-			content['title'] = "Couple Counseling | Simeon Academy"
+			content['numNotes']  = len(notes)
+			content['noteList']  = notes
+			content['c1'] 		 = c1_clientID
+			content['c2'] 		 = c2_clientID
+			content['title'] 	 = "Couple Counseling | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
 
 @login_required(login_url='/index')
@@ -866,14 +868,23 @@ def noteActionTaken(request):
 
 		else:
 			action = str(request.POST.get('noteAction'))
-			note = Note.objects.get(id=(request.POST.get('selectedNoteId')))
 
 			if action == 'save':
-				note.title = request.POST.get('selectedNoteSubject')
-				note.note = request.POST.get('selectedNoteBody')
+				note = Note.objects.get(id=(request.POST.get('selectedNoteId')))
+				note.title 	= request.POST.get('selectedNoteSubject')
+				note.note 	= request.POST.get('selectedNoteBody')
 				note.save()
 			elif action == 'delete':
+				note = Note.objects.get(id=(request.POST.get('selectedNoteId')))
 				note.delete()
+			elif action == 'new':
+				subject 	= request.POST.get('selectedNoteSubject')
+				body 		= request.POST.get('selectedNoteBody')
+				c1 			= request.POST.get('c1')
+				c2 			= request.POST.get('c2')
+				date 		= datetime.now().date()
+				newNote 	= Note(clientID=c1, clientID_2=c2, date=date, title=subject, note=body, isCouple=True)
+				newNote.save()
 
 			session = ClientSession.objects.get(id=(track.s_id))
 			c1_clientID = session.client.clientID
