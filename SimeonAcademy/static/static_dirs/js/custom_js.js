@@ -5182,9 +5182,7 @@ function loadThisDocument_instant(doc_id, json_data) {
 	}
 
 	docPath = pre + post;
-	window.open(docPath);
-	// grab('testingPdf').src = docPath;
-	// parent.grab('superTest').value = "Document Path: " + docPath;
+	openPopUp('auto', docPath);
 }
 
 function loadThisNote_instant(note_id, json_data) {
