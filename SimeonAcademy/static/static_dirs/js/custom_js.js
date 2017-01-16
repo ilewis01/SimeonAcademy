@@ -4867,14 +4867,6 @@ function fetchTrueNoteDate(subject) {
 	return mm + ' ' + dd + ', ' + yy;
 }
 
-function LoadTheDamnNoteData() {
-	var processedSubject = String(getPopParent('newNoteSubject').value);
-	var subject = fetchTrueSubject(processedSubject);
-	grab('subject').value = subject;
-	grab('c_body').innerHTML = getPopParent('newNoteBody').value;
-}
-
-
 
 function fetchTheDivLeadingNumber(SavName) {
 	SavName = String(SavName);
@@ -4913,31 +4905,6 @@ function theOnlyNoteErrorChecker() {
 function superBorderToGray(divName) {	
 	divname = String(divname);
 	var div = grab(divname);
-}
-
-function coupleNoteErase() {
-	var flagName = String(getPopParent('selectedFlag').value);
-	getPopParent(flagName).value = "False";
-	//Handle the number added if needed
-	var numberLoadedNotes = Number(getPopParent('numberLoadedNotes').value);
-	var leadingNumber = fetchTheDivLeadingNumber(flagName);
-	var loadName = "load_" + String(leadingNumber);
-	getPopParent(loadName).value = "False";
-
-	var currentDeletes = String(getPopParent('delete_ids').value);
-	var del_id = "theId_" + String(leadingNumber);
-	var addToDeleteList = String(getPopParent(del_id).value);
-	var newDelList = currentDeletes + addToDeleteList + '~';
-	getPopParent('delete_ids').value = newDelList;
-
-	if (leadingNumber > numberLoadedNotes) {
-		var addedDiv = getPopParent('numberAdded');
-		var newAdded = Number(addedDiv.value) - 1;
-		addedDiv.value = newAdded;
-	}
-
-	superCoupleSelectDisplayBuilder();
-	window.close();
 }
 
 function getNewNoteList() {
@@ -5173,6 +5140,13 @@ function translatePythonDate(date) {
 	return nd + " " + dd + ", " + yy;
 }
 
+function LoadTheDamnNoteData() {
+	var subject = getPopParent('selectedNoteSubject').value;
+	var body = getPopParent('selectedNoteBody').value;
+	grab('subject').value = subject;
+	grab('c_body').value = body;
+}
+
 function initializeCoupleNoteEditor() {
 	var subject = getPopParent('selectedNoteSubject').value;
 	var body = getPopParent('selectedNoteBody').value;
@@ -5199,6 +5173,21 @@ function loadThisNote_instant(note_id, json_data) {
 	}
 
 	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
+}
+
+function noteAction(action) {
+	action = String(action);
+
+	if (action === 'save') {
+		getPopParent('selectedNoteSubject').value 	= grab('subject').value;
+		getPopParent('selectedNoteBody').value 		= grab('c_body').value;
+	}
+
+	getPopParent('noteAction').value = action;
+	var form = getPopParent('upload_form');
+	form.action = '/noteActionTaken/';
+	form.submit();
+	window.close();
 }
 
 function loadThisDocument_instant(doc_id) {

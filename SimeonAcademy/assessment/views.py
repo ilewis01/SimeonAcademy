@@ -845,6 +845,50 @@ def noteLoader(request):
 			return render_to_response('counselor/client/noteLoader.html', content)
 
 @login_required(login_url='/index')
+def noteActionTaken(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			action = str(request.POST.get('noteAction'))
+			note = Note.objects.get(id=(request.POST.get('selectedNoteId')))
+
+			if action == 'save':
+				note.title = request.POST.get('selectedNoteSubject')
+				note.note = request.POST.get('selectedNoteBody')
+				note.save()
+			elif action == 'delete':
+				note.delete()
+
+			session = ClientSession.objects.get(id=(track.s_id))
+			c1_clientID = session.client.clientID
+			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
+			notes = getCoupleNotesWowBuilder(c1_clientID, c2_clientID)
+			serializedNotes = noteSerializer(notes)
+			json_data = json.dumps(serializedNotes)
+
+			content['json_data'] = json_data
+			content['numNotes'] = len(notes)
+			content['noteList'] = notes
+			content['title'] = "Client Search | Simeon Academy"
+			return render_to_response('counselor/client/noteActionTaken.html', content)
+
+@login_required(login_url='/index')
 def superNoteDisplyer(request):
 	user = request.user
 	if not user.is_authenticated():
