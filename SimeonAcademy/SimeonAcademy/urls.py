@@ -212,4 +212,5 @@ urlpatterns = patterns('',
     url(r'^underConstruction/$', 'assessment.views.underConstruction'),
     url(r'^error_zero/$', 'assessment.views.error_zero'),
     url(r'^dataTemplate/$', 'assessment.views.dataTemplate'),
+    url(r'^view_pdf/$', 'assessment.views.view_pdf'),
 )

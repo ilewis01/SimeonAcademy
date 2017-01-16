@@ -2188,9 +2188,10 @@ def documentSerializer(docList):
 
 	for d in docList:
 		data 			 = {}
-		data['title'] 	 = d.title
-		data['document'] = str(d.document)
-		data['id'] 		 = d.id
+		data['subject'] 	 = d.title
+		data['document_path'] = str(d.document)
+		data['date']  	 = str(d.date)
+		data['doc_id'] 	 = d.id
 		data['flag'] 	 = 'False'
 		data['load'] 	 = 'True'
 		finalList.append(data)

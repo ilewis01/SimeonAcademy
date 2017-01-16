@@ -15,6 +15,7 @@ import json
 import json as simplejson
 from xhtml2pdf import pisa
 from django.core import serializers
+from django.http import FileResponse, Http404
 
 from assessment.models import State, RefReason, Client, \
 AngerManagement, Drug, TermReason, \
@@ -804,10 +805,13 @@ def documentLoader(request):
 			c1_clientID = session.client.clientID
 			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
 			docs = coupleDocumentFetch(c1_clientID, c2_clientID)
+			serializedDocuments = documentSerializer(docs)
+			json_data = json.dumps(serializedDocuments)
 
-			content['numDocs'] = len(docs)
-			content['docList'] = docs
-			content['title'] = "Client Search | Simeon Academy"
+			content['json_data'] 	= json_data
+			content['numDocs'] 		= len(docs)
+			content['docList'] 		= docs
+			content['title'] 		= "Uploads | Simeon Academy"
 			return render_to_response('counselor/client/documentLoader.html', content)
 
 @login_required(login_url='/index')
@@ -844,6 +848,39 @@ def noteLoader(request):
 			content['c1'] 		 = c1_clientID
 			content['c2'] 		 = c2_clientID
 			content['title'] 	 = "Couple Counseling | Simeon Academy"
+			return render_to_response('counselor/client/noteLoader.html', content)
+
+@login_required(login_url='/index')
+def view_pdf(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			path = str(request.POST.get('selectedDocPath'))
+			# print "NEW PATH: " + path
+			# return FileResponse(open(path, 'rb'), content_type='application/pdf')
+			
+			# try:
+			# 	return FileResponse(open(path, 'rb'), content_type='application/pdf')
+			# except:
+			# 	raise Http404()
+        		
+			# content['title'] 	 = "Couple Counseling | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
 
 @login_required(login_url='/index')

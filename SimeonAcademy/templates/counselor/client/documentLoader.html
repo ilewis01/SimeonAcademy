@@ -9,7 +9,10 @@
 
 <body class="iFrameDocNoteBody" onLoad="superDocInit({{json_data}});">
 	<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
-		<input type='hidden' name='selectedDoc' id='selectedDoc' value=''>
+		<input type='hidden' name='selectedDocId' id='selectedDocId' value=''>
+		<input type='hidden' name='selectedDocTitle' id='selectedDocTitle' value=''>
+		<input type='hidden' name='selectedDocPath' id='selectedDocPath' value=''>
+		<input type='hidden' name='selectedDocDate' id='selectedDocDate' value=''>
 
 		<div class='outerIframe'>
 			<div class='iDocHeader'>Documents <span>({{numDocs}})</span></div>
@@ -18,7 +21,7 @@
 				<ol>
 					{% for d in docList %}
 					<li>
-						<a href="javascript: loadThisDocument_instant('{{d.id}}')">
+						<a href="javascript: loadThisDocument_instant('{{d.id}}', {{json_data}})">
 							{{d.date}}: {{d.title}}
 						</a>
 					</li>

@@ -7,7 +7,7 @@
 	<link href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class="iFrameDocNoteBody" onLoad="superNoteInit();">
+<body class="iFrameDocNoteBody">
 	<form action="/uploadSuccess/" method='post' id='upload_form'> {% csrf_token %}
 		<input type='hidden' name='selectedNoteId' id='selectedNoteId' value=''>
 		<input type='hidden' name='selectedNoteSubject' id='selectedNoteSubject' value=''>

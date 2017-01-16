@@ -5156,6 +5156,37 @@ function initializeCoupleNoteEditor() {
 	grab('editableDateDiv').innerHTML = translatePythonDate(date);
 }
 
+function openPDF(file) {
+	file = String(file);
+	windows.open(file, 'resizable,scrollbars');
+}
+
+function loadThisDocument_instant(doc_id, json_data) {
+	doc_id = String(doc_id);
+	var cur_id = '';
+	var docPath = '';
+	var post = '';
+	var pre = '/static/media/';
+
+	for (var i = 0; i < json_data.length; i++) {
+		curr_id = String(json_data[i].doc_id);
+		
+		if (curr_id === doc_id) {
+			grab('selectedDocId').value = json_data[i].doc_id;
+			grab('selectedDocTitle').value = json_data[i].subject;
+			grab('selectedDocPath').value = json_data[i].document_path;
+			grab('selectedDocDate').value = json_data[i].date;
+			post = String(json_data[i].document_path);
+			break;
+		}
+	}
+
+	docPath = pre + post;
+	window.open(docPath);
+	// grab('testingPdf').src = docPath;
+	// parent.grab('superTest').value = "Document Path: " + docPath;
+}
+
 function loadThisNote_instant(note_id, json_data) {
 	var note_id = String(note_id);
 	var curr_id = '';
@@ -5202,21 +5233,6 @@ function noteAction(action) {
 		form.submit();
 		window.close();
 	}		
-}
-
-function loadThisDocument_instant(doc_id) {
-	parent.grab('superTest').value = "Loading Document ID: " + String(doc_id)
-}
-
-
-function superNoteInit(json_data) {
-	// var div = grab('noteList');
-	// div.innerHTML = "Number of notes: " + String(json_data.length);
-}
-
-function superDocInit(json_data) {
-	// var div = grab('docList');
-	// div.innerHTML = "Number of documents: " + String(json_data.length);
 }
 
 function populateDropDownDay(sType) {
