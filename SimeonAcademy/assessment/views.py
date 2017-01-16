@@ -894,8 +894,10 @@ def noteActionTaken(request):
 			json_data = json.dumps(serializedNotes)
 
 			content['json_data'] = json_data
-			content['numNotes'] = len(notes)
-			content['noteList'] = notes
+			content['numNotes']  = len(notes)
+			content['noteList']  = notes
+			content['c1'] 		 = c1_clientID
+			content['c2'] 		 = c2_clientID
 			content['title'] = "Client Search | Simeon Academy"
 			return render_to_response('counselor/client/noteActionTaken.html', content)
 
