@@ -5023,11 +5023,11 @@ function superCoupleSaveEditor() {
 	else {
 		var SubName = String(getPopParent('selectedSubject').value);
 		var BodName = String(getPopParent('selectedBody').value);
-		var SavName = String(getPopParent('selectedFlag').value);
+		// var SavName = String(getPopParent('selectedFlag').value);
 
 		getPopParent(SubName).value = grab('subject').value;
 		getPopParent(BodName).value = grab('c_body').value;
-		getPopParent(SavName).value = "True";
+		// getPopParent(SavName).value = "True";
 
 		window.close();
 	}
@@ -5179,15 +5179,29 @@ function noteAction(action) {
 	action = String(action);
 
 	if (action === 'save' || action === 'new') {
-		getPopParent('selectedNoteSubject').value 	= grab('subject').value;
-		getPopParent('selectedNoteBody').value 		= grab('c_body').value;
+		if (theOnlyNoteErrorChecker() === true) {
+			openPopUp('auto', '/blankOnlyErrorHighlighted/', 400, 160);
+		}
+
+		else {
+			getPopParent('selectedNoteSubject').value 	= grab('subject').value;
+			getPopParent('selectedNoteBody').value 		= grab('c_body').value;
+
+			getPopParent('noteAction').value = action;
+			var form = getPopParent('upload_form');
+			form.action = '/noteActionTaken/';
+			form.submit();
+			window.close();
+		}
 	}
 
-	getPopParent('noteAction').value = action;
-	var form = getPopParent('upload_form');
-	form.action = '/noteActionTaken/';
-	form.submit();
-	window.close();
+	else {
+		getPopParent('noteAction').value = action;
+		var form = getPopParent('upload_form');
+		form.action = '/noteActionTaken/';
+		form.submit();
+		window.close();
+	}		
 }
 
 function loadThisDocument_instant(doc_id) {
