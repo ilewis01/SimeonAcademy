@@ -5185,6 +5185,30 @@ function loadThisDocument_instant(doc_id, json_data) {
 	openPopUp('auto', docPath);
 }
 
+function uploadWowDocument_instant() {
+	openPopUp('auto', '/coupleUpload/', 400, 180);
+}
+
+function documentActionTaken(action) {
+	action = String(action);
+	getPopParent('documentAction').value = action;
+	var form = getPopParent('upload_form');
+	form.action = '/docActionTaken/';
+
+	if (action === 'upload') {		
+		var title = String(grab('title').value);
+
+		if (isBlankText(title) === true) {
+			openPopUp('auto', '/errorLegend/', 300, 300);
+		}
+		else {
+			var uploadForm = grab('upload_form');
+			uploadForm.submit();
+			form.submit();
+		}
+	}
+}
+
 function loadThisNote_instant(note_id, json_data) {
 	var note_id = String(note_id);
 	var curr_id = '';

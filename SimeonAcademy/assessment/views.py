@@ -815,6 +815,98 @@ def documentLoader(request):
 			return render_to_response('counselor/client/documentLoader.html', content)
 
 @login_required(login_url='/index')
+def coupleUpload(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Upload Documents | Simeon Academy"
+			return render_to_response('counselor/client/coupleUpload.html', content)
+
+@login_required(login_url='/index')
+def docActionTaken(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			action = str(request.POST.get('documentAction'))
+			session 	= ClientSession.objects.get(id=(track.s_id))
+			c1_clientID = session.client.clientID
+			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
+
+			docs = coupleDocumentFetch(c1_clientID, c2_clientID)
+			serializedDocuments = documentSerializer(docs)
+			json_data = json.dumps(serializedDocuments)
+
+			content['json_data'] 	= json_data
+			content['numDocs'] 		= len(docs)
+			content['docList'] 		= docs
+			content['title'] 		= "Uploads | Simeon Academy"
+			return render_to_response('counselor/client/docActionTaken.html', content)
+
+@login_required(login_url='/index')
+def uploadSuccess2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			session 	= ClientSession.objects.get(id=(track.s_id))
+			c1_clientID = session.client.clientID
+			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
+			title 		= request.POST.get('title')
+			doc 		= request.FILES['upload']
+			newDoc = Attachment(clientID=c1_clientID, clientID2=c2_clientID, title=title, document=doc, isCouple=True)
+			newDoc.save()
+
+			content['title'] = "Upload Documents | Simeon Academy"
+			return render_to_response('counselor/client/uploadSuccess.html', content)
+
+@login_required(login_url='/index')
 def noteLoader(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -872,16 +964,11 @@ def view_pdf(request):
 
 		else:
 			path = str(request.POST.get('selectedDocPath'))
-			# print "NEW PATH: " + path
-			# return FileResponse(open(path, 'rb'), content_type='application/pdf')
-			
-			# try:
-			# 	return FileResponse(open(path, 'rb'), content_type='application/pdf')
-			# except:
-			# 	raise Http404()
-        		
-			# content['title'] 	 = "Couple Counseling | Simeon Academy"
 			return render_to_response('counselor/client/noteLoader.html', content)
+
+
+
+
 
 @login_required(login_url='/index')
 def noteActionTaken(request):
@@ -1530,6 +1617,7 @@ def simpleUpload(request):
 		else:
 			content['title'] = "Upload Documents | Simeon Academy"
 			return render_to_response('counselor/client/simpleUpload.html', content)
+
 
 @login_required(login_url='/index')
 def uploadSuccess(request):

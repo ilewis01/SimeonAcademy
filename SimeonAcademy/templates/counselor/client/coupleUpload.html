@@ -9,7 +9,7 @@
 <body class="error_body_main">
 	<div class='upload_class'>
 		<div class='upload_head'>Upload Documents</div>
-		<form action="/uploadSuccess/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
+		<form action="/uploadSuccess2/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
 			<div class='upload_body'>
 				<table>
 					<tr>
@@ -18,7 +18,7 @@
 
 					<tr>
 						<td><input type="file" name="upload" id='upload'></td>
-						<td><button type="button" onClick='Javascript: verify_uploadTitle(); return false;'>Upload</button></td>
+						<td><button type="button" onClick="Javascript: documentActionTaken('upload'); return false;">Upload</button></td>
 						<td><button type='button' onClick='Javascript: window.close(); return false;'>Cancel</button></td>
 					</tr>
 				</table>
