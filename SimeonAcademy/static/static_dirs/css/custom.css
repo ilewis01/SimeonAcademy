@@ -8508,6 +8508,69 @@ button:hover {
 	color: orange;
 }
 
+.error_body_main_orange {
+	background: url('../images/orangeBk1.jpg');
+	background-size: 100%;
+	width:100%;
+	font-family: arial;
+}
+
+.rUSureWrapper {
+	width:95%;
+	margin: auto;
+	border: 1px solid gray;
+	border-radius: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-top: 5px;
+	background: url('../images/orageRadial.png');
+	background-size: 100%;
+}
+
+.rUSureImg {
+	width:7%;
+	margin:auto;
+}
+
+.rUSureImg img {
+	width:100%;
+}
+
+.rUSureHead {
+	width:100%;
+	margin: auto;
+	padding-top: 15px;
+	text-align: center;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	color:#cc6600;
+}
+
+.rUSureMsg {
+	padding-top: 10px;
+	width:100%;
+	text-align: center;
+	font-size: 14px;
+	color:#8b3139;
+}
+
+.rUSureBtn {
+	width: 95%;
+	margin: auto;
+	/*border:1px solid gray;
+	border-radius: 8px;*/
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin-top: 15px;
+	/*background: url('../images/orageRadial.png');
+	background-size: 100%;*/
+}
+
+.rUSureBtn button {
+	width:49%;
+}
+
 
 
 

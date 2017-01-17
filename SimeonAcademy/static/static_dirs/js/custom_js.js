@@ -5217,7 +5217,7 @@ function load_selected_document_full() {
 }
 
 function confirmDocumentDeletion() {
-	openPopUp('auto', '/confirmDocumentDeletion/', 200, 200);
+	openPopUp('auto', '/confirmDocumentDeletion/', 400, 190);
 }
 
 function delete_selected_document_full() {
