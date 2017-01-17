@@ -5216,11 +5216,16 @@ function load_selected_document_full() {
 	openPopUp('auto', path);
 }
 
+function confirmDocumentDeletion() {
+	openPopUp('auto', '/confirmDocumentDeletion/', 200, 200);
+}
+
 function delete_selected_document_full() {
-	var form = grab('upload_form');
-	grab('documentAction').value = 'delete';
+	var form = getPopParent('upload_form');
+	getPopParent('documentAction').value = 'delete';
 	form.action = '/docActionTaken/';
 	form.submit();
+	window.close();
 }
 
 

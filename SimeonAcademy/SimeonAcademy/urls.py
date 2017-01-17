@@ -102,6 +102,7 @@ urlpatterns = patterns('',
     url(r'^chooseNewPair/$', 'assessment.views.chooseNewPair'),
     url(r'^noteActionTaken/$', 'assessment.views.noteActionTaken'),
     url(r'^docActionTaken/$', 'assessment.views.docActionTaken'),
+    url(r'^confirmDocumentDeletion/$', 'assessment.views.confirmDocumentDeletion'),
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),
