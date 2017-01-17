@@ -8510,7 +8510,7 @@ button:hover {
 
 .error_body_main_orange {
 	background: url('../images/orangeBk1.jpg');
-	background-size: 100%;
+	background-size: cover;
 	width:100%;
 	font-family: arial;
 }
@@ -8525,6 +8525,11 @@ button:hover {
 	margin-top: 5px;
 	background: url('../images/orageRadial.png');
 	background-size: 100%;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	color:#5d3c1d;
 }
 
 .rUSureImg {
@@ -8547,6 +8552,17 @@ button:hover {
 	color:#cc6600;
 }
 
+.rUSureHead2 {
+	width:100%;
+	margin: auto;
+	padding-top: 15px;
+	text-align: center;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+	color:#cc6600;
+}
+
 .rUSureMsg {
 	padding-top: 10px;
 	width:100%;
@@ -8555,16 +8571,30 @@ button:hover {
 	color:#8b3139;
 }
 
-.rUSureBtn {
+.rUSureMsg2 {
+	padding-top: 10px;
+	width:82%;
+	margin: auto;
+	text-align: left;
+	font-size: 13px;
+	color:#8b3139;
+	font-style: italic;
+}
+
+.rUSureMsg2 li {
+	color:#5d3c1d;
+}
+
+.rUSureBtn, .rUSureBtn2 {
 	width: 95%;
 	margin: auto;
-	/*border:1px solid gray;
-	border-radius: 8px;*/
 	padding-top: 3px;
 	padding-bottom: 3px;
 	margin-top: 15px;
-	/*background: url('../images/orageRadial.png');
-	background-size: 100%;*/
+}
+
+.rUSureBtn2 button {
+	width:100%;
 }
 
 .rUSureBtn button {

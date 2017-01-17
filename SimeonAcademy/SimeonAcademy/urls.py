@@ -217,4 +217,5 @@ urlpatterns = patterns('',
     url(r'^error_zero/$', 'assessment.views.error_zero'),
     url(r'^dataTemplate/$', 'assessment.views.dataTemplate'),
     url(r'^view_pdf/$', 'assessment.views.view_pdf'),
+    url(r'^m_errors/$', 'assessment.views.m_errors'),
 )

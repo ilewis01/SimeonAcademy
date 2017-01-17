@@ -839,6 +839,30 @@ def confirmDocumentDeletion(request):
 			return render_to_response('counselor/client/confirmDocumentDeletion.html', content)
 
 @login_required(login_url='/index')
+def m_errors(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		track = getTrack(user)
+		quickTrack('Search', track)
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html')
+
+		else:
+			content['title'] = "Upload Documents | Simeon Academy"
+			return render_to_response('global/m_errors.html', content)
+
+@login_required(login_url='/index')
 def coupleUpload(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -2462,7 +2486,7 @@ def uni_generic_exit(request):
 		else:
 			last_section = request.POST.get('save_section', '')
 			form_type = request.POST.get('exit_type')
-			session_id = request.POST.get('session_id', '')
+			session_id = track.s_id
 
 			form = None
 			type_header = None
@@ -2497,7 +2521,7 @@ def uni_generic_exit(request):
 			elif str(form_type) == 'couple':
 				couple_id = request.POST.get('couple_id', '')
 				form = Couple.objects.get(id=couple_id)
-				type_header = "Couple's Therapy"
+				type_header = 'Couple Counseling'
 
 			saveForm(request, form_type, last_section, form)
 			force_URL_priority(form_type, last_section, form)

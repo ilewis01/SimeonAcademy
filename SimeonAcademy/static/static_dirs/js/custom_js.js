@@ -7,6 +7,150 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+function m_error_text(divName, borderAction) {
+	borderAction 	= String(borderAction);
+	divName 		= String(divname);
+	var div 		= grab(divname);
+	var val 		= String(div.value);
+	var hasError 	= false;
+
+	if (isBlankText(val) === true) {
+		hasError = true;
+		div.style.border = borderAction;
+	}
+	return hasError;
+}
+
+function m_error_select(divname, borderAction) {
+	divName 		= String(divname);
+	borderAction 	= String(borderAction);
+	var div 		= grab(divname);
+	var selected 	= Number(div.selectedIndex);
+	var hasError 	= false;
+
+	if (selected === 0) {
+		hasError = true;
+		div.style.border = borderAction;
+	}
+	return hasError
+}
+
+function m_error_zip(divname, borderAction, blankAllowed) {
+	divName 		= String(divname);
+	borderAction 	= String(borderAction);
+	var div 		= grab(divname);
+	var val 	 	= String(div.value);
+	var hasError 	= false;
+
+	if (blankAllowed === true) {
+		if (val.length !== 5 || isRawNumber(val) === false) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+	}
+	else {
+		if (val.length !== 5 || isRawNumber(val) === false || isBlankText(val) === true) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+	}
+
+		
+	return hasError
+}
+
+function m_error_phone(divname, borderAction, blankAllowed) {
+	divName 		= String(divname);
+	borderAction 	= String(borderAction);
+	var div 		= grab(divname);
+	var val 	 	= String(div.value);
+	var hasError 	= false;
+	var processed 	= String(getRawNumber(val));
+
+	if (blankAllowed === true) {
+		if (processed.length !== 10 || isRawNumber(processed) === false) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+		else {
+			div.value = processed;
+		}
+	}
+	else {
+		if (processed.length !== 10 || isRawNumber(processed) === false || isBlankText(processed) === true) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+		else {
+			div.value = processed;
+		}
+	}
+	return hasError
+}
+
+function m_error_ss(divname, borderAction, numChars, blankAllowed) {
+	divName 		= String(divname);
+	borderAction 	= String(borderAction);
+	numChars 		= Number(numChars);
+	var div 		= grab(divname);
+	var val 	 	= String(div.value);
+	var hasError 	= false;
+	var processed 	= String(getRawNumber(val));
+
+	if (blankAllowed === true) {
+		if (processed.length !== numChars || isRawNumber(processed) === false) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+		else {
+			div.value = processed;
+		}
+	}
+	else {
+		if (processed.length !== numChars || isRawNumber(processed) === false || isBlankText(processed) === true) {
+			hasError = true;
+			div.style.border = borderAction;
+		}
+		else {
+			div.value = processed;
+		}
+	}
+
+	return hasError
+}
+
+function m_error_single(divname, borderAction, type, blankAllowed) {
+	type = String(type);
+	hasError = null;
+
+	if (type === 'text') {hasError 			= m_error_text(divName, borderAction);}
+	else if (type === 'select') {hasError 	= m_error_select(divname, borderAction);}
+	else if (type === 'zip') {hasError 		= m_error_ss(divname, borderAction, 5, blankAllowed);}
+	else if (type === 'phone') {hasError 	= m_error_phone(divname, borderAction, blankAllowed);}
+	else if (type === 'ss4') {hasError 		= m_error_ss(divname, borderAction, 4, blankAllowed);}
+	else if (type === 'ss9') {hasError 		= m_error_ss(divname, borderAction, 9, blankAllowed);}
+
+	return hasError;
+}
+
+function m_error_full(nameList) {
+	var hasError = false;
+	var currError = false;
+	var count = 0;
+
+	for (var i = 0; i < nameList.length; i++) {
+		currError = m_error_single(nameList[i]['divname'], nameList[i]['borderAction'], nameList[i]['type'], nameList[i]['blankAllowed']);
+
+		if (currError === true) {
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasError = true;
+	}
+}
+
 
 function quote(value) {
 	value = String(value);
@@ -3899,13 +4043,17 @@ function processNewClientFinalNumbers(div) {
 	div.value = result;
 }
 
+function generalWarningOpener() {
+	var errorWindow = openPopUp('auto', '/m_errors/', 350, 300);
+}
+
 
 function saveBaselessClient() {
 	var report = newClient_fullErrorChecker();
 	var boolText = String(report['hasErrors']);
 
 	if (boolText === 'true') {
-		var errorWindow = openPopUp('auto', '/errorLegend/', 300, 300);
+		generalWarningOpener();
 	}
 	else {
 		if (grab('photo').value.length > 0) {
@@ -4552,12 +4700,12 @@ function runUpdateClientErrorChecker() {
 function saveBaselessUpdates() {
 	var form1 = getPopParent('c_form');
 	var form2 = grab('c_form');
-	var w = 250, h = 250;
+	var w = 250, h = 145;
 	var l = Number((screen.width/2) - (w/2));
 	var t = Number((screen.height/2) - (h/2));
 
 	if (runUpdateClientErrorChecker() === true) {
-		openPopUp('auto', '/errorLegend/', w, h);
+		generalWarningOpener();
 	}
 	else {
 		form2.action = '/baselessUpdated/';
