@@ -8571,6 +8571,20 @@ button:hover {
 	width:49%;
 }
 
+.iml-sing-btnWrap {
+	width:150px;
+	height:32px;
+	border:1px solid black;
+	box-shadow: 3px 3px 3px #888888;
+	margin-top: 1%;
+	margin-left: 82.7%;
+}
+
+.iml-sing-btnWrap button {
+	width:100%;
+	height:100%;
+}
+
 
 
 
