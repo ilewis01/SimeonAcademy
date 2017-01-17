@@ -8,6 +8,7 @@
 </head>
 
 <body class="iFrameDocNoteBody" onLoad="superDocInit({{json_data}});">
+	<!-- <input type='text' id='testing'> -->
 	<form action="/docActionTaken/" method='post' enctype="multipart/form-data" id='upload_form'> {% csrf_token %}
 		<input type='hidden' name='selectedDocId' id='selectedDocId' value=''>
 		<input type='hidden' name='selectedDocTitle' id='selectedDocTitle' value=''>
@@ -18,11 +19,11 @@
 		<div class='outerIframe'>
 			<div class='iDocHeader'>Documents <span>({{numDocs}})</span></div>
 
-			<div id='docList' class='marginizeZeroTolerance'>
+			<div id='docList' class='marginizeZeroTolerance_hov'>
 				<ol>
 					{% for d in docList %}
 					<li>
-						<a href="javascript: loadThisDocument_instant('{{d.id}}', {{json_data}})">
+						<a href="javascript: loadThisDocument_instant('{{d.id}}', {{json_data}})" id='{{d.id}}'>
 							{{d.date}}: {{d.title}}
 						</a>
 					</li>
@@ -30,7 +31,17 @@
 				</ol>
 			</div>
 
-			<div class='iDocFooter'><div class='ifBtnHold1'><button onClick="Javascript: uploadWowDocument_instant(); return false;">Upload New Documents</button></div></div>
+
+			<div class='iDocFooter'>
+				<div class='ifBtnHold2'>
+					<button onClick="Javascript: load_selected_document_full(); return false;">View</button>
+					<button onClick="Javascript: delete_selected_document_full(); return false;">Delete</button>
+				</div>
+
+				<div class='ifBtnHold1'>
+					<button onClick="Javascript: uploadWowDocument_instant(); return false;">Upload New Documents</button>
+				</div>
+			</div>
 		</div>
 	</form>
 

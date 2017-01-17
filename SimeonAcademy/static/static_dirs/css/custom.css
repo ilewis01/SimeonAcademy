@@ -8277,6 +8277,39 @@ button:hover {
 	position: relative;
 }
 
+.marginizeZeroTolerance_hov {
+	width: 90%;
+	margin: auto;
+	height:50.5%;
+	border: 1px solid black;
+	border-radius: 8px;
+	background-color: #e8e7e7;
+	overflow-y: scroll;
+	margin-top: 5%;
+	margin-bottom: 10%;
+	box-shadow: 3px 3px 3px #515252;
+}
+
+.marginizeZeroTolerance_hov ol {
+	margin:0px;
+	padding:22px;
+}
+
+.marginizeZeroTolerance_hov li {
+	margin-bottom: 8px;
+}
+
+.marginizeZeroTolerance_hov a {
+	text-decoration: none;
+	font-style: italic;
+}
+
+.marginizeZeroTolerance_hov a:hover {
+	text-decoration: underline;
+	color:#7c3e20;
+	/*background-color: #c0c9c7;*/
+}
+
 .marginizeZeroTolerance {
 	width: 90%;
 	margin: auto;
@@ -8331,17 +8364,9 @@ button:hover {
 	width: 90%;
 	height:25px;
 	margin: auto;
-	/*background: url('../images/superGreen.png');*/
-	/*background-color: #e8e7e7;*/
-	/*background-color: #c0c9c7;*/
 	background-size: 100%;
 	padding-top: 2%;
 	padding-bottom: 2%;
-	/*border: 1px solid gray;
-	border-radius: 5px;*/
-	/*height:40px;
-	position: absolute;
-	bottom:0;*/
 }
 
 .ifBtnHold1 {
@@ -8349,6 +8374,22 @@ button:hover {
 	width: 100%;
 	height:100%;
 	margin: auto;
+}
+
+.ifBtnHold2 {
+	/*width: 90%;*/
+	width: 100%;
+	height:100%;
+	margin: auto;
+	margin-bottom: 5px;
+}
+
+.ifBtnHold2 button {
+	width: 49%;
+	height:25px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px #515252;
 }
 
 .ifBtnHold1 button {

@@ -5161,52 +5161,77 @@ function openPDF(file) {
 	windows.open(file, 'resizable,scrollbars');
 }
 
-function loadThisDocument_instant(doc_id, json_data) {
-	doc_id = String(doc_id);
-	var cur_id = '';
-	var docPath = '';
-	var post = '';
-	var pre = '/static/media/';
-
-	for (var i = 0; i < json_data.length; i++) {
-		curr_id = String(json_data[i].doc_id);
-		
-		if (curr_id === doc_id) {
-			grab('selectedDocId').value = json_data[i].doc_id;
-			grab('selectedDocTitle').value = json_data[i].subject;
-			grab('selectedDocPath').value = json_data[i].document_path;
-			grab('selectedDocDate').value = json_data[i].date;
-			post = String(json_data[i].document_path);
-			break;
-		}
-	}
-
-	docPath = pre + post;
-	openPopUp('auto', docPath);
-}
-
 function uploadWowDocument_instant() {
 	openPopUp('auto', '/coupleUpload/', 400, 180);
+}
+
+function updateParentCoupleDocList() {
+	var form = getPopParent('upload_form');
+	form.action = '/docActionTaken/';
+	form.submit();
+	window.close();
+}
+
+function highlightHover1(doc_id) {
+	doc_id = String(doc_id);
+	var pre = 'field_';
+	var divName = pre + doc_id;
+	var div = grab(divname);
+	// div.style.backgroundColor = "#c0c9c7";
 }
 
 function documentActionTaken(action) {
 	action = String(action);
 	getPopParent('documentAction').value = action;
-	var form = getPopParent('upload_form');
-	form.action = '/docActionTaken/';
 
 	if (action === 'upload') {		
-		var title = String(grab('title').value);
+		verify_uploadTitle();
+	}
+}
 
-		if (isBlankText(title) === true) {
-			openPopUp('auto', '/errorLegend/', 300, 300);
-		}
-		else {
-			var uploadForm = grab('upload_form');
-			uploadForm.submit();
-			form.submit();
+function loadThisDocument_instant(doc_id, json_data) {
+	doc_id = String(doc_id);
+	var SelectedDiv = grab(doc_id);
+	var t = '';
+
+	for (var i = 0; i < json_data.length; i++) {
+		var tempDivName = String(json_data[i].doc_id);
+		grab(tempDivName).style.backgroundColor = '';
+		grab(tempDivName).style.color = '';
+
+		if (tempDivName === doc_id) {
+			grab('selectedDocPath').value = json_data[i].document_path;
 		}
 	}
+
+	SelectedDiv.style.backgroundColor = '#e2db70';
+	SelectedDiv.style.color = '#7c3e20';
+	grab('selectedDocId').value = doc_id;
+}
+
+function load_selected_document_full() {
+	var post = String(grab('selectedDocPath').value);
+	var pre = "/static/media/";
+	var path = pre + post;
+	openPopUp('auto', path);
+}
+
+function delete_selected_document_full() {
+	var form = grab('upload_form');
+	grab('documentAction').value = 'delete';
+	form.action = '/docActionTaken/';
+	form.submit();
+}
+
+
+function superDocInit(json_data) {
+	var doc_id = String(json_data[0].doc_id);
+	var path = String(json_data[0].document_path)
+	var div = grab(doc_id);
+	grab('selectedDocId').value = doc_id;
+	grab('selectedDocPath').value = path;
+	div.style.backgroundColor = '#e2db70';
+	div.style.color = '#7c3e20';
 }
 
 function loadThisNote_instant(note_id, json_data) {

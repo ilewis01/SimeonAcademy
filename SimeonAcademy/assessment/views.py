@@ -864,6 +864,11 @@ def docActionTaken(request):
 			c1_clientID = session.client.clientID
 			c2_clientID = Client.objects.get(id=(track.c2_id)).clientID
 
+			if action == 'delete':
+				doc_er = request.POST.get('selectedDocId')
+				delDoc = Attachment.objects.get(id=doc_er)
+				delDoc.delete()
+
 			docs = coupleDocumentFetch(c1_clientID, c2_clientID)
 			serializedDocuments = documentSerializer(docs)
 			json_data = json.dumps(serializedDocuments)
@@ -904,7 +909,7 @@ def uploadSuccess2(request):
 			newDoc.save()
 
 			content['title'] = "Upload Documents | Simeon Academy"
-			return render_to_response('counselor/client/uploadSuccess.html', content)
+			return render_to_response('counselor/client/uploadSuccess2.html', content)
 
 @login_required(login_url='/index')
 def noteLoader(request):
