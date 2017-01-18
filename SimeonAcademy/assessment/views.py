@@ -4871,7 +4871,11 @@ def discharge_client(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content = startForm(request, 'discharge')
+			content 						= startForm(request, 'discharge')
+			content['m_phone'] 				= wowPhoneNumberDisplayConverter(content['session'].client.phone)
+			content['m_work_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.work_phone)
+			content['m_probation_phone'] 	= wowPhoneNumberDisplayConverter(content['session'].client.probation_phone)
+			content['m_emer_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.emer_phone)
 			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

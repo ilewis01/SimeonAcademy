@@ -2055,7 +2055,7 @@ def wowPhoneNumberDisplayConverter(phone):
 	phone = str(phone)
 
 	if len(phone) == 10:
-		result += ("(" + phone[0] + phone[1] + phone[2] + " ) ")
+		result += ("(" + phone[0] + phone[1] + phone[2] + ") ")
 		result += (phone[3] + phone[4] + phone[5] + "-")
 		result += phone[6]
 		result += phone[7]
