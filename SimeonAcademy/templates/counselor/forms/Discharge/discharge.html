@@ -81,8 +81,19 @@
                             </div>
 
                             <div class='addit_details_head'>Additional Details:</div>
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Gender: </b></em>{{gender}}</div>
 
-                            
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Intake Date: </b></em>{{session.client.intake_date}}</div>
+
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Reason for referral: </b></em>{{session.client.reason_ref.reason}}</div>
+
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Date of Birth: </b></em>{{session.client.dob}}</div>
+
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>SSN: </b></em>{{session.client.ss_num}}</div> 
+
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Probation Officer: </b></em>{{session.client.probationOfficer}} / <span style='color:#b46e22'>{{m_probation_phone}}</span></div>
+
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>Emergency Contact: </b></em>{{session.client.emer_contact_name}} / <span style='color:#b46e22'>{{m_emer_phone}}</span></div>
 
                           </div>
                         </div>

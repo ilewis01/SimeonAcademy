@@ -4876,6 +4876,13 @@ def discharge_client(request):
 			content['m_work_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.work_phone)
 			content['m_probation_phone'] 	= wowPhoneNumberDisplayConverter(content['session'].client.probation_phone)
 			content['m_emer_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.emer_phone)
+
+			isMale = content['session'].client.isMale
+
+			if isMale == True:
+				content['gender'] = "Male"
+			else:
+				content['gender'] = "Female"
 			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
