@@ -8615,6 +8615,71 @@ button:hover {
 	height:100%;
 }
 
+.wowTrueLeft {
+	width: 50%;
+	height:100%;
+	float:left;
+}
+
+.wowTrueRight {
+	width: 50%;
+	height:100%;
+	float:right;
+}
+
+.discharge_content_wrapper_true {
+	width:95%;
+	margin:auto;
+	height: 95%;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	/*border:1px solid black;*/
+}
+
+.discharge-pic-container {
+	width:30%;
+	float:left;
+	margin-left: 15%;
+}
+
+.discharge-pic-container img {
+	border:3px solid gray;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.top-ent-wrap {
+	width:100%;
+	margin:auto;
+	height:35%;
+	position: relative;
+}
+
+.discharge-contact-container {
+	width:55%;
+	height:100%;
+	float:left;
+	padding-left: 3%;
+	/*border:1px solid black;*/
+}
+
+#iml-session-name-lg {
+	font-size: 26px;
+	font-weight: bold;
+	color:#7b3f1a;
+	text-align: center;
+	background: url('../images/greenFader.png');
+	background-size: cover;
+	text-shadow:1px 1px gray;
+}
+
+.addit_details_head {
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
 
 
 

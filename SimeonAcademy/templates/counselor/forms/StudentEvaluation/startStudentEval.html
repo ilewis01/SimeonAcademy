@@ -1,0 +1,143 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Student Evaluation</div>
+            </div>
+
+            <!-- <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="#">
+                              <div  class='{{class.asiAdmin}}'>Administrative</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'>General Info</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'>Medical Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'>Employment</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'>Legal Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'>Family History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
+                            </a>
+                          </td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
+                    
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:0px;'>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript:">Exit Form</button></td>
+                    <td><button onClick="javascript:">Exit Form</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
+
+{% endblock %}

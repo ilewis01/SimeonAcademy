@@ -16604,6 +16604,12 @@ function c_exit_session() {
 	}
 }
 
+function new_se() {
+	var form = grab('c_form');
+	form.action = '/startStudentEval/';
+	// form.submit();
+}
+
 function generalSessionExitOptions() {
 	var w = 500;
 	openPopUp('auto', '/uni_exit_session/', w, w);

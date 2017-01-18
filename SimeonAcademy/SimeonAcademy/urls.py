@@ -174,6 +174,9 @@ urlpatterns = patterns('',
     url(r'^discharge_viewForm/$', 'assessment.views.discharge_viewForm'),
     url(r'^process_discharge/$', 'assessment.views.process_discharge'),
 
+    ## Student Evaluation
+    url(r'^startStudentEval/$', 'assessment.views.startStudentEval'),
+
     ##Addiction Severity Views
     url(r'^asi_preliminary/$', 'assessment.views.asi_preliminary'),
     url(r'^asi_admin/$', 'assessment.views.asi_admin'),

@@ -4916,6 +4916,23 @@ def process_discharge(request):
 			return render_to_response('counselor/home.html', content, context_instance=RequestContext(request))
 
 
+@login_required(login_url='/index')
+def startStudentEval(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/forms/StudentEvaluation/startStudentEval.html', content, context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/index')
