@@ -4876,6 +4876,7 @@ def discharge_client(request):
 			content['m_work_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.work_phone)
 			content['m_probation_phone'] 	= wowPhoneNumberDisplayConverter(content['session'].client.probation_phone)
 			content['m_emer_phone'] 		= wowPhoneNumberDisplayConverter(content['session'].client.emer_phone)
+			content['m_ssn'] 				= wowSSNumberDisplayConverter(content['session'].client.ss_num)
 
 			isMale = content['session'].client.isMale
 

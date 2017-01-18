@@ -8680,6 +8680,19 @@ button:hover {
 	font-weight: bold;
 }
 
+.discharge_form_wrap {
+	width:90%;
+	height:90%;
+	margin: auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	box-shadow: 5px 5px 5px #888888;
+  	border:1px solid black;
+  	border-radius: 8px;
+  	background-color: #ececec;
+}
+
 
 
 

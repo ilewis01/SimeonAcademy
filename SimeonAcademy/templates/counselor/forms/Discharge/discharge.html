@@ -3,7 +3,7 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: newCoupleSessionInit({{json_data}});">
+<body class="gradient-white">
     <!-- <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
@@ -45,7 +45,7 @@
                   <div class='col-md-6' style='width:89.3%; height:66.7vh;'>                      
                         <div class='wowTrueLeft'>
                           <div class='discharge_content_wrapper_true'>
-
+                            <div style='height:10px;'></div>
                             <div class='top-ent-wrap'>
                                 <!-- <div class='divider_gradient_up' style='margin-top:10px;'></div> -->
                                 <div id='iml-session-name-lg'>
@@ -89,17 +89,63 @@
 
                             <div style='text-align:center'><em><b style='color:#5b6765;'>Date of Birth: </b></em>{{session.client.dob}}</div>
 
-                            <div style='text-align:center'><em><b style='color:#5b6765;'>SSN: </b></em>{{session.client.ss_num}}</div> 
+                            <div style='text-align:center'><em><b style='color:#5b6765;'>SSN: </b></em>{{m_ssn}}</div> 
 
                             <div style='text-align:center'><em><b style='color:#5b6765;'>Probation Officer: </b></em>{{session.client.probationOfficer}} / <span style='color:#b46e22'>{{m_probation_phone}}</span></div>
 
                             <div style='text-align:center'><em><b style='color:#5b6765;'>Emergency Contact: </b></em>{{session.client.emer_contact_name}} / <span style='color:#b46e22'>{{m_emer_phone}}</span></div>
+
+                            <div class='divider_gradient' style='margin-top:10px;'></div>
 
                           </div>
                         </div>
 
                         <div class='wowTrueRight'>
                           <div class='discharge_content_wrapper_true'>
+                            <div class='discharge_form_wrap'>
+                              <div>
+
+                                <div>Discharge Summary</div>
+
+                                <div id='disLab'>Describe patient's demeanor during treatment:</div>
+                                <div><textarea></textarea></div>
+                                
+                                <div>
+                                    <span id='disLab'>Diagnosis:</span>
+                                    <select name='diagnosis' id='diagnosis'>
+                                        <option value='Select'>Select</option>
+                                        <option value='Diagnosis 1'>Diagnosis 1</option>
+                                        <option value='Diagnosis 2'>Diagnosis 2</option>
+                                        <option value='Diagnosis 3'>Diagnosis 3</option>
+                                        <option value='Diagnosis 4'>Diagnosis 4</option>
+                                        <option value='Diagnosis 5'>Diagnosis 5</option>
+                                        <option value='Diagnosis 6'>Diagnosis 6</option>
+                                    </select>
+                                </div>
+
+                                <div><span id='disLab'>Describe: </span><input type='text' name='' id=''></div>
+
+                                <div>
+                                    <span id='disLab'>Reason for Discharge:</span>
+                                    <select name='reasonTerminated' id='reasonTerminated'>
+                                        <option value='Select'>Select</option>
+                                        <option value='Client withdrew from program'>Client Withdrew From Program</option>
+                                        <option value='Client arrested/New charge'>Client Arrested/New Charge</option>
+                                        <option value='Administrative discharge'>Administrative Discharge</option>
+                                        <option value='Other'>Other</option>
+                                    </select>
+                                </div>
+
+                                <div><span id='disLab'>Describe: </span><input type='text' name='' id=''></div>
+
+                                <div id='disLab'>What are the reccommendations for the client?</div>
+                                <div><textarea></textarea></div>
+
+                                <div id='disLab'>Please include additional details regarding reason for referral:</div>
+                                <div><textarea></textarea></div>
+
+                              </div>
+                            </div>
                           </div>
                         </div>
                   </div>
