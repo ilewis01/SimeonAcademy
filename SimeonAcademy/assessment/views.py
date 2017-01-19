@@ -28,7 +28,7 @@ MHStressor, MHLegalHistory, ClientSession, SType, Invoice, AM_AngerHistory3, \
 AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
 SolidState, TrackApp, WorkSchedule, Note, Roommate, Application, RoommateEvaluation, \
-Attachment, Couple
+Attachment, Couple, TreatmentResource
 
 from assessment.view_functions import convert_datepicker, generateClientID, \
 getStateID, getReasonRefID, clientExist, getClientByName, getClientByDOB, \
@@ -4944,6 +4944,70 @@ def startStudentEval(request):
 
 		else:
 			return render_to_response('counselor/forms/StudentEvaluation/startStudentEval.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def treatmentResourcesMain(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Manage Treatment Resources'
+			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def newTreatmentResource(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Manage Treatment Resources'
+			return render_to_response('counselor/main/newTreatmentResource.html', content, context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

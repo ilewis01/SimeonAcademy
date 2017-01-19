@@ -1733,6 +1733,27 @@ class Application(models.Model):
 	def __unicode__(self):
 		return str(self.lastName) + ', ' + str(self.firstName)
 
+class TreatmentResource(models.Model):
+	name 			= models.CharField(max_length=200, default=None, blank=True, null=True)
+	address 		= models.CharField(max_length=200, default=None, blank=True, null=True)
+	city 			= models.CharField(max_length=100, default=None, blank=True, null=True)
+	state 			= models.CharField(max_length=25, default=None, blank=True, null=True)
+	zip_code 		= models.CharField(max_length=15, default=None, blank=True, null=True)
+	director_title 	= models.CharField(max_length=200, default=None, blank=True, null=True)
+	director_name 	= models.CharField(max_length=200, default=None, blank=True, null=True)
+	phone 			= models.CharField(max_length=14, default=None, blank=True, null=True)
+	fax 			= models.CharField(max_length=20, default=None, blank=True, null=True)
+	email 			= models.CharField(max_length=200, default=None, blank=True, null=True)
+	website 		= models.CharField(max_length=200, default=None, blank=True, null=True)
+	isDAS 			= models.BooleanField(default=False, blank=True)
+	isAccredited 	= models.BooleanField(default=False, blank=True)
+	type_organ 		= models.CharField(max_length=200, default=None, blank=True, null=True)
+	tpye_treat 		= models.CharField(max_length=200, default=None, blank=True, null=True)
+
+	def __unicode__self(self):
+		return self.name
+
+
 class RoommateEvaluation(models.Model):
 	application 	= models.ForeignKey(Application, default=None, blank=True, null=True)
 	hasCheckstubs 	= models.BooleanField(default=False, blank=True)

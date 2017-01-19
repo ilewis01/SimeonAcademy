@@ -7406,6 +7406,16 @@ function universalPrint() {
 	window.close();
 }
 
+function AdministrativeMain() {
+	var form = grab('t_form');
+	form.action = '/AdministrativeMain/';
+	form.submit();
+}
+
+function newTreatmentResource() {
+	openPopUp('auto', '/newTreatmentResource/', 600, 600);
+}
+
 function new_discharge() {
 	grab('c_form').action = '/discharge_client/';
 	grab('c_form').submit();

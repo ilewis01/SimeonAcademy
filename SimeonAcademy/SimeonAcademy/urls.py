@@ -103,6 +103,8 @@ urlpatterns = patterns('',
     url(r'^noteActionTaken/$', 'assessment.views.noteActionTaken'),
     url(r'^docActionTaken/$', 'assessment.views.docActionTaken'),
     url(r'^confirmDocumentDeletion/$', 'assessment.views.confirmDocumentDeletion'),
+    url(r'^treatmentResourcesMain/$', 'assessment.views.treatmentResourcesMain'),
+    url(r'^newTreatmentResource/$', 'assessment.views.newTreatmentResource'),
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),

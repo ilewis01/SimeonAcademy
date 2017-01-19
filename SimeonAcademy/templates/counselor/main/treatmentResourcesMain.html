@@ -1,0 +1,57 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white">
+    <!-- <input type='text' id='superTest' style='width:600px;'> -->
+    <form action='' method='post' id='t_form' name='t_form' enctype="multipart/form-data"> {% csrf_token %}
+      <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Treatment Resources</div>
+            </div>
+
+            <div class='wow-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                 <!-- WRAPPER FIXER -->
+                  <div class='col-md-6' style='width:89.3%; height:66.7vh;'>                      
+                        <div class='wowTrueLeft'>
+                          <div class='discharge_content_wrapper_true'>
+                          </div>
+                        </div>
+
+                        <div class='wowTrueRight'>
+                          <div class='discharge_content_wrapper_true'>
+                          </div>
+                        </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>  
+
+            <div class='triple_button_main_div'>
+                <button onClick="javascript: newTreatmentResource(); return false;">Add New Resource</button>
+                <button onClick="javascript: couple_to_optionsSTUFF(); return false;">Delete Selected</button>
+                <button onClick="javascript: AdministrativeMain(); return false;">Exit</button>
+            </div>  
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
+</body>
+
+{% endblock %}
+
+

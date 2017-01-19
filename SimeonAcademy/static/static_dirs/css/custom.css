@@ -8693,6 +8693,22 @@ button:hover {
   	background-color: #ececec;
 }
 
+.triple_button_main_div {
+	width:470px;
+	margin:auto;
+	border:1px solid black;
+	margin-top: 1%;
+	padding: 5px;
+	box-shadow: 3px 5px 5px #888888;
+	background-color: gray;
+	border-radius: 8px;
+
+}
+
+.triple_button_main_div button {
+	width:150px;
+	border-radius: 8px;
+}
 
 
 

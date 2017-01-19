@@ -23,7 +23,7 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment
+SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment, TreatmentResource
 
 def isCompleteWeek(day):
 	complete = False
