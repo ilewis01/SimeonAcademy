@@ -7416,6 +7416,12 @@ function newTreatmentResource() {
 	openPopUp('auto', '/newTreatmentResource/', 600, 600);
 }
 
+function submitNewTreatmentResource() {
+	var form = grab('t_form');
+	form.action = '/newResourceCreated/';
+	form.submit();
+}
+
 function new_discharge() {
 	grab('c_form').action = '/discharge_client/';
 	grab('c_form').submit();
