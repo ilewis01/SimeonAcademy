@@ -5,8 +5,8 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='body500'>
-    <div class='head300'>New Treatment Resource</div>
+<body class='body500' onLoad='javacript: initializeTreatmentEdit();'>
+    <div class='head300'>Edit Treatment Resource</div>
     <!-- <input type='text' id='test3' style='width:400px;'> -->
 
     <div class='treatmentResourceWrapper'>
@@ -15,13 +15,14 @@
             <input type='hidden' name='m_isAccredited' id='m_isAccredited' value=''>
             <input type='hidden' name='m_isHandiCap' id='m_isHandiCap' value=''>
             <input type='hidden' name='m_tpye_treat' id='m_tpye_treat' value=''>
+            <input type='hidden' name='r_id' id='r_id' value=''>
             <div class='treatmentInputs_wow'>
                 <div style='height:10px;'></div>
-                <input style='width:402px;' type='text' name='name' id='name' placeholder='Company Name' oninput="Javascript: clearNC('name');"> <br>
+                <input style='width:402px;' type='text' name='name' id='name' placeholder='Company Name' oninput="Javascript: clearNC('name');" value='{{tr.name}}'> <br>
                 <div style='height:10px;'></div>
-                <input style='width:402px;' type='text' name='address' id='address' placeholder='Address' oninput="Javascript: clearNC('address');"> <br>
+                <input style='width:402px;' type='text' name='address' id='address' placeholder='Address' oninput="Javascript: clearNC('address');" value='{{tr.address}}'> <br>
                 <div style='height:10px;'></div>
-                <input style='width:200px;' type='text' name='city' id='city' placeholder='City' oninput="Javascript: clearNC('city');">
+                <input style='width:200px;' type='text' name='city' id='city' placeholder='City' oninput="Javascript: clearNC('city');" value='{{tr.city}}'>
 
                 <select name='state' id='state' onChange="Javascript: clearNCS('state');">
                     <option value='None Selected'>State</option>
@@ -119,7 +120,7 @@
     <!-- <div style='height:20px;'></div> -->
 
     <div class='half-length-single-btn'>
-        <button onClick='Javascript: submitNewTreatmentResource();'>Submit</button>
+        <button onClick='Javascript: treatmentEditComplete();'>Submit</button>
         <button onClick='Javascript: window.close(); return false;'>Cancel</button>
     </div>
 

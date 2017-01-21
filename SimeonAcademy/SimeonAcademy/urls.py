@@ -107,6 +107,8 @@ urlpatterns = patterns('',
     url(r'^treatmentResourcesMain2/$', 'assessment.views.treatmentResourcesMain2'),
     url(r'^newTreatmentResource/$', 'assessment.views.newTreatmentResource'),
     url(r'^newResourceCreated/$', 'assessment.views.newResourceCreated'),
+    url(r'^editTreatmentResource/$', 'assessment.views.editTreatmentResource'),
+    url(r'^resourceEdited/$', 'assessment.views.resourceEdited'),
 
     ## Mental Health Views
     url(r'^mh_preliminary/$', 'assessment.views.mh_preliminary'),
@@ -225,4 +227,7 @@ urlpatterns = patterns('',
     url(r'^dataTemplate/$', 'assessment.views.dataTemplate'),
     url(r'^view_pdf/$', 'assessment.views.view_pdf'),
     url(r'^m_errors/$', 'assessment.views.m_errors'),
+    url(r'^generalMessage/$', 'assessment.views.generalMessage'),
+    url(r'^generalDeleteConfirm/$', 'assessment.views.generalDeleteConfirm'),
+    url(r'^generalDeleteElement/$', 'assessment.views.generalDeleteElement'),
 )

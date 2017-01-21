@@ -4970,7 +4970,7 @@ def treatmentResourcesMain(request):
 			content['numSrcs'] 	= numSrcs
 			content['id_data'] 	= json.dumps(fetchAllResourceIds())
 			content['raw_ids'] 	= json.dumps(fetchRawIdNumberResources())
-			content['title'] 	= 'Manage Treatment Resources'
+			content['title'] 	= 'Manage Treatment Resources | Simeon Academy'
 			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -4993,7 +4993,7 @@ def treatmentResourcesMain2(request):
 			content['left'] 	= r_list['left']
 			content['id_data'] 	= json.dumps(fetchAllResourceIds())
 			content['raw_ids'] 	= json.dumps(fetchRawIdNumberResources())
-			content['title'] 	= 'Manage Treatment Resources'
+			content['title'] 	= 'Manage Treatment Resources | Simeon Academy'
 			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -5017,6 +5017,92 @@ def newTreatmentResource(request):
 			return render_to_response('counselor/main/newTreatmentResource.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def editTreatmentResource(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			states = State.objects.all().order_by('state')
+			content['states'] = states
+			content['title'] = 'Manage Treatment Resources'
+			return render_to_response('counselor/main/editResource.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def generalMessage(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Manage Treatment Resources'
+			return render_to_response('global/generalMessage.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def generalDeleteConfirm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'Manage Treatment Resources'
+			content['message'] = 'Are You Sure You Want To Delete This?'
+			return render_to_response('global/generalDeleteConfirm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def generalDeleteElement(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			form = None
+			form_id = request.POST.get('form_id')
+			form_type = str(request.POST.get('form_type'))
+
+			if form_type == 'treatmentResource':
+				form = TreatmentResource.objects.get(id=form_id)
+
+			form.delete()
+
+			content['title'] = 'Manage Treatment Resources'
+			content['message'] = "Sucessfully Deleted"
+			return render_to_response('global/generalMessage.html', content, context_instance=RequestContext(request))
+
+
+@login_required(login_url='/index')
 def newResourceCreated(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -5037,7 +5123,7 @@ def newResourceCreated(request):
 			state 					= request.POST.get('state')
 			zip_code 				= request.POST.get('zip_code')
 			director_name 			= request.POST.get('director_name')
-			director_title 			= request.POST.get('director_title')
+			director_title 			= str(request.POST.get('director_title'))
 			phone 					= request.POST.get('phone')
 			fax 					= request.POST.get('fax')
 			email 					= request.POST.get('email')
@@ -5068,6 +5154,61 @@ def newResourceCreated(request):
 
 			content['title'] = 'Manage Treatment Resources'
 			return render_to_response('counselor/main/newResourceCreated.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def resourceEdited(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			r_id 					= request.POST.get('r_id')
+			name 					= request.POST.get('name')
+			address 				= request.POST.get('address')
+			city 					= request.POST.get('city')
+			state 					= request.POST.get('state')
+			zip_code 				= request.POST.get('zip_code')
+			director_name 			= request.POST.get('director_name')
+			director_title 			= request.POST.get('director_title')
+			phone 					= request.POST.get('phone')
+			fax 					= request.POST.get('fax')
+			email 					= request.POST.get('email')
+			website 				= request.POST.get('website')
+			isDAS 					= truePythonBool(request.POST.get('m_isDAS'))
+			isAccredited 			= truePythonBool(request.POST.get('m_isAccredited'))
+			isHandiCap 				= truePythonBool(request.POST.get('m_isHandiCap'))
+			type_organ 				= request.POST.get('type_organ')
+			tpye_treat 				= request.POST.get('m_tpye_treat')
+
+			resource 				= TreatmentResource.objects.get(id=r_id)
+			resource.address 		= address
+			resource.city 			= city
+			resource.state 			= state
+			resource.zip_code 		= zip_code
+			resource.director_name 	= director_name
+			resource.director_title = director_title
+			resource.phone 			= phone
+			resource.fax 			= fax
+			resource.email 			= email
+			resource.website 		= website
+			resource.isDAS 			= isDAS
+			resource.isAccredited 	= isAccredited
+			resource.isHandiCap 	= isHandiCap
+			resource.type_organ 	= type_organ
+			resource.tpye_treat 	= tpye_treat
+			resource.save()
+
+			content['message'] = 'Sucessfully Updated'
+			content['title'] = 'Manage Treatment Resources'
+			return render_to_response('global/generalMessage.html', content, context_instance=RequestContext(request))
 
 
 

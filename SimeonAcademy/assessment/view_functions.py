@@ -890,9 +890,6 @@ def sortResourceColumns():
 	r_list['right'] = rightSide
 	r_list['left'] = leftSide
 
-	print "LEFT SIZE: " + str(len(leftSide))
-	print "RIGHT SIZE: " + str(len(rightSide))
-
 	return r_list
 
 def fetchAllResourceIds():

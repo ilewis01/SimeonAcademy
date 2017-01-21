@@ -8788,6 +8788,16 @@ button:hover {
   	overflow-y:scroll;
 }
 
+.rUSureSub {
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	color:#8f252f;
+	width:100%;
+	text-align: center;
+	margin-top: 10px;
+}
+
 .resource_leftSide_wrapper {
 	width:50%;
 	height:100%;
@@ -8804,7 +8814,7 @@ button:hover {
 	width:100%;
 	padding-left: 10%;
 	padding-right: 10%;
-	background-color: #bed2ce;
+	background-color: #e9e3d4;
 	border:1px solid black;
 	padding-top: 3%;
 	padding-bottom:3%;

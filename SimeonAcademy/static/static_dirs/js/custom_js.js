@@ -4123,6 +4123,23 @@ function generalWarningOpener() {
 	var errorWindow = openPopUp('auto', '/m_errors/', 350, 300);
 }
 
+function generalMessageOpener() {
+	var messageWindow = openPopUp('auto', '/generalMessage/', 350, 300);
+}
+
+function generalDeleteOpener() {
+	var confirmWindow = openPopUp('auto', '/generalDeleteConfirm/', 350, 210);
+}
+
+function initializeGeneralDeleteConfirm() {
+	grab('form_id').value = getPopParent('form_id').value;
+	grab('form_type').value = getPopParent('form_type').value;
+}
+
+function initializeGeneralMessageWow(message) {
+	grab('messageDiv').innerHTML = message;
+}
+
 
 function saveBaselessClient() {
 	var report = newClient_fullErrorChecker();
@@ -7546,9 +7563,9 @@ function fetchSingleResourceDivData(raw) {
 	m_list.push('fax_' + raw);
 	m_list.push('email_' + raw);
 	m_list.push('website_' + raw);
-	// m_list.push('isDAS_' + raw);
-	// m_list.push('isHandiCap_' + raw);
-	// m_list.push('type_organ_' + raw);
+	m_list.push('isDAS_' + raw);
+	m_list.push('isHandiCap_' + raw);
+	m_list.push('type_organ_' + raw);
 	// m_list.push('tpye_treat_' + raw);
 	return m_list
 }
@@ -7567,9 +7584,9 @@ function fetchHiddeneResourceDivData() {
 	m_list.push('m_fax');
 	m_list.push('m_email');
 	m_list.push('m_website');
-	// m_list.push('m_isDAS');
-	// m_list.push('m_isHandiCap');
-	// m_list.push('m_type_organ');
+	m_list.push('m_isDAS');
+	m_list.push('m_isHandiCap');
+	m_list.push('m_type_organ');
 	// m_list.push('m_tpye_treat');
 	return m_list;
 }
@@ -7605,6 +7622,7 @@ function initializeResourceList(raw_ids) {
 	var divName1 = 'outer_' + String(resource_id);
 	grab(divName1).className = 'selected_treatmentResource';
 	grab('selectedDiv').value = resource_id;
+	grab('form_id').value = resource_id;
 
 	fetchResourceDivs_andSet(resource_id);
 }
@@ -7624,6 +7642,7 @@ function highlightSelectedResource(resource_id, divList) {
 	var div = grab(divName);
 	div.className = 'selected_treatmentResource';
 	grab('selectedDiv').value = resource_id;
+	grab('form_id').value = resource_id;
 	fetchResourceDivs_andSet(resource_id);
 }
 
@@ -7632,11 +7651,87 @@ function newTreatmentResource() {
 }
 
 function editSelectedResource() {
+	openPopUp('auto', '/editTreatmentResource/', 460, 600);
+}
 
+function initializeTreatmentEdit() {
+	grab('name').value = getPopParent('m_name').value;
+	grab('address').value = getPopParent('m_address').value;
+	grab('city').value = getPopParent('m_city').value;
+	grab('zip_code').value = getPopParent('m_zip').value;
+	grab('director_name').value = getPopParent('m_director').value;
+	grab('director_title').value = getPopParent('m_title').value;
+	grab('phone').value = getPopParent('m_phone').value;
+	grab('fax').value = getPopParent('m_fax').value;
+	grab('email').value = getPopParent('m_email').value;
+	grab('website').value = getPopParent('m_website').value;
+	grab('r_id').value = getPopParent('selectedDiv').value;
+
+	var isDAS = String(getPopParent('m_isDAS').value);
+	var isHandiCap = String(getPopParent('m_isHandiCap').value);
+	var t_org = String(getPopParent('m_type_organ').value);
+	var t_sta = String(getPopParent('m_state').value);
+	var stat_list = grab('state');
+	var org_list = grab('type_organ')
+
+	if (isDAS === 'True') {
+		grab('isDAS').checked = true;
+		grab('m_isDAS').value = 'True';
+	}
+	if (isHandiCap === 'True') {
+		grab('isHandiCap').checked = true;
+		grab('m_isHandiCap').value = 'True';
+	}
+
+	for (var i = 0; i < stat_list.length; i++) {
+		var temp = String(stat_list[i].value);
+
+		if (temp === t_sta) {
+			stat_list.selectedIndex = i;
+			break;
+		}
+	}
+
+	for (var j = 0; j < org_list.length; j++) {
+		var temp2 = String(org_list[j].value);
+
+		if (temp2 === t_org) {
+			org_list.selectedIndex = j;
+			break;
+		}
+	}
+}
+
+function treatmentEditComplete() {
+	if (m_complete_error_checker('newTreatmentResource') === true) {
+		generalWarningOpener();
+	}
+	else {		
+		var form = grab('t_form');
+		var parent = getPopParent('t_form');
+		var parentUrl = String(parent.action);
+
+		if (parentUrl === '/treatmentResourcesMain/') {
+			parent.action = '/treatmentResourcesMain2/';
+		}
+		else {
+			parent.action = '/treatmentResourcesMain/';
+		}
+
+		form.action = '/resourceEdited/';
+		var w = 300, h = 200;
+		var l = Number((screen.width/2) - (w/2));
+		var t = Number((screen.height/2) - (h/2));
+
+		window.resizeTo(w, h);
+		window.moveTo(l, t);
+	    window.focus(); 
+		form.submit();
+	}
 }
 
 function deleteSelectedResource() {
-
+	generalDeleteOpener();
 }
 
 function setCheckTru_wow(inputCheckbox, targetDiv) {
