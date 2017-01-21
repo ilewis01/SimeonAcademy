@@ -1751,7 +1751,7 @@ class TreatmentResource(models.Model):
 	type_organ 		= models.CharField(max_length=200, default=None, blank=True, null=True)
 	tpye_treat 		= models.CharField(max_length=200, default=None, blank=True, null=True)
 
-	def __unicode__self(self):
+	def __unicode__(self):
 		return self.name
 
 

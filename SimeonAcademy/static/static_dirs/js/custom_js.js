@@ -7412,6 +7412,25 @@ function AdministrativeMain() {
 	form.submit();
 }
 
+function clearSelectedTreatmentResources(divList) {
+	var t = '';
+
+	for (var i = 0; i < divList.length; i++) {
+		var div =  grab(divList[i]);
+		div.className = 'unselected_treatmentResource';
+	}
+}
+
+function highlightSelectedResource(resource_id, divList) {
+	clearSelectedTreatmentResources(divList);
+	resource_id = String(resource_id);
+	var pre = 'outer_'
+	var divName = pre + resource_id;
+	var div = grab(divName);
+	div.className = 'selected_treatmentResource';
+	grab('selectedDiv').value = resource_id;
+}
+
 function newTreatmentResource() {
 	openPopUp('auto', '/newTreatmentResource/', 460, 600);
 }

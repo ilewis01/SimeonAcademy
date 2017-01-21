@@ -8776,6 +8776,59 @@ button:hover {
 	background-color: #ececec;
 }
 
+.full_page_input_wow {
+	width:100%;
+	height:90%;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	background-color: white;
+  	border:1px solid black;
+  	overflow-y:scroll;
+}
+
+.resource_leftSide_wrapper {
+	width:50%;
+	height:100%;
+	float:left;
+}
+
+.resource_rightSide_wrapper {
+	width:50%;
+	height:100%;
+	float:right;
+}
+
+.selected_treatmentResource {
+	width:100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	background-color: #bed2ce;
+	border:1px solid black;
+	padding-top: 3%;
+	padding-bottom:3%;
+	/*background-color: #bed2ce;*/
+}
+
+.unselected_treatmentResource {
+	width:100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	background-color: white;
+	border:1px solid black;
+	padding-top: 3%;
+	padding-bottom:3%;
+}
+
+.resource_name_head {
+	font-size: 14px;
+	font-weight: bold;
+	height:40px;
+	font-style: italic;
+	color:#762e38;
+	text-align: justify;
+}
+
 
 
 

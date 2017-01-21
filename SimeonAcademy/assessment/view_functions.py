@@ -869,6 +869,43 @@ def filterSS(ss_num):
 			result += s
 	return result
 
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#**************************************************** TREATMENT RESOURCES *******************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
+
+def sortResourceColumns():
+	leftSide 	= []
+	rightSide 	= []
+	r_list 		= {}
+	resources 	= TreatmentResource.objects.all().order_by('name')
+
+	for i in range(len(resources)):
+		if i % 2 == 0:
+			leftSide.append(resources[i])
+		else:
+			rightSide.append(resources[i])
+
+	r_list['right'] = rightSide
+	r_list['left'] = leftSide
+
+	print "LEFT SIZE: " + str(len(leftSide))
+	print "RIGHT SIZE: " + str(len(rightSide))
+
+	return r_list
+
+def fetchAllResourceIds():
+	the_ids = []
+	prem_tg = 'outer_'
+	r_list 	= TreatmentResource.objects.all().order_by('name')
+
+	for r in r_list:
+		temp = str(r.id)
+		tag = prem_tg + temp
+		the_ids.append(tag)
+
+	return the_ids
 
 
 ##################################################################################################################################

@@ -53,7 +53,7 @@ wowClientMatch, processWowSearchData, breakToPages, fixCurrentClients, wowClient
 superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter, \
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
-documentSerializer, noteSerializer
+documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -4960,7 +4960,11 @@ def treatmentResourcesMain(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = 'Manage Treatment Resources'
+			r_list 				= sortResourceColumns()
+			content['right'] 	= r_list['right']
+			content['left'] 	= r_list['left']
+			content['id_data'] 	= json.dumps(fetchAllResourceIds())
+			content['title'] 	= 'Manage Treatment Resources'
 			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

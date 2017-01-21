@@ -6,7 +6,8 @@
 <body class="gradient-white">
     <!-- <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='t_form' name='t_form' enctype="multipart/form-data"> {% csrf_token %}
-      <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
+      <input type='hidden' id='client_id' name='client_id' value='{{c1.id}}' >
+      <input type='hidden' id='selectedDiv' name='selectedDiv' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -22,16 +23,48 @@
                 <div class='row'>
 
                  <!-- WRAPPER FIXER -->
-                  <div class='col-md-6' style='width:89.3%; height:66.7vh;'>                      
-                        <div class='wowTrueLeft'>
-                          <div class='discharge_content_wrapper_true'>
-                          </div>
-                        </div>
+                  <div class='col-md-6' style='width:89.3%; height:66.7vh;'>  
+                    <div class='full_page_input_wow'>
+                      <div class='resource_leftSide_wrapper'>
+                        {% for l in left %}
+                        <a href="javascript: highlightSelectedResource('{{l.id}}', {{id_data}});">
+                            <div class='unselected_treatmentResource' id='outer_{{l.id}}'>
+                                <div class='resource_name_head'>{{l.name}}</div>
 
-                        <div class='wowTrueRight'>
-                          <div class='discharge_content_wrapper_true'>
-                          </div>
-                        </div>
+                                <div class='resource_addy_head'>{{l.address}}</div>
+                                <div class='resource_addy_head'>{{l.city}}, {{l.state}} {{l.zip_code}}</div>
+
+                                <div class='resource_dirc_head'><b>{{l.director_title}}:</b> <span>{{l.director_name}}</span></div>
+
+                                <div class='resource_phon_head'><b>Phone:</b> <span>{{l.phone}}</span> <b>Fax:</b> <span>{{l.fax}}</span></div>
+
+                                <div class='resource_webl_head'><b>Email:</b> <span>{{l.email}}</span></div>
+                                <div class='resource_webl_head'><b>Website:</b> <span>{{l.website}}</span></div>
+                            </div>
+                          </a>
+                        {% endfor %}
+                      </div>
+
+                      <div class='resource_rightSide_wrapper'>
+                        {% for r in right %}
+                        <a href="javascript: highlightSelectedResource('{{r.id}}', {{id_data}});">
+                            <div class='unselected_treatmentResource' id='outer_{{r.id}}'>
+                                <div class='resource_name_head'>{{r.name}}</div>
+
+                                <div class='resource_addy_head'>{{r.address}}</div>
+                                <div class='resource_addy_head'>{{r.city}}, {{r.state}} {{r.zip_code}}</div>
+
+                                <div class='resource_dirc_head'><b>{{r.director_title}}:</b> <span>{{r.director_name}}</span></div>
+
+                                <div class='resource_phon_head'><b>Phone:</b> <span>{{r.phone}}</span> <b>Fax:</b> <span>{{r.fax}}</span></div>
+
+                                <div class='resource_webl_head'><b>Email:</b> <span>{{r.email}}</span></div>
+                                <div class='resource_webl_head'><b>Website:</b> <span>{{r.website}}</span></div>
+                            </div>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </div>                    
                   </div>
 
                 </div>
