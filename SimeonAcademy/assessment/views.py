@@ -54,7 +54,7 @@ superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter,
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
-fetchRawIdNumberResources
+fetchRawIdNumberResources, saveDischarge
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -4885,6 +4885,7 @@ def discharge_client(request):
 				content['gender'] = "Male"
 			else:
 				content['gender'] = "Female"
+
 			return render_to_response('counselor/forms/Discharge/discharge.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
@@ -5073,9 +5074,25 @@ def generalDeleteConfirm(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['title'] = 'Manage Treatment Resources'
 			content['message'] = 'Are You Sure You Want To Delete This?'
 			return render_to_response('global/generalDeleteConfirm.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def generalSaveConfirm(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('global/generalSaveConfirm.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def generalDeleteElement(request):
@@ -5104,6 +5121,29 @@ def generalDeleteElement(request):
 			content['title'] = 'Manage Treatment Resources'
 			content['message'] = "Sucessfully Deleted"
 			return render_to_response('global/generalMessage.html', content, context_instance=RequestContext(request))
+
+def generalSaveElement(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			form_type = str(request.POST.get('form_type'))
+			
+			if form_type == 'discharge':
+				client = Client.objects.get(id=(request.POST.get('client_id')))
+				discharge = saveDischarge(request, client)
+
+			content['message'] = " "
+			return render_to_response('global/generalMessageClose.html', content, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/index')

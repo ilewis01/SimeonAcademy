@@ -230,4 +230,6 @@ urlpatterns = patterns('',
     url(r'^generalMessage/$', 'assessment.views.generalMessage'),
     url(r'^generalDeleteConfirm/$', 'assessment.views.generalDeleteConfirm'),
     url(r'^generalDeleteElement/$', 'assessment.views.generalDeleteElement'),
+    url(r'^generalSaveElement/$', 'assessment.views.generalSaveElement'),
+    url(r'^generalSaveConfirm/$', 'assessment.views.generalSaveConfirm'),
 )

@@ -6,7 +6,12 @@
 <body class="gradient-white" onLoad='javascript: initialize_dischargeForm();'>
     <!-- <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
-      <input type='hidden' id='client_id' name='client_id'value='{{c1.id}}' >
+      <input type='hidden' id='client_id' name='client_id'value='{{session.client.id}}' >
+      <input type='hidden' id='form_type' name='form_type' value='discharge'>
+      <input type='hidden' id='actionBtn' name='actionBtn' value='Discharge'>
+      <input type='hidden' id='confirm_title' name='confirm_title' value='Discharge Client | Simeon Academy'>
+      <input type='hidden' id='confirmPhrase' name='confirmPhrase' value='Discharge This Client?'>
+      <input type='hidden' id='parentForm' name='parentForm' value='c_form'>
       <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
       <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
       <input type='hidden' id='newNoteFlag' name='newNoteFlag'value=''>
@@ -108,13 +113,13 @@
                                 <div class='letsDischargeHead'>Discharge Summary</div>
 
                                 <div class='disLabStank'>Describe patient's demeanor during treatment:</div>
-                                <div class='stankArea'><textarea name='clientAttitude' id='clientAttitude'></textarea></div>
+                                <div class='stankArea'><textarea name='clientAttitude' id='clientAttitude' oninput="Javascript: clearNC('clientAttitude');"></textarea></div>
 
                                 <div style='height:10px;'></div>
                                 
-                                <div>
+                                <div class='stankArea'>
                                     <span class='disLabStank'>Diagnosis:</span>
-                                    <select name='diagnosis' id='diagnosis' onChange="Javascript: unlock_hidden_select_uni(diagnosis, dia_other, diagnosis2, diagnosis_lab);">
+                                    <select name='diagnosis' id='diagnosis' onChange="Javascript: unlock_hidden_select_uni(diagnosis, dia_other, diagnosis2, diagnosis_lab); clearNCS('diagnosis');">
                                         <option value='Select'>Select</option>
                                         <option value='Diagnosis 1'>Diagnosis 1</option>
                                         <option value='Diagnosis 2'>Diagnosis 2</option>
@@ -128,13 +133,13 @@
 
                                 <div style='height:5px;'></div>
 
-                                <div class='stankArea'><span id='diagnosis_lab'>Describe: </span><input type='text' name='diagnosis2' id='diagnosis2' oninput='javascript: loadOtherOptionValue(dia_other, diagnosis2);'></div>
+                                <div class='stankArea'><span id='diagnosis_lab'>Describe: </span><input type='text' name='diagnosis2' id='diagnosis2' oninput="javascript: loadOtherOptionValue(dia_other, diagnosis2); clearNC('diagnosis2');"></div>
 
                                 <div style='height:10px;'></div>
 
-                                <div>
+                                <div class='stankArea'>
                                     <span class='disLabStank'>Reason for Discharge:</span>
-                                    <select name='reasonTerminated' id='reasonTerminated' onChange="Javascript: unlock_hidden_select_uni(reasonTerminated, rt_other, rt_alt, rt_lab);">
+                                    <select name='reasonTerminated' id='reasonTerminated' onChange="Javascript: unlock_hidden_select_uni(reasonTerminated, rt_other, rt_alt, rt_lab); clearNCS('reasonTerminated');">
                                         <option value='Select'>Select</option>
                                         <option value='Client withdrew from program'>Client Withdrew From Program</option>
                                         <option value='Client arrested/New charge'>Client Arrested/New Charge</option>
@@ -145,17 +150,17 @@
 
                                 <div style='height:5px;'></div>
 
-                                <div class='stankArea'><span id='rt_lab'>Describe: </span><input type='text' name='rt_alt' id='rt_alt' oninput='javascript: loadOtherOptionValue(rt_other, rt_alt);'></div>
+                                <div class='stankArea'><span id='rt_lab'>Describe: </span><input type='text' name='rt_alt' id='rt_alt' oninput="javascript: loadOtherOptionValue(rt_other, rt_alt); clearNC('rt_alt');"></div>
 
                                 <div style='height:10px;'></div>
 
                                 <div class='disLabStank'>What are the recommendations for the client?</div>
-                                <div class='stankArea'><textarea name='recommendations' id='recommendations'></textarea></div>
+                                <div class='stankArea'><textarea name='recommendations' id='recommendations' oninput="Javascript: clearNC('recommendations');"></textarea></div>
 
                                 <div style='height:10px;'></div>
 
-                                <div class='disLabStank'>Please include additional details regarding reason for referral:</div>
-                                <div class='stankArea'><textarea name='' id=''></textarea></div>
+                                <div class='disLabStank'>Please provide any additional details:</div>
+                                <div class='stankArea'><textarea name='reasonRefered' id='reasonRefered'></textarea></div>
 
                               </div>
                             </div>
@@ -168,8 +173,9 @@
             </div>
     </form>  
 
-            <div class='iml-sing-btnWrap'>
-                <button onClick="javascript: couple_to_optionsSTUFF(); return false;">Exit</button>
+            <div class='iml-dbl-btnWrap'>
+                <button onClick="javascript: wowDischargeFinal(); return false;">Discharge</button></span>
+                <button onClick="javascript: wowDischargeToOptions(); return false;" style='margin-left:2px;'>Cancel</button>
             </div>  
 
           </div>

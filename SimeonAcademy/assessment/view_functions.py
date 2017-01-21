@@ -12129,8 +12129,9 @@ def grabClientDischargeForms(client):
 	dis = Discharge.objects.all()
 
 	for d in dis:
-		if clientEqual(client, d.client) == True:
-			results.append(d)
+		if d.client.fname != None or d.client.lname != None or d.client.dob != None or d.client.ss_num != None:
+			if clientSuperMatch(client, d.client) == True:
+				results.append(d)
 	return results
 
 def hasIncompleteDischarge(client):
@@ -12162,7 +12163,7 @@ def newDischarge(client):
 def startDischarge(client):
 	result = {}
 
-	if hasIncompleteDischarge(client) == True:
+	if clientExistSuperSearch(client) == True:
 		result['discharge'] = getDischarge(client)
 		result['isNew'] = False
 	else:
@@ -12180,15 +12181,25 @@ def getDischargeFields(discharge):
 	fields['recommendations'] 	= discharge.recommendations
 	return fields
 
-def saveDischarge(request, discharge):
-	discharge.reasonRefered 	= request.POST.get('reasonRefered')
-	discharge.diagnosis 		= request.POST.get('diagnosis')
-	discharge.reasonTerminated 	= request.POST.get('reasonTerminated')
-	discharge.clientAttitude 	= request.POST.get('clientAttitude')
-	discharge.recommendations 	= request.POST.get('recommendations')
-	discharge.isOpen 			= False
-	discharge.isComplete 		= True
+def saveDischarge(request, client):
+	client.isDischarged = True 
+	client.save()
+	reasonRefered 		= request.POST.get('reasonRefered')
+	diagnosis 			= request.POST.get('diagnosis')
+	reasonTerminated 	= request.POST.get('reasonTerminated')
+	clientAttitude 		= request.POST.get('clientAttitude')
+	recommendations 	= request.POST.get('recommendations')
+	date 				= datetime.now().date()
+
+	discharge = Discharge(reasonRefered=reasonRefered, diagnosis=diagnosis, reasonTerminated=reasonTerminated)
+	discharge.clientAttitude = clientAttitude
+	discharge.recommendations = recommendations
+	discharge.isOpen = False
+	discharge.isComplete = True
+	discharge.date_of_assessment = date
+	discharge.client = client
 	discharge.save()
+	return discharge
 
 def refreshDischarge(discharge):
 	discharge.reasonRefered 	= ''
@@ -12234,7 +12245,7 @@ def processDischargeData(request):
 	d_id = request.POST.get('d_id')
 	session = ClientSession.objects.get(id=session_id)
 	discharge = Discharge.objects.get(id=d_id)
-	saveDischarge(request, discharge)
+	saveDischarge(request)
 	session.client.isDischarged = True
 	session.client.save()
 	endSession(session, True)
@@ -13307,6 +13318,7 @@ def fetchContent(request, form_type, current_section):
 	return content
 
 def saveForm(request, form_type, section, form):
+
 	if form_type == 'am':
 		saveCompletedAmSection(request, section, form)
 	elif form_type == 'sap':
@@ -13318,9 +13330,10 @@ def saveForm(request, form_type, section, form):
 	elif form_type == 'ut':
 		saveUT(request, form)
 	elif form_type == 'discharge':
-		saveDischarge(request, discharge)
+		form = saveDischarge(request)
 	elif form_type == 'couple':
 		saveCoupleNotes(request)
+
 
 def saveAndFinish(request, form_type, section, form):
 	if form_type == 'am':

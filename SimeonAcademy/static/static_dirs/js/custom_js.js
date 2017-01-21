@@ -172,8 +172,39 @@ function m_complete_error_checker(pageName) {
 	nameList = null;
 
 	if (pageName === 'newTreatmentResource') {nameList = fetchNewResourceErrors();}
+	else if (pageName === 'dischargeForm') {nameList = fetchNewDischargeErrors();}
 
 	return m_error_full(nameList);
+}
+
+function fetchNewDischargeErrors() {
+	var errors = [];
+	for (var i = 0; i < 4; i++) {
+		var d = {};
+		errors.push(d);
+	}
+
+	errors[0]['divname'] = 'clientAttitude';
+	errors[0]['borderAction'] = '1px solid red';
+	errors[0]['type'] = 'text';
+	errors[0]['blankAllowed'] = false;
+
+	errors[1]['divname'] = 'diagnosis';
+	errors[1]['borderAction'] = '1px solid red';
+	errors[1]['type'] = 'select';
+	errors[1]['blankAllowed'] = false;
+
+	errors[2]['divname'] = 'reasonTerminated';
+	errors[2]['borderAction'] = '1px solid red';
+	errors[2]['type'] = 'select';
+	errors[2]['blankAllowed'] = false;
+
+	errors[3]['divname'] = 'recommendations';
+	errors[3]['borderAction'] = '1px solid red';
+	errors[3]['type'] = 'text';
+	errors[3]['blankAllowed'] = false;
+
+	return errors
 }
 
 function fetchNewResourceErrors() {
@@ -4158,6 +4189,14 @@ function generalDeleteOpener() {
 	var confirmWindow = openPopUp('auto', '/generalDeleteConfirm/', 350, 210);
 }
 
+function generalSaveOpener() {
+	var confirmWindow = openPopUp('auto', '/generalSaveElement/', 350, 210);
+}
+
+function generalSaveConfirmOpener() {
+	var confirmWindow = openPopUp('auto', '/generalSaveConfirm/', 420, 210);
+}
+
 function initializeGeneralDeleteConfirm() {
 	grab('form_id').value = getPopParent('form_id').value;
 	grab('form_type').value = getPopParent('form_type').value;
@@ -4165,6 +4204,34 @@ function initializeGeneralDeleteConfirm() {
 
 function initializeGeneralMessageWow(message) {
 	grab('messageDiv').innerHTML = message;
+	grab('parentForm').value = getPopParent('parentForm').value;
+	grab('form_type').value = getPopParent('form_type').value;
+}
+
+function initializeGeneralSaveConfirm() {
+	grab('confirmPhrase').innerHTML = getPopParent('confirmPhrase').value;
+	grab('confirm_title').innerHTML = getPopParent('confirm_title').value;
+	grab('actionBtn').innerHTML 	= getPopParent('actionBtn').value;
+	grab('form_type').value 		= getPopParent('form_type').value;
+	grab('parentForm').value 		= getPopParent('parentForm').value;
+	grab('client_id').value 		= getPopParent('client_id').value;
+	SuperLoadParentFormSaveData();
+}
+
+function SuperLoadParentFormSaveData() {
+	var form_type = String(grab('form_type').value);
+
+	if (form_type === 'discharge') {
+		grab('reasonRefered').value = getPopParent('reasonRefered').value;
+		grab('diagnosis').value = getPopParent('diagnosis').value;
+		grab('reasonTerminated').value = getPopParent('reasonTerminated').value;
+		grab('clientAttitude').value = getPopParent('clientAttitude').value;
+		grab('recommendations').value = getPopParent('recommendations').value;
+	}
+}
+
+function saveGeneralLoadedData() {
+	grab('d_form').submit();
 }
 
 
@@ -7680,6 +7747,61 @@ function newTreatmentResource() {
 
 function editSelectedResource() {
 	openPopUp('auto', '/editTreatmentResource/', 460, 600);
+}
+
+function runHiddenErrorCheckDischarge(select, inputName) {
+	var hasErrors = false;
+	var lastOption = select.length - 1;
+	inputName = String(inputName);
+
+	if (select.selectedIndex === lastOption) {
+		var div = grab(inputName);
+		var val = String(div.value);
+
+		if (isBlankText(val) === true) {
+			div.style.border = '1px solid red';
+			hasErrors = true;
+		}
+	}
+	return hasErrors;
+}
+
+function dischargeSingleErrorChecker() {
+	hasErrors = false;
+	var sel1 = grab('diagnosis');
+	var sel2 = grab('reasonTerminated');
+
+	var e1 = runHiddenErrorCheckDischarge(sel1, 'diagnosis2');
+	var e2 = runHiddenErrorCheckDischarge(sel2, 'rt_alt');
+	var e3 = m_complete_error_checker('dischargeForm');
+
+	if (e1===true || e2===true || e3===true) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
+function wowDischargeFinal() {
+	if (dischargeSingleErrorChecker() === true) {
+		generalWarningOpener();
+	}
+	else {
+		var form = grab('c_form');
+		form.action = '/adminHome/';
+		generalSaveConfirmOpener();
+	}
+}
+
+function loadParentFormSave() {
+	formName = String(grab('parentForm').value);
+	getPopParent(formName).submit();
+	window.close();
+}
+
+function wowDischargeToOptions() {
+	var form = grab('c_form');
+	form.action = '/clientOptions/';
+	form.submit();
 }
 
 function fetchNoWsTreatmentFields() {
