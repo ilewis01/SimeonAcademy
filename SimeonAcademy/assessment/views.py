@@ -4989,8 +4989,12 @@ def treatmentResourcesMain2(request):
 
 		else:
 			r_list 				= sortResourceColumns()
-			content['right'] 	= r_list['right']
-			content['left'] 	= r_list['left']
+			right 				= r_list['right']
+			left 				= r_list['left']
+			numSrcs 			= len(right) + len(left)
+			content['right'] 	= right
+			content['left'] 	= left
+			content['numSrcs'] 	= numSrcs
 			content['id_data'] 	= json.dumps(fetchAllResourceIds())
 			content['raw_ids'] 	= json.dumps(fetchRawIdNumberResources())
 			content['title'] 	= 'Manage Treatment Resources | Simeon Academy'

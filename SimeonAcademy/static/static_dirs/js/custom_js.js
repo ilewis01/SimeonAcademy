@@ -4118,6 +4118,33 @@ function processNewClientFinalNumbers(div) {
 
 	div.value = result;
 }
+function unlock_hidden_select_uni(mainSelect, otherDiv, altDiv,  labelDiv) {
+	lastSelect = mainSelect.length - 1;
+
+	if (mainSelect.selectedIndex === lastSelect) {
+		labelDiv.style.opacity = '1.0';
+		altDiv.style.opacity = '1.0';
+		altDiv.disabled = false;
+	}
+	else {
+		labelDiv.style.opacity = '0.2';
+		altDiv.style.opacity = '0.2';
+		altDiv.disabled = true;
+	}
+}
+
+function initialize_dischargeForm() {
+	grab('diagnosis_lab').style.opacity = '0.2';
+	grab('rt_lab').style.opacity = '0.2';
+	grab('diagnosis2').style.opacity = '0.2';
+	grab('rt_alt').style.opacity = '0.2';
+	grab('diagnosis2').disabled = true;
+	grab('rt_alt').disabled = true;
+}
+
+function loadOtherOptionValue(otherDiv, altDiv) {
+	otherDiv.value = altDiv.value;
+}
 
 function generalWarningOpener() {
 	var errorWindow = openPopUp('auto', '/m_errors/', 350, 300);
@@ -7566,7 +7593,7 @@ function fetchSingleResourceDivData(raw) {
 	m_list.push('isDAS_' + raw);
 	m_list.push('isHandiCap_' + raw);
 	m_list.push('type_organ_' + raw);
-	// m_list.push('tpye_treat_' + raw);
+	m_list.push('tpye_treat_' + raw);
 	return m_list
 }
 
@@ -7587,7 +7614,7 @@ function fetchHiddeneResourceDivData() {
 	m_list.push('m_isDAS');
 	m_list.push('m_isHandiCap');
 	m_list.push('m_type_organ');
-	// m_list.push('m_tpye_treat');
+	m_list.push('m_tpye_treat');
 	return m_list;
 }
 
@@ -7646,12 +7673,67 @@ function highlightSelectedResource(resource_id, divList) {
 	fetchResourceDivs_andSet(resource_id);
 }
 
+
 function newTreatmentResource() {
 	openPopUp('auto', '/newTreatmentResource/', 460, 600);
 }
 
 function editSelectedResource() {
 	openPopUp('auto', '/editTreatmentResource/', 460, 600);
+}
+
+function fetchNoWsTreatmentFields() {
+	fields = [];
+	fields.push('Co-occurring');
+	fields.push('Short-TermResidential');
+	fields.push('PartialCareTreatment');
+	fields.push('Long-TermResidential');
+	fields.push('Outpatient');
+	fields.push('OPOIDMaintenance-Outpatient');
+	fields.push('IntensiveOutpatient');
+	fields.push('OPOIDMaintenance-IntensiveOutpatient');
+	return fields;
+}
+
+function decryptWord(charVal, value) {
+	var decyrypted = '';
+	var d_list = []
+	charVal = String(charVal);
+	value = String(value);
+	var compare = value + charVal;
+	var len = compare.length;
+
+	for (var i = 0; i < len; i++) {
+		if (String(compare.charAt(i)) !== charVal) {
+			decyrypted += value.charAt(i);
+		}
+		else {
+			d_list.push(decyrypted);
+			decyrypted = '';
+		}
+	}
+
+	return d_list;
+}
+
+
+function decodeTreatmentTypes() {
+	var types_init = clearWhiteSpace(getPopParent('m_tpye_treat').value);
+	var compare = fetchNoWsTreatmentFields();
+	var types = decryptWord(',', types_init);
+
+	for (var i = 0; i < compare.length; i++) {
+		var instance = String(i + 1);
+		var checkboxName = 'so' + instance;
+		var box = grab(checkboxName);
+
+		for (var j = 0; j < types.length; j++) {
+			if (String(types[j]) === String(compare[i])) {
+				box.checked = true;
+				break;
+			}
+		}
+	}
 }
 
 function initializeTreatmentEdit() {
@@ -7700,6 +7782,8 @@ function initializeTreatmentEdit() {
 			break;
 		}
 	}
+
+	decodeTreatmentTypes();
 }
 
 function treatmentEditComplete() {
@@ -7747,6 +7831,7 @@ function m_loadTreatmentType() {
 	var type_list = [];
 	var target = grab('m_tpye_treat');
 	var types = '';
+	var solut = '';
 
 	type_list.push(grab('so1'));
 	type_list.push(grab('so2'));
@@ -7760,13 +7845,18 @@ function m_loadTreatmentType() {
 	for (var i = 0; i < 8; i++) {
 		if (type_list[i].checked === true) {
 			types += String(type_list[i].value);
-			
-			if (i !== 7) {
-				types += ', ';
-			}
+			types += ", ";
 		}
 	}
-	target.value = types;
+	var lenSol = types.length - 2;
+
+	for (var j = 0; j < lenSol; j++) {
+		solut += types.charAt(j);
+	}
+
+	target.value = solut;
+
+	getPopParent('m_tpye_treat').value = types;
 }
 
 function submitNewTreatmentResource() {

@@ -8680,6 +8680,13 @@ button:hover {
 	font-weight: bold;
 }
 
+.letsDischargeHead {
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	color:#687e79;
+}
+
 .discharge_form_wrap {
 	width:90%;
 	height:90%;
@@ -8688,9 +8695,40 @@ button:hover {
   	top: 50%;
   	transform: translateY(-50%);
   	box-shadow: 5px 5px 5px #888888;
-  	border:1px solid black;
+  	border:1px solid #687e79;
   	border-radius: 8px;
   	background-color: #ececec;
+  	padding:4%;
+}
+
+.disLabStank {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.stankArea {
+	width:100%;
+}
+
+.stankArea span {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:#732020;
+}
+
+.stankArea textarea {
+	width:100%;
+	height:60px;
+}
+
+.stankArea input {
+	border:1px solid gray;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	height:20px;
+	width:85%;
 }
 
 .triple_button_main_div {
@@ -8848,6 +8886,11 @@ button:hover {
 
 .resource_dirc_head, .resource_phon_head, .resource_webl_head {
 	font-size: 13px;
+}
+
+.resource_serv_head {
+	font-size: 13px;
+	height:60px;
 }
 
 /*.resource_dirc_head, .resource_phon_head, .resource_webl_head span {
