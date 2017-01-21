@@ -4970,6 +4970,29 @@ def treatmentResourcesMain(request):
 			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
+def treatmentResourcesMain2(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			r_list 				= sortResourceColumns()
+			content['right'] 	= r_list['right']
+			content['left'] 	= r_list['left']
+			content['id_data'] 	= json.dumps(fetchAllResourceIds())
+			content['raw_ids'] 	= json.dumps(fetchRawIdNumberResources())
+			content['title'] 	= 'Manage Treatment Resources'
+			return render_to_response('counselor/main/treatmentResourcesMain.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
 def newTreatmentResource(request):
 	user = request.user
 	if not user.is_authenticated():
@@ -5004,6 +5027,41 @@ def newResourceCreated(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			name 					= request.POST.get('name')
+			address 				= request.POST.get('address')
+			city 					= request.POST.get('city')
+			state 					= request.POST.get('state')
+			zip_code 				= request.POST.get('zip_code')
+			director_name 			= request.POST.get('director_name')
+			director_title 			= request.POST.get('director_title')
+			phone 					= request.POST.get('phone')
+			fax 					= request.POST.get('fax')
+			email 					= request.POST.get('email')
+			website 				= request.POST.get('website')
+			isDAS 					= truePythonBool(request.POST.get('m_isDAS'))
+			isAccredited 			= truePythonBool(request.POST.get('m_isAccredited'))
+			isHandiCap 				= truePythonBool(request.POST.get('m_isHandiCap'))
+			type_organ 				= request.POST.get('type_organ')
+			tpye_treat 				= request.POST.get('m_tpye_treat')
+
+			resource 				= TreatmentResource(name=name)
+			resource.address 		= address
+			resource.city 			= city
+			resource.state 			= state
+			resource.zip_code 		= zip_code
+			resource.director_name 	= director_name
+			resource.director_title = director_title
+			resource.phone 			= phone
+			resource.fax 			= fax
+			resource.email 			= email
+			resource.website 		= website
+			resource.isDAS 			= isDAS
+			resource.isAccredited 	= isAccredited
+			resource.isHandiCap 	= isHandiCap
+			resource.type_organ 	= type_organ
+			resource.tpye_treat 	= tpye_treat
+			resource.save()
+
 			content['title'] = 'Manage Treatment Resources'
 			return render_to_response('counselor/main/newResourceCreated.html', content, context_instance=RequestContext(request))
 

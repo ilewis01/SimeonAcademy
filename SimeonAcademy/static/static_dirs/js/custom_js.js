@@ -9,8 +9,8 @@
 
 function m_error_text(divName, borderAction) {
 	borderAction 	= String(borderAction);
-	divName 		= String(divname);
-	var div 		= grab(divname);
+	divName 		= String(divName);
+	var div 		= grab(divName);
 	var val 		= String(div.value);
 	var hasError 	= false;
 
@@ -68,22 +68,24 @@ function m_error_phone(divname, borderAction, blankAllowed) {
 	var processed 	= String(getRawNumber(val));
 
 	if (blankAllowed === true) {
-		if (processed.length !== 10 || isRawNumber(processed) === false) {
-			hasError = true;
-			div.style.border = borderAction;
+		if (processed.length !== 0) {
+			if (processed.length !== 10 || isRawNumber(processed) === false) {
+				hasError = true;
+				div.style.border = borderAction;
+			}
 		}
-		else {
-			div.value = processed;
-		}
+		// else {
+		// 	div.value = processed;
+		// }
 	}
 	else {
 		if (processed.length !== 10 || isRawNumber(processed) === false || isBlankText(processed) === true) {
 			hasError = true;
 			div.style.border = borderAction;
 		}
-		else {
-			div.value = processed;
-		}
+		// else {
+		// 	div.value = processed;
+		// }
 	}
 	return hasError
 }
@@ -121,14 +123,26 @@ function m_error_ss(divname, borderAction, numChars, blankAllowed) {
 
 function m_error_single(divname, borderAction, type, blankAllowed) {
 	type = String(type);
-	hasError = null;
+	hasError = false;
 
-	if (type === 'text') {hasError 			= m_error_text(divName, borderAction);}
-	else if (type === 'select') {hasError 	= m_error_select(divname, borderAction);}
-	else if (type === 'zip') {hasError 		= m_error_ss(divname, borderAction, 5, blankAllowed);}
-	else if (type === 'phone') {hasError 	= m_error_phone(divname, borderAction, blankAllowed);}
-	else if (type === 'ss4') {hasError 		= m_error_ss(divname, borderAction, 4, blankAllowed);}
-	else if (type === 'ss9') {hasError 		= m_error_ss(divname, borderAction, 9, blankAllowed);}
+	if (type === 'text') {
+		hasError = m_error_text(divname, borderAction);
+	}
+	else if (type === 'select') {
+		hasError = m_error_select(divname, borderAction);
+	}
+	else if (type === 'zip') {
+		hasError = m_error_ss(divname, borderAction, 5, blankAllowed);
+	}
+	else if (type === 'phone') {
+		hasError = m_error_phone(divname, borderAction, blankAllowed);
+	}
+	else if (type === 'ss4') {
+		hasError = m_error_ss(divname, borderAction, 4, blankAllowed);
+	}
+	else if (type === 'ss9') {
+		hasError = m_error_ss(divname, borderAction, 9, blankAllowed);
+	}
 
 	return hasError;
 }
@@ -149,6 +163,68 @@ function m_error_full(nameList) {
 	if (count > 0) {
 		hasError = true;
 	}
+
+	return hasError;
+}
+
+function m_complete_error_checker(pageName) {
+	pageName = String(pageName);
+	nameList = null;
+
+	if (pageName === 'newTreatmentResource') {nameList = fetchNewResourceErrors();}
+
+	return m_error_full(nameList);
+}
+
+function fetchNewResourceErrors() {
+	var errors = [];
+	
+	for (var i = 0; i < 8; i++) {
+		var d = {};
+		errors.push(d);
+	}
+
+	errors[0]['divname'] = 'name';
+	errors[0]['borderAction'] = '1px solid red';
+	errors[0]['type'] = 'text';
+	errors[0]['blankAllowed'] = false;
+
+	errors[1]['divname'] = 'address';
+	errors[1]['borderAction'] = '1px solid red';
+	errors[1]['type'] = 'text';
+	errors[1]['blankAllowed'] = false;
+
+	errors[2]['divname'] = 'city';
+	errors[2]['borderAction'] = '1px solid red';
+	errors[2]['type'] = 'text';
+	errors[2]['blankAllowed'] = false;
+
+	errors[3]['divname'] = 'state';
+	errors[3]['borderAction'] = '1px solid red';
+	errors[3]['type'] = 'select';
+	errors[3]['blankAllowed'] = false;
+
+	errors[4]['divname'] = 'zip_code';
+	errors[4]['borderAction'] = '1px solid red';
+	errors[4]['type'] = 'zip';
+	errors[4]['blankAllowed'] = false;
+
+	errors[5]['divname'] = 'phone';
+	errors[5]['borderAction'] = '1px solid red';
+	errors[5]['type'] = 'phone';
+	errors[5]['blankAllowed'] = false;
+
+	errors[6]['divname'] = 'fax';
+	errors[6]['borderAction'] = '1px solid red';
+	errors[6]['type'] = 'phone';
+	errors[6]['blankAllowed'] = true;
+
+	errors[7]['divname'] = 'type_organ';
+	errors[7]['borderAction'] = '1px solid red';
+	errors[7]['type'] = 'select';
+	errors[7]['blankAllowed'] = false;
+
+	return errors
 }
 
 
@@ -4589,6 +4665,23 @@ function processThePhoneStuff(val) {
 	return result;
 }
 
+function processThezipStuff(value) {
+	value = String(value);
+	result = '';
+
+	if (value.length > 5) {
+		result += value[0];
+		result += value[1];
+		result += value[2];
+		result += value[3];
+		result += value[4];
+	}
+	else {
+		result = value;
+	}
+	return result;
+}
+
 function phoneBuilderWow(divName) {
 	divName 		= 'input_' + String(divName);
 	var div 		= grab(divName);
@@ -4604,6 +4697,15 @@ function phoneBuilderWow_Uni(divName) {
 	var val 		= getRawNumber(div.value);
 
 	finalA = processThePhoneStuff(val);
+	div.value = finalA;
+}
+
+function zipBuilderWow_Uni(divName) {
+	divName 		= String(divName);
+	var div 		= grab(divName);
+	var val 		= getRawNumber(div.value);
+
+	finalA = processThezipStuff(val);
 	div.value = finalA;
 }
 
@@ -7519,10 +7621,61 @@ function deleteSelectedResource() {
 
 }
 
+function setCheckTru_wow(inputCheckbox, targetDiv) {
+	if (inputCheckbox.checked === true) {
+		targetDiv.value = 'True';
+	}
+	else {
+		targetDiv.value = 'False';
+	}
+}
+
+function m_loadTreatmentType() {
+	var type_list = [];
+	var target = grab('m_tpye_treat');
+	var types = '';
+
+	type_list.push(grab('so1'));
+	type_list.push(grab('so2'));
+	type_list.push(grab('so3'));
+	type_list.push(grab('so4'));
+	type_list.push(grab('so5'));
+	type_list.push(grab('so6'));
+	type_list.push(grab('so7'));
+	type_list.push(grab('so8'));
+
+	for (var i = 0; i < 8; i++) {
+		if (type_list[i].checked === true) {
+			types += String(type_list[i].value);
+			
+			if (i !== 7) {
+				types += ', ';
+			}
+		}
+	}
+	target.value = types;
+}
+
 function submitNewTreatmentResource() {
-	var form = grab('t_form');
-	form.action = '/newResourceCreated/';
-	form.submit();
+	if (m_complete_error_checker('newTreatmentResource') === true) {
+		generalWarningOpener();
+	}
+	else {		
+		var form = grab('t_form');
+		var parent = getPopParent('t_form');
+		var parentUrl = String(parent.action);
+
+		if (parentUrl === '/treatmentResourcesMain/') {
+			parent.action = '/treatmentResourcesMain2/';
+		}
+		else {
+			parent.action = '/treatmentResourcesMain/';
+		}
+
+		form.action = '/newResourceCreated/';
+		parent.submit();
+		form.submit();
+	}
 }
 
 function new_discharge() {

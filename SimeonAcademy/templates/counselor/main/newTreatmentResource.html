@@ -7,19 +7,23 @@
 
 <body class='body500'>
     <div class='head300'>New Treatment Resource</div>
-    <!-- <input type='text' id='test3'> -->
+    <!-- <input type='text' id='test3' style='width:400px;'> -->
 
     <div class='treatmentResourceWrapper'>
         <form action='' method='post' id='t_form' name='t_form' enctype="multipart/form-data"> {% csrf_token %}
+            <input type='hidden' name='m_isDAS' id='m_isDAS' value=''>
+            <input type='hidden' name='m_isAccredited' id='m_isAccredited' value=''>
+            <input type='hidden' name='m_isHandiCap' id='m_isHandiCap' value=''>
+            <input type='hidden' name='m_tpye_treat' id='m_tpye_treat' value=''>
             <div class='treatmentInputs_wow'>
                 <div style='height:10px;'></div>
-                <input style='width:402px;' type='text' name='name' id='name' placeholder='Company Name'> <br>
+                <input style='width:402px;' type='text' name='name' id='name' placeholder='Company Name' oninput="Javascript: clearNC('name');"> <br>
                 <div style='height:10px;'></div>
-                <input style='width:402px;' type='text' name='address' id='address' placeholder='Address'> <br>
+                <input style='width:402px;' type='text' name='address' id='address' placeholder='Address' oninput="Javascript: clearNC('address');"> <br>
                 <div style='height:10px;'></div>
-                <input style='width:200px;' type='text' name='city' id='city' placeholder='City'>
+                <input style='width:200px;' type='text' name='city' id='city' placeholder='City' oninput="Javascript: clearNC('city');">
 
-                <select name='state' id='state'>
+                <select name='state' id='state' onChange="Javascript: clearNCS('state');">
                     <option value='None Selected'>State</option>
 
                     {% for s in states %}
@@ -27,15 +31,15 @@
                     {% endfor %}
                 </select>
 
-                <input type='text' style='width:65px;' name='zip_code' id='zip_code' placeholder='Zip Code'> <br>
+                <input type='text' style='width:65px;' name='zip_code' id='zip_code' placeholder='Zip Code' oninput="Javascript: zipBuilderWow_Uni('zip_code'); clearNC('zip_code');"> <br>
                 <div style='height:10px;'></div>
 
                 <input style='width:200px;' type='text' name='director_name' id='director_name' placeholder='Director/Supervisor Name'>
                 <input style='width:200px;' type='text' name='director_title' id='director_title' placeholder='Director/Supervisor Title'> <br>
                 <div style='height:10px;'></div>
 
-                <input style='width:200px;' type='text' name='phone' id='phone' placeholder='Phone'>
-                <input style='width:200px;' type='text' name='fax' id='fax' placeholder='Fax'> <br>
+                <input style='width:200px;' type='text' name='phone' id='phone' placeholder='Phone' oninput="Javascript: phoneBuilderWow_Uni('phone'); clearNC('phone');">
+                <input style='width:200px;' type='text' name='fax' id='fax' placeholder='Fax'  oninput="Javascript: phoneBuilderWow_Uni('fax'); clearNC('fax');"> <br>
                 <div style='height:10px;'></div>
 
                 <input style='width:200px;' type='text' name='email' id='email' placeholder='Email'>
@@ -43,13 +47,13 @@
 
                 <table>
                     <tr>
-                        <td><div><input type='checkbox' name='isDAS' id='isDAS' value=''></div></td>
+                        <td><div><input type='checkbox' name='isDAS' id='isDAS' value='' onClick="javascript: setCheckTru_wow(isDAS, m_isDAS);"></div></td>
                         <td><div class='makemeStable_sm'>Licensed by DAS</div></td>
                         <!-- <td><div style='width:'></div></td> -->
-                        <td><div><input type='checkbox' name='isAccredited' id='isAccredited' value=''></div></td>
+                        <td><div><input type='checkbox' name='isAccredited' id='isAccredited' value='' onClick="javascript: setCheckTru_wow(isAccredited, m_isAccredited);"></div></td>
                         <td><div  class='makemeStable_sm'>State Accredited</div></td>
 
-                        <td><div><input type='checkbox' name='isHandiCap' id='isHandiCap' value=''></div></td>
+                        <td><div><input type='checkbox' name='isHandiCap' id='isHandiCap' value='' onClick="javascript: setCheckTru_wow(isHandiCap, m_isHandiCap);"></div></td>
                         <td><div  class='makemeStable_md'>Handicap Accessible</div></td>
                     </tr>
                 </table>
@@ -60,7 +64,7 @@
 
                         <td>
                             <div style='width:160px;'>
-                                <select name='type_organ' id='type_organ' style='width:130px;'>
+                                <select name='type_organ' id='type_organ' style='width:130px;' onChange="Javascript: clearNCS('type_organ');">
                                     <option value='None Selected'>Select</option>
                                     <option value='profit'>Profit</option>
                                     <option value='non-profit'>Non-Profit</option>
@@ -76,34 +80,34 @@
 
                     <table>
                         <tr>
-                            <td><div><input type='checkbox' name='' id='' value='Co-occurring'></div></td>
+                            <td><div><input type='checkbox' name='so1' id='so1' value='Co-occurring' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>Co-Occurring</div></td>
                             <!-- <td><div style='width:'></div></td> -->
-                            <td><div><input type='checkbox' name='' id='' value='Short-Term Residential'></div></td>
+                            <td><div><input type='checkbox' name='so2' id='so2' value='Short-Term Residential' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>Short-Term Residential</div></td>
                         </tr>
 
                         <tr>
-                            <td><div><input type='checkbox' name='' id='' value='Partial Care Treatment'></div></td>
+                            <td><div><input type='checkbox' name='so3' id='so3' value='Partial Care Treatment' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>Partial Care Treatment</div></td>
                             <!-- <td><div style='width:'></div></td> -->
-                            <td><div><input type='checkbox' name='' id='' value='Long-Term Residential'></div></td>
+                            <td><div><input type='checkbox' name='so4' id='so4' value='Long-Term Residential' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>Long-Term Residential</div></td>
                         </tr>
 
                         <tr>
-                            <td><div><input type='checkbox' name='' id='' value='Outpatient'></div></td>
+                            <td><div><input type='checkbox' name='so5' id='so5' value='Outpatient' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>Outpatient</div></td>
                             <!-- <td><div style='width:'></div></td> -->
-                            <td><div><input type='checkbox' name='' id='' value='OPOID Maintenance - Outpatient'></div></td>
+                            <td><div><input type='checkbox' name='so6' id='so6' value='OPOID Maintenance - Outpatient' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div class='makemeStable'>OPOID Maintenance - Outpatient</div></td>
                         </tr>
 
                         <tr>
-                            <td><div><input type='checkbox' name='' id='' value='Intensive Outpatient'></div></td>
+                            <td><div><input type='checkbox' name='so7' id='so7' value='Intensive Outpatient' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div style='makemeStable'>Intensive Outpatient</div></td>
                             <!-- <td><div style='width:'></div></td> -->
-                            <td><div><input type='checkbox' name='' id='' value='OPOID Maintenance - Intensive Outpatient'></div></td>
+                            <td><div><input type='checkbox' name='so8' id='so8' value='OPOID Maintenance - Intensive Outpatient' onClick="javascript: m_loadTreatmentType();"></div></td>
                             <td><div style='makemeStable'>OPOID Maintenance -<br>Intensive Outpatient</div></td>
                         </tr>
                     </table>

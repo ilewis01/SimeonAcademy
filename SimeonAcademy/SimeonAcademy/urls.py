@@ -104,6 +104,7 @@ urlpatterns = patterns('',
     url(r'^docActionTaken/$', 'assessment.views.docActionTaken'),
     url(r'^confirmDocumentDeletion/$', 'assessment.views.confirmDocumentDeletion'),
     url(r'^treatmentResourcesMain/$', 'assessment.views.treatmentResourcesMain'),
+    url(r'^treatmentResourcesMain2/$', 'assessment.views.treatmentResourcesMain2'),
     url(r'^newTreatmentResource/$', 'assessment.views.newTreatmentResource'),
     url(r'^newResourceCreated/$', 'assessment.views.newResourceCreated'),
 
