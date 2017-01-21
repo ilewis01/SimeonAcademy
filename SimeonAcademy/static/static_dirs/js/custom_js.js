@@ -7413,7 +7413,15 @@ function AdministrativeMain() {
 }
 
 function newTreatmentResource() {
-	openPopUp('auto', '/newTreatmentResource/', 600, 600);
+	openPopUp('auto', '/newTreatmentResource/', 460, 600);
+}
+
+function editSelectedResource() {
+
+}
+
+function deleteSelectedResource() {
+
 }
 
 function submitNewTreatmentResource() {

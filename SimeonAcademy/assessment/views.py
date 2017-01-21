@@ -4978,6 +4978,8 @@ def newTreatmentResource(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			states = State.objects.all().order_by('state')
+			content['states'] = states
 			content['title'] = 'Manage Treatment Resources'
 			return render_to_response('counselor/main/newTreatmentResource.html', content, context_instance=RequestContext(request))
 

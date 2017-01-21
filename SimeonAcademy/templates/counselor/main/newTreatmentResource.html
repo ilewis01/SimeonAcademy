@@ -11,11 +11,108 @@
 
     <div class='treatmentResourceWrapper'>
         <form action='' method='post' id='t_form' name='t_form' enctype="multipart/form-data"> {% csrf_token %}
-            
+            <div class='treatmentInputs_wow'>
+                <div style='height:10px;'></div>
+                <input style='width:402px;' type='text' name='name' id='name' placeholder='Company Name'> <br>
+                <div style='height:10px;'></div>
+                <input style='width:402px;' type='text' name='address' id='address' placeholder='Address'> <br>
+                <div style='height:10px;'></div>
+                <input style='width:200px;' type='text' name='city' id='city' placeholder='City'>
+
+                <select name='state' id='state'>
+                    <option value='None Selected'>State</option>
+
+                    {% for s in states %}
+                    <option value='{{s.id}}'>{{s.state}}</option>
+                    {% endfor %}
+                </select>
+
+                <input type='text' style='width:65px;' name='zip_code' id='zip_code' placeholder='Zip Code'> <br>
+                <div style='height:10px;'></div>
+
+                <input style='width:200px;' type='text' name='director_name' id='director_name' placeholder='Director/Supervisor Name'>
+                <input style='width:200px;' type='text' name='director_title' id='director_title' placeholder='Director/Supervisor Title'> <br>
+                <div style='height:10px;'></div>
+
+                <input style='width:200px;' type='text' name='phone' id='phone' placeholder='Phone'>
+                <input style='width:200px;' type='text' name='fax' id='fax' placeholder='Fax'> <br>
+                <div style='height:10px;'></div>
+
+                <input style='width:200px;' type='text' name='email' id='email' placeholder='Email'>
+                <input style='width:200px;' type='text' name='website' id='website' placeholder='Website'> <br>
+
+                <table>
+                    <tr>
+                        <td><div><input type='checkbox' name='isDAS' id='isDAS' value=''></div></td>
+                        <td><div class='makemeStable_sm'>Licensed by DAS</div></td>
+                        <!-- <td><div style='width:'></div></td> -->
+                        <td><div><input type='checkbox' name='isAccredited' id='isAccredited' value=''></div></td>
+                        <td><div  class='makemeStable_sm'>State Accredited</div></td>
+
+                        <td><div><input type='checkbox' name='isHandiCap' id='isHandiCap' value=''></div></td>
+                        <td><div  class='makemeStable_md'>Handicap Accessible</div></td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td><div style='padding-left:3px;'>Type of Organization</div></td>
+
+                        <td>
+                            <div style='width:160px;'>
+                                <select name='type_organ' id='type_organ' style='width:130px;'>
+                                    <option value='None Selected'>Select</option>
+                                    <option value='profit'>Profit</option>
+                                    <option value='non-profit'>Non-Profit</option>
+                                    <option value='other-unknown'>Other/Unknown</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class='servMeWrapper'>
+                    <div class='servMeHere'><b>Services Offered</b>&nbsp&nbsp<span><em> Check all that apply</em></span></div>
+
+                    <table>
+                        <tr>
+                            <td><div><input type='checkbox' name='' id='' value='Co-occurring'></div></td>
+                            <td><div class='makemeStable'>Co-Occurring</div></td>
+                            <!-- <td><div style='width:'></div></td> -->
+                            <td><div><input type='checkbox' name='' id='' value='Short-Term Residential'></div></td>
+                            <td><div class='makemeStable'>Short-Term Residential</div></td>
+                        </tr>
+
+                        <tr>
+                            <td><div><input type='checkbox' name='' id='' value='Partial Care Treatment'></div></td>
+                            <td><div class='makemeStable'>Partial Care Treatment</div></td>
+                            <!-- <td><div style='width:'></div></td> -->
+                            <td><div><input type='checkbox' name='' id='' value='Long-Term Residential'></div></td>
+                            <td><div class='makemeStable'>Long-Term Residential</div></td>
+                        </tr>
+
+                        <tr>
+                            <td><div><input type='checkbox' name='' id='' value='Outpatient'></div></td>
+                            <td><div class='makemeStable'>Outpatient</div></td>
+                            <!-- <td><div style='width:'></div></td> -->
+                            <td><div><input type='checkbox' name='' id='' value='OPOID Maintenance - Outpatient'></div></td>
+                            <td><div class='makemeStable'>OPOID Maintenance - Outpatient</div></td>
+                        </tr>
+
+                        <tr>
+                            <td><div><input type='checkbox' name='' id='' value='Intensive Outpatient'></div></td>
+                            <td><div style='makemeStable'>Intensive Outpatient</div></td>
+                            <!-- <td><div style='width:'></div></td> -->
+                            <td><div><input type='checkbox' name='' id='' value='OPOID Maintenance - Intensive Outpatient'></div></td>
+                            <td><div style='makemeStable'>OPOID Maintenance -<br>Intensive Outpatient</div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </form>
     </div>
 
-    <div style='height:20px;'></div>
+    <!-- <div style='height:20px;'></div> -->
 
     <div class='half-length-single-btn'>
         <button onClick='Javascript: submitNewTreatmentResource();'>Submit</button>

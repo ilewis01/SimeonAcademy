@@ -8694,7 +8694,7 @@ button:hover {
 }
 
 .triple_button_main_div {
-	width:470px;
+	width:630px;
 	margin:auto;
 	border:1px solid black;
 	margin-top: 1%;
@@ -8702,21 +8702,79 @@ button:hover {
 	box-shadow: 3px 5px 5px #888888;
 	background-color: gray;
 	border-radius: 8px;
-
-}
+}	
 
 .triple_button_main_div button {
 	width:150px;
 	border-radius: 8px;
+	margin-right: 0px;
+	padding-right: 0px;
 }
+
 
 .treatmentResourceWrapper {
 	width:90%;
 	margin:auto;
-	border:1px solid black;
+	/*border:1px solid black;*/
 }
 
+.treatmentResourceWrapper select {
+	height:25px;
+	width:100px;
+	margin-right: 32px;
+}
 
+.treatmentResourceWrapper input {
+	border: 1px solid gray;
+	border-radius: 6px;
+	height:25px;
+	padding:6px;
+}
+
+.treatmentResourceWrapper table {
+	width:402px;
+	font-size: 12px;
+}
+
+.treatmentResourceWrapper td {
+	width:5px;
+}
+
+.makemeStable {
+	width:150px;
+	margin-top: 3px;
+}
+
+.makemeStable_sm {
+	width:108px;
+	margin-top: 3px;
+}
+
+.makemeStable_md {
+	width:115px;
+	margin-top: 3px;
+}
+
+.servMeHere {
+	margin-bottom: 10px;
+	/*margin-left: 6px;*/
+	font-size: 14px;
+	/*font-weight: bold;*/
+	text-align: center;
+	border-bottom:1px solid black;
+}
+
+.servMeHere span {
+	color:gray;
+}
+
+.servMeWrapper {
+	width:92%;
+	padding:3%;
+	border:1px solid black;
+	border-radius: 8px;
+	background-color: #ececec;
+}
 
 
 

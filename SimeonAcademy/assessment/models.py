@@ -1747,6 +1747,7 @@ class TreatmentResource(models.Model):
 	website 		= models.CharField(max_length=200, default=None, blank=True, null=True)
 	isDAS 			= models.BooleanField(default=False, blank=True)
 	isAccredited 	= models.BooleanField(default=False, blank=True)
+	isHandiCap 		= models.BooleanField(default=False, blank=True)
 	type_organ 		= models.CharField(max_length=200, default=None, blank=True, null=True)
 	tpye_treat 		= models.CharField(max_length=200, default=None, blank=True, null=True)
 
