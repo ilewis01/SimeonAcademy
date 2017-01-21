@@ -8722,6 +8722,7 @@ button:hover {
 	height:25px;
 	width:100px;
 	margin-right: 32px;
+	border:1px solid gray;
 }
 
 .treatmentResourceWrapper input {
