@@ -4682,6 +4682,15 @@ function processThezipStuff(value) {
 	return result;
 }
 
+function processTheWebStuff(value) {
+	value = String(value);
+	result = '';
+	pre = 'http://www.';
+	result = pre + value;
+	
+	return result;
+}
+
 function phoneBuilderWow(divName) {
 	divName 		= 'input_' + String(divName);
 	var div 		= grab(divName);
@@ -4697,6 +4706,15 @@ function phoneBuilderWow_Uni(divName) {
 	var val 		= getRawNumber(div.value);
 
 	finalA = processThePhoneStuff(val);
+	div.value = finalA;
+}
+
+function webBuilderWow_Uni(divName) {
+	divName 		= String(divName);
+	var div 		= grab(divName);
+	var val 		= String(div.value);
+
+	finalA = processTheWebStuff(val);
 	div.value = finalA;
 }
 
@@ -7673,9 +7691,20 @@ function submitNewTreatmentResource() {
 		}
 
 		form.action = '/newResourceCreated/';
-		parent.submit();
+		var w = 300, h = 200;
+		var l = Number((screen.width/2) - (w/2));
+		var t = Number((screen.height/2) - (h/2));
+
+		window.resizeTo(w, h);
+		window.moveTo(l, t);
+	    window.focus(); 
 		form.submit();
 	}
+}
+
+function buildNewResourceList() {
+	getPopParent('t_form').submit();
+	window.close();
 }
 
 function new_discharge() {

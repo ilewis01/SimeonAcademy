@@ -8,20 +8,20 @@
 
 <body class="error_body_main_orange">
 	<div style='height:10px;'></div>
-	<div class='rUSureWrapper' style='padding-top:3px;'>Success</div>
+	<div class='rUSureWrapper' style='padding-top:3px;'>Errors Detected</div>
 	<div style='height:10px;'></div>
-	<div class='rUSureHead2'>A New Resource Has Been Created</div>
+	<div class='rUSureHead2'>The Highlighted Fields Contain Errors</div>
 	<div class='divider_gradient' style='margin-bottom:5px;'></div>
-	<!-- <div class='rUSureMsg2'>
+	<div class='rUSureMsg2'>
 		<b>Please Make Sure That:</b>
 		<ul>
 			<li>The field is not blank</li>
 			<li>An option has been selected from the dropdown menu</li>
 			<li>The entry is in the proper fomat and contains the correct number of characters</li>
 		</ul>
-	</div> -->
+	</div>
 	<div class='rUSureBtn2'>
-		<button onClick="Javacript: buildNewResourceList();">OK</button>
+		<button onClick="Javacript: window.close();">OK</button>
 	</div>
 	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
 </body>
