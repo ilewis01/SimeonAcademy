@@ -3,11 +3,26 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white">
-    <!-- <input type='text' id='superTest' style='width:600px;'> -->
+<body class="gradient-white" onLoad='javascript: initializeResourceList({{raw_ids}});'>
+  <!--   <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='t_form' name='t_form' enctype="multipart/form-data"> {% csrf_token %}
       <input type='hidden' id='client_id' name='client_id' value='{{c1.id}}' >
       <input type='hidden' id='selectedDiv' name='selectedDiv' value=''>
+      <input type='hidden' id='m_name' name='m_name' value=''>
+      <input type='hidden' id='m_address' name='m_address' value=''>
+      <input type='hidden' id='m_city' name='m_city' value=''>
+      <input type='hidden' id='m_state' name='m_state' value=''>
+      <input type='hidden' id='m_zip' name='m_zip' value=''>
+      <input type='hidden' id='m_title' name='m_title' value=''>
+      <input type='hidden' id='m_director' name='m_director' value=''>
+      <input type='hidden' id='m_phone' name='m_phone' value=''>
+      <input type='hidden' id='m_fax' name='m_fax' value=''>
+      <input type='hidden' id='m_email' name='m_email' value=''>
+      <input type='hidden' id='m_website' name='m_website' value=''>
+      <!-- <input type='hidden' id='m_isDAS' name='m_isDAS' value=''>
+      <input type='hidden' id='m_isHandiCap' name='m_isHandiCap' value=''>
+      <input type='hidden' id='m_type_organ' name='m_type_organ' value=''>
+      <input type='hidden' id='m_tpye_treat' name='m_tpye_treat' value=''> -->
 
     <div class='container'>
       <div class='row'>
@@ -29,17 +44,18 @@
                         {% for l in left %}
                         <a href="javascript: highlightSelectedResource('{{l.id}}', {{id_data}});">
                             <div class='unselected_treatmentResource' id='outer_{{l.id}}'>
-                                <div class='resource_name_head'>{{l.name}}</div>
+                                <div class='resource_name_head' id='name_{{l.id}}'>{{l.name}}</div>
 
-                                <div class='resource_addy_head'>{{l.address}}</div>
-                                <div class='resource_addy_head'>{{l.city}}, {{l.state}} {{l.zip_code}}</div>
+                                <div class='resource_addy_head' id='address_{{l.id}}'>{{l.address}}</div>
+                                <div class='resource_addy_head'><span id='city_{{l.id}}'>{{l.city}}</span>, <span id='state_{{l.id}}'>{{l.state}}</span> <span id='zip_{{l.id}}'>{{l.zip_code}}</span></div>
 
-                                <div class='resource_dirc_head'><b>{{l.director_title}}:</b> <span>{{l.director_name}}</span></div>
+                                <div class='resource_dirc_head'><b id='title_{{l.id}}'>{{l.director_title}}:</b> <span id='director_{{l.id}}'>{{l.director_name}}</span></div>
 
-                                <div class='resource_phon_head'><b>Phone:</b> <span>{{l.phone}}</span> <b>Fax:</b> <span>{{l.fax}}</span></div>
+                                <div class='resource_phon_head'><b>Phone:</b> <span id='phone_{{l.id}}'>{{l.phone}}</span>&nbsp&nbsp&nbsp&nbsp
+                                  &nbsp&nbsp<b>Fax:</b> <span id='fax_{{l.id}}'>{{l.fax}}</span></div>
 
-                                <div class='resource_webl_head'><b>Email:</b> <span>{{l.email}}</span></div>
-                                <div class='resource_webl_head'><b>Website:</b> <span>{{l.website}}</span></div>
+                                <div class='resource_webl_head'><b>Email:</b> <span id='email_{{l.id}}'>{{l.email}}</span></div>
+                                <div class='resource_webl_head'><b>Website:</b> <span id='website_{{l.id}}'>{{l.website}}</span></div>
                             </div>
                           </a>
                         {% endfor %}
@@ -49,17 +65,18 @@
                         {% for r in right %}
                         <a href="javascript: highlightSelectedResource('{{r.id}}', {{id_data}});">
                             <div class='unselected_treatmentResource' id='outer_{{r.id}}'>
-                                <div class='resource_name_head'>{{r.name}}</div>
+                                <div class='resource_name_head' id='name_{{r.id}}'>{{r.name}}</div>
 
-                                <div class='resource_addy_head'>{{r.address}}</div>
-                                <div class='resource_addy_head'>{{r.city}}, {{r.state}} {{r.zip_code}}</div>
+                                <div class='resource_addy_head' id='address_{{r.id}}'>{{r.address}}</div>
+                                <div class='resource_addy_head'><span id='city_{{r.id}}'>{{r.city}}</span>, <span id='state_{{r.id}}'>{{r.state}}</span> <span id='zip_{{r.id}}'>{{r.zip_code}}</span></div>
 
-                                <div class='resource_dirc_head'><b>{{r.director_title}}:</b> <span>{{r.director_name}}</span></div>
+                                <div class='resource_dirc_head'><b id='title_{{r.id}}'>{{r.director_title}}:</b> <span id='director_{{r.id}}'>{{r.director_name}}</span></div>
 
-                                <div class='resource_phon_head'><b>Phone:</b> <span>{{r.phone}}</span> <b>Fax:</b> <span>{{r.fax}}</span></div>
+                                <div class='resource_phon_head'><b>Phone:</b> <span id='phone_{{r.id}}'>{{r.phone}}</span>&nbsp&nbsp&nbsp&nbsp
+                                  &nbsp&nbsp<b>Fax:</b> <span id='fax_{{r.id}}'>{{r.fax}}</span></div>
 
-                                <div class='resource_webl_head'><b>Email:</b> <span>{{r.email}}</span></div>
-                                <div class='resource_webl_head'><b>Website:</b> <span>{{r.website}}</span></div>
+                                <div class='resource_webl_head'><b>Email:</b> <span id='email_{{r.id}}'>{{r.email}}</span></div>
+                                <div class='resource_webl_head'><b>Website:</b> <span id='website_{{r.id}}'>{{r.website}}</span></div>
                             </div>
                           </a>
                         {% endfor %}

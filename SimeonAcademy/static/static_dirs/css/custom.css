@@ -8814,21 +8814,34 @@ button:hover {
 	width:100%;
 	padding-left: 10%;
 	padding-right: 10%;
-	background-color: white;
+	/*background-color: white;*/
 	border:1px solid black;
 	padding-top: 3%;
 	padding-bottom:3%;
 }
 
 .resource_name_head {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
-	height:40px;
+	height:46px;
 	font-style: italic;
 	color:#762e38;
 	text-align: justify;
 }
 
+.resource_addy_head {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.resource_dirc_head, .resource_phon_head, .resource_webl_head {
+	font-size: 13px;
+}
+
+/*.resource_dirc_head, .resource_phon_head, .resource_webl_head span {
+	font-style: italic;
+}*/
 
 
 

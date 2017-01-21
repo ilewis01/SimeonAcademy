@@ -907,6 +907,14 @@ def fetchAllResourceIds():
 
 	return the_ids
 
+def fetchRawIdNumberResources():
+	r_list 	= TreatmentResource.objects.all().order_by('name')
+	the_ids = []
+
+	for r in r_list:
+		the_ids.append(str(r.id))
+	return the_ids
+
 
 ##################################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------------------#

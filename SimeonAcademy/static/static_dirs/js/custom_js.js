@@ -7412,9 +7412,84 @@ function AdministrativeMain() {
 	form.submit();
 }
 
-function clearSelectedTreatmentResources(divList) {
-	var t = '';
+function fetchSingleResourceDivData(raw) {
+	var m_list = [];
+	var raw =  String(raw);
+	m_list.push('name_' + raw);
+	m_list.push('address_' + raw);
+	m_list.push('city_' + raw);
+	m_list.push('state_' + raw);
+	m_list.push('zip_' + raw);
+	m_list.push('title_' + raw);
+	m_list.push('director_' + raw);
+	m_list.push('phone_' + raw);
+	m_list.push('fax_' + raw);
+	m_list.push('email_' + raw);
+	m_list.push('website_' + raw);
+	// m_list.push('isDAS_' + raw);
+	// m_list.push('isHandiCap_' + raw);
+	// m_list.push('type_organ_' + raw);
+	// m_list.push('tpye_treat_' + raw);
+	return m_list
+}
 
+
+function fetchHiddeneResourceDivData() {
+	var m_list = [];
+	m_list.push('m_name');
+	m_list.push('m_address');
+	m_list.push('m_city');
+	m_list.push('m_state');
+	m_list.push('m_zip');
+	m_list.push('m_title');
+	m_list.push('m_director');
+	m_list.push('m_phone');
+	m_list.push('m_fax');
+	m_list.push('m_email');
+	m_list.push('m_website');
+	// m_list.push('m_isDAS');
+	// m_list.push('m_isHandiCap');
+	// m_list.push('m_type_organ');
+	// m_list.push('m_tpye_treat');
+	return m_list;
+}
+
+function fetch_resource_divs(m_list) {
+	var divs = [];
+
+	for (var i = 0; i < m_list.length; i++) {
+		var tempName = String(m_list[i]);
+		var div = grab(tempName);
+		divs.push(div);
+	}
+
+	return divs
+}
+
+function setHiddenDivVals(r_data, h_data) {
+	for (var i = 0; i < r_data.length; i++) {
+		h_data[i].value = r_data[i].innerHTML;
+	}
+}
+
+function fetchResourceDivs_andSet(raw_id) {
+	var res 	= fetchSingleResourceDivData(raw_id);
+	var hid 	= fetchHiddeneResourceDivData();
+	var resDivs = fetch_resource_divs(res);
+	var hidDivs = fetch_resource_divs(hid);
+	setHiddenDivVals(resDivs, hidDivs);
+}
+
+function initializeResourceList(raw_ids) {
+	resource_id = raw_ids[0];
+	var divName1 = 'outer_' + String(resource_id);
+	grab(divName1).className = 'selected_treatmentResource';
+	grab('selectedDiv').value = resource_id;
+
+	fetchResourceDivs_andSet(resource_id);
+}
+
+function clearSelectedTreatmentResources(divList) {
 	for (var i = 0; i < divList.length; i++) {
 		var div =  grab(divList[i]);
 		div.className = 'unselected_treatmentResource';
@@ -7429,6 +7504,7 @@ function highlightSelectedResource(resource_id, divList) {
 	var div = grab(divName);
 	div.className = 'selected_treatmentResource';
 	grab('selectedDiv').value = resource_id;
+	fetchResourceDivs_andSet(resource_id);
 }
 
 function newTreatmentResource() {
