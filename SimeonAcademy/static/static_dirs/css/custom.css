@@ -9060,6 +9060,8 @@ button:hover {
 	height: 24%;
 	position: relative;
 	background-color: #ececec;
+	background: url('../images/superRed.png');
+	background-size: cover;
 }
 
 .craftInnerDiv {
@@ -9128,13 +9130,30 @@ button:hover {
 	border-left:1px solid gray;
 }
 
+.craftMainFormRadioDk {
+	float:left;
+	height:100%;
+	width:8%;
+	border-left:1px solid gray;
+	background-color: #dab7be;
+}
+
+.craftMainFormRadioDkHd {
+	float:left;
+	height:100%;
+	width:8%;
+	border-left:1px solid gray;
+	background-color: #dab7be;
+}
+
 .crafftCenter {
-	width:60%;
+	width:63%;
 	margin: auto;
 	text-align: center;
 	height:25px;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
+	font-style: italic;
 	position: relative;
   	top: 50%;
   	transform: translateY(-50%);
