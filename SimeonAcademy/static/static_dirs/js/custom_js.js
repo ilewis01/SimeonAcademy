@@ -3440,6 +3440,22 @@ function new_preScreen() {
 	form.submit();
 }
 
+function crafft_goToBSection() {
+	var goToB = true;
+	var a1 = grab('a1').checked;
+	var a2 = grab('a2').checked;
+	var a3 = grab('a3').checked;
+
+	if (a1 === false && a2 === false && a3 === false) {
+		goToB = false;
+		grab('fetchB').value = false;
+	}
+	else {
+		grab('fetchB').value = true;
+	}
+	return goToB;
+}
+
 function baselessNoteErrorSuperDuper() {
 	hasError = false;
 	var subject = String(grab('subject').value);

@@ -6,182 +6,172 @@
 <body class="gradient-white" onLoad='javascript: initialize_dischargeForm();'>
     <!-- <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
-      <input type='hidden' id='client_id' name='client_id'value='{{session.client.id}}' >
-      <input type='hidden' id='form_type' name='form_type' value='discharge'>
-      <input type='hidden' id='actionBtn' name='actionBtn' value='Discharge'>
-      <input type='hidden' id='confirm_title' name='confirm_title' value='Discharge Client | Simeon Academy'>
-      <input type='hidden' id='confirmPhrase' name='confirmPhrase' value='Discharge This Client?'>
-      <input type='hidden' id='parentForm' name='parentForm' value='c_form'>
-      <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
-      <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
-      <input type='hidden' id='newNoteFlag' name='newNoteFlag'value=''>
-      <input type='hidden' id='totalNotes' name='totalNotes'value='0'>
-      <input type='hidden' id='numberAdded' name='numberAdded'value='0'>
-      <input type='hidden' id='numberLoadedNotes' name='numberLoadedNotes'value='{{loadedNotes}}'>
-      <input type='hidden' id='selectedSubject' name='selectedSubject'value='0'>
-      <input type='hidden' id='selectedBody' name='selectedBody'value='0'>
-      <input type='hidden' id='selectedFlag' name='selectedFlag'value='0'>
-      <input type='hidden' id='delete_ids' name='delete_ids' value=''>
+        <input type='hidden' id='client_id' name='client_id'value='{{client_id}}' >
+        <input type='hidden' name='fetchB' id='fetchB' value='false'>
 
-      <input type='hidden' id='c1_tag' name='c1_tag'value='{{c1.clientID}}'>
-      <input type='hidden' id='c2_tag' name='c2_tag'value='{{c2.clientID}}'>
+        <div class='container'>
+          <div class='row'>
+            <div class="col-md-12" style='width:100%; height:84vh;'>
+              <div class='iml-body-wrapper2'>
 
-      <input type='hidden' id='save_section' name='save_section' value='/coupleSession/'>
-      <input type='hidden' id='exit_type' name='exit_type' value='couple'>
-      <input type='hidden' id='session_id' name='session_id' value='{{session_id}}'>
-      <input type='hidden' id='couple_id' name='couple_id' value='{{couple_id}}'>
-
-      <div id="newNoteBuilder"></div>
-
-    <div class='container'>
-      <div class='row'>
-        <div class="col-md-12" style='width:100%; height:84vh;'>
-          <div class='iml-body-wrapper2'>
-
-            <div id='iml-info-head2'>
-              <div style='margin-left:3%;'>CRAFFT Screening Interview</div>
-            </div>
-
-            <div class='crafftBtnHolder'>
-                <table>
-                    <tr>
-                        <td>
-                            <a href="javascript: crafft_submit_and_score(); return false;">
-                                <div class='crafftButton'>
-                                    Submit & Score
-                                </div>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="javascript: crafft_view_instruction(); return false;">
-                                <div class='crafftButton'>
-                                    View Scoring Instructions
-                                </div>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="javascript: crafft_return_to_options(); return false;">
-                                <div class='crafftButton'>
-                                    Cancel
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class='divider_gradient' style='margin-top:5px;'></div>
-            </div>
-
-            <div class='wow-data-entry-wrapperCrafft'>
-              <div class='container'>
-                <div class='row'>
-
-                 <!-- WRAPPER FIXER -->
-                  <div class='col-md-6' style='width:89.3%; height:64.6vh;'>
-                      <div style='height:20px;'></div>
-                      <div class='crafftOpener'>
-                            <b>Begin:</b> "I'm going to ask you a few questions that I ask all my patients. Please be honest. I will keep your answers confidential."
-                      </div>
-
-                      <div class='divider_gradient' style='margin-bottom:15px;'></div>
-
-                      <div class='singleCrafftForm'>
-                          <div class='crafftTop'>
-                              <div class='crafftMainFormNumberNone'></div>
-                              <div class='craftMainFormLeft'></div>
-
-                              <div class='craftMainFormRadioDkHd'><div class='crafftCenter'>No</div></div>                              
-                              <div class='craftMainFormRadio'><div class='crafftCenter'>Yes</div></div>
-                          </div>
-
-                          <div class='craftInnerDiv'>
-                              <div class='crafftMainFormNumber'><div class='crafftInNum'>1.</div></div>
-                              <div class='craftMainFormLeft'></div>
-
-                              <div class='craftMainFormRadioDk'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a1' id='a1False' value='False' checked>
-                                </div>
-                              </div>
-
-                              <div class='craftMainFormRadio'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a1' id='a1True' value='True'>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div class='craftInnerDiv'>
-                              <div class='crafftMainFormNumber'><div class='crafftInNum'>2.</div></div>
-                              <div class='craftMainFormLeft'></div>
-                              
-                              <div class='craftMainFormRadioDk'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a2' id='a2False' value='False' checked>
-                                </div>
-                              </div>
-
-                              <div class='craftMainFormRadio'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a2' id='a2True' value='True'>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div class='craftInnerDiv'>
-                              <div class='crafftMainFormNumber'><div class='crafftInNum'>3.</div></div>
-                              <div class='craftMainFormLeft'></div>
-                              
-                              <div class='craftMainFormRadioDk'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a3' id='a3False' value='False' checked>
-                                </div>
-                              </div>
-
-                              <div class='craftMainFormRadio'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='a3' id='a3True' value='True'>
-                                </div>
-                              </div>
-                          </div>
-
-                          <div class='crafftBottomDiv' id='b1Dynamic'>
-                              <div class='crafftMainFormNumber'><div class='crafftInNum'>4.</div></div>
-                              <div class='craftMainFormLeft'></div>
-                              
-                              <div class='craftMainFormRadioDk'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='b1' id='b1False' value='False' checked>
-                                </div>
-                              </div>
-
-                              <div class='craftMainFormRadio'>
-                                <div class='crafftCenterRadioInput'>
-                                    <input type='radio' name='b1' id='b1True' value='True'>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div style='width:50%; margin:auto;'><div class='divider_gradient' style='margin-bottom:15px;'></div></div>
-
-                      <div class='confHead'>Confidentiality Notice</div>
-                          <div class='confNotice'>
-                            The information recorded on this page may be protected by special confidentiality rules (42 CFR Part 2), which prohibit disclosure of this information unless authorized by specific written concent. A general authorization for release of medical information is NOT sufficient for this purpose.
-                          </div>                    
-                      </div>
-
+                <div id='crafft-info-head'>
+                  <div style='margin-left:3%;'>CRAFFT Screening Interview</div>
                 </div>
-              </div>
-            </div>
-    </form>  
 
-            <!-- <div class='iml-dbl-btnWrap'>
-                <button onClick="javascript: wowDischargeFinal(); return false;">Discharge</button></span>
-                <button onClick="javascript: wowDischargeToOptions(); return false;" style='margin-left:2px;'>Cancel</button>
-            </div>  --> 
+                <div class='crafftBtnHolder'>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript: crafft_submit_and_score(); return false;">
+                                    <div class='crafftButton'>
+                                        Submit
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_view_instruction(); return false;">
+                                    <div class='crafftButton'>
+                                        View Scoring Instructions
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_return_to_options(); return false;">
+                                    <div class='crafftButton'>
+                                        Cancel
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class='divider_gradient' style='margin-top:5px;'></div>
+                </div>
+
+                <div class='wow-data-entry-wrapperCrafft'>
+                  <div class='container'>
+                    <div class='row'>
+
+                     <!-- WRAPPER FIXER -->
+                      <div class='col-md-6' style='width:89.3%; height:64.6vh;'>
+                          <div style='height:20px;'></div>
+                          <div class='crafftOpener'>
+                                <b>Begin:</b> "I'm going to ask you a few questions that I ask all my patients. Please be honest. I will keep your answers confidential."
+                          </div>
+
+                          <div class='divider_gradient' style='margin-bottom:15px;'></div>
+
+                          <div class='singleCrafftForm'>
+                              <div class='crafftTop'>
+                                  <div class='craftMainFormFull'>
+                                      <div class='craftTH1'>DURING THE <span>PAST 12 MONTHS</span>, DID YOU:</div>
+                                  </div>
+
+                                  <div class='craftMainFormRadioDkHd'><div class='crafftCenter'>No</div></div>                              
+                                  <div class='craftMainFormRadio'><div class='crafftCenter'>Yes</div></div>
+                              </div>
+
+                              <div class='craftInnerDiv'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>1.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftDoubleInputLine'>
+                                          Drink any <span>ALCOHOL</span> (more than a few sips)?<br>
+                                          <em>Do not count sips of alcohol taken during family or religious events.</em>
+                                      </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a1' id='a1False' value='False' checked onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a1' id='a1True' value='True' onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='craftInnerDiv'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>2.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftSingleInputLine'>
+                                          Smoke and <span>MARIJUANA</span> or <span>HASHISH</span>?
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a2' id='a2False' value='False' checked onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a2' id='a2True' value='True' onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='craftInnerDiv'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>3.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftDoubleInputLine'>
+                                          Use anything else to get <span>HIGH</span>? <em>("anything else" includes illeagal drugs, over the counter and prescription drugs, and things that you sniff or "huff")</em>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a3' id='a3False' value='False' checked onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='a3' id='a3True' value='True' onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='crafftBottomDiv' id='b1Dynamic'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>4.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftDoubleInputLine'>
+                                          Have you ever ridden in a <span>CAR</span> driven by someone (including yourself)<br>
+                                          who was "high" or had been using alcohol or drugs?
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b1' id='b1False' value='False' checked onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b1' id='b1True' value='True' onClick='javascript: crafft_goToBSection();'>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div style='width:50%; margin:auto;'><div class='divider_gradient' style='margin-bottom:15px;'></div></div>
+
+                          <div class='confHead'>Confidentiality Notice</div>
+                              <div class='confNotice'>
+                                The information recorded on this page may be protected by special confidentiality rules (42 CFR Part 2), which prohibit disclosure of this information unless authorized by specific written concent. A general authorization for release of medical information is <b>NOT</b> sufficient for this purpose.
+                              </div>                    
+                          </div>
+
+                    </div>
+                  </div>
+                </div>
+        </form>  
 
           </div>
         </div>

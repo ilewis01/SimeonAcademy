@@ -1169,8 +1169,6 @@ def viewProfile(request):
 		quickTrack('Search', track)
 		content['tracking'] = track.state.state
 		content['user'] = user
-		track = getTrack(user)
-		quickTrack('Search', track)
 
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -4927,12 +4925,18 @@ def startStudentEval(request):
 	else:
 		content = {}
 		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
 		content['user'] = user
+		content['user'] = user
+
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
 			return render_to_response('global/restricted.html', content)
 
 		else:
+			content['client_id'] = superDuperFetchClientID_track(track)
 			return render_to_response('counselor/forms/StudentEvaluation/startStudentEval.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

@@ -9001,9 +9001,6 @@ button:hover {
 	height:60%;
 	padding:2%;
 	margin: auto;
-	/*position: relative;
-	top: 50%;
-	transform: translateY(-50%);*/
 }
 
 .confHead {
@@ -9014,7 +9011,7 @@ button:hover {
 }
 
 .confNotice {
-	width:50%;
+	width:60%;
 	margin:auto;
 	text-align: justify;
 	font-size: 12px;
@@ -9031,13 +9028,30 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+#crafft-info-head {
+	width:100%;
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	padding:9px;
+	text-shadow: 1px 1px black;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: 1px solid black;
+	color:#e4ddca;
+	/*color: #e3dcc8;*/
+	background: url('/static/images/super_head_red.png');
+	background-size: 100%;
+	margin-bottom: 1%;
+}
+
 .crafftMainHeadTh {
 	padding-left: 4%;
 }
 
 .singleCrafftForm {
-	width:50%;
-	height:50%;
+	width:60%;
+	height:51%;
 	margin:auto;
 	border-radius: 8px;
 	box-shadow: 5px 5px 5px #888888;
@@ -9076,7 +9090,7 @@ button:hover {
 
 .crafftBottomDiv {
 	width:100%;
-	height: 19%;
+	height: 20%;
 	border-left:1px solid black;
 	border-right:1px solid black;
 	border-bottom: 1px solid black;
@@ -9090,6 +9104,60 @@ button:hover {
 	float:left;
 	height:100%;
 	width:77%;
+}
+
+.craftTH1 {
+	width: 95%;
+	margin:auto;
+	height:45%;
+	font-size: 19px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-style: italic;
+	color:#e3e4a3;
+	text-shadow:1px 1px black;
+	font-weight: bold;
+	/*background-color: orange;*/
+}
+
+.crafftSingleInputLine {
+	width:95%;
+	margin:auto;
+	height:40%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+}
+
+.crafftDoubleInputLine {
+	/*background-color: yellow;*/
+	width:95%;
+	margin:auto;
+	height:80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+	line-height: 20px;
+}
+
+.crafftDoubleInputLine span {
+	text-decoration: underline;
+	font-weight:bold;
+	font-style: italic;
+}
+
+.crafftSingleInputLine span {
+	text-decoration: underline;
+	font-weight:bold;
+	font-style: italic;
+}
+
+.craftTH1 span {
+	text-decoration: underline;
+	font-weight: bold;
 }
 
 .craftMainFormFull {
