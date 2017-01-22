@@ -1574,27 +1574,15 @@ def notePadAdded(request):
 			return render_to_response('global/restricted.html')
 
 		else:
-			edit_enabled = str(request.POST.get('edit_enabled'))
-			subject = str(request.POST.get('subject'))
-			body 	= str(request.POST.get('body'))
-			note_id = None
-			note = None
-
-			if edit_enabled == 'false':
-				note_id = create_note(track.client_id, subject)
-				note = Note.objects.get(id=note_id)
-				note.note = body
-			elif edit_enabled == 'true':
-				note_id = request.POST.get('note_id')
-				note = Note.objects.get(id=note_id)
-				note.title = subject
-				note.note = body
-
-			note.save()
 			client = Client.objects.get(id=superDuperFetchClientID_track(track))
+			subject = request.POST.get('subject')
+			body = request.POST.get('body')
+			date = datetime.now().date()
+			newNote = Note(date=date, title=subject, note=body, clientID=client.id, isCouple=False)
+			newNote.save()
 
 			content['client'] = client
-			content['note'] = note
+			content['note'] = newNote
 			content['title'] = "New Note | Simeon Academy"
 			return render_to_response('counselor/client/notePadAdded.html', content)
 

@@ -1,38 +1,30 @@
+
+
 {% load staticfiles %}
 
 <head>
-	<title>New Note</title>
+	<title>Simeon Academy</title>
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='new_note_body' onLoad="javascript: initializeNotePad();">
-	<form action='/notePadAdded/' method='post' id='nnform'> {% csrf_token %}
+<body class='asi_comment_body' onLoad="javascript: initializeNotePad();">
+	<form action='' method='post' id='nnform'> {% csrf_token %}
 		<input type='hidden' name='note_id' id='note_id' value='{{note.id}}'>
 		<input type='hidden' name='m_subject' id='m_subject' value='{{note.title}}'>
 		<input type='hidden' name='m_body' id='m_body' value='{{note.note}}'>
 		<input type='hidden' name='edit_enabled' id='edit_enabled' value='false'>
 		<input type='hidden' name='error1' id='error1' value='false'>
         <input type='hidden' name='error2' id='error2' value='false'>
-		<div class='notePadTitle'>New Note</div>
-		<div class='notePadBody'>
-			<table>
-				<tr>
-					<td><div class='notePadLabel'>Subject:</div></td>
-					<td><div><input type='text' name='subject' id='subject' class='notePadInput' value=''></div></td>
-				</tr>
-			</table>
 
-			<table>
-				<!-- <tr><td><div class='notePadLabel'>Body:</div></td></tr> -->
-				<tr><td><div class='notePadTextArea'><textarea name='body' id='body'></textarea></div></td></tr>
-			</table>
-		</div>
+		<div id='comment_title' class='asi_comment_header'>Add Note</div>
+		<div class='coupleNoteSubject'><input type='text' name='subject' id='subject' placeholder="Subject:" oninput="javascript: clearRedErrorBorders('subject');"></div>
+		<div class='divider_gradient' style='margin-bottom:10px;'></div>
+		<div class='comment_page_body2'><textarea name='body' id='body' placeholder='Enter note body here...' value='' oninput="javascript: clearRedErrorBorders('body');"></textarea></div>
+		<div class='divider_gradient' style='margin-bottom:15px;'></div>
 
-		<!-- <input type='text' id='test1'> -->
-
-		<div class='notePadButton'>
-			<button onClick='javascript: saveNotePadItem(); return false;' id='addNoteBtn'>Add Note</button>
-			<button onClick='javascript: saveNotePadChanges(); return false;' id='cancelNoteBtn'>Cancel</button>		
+		<div class='couple_comment_button_wrapper'>
+			<button onClick="javascript: saveNotePadItem(); return false;">Save</button>
+			<button onClick='javascript: window.close();'>Exit</button>
 		</div>
 	</form>
 

@@ -2379,6 +2379,21 @@ button:hover {
     text-align: justify;
 }
 
+.notePadBodyScroll2 {
+	height: 36%;
+    width: 88%;
+    margin:auto;
+    overflow-y: scroll;
+    background-color: #cccccc;
+    border: 1px solid gray;
+    padding: 1%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-style: italic;
+    text-align: justify;
+    font-size: 12px;
+}
+
 .notePadBtn3 {
 	width:260px;
 	margin: auto;
@@ -8624,6 +8639,20 @@ button:hover {
 	height:100%;
 }
 
+.makeMeSingleBtn {
+	width:150px;
+	height:32px;
+	border:1px solid black;
+	box-shadow: 3px 3px 3px #888888;
+	margin-top: 1%;
+	margin-left: 82.7%;
+}
+
+.makeMeSingleBtn button {
+	width:100%;
+	height:100%;
+}
+
 .wowTrueLeft {
 	width: 50%;
 	height:100%;
@@ -8906,6 +8935,194 @@ button:hover {
 	font-size: 13px;
 	height:60px;
 }
+
+.nnp_nameHead {
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	color:#732020;
+}
+
+.nnp_nameSmaller {
+	font-size: 13px;
+}
+
+.nnp_nameSmaller2 {
+	font-size: 13px;
+	height: 30px;
+	color:#815f29;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.nnp_nameSmaller3 {
+	width:95%;
+	margin:auto;
+	text-align: center;
+	font-weight: bold;
+	color:#6e8883;
+	padding-top: 3px;
+	font-size: 15px;
+}
+
+.newNotePadOptions85 {
+	width:90%;
+	height:68px;
+	margin:auto;
+	padding-top: 10px;
+}
+
+.newNotePadOptions85_img {
+	width: 62px;
+	height:100%;
+	float:left;
+	margin-right:10px; 
+}
+
+.newNotePadOptions85_img img {
+	width:100%;
+	border:2px solid gray;
+	border-radius: 8px;
+}
+
+.newNotePadOptions85_dta {
+	width:85%;
+	height:100%;
+	float:left;
+}
+
+.newNotePadOptions85_dta table {
+	height:100%;
+}
+
+.fixitupWrapper {
+	width:95%;
+	height:60%;
+	padding:2%;
+	margin: auto;
+	/*position: relative;
+	top: 50%;
+	transform: translateY(-50%);*/
+}
+
+.crafftOpener {
+	font-style: italic;
+	font-size: 15px;
+	text-align: center;
+	margin-top:15px;
+	margin-bottom:15px;
+	background-color: white;
+	border:2px solid black;
+	padding:1%;
+	width:95.5%;
+	margin:auto;
+	border-radius: 5px;
+	background: url('../images/superBrown.png');
+	background-size: cover;
+	color:#495c58;
+}
+
+.miniBoolCrafft {
+	text-align: center;
+	font-style: bold;
+	color:#495c58;
+	font-weight: bold;
+}
+
+.yeildPart1 {
+	font-size: 21px;
+	font-weight: bold;
+	font-style: italic;
+	color:#6e8883;
+	margin-bottom:10px;
+	text-align: center;
+	border: 2px solid black;
+	margin:auto;
+	width:100%;
+	padding:1%;
+	box-shadow: 4px 4px 4px #888888;
+	background: url('../images/superBrown.png');
+	background-size: cover;
+	text-shadow:1px 1px black;
+}
+
+.yeildPart2 {
+	font-size: 21px;
+	font-weight: bold;
+	font-style: italic;
+	color:#6e8883;
+	margin-bottom:10px;
+	text-align: center;
+	border: 2px solid black;
+	margin:auto;
+	width:100%;
+	padding:1%;
+	box-shadow: 4px 4px 4px #888888;
+	background: url('../images/superBrown.png');
+	background-size: cover;
+	text-shadow:1px 1px black;
+}
+
+.crafftTable1 {
+	width:100%;
+	height:40%;
+	background-color: #ececec;
+}
+
+.crafftTable1 table {
+	width:100%;
+	background-color: #ececec;
+	border:2px solid black;
+	box-shadow: 4px 4px 4px #888888;
+	/*height:100%;*/
+}
+
+.crafftTable1 th {
+	border: 1px solid black;
+	height:45px;
+	color:#495c58;
+	background-color: #c0c9c7;
+}
+
+.crafftTable1 td {
+	border: 1px solid black;
+}
+
+.crafft-sm-th {
+	width:30px;
+	margin: auto;
+	text-align: center;
+}
+
+.crafft-sm-th-lng {
+	width:380px;
+	padding-left: 10px;
+}
+
+.crafftSubTitle1 {
+	font-size: 12px;
+	height:40px;
+	padding-left: 10px;
+	margin-top: 7px;
+}
+
+.crafft_box_wrapper {
+	width:100%;
+	height:100%;
+	margin: auto;
+}
+
+.crafft_center_box {
+	width:16px;
+	margin:auto;
+}
+
+.crafft_center_box input {
+	width:14px;
+	height:14px;
+	border: 1px solid gray;
+}
+
 
 /*.resource_dirc_head, .resource_phon_head, .resource_webl_head span {
 	font-style: italic;

@@ -3384,7 +3384,11 @@ function runFunctionTest() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function rock_new_note() {
-	openPopUp('auto', "/new_note_pad/", 450, 450);
+	openPopUp('auto', "/new_note_pad/", 600, 410);
+}
+
+function superNoteOpener() {
+	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
 }
 
 function hasNoteErrors(subError, bodyError) {
@@ -3430,22 +3434,39 @@ function initialize_notePad_errors() {
 	div.innerHTML = html;
 }
 
-function saveNotePadItem() {
+function new_preScreen() {
+	var form = grab('c_form');
+	form.action = '/startStudentEval/';
+	form.submit();
+}
+
+function baselessNoteErrorSuperDuper() {
+	hasError = false;
 	var subject = String(grab('subject').value);
 	var body = String(grab('body').value);
 
-	var subj_error = isBlankText(subject);
-	var body_error = isBlankText(body);
-	var hasErrors  = hasNoteErrors(subj_error, body_error);
+	if (isBlankText(subject) === true) {
+		grab('subject').style.border = '1px solid red';
+		hasError = true;
+	}
 
-	if (hasErrors === true) {
-		var errors = getNoteErrors(subj_error, body_error);
-		openPopUp('auto', '/notePadErrorPage/', 350, 350);
+	if (isBlankText(body) === true) {
+		grab('body').style.border = '1px solid red';
+		hasError = true;
+	}
+	return hasError;
+}
+
+function saveNotePadItem() {
+	if (baselessNoteErrorSuperDuper() === true) {
+		generalWarningOpener();
 	}
 	else {
-		getPopParent('note_subject').value = subject;
-		getPopParent('note_body').value = body;
-		grab('nnform').submit();
+		getPopParent('note_subject').value = grab('subject').value;
+		getPopParent('note_body').value = grab('body').value;
+		var form = grab('nnform');
+		form.action = '/notePadAdded/';
+		form.submit();
 	}
 }
 
@@ -5636,6 +5657,8 @@ function loadThisNote_instant(note_id, json_data) {
 
 	openPopUp('auto', '/superNoteDisplyer/', 600, 410);
 }
+
+
 
 function noteAction(action) {
 	action = String(action);

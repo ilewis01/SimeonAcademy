@@ -5,17 +5,34 @@
 	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
 </head>
 
-<body class='new_note_body_options' onload='initializeNotePadOptions();'>
+<body class='asi_comment_body' onload='initializeNotePadOptions();'>
 	<form action="" method="post" id="nnform"> {% csrf_token %}
 		<input type='hidden' name='note_id' id='note_id' value='{{note.id}}'>
-		<input type='hidden' name='edit_enabled' id='edit_enabled' value=''>
-		<div class='padOptions1'>
-			<h2 style='text-align:center;'><em>Please make a selection</em></h2>
+
+		<div id='comment_title' class='asi_comment_header'>Note Options</div>
+		<div class='newNotePadOptions85'>
+			<div class='newNotePadOptions85_img'>
+				<img src="/static/media/{{client.photo}}" alt="client_img" class=''>
+			</div>
+
+			<div class='newNotePadOptions85_dta'>
+				<div class='nnp_nameHead'>{{client.fname}} {{client.lname}}</div>
+				<div class='nnp_nameSmaller2'>{{client.clientID}}</div>
+				<div class='nnp_nameSmaller'><b>Date:</b> {{note.date}}</div>
+			</div>
+		</div>
+
+		<div class='nnp_nameSmaller3'>{{note.title}}</div>
+		<div class='divider_gradient'></div>
+		<div class='notePadBodyScroll2'>{{note.note}}</div>
+
+		<!-- <div class='padOptions1'> -->
+			<!-- <h2 style='text-align:center;'><em>Please make a selection</em></h2>
 			<div><b><em>Client:</em></b> {{client.fname}} {{client.lname}}</div>
 			<div><b><em>Date:</b></em> {{note.date}}</div>
 			<div><b><em>Subject:</b></em> {{note.title}}</div>
-			<div class='notePadBodyScroll'>{{note.note}}</div>
-		</div>
+			<div class='notePadBodyScroll'>{{note.note}}</div> -->
+		<!-- </div> -->
 
 		<div class='notePadBtn3'>
 			<table>

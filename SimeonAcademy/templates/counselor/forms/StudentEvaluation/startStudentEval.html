@@ -3,17 +3,35 @@
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
-    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
-      <input type='hidden' name='save_this' id='save_this' value=''>
-      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
-      <input type='hidden' name='new_form' id='new_form' value='false'>
-      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
-      <input type='hidden' name='exit_to' id='exit_to' value=''>
+<body class="gradient-white" onLoad='javascript: initialize_dischargeForm();'>
+    <!-- <input type='text' id='superTest' style='width:600px;'> -->
+    <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
+      <input type='hidden' id='client_id' name='client_id'value='{{session.client.id}}' >
+      <input type='hidden' id='form_type' name='form_type' value='discharge'>
+      <input type='hidden' id='actionBtn' name='actionBtn' value='Discharge'>
+      <input type='hidden' id='confirm_title' name='confirm_title' value='Discharge Client | Simeon Academy'>
+      <input type='hidden' id='confirmPhrase' name='confirmPhrase' value='Discharge This Client?'>
+      <input type='hidden' id='parentForm' name='parentForm' value='c_form'>
+      <input type='hidden' id='newNoteSubject' name='newNoteSubject'value='' >
+      <input type='hidden' id='newNoteBody' name='newNoteBody'value=''>
+      <input type='hidden' id='newNoteFlag' name='newNoteFlag'value=''>
+      <input type='hidden' id='totalNotes' name='totalNotes'value='0'>
+      <input type='hidden' id='numberAdded' name='numberAdded'value='0'>
+      <input type='hidden' id='numberLoadedNotes' name='numberLoadedNotes'value='{{loadedNotes}}'>
+      <input type='hidden' id='selectedSubject' name='selectedSubject'value='0'>
+      <input type='hidden' id='selectedBody' name='selectedBody'value='0'>
+      <input type='hidden' id='selectedFlag' name='selectedFlag'value='0'>
+      <input type='hidden' id='delete_ids' name='delete_ids' value=''>
+
+      <input type='hidden' id='c1_tag' name='c1_tag'value='{{c1.clientID}}'>
+      <input type='hidden' id='c2_tag' name='c2_tag'value='{{c2.clientID}}'>
+
+      <input type='hidden' id='save_section' name='save_section' value='/coupleSession/'>
+      <input type='hidden' id='exit_type' name='exit_type' value='couple'>
+      <input type='hidden' id='session_id' name='session_id' value='{{session_id}}'>
+      <input type='hidden' id='couple_id' name='couple_id' value='{{couple_id}}'>
+
+      <div id="newNoteBuilder"></div>
 
     <div class='container'>
       <div class='row'>
@@ -21,117 +39,282 @@
           <div class='iml-body-wrapper2'>
 
             <div id='iml-info-head2'>
-              <div style='margin-left:3%;'>Student Evaluation</div>
+              <div style='margin-left:3%;'>CRAFFT Screening Interview</div>
             </div>
 
-            <!-- <div class='iml-form-nav'>
-              <div class='iml-form-btn-wrapper'>
-                <div class='container' style='width:100%'>
-                  <div class='row'>
-                    <div class='col-md-12'>
-                      <table class='img-single-btn-table'>
-                        <tr>
-                          <td>
-                            <a href="#">
-                              <div  class='{{class.asiAdmin}}'>Administrative</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_general/');">
-                              <div  class='{{class.asiGeneral}}'>General Info</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_medical/');">
-                              <div  class='{{class.asiMedical}}'>Medical Status</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_employment/');">
-                              <div  class='{{class.asiEmployment}}'>Employment</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_drug1/');">
-                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-
-                      <div style='margin-bottom: 6px;'></div>
-
-                      <table class='img-single-btn-table'>
-                        <tr>
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_legal/');">
-                              <div  class='{{class.asiLegal}}'>Legal Status</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_family/');">
-                              <div  class='{{class.asiFamily}}'>Family History</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_social1/');">
-                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_social2/');">
-                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
-                            </a>
-                          </td>
-
-                          <td>
-                            <a href="javascript: sideBarASI('/asi_psych/');">
-                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
-                            </a>
-                          </td>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <div class='iml-data-entry-wrapper'>
+            <div class='wow-data-entry-wrapper'>
               <div class='container'>
                 <div class='row'>
 
-                  <!-- LEFT SIDE -->
-                  <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
-                    
-                  </div>
+                 <!-- WRAPPER FIXER -->
+                  <div class='col-md-6' style='width:89.3%; height:66.7vh;'> 
+                        <div style='height:15px;'></div>
+                        <div class='crafftOpener'>
+                            <b>Begin:</b> "I'm going to ask you a few questions that I ask all my patients. Please be honest. I will keep your answers confidential."
+                        </div>  
+                        <div class='divider_gradient'></div>
 
-                  <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:10%; margin-left:0px;'>
-                    
+                        <div class='wowTrueLeft'>
+                          <div class='fixitupWrapper'>
+
+                            <div class='yeildPart1'>Part A</div>
+
+                            <div class='crafftTable1'>
+                              <table>
+                                <tr>
+                                  <th><div class='crafft-sm-th-lng'>During the <u>PAST 12 MONTHS</u>, did you:</div></th>
+                                  <th><div class='crafft-sm-th'>No</div></th>
+                                  <th><div class='crafft-sm-th'>Yes</div></th>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1'>
+                                      <b>1. </b>Drink any <u>alcohol</u> (more than a few sips)? <br>
+                                      <em>Do not count sips of alcohol taken during family or religious events.</em>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='padding-top:8px;'>
+                                      <b>2.</b> Smoke any <u>marijuana or hashish</u>?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='height:60px;'>
+                                      <b>3.</b> Use <u>anything else</u> to <u>get high</u>?<br>
+                                      <em>("anything else" includes illegal drugs, over the counter and<br>
+                                      prescription drugs, and things that you sniff or "huff")</em>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class='wowTrueRight'>
+                          <div class='fixitupWrapper'>
+
+                            <div class='yeildPart2'>Part B</div>
+
+                            <div class='crafftTable1'>
+                              <table>
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='font-size:11px;'>
+                                      <b>1. </b>Have you ever ridden in a <b><u>CAR</u></b> driven by someone <em>(including <br>
+                                      yourself) who was "high" or had been using alcohol or drugs?</em>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:25px'>
+                                      <div class='miniBoolCrafft'>No</div>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:25px'>
+                                      <div class='miniBoolCrafft'>Yes</div>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='font-size:11px;'>
+                                      <b>2. </b>Do you ever use alcohol or drugs to <b><u>RELAX</u></b>, feel better about<br>
+                                      yourself, or fit in?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='height:22px; font-size:11px;'>
+                                      <b>3. </b>Do you ever use alcohol or drugs while you are by yourself, or <b><u>ALONE</u></b>?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='height:22px; font-size:11px'>
+                                      <b>4. </b>Do you ever <b><u>FORGET</u></b> things you did while using alcohol or drugs?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='font-size:11px;'>
+                                      <b>5. </b>Do your <b><u>FAMILY</u></b> or <b><u>FRIENDS</u></b> ever tell you that you should cut down<br> on your drinking or drug use?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <div class='crafftSubTitle1' style='height:22px; font-size:11px;'>
+                                      <b>6. </b>Have you ever gotten into <b><u>TROUBLE</u></b> while you were using?
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class='crafft_box_wrapper' style='width:20px'>
+                                      <div class='crafft_center_box'>
+                                        <input type='checkbox' name='' id='' value=''>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
                   </div>
 
                 </div>
               </div>
             </div>
-    </form>        
+    </form>  
 
-            <div class='row'>
-              <div class='col-md-12' style='width:100%'>
-                <table class='iml-save-btn'>
-                  <tr>
-                    <td><button onClick="javascript:">Exit Form</button></td>
-                    <td><button onClick="javascript:">Exit Form</button></td>
-                  </tr>
-                </table>
-              </div>
-            </div>
+            <div class='iml-dbl-btnWrap'>
+                <button onClick="javascript: wowDischargeFinal(); return false;">Discharge</button></span>
+                <button onClick="javascript: wowDischargeToOptions(); return false;" style='margin-left:2px;'>Cancel</button>
+            </div>  
 
           </div>
         </div>
@@ -141,3 +324,5 @@
 </body>
 
 {% endblock %}
+
+
