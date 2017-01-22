@@ -9013,11 +9013,20 @@ button:hover {
 }
 
 .confNotice {
-	width:70%;
+	width:50%;
 	margin:auto;
 	text-align: justify;
 	font-size: 12px;
 	padding-bottom:15px;
+}
+
+.singleCrafftForm {
+	width:50%;
+	height:50%;
+	margin:auto;
+	border:1px solid black;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px #888888;
 }
 
 .crafftOpener {

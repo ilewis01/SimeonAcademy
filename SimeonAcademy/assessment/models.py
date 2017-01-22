@@ -1520,6 +1520,7 @@ class Crafft(models.Model):
 	b4 = models.BooleanField(default=False, blank=True)
 	b5 = models.BooleanField(default=False, blank=True)
 	b6 = models.BooleanField(default=False, blank=True)
+	score = models.IntegerField(default=0)
 	isOpen = models.BooleanField(default=False, blank=True)
 	isComplete = models.BooleanField(default=False, blank=True)
 

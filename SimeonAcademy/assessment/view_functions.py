@@ -23,7 +23,8 @@ SapDemographics, SapPsychoactive, MHDemographic, MHBackground, MHEducation, \
 MHStressor, MHLegalHistory, ClientSession, Invoice, SType, AM_AngerHistory3, \
 TrackApp, AIS_Admin, AIS_General, AIS_Medical, AIS_Employment, AIS_Drug1, \
 AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
-SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment, TreatmentResource
+SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment, TreatmentResource, \
+Crafft
 
 def isCompleteWeek(day):
 	complete = False
@@ -911,6 +912,14 @@ def fetchRawIdNumberResources():
 	for r in r_list:
 		the_ids.append(str(r.id))
 	return the_ids
+
+##################################################################################################################################
+#--------------------------------------------------------------------------------------------------------------------------------#
+#**************************************************** CRAFFT CRAFFT CRAFFT ******************************************************#
+#--------------------------------------------------------------------------------------------------------------------------------#
+##################################################################################################################################
+
+
 
 
 ##################################################################################################################################
