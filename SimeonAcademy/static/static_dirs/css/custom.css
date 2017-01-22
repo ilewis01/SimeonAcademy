@@ -5356,6 +5356,7 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+
 .iml-data-entry-wrapper-sap {
 	width: 92%;
 	height: 63vh;
@@ -9020,13 +9021,63 @@ button:hover {
 	padding-bottom:15px;
 }
 
+.wow-data-entry-wrapperCrafft {
+	width: 92%;
+	height: 65vh;
+	margin: auto;
+	margin-top: 1.5%;
+	border: 1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
 .singleCrafftForm {
 	width:50%;
 	height:50%;
 	margin:auto;
 	border:1px solid black;
 	border-radius: 8px;
+	box-shadow: 5px 5px 5px #888888;
+	background-color: #ececec;
+}
+
+.crafftBtnHolder {
+	width: 630px;
+	height:45px;
+	margin:auto;
+}
+
+.crafftBtnHolder table {
+	width:100%;
+}
+
+.crafftBtnHolder a {
+	width:200px;
+	height:32px;
+}
+
+.crafftBtnHolder a:hover {
+	text-decoration: none;
+}
+
+.crafftButton {
+	width:200px;
+	height:32px;
+	text-align: center;
+	border: 2px solid gray;
+	border-radius: 8px;
 	box-shadow: 3px 3px 3px #888888;
+	padding-top: 4px;
+	background-color: #bed4cf;
+	background: url('../images/iml_bkgnd.png');
+	background-size: cover;
+}
+
+.crafftButton:hover {
+	background: url('../images/superRed.png');
+	background-size: cover;
+	color:#e3e4a3;
+	text-shadow:1px 1px gray;
 }
 
 .crafftOpener {
