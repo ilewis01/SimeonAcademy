@@ -9005,6 +9005,21 @@ button:hover {
 	transform: translateY(-50%);*/
 }
 
+.confHead {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-top:25px;
+}
+
+.confNotice {
+	width:70%;
+	margin:auto;
+	text-align: justify;
+	font-size: 12px;
+	padding-bottom:15px;
+}
+
 .crafftOpener {
 	font-style: italic;
 	font-size: 15px;
@@ -9020,6 +9035,7 @@ button:hover {
 	background: url('../images/superBrown.png');
 	background-size: cover;
 	color:#495c58;
+	box-shadow: 4px 4px 4px #888888;
 }
 
 .miniBoolCrafft {

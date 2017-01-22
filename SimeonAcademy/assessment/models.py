@@ -1508,6 +1508,24 @@ class ASI(models.Model):
 ################################################################################################################################
 ################################################################################################################################
 
+class Crafft(models.Model):
+	client = models.ForeignKey(Client, default=None, blank=True, null=True)
+	date_of_assessment = models.DateField(blank=True, default=None, null=True)
+	a1 = models.BooleanField(default=False, blank=True)
+	a2 = models.BooleanField(default=False, blank=True)
+	a3 = models.BooleanField(default=False, blank=True)
+	b1 = models.BooleanField(default=False, blank=True)
+	b2 = models.BooleanField(default=False, blank=True)
+	b3 = models.BooleanField(default=False, blank=True)
+	b4 = models.BooleanField(default=False, blank=True)
+	b5 = models.BooleanField(default=False, blank=True)
+	b6 = models.BooleanField(default=False, blank=True)
+	isOpen = models.BooleanField(default=False, blank=True)
+	isComplete = models.BooleanField(default=False, blank=True)
+
+	def __unicode__(self):
+		return self.client
+
 
 
 ## SESSION TYPE----------------------------------------------------------------------------------------
