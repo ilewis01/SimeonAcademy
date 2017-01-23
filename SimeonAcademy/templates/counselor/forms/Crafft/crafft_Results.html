@@ -114,60 +114,25 @@
                         <div class='wowTrueRight'>
                           <div class='discharge_content_wrapper_true'>
                             <div class='discharge_form_wrap'>
-                              <div>
+                              <div class='letsDischargeHead' style='text-align:center;'>Client Responses:</div>
+                              <div class='divider_gradient' style='margin-top:15px; margin-bottom:15px;'></div>
+                                  <div class='crafft_response_wrapper'>
+                                      <ul>
+                                        {% for r in responses %}
+                                        <li>
+                                          <div>
+                                            <em>{{r.ques}}</em> <span>{{r.bool}}</span>
+                                          </div>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                  </div>
 
-                                <div class='letsDischargeHead'>Discharge Summary</div>
+                                  <div class='divider_gradient' style='margin-top:10px; margin-bottom:25px;'></div>
 
-                                <div class='disLabStank'>Describe patient's demeanor during treatment:</div>
-                                <div class='stankArea'><textarea name='clientAttitude' id='clientAttitude' oninput="Javascript: clearNC('clientAttitude');"></textarea></div>
-
-                                <div style='height:10px;'></div>
-                                
-                                <div class='stankArea'>
-                                    <span class='disLabStank'>Diagnosis:</span>
-                                    <select name='diagnosis' id='diagnosis' onChange="Javascript: unlock_hidden_select_uni(diagnosis, dia_other, diagnosis2, diagnosis_lab); clearNCS('diagnosis');">
-                                        <option value='Select'>Select</option>
-                                        <option value='Diagnosis 1'>Diagnosis 1</option>
-                                        <option value='Diagnosis 2'>Diagnosis 2</option>
-                                        <option value='Diagnosis 3'>Diagnosis 3</option>
-                                        <option value='Diagnosis 4'>Diagnosis 4</option>
-                                        <option value='Diagnosis 5'>Diagnosis 5</option>
-                                        <option value='Diagnosis 6'>Diagnosis 6</option>
-                                        <option value='' id='dia_other'>Other</option>
-                                    </select>
-                                </div>
-
-                                <div style='height:5px;'></div>
-
-                                <div class='stankArea'><span id='diagnosis_lab'>Describe: </span><input type='text' name='diagnosis2' id='diagnosis2' oninput="javascript: loadOtherOptionValue(dia_other, diagnosis2); clearNC('diagnosis2');"></div>
-
-                                <div style='height:10px;'></div>
-
-                                <div class='stankArea'>
-                                    <span class='disLabStank'>Reason for Discharge:</span>
-                                    <select name='reasonTerminated' id='reasonTerminated' onChange="Javascript: unlock_hidden_select_uni(reasonTerminated, rt_other, rt_alt, rt_lab); clearNCS('reasonTerminated');">
-                                        <option value='Select'>Select</option>
-                                        <option value='Client withdrew from program'>Client Withdrew From Program</option>
-                                        <option value='Client arrested/New charge'>Client Arrested/New Charge</option>
-                                        <option value='Administrative discharge'>Administrative Discharge</option>
-                                        <option value='' id='rt_other'>Other</option>
-                                    </select>
-                                </div>
-
-                                <div style='height:5px;'></div>
-
-                                <div class='stankArea'><span id='rt_lab'>Describe: </span><input type='text' name='rt_alt' id='rt_alt' oninput="javascript: loadOtherOptionValue(rt_other, rt_alt); clearNC('rt_alt');"></div>
-
-                                <div style='height:10px;'></div>
-
-                                <div class='disLabStank'>What are the recommendations for the client?</div>
-                                <div class='stankArea'><textarea name='recommendations' id='recommendations' oninput="Javascript: clearNC('recommendations');"></textarea></div>
-
-                                <div style='height:10px;'></div>
-
-                                <div class='disLabStank'>Please provide any additional details:</div>
-                                <div class='stankArea'><textarea name='reasonRefered' id='reasonRefered'></textarea></div>
-
+                                  <div class='crafft_probabilities'> 
+                                    The Probability of Substance Abuse/Dependence Diagnosis Based on CRAFFT Score is:<br><span>{{ranking}}</span>
+                                  </div>
                               </div>
                             </div>
                           </div>

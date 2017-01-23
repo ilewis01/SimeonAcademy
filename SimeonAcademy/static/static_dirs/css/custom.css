@@ -9399,14 +9399,14 @@ button:hover {
 }
 
 .crafft_POSITIVE {
-	color:red;
+	color:green;
 	font-weight: bold;
 	font-style: italic;
 	text-decoration: underline;
 }
 
 .crafft_NEGATIVE {
-	color:green;
+	color:red;
 	font-weight: bold;
 	font-style: italic;
 	text-decoration: underline;
@@ -9424,6 +9424,33 @@ button:hover {
 	height:100%;
 	margin-top:15px;
 	/*border: 1px solid black;*/
+}
+
+.crafft_response_wrapper {
+	width:90%;
+	text-align: justify;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.crafft_response_wrapper span {
+	font-weight: bold;
+}
+
+.crafft_probabilities {
+	width:85%;
+	margin:auto;
+	text-align: justify;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	color:#993333;
+}
+
+.crafft_probabilities span {
+	font-size: 20px;
+	color:green;
+	text-shadow:1px 1px gray;
 }
 
 .crafft_superImgContainer img {
@@ -9467,6 +9494,7 @@ button:hover {
 }
 
 .crafft_phrase {
+	font-size: 18px;
 	text-align: center;
 	color:#883a47;
 }

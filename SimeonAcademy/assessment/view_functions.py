@@ -983,23 +983,23 @@ def superCrafftSaver(crafft):
 def crafft_fetchResults(crafft):
 	data = {}
 	score = getCrafftScore(crafft)
-	percentage = 'less than 30%'
+	percentage = 'Less Than 30%'
 	image = ''
 
 	if score == 1:
-		percentage = 'greater than 30%'
+		percentage = 'Greater Than 30%'
 		image = '/static/images/score1.png'
 	elif score == 2:
-		percentage = 'greater than 50%'
+		percentage = 'Greater Than 50%'
 		image = '/static/images/score2.png'
 	elif score == 3:
-		percentage = 'greater than 60%'
+		percentage = 'Greater Than 60%'
 		image = '/static/images/score3.png'
 	elif score == 4:
-		percentage = 'greater than 80%'
+		percentage = 'Greater Than 80%'
 		image = '/static/images/score4.png'
 	elif score == 5:
-		percentage = 'greater than 90%'
+		percentage = 'Greater Than 90%'
 		image = '/static/images/score5.png'
 	elif score == 6:
 		percentage = '100%'
@@ -1010,6 +1010,73 @@ def crafft_fetchResults(crafft):
 	data['image'] 	= image
 
 	return data
+
+def switchBoolToEnglish(val):
+	ans = "No"
+	if val == True:
+		ans = "Yes"
+	return ans
+
+def responseDicts(r_list):
+	data = []
+	d1 = {}
+	d2 = {}
+	d3 = {}
+	d4 = {}
+	d5 = {}
+	d6 = {}
+	d7 = {}
+	d8 = {}
+	d9 = {}
+	d1['ques'] = 'Used alcohol in th past 12 months:'
+	d2['ques'] = 'Smoked marijuana or hashish in the past 12 months:'
+	d3['ques'] = 'Used and other substances to get high in the past 12 months:'
+	d4['ques'] = 'Driven or ridden in a car operated by a driver under the influence:'
+	d5['ques'] = 'Used alcohol or drugs to relax:'
+	d6['ques'] = 'Used drugs or alcohol while alone:'
+	d7['ques'] = 'Forgotten things done while using drugs or alcohol:'
+	d8['ques'] = 'Warned by family or friends to cut down:'
+	d9['ques'] = 'Gotten in to trouble while using drugs or alcohol:'
+	d1['bool'] = r_list[0]
+	d2['bool'] = r_list[1]
+	d3['bool'] = r_list[2]
+	d4['bool'] = r_list[3]
+	d5['bool'] = r_list[4]
+	d6['bool'] = r_list[5]
+	d7['bool'] = r_list[6]
+	d8['bool'] = r_list[7]
+	d9['bool'] = r_list[8]
+	data.append(d1)
+	data.append(d2)
+	data.append(d3)
+	data.append(d4)
+	data.append(d5)
+	data.append(d6)
+	data.append(d7)
+	data.append(d8)
+	data.append(d9)
+	return data
+
+def crafft_fetchResponses(crafft):
+	data = []
+	awns = []
+
+	awns.append(crafft.a1)
+	awns.append(crafft.a2)
+	awns.append(crafft.a3)
+	awns.append(crafft.b1)
+	awns.append(crafft.b2)
+	awns.append(crafft.b3)
+	awns.append(crafft.b4)
+	awns.append(crafft.b5)
+	awns.append(crafft.b6)
+
+	for a in awns:
+		data.append(switchBoolToEnglish(a))
+
+	responses = responseDicts(data)
+
+	return responses
 
 
 ##################################################################################################################################

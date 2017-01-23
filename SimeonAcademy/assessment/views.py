@@ -54,7 +54,8 @@ superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter,
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
-fetchRawIdNumberResources, saveDischarge, crafft_fetchResults, superCrafftSaver
+fetchRawIdNumberResources, saveDischarge, crafft_fetchResults, superCrafftSaver, \
+crafft_fetchResponses
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -4998,9 +4999,10 @@ def crafft_Results(request):
 			crafft.b4 = truePythonBool(request.POST.get('b4'))
 			crafft.b5 = truePythonBool(request.POST.get('b5'))
 			crafft.b6 = truePythonBool(request.POST.get('b6'))
-			superCrafftSaver(crafft)
+			crafft 	  = superCrafftSaver(crafft)
 
 			score = crafft_fetchResults(crafft)
+			responses = crafft_fetchResponses(crafft)
 			content['crafft_result'] = 'NEGATIVE'
 			content['phrase'] = "No additional assessment is required"
 
@@ -5008,7 +5010,7 @@ def crafft_Results(request):
 				content['crafft_result'] = 'POSITIVE'
 				content['phrase'] = "Additional assessment is suggested"
 
-			
+			content['responses'] 	= responses
 			content['score'] 		= score['score']
 			content['ranking'] 		= score['ranking']
 			content['image'] 		= score['image']
