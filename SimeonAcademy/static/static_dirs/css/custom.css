@@ -9499,6 +9499,53 @@ button:hover {
 	color:#883a47;
 }
 
+.center_file_uploader75 {
+	width:91%;
+	margin: auto;
+	margin-top:5px;
+}
+
+.uploader_baseless_btn_wrap {
+	width:90%;
+	margin:auto;
+	height:32px;
+	border:1px solid gray;
+	border-radius: 4px;
+	background: url('../images/superGreen.png');
+	background-size: cover;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.uploader_baseless_btn_inner {
+	width:95%;
+	height:25px;
+	margin:auto;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.uploader_baseless_btn_inner button {
+	height:100%;
+	width:49%;
+	border-radius: 4px;
+}
+
+.docLoad_input_div1 {
+	width:90%;
+	height: 25px;
+	margin:auto;
+}
+
+.docLoad_input_div1 input {
+	width:100%;
+	height:100%;
+	border: 1px solid gray;
+	border-radius: 6px;
+	padding-left: 3%;
+	padding-right: 3%;
+}
+
 .crafftButton {
 	width:200px;
 	height:32px;
