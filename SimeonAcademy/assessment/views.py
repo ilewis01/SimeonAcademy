@@ -54,7 +54,7 @@ superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter,
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
-fetchRawIdNumberResources, saveDischarge, crafft_fetchResults
+fetchRawIdNumberResources, saveDischarge, crafft_fetchResults, superCrafftSaver
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -4990,15 +4990,15 @@ def crafft_Results(request):
 			crafft 	= Crafft(date_of_assessment=date, client=client, positiveScreen=False)
 
 			crafft.a1 = truePythonBool(request.POST.get('a1'))
-			crafft.a2 = truePythonBool(request.POST.get('a1'))
-			crafft.a3 = truePythonBool(request.POST.get('a1'))
+			crafft.a2 = truePythonBool(request.POST.get('a2'))
+			crafft.a3 = truePythonBool(request.POST.get('a3'))
 			crafft.b1 = truePythonBool(request.POST.get('b1'))
 			crafft.b2 = truePythonBool(request.POST.get('b2'))
 			crafft.b3 = truePythonBool(request.POST.get('b3'))
 			crafft.b4 = truePythonBool(request.POST.get('b4'))
 			crafft.b5 = truePythonBool(request.POST.get('b5'))
 			crafft.b6 = truePythonBool(request.POST.get('b6'))
-			# crafft.save()
+			superCrafftSaver(crafft)
 
 			score = crafft_fetchResults(crafft)
 			content['crafft_result'] = 'NEGATIVE'
@@ -5207,6 +5207,8 @@ def generalDeleteElement(request):
 
 			if form_type == 'treatmentResource':
 				form = TreatmentResource.objects.get(id=form_id)
+			elif form_type == 'crafft':
+				form = Crafft.objects.get(id=form_id)
 
 			form.delete()
 

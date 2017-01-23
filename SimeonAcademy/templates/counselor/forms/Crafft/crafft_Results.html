@@ -7,10 +7,11 @@
     <!-- <input type='text' id='superTest' style='width:600px;'> -->
     <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
         <input type='hidden' id='client_id' name='client_id'value='{{crafft.client.id}}' >
-        <input type='hidden' name='a1' id='a1' value='{{a1}}'>
-        <input type='hidden' name='a2' id='a2' value='{{a2}}'>
-        <input type='hidden' name='a3' id='a3' value='{{a3}}'>
-        <input type='hidden' name='b1' id='b1' value='{{b1}}'>
+        <input type='hidden' name='crafft_id' id='crafft_id' value='{{crafft.id}}'>
+        <input type='hidden' name='form_id' id='form_id' value='{{crafft.id}}'> 
+        <input type='hidden' name='form_type' id='form_type' value='crafft'> 
+        <input type='hidden' name='form_type' id='form_type' value='CRAFFT'> 
+        <input type='hidden' name='parentForm' id='parentForm' value='c_form'>
 
         <div class='container'>
           <div class='row'>
@@ -25,9 +26,9 @@
                     <table>
                         <tr>
                             <td>
-                                <a href="javascript: crafft_submitB(c_form);">
+                                <a href="javascript: generalDeleteOpener();">
                                     <div class='crafftButton'>
-                                        Submit
+                                        Delete Screening
                                     </div>
                                 </a>
                             </td>
@@ -43,7 +44,7 @@
                             <td>
                                 <a href="javascript: crafft_return_to_options(c_form);">
                                     <div class='crafftButton'>
-                                        Cancel
+                                        Exit
                                     </div>
                                 </a>
                             </td>

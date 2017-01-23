@@ -8077,6 +8077,17 @@ function submitNewTreatmentResource() {
 }
 
 function buildNewResourceList() {
+	var form_type = String(getPopParent('form_type').value);
+	var parentName = String(getPopParent('parentForm').value);
+	var form = getPopParent(parentName); 
+
+	if (form_type === 'crafft') {
+		form.action = '/clientOptions/';
+		form.submit();
+		window.close();
+		return;
+	}
+
 	getPopParent('t_form').submit();
 	window.close();
 }

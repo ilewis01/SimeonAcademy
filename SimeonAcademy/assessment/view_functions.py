@@ -940,6 +940,46 @@ def getCrafftScore(crafft):
 
 	return score
 
+def crafftEqual(c1, c2):
+	num1 = False
+	num2 = False
+	num3 = False
+	isEqual = False
+
+	if clientSuperMatch(c1.client, c2.client) == True:
+		num1 = True
+
+	if c1.a1==c2.a1 and c1.a2==c2.a2 and c1.a3==c2.a3 and c1.b1==c2.b1:
+		num2 = True
+
+	if c1.b2==c2.b2 and c1.b3==c2.b3 and c1.b4==c2.b4 and c1.b5==c2.b5 and c1.b6==c2.b6:
+		num3 = True
+
+	if num1==True and num2==True and num3==True:
+		isEqual = True
+
+
+	return isEqual
+
+def superCrafftSaver(crafft):
+	c_list = Crafft.objects.all()
+	newCrafft = None
+	foundExisting = False
+
+	for c in c_list:
+		if crafftEqual(c, crafft) == True:
+			newCrafft = c
+			foundExisting = True
+			break
+
+	if foundExisting == False:
+		crafft.save()
+		newCrafft = crafft
+
+	return newCrafft
+		
+
+
 def crafft_fetchResults(crafft):
 	data = {}
 	score = getCrafftScore(crafft)
