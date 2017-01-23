@@ -1520,12 +1520,12 @@ class Crafft(models.Model):
 	b4 = models.BooleanField(default=False, blank=True)
 	b5 = models.BooleanField(default=False, blank=True)
 	b6 = models.BooleanField(default=False, blank=True)
-	score = models.IntegerField(default=0)
-	isOpen = models.BooleanField(default=False, blank=True)
-	isComplete = models.BooleanField(default=False, blank=True)
+
+	positiveScreen 	= models.BooleanField(default=False, blank=True)
+	score 			= models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return self.client
+		return str(self.client.fname) + ' ' + str(self.client.lname)
 
 
 

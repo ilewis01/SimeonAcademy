@@ -1,0 +1,212 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad='javascript: initialize_dischargeForm();'>
+    <!-- <input type='text' id='superTest' style='width:600px;'> -->
+    <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
+        <input type='hidden' id='client_id' name='client_id'value='{{client_id}}' >
+        <input type='hidden' name='a1' id='a1' value='{{a1}}'>
+        <input type='hidden' name='a2' id='a2' value='{{a2}}'>
+        <input type='hidden' name='a3' id='a3' value='{{a3}}'>
+        <input type='hidden' name='b1' id='b1' value='{{b1}}'>
+
+        <div class='container'>
+          <div class='row'>
+            <div class="col-md-12" style='width:100%; height:84vh;'>
+              <div class='iml-body-wrapper2'>
+
+                <div id='crafft-info-head'>
+                  <div style='margin-left:3%;'>CRAFFT Screening Interview: PART B</div>
+                </div>
+
+                <div class='crafftBtnHolder'>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript: crafft_submitB(c_form);">
+                                    <div class='crafftButton'>
+                                        Submit
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_view_instruction();">
+                                    <div class='crafftButton'>
+                                        View Scoring Criteria
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_return_to_options(c_form);">
+                                    <div class='crafftButton'>
+                                        Cancel
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class='divider_gradient' style='margin-top:5px;'></div>
+                </div>
+
+                <div class='wow-data-entry-wrapperCrafft'>
+                  <div class='container'>
+                    <div class='row'>
+
+                     <!-- WRAPPER FIXER -->
+                      <div class='col-md-6' style='width:89.3%; height:64.6vh;'>
+                          <div style='height:20px;'></div>
+
+                          <div class='divider_gradient' style='margin-bottom:15px;'></div>
+
+                          <div class='borderlessCafftTh'>
+                              <div class='thYesNoDiv'><div class='crafftYNwrapper'>Yes</div></div>
+                              <div class='thYesNoDiv'><div class='crafftYNwrapper'>No</div></div>
+                          </div>
+
+                          <div class='singleCrafftForm'>
+                              <div class='crafftTopB'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>1.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftDoubleInputLine20'>
+                                          Do you ever use alcohol or drugs to <span><em>RELAX</em></span>, feel better about yourself, <br>
+                                          or fit in?
+                                      </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b2' id='b2False' value='False' checked>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b2' id='b2True' value='True'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='craftInnerDiv20'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>2.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftSingleInputLine20'>
+                                          Do you ever use alcohol or drugs while you are by yourself, or <span><em>ALONE</em></span>?
+                                      </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b3' id='b3False' value='False' checked>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b3' id='b3True' value='True'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='craftInnerDiv20'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>3.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftSingleInputLine20'>
+                                          Do you ever <span><em>FORGET</em></span> things you did while using alcohol or drugs?
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b4' id='b4False' value='False' checked>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b4' id='b4True' value='True'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='craftInnerDiv20'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>4.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftDoubleInputLine'>
+                                          Do your <span><em>FAMILY</em></span> or <span><em>FRIENDS</em></span> ever tell you that you should cut down on<br>your drinking or drug use?
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b5' id='b5False' value='False' checked>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b5' id='b5True' value='True'>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class='crafftBottomDiv' id='b1Dynamic'>
+                                  <div class='crafftMainFormNumber'><div class='crafftInNum'>5.</div></div>
+                                  <div class='craftMainFormLeft'>
+                                      <div class='crafftSingleInputLine20'>
+                                          Have you ever gotten into <span><em>TROUBLE</em></span> while you were using alcohol or drugs?
+                                      </div>
+                                  </div>
+                                  
+                                  <div class='craftMainFormRadioDk'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b6' id='b6False' value='False' checked>
+                                    </div>
+                                  </div>
+
+                                  <div class='craftMainFormRadio'>
+                                    <div class='crafftCenterRadioInput'>
+                                        <input type='radio' name='b6' id='b6True' value='True'>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div style='width:50%; margin:auto;'><div class='divider_gradient' style='margin-bottom:15px;'></div></div>
+
+                          <div class='confHead'>Confidentiality Notice</div>
+                              <div class='confNotice'>
+                                The information recorded on this page may be protected by special confidentiality rules (42 CFR Part 2), which prohibit disclosure of this information unless authorized by specific written concent. A general authorization for release of medical information is <b><em>NOT</em></b> sufficient for this purpose.
+                              </div>                    
+                          </div>
+
+                    </div>
+                  </div>
+                </div>
+        </form>  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+{% endblock %}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3442,18 +3442,46 @@ function new_preScreen() {
 
 function crafft_goToBSection() {
 	var goToB = true;
-	var a1 = grab('a1').checked;
-	var a2 = grab('a2').checked;
-	var a3 = grab('a3').checked;
+	var a1F = grab('a1False').checked;
+	var a2F = grab('a2False').checked;
+	var a3F = grab('a3False').checked;
 
-	if (a1 === false && a2 === false && a3 === false) {
+	if (a1F === true && a2F === true && a3F === true) {
 		goToB = false;
 		grab('fetchB').value = false;
 	}
 	else {
 		grab('fetchB').value = true;
 	}
+
 	return goToB;
+}
+
+function crafft_submitA() {
+	var goToB = String(grab('fetchB').value);
+	var form = grab('c_form');
+
+	if (goToB === 'true') {
+		form.action = '/crafft_b/';
+	}
+	else {
+		form.action = '/crafft_Results/';
+	}
+	form.submit();
+}
+
+function crafft_submitB(form) {
+	form.action = '/crafft_Results/';
+	form.submit();
+}
+
+function crafft_view_instruction() {
+	openPopUp('auto', '/crafft_viewScoreInstruction/', 600, 600);
+}
+
+function crafft_return_to_options(form) {
+	form.action = '/clientOptions/';
+	form.submit();
 }
 
 function baselessNoteErrorSuperDuper() {

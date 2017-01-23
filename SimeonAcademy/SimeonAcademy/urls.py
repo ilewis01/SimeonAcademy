@@ -182,6 +182,9 @@ urlpatterns = patterns('',
 
     ## Student Evaluation
     url(r'^startStudentEval/$', 'assessment.views.startStudentEval'),
+    url(r'^crafft_Results/$', 'assessment.views.crafft_Results'),
+    url(r'^crafft_b/$', 'assessment.views.crafft_b'),
+    url(r'^crafft_viewScoreInstruction/$', 'assessment.views.crafft_viewScoreInstruction'),
 
     ##Addiction Severity Views
     url(r'^asi_preliminary/$', 'assessment.views.asi_preliminary'),

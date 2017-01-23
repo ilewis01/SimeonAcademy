@@ -8695,6 +8695,13 @@ button:hover {
 	position: relative;
 }
 
+.top-ent-wrap2 {
+	width:100%;
+	margin:auto;
+	height:40%;
+	position: relative;
+}
+
 .discharge-contact-container {
 	width:55%;
 	height:100%;
@@ -9039,7 +9046,6 @@ button:hover {
 	border-top-right-radius: 8px;
 	border-bottom: 1px solid black;
 	color:#e4ddca;
-	/*color: #e3dcc8;*/
 	background: url('/static/images/super_head_red.png');
 	background-size: 100%;
 	margin-bottom: 1%;
@@ -9055,6 +9061,67 @@ button:hover {
 	margin:auto;
 	border-radius: 8px;
 	box-shadow: 5px 5px 5px #888888;
+}
+
+.borderlessCafftTh {
+	width:60%;
+	margin:auto;
+	height:35px;
+	position: relative;
+	background: url('../images/superRed.png');
+	background-size: cover;
+	border:1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.borderlessCafftThDk {
+	width:60%;
+	margin:auto;
+	height:35px;
+	position: relative;
+	background: url('../images/superRed.png');
+	background-size: cover;
+	border:1px solid black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.thYesNoDiv {
+	width:8%;
+	float:right;
+	height:100%;
+	text-align: center;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 16px;
+	color:#e3e4a3;
+	text-shadow:1px 1px black;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.thYesNoDivDk {
+	width:8%;
+	float:right;
+	height:100%;
+	text-align: center;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 16px;
+	color:#e3e4a3;
+	text-shadow:1px 1px black;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	background-color: #dab7be;
+  	border-left:1px solid gray;
+  	border-right:1px solid gray;
+}
+
+.crafftYNwrapper {
+	padding-top:5px;
 }
 
 
@@ -9078,12 +9145,35 @@ button:hover {
 	background-size: cover;
 }
 
+.crafftTopB {
+	width:100%;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid gray;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	height: 20%;
+	position: relative;
+	background-color: #ececec;
+}
+
 .craftInnerDiv {
 	width:100%;
 	border-left:1px solid black;
 	border-right:1px solid black;
 	border-bottom: 1px solid gray;
 	height:19%;
+	position: relative;
+	background-color: #ececec;
+}
+
+.craftInnerDiv20 {
+	width:100%;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom: 1px solid gray;
+	height:20%;
 	position: relative;
 	background-color: #ececec;
 }
@@ -9131,11 +9221,31 @@ button:hover {
 	font-size: 12px;
 }
 
+.crafftSingleInputLine20 {
+	width:95%;
+	margin:auto;
+	height:38%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+}
+
 .crafftDoubleInputLine {
-	/*background-color: yellow;*/
 	width:95%;
 	margin:auto;
 	height:80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+	line-height: 20px;
+}
+
+.crafftDoubleInputLine20 {
+	width:95%;
+	margin:auto;
+	height:65%;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
@@ -9198,6 +9308,12 @@ button:hover {
 	border-left:1px solid gray;
 }
 
+.craftMainFormRadioNone {
+	float:left;
+	height:100%;
+	width:8%;
+}
+
 .craftMainFormRadioDk {
 	float:left;
 	height:100%;
@@ -9225,6 +9341,19 @@ button:hover {
 	position: relative;
   	top: 50%;
   	transform: translateY(-50%);
+}
+
+.crafftCenter2 {
+	width:63%;
+	margin: auto;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	font-style: italic;
+	/*height:25px;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);*/
 }
 
 .crafftCenterRadioInput {
@@ -9262,10 +9391,53 @@ button:hover {
 .crafftBtnHolder a {
 	width:200px;
 	height:32px;
+	/*color:black;*/
 }
 
 .crafftBtnHolder a:hover {
 	text-decoration: none;
+}
+
+.crafft_POSITIVE {
+	color:red;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.crafft_NEGATIVE {
+	color:green;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.crafft_score_disply {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 15px;
+	color:#697f7b;
+	text-shadow:1px 1px gray;
+}
+
+.crafft_score_disply span {
+	color:orange;
+	font-size: 26px;
+}
+
+.crafft_positiveNegative {
+	text-align: center;
+	font-size: 15px;
+	color:#697f7b;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.crafft_phrase {
+	text-align: center;
+	color:#883a47;
 }
 
 .crafftButton {

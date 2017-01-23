@@ -919,7 +919,57 @@ def fetchRawIdNumberResources():
 #--------------------------------------------------------------------------------------------------------------------------------#
 ##################################################################################################################################
 
+def getCrafftScore(crafft):
+	score = 0;
+	answers = []
 
+	answers.append(crafft.b1)
+	answers.append(crafft.b2)
+	answers.append(crafft.b3)
+	answers.append(crafft.b4)
+	answers.append(crafft.b5)
+	answers.append(crafft.b6)
+
+	for a in answers:
+		if a == True:
+			score += 1
+
+	if score > 1:
+		crafft.positiveScreen = True;
+		crafft.save()
+
+	return score
+
+def crafft_fetchResults(crafft):
+	data = {}
+	score = getCrafftScore(crafft)
+	percentage = 'less than 30%'
+	image = ''
+
+	if score == 1:
+		percentage = 'greater than 30%'
+		image = '/static/images/score1.png'
+	elif score == 2:
+		percentage = 'greater than 50%'
+		image = '/static/images/score2.png'
+	elif score == 3:
+		percentage = 'greater than 60%'
+		image = '/static/images/score3.png'
+	elif score == 4:
+		percentage = 'greater than 80%'
+		image = '/static/images/score4.png'
+	elif score == 5:
+		percentage = 'greater than 90%'
+		image = '/static/images/score5.png'
+	elif score == 6:
+		percentage = '100%'
+		image = '/static/images/score6.png'
+
+	data['score'] 	= score
+	data['ranking'] = percentage
+	data['image'] 	= image
+
+	return data
 
 
 ##################################################################################################################################

@@ -54,7 +54,7 @@ superCoupleStarter, wowPhoneNumberDisplayConverter, wowSSNumberDisplayConverter,
 wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClientUpdates, \
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
-fetchRawIdNumberResources, saveDischarge
+fetchRawIdNumberResources, saveDischarge, crafft_fetchResults
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
@@ -4929,7 +4929,6 @@ def startStudentEval(request):
 		quickTrack('Search', track)
 		content['tracking'] = track.state.state
 		content['user'] = user
-		content['user'] = user
 
 		if user.account.is_counselor == False:
 			content['title'] = 'Restricted Access'
@@ -4937,7 +4936,108 @@ def startStudentEval(request):
 
 		else:
 			content['client_id'] = superDuperFetchClientID_track(track)
-			return render_to_response('counselor/forms/StudentEvaluation/startStudentEval.html', content, context_instance=RequestContext(request))
+			content['title'] = 'CRAFFT Screening | Simeon Academy'
+			return render_to_response('counselor/forms/Crafft/crafft_a.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def crafft_b(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['a1'] 		 = request.POST.get('a1')
+			content['a2'] 		 = request.POST.get('a2')
+			content['a3'] 		 = request.POST.get('a3')
+			content['b1'] 		 = request.POST.get('b1')
+			content['client_id'] = request.POST.get('client_id')
+			content['title'] 	 = 'CRAFFT Screening | Simeon Academy'
+			return render_to_response('counselor/forms/Crafft/crafft_b.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def crafft_Results(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			date 	= datetime.now().date()
+			client 	= Client.objects.get(id=(request.POST.get('client_id')))
+			crafft 	= Crafft(date_of_assessment=date, client=client, positiveScreen=False)
+
+			crafft.a1 = truePythonBool(request.POST.get('a1'))
+			crafft.a2 = truePythonBool(request.POST.get('a1'))
+			crafft.a3 = truePythonBool(request.POST.get('a1'))
+			crafft.b1 = truePythonBool(request.POST.get('b1'))
+			crafft.b2 = truePythonBool(request.POST.get('b2'))
+			crafft.b3 = truePythonBool(request.POST.get('b3'))
+			crafft.b4 = truePythonBool(request.POST.get('b4'))
+			crafft.b5 = truePythonBool(request.POST.get('b5'))
+			crafft.b6 = truePythonBool(request.POST.get('b6'))
+			# crafft.save()
+
+			score = crafft_fetchResults(crafft)
+			content['crafft_result'] = 'NEGATIVE'
+			content['phrase'] = "No additional assessment is required"
+
+			if crafft.positiveScreen == True:
+				content['crafft_result'] = 'POSITIVE'
+				content['phrase'] = "Additional assessment is suggested"
+
+			
+			content['score'] 		= score['score']
+			content['ranking'] 		= score['ranking']
+			content['image'] 		= score['image']
+			content['crafft'] 		= crafft
+			content['title'] 		= 'CRAFFT Screening | Simeon Academy'
+			return render_to_response('counselor/forms/Crafft/crafft_Results.html', content, context_instance=RequestContext(request))
+
+@login_required(login_url='/index')
+def crafft_viewScoreInstruction(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		track = getTrack(user)
+		quickTrack('Search', track)
+		content['tracking'] = track.state.state
+		content['user'] = user
+		content['user'] = user
+
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			content['title'] = 'CRAFFT Screening | Simeon Academy'
+			return render_to_response('counselor/forms/Crafft/crafft_viewScoreInstruction.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')
 def treatmentResourcesMain(request):

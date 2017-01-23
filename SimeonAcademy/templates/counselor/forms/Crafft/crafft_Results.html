@@ -1,0 +1,200 @@
+<!-- AM DEMOGRAPHIC -->
+{% extends "base.html" %}
+{% block body %}
+{% load staticfiles %}
+
+<body class="gradient-white" onLoad='javascript: initialize_dischargeForm();'>
+    <!-- <input type='text' id='superTest' style='width:600px;'> -->
+    <form action='' method='post' id='c_form' name='c_form' enctype="multipart/form-data"> {% csrf_token %}
+        <input type='hidden' id='client_id' name='client_id'value='{{crafft.client.id}}' >
+        <input type='hidden' name='a1' id='a1' value='{{a1}}'>
+        <input type='hidden' name='a2' id='a2' value='{{a2}}'>
+        <input type='hidden' name='a3' id='a3' value='{{a3}}'>
+        <input type='hidden' name='b1' id='b1' value='{{b1}}'>
+
+        <div class='container'>
+          <div class='row'>
+            <div class="col-md-12" style='width:100%; height:84vh;'>
+              <div class='iml-body-wrapper2'>
+
+                <div id='crafft-info-head'>
+                  <div style='margin-left:3%;'>CRAFFT Screening Interview: Results</div>
+                </div>
+
+                <div class='crafftBtnHolder'>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript: crafft_submitB(c_form);">
+                                    <div class='crafftButton'>
+                                        Submit
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_view_instruction();">
+                                    <div class='crafftButton'>
+                                        View Scoring Criteria
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="javascript: crafft_return_to_options(c_form);">
+                                    <div class='crafftButton'>
+                                        Cancel
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class='divider_gradient' style='margin-top:5px;'></div>
+                </div>
+
+                <div class='wow-data-entry-wrapperCrafft'>
+                  <div class='container'>
+                    <div class='row'>
+
+                     <!-- WRAPPER FIXER -->
+                      <div class='col-md-6' style='width:89.3%; height:64.6vh;'>
+                          <div class='wowTrueLeft'>
+                          <div class='discharge_content_wrapper_true'>
+                            <div style='height:20px;'></div>
+                            <div class='top-ent-wrap2'>
+                                <!-- <div class='divider_gradient_up' style='margin-top:10px;'></div> -->
+                                <div id='iml-session-name-lg'>
+                                  <em>
+                                    {{crafft.client.fname}} {{crafft.client.middleInit}}. {{crafft.client.lname}}
+                                  </em>
+                                </div>
+
+                                <div id='iml-session-id' style='text-align:center; margin-top:10px;'>{{crafft.client.clientID}}</div>
+                                <div class='divider_gradient' style='margin-top:8px; margin-bottom:10px;'></div>
+
+
+                                <div class='discharge-pic-container'>
+                                  <img src="/static/media/{{crafft.client.photo}}" alt="client_img" class='iml-avatar-img'>
+                                  <!-- <div class='divider_gradient' style='margin-top:10px;'></div> -->
+                                </div>
+
+                                <div class='discharge-contact-container'>
+                                    <div id='iml-head-md'>Contact Information:</div>
+                                    <div id='iml-session-email'>{{crafft.client.email}}</div>
+                                    <div id='iml-session-phone'><b style='color:#5b6765;'><em>Primary Phone: </em></b>{{crafft.client.phone}}</div>
+                                    <div id='iml-session-phone'><b style='color:#5b6765;'><em>Additional Phone: </em></b>{{crafft.client.work_phone}}</div>
+                                    <div id='iml-head-sm'>Address:</div>
+
+                                    <div id='iml-session-address'>
+                                        {{crafft.client.street_no}} {{crafft.client.street_name}} {{crafft.client.apartment_no}}
+                                    </div>
+
+                                    <div id='iml-session-address'>
+                                        {{crafft.client.city}}, {{crafft.client.state}} {{crafft.client.zip_code}}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class='crafft_score_disply'>CRAFFT SCORE: &nbsp<span>{{score}}</span></div>
+                            <div class='crafft_positiveNegative'>
+                                {{crafft.client.fname}}'s responses indicate a <span class='crafft_{{crafft_result}}'>{{crafft_result}}</span> screen
+                            </div>
+
+                            <div class='divider_gradient' style='margin-bottom:10px;'></div>
+
+                            <div class='crafft_phrase'>*{{phrase}}</div>
+                          </div>
+
+                          
+                        </div>
+
+                        <div class='wowTrueRight'>
+                          <div class='discharge_content_wrapper_true'>
+                            <div class='discharge_form_wrap'>
+                              <div>
+
+                                <div class='letsDischargeHead'>Discharge Summary</div>
+
+                                <div class='disLabStank'>Describe patient's demeanor during treatment:</div>
+                                <div class='stankArea'><textarea name='clientAttitude' id='clientAttitude' oninput="Javascript: clearNC('clientAttitude');"></textarea></div>
+
+                                <div style='height:10px;'></div>
+                                
+                                <div class='stankArea'>
+                                    <span class='disLabStank'>Diagnosis:</span>
+                                    <select name='diagnosis' id='diagnosis' onChange="Javascript: unlock_hidden_select_uni(diagnosis, dia_other, diagnosis2, diagnosis_lab); clearNCS('diagnosis');">
+                                        <option value='Select'>Select</option>
+                                        <option value='Diagnosis 1'>Diagnosis 1</option>
+                                        <option value='Diagnosis 2'>Diagnosis 2</option>
+                                        <option value='Diagnosis 3'>Diagnosis 3</option>
+                                        <option value='Diagnosis 4'>Diagnosis 4</option>
+                                        <option value='Diagnosis 5'>Diagnosis 5</option>
+                                        <option value='Diagnosis 6'>Diagnosis 6</option>
+                                        <option value='' id='dia_other'>Other</option>
+                                    </select>
+                                </div>
+
+                                <div style='height:5px;'></div>
+
+                                <div class='stankArea'><span id='diagnosis_lab'>Describe: </span><input type='text' name='diagnosis2' id='diagnosis2' oninput="javascript: loadOtherOptionValue(dia_other, diagnosis2); clearNC('diagnosis2');"></div>
+
+                                <div style='height:10px;'></div>
+
+                                <div class='stankArea'>
+                                    <span class='disLabStank'>Reason for Discharge:</span>
+                                    <select name='reasonTerminated' id='reasonTerminated' onChange="Javascript: unlock_hidden_select_uni(reasonTerminated, rt_other, rt_alt, rt_lab); clearNCS('reasonTerminated');">
+                                        <option value='Select'>Select</option>
+                                        <option value='Client withdrew from program'>Client Withdrew From Program</option>
+                                        <option value='Client arrested/New charge'>Client Arrested/New Charge</option>
+                                        <option value='Administrative discharge'>Administrative Discharge</option>
+                                        <option value='' id='rt_other'>Other</option>
+                                    </select>
+                                </div>
+
+                                <div style='height:5px;'></div>
+
+                                <div class='stankArea'><span id='rt_lab'>Describe: </span><input type='text' name='rt_alt' id='rt_alt' oninput="javascript: loadOtherOptionValue(rt_other, rt_alt); clearNC('rt_alt');"></div>
+
+                                <div style='height:10px;'></div>
+
+                                <div class='disLabStank'>What are the recommendations for the client?</div>
+                                <div class='stankArea'><textarea name='recommendations' id='recommendations' oninput="Javascript: clearNC('recommendations');"></textarea></div>
+
+                                <div style='height:10px;'></div>
+
+                                <div class='disLabStank'>Please provide any additional details:</div>
+                                <div class='stankArea'><textarea name='reasonRefered' id='reasonRefered'></textarea></div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+        </form>  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+{% endblock %}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
