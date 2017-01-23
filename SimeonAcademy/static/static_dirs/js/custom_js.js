@@ -3476,7 +3476,7 @@ function crafft_submitB(form) {
 }
 
 function crafft_view_instruction() {
-	openPopUp('auto', '/crafft_viewScoreInstruction/', 600, 600);
+	openPopUp('auto', '/crafft_viewScoreInstruction/', 700, 700);
 }
 
 function crafft_return_to_options(form) {
