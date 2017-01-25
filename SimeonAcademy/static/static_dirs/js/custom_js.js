@@ -7,6 +7,29 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+function landON(div) {
+	div.style.opacity = '0.7';
+}
+
+function landOFF(div) {
+	div.style.opacity = '1.0';
+}
+
+function landing_logMeOn() {
+	document.getElementById("testingInput").value = "testing function...";
+	document.getElementById('superLoginDiv').style.visibility ="visible";
+
+}
+
+function appLogin() {
+	grab('login').submit();
+}
+
+function closeLoginPopup() {
+	// grab('superLoginDiv').className = "login-wrapper-fadeOut";
+	grab('superLoginDiv').style.visibility = "hidden";
+}
+
 function m_error_text(divName, borderAction) {
 	borderAction 	= String(borderAction);
 	divName 		= String(divName);

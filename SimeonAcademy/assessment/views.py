@@ -55,12 +55,14 @@ wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClient
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
 fetchRawIdNumberResources, saveDischarge, crafft_fetchResults, superCrafftSaver, \
-crafft_fetchResponses
+crafft_fetchResponses, getAllClientCraffts
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
-	return render_to_response('global/index.html')
+	content = {}
+	content.update(csrf(request))
+	return render_to_response('global/index.html', content)
 
 def login(request):
 	content = {}
@@ -4936,8 +4938,17 @@ def startStudentEval(request):
 			return render_to_response('global/restricted.html', content)
 
 		else:
-			content['client_id'] = superDuperFetchClientID_track(track)
+			# hasExisting = False
+			client_id = superDuperFetchClientID_track(track)
+			client = Client.objects.get(id=client_id)
+			# existing = getAllClientCraffts(client)
+			content['client_id'] = client.id
 			content['title'] = 'CRAFFT Screening | Simeon Academy'
+
+			# if len(existing) > 0:
+			# 	hasExisting = True
+
+			# content['hasExisting'] = hasExisting
 			return render_to_response('counselor/forms/Crafft/crafft_a.html', content, context_instance=RequestContext(request))
 
 @login_required(login_url='/index')

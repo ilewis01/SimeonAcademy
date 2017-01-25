@@ -961,6 +961,18 @@ def crafftEqual(c1, c2):
 
 	return isEqual
 
+def getAllClientCraffts(client):
+	results = []
+	c_list = Crafft.objects.all()
+
+	for c in c_list:
+		if clientSuperMatch(client, c.client) == True:
+			results.append(c)
+	return results
+
+
+
+
 def superCrafftSaver(crafft):
 	c_list = Crafft.objects.all()
 	newCrafft = None

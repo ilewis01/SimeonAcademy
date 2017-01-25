@@ -1,0 +1,445 @@
+/* 
+
+Sigma Template
+
+http://www.templatemo.com/tm-479-sigma
+
+*/
+
+body {
+    font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 34px;
+}
+
+h1 {
+	font-size: 34px;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+.container-fluid {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.sigma-icon {
+	font-size: 72px;
+	padding: 30px;
+}
+
+.contact-icon {
+	font-size: 30px;
+	padding: 0 20px 0 0;
+	min-width: 50px;
+}
+
+.site-title {
+	padding: 0;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.site-title h1 {
+	color: #333;
+}
+
+.site-title h2 {
+	color: #888;
+	font-size: 16px;
+	padding-top: 20px;
+}
+
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+
+.main-menu {
+	margin-top: 60px;
+}
+
+.navbar {
+	float: right;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.nav-link {
+	padding: 10px 15px;
+	font-size: 18px;
+}
+
+.sigma-hr {
+   	margin: 15px -15px !important;
+}
+
+.sigmapad {
+	padding: 0 1px 1px 0 !important;
+	margin: 0 !important;
+}
+
+.sigmano {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.sigma-home h1 {
+	font-size: 48px;
+}
+.sigma-home p {
+	font-size: 24px;
+	color: #555;
+	line-height: 44px;
+}
+.sigma-home {
+	padding: 0px;
+	padding-top: 150px;
+	padding-bottom: 150px;
+	background: url(../images/steps_color3.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.land-hours-line {
+	width:100%;
+	height:20px;
+	margin:auto;
+	position: relative;
+	color:black;
+}
+
+.land-hours-line span {
+	color:black;
+	font-weight: bold;
+}
+
+.land-hours-single {
+	width:50%;
+	height:100%;
+	float:left;
+}
+
+#hr-head{
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: underline;
+}
+
+.anchor {
+    display: block;
+    position: absolute;
+    top: -250px;
+    visibility: hidden;
+}
+
+.landing-iml-resource {
+	height:280px;
+}
+
+.icon_holder_img_land {
+	width:40px;
+	height:40px;
+	margin:auto;
+}
+
+.icon_holder_img_land_lg {
+	width:45px;
+	height:45px;
+	margin:auto;
+}
+
+.icon_holder_img_land_lg img{
+	width:100%;
+	height:100%;
+}
+
+.icon_holder_img_land img {
+	width:100%;
+	height:100%;
+}
+
+.landing-iml-resource p {
+	font-size: 14px;
+}
+
+.space40 {
+	margin-bottom: 40px;
+}
+
+.land-btn-iml {
+	width:125px;
+}
+
+.sigma-start {
+	margin: 10px;
+	padding: 16px 40px;
+	min-width: 200px;
+	font-size: 22px;
+}
+
+.sigma-content {
+	padding: 60px 40px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	min-height: 280px;
+}
+
+.sigma-section-header {
+	padding: 0px;
+	padding-top: 100px;
+	padding-bottom: 80px;
+	background: url(../images/steps_color3.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.sigma-home p, .sigma-content p, .sigma-section-header p {
+	padding: 20px 0 0 0;
+}
+
+.form-group {
+	margin: 20px 0;
+}
+
+
+.iml-lead-service_divs {
+	height:230px;
+	font-size: 13px;
+	font-style: italic;
+}
+
+/* Sigma BG Colors --- BEGIN */
+
+.sigma-bg-lightgray {
+	background-color: #E4E8E8;
+}
+
+.sigma-bg-gray {
+	background-color: #999;
+	color: #FFF;
+}
+
+.sigma-bg-darkgray {
+	background-color: #666;
+	color: #FFF;
+}
+
+.sigma-bg-iml0 {
+	background-color: #efdeca;
+	background-color: #467f9c;
+	color:white;
+	/*color: #aa6009;*/
+}
+
+.sigma-bg-iml1 {
+	background-color: #cad6ba;
+	background-color: #c76b33;
+	color:white;
+	/*color: #6d7356;*/
+}
+
+#simeonAddressHead {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 18px;
+}
+
+.sigma-bg-iml2 {
+	background-color: #97ad6e;
+	background-color: #97ad6e;
+	/*color:black;*/
+	color: #FFF;
+}
+
+.sigma-bg-black {
+	background-color: #444;
+	color: #FFF;
+}
+
+.sigma-bg-blue {
+	background-color: #28B;
+	color: #FFF;
+}
+
+.sigma-bg-red {
+	background-color: #A52;
+	color: #FFF;
+}
+
+.sigma-bg-pink {
+	background-color: #EBE;
+	color: #000;
+}
+
+.sigma-bg-lightblue {
+	background-color: #92C4F8;
+	color: #000;
+}
+
+.sigma-bg-yellow {
+	background-color: #A4A430;
+	color: #FFF;
+}
+
+.sigma-bg-green {
+	background-color: #496;
+	color: #FFF;
+}
+
+/* Sigma BG Colors --- END */
+
+.sigma-copyright {
+	margin: 0;
+	padding: 10px 0 30px 0;
+	font-size: 14px;
+}
+
+.landing_login_popup {
+	width:60%;
+	height:75%;
+	margin: auto;
+	border:2px solid #666666;
+	border-radius: 9px;
+}
+
+.buttons-for-login {
+	width:93%;
+	margin:auto;
+	padding-top:5%;
+}
+
+.buttons-for-login button {
+	border: 1px solid gray;
+	border-radius: 8px;
+	width:48%;
+}
+
+.login-opacity-iml {
+	width:100%;
+	height:100%;
+	background-color:rgba(0, 0, 0, 0.5);
+	/*background-color: #999999;*/
+	border-radius: 8px;
+	/*opacity: 0.8;*/
+
+	/*filter: blur(50px);*/
+}
+
+.input-login-text {
+	color:white;
+	font-size: 24px;
+	width:90%;
+	margin:auto;
+	text-align: left;
+	border-bottom :2px solid white;
+	margin-bottom: 30px;
+	padding-top: 5px;
+}
+
+.inputLogin {
+	width:90%;
+	margin:auto;
+	margin-bottom:10px;
+}
+
+.inputLogin input {
+	width:100%;
+	border-radius: 8px;
+	border: 1px solid gray;
+	padding-left: 5%;
+}
+
+.login-wrapper {
+	width:93%;
+	margin:auto;
+	height:150%;
+	position: absolute;
+	z-index: auto;
+	visibility: hidden;
+}
+
+.login-wrapper-fadeOut {
+	width:93%;
+	margin:auto;
+	height:150%;
+	position: absolute;
+	z-index: auto;
+	transition: opacity .5s;
+	opacity: 0;
+	visibility: hidden;
+}
+
+@media (max-width:1330px) {
+	body {
+		font-size: 16px;
+		line-height: 28px;
+	}
+	h1 {
+		font-size: 28px;
+	}
+	
+	h2 {
+		font-size: 24px;
+	}
+	.sigma-icon {
+		font-size: 48px;
+		padding: 20px;
+	}
+	.site-title h2 {
+		font-size: 14px;
+		padding-top: 10px;
+	}
+	.sigma-content {
+		padding: 30px 20px;
+		min-height: 200px;
+	}
+	.sigma-home h1 {
+		font-size: 40px;
+	}
+	.sigma-home p {
+		font-size: 18px;
+		line-height: 36px;
+	}
+	/*.sigma-home p {
+		font-size: 18px;
+		line-height: 36px;
+	}*/
+}
+
+@media (max-width:990px) {
+	.main-menu {
+		margin: 0px;
+	}
+}
+
+@media (max-width:767px) {
+	.nav-link {
+		padding: 5px 10px;
+		font-size: 16px;
+	}
+	.sigma-home h1 {
+		font-size: 30px;
+	}
+	.sigma-home p {
+		font-size: 16px;
+		line-height: 28px;
+	}
+	.sigma-content {
+		padding: 20px;
+		min-height: 100px;
+	}
+}
