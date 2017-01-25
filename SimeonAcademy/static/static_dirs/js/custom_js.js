@@ -15,8 +15,17 @@ function landOFF(div) {
 	div.style.opacity = '1.0';
 }
 
-function landing_logMeOn() {
-	grab('superLoginDiv').className = "login-wrapper-fadeIn";
+function landing_logMeOn(div) {
+	div.className = "login-wrapper-fadeIn";
+}
+
+function closeLoginPopup(div) {
+	div.className = "login-wrapper-fadeOut";
+}
+
+function generalVisibilityChange(div, newClass) {
+	newClass = String(newClass);
+	div.className = newClass;
 }
 
 function appLogin() {
@@ -70,9 +79,6 @@ function fetchFullResourceHtmlSingle(resource, num) {
 	return html;
 }
 
-function buildFullResourceList(json_data) {
-
-}
 
 function initializeIndexPage(json_data) {
 	var html = "";
@@ -99,9 +105,7 @@ function initializeIndexPage(json_data) {
 	div.innerHTML = html;
 }
 
-function closeLoginPopup() {
-	grab('superLoginDiv').className = "login-wrapper-fadeOut";
-}
+
 
 function m_error_text(divName, borderAction) {
 	borderAction 	= String(borderAction);

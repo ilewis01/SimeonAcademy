@@ -93,7 +93,7 @@ http://www.templatemo.com/tm-479-sigma
                                 <div class="">
                                     <div class="buttons-for-login">
                                         <button onClick"javascript: appLogin();">Login</button>
-                                        <button onClick="Javascript: closeLoginPopup(); return false;">Cancel</button>
+                                        <button onClick="Javascript: closeLoginPopup(superLoginDiv); return false;">Cancel</button>
                                     </div>
                                 </div>
                             </form>
@@ -103,7 +103,7 @@ http://www.templatemo.com/tm-479-sigma
 
             	<p><em><div style='width:500px; margin:auto;'>Equipping, educating, and providing tools to enhance lives...</div></em></p>
                 <a href="#about" class="btn btn-primary land-btn-iml">Learn More</a>
-                <a onClick="javascript: landing_logMeOn();" class="btn btn-danger land-btn-iml" >Login</a>
+                <a onClick="javascript: landing_logMeOn(superLoginDiv);" class="btn btn-danger land-btn-iml" >Login</a>
                 <a href="#contact" class="btn btn-success land-btn-iml">Contact Us</a>
                 
             </div>
@@ -244,33 +244,6 @@ http://www.templatemo.com/tm-479-sigma
                     <div class='land-hours-single' id='hr-entry'>Friday: <span>8am-4pm</span></div>
                 </div>
 
-
-                <!-- <table>
-                    <tr>
-                        <th><div>Weekdays</div></th>
-                        <th><div>Weekends</div></th>
-                    </tr>
-
-                    <tr>
-                        <td><div>Monday: 8pm-4pm</div></td>
-                        <td><div>Friday: 8pm-4pm</div></td>
-                    </tr>
-
-                    <tr>
-                        <td><div>Tuesday: 8pm-4pm</div></td>
-                        <td><div>Saturday: 8pm-4pm</div></td>
-                    </tr>
-
-                    <tr>
-                        <td><div>Wednesday: 8pm-4pm</div></td>
-                        <td><div>Sunday: Closed</div></td>
-                    </tr>
-
-                    <tr>
-                        <td><div>Thursday: 8pm-4pm</div></td>
-                        <td><div></div></td>
-                    </tr>
-                </table> -->
             	<p></p>
             </div>
             <div class="sigma-content col-lg-4 col-md-12 sigma-bg-darkgray iml-lead-service_divs">
@@ -279,14 +252,90 @@ http://www.templatemo.com/tm-479-sigma
             </div>
         
         	<div class="sigma-content col-lg-6 col-md-6 sigma-bg-pink">
+                <div class='grpSessionWrap_out' id='manipGroup'>
+                    <div class='grpSessionDataHolder'>
+                        <div class='grpSessionMaker'>
+                            <div class='grpSessHead1'>Substance Abuse Group Therapy</div>
+                            <div class='grpSessHead2'>Saturday's 9-10am</div>
+                            <div class='grpSessinfo'>
+                                The Substance Abuse Clinic is a combination of diaditic and psycho educational groups. Participants will also receive individual sessions and random drug testing.
+                            </div>
+
+                            <div class='grpSessHead1'><span>Anger Management Group Therapy</span></div>
+                            <div class='grpSessHead2'><span>Saturday's 10-11am</span></div>
+                            <div class='grpSessinfo'>
+                                In this group, participants work on impluse control using cognitive behavioral therapy and the Anger Management Workbook.
+                            </div>
+
+                            <div style='height:10px;'></div>
+
+                            <div class='grpSessButtonWrap'>
+                                <button onClick="javascript: generalVisibilityChange(manipGroup, 'grpSessionWrap_out');">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             	<h2>Group Sessions</h2>
             	<p>Group sessions are available each saturday morning and focuses on substance abuse and anger management</p>
-                <a href="#about" class="btn btn-primary btn-lg">Get Details</a>
+                <a onClick="javascript: generalVisibilityChange(manipGroup, 'grpSessionWrap_in'); return false" class="btn btn-primary btn-lg">Get Details</a>
             </div>
             <div class="sigma-content col-lg-6 col-md-6 sigma-bg-lightblue">
+                <div class='grpSessionWrap_out' id='manipAppointment'>
+                    <div class='makeApptHolder'>
+                        <div class='apptMakerDiv'>
+                            <div style='height:15px;'></div>
+                            <form action='/landApptScheduled/' method='post' id='a_form' name='a_form'> {% csrf_token %}
+                                <div class='simApptTitle1'>Simeon Academy</div>
+                                <div class='simApptTitle1'><span>Schedule An Appointment</span></div>
+                                <div class='apptTextInputs'>
+                                    <input type='text' name='apptName' id='apptName' placeholder='Name'>
+                                    <input type='text' name='apptName' id='apptName' placeholder='Email'>
+                                    <input type='text' name='apptName' id='apptName' placeholder='Phone'>
+                                </div>
+
+                                <div class='apptOthersLand'>
+                                    Requested Date: <input name='' id=''>
+                                </div>
+
+                                <div class='apptOthersLand'>
+                                    Requested Time:
+                                    <select name='' id=''>
+                                        <option value='None Selected'>None Selected</option>
+                                    </select>
+                                </div>
+
+                                <div class='apptOthersLand'>
+                                    Reason for Appointment:
+
+                                    <select name='refs' id='refs'>
+                                        <option value='None Selected'>None Selected</option>
+                                        <option value='Anger Management'>Anger Management</option>
+                                        <option value='Anxiety'>Anxiety</option>
+                                        <option value='Couple Counseling'>Couple's Counseling</option>
+                                        <option value='Depression'>Depression</option>
+                                        <option value='Domestic Violence'>Domestic Violence</option>
+                                        <option value='Family Counseling'>Family Counseling</option>
+                                        <option value='IRDC'>IRDC</option>
+                                        <option value='Mental Health'>Mental Health</option>
+                                        <option value='Substance Abuse'>Substance Abuse</option>
+                                        <option value='None Selected'>Other</option>
+                                    </select>
+                                </div>
+
+                                <div style='height:15px;'></div>
+                                <div class='apptTextInputs'>
+                                    <button>Submit</button>
+                                    <button onClick="javascript: generalVisibilityChange(manipAppointment, 'grpSessionWrap_out'); return false;">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             	<h2>Schedule an Appointment</h2>
-            	<p>Click below to schedule an appointment with our qualified staff.<br><br></p>
-                <a href="#contact" class="btn btn-danger btn-lg">Schedule Appointment</a>
+            	<p>Click below to schedule an appointment with Simeon Academy's qualified staff.</p>
+                <a onClick="javascript: generalVisibilityChange(manipAppointment, 'grpSessionWrap_in'); return false" class="btn btn-danger btn-lg">Schedule Appointment</a>
             </div>
         
         	<div class="sigma-content col-lg-3 col-md-6 sigma-bg-red">
@@ -333,10 +382,14 @@ http://www.templatemo.com/tm-479-sigma
                   	<fieldset class="form-group">
                     	<label for="email">Your Email</label>
                     	<input type="email" class="form-control" id="email" placeholder="Enter your email">
-                    	
                   	</fieldset>
-                    
+
                     <fieldset class="form-group">
+                        <label for="email">Your Phone Number</label>
+                        <input type="phone" class="form-control" id="phone" placeholder="Enter your Phone Number">
+                    </fieldset>
+                    
+                    <!-- <fieldset class="form-group">
                     	<label for="budget">Your Budget</label>
                     	<select class="form-control" id="budget">
                       		<option>$500</option>
@@ -344,7 +397,7 @@ http://www.templatemo.com/tm-479-sigma
                       		<option>$1,500</option>
                       		<option>$2,000</option>
                     	</select>
-                  	</fieldset>
+                  	</fieldset> -->
                 </div> 
                 <div class="col-md-6">
                  
@@ -438,33 +491,33 @@ http://www.templatemo.com/tm-479-sigma
 
         <script>
 
-   //          // Prevent console.log from generating errors in IE for the purposes of the demo
-   //          if ( ! window.console ) console = { log: function(){} };
+            // Prevent console.log from generating errors in IE for the purposes of the demo
+            if ( ! window.console ) console = { log: function(){} };
 
-   //          // The actual plugin
-   //          $('.single-page-nav').singlePageNav({
-   //              offset: $('.single-page-nav').outerHeight(),
-   //              filter: ':not(.external)',
-   //              updateHash: true,
-   //              beforeStart: function() {
-   //                  console.log('begin scrolling');
-   //              },
-   //              onComplete: function() {
-   //                  console.log('done scrolling');
-   //              }
-   //          });
+            // The actual plugin
+            $('.single-page-nav').singlePageNav({
+                offset: $('.single-page-nav').outerHeight(),
+                filter: ':not(.external)',
+                updateHash: true,
+                beforeStart: function() {
+                    console.log('begin scrolling');
+                },
+                onComplete: function() {
+                    console.log('done scrolling');
+                }
+            });
 			
-			// $(document).ready(function ($) {
+			$(document).ready(function ($) {
 
-			// 	// delegate calls to data-toggle="lightbox"
-			// 	$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-			// 		event.preventDefault();
-			// 		return $(this).ekkoLightbox({
-			// 			always_show_close: true
-			// 		});
-			// 	});
+				// delegate calls to data-toggle="lightbox"
+				$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+					event.preventDefault();
+					return $(this).ekkoLightbox({
+						always_show_close: true
+					});
+				});
 
-			// });
+			});
 			
         </script>
 

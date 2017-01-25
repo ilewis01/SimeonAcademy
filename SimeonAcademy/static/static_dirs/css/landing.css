@@ -217,7 +217,7 @@ h2 {
 
 
 .iml-lead-service_divs {
-	height:230px;
+	height:280px;
 	font-size: 13px;
 	font-style: italic;
 }
@@ -384,7 +384,6 @@ h2 {
 }
 
 .login-wrapper-fadeIn {
-	visibility: visible;
 	width:93%;
 	margin:auto;
 	height:150%;
@@ -393,6 +392,156 @@ h2 {
 	transition: visibility 0s linear 0.2s, opacity .2s linear;
 	transition-delay:0s;
 	opacity: 1;
+	visibility: visible;
+}
+
+.grpSessionWrap_out {
+	width:80%;
+	height:500px;
+	position: absolute;
+	z-index: 2;
+	margin-top: -100px;
+	transition: visibility 0s linear 0.2s, opacity .2s linear;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.grpSessionWrap_in {
+	width:80%;
+	height:500px;
+	position: absolute;
+	z-index: 2;
+	margin-top: -100px;
+	transition: visibility 0s linear 0.2s, opacity .2s linear;
+	transition-delay:0s;
+	opacity: 1;
+	visibility: visible;
+}
+
+.grpSessionDataHolder {
+	width:80%;
+	height:86%;
+	border: 2px solid gray;
+	border-radius: 8px;
+	margin:auto;
+}
+
+.makeApptHolder {
+	width:80%;
+	height:73%;
+	border: 2px solid gray;
+	border-radius: 8px;
+	margin:auto;
+}
+
+.grpSessionMaker {
+	width:100%;
+	height: 100%;
+	background-color:rgba(0, 0, 0, 0.81);
+	border-radius:7px;
+	color:#cccccc;
+}
+
+.apptMakerDiv {
+	width:100%;
+	height:100%;
+	background-color:rgba(0, 0, 0, 0.8); 
+	border-radius:7px;
+	color:#cccccc;
+}
+
+.grpSessHead1 {
+	padding-top: 10px;
+	padding-left:15px;
+	font-size: 20px;
+	color:#bb5e12;
+}
+
+.grpSessHead1 span {
+	color:#9bde59;
+	font-size: 19px;
+}
+
+.grpSessHead2 {
+	padding-left:15px;
+	font-style: italic;
+	color:#b18d54;
+}
+
+.grpSessHead2 span {
+	color: #667558;
+}
+
+.simApptTitle1 {
+	text-align: center;
+	font-size: 28px;
+	color:#1e89b7;
+}
+
+.simApptTitle1 span {
+	font-size: 17px;
+	color:#cccccc;
+}
+
+.apptTextInputs {
+	width:90%;
+	margin:auto;
+}
+
+.apptTextInputs input {
+	width:100%;
+	border: 1px solid gray;
+	border-radius: 8px;
+	margin-bottom:10px;
+	padding-left: 10px;
+	font-size: 12px;
+	color:black;
+}
+
+.apptTextInputs button {
+	width:49%;
+	color:black;
+	border:1px solid gray;
+	border-radius: 8px;
+}
+
+.apptOthersLand {
+	width: 90%;
+	font-size: 12px;
+	margin:auto;
+}
+
+.apptOthersLand input {
+	color:black;
+	border: 1px solid gray;
+	border-radius: 8px;
+	padding-left:10px;
+	width:110px;
+}
+
+.grpSessinfo {
+	padding-left:15px;
+	padding-right: 15px;
+	font-size: 13px;
+	font-weight: normal;
+	font-style: italic;
+	padding-bottom: 25px;
+}
+
+.grpSessButtonWrap {
+	width:92%;
+	height:40px;
+	margin:auto;
+	/*padding-top:10px;*/
+}
+
+.grpSessButtonWrap button {
+	width:100%;
+	height:100%;
+	border-radius: 8px;
+	border: 1px solid gray;
+	color: black;
+	font-size: 13px;
 }
 
 .resource_landingWrapper {

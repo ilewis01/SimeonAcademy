@@ -66,6 +66,7 @@ def index(request):
 	mhr = serializeResources()
 	json_data = json.dumps(mhr)
 
+	content['refs'] = RefReason.objects.all().order_by('reason')
 	content['json_data'] = json_data
 	return render_to_response('global/index.html', content)
 
@@ -102,8 +103,10 @@ def logout(request):
 	auth.logout(request)
 	content = {}
 	content.update(csrf(request))
-	mhr = TreatmentResource.objects.all().order_by('name')
-	content['mhr'] = mhr
+	mhr = serializeResources()
+	json_data = json.dumps(mhr)
+
+	content['json_data'] = json_data
 	return render_to_response('global/index.html', content)
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
