@@ -333,7 +333,7 @@ h2 {
 	height:100%;
 	background-color:rgba(0, 0, 0, 0.5);
 	/*background-color: #999999;*/
-	border-radius: 8px;
+	border-radius: 6px;
 	/*opacity: 0.8;*/
 
 	/*filter: blur(50px);*/
@@ -378,9 +378,85 @@ h2 {
 	height:150%;
 	position: absolute;
 	z-index: auto;
-	transition: opacity .5s;
+	transition: visibility 0s linear 0.2s, opacity .2s linear;
 	opacity: 0;
 	visibility: hidden;
+}
+
+.login-wrapper-fadeIn {
+	visibility: visible;
+	width:93%;
+	margin:auto;
+	height:150%;
+	position: absolute;
+	z-index: auto;
+	transition: visibility 0s linear 0.2s, opacity .2s linear;
+	transition-delay:0s;
+	opacity: 1;
+}
+
+.resource_landingWrapper {
+	width:100%;
+	/*position:relative;
+	border:1px solid black;*/
+	/*border: 1px solid black;*/
+	/*height:200px;*/
+}
+
+.landingResourceCoverWrap {
+	width:100%;
+	margin:auto;
+	position:relative;
+	/*background-color: yellow;
+*/}
+
+.landingResourceCoverInner {
+	width:50%;
+	float:left;
+	border:1px solid black;
+	height:200px;
+	padding-left:2%;
+	padding-right:2%;
+	padding-top:1%;
+	/*padding-bottom:1%;*/
+}
+
+.landingResourceCoverInner2 {
+	width:50%;
+	float:left;
+	border:1px solid black;
+	height:200px;
+	padding-left:2%;
+	padding-right:2%;
+	padding-top:1%;
+	/*padding-bottom:1%;*/
+	background-color: #b6b6b6;
+}
+
+.LR_name {
+	font-size: 14px;
+	font-weight: bold;
+	color:#593f15;
+	height:15%;
+	font-style: italic;
+}
+
+.LR_address {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14px;
+	/*border: 1px solid black;*/
+	height:10%;
+}
+
+.LR_info {
+	font-size: 14px;
+	height:10%;
+}
+
+.LR_info span {
+	font-weight: bold;
+	color:gray;
 }
 
 @media (max-width:1330px) {

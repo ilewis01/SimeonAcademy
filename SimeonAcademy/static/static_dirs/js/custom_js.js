@@ -16,18 +16,91 @@ function landOFF(div) {
 }
 
 function landing_logMeOn() {
-	document.getElementById("testingInput").value = "testing function...";
-	document.getElementById('superLoginDiv').style.visibility ="visible";
-
+	grab('superLoginDiv').className = "login-wrapper-fadeIn";
 }
 
 function appLogin() {
 	grab('login').submit();
 }
 
+function singleResourceDataHtml(resource) {
+	var html = "";
+
+	html += "<div class=\"LR_name\">" + String(resource['name']) + "</div>"
+	html += "<div class=\"LR_address\">" + String(resource['address']) + "</div>"
+	html += "<div class=\"LR_address\">" + String(resource['city']) + ", " + String(resource['state']) + " " +  + String(resource['zip_code']) + "</div>";
+	html += "<div class=\"LR_info\"><span>" + String(resource['director_title']) + ": </span><em>" + String(resource['director_name']) +"</em></div>"
+	html += "<div class=\"LR_info\"><span>Phone: </span><em>" + String(resource['phone']) + "</em>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>Fax: </span>" + String(resource['fax']) + "</em></div>"
+	html += "<div class=\"LR_info\"><span>Email: </span><em>" + String(resource['email']) +"</em></div>"
+	html += "<div class=\"LR_info\"><span>Website: </span><em>" + String(resource['website']) +"</em></div>"
+	html += "<div class=\"LR_info\"><span>DAS Licensed: </span><em>" + String(resource['isDAS']) +"</em></div>"
+
+	return html;
+}
+
+function wrapSingleDataDiv1(data) {
+	data = String(data);
+	var pre = "<div class=\"landingResourceCoverWrap\"><div class=\"landingResourceCoverInner\">";
+	var post = "</div></div>";
+	var html = pre + data + post;
+	return html;
+}
+
+function wrapSingleDataDiv2(data) {
+	data = String(data);
+	var pre = "<div class=\"landingResourceCoverWrap\"><div class=\"landingResourceCoverInner2\">";
+	var post = "</div></div>";
+	var html = pre + data + post;
+	return html;
+}
+
+function fetchFullResourceHtmlSingle(resource, num) {
+	num = Number(num);
+	var data = singleResourceDataHtml(resource);
+	var html = null;
+	// var html = wrapSingleDataDiv2(data);
+
+	if (num === 1) {
+		html = wrapSingleDataDiv1(data);
+	}
+	else if (num === 2) {
+		html = wrapSingleDataDiv2(data);
+	}
+
+	return html;
+}
+
+function buildFullResourceList(json_data) {
+
+}
+
+function initializeIndexPage(json_data) {
+	var html = "";
+	var div = grab('resource_loader');
+	var count = 0;
+	var row = 2;
+
+	for (var i = 0; i < json_data.length; i++) {
+		html += fetchFullResourceHtmlSingle(json_data[i], row);
+		count += 1;
+
+		if (count === 2) {
+			count = 0;
+
+			if (row === 1) {
+				row = 2;
+			}
+			else if (row === 2) {
+				row = 1;
+			}
+		}
+	}
+
+	div.innerHTML = html;
+}
+
 function closeLoginPopup() {
-	// grab('superLoginDiv').className = "login-wrapper-fadeOut";
-	grab('superLoginDiv').style.visibility = "hidden";
+	grab('superLoginDiv').className = "login-wrapper-fadeOut";
 }
 
 function m_error_text(divName, borderAction) {

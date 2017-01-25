@@ -55,13 +55,18 @@ wowSSNumberDisplayConverterHidden, getCoupleNotesWowBuilder, fetchExistingClient
 changeAndUpdateExistingClient, executeClientUpdate, setNewRefReason, coupleDocumentFetch, \
 documentSerializer, noteSerializer, sortResourceColumns, fetchAllResourceIds, \
 fetchRawIdNumberResources, saveDischarge, crafft_fetchResults, superCrafftSaver, \
-crafft_fetchResponses, getAllClientCraffts
+crafft_fetchResponses, getAllClientCraffts, serializeResources
 
 
 ## LOGIN VIEWS---------------------------------------------------------------------------------
 def index(request):
 	content = {}
 	content.update(csrf(request))
+
+	mhr = serializeResources()
+	json_data = json.dumps(mhr)
+
+	content['json_data'] = json_data
 	return render_to_response('global/index.html', content)
 
 def login(request):
@@ -95,7 +100,11 @@ def newProfile(request):
 @login_required(login_url='/index')
 def logout(request):
 	auth.logout(request)
-	return render_to_response('global/logout.html')
+	content = {}
+	content.update(csrf(request))
+	mhr = TreatmentResource.objects.all().order_by('name')
+	content['mhr'] = mhr
+	return render_to_response('global/index.html', content)
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

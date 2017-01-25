@@ -26,6 +26,40 @@ AIS_Legal, AIS_Family, AIS_Social1, AIS_Social2, AIS_Psych, ASI, UtPaid, \
 SolidState, PrintableForms, WorkSchedule, Note, Couple, Attachment, TreatmentResource, \
 Crafft
 
+def serializeResources():
+	mhrs = TreatmentResource.objects.all().order_by('name')
+	data = []
+	
+	for m in mhrs:
+		d = {}
+		d['name'] = m.name
+		d['address'] = m.address
+		d['city'] = m.city
+		d['state'] = m.state
+		d['zip_code'] = m.zip_code
+		d['director_title'] = m.director_title
+		d['director_name'] = m.director_name
+		d['phone'] = m.phone
+		d['fax'] = m.fax
+		d['email'] = m.email
+		d['website'] = m.website
+		d['type_organ'] = m.type_organ
+		d['tpye_treat'] = m.tpye_treat
+
+		if m.isDAS == True:
+			d['isDAS'] = "Yes"
+		else:
+			d['isDAS'] = "No"
+
+		if m.isHandiCap == True:
+			d['isHandiCap'] = "Yes"
+			d['image'] = "/static/images/handicapped.png"
+		else:
+			d['isHandiCap'] = "No"
+		data.append(d)
+
+	return data
+
 def isCompleteWeek(day):
 	complete = False
 	if day == 7:

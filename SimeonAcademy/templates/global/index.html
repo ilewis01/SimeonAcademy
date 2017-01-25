@@ -19,9 +19,9 @@ http://www.templatemo.com/tm-479-sigma
     <title>Simeon Academy</title>
 </head>
 
-<body>
-<input type='text' id='testingInput'>
-<button onClick="javascript: landing_logMeOn();">Test</button>
+<body onLoad="initializeIndexPage({{json_data}});">
+<!-- <input type='text' id='testingInput'> -->
+<!-- <button onClick="javascript: landing_logMeOn();">Test</button> -->
 <header id="top" class="anchor">
 
 	<div class="container-fluid">
@@ -82,7 +82,7 @@ http://www.templatemo.com/tm-479-sigma
         	<div class="col-md-offset-2 col-lg-offset-3 col-lg-6 col-md-8 col-sm-12 text-center">
             	<h1>Simeon Academy</h1>
 
-                <div class='login-wrapper' id='superLoginDiv'>
+                <div class='login-wrapper-fadeOut' id='superLoginDiv'>
                     <div class='landing_login_popup'>
                         <div class='login-opacity-iml'>
                             <form action="/auth/" method="post" id='login' name='login'> {% csrf_token %}
@@ -98,12 +98,12 @@ http://www.templatemo.com/tm-479-sigma
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
             	<p><em><div style='width:500px; margin:auto;'>Equipping, educating, and providing tools to enhance lives...</div></em></p>
                 <a href="#about" class="btn btn-primary land-btn-iml">Learn More</a>
-                <a href="javascript: landing_logMeOn();" class="btn btn-danger land-btn-iml">Login</a>
+                <a onClick="javascript: landing_logMeOn();" class="btn btn-danger land-btn-iml" >Login</a>
                 <a href="#contact" class="btn btn-success land-btn-iml">Contact Us</a>
                 
             </div>
@@ -295,7 +295,7 @@ http://www.templatemo.com/tm-479-sigma
             </div>
             <div class="sigma-content col-lg-3 col-md-6 sigma-bg-blue">
             	<h2>Licensing</h2>
-            	<p><em>LCADC, LSW, CCS, and SAP Licensed</em><br><br><br></p>
+            	<p><em>LCADC, LSW, CCS, and SAP Licensed</em><br><br></p>
             </div>
             <div class="sigma-content col-lg-3 col-md-6 sigma-bg-green">
             	<h2>Management</h2>
@@ -399,7 +399,7 @@ http://www.templatemo.com/tm-479-sigma
         
         <div class="row">
             <div class="sigmano col-lg-12 col-md-12">
-                
+                <div class='resource_landingWrapper' id='resource_loader'></div>
             </div>
             
         </div>        
