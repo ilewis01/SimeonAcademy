@@ -9685,7 +9685,151 @@ button:hover {
 	border: 1px solid gray;
 }
 
+.asi-true-left {
+	width:48%;
+	height:100%;
+	float:left;
 
+}
+
+.asi-true-right {
+	width:48%;
+	height:100%;
+	float:right;
+}
+
+.asi-emp-cont {
+	width:95%;
+	height:95%;
+	margin:auto;
+	/*border:1px solid green;*/
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	/*border:1px solid black;*/
+}
+
+.asi-tri-holder {
+	width:100%;
+	position: relative;
+	/*background-color: 1px solid black;*/
+}
+
+.asi-tri-number {
+	width:8%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-ques {
+	width:62%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-resp {
+	width:30%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-number-s {
+	width:8%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-ques-s {
+	width:72%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-resp-s {
+	width:20%;
+	height:22px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-number-dbl {
+	width:8%;
+	height:44px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-ques-dbl {
+	width:72%;
+	height:44px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-resp-dbl {
+	width:20%;
+	height:44px;
+	float:left;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-resp-s input {
+	width:100%;
+	border:1px solid gray;
+	border-radius:5px;
+}
+
+.asi-tri-resp-dbl input {
+	width:100%;
+	border:1px solid gray;
+	border-radius:5px;
+}
+
+.asi-howMany-head-wow {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 40px; 
+}
+
+.asi-howMany-head-wowNone {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	/*padding-top: 40px; */
+}
+
+
+
+.asi-d1-top {
+	width:100%;
+	height: 10%;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid gray;
+}
+
+.asi-d1-mid {
+	width:100%;
+	height:7.5%;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid gray;
+}
+
+.asi-d1-btm {
+	width:100%;
+	height:7.5%;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid gray;
+}
 /*.resource_dirc_head, .resource_phon_head, .resource_webl_head span {
 	font-style: italic;
 }*/

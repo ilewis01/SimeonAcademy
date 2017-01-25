@@ -13,6 +13,10 @@ body {
 	line-height: 34px;
 }
 
+.simLanding button:hover {
+	background-color: #6f7070;
+}
+
 h1 {
 	font-size: 34px;
 }
@@ -416,6 +420,11 @@ h2 {
 	transition-delay:0s;
 	opacity: 1;
 	visibility: visible;
+}
+
+.iml-land-lowest {
+	height:220px;
+	/*opacity: 0.2;*/
 }
 
 .grpSessionDataHolder {
