@@ -15864,6 +15864,42 @@ function snatchUpASI_d1_preTable_select_divs() {
 	return divs;
 }
 
+function m_snatchUpASI_d1_preTable_day_divs() {
+	var divs = [];
+
+	for (var i = 0; i < 13; i++) {
+		var index = String(i + 1);
+		var t1 = 'm_d' + index + 'Day';
+		var d1 = grab(t1);
+		divs.push(d1);
+	}
+	return divs;
+}
+
+function m_snatchUpASI_d1_preTable_year_divs() {
+	var divs = [];
+
+	for (var i = 0; i < 13; i++) {
+		var index = String(i + 1);
+		var t2 = 'm_d' + index + 'Year';
+		var d2 = grab(t2);
+		divs.push(d2);
+	}
+	return divs;
+}
+
+function m_snatchUpASI_d1_preTable_select_divs() {
+	var divs = [];
+
+	for (var i = 0; i < 12; i++) {
+		var index = String(i + 1);
+		var t1 = 'm_d' + index + 'Route';
+		var d1 = grab(t1);
+		divs.push(d1);
+	}
+	return divs;
+}
+
 
 function asi_d1_day_errors() {
 	var divs = snatchUpASI_d1_preTable_day_divs();
@@ -15925,6 +15961,19 @@ function asi_d1_select_errors() {
 	return hasErrors;
 }
 
+function clearG1(div) {
+	div.style.border = '1px solid gray';
+}
+
+function m_copy(tarName) {
+	divName = String(divName);
+	targetName = 'm_' + divName;
+
+	var div = grab(divName);
+	var target = grab(targetName);
+
+	target.value = div.value;
+}
 
 function asi_d1_z1_errorCheck() {
 	var hasErrors = false;
@@ -15944,6 +15993,22 @@ function asi_d1_z1_submit(errorDiv, errorOpenClass, formDiv, formCloseClass) {
 		generalVisibilityChange(errorDiv, errorOpenClass);
 	}
 	else {
+		var days 		= snatchUpASI_d1_preTable_day_divs();
+		var years 		= snatchUpASI_d1_preTable_year_divs();
+		var routes 		= snatchUpASI_d1_preTable_select_divs();
+		var m_days 		= m_snatchUpASI_d1_preTable_day_divs();
+		var m_years 	= m_snatchUpASI_d1_preTable_year_divs();
+		var m_routes 	= m_snatchUpASI_d1_preTable_select_divs();
+
+		for (var i = 0; i < 13; i++) {
+			m_days[i].value = days[i].value;
+			m_years[i].value = years[i].value;
+		}
+
+		for (var j = 0; j < 12; j++) {
+			m_routes[j].value = routes[j].value;
+		}
+
 		generalVisibilityChange(formDiv, formCloseClass);
 	}
 }
