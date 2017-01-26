@@ -9832,6 +9832,16 @@ button:hover {
 	box-shadow: 3px 8px 8px black;
 }
 
+.asi-drug1-z4-border {
+	width:45%;
+	margin: auto;
+	height:83%;
+	margin-top:-60px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
 .asi-drug1-z1-bkg, .asi-drug1-z2-bkg, .asi-drug1-z3-bkg, .asi-drug1-z4-bkg {
 	/*opacity: 0.89;*/
 	width:100%;
@@ -9880,6 +9890,45 @@ button:hover {
 	margin-bottom: 2%;
 }
 
+.asi-d1-ir1 {
+	text-align: left;
+	color:#5d706d;
+	font-size:22px;
+	font-weight: bold;
+	font-style:italic;
+	text-shadow:1px 1px gray;
+	width:83%;
+	margin:auto;
+	border-bottom: 2px solid gray;
+}
+
+.asi-d1-ir2 {
+	width:83%;
+	margin:auto;
+	font-weight: bold;
+	font-style: italic;
+	padding-top:1%;
+	color:#6b2d12;
+}
+
+.asi-d1-ir3 {
+	width:83%;
+	margin:auto;
+	margin-top:1%;
+}
+
+.asi-d1-ir-tri-btn {
+	width:83%;
+	margin:auto;
+	padding-left: 1%;
+	margin-top:5%;
+}
+
+.asi-d1-ir-tri-btn button {
+	width:32%;
+	font-size: 12px;
+}
+
 .comment_page_body_d1 textarea {
 	width:100%;
 	height:100%;
@@ -9909,7 +9958,12 @@ button:hover {
 	color:#cccccc;
 }
 
-.ft-closeWindow-icon, .ft-closeWindow-icon-ltgray a:hover {
+.ft-closeWindow-icon-ltgray a:hover {
+	color:#5d706d;
+	text-decoration: none;
+}
+
+.ft-closeWindow-icon a:hover {
 	color:#5d706d;
 	text-decoration: none;
 }
