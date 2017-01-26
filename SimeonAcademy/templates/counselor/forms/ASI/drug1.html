@@ -4,6 +4,7 @@
 {% load staticfiles %}
 
 <body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+  <!-- <input type='text' id='test1'> -->
     <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
       <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
       <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
@@ -163,7 +164,7 @@
                                   <ul class='overall-warning-t3'>
                                     <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> can only be a value betweem 0 and 30</li>
                                     <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 99</li>
-                                    <li>You must make a selection from the fields <span style='color:orange'>HIGHLIGHTED IN ORANGE</span></li>
+                                    <li>You must make a selection from the fields <span style='color:#bf6c01'>HIGHLIGHTED IN ORANGE</span></li>
                                   </ul>
                                 </div>
                                 <div class='finalAndCompleteWarningButtonDiv_single2'>
@@ -285,7 +286,7 @@
                                   <div class='comment_page_body_d1'><textarea name='asi_comment' id='asi_comment' value=''></textarea></div>
 
                                   <div class='asi-d1-newComment-btns-wrap'>
-                                      <button onClick='javascript: save_asi_comment();'>Save</button>
+                                      <button onClick='javascript: save_asi_comment(); return false;'>Save</button>
                                       <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">Cancel</button>
                                   </div>
                             </div>
@@ -324,7 +325,7 @@
                                     <i class="fa fa-window-close" aria-hidden="true"></i>
                                 </a>
                             </div> -->
-                            <div style='height:20px';></div>
+                            <div style='height:20px;'></div>
 
                             <div class='asi-zi-form-head'><b>Alcohol/Drug Use</b></div>
 
@@ -350,12 +351,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d1Year' id='d1Year' value='' oninput="javascript: clearG1(d1Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d1Route' id='d1Route' onChange="javascript: clearG1(d1Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -368,12 +369,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d2Year' id='d2Year' value='' oninput="javascript: clearG1(d2Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d2Route' id='d2Route' onChange="javascript: clearG1(d2Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -386,12 +387,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d3Year' id='d3Year' value='' oninput="javascript: clearG1(d3Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d3Route' id='d3Route' onChange="javascript: clearG1(d3Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -404,12 +405,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d4Year' id='d4Year' value='' oninput="javascript: clearG1(d4Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d4Route' id='d4Route' onChange="javascript: clearG1(d4Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -422,12 +423,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d5Year' id='d5Year' value='' oninput="javascript: clearG1(d5Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d5Route' id='d5Route' onChange="javascript: clearG1(d5Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -440,12 +441,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d6Year' id='d6Year' value='' oninput="javascript: clearG1(d6Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d6Route' id='d6Route' onChange="javascript: clearG1(d6Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -458,12 +459,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d7Year' id='d7Year' value='' oninput="javascript: clearG1(d7Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d7Route' id='d7Route' onChange="javascript: clearG1(d7Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -476,12 +477,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d8Year' id='d8Year' value='' oninput="javascript: clearG1(d8Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d8Route' id='d8Route' onChange="javascript: clearG1(d8Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -494,12 +495,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d9Year' id='d9Year' value='' oninput="javascript: clearG1(d9Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d9Route' id='d9Route' onChange="javascript: clearG1(d9Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -512,12 +513,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d10Year' id='d10Year' value='' oninput="javascript: clearG1(d10Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d10Route' id='d10Route' onChange="javascript: clearG1(d10Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -530,12 +531,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d11Year' id='d11Year' value='' oninput="javascript: clearG1(d11Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d11Route' id='d11Route' onChange="javascript: clearG1(d11Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -548,12 +549,12 @@
                                     <div class='asi-d1-inner4'><input type='number' name='d12Year' id='d12Year' value='' oninput="javascript: clearG1(d12Year);"></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d12Route' id='d12Route' onChange="javascript: clearG1(d12Route);">
-                                            <option value='None Selected'>Select</option>
-                                            <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='0'>Select</option>
+                                            <option value='1'>Oral</option>
+                                            <option value='2'>Nasal</option>
+                                            <option value='3'>Smoking</option>
+                                            <option value='4'>Non-IV Inject</option>
+                                            <option value='5'>IV Inject</option>
                                             <option value='X'>No Answer</option>
                                             <option value='N'>N/A</option>
                                         </select>
@@ -588,25 +589,27 @@
                       </div>
                     </div>
 
-                    <div style='height:25px;'></div>
+                    <div class='asi-d1-instruction-div'>
+                        <a onClick="javascript: viewASIinstruction('drug'); return false;">View Instructions</a>
+                    </div>
                     <div class='asi-true-left'>
                       <div class='asi-emp-cont'>
                         <div class='asi-tri-holder'>
                           <div class='asi-tri-number'>D14.</div>
                           <div class='asi-tri-ques'>Which substance is the major problem?</div>
                           <div class='asi-tri-resp'>
-                            <select name='d14' id='d14'>
+                            <select name='d14' id='d14' onChange="javascript: clearG1(d14);">
                               <option value='None Selected'>Select</option>
-                              <option value='00'>None at all</option>
-                              <option value='01'>Alcohol (Any Use)</option>
-                              <option value='02'>Alcohol (Intoxication)</option>
-                              <option value='03'>Heroin</option>
-                              <option value='04'>Methadone</option>
-                              <option value='05'>Other Opiates</option>
-                              <option value='06'>Barbiturates</option>
-                              <option value='07'>Other sed/hyp/tranq</option>
-                              <option value='08'>Cocaine</option>
-                              <option value='09'>Amphetamines</option>
+                              <option value='0'>None at all</option>
+                              <option value='1'>Alcohol (Any Use)</option>
+                              <option value='2'>Alcohol (Intoxication)</option>
+                              <option value='3'>Heroin</option>
+                              <option value='4'>Methadone</option>
+                              <option value='5'>Other Opiates</option>
+                              <option value='6'>Barbiturates</option>
+                              <option value='7'>Other sed/hyp/tranq</option>
+                              <option value='8'>Cocaine</option>
+                              <option value='9'>Amphetamines</option>
                               <option value='10'>Cannabis</option>
                               <option value='11'>Hallucinogens</option>
                               <option value='12'>Inhalants</option>
@@ -615,50 +618,50 @@
                             </select>
                           </div>
 
-                          <div style='height:25px;'></div>
+                          <div style='height:35px;'></div>
 
                           <div class='asi-tri-number-dbl'>D15.</div>
                           <div class='asi-tri-ques-dbl'>How long ago was your last period of voluntary abstinence?</div>
-                          <div class='asi-tri-resp-dbl'><input type='text' name='d15' id='d15'><br><br></div>
+                          <div class='asi-tri-resp-dbl'><input type='text' name='d15' id='d15' oninput="javascript: clearG1(d15);"><br><br></div>
 
                           <div class='asi-tri-number-s'>D16.</div>
                           <div class='asi-tri-ques-s'>How many months ago did this abstinence end?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d16' id='d16'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d16' id='d16' oninput="javascript: clearG1(d16);"></div>
 
                           <div style='height:45px;'></div>
 
                           <div class='asi-howMany-head-wow'>How many times have you:</div>
                           <div class='asi-tri-number-s'>D17.</div>
                           <div class='asi-tri-ques-s'>Had alcohol D.T's?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d17' id='d17'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d17' id='d17' oninput="javascript: clearG1(d17);"></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D18.</div>
                           <div class='asi-tri-ques-s'>Overdosed on drugs?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d18' id='d18'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d18' id='d18' oninput="javascript: clearG1(d18);"></div>
 
                           <div class='asi-howMany-head-wow'>How many times in your life have you been treated for:</div>
                           <div class='asi-tri-number-s'>D19.</div>
                           <div class='asi-tri-ques-s'>Alcohol abuse?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d19' id='d19'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d19' id='d19' oninput="javascript: clearG1(d19);"></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D20.</div>
                           <div class='asi-tri-ques-s'>Drug abuse?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d20' id='d20'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d20' id='d20' oninput="javascript: clearG1(d20);"></div>
 
                           <div class='asi-howMany-head-wow'>How many of these were detox only?</div>
                           <div class='asi-tri-number-s'>D21.</div>
                           <div class='asi-tri-ques-s'>Alcohol:</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d21' id='d21'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d21' id='d21' oninput="javascript: clearG1(d21);"></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D22.</div>
                           <div class='asi-tri-ques-s'>Drugs:</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d22' id='d22'></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d22' id='d22' oninput="javascript: clearG1(d22);"></div>
                         </div>
                       </div>
                     </div>
@@ -669,56 +672,56 @@
                             <div class='asi-howMany-head-wowNone'>How much have you spent during the last 30 days on:</div>
                             <div class='asi-tri-number-s'>D23.</div>
                             <div class='asi-tri-ques-s'>Alcohol?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d23' id='d23'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d23' id='d23' oninput="javascript: clearG1(d23);"></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D24.</div>
                             <div class='asi-tri-ques-s'>Drugs?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d24' id='d24'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d24' id='d24' oninput="javascript: clearG1(d24);"></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-dbl'>D25.</div>
                             <div class='asi-tri-ques-dbl'>How many days have you been treated in an outputpatient setting in the past 30 days?</div>
-                            <div class='asi-tri-resp-dbl'><input type='text' name='d25' id='d25'><br><br></div>
+                            <div class='asi-tri-resp-dbl'><input type='text' name='d25' id='d25' oninput="javascript: clearG1(d25);"><br><br></div>
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, have you experienced:</div>
                             <div class='asi-tri-number-s'>D26.</div>
                             <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d26' id='d26'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d26' id='d26' oninput="javascript: clearG1(d26);"></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D27.</div>
                             <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d27' id='d27'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d27' id='d27' oninput="javascript: clearG1(d27);"></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, how troubled have you been by the following:</div>
                             <div class='asi-tri-number-s'>D28.</div>
                             <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d28' id='d28'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d28' id='d28' oninput="javascript: clearG1(d28);"></div>
 
                             <div style='height:40px;'></div>
 
                             <div class='asi-tri-number-s'>D29.</div>
                             <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d29' id='d29'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d29' id='d29' oninput="javascript: clearG1(d29);"></div>
 
                             <div style='height:40px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>How important to you now is treatment for these:</div>
                             <div class='asi-tri-number-s'>D30.</div>
                             <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d30' id='d30'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d30' id='d30' oninput="javascript: clearG1(d30);"></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D31.</div>
                             <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d31' id='d31'></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d31' id='d31' oninput="javascript: clearG1(d31);"></div>
                           </div>
                       </div>
                     </div>  
@@ -729,8 +732,8 @@
               <div class='col-md-12' style='width:100%'>
                 <table class='iml-save-btn'>
                   <tr>
+                    <td><button onClick="javascript: continue_asi_d1_main(z2, 'asi-drug1-z2-holder-in', z4, 'asi-drug1-z4-holder-in'); return false;">Save & Continue</button></td>
                     <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
-                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
                   </tr>
                 </table>
               </div>

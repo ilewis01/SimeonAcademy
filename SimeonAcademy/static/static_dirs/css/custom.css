@@ -9693,6 +9693,11 @@ button:hover {
 	border-bottom:2px solid #6b2d12;
 }
 
+.asi-d1-instruction-div {
+	font-size: 18px;
+	padding-top:15px;
+	padding-left:12px;
+}
 
 .finalAndCompleteWarningButtonDiv_single {
 	width:95%;
@@ -9706,7 +9711,11 @@ button:hover {
 	margin-top:28%;
 }
 
-.finalAndCompleteWarningButtonDiv_single, .finalAndCompleteWarningButtonDiv_single2 button {
+.finalAndCompleteWarningButtonDiv_single button {
+	width:100%;
+}
+
+.finalAndCompleteWarningButtonDiv_single2 button {
 	width:100%;
 }
 
@@ -10188,6 +10197,13 @@ button:hover {
 	height:22px;
 	float:left;
 	/*border: 1px solid black;*/
+}
+
+.asi-tri-resp select {
+	border: 1px solid gray;
+	width:100%;
+	height:100%;
+	font-size: 12px;
 }
 
 .asi-tri-number-s {

@@ -3998,6 +3998,22 @@ function isRawNumber(num) {
 	return isNumber;
 }
 
+function isRawASInumber(num) {
+	isNumber = true;
+	num = String(num);
+
+	for (var i = 0; i < num.length; i++) {
+		var c = num.charAt(i);
+
+		if (c!=='0' && c!=='1' && c!=='2' && c!=='3' && c!=='4' && c!=='5' && c!=='6' && c!=='7' && c!=='8' && c!=='9' && c!=='X'  && c!=='x'  && c!=='N'  && c!=='n'  && c!=='XX'  && c!=='xx' && c!=='Xx' && c!=='xX' && c!=='NN'  && c!=='nn'  && c!=='Nn' && c!=='nN') {
+			isNumber = false;
+			break;
+		}
+	}
+
+	return isNumber;
+}
+
 function isRawSSN(num) {
 	isNumber = true;
 	num = clearWhiteSpace(num);
@@ -15986,6 +16002,68 @@ function asi_d1_z1_errorCheck() {
 	}
 
 	return hasErrors;
+}
+
+function fetch_asi_d1_main_divs() {
+	var divs = []
+	var d = 'd';
+
+	for (var i = 15; i <= 25; i++) {
+		var name = d + String(i);
+		var div = grab(name);
+		divs.push(div);
+	}
+
+	for (var j = 28; j <= 31; j++) {
+		var n = d + String(j);
+		var d1 = grab(n);
+		divs.push(d1);
+	}
+
+	return divs;
+}
+
+function check_asi_d1_value(val) {
+	var hasError = false;
+
+	if (isRawASInumber(val) === false || isBlankText(val) === true) {
+		hasError = true;
+	}
+
+	return hasError;
+}
+
+function asi_d1_main_error_checker() {
+	var hasErrors = false;
+	var count = 0;
+	var divs = fetch_asi_d1_main_divs();
+
+	for (var i = 0; i < divs.length; i++) {
+		if (check_asi_d1_value(divs[i].value) === true) {
+			divs[i].style.border = '1px solid red';
+			count += 1;
+		}
+	}
+
+	if (grab('d14').selectedIndex === 0) {
+		grab('d14').style.border = '1px solid red';
+		count += 1;
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
+function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDivClass) {
+	if (asi_d1_main_error_checker() === true) {
+		generalVisibilityChange(warningDiv, warningDivClass);
+	}
+	else {
+		generalVisibilityChange(openingDiv, openingDivClass);
+	}
 }
 
 function asi_d1_z1_submit(errorDiv, errorOpenClass, formDiv, formCloseClass) {
