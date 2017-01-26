@@ -109,8 +109,32 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
+                  <!-- THIS IS THE WARNING 2 SECTION-->
+                    <div class='asi-drug1-z5-holder-out' id='z5'>
+                        <div class='asi-drug1-z5-border'>
+                            <div class='asi-drug1-z5-bkg'>
+                                <div style='height:2%;'></div>
+                                <div class='asi-d1-warningHld'>
+                                  <div class='asi-d1-warningHld1'><img src="{% static 'images/warnING.png' %}" alt="WARNING" class=''></div>
+                                  <div class='asi-d1-warningHld2'>Warning!</div>
+                                  <div class='overall-warning-t1'>The Highlighted Fields Contain Errors</div>
+                                  <div class='overall-warning-t2'>Follow the legend below to correct these errors:</div>
+                                  <ul class='overall-warning-t3'>
+                                    <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> can only be a value betweem 0 and 30</li>
+                                    <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 99</li>
+                                    <li>You must make a selection from the fields <span style='color:orange'>HIGHLIGHTED IN ORANGE</span></li>
+                                  </ul>
+                                </div>
+                                <div class='finalAndCompleteWarningButtonDiv_single2'>
+                                  <button onClick="javascript: generalVisibilityChange(z5, 'asi-drug1-z5-holder-out'); return false;">ok</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  <!-- CONFIDENCE RATING SECTION -->
                   <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
-                    <div class='asi-drug1-z4-holder-in' id='z4'>
+                    <div class='asi-drug1-z4-holder-out' id='z4'>
                         <div class='asi-drug1-z4-border'>
                             <div class='asi-drug1-z4-bkg'>
                                 <div class='ft-closeWindow-icon'>
@@ -125,7 +149,7 @@
                                 <div class='asi-d1-ir3'>
                                     <table>
                                       <tr>
-                                        <td><div>Alcohol Problems?</div></td>
+                                        <td><div class='asi-d1-pas-select'>Alcohol Problems?</div></td>
                                         <td>
                                           <select name='D32' id='D32'>
                                             <option value='0'>Select</option>
@@ -143,7 +167,7 @@
                                       </tr>
 
                                       <tr>
-                                        <td><div>Drug Problems?</div></td>
+                                        <td><div class='asi-d1-pas-select'>Drug Problems?</div></td>
                                         <td>
                                           <select name='D33' id='D33'>
                                             <option value='0'>Select</option>
@@ -171,20 +195,22 @@
                                     <table>
                                       <tr>
                                         <td><div>D34.</div></td>
-                                        <td><div>Patient's Misrepresentation?</div></td>
-                                        <td><div><input type='radio' name='d34' id='noD34' value='0' checked></div></td>
-                                        <td><div>No</div></td>
-                                        <td><div><input type='radio' name='d34' id='yesD34' value='1'></div></td>
-                                        <td><div>Yes</div></td>
+                                        <td><div class='asi-d1-pas-select'>Patient's Misrepresentation?</div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='d34' id='noD34' value='0' checked></div></td>
+                                        <td><div class='asi-d1-radio-label'>No</div></td>
+                                        <td><div style='width:15px;'></div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='d34' id='yesD34' value='1'></div></td>
+                                        <td><div class='asi-d1-radio-label'>Yes</div></td>
                                       </tr>
 
                                       <tr>
                                         <td><div>D35.</div></td>
-                                        <td><div>Patient's Inability To Understand?</div></td>
-                                        <td><div><input type='radio' name='d35' id='noD35' value='0' checked></div></td>
-                                        <td><div>No</div></td>
-                                        <td><div><input type='radio' name='d35' id='yesD35' value='1'></div></td>
-                                        <td><div>Yes</div></td>
+                                        <td><div class='asi-d1-pas-select'>Patient's Inability To Understand?</div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='d35' id='noD35' value='0' checked></div></td>
+                                        <td><div class='asi-d1-radio-label'>No</div></td>
+                                        <td><div style='width:15px;'></div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='d35' id='yesD35' value='1'></div></td>
+                                        <td><div class='asi-d1-radio-label'>Yes</div></td>
                                       </tr>
                                     </table>
                                 </div>
@@ -199,7 +225,8 @@
                         </div>
                     </div>
 
-                    <div class='asi-drug1-z3-holder-in' id='z3'>
+                    <!-- NEW COMMENT SECTION -->
+                    <div class='asi-drug1-z3-holder-out' id='z3'>
                         <div class='asi-drug1-z3-border'>
                             <div class='asi-drug1-z3-bkg'>
                                   <div class='asi_comment_header_d1'>
@@ -224,8 +251,8 @@
                         </div>
                     </div>
 
-                    <!-- THIS IS THE WARNING -->
-                    <div class='asi-drug1-z2-holder-in' id='z2'>
+                    <!-- THIS IS THE WARNING SECTION-->
+                    <div class='asi-drug1-z2-holder-out' id='z2'>
                         <div class='asi-drug1-z2-border'>
                             <div class='asi-drug1-z2-bkg'>
                                 <div style='height:2%;'></div>
@@ -251,11 +278,12 @@
                     <div class='asi-drug1-z1-holder-in' id='z1'>
                       <div class='asi-drug1-z1-border'>
                         <div class='asi-drug1-z1-bkg'>
-                            <div class='ft-closeWindow-icon'>
+                            <!-- <div class='ft-closeWindow-icon'>
                                 <a onClick="javascript: generalVisibilityChange(z1, 'asi-drug1-z1-holder-out'); return false;">
                                     <i class="fa fa-window-close" aria-hidden="true"></i>
                                 </a>
-                            </div>
+                            </div> -->
+                            <div style='height:20px';></div>
 
                             <div class='asi-zi-form-head'><b>Alcohol/Drug Use</b></div>
 
@@ -277,8 +305,8 @@
 
                                 <div class='asi-d1-mid'>
                                     <div class='asi-d1-inner3'>Alcohol (Any use at all)</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d1Day' id='d1Day' value='{{fields.d1Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d1Year' id='d1Year' value='{{fields.d1Year}}'></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d1Day' id='d1Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d1Year' id='d1Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d1Route' id='d1Route'>
                                             <option value='None Selected'>Select</option>
@@ -287,14 +315,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
                                     <div class='asi-d1-inner3'>Alcohol (Intoxication)</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d2Day' id='d2Day' value='{{fields.d2Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d2Year' id='d2Year' value='{{fields.d2Year}}'></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d2Day' id='d2Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d2Year' id='d2Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d2Route' id='d2Route'>
                                             <option value='None Selected'>Select</option>
@@ -303,14 +333,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
                                     <div class='asi-d1-inner3'>Herion</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d3Day' id='d3Day' value='{{fields.d3Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d3Year' id='d3Year' value='{{fields.d3Year}}'></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d3Day' id='d3Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d3Year' id='d3Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d3Route' id='d3Route'>
                                             <option value='None Selected'>Select</option>
@@ -319,14 +351,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Other Opiates/Analgesics</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d4Day' id='d4Day' value='{{fields.d4Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d4Year' id='d4Year' value='{{fields.d4Year}}'></div>
+                                    <div class='asi-d1-inner3'>Methadone</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d4Day' id='d4Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d4Year' id='d4Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d4Route' id='d4Route'>
                                             <option value='None Selected'>Select</option>
@@ -335,14 +369,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Barbiturates</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d5Day' id='d5Day' value='{{fields.d5Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d5Year' id='d5Year' value='{{fields.d5Year}}'></div>
+                                    <div class='asi-d1-inner3'>Other Opiates/Analgesics</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d5Day' id='d5Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d5Year' id='d5Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d5Route' id='d5Route'>
                                             <option value='None Selected'>Select</option>
@@ -351,14 +387,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Sedatives/Hypnotics/Tranqs</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d6Day' id='d6Day' value='{{fields.d6Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d6Year' id='d6Year' value='{{fields.d6Year}}'></div>
+                                    <div class='asi-d1-inner3'>Barbiturates</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d6Day' id='d6Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d6Year' id='d6Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d6Route' id='d6Route'>
                                             <option value='None Selected'>Select</option>
@@ -367,14 +405,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Cocaine</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d7Day' id='d7Day' value='{{fields.d7Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d7Year' id='d7Year' value='{{fields.d7Year}}'></div>
+                                    <div class='asi-d1-inner3'>Sedatives/Hypnotics/Tranquilizers</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d7Day' id='d7Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d7Year' id='d7Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d7Route' id='d7Route'>
                                             <option value='None Selected'>Select</option>
@@ -383,14 +423,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Amphetamines</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d8Day' id='d8Day' value='{{fields.d8Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d8Year' id='d8Year' value='{{fields.d8Year}}'></div>
+                                    <div class='asi-d1-inner3'>Cocaine</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d8Day' id='d8Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d8Year' id='d8Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d8Route' id='d8Route'>
                                             <option value='None Selected'>Select</option>
@@ -399,14 +441,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Cannabis</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d9Day' id='d9Day' value='{{fields.d9Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d9Year' id='d9Year' value='{{fields.d9Year}}'></div>
+                                    <div class='asi-d1-inner3'>Amphetamines</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d9Day' id='d9Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d9Year' id='d9Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d9Route' id='d9Route'>
                                             <option value='None Selected'>Select</option>
@@ -415,14 +459,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Hallucinogens</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d10Day' id='d10Day' value='{{fields.d10Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d10Year' id='d10Year' value='{{fields.d10Year}}'></div>
+                                    <div class='asi-d1-inner3'>Cannabis</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d10Day' id='d10Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d10Year' id='d10Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d10Route' id='d10Route'>
                                             <option value='None Selected'>Select</option>
@@ -431,14 +477,16 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-mid'>
-                                    <div class='asi-d1-inner3'>Inhalants</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d11Day' id='d11Day' value='{{fields.d11Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d11Year' id='d11Year' value='{{fields.d11Year}}'></div>
+                                    <div class='asi-d1-inner3'>Hallucinogens</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d11Day' id='d11Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d11Year' id='d11Year' value=''></div>
                                     <div class='asi-d1-inner4'>
                                         <select name='d11Route' id='d11Route'>
                                             <option value='None Selected'>Select</option>
@@ -447,29 +495,49 @@
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
                                             <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class='asi-d1-mid'>
+                                    <div class='asi-d1-inner3'>Inhalants</div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d12Day' id='d12Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d12Year' id='d12Year' value=''></div>
+                                    <div class='asi-d1-inner4'>
+                                        <select name='d12Route' id='d12Route'>
+                                            <option value='None Selected'>Select</option>
+                                            <option value='01'>Oral</option>
+                                            <option value='02'>Nasal</option>
+                                            <option value='03'>Smoking</option>
+                                            <option value='04'>Non-IV Inject</option>
+                                            <option value='05'>IV Inject</option>
+                                            <option value='X'>No Answer</option>
+                                            <option value='N'>N/A</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-d1-btm'>
                                     <div class='asi-d1-inner3'>More than 1 substance per day</div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d12Day' id='d12Day' value='{{fields.d12Day}}}'></div>
-                                    <div class='asi-d1-inner4'><input type='number' name='d12Year' id='d12Year' value='{{fields.d12Year}}'></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d13Day' id='d13Day' value=''></div>
+                                    <div class='asi-d1-inner4'><input type='number' name='d13Year' id='d13Year' value=''></div>
                                     <div class='asi-d1-inner4'>
-                                        <select name='d12Route' id='d12Route' disabled style='opacity:0.3'>
+                                        <select name='' id='' disabled style='opacity:0.3'>
                                             <option value='None Selected'></option>
-                                            <option value='01'>Oral</option>
+                                            <!-- <option value='01'>Oral</option>
                                             <option value='02'>Nasal</option>
                                             <option value='03'>Smoking</option>
                                             <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option>
+                                            <option value='05'>IV Inject</option> -->
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class='asi-di-btn-cont'>
                                     <div class='asi-d1-vert-btn'>
-                                        <button>Submit</button>
+                                        <button onClick="javascript: asi_d1_z1_submit(z5, 'asi-drug1-z5-holder-in', z1, 'asi-drug1-z1-holder-out'); return false;">Submit</button>
                                         <button>Exit ASI</button>
                                     </div>
                                 </div>

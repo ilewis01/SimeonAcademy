@@ -15782,72 +15782,170 @@ function init_asi_employmentl(json_data) {
 }
 
 function init_asi_drug1(json_data) {
-	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+	grab('d1Day').value = json_data.d1Day;
+	grab('d2Day').value = json_data.d2Day;
+	grab('d3Day').value = json_data.d3Day;
+	grab('d4Day').value = json_data.d4Day;
+	grab('d5Day').value = json_data.d5Day;
+	grab('d6Day').value = json_data.d6Day;
+	grab('d7Day').value = json_data.d7Day;
+	grab('d8Day').value = json_data.d8Day;
+	grab('d9Day').value = json_data.d9Day;
+	grab('d10Day').value = json_data.d10Day;
+	grab('d11Day').value = json_data.d11Day;
+	grab('d12Day').value = json_data.d12Day;
+	grab('d13Day').value = json_data.d13Day
 
-	number_init(json_data.isComplete, document.getElementById('d1Day'));
-	number_init(json_data.isComplete, document.getElementById('d2Day'));
-	number_init(json_data.isComplete, document.getElementById('d3Day'));
-	number_init(json_data.isComplete, document.getElementById('d4Day'));
-	number_init(json_data.isComplete, document.getElementById('d5Day'));
-	number_init(json_data.isComplete, document.getElementById('d6Day'));
-	number_init(json_data.isComplete, document.getElementById('d7Day'));
-	number_init(json_data.isComplete, document.getElementById('d8Day'));
-	number_init(json_data.isComplete, document.getElementById('d9Day'));
-	number_init(json_data.isComplete, document.getElementById('d10Day'));
-	number_init(json_data.isComplete, document.getElementById('d11Day'));
-	number_init(json_data.isComplete, document.getElementById('d12Day'));
+	grab('d1Year').value = json_data.d1Year;
+	grab('d2Year').value = json_data.d2Year;
+	grab('d3Year').value = json_data.d3Year;
+	grab('d4Year').value = json_data.d4Year;
+	grab('d5Year').value = json_data.d5Year;
+	grab('d6Year').value = json_data.d6Year;
+	grab('d7Year').value = json_data.d7Year;
+	grab('d8Year').value = json_data.d8Year;
+	grab('d9Year').value = json_data.d9Year;
+	grab('d10Year').value = json_data.d10Year;
+	grab('d11Year').value = json_data.d11Year;
+	grab('d12Year').value = json_data.d12Year;
+	grab('d13Year').value = json_data.d13Year;
 
-	number_init(json_data.isComplete, document.getElementById('d1Year'));
-	number_init(json_data.isComplete, document.getElementById('d2Year'));
-	number_init(json_data.isComplete, document.getElementById('d3Year'));
-	number_init(json_data.isComplete, document.getElementById('d4Year'));
-	number_init(json_data.isComplete, document.getElementById('d5Year'));
-	number_init(json_data.isComplete, document.getElementById('d6Year'));
-	number_init(json_data.isComplete, document.getElementById('d7Year'));
-	number_init(json_data.isComplete, document.getElementById('d8Year'));
-	number_init(json_data.isComplete, document.getElementById('d9Year'));
-	number_init(json_data.isComplete, document.getElementById('d10Year'));
-	number_init(json_data.isComplete, document.getElementById('d11Year'));
-	number_init(json_data.isComplete, document.getElementById('d12Year'));
+	grab('d1Route').selectedIndex = json_data.d1Route;
+	grab('d2Route').selectedIndex = json_data.d2Route;
+	grab('d3Route').selectedIndex = json_data.d3Route;
+	grab('d4Route').selectedIndex = json_data.d4Route;
+	grab('d5Route').selectedIndex = json_data.d5Route;
+	grab('d6Route').selectedIndex = json_data.d6Route;
+	grab('d7Route').selectedIndex = json_data.d7Route;
+	grab('d8Route').selectedIndex = json_data.d8Route;
+	grab('d9Route').selectedIndex = json_data.d9Route;
+	grab('d10Route').selectedIndex = json_data.d10Route;
+	grab('d11Route').selectedIndex = json_data.d11Route;
+	grab('d12Route').selectedIndex = json_data.d12Route;
 
-	number_init(json_data.isComplete, document.getElementById('d15'));
-	number_init(json_data.isComplete, document.getElementById('d16'));
-	number_init(json_data.isComplete, document.getElementById('d17'));
-	number_init(json_data.isComplete, document.getElementById('d18'));
-	number_init(json_data.isComplete, document.getElementById('d19'));
-	number_init(json_data.isComplete, document.getElementById('d20'));
-	number_init(json_data.isComplete, document.getElementById('d21'));
-	number_init(json_data.isComplete, document.getElementById('d22'));
-	number_init(json_data.isComplete, document.getElementById('d23'));
-	number_init(json_data.isComplete, document.getElementById('d24'));
-	number_init(json_data.isComplete, document.getElementById('d25'));
-	number_init(json_data.isComplete, document.getElementById('d26'));
-	number_init(json_data.isComplete, document.getElementById('d27'));
 
-	document.getElementById('d1Route').selectedIndex = json_data.d1Route;
-	document.getElementById('d2Route').selectedIndex = json_data.d2Route;
-	document.getElementById('d3Route').selectedIndex = json_data.d3Route;
-	document.getElementById('d4Route').selectedIndex = json_data.d4Route;
-	document.getElementById('d5Route').selectedIndex = json_data.d5Route;
-	document.getElementById('d6Route').selectedIndex = json_data.d6Route;
-	document.getElementById('d7Route').selectedIndex = json_data.d7Route;
-	document.getElementById('d8Route').selectedIndex = json_data.d8Route;
-	document.getElementById('d9Route').selectedIndex = json_data.d9Route;
-	document.getElementById('d10Route').selectedIndex = json_data.d10Route;
-	document.getElementById('d11Route').selectedIndex = json_data.d11Route;
-	document.getElementById('d12Route').selectedIndex = json_data.d12Route;
+	// asi_radioBtn_select(json_data.d34, document.getElementById('d34yes'), document.getElementById('d34no'));
+	// asi_radioBtn_select(json_data.d35, document.getElementById('d35yes'), document.getElementById('d35no'));
+}
 
-	document.getElementById('d13').selectedIndex = json_data.d13;
-	document.getElementById('d14').selectedIndex = json_data.d14;
-	document.getElementById('d28').selectedIndex = json_data.d28;
-	document.getElementById('d29').selectedIndex = json_data.d29;
-	document.getElementById('d30').selectedIndex = json_data.d30;
-	document.getElementById('d31').selectedIndex = json_data.d31;
-	document.getElementById('d32').selectedIndex = json_data.d32;
-	document.getElementById('d33').selectedIndex = json_data.d33;
+function snatchUpASI_d1_preTable_day_divs() {
+	var divs = [];
 
-	asi_radioBtn_select(json_data.d34, document.getElementById('d34yes'), document.getElementById('d34no'));
-	asi_radioBtn_select(json_data.d35, document.getElementById('d35yes'), document.getElementById('d35no'));
+	for (var i = 0; i < 13; i++) {
+		var index = String(i + 1);
+		var t1 = 'd' + index + 'Day';
+		var d1 = grab(t1);
+		divs.push(d1);
+	}
+	return divs;
+}
+
+function snatchUpASI_d1_preTable_year_divs() {
+	var divs = [];
+
+	for (var i = 0; i < 13; i++) {
+		var index = String(i + 1);
+		var t2 = 'd' + index + 'Year';
+		var d2 = grab(t2);
+		divs.push(d2);
+	}
+	return divs;
+}
+
+function snatchUpASI_d1_preTable_select_divs() {
+	var divs = [];
+
+	for (var i = 0; i < 12; i++) {
+		var index = String(i + 1);
+		var t1 = 'd' + index + 'Route';
+		var d1 = grab(t1);
+		divs.push(d1);
+	}
+	return divs;
+}
+
+
+function asi_d1_day_errors() {
+	var divs = snatchUpASI_d1_preTable_day_divs();
+	var numErrors = 0;
+	var hasErrors = false;
+
+	for (var i = 0; i < divs.length; i++) {
+		var val = Number(divs[i].value);
+
+		if (val < 0 || val > 31) {
+			divs[i].style.border = '1px solid red';
+			numErrors += 1;
+		}
+	}
+
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
+function asi_d1_year_errors() {
+	var divs = snatchUpASI_d1_preTable_year_divs();
+	var numErrors = 0;
+	var hasErrors = false;
+
+	for (var i = 0; i < divs.length; i++) {
+		var val = Number(divs[i].value);
+
+		if (val < 0 || val > 99) {
+			divs[i].style.border = '1px solid blue';
+			numErrors += 1;
+		}
+	}
+
+	if (numErrors > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
+function asi_d1_select_errors() {
+	var divs = snatchUpASI_d1_preTable_select_divs()
+	var count = 0;
+	var hasErrors = false;
+
+	for (var i = 0; i < divs.length; i++) {
+		if (divs[i].selectedIndex === 0) {
+			divs[i].style.border = '1px solid orange';
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
+
+function asi_d1_z1_errorCheck() {
+	var hasErrors = false;
+	var e1 = asi_d1_day_errors();
+	var e2 = asi_d1_year_errors();
+	var e3 = asi_d1_select_errors();
+
+	if (e1 === true || e2 === true || e3 === true) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
+function asi_d1_z1_submit(errorDiv, errorOpenClass, formDiv, formCloseClass) {
+	if (asi_d1_z1_errorCheck() === true) {
+		generalVisibilityChange(errorDiv, errorOpenClass);
+	}
+	else {
+		generalVisibilityChange(formDiv, formCloseClass);
+	}
 }
 
 function init_asi_legal(json_data) {

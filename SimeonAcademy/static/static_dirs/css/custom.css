@@ -9699,7 +9699,13 @@ button:hover {
 	margin-top:35%;
 }
 
-.finalAndCompleteWarningButtonDiv_single button {
+.finalAndCompleteWarningButtonDiv_single2 {
+	width:95%;
+	margin:auto;
+	margin-top:28%;
+}
+
+.finalAndCompleteWarningButtonDiv_single, .finalAndCompleteWarningButtonDiv_single2 button {
 	width:100%;
 }
 
@@ -9778,8 +9784,12 @@ button:hover {
 .asi-drug1-z4-holder-in {
 	z-index: 4;
 }
+
+.asi-drug1-z5-holder-in {
+	z-index: 5;
+}
   
-.asi-drug1-z1-holder-in, .asi-drug1-z2-holder-in, .asi-drug1-z3-holder-in, .asi-drug1-z4-holder-in {
+.asi-drug1-z1-holder-in, .asi-drug1-z2-holder-in, .asi-drug1-z3-holder-in, .asi-drug1-z4-holder-in, .asi-drug1-z5-holder-in {
 	margin-left:-15px;
 	width:100%;
 	height:100%;
@@ -9791,7 +9801,7 @@ button:hover {
 	visibility: visible;
 }
 
-.asi-drug1-z1-holder-out, .asi-drug1-z2-holder-out, .asi-drug1-z3-holder-out, .asi-drug1-z4-holder-out {
+.asi-drug1-z1-holder-out, .asi-drug1-z2-holder-out, .asi-drug1-z3-holder-out, .asi-drug1-z4-holder-out, .asi-drug1-z5-holder-out {
 	margin-left:-15px;
 	width:100%;
 	height:100%;
@@ -9805,7 +9815,7 @@ button:hover {
 .asi-drug1-z1-border {
 	width:50%;
 	margin: auto;
-	height:130%;
+	height:122%;
 	margin-top:-100px;
 	border:2px solid #525050;
 	border-radius: 8px;
@@ -9842,7 +9852,17 @@ button:hover {
 	box-shadow: 3px 8px 8px black;
 }
 
-.asi-drug1-z1-bkg, .asi-drug1-z2-bkg, .asi-drug1-z3-bkg, .asi-drug1-z4-bkg {
+.asi-drug1-z5-border {
+	width:40%;
+	margin: auto;
+	height:35%;
+	margin-top:20px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
+.asi-drug1-z1-bkg, .asi-drug1-z2-bkg, .asi-drug1-z3-bkg, .asi-drug1-z4-bkg, .asi-drug1-z5-bkg{
 	/*opacity: 0.89;*/
 	width:100%;
 	height:100%;
@@ -9915,6 +9935,21 @@ button:hover {
 	width:83%;
 	margin:auto;
 	margin-top:1%;
+}
+
+.asi-d1-pas-select {
+	margin-right: 5px;
+}
+
+.asi-d1-level-checks {
+	margin-bottom: 3px;
+}
+
+.asi-d1-radio-label {
+	font-style: italic;
+	margin-left:5px;
+	color:#2f4559;
+	font-weight:bold;
 }
 
 .asi-d1-ir-tri-btn {
@@ -10064,6 +10099,7 @@ button:hover {
 
 .asi-d1-inner4 input {
 	width: 100%;
+	height:100%;
 	border:1px solid gray;
 	text-align: center;
 }

@@ -10547,7 +10547,7 @@ def getDrugTableIndex(m_val):
 	index = 0
 
 	if m_val != 'None' and m_val != 'Select' and m_val != '':
-		if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4':
+		if m_val=='0' or m_val=='1' or m_val=='2' or m_val=='3' or m_val=='4' or m_val=='5':
 			index = int(m_val)
 		elif m_val=='X':
 			index = 6
@@ -11088,7 +11088,6 @@ def grabAsiDrug1Fields(asi):
 	d11Route = getDrugTableIndex(asi.drug1.d11Route)
 	d12Route = getDrugTableIndex(asi.drug1.d12Route)
 
-	d13 = getDrugTableIndex(asi.drug1.d13)
 	d14 = getASIDrugMajor(asi.drug1.d14)
 	d28 = getPatientIndex(asi.drug1.d28)
 	d29 = getPatientIndex(asi.drug1.d29)
@@ -11145,7 +11144,9 @@ def grabAsiDrug1Fields(asi):
 	result['d12Year'] = asi.drug1.d12Year
 	result['d12Route'] = d12Route
 
-	result['d13'] = d13
+	result['d13Day'] = asi.drug1.d13Day
+	result['d13Year'] = asi.drug1.d13Year
+
 	result['d14'] = d14
 	result['d15'] = asi.drug1.d15
 	result['d16'] = asi.drug1.d16
