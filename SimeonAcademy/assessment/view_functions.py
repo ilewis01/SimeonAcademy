@@ -10561,11 +10561,12 @@ def getASIDrugMajor(m_val):
 	index = 0
 
 	if m_val != 'None' and m_val != 'Select' and m_val != '':
-		if m_val=='00' or m_val=='01'or m_val=='02'or m_val=='03'or m_val=='04'or m_val=='05'or m_val=='06'or m_val=='07'or m_val=='08'or m_val=='09':
-			temp = m_val[1]
-			index = int(temp) + 1
-		else:
+		if m_val=='0' or m_val=='1'or m_val=='2'or m_val=='3'or m_val=='4'or m_val=='5'or m_val=='6'or m_val=='7'or m_val=='8'or m_val=='9'or m_val=='10'or m_val=='11'or m_val=='12':
+			index = int(m_val) + 1
+		elif m_val == '15' or m_val == '16':
 			index = int(m_val) - 1
+		else:
+			index = 0
 	return index
 
 def getLegalChargesIndex(m_val):
@@ -11089,10 +11090,6 @@ def grabAsiDrug1Fields(asi):
 	d12Route = getDrugTableIndex(asi.drug1.d12Route)
 
 	d14 = getASIDrugMajor(asi.drug1.d14)
-	d28 = getPatientIndex(asi.drug1.d28)
-	d29 = getPatientIndex(asi.drug1.d29)
-	d30 = getPatientIndex(asi.drug1.d30)
-	d31 = getPatientIndex(asi.drug1.d31)
 	d32 = getInterviewerIndex(asi.drug1.d32)
 	d33 = getInterviewerIndex(asi.drug1.d33)
 
@@ -11161,10 +11158,10 @@ def grabAsiDrug1Fields(asi):
 	result['d25'] = asi.drug1.d25
 	result['d26'] = asi.drug1.d26
 	result['d27'] = asi.drug1.d27
-	result['d28'] = d28
-	result['d29'] = d29
-	result['d30'] = d30
-	result['d31'] = d31
+	result['d28'] = asi.drug1.d28
+	result['d29'] = asi.drug1.d29
+	result['d30'] = asi.drug1.d30
+	result['d31'] = asi.drug1.d31
 	result['d32'] = d32
 	result['d33'] = d33
 	result['d34'] = asi.drug1.d34

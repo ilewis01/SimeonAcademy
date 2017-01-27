@@ -15798,6 +15798,8 @@ function init_asi_employmentl(json_data) {
 }
 
 function init_asi_drug1(json_data) {
+	var mainDivs = fetch_asi_d1_main_divs();
+
 	grab('d1Day').value = json_data.d1Day;
 	grab('d2Day').value = json_data.d2Day;
 	grab('d3Day').value = json_data.d3Day;
@@ -15839,9 +15841,15 @@ function init_asi_drug1(json_data) {
 	grab('d11Route').selectedIndex = json_data.d11Route;
 	grab('d12Route').selectedIndex = json_data.d12Route;
 
+	set_d1_main_values(json_data);
+	grab('d14').selectedIndex = json_data.d14;
 
-	// asi_radioBtn_select(json_data.d34, document.getElementById('d34yes'), document.getElementById('d34no'));
-	// asi_radioBtn_select(json_data.d35, document.getElementById('d35yes'), document.getElementById('d35no'));
+	if (String(json_data.d26) === '1') {
+		grab('yes26').checked = true;
+	}
+	if (String(json_data.d27) === '1') {
+		grab('yes27').checked = true;
+	}
 }
 
 function snatchUpASI_d1_preTable_day_divs() {
@@ -16002,6 +16010,38 @@ function asi_d1_z1_errorCheck() {
 	}
 
 	return hasErrors;
+}
+
+function prepare_asi_d1_main_data(json_val) {
+	var data = null;
+	json_val = String(json_val);
+
+	if (json_val === '' || json_val === ' ' || json_val === null) {
+		data = '00';
+	}
+	else {
+		data = json_val;
+	}
+
+	return data;
+}
+
+function set_d1_main_values(json_data) {
+	grab('d15').value = prepare_asi_d1_main_data(json_data.d15);
+	grab('d16').value = prepare_asi_d1_main_data(json_data.d16);
+	grab('d17').value = prepare_asi_d1_main_data(json_data.d17);
+	grab('d18').value = prepare_asi_d1_main_data(json_data.d18);
+	grab('d19').value = prepare_asi_d1_main_data(json_data.d19);
+	grab('d20').value = prepare_asi_d1_main_data(json_data.d20);
+	grab('d21').value = prepare_asi_d1_main_data(json_data.d21);
+	grab('d22').value = prepare_asi_d1_main_data(json_data.d22);
+	grab('d23').value = prepare_asi_d1_main_data(json_data.d23);
+	grab('d24').value = prepare_asi_d1_main_data(json_data.d24);
+	grab('d25').value = prepare_asi_d1_main_data(json_data.d25);
+	grab('d28').value = prepare_asi_d1_main_data(json_data.d28);
+	grab('d29').value = prepare_asi_d1_main_data(json_data.d29);
+	grab('d30').value = prepare_asi_d1_main_data(json_data.d30);
+	grab('d31').value = prepare_asi_d1_main_data(json_data.d31);
 }
 
 function fetch_asi_d1_main_divs() {

@@ -9962,6 +9962,17 @@ button:hover {
 	font-weight:bold;
 }
 
+.lo-d1-rad {
+	padding-left:15px;
+}
+
+.lo-d1-rad-lab {
+	font-style: italic;
+	font-weight: bold;
+	padding-left:5px;
+	padding-bottom:3px;
+}
+
 .asi-d1-ir-tri-btn {
 	width:83%;
 	margin:auto;
@@ -10211,6 +10222,14 @@ button:hover {
 	height:22px;
 	float:left;
 	/*border: 1px solid black;*/
+}
+
+.asi-tri-number-rad {
+	float:left;
+}
+
+.asi-tri-number-rad1 {
+	position:relative;
 }
 
 .asi-tri-ques-s {

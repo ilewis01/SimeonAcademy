@@ -568,11 +568,6 @@
                                     <div class='asi-d1-inner4'>
                                         <select name='' id='' disabled style='opacity:0.3'>
                                             <option value='None Selected'></option>
-                                            <!-- <option value='01'>Oral</option>
-                                            <option value='02'>Nasal</option>
-                                            <option value='03'>Smoking</option>
-                                            <option value='04'>Non-IV Inject</option>
-                                            <option value='05'>IV Inject</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -688,14 +683,34 @@
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, have you experienced:</div>
                             <div class='asi-tri-number-s'>D26.</div>
-                            <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d26' id='d26' oninput="javascript: clearG1(d26);"></div>
+                            <div class='asi-tri-ques-s'>
+                              <table>
+                                <tr>
+                                  <td>Alcohol Problems?</td>
+                                  <td><div class='lo-d1-rad'><input type='radio' name='d26' id='yes26' value='1'></div></td>
+                                  <td><div class='lo-d1-rad-lab'>Yes</div></td>
+                                  <td><div class='lo-d1-rad'><input type='radio' name='d26' id='no26' value='0' checked></div></td>
+                                  <td><div class='lo-d1-rad-lab'>No</div></td>
+                                </tr>
+                              </table>
+                            </div>
+                            <div class='asi-tri-resp-s'></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D27.</div>
-                            <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d27' id='d27' oninput="javascript: clearG1(d27);"></div>
+                            <div class='asi-tri-ques-s'>
+                              <table>
+                                <tr>
+                                  <td>Drug Problems?</td>
+                                  <td><div class='lo-d1-rad'><input type='radio' name='d27' id='yes27' value='1'></div></td>
+                                  <td><div class='lo-d1-rad-lab'>Yes</div></td>
+                                  <td><div class='lo-d1-rad'><input type='radio' name='d27' id='no27' value='0' checked></div></td>
+                                  <td><div class='lo-d1-rad-lab'>No</div></td>
+                                </tr>
+                              </table>
+                            </div>
+                            <div class='asi-tri-resp-s'></div>
 
                             <div style='height:30px;'></div>
 
