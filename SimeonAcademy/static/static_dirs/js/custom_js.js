@@ -15843,6 +15843,10 @@ function init_asi_drug1(json_data) {
 
 	set_d1_main_values(json_data);
 	grab('d14').selectedIndex = json_data.d14;
+	grab('d28').selectedIndex = json_data.d28;
+	grab('d29').selectedIndex = json_data.d29;
+	grab('d30').selectedIndex = json_data.d30;
+	grab('d31').selectedIndex = json_data.d31;
 
 	if (String(json_data.d26) === '1') {
 		grab('yes26').checked = true;
@@ -15850,6 +15854,88 @@ function init_asi_drug1(json_data) {
 	if (String(json_data.d27) === '1') {
 		grab('yes27').checked = true;
 	}
+}
+
+function fetch_d1_main_veri_limits() {
+	var v_d19 = String(grab('d19').value);
+	var v_d20 = String(grab('d20').value);
+
+	if (isBlankText(v_d19) === false && isRawNumber(v_d19) === true) {
+		v_d19 = Number(v_d19);
+	}
+	else {
+		v_d19 = 100000;
+	}
+
+	if (isBlankText(v_d20) === false && isRawNumber(v_d20) === true) {
+		v_d20 = Number(v_d20);
+	}
+	else {
+		v_d20 = 100000;
+	}
+
+	var limits = [];
+	var d15 = 100000;
+	var d16 = 100000;
+	var d17 = 100000;
+	var d18 = 100000;
+	var d19 = 100000;
+	var d20 = 100000;
+	var d21 = v_d19;
+	var d22 = v_d20;
+	var d23 = 30;
+	var d24 = 30;
+	var d25 = 30;
+
+	limits.push(d15);
+	limits.push(d16);
+	limits.push(d17);
+	limits.push(d18);
+	limits.push(d19);
+	limits.push(d20);
+	limits.push(d21);
+	limits.push(d22);
+	limits.push(d23);
+	limits.push(d24);
+	limits.push(d25);
+
+	return limits;
+}
+
+function asi_d1_verify_correct_vals_main_single(val, num) {
+	var strVal = String(val);
+	var hasError = false;
+
+	if (isRawNumber(strVal) === true) {
+		num = Number(num);
+		val = Number(val);
+
+		if (val < 0 || val > num) {
+			hasError = true;
+		}
+	}
+
+	return hasError;
+}
+
+function asi_d1_total_main_veri_check() {
+	var limits 	= fetch_d1_main_veri_limits();
+	var divs 	= fetch_asi_d1_main_divs();
+	var errors 	= false;
+	var count 	= 0;
+
+	for (var i = 0; i < limits.length; i++) {
+		if (asi_d1_verify_correct_vals_main_single(divs[i].value, limits[i]) === true) {
+			divs[i].style.border = '1px solid red';
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		errors = true;
+	}
+
+	return errors;
 }
 
 function snatchUpASI_d1_preTable_day_divs() {
@@ -16017,7 +16103,7 @@ function prepare_asi_d1_main_data(json_val) {
 	json_val = String(json_val);
 
 	if (json_val === '' || json_val === ' ' || json_val === null) {
-		data = '00';
+		data = '';
 	}
 	else {
 		data = json_val;
@@ -16044,6 +16130,16 @@ function set_d1_main_values(json_data) {
 	grab('d31').value = prepare_asi_d1_main_data(json_data.d31);
 }
 
+function fetch_asi_d1_main_selects() {
+	var data = [];
+	data.push(grab('d14'));
+	data.push(grab('d28'));
+	data.push(grab('d29'));
+	data.push(grab('d30'));
+	data.push(grab('d31'));
+	return data;
+}
+
 function fetch_asi_d1_main_divs() {
 	var divs = []
 	var d = 'd';
@@ -16054,23 +16150,47 @@ function fetch_asi_d1_main_divs() {
 		divs.push(div);
 	}
 
-	for (var j = 28; j <= 31; j++) {
-		var n = d + String(j);
-		var d1 = grab(n);
-		divs.push(d1);
-	}
-
 	return divs;
 }
 
 function check_asi_d1_value(val) {
 	var hasError = false;
+	var el = asi_d1_total_main_veri_check();
 
 	if (isRawASInumber(val) === false || isBlankText(val) === true) {
 		hasError = true;
 	}
 
 	return hasError;
+}
+
+function u_select_error_checker(sel) {
+	var hasError = false;
+
+	if (sel.selectedIndex === 0) {
+		hasError = true;
+	}
+
+	return hasError;
+}
+
+function asi_d1_main_select_errors() {
+	var sels = fetch_asi_d1_main_selects();	
+	var hasErrors = false;
+	var count = 0;
+
+	for (var i = 0; i < sels.length; i++) {
+		if (u_select_error_checker(sels[i]) === true) {
+			sels[i].style.border = '1px solid red';
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
 }
 
 function asi_d1_main_error_checker() {
@@ -16085,12 +16205,9 @@ function asi_d1_main_error_checker() {
 		}
 	}
 
-	if (grab('d14').selectedIndex === 0) {
-		grab('d14').style.border = '1px solid red';
-		count += 1;
-	}
+	var s_err = asi_d1_main_select_errors();
 
-	if (count > 0) {
+	if (count > 0 || s_err === true) {
 		hasErrors = true;
 	}
 

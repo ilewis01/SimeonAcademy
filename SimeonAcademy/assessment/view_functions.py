@@ -11090,6 +11090,10 @@ def grabAsiDrug1Fields(asi):
 	d12Route = getDrugTableIndex(asi.drug1.d12Route)
 
 	d14 = getASIDrugMajor(asi.drug1.d14)
+	d28 = getPatientIndex(asi.drug1.d28)
+	d29 = getPatientIndex(asi.drug1.d29)
+	d30 = getPatientIndex(asi.drug1.d30)
+	d31 = getPatientIndex(asi.drug1.d31)
 	d32 = getInterviewerIndex(asi.drug1.d32)
 	d33 = getInterviewerIndex(asi.drug1.d33)
 
@@ -11158,10 +11162,10 @@ def grabAsiDrug1Fields(asi):
 	result['d25'] = asi.drug1.d25
 	result['d26'] = asi.drug1.d26
 	result['d27'] = asi.drug1.d27
-	result['d28'] = asi.drug1.d28
-	result['d29'] = asi.drug1.d29
-	result['d30'] = asi.drug1.d30
-	result['d31'] = asi.drug1.d31
+	result['d28'] = d28
+	result['d29'] = d29
+	result['d30'] = d30
+	result['d31'] = d31
 	result['d32'] = d32
 	result['d33'] = d33
 	result['d34'] = asi.drug1.d34

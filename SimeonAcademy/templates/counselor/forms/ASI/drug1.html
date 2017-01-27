@@ -259,7 +259,7 @@
 
                                 <div class='asi-d1-ir-tri-btn'>
                                   <button onClick="javascript: ">Submit</button>
-                                  <button onClick="javascript: ">Add Comments</button>
+                                  <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Comments</button>
                                   <button onClick="javascript: ">Exit ASI</button>
                                 </div>
                                 <div class='divider_gradient'></div>
@@ -306,7 +306,7 @@
                                   <ul class='overall-warning-t3'>
                                     <li>These fields are not blank</li>
                                     <li>An option has been selected from the dropdown menu</li>
-                                    <li>The entry is in the proper format and have the correct number of characters</li>
+                                    <li>The entry is in the proper format, has the correct number of characters, and not greater than it's highest possible value</li>
                                   </ul>
                                 </div>
                                 <div class='finalAndCompleteWarningButtonDiv_single'>
@@ -585,7 +585,7 @@
                     </div>
 
                     <div class='asi-d1-instruction-div'>
-                        <a onClick="javascript: viewASIinstruction('drug'); return false;">View Instructions</a>
+                        <a onClick="javascript: viewASIinstruction('drug'); return false;">click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
                     </div>
                     <div class='asi-true-left'>
                       <div class='asi-emp-cont'>
@@ -617,46 +617,46 @@
 
                           <div class='asi-tri-number-dbl'>D15.</div>
                           <div class='asi-tri-ques-dbl'>How long ago was your last period of voluntary abstinence?</div>
-                          <div class='asi-tri-resp-dbl'><input type='text' name='d15' id='d15' oninput="javascript: clearG1(d15);"><br><br></div>
+                          <div class='asi-tri-resp-dbl'><input type='text' name='d15' id='d15' oninput="javascript: clearG1(d15);" placeholder='D15 (months)'><br><br></div>
 
                           <div class='asi-tri-number-s'>D16.</div>
                           <div class='asi-tri-ques-s'>How many months ago did this abstinence end?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d16' id='d16' oninput="javascript: clearG1(d16);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d16' id='d16' oninput="javascript: clearG1(d16);" placeholder='D16'></div>
 
                           <div style='height:45px;'></div>
 
                           <div class='asi-howMany-head-wow'>How many times have you:</div>
                           <div class='asi-tri-number-s'>D17.</div>
                           <div class='asi-tri-ques-s'>Had alcohol D.T's?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d17' id='d17' oninput="javascript: clearG1(d17);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d17' id='d17' oninput="javascript: clearG1(d17);" placeholder='D17'></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D18.</div>
                           <div class='asi-tri-ques-s'>Overdosed on drugs?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d18' id='d18' oninput="javascript: clearG1(d18);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d18' id='d18' oninput="javascript: clearG1(d18);" placeholder='D18'></div>
 
                           <div class='asi-howMany-head-wow'>How many times in your life have you been treated for:</div>
                           <div class='asi-tri-number-s'>D19.</div>
                           <div class='asi-tri-ques-s'>Alcohol abuse?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d19' id='d19' oninput="javascript: clearG1(d19);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d19' id='d19' oninput="javascript: clearG1(d19);" placeholder='D19'></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D20.</div>
                           <div class='asi-tri-ques-s'>Drug abuse?</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d20' id='d20' oninput="javascript: clearG1(d20);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d20' id='d20' oninput="javascript: clearG1(d20);" placeholder='D20'></div>
 
                           <div class='asi-howMany-head-wow'>How many of these were detox only?</div>
                           <div class='asi-tri-number-s'>D21.</div>
                           <div class='asi-tri-ques-s'>Alcohol:</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d21' id='d21' oninput="javascript: clearG1(d21);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d21' id='d21' oninput="javascript: clearG1(d21);" placeholder='D21'></div>
 
                           <div style='height:30px;'></div>
 
                           <div class='asi-tri-number-s'>D22.</div>
                           <div class='asi-tri-ques-s'>Drugs:</div>
-                          <div class='asi-tri-resp-s'><input type='text' name='d22' id='d22' oninput="javascript: clearG1(d22);"></div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d22' id='d22' oninput="javascript: clearG1(d22);" placeholder='D22'></div>
                         </div>
                       </div>
                     </div>
@@ -667,19 +667,19 @@
                             <div class='asi-howMany-head-wowNone'>How much have you spent during the last 30 days on:</div>
                             <div class='asi-tri-number-s'>D23.</div>
                             <div class='asi-tri-ques-s'>Alcohol?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d23' id='d23' oninput="javascript: clearG1(d23);"></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d23' id='d23' oninput="javascript: clearG1(d23);" placeholder='D23'></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D24.</div>
                             <div class='asi-tri-ques-s'>Drugs?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d24' id='d24' oninput="javascript: clearG1(d24);"></div>
+                            <div class='asi-tri-resp-s'><input type='text' name='d24' id='d24' oninput="javascript: clearG1(d24);" placeholder='D24'></div>
 
                             <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-dbl'>D25.</div>
                             <div class='asi-tri-ques-dbl'>How many days have you been treated in an outputpatient setting in the past 30 days?</div>
-                            <div class='asi-tri-resp-dbl'><input type='text' name='d25' id='d25' oninput="javascript: clearG1(d25);"><br><br></div>
+                            <div class='asi-tri-resp-dbl'><input type='text' name='d25' id='d25' oninput="javascript: clearG1(d25);" placeholder='D25'><br><br></div>
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, have you experienced:</div>
                             <div class='asi-tri-number-s'>D26.</div>
@@ -715,28 +715,72 @@
                             <div style='height:30px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, how troubled have you been by the following:</div>
-                            <div class='asi-tri-number-s'>D28.</div>
-                            <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d28' id='d28' oninput="javascript: clearG1(d28);"></div>
+                            <div class='asi-tri-number'>D28.</div>
+                            <div class='asi-tri-ques'>Alcohol problems?</div>
+                            <div class='asi-tri-resp'>
+                              <select name='d28' id='d28' onChange="javascript: clearG1(d28);">
+                                <option value='Select'>Select</option>
+                                <option value='0'>Not at All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='X'>No Answer</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
 
                             <div style='height:40px;'></div>
 
-                            <div class='asi-tri-number-s'>D29.</div>
-                            <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d29' id='d29' oninput="javascript: clearG1(d29);"></div>
+                            <div class='asi-tri-number'>D29.</div>
+                            <div class='asi-tri-ques'>Drug problems?</div>
+                            <div class='asi-tri-resp'>
+                              <select name='d29' id='d29' onChange="javascript: clearG1(d29);">
+                                <option value='Select'>Select</option>
+                                <option value='0'>Not at All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='X'>No Answer</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
 
                             <div style='height:40px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>How important to you now is treatment for these:</div>
-                            <div class='asi-tri-number-s'>D30.</div>
-                            <div class='asi-tri-ques-s'>Alcohol problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d30' id='d30' oninput="javascript: clearG1(d30);"></div>
+                            <div class='asi-tri-number'>D30.</div>
+                            <div class='asi-tri-ques'>Alcohol problems?</div>
+                            <div class='asi-tri-resp'>
+                              <select name='d30' id='d30' onChange="javascript: clearG1(d30);">
+                                <option value='Select'>Select</option>
+                                <option value='0'>Not at All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='X'>No Answer</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
 
                             <div style='height:30px;'></div>
 
-                            <div class='asi-tri-number-s'>D31.</div>
-                            <div class='asi-tri-ques-s'>Drug problems?</div>
-                            <div class='asi-tri-resp-s'><input type='text' name='d31' id='d31' oninput="javascript: clearG1(d31);"></div>
+                            <div class='asi-tri-number'>D31.</div>
+                            <div class='asi-tri-ques'>Drug problems?</div>
+                            <div class='asi-tri-resp'>
+                              <select name='d31' id='d31' onChange="javascript: clearG1(d31);">
+                                <option value='Select'>Select</option>
+                                <option value='0'>Not at All</option>
+                                <option value='1'>Slightly</option>
+                                <option value='2'>Moderately</option>
+                                <option value='3'>Considerably</option>
+                                <option value='4'>Extremely</option>
+                                <option value='X'>No Answer</option>
+                                <option value='N'>N/A</option>
+                              </select>
+                            </div>
                           </div>
                       </div>
                     </div>  

@@ -9788,11 +9788,11 @@ button:hover {
 }
 
 .asi-drug1-z3-holder-in {
-	z-index: 3;
+	z-index: 4;
 }
 
 .asi-drug1-z4-holder-in {
-	z-index: 4;
+	z-index: 3;
 }
 
 .asi-drug1-z5-holder-in {
@@ -9856,7 +9856,7 @@ button:hover {
 	width:45%;
 	margin: auto;
 	height:83%;
-	margin-top:-60px;
+	margin-top:-20px;
 	border:2px solid #525050;
 	border-radius: 8px;
 	box-shadow: 3px 8px 8px black;
@@ -9926,7 +9926,7 @@ button:hover {
 	font-size:22px;
 	font-weight: bold;
 	font-style:italic;
-	text-shadow:1px 1px gray;
+	/*text-shadow:1px 1px gray;*/
 	width:83%;
 	margin:auto;
 	border-bottom: 2px solid gray;
@@ -10271,12 +10271,23 @@ button:hover {
 	width:100%;
 	border:1px solid gray;
 	border-radius:5px;
+	text-align: center;
+	font-style: italic;
+}
+
+.asi-tri-resp-s select {
+	width:100%;
+	height:100%;
+	border:1px solid gray;
+	font-size: 12px;
 }
 
 .asi-tri-resp-dbl input {
 	width:100%;
 	border:1px solid gray;
 	border-radius:5px;
+	text-align: center;
+	font-style: italic;
 }
 
 .asi-howMany-head-wow {
@@ -10284,12 +10295,14 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	padding-top: 40px; 
+	color:#732b30;
 }
 
 .asi-howMany-head-wowNone {
 	font-size: 14px;
 	font-weight: bold;
 	font-style: italic;
+	color:#732b30;
 	/*padding-top: 40px; */
 }
 
