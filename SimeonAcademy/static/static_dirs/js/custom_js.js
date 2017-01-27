@@ -15578,6 +15578,12 @@ function save_asi_comment() {
 	window.close();
 }
 
+function save_asi_comment_iframe(divOut, divOutClass) {
+	var comment = grab('asi_comment').value;
+	generalVisibilityChange(divOut, String(divOutClass));
+	grab('comments').value = comment;
+}
+
 function initialize_asi(section, json_data) {
 	section = String(section);
 
@@ -15847,6 +15853,10 @@ function init_asi_drug1(json_data) {
 	grab('d29').selectedIndex = json_data.d29;
 	grab('d30').selectedIndex = json_data.d30;
 	grab('d31').selectedIndex = json_data.d31;
+	grab('d32').value = json_data.d32;
+	grab('d33').value = json_data.d33;
+
+	grab('asi_comment').value = json_data.comments;
 
 	if (String(json_data.d26) === '1') {
 		grab('yes26').checked = true;
@@ -15854,7 +15864,41 @@ function init_asi_drug1(json_data) {
 	if (String(json_data.d27) === '1') {
 		grab('yes27').checked = true;
 	}
+	if (String(json_data.d34) === '1') {
+		grab('yesd34').checked = true;
+	}
+	if (String(json_data.d35) === '1') {
+		grab('yesd35').checked = true;
+	}
 }
+
+function asi_d1_confidence_errors() {
+	var s1 = grab('d32');
+	var s2 = grab('d33');
+	var er = false;
+	
+	if (s1.selectedIndex === 0) {
+		s1.style.border = '1px solid red';
+		er = true;
+	}
+	if (s2.selectedIndex === 0) {
+		s2.style.border = '1px solid red';
+		er = true;
+	}
+	return er;
+}
+
+function finish_all_asi_d1(form, warningDiv, warningClass) {
+	if (asi_d1_confidence_errors() === true) {
+		generalVisibilityChange(warningDiv, warningClass);
+	}
+	else {
+		form.action = grab('next_url').value;
+		grab('save_this').value = 'true';
+		form.submit();
+	}
+}
+
 
 function fetch_d1_main_veri_limits() {
 	var v_d19 = String(grab('d19').value);
@@ -16214,12 +16258,16 @@ function asi_d1_main_error_checker() {
 	return hasErrors;
 }
 
+
+
 function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDivClass) {
 	if (asi_d1_main_error_checker() === true) {
 		generalVisibilityChange(warningDiv, warningDivClass);
 	}
 	else {
 		generalVisibilityChange(openingDiv, openingDivClass);
+		// grab('d32').selectedIndex = grab('m_d32').value;
+		// grab('d33').selectedIndex = grab('m_d33').value;
 	}
 }
 

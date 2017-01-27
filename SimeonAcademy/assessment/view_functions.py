@@ -10521,8 +10521,9 @@ def beginASI(request):
 
 def getInterviewerIndex(m_val):
 	index = 0
+	print "M_VAL: " + str(m_val)
 
-	if m_val != None and m_val != 'Select' and m_val != '':
+	if m_val != None and m_val != 'None Selected' and m_val != '':
 		index = int(m_val) + 1
 
 	return index
@@ -11582,11 +11583,12 @@ def saveASIdrug1(request, asi):
 	asi.drug1.d12Year = request.POST.get('d12Year')
 	asi.drug1.d12Route = request.POST.get('d12Route')
 
-	asi.drug1.d13 = request.POST.get('d13')
+	asi.drug1.d13Day = request.POST.get('d13Day')
+	asi.drug1.d13Year = request.POST.get('d13Year')
+
 	asi.drug1.d14 = request.POST.get('d14')
 	asi.drug1.d15 = request.POST.get('d15')
 	asi.drug1.d16 = request.POST.get('d16')
-
 	asi.drug1.d17 = request.POST.get('d17')
 	asi.drug1.d18 = request.POST.get('d18')
 	asi.drug1.d19 = request.POST.get('d19')

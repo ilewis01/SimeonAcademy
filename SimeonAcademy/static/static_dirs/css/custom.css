@@ -9784,15 +9784,15 @@ button:hover {
 }
 
 .asi-drug1-z2-holder-in {
-	z-index: 2;
-}
-
-.asi-drug1-z3-holder-in {
 	z-index: 4;
 }
 
-.asi-drug1-z4-holder-in {
+.asi-drug1-z3-holder-in {
 	z-index: 3;
+}
+
+.asi-drug1-z4-holder-in {
+	z-index: 2;
 }
 
 .asi-drug1-z5-holder-in {
@@ -9949,6 +9949,13 @@ button:hover {
 
 .asi-d1-pas-select {
 	margin-right: 5px;
+}
+
+.dumbSel-iml50 {
+	border:1px solid gray;
+	width:100%;
+	height:100%;
+	font-size: 12px;
 }
 
 .asi-d1-level-checks {
@@ -10193,6 +10200,9 @@ button:hover {
 	width:8%;
 	height:22px;
 	float:left;
+	font-weight: bold;
+	font-style: italic;
+	color:#303b39;
 	/*border: 1px solid black;*/
 }
 
@@ -10221,6 +10231,20 @@ button:hover {
 	width:8%;
 	height:22px;
 	float:left;
+	font-weight: bold;
+	font-style: italic;
+	color:#303b39;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-number-sf {
+	width:8%;
+	height:22px;
+	float:left;
+	font-weight: bold;
+	font-style: italic;
+	color:#303b39;
+	padding-top:2.5%;
 	/*border: 1px solid black;*/
 }
 
@@ -10250,6 +10274,9 @@ button:hover {
 	width:8%;
 	height:44px;
 	float:left;
+	font-weight: bold;
+	font-style: italic;
+	color:#303b39;
 	/*border: 1px solid black;*/
 }
 
