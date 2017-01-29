@@ -15665,9 +15665,22 @@ function init_asi_general(json_data) {
 	number_init(json_data.isComplete, document.getElementById('g14mos'));
 	number_init(json_data.isComplete, document.getElementById('g20'));
 
-	document.getElementById('g17').selectedIndex = json_data.g17;
-	document.getElementById('g18').selectedIndex = json_data.g18;
-	document.getElementById('g19').selectedIndex = json_data.g19;
+	grab('g17').selectedIndex = json_data.g17;
+	grab('g18').selectedIndex = json_data.g18;
+
+	if (String(json_data.g15) === 'true') {
+		grab('yea1').checked = true;
+	}
+	else {
+		grab('nea1').checked = true;
+	}
+
+	if (String(json_data.g19) === 'Yes') {
+		grab('yesCon').checked = true;
+	}
+	else {
+		grab('noCon').checked = true;
+	}
 }
 
 function init_asi_medical(json_data) {
@@ -16914,14 +16927,62 @@ function asi_admin_errors() {
 	return hasErrors;
 }
 
-function continue_asi1(section) {
-	if (asi_admin_errors() === true) {
+function u_general_blank_check(div, color) {
+	color = String(color);
+	var hasError = false;
+
+	if (isBlankText(div.value) === true) {
+		div.style.border = '1px solid ' + color;
+	}
+	return hasError;
+}
+
+function asi_general_errors() {
+	var count = 0;
+	var hasErrors = false;
+	var text = [];
+	text.push(grab('g14yrs'));
+	text.push(grab('g14mos'));
+	text.push(grab('g20'));
+	var g17 = grab('g17');
+	var g18 = grab('g18');
+
+	if (g17.selectedIndex === 0) {
+		g17.style.border = '1px solid #bf6c01';
+		count += 1;
+	}
+
+	if (g18.selectedIndex === 0) {
+		g18.style.border = '1px solid #bf6c01';
+		count += 1;
+	}
+
+	for (var i = 0; i < text.length; i++) {
+		if (u_general_blank_check(text[i], 'red') === true) {
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
+function general_asi_save(section) {
+	var errors = false;
+	section = String(section);
+
+	if (section === '/asi_admin/') {errors = asi_admin_errors();}
+	else if (section === '/asi_general/') {errors = asi_general_errors();}
+
+	if (errors === true) {
 		generalVisibilityChange(z5, 'asi-drug1-z5-holder-in');
 	}
 	else {
-		section = String(section);
 		var form = grab('asi_form');
-		form.action = next_url.value;
+		form.action = grab('next_url').value;
 		grab('save_this').value = 'true';
 		form.submit();
 	}

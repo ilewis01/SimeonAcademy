@@ -10994,9 +10994,6 @@ def grabAsiGeneralFields(asi):
 	result['g14yrs'] 	= asi.general.g14yrs
 	result['g14mos'] 	= asi.general.g14mos
 	result['g15'] 		= asi.general.g15
-	result['g16mth'] 	= asi.general.g16mth
-	result['g16day'] 	= asi.general.g16day
-	result['g16year'] 	= asi.general.g16year
 	result['g17'] 		= asi.general.g17
 	result['g18'] 		= asi.general.g18
 	result['g19'] 		= asi.general.g19
@@ -11009,6 +11006,9 @@ def grabAsiGeneralFields(asi):
 	result['g26'] 		= asi.general.g26
 	result['g27'] 		= asi.general.g27
 	result['g28'] 		= asi.general.g28
+	result['test1'] 	= asi.general.test1
+	result['test2'] 	= asi.general.test2
+	result['test3'] 	= asi.general.test3
 	
 	result['isComplete'] = asi.generalComplete
 	return result
@@ -11459,39 +11459,38 @@ def saveASIadmin(request, asi):
 	asi.admin.save()
 	asi.general.save()
 
+def processBlankAsiFields(field):
+	field2 = wowClearWhiteSpace(field)
+	result = None
+
+	if len(field2) == 0:
+		result = 'N'
+	else:
+		result = field
+	return result
+
 def saveASIgeneral(request, asi):
-	asi.general.g13 = request.POST.get('g13')
+	asi.general.g13 = processBlankAsiFields(request.POST.get('g13'))
 	asi.general.g14yrs = request.POST.get('g14yrs')
 	asi.general.g14mos = request.POST.get('g14mos')
-	asi.general.g15 = request.POST.get('g15')
-	asi.general.g16mth = request.POST.get('g16mth')
-	asi.general.g16day = request.POST.get('g16day')
-	asi.general.g16year = request.POST.get('g16year')
+	asi.general.g15 = truePythonBool(request.POST.get('g15'))
 	asi.general.g17 = request.POST.get('g17')
 	asi.general.g18 = request.POST.get('g18')
 	asi.general.g19 = request.POST.get('g19')
 	asi.general.g20 = request.POST.get('g20')
 
-	asi.general.g21 = request.POST.get('g21')
-	asi.general.g22 = request.POST.get('g22')
-	asi.general.g23 = request.POST.get('g23')
-	asi.general.g24 = request.POST.get('g24')
-	asi.general.g25 = request.POST.get('g25')
-	asi.general.g26 = request.POST.get('g26')
-	asi.general.g27 = request.POST.get('g27')
-	asi.general.g28 = request.POST.get('g28')
+	asi.general.g21 = processBlankAsiFields(request.POST.get('g21'))
+	asi.general.g22 = processBlankAsiFields(request.POST.get('g22'))
+	asi.general.g23 = processBlankAsiFields(request.POST.get('g23'))
+	asi.general.g24 = processBlankAsiFields(request.POST.get('g24'))
+	asi.general.g25 = processBlankAsiFields(request.POST.get('g25'))
+	asi.general.g26 = processBlankAsiFields(request.POST.get('g26'))
+	asi.general.g27 = processBlankAsiFields(request.POST.get('g27'))
+	asi.general.g28 = processBlankAsiFields(request.POST.get('g28'))
 
-	# asi.general.medical = request.POST.get('medical')
-	# asi.general.employ = request.POST.get('employ')
-	# asi.general.alcohol = request.POST.get('alcohol')
-	# asi.general.drug = request.POST.get('drug')
-	# asi.general.legal = request.POST.get('legal')
-	# asi.general.family = request.POST.get('family')
-	# asi.general.psych = request.POST.get('psych')
-
-	asi.general.test1 = request.POST.get('test1')
-	asi.general.test2 = request.POST.get('test2')
-	asi.general.test3 = request.POST.get('test3')
+	asi.general.test1 = processBlankAsiFields(request.POST.get('test1'))
+	asi.general.test2 = processBlankAsiFields(request.POST.get('test2'))
+	asi.general.test3 = processBlankAsiFields(request.POST.get('test3'))
 
 	asi.general.save()
 

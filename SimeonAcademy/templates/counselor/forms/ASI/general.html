@@ -33,31 +33,31 @@
                         <tr>
                           <td>
                             <a href="javascript: sideBarASI('/asi_admin/');">
-                              <div  class='{{class.asiAdmin}}'>Administrative</div>
+                              <div  class='{{class.asiAdmin}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_admin_image}}"></div>Administrative</div>
                             </a>
                           </td>
 
                           <td>
-                            <a href="#">
-                              <div  class='{{class.asiGeneral}}'>General Info</div>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_general_image}}"></div>General Info</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_medical/');">
-                              <div  class='{{class.asiMedical}}'>Medical Status</div>
+                              <div  class='{{class.asiMedical}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_medical_image}}"></div>Medical Status</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_employment/');">
-                              <div  class='{{class.asiEmployment}}'>Employment</div>
+                              <div  class='{{class.asiEmployment}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_employment_image}}"></div>Employment</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_drug1/');">
-                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
+                              <div  class='{{class.asiDrug1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_drug1_image}}"></div>Drug & Alcohol Use</div>
                             </a>
                           </td>
                         </tr>
@@ -69,34 +69,35 @@
                         <tr>
                           <td>
                             <a href="javascript: sideBarASI('/asi_legal/');">
-                              <div  class='{{class.asiLegal}}'>Legal Status</div>
+                              <div  class='{{class.asiLegal}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_legal_image}}"></div>Legal Status</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_family/');">
-                              <div  class='{{class.asiFamily}}'>Family History</div>
+                              <div  class='{{class.asiFamily}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_family_image}}"></div>Family History</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_social1/');">
-                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
+                              <div  class='{{class.asiSocial1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social1_image}}"></div>Social Interactions</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_social2/');">
-                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
+                              <div  class='{{class.asiSocial2}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social2_image}}"></div>Social Interactions II</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_psych/');">
-                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
+                              <div  class='{{class.asiPsych}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_psych_image}}"></div>Psychiatric Status</div>
                             </a>
                           </td>
                       </table>
+                      <div class='divider_gradient'></div>
                     </div>
                   </div>
                 </div>
@@ -108,6 +109,29 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
+                  <!-- WARNING DIV -->
+                  <div class='asi-drug1-z5-holder-out' id='z5'>
+                      <div class='asi-drug1-z5-border'>
+                          <div class='asi-drug1-z5-bkg'>
+                              <div style='height:2%;'></div>
+                              <div class='asi-d1-warningHld'>
+                                <div class='asi-d1-warningHld1'><img src="{% static 'images/warnING.png' %}" alt="WARNING" class=''></div>
+                                <div class='asi-d1-warningHld2'>Warning!</div>
+                                <div class='overall-warning-t1'>The Highlighted Fields Contain Errors</div>
+                                <div class='overall-warning-t2'>Follow the legend below to correct these errors:</div>
+                                <ul class='overall-warning-t3'>
+                                  <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> cannot be blank or in the wrong format</li>
+                                  <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 99</li>
+                                  <li>You must make a selection from the fields <span style='color:#bf6c01'>HIGHLIGHTED IN ORANGE</span></li>
+                                </ul>
+                               </div>
+                              <div class='finalAndCompleteWarningButtonDiv_single2'>
+                                <button onClick="javascript: generalVisibilityChange(z5, 'asi-drug1-z5-holder-out'); return false;">ok</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
                   <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
                     <div class='top-split'>
                       <h4>Demographic Information</h4>
@@ -116,7 +140,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G13.</div></td>
                           <td><div><div class='asi_iml_label'>Geographic Code:</div></div></td>
-                          <td><div><input type='text' name='g13' id='g13' value='{{fields.g13}}'></div></td>
+                          <td><div class='general_asi_input'><input type='text' name='g13' id='g13' value='{{fields.g13}}' oninput="javascript: clearG1(g13);"></div></td>
                         </tr>
                       </table>
 
@@ -124,9 +148,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G14.</div></td>
                           <td><div><div class='asi_iml_label'>Time at Residence:</div></div></td>
-                          <td><div><input type='number' name='g14yrs' id='g14yrs' value='{{fields.g14yrs}}' style='width:40px; text-align:center;'></div></td>
+                          <td><div class='general_asi_input'><input type='number' name='g14yrs' id='g14yrs' value='{{fields.g14yrs}}' style='width:40px; text-align:center;' oninput="javascript: clearG1(g14yrs);"></div></td>
                           <td><div><div class='years_months_iml'>years</div></div></td>
-                          <td><div><input type='number' name='g14mos' id='g14mos' value='{{fields.g14mos}}' style='width:40px; text-align:center;'></div></td>
+                          <td><div class='general_asi_input'><input type='number' name='g14mos' id='g14mos' value='{{fields.g14mos}}' style='width:40px; text-align:center;' oninput="javascript: clearG1(g14mos);"></div></td>
                           <td><div><div class='years_months_iml'>months</div></div></td>
                         </tr>
                       </table>
@@ -135,9 +159,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G15.</div></td>
                           <td><div><div class='asi_iml_label'>Is This Residence Owned By Your Family?</div></div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='yesRent' value='1' onClick="javascript: asi_g_r1();"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='yea1' value='1' onClick="javascript: asi_g_r1();"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='noRent' value='0' onClick="javascript: asi_g_r1();" checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='nea1' value='0' onClick="javascript: asi_g_r1();"></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
@@ -147,8 +171,8 @@
                           <td><div class='asi_number_iml2'>G17.</div></td>
                           <td><div><div class='asi_iml_label'>Race:</div></div></td>
                           <td>
-                            <div>
-                              <select name='g17' id='g17'>
+                            <div class='general_asi_input'>
+                              <select name='g17' id='g17' onChange="javascript: clearG1(g17);">
                                 <option value='0'>Select</option>
                                 <option value='1'>White (Not of Hispanic Origin)</option>
                                 <option value='2'>Black (Not of Hispanic Origin)</option>
@@ -170,8 +194,8 @@
                           <td><div class='asi_number_iml2'>G18.</div></td>
                           <td><div><div class='asi_iml_label'>Religious Prefrence:</div></div></td>
                           <td>
-                            <div>
-                              <select name='g18' id='g18'>
+                            <div class='general_asi_input'>
+                              <select name='g18' id='g18' onChange="javascript: clearG1(g18);">
                                 <option value='0'>Select</option>
                                 <option value='1'>Protestant</option>
                                 <option value='2'>Catholic</option>
@@ -196,9 +220,9 @@
                             <table>
                               <tr>
                                 <td><div class='asi_iml_label'>past 30 days?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='yesRent' value='1' onClick="javascript: asi_g_r1();"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g19' id='yesCon' value='1' onClick="javascript: asi_g_r1();"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g15' id='noRent' value='0' onClick="javascript: asi_g_r1();" checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='g19' id='noCon' value='0' onClick="javascript: asi_g_r1();" checked></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                               </tr>
                             </table>
@@ -210,7 +234,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G20.</div></td>
                           <td><div><div class='asi_iml_label'>How Many Days?</div></div></td>
-                          <td><div><input type='number' name='g20' id='g20' value='{{fields.g20}}' style='width:40px; text-align:center;'></div></td>
+                          <td><div class='general_asi_input'><input type='number' name='g20' id='g20' value='{{fields.g20}}' style='width:40px; text-align:center;' oninput="javascript: clearG1(g20);"></div></td>
                         </tr>
                       </table>
                     </div>
@@ -224,31 +248,31 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G21.</div></td>
                           <td><div><div class='asi_iml_label' style='margin-right:30px;'>Shipley C.Q.:</div></div></td>
-                          <td><input type="text" name='g21' id='g21' value='{{fields.g21}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g21' id='g21' value='{{fields.g21}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g21);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G22.</div></td>
                           <td><div><div class='asi_iml_label'>Shipley I.Q.:</div></div></td>
-                          <td><input type="text" name='g22' id='g22' value='{{fields.g22}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g22' id='g22' value='{{fields.g22}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g22);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G23.</div></td>
                           <td><div><div class='asi_iml_label'>Beck Total Score:</div></div></td>
-                          <td><input type="text" name='g23' id='g23' value='{{fields.g23}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g23' id='g23' value='{{fields.g23}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g23);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G24.</div></td>
                           <td><div><div class='asi_iml_label'>SCL-90 Total:</div></div></td>
-                          <td><input type="text" name='g24' id='g24' value='{{fields.g24}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g24' id='g24' value='{{fields.g24}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g24);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G25.</div></td>
                           <td><div><div class='asi_iml_label'>MAST:</div></div></td>
-                          <td><input type="text" name='g25' id='g25' value='{{fields.g25}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g25' id='g25' value='{{fields.g25}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g25);"></div></td>
                         </tr>
                       </table>
 
@@ -256,25 +280,25 @@
                         <tr>
                           <td><div class='asi_number_iml2'>G26.</div></td>
                           <td><div><div class='asi_iml_label' style='margin-right:5px;'>Test Name:</div></div></td>
-                          <td><input type='text' name='test1' id='test1' value='{{fields.test1}}'></td>
+                          <td><div  class='general_asi_input'><input type='text' name='test1' id='test1' value='{{fields.test1}}' oninput="javascript: clearG1(test1);"></div></td>
                           <td><div><div class='asi_iml_label' style='margin-right:5px; margin-left:20px;'>Score:</div></div></td>
-                          <td><input type="text" name='g26' id='g26' value='{{fields.g26}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g26' id='g26' value='{{fields.g26}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g26);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G27.</div></td>
                           <td><div><div class='asi_iml_label'>Test Name:</div></div></td>
-                          <td><input type='text' name='test2' id='test2' value='{{fields.test2}}'></td>
+                          <td><div  class='general_asi_input'><input type='text' name='test2' id='test2' value='{{fields.test2}}' oninput="javascript: clearG1(test2);"></div></td>
                           <td><div><div class='asi_iml_label' style='margin-left:20px;'>Score:</div></div></td>
-                          <td><input type="text" name='g27' id='g27' value='{{fields.g27}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g27' id='g27' value='{{fields.g27}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g27);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>G28.</div></td>
                           <td><div><div class='asi_iml_label'>Test Name:</div></div></td>
-                          <td><input type='text' name='test3' id='test3' value='{{fields.test3}}'></td>
+                          <td><div  class='general_asi_input'><input type='text' name='test3' id='test3' value='{{fields.test3}}' oninput="javascript: clearG1(test3);"></div></td>
                           <td><div><div class='asi_iml_label' style='margin-left:20px;'>Score:</div></div></td>
-                          <td><input type="text" name='g28' id='g28' value='{{fields.g28}}' style='width:50px; text-align:center;'></td>
+                          <td><div  class='general_asi_input'><input type="text" name='g28' id='g28' value='{{fields.g28}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g28);"></div></td>
                         </tr>
                       </table>
                     </div>
@@ -290,7 +314,7 @@
                 <table class='iml-save-btn'>
                   <tr>
                     <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
-                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                    <td><button onClick="javascript: general_asi_save('/asi_general/'); return false;">Save & Continue</button></td>
                   </tr>
                 </table>
               </div>
