@@ -15619,6 +15619,13 @@ function initialize_asi(section, json_data) {
 	}
 }
 
+function assign_asi_a1_table(preName, value) {
+	preName = String(preName);
+	value = String(value);
+	var name = preName + value;
+	grab(name).checked = true;
+}
+
 function init_asi_admin(json_data) {
 	blank_init_asi(json_data.isComplete, document.getElementById('g1'));
 	blank_init_asi(json_data.isComplete, document.getElementById('g2'));
@@ -15630,6 +15637,14 @@ function init_asi_admin(json_data) {
 	document.getElementById('g9').selectedIndex = json_data.g9;
 	document.getElementById('g12').selectedIndex = json_data.g12;
 	asi_radioBtn_select(json_data.g10, document.getElementById('isMale'), document.getElementById('isFemale'));
+
+	assign_asi_a1_table('m', json_data.medical);
+	assign_asi_a1_table('em', json_data.employ);
+	assign_asi_a1_table('a', json_data.alcohol);
+	assign_asi_a1_table('d', json_data.drug);
+	assign_asi_a1_table('l', json_data.legal);
+	assign_asi_a1_table('f', json_data.family);
+	assign_asi_a1_table('p', json_data.psych);
 }
 
 function init_asi_general(json_data) {
@@ -15653,92 +15668,6 @@ function init_asi_general(json_data) {
 	document.getElementById('g17').selectedIndex = json_data.g17;
 	document.getElementById('g18').selectedIndex = json_data.g18;
 	document.getElementById('g19').selectedIndex = json_data.g19;
-
-	//SEVERITY RADIO ENTRIES
-	var m0 = document.getElementById('m0');
-	var m1 = document.getElementById('m1');
-	var m2 = document.getElementById('m2');
-	var m3 = document.getElementById('m3');
-	var m4 = document.getElementById('m4');
-	var m5 = document.getElementById('m5');
-	var m6 = document.getElementById('m6');
-	var m7 = document.getElementById('m7');
-	var m8 = document.getElementById('m8');
-	var m9 = document.getElementById('m9');
-
-	var e0 = document.getElementById('e0');
-	var e1 = document.getElementById('e1');
-	var e2 = document.getElementById('e2');
-	var e3 = document.getElementById('e3');
-	var e4 = document.getElementById('e4');
-	var e5 = document.getElementById('e5');
-	var e6 = document.getElementById('e6');
-	var e7 = document.getElementById('e7');
-	var e8 = document.getElementById('e8');
-	var e9 = document.getElementById('e9');
-
-	var a0 = document.getElementById('a0');
-	var a1 = document.getElementById('a1');
-	var a2 = document.getElementById('a2');
-	var a3 = document.getElementById('a3');
-	var a4 = document.getElementById('a4');
-	var a5 = document.getElementById('a5');
-	var a6 = document.getElementById('a6');
-	var a7 = document.getElementById('a7');
-	var a8 = document.getElementById('a8');
-	var a9 = document.getElementById('a9');
-
-	var d0 = document.getElementById('d0');
-	var d1 = document.getElementById('d1');
-	var d2 = document.getElementById('d2');
-	var d3 = document.getElementById('d3');
-	var d4 = document.getElementById('d4');
-	var d5 = document.getElementById('d5');
-	var d6 = document.getElementById('d6');
-	var d7 = document.getElementById('d7');
-	var d8 = document.getElementById('d8');
-	var d9 = document.getElementById('d9');
-
-	var l0 = document.getElementById('l0');
-	var l1 = document.getElementById('l1');
-	var l2 = document.getElementById('l2');
-	var l3 = document.getElementById('l3');
-	var l4 = document.getElementById('l4');
-	var l5 = document.getElementById('l5');
-	var l6 = document.getElementById('l6');
-	var l7 = document.getElementById('l7');
-	var l8 = document.getElementById('l8');
-	var l9 = document.getElementById('l9');
-
-	var f0 = document.getElementById('f0');
-	var f1 = document.getElementById('f1');
-	var f2 = document.getElementById('f2');
-	var f3 = document.getElementById('f3');
-	var f4 = document.getElementById('f4');
-	var f5 = document.getElementById('f5');
-	var f6 = document.getElementById('f6');
-	var f7 = document.getElementById('f7');
-	var f8 = document.getElementById('f8');
-	var f9 = document.getElementById('f9');
-
-	var p0 = document.getElementById('p0');
-	var p1 = document.getElementById('p1');
-	var p2 = document.getElementById('p2');
-	var p3 = document.getElementById('p3');
-	var p4 = document.getElementById('p4');
-	var p5 = document.getElementById('p5');
-	var p6 = document.getElementById('p6');
-	var p7 = document.getElementById('p7');
-	var p8 = document.getElementById('p8');
-	var p9 = document.getElementById('p9');
-
-	assign_radio1_9(json_data.medical, m0, m1, m2, m3, m4, m5, m6, m7, m8, m9);
-	assign_radio1_9(json_data.employ, e0, e1, e2, e3, e4, e5, e6, e7, e8, e9);
-	assign_radio1_9(json_data.alcohol, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
-	assign_radio1_9(json_data.drug, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9);
-	assign_radio1_9(json_data.legal, l0, l1, l2, l3, l4, l5, l6, l7, l8, l9);
-	assign_radio1_9(json_data.family, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
-	assign_radio1_9(json_data.psych, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
 }
 
 function init_asi_medical(json_data) {
@@ -16933,11 +16862,75 @@ function sessionChecking(btnType) {
 }
 
 //*********************************************** ASI PAGE SUBMITS *************************************************//
+function asi_admin_errors() {
+	var sels = [];
+	var count = 0;
+	var hasErrors = false;
+
+	var val1 = String(grab('g1').value);
+	var val2 = String(grab('g2').value);
+	var val4 = String(grab('popupDatepicker').value);
+	var val11 = String(grab('g11').value);
+
+	var g1 = grab('g1');
+	var g2 = grab('g2');
+	var g4 = grab('popupDatepicker');
+	var g11 = (grab('g11'));
+
+	sels.push(grab('g8'));
+	sels.push(grab('g9'));
+	sels.push(grab('g12'));
+
+	for (var i = 0; i < sels.length; i++) {
+		if (sels[i].selectedIndex === 0) {
+			sels[i].style.border = '1px solid #d68319';
+			count += 1;
+		}
+	}
+
+	if (val1.length === 0 || val1.length !== 9) {
+		count += 1;
+		g1.style.border = '1px solid red';
+	}
+
+	if (val2.length === 0 || val2.length !== 4 || isRawNumber(val2) === false) {
+		count += 1;
+		g2.style.border = '1px solid red';
+	}
+
+	if (val4.length === 0) {
+		count += 1;
+		g4.style.border = '1px solid red';
+	}
+
+	if (val11.length === 0 || val11.length !== 3) {
+		count += 1;
+		g11.style.border = '1px solid red';
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+	return hasErrors;
+}
+
+function continue_asi1(section) {
+	if (asi_admin_errors() === true) {
+		generalVisibilityChange(z5, 'asi-drug1-z5-holder-in');
+	}
+	else {
+		section = String(section);
+		var form = grab('asi_form');
+		form.action = next_url.value;
+		grab('save_this').value = 'true';
+		form.submit();
+	}
+}
 
 function continue_asi_form(section) {
 	section = String(section);
-	var form = document.getElementById('asi_form');
-	var next_url = document.getElementById('next_url');
+	var form = grab('asi_form');
+	var next_url = grab('next_url');
 	var proceed = true;
 
 	processAsiFields(section);

@@ -10377,9 +10377,9 @@ def grabASIClassesCSS(asi, m_page):
 
 def grabASISideImages(asi, page):
 	images = {}
-	check = "/static/images/green_check.png"
-	x = "/static/images/red_x.png"
-	progress = "/static/images/yellow_progress.png"
+	check = "/static/images/check_m.png"
+	x = "/static/images/blank95.png"
+	progress = "/static/images/blank95.png"
 	asiComps = get_asi_parameters(asi)
 
 	for a in asiComps:
@@ -10387,8 +10387,10 @@ def grabASISideImages(asi, page):
 			images[a['btn']] = check
 		elif page == '/asi_viewForm/':
 			images[a['btn']] = check
-		elif page == a['url']:
-			images[a['btn']] = progress
+		elif page == a['url'] and a['complete'] == True:
+			images[a['btn']] = check
+		elif page == a['url'] and a['complete'] == False:
+			images[a['btn']] = x
 		else:
 			images[a['btn']] = x
 
@@ -10972,6 +10974,16 @@ def grabAsiAdminFields(asi):
 	result['g10'] = asi.admin.g10
 	result['g11'] = asi.admin.g11
 	result['g12'] = asi.admin.g12
+	result['medical'] 	= asi.general.medical
+	result['employ'] 	= asi.general.employ
+	result['alcohol'] 	= asi.general.alcohol
+	result['drug'] 		= asi.general.drug
+	result['legal'] 	= asi.general.legal
+	result['family'] 	= asi.general.family
+	result['psych'] 	= asi.general.psych
+	result['test1'] 	= asi.general.test1
+	result['test2'] 	= asi.general.test2
+	result['test3'] 	= asi.general.test3
 	result['isComplete'] = asi.adminComplete
 	return result
 
@@ -10997,16 +11009,7 @@ def grabAsiGeneralFields(asi):
 	result['g26'] 		= asi.general.g26
 	result['g27'] 		= asi.general.g27
 	result['g28'] 		= asi.general.g28
-	result['medical'] 	= asi.general.medical
-	result['employ'] 	= asi.general.employ
-	result['alcohol'] 	= asi.general.alcohol
-	result['drug'] 		= asi.general.drug
-	result['legal'] 	= asi.general.legal
-	result['family'] 	= asi.general.family
-	result['psych'] 	= asi.general.psych
-	result['test1'] 	= asi.general.test1
-	result['test2'] 	= asi.general.test2
-	result['test3'] 	= asi.general.test3
+	
 	result['isComplete'] = asi.generalComplete
 	return result
 
@@ -11445,7 +11448,16 @@ def saveASIadmin(request, asi):
 	asi.admin.g11 = request.POST.get('g11')
 	asi.admin.g12 = request.POST.get('g12')
 
+	asi.general.medical = request.POST.get('medical')
+	asi.general.employ 	= request.POST.get('employ')
+	asi.general.alcohol = request.POST.get('alcohol')
+	asi.general.drug 	= request.POST.get('drug')
+	asi.general.legal 	= request.POST.get('legal')
+	asi.general.family 	= request.POST.get('family')
+	asi.general.psych 	= request.POST.get('psych')
+
 	asi.admin.save()
+	asi.general.save()
 
 def saveASIgeneral(request, asi):
 	asi.general.g13 = request.POST.get('g13')
@@ -11469,13 +11481,13 @@ def saveASIgeneral(request, asi):
 	asi.general.g27 = request.POST.get('g27')
 	asi.general.g28 = request.POST.get('g28')
 
-	asi.general.medical = request.POST.get('medical')
-	asi.general.employ = request.POST.get('employ')
-	asi.general.alcohol = request.POST.get('alcohol')
-	asi.general.drug = request.POST.get('drug')
-	asi.general.legal = request.POST.get('legal')
-	asi.general.family = request.POST.get('family')
-	asi.general.psych = request.POST.get('psych')
+	# asi.general.medical = request.POST.get('medical')
+	# asi.general.employ = request.POST.get('employ')
+	# asi.general.alcohol = request.POST.get('alcohol')
+	# asi.general.drug = request.POST.get('drug')
+	# asi.general.legal = request.POST.get('legal')
+	# asi.general.family = request.POST.get('family')
+	# asi.general.psych = request.POST.get('psych')
 
 	asi.general.test1 = request.POST.get('test1')
 	asi.general.test2 = request.POST.get('test2')

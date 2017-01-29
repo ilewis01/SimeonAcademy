@@ -32,32 +32,32 @@
                       <table class='img-single-btn-table'>
                         <tr>
                           <td>
-                            <a href="#">
-                              <div  class='{{class.asiAdmin}}'>Administrative</div>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_admin_image}}"></div>Administrative</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_general/');">
-                              <div  class='{{class.asiGeneral}}'>General Info</div>
+                              <div  class='{{class.asiGeneral}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_general_image}}"></div>General Info</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_medical/');">
-                              <div  class='{{class.asiMedical}}'>Medical Status</div>
+                              <div  class='{{class.asiMedical}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_medical_image}}"></div>Medical Status</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_employment/');">
-                              <div  class='{{class.asiEmployment}}'>Employment</div>
+                              <div  class='{{class.asiEmployment}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_employment_image}}"></div>Employment</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_drug1/');">
-                              <div  class='{{class.asiDrug1}}'>Drug & Alcohol Use</div>
+                              <div  class='{{class.asiDrug1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_drug1_image}}"></div>Drug & Alcohol Use</div>
                             </a>
                           </td>
                         </tr>
@@ -69,34 +69,35 @@
                         <tr>
                           <td>
                             <a href="javascript: sideBarASI('/asi_legal/');">
-                              <div  class='{{class.asiLegal}}'>Legal Status</div>
+                              <div  class='{{class.asiLegal}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_legal_image}}"></div>Legal Status</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_family/');">
-                              <div  class='{{class.asiFamily}}'>Family History</div>
+                              <div  class='{{class.asiFamily}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_family_image}}"></div>Family History</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_social1/');">
-                              <div  class='{{class.asiSocial1}}'>Social Interactions</div>
+                              <div  class='{{class.asiSocial1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social1_image}}"></div>Social Interactions</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_social2/');">
-                              <div  class='{{class.asiSocial2}}'>Social Interactions II</div>
+                              <div  class='{{class.asiSocial2}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social2_image}}"></div>Social Interactions II</div>
                             </a>
                           </td>
 
                           <td>
                             <a href="javascript: sideBarASI('/asi_psych/');">
-                              <div  class='{{class.asiPsych}}'>Psychiatric Status</div>
+                              <div  class='{{class.asiPsych}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_psych_image}}"></div>Psychiatric Status</div>
                             </a>
                           </td>
                       </table>
+                      <div class='divider_gradient'></div>
                     </div>
                   </div>
                 </div>
@@ -108,6 +109,29 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
+                  <!-- WARNING DIV -->
+                  <div class='asi-drug1-z5-holder-out' id='z5'>
+                      <div class='asi-drug1-z5-border'>
+                          <div class='asi-drug1-z5-bkg'>
+                              <div style='height:2%;'></div>
+                              <div class='asi-d1-warningHld'>
+                                <div class='asi-d1-warningHld1'><img src="{% static 'images/warnING.png' %}" alt="WARNING" class=''></div>
+                                <div class='asi-d1-warningHld2'>Warning!</div>
+                                <div class='overall-warning-t1'>The Highlighted Fields Contain Errors</div>
+                                <div class='overall-warning-t2'>Follow the legend below to correct these errors:</div>
+                                <ul class='overall-warning-t3'>
+                                  <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> cannot be blank or in the wrong format</li>
+                                  <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 99</li>
+                                  <li>You must make a selection from the fields <span style='color:#bf6c01'>HIGHLIGHTED IN ORANGE</span></li>
+                                </ul>
+                               </div>
+                              <div class='finalAndCompleteWarningButtonDiv_single2'>
+                                <button onClick="javascript: generalVisibilityChange(z5, 'asi-drug1-z5-holder-out'); return false;">ok</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
                   <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
                     <div class='top-split2'>
                       <h4>Administrative Information</h4>
@@ -116,25 +140,25 @@
                         <tr>
                           <td><div class='asi_number_iml'>G1.</div></td>
                           <td><div><div class='asi_iml_label'>I.D. Number:</div></div></td>
-                          <td><div><input type='number' name='g1' id='g1' value='{{fields.g1}}'></div></td>
+                          <td><div class='general_asi_input'><input type='text' name='g1' id='g1' value='{{fields.g1}}' oninput="javascript: clearG1(g1);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml'>G2.</div></td>
                           <td><div><div class='asi_iml_label'>Last 4 Digits of SSN:</div></div></td>
-                          <td><div><input type='number' name='g2' id='g2' value='{{fields.g2}}'></div></td>
+                          <td><div class='general_asi_input'><input type='text' name='g2' id='g2' value='{{fields.g2}}' oninput="javascript: clearG1(g2);"></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml'>G3.</div></td>
                           <td><div><div class='asi_iml_label'>Program Number:</div></div></td>
-                          <td><div><input type='number' name='g3' id='g3' value='{{fields.g3}}'></div></td>
+                          <td><div class='general_asi_input'><input type='number' name='g3' id='g3' value='{{fields.g3}}'></div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml'>G4.</div></td>
                           <td><div><div class='asi_iml_label'>Date of Admission:</div></div></td>
-                          <td><div><input type="text" id="popupDatepicker" name='g4' value='{{session.client.intake_date}}' style='padding-left:5px; width:159px;'></div></td>
+                          <td><div class='general_asi_input'><input type="text" id="popupDatepicker" name='g4' value='{{session.client.intake_date}}' style='padding-left:5px; width:159px;' onClick="javascript: clearG1(popupDatepicker);"></div></td>
                         </tr>
                       </table>
 
@@ -143,8 +167,8 @@
                           <td><div class='asi_number_iml'>G5.</div></td>
                           <td><div><div class='asi_iml_label'>Class:</div></div></td>
                           <td>
-                            <div>
-                              <select name='g8' id='g8'>
+                            <div class='general_asi_input'>
+                              <select name='g8' id='g8' onChange="javascript: clearG1(g8);">
                                 <option value='0'>Select</option>
                                 <option value='1'>Intake</option>
                                 <option value='2'>Follow-up</option>
@@ -159,8 +183,8 @@
                           <td><div class='asi_number_iml'>G6.</div></td>
                           <td><div><div class='asi_iml_label'>Contact Code:</div></div></td>
                           <td>
-                            <div>
-                              <select name='g9' id='g9'>
+                            <div class='general_asi_input'>
+                              <select name='g9' id='g9' onChange="javascript: clearG1(g9);">
                                 <option value='0'>Select</option>
                                 <option value='1'>In Person</option>
                                 <option value='2'>Phone</option>
@@ -173,8 +197,8 @@
                       <table class='iml-asi-wide-table'>
                         <tr>
                           <td><div class='asi_number_iml'>G7.</div></td>
-                          <td><div><div class='asi_iml_label'>Interviewer Code Number:</div></div></td>
-                          <td><div><input type='number' name='g11' id='g11' value='{{fields.g11}}' style='width:129px;'></div></td>
+                          <td><div><div class='asi_iml_label'>Interviewer Code Number/Initials:</div></div></td>
+                          <td><div class='general_asi_input'><input type='text' name='g11' id='g11' value='{{fields.g11}}' style='width:129px;' oninput="javascript: clearG1(g11);"></div></td>
                         </tr>
                       </table>
 
@@ -183,8 +207,8 @@
                           <td><div class='asi_number_iml'>G8.</div></td>
                           <td><div><div class='asi_iml_label'>Special:</div></div></td>
                           <td>
-                            <div>
-                              <select name='g12' id='g12'>
+                            <div class='general_asi_input'>
+                              <select name='g12' id='g12' onChange="javascript: clearG1(g12);">
                                 <option value='0'>Select</option>
                                 <option value='1'>Patient Terminated</option>
                                 <option value='2'>Patient Refused</option>
@@ -356,7 +380,7 @@
                 <table class='iml-save-btn'>
                   <tr>
                     <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
-                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                    <td><button onClick="javascript: continue_asi1('{{current_section}}'); return false;">Save & Continue</button></td>
                   </tr>
                 </table>
               </div>
