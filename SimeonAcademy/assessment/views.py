@@ -4195,6 +4195,23 @@ def asi_preliminary(request):
 			else:
 				return render_to_response('counselor/forms/ASI/instructions.html', content, context_instance=RequestContext(request))
 
+@login_required(login_url='/index')
+def viewASIinstruction(request):
+	user = request.user
+	if not user.is_authenticated():
+		render_to_response('global/index.html')
+
+	else:
+		content = {}
+		content.update(csrf(request))
+		content['user'] = user
+		if user.account.is_counselor == False:
+			content['title'] = 'Restricted Access'
+			return render_to_response('global/restricted.html', content)
+
+		else:
+			return render_to_response('counselor/forms/ASI/viewASIinstruction.html', content, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/index')
 def asi_admin(request):

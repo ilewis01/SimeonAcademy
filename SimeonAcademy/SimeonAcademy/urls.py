@@ -201,6 +201,7 @@ urlpatterns = patterns('',
     url(r'^asi_viewForm/$', 'assessment.views.asi_viewForm'),
     url(r'^new_comment/$', 'assessment.views.new_comment'),
     url(r'^printASI/$', 'assessment.views.printASI'),
+    url(r'^viewASIinstruction/$', 'assessment.views.viewASIinstruction'),
 
     ##Global Views
     url(r'^generic_exit/$', 'assessment.views.generic_exit'),

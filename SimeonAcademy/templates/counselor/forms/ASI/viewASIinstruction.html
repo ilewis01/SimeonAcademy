@@ -1,0 +1,204 @@
+{% load staticfiles %}
+<head>
+	<title>Simeon Academy</title>
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{% static 'css/font_awesome/css/font-awesome.min.css' %}" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body class='asi_directions'>
+	<!-- <div class='asi-instru-top'>
+		ASI Instructions/Help
+	</div> -->
+
+	<div class='asi-instr-left'>
+		<h4 class='asi_dirct_head'>Content</h4>
+
+		<ul>
+			<li><a href="#top">Interviewer Instructions</a></li>
+			<li><a href="#general">Administrative/General</a></li>
+			<li><a href="#medical">Medical Status</a></li>
+			<li><a href="#employment">Employment</a></li>
+			<li><a href="#drug">Drug & Alcohol Use</a></li>
+			<li><a href="#legal">Legal Status</a></li>
+			<li><a href="#family">Family History</a></li>
+			<li><a href="#soc1">Social Interactions I</a></li>
+			<li><a href="#soc2">Social Interactions II</a></li>
+			<li><a href="#psych">Psychiactic Status</a></li>
+		</ul>
+
+		<div class='asi_instru_btn_div'>
+			<button onClick='javascript: window.close();'>Close</button>
+		</div>
+	</div>
+
+	<div class='asi-instr-right'>
+		<div class='asi_right_direction_container'>
+			<section id='top'>
+				<div class='asi_inst_heads'>Interviewer Instructions</div>
+
+				<ol>
+					<li>Leave no blanks.</li>
+					<li>Make plenty of comments (if another person reads this ASI, they should have a relatively complete picture of the client's perceptions of his/her problems).</li>
+					<li>X = Question not answered.<br>N = Question not applicable.</li>
+					<li>Terminate interview if client misrepresents two or more sections.</li>
+					<li>When noting comments, please record the question number.</li>
+					<li>Tutorial/clarification notes are preceded with "*".</li>
+					<li><u>HALF TIME RULE: </u>If a question ask the number of months, round up periods over 14 days or more to 1 month. Round up 6 months or more to 1 year.</li>
+				</ol>
+
+				<div>
+					<b style='font-size:14px;'>Confidence Ratings:</b>
+
+					<ul>
+						<li>Last two items in each section.</li>
+						<li>Do not over-interpret.</li>
+						<li>Denial does not necessarily warrant misrepresentation.</li>
+						<li>Misrepresentation is OVERT contradiction in information.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section id='general'>
+				<div class='asi_inst_heads'>Administrative/General Sections</div>
+
+				<ul>
+					<li><span>G9</span> - Intake ASI must be in person.</li>
+					<li><span>G19</span> - A controlled environment is a place, <em>theoretically</em>, without access to drugs/alcohol.</li>
+					<li><span>G20</span> - This response should be "N" if question G19 is "No". This refers to the total number of days detained in the past 30 days.</li>
+					<li><span>Comments</span> - Be certain to include the question number to which you are referring in your notes.</li>
+				</ul>
+			</section>
+
+			<section id='medical'>
+				<div class='asi_inst_heads'>Medical Status</div>
+
+				<ul>
+					<li><span>M1</span> - Included O.D.'s and D.T.'s. Exclude detox, alcohol/drug, psychiatric treatment and childbirth (if no complications).Enter the number of <b>OVERNIGHT</b> hospitalizations for medical problems.</li>
+					<li><span>M2</span> - If no hospitalizations in question M1, then this response shoulf ne "N".</li>
+					<li><span>M3</span> - <em><b>If yes, specify in comments.</em></b> A chronic medical condition is a serious physical condition that requires regular care, (i.e., medication, dietary restriction) preventing full advantage of their abilities.</li>
+					<li><span>M4</span> - <em><b>If yes, specify in comments.</em></b> Medication prescribed by a MD for medical conditions; <b><em>not psychiatric medicines</em></b>. Include medicines prescribed whether or not the patient is currently taking them. The intent is to verify chronic medical problems.</li>
+					<li><span>M5</span> - <em><b>If yes, specify in comments.</em></b> Include Workers' compensation, exclude psychiatric disability.</li>
+					<li><span>M6</span> - Include flu, colds, etc. Include serious ailments related to drug/alcohol, which would continue even if the patient were abstinent (e.g., cirrhosis of the liver, abscesses from needles, etc.).</li>
+					<li><span>M7</span> - Restrict response to problem days of question M6.</li>
+					<li><span>M8</span> - If client is currently receiving medical treatment, refer to the need for <em><b>additional</b></em> medical treatment by the patient.</li>
+					<li><span>M9</span> - Refers to the patient's need for <em><b>additional</em></b> medical treatment.</li>
+				</ul>
+			</section>
+
+			<section id='employment'>
+				<div class='asi_inst_heads'>Employment Status</div>
+
+				<ul>
+					<li><span>E1</span> - GED = 12 years. Please not in comments. <br>Include formal education only.</li>
+					<li><span>E2</span> - Formal/organized training only. For military training, only include training that can be used in civilian life (i.e., electronics, computers)</li>
+					<li><span>E3</span> - Employable, transferrable skill aquired through training.</li>
+					<li><span>E4</span> - Valid license; not suspended/revoked.</li>
+					<li><span>E5</span> - If answer to E4 is "No", then E5 <u>must</u> be "No". Does not require ownership, only requires availability on a regular basis.</li>
+					<li><span>E6</span> - Full time = 35+ weekly hours; does not necessarily mean most recent job.</li>
+					<li><span>E7</span> - Use Hollingshead Catagories Reference Sheet.</li>
+					<li><span>E8</span> - Is patient receiving any regular support (i.e., cash, food, housing) from family/friend? Include spouse's contribution; exclude support by any institution.</li>
+					<li><span>E9</span> - If E8 is "No", then E9 is "N".</li>
+					<li><span>E10</span> - Answer should represent the majority of the last 3 years, not just the most recent selection. If there are equal times for more than one category, select that which represents the current situation.</li>
+					<li><span>E11</span> - Include "under the table" work, paid sick days and vacation.</li>
+					<li><span>E12</span> - Net or "take home" pay, include any "under the table" money.</li>
+					<li><span>E14</span> - Include food stamps, transportation money provided by an agency to go to and from treatment.</li>
+					<li><span>E15</span> - Include disability, pensions, retirement, veteran's benefits, SSI & workers' compensation.</li>
+					<li><span>E16</span> - Money for personal expenses, (i.e. clothing), include unreliable sources of income. Record <b><em>cash</em></b> payments only, include windfalls (unexpected), money from loans, legal gambling, inheritance, tax returns, etc.).</li>
+					<li><span>E17</span> - <b><em>Cash</em></b> obtained from drug dealing, stealing, fencing stolen goods, illegal gambling, prostitution, etc. <b><em>DO NOT</em></b> attempt to convert drugs exchanged to a dollar value.</li>
+					<li><span>E18</span> - Must be regularly depending on patient, do not include alimony/child support, do not include the patient or self-supporting spouse.</li>
+					<li><span>E19</span> - Include inability to find work, if they are actively looking for work, or problems with present job in which that job is jeopardized.</li>
+					<li><span>E20</span> - If the patient has been incarcerated or detained during the past 30 days, they cannot have employment problems. In that case an "N" response is indicated.</li>
+					<li><span>E21</span> - Stress help in finding or preparing for a job, not giving them a job.</li>
+				</ul>
+			</section>
+
+			<section id='drug'>
+				<div class='asi_inst_heads'>Drug & Alcohol Section</div>
+
+				<ul>
+					<li>30 day questions only require the number of days used</li>
+					<li>Lifetime use is asked to determine extended periods of use.</li>
+					<li>Regular use = 3 or more times per week, binges, or problematic irregular use in which normal activities are compromised.</li>
+					<li>Alcohol to intoxication does not necessarily mean "drunk", use the words “to feel or felt the effects", “got a buzz”, “high”, etc. instead of intoxication. As a rule, 3 or more drinks in one sitting, or 5 or more drinks in one day defines “intoxication".</li>
+					<li>How to ask these questions:<br>
+						“How many days in the past 30 have you used....?”<br>
+						"How many years in your life have you regularly used....?"
+					</li>
+					<li><b><u>ROUTE OF ADMINISTRATION</u></b> - Note the usual or most recent route. For more than one route, choose the most severe. The routes are listed from least severe to most severe.</b></li>
+
+					<li><span>D14</span> - Interviewer should determine the major drug or drugs of abuse. Code the number next to the drug in questions 01-12, or "00" = no problem, "15" = alcohol & one or more drugs, "16" = more than one drug but no alcohol. Ask patient when not clear.</li>
+					<li><span>D15</span> - Last attempt of at least one month, not necessarily Mos. the longest. Periods of hospitalization/incarceration <em><b>do not count</b></em>. Periods of antabuse, methadone, or naltrexone use during abstinence <em><b>do count</b></em>.<br>”00” = never abstinent</li>
+					<li><span>D16</span> - If D15 = “00”, then D16 = “NN”.<br>"00" = still abstinent.</li>
+					<li><span>D17</span> - <em><b>Delirium Tremens</b></em> (DT's): Occur 24-48 hours after last drink, or significant decrease in alcohol intake, shaking, severe disorientation, fever, hallucinations, they usually require medical attention.</li>
+					<li><span>D18</span> - <b><em>Overdoses</em></b> (OD): Requires intervention by someone to recover, not simply sleeping it off, include suicide attempts by OD.</li>
+					<li><span>D19</span> - Include detoxification, halfway houses, in/outpatient counseling, and AA (if 3+ meetings within one month period).</li>
+					<li><span>D20</span> -  Include detoxification, halfway houses, in/outpatient counseling, and NA (if 3+ meetings within one month period).</li>
+					<li><span>D22</span> - If D19 = "00", then question D21 is "NN"<br>If D20 = ‘00’, then question D22 is “NN”</li>
+					<li><span>D24</span> - Only count actual <b><em>money</em></b> spent. What is the financial burden caused by drugs/alcohol?</li>
+					<li><span>D25</span> - Include AA/NA</li>
+					<li><span>D26</span> - Include: Craving, withdrawal symptoms, disturbing effects of use, or wanting to stop and being unable to.</li>
+					<li><span>D27</span> - Include: Craving, withdrawal symptoms, disturbing effects of use, or wanting to stop and being unable to.</li>
+					<li><span>D28</span> - Include: Craving, withdrawal symptoms, disturbing effects of use, or wanting to stop and being unable to.</li>
+				</ul>
+			</section>
+
+			<section id='legal'>
+				<div class='asi_inst_heads'>Legal Status</div>
+			</section>
+
+			<section id='family'>
+				<div class='asi_inst_heads'>Family History</div>
+			</section>
+
+			<section id='soc1'>
+				<div class='asi_inst_heads'>Social Interactions I</div>
+			</section>
+
+			<section id='soc2'>
+				<div class='asi_inst_heads'>Social Interactions II</div>
+			</section>
+
+			<section id='psych'>
+				<div class='asi_inst_heads'>Psychiatric Status</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery.min.js' %}"  type="text/javascript"></script>
+	<script src="{% static 'js/custom_js.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/jquery.singlePageNav.min.js' %}"  type="text/javascript"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	 <script>
+
+            // Prevent console.log from generating errors in IE for the purposes of the demo
+            if ( ! window.console ) console = { log: function(){} };
+
+            // The actual plugin
+            $('.single-page-nav').singlePageNav({
+                offset: $('.single-page-nav').outerHeight(),
+                filter: ':not(.external)',
+                updateHash: true,
+                beforeStart: function() {
+                    console.log('begin scrolling');
+                },
+                onComplete: function() {
+                    console.log('done scrolling');
+                }
+            });
+			
+			$(document).ready(function ($) {
+
+				// delegate calls to data-toggle="lightbox"
+				$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+					event.preventDefault();
+					return $(this).ekkoLightbox({
+						always_show_close: true
+					});
+				});
+
+			});
+			
+    </script>
+</body>

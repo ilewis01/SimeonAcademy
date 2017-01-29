@@ -16772,6 +16772,16 @@ function openPopUp(location, url, w, h) {
 		var tops = Number((screen.height/2) - (h/2));
 		var opWin = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
 	}
+	else if (location === 'right') {
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var opWin = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	}
+	else if (location === 'left') {
+		var lefts = Number((screen.width/2) - (w/2));
+		var tops = Number((screen.height/2) - (h/2));
+		var opWin = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+lefts);
+	}
 }
 
 function getPopParent(element) {
@@ -16974,6 +16984,10 @@ function asi_sel1_iml() {
 		target.style.opacity = '1.0';
 		lab.style.opacity = '1.0';
 	}
+}
+
+function viewASIinstruction(section, side) {
+	openPopUp(side, '/viewASIinstruction/', 500, 600);
 }
 
 function asi_general_errors() {

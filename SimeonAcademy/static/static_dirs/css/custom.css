@@ -10396,6 +10396,83 @@ button:hover {
 	border:1px solid gray;
 }
 
+.asi_directions {
+	font-family: arial;
+	background-color: white;
+	color: black;
+	position:relative;
+}
+
+.asi-instru-top {
+	width:100%;
+	text-align: center;
+	border-bottom: 2px solid black;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 22px;
+	padding-top:1%;
+	padding-bottom:1%;
+}
+
+.asi-instr-left {
+	float:left;
+	width:30%;
+	text-align: left;
+	height:100%;
+	font-size: 11px;
+	position: relative;
+	border-right-style: double;
+	background-color: #ececec;
+}
+
+.asi-instr-left ul {
+	padding-left: 20%;
+}
+
+.asi-instr-right {
+	float:left;
+	width:70%;
+	text-align: left;
+}
+
+.asi_dirct_head {
+	text-align: left;
+	font-weight: bold;
+	font-style: italic;
+	margin-left:10%;
+}
+
+.asi_instru_btn_div {
+	width:90%;
+	margin:auto;
+	margin-top: 40%;
+}
+
+.asi_instru_btn_div button {
+	width: 100%;
+}
+
+.asi_right_direction_container {
+	width:95%;
+	margin:auto;
+	font-size: 11px;
+	overflow-y: scroll; 
+	height:59%;
+	/*background-color: yellow;*/
+}
+
+.asi_right_direction_container ol {
+	padding-left:5%;
+}
+
+.asi_inst_heads {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
 
 
 
