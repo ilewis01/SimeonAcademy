@@ -5448,6 +5448,15 @@ button:hover {
 	font-size: 13px;
 }
 
+.top-split-asi2 {
+	width:91%;
+	margin-top: 2%;
+	height:20%;
+	padding:2%;
+	text-align: justify;
+	font-size: 13px;
+}
+
 .top-split2 {
 	width:91%;
 	margin-top: 3%;
@@ -9729,6 +9738,18 @@ button:hover {
 	font-size: 18px;
 	padding-top:15px;
 	padding-left:12px;
+}
+
+.asi-d1-instruction-div2 {
+	font-size: 18px;
+	padding-top:15px;
+	padding-left:82px;
+}
+
+.asi-d1-instruction-div3 {
+	font-size: 18px;
+	padding-top:15px;
+	padding-left:8px;
 }
 
 .finalAndCompleteWarningButtonDiv_single {

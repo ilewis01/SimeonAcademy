@@ -15692,17 +15692,35 @@ function init_asi_medical(json_data) {
 	blank_init_asi(json_data.isComplete, document.getElementById('m5Exp'));
 	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
 
-	document.getElementById('m7').selectedIndex = Number(json_data.m7);
-	document.getElementById('m8').selectedIndex = Number(json_data.m8);
-	document.getElementById('m9').selectedIndex = Number(json_data.m9);
-	
-	asi_radioBtn_select(json_data.m3, document.getElementById('m3yes'), document.getElementById('m3no'));
-	asi_radioBtn_select(json_data.m4, document.getElementById('m4yes'), document.getElementById('m4no'));
-	asi_radioBtn_select(json_data.m5, document.getElementById('m5yes'), document.getElementById('m5no'));
-	asi_radioBtn_select(json_data.m10, document.getElementById('m10yes'), document.getElementById('m10no'));
-	asi_radioBtn_select(json_data.m11, document.getElementById('m11yes'), document.getElementById('m11no'));
+	grab('m3').selectedIndex = json_data.m3;
+	grab('m4').selectedIndex = json_data.m4;
+	grab('m5').selectedIndex = json_data.m5;
+	asi_sel1_iml();
 
-	m5Radio();
+	grab('m6').selectedIndex = Number(json_data.m6) + 1;
+	grab('m7').selectedIndex = Number(json_data.m7);
+	grab('m8').selectedIndex = Number(json_data.m8);
+	grab('m9').selectedIndex = Number(json_data.m9);
+
+	if (String(json_data.m10) === '1') {
+		grab('yesMis').checked = true;
+	}
+	else {
+		grab('noMis').checked = true;
+	}
+
+	if (String(json_data.m11) === '1') {
+		grab('yesUnd').checked = true;
+	}
+	else {
+		grab('noUnd').checked = true;
+	}
+
+	grab('asi_comment').value = json_data.comments;
+
+	if (grab('m5').selectedIndex === 1) {
+		grab('m5Exp').value = json_data.m5Exp;
+	}
 }
 
 function init_asi_employmentl(json_data) {
@@ -16937,6 +16955,27 @@ function u_general_blank_check(div, color) {
 	return hasError;
 }
 
+function u_load_m_target_data(field, target) {
+	target.value = field.value;
+}
+
+function asi_sel1_iml() {
+	var target = grab('m5Exp');
+	var lab = grab('m5Lab');
+
+	if (grab('m5').selectedIndex !== 1) {
+		target.disabled = true;
+		target.style.opacity = '0.3';
+		lab.style.opacity = '0.3';
+		target.value = '';
+	}
+	else {
+		target.disabled = false;
+		target.style.opacity = '1.0';
+		lab.style.opacity = '1.0';
+	}
+}
+
 function asi_general_errors() {
 	var count = 0;
 	var hasErrors = false;
@@ -16970,12 +17009,60 @@ function asi_general_errors() {
 	return hasErrors;
 }
 
+function asi_medical_errors() {
+	hasErrors = false;
+	var count = 0;
+
+	sels = [];
+	sels.push(grab('m3'));
+	sels.push(grab('m4'));
+	sels.push(grab('m5'));
+	sels.push(grab('m6'));
+	sels.push(grab('m7'));
+	sels.push(grab('m8'));
+	sels.push(grab('m9'));
+
+	for (var i = 0; i < sels.length; i++) {
+		if (u_select_error_checker(sels[i]) === true) {
+			sels[i].style.border = '1px solid #bf6c01';
+			count += 1;
+		}
+	}
+
+	if (clearWhiteSpace(grab('m1').value).length === 0) {
+		grab('m1').style.border = '1px solid red';
+		count += 1;
+	}
+
+	if (clearWhiteSpace(grab('m2yrs').value).length === 0) {
+		grab('m2yrs').style.border = '1px solid red';
+		count += 1;
+	}
+
+	if (clearWhiteSpace(grab('m2mth').value).length === 0) {
+		grab('m2mth').style.border = '1px solid red';
+		count += 1;
+	}
+
+	if (grab('m5').selectedIndex === 1) {
+		if (isBlankText(grab('m5Exp').value) === true) {
+			count += 1;
+			grab('m5Exp').style.border = '1px solid red';
+		}
+	}
+
+	if (count > 0) {hasErrors = true;}
+
+	return hasErrors;
+}
+
 function general_asi_save(section) {
 	var errors = false;
 	section = String(section);
 
 	if (section === '/asi_admin/') {errors = asi_admin_errors();}
 	else if (section === '/asi_general/') {errors = asi_general_errors();}
+	else if (section === '/asi_medical/') {errors = asi_medical_errors();}
 
 	if (errors === true) {
 		generalVisibilityChange(z5, 'asi-drug1-z5-holder-in');

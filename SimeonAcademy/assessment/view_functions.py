@@ -10572,6 +10572,19 @@ def getASIDrugMajor(m_val):
 			index = 0
 	return index
 
+def getYesNoIndexes(val):
+	index = 0
+	val = str(val)
+
+	if val == '1':
+		index = 1
+	elif val == '0':
+		index = 2
+	elif val == 'X':
+		index = 3
+
+	return index
+
 def getLegalChargesIndex(m_val):
 	m_val = str(m_val)
 	index = 0
@@ -11016,6 +11029,9 @@ def grabAsiGeneralFields(asi):
 def grabAsiMedicalFields(asi):
 	# Returns a dictionary List of ASI.medical fields
 	result = {}
+	m3 = getYesNoIndexes(asi.medical.m3)
+	m4 = getYesNoIndexes(asi.medical.m4)
+	m5 = getYesNoIndexes(asi.medical.m5)
 	m7 = getPatientIndex(asi.medical.m7)
 	m8 = getPatientIndex(asi.medical.m8)
 	m9 = getInterviewerIndex(asi.medical.m9)
@@ -11023,9 +11039,9 @@ def grabAsiMedicalFields(asi):
 	result['m1'] = asi.medical.m1
 	result['m2yrs'] = asi.medical.m2yrs
 	result['m2mth'] = asi.medical.m2mth
-	result['m3'] = asi.medical.m3
-	result['m4'] = asi.medical.m4
-	result['m5'] = asi.medical.m5
+	result['m3'] = m3
+	result['m4'] = m4
+	result['m5'] = m5
 	result['m5Exp'] = asi.medical.m5Exp
 	result['m6'] = asi.medical.m6
 	result['m7'] = m7

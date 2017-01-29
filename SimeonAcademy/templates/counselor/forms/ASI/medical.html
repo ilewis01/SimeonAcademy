@@ -15,6 +15,7 @@
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
       <input type='hidden' name='comments' id='comments' value=''>
+      <input type='hidden' name='m_m5Exp' id='m_m5Exp' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -110,8 +111,61 @@
                 <div class='row'>
 
                   <!-- LEFT SIDE -->
+                  <!-- WARNING DIV -->
+                  <div class='asi-drug1-z5-holder-out' id='z5'>
+                      <div class='asi-drug1-z5-border'>
+                          <div class='asi-drug1-z5-bkg'>
+                              <div style='height:2%;'></div>
+                              <div class='asi-d1-warningHld'>
+                                <div class='asi-d1-warningHld1'><img src="{% static 'images/warnING.png' %}" alt="WARNING" class=''></div>
+                                <div class='asi-d1-warningHld2'>Warning!</div>
+                                <div class='overall-warning-t1'>The Highlighted Fields Contain Errors</div>
+                                <div class='overall-warning-t2'>Follow the legend below to correct these errors:</div>
+                                <ul class='overall-warning-t3'>
+                                  <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> cannot be blank or in the wrong format</li>
+                                  <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 99</li>
+                                  <li>You must make a selection from the fields <span style='color:#bf6c01'>HIGHLIGHTED IN ORANGE</span></li>
+                                </ul>
+                               </div>
+                              <div class='finalAndCompleteWarningButtonDiv_single2'>
+                                <button onClick="javascript: generalVisibilityChange(z5, 'asi-drug1-z5-holder-out'); return false;">ok</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- NEW COMMENT SECTION -->
+                    <div class='asi-drug1-z3-holder-out' id='z3'>
+                        <div class='asi-drug1-z3-border'>
+                            <div class='asi-drug1-z3-bkg'>
+                                  <div class='asi_comment_header_d1'>
+                                      <div class='align-asi-d1-close-left'>
+                                          <div class='ft-closeWindow-icon-ltgray'>
+                                              <a onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">
+                                                  <i class="fa fa-window-close" aria-hidden="true"></i>
+                                              </a>
+                                          </div>
+                                      </div>
+                                      <div class='align-asi-d1-close-left2'>New Comment: ASI Drug/Alcohol Use</div>
+                                  </div>
+                                  <div class='divider_gradient' style='margin-bottom:20px;'></div>
+
+                                  <div class='comment_page_body_d1'><textarea name='asi_comment' id='asi_comment' value=''></textarea></div>
+
+                                  <div class='asi-d1-newComment-btns-wrap'>
+                                      <button onClick="javascript: save_asi_comment_iframe(z3, 'asi-drug1-z3-holder-out'); return false;">Save</button>
+                                      <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">Cancel</button>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  <div class='asi-d1-instruction-div2'>
+                      <a onClick="javascript: viewASIinstruction('medical'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                  </div>
+
                   <div class='col-md-6' style='width:40%; height:100%; margin-left:60px;'>
-                    <div class='top-split'>
+                    <div class='top-split-asi2'>
                       <table class='iml-asi-medical-table'>
                         <tr>
                           <td><div class='asi_number_iml'>M1.</div></td>
@@ -120,7 +174,7 @@
 
                         <tr>
                           <td></td>
-                          <td><div><div style='margin-bottom:15px;'>medical problems? <input type='number' name='m1' id='m1' value='{{fields.m1}}' style='width:50px; text-align:center;'></div></div></td>
+                          <td><div><div class='general_asi_input' style='margin-bottom:15px;'>medical problems? <input type='number' name='m1' id='m1' value='{{fields.m1}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(m1);"></div></div></td>
                         </tr>
 
                         <tr>
@@ -131,11 +185,11 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               problem?
-                              <input type='number' name='m2yrs' id='m2yrs' value='{{fields.m2yrs}}' style='width:50px; text-align:center;'>
+                              <input type='number' name='m2yrs' id='m2yrs' value='{{fields.m2yrs}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(m2yrs);">
                               <span>years</span>
-                              <input type='number' name='m2mth' id='m2mth' value='{{fields.m2mth}}' style='width:50px; text-align:center;'>
+                              <input type='number' name='m2mth' id='m2mth' value='{{fields.m2mth}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(m2mth);">
                               <span>months</span>
                             </div>
                           </td>
@@ -149,9 +203,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               interfere with your life?
-                              <select name='m3' id='m3'>
+                              <select name='m3' id='m3' oninput="javascript: clearG1(m3);">
                                 <option value='None Selected'>Select</option>
                                 <option value='1'>Yes</option>
                                 <option value='0'>No</option>
@@ -169,9 +223,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               for a physical problem?
-                              <select name='m4' id='m4'>
+                              <select name='m4' id='m4' oninput="javascript: clearG1(m4);">
                                 <option value='None Selected'>Select</option>
                                 <option value='1'>Yes</option>
                                 <option value='0'>No</option>
@@ -190,28 +244,37 @@
                           <td></td>
                           <td>
                             <em>(Exclude psychiatric disability)</em>
-                            <select name='m5' id='m5'>
-                              <option value='None Selected'>Select</option>
-                              <option value='1'>Yes</option>
-                              <option value='0'>No</option>
-                              <option value='X'>Not Answered</option>
-                            </select>
+                            <div class='general_asi_input'>
+                              <select name='m5' id='m5' onChange="javascript: asi_sel1_iml(); clearG1(m5);">
+                                <option value='None Selected'>Select</option>
+                                <option value='1'>Yes</option>
+                                <option value='0'>No</option>
+                                <option value='X'>Not Answered</option>
+                              </select>
+                            </div>
                           </td>
                         </tr>
 
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px; margin-top:10px;'>
                               <li>
-                                <em>Specify:</em>
-                                <input type='text' name='m5Exp' id='m5Exp' value='{{fields.m5Exp}}'>
+                                <em id='m5Lab'>Specify:</em>
+                                <div class='general_asi_input'><input type='text' name='m5Exp' id='m5Exp' value='{{fields.m5Exp}}' oninput="javascript: u_load_m_target_data(m5Exp, m_m5Exp); clearG1(m5Exp);"></div>
                               </li>
                             </div>
                           </td>
                         </tr>
+                      </table>
+                    </div>
+                  </div>
 
-                        <tr>
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
+                    <div class='top-split-asi2'>
+                      <table>
+                         <tr>
                           <td><div class='asi_number_iml'>M6.</div></td>
                           <td><div><div class='asi_iml_label'>How many days have you experienced medical problems in</div></div></td>
                         </tr>
@@ -219,9 +282,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               the last 30 days?
-                              <select name='m6' id='m6'>
+                              <select name='m6' id='m6' oninput="javascript: clearG1(m6);">
                                 <option value='None Selected'>Select</option>
                                 <option value='0'>0</option>
                                 <option value='1'>1</option>
@@ -258,14 +321,7 @@
                             </div>
                           </td>
                         </tr>
-                      </table>
-                    </div>
-                  </div>
 
-                  <!-- RIGHT SIDE -->
-                  <div class='col-md-6' style='width:44%; height:10%; margin-left:30px;'>
-                    <div class='top-split'>
-                      <table>
                         <tr>
                           <td><div class='asi_number_iml'>M7.</div></td>
                           <td>How troubled or bothered have you been by these medical</td>
@@ -274,9 +330,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               problems in the past 30 days?
-                              <select name='m7' id='m7'>
+                              <select name='m7' id='m7' oninput="javascript: clearG1(m7);">
                                 <option value='None Selected'>Select</option>
                                 <option value='0'>Not At All</option>
                                 <option value='1'>Slightly</option>
@@ -296,9 +352,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               problems?
-                              <select name='m8' id='m8'>
+                              <select name='m8' id='m8' oninput="javascript: clearG1(m8);">
                                 <option value='None Selected'>Select</option>
                                 <option value='0'>Not At All</option>
                                 <option value='1'>Slightly</option>
@@ -319,9 +375,9 @@
                         <tr>
                           <td></td>
                           <td>
-                            <div style='margin-bottom:15px;'>
+                            <div style='margin-bottom:15px;' class='general_asi_input'>
                               treatment?
-                              <select name='m9' id='m9'>
+                              <select name='m9' id='m9' oninput="javascript: clearG1(m9);">
                                 <option value='None Selected'>Select</option>
                                 <option value='0'>0</option>
                                 <option value='1'>1</option>
@@ -351,24 +407,24 @@
                         <tr>
                           <td><div class='asi_number_iml2'>M10.</div></td>
                           <td><div><div>Patient's misrepresentation?</div></div></td>
-                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m10' id='yesMis' value='True'></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m10' id='yesMis' value='1'></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m10' id='noMis' value='False' checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m10' id='noMis' value='0' checked></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
 
                         <tr>
                           <td><div class='asi_number_iml2'>M11.</div></td>
                           <td><div><div>Patient's inability to understand?</div></div></td>
-                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m11' id='yesUnd' value='True'></div></td>
+                          <td><div class='iml_asi_rad_fix' style='margin-left:5px;'><input type='radio' name='m11' id='yesUnd' value='1'></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m11' id='noUnd' value='False' checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='m11' id='noUnd' value='0' checked></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
 
                       <div class='medical_comment_wrapper'>
-                        <button onClick="javascript: add_asi_comments(); return false;">Add Additional Comments</button>
+                        <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Additional Comments</button>
                       </div>
                     </div>
                   </div>
@@ -383,7 +439,7 @@
                 <table class='iml-save-btn'>
                   <tr>
                     <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
-                    <td><button onClick="javascript: continue_asi_form('{{current_section}}'); return false;">Save & Continue</button></td>
+                    <td><button onClick="javascript: general_asi_save('{{current_section}}'); return false;">Save & Continue</button></td>
                   </tr>
                 </table>
               </div>
