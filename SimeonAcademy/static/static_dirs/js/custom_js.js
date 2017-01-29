@@ -16986,8 +16986,14 @@ function asi_sel1_iml() {
 	}
 }
 
-function viewASIinstruction(section, side) {
-	openPopUp(side, '/viewASIinstruction/', 500, 600);
+function viewASIinstruction(section) {
+	grab('help_section').value = section;
+	openPopUp('auto', '/viewASIinstruction/', 500, 600);
+}
+
+function initialize_asi_inner_help() {
+	var section = String(getPopParent('help_section').value);
+	window.location.href = "#" + section;
 }
 
 function asi_general_errors() {
