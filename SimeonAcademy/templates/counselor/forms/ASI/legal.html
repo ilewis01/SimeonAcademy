@@ -1,690 +1,157 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Addiction Severity Index</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{asi.client.fname}} {{asi.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{asi.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiAdmin}}'>
-                  <img src="{{image.asi_admin_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_admin/');" name='asiAdminBtn' id='asiAdminBtn'>
-                    Administrative
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiGeneral}}'>
-                  <img src="{{image.asi_general_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_general/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     General Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiMedical}}'>
-                  <img src="{{image.asi_medical_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_medical/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Medical Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiEmployment}}'>
-                  <img src="{{image.asi_employment_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_employment/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Employment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiDrug1}}'>
-                  <img src="{{image.asi_drug1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_drug1/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Drugs & Alcohol Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiLegal}}'>
-                  <img src="{{image.asi_legal_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='asiLegalBtn' id='asiLegalBtn'>
-                    Legal Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiFamily}}'>
-                  <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_family/');" name='asiFamilyBtn' id='asiFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial1}}'>
-                  <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
-                    Social
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial2}}'>
-                  <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social2/');" name='asiSocial2Btn' id='asiSocial2Btn'>
-                    Social II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiPsych}}'>
-                  <img src="{{image.asi_psych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_psych/');" name='asiPsychBtn' id='asiPsychBtn'>
-                    Psychiatric Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_legal/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Addiction Severity Index: Legal Status</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  		<div class="col-md-6 col-sm-6">
-                  			<div>
-                  				<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  					<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                            <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                            <input type='hidden' name='save_this' id='save_this' value=''>
-                            <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                            <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                            <input type='hidden' name='new_form' id='new_form' value='false'>
-                            <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-                            <input type='hidden' name='help_section' id='help_section' value=''>
-
-            <table>
-              <tr>
-                <td><div id='asiNumber'>L1.</div></td>
-                <td><label>Was this admission prompeted or suggested by the criminal justice system</label></td>
-              </tr>
-            </table>
-
-            <table>
-              <tr>
-                <td><div id='asi_2nd_line_indent'><label>(Judge, probation/parole officer, etc.):</label></div></td>
-                <td><div id='fix_my_radio'><input type='radio' name='l1' id='l1yes' value='1'></div></td>
-                <td><label>Yes</label></td>
-                <td><div id='fix_my_radio'><input type='radio' name='l1' id='l1no' value='0' checked></div></td>
-                <td><label>No</label></td>
-              </tr>
-            </table>
-
-            <table>
-              <tr>
-                <td><div id='asiNumber'>L2.</div></td>
-                <td><label>Are you on probation or parole?</label></td>
-                <td><div id='fix_my_radio'><input type='radio' name='l2' id='l2yes' value='1'></div></td>
-                <td><label>Yes</label></td>
-                <td><div id='fix_my_radio'><input type='radio' name='l2' id='l2no' value='0' checked></div></td>
-                <td><label>No</label></td>
-              </tr>
-            </table>
-
-            <table><tr><td><label style='margin-top:15px;'>How many times in your life have you been arrested and <u>charged</u> with the following:</label></td></tr></table>
-
-            <ul>
-              <table>
-                <tr>
-                  <td><li><div id='asiNumber'>L3.</div></li></td>
-                  <td><label>Shoplifting/Vandalism:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l3' id='l3' value='{{fields.l3}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L4.</div></li></td>
-                  <td><label>Parole/Probation Violations:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l4' id='l4' value='{{fields.l4}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L5.</div></li></td>
-                  <td><label>Drug Charges:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l5' id='l5' value='{{fields.l5}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L6.</div></li></td>
-                  <td><label>Forgery:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l6' id='l6' value='{{fields.l6}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L7.</div></li></td>
-                  <td><label>Weapons Offense:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l7' id='l7' value='{{fields.l7}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L8.</div></li></td>
-                  <td><label>Burglary/Larceny/B&E:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l8' id='l8' value='{{fields.l8}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L9.</div></li></td>
-                  <td><label>Robbery:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l9' id='l9' value='{{fields.l9}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L10.</div></li></td>
-                  <td><label>Assult:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l10' id='l10' value='{{fields.l10}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L11.</div></li></td>
-                  <td><label>Arson:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l11' id='l11' value='{{fields.l11}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L12.</div></li></td>
-                  <td><label>Rape:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l12' id='l12' value='{{fields.l12}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L13.</div></li></td>
-                  <td><label>Homicide/Manslaughter:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l13' id='l13' value='{{fields.l13}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L14.</div></li></td>
-                  <td><label>Prostitution:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l14' id='l14' value='{{fields.l14}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L15.</div></li></td>
-                  <td><label>Contempt of Court:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l15' id='l15' value='{{fields.l15}}'></div></td>
-                </tr>
-
-                <tr>
-                  <td><li><div id='asiNumber'>L16.</div></li></td>
-                  <td><label>Other:</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l16' id='l16' value='{{fields.l16}}'></div></td>
-                </tr>
-              </table>
-            </ul>
-
-            <table>
-              <tr>
-                <td><div id='asiNumber'>L17.</div></td>
-                <td><label>How many of these charges resulted in convictions?</label></td>
-                <td><div id='fix_my_text'><input type='number' name='l17' id='l17' value='{{fields.l17}}'></div></td>
-              </tr>
-            </table>
-
-            <table>
-              <tr>
-                <td>
-                  <div style='margin-top:30px;'>
-                    <label>Comments:</label>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td><textarea rows='6' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
-              </tr>
-            </table>
-				           				            
-				        </div> 
-				      </div><!--  END OF LEFT SIDE -->
-
-            <div class="col-md-6 col-sm-6">
-              <table>
-                <tr><td><label>How many times in your life have you been <u>charged</u> with the following:</label></td></tr>
-              </table>
-
-              <ul>
-                <table>
-                  <tr>
-                    <td><li><div id='asiNumber'>L18.</div></li></td>
-                    <td><label>Disorderly Conduct/Vagrancy/Public Intoxication:</label></td>
-                    <td><div id='fix_my_text'><input type='number' name='l18' id='l18' value='{{fields.l18}}'></div></td>
-                  </tr>
-                </table>
-                <table>
-                  <tr>
-                    <td><li><div id='asiNumber'>L19.</div></li></td>
-                    <td><label>Driving While Intoxicated:</label></td>
-                    <td><div id='fix_my_text'><input type='number' name='l19' id='l19' value='{{fields.l19}}'></div></td>
-                  </tr>
-                </table>
-                <table>
-                  <tr>
-                    <td><li><div id='asiNumber'>L20.</div></li></td>
-                    <td><label>Other Major Driving Violations:</label></td>
-                    <td><div id='fix_my_text'><input type='number' name='l20' id='l20' value='{{fields.l20}}'></div></td>
-                  </tr>
-                </table>
-              </ul>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L21.</div></td>
-                  <td><label>How many months were you incarcerated in your life?</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l21' id='l21' value='{{fields.l21}}'></div></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L22.</div></td>
-                  <td><label>How long was your last incarceration?</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l22' id='l22' value='{{fields.l22}}'></div></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L23.</div></td>
-                  <td><label>What was it for? (most severe):</label></td>
-                  <td>
-                    <div id='fix_my_select'>
-                      <select name='l23' id='l23'>
-                        <option value='0'>Select</option>
-                        <option value='03'>Shoplifting/Vandalism</option>
-                        <option value='04'>Parole/Probation Violations</option>
-                        <option value='05'>Drug Charges</option>
-                        <option value='06'>Forgery</option>
-                        <option value='07'>Weapons Offense</option>
-                        <option value='08'>Burglary/Larceny/B&E</option>
-                        <option value='09'>Robbery</option>
-                        <option value='10'>Assult</option>
-                        <option value='11'>Arson</option>
-                        <option value='12'>Rape</option>
-                        <option value='13'>Homicide/Manslaughter</option>
-                        <option value='14'>Prostitution</option>
-                        <option value='15'>Contempt of Court</option>
-                        <option value='16'>Other</option>
-                        <option value='18'>Disorderly Conduct/Vargrancy/PI</option>
-                        <option value='19'>DUI</option>
-                        <option value='20'>Other Major Driving Violations</option>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L24.</div></td>
-                  <td><label>Are you presently awaiting charges, trial, or sentence?</label></td>
-                  <td><div id='fix_my_radio'><input type='radio' name='l24' id='l24yes' value='1'></div></td>
-                  <td><label>Yes</label></td>
-                  <td><div id='fix_my_radio'><input type='radio' name='l24' id='l24no' value='0' checked></div></td>
-                  <td><label>No</label></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L25.</div></td>
-                  <td><label>What for?</label></td>
-                  <td>
-                    <div id='fix_my_select'>
-                      <select name='l25' id='l25'>
-                        <option value='0'>Select</option>
-                        <option value='03'>Shoplifting/Vandalism</option>
-                        <option value='04'>Parole/Probation Violations</option>
-                        <option value='05'>Drug Charges</option>
-                        <option value='06'>Forgery</option>
-                        <option value='07'>Weapons Offense</option>
-                        <option value='08'>Burglary/Larceny/B&E</option>
-                        <option value='09'>Robbery</option>
-                        <option value='10'>Assult</option>
-                        <option value='11'>Arson</option>
-                        <option value='12'>Rape</option>
-                        <option value='13'>Homicide/Manslaughter</option>
-                        <option value='14'>Prostitution</option>
-                        <option value='15'>Contempt of Court</option>
-                        <option value='16'>Other</option>
-                        <option value='18'>Disorderly Conduct/Vargrancy/PI</option>
-                        <option value='19'>DUI</option>
-                        <option value='20'>Other Major Driving Violations</option>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L26.</div></td>
-                  <td><label>How many days in the past 30 were you incarcerated?</label></td>
-                  <td><div id='fix_my_text'><input type='number' name='l26' id='l26' value='{{fields.l26}}'></div></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L27.</div></td>
-                  <td><label>How many days in the past 30 have you engaged in illegal activities</label></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asi_2nd_line_indent_db'><label>for profit?</label></div></td>
-                  <td><div id='fix_my_text'><input type='number' name='l27' id='l27' value='{{fields.l27}}'></div></td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L28.</div></td>
-                  <td><label>How serious do you feel your present legal problems are?</label></td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td>
-                    <div id='fix_my_select'>
-                      <select name='l28' id='l28'>
-                        <option value='Select'>Select</option>
-                        <option value='0'>Not at all</option>
-                        <option value='1'>Slightly</option>
-                        <option value='2'>Moderately</option>
-                        <option value='3'>Considerably</option>
-                        <option value='4'>Extremely</option>
-                        <option value='N'>Question not applicable</option>
-                        <option value='X'>Question not answered</option>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L29.</div></td>
-                  <td><label>How important to you now is counseling or referral for these legal problems?</label></td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td>
-                    <div id='fix_my_select'>
-                      <select name='l29' id='l29'>
-                        <option value='Select'>Select</option>
-                        <option value='0'>Not at all</option>
-                        <option value='1'>Slightly</option>
-                        <option value='2'>Moderately</option>
-                        <option value='3'>Considerably</option>
-                        <option value='4'>Extremely</option>
-                        <option value='N'>Question not applicable</option>
-                        <option value='X'>Question not answered</option>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td>
-                    <div id='ital_sub_head'>
-                      Interviewer Severity Rating
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-              <table>
-                <tr>
-                  <td><div id='asiNumber'>L30.</div></td>
-                  <td><label>How would you rate the patient's need for legal services or counseling?</label></td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td>
-                    <div id='fix_my_select'>
-                      <select name='l30' id='l30'>
-                        <option value='Select'>Select</option>
-                        <option value='0'>0</option>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                        <option value='7'>7</option>
-                        <option value='8'>8</option>
-                        <option value='9'>9</option>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-
-                  <table>
-                    <tr>
-                      <td>
-                        <div id='ital_sub_head'>
-                          Confidence Rating
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <table>
-                    <tr>
-                      <td><label>Is the above information significantly distorted by:</label></td>
-                    </tr>
-                  </table>
-
-                  <ul>
-                    <table>
-                      <tr>
-                        <td><li><div id='asiNumber'>L31.</div></li></td>
-                        <td><label>Patient's misrepresentation?</label></td>
-                        <td>
-                          <div id='fix_my_radio'>
-                            <input type='radio' name='l31' id='l31yes' value='1'>
-                          </div>
-                        </td>
-                        <td><label>Yes</label></td>
-
-                        <td>
-                          <div id='fix_my_radio'>
-                            <input type='radio' name='l31' id='l31no' value='0' checked>
-                          </div>
-                        </td>
-                        <td><label>No</label></td>
-                      </tr>
-
-                      <tr>
-                        <td><li><div id='asiNumber'>L32.</div></li></td>
-                        <td><label>Patient's inability to understand?</label></td>
-                        <td>
-                          <div id='fix_my_radio'>
-                            <input type='radio' name='l32' id='l32yes' value='1'>
-                          </div>
-                        </td>
-                        <td><label>Yes</label></td>
-
-                        <td>
-                          <div id='fix_my_radio'>
-                            <input type='radio' name='l32' id='l32no' value='0' checked>
-                          </div>
-                        </td>
-                        <td><label>No</label></td>
-                      </tr>
-                    </table>
-                  </ul>
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='comments' id='comments' value=''>
+      <input type='hidden' name='help_section' id='help_section' value=''>
+      <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
+      <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Addiction Severity Index: Employment/Support Status</div>
             </div>
-          </form>
-				</div> <!-- END PAGE CONTAINER -->
 
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_admin_image}}"></div>Administrative</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_general_image}}"></div>General Info</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: continue_asi_form('/asi_legal/');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_medical_image}}"></div>Medical Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_employment_image}}"></div>Employment</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_drug1_image}}"></div>Drug & Alcohol Use</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_legal_image}}"></div>Legal Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_family_image}}"></div>Family History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social1_image}}"></div>Social Interactions</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social2_image}}"></div>Social Interactions II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_psych_image}}"></div>Psychiatric Status</div>
+                            </a>
+                          </td>
+                      </table>
+                      <div class='divider_gradient'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <!-- CONFIDENCE RATING SECTION -->
+                  <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
+
+
+                <!-- THE LEFT SIDE STARTS HERE -->
+                  <div class='col-md-6 asi-true-left general_asi_input' style='margin-left:35px;'>
+                    <div class='asi-d1-instruction-div4'>
+                        <a onClick="javascript: viewASIinstruction('#legal'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                    </div>
+
+                    
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6 asi-true-right general_asi_input' style='margin-top:30px;'>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
+                    <td><button onClick="javascript: continue_asi_dX_main(z5, 'asi-drug1-z5-holder-in', z4, 'asi-drug1-z4-holder-in', 'employment'); return false;">Save & Continue</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

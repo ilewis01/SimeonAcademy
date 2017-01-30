@@ -1,769 +1,157 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
-
-    <div id="wrapper" class='shift-rr'>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Addiction Severity Index</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{asi.client.fname}} {{asi.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{asi.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiAdmin}}'>
-                  <img src="{{image.asi_admin_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_admin/');" name='asiAdminBtn' id='asiAdminBtn'>
-                    Administrative
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiGeneral}}'>
-                  <img src="{{image.asi_general_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_general/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     General Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiMedical}}'>
-                  <img src="{{image.asi_medical_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_medical/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Medical Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiEmployment}}'>
-                  <img src="{{image.asi_employment_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_employment/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Employment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiDrug1}}'>
-                  <img src="{{image.asi_drug1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_drug1/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Drugs & Alcohol Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiLegal}}'>
-                  <img src="{{image.asi_legal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_legal/');" name='asiLegalBtn' id='asiLegalBtn'>
-                    Legal Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiFamily}}'>
-                  <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='asiFamilyBtn' id='asiFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial1}}'>
-                  <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
-                    Social
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial2}}'>
-                  <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social2/');" name='asiSocial2Btn' id='asiSocial2Btn'>
-                    Social II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiPsych}}'>
-                  <img src="{{image.asi_psych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_psych/');" name='asiPsychBtn' id='asiPsychBtn'>
-                    Psychiatric Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_family/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:30px;'>
-                	<h3 id='am-h2'>Addiction Severity Index: Family History</h3>
-                  <div id='header_p'>Have any of your relatives had what you would call a significant drinking, drug use, or psych problem - One that did or should have led to treatment?</div>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  <div class="col-md-12 col-sm-12">
-                  	<div>
-                  		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                        <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                        <input type='hidden' name='save_this' id='save_this' value=''>
-                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                        <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                        <input type='hidden' name='new_form' id='new_form' value='false'>
-                        <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-
-                        <div id='ASI_FH_HEAD'>
-                          Family History
-                        </div>
-
-                        <div class='container_asiH'>
-                          <table class='asi_family_table'>
-                            <tr>
-                              <th><div id='asi_fam_hori_label'>RELATIVE</div></th>
-                              <th><div>ALCOHOL</div></th>
-                              <th><div>DRUG</div></th>
-                              <th><div>PSYCH</div></th>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Maternal Grandmother</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h1a' id='h1a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h1d' id='h1d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h1p' id='h1p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Maternal Grandfather</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h2a' id='h2a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h2d' id='h2d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h2p' id='h2p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Maternal Mother</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h3a' id='h3a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h3d' id='h3d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h3p' id='h3p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Maternal Aunt</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h4a' id='h4a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h4d' id='h4d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h4p' id='h4p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Maternal Uncle</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h5a' id='h5a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h5d' id='h5d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h5p' id='h5p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-
-
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Paternal Grandmother</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h6a' id='h6a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h6d' id='h6d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h6p' id='h6p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Paternal Grandfather</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h7a' id='h7a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h7d' id='h7d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h7p' id='h7p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Paternal Mother</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h8a' id='h8a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h8d' id='h8d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h8p' id='h8p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Paternal Aunt</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h9a' id='h9a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h9d' id='h9d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h9p' id='h9p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Paternal Uncle</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h10a' id='h10a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h10d' id='h10d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h10p' id='h10p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-
-
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Brother</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h11a' id='h11a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h11d' id='h11d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h11p' id='h11p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><div id='asi_vert_head'>Sister</div></td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h12a' id='h12a'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h12d' id='h12d'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div id='td_select'>
-                                  <select name='h12p' id='h12p'>
-                                    <option value='Select'>Select</option>
-                                    <option value='1'>Yes</option>
-                                    <option value='0'>No</option>
-                                    <option value='X'>Uncertain</option>
-                                    <option value='N'>N/A</option>
-                                  </select>
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-
-                          <div id='table_btn_asi'>
-                            <button type='button' onClick="javascript: reset_asi_subf('fh');">Reset</button>
-                          </div>
-                        </div>
-                      </form>			            
-				            </div>
-				          </div>
-				        </div> <!-- END PAGE CONTAINER -->
-
-				<div style='margin-left:14%'>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='comments' id='comments' value=''>
+      <input type='hidden' name='help_section' id='help_section' value=''>
+      <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
+      <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
+
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
+
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Addiction Severity Index: Employment/Support Status</div>
+            </div>
+
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_admin_image}}"></div>Administrative</div>
+                            </a>
+                          </td>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_general_image}}"></div>General Info</div>
+                            </a>
+                          </td>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: continue_asi_form('/asi_family/');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_medical_image}}"></div>Medical Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_employment_image}}"></div>Employment</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_drug1_image}}"></div>Drug & Alcohol Use</div>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style='margin-bottom: 6px;'></div>
+
+                      <table class='img-single-btn-table'>
+                        <tr>
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_legal_image}}"></div>Legal Status</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_family_image}}"></div>Family History</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social1_image}}"></div>Social Interactions</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social2_image}}"></div>Social Interactions II</div>
+                            </a>
+                          </td>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_psych_image}}"></div>Psychiatric Status</div>
+                            </a>
+                          </td>
+                      </table>
+                      <div class='divider_gradient'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
+
+                  <!-- LEFT SIDE -->
+                  <!-- CONFIDENCE RATING SECTION -->
+                  <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
+
+
+                <!-- THE LEFT SIDE STARTS HERE -->
+                  <div class='col-md-6 asi-true-left general_asi_input' style='margin-left:35px;'>
+                    <div class='asi-d1-instruction-div4'>
+                        <a onClick="javascript: viewASIinstruction('#family'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                    </div>
+
+                    
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6 asi-true-right general_asi_input' style='margin-top:30px;'>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
+                    <td><button onClick="javascript: continue_asi_dX_main(z5, 'asi-drug1-z5-holder-in', z4, 'asi-drug1-z4-holder-in', 'employment'); return false;">Save & Continue</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

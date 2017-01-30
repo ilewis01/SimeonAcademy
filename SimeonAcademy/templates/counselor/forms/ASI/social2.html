@@ -1,748 +1,157 @@
+<!-- AM DEMOGRAPHIC -->
 {% extends "base.html" %}
 {% block body %}
 {% load staticfiles %}
 
-<body class="gradient-white" onLoad="javascript: initialize_asi('{{current_section}}', {{json_data}});">
-    <!-- _________________________SIDE BAR_________________________ -->
+<body class="gradient-white" onLoad="javascript: initialize_asi({{current_section}}, {{json_data}});">
+    <form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
+      <input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
+      <input type='hidden' name='asi_id' id='asi_id' value='{{session.asi.id}}'>
+      <input type='hidden' name='save_this' id='save_this' value=''>
+      <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
+      <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'> 
+      <input type='hidden' name='new_form' id='new_form' value='false'>
+      <input type='hidden' name='exit_type' id='exit_type' value='asi'>
+      <input type='hidden' name='form_name' id='form_name' value='asi_form'>
+      <input type='hidden' name='exit_to' id='exit_to' value=''>
+      <input type='hidden' name='comments' id='comments' value=''>
+      <input type='hidden' name='help_section' id='help_section' value=''>
+      <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
+      <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
 
-    <div id="wrapper" class='shift-rr'>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-12" style='width:100%; height:84vh;'>
+          <div class='iml-body-wrapper2'>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <table class='session-side'>
-            <tr>
-              <td>
-                <div id='sideBarMainHeader'>
-                  Session Details:
-                </div>
-              </td>
-            </tr>
+            <div id='iml-info-head2'>
+              <div style='margin-left:3%;'>Addiction Severity Index: Employment/Support Status</div>
+            </div>
 
-            <tr>
-              <td>
-                <div style='color:#fee047'>
-                  <h4>Addiction Severity Index</h4>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div>
-                          <span class='sidebar-name'>{{asi.client.fname}} {{asi.client.lname}}</span>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div id='sidebar-space-lower2'>
-                          <span class="sidebar-id">{{asi.client.clientID}}</span>
-                      </div>
-              </td>
-            </tr>
-
-
-
-            <!-- <div style='margin-bottom: 80px;'></div> -->
-            <tr>
-              <td>
-                <div id='sidebar-space-lower'>
-                          <h4>Progress:</h4>
-                      </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiAdmin}}'>
-                  <img src="{{image.asi_admin_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_admin/');" name='asiAdminBtn' id='asiAdminBtn'>
-                    Administrative
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiGeneral}}'>
-                  <img src="{{image.asi_general_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_general/');" name='asiGeneralBtn' id='asiGeneralBtn'>
-                     General Info
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiMedical}}'>
-                  <img src="{{image.asi_medical_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_medical/');" name='asiMedicalBtn' id='asiMedicalBtn'>
-                    Medical Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiEmployment}}'>
-                  <img src="{{image.asi_employment_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_employment/');" name='asiEmploymentBtn' id='asiEmploymentBtn'>
-                    Employment
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiDrug1}}'>
-                  <img src="{{image.asi_drug1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_drug1/');" name='asiDrug1Btn' id='asiDrug1Btn'>
-                    Drugs & Alcohol Use
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiLegal}}'>
-                  <img src="{{image.asi_legal_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_legal/');" name='asiLegalBtn' id='asiLegalBtn'>
-                    Legal Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiFamily}}'>
-                  <img src="{{image.asi_family_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_family/');" name='asiFamilyBtn' id='asiFamilyBtn'>
-                    Family History
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial1}}'>
-                  <img src="{{image.asi_social1_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_social1/');" name='asiSocial1Btn' id='asiSocial1Btn'>
-                    Social
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiSocial2}}'>
-                  <img src="{{image.asi_social2_image}}" id='bullet-img'> &nbsp
-                  <a href="#" name='asiSocial2Btn' id='asiSocial2Btn'>
-                    Social II
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='{{class.asiPsych}}'>
-                  <img src="{{image.asi_psych_image}}" id='bullet-img'> &nbsp
-                  <a href="javascript: sideBarASI('/asi_psych/');" name='asiPsychBtn' id='asiPsychBtn'>
-                    Psychiatric Status
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-            <tr><td><div id='vertSpaceSideBar'></div></td></tr>
-
-            <tr>
-              <td>
-                <div class='exit_btn_text'>
-                  <img src="{% static 'images/exitBtn.png' %}" alt="exit_icon" class='exit_icon'>
-                  <a href="javascript: universal_generic_exit('asi', '/asi_social2/');" name='sourceBtn' class='exit_a_tag'>
-                    Exit
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div>
-                <div style='margin-bottom:20px;'>
-                	<h3 id='am-h2'>Addiction Severity Index: Family/Social Relationships II</h3>
-                </div>
-
-                <div class="container">
-            		<div class="row">                   
-                  <div class="col-md-6 col-sm-6">
-                  	<div>
-                  		<form action='' method='post' id='asi_form' name='asi_form'> {% csrf_token %}
-                  			<input type='hidden' name='session_id' id='session_id' value='{{session.id}}'>
-                        <input type='hidden' name='asi_id' id='asi_id' value='{{asi.id}}'>
-                        <input type='hidden' name='save_this' id='save_this' value=''>
-                        <input type='hidden' name='next_url' id='next_url' value='{{next_url}}'>
-                        <input type='hidden' name='save_section' id='save_section' value='{{current_section}}'>   
-                        <input type='hidden' name='new_form' id='new_form' value='false'>
-                        <input type='hidden' name='exit_type' id='exit_type' value='asi'>
-
-                      <!-- <div id='ASI_FH_HEAD2'>
-                        Social Issues
-                      </div> -->
-
-                      <div id='ital_sub_head'>
-                        Social Issues
-                      </div>
-
-                      <div id='ASI_FH_INST2'>
-                        Would you say that you have had close, long lasting personal relationships with any of the following people in your life?
-                      </div>
-
-                      <div class='container_asiH2'>
-                        <table class='asi_family_table'>
-                          <tr>
-                            <th><div id='th_head_soc2'><div id='main_asi_soc2_vert'>Relative</div></div></th>
-                            <th>Past 30 Days</th>
-                            <th>In Your Life</th>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Mother</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f18d' id='f18d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f18y' id='f18y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Father</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f19d' id='f19d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f19y' id='f19y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Siblings</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f20d' id='f20d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f20y' id='f20y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Sexual Partner/Spouse</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f21d' id='f21d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f21y' id='f21y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Children</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f22d' id='f22d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f22y' id='f22y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Other Significant Family</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f23d' id='f23d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f23y' id='f23y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Close Friends</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f24d' id='f24d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f24y' id='f24y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Neighbors</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f25d' id='f25d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f25y' id='f25y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td><div id='asi_vert_head'>Co-workers</div></td>
-                            <td>
-                              <div id='td_select'>
-                                <select name='f26d' id='f26d'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-
-                            <td>
-                              <div id='td_select'>
-                                <select name='f26y' id='f26y'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-                        <div id='table_btn_asi'>
-                          <button type='button' onClick="javascript: reset_asi_subf('social');">Reset</button>
-                        </div>
-                      </div>
-
-                      <div style='margin-top:23px;'>
-                        <table>
-                          <tr>
-                            <td><div id='ital_sub_head'>Additional Comments:</div></td>
-                          </tr>
-                          <tr>
-                            <td><textarea rows='6' cols='80' name='comments' id='comments'>{{fields.comments}}</textarea></td>
-                          </tr>
-                        </table>
-                      </div>
-				           				            
-				            </div>
-                  </div><!--  END OF LEFT SIDE -->
-
-				          <div class="col-md-6 col-sm-6"> <!-- RIGHT SIDE -->
-                    <div id='ital_sub_head'>
-                      Relationships
-                    </div>
-
-                    <div id='ASI_FH_INST3'>
-                      Have you had significant periods in which you have experienced serious problems getting along with:
-                    </div>
-
-                    <div class='container_asiH3'>
-                      <table  class='asi_family_table'>
+            <div class='iml-form-nav'>
+              <div class='iml-form-btn-wrapper'>
+                <div class='container' style='width:100%'>
+                  <div class='row'>
+                    <div class='col-md-12'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                          <th><div id='th_asi_relate_head'>Relative</div></th>
-                          <th>Relationship</th>
-                        </tr>
-
-                        <tr>
-                          <td><div id='asi_vert_head'>Mother</div></td>
                           <td>
-                              <div id='td_select'>
-                                <select name='f12' id='f12'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                        </tr>
+                            <a href="javascript: sideBarASI('/asi_admin/');">
+                              <div  class='{{class.asiAdmin}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_admin_image}}"></div>Administrative</div>
+                            </a>
+                          </td>
 
-                        <tr>
-                          <td><div id='asi_vert_head'>Father</div></td>
                           <td>
-                              <div id='td_select'>
-                                <select name='f13' id='f13'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                        </tr>
+                            <a href="javascript: sideBarASI('/asi_general/');">
+                              <div  class='{{class.asiGeneral}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_general_image}}"></div>General Info</div>
+                            </a>
+                          </td>
 
-                        <tr>
-                          <td><div id='asi_vert_head'>Siblings</div></td>
                           <td>
-                              <div id='td_select'>
-                                <select name='f14' id='f14'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                        </tr>
+                            <a href="javascript: sideBarASI('/asi_medical/');">
+                              <div  class='{{class.asiMedical}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_medical_image}}"></div>Medical Status</div>
+                            </a>
+                          </td>
 
-                        <tr>
-                          <td><div id='asi_vert_head'>Children</div></td>
                           <td>
-                              <div id='td_select'>
-                                <select name='f16' id='f16'>
-                                  <option value='Select'>Select</option>
-                                  <option value='1'>Yes</option>
-                                  <option value='0'>No</option>
-                                  <option value='X'>Uncertain</option>
-                                  <option value='N'>N/A</option>
-                                </select>
-                              </div>
-                            </td>
-                        </tr>
+                            <a href="javascript: sideBarASI('/asi_employment/');">
+                              <div  class='{{class.asiEmployment}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_employment_image}}"></div>Employment</div>
+                            </a>
+                          </td>
 
-                        <tr>
-                          <td><div id='asi_vert_head'>Friends</div></td>
                           <td>
-                            <div id='td_select'>
-                              <select name='f17' id='f17'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
+                            <a href="javascript: sideBarASI('/asi_drug1/');">
+                              <div  class='{{class.asiDrug1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_drug1_image}}"></div>Drug & Alcohol Use</div>
+                            </a>
                           </td>
                         </tr>
                       </table>
 
-                      <div id='table_btn_asi'>
-                          <button type='button' onClick="javascript: reset_asi_subf('relate');">Reset</button>
-                      </div>
-                    </div>
+                      <div style='margin-bottom: 6px;'></div>
 
-                    <div id='ital_sub_head' style='margin-top:40px;'>
-                      Abuse
-                    </div>
-
-                    <div id='ASI_FH_INST2'>
-                      Did any of these people abuse you?
-                    </div>
-
-                    <div class='container_asiH3'>
-                      <table  class='asi_family_table'>
+                      <table class='img-single-btn-table'>
                         <tr>
-                          <th><div style='margin-left:9%;'><div id='th_asi_relate_head2'>Relative</div></div></th>
-                          <th>Past 30 Days</th>
-                          <th>In Your Life</th>
-                        </tr>
-
-                        <tr>
-                          <td><div id='asi_vert_head'>Emotionally</div></td>
-
                           <td>
-                            <div id='td_select'>
-                              <select name='f27' id='f27d'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
+                            <a href="javascript: sideBarASI('/asi_legal/');">
+                              <div  class='{{class.asiLegal}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_legal_image}}"></div>Legal Status</div>
+                            </a>
                           </td>
 
                           <td>
-                            <div id='td_select'>
-                              <select name='f27' id='f27y'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td><div id='asi_vert_head'>Physically</div></td>
-
-                          <td>
-                            <div id='td_select'>
-                              <select name='f28d' id='f28d'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
+                            <a href="javascript: sideBarASI('/asi_family/');">
+                              <div  class='{{class.asiFamily}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_family_image}}"></div>Family History</div>
+                            </a>
                           </td>
 
                           <td>
-                            <div id='td_select'>
-                              <select name='f28y' id='f28y'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td><div id='asi_vert_head'>Sexually</div></td>
-
-                          <td>
-                            <div id='td_select'>
-                              <select name='f29d' id='f29d'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
+                            <a href="javascript: sideBarASI('/asi_social1/');">
+                              <div  class='{{class.asiSocial1}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social1_image}}"></div>Social Interactions</div>
+                            </a>
                           </td>
 
                           <td>
-                            <div id='td_select'>
-                              <select name='f29y' id='f29y'>
-                                <option value='Select'>Select</option>
-                                <option value='1'>Yes</option>
-                                <option value='0'>No</option>
-                                <option value='X'>Uncertain</option>
-                                <option value='N'>N/A</option>
-                              </select>
-                            </div>
+                            <a href="javascript: sideBarASI('/asi_social2/');">
+                              <div  class='{{class.asiSocial2}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_social2_image}}"></div>Social Interactions II</div>
+                            </a>
                           </td>
-                        </tr>
+
+                          <td>
+                            <a href="javascript: sideBarASI('/asi_psych/');">
+                              <div  class='{{class.asiPsych}}'><div class='asi-full-btn-img-cont'><img src="{{image.asi_psych_image}}"></div>Psychiatric Status</div>
+                            </a>
+                          </td>
                       </table>
-
-                      <div id='table_btn_asi'>
-                          <button type='button' onClick="javascript: reset_asi_subf('abuse');">Reset</button>
-                      </div>
+                      <div class='divider_gradient'></div>
                     </div>
                   </div>
-              </form>
-				</div> <!-- END PAGE CONTAINER -->
+                </div>
+              </div>
+            </div>
 
-				<div>
-					<!-- ____________________________BUTTONS________________________________ -->
-					<table class='toggle-div-page'>
-						<tr><td><div style='margin-top:30px;'></div></td></tr>
-                        <tr>
-                        	<td>
-                        		<div style='margin-left:12px;'>
-				                    <a href="#menu-toggle" id="menu-toggle">
-				                        <button type='button' onClick='javascript: hideToggle();' id='my_toggle_btn1'>Hide Details</button>
-				                    </a>
-				                </div>
-			                </td>
+            <div class='iml-data-entry-wrapper'>
+              <div class='container'>
+                <div class='row'>
 
-			                <td><div style='margin-right:5px;'></div></td>
+                  <!-- LEFT SIDE -->
+                  <!-- CONFIDENCE RATING SECTION -->
+                  <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
 
-			                <td>
-			                	<div>
-			                		<a href="javascript: continue_asi_form('/asi_social2/');">
-			                			<button type='button'>Continue</button>
-			                		</a>
-			                	</div>
-			                </td>
-			            </tr>
-			        </table>
-				</div>
-			</div>
-		</div>
-	</div>
+
+                <!-- THE LEFT SIDE STARTS HERE -->
+                  <div class='col-md-6 asi-true-left general_asi_input' style='margin-left:35px;'>
+                    <div class='asi-d1-instruction-div4'>
+                        <a onClick="javascript: viewASIinstruction('#soc1'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                    </div>
+
+                    
+                  </div>
+
+                  <!-- RIGHT SIDE -->
+                  <div class='col-md-6 asi-true-right general_asi_input' style='margin-top:30px;'>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </div>
+    </form>        
+
+            <div class='row'>
+              <div class='col-md-12' style='width:100%'>
+                <table class='iml-save-btn'>
+                  <tr>
+                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
+                    <td><button onClick="javascript: continue_asi_dX_main(z5, 'asi-drug1-z5-holder-in', z4, 'asi-drug1-z4-holder-in', 'employment'); return false;">Save & Continue</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+
 </body>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
