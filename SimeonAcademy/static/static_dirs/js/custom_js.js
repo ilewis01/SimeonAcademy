@@ -16372,16 +16372,26 @@ function asi_dL_main_error_checker() {
 	var u3 = grab('l26');
 	var u4 = grab('l27');
 
-	if (isBlankText(u1.value) === true && isBlankText(u2.value) === false) {
-		u1.style.border = '1px solid green';
-		u2.style.border = '1px solid green';
-		count += 1;
+	if (isBlankText(u1.value) === true) {
+		u2.value = 'N';
 	}
 
-	if (isBlankText(u1.value) === false && isBlankText(u2.value) === true) {
-		u1.style.border = '1px solid green';
-		u2.style.border = '1px solid green';
-		count += 1;
+	else {
+		var v2 = String(u2.value);
+
+		if (isProperAsiTriggerValue(v2) === true) {
+			u1.style.border = '1px solid green';
+			u2.style.border = '1px solid green';
+			count += 1;
+		}
+	}
+
+	if (isBlankText(u2.value) === true) {
+		if (isBlankText(u1.value) === false) {
+			u1.style.border = '1px solid green';
+			u2.style.border = '1px solid green';
+			count += 1;
+		}
 	}
 
 	if (isRawNumber(u3.value) === true) {
@@ -16663,6 +16673,7 @@ function init_asi_legal(json_data) {
 
 	lock_asi_leg_sel(grab('l21'), grab('l22'), grab('l23'), grab('m_l22'), grab('m_l23'));
 	lock_asi_rad_sel(grab('no24'), grab('l25'), grab('m_l25'));
+	writeToSel(grab('l16n'), grab('opt23'), grab('opt25'));
 }
 
 function init_asi_family(json_data) {
