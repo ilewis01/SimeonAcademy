@@ -11022,6 +11022,7 @@ def grabAsiGeneralFields(asi):
 	result['test1'] 	= asi.general.test1
 	result['test2'] 	= asi.general.test2
 	result['test3'] 	= asi.general.test3
+	result['comments']  = asi.general.comments
 	
 	result['isComplete'] = asi.generalComplete
 	return result
@@ -11507,6 +11508,7 @@ def saveASIgeneral(request, asi):
 	asi.general.test1 = processBlankAsiFields(request.POST.get('test1'))
 	asi.general.test2 = processBlankAsiFields(request.POST.get('test2'))
 	asi.general.test3 = processBlankAsiFields(request.POST.get('test3'))
+	asi.general.comments = processBlankAsiFields(request.POST.get('comments'))
 
 	asi.general.save()
 

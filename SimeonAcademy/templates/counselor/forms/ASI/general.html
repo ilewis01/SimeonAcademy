@@ -15,6 +15,7 @@
       <input type='hidden' name='form_name' id='form_name' value='asi_form'>
       <input type='hidden' name='exit_to' id='exit_to' value=''>
       <input type='hidden' name='help_section' id='help_section' value=''>
+      <input type='hidden' name='comments' id='comments' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -132,6 +133,32 @@
                           </div>
                       </div>
                   </div>
+
+                  <!-- NEW COMMENT SECTION -->
+                    <div class='asi-drug1-z3-holder-out' id='z3'>
+                        <div class='asi-drug1-z3-border'>
+                            <div class='asi-drug1-z3-bkg'>
+                                  <div class='asi_comment_header_d1'>
+                                      <div class='align-asi-d1-close-left'>
+                                          <div class='ft-closeWindow-icon-ltgray'>
+                                              <a onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">
+                                                  <i class="fa fa-window-close" aria-hidden="true"></i>
+                                              </a>
+                                          </div>
+                                      </div>
+                                      <div class='align-asi-d1-close-left2'>New Comment: ASI Drug/Alcohol Use</div>
+                                  </div>
+                                  <div class='divider_gradient' style='margin-bottom:20px;'></div>
+
+                                  <div class='comment_page_body_d1'><textarea name='asi_comment' id='asi_comment' value=''></textarea></div>
+
+                                  <div class='asi-d1-newComment-btns-wrap'>
+                                      <button onClick="javascript: save_asi_comment_iframe(z3, 'asi-drug1-z3-holder-out'); return false;">Save</button>
+                                      <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">Cancel</button>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
 
                   <div class='col-md-6' style='width:43%; height:100%; margin-left:60px;'>
 
@@ -307,6 +334,10 @@
                           <td><div  class='general_asi_input'><input type="text" name='g28' id='g28' value='{{fields.g28}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(g28);"></div></td>
                         </tr>
                       </table>
+
+                      <div class='medical_comment_wrapper'>
+                        <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Additional Comments</button>
+                      </div>
                     </div>
                   </div>
 

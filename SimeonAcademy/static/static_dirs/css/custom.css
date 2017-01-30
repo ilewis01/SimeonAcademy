@@ -10427,7 +10427,8 @@ button:hover {
 
 .asi-instr-left ul {
 	padding-left: 20%;
-}
+	/*font-style: italic;
+*/}
 
 .asi-instr-right {
 	float:left;

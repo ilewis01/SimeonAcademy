@@ -15681,6 +15681,8 @@ function init_asi_general(json_data) {
 	else {
 		grab('noCon').checked = true;
 	}
+
+	grab('asi_comment').value = json_data.comments;
 }
 
 function init_asi_medical(json_data) {
