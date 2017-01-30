@@ -10457,8 +10457,8 @@ button:hover {
 	margin:auto;
 	font-size: 11px;
 	overflow-y: scroll; 
-	height:59%;
-	/*background-color: yellow;*/
+	height:90%;
+	background-color: yellow;
 }
 
 .asi_right_direction_container ol {
@@ -10470,7 +10470,6 @@ button:hover {
 	font-size: 20px;
 	font-weight: bold;
 	font-style: italic;
-	margin-top: 5%;
 	margin-bottom: 5%;
 }
 
