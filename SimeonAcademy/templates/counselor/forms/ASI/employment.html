@@ -16,6 +16,8 @@
       <input type='hidden' name='exit_to' id='exit_to' value=''>
       <input type='hidden' name='comments' id='comments' value=''>
       <input type='hidden' name='help_section' id='help_section' value=''>
+      <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
+      <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
 
     <div class='container'>
       <div class='row'>
@@ -135,7 +137,7 @@
                                       <tr>
                                         <td><div class='asi-d1-pas-select' style='margin-right:150px;'>employment counseling?</div></td>
                                         <td>
-                                          <select name='e22' id='e22' class='dumbSel-iml50' onChange="javascript: clearG1(d32);">
+                                          <select name='e22' id='e22' class='dumbSel-iml50' onChange="javascript: clearG1(e22);">
                                             <option value='0'>Select</option>
                                             <option value='1'>1</option>
                                             <option value='2'>2</option>
@@ -182,7 +184,7 @@
                                 </div>
 
                                 <div class='asi-d1-ir-tri-btn'>
-                                  <button onClick="javascript: finish_all_asi_d1(asi_form, z2, 'asi-drug1-z2-holder-in'); return false;">Submit</button>
+                                  <button onClick="javascript: general_asi_save({{current_section}}); return false;">Submit</button>
                                   <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Comments</button>
                                   <button onClick="javascript: ">Exit ASI</button>
                                 </div>
@@ -251,9 +253,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E1.</div></td>
                           <td><div>Education completed:</div></td>
-                          <td><input type='number' name='e1yrs' id='e1yrs' value='{{fields.e1yrs}}' style='width:50px; text-align:center;'></td>
+                          <td><input type='number' name='e1yrs' id='e1yrs' value='{{fields.e1yrs}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e1yrs);"></td>
                           <td><div class='asi-ed-num-lab'>years</div></td>
-                          <td><input type='number' name='e1mth' id='e1mth' value='{{fields.e1mth}}' style='width:50px; text-align:center;'></td>
+                          <td><input type='number' name='e1mth' id='e1mth' value='{{fields.e1mth}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e1mth);"></td>
                           <td><div class='asi-ed-num-lab'>months</div></td>
                         </tr>
                       </table>
@@ -262,7 +264,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E2.</div></td>
                           <td><div>Training/Technical school completed:</div></td>
-                          <td><input type='number' name='e2' id='e2' value='{{fields.e2}}' style='width:50px; text-align:center;'></td>
+                          <td><input type='number' name='e2' id='e2' value='{{fields.e2}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e2);"></td>
                           <td><div class='asi-ed-num-lab'>months</div></td>
                         </tr>
                       </table>
@@ -271,15 +273,15 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E3.</div></td>
                           <td><div>Do you have a profession, trade or skill?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e3' id='yesE3' value='True' onClick="javascript: u_radio2(yesE3, e3Exp, e3Spec_lab);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e3' id='yesE3' value='1' onClick="javascript: u_radio2(yesE3, e3Exp, e3Spec_lab);"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e3' id='noE3' value='False' checked onClick="javascript: u_radio2(yesE3, e3Exp, e3Spec_lab);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e3' id='noE3' value='0' checked onClick="javascript: u_radio2(yesE3, e3Exp, e3Spec_lab);"></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
 
                         <tr>
                           <td></td>
-                          <td><div><li><em id='e3Spec_lab'>Specify:</em><input type='text' name='e3Exp' id='e3Exp' value='{{fields.e3Exp}}'></li></div></td>
+                          <td><div><li><em id='e3Spec_lab'>Specify:</em><input type='text' name='e3Exp' id='e3Exp' value='{{fields.e3Exp}}' oninput="javascript: clearG1(e3Exp); super_mLoader(e3Exp, m_e3Exp);"></li></div></td>
                         </tr>
                       </table>
 
@@ -287,9 +289,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E4.</div></td>
                           <td><div>Do you have a valid driver's license?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e4' id='yesE4' value='True' onClick="javascript: lockRade4(noE4, noE5, yesE5);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e4' id='yesE4' value='1' onClick="javascript: lockRade4(noE4, noE5, yesE5);"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e4' id='noE4' value='False' checked onClick="javascript: lockRade4(noE4, noE5, yesE5);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e4' id='noE4' value='0' checked onClick="javascript: lockRade4(noE4, noE5, yesE5);"></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
@@ -298,9 +300,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E5.</div></td>
                           <td><div>Do you have an automobile for use?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e5' id='yesE5' value='True'></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e5' id='yesE5' value='1'></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e5' id='noE5' value='False' checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e5' id='noE5' value='0' checked></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
@@ -309,9 +311,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E6.</div></td>
                           <td><div style='width:200px;'>Longest full-time employment:</div></td>
-                          <td><input type='number' name='e6yrs' id='e6yrs' value='{{fields.e6yrs}}' style='width:50px; text-align:center;'></td>
+                          <td><input type='number' name='e6yrs' id='e6yrs' value='{{fields.e6yrs}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e6yrs);"></td>
                           <td><div class='asi-ed-num-lab'>years</div></td>
-                          <td><input type='number' name='e6mth' id='e6mth' value='{{fields.e6mth}}' style='width:50px; text-align:center;'></td>
+                          <td><input type='number' name='e6mth' id='e6mth' value='{{fields.e6mth}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e6mth);"></td>
                           <td><div class='asi-ed-num-lab'>months</div></td>
                         </tr>
                       </table>
@@ -320,16 +322,16 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E7.</div></td>
                           <td><div>Usual (or last) occupation?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='yesE7' value='True' onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='yesE7' value='1' onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='noE7' value='False' checked onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='noE7' value='0' checked onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
 
                           <tr>
                           <td></td>
-                          <td><div style='margin-left:35px'><li><em id='e7_exp_lab'>Specify:</em><input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}'></li></div></td>
+                          <td><div style='margin-left:35px'><li><em id='e7_exp_lab'>Specify:</em><input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}' oninput="javascript: clearG1(e7Exp); super_mLoader(e7Exp, m_e7Exp)"></li></div></td>
                         </tr>
                         </tr>
                       </table>
@@ -338,9 +340,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E8.</div></td>
                           <td><div>Does anyone contribute to your support?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e8' id='yesE8' value='True' onClick="javascript: lockRade4(noE8, noE9, yesE9);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e8' id='yesE8' value='1' onClick="javascript: lockRade4(noE8, noE9, yesE9);"></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e8' id='noE8' value='False' checked onClick="javascript: lockRade4(noE8, noE9, yesE9);"></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e8' id='noE8' value='0' checked onClick="javascript: lockRade4(noE8, noE9, yesE9);"></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
@@ -349,9 +351,9 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E9.</div></td>
                           <td><div>Is this the majority of your support?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e9' id='yesE9' value='True'></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e9' id='yesE9' value='1'></div></td>
                           <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e9' id='noE9' value='False' checked></div></td>
+                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e9' id='noE9' value='0' checked></div></td>
                           <td><div class='iml-radio-label-asi2'>No</div></td>
                         </tr>
                       </table>
@@ -361,7 +363,7 @@
                           <td><div class='asi_number_iml2'>E10.</div></td>
                           <td><div>Usual employment pattern:</div></td>
                           <td>
-                            <select name='e10' id='e10'>
+                            <select name='e10' id='e10' oninput="javascript: clearG1(e10);">
                               <option value='None Selected'>Select</option>
                               <option value='1'>Full Time (40 hrs/wk)</option>
                               <option value='2'>Part Time (reg. hrs)</option>
@@ -386,7 +388,7 @@
 
                         <tr>
                           <td></td>
-                          <td>30 days? <input type='number' name='e11' id='e11' value='{{fields.e11}}' max='30' style='width:50px; text-align:center;'></td>
+                          <td>30 days? <input type='number' name='e11' id='e11' value='{{fields.e11}}' max='30' style='width:50px; text-align:center;' oninput="javascript: clearG1(e11);"></td>
                         </tr>
                       </table>
                     </div>
@@ -403,7 +405,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E12.</div></td>
                           <td><div>Employment (net income):</div></td>
-                          <td><input type='number' name='e12' id='e12' value='{{fields.e12}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e12' id='e12' value='{{fields.e12}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e12);"></td>
                         </tr>
                       </table>
 
@@ -411,7 +413,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E13.</div></td>
                           <td><div>Unemployment compensation:</div></td>
-                          <td><input type='number' name='e13' id='e13' value='{{fields.e13}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e13' id='e13' value='{{fields.e13}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e13);"></td>
                         </tr>
                       </table>
 
@@ -419,7 +421,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E14.</div></td>
                           <td><div>DPA:</div></td>
-                          <td><input type='number' name='e14' id='e14' value='{{fields.e14}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e14' id='e14' value='{{fields.e14}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e14);"></td>
                         </tr>
                       </table>
 
@@ -427,7 +429,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E15.</div></td>
                           <td><div>Pension, benefits, or social security:</div></td>
-                          <td><input type='number' name='e15' id='e15' value='{{fields.e15}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e15' id='e15' value='{{fields.e15}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e15);"></td>
                         </tr>
                       </table>
 
@@ -435,7 +437,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E16.</div></td>
                           <td><div>Mate, family, or friends (Personal expenses):</div></td>
-                          <td><input type='number' name='e16' id='e16' value='{{fields.e16}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e16' id='e16' value='{{fields.e16}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e16);"></td>
                         </tr>
                       </table>
 
@@ -443,7 +445,7 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E17.</div></td>
                           <td><div>Illegal:</div></td>
-                          <td><input type='number' name='e17' id='e17' value='{{fields.e17}}' style='width:70px; text-align:center;'></td>
+                          <td><input type='number' name='e17' id='e17' value='{{fields.e17}}' style='width:70px; text-align:center;' oninput="javascript: clearG1(e17);"></td>
                         </tr>
                       </table>
 
@@ -457,7 +459,7 @@
                           <td></td>
                           <td>
                             food, shelter, etc.?
-                            <input type='number' name='e18' id='e18' value='{{fields.e18}}' style='width:50px; text-align:center;'>
+                            <input type='number' name='e18' id='e18' value='{{fields.e18}}' style='width:50px; text-align:center;' oninput="javascript: clearG1(e18);">
                           </td>
                         </tr>
                       </table>
@@ -470,7 +472,7 @@
 
                         <tr>
                           <td></td>
-                          <td>in the past 30 days? <input type='number' name='e19' id='e19' value='{{fields.e19}}' style='width:50px; text-align:center;' max='30'></td>
+                          <td>in the past 30 days? <input type='number' name='e19' id='e19' value='{{fields.e19}}' style='width:50px; text-align:center;' max='30' oninput="javascript: clearG1(e19);"></td>
                         </tr>
                       </table>
 
@@ -483,7 +485,7 @@
                         <tr>
                           <td></td>
                           <td>in the past 30 days? 
-                            <select name='e20' id='e20'>
+                            <select name='e20' id='e20' oninput="javascript: clearG1(e20);">
                               <option value='None Selected'>Select</option>
                               <option value='0'>Not At All</option>
                               <option value='1'>Slightly</option>
@@ -506,7 +508,7 @@
                         <tr>
                           <td></td>
                           <td>employment problems? 
-                            <select name='e21' id='e21'>
+                            <select name='e21' id='e21' oninput="javascript: clearG1(e21);">
                               <option value='None Selected'>Select</option>
                               <option value='0'>Not At All</option>
                               <option value='1'>Slightly</option>

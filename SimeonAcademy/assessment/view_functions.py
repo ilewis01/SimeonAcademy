@@ -11113,8 +11113,6 @@ def grabAsiDrug1Fields(asi):
 	d29 = getPatientIndex(asi.drug1.d29)
 	d30 = getPatientIndex(asi.drug1.d30)
 	d31 = getPatientIndex(asi.drug1.d31)
-	d32 = getInterviewerIndex(asi.drug1.d32)
-	d33 = getInterviewerIndex(asi.drug1.d33)
 
 	result['d1Day'] = asi.drug1.d1Day
 	result['d1Year'] = asi.drug1.d1Year
@@ -11185,8 +11183,8 @@ def grabAsiDrug1Fields(asi):
 	result['d29'] = d29
 	result['d30'] = d30
 	result['d31'] = d31
-	result['d32'] = d32
-	result['d33'] = d33
+	result['d32'] = asi.drug1.d32
+	result['d33'] = asi.drug1.d33
 	result['d34'] = asi.drug1.d34
 	result['d35'] = asi.drug1.d35
 
@@ -11533,15 +11531,15 @@ def saveASIemployment(request, asi):
 	asi.employment.e1mth = request.POST.get('e1mth')
 	asi.employment.e2 = request.POST.get('e2')
 	asi.employment.e3 = request.POST.get('e3')
-	asi.employment.e3Exp = request.POST.get('m_e3Exp')
+	asi.employment.e3Exp = processBlankAsiFields(request.POST.get('m_e3Exp'))
 	asi.employment.e4 = request.POST.get('e4')
-	asi.employment.e5 = request.POST.get('m_e5')
+	asi.employment.e5 = request.POST.get('e5')
 	asi.employment.e6yrs = request.POST.get('e6yrs')
 	asi.employment.e6mth = request.POST.get('e6mth')
 	asi.employment.e7 = request.POST.get('e7')
-	asi.employment.e7Exp = request.POST.get('m_e7Exp')
+	asi.employment.e7Exp = processBlankAsiFields(request.POST.get('m_e7Exp'))
 	asi.employment.e8 = request.POST.get('e8')
-	asi.employment.e9 = request.POST.get('m_e9')
+	asi.employment.e9 = request.POST.get('e9')
 	asi.employment.e10 = request.POST.get('e10')
 	asi.employment.e11 = request.POST.get('e11')
 	asi.employment.e12 = request.POST.get('e12')

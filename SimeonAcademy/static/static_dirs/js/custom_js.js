@@ -16346,17 +16346,35 @@ function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDi
 	}
 }
 
+function clearOpeningInputs(section) {
+	section = String(section);
+	var divs = [];
+
+	if (section === 'employment') {
+		divs.push(grab('e22'));
+	}
+
+	return divs;
+}
+
 function continue_asi_dX_main(warningDiv, warningDivClass, openingDiv, openingDivClass, section) {
 	var errors = false;
 	section = String(section);
+	var divs = clearOpeningInputs(section);
 
-	if (section === 'employment') {errors = asi_dE_main_error_checker();}
+	if (section === 'employment') {
+		errors = asi_dE_main_error_checker();
+	}
 
 	if (errors === true) {
 		generalVisibilityChange(warningDiv, warningDivClass);
 	}
 	else {
 		generalVisibilityChange(openingDiv, openingDivClass);
+
+		for (var i = 0; i < divs.length; i++) {
+			divs[i].style.border = '1px solid gray';
+		}
 	}
 }
 
@@ -17206,6 +17224,19 @@ function asi_medical_errors() {
 	return hasErrors;
 }
 
+function asi_employment_errors() {
+	var hasError = false;
+	if (grab('e22').selectedIndex === 0) {
+		grab('e22').style.border = '1px solid orange';
+		hasError = true;
+	}
+	return hasError;
+}
+
+function super_mLoader(field, target) {
+	target.value = field.value;
+}
+
 function general_asi_save(section) {
 	var errors = false;
 	section = String(section);
@@ -17213,6 +17244,7 @@ function general_asi_save(section) {
 	if (section === '/asi_admin/') {errors = asi_admin_errors();}
 	else if (section === '/asi_general/') {errors = asi_general_errors();}
 	else if (section === '/asi_medical/') {errors = asi_medical_errors();}
+	else if (section === '/asi_employment/') {errors = asi_employment_errors();}
 
 	if (errors === true) {
 		generalVisibilityChange(z5, 'asi-drug1-z5-holder-in');
