@@ -1135,6 +1135,8 @@ class AIS_General(models.Model):
 	test2 	= models.CharField(max_length=40, default=None, blank=True, null=True)
 	test3 	= models.CharField(max_length=40, default=None, blank=True, null=True)
 
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
+
 	def __unicode__(self):
 		return str(self.clientID)
 
@@ -1154,7 +1156,7 @@ class AIS_Medical(models.Model):
 	m9 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	m10 = models.IntegerField(default=0)
 	m11 = models.IntegerField(default=0)
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1190,7 +1192,7 @@ class AIS_Employment(models.Model):
 	e22 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	e23 = models.IntegerField(default=0)
 	e24 = models.IntegerField(default=0)
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1258,7 +1260,7 @@ class AIS_Drug1(models.Model):
 	d33 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	d34 = models.IntegerField(default=0)
 	d35 = models.IntegerField(default=0)
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1298,7 +1300,7 @@ class AIS_Legal(models.Model):
 	l30 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	l31 = models.IntegerField(default=0)
 	l32 = models.IntegerField(default=0)
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1342,6 +1344,8 @@ class AIS_Family(models.Model):
 	h12a = models.CharField(max_length=1, default=None, blank=True, null=True)
 	h12d = models.CharField(max_length=1, default=None, blank=True, null=True)
 	h12p = models.CharField(max_length=1, default=None, blank=True, null=True)
+
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1411,7 +1415,7 @@ class AIS_Social2(models.Model):
 	f29d = models.IntegerField(default=0)
 	f29y = models.IntegerField(default=0)
 
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)
@@ -1454,7 +1458,7 @@ class AIS_Psych(models.Model):
 	p21 = models.CharField(max_length=1, default=None, blank=True, null=True)
 	p22 = models.IntegerField(default=0)
 	p23 = models.IntegerField(default=0)
-	comments = models.CharField(max_length=200, default=None, blank=True, null=True)
+	comments = models.CharField(max_length=2000, default=None, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.clientID)

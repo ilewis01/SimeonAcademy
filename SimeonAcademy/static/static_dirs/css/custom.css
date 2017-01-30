@@ -9735,19 +9735,19 @@ button:hover {
 }
 
 .asi-d1-instruction-div {
-	font-size: 18px;
+	font-size: 14px;
 	padding-top:15px;
 	padding-left:12px;
 }
 
 .asi-d1-instruction-div2 {
-	font-size: 18px;
+	font-size: 14px;
 	padding-top:15px;
 	padding-left:82px;
 }
 
 .asi-d1-instruction-div3 {
-	font-size: 18px;
+	font-size: 14px;
 	padding-top:15px;
 	padding-left:8px;
 }
@@ -10445,7 +10445,7 @@ button:hover {
 .asi_instru_btn_div {
 	width:90%;
 	margin:auto;
-	margin-top: 40%;
+	margin-top: 10%;
 }
 
 .asi_instru_btn_div button {
