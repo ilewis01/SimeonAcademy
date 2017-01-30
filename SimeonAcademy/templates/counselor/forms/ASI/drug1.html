@@ -329,16 +329,16 @@
                     <div class='asi-drug1-z1-holder-in' id='z1'>
                       <div class='asi-drug1-z1-border'>
                         <div class='asi-drug1-z1-bkg'>
-                            <!-- <div class='ft-closeWindow-icon'>
-                                <a onClick="javascript: generalVisibilityChange(z1, 'asi-drug1-z1-holder-out'); return false;">
-                                    <i class="fa fa-window-close" aria-hidden="true"></i>
-                                </a>
-                            </div> -->
+                            
                             <div style='height:20px;'></div>
 
                             <div class='asi-zi-form-head'><b>Alcohol/Drug Use</b></div>
 
-                            <div class='divider_gradient' style='margin-bottom:20px;'></div>
+                            <div class='divider_gradient'></div>
+
+                            <div class='asi-d1-instruction-div' style='text-align:center; font-size:12px;'>
+                                <a onClick="javascript: viewASIinstruction('#drug'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                            </div>
 
                             <div class='asi-zi-form-head2'>
                                 Note the usual or most recent route. For more than one route, choose the most severe.The routes are ordered from least severe to most severe.
@@ -594,8 +594,9 @@
                     </div>
 
                     <div class='asi-d1-instruction-div'>
-                        <a onClick="javascript: viewASIinstruction('#drug', 'right'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                        <a onClick="javascript: viewASIinstruction('#drug'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
                     </div>
+
                     <div class='asi-true-left'>
                       <div class='asi-emp-cont'>
                         <div class='asi-tri-holder'>
@@ -622,24 +623,24 @@
                             </select>
                           </div>
 
-                          <div style='height:35px;'></div>
+                         <div style='height:22px;'></div>
 
-                          <div class='asi-tri-number-dbl'>D15.</div>
-                          <div class='asi-tri-ques-dbl'>How long ago was your last period of voluntary abstinence?</div>
-                          <div class='asi-tri-resp-dbl'><input type='text' name='d15' id='d15' oninput="javascript: clearG1(d15);" placeholder='D15 (months)'><br><br></div>
+                          <div class='asi-tri-number-s'>D15.</div>
+                          <div class='asi-tri-ques-s'>How long ago was your last period of voluntary abstinence?</div>
+                          <div class='asi-tri-resp-s'><input type='text' name='d15' id='d15' oninput="javascript: clearG1(d15);" placeholder='D15 (months)'><br><br></div>
+
+                          <div style='height:25px;'></div>
 
                           <div class='asi-tri-number-s'>D16.</div>
                           <div class='asi-tri-ques-s'>How many months ago did this abstinence end?</div>
                           <div class='asi-tri-resp-s'><input type='text' name='d16' id='d16' oninput="javascript: clearG1(d16);" placeholder='D16'></div>
-
-                          <div style='height:45px;'></div>
 
                           <div class='asi-howMany-head-wow'>How many times have you:</div>
                           <div class='asi-tri-number-s'>D17.</div>
                           <div class='asi-tri-ques-s'>Had alcohol D.T's?</div>
                           <div class='asi-tri-resp-s'><input type='text' name='d17' id='d17' oninput="javascript: clearG1(d17);" placeholder='D17'></div>
 
-                          <div style='height:30px;'></div>
+                           <div style='height:27px;'></div>
 
                           <div class='asi-tri-number-s'>D18.</div>
                           <div class='asi-tri-ques-s'>Overdosed on drugs?</div>
@@ -650,7 +651,7 @@
                           <div class='asi-tri-ques-s'>Alcohol abuse?</div>
                           <div class='asi-tri-resp-s'><input type='text' name='d19' id='d19' oninput="javascript: clearG1(d19);" placeholder='D19'></div>
 
-                          <div style='height:30px;'></div>
+                           <div style='height:27px;'></div>
 
                           <div class='asi-tri-number-s'>D20.</div>
                           <div class='asi-tri-ques-s'>Drug abuse?</div>
@@ -661,7 +662,7 @@
                           <div class='asi-tri-ques-s'>Alcohol:</div>
                           <div class='asi-tri-resp-s'><input type='text' name='d21' id='d21' oninput="javascript: clearG1(d21);" placeholder='D21'></div>
 
-                          <div style='height:30px;'></div>
+                           <div style='height:27px;'></div>
 
                           <div class='asi-tri-number-s'>D22.</div>
                           <div class='asi-tri-ques-s'>Drugs:</div>
@@ -678,19 +679,18 @@
                             <div class='asi-tri-ques-s'>Alcohol?</div>
                             <div class='asi-tri-resp-s'><input type='text' name='d23' id='d23' oninput="javascript: clearG1(d23);" placeholder='D23'></div>
 
-                            <div style='height:30px;'></div>
-
                             <div class='asi-tri-number-s'>D24.</div>
                             <div class='asi-tri-ques-s'>Drugs?</div>
                             <div class='asi-tri-resp-s'><input type='text' name='d24' id='d24' oninput="javascript: clearG1(d24);" placeholder='D24'></div>
-
-                            <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-dbl'>D25.</div>
                             <div class='asi-tri-ques-dbl'>How many days have you been treated in an outpatient setting in the past 30 days?</div>
                             <div class='asi-tri-resp-dbl'><input type='text' name='d25' id='d25' oninput="javascript: clearG1(d25);" placeholder='D25'><br><br></div>
 
+                            <div style='height:90px;'></div>
+
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, have you experienced:</div>
+                            <div style='height:5px;'></div>
                             <div class='asi-tri-number-s'>D26.</div>
                             <div class='asi-tri-ques-s'>
                               <table>
@@ -704,8 +704,6 @@
                               </table>
                             </div>
                             <div class='asi-tri-resp-s'></div>
-
-                            <div style='height:30px;'></div>
 
                             <div class='asi-tri-number-s'>D27.</div>
                             <div class='asi-tri-ques-s'>
@@ -721,7 +719,7 @@
                             </div>
                             <div class='asi-tri-resp-s'></div>
 
-                            <div style='height:30px;'></div>
+                            <div style='height:55px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>In the past 30 days, how troubled have you been by the following:</div>
                             <div class='asi-tri-number'>D28.</div>
@@ -739,7 +737,7 @@
                               </select>
                             </div>
 
-                            <div style='height:40px;'></div>
+                            <div style='height:22px;'></div>
 
                             <div class='asi-tri-number'>D29.</div>
                             <div class='asi-tri-ques'>Drug problems?</div>
@@ -756,7 +754,7 @@
                               </select>
                             </div>
 
-                            <div style='height:40px;'></div>
+                            <div style='height:35px;'></div>
 
                             <div class='asi-howMany-head-wowNone'>How important to you now is treatment for these:</div>
                             <div class='asi-tri-number'>D30.</div>
@@ -774,7 +772,7 @@
                               </select>
                             </div>
 
-                            <div style='height:30px;'></div>
+                            <div style='height:22px;'></div>
 
                             <div class='asi-tri-number'>D31.</div>
                             <div class='asi-tri-ques'>Drug problems?</div>
@@ -791,6 +789,11 @@
                               </select>
                             </div>
                           </div>
+                        <!-- </div> -->
+
+                          <div class='medical_comment_wrapper6'>
+                            <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Additional Comments</button>
+                          </div>
                       </div>
                     </div>  
                   </div>
@@ -798,7 +801,7 @@
 
             <div class='row'>
               <div class='col-md-12' style='width:100%'>
-                <table class='iml-save-btn'>
+                <table class='iml-save-btn-asiDrug'>
                   <tr>
                     <td><button onClick="javascript: continue_asi_d1_main(z2, 'asi-drug1-z2-holder-in', z4, 'asi-drug1-z4-holder-in'); return false;">Save & Continue</button></td>
                     <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>

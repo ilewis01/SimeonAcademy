@@ -5755,6 +5755,18 @@ button:hover {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+.iml-save-btn-asiDrug {
+	padding: 2%;
+	border: 1px solid black;
+	margin-top: 15px;
+	margin-left: 63.5%;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.iml-save-btn-asiDrug button {
+	width: 150px;
+}
+
 .iml-save-btn-viewform {
 	/*padding: 2%;*/
 	border: 1px solid black;
@@ -6964,12 +6976,25 @@ button:hover {
 	width: 203px;
 }
 
+.medical_comment_wrapper6 {
+	/*margin-top: 6px;
+	margin-left: 215px;*/
+	padding-top: 50px;
+	/*border: 2px solid black;*/
+	width: 203px;
+}
+
 .medical_comment_wrapper button {
 	width:200px;
 }
 
 .medical_comment_wrapper2 button {
 	width:200px;
+}
+
+.medical_comment_wrapper6 button {
+	width:200px;
+	border:1px solid gray;
 }
 
 .asi_comment_header {
@@ -9883,7 +9908,7 @@ button:hover {
 .asi-drug1-z1-border {
 	width:50%;
 	margin: auto;
-	height:122%;
+	height:128%;
 	margin-top:-100px;
 	border:2px solid #525050;
 	border-radius: 8px;
@@ -10276,44 +10301,47 @@ button:hover {
 
 .asi-tri-number {
 	width:8%;
-	height:22px;
+	height:18px;
 	float:left;
 	font-weight: bold;
 	font-style: italic;
 	color:#303b39;
 	/*border: 1px solid black;*/
+	font-size: 12px;
+	line-height: 16px;
 }
 
 .asi-tri-ques {
 	width:62%;
-	height:22px;
+	height:18px;
 	float:left;
 	/*border: 1px solid black;*/
+	font-size: 12px;
 }
 
 .asi-tri-resp {
 	width:30%;
-	height:22px;
+	height:18px;
 	float:left;
 	/*border: 1px solid black;*/
+	font-size: 12px;
+}
+
+.asi-tri-resp input {
+	border:1px solid gray;
+	border-radius: 5px;
+	width:100%;
+	height:100%;
 }
 
 .asi-tri-resp select {
 	border: 1px solid gray;
 	width:100%;
 	height:100%;
-	font-size: 12px;
+	font-size: 11px;
 }
 
-.asi-tri-number-s {
-	width:8%;
-	height:22px;
-	float:left;
-	font-weight: bold;
-	font-style: italic;
-	color:#303b39;
-	/*border: 1px solid black;*/
-}
+
 
 .asi-tri-number-sf {
 	width:8%;
@@ -10334,10 +10362,23 @@ button:hover {
 	position:relative;
 }
 
+.asi-tri-number-s {
+	width:8%;
+	height:22px;
+	float:left;
+	font-weight: bold;
+	font-style: italic;
+	color:#303b39;
+	font-size: 12px;
+	line-height: 16px;
+	/*border: 1px solid black;*/
+}
+
 .asi-tri-ques-s {
 	width:72%;
 	height:22px;
 	float:left;
+	font-size: 12px;
 	/*border: 1px solid black;*/
 }
 
@@ -10345,31 +10386,36 @@ button:hover {
 	width:20%;
 	height:22px;
 	float:left;
+	font-size: 12px;
 	/*border: 1px solid black;*/
 }
 
 .asi-tri-number-dbl {
 	width:8%;
-	height:44px;
+	height:38px;
 	float:left;
 	font-weight: bold;
 	font-style: italic;
 	color:#303b39;
 	/*border: 1px solid black;*/
+	font-size: 12px;
+	line-height: 16px;
 }
 
 .asi-tri-ques-dbl {
 	width:72%;
-	height:44px;
+	height:38px;
 	float:left;
 	/*border: 1px solid black;*/
+	font-size: 12px;
 }
 
 .asi-tri-resp-dbl {
 	width:20%;
-	height:44px;
+	height:38px;
 	float:left;
 	/*border: 1px solid black;*/
+	font-size: 12px;
 }
 
 .asi-tri-resp-s input {
@@ -10378,6 +10424,7 @@ button:hover {
 	border-radius:5px;
 	text-align: center;
 	font-style: italic;
+	font-size: 11px;
 }
 
 .asi-tri-resp-s select {

@@ -16343,6 +16343,8 @@ function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDi
 	}
 	else {
 		generalVisibilityChange(openingDiv, openingDivClass);
+		grab('d32').style.border = '1px solid gray';
+		grab('d33').style.border = '1px solid gray';
 	}
 }
 
