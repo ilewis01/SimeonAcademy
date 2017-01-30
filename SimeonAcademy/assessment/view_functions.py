@@ -11035,7 +11035,6 @@ def grabAsiMedicalFields(asi):
 	m5 = getYesNoIndexes(asi.medical.m5)
 	m7 = getPatientIndex(asi.medical.m7)
 	m8 = getPatientIndex(asi.medical.m8)
-	m9 = getInterviewerIndex(asi.medical.m9)
 
 	result['m1'] = asi.medical.m1
 	result['m2yrs'] = asi.medical.m2yrs
@@ -11047,7 +11046,7 @@ def grabAsiMedicalFields(asi):
 	result['m6'] = asi.medical.m6
 	result['m7'] = m7
 	result['m8'] = m8
-	result['m9'] = m9
+	result['m9'] = asi.medical.m9
 	result['m10'] = asi.medical.m10
 	result['m11'] = asi.medical.m11
 	result['comments'] = asi.medical.comments
@@ -11059,7 +11058,6 @@ def grabAsiEmploymentFields(asi):
 	result = {}
 	e20 = getPatientIndex(asi.employment.e20)
 	e21 = getPatientIndex(asi.employment.e21)
-	e22 = getInterviewerIndex(asi.employment.e22)
 
 	result['e1yrs'] = asi.employment.e1yrs
 	result['e1mth'] = asi.employment.e1mth
@@ -11086,7 +11084,7 @@ def grabAsiEmploymentFields(asi):
 	result['e19'] = asi.employment.e19
 	result['e20'] = e20
 	result['e21'] = e21
-	result['e22'] = e22
+	result['e22'] = asi.employment.e22
 	result['e23'] = asi.employment.e23
 	result['e24'] = asi.employment.e24
 	result['comments'] = asi.employment.comments

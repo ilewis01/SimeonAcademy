@@ -9752,6 +9752,11 @@ button:hover {
 	padding-left:8px;
 }
 
+.asi-d1-instruction-div4 {
+	font-size: 14px;
+	padding-top:15px;
+}
+
 .finalAndCompleteWarningButtonDiv_single {
 	width:95%;
 	margin:auto;
@@ -9905,6 +9910,16 @@ button:hover {
 	box-shadow: 3px 8px 8px black;
 }
 
+.asi-drug1-z3-border2 {
+	width:50%;
+	margin: auto;
+	height:55%;
+	margin-top:20px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
 .asi-drug1-z4-border {
 	width:45%;
 	margin: auto;
@@ -9919,6 +9934,16 @@ button:hover {
 	width:40%;
 	margin: auto;
 	height:35%;
+	margin-top:20px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
+.asi-drug1-z5-border-emp {
+	width:45%;
+	margin: auto;
+	height:45%;
 	margin-top:20px;
 	border:2px solid #525050;
 	border-radius: 8px;

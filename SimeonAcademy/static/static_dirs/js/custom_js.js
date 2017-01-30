@@ -15568,6 +15568,20 @@ function fetch_asi_comment_title() {
 	return title;
 }
 
+function u_radio2(radio, target, label) {
+	if (radio.checked === true) {
+		target.disabled = false;
+		target.style.opacity = '1.0';
+		label.style.opacity = '1.0';
+	}
+	else {
+		target.value = '';
+		target.disabled = true;
+		target.style.opacity = '0.3';
+		label.style.opacity = '0.3';
+	}
+}
+
 function initialize_asi_comment_popup() {
 	grab('comment_title').innerHTML = fetch_asi_comment_title();
 	grab('asi_comment').innerHTML = String(getPopParent('comments').value);
@@ -15725,6 +15739,21 @@ function init_asi_medical(json_data) {
 	}
 }
 
+function checkOneCheckTwo(val, yesTrigger) {
+	if (Number(val) === 1) {
+		yesTrigger.checked = true;
+	}
+}
+
+function getHiddenRadInit(val, input, json_val) {
+	if (Number(val) === 1) {
+		input.value = json_val;
+	}
+	else {
+		input.value = '';
+	}
+}
+
 function init_asi_employmentl(json_data) {
 	number_init(json_data.isComplete, document.getElementById('e1yrs'));
 	number_init(json_data.isComplete, document.getElementById('e1mth'));
@@ -15741,28 +15770,39 @@ function init_asi_employmentl(json_data) {
 	number_init(json_data.isComplete, document.getElementById('e18'));
 	number_init(json_data.isComplete, document.getElementById('e19'));
 
-	blank_init_asi(json_data.isComplete, document.getElementById('e3Exp'));
-	blank_init_asi(json_data.isComplete, document.getElementById('e7Exp'));
-	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+	checkOneCheckTwo(json_data.e3, grab('yesE3'));
+	checkOneCheckTwo(json_data.e4, grab('yesE4'));
+	checkOneCheckTwo(json_data.e5, grab('yesE5'));
+	checkOneCheckTwo(json_data.e7, grab('yesE7'));
+	checkOneCheckTwo(json_data.e8, grab('yesE8'));
+	checkOneCheckTwo(json_data.e9, grab('yesE9'));
+	checkOneCheckTwo(json_data.e23, grab('yese23'));
+	checkOneCheckTwo(json_data.e24, grab('yese24'));
+
+	getHiddenRadInit(json_data.e3, grab('e3Exp'), json_data.e3Exp);
+	getHiddenRadInit(json_data.e3, grab('e7Exp'), json_data.e7Exp);
+
+	grab('asi_comment').value = json_data.comments;
 
 	document.getElementById('e10').selectedIndex = json_data.e10;
 	document.getElementById('e20').selectedIndex = json_data.e20;
 	document.getElementById('e21').selectedIndex = json_data.e21;
 	document.getElementById('e22').selectedIndex = json_data.e22;
 
-	asi_radioBtn_select(json_data.e3, document.getElementById('e3yes'), document.getElementById('e3no'));
-	asi_radioBtn_select(json_data.e4, document.getElementById('e4yes'), document.getElementById('e4no'));
-	asi_radioBtn_select(json_data.e5, document.getElementById('e5yes'), document.getElementById('e5no'));
-	asi_radioBtn_select(json_data.e7, document.getElementById('e7yes'), document.getElementById('e7no'));
-	asi_radioBtn_select(json_data.e8, document.getElementById('e8yes'), document.getElementById('e8no'));
-	asi_radioBtn_select(json_data.e9, document.getElementById('e9yes'), document.getElementById('e9no'));
-	asi_radioBtn_select(json_data.e23, document.getElementById('e23yes'), document.getElementById('e23no'));
-	asi_radioBtn_select(json_data.e24, document.getElementById('e24yes'), document.getElementById('e24no'));
+	lockRade4(grab('noE4'), grab('noE5'), grab('yesE5'));
+	lockRade4(grab('noE8'), grab('noE9'), grab('yesE9'));
+	u_radio2(grab('yesE3'), grab('e3Exp'), grab('e3Spec_lab'));
+	u_radio2(grab('yesE7'), grab('e7Exp'), grab('e7_exp_lab'));
+}
 
-	e3Radio();
-	e4Radio();
-	e7Radio();
-	e8Radio();
+function lockRade4(trigger, target, lock) {
+	if (trigger.checked === true) {
+		target.checked = true;
+		lock.disabled = true;
+	}
+	else {
+		lock.disabled = false;
+	}
 }
 
 function init_asi_drug1(json_data) {
@@ -16220,7 +16260,82 @@ function asi_d1_main_error_checker() {
 	return hasErrors;
 }
 
+function u_select_error_checker_change(sel, color) {
+	var hasError = false;
+	if (sel.selectedIndex === 0) {
+		sel.style.border = "1px solid " + String(color);
+		hasError = true;
+	}
+	return hasError;
+}
 
+function get_asi_emp_numDivs() {
+	var nums = [];
+	nums.push(grab('e1yrs'));
+	nums.push(grab('e1mth'));
+	nums.push(grab('e2'));
+	nums.push(grab('e6yrs'));
+	nums.push(grab('e6mth'));
+	nums.push(grab('e11'));
+	nums.push(grab('e12'));
+	nums.push(grab('e13'));
+	nums.push(grab('e14'));
+	nums.push(grab('e15'));
+	nums.push(grab('e16'));
+	nums.push(grab('e17'));
+	nums.push(grab('e18'));
+	nums.push(grab('e19'));
+	return nums;
+}
+
+function asi_dE_main_error_checker() {
+	var hasErrors = false;
+	var count = 0;
+	var nums = get_asi_emp_numDivs();
+
+	for (var i = 0; i < nums.length; i++) {
+		if (isRawNumber(nums[i].value) === false || clearWhiteSpace(nums[i].value).length === 0) {
+			count += 1;
+			nums[i].style.border = '1px solid red';
+		}
+	}
+
+	if (Number(grab('e11').value) > 30) {
+		count += 1;
+		grab('e11').style.border = '1px solid blue';
+	}
+
+	if (Number(grab('e19').value) > 30) {
+		count += 1;
+		grab('e19').style.border = '1px solid blue';
+	}
+
+	if (u_select_error_checker_change(grab('e10'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('e20'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('e21'), "orange") === true) {count += 1;}
+
+	if (grab('yesE3').checked === true) {
+		var t1 = String(grab('e3Exp').value);
+		if (t1.length === 0) {
+			grab('e3Exp').style.border = '1px solid red';
+			count += 1;
+		}
+	}
+
+	if (grab('yesE7').checked === true) {
+		var t1 = String(grab('e7Exp').value);
+		if (t1.length === 0) {
+			grab('e7Exp').style.border = '1px solid red';
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
 
 function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDivClass) {
 	if (asi_d1_main_error_checker() === true) {
@@ -16228,10 +16343,23 @@ function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDi
 	}
 	else {
 		generalVisibilityChange(openingDiv, openingDivClass);
-		// grab('d32').selectedIndex = grab('m_d32').value;
-		// grab('d33').selectedIndex = grab('m_d33').value;
 	}
 }
+
+function continue_asi_dX_main(warningDiv, warningDivClass, openingDiv, openingDivClass, section) {
+	var errors = false;
+	section = String(section);
+
+	if (section === 'employment') {errors = asi_dE_main_error_checker();}
+
+	if (errors === true) {
+		generalVisibilityChange(warningDiv, warningDivClass);
+	}
+	else {
+		generalVisibilityChange(openingDiv, openingDivClass);
+	}
+}
+
 
 function asi_d1_z1_submit(errorDiv, errorOpenClass, formDiv, formCloseClass) {
 	if (asi_d1_z1_errorCheck() === true) {
