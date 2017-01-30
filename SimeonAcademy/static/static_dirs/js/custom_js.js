@@ -15770,17 +15770,22 @@ function init_asi_employmentl(json_data) {
 	number_init(json_data.isComplete, document.getElementById('e18'));
 	number_init(json_data.isComplete, document.getElementById('e19'));
 
+	if (String(json_data.e7Exp).length === 0) {
+		grab('e7Exp').value = '0';
+	}
+	else {
+		grab('e7Exp').value = json_data.e7Exp;
+	}
+
 	checkOneCheckTwo(json_data.e3, grab('yesE3'));
 	checkOneCheckTwo(json_data.e4, grab('yesE4'));
 	checkOneCheckTwo(json_data.e5, grab('yesE5'));
-	checkOneCheckTwo(json_data.e7, grab('yesE7'));
 	checkOneCheckTwo(json_data.e8, grab('yesE8'));
 	checkOneCheckTwo(json_data.e9, grab('yesE9'));
 	checkOneCheckTwo(json_data.e23, grab('yese23'));
 	checkOneCheckTwo(json_data.e24, grab('yese24'));
 
 	getHiddenRadInit(json_data.e3, grab('e3Exp'), json_data.e3Exp);
-	getHiddenRadInit(json_data.e3, grab('e7Exp'), json_data.e7Exp);
 
 	grab('asi_comment').value = json_data.comments;
 
@@ -15788,11 +15793,12 @@ function init_asi_employmentl(json_data) {
 	document.getElementById('e20').selectedIndex = json_data.e20;
 	document.getElementById('e21').selectedIndex = json_data.e21;
 	document.getElementById('e22').selectedIndex = json_data.e22;
+	document.getElementById('e7').selectedIndex = json_data.e7;
 
 	lockRade4(grab('noE4'), grab('noE5'), grab('yesE5'));
 	lockRade4(grab('noE8'), grab('noE9'), grab('yesE9'));
 	u_radio2(grab('yesE3'), grab('e3Exp'), grab('e3Spec_lab'));
-	u_radio2(grab('yesE7'), grab('e7Exp'), grab('e7_exp_lab'));
+	// u_radio2(grab('yesE7'), grab('e7Exp'), grab('e7_exp_lab'));
 }
 
 function lockRade4(trigger, target, lock) {
@@ -16310,22 +16316,20 @@ function asi_dE_main_error_checker() {
 		grab('e19').style.border = '1px solid blue';
 	}
 
+	if (isBlankText(grab('e7Exp').value) === true) {
+		count += 1;
+		grab('e7Exp').style.border = '1px solid red';
+	}
+
 	if (u_select_error_checker_change(grab('e10'), "orange") === true) {count += 1;}
 	if (u_select_error_checker_change(grab('e20'), "orange") === true) {count += 1;}
 	if (u_select_error_checker_change(grab('e21'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('e7'), "orange") === true) {count += 1;}
 
 	if (grab('yesE3').checked === true) {
 		var t1 = String(grab('e3Exp').value);
 		if (t1.length === 0) {
 			grab('e3Exp').style.border = '1px solid red';
-			count += 1;
-		}
-	}
-
-	if (grab('yesE7').checked === true) {
-		var t1 = String(grab('e7Exp').value);
-		if (t1.length === 0) {
-			grab('e7Exp').style.border = '1px solid red';
 			count += 1;
 		}
 	}

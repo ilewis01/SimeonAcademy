@@ -322,16 +322,28 @@
                         <tr>
                           <td><div class='asi_number_iml2'>E7.</div></td>
                           <td><div>Usual (or last) occupation?</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='yesE7' value='1' onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
-                          <td><div class='iml-radio-label-asi2'>Yes</div></td>
-                          <td><div class='iml_asi_rad_fix'><input type='radio' name='e7' id='noE7' value='0' checked onClick="javascript: u_radio2(yesE7, e7Exp, e7_exp_lab);"></div></td>
-                          <td><div class='iml-radio-label-asi2'>No</div></td>
+                          <td>
+                              <div class='iml_asi_rad_fix'>
+                                  <select name='e7' id='e7' onChange="javascript: clearG1(e7);">
+                                      <option value='0'>Select</option>
+                                      <option value='1'>1</option>
+                                      <option value='2'>2</option>
+                                      <option value='3'>3</option>
+                                      <option value='4'>4</option>
+                                      <option value='5'>5</option>
+                                      <option value='6'>6</option>
+                                      <option value='7'>7</option>
+                                      <option value='8'>8</option>
+                                      <option value='9'>9</option>
+                                  </select>
+                              </div>
+                          </td>
                         </tr>
                       </table>
 
                           <tr>
                           <td></td>
-                          <td><div style='margin-left:35px'><li><em id='e7_exp_lab'>Specify:</em><input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}' oninput="javascript: clearG1(e7Exp); super_mLoader(e7Exp, m_e7Exp)"></li></div></td>
+                          <td><div style='margin-left:35px'><li><em id='e7_exp_lab'>Specify:</em><input type='text' name='e7Exp' id='e7Exp' value='{{fields.e7Exp}}' oninput="javascript: clearG1(e7Exp);"></li></div></td>
                         </tr>
                         </tr>
                       </table>

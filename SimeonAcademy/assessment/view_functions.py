@@ -11537,7 +11537,7 @@ def saveASIemployment(request, asi):
 	asi.employment.e6yrs = request.POST.get('e6yrs')
 	asi.employment.e6mth = request.POST.get('e6mth')
 	asi.employment.e7 = request.POST.get('e7')
-	asi.employment.e7Exp = processBlankAsiFields(request.POST.get('m_e7Exp'))
+	asi.employment.e7Exp = request.POST.get('e7Exp')
 	asi.employment.e8 = request.POST.get('e8')
 	asi.employment.e9 = request.POST.get('e9')
 	asi.employment.e10 = request.POST.get('e10')
