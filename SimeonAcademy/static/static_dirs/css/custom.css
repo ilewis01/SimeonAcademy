@@ -10458,11 +10458,15 @@ button:hover {
 	font-size: 11px;
 	overflow-y: scroll; 
 	height:90%;
-	background-color: yellow;
+	/*background-color: yellow;*/
 }
 
 .asi_right_direction_container ol {
 	padding-left:5%;
+}
+
+.asi_right_direction_container table {
+	font-size: 11px;
 }
 
 .asi_inst_heads {
@@ -10471,6 +10475,18 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	margin-bottom: 5%;
+	color:#2a52d2;
+}
+
+.asi_right_direction_container section {
+	border-bottom:1px solid black;
+	padding-bottom:3%;
+}
+
+.asi_right_direction_container span {
+	font-style: italic;
+	font-weight: bold;
+	color:#2a52d2;
 }
 
 

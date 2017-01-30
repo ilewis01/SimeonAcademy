@@ -16993,7 +16993,7 @@ function viewASIinstruction(section) {
 
 function initialize_asi_inner_help() {
 	var section = String(getPopParent('help_section').value);
-	window.location.href = "#" + section;
+	window.location.href = section;
 }
 
 function asi_general_errors() {
