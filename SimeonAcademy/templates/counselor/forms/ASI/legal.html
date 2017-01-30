@@ -16,8 +16,12 @@
       <input type='hidden' name='exit_to' id='exit_to' value=''>
       <input type='hidden' name='comments' id='comments' value=''>
       <input type='hidden' name='help_section' id='help_section' value=''>
-      <input type='hidden' name='m_e3Exp' id='m_e3Exp' value=''>
-      <input type='hidden' name='m_e7Exp' id='m_e7Exp' value=''>
+
+      <input type='hidden' name='m_l17' id='m_l17' value=''>
+      <input type='hidden' name='m_l22' id='m_l22' value=''>
+      <input type='hidden' name='m_l23' id='m_l23' value=''>
+      <input type='hidden' name='m_l25' id='m_l25' value=''>
+
 
     <div class='container'>
       <div class='row'>
@@ -112,23 +116,407 @@
               <div class='container'>
                 <div class='row'>
 
-                  <!-- LEFT SIDE -->
                   <!-- CONFIDENCE RATING SECTION -->
-                  <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
+                    <div class='asi-drug1-z4-holder-out' id='z4'>
+                        <div class='asi-drug1-z4-border-leg'>
+                            <div class='asi-drug1-z4-bkg'>
+                                <div class='ft-closeWindow-icon'>
+                                    <a onClick="javascript: generalVisibilityChange(z4, 'asi-drug1-z4-holder-out'); return false;">
+                                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                                    </a>
+                                </div>
 
+                                <input type='hidden' name='c_comments' id='c_comments' value=''>
 
-                <!-- THE LEFT SIDE STARTS HERE -->
-                  <div class='col-md-6 asi-true-left general_asi_input' style='margin-left:35px;'>
-                    <div class='asi-d1-instruction-div4'>
-                        <a onClick="javascript: viewASIinstruction('#legal'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                                <div class='asi-d1-ir1' style='padding-top:2%;'>Interviewer Rating</div>
+
+                                <div class='asi-d1-ir3'>
+                                    <table>
+                                      <tr>
+                                      </tr>
+                                        <td><div class='asi-d1-pas-select'>How would you rate the patient's need for legal</div></td>
+                                        <td></td>
+                                      <tr>
+                                        <td><div class='asi-d1-pas-select' style='margin-right:150px;'>services or counseling?</div></td>
+                                        <td>
+                                          <select name='l30' id='l30' class='dumbSel-iml50' onChange="javascript: clearG1(l30);">
+                                            <option value='0'>Select</option>
+                                            <option value='1'>1</option>
+                                            <option value='2'>2</option>
+                                            <option value='3'>3</option>
+                                            <option value='4'>4</option>
+                                            <option value='5'>5</option>
+                                            <option value='6'>6</option>
+                                            <option value='7'>7</option>
+                                            <option value='8'>8</option>
+                                            <option value='9'>9</option>
+                                          </select>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                </div>
+
+                                <div style='height:30px'></div>
+
+                                <div class='asi-d1-ir1'>Confidence Ratings</div>
+                                <div class='asi-d1-ir2'>Is the above information significantly distorted by:</div>
+
+                                <div class='asi-d1-ir3'>
+                                    <table>
+                                      <tr>
+                                        <td><div class='asi-tri-number-sf' style='padding-right:5px;'>L31.</div></td>
+                                        <td><div class='asi-d1-pas-select'>Patient's Misrepresentation?</div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='l31' id='no31' value='0' checked></div></td>
+                                        <td><div class='asi-d1-radio-label'>No</div></td>
+                                        <td><div style='width:15px;'></div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='l31' id='yes31' value='1'></div></td>
+                                        <td><div class='asi-d1-radio-label'>Yes</div></td>
+                                      </tr>
+
+                                      <tr>
+                                        <td><div class='asi-tri-number-sf' style='padding-right:5px;'>L32.</div></td>
+                                        <td><div class='asi-d1-pas-select'>Patient's Inability To Understand?</div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='l32' id='no32' value='0' checked></div></td>
+                                        <td><div class='asi-d1-radio-label'>No</div></td>
+                                        <td><div style='width:15px;'></div></td>
+                                        <td><div class='asi-d1-level-checks'><input type='radio' name='l32' id='yes32' value='1'></div></td>
+                                        <td><div class='asi-d1-radio-label'>Yes</div></td>
+                                      </tr>
+                                    </table>
+                                </div>
+
+                                <div class='asi-d1-ir-tri-btn'>
+                                  <button onClick="javascript: general_asi_save({{current_section}}); return false;">Submit</button>
+                                  <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Comments</button>
+                                  <button onClick="javascript: ">Exit ASI</button>
+                                </div>
+                                <div class='divider_gradient'></div>
+                            </div>
+                        </div>
                     </div>
 
-                    
+                  <!-- WARNING DIV -->
+                  <div class='asi-drug1-z5-holder-out' id='z5'>
+                      <div class='asi-drug1-z5-border-leg'>
+                          <div class='asi-drug1-z5-bkg'>
+                              <div style='height:2%;'></div>
+                              <div class='asi-d1-warningHld'>
+                                <div class='asi-d1-warningHld1'><img src="{% static 'images/warnING.png' %}" alt="WARNING" class=''></div>
+                                <div class='asi-d1-warningHld2'>Warning!</div>
+                                <div class='overall-warning-t1'>The Highlighted Fields Contain Errors</div>
+                                <div class='overall-warning-t2'>Follow the legend below to correct these errors:</div>
+                                <ul class='overall-warning-t3'>
+                                  <li>Fields <span style='color:red'>HIGHLIGHTED IN RED</span> cannot be blank or in the wrong format</li>
+                                  <li>Fields <span style='color:blue'>HIGHLIGHTED IN BLUE</span> can only be a value betweem 0 and 30</li>
+                                  <li>You must make a selection from the fields <span style='color:#bf6c01'>HIGHLIGHTED IN ORANGE</span></li>
+                                </ul>
+                               </div>
+                              <div class='finalAndCompleteWarningButtonDiv_single2'>
+                                <button onClick="javascript: generalVisibilityChange(z5, 'asi-drug1-z5-holder-out'); return false;">ok</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- NEW COMMENT SECTION -->
+                    <div class='asi-drug1-z3-holder-out' id='z3'>
+                        <div class='asi-drug1-z3-border2'>
+                            <div class='asi-drug1-z3-bkg'>
+                                  <div class='asi_comment_header_d1'>
+                                      <div class='align-asi-d1-close-left'>
+                                          <div class='ft-closeWindow-icon-ltgray'>
+                                              <a onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">
+                                                  <i class="fa fa-window-close" aria-hidden="true"></i>
+                                              </a>
+                                          </div>
+                                      </div>
+                                      <div class='align-asi-d1-close-left2'>New Comment: ASI Drug/Alcohol Use</div>
+                                  </div>
+                                  <div class='divider_gradient' style='margin-bottom:20px;'></div>
+
+                                  <div class='comment_page_body_d1'><textarea name='asi_comment' id='asi_comment' value=''></textarea></div>
+
+                                  <div class='asi-d1-newComment-btns-wrap'>
+                                      <button onClick="javascript: save_asi_comment_iframe(z3, 'asi-drug1-z3-holder-out'); return false;">Save</button>
+                                      <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-out'); return false;">Cancel</button>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  <!-- CENTERED -->
+                  <div class='col-md-6' style='width:89.3%; height:58.6vh; position:relative;'>
+
+                <!-- THE LEFT SIDE STARTS HERE -->
+                  <div class='col-md-6 asi-true-left general_asi_input'>
+                      <div class='asi-emp-cont'>
+                        <div class='asi-d1-instruction-divEmpty'>
+                            <a onClick="javascript: viewASIinstruction('#legal'); return false;">Click here for instructions/help <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></a>
+                        </div>
+
+                        <div class='divider_gradient' style='margin-bottom:20px'></div>
+
+                        <div class='asi-tri-holder'>
+                              <div class='asi-tri-number-dbl'>L1.</div>
+                              <div class='asi-tri-ques-dblLn'>
+                                  <table>
+                                      <tr>
+                                          <td>Was this admission prompted or suggested by the criminal</td>
+                                      </tr>
+                                  </table>
+                                  <table>
+                                      <tr>
+                                          <td>justice system?</td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l1' id='yes1' value='1'></div></td>
+                                          <td><div class='asi_rad_moveit2'>Yes</div></td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l1' id='no1' value='0' checked></div></td>
+                                          <td><div class='asi_rad_moveit2'>No</div></td>
+                                      </tr>
+                                  </table>
+                              </div>
+
+                              <div class='asi-tri-number-dbl'>L2.</div>
+                              <div class='asi-tri-ques-dblLn'>
+                                  <table>
+                                      <tr>
+                                          <td>Are you on parole or probation?</td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l2' id='yes2' value='1'></div></td>
+                                          <td><div class='asi_rad_moveit2'>Yes</div></td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l2' id='no2' value='0' checked></div></td>
+                                          <td><div class='asi_rad_moveit2'>No</div></td>
+                                      </tr>
+                                  </table>
+                              </div>
+
+                              <div class='asi-howMany-head-sm'>How many times in your life have you been arrested<br>and charged with the following:</div>
+
+                              <div class='asi_l3_wrap'>
+                                  <table>
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L3.</div></td>
+                                          <td class='l3_tbl_head'><div>Shoplift/Vandal</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l3' id='l3' oninput="javascript: clearG1(l3); lock_asi_txt_tbl(l17, m_l17);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L10.</div></td>
+                                          <td class='l3_tbl_head'><div>Assault</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l10' id='l10' oninput="javascript: clearG1(l10);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L4.</div></td>
+                                          <td class='l3_tbl_head'><div>Parole/Probation</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l4' id='l4' oninput="javascript: clearG1(l4);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L11.</div></td>
+                                          <td class='l3_tbl_head'><div>Arson Violations</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l11' id='l11' oninput="javascript: clearG1(l11);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L5.</div></td>
+                                          <td class='l3_tbl_head'><div>Drug Charges</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l5' id='l5' oninput="javascript: clearG1(l5);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L12.</div></td>
+                                          <td class='l3_tbl_head'><div>Rape</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l12' id='l12' oninput="javascript: clearG1(l12);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L6.</div></td>
+                                          <td class='l3_tbl_head'><div>Forgery</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l6' id='l6' oninput="javascript: clearG1(l6);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L13.</div></td>
+                                          <td class='l3_tbl_head'><div>Homicide/Mansl.</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l13' id='l13' oninput="javascript: clearG1(l13);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L7.</div></td>
+                                          <td class='l3_tbl_head'><div>Weapons Offense</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l7' id='l7' oninput="javascript: clearG1(l7);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L14.</div></td>
+                                          <td class='l3_tbl_head'><div>Prostitution</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l14' id='l14' oninput="javascript: clearG1(l14);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L8.</div></td>
+                                          <td class='l3_tbl_head'><div>Burglary/Larceny/B&E</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l8' id='l8' oninput="javascript: clearG1(l8);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L15.</div></td>
+                                          <td class='l3_tbl_head'><div>Contempt of Court</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l15' id='l15' oninput="javascript: clearG1(l15);"></div></td>
+                                      </tr>
+
+                                      <tr>
+                                          <td class='l3_tbl_number'><div>L9.</div></td>
+                                          <td class='l3_tbl_head'><div>Robbery</div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l9' id='l9' oninput="javascript: clearG1(l9);"></div></td>
+                                          <td class='l3_tbl_center'><div></div></td>
+                                          <td class='l3_tbl_number'><div>L16.</div></td>
+                                          <td class='l3_tbl_head_in'><div><input type='text' name='l16n' id='l16n'  placeholder="Other:" oninput="javascript: clearG1(l16n); writeToSel(l16n, opt23, opt25);"></div></td>
+                                          <td class='l3_tbl_in'><div><input type='text' name='l16' id='l16' oninput="javascript: clearG1(l16);"></div></td>
+                                      </tr>
+                                  </table>
+                              </div>
+
+                              <div class='asi-tri-number-s'>L17.</div>
+                              <div class='asi-tri-ques-s'>How many of these charges resulted in convictions?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l17' id='l17' oninput="javascript: clearG1(l17); super_mLoader(l17, m_l17);"></div>
+                        </div>
+                      </div>
                   </div>
 
                   <!-- RIGHT SIDE -->
-                  <div class='col-md-6 asi-true-right general_asi_input' style='margin-top:30px;'>
-                    
+                  <div class='col-md-6 asi-true-right general_asi_input'>
+                      <div class='asi-emp-cont'>
+                          <div class='asi-tri-holder'>
+                              <div class='asi-howMany-head-sm'>How many times in your life have you been charged with the following:</div>
+
+                              <div class='asi-tri-number-s'>L18.</div>
+                              <div class='asi-tri-ques-s'>Disorderly conduct, vagrancy, public intoxication?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l18' id='l18' oninput="javascript: clearG1(l18);"></div>
+
+                              <div class='asi-tri-number-s'>L19.</div>
+                              <div class='asi-tri-ques-s'>Driving while intoxicated?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l19' id='l19' oninput="javascript: clearG1(l19);"></div>
+
+                              <div class='asi-tri-number-s'>L20.</div>
+                              <div class='asi-tri-ques-s'>Major driving violations?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l20' id='l20' oninput="javascript: clearG1(l20);"></div>
+
+                              <div class='divider_gradient' style='margin-top:75px; margin-bottom:10px'></div>
+
+                              <div class='asi-tri-number-s'>L21.</div>
+                              <div class='asi-tri-ques-s'>How many months were you incarcerated in your life?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l21' id='l21' oninput="javascript: clearG1(l21); lock_asi_leg_sel(l21, l22, l23, m_l22, m_l23);"></div>
+
+                              <div class='asi-tri-number-s'>L22.</div>
+                              <div class='asi-tri-ques-s'>How long was your last incarceration?</div>
+                              <div class='asi-tri-resp-s'><input type='text' name='l22' id='l22' oninput="javascript: clearG1(l22); super_mLoader(l22, m_l22);"></div>
+
+                              <div class='asi-tri-number'>L23.</div>
+                              <div class='asi-tri-ques'>What was it for?</div>
+                              <div class='asi-tri-resp'>
+                                  <select name='l23' id='l23' onChange="javascript: clearG1(l23); super_mLoader(l23, m_l23);">
+                                      <option value='0'>Select</option>
+                                      <option value='3'>Shoplift/Vandal</option>
+                                      <option value='4'>Parole/Probation Violations</option>
+                                      <option value='5'>Drug Charges</option>
+                                      <option value='6'>Forgery</option>
+                                      <option value='7'>Weapons Offense</option>
+                                      <option value='8'>Burglary/Larceny/B&E</option>
+                                      <option value='9'>Robbery</option>
+                                      <option value='10'>Assult</option>
+                                      <option value='11'>Arson</option>
+                                      <option value='12'>Rape</option>
+                                      <option value='13'>Homicide/Mansl.</option>
+                                      <option value='14'>Prostitution</option>
+                                      <option value='15'>Contempt of Court</option>
+                                      <option value='16' id='opt23'>Other</option>
+                                      <option value='18'>Disorderly conduct, etc.</option>
+                                      <option value='19'>D.U.I</option>
+                                      <option value='20'>Major driving violations</option>
+                                      <option value='N'>Never Incarcerated</option>
+                                      <option value='X'>Not Answered</option>
+                                  </select>
+                              </div>
+
+                              <div style='height:65px;;'></div>
+
+                              <div class='asi-tri-number-s'>L24.</div>
+                              <div class='asi-tri-ques-s-uni-lg'>
+                                  <table>
+                                      <tr>
+                                          <td>Are you presently awaiting charges, trial, or sentence?</td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l24' id='yes24' value='1' onClick="javascript: lock_asi_rad_sel(no24, l25, m_l25);"></div></td>
+                                          <td><div class='asi_rad_moveit2'>Yes</div></td>
+                                          <td><div class='asi_rad_moveit'><input type='radio' name='l24' id='no24' value='0' checked onClick="javascript: lock_asi_rad_sel(no24, l25, m_l25);"></div></td>
+                                          <td><div class='asi_rad_moveit2'>No</div></td>
+                                      </tr>
+                                  </table>
+                              </div>
+
+                              <div class='asi-tri-number'>L25.</div>
+                              <div class='asi-tri-ques'>What for?</div>
+                              <div class='asi-tri-resp'>
+                                  <select name='l25' id='l25' onChange="javascript: clearG1(l25); super_mLoader(l25, m_l25);">
+                                      <option value='0'>Select</option>
+                                      <option value='3'>Shoplift/Vandal</option>
+                                      <option value='4'>Parole/Probation Violations</option>
+                                      <option value='5'>Drug Charges</option>
+                                      <option value='6'>Forgery</option>
+                                      <option value='7'>Weapons Offense</option>
+                                      <option value='8'>Burglary/Larceny/B&E</option>
+                                      <option value='9'>Robbery</option>
+                                      <option value='10'>Assult</option>
+                                      <option value='11'>Arson</option>
+                                      <option value='12'>Rape</option>
+                                      <option value='13'>Homicide/Mansl.</option>
+                                      <option value='14'>Prostitution</option>
+                                      <option value='15'>Contempt of Court</option>
+                                      <option value='16' id='opt25'>Other</option>
+                                      <option value='18'>Disorderly conduct, etc.</option>
+                                      <option value='19'>D.U.I</option>
+                                      <option value='20'>Major driving violations</option>
+                                      <option value='N'>N/A</option>
+                                      <option value='X'>Not Answered</option>
+                                  </select>
+                              </div>
+
+                              <div style='height:43px;;'></div>
+
+                              <div class='asi-tri-number-dbl'>L26.</div>
+                              <div class='asi-tri-ques-dbl'>How many days in the past 30, were you detained or incarcerated?</div>
+                              <div class='asi-tri-resp-dbl'><input type='text' name='l26' id='l26' oninput="javascript: clearG1(l26);"></div>
+
+                              <div class='asi-tri-number-dbl'>L27.</div>
+                              <div class='asi-tri-ques-dbl'>How many days in the past 30 have you engaged in illegal activities for profit?</div>
+                              <div class='asi-tri-resp-dbl'><input type='text' name='l27' id='l27' oninput="javascript: clearG1(l27);"></div>
+
+                              <div class='asi-tri-number-s'>L28.</div>
+                              <div class='asi-tri-ques-s'>How serious do you feel your present legal problems are?</div>
+                              <div class='asi-tri-resp-s'>
+                                  <select name='l28' id='l28' onChange="javascript: clearG1(l28);" style='font-size:11px; height:18px;'>
+                                      <option value='Select'>Select</option>
+                                      <option value='0'>Not at All</option>
+                                      <option value='1'>Slightly</option>
+                                      <option value='2'>Moderately</option>
+                                      <option value='3'>Considerably</option>
+                                      <option value='4'>Extremely</option>
+                                      <option value='X'>No Answer</option>
+                                      <option value='N'>N/A</option>
+                                  </select>
+                              </div>
+
+                              <div class='asi-tri-number-dbl'>L29.</div>
+                              <div class='asi-tri-ques-dbl'>How important to you now is counseling or referral for these legal problems?</div>
+                              <div class='asi-tri-resp-dbl'>
+                                  <select name='l29' id='l29' onChange="javascript: clearG1(l29);" style='font-size:11px;'>
+                                      <option value='Select'>Select</option>
+                                      <option value='0'>Not at All</option>
+                                      <option value='1'>Slightly</option>
+                                      <option value='2'>Moderately</option>
+                                      <option value='3'>Considerably</option>
+                                      <option value='4'>Extremely</option>
+                                      <option value='X'>No Answer</option>
+                                      <option value='N'>N/A</option>
+                                  </select>
+                              </div>
+
+                              <div class='divider_gradient' style='margin-top:135px; margin-bottom:10px'></div>
+
+                              <div style='width:200px; margin:auto;'>
+                                  <div class='medical_comment_wrapper'>
+                                      <button onClick="javascript: generalVisibilityChange(z3, 'asi-drug1-z3-holder-in'); return false;">Add Additional Comments</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
 
                 </div>
@@ -140,8 +528,9 @@
               <div class='col-md-12' style='width:100%'>
                 <table class='iml-save-btn'>
                   <tr>
-                    <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td>
-                    <td><button onClick="javascript: continue_asi_dX_main(z5, 'asi-drug1-z5-holder-in', z4, 'asi-drug1-z4-holder-in', 'employment'); return false;">Save & Continue</button></td>
+                    <td><button onClick="javascript: isFullProperAsiValue(l3); return false;">Exit Form</button></td>
+                    <!-- <td><button onClick="javascript: universal_generic_exit('asi', '{{current_section}}');">Exit Form</button></td> -->
+                    <td><button onClick="javascript: continue_asi_dX_main(z5, 'asi-drug1-z5-holder-in', z4, 'asi-drug1-z4-holder-in', 'legal'); return false;">Save & Continue</button></td>
                   </tr>
                 </table>
               </div>

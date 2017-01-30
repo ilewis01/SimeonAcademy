@@ -10592,6 +10592,10 @@ def getLegalChargesIndex(m_val):
 	if m_val != 'None' and m_val != 'Select' and m_val != '':
 		if m_val=='18' or m_val=='19' or m_val=='20':
 			index = int(m_val) - 3
+		elif m_val == 'N':
+			index = 18
+		elif m_val == 'X':
+			index = 19
 		else:
 			index = int(m_val) - 2
 
@@ -11200,7 +11204,6 @@ def grabAsiLegalFields(asi):
 	l25 = getLegalChargesIndex(asi.legal.l25)
 	l28 = getPatientIndex(asi.legal.l28)
 	l29 = getPatientIndex(asi.legal.l29)
-	l30 = getInterviewerIndex(asi.legal.l30)
 
 	result['l1'] = asi.legal.l1
 	result['l2'] = asi.legal.l2
@@ -11218,6 +11221,7 @@ def grabAsiLegalFields(asi):
 	result['l14'] = asi.legal.l14
 	result['l15'] = asi.legal.l15
 	result['l16'] = asi.legal.l16
+	result['l16n'] = asi.legal.l16n
 	result['l17'] = asi.legal.l17
 	result['l18'] = asi.legal.l18
 	result['l19'] = asi.legal.l19
@@ -11231,7 +11235,7 @@ def grabAsiLegalFields(asi):
 	result['l27'] = asi.legal.l27
 	result['l28'] = l28
 	result['l29'] = l29
-	result['l30'] = l30
+	result['l30'] = asi.legal.l30
 	result['l31'] = asi.legal.l31
 	result['l32'] = asi.legal.l32
 	result['comments'] = asi.legal.comments
@@ -11655,15 +11659,16 @@ def saveASIlegal(request, asi):
 	asi.legal.l14 = request.POST.get('l14')
 	asi.legal.l15 = request.POST.get('l15')
 	asi.legal.l16 = request.POST.get('l16')
-	asi.legal.l17 = request.POST.get('l17')
+	asi.legal.l16n = request.POST.get('l16n')
+	asi.legal.l17 = request.POST.get('m_l17')
 	asi.legal.l18 = request.POST.get('l18')
 	asi.legal.l19 = request.POST.get('l19')
 	asi.legal.l20 = request.POST.get('l20')
 	asi.legal.l21 = request.POST.get('l21')
-	asi.legal.l22 = request.POST.get('l22')
-	asi.legal.l23 = request.POST.get('l23')
+	asi.legal.l22 = request.POST.get('m_l22')
+	asi.legal.l23 = request.POST.get('m_l23')
 	asi.legal.l24 = request.POST.get('l24')
-	asi.legal.l25 = request.POST.get('l25')
+	asi.legal.l25 = request.POST.get('m_l25')
 	asi.legal.l26 = request.POST.get('l26')
 	asi.legal.l27 = request.POST.get('l27')
 	asi.legal.l28 = request.POST.get('l28')

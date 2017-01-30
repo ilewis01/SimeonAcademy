@@ -1284,6 +1284,7 @@ class AIS_Legal(models.Model):
 	l14 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l15 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l16 = models.CharField(max_length=2, default=None, blank=True, null=True)
+	l16n = models.CharField(max_length=50, default=None, blank=True, null=True)
 	l17 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l18 = models.CharField(max_length=2, default=None, blank=True, null=True)
 	l19 = models.CharField(max_length=2, default=None, blank=True, null=True)

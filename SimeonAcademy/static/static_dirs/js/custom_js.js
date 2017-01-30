@@ -16341,6 +16341,70 @@ function asi_dE_main_error_checker() {
 	return hasErrors;
 }
 
+function asi_dL_main_error_checker() {
+	var hasErrors = false;
+	var count = 0;
+	var divs = fetchAsiLegalTableDivs();
+	
+	divs.push(grab('l17'));
+	divs.push(grab('l18'));
+	divs.push(grab('l19'));
+	divs.push(grab('l20'));
+	divs.push(grab('l21'));
+	divs.push(grab('l22'));
+	divs.push(grab('l26'));
+	divs.push(grab('l27'));
+
+	for (var i = 0; i < divs.length; i++) {
+		if (isFullProperAsiValue(divs[i].value) === false || isBlankText(divs[i].value) === true) {
+			count += 1;
+			divs[i].style.border = '1px solid red';
+		}
+	}
+
+	if (u_select_error_checker_change(grab('l23'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('l25'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('l28'), "orange") === true) {count += 1;}
+	if (u_select_error_checker_change(grab('l29'), "orange") === true) {count += 1;}
+
+	var u1 = grab('l16n');
+	var u2 = grab('l16');
+	var u3 = grab('l26');
+	var u4 = grab('l27');
+
+	if (isBlankText(u1.value) === true && isBlankText(u2.value) === false) {
+		u1.style.border = '1px solid green';
+		u2.style.border = '1px solid green';
+		count += 1;
+	}
+
+	if (isBlankText(u1.value) === false && isBlankText(u2.value) === true) {
+		u1.style.border = '1px solid green';
+		u2.style.border = '1px solid green';
+		count += 1;
+	}
+
+	if (isRawNumber(u3.value) === true) {
+		if (Number(u3.value) > 30) {
+			u3.style.border = '1px solid blue';
+			count += 1;
+		}
+	}
+
+	if (isRawNumber(u4.value) === true) {
+		if (Number(u4.value) > 30) {
+			u4.style.border = '1px solid blue';
+			count += 1;
+		}
+	}
+
+	if (count > 0) {
+		hasErrors = true;
+	}
+
+	return hasErrors;
+}
+
 function continue_asi_d1_main(warningDiv, warningDivClass, openingDiv, openingDivClass) {
 	if (asi_d1_main_error_checker() === true) {
 		generalVisibilityChange(warningDiv, warningDivClass);
@@ -16359,6 +16423,9 @@ function clearOpeningInputs(section) {
 	if (section === 'employment') {
 		divs.push(grab('e22'));
 	}
+	if (section === 'legal') {
+		divs.push(grab('l30'));
+	}
 
 	return divs;
 }
@@ -16371,6 +16438,9 @@ function continue_asi_dX_main(warningDiv, warningDivClass, openingDiv, openingDi
 	if (section === 'employment') {
 		errors = asi_dE_main_error_checker();
 	}
+	if (section === 'legal') {
+		errors = asi_dL_main_error_checker();
+	}
 
 	if (errors === true) {
 		generalVisibilityChange(warningDiv, warningDivClass);
@@ -16382,6 +16452,133 @@ function continue_asi_dX_main(warningDiv, warningDivClass, openingDiv, openingDi
 			divs[i].style.border = '1px solid gray';
 		}
 	}
+}
+
+function writeToSel(input, opt1, opt2) {
+	var val = clearWhiteSpace(input.value);
+
+	if (val.length > 0) {
+		opt1.innerHTML = input.value;
+		opt2.innerHTML = input.value;
+	}
+	else {
+		opt1.innerHTML = "Other";
+		opt2.innerHTML = "Other";
+	}
+}
+
+function isProperAsiTriggerValue(val) {
+	isProper = false;
+	val = String(val);
+	val = val.toLowerCase();
+
+	if (val==='0' || val==='x' || val==='xx' || val==='n' || val==='nn' || val.length === 0) {
+		isProper = true;
+	}
+
+	return isProper;
+}
+
+function isFullProperAsiValue(val) {
+	isProper = false;
+	val = clearWhiteSpace(val);
+	val = val.toLowerCase();
+
+	if (isRawNumber(val) === false) {
+		if (val==='x' || val==='n' || val==='xx' || val==='nn') {
+			isProper = true;
+		}
+	}
+	else if (isRawNumber(val) === true) {
+		isProper = true;
+	}
+
+	return isProper;
+}
+
+function isFullProperAsiValue_max(val, max_val) {
+	isProper = false;
+	val = clearWhiteSpace(val);
+	val = val.toLowerCase();
+
+	if (isRawNumber(val) === false) {
+		if (val==='x' || val==='n' || val==='xx' || val==='nn') {
+			isProper = true;
+		}
+	}
+	else if (Number(val) <= Number(max_val)) {
+		isProper = true;
+	}
+	return isProper;
+}
+
+function  lock_asi_leg_sel(trigger, field, sel, fieldTarget, selTarget) {
+	if (isProperAsiTriggerValue(trigger.value) === true) {
+		sel.selectedIndex = 18;
+		selTarget.value = sel.value;
+		field.value = "N";
+		fieldTarget.value = "N";
+		sel.style.opacity = '0.3';
+		field.style.opacity = '0.3';
+		sel.disabled = true;
+		field.disabled = true;
+	}
+	else {
+		sel.disabled = false;
+		sel.style.opacity = '1.0';
+
+		field.disabled = false;
+		field.style.opacity = '1.0';
+	}
+}
+
+function lock_asi_rad_sel(trigger, sel, target) {
+	if (trigger.checked === true) {
+		sel.selectedIndex = 18;
+		target.value = sel.value;
+		sel.style.opacity = '0.3';
+		sel.disabled = true;
+	}
+	else {
+		sel.disabled = false;
+		sel.style.opacity = '1.0';
+	}
+}
+
+function lock_asi_txt_tbl(field, target) {
+	var divs = fetchAsiLegalTableDivs();
+	var foundBreak = false;
+
+	for (var i = 0; i < divs.length; i++) {
+		var val = String(divs[i].value);
+
+		if (val !== '0') {
+			foundBreak = true;
+			break;
+		}
+	}
+
+	if (foundBreak === false) {
+		field.value = 'N';
+		target.value = 'N';
+		field.disabled = true;
+		field.style.opacity = '0.6';
+	}
+	else {
+		field.disabled = false;
+		field.style.opacity = '1.0';
+	}
+}
+
+function fetchAsiLegalTableDivs() {
+	var divs = [];
+
+	for (var i = 3; i <= 15; i++) {
+		var n = 'l' + String(i);
+		var d = grab(n);
+		divs.push(d);
+	}
+	return divs;
 }
 
 
@@ -16410,43 +16607,62 @@ function asi_d1_z1_submit(errorDiv, errorOpenClass, formDiv, formCloseClass) {
 	}
 }
 
+function initial_asi_text_mainDivs(div, json_val) {
+	if (clearWhiteSpace(json_val).length === 0) {
+		div.value = '';
+	}
+	else {
+		div.value = json_val;
+	}
+}
+
 function init_asi_legal(json_data) {
-	number_init(json_data.isComplete, document.getElementById('l3'));
-	number_init(json_data.isComplete, document.getElementById('l4'));
-	number_init(json_data.isComplete, document.getElementById('l5'));
-	number_init(json_data.isComplete, document.getElementById('l6'));
-	number_init(json_data.isComplete, document.getElementById('l7'));
-	number_init(json_data.isComplete, document.getElementById('l8'));
-	number_init(json_data.isComplete, document.getElementById('l9'));
-	number_init(json_data.isComplete, document.getElementById('l10'));
-	number_init(json_data.isComplete, document.getElementById('l11'));
-	number_init(json_data.isComplete, document.getElementById('l12'));
-	number_init(json_data.isComplete, document.getElementById('l13'));
-	number_init(json_data.isComplete, document.getElementById('l14'));
-	number_init(json_data.isComplete, document.getElementById('l15'));
-	number_init(json_data.isComplete, document.getElementById('l16'));
-	number_init(json_data.isComplete, document.getElementById('l17'));
-	number_init(json_data.isComplete, document.getElementById('l18'));
-	number_init(json_data.isComplete, document.getElementById('l19'));
-	number_init(json_data.isComplete, document.getElementById('l20'));
-	number_init(json_data.isComplete, document.getElementById('l21'));
-	number_init(json_data.isComplete, document.getElementById('l22'));
-	number_init(json_data.isComplete, document.getElementById('l26'));
-	number_init(json_data.isComplete, document.getElementById('l27'));
+	var i = 0;
 
-	blank_init_asi(json_data.isComplete, document.getElementById('comments'));
+	grab('l23').selectedIndex = json_data.l23;
+	grab('l25').selectedIndex = json_data.l25;
+	grab('l28').selectedIndex = json_data.l28;
+	grab('l29').selectedIndex = json_data.l29;
+	grab('l30').selectedIndex = json_data.l30;
 
-	asi_radioBtn_select(json_data.l1, document.getElementById('l1yes'), document.getElementById('l1no'));
-	asi_radioBtn_select(json_data.l2, document.getElementById('l2yes'), document.getElementById('l2no'));
-	asi_radioBtn_select(json_data.l24, document.getElementById('l24yes'), document.getElementById('l24no'));
-	asi_radioBtn_select(json_data.l31, document.getElementById('l31yes'), document.getElementById('l31no'));
-	asi_radioBtn_select(json_data.l32, document.getElementById('l32yes'), document.getElementById('l32no'));
+	checkOneCheckTwo(json_data.l1, grab('yes1'));
+	checkOneCheckTwo(json_data.l2, grab('yes2'));
+	checkOneCheckTwo(json_data.l24, grab('yes24'));
+	checkOneCheckTwo(json_data.l31, grab('yes31'));
+	checkOneCheckTwo(json_data.l32, grab('yes32'));
 
-	document.getElementById('l23').selectedIndex = json_data.l23;
-	document.getElementById('l25').selectedIndex = json_data.l25;
-	document.getElementById('l28').selectedIndex = json_data.l28;
-	document.getElementById('l29').selectedIndex = json_data.l29;
-	document.getElementById('l30').selectedIndex = json_data.l30;
+	initial_asi_text_mainDivs(grab('l3'), json_data.l3);
+	initial_asi_text_mainDivs(grab('l4'), json_data.l4);
+	initial_asi_text_mainDivs(grab('l5'), json_data.l5);
+	initial_asi_text_mainDivs(grab('l6'), json_data.l6);
+	initial_asi_text_mainDivs(grab('l7'), json_data.l7);
+	initial_asi_text_mainDivs(grab('l8'), json_data.l8);
+	initial_asi_text_mainDivs(grab('l9'), json_data.l9);
+	initial_asi_text_mainDivs(grab('l10'), json_data.l10);
+	initial_asi_text_mainDivs(grab('l11'), json_data.l11);
+	initial_asi_text_mainDivs(grab('l12'), json_data.l12);
+	initial_asi_text_mainDivs(grab('l13'), json_data.l13);
+	initial_asi_text_mainDivs(grab('l14'), json_data.l14);
+	initial_asi_text_mainDivs(grab('l15'), json_data.l15);
+	initial_asi_text_mainDivs(grab('l16'), json_data.l16);
+	initial_asi_text_mainDivs(grab('l17'), json_data.l17);
+	initial_asi_text_mainDivs(grab('l18'), json_data.l18);
+	initial_asi_text_mainDivs(grab('l19'), json_data.l19);
+	initial_asi_text_mainDivs(grab('l20'), json_data.l20);
+	initial_asi_text_mainDivs(grab('l21'), json_data.l21);
+	initial_asi_text_mainDivs(grab('l22'), json_data.l22);
+	initial_asi_text_mainDivs(grab('l26'), json_data.l26);
+	initial_asi_text_mainDivs(grab('l27'), json_data.l27);
+	initial_asi_text_mainDivs(grab('l16n'), json_data.l16n);
+	initial_asi_text_mainDivs(grab('asi_comment'), json_data.comments);
+
+	grab('m_l17').value = json_data.l17;
+	grab('m_l22').value = json_data.l22;
+	grab('m_l23').value = json_data.l23;
+	grab('m_l25').value = json_data.l25;
+
+	lock_asi_leg_sel(grab('l21'), grab('l22'), grab('l23'), grab('m_l22'), grab('m_l23'));
+	lock_asi_rad_sel(grab('no24'), grab('l25'), grab('m_l25'));
 }
 
 function init_asi_family(json_data) {
@@ -17239,6 +17455,15 @@ function asi_employment_errors() {
 	return hasError;
 }
 
+function asi_legal_errors() {
+	var hasError = false;
+	if (grab('l30').selectedIndex === 0) {
+		grab('l30').style.border = '1px solid orange';
+		hasError = true;
+	}
+	return hasError;
+}
+
 function super_mLoader(field, target) {
 	target.value = field.value;
 }
@@ -17251,6 +17476,7 @@ function general_asi_save(section) {
 	else if (section === '/asi_general/') {errors = asi_general_errors();}
 	else if (section === '/asi_medical/') {errors = asi_medical_errors();}
 	else if (section === '/asi_employment/') {errors = asi_employment_errors();}
+	else if (section === '/asi_legal/') {errors = asi_legal_errors();}
 
 	if (errors === true) {
 		generalVisibilityChange(z5, 'asi-drug1-z5-holder-in');

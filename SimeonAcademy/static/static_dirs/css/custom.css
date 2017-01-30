@@ -9782,6 +9782,11 @@ button:hover {
 	padding-top:15px;
 }
 
+.asi-d1-instruction-divEmpty {
+	font-size: 14px;
+	text-align: center;
+}
+
 .finalAndCompleteWarningButtonDiv_single {
 	width:95%;
 	margin:auto;
@@ -9955,6 +9960,16 @@ button:hover {
 	box-shadow: 3px 8px 8px black;
 }
 
+.asi-drug1-z4-border-leg {
+	width:40%;
+	margin: auto;
+	height:50%;
+	margin-top:-20px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
 .asi-drug1-z5-border {
 	width:40%;
 	margin: auto;
@@ -9969,6 +9984,16 @@ button:hover {
 	width:45%;
 	margin: auto;
 	height:45%;
+	margin-top:20px;
+	border:2px solid #525050;
+	border-radius: 8px;
+	box-shadow: 3px 8px 8px black;
+}
+
+.asi-drug1-z5-border-leg {
+	width:45%;
+	margin: auto;
+	height:35%;
 	margin-top:20px;
 	border:2px solid #525050;
 	border-radius: 8px;
@@ -10286,7 +10311,6 @@ button:hover {
 	width:95%;
 	height:95%;
 	margin:auto;
-	/*border:1px solid green;*/
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
@@ -10362,6 +10386,90 @@ button:hover {
 	position:relative;
 }
 
+.l3_tbl_number {
+	width:3%;
+	border-bottom:1px solid gray;
+	border-right:1px solid gray;
+	font-size:11px;
+	font-weight: bold;
+	font-style: italic;
+	padding-left:5px;
+	padding-right:5px;
+	color:#732b30;
+	/*background-color: green;*/
+}
+
+.l3_tbl_head {
+	width:30%;
+	border-bottom:1px solid gray;
+	font-size:11px;
+	padding-top:2px;
+	padding-left:5px;
+	/*background-color: blue;*/
+}
+
+.l3_tbl_in {
+	width:15%;
+	border-bottom:1px solid gray;
+	border-left:1px solid gray;
+	/*background-color: yellow;*/
+}
+
+.l3_tbl_center {
+	width:2%;
+	border-bottom:1px solid black;
+	background-color: black;
+
+}
+
+.l3_tbl_in input {
+	width:100%;
+	height:100%;
+	text-align: center;
+	font-style: italic;
+}
+
+.l3_tbl_head_in {
+	width:30%;
+	border-bottom:1px solid gray;
+	font-size: 12px;
+	/*background-color: blue;*/
+}
+
+.l3_tbl_head_in input {
+	width:100%;
+	height:23px;
+	padding:5%;
+}
+
+.asi_l3_wrap {
+	width:100%;
+	margin:auto;
+	border:2px solid black;
+	border-radius: 8px;
+	background-color: #ececec;
+	box-shadow: 3px 3px 3px #888888;
+	margin-bottom:15px;
+}
+
+.asi_rad_moveit {
+	padding-left:20px;
+}
+
+.asi_rad_moveit2 {
+	padding-left:2px;
+	font-style: italic;
+}
+
+.asi_l3_wrap table {
+	width:100%;
+}
+
+.asi_l3_wrap tr {
+	width:100%;/*
+	height:30px;*/
+}
+
 .asi-tri-number-s {
 	width:8%;
 	height:22px;
@@ -10376,6 +10484,14 @@ button:hover {
 
 .asi-tri-ques-s {
 	width:72%;
+	height:22px;
+	float:left;
+	font-size: 12px;
+	/*border: 1px solid black;*/
+}
+
+.asi-tri-ques-s-uni-lg {
+	width:92%;
 	height:22px;
 	float:left;
 	font-size: 12px;
@@ -10404,6 +10520,14 @@ button:hover {
 
 .asi-tri-ques-dbl {
 	width:72%;
+	height:38px;
+	float:left;
+	/*border: 1px solid black;*/
+	font-size: 12px;
+}
+
+.asi-tri-ques-dblLn {
+	width:92%;
 	height:38px;
 	float:left;
 	/*border: 1px solid black;*/
@@ -10442,6 +10566,12 @@ button:hover {
 	font-style: italic;
 }
 
+.asi-tri-resp-dbl select {
+	width:100%;
+	border:1px solid gray;
+	font-size: 12px;
+}
+
 .asi-howMany-head-wow {
 	font-size: 14px;
 	font-weight: bold;
@@ -10455,6 +10585,15 @@ button:hover {
 	font-weight: bold;
 	font-style: italic;
 	color:#732b30;
+	/*padding-top: 40px; */
+}
+
+.asi-howMany-head-sm {
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	color:#732b30;
+	margin-bottom:10px;
 	/*padding-top: 40px; */
 }
 
