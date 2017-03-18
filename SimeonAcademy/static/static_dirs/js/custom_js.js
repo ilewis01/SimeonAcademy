@@ -4488,8 +4488,8 @@ function newClientAborted() {
 	wins[1].focus();
 }
 
-function searchLikeWow() {
-	getPopParent('searchType').value = grab('searchType').value;
+function searchLikeWow(search_type) {
+	getPopParent('search_type').value = String(search_type);
 	var form = grab('c_form');
 	form.action = '/wowSearch/';
 	form.submit();
@@ -4499,6 +4499,17 @@ function searchLikeWow() {
 	window.resizeTo(w, h);
 	window.moveTo(l, t);
 	window.focus();
+}
+
+function baseJumpSearch(search_type) {
+	search_type = String(search_type);
+	grab('search_type').value = search_type;
+	openPopUp('auto', '/wowSearch/', 315, 500);
+}
+
+function initialWowLoader() {
+	var search_type = getPopParent('search_type').value;
+	grab('search_type').value = String(search_type);
 }
 
 function searchClient_shouldSearchText(value) {
@@ -5133,11 +5144,26 @@ function saveBaselessUpdates() {
 }
 
 function wowSelectSearchItem(clientID) {
-	getPopParent('c2_id').value = clientID;
-	getPopParent('c2Type').value = 'existing';
-	var searchType = getPopParent('wowSelectSearchItem');
-	var form = getPopParent('c_form');
-	form.action = '/coupleSession/';
+	var search_type = String(getPopParent('search_type').value);
+	var form = null;
+
+	if (search_type === 'couple_search')
+	{
+		getPopParent('c2_id').value = clientID;
+		getPopParent('c2Type').value = 'existing';
+		form = getPopParent('c_form');
+		form.action = '/coupleSession/';
+		// var searchType = getPopParent('wowSelectSearchItem');
+	}
+
+	else if (search_type === 'start_session')
+	{
+		getPopParent('client_id').value = String(clientID);
+		form = getPopParent('m_form');
+		form.action = '/clientOptions/';
+	}
+	
+	
 	form.submit();
 	window.close();
 }

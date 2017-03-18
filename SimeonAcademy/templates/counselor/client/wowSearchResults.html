@@ -7,7 +7,7 @@
 </head>
 
 <body class='body400' onLoad="Javascript: InitializeSuperWowResults({{json_data}});">
-    <!-- <input type='text' id='test5'> -->
+    <input type='text' id='test5' style="width:400px;">
     <form action='' method='post' id='c_form'> {% csrf_token %}
     	<input type='hidden' name='current_page' id='current_page' value='1'>
         <input type='hidden' name='m_numPages' id='m_numPages' value='{{numPages}}'>
@@ -16,6 +16,8 @@
         <input type='hidden' name='sorted' id='sorted' value='ASC'>
         <input type='hidden' name='dataList' id='dataList' value='json_data'>
         <input type='hidden' name='useFname' id='useFname' value='true'>
+        <input type="hidden" name='search_type' id="search_type" value="{{search_type}}">
+        <input type="hidden" name='client_id' id='client_id' value=''>
 
         <div class='head400'>Search Results</div>
         <div class='nav400'>

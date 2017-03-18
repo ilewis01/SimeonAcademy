@@ -1426,6 +1426,32 @@ def getWowClientList(includeDischarged, includePending, session):
 
 	return result
 
+def getWowClientListBaseJump(includeDischarged, includePending):
+	result = []
+	clients = Client.objects.all().order_by('lname', 'fname')
+
+	if includeDischarged == True and includePending == True:
+		for c1 in clients:
+			if c1.isDischarged == True and c1.isPending == True:
+				result.append(c1)
+
+	elif includeDischarged == True and includePending == False:
+		for c2 in clients:
+			if c2.isDischarged == True and c2.isPending == False:
+				result.append(c2)
+
+	elif includeDischarged == False and includePending == True:
+		for c3 in clients:
+			if c3.isDischarged == False and c3.isPending == True:
+				result.append(c3)
+
+	elif includeDischarged == False and includePending == False:
+		for c4 in clients:
+			if c4.isDischarged == False and c4.isPending == False:
+				result.append(c4)
+
+	return result
+
 def getWowClientListFname(includeDischarged, includePending, session):
 	result = []
 	clients = Client.objects.all().order_by('fname', 'lname')
@@ -1688,7 +1714,13 @@ def wowClientMatchFname(searchDict, includeDischarged, includePending, getFullDO
 
 
 def wowClientMatch(searchDict, includeDischarged, includePending, getFullDOB, currSession_id):
-	clientList = getWowClientList(includeDischarged, includePending, currSession_id)
+	clientList = None
+
+	if currSession_id == None:
+		clientList = getWowClientListBaseJump(includeDischarged, includePending)
+	else:
+		clientList = getWowClientList(includeDischarged, includePending, currSession_id)
+
 	return superWowSearcher(searchDict, getFullDOB, clientList)
 
 def wowDateDisplay(date_object):

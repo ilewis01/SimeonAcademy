@@ -10701,11 +10701,78 @@ button:hover {
 	color:#2a52d2;
 }
 
+.asiThirdCenter {
+	width:67%;
+	height:20%;
+	margin:auto;
+	text-align: center;
+}
 
+.astThirdSection {
+	width:33.3%;
+	height:65%;
+	float:left;
+}
 
-/*.resource_dirc_head, .resource_phon_head, .resource_webl_head span {
+.asiThirdHead1 {
+	font-size: 14px;
+	font-weight: bold;
 	font-style: italic;
-}*/
+	padding-top:1.5%;
+}
+
+.asiThirdTblWrap {
+	width:96%;
+	height:80%;
+	margin:auto;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px #888888;
+    background-color: #ececec;
+}
+
+.asiThirdTblWrap table {
+	width:100%;
+}
+
+.asiThirdTblWrap input {
+	width:16px;
+	height:16px;
+	border-radius: 1px solid gray;
+}
+
+.asiThirdTblWrap th {
+	font-size: 13px;
+	height:50px;
+	border-bottom-style: double;
+	color:#46352a;
+}
+
+.asiThirdTblWrap td {
+	border-bottom: 1px solid gray;
+}
+
+.asifm1_size {
+	width:49%;
+	font-size: 13px;
+	line-height: 30px;
+	font-style:italic;
+}
+
+.asifm2_size {
+	width:17%;
+	text-align: center;
+	border-left: 1px solid gray;
+}
+
+.asifm3_size {
+	width:17%;
+	text-align: center;
+	border-left: 1px solid gray;
+}
 
 
 

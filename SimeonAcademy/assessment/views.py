@@ -770,13 +770,19 @@ def wowSearchResults(request):
 					d['isNumber'] = True					
 					data.append(d)
 
-			session = ClientSession.objects.get(id=(getSessionID(user)))
-
+			searchType = request.POST.get('search_type')
 			discharged = truePythonBool(request.POST.get('m_discharged'))
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
-			l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, session)
+
+			if searchType == 'start_session':
+				l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, None)
+			elif searchType == 'couple_search':
+				session = ClientSession.objects.get(id=(getSessionID(user)))
+				l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, session)
+
 			# f_NameList = wowClientMatchFname(data, discharged, pending, getFullDOB, session)
+
 			pages = breakToPages(l_NameList, 8)
 			# pagesFname = breakToPages(matchFname, 8)
 			json_data = json.dumps(pages)
@@ -788,6 +794,7 @@ def wowSearchResults(request):
 			else:
 				phrase1 = 'Results'
 
+			content['search_type'] = searchType
 			content['phrase1'] = phrase1
 			content['json_data'] = json_data
 			# content['json_fname'] = json_fname
@@ -2317,7 +2324,7 @@ def clientOptions(request):
 			pages = calculateHistoryPages(matches)
 
 			content['phone'] = wowPhoneNumberDisplayConverter(session.client.phone)
-			content['ssn'] =fetchClientSSDisplay(session.client.ss_num)
+			content['ssn'] = fetchClientSSDisplay(session.client.ss_num)
 			content['history'] = history
 			content['pages'] = pages
 			content['numPages'] = len(pages)
