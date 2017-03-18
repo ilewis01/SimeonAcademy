@@ -775,11 +775,12 @@ def wowSearchResults(request):
 			pending = truePythonBool(request.POST.get('m_pending'))
 			getFullDOB = truePythonBool(request.POST.get('fullDOB'))
 
-			if searchType == 'start_session':
+			if searchType == 'start_session' or searchType == 'general':
 				l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, None)
 			elif searchType == 'couple_search':
 				session = ClientSession.objects.get(id=(getSessionID(user)))
 				l_NameList = wowClientMatch(data, discharged, pending, getFullDOB, session)
+
 
 			# f_NameList = wowClientMatchFname(data, discharged, pending, getFullDOB, session)
 

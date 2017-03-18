@@ -5162,6 +5162,13 @@ function wowSelectSearchItem(clientID) {
 		form = getPopParent('m_form');
 		form.action = '/clientOptions/';
 	}
+
+	else if (search_type === 'general')
+	{
+		getPopParent('client_id').value = String(clientID);
+		form = getPopParent('m_form');
+		form.action = '/clientProfile/';
+	}
 	
 	
 	form.submit();
