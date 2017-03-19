@@ -4512,6 +4512,18 @@ function initialWowLoader() {
 	grab('search_type').value = String(search_type);
 }
 
+function newSearchShrink() {
+	var form = grab('c_form');
+	form.action = '/wowSearch/';
+	form.submit();
+	var w = 315, h = 500;
+	var l = Number((screen.width/2) - (w/2));
+	var t = Number((screen.height/2) - (h/2));
+	window.resizeTo(w, h);
+	window.moveTo(l, t);
+	window.focus();
+}
+
 function searchClient_shouldSearchText(value) {
 	value = String(value);
 	value = clearWhiteSpace(value);

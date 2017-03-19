@@ -7,7 +7,7 @@
 </head>
 
 <body class='body400' onLoad="Javascript: InitializeSuperWowResults({{json_data}});">
-    <input type='text' id='test5' style="width:400px;">
+    <!-- <input type='text' id='test5' style="width:400px;"> -->
     <form action='' method='post' id='c_form'> {% csrf_token %}
     	<input type='hidden' name='current_page' id='current_page' value='1'>
         <input type='hidden' name='m_numPages' id='m_numPages' value='{{numPages}}'>
@@ -318,7 +318,7 @@
         </div> -->
 
         <div class='double-btn-400'>
-        	<button onClick='Javascript: initializeWowSearch(); return false;'>New Search</button>
+        	<button onClick='Javascript: newSearchShrink(); return false;'>New Search</button>
         	<button onClick='Javascript: window.close(); return false;'>Cancel</button>
         </div>
     </form>
